@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewSmartCardATRInterfaceGroup() *SmartCardATRInterfaceGroup {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardATRInterfaceGroup")), objc.RegisterName("new"))
 	return &SmartCardATRInterfaceGroup{inner: raw.TKSmartCardATRInterfaceGroupFromID(_id)}
 }
+
+// TA calls the underlying TA.
+func (x *SmartCardATRInterfaceGroup) TA() *foundation.NSNumber {
+	return x.inner.TA()
+}
+
+// TB calls the underlying TB.
+func (x *SmartCardATRInterfaceGroup) TB() *foundation.NSNumber {
+	return x.inner.TB()
+}
+
+// TC calls the underlying TC.
+func (x *SmartCardATRInterfaceGroup) TC() *foundation.NSNumber {
+	return x.inner.TC()
+}
+
+// Protocol calls the underlying Protocol.
+func (x *SmartCardATRInterfaceGroup) Protocol() *foundation.NSNumber {
+	return x.inner.Protocol()
+}
+
+// SmartCardATRInterfaceGroupable is the interface implemented by [SmartCardATRInterfaceGroup], for mocking and DI.
+type SmartCardATRInterfaceGroupable interface {
+	Unwrap() *raw.TKSmartCardATRInterfaceGroup
+	TA() *foundation.NSNumber
+	TB() *foundation.NSNumber
+	TC() *foundation.NSNumber
+	Protocol() *foundation.NSNumber
+}
+
+var _ SmartCardATRInterfaceGroupable = (*SmartCardATRInterfaceGroup)(nil)
 

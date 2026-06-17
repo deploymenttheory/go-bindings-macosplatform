@@ -24,3 +24,20 @@ func NewMapItemRequestWithMapItemIdentifier(identifier *raw.MKMapItemIdentifier)
 	return &MapItemRequest{inner: raw.MKMapItemRequestFromID(_id)}
 }
 
+// MapItemIdentifier calls the underlying MapItemIdentifier.
+func (x *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
+	_r := x.inner.MapItemIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &MapItemIdentifier{inner: _r}
+}
+
+// MapItemRequestable is the interface implemented by [MapItemRequest], for mocking and DI.
+type MapItemRequestable interface {
+	Unwrap() *raw.MKMapItemRequest
+	MapItemIdentifier() *MapItemIdentifier
+}
+
+var _ MapItemRequestable = (*MapItemRequest)(nil)
+

@@ -31,7 +31,30 @@ func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
 	return &UserScriptTask{inner: raw.NSUserScriptTaskFromID(_id)}, nil
 }
 
+// ExecuteWithCompletionHandler calls the underlying ExecuteWithCompletionHandler.
+func (x *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
+	x.inner.ExecuteWithCompletionHandler(handler)
+}
+
+// ScriptURL calls the underlying ScriptURL.
+func (x *UserScriptTask) ScriptURL() *URL {
+	_r := x.inner.ScriptURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
 func (x *UserScriptTask) asUserScriptTask() *raw.NSUserScriptTask { return x.inner }
 
 func (x *UserScriptTask) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UserScriptTaskable is the interface implemented by [UserScriptTask], for mocking and DI.
+type UserScriptTaskable interface {
+	Unwrap() *raw.NSUserScriptTask
+	ExecuteWithCompletionHandler(handler func(unsafe.Pointer))
+	ScriptURL() *URL
+}
+
+var _ UserScriptTaskable = (*UserScriptTask)(nil)
 

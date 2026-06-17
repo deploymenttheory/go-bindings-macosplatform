@@ -65,5 +65,127 @@ func (x *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinar
 	return x
 }
 
+// Reset calls the underlying Reset.
+func (x *MTL4TileRenderPipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// TileFunctionDescriptor calls the underlying TileFunctionDescriptor.
+func (x *MTL4TileRenderPipelineDescriptor) TileFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := x.inner.TileFunctionDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4FunctionDescriptor{inner: _r}
+}
+
+// SetTileFunctionDescriptor calls the underlying SetTileFunctionDescriptor.
+func (x *MTL4TileRenderPipelineDescriptor) SetTileFunctionDescriptor(tileFunctionDescriptor *raw.MTL4FunctionDescriptor) {
+	x.inner.SetTileFunctionDescriptor(tileFunctionDescriptor)
+}
+
+// RasterSampleCount calls the underlying RasterSampleCount.
+func (x *MTL4TileRenderPipelineDescriptor) RasterSampleCount() uint {
+	return x.inner.RasterSampleCount()
+}
+
+// SetRasterSampleCount calls the underlying SetRasterSampleCount.
+func (x *MTL4TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
+	x.inner.SetRasterSampleCount(rasterSampleCount)
+}
+
+// ColorAttachments calls the underlying ColorAttachments.
+func (x *MTL4TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
+	_r := x.inner.ColorAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: _r}
+}
+
+// ThreadgroupSizeMatchesTileSize calls the underlying ThreadgroupSizeMatchesTileSize.
+func (x *MTL4TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
+	return x.inner.ThreadgroupSizeMatchesTileSize()
+}
+
+// SetThreadgroupSizeMatchesTileSize calls the underlying SetThreadgroupSizeMatchesTileSize.
+func (x *MTL4TileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) {
+	x.inner.SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize)
+}
+
+// MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
+func (x *MTL4TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
+	return x.inner.MaxTotalThreadsPerThreadgroup()
+}
+
+// SetMaxTotalThreadsPerThreadgroup calls the underlying SetMaxTotalThreadsPerThreadgroup.
+func (x *MTL4TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) {
+	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
+}
+
+// RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
+func (x *MTL4TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
+	return x.inner.RequiredThreadsPerThreadgroup()
+}
+
+// SetRequiredThreadsPerThreadgroup calls the underlying SetRequiredThreadsPerThreadgroup.
+func (x *MTL4TileRenderPipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) {
+	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
+}
+
+// StaticLinkingDescriptor calls the underlying StaticLinkingDescriptor.
+func (x *MTL4TileRenderPipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	_r := x.inner.StaticLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4StaticLinkingDescriptor{inner: _r}
+}
+
+// SetStaticLinkingDescriptor calls the underlying SetStaticLinkingDescriptor.
+func (x *MTL4TileRenderPipelineDescriptor) SetStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) {
+	x.inner.SetStaticLinkingDescriptor(staticLinkingDescriptor)
+}
+
+// SupportBinaryLinking calls the underlying SupportBinaryLinking.
+func (x *MTL4TileRenderPipelineDescriptor) SupportBinaryLinking() bool {
+	return x.inner.SupportBinaryLinking()
+}
+
+// SetSupportBinaryLinking calls the underlying SetSupportBinaryLinking.
+func (x *MTL4TileRenderPipelineDescriptor) SetSupportBinaryLinking(supportBinaryLinking bool) {
+	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
+}
+
 func (x *MTL4TileRenderPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+
+// MTL4TileRenderPipelineDescriptorable is the interface implemented by [MTL4TileRenderPipelineDescriptor], for mocking and DI.
+type MTL4TileRenderPipelineDescriptorable interface {
+	Unwrap() *raw.MTL4TileRenderPipelineDescriptor
+	WithTileFunctionDescriptor(tileFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4TileRenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount uint) *MTL4TileRenderPipelineDescriptor
+	WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *MTL4TileRenderPipelineDescriptor
+	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *MTL4TileRenderPipelineDescriptor
+	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4TileRenderPipelineDescriptor
+	WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor
+	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor
+	Reset()
+	TileFunctionDescriptor() *MTL4FunctionDescriptor
+	SetTileFunctionDescriptor(tileFunctionDescriptor *raw.MTL4FunctionDescriptor)
+	RasterSampleCount() uint
+	SetRasterSampleCount(rasterSampleCount uint)
+	ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray
+	ThreadgroupSizeMatchesTileSize() bool
+	SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool)
+	MaxTotalThreadsPerThreadgroup() uint
+	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint)
+	RequiredThreadsPerThreadgroup() raw.MTLSize
+	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
+	StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
+	SetStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor)
+	SupportBinaryLinking() bool
+	SetSupportBinaryLinking(supportBinaryLinking bool)
+}
+
+var _ MTL4TileRenderPipelineDescriptorable = (*MTL4TileRenderPipelineDescriptor)(nil)
 

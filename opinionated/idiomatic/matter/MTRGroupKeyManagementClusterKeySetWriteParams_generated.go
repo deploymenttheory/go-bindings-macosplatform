@@ -42,3 +42,53 @@ func (x *MTRGroupKeyManagementClusterKeySetWriteParams) WithServerSideProcessing
 	return x
 }
 
+// GroupKeySet calls the underlying GroupKeySet.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct {
+	_r := x.inner.GroupKeySet()
+	if _r == nil {
+		return nil
+	}
+	return &MTRGroupKeyManagementClusterGroupKeySetStruct{inner: _r}
+}
+
+// SetGroupKeySet calls the underlying SetGroupKeySet.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) {
+	x.inner.SetGroupKeySet(groupKeySet)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupKeyManagementClusterKeySetWriteParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGroupKeyManagementClusterKeySetWriteParamsable is the interface implemented by [MTRGroupKeyManagementClusterKeySetWriteParams], for mocking and DI.
+type MTRGroupKeyManagementClusterKeySetWriteParamsable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterKeySetWriteParams
+	WithGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct) *MTRGroupKeyManagementClusterKeySetWriteParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetWriteParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupKeyManagementClusterKeySetWriteParams
+	GroupKeySet() *MTRGroupKeyManagementClusterGroupKeySetStruct
+	SetGroupKeySet(groupKeySet *raw.MTRGroupKeyManagementClusterGroupKeySetStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterKeySetWriteParamsable = (*MTRGroupKeyManagementClusterKeySetWriteParams)(nil)
+

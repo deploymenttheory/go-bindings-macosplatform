@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewMemoryMetric() *MemoryMetric {
 	return &MemoryMetric{inner: raw.MXMemoryMetricFromID(_id)}
 }
 
+// PeakMemoryUsage calls the underlying PeakMemoryUsage.
+func (x *MemoryMetric) PeakMemoryUsage() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.PeakMemoryUsage()
+}
+
+// AverageSuspendedMemory calls the underlying AverageSuspendedMemory.
+func (x *MemoryMetric) AverageSuspendedMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage] {
+	return x.inner.AverageSuspendedMemory()
+}
+
 func (x *MemoryMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// MemoryMetricable is the interface implemented by [MemoryMetric], for mocking and DI.
+type MemoryMetricable interface {
+	Unwrap() *raw.MXMemoryMetric
+	PeakMemoryUsage() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	AverageSuspendedMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage]
+}
+
+var _ MemoryMetricable = (*MemoryMetric)(nil)
 

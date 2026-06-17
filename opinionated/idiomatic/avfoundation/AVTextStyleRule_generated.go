@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,27 @@ func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes *
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), textMarkupAttributes.Ptr(), foundation.NSStringStringWithUTF8String(textSelector).Ptr())
 	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
 }
+
+// TextMarkupAttributes calls the underlying TextMarkupAttributes.
+func (x *TextStyleRule) TextMarkupAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.TextMarkupAttributes()
+}
+
+// TextSelector calls the underlying TextSelector.
+func (x *TextStyleRule) TextSelector() string {
+	_r := x.inner.TextSelector()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TextStyleRuleable is the interface implemented by [TextStyleRule], for mocking and DI.
+type TextStyleRuleable interface {
+	Unwrap() *raw.AVTextStyleRule
+	TextMarkupAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	TextSelector() string
+}
+
+var _ TextStyleRuleable = (*TextStyleRule)(nil)
 

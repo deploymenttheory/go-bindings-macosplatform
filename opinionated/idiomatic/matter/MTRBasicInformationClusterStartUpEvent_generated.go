@@ -30,5 +30,25 @@ func (x *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVer
 	return x
 }
 
+// SoftwareVersion calls the underlying SoftwareVersion.
+func (x *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() *foundation.NSNumber {
+	return x.inner.SoftwareVersion()
+}
+
+// SetSoftwareVersion calls the underlying SetSoftwareVersion.
+func (x *MTRBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion *foundation.NSNumber) {
+	x.inner.SetSoftwareVersion(softwareVersion)
+}
+
 func (x *MTRBasicInformationClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent { return x.inner }
+
+// MTRBasicInformationClusterStartUpEventable is the interface implemented by [MTRBasicInformationClusterStartUpEvent], for mocking and DI.
+type MTRBasicInformationClusterStartUpEventable interface {
+	Unwrap() *raw.MTRBasicInformationClusterStartUpEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBasicInformationClusterStartUpEvent
+	SoftwareVersion() *foundation.NSNumber
+	SetSoftwareVersion(softwareVersion *foundation.NSNumber)
+}
+
+var _ MTRBasicInformationClusterStartUpEventable = (*MTRBasicInformationClusterStartUpEvent)(nil)
 

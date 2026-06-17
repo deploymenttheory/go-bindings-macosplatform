@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,6 +33,16 @@ func NewBundleWithURL(url string) *Bundle {
 	return &Bundle{inner: raw.NSBundleFromID(_id)}
 }
 
+// Load calls the underlying Load.
+func (x *Bundle) Load() bool {
+	return x.inner.Load()
+}
+
+// Unload calls the underlying Unload.
+func (x *Bundle) Unload() bool {
+	return x.inner.Unload()
+}
+
 // PreflightAndReturnError returns any validation error.
 func (x *Bundle) PreflightAndReturnError() error {
 	_, err := x.inner.PreflightAndReturnError()
@@ -44,30 +55,328 @@ func (x *Bundle) LoadAndReturnError() error {
 	return err
 }
 
+// URLForAuxiliaryExecutable calls the underlying URLForAuxiliaryExecutable.
+func (x *Bundle) URLForAuxiliaryExecutable(executableName string) *URL {
+	_r := x.inner.URLForAuxiliaryExecutable(foundation.NSStringStringWithUTF8String(executableName))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// PathForAuxiliaryExecutable calls the underlying PathForAuxiliaryExecutable.
+func (x *Bundle) PathForAuxiliaryExecutable(executableName string) *String {
+	_r := x.inner.PathForAuxiliaryExecutable(foundation.NSStringStringWithUTF8String(executableName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// URLForResourceWithExtension calls the underlying URLForResourceWithExtension.
+func (x *Bundle) URLForResourceWithExtension(name string, ext string) *URL {
+	_r := x.inner.URLForResourceWithExtension(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLForResourceWithExtensionSubdirectory calls the underlying URLForResourceWithExtensionSubdirectory.
+func (x *Bundle) URLForResourceWithExtensionSubdirectory(name string, ext string, subpath string) *URL {
+	_r := x.inner.URLForResourceWithExtensionSubdirectory(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLForResourceWithExtensionSubdirectoryLocalization calls the underlying URLForResourceWithExtensionSubdirectoryLocalization.
+func (x *Bundle) URLForResourceWithExtensionSubdirectoryLocalization(name string, ext string, subpath string, localizationName string) *URL {
+	_r := x.inner.URLForResourceWithExtensionSubdirectoryLocalization(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSStringStringWithUTF8String(localizationName))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLsForResourcesWithExtensionSubdirectory calls the underlying URLsForResourcesWithExtensionSubdirectory.
+func (x *Bundle) URLsForResourcesWithExtensionSubdirectory(ext string, subpath string) *raw.NSArray[*raw.NSURL] {
+	return x.inner.URLsForResourcesWithExtensionSubdirectory(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath))
+}
+
+// URLsForResourcesWithExtensionSubdirectoryLocalization calls the underlying URLsForResourcesWithExtensionSubdirectoryLocalization.
+func (x *Bundle) URLsForResourcesWithExtensionSubdirectoryLocalization(ext string, subpath string, localizationName string) *raw.NSArray[*raw.NSURL] {
+	return x.inner.URLsForResourcesWithExtensionSubdirectoryLocalization(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSStringStringWithUTF8String(localizationName))
+}
+
+// PathForResourceOfType calls the underlying PathForResourceOfType.
+func (x *Bundle) PathForResourceOfType(name string, ext string) *String {
+	_r := x.inner.PathForResourceOfType(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PathForResourceOfTypeInDirectory calls the underlying PathForResourceOfTypeInDirectory.
+func (x *Bundle) PathForResourceOfTypeInDirectory(name string, ext string, subpath string) *String {
+	_r := x.inner.PathForResourceOfTypeInDirectory(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PathForResourceOfTypeInDirectoryForLocalization calls the underlying PathForResourceOfTypeInDirectoryForLocalization.
+func (x *Bundle) PathForResourceOfTypeInDirectoryForLocalization(name string, ext string, subpath string, localizationName string) *String {
+	_r := x.inner.PathForResourceOfTypeInDirectoryForLocalization(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSStringStringWithUTF8String(localizationName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PathsForResourcesOfTypeInDirectory calls the underlying PathsForResourcesOfTypeInDirectory.
+func (x *Bundle) PathsForResourcesOfTypeInDirectory(ext string, subpath string) *raw.NSArray[*raw.NSString] {
+	return x.inner.PathsForResourcesOfTypeInDirectory(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath))
+}
+
+// PathsForResourcesOfTypeInDirectoryForLocalization calls the underlying PathsForResourcesOfTypeInDirectoryForLocalization.
+func (x *Bundle) PathsForResourcesOfTypeInDirectoryForLocalization(ext string, subpath string, localizationName string) *raw.NSArray[*raw.NSString] {
+	return x.inner.PathsForResourcesOfTypeInDirectoryForLocalization(foundation.NSStringStringWithUTF8String(ext), foundation.NSStringStringWithUTF8String(subpath), foundation.NSStringStringWithUTF8String(localizationName))
+}
+
+// LocalizedStringForKeyValueTable calls the underlying LocalizedStringForKeyValueTable.
+func (x *Bundle) LocalizedStringForKeyValueTable(key string, value string, tableName string) *String {
+	_r := x.inner.LocalizedStringForKeyValueTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LocalizedAttributedStringForKeyValueTable calls the underlying LocalizedAttributedStringForKeyValueTable.
+func (x *Bundle) LocalizedAttributedStringForKeyValueTable(key string, value string, tableName string) *AttributedString {
+	_r := x.inner.LocalizedAttributedStringForKeyValueTable(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName))
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
+// LocalizedStringForKeyValueTableLocalizations calls the underlying LocalizedStringForKeyValueTableLocalizations.
+func (x *Bundle) LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations *raw.NSArray[*raw.NSString]) *String {
+	_r := x.inner.LocalizedStringForKeyValueTableLocalizations(foundation.NSStringStringWithUTF8String(key), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(tableName), localizations)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ObjectForInfoDictionaryKey calls the underlying ObjectForInfoDictionaryKey.
+func (x *Bundle) ObjectForInfoDictionaryKey(key string) objc.ID {
+	return x.inner.ObjectForInfoDictionaryKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// ClassNamed calls the underlying ClassNamed.
+func (x *Bundle) ClassNamed(className string) objc.Class {
+	return x.inner.ClassNamed(foundation.NSStringStringWithUTF8String(className))
+}
+
+// IsLoaded calls the underlying IsLoaded.
+func (x *Bundle) IsLoaded() bool {
+	return x.inner.IsLoaded()
+}
+
+// BundleURL calls the underlying BundleURL.
+func (x *Bundle) BundleURL() *URL {
+	_r := x.inner.BundleURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// ResourceURL calls the underlying ResourceURL.
+func (x *Bundle) ResourceURL() *URL {
+	_r := x.inner.ResourceURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// ExecutableURL calls the underlying ExecutableURL.
+func (x *Bundle) ExecutableURL() *URL {
+	_r := x.inner.ExecutableURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// PrivateFrameworksURL calls the underlying PrivateFrameworksURL.
+func (x *Bundle) PrivateFrameworksURL() *URL {
+	_r := x.inner.PrivateFrameworksURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SharedFrameworksURL calls the underlying SharedFrameworksURL.
+func (x *Bundle) SharedFrameworksURL() *URL {
+	_r := x.inner.SharedFrameworksURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// SharedSupportURL calls the underlying SharedSupportURL.
+func (x *Bundle) SharedSupportURL() *URL {
+	_r := x.inner.SharedSupportURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// BuiltInPlugInsURL calls the underlying BuiltInPlugInsURL.
+func (x *Bundle) BuiltInPlugInsURL() *URL {
+	_r := x.inner.BuiltInPlugInsURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// AppStoreReceiptURL calls the underlying AppStoreReceiptURL.
+func (x *Bundle) AppStoreReceiptURL() *URL {
+	_r := x.inner.AppStoreReceiptURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// BundlePath calls the underlying BundlePath.
+func (x *Bundle) BundlePath() *String {
+	_r := x.inner.BundlePath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ResourcePath calls the underlying ResourcePath.
+func (x *Bundle) ResourcePath() *String {
+	_r := x.inner.ResourcePath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ExecutablePath calls the underlying ExecutablePath.
+func (x *Bundle) ExecutablePath() *String {
+	_r := x.inner.ExecutablePath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// PrivateFrameworksPath calls the underlying PrivateFrameworksPath.
+func (x *Bundle) PrivateFrameworksPath() *String {
+	_r := x.inner.PrivateFrameworksPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SharedFrameworksPath calls the underlying SharedFrameworksPath.
+func (x *Bundle) SharedFrameworksPath() *String {
+	_r := x.inner.SharedFrameworksPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SharedSupportPath calls the underlying SharedSupportPath.
+func (x *Bundle) SharedSupportPath() *String {
+	_r := x.inner.SharedSupportPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// BuiltInPlugInsPath calls the underlying BuiltInPlugInsPath.
+func (x *Bundle) BuiltInPlugInsPath() *String {
+	_r := x.inner.BuiltInPlugInsPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *Bundle) BundleIdentifier() *String {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// InfoDictionary calls the underlying InfoDictionary.
+func (x *Bundle) InfoDictionary() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.InfoDictionary()
+}
+
+// LocalizedInfoDictionary calls the underlying LocalizedInfoDictionary.
+func (x *Bundle) LocalizedInfoDictionary() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.LocalizedInfoDictionary()
+}
+
+// PrincipalClass calls the underlying PrincipalClass.
+func (x *Bundle) PrincipalClass() objc.Class {
+	return x.inner.PrincipalClass()
+}
+
 // PreferredLocalizations returns the collection as a Go slice.
-func (x *Bundle) PreferredLocalizations() []*raw.NSString {
+func (x *Bundle) PreferredLocalizations() []string {
 	arr := x.inner.PreferredLocalizations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // Localizations returns the collection as a Go slice.
-func (x *Bundle) Localizations() []*raw.NSString {
+func (x *Bundle) Localizations() []string {
 	arr := x.inner.Localizations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// DevelopmentLocalization calls the underlying DevelopmentLocalization.
+func (x *Bundle) DevelopmentLocalization() *String {
+	_r := x.inner.DevelopmentLocalization()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
 }
 
 // ExecutableArchitectures returns the collection as a Go slice.
@@ -76,12 +385,62 @@ func (x *Bundle) ExecutableArchitectures() []*raw.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
+		return raw.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Bundle) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Bundleable is the interface implemented by [Bundle], for mocking and DI.
+type Bundleable interface {
+	Unwrap() *raw.NSBundle
+	Load() bool
+	Unload() bool
+	PreflightAndReturnError() error
+	LoadAndReturnError() error
+	URLForAuxiliaryExecutable(executableName string) *URL
+	PathForAuxiliaryExecutable(executableName string) *String
+	URLForResourceWithExtension(name string, ext string) *URL
+	URLForResourceWithExtensionSubdirectory(name string, ext string, subpath string) *URL
+	URLForResourceWithExtensionSubdirectoryLocalization(name string, ext string, subpath string, localizationName string) *URL
+	URLsForResourcesWithExtensionSubdirectory(ext string, subpath string) *raw.NSArray[*raw.NSURL]
+	URLsForResourcesWithExtensionSubdirectoryLocalization(ext string, subpath string, localizationName string) *raw.NSArray[*raw.NSURL]
+	PathForResourceOfType(name string, ext string) *String
+	PathForResourceOfTypeInDirectory(name string, ext string, subpath string) *String
+	PathForResourceOfTypeInDirectoryForLocalization(name string, ext string, subpath string, localizationName string) *String
+	PathsForResourcesOfTypeInDirectory(ext string, subpath string) *raw.NSArray[*raw.NSString]
+	PathsForResourcesOfTypeInDirectoryForLocalization(ext string, subpath string, localizationName string) *raw.NSArray[*raw.NSString]
+	LocalizedStringForKeyValueTable(key string, value string, tableName string) *String
+	LocalizedAttributedStringForKeyValueTable(key string, value string, tableName string) *AttributedString
+	LocalizedStringForKeyValueTableLocalizations(key string, value string, tableName string, localizations *raw.NSArray[*raw.NSString]) *String
+	ObjectForInfoDictionaryKey(key string) objc.ID
+	ClassNamed(className string) objc.Class
+	IsLoaded() bool
+	BundleURL() *URL
+	ResourceURL() *URL
+	ExecutableURL() *URL
+	PrivateFrameworksURL() *URL
+	SharedFrameworksURL() *URL
+	SharedSupportURL() *URL
+	BuiltInPlugInsURL() *URL
+	AppStoreReceiptURL() *URL
+	BundlePath() *String
+	ResourcePath() *String
+	ExecutablePath() *String
+	PrivateFrameworksPath() *String
+	SharedFrameworksPath() *String
+	SharedSupportPath() *String
+	BuiltInPlugInsPath() *String
+	BundleIdentifier() *String
+	InfoDictionary() *raw.NSDictionary[*raw.NSString, objc.ID]
+	LocalizedInfoDictionary() *raw.NSDictionary[*raw.NSString, objc.ID]
+	PrincipalClass() objc.Class
+	PreferredLocalizations() []string
+	Localizations() []string
+	DevelopmentLocalization() *String
+	ExecutableArchitectures() []*raw.NSNumber
+}
+
+var _ Bundleable = (*Bundle)(nil)
 

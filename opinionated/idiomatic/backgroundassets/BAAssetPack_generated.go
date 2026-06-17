@@ -6,6 +6,8 @@ package backgroundassets
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,53 @@ func NewAssetPack() *AssetPack {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPack")), objc.RegisterName("new"))
 	return &AssetPack{inner: raw.BAAssetPackFromID(_id)}
 }
+
+// Download calls the underlying Download.
+func (x *AssetPack) Download() *Download {
+	_r := x.inner.Download()
+	if _r == nil {
+		return nil
+	}
+	return &Download{inner: _r}
+}
+
+// DownloadForContentRequest calls the underlying DownloadForContentRequest.
+func (x *AssetPack) DownloadForContentRequest(contentRequest raw.BAContentRequest) *Download {
+	_r := x.inner.DownloadForContentRequest(contentRequest)
+	if _r == nil {
+		return nil
+	}
+	return &Download{inner: _r}
+}
+
+// Identifier calls the underlying Identifier.
+func (x *AssetPack) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DownloadSize calls the underlying DownloadSize.
+func (x *AssetPack) DownloadSize() int {
+	return x.inner.DownloadSize()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *AssetPack) UserInfo() *foundation.NSData {
+	return x.inner.UserInfo()
+}
+
+// AssetPackable is the interface implemented by [AssetPack], for mocking and DI.
+type AssetPackable interface {
+	Unwrap() *raw.BAAssetPack
+	Download() *Download
+	DownloadForContentRequest(contentRequest raw.BAContentRequest) *Download
+	Identifier() string
+	DownloadSize() int
+	UserInfo() *foundation.NSData
+}
+
+var _ AssetPackable = (*AssetPack)(nil)
 

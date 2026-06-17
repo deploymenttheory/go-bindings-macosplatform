@@ -7,6 +7,7 @@ package iousbhost
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HostDevice wraps [raw.IOUSBHostDevice] with a fluent Go API.
@@ -23,11 +24,37 @@ func NewHostDevice() *HostDevice {
 	return &HostDevice{inner: raw.IOUSBHostDeviceFromID(_id)}
 }
 
+// ConfigureWithValueMatchInterfacesError calls the underlying ConfigureWithValueMatchInterfacesError.
+func (x *HostDevice) ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error) {
+	return x.inner.ConfigureWithValueMatchInterfacesError(value, matchInterfaces)
+}
+
+// ConfigureWithValueError calls the underlying ConfigureWithValueError.
+func (x *HostDevice) ConfigureWithValueError(value uint) (bool, error) {
+	return x.inner.ConfigureWithValueError(value)
+}
+
 // Reset returns any validation error.
 func (x *HostDevice) Reset() error {
 	_, err := x.inner.ResetWithError()
 	return err
 }
 
+// ConfigurationDescriptor calls the underlying ConfigurationDescriptor.
+func (x *HostDevice) ConfigurationDescriptor() unsafe.Pointer {
+	return x.inner.ConfigurationDescriptor()
+}
+
 func (x *HostDevice) asHostObject() *raw.IOUSBHostObject { return &x.inner.IOUSBHostObject }
+
+// HostDeviceable is the interface implemented by [HostDevice], for mocking and DI.
+type HostDeviceable interface {
+	Unwrap() *raw.IOUSBHostDevice
+	ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error)
+	ConfigureWithValueError(value uint) (bool, error)
+	Reset() error
+	ConfigurationDescriptor() unsafe.Pointer
+}
+
+var _ HostDeviceable = (*HostDevice)(nil)
 

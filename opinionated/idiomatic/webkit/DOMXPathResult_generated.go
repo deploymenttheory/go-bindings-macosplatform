@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,84 @@ func NewDOMXPathResult() *DOMXPathResult {
 	return &DOMXPathResult{inner: raw.DOMXPathResultFromID(_id)}
 }
 
+// IterateNext calls the underlying IterateNext.
+func (x *DOMXPathResult) IterateNext() *DOMNode {
+	_r := x.inner.IterateNext()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// SnapshotItem calls the underlying SnapshotItem.
+func (x *DOMXPathResult) SnapshotItem(index uint) *DOMNode {
+	_r := x.inner.SnapshotItem(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ResultType calls the underlying ResultType.
+func (x *DOMXPathResult) ResultType() uint16 {
+	return x.inner.ResultType()
+}
+
+// NumberValue calls the underlying NumberValue.
+func (x *DOMXPathResult) NumberValue() float64 {
+	return x.inner.NumberValue()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *DOMXPathResult) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BooleanValue calls the underlying BooleanValue.
+func (x *DOMXPathResult) BooleanValue() bool {
+	return x.inner.BooleanValue()
+}
+
+// SingleNodeValue calls the underlying SingleNodeValue.
+func (x *DOMXPathResult) SingleNodeValue() *DOMNode {
+	_r := x.inner.SingleNodeValue()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// InvalidIteratorState calls the underlying InvalidIteratorState.
+func (x *DOMXPathResult) InvalidIteratorState() bool {
+	return x.inner.InvalidIteratorState()
+}
+
+// SnapshotLength calls the underlying SnapshotLength.
+func (x *DOMXPathResult) SnapshotLength() uint {
+	return x.inner.SnapshotLength()
+}
+
 func (x *DOMXPathResult) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMXPathResult) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMXPathResultable is the interface implemented by [DOMXPathResult], for mocking and DI.
+type DOMXPathResultable interface {
+	Unwrap() *raw.DOMXPathResult
+	IterateNext() *DOMNode
+	SnapshotItem(index uint) *DOMNode
+	ResultType() uint16
+	NumberValue() float64
+	StringValue() string
+	BooleanValue() bool
+	SingleNodeValue() *DOMNode
+	InvalidIteratorState() bool
+	SnapshotLength() uint
+}
+
+var _ DOMXPathResultable = (*DOMXPathResult)(nil)
 

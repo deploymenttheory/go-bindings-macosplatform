@@ -24,3 +24,22 @@ func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels raw.PGDisplayC
 	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(_id)}
 }
 
+// SizeInPixels calls the underlying SizeInPixels.
+func (x *PGDisplayMode) SizeInPixels() raw.PGDisplayCoord_t {
+	return x.inner.SizeInPixels()
+}
+
+// RefreshRate calls the underlying RefreshRate.
+func (x *PGDisplayMode) RefreshRate() float64 {
+	return x.inner.RefreshRate()
+}
+
+// PGDisplayModeable is the interface implemented by [PGDisplayMode], for mocking and DI.
+type PGDisplayModeable interface {
+	Unwrap() *raw.PGDisplayMode
+	SizeInPixels() raw.PGDisplayCoord_t
+	RefreshRate() float64
+}
+
+var _ PGDisplayModeable = (*PGDisplayMode)(nil)
+

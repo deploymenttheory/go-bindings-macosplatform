@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,38 @@ func NewEnvironmentMechanism() *EnvironmentMechanism {
 	return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(_id)}
 }
 
+// IsUsable calls the underlying IsUsable.
+func (x *EnvironmentMechanism) IsUsable() bool {
+	return x.inner.IsUsable()
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *EnvironmentMechanism) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IconSystemName calls the underlying IconSystemName.
+func (x *EnvironmentMechanism) IconSystemName() string {
+	_r := x.inner.IconSystemName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *EnvironmentMechanism) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return x.inner }
+
+// EnvironmentMechanismable is the interface implemented by [EnvironmentMechanism], for mocking and DI.
+type EnvironmentMechanismable interface {
+	Unwrap() *raw.LAEnvironmentMechanism
+	IsUsable() bool
+	LocalizedName() string
+	IconSystemName() string
+}
+
+var _ EnvironmentMechanismable = (*EnvironmentMechanism)(nil)
 

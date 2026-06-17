@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewSyncEngineFetchedRecordDeletion() *SyncEngineFetchedRecordDeletion {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchedRecordDeletion")), objc.RegisterName("new"))
 	return &SyncEngineFetchedRecordDeletion{inner: raw.CKSyncEngineFetchedRecordDeletionFromID(_id)}
 }
+
+// RecordID calls the underlying RecordID.
+func (x *SyncEngineFetchedRecordDeletion) RecordID() *RecordID {
+	_r := x.inner.RecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// RecordType calls the underlying RecordType.
+func (x *SyncEngineFetchedRecordDeletion) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SyncEngineFetchedRecordDeletionable is the interface implemented by [SyncEngineFetchedRecordDeletion], for mocking and DI.
+type SyncEngineFetchedRecordDeletionable interface {
+	Unwrap() *raw.CKSyncEngineFetchedRecordDeletion
+	RecordID() *RecordID
+	RecordType() string
+}
+
+var _ SyncEngineFetchedRecordDeletionable = (*SyncEngineFetchedRecordDeletion)(nil)
 

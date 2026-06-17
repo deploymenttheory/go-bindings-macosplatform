@@ -6,7 +6,9 @@ package fileproviderui
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileproviderui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ActionExtensionViewController wraps [raw.FPUIActionExtensionViewController] with a fluent Go API.
@@ -22,4 +24,23 @@ func NewActionExtensionViewController() *ActionExtensionViewController {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FPUIActionExtensionViewController")), objc.RegisterName("new"))
 	return &ActionExtensionViewController{inner: raw.FPUIActionExtensionViewControllerFromID(_id)}
 }
+
+// PrepareForError calls the underlying PrepareForError.
+func (x *ActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
+	x.inner.PrepareForError(error_)
+}
+
+// PrepareForActionWithIdentifierItemIdentifiers calls the underlying PrepareForActionWithIdentifierItemIdentifiers.
+func (x *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.PrepareForActionWithIdentifierItemIdentifiers(foundation.NSStringStringWithUTF8String(actionIdentifier), itemIdentifiers)
+}
+
+// ActionExtensionViewControllerable is the interface implemented by [ActionExtensionViewController], for mocking and DI.
+type ActionExtensionViewControllerable interface {
+	Unwrap() *raw.FPUIActionExtensionViewController
+	PrepareForError(error_ unsafe.Pointer)
+	PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers *foundation.NSArray[*foundation.NSString])
+}
+
+var _ ActionExtensionViewControllerable = (*ActionExtensionViewController)(nil)
 

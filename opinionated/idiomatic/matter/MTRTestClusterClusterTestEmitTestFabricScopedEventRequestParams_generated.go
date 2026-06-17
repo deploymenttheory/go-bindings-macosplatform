@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams() *MTRTe
 
 func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams { return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams }
 
+// MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams
+}
+
+var _ MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams)(nil)
+

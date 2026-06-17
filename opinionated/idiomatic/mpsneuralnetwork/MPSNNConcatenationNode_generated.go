@@ -27,3 +27,10 @@ func NewNNConcatenationNodeWithSources(sourceNodes *foundation.NSArray[*raw.MPSN
 
 func (x *NNConcatenationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNConcatenationNodeable is the interface implemented by [NNConcatenationNode], for mocking and DI.
+type NNConcatenationNodeable interface {
+	Unwrap() *raw.MPSNNConcatenationNode
+}
+
+var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
+

@@ -48,7 +48,28 @@ func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *Mu
 	return x
 }
 
+// SetTimeRange calls the underlying SetTimeRange.
+func (x *MutableTimedMetadataGroup) SetTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.SetTimeRange(timeRange)
+}
+
+// SetItems calls the underlying SetItems.
+func (x *MutableTimedMetadataGroup) SetItems(items *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetItems(items)
+}
+
 func (x *MutableTimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup { return &x.inner.AVTimedMetadataGroup }
 
 func (x *MutableTimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVTimedMetadataGroup.AVMetadataGroup }
+
+// MutableTimedMetadataGroupable is the interface implemented by [MutableTimedMetadataGroup], for mocking and DI.
+type MutableTimedMetadataGroupable interface {
+	Unwrap() *raw.AVMutableTimedMetadataGroup
+	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup
+	WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup
+	SetTimeRange(timeRange coremedia.CMTimeRange)
+	SetItems(items *foundation.NSArray[*raw.AVMetadataItem])
+}
+
+var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)
 

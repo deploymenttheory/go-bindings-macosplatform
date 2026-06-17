@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VoxelArray wraps [raw.MDLVoxelArray] with a fluent Go API.
@@ -58,5 +59,176 @@ func (x *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness
 	return x
 }
 
+// VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell calls the underlying VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell.
+func (x *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
+	return x.inner.VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
+}
+
+// VoxelsWithinExtent calls the underlying VoxelsWithinExtent.
+func (x *VoxelArray) VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData {
+	return x.inner.VoxelsWithinExtent(extent)
+}
+
+// VoxelIndices calls the underlying VoxelIndices.
+func (x *VoxelArray) VoxelIndices() *foundation.NSData {
+	return x.inner.VoxelIndices()
+}
+
+// SetVoxelAtIndex calls the underlying SetVoxelAtIndex.
+func (x *VoxelArray) SetVoxelAtIndex(index unsafe.Pointer) {
+	x.inner.SetVoxelAtIndex(index)
+}
+
+// SetVoxelsForMeshDivisionsPatchRadius calls the underlying SetVoxelsForMeshDivisionsPatchRadius.
+func (x *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *raw.MDLMesh, divisions int, patchRadius float32) {
+	x.inner.SetVoxelsForMeshDivisionsPatchRadius(mesh, divisions, patchRadius)
+}
+
+// SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius.
+func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *raw.MDLMesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
+	x.inner.SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh, divisions, interiorShells, exteriorShells, patchRadius)
+}
+
+// SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius.
+func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *raw.MDLMesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
+	x.inner.SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh, divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
+}
+
+// UnionWithVoxels calls the underlying UnionWithVoxels.
+func (x *VoxelArray) UnionWithVoxels(voxels *raw.MDLVoxelArray) {
+	x.inner.UnionWithVoxels(voxels)
+}
+
+// IntersectWithVoxels calls the underlying IntersectWithVoxels.
+func (x *VoxelArray) IntersectWithVoxels(voxels *raw.MDLVoxelArray) {
+	x.inner.IntersectWithVoxels(voxels)
+}
+
+// DifferenceWithVoxels calls the underlying DifferenceWithVoxels.
+func (x *VoxelArray) DifferenceWithVoxels(voxels *raw.MDLVoxelArray) {
+	x.inner.DifferenceWithVoxels(voxels)
+}
+
+// IndexOfSpatialLocation calls the underlying IndexOfSpatialLocation.
+func (x *VoxelArray) IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer {
+	return x.inner.IndexOfSpatialLocation(location)
+}
+
+// SpatialLocationOfIndex calls the underlying SpatialLocationOfIndex.
+func (x *VoxelArray) SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer {
+	return x.inner.SpatialLocationOfIndex(index)
+}
+
+// VoxelBoundingBoxAtIndex calls the underlying VoxelBoundingBoxAtIndex.
+func (x *VoxelArray) VoxelBoundingBoxAtIndex(index unsafe.Pointer) raw.MDLAxisAlignedBoundingBox {
+	return x.inner.VoxelBoundingBoxAtIndex(index)
+}
+
+// ConvertToSignedShellField calls the underlying ConvertToSignedShellField.
+func (x *VoxelArray) ConvertToSignedShellField() {
+	x.inner.ConvertToSignedShellField()
+}
+
+// CoarseMesh calls the underlying CoarseMesh.
+func (x *VoxelArray) CoarseMesh() *Mesh {
+	_r := x.inner.CoarseMesh()
+	if _r == nil {
+		return nil
+	}
+	return &Mesh{inner: _r}
+}
+
+// CoarseMeshUsingAllocator calls the underlying CoarseMeshUsingAllocator.
+func (x *VoxelArray) CoarseMeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := x.inner.CoarseMeshUsingAllocator(allocator)
+	if _r == nil {
+		return nil
+	}
+	return &Mesh{inner: _r}
+}
+
+// MeshUsingAllocator calls the underlying MeshUsingAllocator.
+func (x *VoxelArray) MeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh {
+	_r := x.inner.MeshUsingAllocator(allocator)
+	if _r == nil {
+		return nil
+	}
+	return &Mesh{inner: _r}
+}
+
+// Count calls the underlying Count.
+func (x *VoxelArray) Count() uint {
+	return x.inner.Count()
+}
+
+// VoxelIndexExtent calls the underlying VoxelIndexExtent.
+func (x *VoxelArray) VoxelIndexExtent() raw.MDLVoxelIndexExtent {
+	return x.inner.VoxelIndexExtent()
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *VoxelArray) BoundingBox() raw.MDLAxisAlignedBoundingBox {
+	return x.inner.BoundingBox()
+}
+
+// IsValidSignedShellField calls the underlying IsValidSignedShellField.
+func (x *VoxelArray) IsValidSignedShellField() bool {
+	return x.inner.IsValidSignedShellField()
+}
+
+// ShellFieldInteriorThickness calls the underlying ShellFieldInteriorThickness.
+func (x *VoxelArray) ShellFieldInteriorThickness() float32 {
+	return x.inner.ShellFieldInteriorThickness()
+}
+
+// SetShellFieldInteriorThickness calls the underlying SetShellFieldInteriorThickness.
+func (x *VoxelArray) SetShellFieldInteriorThickness(shellFieldInteriorThickness float32) {
+	x.inner.SetShellFieldInteriorThickness(shellFieldInteriorThickness)
+}
+
+// ShellFieldExteriorThickness calls the underlying ShellFieldExteriorThickness.
+func (x *VoxelArray) ShellFieldExteriorThickness() float32 {
+	return x.inner.ShellFieldExteriorThickness()
+}
+
+// SetShellFieldExteriorThickness calls the underlying SetShellFieldExteriorThickness.
+func (x *VoxelArray) SetShellFieldExteriorThickness(shellFieldExteriorThickness float32) {
+	x.inner.SetShellFieldExteriorThickness(shellFieldExteriorThickness)
+}
+
 func (x *VoxelArray) asObject() *raw.MDLObject { return &x.inner.MDLObject }
+
+// VoxelArrayable is the interface implemented by [VoxelArray], for mocking and DI.
+type VoxelArrayable interface {
+	Unwrap() *raw.MDLVoxelArray
+	WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray
+	WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray
+	VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool
+	VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData
+	VoxelIndices() *foundation.NSData
+	SetVoxelAtIndex(index unsafe.Pointer)
+	SetVoxelsForMeshDivisionsPatchRadius(mesh *raw.MDLMesh, divisions int, patchRadius float32)
+	SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *raw.MDLMesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32)
+	SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *raw.MDLMesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32)
+	UnionWithVoxels(voxels *raw.MDLVoxelArray)
+	IntersectWithVoxels(voxels *raw.MDLVoxelArray)
+	DifferenceWithVoxels(voxels *raw.MDLVoxelArray)
+	IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer
+	SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer
+	VoxelBoundingBoxAtIndex(index unsafe.Pointer) raw.MDLAxisAlignedBoundingBox
+	ConvertToSignedShellField()
+	CoarseMesh() *Mesh
+	CoarseMeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh
+	MeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh
+	Count() uint
+	VoxelIndexExtent() raw.MDLVoxelIndexExtent
+	BoundingBox() raw.MDLAxisAlignedBoundingBox
+	IsValidSignedShellField() bool
+	ShellFieldInteriorThickness() float32
+	SetShellFieldInteriorThickness(shellFieldInteriorThickness float32)
+	ShellFieldExteriorThickness() float32
+	SetShellFieldExteriorThickness(shellFieldExteriorThickness float32)
+}
+
+var _ VoxelArrayable = (*VoxelArray)(nil)
 

@@ -48,3 +48,10 @@ func NewURLDownloadWithIdentifierRequestApplicationGroupIdentifierPriority(ident
 
 func (x *URLDownload) asDownload() *raw.BADownload { return &x.inner.BADownload }
 
+// URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
+type URLDownloadable interface {
+	Unwrap() *raw.BAURLDownload
+}
+
+var _ URLDownloadable = (*URLDownload)(nil)
+

@@ -24,3 +24,16 @@ func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float
 	return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(_id)}
 }
 
+// GetControlPointAtIndexValues calls the underlying GetControlPointAtIndexValues.
+func (x *MediaTimingFunction) GetControlPointAtIndexValues(idx uint, ptr *float32) {
+	x.inner.GetControlPointAtIndexValues(idx, ptr)
+}
+
+// MediaTimingFunctionable is the interface implemented by [MediaTimingFunction], for mocking and DI.
+type MediaTimingFunctionable interface {
+	Unwrap() *raw.CAMediaTimingFunction
+	GetControlPointAtIndexValues(idx uint, ptr *float32)
+}
+
+var _ MediaTimingFunctionable = (*MediaTimingFunction)(nil)
+

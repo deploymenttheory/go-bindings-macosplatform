@@ -23,3 +23,10 @@ func NewAppExtensionBrowserViewController() *AppExtensionBrowserViewController {
 	return &AppExtensionBrowserViewController{inner: raw.EXAppExtensionBrowserViewControllerFromID(_id)}
 }
 
+// AppExtensionBrowserViewControllerable is the interface implemented by [AppExtensionBrowserViewController], for mocking and DI.
+type AppExtensionBrowserViewControllerable interface {
+	Unwrap() *raw.EXAppExtensionBrowserViewController
+}
+
+var _ AppExtensionBrowserViewControllerable = (*AppExtensionBrowserViewController)(nil)
+

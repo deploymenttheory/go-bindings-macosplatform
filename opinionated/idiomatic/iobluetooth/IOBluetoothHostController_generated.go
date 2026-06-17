@@ -5,7 +5,9 @@
 package iobluetooth
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/icadevices"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +30,62 @@ func (x *IOBluetoothHostController) WithDelegate(delegate objc.ID) *IOBluetoothH
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// ClassOfDevice calls the underlying ClassOfDevice.
+func (x *IOBluetoothHostController) ClassOfDevice() uint32 {
+	return x.inner.ClassOfDevice()
+}
+
+// SetClassOfDeviceForTimeInterval calls the underlying SetClassOfDeviceForTimeInterval.
+func (x *IOBluetoothHostController) SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int {
+	return x.inner.SetClassOfDeviceForTimeInterval(classOfDevice, seconds)
+}
+
+// AddressAsString calls the underlying AddressAsString.
+func (x *IOBluetoothHostController) AddressAsString() string {
+	_r := x.inner.AddressAsString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NameAsString calls the underlying NameAsString.
+func (x *IOBluetoothHostController) NameAsString() string {
+	_r := x.inner.NameAsString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IOBluetoothHostController) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IOBluetoothHostController) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PowerState calls the underlying PowerState.
+func (x *IOBluetoothHostController) PowerState() icadevices.BluetoothHCIPowerState {
+	return x.inner.PowerState()
+}
+
+// IOBluetoothHostControllerable is the interface implemented by [IOBluetoothHostController], for mocking and DI.
+type IOBluetoothHostControllerable interface {
+	Unwrap() *raw.IOBluetoothHostController
+	WithDelegate(delegate objc.ID) *IOBluetoothHostController
+	ClassOfDevice() uint32
+	SetClassOfDeviceForTimeInterval(classOfDevice uint32, seconds float64) int
+	AddressAsString() string
+	NameAsString() string
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	PowerState() icadevices.BluetoothHCIPowerState
+}
+
+var _ IOBluetoothHostControllerable = (*IOBluetoothHostController)(nil)
 

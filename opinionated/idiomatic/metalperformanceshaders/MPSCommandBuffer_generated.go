@@ -38,3 +38,60 @@ func (x *CommandBuffer) WithHeapProvider(heapProvider mpscore.MPSHeapProvider) *
 	return x
 }
 
+// CommitAndContinue calls the underlying CommitAndContinue.
+func (x *CommandBuffer) CommitAndContinue() {
+	x.inner.CommitAndContinue()
+}
+
+// PrefetchHeapForWorkloadSize calls the underlying PrefetchHeapForWorkloadSize.
+func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size uint) {
+	x.inner.PrefetchHeapForWorkloadSize(size)
+}
+
+// CommandBuffer calls the underlying CommandBuffer.
+func (x *CommandBuffer) CommandBuffer() metal.MTLCommandBuffer {
+	return x.inner.CommandBuffer()
+}
+
+// RootCommandBuffer calls the underlying RootCommandBuffer.
+func (x *CommandBuffer) RootCommandBuffer() metal.MTLCommandBuffer {
+	return x.inner.RootCommandBuffer()
+}
+
+// Predicate calls the underlying Predicate.
+func (x *CommandBuffer) Predicate() *mpscore.MPSPredicate {
+	return x.inner.Predicate()
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *CommandBuffer) SetPredicate(predicate *mpscore.MPSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
+// HeapProvider calls the underlying HeapProvider.
+func (x *CommandBuffer) HeapProvider() mpscore.MPSHeapProvider {
+	return x.inner.HeapProvider()
+}
+
+// SetHeapProvider calls the underlying SetHeapProvider.
+func (x *CommandBuffer) SetHeapProvider(heapProvider mpscore.MPSHeapProvider) {
+	x.inner.SetHeapProvider(heapProvider)
+}
+
+// CommandBufferable is the interface implemented by [CommandBuffer], for mocking and DI.
+type CommandBufferable interface {
+	Unwrap() *raw.MPSCommandBuffer
+	WithPredicate(predicate *mpscore.MPSPredicate) *CommandBuffer
+	WithHeapProvider(heapProvider mpscore.MPSHeapProvider) *CommandBuffer
+	CommitAndContinue()
+	PrefetchHeapForWorkloadSize(size uint)
+	CommandBuffer() metal.MTLCommandBuffer
+	RootCommandBuffer() metal.MTLCommandBuffer
+	Predicate() *mpscore.MPSPredicate
+	SetPredicate(predicate *mpscore.MPSPredicate)
+	HeapProvider() mpscore.MPSHeapProvider
+	SetHeapProvider(heapProvider mpscore.MPSHeapProvider)
+}
+
+var _ CommandBufferable = (*CommandBuffer)(nil)
+

@@ -5,8 +5,10 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +38,71 @@ func (x *IKSaveOptions) WithRememberLastSetting(rememberLastSetting bool) *IKSav
 	x.inner.SetRememberLastSetting(rememberLastSetting)
 	return x
 }
+
+// AddSaveOptionsAccessoryViewToSavePanel calls the underlying AddSaveOptionsAccessoryViewToSavePanel.
+func (x *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel) {
+	x.inner.AddSaveOptionsAccessoryViewToSavePanel(savePanel)
+}
+
+// AddSaveOptionsToView calls the underlying AddSaveOptionsToView.
+func (x *IKSaveOptions) AddSaveOptionsToView(view *appkit.NSView) {
+	x.inner.AddSaveOptionsToView(view)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IKSaveOptions) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IKSaveOptions) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ImageProperties calls the underlying ImageProperties.
+func (x *IKSaveOptions) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.ImageProperties()
+}
+
+// ImageUTType calls the underlying ImageUTType.
+func (x *IKSaveOptions) ImageUTType() string {
+	_r := x.inner.ImageUTType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UserSelection calls the underlying UserSelection.
+func (x *IKSaveOptions) UserSelection() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserSelection()
+}
+
+// RememberLastSetting calls the underlying RememberLastSetting.
+func (x *IKSaveOptions) RememberLastSetting() bool {
+	return x.inner.RememberLastSetting()
+}
+
+// SetRememberLastSetting calls the underlying SetRememberLastSetting.
+func (x *IKSaveOptions) SetRememberLastSetting(rememberLastSetting bool) {
+	x.inner.SetRememberLastSetting(rememberLastSetting)
+}
+
+// IKSaveOptionsable is the interface implemented by [IKSaveOptions], for mocking and DI.
+type IKSaveOptionsable interface {
+	Unwrap() *raw.IKSaveOptions
+	WithDelegate(delegate objc.ID) *IKSaveOptions
+	WithRememberLastSetting(rememberLastSetting bool) *IKSaveOptions
+	AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel)
+	AddSaveOptionsToView(view *appkit.NSView)
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID]
+	ImageUTType() string
+	UserSelection() *foundation.NSDictionary[objc.ID, objc.ID]
+	RememberLastSetting() bool
+	SetRememberLastSetting(rememberLastSetting bool)
+}
+
+var _ IKSaveOptionsable = (*IKSaveOptions)(nil)
 

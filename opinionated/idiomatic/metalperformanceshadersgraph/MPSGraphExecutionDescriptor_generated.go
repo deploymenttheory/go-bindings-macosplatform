@@ -5,6 +5,7 @@
 package metalperformanceshadersgraph
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -48,5 +49,80 @@ func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescript
 	return x
 }
 
+// WaitForEventValue calls the underlying WaitForEventValue.
+func (x *GraphExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
+	x.inner.WaitForEventValue(event, value)
+}
+
+// SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
+func (x *GraphExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64) {
+	x.inner.SignalEventAtExecutionEventValue(event, executionStage, value)
+}
+
+// ScheduledHandler calls the underlying ScheduledHandler.
+func (x *GraphExecutionDescriptor) ScheduledHandler() objc.Block {
+	return x.inner.ScheduledHandler()
+}
+
+// SetScheduledHandler calls the underlying SetScheduledHandler.
+func (x *GraphExecutionDescriptor) SetScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.SetScheduledHandler(scheduledHandler)
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *GraphExecutionDescriptor) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
+// SetCompletionHandler calls the underlying SetCompletionHandler.
+func (x *GraphExecutionDescriptor) SetCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.SetCompletionHandler(completionHandler)
+}
+
+// WaitUntilCompleted calls the underlying WaitUntilCompleted.
+func (x *GraphExecutionDescriptor) WaitUntilCompleted() bool {
+	return x.inner.WaitUntilCompleted()
+}
+
+// SetWaitUntilCompleted calls the underlying SetWaitUntilCompleted.
+func (x *GraphExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
+	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
+}
+
+// CompilationDescriptor calls the underlying CompilationDescriptor.
+func (x *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
+	_r := x.inner.CompilationDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &GraphCompilationDescriptor{inner: _r}
+}
+
+// SetCompilationDescriptor calls the underlying SetCompilationDescriptor.
+func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor) {
+	x.inner.SetCompilationDescriptor(compilationDescriptor)
+}
+
 func (x *GraphExecutionDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphExecutionDescriptorable is the interface implemented by [GraphExecutionDescriptor], for mocking and DI.
+type GraphExecutionDescriptorable interface {
+	Unwrap() *raw.MPSGraphExecutionDescriptor
+	WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
+	WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
+	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor
+	WithCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor) *GraphExecutionDescriptor
+	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
+	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage raw.MPSGraphExecutionStage, value uint64)
+	ScheduledHandler() objc.Block
+	SetScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer))
+	CompletionHandler() objc.Block
+	SetCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	WaitUntilCompleted() bool
+	SetWaitUntilCompleted(waitUntilCompleted bool)
+	CompilationDescriptor() *GraphCompilationDescriptor
+	SetCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor)
+}
+
+var _ GraphExecutionDescriptorable = (*GraphExecutionDescriptor)(nil)
 

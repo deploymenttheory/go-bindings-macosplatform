@@ -30,3 +30,23 @@ func (x *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue *foun
 	return x
 }
 
+// StateValue calls the underlying StateValue.
+func (x *MTRBooleanStateClusterStateChangeEvent) StateValue() *foundation.NSNumber {
+	return x.inner.StateValue()
+}
+
+// SetStateValue calls the underlying SetStateValue.
+func (x *MTRBooleanStateClusterStateChangeEvent) SetStateValue(stateValue *foundation.NSNumber) {
+	x.inner.SetStateValue(stateValue)
+}
+
+// MTRBooleanStateClusterStateChangeEventable is the interface implemented by [MTRBooleanStateClusterStateChangeEvent], for mocking and DI.
+type MTRBooleanStateClusterStateChangeEventable interface {
+	Unwrap() *raw.MTRBooleanStateClusterStateChangeEvent
+	WithStateValue(stateValue *foundation.NSNumber) *MTRBooleanStateClusterStateChangeEvent
+	StateValue() *foundation.NSNumber
+	SetStateValue(stateValue *foundation.NSNumber)
+}
+
+var _ MTRBooleanStateClusterStateChangeEventable = (*MTRBooleanStateClusterStateChangeEvent)(nil)
+

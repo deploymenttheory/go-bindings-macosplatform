@@ -25,3 +25,10 @@ func NewCharacteristicType() *CharacteristicType {
 
 func (x *CharacteristicType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
+// CharacteristicTypeable is the interface implemented by [CharacteristicType], for mocking and DI.
+type CharacteristicTypeable interface {
+	Unwrap() *raw.HKCharacteristicType
+}
+
+var _ CharacteristicTypeable = (*CharacteristicType)(nil)
+

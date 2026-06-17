@@ -23,3 +23,16 @@ func NewAssetResourceLoadingRequestor() *AssetResourceLoadingRequestor {
 	return &AssetResourceLoadingRequestor{inner: raw.AVAssetResourceLoadingRequestorFromID(_id)}
 }
 
+// ProvidesExpiredSessionReports calls the underlying ProvidesExpiredSessionReports.
+func (x *AssetResourceLoadingRequestor) ProvidesExpiredSessionReports() bool {
+	return x.inner.ProvidesExpiredSessionReports()
+}
+
+// AssetResourceLoadingRequestorable is the interface implemented by [AssetResourceLoadingRequestor], for mocking and DI.
+type AssetResourceLoadingRequestorable interface {
+	Unwrap() *raw.AVAssetResourceLoadingRequestor
+	ProvidesExpiredSessionReports() bool
+}
+
+var _ AssetResourceLoadingRequestorable = (*AssetResourceLoadingRequestor)(nil)
+

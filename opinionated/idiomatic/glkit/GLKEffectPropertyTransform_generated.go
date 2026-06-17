@@ -7,6 +7,7 @@ package glkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EffectPropertyTransform wraps [raw.GLKEffectPropertyTransform] with a fluent Go API.
@@ -23,5 +24,42 @@ func NewEffectPropertyTransform() *EffectPropertyTransform {
 	return &EffectPropertyTransform{inner: raw.GLKEffectPropertyTransformFromID(_id)}
 }
 
+// ModelviewMatrix calls the underlying ModelviewMatrix.
+func (x *EffectPropertyTransform) ModelviewMatrix() unsafe.Pointer {
+	return x.inner.ModelviewMatrix()
+}
+
+// SetModelviewMatrix calls the underlying SetModelviewMatrix.
+func (x *EffectPropertyTransform) SetModelviewMatrix(modelviewMatrix unsafe.Pointer) {
+	x.inner.SetModelviewMatrix(modelviewMatrix)
+}
+
+// ProjectionMatrix calls the underlying ProjectionMatrix.
+func (x *EffectPropertyTransform) ProjectionMatrix() unsafe.Pointer {
+	return x.inner.ProjectionMatrix()
+}
+
+// SetProjectionMatrix calls the underlying SetProjectionMatrix.
+func (x *EffectPropertyTransform) SetProjectionMatrix(projectionMatrix unsafe.Pointer) {
+	x.inner.SetProjectionMatrix(projectionMatrix)
+}
+
+// NormalMatrix calls the underlying NormalMatrix.
+func (x *EffectPropertyTransform) NormalMatrix() unsafe.Pointer {
+	return x.inner.NormalMatrix()
+}
+
 func (x *EffectPropertyTransform) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+
+// EffectPropertyTransformable is the interface implemented by [EffectPropertyTransform], for mocking and DI.
+type EffectPropertyTransformable interface {
+	Unwrap() *raw.GLKEffectPropertyTransform
+	ModelviewMatrix() unsafe.Pointer
+	SetModelviewMatrix(modelviewMatrix unsafe.Pointer)
+	ProjectionMatrix() unsafe.Pointer
+	SetProjectionMatrix(projectionMatrix unsafe.Pointer)
+	NormalMatrix() unsafe.Pointer
+}
+
+var _ EffectPropertyTransformable = (*EffectPropertyTransform)(nil)
 

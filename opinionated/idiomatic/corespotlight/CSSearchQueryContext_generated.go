@@ -7,6 +7,7 @@ package corespotlight
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -70,30 +71,79 @@ func (x *SearchQueryContext) WithSourceOptions(sourceOptions raw.CSSearchQuerySo
 }
 
 // FetchAttributes returns the collection as a Go slice.
-func (x *SearchQueryContext) FetchAttributes() []*foundation.NSString {
+func (x *SearchQueryContext) FetchAttributes() []string {
 	arr := x.inner.FetchAttributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetFetchAttributes calls the underlying SetFetchAttributes.
+func (x *SearchQueryContext) SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetFetchAttributes(fetchAttributes)
 }
 
 // FilterQueries returns the collection as a Go slice.
-func (x *SearchQueryContext) FilterQueries() []*foundation.NSString {
+func (x *SearchQueryContext) FilterQueries() []string {
 	arr := x.inner.FilterQueries()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetFilterQueries calls the underlying SetFilterQueries.
+func (x *SearchQueryContext) SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetFilterQueries(filterQueries)
+}
+
+// KeyboardLanguage calls the underlying KeyboardLanguage.
+func (x *SearchQueryContext) KeyboardLanguage() string {
+	_r := x.inner.KeyboardLanguage()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKeyboardLanguage calls the underlying SetKeyboardLanguage.
+func (x *SearchQueryContext) SetKeyboardLanguage(keyboardLanguage string) {
+	x.inner.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
+}
+
+// SourceOptions calls the underlying SourceOptions.
+func (x *SearchQueryContext) SourceOptions() raw.CSSearchQuerySourceOptions {
+	return x.inner.SourceOptions()
+}
+
+// SetSourceOptions calls the underlying SetSourceOptions.
+func (x *SearchQueryContext) SetSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) {
+	x.inner.SetSourceOptions(sourceOptions)
 }
 
 func (x *SearchQueryContext) asSearchQueryContext() *raw.CSSearchQueryContext { return x.inner }
+
+// SearchQueryContextable is the interface implemented by [SearchQueryContext], for mocking and DI.
+type SearchQueryContextable interface {
+	Unwrap() *raw.CSSearchQueryContext
+	WithFetchAttributes(items ...*foundation.NSString) *SearchQueryContext
+	WithFilterQueries(items ...*foundation.NSString) *SearchQueryContext
+	WithKeyboardLanguage(keyboardLanguage string) *SearchQueryContext
+	WithSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions) *SearchQueryContext
+	FetchAttributes() []string
+	SetFetchAttributes(fetchAttributes *foundation.NSArray[*foundation.NSString])
+	FilterQueries() []string
+	SetFilterQueries(filterQueries *foundation.NSArray[*foundation.NSString])
+	KeyboardLanguage() string
+	SetKeyboardLanguage(keyboardLanguage string)
+	SourceOptions() raw.CSSearchQuerySourceOptions
+	SetSourceOptions(sourceOptions raw.CSSearchQuerySourceOptions)
+}
+
+var _ SearchQueryContextable = (*SearchQueryContext)(nil)
 

@@ -33,7 +33,32 @@ func NewCNNDropoutGradientWithDeviceKeepProbabilitySeedMaskStrideInPixels(device
 	return &CNNDropoutGradient{inner: raw.MPSCNNDropoutGradientFromID(_id)}
 }
 
+// KeepProbability calls the underlying KeepProbability.
+func (x *CNNDropoutGradient) KeepProbability() float32 {
+	return x.inner.KeepProbability()
+}
+
+// Seed calls the underlying Seed.
+func (x *CNNDropoutGradient) Seed() uint {
+	return x.inner.Seed()
+}
+
+// MaskStrideInPixels calls the underlying MaskStrideInPixels.
+func (x *CNNDropoutGradient) MaskStrideInPixels() metal.MTLSize {
+	return x.inner.MaskStrideInPixels()
+}
+
 func (x *CNNDropoutGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNDropoutGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// CNNDropoutGradientable is the interface implemented by [CNNDropoutGradient], for mocking and DI.
+type CNNDropoutGradientable interface {
+	Unwrap() *raw.MPSCNNDropoutGradient
+	KeepProbability() float32
+	Seed() uint
+	MaskStrideInPixels() metal.MTLSize
+}
+
+var _ CNNDropoutGradientable = (*CNNDropoutGradient)(nil)
 

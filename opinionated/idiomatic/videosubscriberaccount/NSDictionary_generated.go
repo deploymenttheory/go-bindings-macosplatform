@@ -23,3 +23,10 @@ func NewNSDictionary() *NSDictionary {
 	return &NSDictionary{inner: raw.NSDictionaryFromID[objc.ID, objc.ID](_id)}
 }
 
+// NSDictionaryable is the interface implemented by [NSDictionary], for mocking and DI.
+type NSDictionaryable interface {
+	Unwrap() *raw.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ NSDictionaryable = (*NSDictionary)(nil)
+

@@ -31,3 +31,10 @@ func (x *MTRClusterBridgedDeviceBasic) asMTRGenericCluster() *raw.MTRGenericClus
 
 func (x *MTRClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster.MTRCluster }
 
+// MTRClusterBridgedDeviceBasicable is the interface implemented by [MTRClusterBridgedDeviceBasic], for mocking and DI.
+type MTRClusterBridgedDeviceBasicable interface {
+	Unwrap() *raw.MTRClusterBridgedDeviceBasic
+}
+
+var _ MTRClusterBridgedDeviceBasicable = (*MTRClusterBridgedDeviceBasic)(nil)
+

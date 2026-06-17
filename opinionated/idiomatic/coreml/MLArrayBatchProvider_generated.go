@@ -38,3 +38,16 @@ func NewArrayBatchProviderWithDictionaryError(dictionary *foundation.NSDictionar
 	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(_id)}, nil
 }
 
+// Array calls the underlying Array.
+func (x *ArrayBatchProvider) Array() *foundation.NSArray[raw.MLFeatureProvider] {
+	return x.inner.Array()
+}
+
+// ArrayBatchProviderable is the interface implemented by [ArrayBatchProvider], for mocking and DI.
+type ArrayBatchProviderable interface {
+	Unwrap() *raw.MLArrayBatchProvider
+	Array() *foundation.NSArray[raw.MLFeatureProvider]
+}
+
+var _ ArrayBatchProviderable = (*ArrayBatchProvider)(nil)
+

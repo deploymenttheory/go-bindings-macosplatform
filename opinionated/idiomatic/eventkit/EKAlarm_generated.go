@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,5 +67,121 @@ func (x *Alarm) WithUrl(url string) *Alarm {
 	return x
 }
 
+// RelativeOffset calls the underlying RelativeOffset.
+func (x *Alarm) RelativeOffset() float64 {
+	return x.inner.RelativeOffset()
+}
+
+// SetRelativeOffset calls the underlying SetRelativeOffset.
+func (x *Alarm) SetRelativeOffset(relativeOffset float64) {
+	x.inner.SetRelativeOffset(relativeOffset)
+}
+
+// AbsoluteDate calls the underlying AbsoluteDate.
+func (x *Alarm) AbsoluteDate() *foundation.NSDate {
+	return x.inner.AbsoluteDate()
+}
+
+// SetAbsoluteDate calls the underlying SetAbsoluteDate.
+func (x *Alarm) SetAbsoluteDate(absoluteDate *foundation.NSDate) {
+	x.inner.SetAbsoluteDate(absoluteDate)
+}
+
+// StructuredLocation calls the underlying StructuredLocation.
+func (x *Alarm) StructuredLocation() *StructuredLocation {
+	_r := x.inner.StructuredLocation()
+	if _r == nil {
+		return nil
+	}
+	return &StructuredLocation{inner: _r}
+}
+
+// SetStructuredLocation calls the underlying SetStructuredLocation.
+func (x *Alarm) SetStructuredLocation(structuredLocation *raw.EKStructuredLocation) {
+	x.inner.SetStructuredLocation(structuredLocation)
+}
+
+// Proximity calls the underlying Proximity.
+func (x *Alarm) Proximity() raw.EKAlarmProximity {
+	return x.inner.Proximity()
+}
+
+// SetProximity calls the underlying SetProximity.
+func (x *Alarm) SetProximity(proximity raw.EKAlarmProximity) {
+	x.inner.SetProximity(proximity)
+}
+
+// Type calls the underlying Type.
+func (x *Alarm) Type() raw.EKAlarmType {
+	return x.inner.Type()
+}
+
+// EmailAddress calls the underlying EmailAddress.
+func (x *Alarm) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEmailAddress calls the underlying SetEmailAddress.
+func (x *Alarm) SetEmailAddress(emailAddress string) {
+	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
+}
+
+// SoundName calls the underlying SoundName.
+func (x *Alarm) SoundName() string {
+	_r := x.inner.SoundName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSoundName calls the underlying SetSoundName.
+func (x *Alarm) SetSoundName(soundName string) {
+	x.inner.SetSoundName(foundation.NSStringStringWithUTF8String(soundName))
+}
+
+// Url calls the underlying Url.
+func (x *Alarm) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *Alarm) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
 func (x *Alarm) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// Alarmable is the interface implemented by [Alarm], for mocking and DI.
+type Alarmable interface {
+	Unwrap() *raw.EKAlarm
+	WithRelativeOffset(relativeOffset float64) *Alarm
+	WithAbsoluteDate(absoluteDate *foundation.NSDate) *Alarm
+	WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Alarm
+	WithProximity(proximity raw.EKAlarmProximity) *Alarm
+	WithEmailAddress(emailAddress string) *Alarm
+	WithSoundName(soundName string) *Alarm
+	WithUrl(url string) *Alarm
+	RelativeOffset() float64
+	SetRelativeOffset(relativeOffset float64)
+	AbsoluteDate() *foundation.NSDate
+	SetAbsoluteDate(absoluteDate *foundation.NSDate)
+	StructuredLocation() *StructuredLocation
+	SetStructuredLocation(structuredLocation *raw.EKStructuredLocation)
+	Proximity() raw.EKAlarmProximity
+	SetProximity(proximity raw.EKAlarmProximity)
+	Type() raw.EKAlarmType
+	EmailAddress() string
+	SetEmailAddress(emailAddress string)
+	SoundName() string
+	SetSoundName(soundName string)
+	Url() *foundation.NSURL
+	SetUrl(url string)
+}
+
+var _ Alarmable = (*Alarm)(nil)
 

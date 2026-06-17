@@ -37,3 +37,23 @@ func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPas
 	return x
 }
 
+// Passphrase calls the underlying Passphrase.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() *foundation.NSData {
+	return x.inner.Passphrase()
+}
+
+// SetPassphrase calls the underlying SetPassphrase.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase *foundation.NSData) {
+	x.inner.SetPassphrase(passphrase)
+}
+
+// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable is the interface implemented by [MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams], for mocking and DI.
+type MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable interface {
+	Unwrap() *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+	WithPassphrase(passphrase *foundation.NSData) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+	Passphrase() *foundation.NSData
+	SetPassphrase(passphrase *foundation.NSData)
+}
+
+var _ MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable = (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams)(nil)
+

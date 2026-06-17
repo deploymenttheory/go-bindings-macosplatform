@@ -5,6 +5,7 @@
 package quartzcomposer
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewCompositionPickerPanel() *CompositionPickerPanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionPickerPanel")), objc.RegisterName("new"))
 	return &CompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(_id)}
 }
+
+// CompositionPickerView calls the underlying CompositionPickerView.
+func (x *CompositionPickerPanel) CompositionPickerView() *quartz.QCCompositionPickerView {
+	return x.inner.CompositionPickerView()
+}
+
+// CompositionPickerPanelable is the interface implemented by [CompositionPickerPanel], for mocking and DI.
+type CompositionPickerPanelable interface {
+	Unwrap() *raw.QCCompositionPickerPanel
+	CompositionPickerView() *quartz.QCCompositionPickerView
+}
+
+var _ CompositionPickerPanelable = (*CompositionPickerPanel)(nil)
 

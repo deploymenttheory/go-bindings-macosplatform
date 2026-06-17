@@ -5,6 +5,7 @@
 package localauthentication
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainStateCompanion")), objc.RegisterName("new"))
 	return &DomainStateCompanion{inner: raw.LADomainStateCompanionFromID(_id)}
 }
+
+// StateHashForCompanionType calls the underlying StateHashForCompanionType.
+func (x *DomainStateCompanion) StateHashForCompanionType(companionType raw.LACompanionType) *foundation.NSData {
+	return x.inner.StateHashForCompanionType(companionType)
+}
+
+// AvailableCompanionTypes calls the underlying AvailableCompanionTypes.
+func (x *DomainStateCompanion) AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.AvailableCompanionTypes()
+}
+
+// StateHash calls the underlying StateHash.
+func (x *DomainStateCompanion) StateHash() *foundation.NSData {
+	return x.inner.StateHash()
+}
+
+// DomainStateCompanionable is the interface implemented by [DomainStateCompanion], for mocking and DI.
+type DomainStateCompanionable interface {
+	Unwrap() *raw.LADomainStateCompanion
+	StateHashForCompanionType(companionType raw.LACompanionType) *foundation.NSData
+	AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber]
+	StateHash() *foundation.NSData
+}
+
+var _ DomainStateCompanionable = (*DomainStateCompanion)(nil)
 

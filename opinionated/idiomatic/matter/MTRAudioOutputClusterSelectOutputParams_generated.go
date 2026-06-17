@@ -42,3 +42,49 @@ func (x *MTRAudioOutputClusterSelectOutputParams) WithServerSideProcessingTimeou
 	return x
 }
 
+// Index calls the underlying Index.
+func (x *MTRAudioOutputClusterSelectOutputParams) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRAudioOutputClusterSelectOutputParams) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAudioOutputClusterSelectOutputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAudioOutputClusterSelectOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAudioOutputClusterSelectOutputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAudioOutputClusterSelectOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAudioOutputClusterSelectOutputParamsable is the interface implemented by [MTRAudioOutputClusterSelectOutputParams], for mocking and DI.
+type MTRAudioOutputClusterSelectOutputParamsable interface {
+	Unwrap() *raw.MTRAudioOutputClusterSelectOutputParams
+	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterSelectOutputParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAudioOutputClusterSelectOutputParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAudioOutputClusterSelectOutputParams
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAudioOutputClusterSelectOutputParamsable = (*MTRAudioOutputClusterSelectOutputParams)(nil)
+

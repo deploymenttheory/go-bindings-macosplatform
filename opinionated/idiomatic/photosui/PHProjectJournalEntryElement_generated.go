@@ -5,6 +5,7 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,38 @@ func NewProjectJournalEntryElement() *ProjectJournalEntryElement {
 	return &ProjectJournalEntryElement{inner: raw.PHProjectJournalEntryElementFromID(_id)}
 }
 
+// Date calls the underlying Date.
+func (x *ProjectJournalEntryElement) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// AssetElement calls the underlying AssetElement.
+func (x *ProjectJournalEntryElement) AssetElement() *ProjectAssetElement {
+	_r := x.inner.AssetElement()
+	if _r == nil {
+		return nil
+	}
+	return &ProjectAssetElement{inner: _r}
+}
+
+// TextElement calls the underlying TextElement.
+func (x *ProjectJournalEntryElement) TextElement() *ProjectTextElement {
+	_r := x.inner.TextElement()
+	if _r == nil {
+		return nil
+	}
+	return &ProjectTextElement{inner: _r}
+}
+
 func (x *ProjectJournalEntryElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+
+// ProjectJournalEntryElementable is the interface implemented by [ProjectJournalEntryElement], for mocking and DI.
+type ProjectJournalEntryElementable interface {
+	Unwrap() *raw.PHProjectJournalEntryElement
+	Date() *foundation.NSDate
+	AssetElement() *ProjectAssetElement
+	TextElement() *ProjectTextElement
+}
+
+var _ ProjectJournalEntryElementable = (*ProjectJournalEntryElement)(nil)
 

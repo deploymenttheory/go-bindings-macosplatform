@@ -42,3 +42,61 @@ func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) W
 	return x
 }
 
+// Constraints calls the underlying Constraints.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Constraints() *foundation.NSArray[objc.ID] {
+	return x.inner.Constraints()
+}
+
+// SetConstraints calls the underlying SetConstraints.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetConstraints(constraints *foundation.NSArray[objc.ID]) {
+	x.inner.SetConstraints(constraints)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams
+	Constraints() *foundation.NSArray[objc.ID]
+	SetConstraints(constraints *foundation.NSArray[objc.ID])
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParamsable = (*MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams)(nil)
+

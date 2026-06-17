@@ -23,5 +23,18 @@ func NewCellularConditionMetric() *CellularConditionMetric {
 	return &CellularConditionMetric{inner: raw.MXCellularConditionMetricFromID(_id)}
 }
 
+// HistogrammedCellularConditionTime calls the underlying HistogrammedCellularConditionTime.
+func (x *CellularConditionMetric) HistogrammedCellularConditionTime() *raw.MXHistogram[*raw.MXUnitSignalBars] {
+	return x.inner.HistogrammedCellularConditionTime()
+}
+
 func (x *CellularConditionMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// CellularConditionMetricable is the interface implemented by [CellularConditionMetric], for mocking and DI.
+type CellularConditionMetricable interface {
+	Unwrap() *raw.MXCellularConditionMetric
+	HistogrammedCellularConditionTime() *raw.MXHistogram[*raw.MXUnitSignalBars]
+}
+
+var _ CellularConditionMetricable = (*CellularConditionMetric)(nil)
 

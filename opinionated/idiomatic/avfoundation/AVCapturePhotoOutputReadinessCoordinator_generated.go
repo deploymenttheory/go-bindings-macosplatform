@@ -30,3 +30,41 @@ func (x *CapturePhotoOutputReadinessCoordinator) WithDelegate(delegate raw.AVCap
 	return x
 }
 
+// StartTrackingCaptureRequestUsingPhotoSettings calls the underlying StartTrackingCaptureRequestUsingPhotoSettings.
+func (x *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *raw.AVCapturePhotoSettings) {
+	x.inner.StartTrackingCaptureRequestUsingPhotoSettings(settings)
+}
+
+// StopTrackingCaptureRequestUsingPhotoSettingsUniqueID calls the underlying StopTrackingCaptureRequestUsingPhotoSettingsUniqueID.
+func (x *CapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
+	x.inner.StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CapturePhotoOutputReadinessCoordinator) Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CapturePhotoOutputReadinessCoordinator) SetDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CaptureReadiness calls the underlying CaptureReadiness.
+func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness {
+	return x.inner.CaptureReadiness()
+}
+
+// CapturePhotoOutputReadinessCoordinatorable is the interface implemented by [CapturePhotoOutputReadinessCoordinator], for mocking and DI.
+type CapturePhotoOutputReadinessCoordinatorable interface {
+	Unwrap() *raw.AVCapturePhotoOutputReadinessCoordinator
+	WithDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) *CapturePhotoOutputReadinessCoordinator
+	StartTrackingCaptureRequestUsingPhotoSettings(settings *raw.AVCapturePhotoSettings)
+	StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64)
+	Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate
+	SetDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate)
+	CaptureReadiness() raw.AVCapturePhotoOutputCaptureReadiness
+}
+
+var _ CapturePhotoOutputReadinessCoordinatorable = (*CapturePhotoOutputReadinessCoordinator)(nil)
+

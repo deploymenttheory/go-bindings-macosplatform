@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -71,4 +72,131 @@ func (x *MTRMessagesClusterPresentMessagesRequestParams) WithServerSideProcessin
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// MessageID calls the underlying MessageID.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageID() *foundation.NSData {
+	return x.inner.MessageID()
+}
+
+// SetMessageID calls the underlying SetMessageID.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageID(messageID *foundation.NSData) {
+	x.inner.SetMessageID(messageID)
+}
+
+// Priority calls the underlying Priority.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) Priority() *foundation.NSNumber {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetPriority(priority *foundation.NSNumber) {
+	x.inner.SetPriority(priority)
+}
+
+// MessageControl calls the underlying MessageControl.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() *foundation.NSNumber {
+	return x.inner.MessageControl()
+}
+
+// SetMessageControl calls the underlying SetMessageControl.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageControl(messageControl *foundation.NSNumber) {
+	x.inner.SetMessageControl(messageControl)
+}
+
+// StartTime calls the underlying StartTime.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// MessageText calls the underlying MessageText.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) MessageText() string {
+	_r := x.inner.MessageText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessageText calls the underlying SetMessageText.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetMessageText(messageText string) {
+	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+}
+
+// Responses calls the underlying Responses.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) Responses() *foundation.NSArray[objc.ID] {
+	return x.inner.Responses()
+}
+
+// SetResponses calls the underlying SetResponses.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetResponses(responses *foundation.NSArray[objc.ID]) {
+	x.inner.SetResponses(responses)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMessagesClusterPresentMessagesRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMessagesClusterPresentMessagesRequestParamsable is the interface implemented by [MTRMessagesClusterPresentMessagesRequestParams], for mocking and DI.
+type MTRMessagesClusterPresentMessagesRequestParamsable interface {
+	Unwrap() *raw.MTRMessagesClusterPresentMessagesRequestParams
+	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterPresentMessagesRequestParams
+	WithPriority(priority *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	WithMessageControl(messageControl *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	WithStartTime(startTime *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	WithDuration(duration *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	WithMessageText(messageText string) *MTRMessagesClusterPresentMessagesRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMessagesClusterPresentMessagesRequestParams
+	MessageID() *foundation.NSData
+	SetMessageID(messageID *foundation.NSData)
+	Priority() *foundation.NSNumber
+	SetPriority(priority *foundation.NSNumber)
+	MessageControl() *foundation.NSNumber
+	SetMessageControl(messageControl *foundation.NSNumber)
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	MessageText() string
+	SetMessageText(messageText string)
+	Responses() *foundation.NSArray[objc.ID]
+	SetResponses(responses *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMessagesClusterPresentMessagesRequestParamsable = (*MTRMessagesClusterPresentMessagesRequestParams)(nil)
 

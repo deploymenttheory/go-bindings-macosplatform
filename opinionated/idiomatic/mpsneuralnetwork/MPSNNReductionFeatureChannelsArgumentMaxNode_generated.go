@@ -27,3 +27,10 @@ func (x *NNReductionFeatureChannelsArgumentMaxNode) asNNUnaryReductionNode() *ra
 
 func (x *NNReductionFeatureChannelsArgumentMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionFeatureChannelsArgumentMaxNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMaxNode], for mocking and DI.
+type NNReductionFeatureChannelsArgumentMaxNodeable interface {
+	Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMaxNode
+}
+
+var _ NNReductionFeatureChannelsArgumentMaxNodeable = (*NNReductionFeatureChannelsArgumentMaxNode)(nil)
+

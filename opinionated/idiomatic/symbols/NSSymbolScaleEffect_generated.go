@@ -23,5 +23,32 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 	return &SymbolScaleEffect{inner: raw.NSSymbolScaleEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolScaleEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolScaleEffect{inner: _r}
+}
+
 func (x *SymbolScaleEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolScaleEffectable is the interface implemented by [SymbolScaleEffect], for mocking and DI.
+type SymbolScaleEffectable interface {
+	Unwrap() *raw.NSSymbolScaleEffect
+	EffectWithByLayer() *SymbolScaleEffect
+	EffectWithWholeSymbol() *SymbolScaleEffect
+}
+
+var _ SymbolScaleEffectable = (*SymbolScaleEffect)(nil)
 

@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NDArrayMultiaryBase wraps [raw.MPSNDArrayMultiaryBase] with a fluent Go API.
@@ -40,5 +42,83 @@ func (x *NDArrayMultiaryBase) WithDestinationArrayAllocator(destinationArrayAllo
 	return x
 }
 
+// OffsetsAtSourceIndex calls the underlying OffsetsAtSourceIndex.
+func (x *NDArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets {
+	return x.inner.OffsetsAtSourceIndex(sourceIndex)
+}
+
+// EdgeModeAtSourceIndex calls the underlying EdgeModeAtSourceIndex.
+func (x *NDArrayMultiaryBase) EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeModeAtSourceIndex(sourceIndex)
+}
+
+// KernelSizesForSourceIndex calls the underlying KernelSizesForSourceIndex.
+func (x *NDArrayMultiaryBase) KernelSizesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes {
+	return x.inner.KernelSizesForSourceIndex(sourceIndex)
+}
+
+// StridesForSourceIndex calls the underlying StridesForSourceIndex.
+func (x *NDArrayMultiaryBase) StridesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets {
+	return x.inner.StridesForSourceIndex(sourceIndex)
+}
+
+// DilationRatesForSourceIndex calls the underlying DilationRatesForSourceIndex.
+func (x *NDArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes {
+	return x.inner.DilationRatesForSourceIndex(sourceIndex)
+}
+
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *NDArrayMultiaryBase) EncodeWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(coder)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *NDArrayMultiaryBase) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *NDArrayMultiaryBase {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &NDArrayMultiaryBase{inner: _r}
+}
+
+// ResultStateForSourceArraysSourceStatesDestinationArray calls the underlying ResultStateForSourceArraysSourceStatesDestinationArray.
+func (x *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState {
+	return x.inner.ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays, sourceStates, destinationArray)
+}
+
+// DestinationArrayDescriptorForSourceArraysSourceState calls the underlying DestinationArrayDescriptorForSourceArraysSourceState.
+func (x *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
+	return x.inner.DestinationArrayDescriptorForSourceArraysSourceState(sources, state)
+}
+
+// DestinationArrayAllocator calls the underlying DestinationArrayAllocator.
+func (x *NDArrayMultiaryBase) DestinationArrayAllocator() mpscore.MPSNDArrayAllocator {
+	return x.inner.DestinationArrayAllocator()
+}
+
+// SetDestinationArrayAllocator calls the underlying SetDestinationArrayAllocator.
+func (x *NDArrayMultiaryBase) SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) {
+	x.inner.SetDestinationArrayAllocator(destinationArrayAllocator)
+}
+
 func (x *NDArrayMultiaryBase) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// NDArrayMultiaryBaseable is the interface implemented by [NDArrayMultiaryBase], for mocking and DI.
+type NDArrayMultiaryBaseable interface {
+	Unwrap() *raw.MPSNDArrayMultiaryBase
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryBase
+	OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets
+	EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode
+	KernelSizesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes
+	StridesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets
+	DilationRatesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes
+	EncodeWithCoder(coder *foundation.NSCoder)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *NDArrayMultiaryBase
+	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState
+	DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor
+	DestinationArrayAllocator() mpscore.MPSNDArrayAllocator
+	SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator)
+}
+
+var _ NDArrayMultiaryBaseable = (*NDArrayMultiaryBase)(nil)
 

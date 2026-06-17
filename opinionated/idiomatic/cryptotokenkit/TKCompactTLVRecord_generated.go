@@ -27,3 +27,10 @@ func NewCompactTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *Compa
 
 func (x *CompactTLVRecord) asTLVRecord() *raw.TKTLVRecord { return &x.inner.TKTLVRecord }
 
+// CompactTLVRecordable is the interface implemented by [CompactTLVRecord], for mocking and DI.
+type CompactTLVRecordable interface {
+	Unwrap() *raw.TKCompactTLVRecord
+}
+
+var _ CompactTLVRecordable = (*CompactTLVRecord)(nil)
+

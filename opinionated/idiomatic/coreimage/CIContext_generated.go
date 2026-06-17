@@ -5,9 +5,13 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Context wraps [raw.CIContext] with a fluent Go API.
@@ -30,4 +34,302 @@ func NewContextWithOptions(options *foundation.NSDictionary[*foundation.NSString
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.Ptr())
 	return &Context{inner: raw.CIContextFromID(_id)}
 }
+
+// DrawImageAtPointFromRect calls the underlying DrawImageAtPointFromRect.
+func (x *Context) DrawImageAtPointFromRect(image *raw.CIImage, atPoint corefoundation.CGPoint, fromRect corefoundation.CGRect) {
+	x.inner.DrawImageAtPointFromRect(image, atPoint, fromRect)
+}
+
+// DrawImageInRectFromRect calls the underlying DrawImageInRectFromRect.
+func (x *Context) DrawImageInRectFromRect(image *raw.CIImage, inRect corefoundation.CGRect, fromRect corefoundation.CGRect) {
+	x.inner.DrawImageInRectFromRect(image, inRect, fromRect)
+}
+
+// CreateCGLayerWithSizeInfo calls the underlying CreateCGLayerWithSizeInfo.
+func (x *Context) CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info unsafe.Pointer) unsafe.Pointer {
+	return x.inner.CreateCGLayerWithSizeInfo(size, info)
+}
+
+// RenderToBitmapRowBytesBoundsFormatColorSpace calls the underlying RenderToBitmapRowBytesBoundsFormatColorSpace.
+func (x *Context) RenderToBitmapRowBytesBoundsFormatColorSpace(image *raw.CIImage, data unsafe.Pointer, rowBytes int, bounds corefoundation.CGRect, format int, colorSpace unsafe.Pointer) {
+	x.inner.RenderToBitmapRowBytesBoundsFormatColorSpace(image, data, rowBytes, bounds, format, colorSpace)
+}
+
+// RenderToIOSurfaceBoundsColorSpace calls the underlying RenderToIOSurfaceBoundsColorSpace.
+func (x *Context) RenderToIOSurfaceBoundsColorSpace(image *raw.CIImage, surface unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
+	x.inner.RenderToIOSurfaceBoundsColorSpace(image, surface, bounds, colorSpace)
+}
+
+// RenderToCVPixelBuffer calls the underlying RenderToCVPixelBuffer.
+func (x *Context) RenderToCVPixelBuffer(image *raw.CIImage, buffer unsafe.Pointer) {
+	x.inner.RenderToCVPixelBuffer(image, buffer)
+}
+
+// RenderToCVPixelBufferBoundsColorSpace calls the underlying RenderToCVPixelBufferBoundsColorSpace.
+func (x *Context) RenderToCVPixelBufferBoundsColorSpace(image *raw.CIImage, buffer unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
+	x.inner.RenderToCVPixelBufferBoundsColorSpace(image, buffer, bounds, colorSpace)
+}
+
+// RenderToMTLTextureCommandBufferBoundsColorSpace calls the underlying RenderToMTLTextureCommandBufferBoundsColorSpace.
+func (x *Context) RenderToMTLTextureCommandBufferBoundsColorSpace(image *raw.CIImage, texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer) {
+	x.inner.RenderToMTLTextureCommandBufferBoundsColorSpace(image, texture, commandBuffer, bounds, colorSpace)
+}
+
+// ReclaimResources calls the underlying ReclaimResources.
+func (x *Context) ReclaimResources() {
+	x.inner.ReclaimResources()
+}
+
+// ClearCaches calls the underlying ClearCaches.
+func (x *Context) ClearCaches() {
+	x.inner.ClearCaches()
+}
+
+// WorkingColorSpace calls the underlying WorkingColorSpace.
+func (x *Context) WorkingColorSpace() unsafe.Pointer {
+	return x.inner.WorkingColorSpace()
+}
+
+// WorkingFormat calls the underlying WorkingFormat.
+func (x *Context) WorkingFormat() int {
+	return x.inner.WorkingFormat()
+}
+
+// CreateCGImageFromRect calls the underlying CreateCGImageFromRect.
+func (x *Context) CreateCGImageFromRect(image *raw.CIImage, fromRect corefoundation.CGRect) unsafe.Pointer {
+	return x.inner.CreateCGImageFromRect(image, fromRect)
+}
+
+// CreateCGImageFromRectFormatColorSpace calls the underlying CreateCGImageFromRectFormatColorSpace.
+func (x *Context) CreateCGImageFromRectFormatColorSpace(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer) unsafe.Pointer {
+	return x.inner.CreateCGImageFromRectFormatColorSpace(image, fromRect, format, colorSpace)
+}
+
+// CreateCGImageFromRectFormatColorSpaceDeferred calls the underlying CreateCGImageFromRectFormatColorSpaceDeferred.
+func (x *Context) CreateCGImageFromRectFormatColorSpaceDeferred(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool) unsafe.Pointer {
+	return x.inner.CreateCGImageFromRectFormatColorSpaceDeferred(image, fromRect, format, colorSpace, deferred)
+}
+
+// CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats calls the underlying CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats.
+func (x *Context) CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool, calculateHDRStats bool) unsafe.Pointer {
+	return x.inner.CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image, fromRect, format, colorSpace, deferred, calculateHDRStats)
+}
+
+// CalculateHDRStatsForIOSurface calls the underlying CalculateHDRStatsForIOSurface.
+func (x *Context) CalculateHDRStatsForIOSurface(surface unsafe.Pointer) {
+	x.inner.CalculateHDRStatsForIOSurface(surface)
+}
+
+// CalculateHDRStatsForCVPixelBuffer calls the underlying CalculateHDRStatsForCVPixelBuffer.
+func (x *Context) CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer) {
+	x.inner.CalculateHDRStatsForCVPixelBuffer(buffer)
+}
+
+// CalculateHDRStatsForCGImage calls the underlying CalculateHDRStatsForCGImage.
+func (x *Context) CalculateHDRStatsForCGImage(cgimage unsafe.Pointer) unsafe.Pointer {
+	return x.inner.CalculateHDRStatsForCGImage(cgimage)
+}
+
+// CalculateHDRStatsForImage calls the underlying CalculateHDRStatsForImage.
+func (x *Context) CalculateHDRStatsForImage(image *raw.CIImage) *Image {
+	_r := x.inner.CalculateHDRStatsForImage(image)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// TIFFRepresentationOfImageFormatColorSpaceOptions calls the underlying TIFFRepresentationOfImageFormatColorSpaceOptions.
+func (x *Context) TIFFRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.TIFFRepresentationOfImageFormatColorSpaceOptions(image, format, colorSpace, options)
+}
+
+// JPEGRepresentationOfImageColorSpaceOptions calls the underlying JPEGRepresentationOfImageColorSpaceOptions.
+func (x *Context) JPEGRepresentationOfImageColorSpaceOptions(image *raw.CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.JPEGRepresentationOfImageColorSpaceOptions(image, colorSpace, options)
+}
+
+// HEIFRepresentationOfImageFormatColorSpaceOptions calls the underlying HEIFRepresentationOfImageFormatColorSpaceOptions.
+func (x *Context) HEIFRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.HEIFRepresentationOfImageFormatColorSpaceOptions(image, format, colorSpace, options)
+}
+
+// HEIF10RepresentationOfImageColorSpaceOptionsError calls the underlying HEIF10RepresentationOfImageColorSpaceOptionsError.
+func (x *Context) HEIF10RepresentationOfImageColorSpaceOptionsError(image *raw.CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	return x.inner.HEIF10RepresentationOfImageColorSpaceOptionsError(image, colorSpace, options)
+}
+
+// PNGRepresentationOfImageFormatColorSpaceOptions calls the underlying PNGRepresentationOfImageFormatColorSpaceOptions.
+func (x *Context) PNGRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData {
+	return x.inner.PNGRepresentationOfImageFormatColorSpaceOptions(image, format, colorSpace, options)
+}
+
+// OpenEXRRepresentationOfImageOptionsError calls the underlying OpenEXRRepresentationOfImageOptionsError.
+func (x *Context) OpenEXRRepresentationOfImageOptionsError(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	return x.inner.OpenEXRRepresentationOfImageOptionsError(image, options)
+}
+
+// WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError calls the underlying WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError.
+func (x *Context) WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), format, colorSpace, options)
+}
+
+// WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError calls the underlying WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError.
+func (x *Context) WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), format, colorSpace, options)
+}
+
+// WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError calls the underlying WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError.
+func (x *Context) WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError(image *raw.CIImage, url string, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), colorSpace, options)
+}
+
+// WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError calls the underlying WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError.
+func (x *Context) WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), format, colorSpace, options)
+}
+
+// WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError calls the underlying WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError.
+func (x *Context) WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError(image *raw.CIImage, url string, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), colorSpace, options)
+}
+
+// WriteOpenEXRRepresentationOfImageToURLOptionsError calls the underlying WriteOpenEXRRepresentationOfImageToURLOptionsError.
+func (x *Context) WriteOpenEXRRepresentationOfImageToURLOptionsError(image *raw.CIImage, url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.WriteOpenEXRRepresentationOfImageToURLOptionsError(image, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+}
+
+// DepthBlurEffectFilterForImageURLOptions calls the underlying DepthBlurEffectFilterForImageURLOptions.
+func (x *Context) DepthBlurEffectFilterForImageURLOptions(url string, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter {
+	_r := x.inner.DepthBlurEffectFilterForImageURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// DepthBlurEffectFilterForImageDataOptions calls the underlying DepthBlurEffectFilterForImageDataOptions.
+func (x *Context) DepthBlurEffectFilterForImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter {
+	_r := x.inner.DepthBlurEffectFilterForImageDataOptions(data, options)
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions calls the underlying DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions.
+func (x *Context) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter {
+	_r := x.inner.DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions(image, disparityImage, portraitEffectsMatte, orientation, options)
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions calls the underlying DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions.
+func (x *Context) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, hairSemanticSegmentation *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter {
+	_r := x.inner.DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions(image, disparityImage, portraitEffectsMatte, hairSemanticSegmentation, orientation, options)
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions calls the underlying DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions.
+func (x *Context) DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, hairSemanticSegmentation *raw.CIImage, glassesMatte *raw.CIImage, gainMap *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter {
+	_r := x.inner.DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions(image, disparityImage, portraitEffectsMatte, hairSemanticSegmentation, glassesMatte, gainMap, orientation, options)
+	if _r == nil {
+		return nil
+	}
+	return &Filter{inner: _r}
+}
+
+// StartTaskToRenderFromRectToDestinationAtPointError calls the underlying StartTaskToRenderFromRectToDestinationAtPointError.
+func (x *Context) StartTaskToRenderFromRectToDestinationAtPointError(image *raw.CIImage, fromRect corefoundation.CGRect, destination *raw.CIRenderDestination, atPoint corefoundation.CGPoint) (*RenderTask, error) {
+	_r, _err := x.inner.StartTaskToRenderFromRectToDestinationAtPointError(image, fromRect, destination, atPoint)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RenderTask{inner: _r}, nil
+}
+
+// StartTaskToRenderToDestinationError calls the underlying StartTaskToRenderToDestinationError.
+func (x *Context) StartTaskToRenderToDestinationError(image *raw.CIImage, destination *raw.CIRenderDestination) (*RenderTask, error) {
+	_r, _err := x.inner.StartTaskToRenderToDestinationError(image, destination)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RenderTask{inner: _r}, nil
+}
+
+// PrepareRenderFromRectToDestinationAtPointError calls the underlying PrepareRenderFromRectToDestinationAtPointError.
+func (x *Context) PrepareRenderFromRectToDestinationAtPointError(image *raw.CIImage, fromRect corefoundation.CGRect, destination *raw.CIRenderDestination, atPoint corefoundation.CGPoint) (bool, error) {
+	return x.inner.PrepareRenderFromRectToDestinationAtPointError(image, fromRect, destination, atPoint)
+}
+
+// StartTaskToClearError calls the underlying StartTaskToClearError.
+func (x *Context) StartTaskToClearError(destination *raw.CIRenderDestination) (*RenderTask, error) {
+	_r, _err := x.inner.StartTaskToClearError(destination)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RenderTask{inner: _r}, nil
+}
+
+// Contextable is the interface implemented by [Context], for mocking and DI.
+type Contextable interface {
+	Unwrap() *raw.CIContext
+	DrawImageAtPointFromRect(image *raw.CIImage, atPoint corefoundation.CGPoint, fromRect corefoundation.CGRect)
+	DrawImageInRectFromRect(image *raw.CIImage, inRect corefoundation.CGRect, fromRect corefoundation.CGRect)
+	CreateCGLayerWithSizeInfo(size corefoundation.CGSize, info unsafe.Pointer) unsafe.Pointer
+	RenderToBitmapRowBytesBoundsFormatColorSpace(image *raw.CIImage, data unsafe.Pointer, rowBytes int, bounds corefoundation.CGRect, format int, colorSpace unsafe.Pointer)
+	RenderToIOSurfaceBoundsColorSpace(image *raw.CIImage, surface unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer)
+	RenderToCVPixelBuffer(image *raw.CIImage, buffer unsafe.Pointer)
+	RenderToCVPixelBufferBoundsColorSpace(image *raw.CIImage, buffer unsafe.Pointer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer)
+	RenderToMTLTextureCommandBufferBoundsColorSpace(image *raw.CIImage, texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer, bounds corefoundation.CGRect, colorSpace unsafe.Pointer)
+	ReclaimResources()
+	ClearCaches()
+	WorkingColorSpace() unsafe.Pointer
+	WorkingFormat() int
+	CreateCGImageFromRect(image *raw.CIImage, fromRect corefoundation.CGRect) unsafe.Pointer
+	CreateCGImageFromRectFormatColorSpace(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer) unsafe.Pointer
+	CreateCGImageFromRectFormatColorSpaceDeferred(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool) unsafe.Pointer
+	CreateCGImageFromRectFormatColorSpaceDeferredCalculateHDRStats(image *raw.CIImage, fromRect corefoundation.CGRect, format int, colorSpace unsafe.Pointer, deferred bool, calculateHDRStats bool) unsafe.Pointer
+	CalculateHDRStatsForIOSurface(surface unsafe.Pointer)
+	CalculateHDRStatsForCVPixelBuffer(buffer unsafe.Pointer)
+	CalculateHDRStatsForCGImage(cgimage unsafe.Pointer) unsafe.Pointer
+	CalculateHDRStatsForImage(image *raw.CIImage) *Image
+	TIFFRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	JPEGRepresentationOfImageColorSpaceOptions(image *raw.CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	HEIFRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	HEIF10RepresentationOfImageColorSpaceOptionsError(image *raw.CIImage, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	PNGRepresentationOfImageFormatColorSpaceOptions(image *raw.CIImage, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSData
+	OpenEXRRepresentationOfImageOptionsError(image *raw.CIImage, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	WriteTIFFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	WritePNGRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	WriteJPEGRepresentationOfImageToURLColorSpaceOptionsError(image *raw.CIImage, url string, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	WriteHEIFRepresentationOfImageToURLFormatColorSpaceOptionsError(image *raw.CIImage, url string, format int, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	WriteHEIF10RepresentationOfImageToURLColorSpaceOptionsError(image *raw.CIImage, url string, colorSpace unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	WriteOpenEXRRepresentationOfImageToURLOptionsError(image *raw.CIImage, url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	DepthBlurEffectFilterForImageURLOptions(url string, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter
+	DepthBlurEffectFilterForImageDataOptions(data *foundation.NSData, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter
+	DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter
+	DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, hairSemanticSegmentation *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter
+	DepthBlurEffectFilterForImageDisparityImagePortraitEffectsMatteHairSemanticSegmentationGlassesMatteGainMapOrientationOptions(image *raw.CIImage, disparityImage *raw.CIImage, portraitEffectsMatte *raw.CIImage, hairSemanticSegmentation *raw.CIImage, glassesMatte *raw.CIImage, gainMap *raw.CIImage, orientation imageio.CGImagePropertyOrientation, options *foundation.NSDictionary[objc.ID, objc.ID]) *Filter
+	StartTaskToRenderFromRectToDestinationAtPointError(image *raw.CIImage, fromRect corefoundation.CGRect, destination *raw.CIRenderDestination, atPoint corefoundation.CGPoint) (*RenderTask, error)
+	StartTaskToRenderToDestinationError(image *raw.CIImage, destination *raw.CIRenderDestination) (*RenderTask, error)
+	PrepareRenderFromRectToDestinationAtPointError(image *raw.CIImage, fromRect corefoundation.CGRect, destination *raw.CIRenderDestination, atPoint corefoundation.CGPoint) (bool, error)
+	StartTaskToClearError(destination *raw.CIRenderDestination) (*RenderTask, error)
+}
+
+var _ Contextable = (*Context)(nil)
 

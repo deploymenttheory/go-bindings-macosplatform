@@ -5,7 +5,9 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,28 @@ func NewComputePipelineReflection() *ComputePipelineReflection {
 	return &ComputePipelineReflection{inner: raw.MTLComputePipelineReflectionFromID(_id)}
 }
 
+// Bindings calls the underlying Bindings.
+func (x *ComputePipelineReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.Bindings()
+}
+
 // Arguments returns the collection as a Go slice.
 func (x *ComputePipelineReflection) Arguments() []*raw.MTLArgument {
 	arr := x.inner.Arguments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLArgument, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLArgument {
+		return raw.MTLArgumentFromID(purego.Retain(_id))
+	})
 }
+
+// ComputePipelineReflectionable is the interface implemented by [ComputePipelineReflection], for mocking and DI.
+type ComputePipelineReflectionable interface {
+	Unwrap() *raw.MTLComputePipelineReflection
+	Bindings() *foundation.NSArray[raw.MTLBinding]
+	Arguments() []*raw.MTLArgument
+}
+
+var _ ComputePipelineReflectionable = (*ComputePipelineReflection)(nil)
 

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewCaptionRendererScene() *CaptionRendererScene {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRendererScene")), objc.RegisterName("new"))
 	return &CaptionRendererScene{inner: raw.AVCaptionRendererSceneFromID(_id)}
 }
+
+// TimeRange calls the underlying TimeRange.
+func (x *CaptionRendererScene) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// HasActiveCaptions calls the underlying HasActiveCaptions.
+func (x *CaptionRendererScene) HasActiveCaptions() bool {
+	return x.inner.HasActiveCaptions()
+}
+
+// NeedsPeriodicRefresh calls the underlying NeedsPeriodicRefresh.
+func (x *CaptionRendererScene) NeedsPeriodicRefresh() bool {
+	return x.inner.NeedsPeriodicRefresh()
+}
+
+// CaptionRendererSceneable is the interface implemented by [CaptionRendererScene], for mocking and DI.
+type CaptionRendererSceneable interface {
+	Unwrap() *raw.AVCaptionRendererScene
+	TimeRange() coremedia.CMTimeRange
+	HasActiveCaptions() bool
+	NeedsPeriodicRefresh() bool
+}
+
+var _ CaptionRendererSceneable = (*CaptionRendererScene)(nil)
 

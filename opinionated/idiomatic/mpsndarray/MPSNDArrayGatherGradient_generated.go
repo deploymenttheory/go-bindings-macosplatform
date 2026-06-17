@@ -29,3 +29,10 @@ func (x *ArrayGatherGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMul
 
 func (x *ArrayGatherGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase }
 
+// ArrayGatherGradientable is the interface implemented by [ArrayGatherGradient], for mocking and DI.
+type ArrayGatherGradientable interface {
+	Unwrap() *raw.MPSNDArrayGatherGradient
+}
+
+var _ ArrayGatherGradientable = (*ArrayGatherGradient)(nil)
+

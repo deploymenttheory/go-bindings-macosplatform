@@ -6,6 +6,8 @@ package addressbook
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,70 @@ func NewGroup() *Group {
 	return &Group{inner: raw.ABGroupFromID(_id)}
 }
 
+// Members calls the underlying Members.
+func (x *Group) Members() *foundation.NSArray[objc.ID] {
+	return x.inner.Members()
+}
+
+// AddMember calls the underlying AddMember.
+func (x *Group) AddMember(person *raw.ABPerson) bool {
+	return x.inner.AddMember(person)
+}
+
+// RemoveMember calls the underlying RemoveMember.
+func (x *Group) RemoveMember(person *raw.ABPerson) bool {
+	return x.inner.RemoveMember(person)
+}
+
+// Subgroups calls the underlying Subgroups.
+func (x *Group) Subgroups() *foundation.NSArray[objc.ID] {
+	return x.inner.Subgroups()
+}
+
+// AddSubgroup calls the underlying AddSubgroup.
+func (x *Group) AddSubgroup(group *raw.ABGroup) bool {
+	return x.inner.AddSubgroup(group)
+}
+
+// RemoveSubgroup calls the underlying RemoveSubgroup.
+func (x *Group) RemoveSubgroup(group *raw.ABGroup) bool {
+	return x.inner.RemoveSubgroup(group)
+}
+
+// ParentGroups calls the underlying ParentGroups.
+func (x *Group) ParentGroups() *foundation.NSArray[objc.ID] {
+	return x.inner.ParentGroups()
+}
+
+// SetDistributionIdentifierForPropertyPerson calls the underlying SetDistributionIdentifierForPropertyPerson.
+func (x *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *raw.ABPerson) bool {
+	return x.inner.SetDistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(property), person)
+}
+
+// DistributionIdentifierForPropertyPerson calls the underlying DistributionIdentifierForPropertyPerson.
+func (x *Group) DistributionIdentifierForPropertyPerson(property string, person *raw.ABPerson) string {
+	_r := x.inner.DistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(property), person)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Group) asRecord() *raw.ABRecord { return &x.inner.ABRecord }
+
+// Groupable is the interface implemented by [Group], for mocking and DI.
+type Groupable interface {
+	Unwrap() *raw.ABGroup
+	Members() *foundation.NSArray[objc.ID]
+	AddMember(person *raw.ABPerson) bool
+	RemoveMember(person *raw.ABPerson) bool
+	Subgroups() *foundation.NSArray[objc.ID]
+	AddSubgroup(group *raw.ABGroup) bool
+	RemoveSubgroup(group *raw.ABGroup) bool
+	ParentGroups() *foundation.NSArray[objc.ID]
+	SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *raw.ABPerson) bool
+	DistributionIdentifierForPropertyPerson(property string, person *raw.ABPerson) string
+}
+
+var _ Groupable = (*Group)(nil)
 

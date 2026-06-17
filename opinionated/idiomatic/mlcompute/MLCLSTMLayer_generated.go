@@ -6,6 +6,7 @@ package mlcompute
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,33 @@ func NewLSTMLayer() *LSTMLayer {
 	return &LSTMLayer{inner: raw.MLCLSTMLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *LSTMLayer) Descriptor() *LSTMDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &LSTMDescriptor{inner: _r}
+}
+
 // GateActivations returns the collection as a Go slice.
 func (x *LSTMLayer) GateActivations() []*raw.MLCActivationDescriptor {
 	arr := x.inner.GateActivations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCActivationDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCActivationDescriptor {
+		return raw.MLCActivationDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// OutputResultActivation calls the underlying OutputResultActivation.
+func (x *LSTMLayer) OutputResultActivation() *ActivationDescriptor {
+	_r := x.inner.OutputResultActivation()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ActivationDescriptor{inner: _r}
 }
 
 // InputWeights returns the collection as a Go slice.
@@ -42,11 +59,9 @@ func (x *LSTMLayer) InputWeights() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // HiddenWeights returns the collection as a Go slice.
@@ -55,11 +70,9 @@ func (x *LSTMLayer) HiddenWeights() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // PeepholeWeights returns the collection as a Go slice.
@@ -68,11 +81,9 @@ func (x *LSTMLayer) PeepholeWeights() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // Biases returns the collection as a Go slice.
@@ -81,11 +92,9 @@ func (x *LSTMLayer) Biases() []*raw.MLCTensor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensor {
+		return raw.MLCTensorFromID(purego.Retain(_id))
+	})
 }
 
 // InputWeightsParameters returns the collection as a Go slice.
@@ -94,11 +103,9 @@ func (x *LSTMLayer) InputWeightsParameters() []*raw.MLCTensorParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 // HiddenWeightsParameters returns the collection as a Go slice.
@@ -107,11 +114,9 @@ func (x *LSTMLayer) HiddenWeightsParameters() []*raw.MLCTensorParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 // PeepholeWeightsParameters returns the collection as a Go slice.
@@ -120,11 +125,9 @@ func (x *LSTMLayer) PeepholeWeightsParameters() []*raw.MLCTensorParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 // BiasesParameters returns the collection as a Go slice.
@@ -133,12 +136,28 @@ func (x *LSTMLayer) BiasesParameters() []*raw.MLCTensorParameter {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLCTensorParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLCTensorParameter {
+		return raw.MLCTensorParameterFromID(purego.Retain(_id))
+	})
 }
 
 func (x *LSTMLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// LSTMLayerable is the interface implemented by [LSTMLayer], for mocking and DI.
+type LSTMLayerable interface {
+	Unwrap() *raw.MLCLSTMLayer
+	Descriptor() *LSTMDescriptor
+	GateActivations() []*raw.MLCActivationDescriptor
+	OutputResultActivation() *ActivationDescriptor
+	InputWeights() []*raw.MLCTensor
+	HiddenWeights() []*raw.MLCTensor
+	PeepholeWeights() []*raw.MLCTensor
+	Biases() []*raw.MLCTensor
+	InputWeightsParameters() []*raw.MLCTensorParameter
+	HiddenWeightsParameters() []*raw.MLCTensorParameter
+	PeepholeWeightsParameters() []*raw.MLCTensorParameter
+	BiasesParameters() []*raw.MLCTensorParameter
+}
+
+var _ LSTMLayerable = (*LSTMLayer)(nil)
 

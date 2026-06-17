@@ -36,3 +36,36 @@ func (x *Range) WithUpperLimit(upperLimit float64) *Range {
 	return x
 }
 
+// LowerLimit calls the underlying LowerLimit.
+func (x *Range) LowerLimit() float64 {
+	return x.inner.LowerLimit()
+}
+
+// SetLowerLimit calls the underlying SetLowerLimit.
+func (x *Range) SetLowerLimit(lowerLimit float64) {
+	x.inner.SetLowerLimit(lowerLimit)
+}
+
+// UpperLimit calls the underlying UpperLimit.
+func (x *Range) UpperLimit() float64 {
+	return x.inner.UpperLimit()
+}
+
+// SetUpperLimit calls the underlying SetUpperLimit.
+func (x *Range) SetUpperLimit(upperLimit float64) {
+	x.inner.SetUpperLimit(upperLimit)
+}
+
+// Rangeable is the interface implemented by [Range], for mocking and DI.
+type Rangeable interface {
+	Unwrap() *raw.SKRange
+	WithLowerLimit(lowerLimit float64) *Range
+	WithUpperLimit(upperLimit float64) *Range
+	LowerLimit() float64
+	SetLowerLimit(lowerLimit float64)
+	UpperLimit() float64
+	SetUpperLimit(upperLimit float64)
+}
+
+var _ Rangeable = (*Range)(nil)
+

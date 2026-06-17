@@ -24,5 +24,54 @@ func NewRandomDistributionWithRandomSourceLowestValueHighestValue(source raw.GKR
 	return &RandomDistribution{inner: raw.GKRandomDistributionFromID(_id)}
 }
 
+// NextInt calls the underlying NextInt.
+func (x *RandomDistribution) NextInt() int {
+	return x.inner.NextInt()
+}
+
+// NextIntWithUpperBound calls the underlying NextIntWithUpperBound.
+func (x *RandomDistribution) NextIntWithUpperBound(upperBound uint) uint {
+	return x.inner.NextIntWithUpperBound(upperBound)
+}
+
+// NextUniform calls the underlying NextUniform.
+func (x *RandomDistribution) NextUniform() float32 {
+	return x.inner.NextUniform()
+}
+
+// NextBool calls the underlying NextBool.
+func (x *RandomDistribution) NextBool() bool {
+	return x.inner.NextBool()
+}
+
+// LowestValue calls the underlying LowestValue.
+func (x *RandomDistribution) LowestValue() int {
+	return x.inner.LowestValue()
+}
+
+// HighestValue calls the underlying HighestValue.
+func (x *RandomDistribution) HighestValue() int {
+	return x.inner.HighestValue()
+}
+
+// NumberOfPossibleOutcomes calls the underlying NumberOfPossibleOutcomes.
+func (x *RandomDistribution) NumberOfPossibleOutcomes() uint {
+	return x.inner.NumberOfPossibleOutcomes()
+}
+
 func (x *RandomDistribution) asRandomDistribution() *raw.GKRandomDistribution { return x.inner }
+
+// RandomDistributionable is the interface implemented by [RandomDistribution], for mocking and DI.
+type RandomDistributionable interface {
+	Unwrap() *raw.GKRandomDistribution
+	NextInt() int
+	NextIntWithUpperBound(upperBound uint) uint
+	NextUniform() float32
+	NextBool() bool
+	LowestValue() int
+	HighestValue() int
+	NumberOfPossibleOutcomes() uint
+}
+
+var _ RandomDistributionable = (*RandomDistribution)(nil)
 

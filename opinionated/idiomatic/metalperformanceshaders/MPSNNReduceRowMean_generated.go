@@ -41,3 +41,10 @@ func (x *NNReduceRowMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return 
 
 func (x *NNReduceRowMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceRowMeanable is the interface implemented by [NNReduceRowMean], for mocking and DI.
+type NNReduceRowMeanable interface {
+	Unwrap() *raw.MPSNNReduceRowMean
+}
+
+var _ NNReduceRowMeanable = (*NNReduceRowMean)(nil)
+

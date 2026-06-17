@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterPumpBlockedEvent() *MTRPumpConfigur
 	return &MTRPumpConfigurationAndControlClusterPumpBlockedEvent{inner: raw.MTRPumpConfigurationAndControlClusterPumpBlockedEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterPumpBlockedEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterPumpBlockedEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterPumpBlockedEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpBlockedEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterPumpBlockedEventable = (*MTRPumpConfigurationAndControlClusterPumpBlockedEvent)(nil)
+

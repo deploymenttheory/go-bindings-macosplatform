@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -31,5 +32,43 @@ func (x *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
 	return x
 }
 
+// PDFRepresentation calls the underlying PDFRepresentation.
+func (x *PDFImageRep) PDFRepresentation() *foundation.NSData {
+	return x.inner.PDFRepresentation()
+}
+
+// Bounds calls the underlying Bounds.
+func (x *PDFImageRep) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// CurrentPage calls the underlying CurrentPage.
+func (x *PDFImageRep) CurrentPage() int {
+	return x.inner.CurrentPage()
+}
+
+// SetCurrentPage calls the underlying SetCurrentPage.
+func (x *PDFImageRep) SetCurrentPage(currentPage int) {
+	x.inner.SetCurrentPage(currentPage)
+}
+
+// PageCount calls the underlying PageCount.
+func (x *PDFImageRep) PageCount() int {
+	return x.inner.PageCount()
+}
+
 func (x *PDFImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// PDFImageRepable is the interface implemented by [PDFImageRep], for mocking and DI.
+type PDFImageRepable interface {
+	Unwrap() *raw.NSPDFImageRep
+	WithCurrentPage(currentPage int) *PDFImageRep
+	PDFRepresentation() *foundation.NSData
+	Bounds() corefoundation.CGRect
+	CurrentPage() int
+	SetCurrentPage(currentPage int)
+	PageCount() int
+}
+
+var _ PDFImageRepable = (*PDFImageRep)(nil)
 

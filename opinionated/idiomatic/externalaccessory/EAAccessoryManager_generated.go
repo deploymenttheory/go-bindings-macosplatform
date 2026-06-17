@@ -7,6 +7,7 @@ package externalaccessory
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AccessoryManager wraps [raw.EAAccessoryManager] with a fluent Go API.
@@ -22,4 +23,17 @@ func NewAccessoryManager() *AccessoryManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EAAccessoryManager")), objc.RegisterName("new"))
 	return &AccessoryManager{inner: raw.EAAccessoryManagerFromID(_id)}
 }
+
+// ConnectedAccessories calls the underlying ConnectedAccessories.
+func (x *AccessoryManager) ConnectedAccessories() unsafe.Pointer {
+	return x.inner.ConnectedAccessories()
+}
+
+// AccessoryManagerable is the interface implemented by [AccessoryManager], for mocking and DI.
+type AccessoryManagerable interface {
+	Unwrap() *raw.EAAccessoryManager
+	ConnectedAccessories() unsafe.Pointer
+}
+
+var _ AccessoryManagerable = (*AccessoryManager)(nil)
 

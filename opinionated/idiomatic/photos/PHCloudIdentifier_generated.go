@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), foundation.NSStringStringWithUTF8String(stringValue).Ptr())
 	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(_id)}
 }
+
+// StringValue calls the underlying StringValue.
+func (x *CloudIdentifier) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CloudIdentifierable is the interface implemented by [CloudIdentifier], for mocking and DI.
+type CloudIdentifierable interface {
+	Unwrap() *raw.PHCloudIdentifier
+	StringValue() string
+}
+
+var _ CloudIdentifierable = (*CloudIdentifier)(nil)
 

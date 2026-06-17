@@ -25,3 +25,10 @@ func NewAnnotationSquare() *AnnotationSquare {
 
 func (x *AnnotationSquare) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationSquareable is the interface implemented by [AnnotationSquare], for mocking and DI.
+type AnnotationSquareable interface {
+	Unwrap() *raw.PDFAnnotationSquare
+}
+
+var _ AnnotationSquareable = (*AnnotationSquare)(nil)
+

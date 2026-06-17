@@ -29,3 +29,10 @@ func (x *ImageReduceColumnMax) asImageReduceUnary() *raw.MPSImageReduceUnary { r
 
 func (x *ImageReduceColumnMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
 
+// ImageReduceColumnMaxable is the interface implemented by [ImageReduceColumnMax], for mocking and DI.
+type ImageReduceColumnMaxable interface {
+	Unwrap() *raw.MPSImageReduceColumnMax
+}
+
+var _ ImageReduceColumnMaxable = (*ImageReduceColumnMax)(nil)
+

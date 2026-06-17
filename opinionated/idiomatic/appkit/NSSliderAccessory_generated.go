@@ -35,3 +35,40 @@ func (x *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
 	return x
 }
 
+// Behavior calls the underlying Behavior.
+func (x *SliderAccessory) Behavior() *SliderAccessoryBehavior {
+	_r := x.inner.Behavior()
+	if _r == nil {
+		return nil
+	}
+	return &SliderAccessoryBehavior{inner: _r}
+}
+
+// SetBehavior calls the underlying SetBehavior.
+func (x *SliderAccessory) SetBehavior(behavior *raw.NSSliderAccessoryBehavior) {
+	x.inner.SetBehavior(behavior)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *SliderAccessory) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *SliderAccessory) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// SliderAccessoryable is the interface implemented by [SliderAccessory], for mocking and DI.
+type SliderAccessoryable interface {
+	Unwrap() *raw.NSSliderAccessory
+	WithBehavior(behavior *raw.NSSliderAccessoryBehavior) *SliderAccessory
+	WithEnabled(enabled bool) *SliderAccessory
+	Behavior() *SliderAccessoryBehavior
+	SetBehavior(behavior *raw.NSSliderAccessoryBehavior)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ SliderAccessoryable = (*SliderAccessory)(nil)
+

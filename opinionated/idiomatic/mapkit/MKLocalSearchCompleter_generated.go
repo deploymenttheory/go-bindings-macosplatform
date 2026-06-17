@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,16 +73,150 @@ func (x *LocalSearchCompleter) WithDelegate(delegate raw.MKLocalSearchCompleterD
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *LocalSearchCompleter) Cancel() {
+	x.inner.Cancel()
+}
+
+// QueryFragment calls the underlying QueryFragment.
+func (x *LocalSearchCompleter) QueryFragment() string {
+	_r := x.inner.QueryFragment()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetQueryFragment calls the underlying SetQueryFragment.
+func (x *LocalSearchCompleter) SetQueryFragment(queryFragment string) {
+	x.inner.SetQueryFragment(foundation.NSStringStringWithUTF8String(queryFragment))
+}
+
+// Region calls the underlying Region.
+func (x *LocalSearchCompleter) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *LocalSearchCompleter) SetRegion(region raw.MKCoordinateRegion) {
+	x.inner.SetRegion(region)
+}
+
+// RegionPriority calls the underlying RegionPriority.
+func (x *LocalSearchCompleter) RegionPriority() raw.MKLocalSearchRegionPriority {
+	return x.inner.RegionPriority()
+}
+
+// SetRegionPriority calls the underlying SetRegionPriority.
+func (x *LocalSearchCompleter) SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) {
+	x.inner.SetRegionPriority(regionPriority)
+}
+
+// FilterType calls the underlying FilterType.
+func (x *LocalSearchCompleter) FilterType() raw.MKSearchCompletionFilterType {
+	return x.inner.FilterType()
+}
+
+// SetFilterType calls the underlying SetFilterType.
+func (x *LocalSearchCompleter) SetFilterType(filterType raw.MKSearchCompletionFilterType) {
+	x.inner.SetFilterType(filterType)
+}
+
+// ResultTypes calls the underlying ResultTypes.
+func (x *LocalSearchCompleter) ResultTypes() raw.MKLocalSearchCompleterResultType {
+	return x.inner.ResultTypes()
+}
+
+// SetResultTypes calls the underlying SetResultTypes.
+func (x *LocalSearchCompleter) SetResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) {
+	x.inner.SetResultTypes(resultTypes)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *LocalSearchCompleter) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *LocalSearchCompleter) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// AddressFilter calls the underlying AddressFilter.
+func (x *LocalSearchCompleter) AddressFilter() *AddressFilter {
+	_r := x.inner.AddressFilter()
+	if _r == nil {
+		return nil
+	}
+	return &AddressFilter{inner: _r}
+}
+
+// SetAddressFilter calls the underlying SetAddressFilter.
+func (x *LocalSearchCompleter) SetAddressFilter(addressFilter *raw.MKAddressFilter) {
+	x.inner.SetAddressFilter(addressFilter)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *LocalSearchCompleter) Delegate() raw.MKLocalSearchCompleterDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *LocalSearchCompleter) SetDelegate(delegate raw.MKLocalSearchCompleterDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // Results returns the collection as a Go slice.
 func (x *LocalSearchCompleter) Results() []*raw.MKLocalSearchCompletion {
 	arr := x.inner.Results()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKLocalSearchCompletion, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKLocalSearchCompletion {
+		return raw.MKLocalSearchCompletionFromID(purego.Retain(_id))
+	})
 }
+
+// IsSearching calls the underlying IsSearching.
+func (x *LocalSearchCompleter) IsSearching() bool {
+	return x.inner.IsSearching()
+}
+
+// LocalSearchCompleterable is the interface implemented by [LocalSearchCompleter], for mocking and DI.
+type LocalSearchCompleterable interface {
+	Unwrap() *raw.MKLocalSearchCompleter
+	WithQueryFragment(queryFragment string) *LocalSearchCompleter
+	WithRegion(region raw.MKCoordinateRegion) *LocalSearchCompleter
+	WithRegionPriority(regionPriority raw.MKLocalSearchRegionPriority) *LocalSearchCompleter
+	WithFilterType(filterType raw.MKSearchCompletionFilterType) *LocalSearchCompleter
+	WithResultTypes(resultTypes raw.MKLocalSearchCompleterResultType) *LocalSearchCompleter
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalSearchCompleter
+	WithAddressFilter(addressFilter *raw.MKAddressFilter) *LocalSearchCompleter
+	WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter
+	Cancel()
+	QueryFragment() string
+	SetQueryFragment(queryFragment string)
+	Region() raw.MKCoordinateRegion
+	SetRegion(region raw.MKCoordinateRegion)
+	RegionPriority() raw.MKLocalSearchRegionPriority
+	SetRegionPriority(regionPriority raw.MKLocalSearchRegionPriority)
+	FilterType() raw.MKSearchCompletionFilterType
+	SetFilterType(filterType raw.MKSearchCompletionFilterType)
+	ResultTypes() raw.MKLocalSearchCompleterResultType
+	SetResultTypes(resultTypes raw.MKLocalSearchCompleterResultType)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	AddressFilter() *AddressFilter
+	SetAddressFilter(addressFilter *raw.MKAddressFilter)
+	Delegate() raw.MKLocalSearchCompleterDelegate
+	SetDelegate(delegate raw.MKLocalSearchCompleterDelegate)
+	Results() []*raw.MKLocalSearchCompletion
+	IsSearching() bool
+}
+
+var _ LocalSearchCompleterable = (*LocalSearchCompleter)(nil)
 

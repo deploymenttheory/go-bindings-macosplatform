@@ -23,7 +23,26 @@ func NewUnitConverter() *UnitConverter {
 	return &UnitConverter{inner: raw.NSUnitConverterFromID(_id)}
 }
 
+// BaseUnitValueFromValue calls the underlying BaseUnitValueFromValue.
+func (x *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
+	return x.inner.BaseUnitValueFromValue(value)
+}
+
+// ValueFromBaseUnitValue calls the underlying ValueFromBaseUnitValue.
+func (x *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
+	return x.inner.ValueFromBaseUnitValue(baseUnitValue)
+}
+
 func (x *UnitConverter) asUnitConverter() *raw.NSUnitConverter { return x.inner }
 
 func (x *UnitConverter) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UnitConverterable is the interface implemented by [UnitConverter], for mocking and DI.
+type UnitConverterable interface {
+	Unwrap() *raw.NSUnitConverter
+	BaseUnitValueFromValue(value float64) float64
+	ValueFromBaseUnitValue(baseUnitValue float64) float64
+}
+
+var _ UnitConverterable = (*UnitConverter)(nil)
 

@@ -42,3 +42,49 @@ func (x *MTRServiceAreaClusterSkipAreaParams) WithServerSideProcessingTimeout(se
 	return x
 }
 
+// SkippedArea calls the underlying SkippedArea.
+func (x *MTRServiceAreaClusterSkipAreaParams) SkippedArea() *foundation.NSNumber {
+	return x.inner.SkippedArea()
+}
+
+// SetSkippedArea calls the underlying SetSkippedArea.
+func (x *MTRServiceAreaClusterSkipAreaParams) SetSkippedArea(skippedArea *foundation.NSNumber) {
+	x.inner.SetSkippedArea(skippedArea)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRServiceAreaClusterSkipAreaParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRServiceAreaClusterSkipAreaParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRServiceAreaClusterSkipAreaParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRServiceAreaClusterSkipAreaParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRServiceAreaClusterSkipAreaParamsable is the interface implemented by [MTRServiceAreaClusterSkipAreaParams], for mocking and DI.
+type MTRServiceAreaClusterSkipAreaParamsable interface {
+	Unwrap() *raw.MTRServiceAreaClusterSkipAreaParams
+	WithSkippedArea(skippedArea *foundation.NSNumber) *MTRServiceAreaClusterSkipAreaParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRServiceAreaClusterSkipAreaParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRServiceAreaClusterSkipAreaParams
+	SkippedArea() *foundation.NSNumber
+	SetSkippedArea(skippedArea *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRServiceAreaClusterSkipAreaParamsable = (*MTRServiceAreaClusterSkipAreaParams)(nil)
+

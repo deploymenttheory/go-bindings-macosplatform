@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -85,16 +86,142 @@ func (x *TrackInfo) WithRequiresFrameReordering(requiresFrameReordering bool) *T
 	return x
 }
 
+// MediaType calls the underlying MediaType.
+func (x *TrackInfo) MediaType() uint {
+	return x.inner.MediaType()
+}
+
+// TrackID calls the underlying TrackID.
+func (x *TrackInfo) TrackID() int32 {
+	return x.inner.TrackID()
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *TrackInfo) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *TrackInfo) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// FormatDescriptions calls the underlying FormatDescriptions.
+func (x *TrackInfo) FormatDescriptions() *foundation.NSArray[objc.ID] {
+	return x.inner.FormatDescriptions()
+}
+
+// NaturalTimescale calls the underlying NaturalTimescale.
+func (x *TrackInfo) NaturalTimescale() int32 {
+	return x.inner.NaturalTimescale()
+}
+
+// SetNaturalTimescale calls the underlying SetNaturalTimescale.
+func (x *TrackInfo) SetNaturalTimescale(naturalTimescale int32) {
+	x.inner.SetNaturalTimescale(naturalTimescale)
+}
+
 // TrackEdits returns the collection as a Go slice.
 func (x *TrackInfo) TrackEdits() []*foundation.NSValue {
 	arr := x.inner.TrackEdits()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// SetTrackEdits calls the underlying SetTrackEdits.
+func (x *TrackInfo) SetTrackEdits(trackEdits *foundation.NSArray[*foundation.NSValue]) {
+	x.inner.SetTrackEdits(trackEdits)
+}
+
+// ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
+func (x *TrackInfo) ExtendedLanguageTag() string {
+	_r := x.inner.ExtendedLanguageTag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+func (x *TrackInfo) SetExtendedLanguageTag(extendedLanguageTag string) {
+	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+}
+
+// NaturalSize calls the underlying NaturalSize.
+func (x *TrackInfo) NaturalSize() corefoundation.CGSize {
+	return x.inner.NaturalSize()
+}
+
+// SetNaturalSize calls the underlying SetNaturalSize.
+func (x *TrackInfo) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	x.inner.SetNaturalSize(naturalSize)
+}
+
+// PreferredTransform calls the underlying PreferredTransform.
+func (x *TrackInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	return x.inner.PreferredTransform()
+}
+
+// SetPreferredTransform calls the underlying SetPreferredTransform.
+func (x *TrackInfo) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
+	x.inner.SetPreferredTransform(preferredTransform)
+}
+
+// NominalFrameRate calls the underlying NominalFrameRate.
+func (x *TrackInfo) NominalFrameRate() float32 {
+	return x.inner.NominalFrameRate()
+}
+
+// SetNominalFrameRate calls the underlying SetNominalFrameRate.
+func (x *TrackInfo) SetNominalFrameRate(nominalFrameRate float32) {
+	x.inner.SetNominalFrameRate(nominalFrameRate)
+}
+
+// RequiresFrameReordering calls the underlying RequiresFrameReordering.
+func (x *TrackInfo) RequiresFrameReordering() bool {
+	return x.inner.RequiresFrameReordering()
+}
+
+// SetRequiresFrameReordering calls the underlying SetRequiresFrameReordering.
+func (x *TrackInfo) SetRequiresFrameReordering(requiresFrameReordering bool) {
+	x.inner.SetRequiresFrameReordering(requiresFrameReordering)
+}
+
+// TrackInfoable is the interface implemented by [TrackInfo], for mocking and DI.
+type TrackInfoable interface {
+	Unwrap() *raw.METrackInfo
+	WithEnabled(enabled bool) *TrackInfo
+	WithNaturalTimescale(naturalTimescale int32) *TrackInfo
+	WithTrackEdits(items ...*foundation.NSValue) *TrackInfo
+	WithExtendedLanguageTag(extendedLanguageTag string) *TrackInfo
+	WithNaturalSize(naturalSize corefoundation.CGSize) *TrackInfo
+	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *TrackInfo
+	WithNominalFrameRate(nominalFrameRate float32) *TrackInfo
+	WithRequiresFrameReordering(requiresFrameReordering bool) *TrackInfo
+	MediaType() uint
+	TrackID() int32
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	FormatDescriptions() *foundation.NSArray[objc.ID]
+	NaturalTimescale() int32
+	SetNaturalTimescale(naturalTimescale int32)
+	TrackEdits() []*foundation.NSValue
+	SetTrackEdits(trackEdits *foundation.NSArray[*foundation.NSValue])
+	ExtendedLanguageTag() string
+	SetExtendedLanguageTag(extendedLanguageTag string)
+	NaturalSize() corefoundation.CGSize
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	PreferredTransform() corefoundation.CGAffineTransform
+	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
+	NominalFrameRate() float32
+	SetNominalFrameRate(nominalFrameRate float32)
+	RequiresFrameReordering() bool
+	SetRequiresFrameReordering(requiresFrameReordering bool)
+}
+
+var _ TrackInfoable = (*TrackInfo)(nil)
 

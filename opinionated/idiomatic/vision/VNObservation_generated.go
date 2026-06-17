@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +25,30 @@ func NewObservation() *Observation {
 	return &Observation{inner: raw.VNObservationFromID(_id)}
 }
 
+// Uuid calls the underlying Uuid.
+func (x *Observation) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// Confidence calls the underlying Confidence.
+func (x *Observation) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
+// TimeRange calls the underlying TimeRange.
+func (x *Observation) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
 func (x *Observation) asObservation() *raw.VNObservation { return x.inner }
+
+// Observationable is the interface implemented by [Observation], for mocking and DI.
+type Observationable interface {
+	Unwrap() *raw.VNObservation
+	Uuid() *foundation.NSUUID
+	Confidence() float32
+	TimeRange() coremedia.CMTimeRange
+}
+
+var _ Observationable = (*Observation)(nil)
 

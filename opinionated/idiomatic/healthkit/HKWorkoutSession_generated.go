@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,128 @@ func (x *WorkoutSession) WithDelegate(delegate raw.HKWorkoutSessionDelegate) *Wo
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// Prepare calls the underlying Prepare.
+func (x *WorkoutSession) Prepare() {
+	x.inner.Prepare()
+}
+
+// StartActivityWithDate calls the underlying StartActivityWithDate.
+func (x *WorkoutSession) StartActivityWithDate(date *foundation.NSDate) {
+	x.inner.StartActivityWithDate(date)
+}
+
+// StopActivityWithDate calls the underlying StopActivityWithDate.
+func (x *WorkoutSession) StopActivityWithDate(date *foundation.NSDate) {
+	x.inner.StopActivityWithDate(date)
+}
+
+// End calls the underlying End.
+func (x *WorkoutSession) End() {
+	x.inner.End()
+}
+
+// Pause calls the underlying Pause.
+func (x *WorkoutSession) Pause() {
+	x.inner.Pause()
+}
+
+// Resume calls the underlying Resume.
+func (x *WorkoutSession) Resume() {
+	x.inner.Resume()
+}
+
+// BeginNewActivityWithConfigurationDateMetadata calls the underlying BeginNewActivityWithConfigurationDateMetadata.
+func (x *WorkoutSession) BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration, date, metadata)
+}
+
+// EndCurrentActivityOnDate calls the underlying EndCurrentActivityOnDate.
+func (x *WorkoutSession) EndCurrentActivityOnDate(date *foundation.NSDate) {
+	x.inner.EndCurrentActivityOnDate(date)
+}
+
+// ActivityType calls the underlying ActivityType.
+func (x *WorkoutSession) ActivityType() raw.HKWorkoutActivityType {
+	return x.inner.ActivityType()
+}
+
+// LocationType calls the underlying LocationType.
+func (x *WorkoutSession) LocationType() raw.HKWorkoutSessionLocationType {
+	return x.inner.LocationType()
+}
+
+// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+func (x *WorkoutSession) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := x.inner.WorkoutConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutConfiguration{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *WorkoutSession) Delegate() raw.HKWorkoutSessionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WorkoutSession) SetDelegate(delegate raw.HKWorkoutSessionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// State calls the underlying State.
+func (x *WorkoutSession) State() raw.HKWorkoutSessionState {
+	return x.inner.State()
+}
+
+// Type calls the underlying Type.
+func (x *WorkoutSession) Type() raw.HKWorkoutSessionType {
+	return x.inner.Type()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *WorkoutSession) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *WorkoutSession) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// CurrentActivity calls the underlying CurrentActivity.
+func (x *WorkoutSession) CurrentActivity() *WorkoutActivity {
+	_r := x.inner.CurrentActivity()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutActivity{inner: _r}
+}
+
+// WorkoutSessionable is the interface implemented by [WorkoutSession], for mocking and DI.
+type WorkoutSessionable interface {
+	Unwrap() *raw.HKWorkoutSession
+	WithDelegate(delegate raw.HKWorkoutSessionDelegate) *WorkoutSession
+	Prepare()
+	StartActivityWithDate(date *foundation.NSDate)
+	StopActivityWithDate(date *foundation.NSDate)
+	End()
+	Pause()
+	Resume()
+	BeginNewActivityWithConfigurationDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, date *foundation.NSDate, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	EndCurrentActivityOnDate(date *foundation.NSDate)
+	ActivityType() raw.HKWorkoutActivityType
+	LocationType() raw.HKWorkoutSessionLocationType
+	WorkoutConfiguration() *WorkoutConfiguration
+	Delegate() raw.HKWorkoutSessionDelegate
+	SetDelegate(delegate raw.HKWorkoutSessionDelegate)
+	State() raw.HKWorkoutSessionState
+	Type() raw.HKWorkoutSessionType
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	CurrentActivity() *WorkoutActivity
+}
+
+var _ WorkoutSessionable = (*WorkoutSession)(nil)
 

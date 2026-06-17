@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterLeakageEvent() *MTRPumpConfiguratio
 	return &MTRPumpConfigurationAndControlClusterLeakageEvent{inner: raw.MTRPumpConfigurationAndControlClusterLeakageEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterLeakageEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterLeakageEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterLeakageEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterLeakageEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterLeakageEventable = (*MTRPumpConfigurationAndControlClusterLeakageEvent)(nil)
+

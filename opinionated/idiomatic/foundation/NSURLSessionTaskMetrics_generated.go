@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,34 @@ func (x *URLSessionTaskMetrics) TransactionMetrics() []*raw.NSURLSessionTaskTran
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSURLSessionTaskTransactionMetrics, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLSessionTaskTransactionMetrics {
+		return raw.NSURLSessionTaskTransactionMetricsFromID(purego.Retain(_id))
+	})
+}
+
+// TaskInterval calls the underlying TaskInterval.
+func (x *URLSessionTaskMetrics) TaskInterval() *DateInterval {
+	_r := x.inner.TaskInterval()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &DateInterval{inner: _r}
+}
+
+// RedirectCount calls the underlying RedirectCount.
+func (x *URLSessionTaskMetrics) RedirectCount() uint {
+	return x.inner.RedirectCount()
 }
 
 func (x *URLSessionTaskMetrics) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLSessionTaskMetricsable is the interface implemented by [URLSessionTaskMetrics], for mocking and DI.
+type URLSessionTaskMetricsable interface {
+	Unwrap() *raw.NSURLSessionTaskMetrics
+	TransactionMetrics() []*raw.NSURLSessionTaskTransactionMetrics
+	TaskInterval() *DateInterval
+	RedirectCount() uint
+}
+
+var _ URLSessionTaskMetricsable = (*URLSessionTaskMetrics)(nil)
 

@@ -41,9 +41,43 @@ func (x *Panel) WithWorksWhenModal(worksWhenModal bool) *Panel {
 	return x
 }
 
+// SetFloatingPanel calls the underlying SetFloatingPanel.
+func (x *Panel) SetFloatingPanel(floatingPanel bool) {
+	x.inner.SetFloatingPanel(floatingPanel)
+}
+
+// BecomesKeyOnlyIfNeeded calls the underlying BecomesKeyOnlyIfNeeded.
+func (x *Panel) BecomesKeyOnlyIfNeeded() bool {
+	return x.inner.BecomesKeyOnlyIfNeeded()
+}
+
+// SetBecomesKeyOnlyIfNeeded calls the underlying SetBecomesKeyOnlyIfNeeded.
+func (x *Panel) SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) {
+	x.inner.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+}
+
+// SetWorksWhenModal calls the underlying SetWorksWhenModal.
+func (x *Panel) SetWorksWhenModal(worksWhenModal bool) {
+	x.inner.SetWorksWhenModal(worksWhenModal)
+}
+
 func (x *Panel) asPanel() *raw.NSPanel { return x.inner }
 
 func (x *Panel) asWindow() *raw.NSWindow { return &x.inner.NSWindow }
 
 func (x *Panel) asResponder() *raw.NSResponder { return &x.inner.NSWindow.NSResponder }
+
+// Panelable is the interface implemented by [Panel], for mocking and DI.
+type Panelable interface {
+	Unwrap() *raw.NSPanel
+	WithFloatingPanel(floatingPanel bool) *Panel
+	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *Panel
+	WithWorksWhenModal(worksWhenModal bool) *Panel
+	SetFloatingPanel(floatingPanel bool)
+	BecomesKeyOnlyIfNeeded() bool
+	SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool)
+	SetWorksWhenModal(worksWhenModal bool)
+}
+
+var _ Panelable = (*Panel)(nil)
 

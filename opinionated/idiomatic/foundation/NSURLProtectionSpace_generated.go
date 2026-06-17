@@ -7,7 +7,9 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // URLProtectionSpace wraps [raw.NSURLProtectionSpace] with a fluent Go API.
@@ -32,18 +34,98 @@ func NewURLProtectionSpaceWithProxyHostPortTypeRealmAuthenticationMethod(host st
 	return &URLProtectionSpace{inner: raw.NSURLProtectionSpaceFromID(_id)}
 }
 
+// Realm calls the underlying Realm.
+func (x *URLProtectionSpace) Realm() *String {
+	_r := x.inner.Realm()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ReceivesCredentialSecurely calls the underlying ReceivesCredentialSecurely.
+func (x *URLProtectionSpace) ReceivesCredentialSecurely() bool {
+	return x.inner.ReceivesCredentialSecurely()
+}
+
+// IsProxy calls the underlying IsProxy.
+func (x *URLProtectionSpace) IsProxy() bool {
+	return x.inner.IsProxy()
+}
+
+// Host calls the underlying Host.
+func (x *URLProtectionSpace) Host() *String {
+	_r := x.inner.Host()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Port calls the underlying Port.
+func (x *URLProtectionSpace) Port() int {
+	return x.inner.Port()
+}
+
+// ProxyType calls the underlying ProxyType.
+func (x *URLProtectionSpace) ProxyType() *String {
+	_r := x.inner.ProxyType()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Protocol calls the underlying Protocol.
+func (x *URLProtectionSpace) Protocol() *String {
+	_r := x.inner.Protocol()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AuthenticationMethod calls the underlying AuthenticationMethod.
+func (x *URLProtectionSpace) AuthenticationMethod() *String {
+	_r := x.inner.AuthenticationMethod()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 // DistinguishedNames returns the collection as a Go slice.
 func (x *URLProtectionSpace) DistinguishedNames() []*raw.NSData {
 	arr := x.inner.DistinguishedNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSData {
+		return raw.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// ServerTrust calls the underlying ServerTrust.
+func (x *URLProtectionSpace) ServerTrust() unsafe.Pointer {
+	return x.inner.ServerTrust()
 }
 
 func (x *URLProtectionSpace) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLProtectionSpaceable is the interface implemented by [URLProtectionSpace], for mocking and DI.
+type URLProtectionSpaceable interface {
+	Unwrap() *raw.NSURLProtectionSpace
+	Realm() *String
+	ReceivesCredentialSecurely() bool
+	IsProxy() bool
+	Host() *String
+	Port() int
+	ProxyType() *String
+	Protocol() *String
+	AuthenticationMethod() *String
+	DistinguishedNames() []*raw.NSData
+	ServerTrust() unsafe.Pointer
+}
+
+var _ URLProtectionSpaceable = (*URLProtectionSpace)(nil)
 

@@ -25,3 +25,10 @@ func NewBootLoader() *BootLoader {
 
 func (x *BootLoader) asBootLoader() *raw.VZBootLoader { return x.inner }
 
+// BootLoaderable is the interface implemented by [BootLoader], for mocking and DI.
+type BootLoaderable interface {
+	Unwrap() *raw.VZBootLoader
+}
+
+var _ BootLoaderable = (*BootLoader)(nil)
+

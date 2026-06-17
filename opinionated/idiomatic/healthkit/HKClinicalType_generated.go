@@ -27,3 +27,10 @@ func (x *ClinicalType) asSampleType() *raw.HKSampleType { return &x.inner.HKSamp
 
 func (x *ClinicalType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// ClinicalTypeable is the interface implemented by [ClinicalType], for mocking and DI.
+type ClinicalTypeable interface {
+	Unwrap() *raw.HKClinicalType
+}
+
+var _ ClinicalTypeable = (*ClinicalType)(nil)
+

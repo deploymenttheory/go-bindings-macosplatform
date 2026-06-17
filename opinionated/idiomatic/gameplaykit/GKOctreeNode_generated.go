@@ -23,3 +23,16 @@ func NewOctreeNode() *OctreeNode {
 	return &OctreeNode{inner: raw.GKOctreeNodeFromID(_id)}
 }
 
+// Box calls the underlying Box.
+func (x *OctreeNode) Box() raw.GKBox {
+	return x.inner.Box()
+}
+
+// OctreeNodeable is the interface implemented by [OctreeNode], for mocking and DI.
+type OctreeNodeable interface {
+	Unwrap() *raw.GKOctreeNode
+	Box() raw.GKBox
+}
+
+var _ OctreeNodeable = (*OctreeNode)(nil)
+

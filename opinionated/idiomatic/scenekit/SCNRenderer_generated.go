@@ -5,6 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +32,76 @@ func (x *Renderer) WithScene(scene *raw.SCNScene) *Renderer {
 	x.inner.SetScene(scene)
 	return x
 }
+
+// RenderAtTimeViewportCommandBufferPassDescriptor calls the underlying RenderAtTimeViewportCommandBufferPassDescriptor.
+func (x *Renderer) RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
+	x.inner.RenderAtTimeViewportCommandBufferPassDescriptor(time_, viewport, commandBuffer, renderPassDescriptor)
+}
+
+// RenderAtTime calls the underlying RenderAtTime.
+func (x *Renderer) RenderAtTime(time_ float64) {
+	x.inner.RenderAtTime(time_)
+}
+
+// UpdateAtTime calls the underlying UpdateAtTime.
+func (x *Renderer) UpdateAtTime(time_ float64) {
+	x.inner.UpdateAtTime(time_)
+}
+
+// RenderWithViewportCommandBufferPassDescriptor calls the underlying RenderWithViewportCommandBufferPassDescriptor.
+func (x *Renderer) RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
+	x.inner.RenderWithViewportCommandBufferPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
+}
+
+// SnapshotAtTimeWithSizeAntialiasingMode calls the underlying SnapshotAtTimeWithSizeAntialiasingMode.
+func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode raw.SCNAntialiasingMode) *appkit.NSImage {
+	return x.inner.SnapshotAtTimeWithSizeAntialiasingMode(time_, size, antialiasingMode)
+}
+
+// UpdateProbesAtTime calls the underlying UpdateProbesAtTime.
+func (x *Renderer) UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64) {
+	x.inner.UpdateProbesAtTime(lightProbes, time_)
+}
+
+// Scene calls the underlying Scene.
+func (x *Renderer) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// SetScene calls the underlying SetScene.
+func (x *Renderer) SetScene(scene *raw.SCNScene) {
+	x.inner.SetScene(scene)
+}
+
+// NextFrameTime calls the underlying NextFrameTime.
+func (x *Renderer) NextFrameTime() float64 {
+	return x.inner.NextFrameTime()
+}
+
+// Render calls the underlying Render.
+func (x *Renderer) Render() {
+	x.inner.Render()
+}
+
+// Rendererable is the interface implemented by [Renderer], for mocking and DI.
+type Rendererable interface {
+	Unwrap() *raw.SCNRenderer
+	WithScene(scene *raw.SCNScene) *Renderer
+	RenderAtTimeViewportCommandBufferPassDescriptor(time_ float64, viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
+	RenderAtTime(time_ float64)
+	UpdateAtTime(time_ float64)
+	RenderWithViewportCommandBufferPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
+	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode raw.SCNAntialiasingMode) *appkit.NSImage
+	UpdateProbesAtTime(lightProbes *foundation.NSArray[*raw.SCNNode], time_ float64)
+	Scene() *Scene
+	SetScene(scene *raw.SCNScene)
+	NextFrameTime() float64
+	Render()
+}
+
+var _ Rendererable = (*Renderer)(nil)
 

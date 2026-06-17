@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,7 +36,64 @@ func (x *ISO8601DateFormatter) WithFormatOptions(formatOptions raw.NSISO8601Date
 	return x
 }
 
+// StringFromDate calls the underlying StringFromDate.
+func (x *ISO8601DateFormatter) StringFromDate(date *raw.NSDate) *String {
+	_r := x.inner.StringFromDate(date)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DateFromString calls the underlying DateFromString.
+func (x *ISO8601DateFormatter) DateFromString(string_ string) *Date {
+	_r := x.inner.DateFromString(foundation.NSStringStringWithUTF8String(string_))
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *ISO8601DateFormatter) TimeZone() *TimeZone {
+	_r := x.inner.TimeZone()
+	if _r == nil {
+		return nil
+	}
+	return &TimeZone{inner: _r}
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *ISO8601DateFormatter) SetTimeZone(timeZone *raw.NSTimeZone) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// FormatOptions calls the underlying FormatOptions.
+func (x *ISO8601DateFormatter) FormatOptions() raw.NSISO8601DateFormatOptions {
+	return x.inner.FormatOptions()
+}
+
+// SetFormatOptions calls the underlying SetFormatOptions.
+func (x *ISO8601DateFormatter) SetFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) {
+	x.inner.SetFormatOptions(formatOptions)
+}
+
 func (x *ISO8601DateFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *ISO8601DateFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// ISO8601DateFormatterable is the interface implemented by [ISO8601DateFormatter], for mocking and DI.
+type ISO8601DateFormatterable interface {
+	Unwrap() *raw.NSISO8601DateFormatter
+	WithTimeZone(timeZone *raw.NSTimeZone) *ISO8601DateFormatter
+	WithFormatOptions(formatOptions raw.NSISO8601DateFormatOptions) *ISO8601DateFormatter
+	StringFromDate(date *raw.NSDate) *String
+	DateFromString(string_ string) *Date
+	TimeZone() *TimeZone
+	SetTimeZone(timeZone *raw.NSTimeZone)
+	FormatOptions() raw.NSISO8601DateFormatOptions
+	SetFormatOptions(formatOptions raw.NSISO8601DateFormatOptions)
+}
+
+var _ ISO8601DateFormatterable = (*ISO8601DateFormatter)(nil)
 

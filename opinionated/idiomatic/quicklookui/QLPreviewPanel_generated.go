@@ -5,6 +5,8 @@
 package quicklookui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -40,4 +42,98 @@ func (x *PreviewPanel) WithDisplayState(displayState objc.ID) *PreviewPanel {
 	x.inner.SetDisplayState(displayState)
 	return x
 }
+
+// UpdateController calls the underlying UpdateController.
+func (x *PreviewPanel) UpdateController() {
+	x.inner.UpdateController()
+}
+
+// ReloadData calls the underlying ReloadData.
+func (x *PreviewPanel) ReloadData() {
+	x.inner.ReloadData()
+}
+
+// RefreshCurrentPreviewItem calls the underlying RefreshCurrentPreviewItem.
+func (x *PreviewPanel) RefreshCurrentPreviewItem() {
+	x.inner.RefreshCurrentPreviewItem()
+}
+
+// EnterFullScreenModeWithOptions calls the underlying EnterFullScreenModeWithOptions.
+func (x *PreviewPanel) EnterFullScreenModeWithOptions(screen *appkit.NSScreen, options *foundation.NSDictionary[objc.ID, objc.ID]) bool {
+	return x.inner.EnterFullScreenModeWithOptions(screen, options)
+}
+
+// ExitFullScreenModeWithOptions calls the underlying ExitFullScreenModeWithOptions.
+func (x *PreviewPanel) ExitFullScreenModeWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.ExitFullScreenModeWithOptions(options)
+}
+
+// CurrentController calls the underlying CurrentController.
+func (x *PreviewPanel) CurrentController() objc.ID {
+	return x.inner.CurrentController()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *PreviewPanel) DataSource() raw.QLPreviewPanelDataSource {
+	return x.inner.DataSource()
+}
+
+// SetDataSource calls the underlying SetDataSource.
+func (x *PreviewPanel) SetDataSource(dataSource raw.QLPreviewPanelDataSource) {
+	x.inner.SetDataSource(dataSource)
+}
+
+// CurrentPreviewItemIndex calls the underlying CurrentPreviewItemIndex.
+func (x *PreviewPanel) CurrentPreviewItemIndex() int {
+	return x.inner.CurrentPreviewItemIndex()
+}
+
+// SetCurrentPreviewItemIndex calls the underlying SetCurrentPreviewItemIndex.
+func (x *PreviewPanel) SetCurrentPreviewItemIndex(currentPreviewItemIndex int) {
+	x.inner.SetCurrentPreviewItemIndex(currentPreviewItemIndex)
+}
+
+// CurrentPreviewItem calls the underlying CurrentPreviewItem.
+func (x *PreviewPanel) CurrentPreviewItem() raw.QLPreviewItem {
+	return x.inner.CurrentPreviewItem()
+}
+
+// DisplayState calls the underlying DisplayState.
+func (x *PreviewPanel) DisplayState() objc.ID {
+	return x.inner.DisplayState()
+}
+
+// SetDisplayState calls the underlying SetDisplayState.
+func (x *PreviewPanel) SetDisplayState(displayState objc.ID) {
+	x.inner.SetDisplayState(displayState)
+}
+
+// IsInFullScreenMode calls the underlying IsInFullScreenMode.
+func (x *PreviewPanel) IsInFullScreenMode() bool {
+	return x.inner.IsInFullScreenMode()
+}
+
+// PreviewPanelable is the interface implemented by [PreviewPanel], for mocking and DI.
+type PreviewPanelable interface {
+	Unwrap() *raw.QLPreviewPanel
+	WithDataSource(dataSource raw.QLPreviewPanelDataSource) *PreviewPanel
+	WithCurrentPreviewItemIndex(currentPreviewItemIndex int) *PreviewPanel
+	WithDisplayState(displayState objc.ID) *PreviewPanel
+	UpdateController()
+	ReloadData()
+	RefreshCurrentPreviewItem()
+	EnterFullScreenModeWithOptions(screen *appkit.NSScreen, options *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	ExitFullScreenModeWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID])
+	CurrentController() objc.ID
+	DataSource() raw.QLPreviewPanelDataSource
+	SetDataSource(dataSource raw.QLPreviewPanelDataSource)
+	CurrentPreviewItemIndex() int
+	SetCurrentPreviewItemIndex(currentPreviewItemIndex int)
+	CurrentPreviewItem() raw.QLPreviewItem
+	DisplayState() objc.ID
+	SetDisplayState(displayState objc.ID)
+	IsInFullScreenMode() bool
+}
+
+var _ PreviewPanelable = (*PreviewPanel)(nil)
 

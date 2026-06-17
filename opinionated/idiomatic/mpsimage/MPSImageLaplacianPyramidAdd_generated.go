@@ -29,3 +29,10 @@ func (x *ImageLaplacianPyramidAdd) asImagePyramid() *raw.MPSImagePyramid { retur
 
 func (x *ImageLaplacianPyramidAdd) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel }
 
+// ImageLaplacianPyramidAddable is the interface implemented by [ImageLaplacianPyramidAdd], for mocking and DI.
+type ImageLaplacianPyramidAddable interface {
+	Unwrap() *raw.MPSImageLaplacianPyramidAdd
+}
+
+var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)
+

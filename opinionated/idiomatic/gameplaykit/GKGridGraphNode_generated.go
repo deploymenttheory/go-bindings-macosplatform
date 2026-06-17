@@ -25,5 +25,18 @@ func NewGridGraphNodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNod
 	return &GridGraphNode{inner: raw.GKGridGraphNodeFromID(_id)}
 }
 
+// GridPosition calls the underlying GridPosition.
+func (x *GridGraphNode) GridPosition() unsafe.Pointer {
+	return x.inner.GridPosition()
+}
+
 func (x *GridGraphNode) asGraphNode() *raw.GKGraphNode { return &x.inner.GKGraphNode }
+
+// GridGraphNodeable is the interface implemented by [GridGraphNode], for mocking and DI.
+type GridGraphNodeable interface {
+	Unwrap() *raw.GKGridGraphNode
+	GridPosition() unsafe.Pointer
+}
+
+var _ GridGraphNodeable = (*GridGraphNode)(nil)
 

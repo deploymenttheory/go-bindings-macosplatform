@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioMixInputParameters wraps [raw.AVAudioMixInputParameters] with a fluent Go API.
@@ -23,5 +26,40 @@ func NewAudioMixInputParameters() *AudioMixInputParameters {
 	return &AudioMixInputParameters{inner: raw.AVAudioMixInputParametersFromID(_id)}
 }
 
+// GetVolumeRampForTimeStartVolumeEndVolumeTimeRange calls the underlying GetVolumeRampForTimeStartVolumeEndVolumeTimeRange.
+func (x *AudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool {
+	return x.inner.GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_, startVolume, endVolume, timeRange)
+}
+
+// TrackID calls the underlying TrackID.
+func (x *AudioMixInputParameters) TrackID() int32 {
+	return x.inner.TrackID()
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AudioTapProcessor calls the underlying AudioTapProcessor.
+func (x *AudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
+	return x.inner.AudioTapProcessor()
+}
+
 func (x *AudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters { return x.inner }
+
+// AudioMixInputParametersable is the interface implemented by [AudioMixInputParameters], for mocking and DI.
+type AudioMixInputParametersable interface {
+	Unwrap() *raw.AVAudioMixInputParameters
+	GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool
+	TrackID() int32
+	AudioTimePitchAlgorithm() string
+	AudioTapProcessor() unsafe.Pointer
+}
+
+var _ AudioMixInputParametersable = (*AudioMixInputParameters)(nil)
 

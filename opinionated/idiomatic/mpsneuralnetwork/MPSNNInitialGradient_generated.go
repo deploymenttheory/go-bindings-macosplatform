@@ -27,3 +27,10 @@ func NewNNInitialGradientWithDevice(device metal.MTLDevice) *NNInitialGradient {
 
 func (x *NNInitialGradient) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
+// NNInitialGradientable is the interface implemented by [NNInitialGradient], for mocking and DI.
+type NNInitialGradientable interface {
+	Unwrap() *raw.MPSNNInitialGradient
+}
+
+var _ NNInitialGradientable = (*NNInitialGradient)(nil)
+

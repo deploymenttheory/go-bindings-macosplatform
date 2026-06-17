@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -89,7 +90,203 @@ func (x *TableRowView) WithBackgroundColor(backgroundColor *raw.NSColor) *TableR
 	return x
 }
 
+// DrawBackgroundInRect calls the underlying DrawBackgroundInRect.
+func (x *TableRowView) DrawBackgroundInRect(dirtyRect corefoundation.CGRect) {
+	x.inner.DrawBackgroundInRect(dirtyRect)
+}
+
+// DrawSelectionInRect calls the underlying DrawSelectionInRect.
+func (x *TableRowView) DrawSelectionInRect(dirtyRect corefoundation.CGRect) {
+	x.inner.DrawSelectionInRect(dirtyRect)
+}
+
+// DrawSeparatorInRect calls the underlying DrawSeparatorInRect.
+func (x *TableRowView) DrawSeparatorInRect(dirtyRect corefoundation.CGRect) {
+	x.inner.DrawSeparatorInRect(dirtyRect)
+}
+
+// DrawDraggingDestinationFeedbackInRect calls the underlying DrawDraggingDestinationFeedbackInRect.
+func (x *TableRowView) DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect) {
+	x.inner.DrawDraggingDestinationFeedbackInRect(dirtyRect)
+}
+
+// ViewAtColumn calls the underlying ViewAtColumn.
+func (x *TableRowView) ViewAtColumn(column int) objc.ID {
+	return x.inner.ViewAtColumn(column)
+}
+
+// SelectionHighlightStyle calls the underlying SelectionHighlightStyle.
+func (x *TableRowView) SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle {
+	return x.inner.SelectionHighlightStyle()
+}
+
+// SetSelectionHighlightStyle calls the underlying SetSelectionHighlightStyle.
+func (x *TableRowView) SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) {
+	x.inner.SetSelectionHighlightStyle(selectionHighlightStyle)
+}
+
+// IsEmphasized calls the underlying IsEmphasized.
+func (x *TableRowView) IsEmphasized() bool {
+	return x.inner.IsEmphasized()
+}
+
+// SetEmphasized calls the underlying SetEmphasized.
+func (x *TableRowView) SetEmphasized(emphasized bool) {
+	x.inner.SetEmphasized(emphasized)
+}
+
+// IsGroupRowStyle calls the underlying IsGroupRowStyle.
+func (x *TableRowView) IsGroupRowStyle() bool {
+	return x.inner.IsGroupRowStyle()
+}
+
+// SetGroupRowStyle calls the underlying SetGroupRowStyle.
+func (x *TableRowView) SetGroupRowStyle(groupRowStyle bool) {
+	x.inner.SetGroupRowStyle(groupRowStyle)
+}
+
+// IsSelected calls the underlying IsSelected.
+func (x *TableRowView) IsSelected() bool {
+	return x.inner.IsSelected()
+}
+
+// SetSelected calls the underlying SetSelected.
+func (x *TableRowView) SetSelected(selected bool) {
+	x.inner.SetSelected(selected)
+}
+
+// IsPreviousRowSelected calls the underlying IsPreviousRowSelected.
+func (x *TableRowView) IsPreviousRowSelected() bool {
+	return x.inner.IsPreviousRowSelected()
+}
+
+// SetPreviousRowSelected calls the underlying SetPreviousRowSelected.
+func (x *TableRowView) SetPreviousRowSelected(previousRowSelected bool) {
+	x.inner.SetPreviousRowSelected(previousRowSelected)
+}
+
+// IsNextRowSelected calls the underlying IsNextRowSelected.
+func (x *TableRowView) IsNextRowSelected() bool {
+	return x.inner.IsNextRowSelected()
+}
+
+// SetNextRowSelected calls the underlying SetNextRowSelected.
+func (x *TableRowView) SetNextRowSelected(nextRowSelected bool) {
+	x.inner.SetNextRowSelected(nextRowSelected)
+}
+
+// IsFloating calls the underlying IsFloating.
+func (x *TableRowView) IsFloating() bool {
+	return x.inner.IsFloating()
+}
+
+// SetFloating calls the underlying SetFloating.
+func (x *TableRowView) SetFloating(floating bool) {
+	x.inner.SetFloating(floating)
+}
+
+// IsTargetForDropOperation calls the underlying IsTargetForDropOperation.
+func (x *TableRowView) IsTargetForDropOperation() bool {
+	return x.inner.IsTargetForDropOperation()
+}
+
+// SetTargetForDropOperation calls the underlying SetTargetForDropOperation.
+func (x *TableRowView) SetTargetForDropOperation(targetForDropOperation bool) {
+	x.inner.SetTargetForDropOperation(targetForDropOperation)
+}
+
+// DraggingDestinationFeedbackStyle calls the underlying DraggingDestinationFeedbackStyle.
+func (x *TableRowView) DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle {
+	return x.inner.DraggingDestinationFeedbackStyle()
+}
+
+// SetDraggingDestinationFeedbackStyle calls the underlying SetDraggingDestinationFeedbackStyle.
+func (x *TableRowView) SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) {
+	x.inner.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+}
+
+// IndentationForDropOperation calls the underlying IndentationForDropOperation.
+func (x *TableRowView) IndentationForDropOperation() float64 {
+	return x.inner.IndentationForDropOperation()
+}
+
+// SetIndentationForDropOperation calls the underlying SetIndentationForDropOperation.
+func (x *TableRowView) SetIndentationForDropOperation(indentationForDropOperation float64) {
+	x.inner.SetIndentationForDropOperation(indentationForDropOperation)
+}
+
+// InteriorBackgroundStyle calls the underlying InteriorBackgroundStyle.
+func (x *TableRowView) InteriorBackgroundStyle() raw.NSBackgroundStyle {
+	return x.inner.InteriorBackgroundStyle()
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *TableRowView) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *TableRowView) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *TableRowView) NumberOfColumns() int {
+	return x.inner.NumberOfColumns()
+}
+
 func (x *TableRowView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *TableRowView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// TableRowViewable is the interface implemented by [TableRowView], for mocking and DI.
+type TableRowViewable interface {
+	Unwrap() *raw.NSTableRowView
+	WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *TableRowView
+	WithEmphasized(emphasized bool) *TableRowView
+	WithGroupRowStyle(groupRowStyle bool) *TableRowView
+	WithSelected(selected bool) *TableRowView
+	WithPreviousRowSelected(previousRowSelected bool) *TableRowView
+	WithNextRowSelected(nextRowSelected bool) *TableRowView
+	WithFloating(floating bool) *TableRowView
+	WithTargetForDropOperation(targetForDropOperation bool) *TableRowView
+	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *TableRowView
+	WithIndentationForDropOperation(indentationForDropOperation float64) *TableRowView
+	WithBackgroundColor(backgroundColor *raw.NSColor) *TableRowView
+	DrawBackgroundInRect(dirtyRect corefoundation.CGRect)
+	DrawSelectionInRect(dirtyRect corefoundation.CGRect)
+	DrawSeparatorInRect(dirtyRect corefoundation.CGRect)
+	DrawDraggingDestinationFeedbackInRect(dirtyRect corefoundation.CGRect)
+	ViewAtColumn(column int) objc.ID
+	SelectionHighlightStyle() raw.NSTableViewSelectionHighlightStyle
+	SetSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle)
+	IsEmphasized() bool
+	SetEmphasized(emphasized bool)
+	IsGroupRowStyle() bool
+	SetGroupRowStyle(groupRowStyle bool)
+	IsSelected() bool
+	SetSelected(selected bool)
+	IsPreviousRowSelected() bool
+	SetPreviousRowSelected(previousRowSelected bool)
+	IsNextRowSelected() bool
+	SetNextRowSelected(nextRowSelected bool)
+	IsFloating() bool
+	SetFloating(floating bool)
+	IsTargetForDropOperation() bool
+	SetTargetForDropOperation(targetForDropOperation bool)
+	DraggingDestinationFeedbackStyle() raw.NSTableViewDraggingDestinationFeedbackStyle
+	SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle)
+	IndentationForDropOperation() float64
+	SetIndentationForDropOperation(indentationForDropOperation float64)
+	InteriorBackgroundStyle() raw.NSBackgroundStyle
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	NumberOfColumns() int
+}
+
+var _ TableRowViewable = (*TableRowView)(nil)
 

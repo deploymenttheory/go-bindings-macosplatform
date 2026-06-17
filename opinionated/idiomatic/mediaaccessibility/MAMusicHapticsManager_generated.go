@@ -5,6 +5,7 @@
 package mediaaccessibility
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewMusicHapticsManager() *MusicHapticsManager {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MAMusicHapticsManager")), objc.RegisterName("new"))
 	return &MusicHapticsManager{inner: raw.MAMusicHapticsManagerFromID(_id)}
 }
+
+// CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler calls the underlying CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler.
+func (x *MusicHapticsManager) CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool)) {
+	x.inner.CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(foundation.NSStringStringWithUTF8String(internationalStandardRecordingCode), completionHandler)
+}
+
+// AddStatusObserver calls the underlying AddStatusObserver.
+func (x *MusicHapticsManager) AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying {
+	return x.inner.AddStatusObserver(statusHandler)
+}
+
+// RemoveStatusObserver calls the underlying RemoveStatusObserver.
+func (x *MusicHapticsManager) RemoveStatusObserver(registrationToken foundation.NSCopying) {
+	x.inner.RemoveStatusObserver(registrationToken)
+}
+
+// IsActive calls the underlying IsActive.
+func (x *MusicHapticsManager) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// MusicHapticsManagerable is the interface implemented by [MusicHapticsManager], for mocking and DI.
+type MusicHapticsManagerable interface {
+	Unwrap() *raw.MAMusicHapticsManager
+	CheckHapticTrackAvailabilityForMediaMatchingCodeCompletionHandler(internationalStandardRecordingCode string, completionHandler func(bool))
+	AddStatusObserver(statusHandler func(*foundation.NSString, bool)) foundation.NSCopying
+	RemoveStatusObserver(registrationToken foundation.NSCopying)
+	IsActive() bool
+}
+
+var _ MusicHapticsManagerable = (*MusicHapticsManager)(nil)
 

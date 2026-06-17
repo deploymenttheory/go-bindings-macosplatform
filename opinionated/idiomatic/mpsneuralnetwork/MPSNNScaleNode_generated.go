@@ -36,3 +36,10 @@ func (x *NNScaleNode) asNNScaleNode() *raw.MPSNNScaleNode { return x.inner }
 
 func (x *NNScaleNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNScaleNodeable is the interface implemented by [NNScaleNode], for mocking and DI.
+type NNScaleNodeable interface {
+	Unwrap() *raw.MPSNNScaleNode
+}
+
+var _ NNScaleNodeable = (*NNScaleNode)(nil)
+

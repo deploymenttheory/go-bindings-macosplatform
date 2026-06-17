@@ -44,5 +44,169 @@ func (x *Action) WithProgressValue(progressValue float64) *Action {
 	return x
 }
 
+// RunWithInputFromActionError calls the underlying RunWithInputFromActionError.
+func (x *Action) RunWithInputFromActionError(input objc.ID, anAction *raw.AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID {
+	return x.inner.RunWithInputFromActionError(input, anAction, errorInfo)
+}
+
+// RunWithInputError calls the underlying RunWithInputError.
+func (x *Action) RunWithInputError(input objc.ID) (objc.ID, error) {
+	return x.inner.RunWithInputError(input)
+}
+
+// RunAsynchronouslyWithInput calls the underlying RunAsynchronouslyWithInput.
+func (x *Action) RunAsynchronouslyWithInput(input objc.ID) {
+	x.inner.RunAsynchronouslyWithInput(input)
+}
+
+// WillFinishRunning calls the underlying WillFinishRunning.
+func (x *Action) WillFinishRunning() {
+	x.inner.WillFinishRunning()
+}
+
+// DidFinishRunningWithError calls the underlying DidFinishRunningWithError.
+func (x *Action) DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.DidFinishRunningWithError(errorInfo)
+}
+
+// FinishRunningWithError calls the underlying FinishRunningWithError.
+func (x *Action) FinishRunningWithError(error_ unsafe.Pointer) {
+	x.inner.FinishRunningWithError(error_)
+}
+
+// Stop calls the underlying Stop.
+func (x *Action) Stop() {
+	x.inner.Stop()
+}
+
+// Reset calls the underlying Reset.
+func (x *Action) Reset() {
+	x.inner.Reset()
+}
+
+// WriteToDictionary calls the underlying WriteToDictionary.
+func (x *Action) WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.WriteToDictionary(dictionary)
+}
+
+// Opened calls the underlying Opened.
+func (x *Action) Opened() {
+	x.inner.Opened()
+}
+
+// Activated calls the underlying Activated.
+func (x *Action) Activated() {
+	x.inner.Activated()
+}
+
+// Closed calls the underlying Closed.
+func (x *Action) Closed() {
+	x.inner.Closed()
+}
+
+// UpdateParameters calls the underlying UpdateParameters.
+func (x *Action) UpdateParameters() {
+	x.inner.UpdateParameters()
+}
+
+// ParametersUpdated calls the underlying ParametersUpdated.
+func (x *Action) ParametersUpdated() {
+	x.inner.ParametersUpdated()
+}
+
+// LogMessageWithLevelFormat calls the underlying LogMessageWithLevelFormat.
+func (x *Action) LogMessageWithLevelFormat(level raw.AMLogLevel, format string) {
+	x.inner.LogMessageWithLevelFormat(level, foundation.NSStringStringWithUTF8String(format))
+}
+
+// Name calls the underlying Name.
+func (x *Action) Name() unsafe.Pointer {
+	return x.inner.Name()
+}
+
+// IgnoresInput calls the underlying IgnoresInput.
+func (x *Action) IgnoresInput() bool {
+	return x.inner.IgnoresInput()
+}
+
+// SelectedInputType calls the underlying SelectedInputType.
+func (x *Action) SelectedInputType() unsafe.Pointer {
+	return x.inner.SelectedInputType()
+}
+
+// SetSelectedInputType calls the underlying SetSelectedInputType.
+func (x *Action) SetSelectedInputType(selectedInputType unsafe.Pointer) {
+	x.inner.SetSelectedInputType(selectedInputType)
+}
+
+// SelectedOutputType calls the underlying SelectedOutputType.
+func (x *Action) SelectedOutputType() unsafe.Pointer {
+	return x.inner.SelectedOutputType()
+}
+
+// SetSelectedOutputType calls the underlying SetSelectedOutputType.
+func (x *Action) SetSelectedOutputType(selectedOutputType unsafe.Pointer) {
+	x.inner.SetSelectedOutputType(selectedOutputType)
+}
+
+// ProgressValue calls the underlying ProgressValue.
+func (x *Action) ProgressValue() float64 {
+	return x.inner.ProgressValue()
+}
+
+// SetProgressValue calls the underlying SetProgressValue.
+func (x *Action) SetProgressValue(progressValue float64) {
+	x.inner.SetProgressValue(progressValue)
+}
+
+// Output calls the underlying Output.
+func (x *Action) Output() unsafe.Pointer {
+	return x.inner.Output()
+}
+
+// SetOutput calls the underlying SetOutput.
+func (x *Action) SetOutput(output unsafe.Pointer) {
+	x.inner.SetOutput(output)
+}
+
+// IsStopped calls the underlying IsStopped.
+func (x *Action) IsStopped() bool {
+	return x.inner.IsStopped()
+}
+
 func (x *Action) asAction() *raw.AMAction { return x.inner }
+
+// Actionable is the interface implemented by [Action], for mocking and DI.
+type Actionable interface {
+	Unwrap() *raw.AMAction
+	WithProgressValue(progressValue float64) *Action
+	RunWithInputFromActionError(input objc.ID, anAction *raw.AMAction, errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) objc.ID
+	RunWithInputError(input objc.ID) (objc.ID, error)
+	RunAsynchronouslyWithInput(input objc.ID)
+	WillFinishRunning()
+	DidFinishRunningWithError(errorInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	FinishRunningWithError(error_ unsafe.Pointer)
+	Stop()
+	Reset()
+	WriteToDictionary(dictionary *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+	Opened()
+	Activated()
+	Closed()
+	UpdateParameters()
+	ParametersUpdated()
+	LogMessageWithLevelFormat(level raw.AMLogLevel, format string)
+	Name() unsafe.Pointer
+	IgnoresInput() bool
+	SelectedInputType() unsafe.Pointer
+	SetSelectedInputType(selectedInputType unsafe.Pointer)
+	SelectedOutputType() unsafe.Pointer
+	SetSelectedOutputType(selectedOutputType unsafe.Pointer)
+	ProgressValue() float64
+	SetProgressValue(progressValue float64)
+	Output() unsafe.Pointer
+	SetOutput(output unsafe.Pointer)
+	IsStopped() bool
+}
+
+var _ Actionable = (*Action)(nil)
 

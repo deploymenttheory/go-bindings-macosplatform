@@ -23,3 +23,32 @@ func NewLevelOfDetail() *LevelOfDetail {
 	return &LevelOfDetail{inner: raw.SCNLevelOfDetailFromID(_id)}
 }
 
+// Geometry calls the underlying Geometry.
+func (x *LevelOfDetail) Geometry() *Geometry {
+	_r := x.inner.Geometry()
+	if _r == nil {
+		return nil
+	}
+	return &Geometry{inner: _r}
+}
+
+// ScreenSpaceRadius calls the underlying ScreenSpaceRadius.
+func (x *LevelOfDetail) ScreenSpaceRadius() float64 {
+	return x.inner.ScreenSpaceRadius()
+}
+
+// WorldSpaceDistance calls the underlying WorldSpaceDistance.
+func (x *LevelOfDetail) WorldSpaceDistance() float64 {
+	return x.inner.WorldSpaceDistance()
+}
+
+// LevelOfDetailable is the interface implemented by [LevelOfDetail], for mocking and DI.
+type LevelOfDetailable interface {
+	Unwrap() *raw.SCNLevelOfDetail
+	Geometry() *Geometry
+	ScreenSpaceRadius() float64
+	WorldSpaceDistance() float64
+}
+
+var _ LevelOfDetailable = (*LevelOfDetail)(nil)
+

@@ -48,3 +48,62 @@ func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithServerSideProcessingT
 	return x
 }
 
+// Mode calls the underlying Mode.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Mode() *foundation.NSNumber {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetMode(mode *foundation.NSNumber) {
+	x.inner.SetMode(mode)
+}
+
+// Amount calls the underlying Amount.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Amount() *foundation.NSNumber {
+	return x.inner.Amount()
+}
+
+// SetAmount calls the underlying SetAmount.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetAmount(amount *foundation.NSNumber) {
+	x.inner.SetAmount(amount)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterSetpointRaiseLowerParamsable is the interface implemented by [MTRThermostatClusterSetpointRaiseLowerParams], for mocking and DI.
+type MTRThermostatClusterSetpointRaiseLowerParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams
+	WithMode(mode *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithAmount(amount *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
+	Mode() *foundation.NSNumber
+	SetMode(mode *foundation.NSNumber)
+	Amount() *foundation.NSNumber
+	SetAmount(amount *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterSetpointRaiseLowerParamsable = (*MTRThermostatClusterSetpointRaiseLowerParams)(nil)
+

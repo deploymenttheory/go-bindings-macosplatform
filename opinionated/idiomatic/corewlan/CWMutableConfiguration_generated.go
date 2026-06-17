@@ -54,5 +54,47 @@ func (x *MutableConfiguration) WithRememberJoinedNetworks(rememberJoinedNetworks
 	return x
 }
 
+// SetNetworkProfiles calls the underlying SetNetworkProfiles.
+func (x *MutableConfiguration) SetNetworkProfiles(networkProfiles *foundation.NSOrderedSet[*raw.CWNetworkProfile]) {
+	x.inner.SetNetworkProfiles(networkProfiles)
+}
+
+// SetRequireAdministratorForAssociation calls the underlying SetRequireAdministratorForAssociation.
+func (x *MutableConfiguration) SetRequireAdministratorForAssociation(requireAdministratorForAssociation bool) {
+	x.inner.SetRequireAdministratorForAssociation(requireAdministratorForAssociation)
+}
+
+// SetRequireAdministratorForPower calls the underlying SetRequireAdministratorForPower.
+func (x *MutableConfiguration) SetRequireAdministratorForPower(requireAdministratorForPower bool) {
+	x.inner.SetRequireAdministratorForPower(requireAdministratorForPower)
+}
+
+// SetRequireAdministratorForIBSSMode calls the underlying SetRequireAdministratorForIBSSMode.
+func (x *MutableConfiguration) SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) {
+	x.inner.SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode)
+}
+
+// SetRememberJoinedNetworks calls the underlying SetRememberJoinedNetworks.
+func (x *MutableConfiguration) SetRememberJoinedNetworks(rememberJoinedNetworks bool) {
+	x.inner.SetRememberJoinedNetworks(rememberJoinedNetworks)
+}
+
 func (x *MutableConfiguration) asConfiguration() *raw.CWConfiguration { return &x.inner.CWConfiguration }
+
+// MutableConfigurationable is the interface implemented by [MutableConfiguration], for mocking and DI.
+type MutableConfigurationable interface {
+	Unwrap() *raw.CWMutableConfiguration
+	WithNetworkProfiles(networkProfiles *foundation.NSOrderedSet[*raw.CWNetworkProfile]) *MutableConfiguration
+	WithRequireAdministratorForAssociation(requireAdministratorForAssociation bool) *MutableConfiguration
+	WithRequireAdministratorForPower(requireAdministratorForPower bool) *MutableConfiguration
+	WithRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool) *MutableConfiguration
+	WithRememberJoinedNetworks(rememberJoinedNetworks bool) *MutableConfiguration
+	SetNetworkProfiles(networkProfiles *foundation.NSOrderedSet[*raw.CWNetworkProfile])
+	SetRequireAdministratorForAssociation(requireAdministratorForAssociation bool)
+	SetRequireAdministratorForPower(requireAdministratorForPower bool)
+	SetRequireAdministratorForIBSSMode(requireAdministratorForIBSSMode bool)
+	SetRememberJoinedNetworks(rememberJoinedNetworks bool)
+}
+
+var _ MutableConfigurationable = (*MutableConfiguration)(nil)
 

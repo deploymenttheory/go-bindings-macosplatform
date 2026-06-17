@@ -25,3 +25,10 @@ func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
 
 func (x *MTRMediaInputClusterInputInfo) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct { return &x.inner.MTRMediaInputClusterInputInfoStruct }
 
+// MTRMediaInputClusterInputInfoable is the interface implemented by [MTRMediaInputClusterInputInfo], for mocking and DI.
+type MTRMediaInputClusterInputInfoable interface {
+	Unwrap() *raw.MTRMediaInputClusterInputInfo
+}
+
+var _ MTRMediaInputClusterInputInfoable = (*MTRMediaInputClusterInputInfo)(nil)
+

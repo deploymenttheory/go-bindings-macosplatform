@@ -37,3 +37,10 @@ func (x *TrackTranslationalImageRegistrationRequest) asImageBasedRequest() *raw.
 
 func (x *TrackTranslationalImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
 
+// TrackTranslationalImageRegistrationRequestable is the interface implemented by [TrackTranslationalImageRegistrationRequest], for mocking and DI.
+type TrackTranslationalImageRegistrationRequestable interface {
+	Unwrap() *raw.VNTrackTranslationalImageRegistrationRequest
+}
+
+var _ TrackTranslationalImageRegistrationRequestable = (*TrackTranslationalImageRegistrationRequest)(nil)
+

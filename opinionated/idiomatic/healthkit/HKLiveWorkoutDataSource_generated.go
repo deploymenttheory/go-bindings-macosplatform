@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,4 +24,29 @@ func NewLiveWorkoutDataSourceWithHealthStoreWorkoutConfiguration(healthStore *ra
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:workoutConfiguration:"), healthStore.Ptr(), configuration.Ptr())
 	return &LiveWorkoutDataSource{inner: raw.HKLiveWorkoutDataSourceFromID(_id)}
 }
+
+// EnableCollectionForTypePredicate calls the underlying EnableCollectionForTypePredicate.
+func (x *LiveWorkoutDataSource) EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate) {
+	x.inner.EnableCollectionForTypePredicate(quantityType, predicate)
+}
+
+// DisableCollectionForType calls the underlying DisableCollectionForType.
+func (x *LiveWorkoutDataSource) DisableCollectionForType(quantityType *raw.HKQuantityType) {
+	x.inner.DisableCollectionForType(quantityType)
+}
+
+// TypesToCollect calls the underlying TypesToCollect.
+func (x *LiveWorkoutDataSource) TypesToCollect() *foundation.NSSet[*raw.HKQuantityType] {
+	return x.inner.TypesToCollect()
+}
+
+// LiveWorkoutDataSourceable is the interface implemented by [LiveWorkoutDataSource], for mocking and DI.
+type LiveWorkoutDataSourceable interface {
+	Unwrap() *raw.HKLiveWorkoutDataSource
+	EnableCollectionForTypePredicate(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate)
+	DisableCollectionForType(quantityType *raw.HKQuantityType)
+	TypesToCollect() *foundation.NSSet[*raw.HKQuantityType]
+}
+
+var _ LiveWorkoutDataSourceable = (*LiveWorkoutDataSource)(nil)
 

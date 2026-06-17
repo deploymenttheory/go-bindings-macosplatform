@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -64,4 +65,60 @@ func (x *IPAddress) WithStringRepresentation(stringRepresentation string) *IPAdd
 	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
 	return x
 }
+
+// RepresentsIPv4Address calls the underlying RepresentsIPv4Address.
+func (x *IPAddress) RepresentsIPv4Address() bool {
+	return x.inner.RepresentsIPv4Address()
+}
+
+// Ipv6Address calls the underlying Ipv6Address.
+func (x *IPAddress) Ipv6Address() *foundation.NSData {
+	return x.inner.Ipv6Address()
+}
+
+// SetIpv6Address calls the underlying SetIpv6Address.
+func (x *IPAddress) SetIpv6Address(ipv6Address *foundation.NSData) {
+	x.inner.SetIpv6Address(ipv6Address)
+}
+
+// Ipv4Address calls the underlying Ipv4Address.
+func (x *IPAddress) Ipv4Address() uint32 {
+	return x.inner.Ipv4Address()
+}
+
+// SetIpv4Address calls the underlying SetIpv4Address.
+func (x *IPAddress) SetIpv4Address(ipv4Address uint32) {
+	x.inner.SetIpv4Address(ipv4Address)
+}
+
+// StringRepresentation calls the underlying StringRepresentation.
+func (x *IPAddress) StringRepresentation() string {
+	_r := x.inner.StringRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStringRepresentation calls the underlying SetStringRepresentation.
+func (x *IPAddress) SetStringRepresentation(stringRepresentation string) {
+	x.inner.SetStringRepresentation(foundation.NSStringStringWithUTF8String(stringRepresentation))
+}
+
+// IPAddressable is the interface implemented by [IPAddress], for mocking and DI.
+type IPAddressable interface {
+	Unwrap() *raw.AVBIPAddress
+	WithIpv6Address(ipv6Address *foundation.NSData) *IPAddress
+	WithIpv4Address(ipv4Address uint32) *IPAddress
+	WithStringRepresentation(stringRepresentation string) *IPAddress
+	RepresentsIPv4Address() bool
+	Ipv6Address() *foundation.NSData
+	SetIpv6Address(ipv6Address *foundation.NSData)
+	Ipv4Address() uint32
+	SetIpv4Address(ipv4Address uint32)
+	StringRepresentation() string
+	SetStringRepresentation(stringRepresentation string)
+}
+
+var _ IPAddressable = (*IPAddress)(nil)
 

@@ -28,3 +28,10 @@ func (x *NNMultiplicationNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSN
 
 func (x *NNMultiplicationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
 
+// NNMultiplicationNodeable is the interface implemented by [NNMultiplicationNode], for mocking and DI.
+type NNMultiplicationNodeable interface {
+	Unwrap() *raw.MPSNNMultiplicationNode
+}
+
+var _ NNMultiplicationNodeable = (*NNMultiplicationNode)(nil)
+

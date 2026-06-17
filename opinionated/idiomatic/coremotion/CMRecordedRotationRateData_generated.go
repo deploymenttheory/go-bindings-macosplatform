@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,20 @@ func NewRecordedRotationRateData() *RecordedRotationRateData {
 	return &RecordedRotationRateData{inner: raw.CMRecordedRotationRateDataFromID(_id)}
 }
 
+// StartDate calls the underlying StartDate.
+func (x *RecordedRotationRateData) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
 func (x *RecordedRotationRateData) asRotationRateData() *raw.CMRotationRateData { return &x.inner.CMRotationRateData }
 
 func (x *RecordedRotationRateData) asLogItem() *raw.CMLogItem { return &x.inner.CMRotationRateData.CMLogItem }
+
+// RecordedRotationRateDataable is the interface implemented by [RecordedRotationRateData], for mocking and DI.
+type RecordedRotationRateDataable interface {
+	Unwrap() *raw.CMRecordedRotationRateData
+	StartDate() *foundation.NSDate
+}
+
+var _ RecordedRotationRateDataable = (*RecordedRotationRateData)(nil)
 

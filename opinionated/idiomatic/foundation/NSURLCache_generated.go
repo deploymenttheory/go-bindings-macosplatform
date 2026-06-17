@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
@@ -44,5 +45,120 @@ func (x *URLCache) WithDiskCapacity(diskCapacity uint) *URLCache {
 	return x
 }
 
+// CachedResponseForRequest calls the underlying CachedResponseForRequest.
+func (x *URLCache) CachedResponseForRequest(request *raw.NSURLRequest) *CachedURLResponse {
+	_r := x.inner.CachedResponseForRequest(request)
+	if _r == nil {
+		return nil
+	}
+	return &CachedURLResponse{inner: _r}
+}
+
+// StoreCachedResponseForRequest calls the underlying StoreCachedResponseForRequest.
+func (x *URLCache) StoreCachedResponseForRequest(cachedResponse *raw.NSCachedURLResponse, request *raw.NSURLRequest) {
+	x.inner.StoreCachedResponseForRequest(cachedResponse, request)
+}
+
+// RemoveCachedResponseForRequest calls the underlying RemoveCachedResponseForRequest.
+func (x *URLCache) RemoveCachedResponseForRequest(request *raw.NSURLRequest) {
+	x.inner.RemoveCachedResponseForRequest(request)
+}
+
+// RemoveAllCachedResponses calls the underlying RemoveAllCachedResponses.
+func (x *URLCache) RemoveAllCachedResponses() {
+	x.inner.RemoveAllCachedResponses()
+}
+
+// RemoveCachedResponsesSinceDate calls the underlying RemoveCachedResponsesSinceDate.
+func (x *URLCache) RemoveCachedResponsesSinceDate(date *raw.NSDate) {
+	x.inner.RemoveCachedResponsesSinceDate(date)
+}
+
+// MemoryCapacity calls the underlying MemoryCapacity.
+func (x *URLCache) MemoryCapacity() uint {
+	return x.inner.MemoryCapacity()
+}
+
+// SetMemoryCapacity calls the underlying SetMemoryCapacity.
+func (x *URLCache) SetMemoryCapacity(memoryCapacity uint) {
+	x.inner.SetMemoryCapacity(memoryCapacity)
+}
+
+// DiskCapacity calls the underlying DiskCapacity.
+func (x *URLCache) DiskCapacity() uint {
+	return x.inner.DiskCapacity()
+}
+
+// SetDiskCapacity calls the underlying SetDiskCapacity.
+func (x *URLCache) SetDiskCapacity(diskCapacity uint) {
+	x.inner.SetDiskCapacity(diskCapacity)
+}
+
+// CurrentMemoryUsage calls the underlying CurrentMemoryUsage.
+func (x *URLCache) CurrentMemoryUsage() uint {
+	return x.inner.CurrentMemoryUsage()
+}
+
+// CurrentDiskUsage calls the underlying CurrentDiskUsage.
+func (x *URLCache) CurrentDiskUsage() uint {
+	return x.inner.CurrentDiskUsage()
+}
+
+// StoreCachedResponseForDataTask calls the underlying StoreCachedResponseForDataTask.
+func (x *URLCache) StoreCachedResponseForDataTask(cachedResponse *raw.NSCachedURLResponse, dataTask *raw.NSURLSessionDataTask) {
+	x.inner.StoreCachedResponseForDataTask(cachedResponse, dataTask)
+}
+
+// GetCachedResponseForDataTask blocks until the operation completes or ctx is cancelled.
+func (x *URLCache) GetCachedResponseForDataTask(ctx context.Context, dataTask *raw.NSURLSessionDataTask) (*CachedURLResponse, error) {
+	type _result struct {
+		val *CachedURLResponse
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetCachedResponseForDataTaskCompletionHandler(dataTask, func(_p0 *raw.NSCachedURLResponse) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &CachedURLResponse{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *CachedURLResponse
+		return _zero, ctx.Err()
+	}
+}
+
+// RemoveCachedResponseForDataTask calls the underlying RemoveCachedResponseForDataTask.
+func (x *URLCache) RemoveCachedResponseForDataTask(dataTask *raw.NSURLSessionDataTask) {
+	x.inner.RemoveCachedResponseForDataTask(dataTask)
+}
+
 func (x *URLCache) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLCacheable is the interface implemented by [URLCache], for mocking and DI.
+type URLCacheable interface {
+	Unwrap() *raw.NSURLCache
+	WithMemoryCapacity(memoryCapacity uint) *URLCache
+	WithDiskCapacity(diskCapacity uint) *URLCache
+	CachedResponseForRequest(request *raw.NSURLRequest) *CachedURLResponse
+	StoreCachedResponseForRequest(cachedResponse *raw.NSCachedURLResponse, request *raw.NSURLRequest)
+	RemoveCachedResponseForRequest(request *raw.NSURLRequest)
+	RemoveAllCachedResponses()
+	RemoveCachedResponsesSinceDate(date *raw.NSDate)
+	MemoryCapacity() uint
+	SetMemoryCapacity(memoryCapacity uint)
+	DiskCapacity() uint
+	SetDiskCapacity(diskCapacity uint)
+	CurrentMemoryUsage() uint
+	CurrentDiskUsage() uint
+	StoreCachedResponseForDataTask(cachedResponse *raw.NSCachedURLResponse, dataTask *raw.NSURLSessionDataTask)
+	GetCachedResponseForDataTask(ctx context.Context, dataTask *raw.NSURLSessionDataTask) (*CachedURLResponse, error)
+	RemoveCachedResponseForDataTask(dataTask *raw.NSURLSessionDataTask)
+}
+
+var _ URLCacheable = (*URLCache)(nil)
 

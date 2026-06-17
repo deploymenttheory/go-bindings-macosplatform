@@ -6,6 +6,7 @@ package eventkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewRecurrenceEnd() *RecurrenceEnd {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKRecurrenceEnd")), objc.RegisterName("new"))
 	return &RecurrenceEnd{inner: raw.EKRecurrenceEndFromID(_id)}
 }
+
+// EndDate calls the underlying EndDate.
+func (x *RecurrenceEnd) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// OccurrenceCount calls the underlying OccurrenceCount.
+func (x *RecurrenceEnd) OccurrenceCount() uint {
+	return x.inner.OccurrenceCount()
+}
+
+// RecurrenceEndable is the interface implemented by [RecurrenceEnd], for mocking and DI.
+type RecurrenceEndable interface {
+	Unwrap() *raw.EKRecurrenceEnd
+	EndDate() *foundation.NSDate
+	OccurrenceCount() uint
+}
+
+var _ RecurrenceEndable = (*RecurrenceEnd)(nil)
 

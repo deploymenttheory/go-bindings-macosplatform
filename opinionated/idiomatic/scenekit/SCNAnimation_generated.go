@@ -7,6 +7,7 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -149,16 +150,271 @@ func (x *Animation) WithCumulative(cumulative bool) *Animation {
 	return x
 }
 
+// Duration calls the underlying Duration.
+func (x *Animation) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *Animation) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
+// KeyPath calls the underlying KeyPath.
+func (x *Animation) KeyPath() string {
+	_r := x.inner.KeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKeyPath calls the underlying SetKeyPath.
+func (x *Animation) SetKeyPath(keyPath string) {
+	x.inner.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
+}
+
+// TimingFunction calls the underlying TimingFunction.
+func (x *Animation) TimingFunction() *TimingFunction {
+	_r := x.inner.TimingFunction()
+	if _r == nil {
+		return nil
+	}
+	return &TimingFunction{inner: _r}
+}
+
+// SetTimingFunction calls the underlying SetTimingFunction.
+func (x *Animation) SetTimingFunction(timingFunction *raw.SCNTimingFunction) {
+	x.inner.SetTimingFunction(timingFunction)
+}
+
+// BlendInDuration calls the underlying BlendInDuration.
+func (x *Animation) BlendInDuration() float64 {
+	return x.inner.BlendInDuration()
+}
+
+// SetBlendInDuration calls the underlying SetBlendInDuration.
+func (x *Animation) SetBlendInDuration(blendInDuration float64) {
+	x.inner.SetBlendInDuration(blendInDuration)
+}
+
+// BlendOutDuration calls the underlying BlendOutDuration.
+func (x *Animation) BlendOutDuration() float64 {
+	return x.inner.BlendOutDuration()
+}
+
+// SetBlendOutDuration calls the underlying SetBlendOutDuration.
+func (x *Animation) SetBlendOutDuration(blendOutDuration float64) {
+	x.inner.SetBlendOutDuration(blendOutDuration)
+}
+
+// IsRemovedOnCompletion calls the underlying IsRemovedOnCompletion.
+func (x *Animation) IsRemovedOnCompletion() bool {
+	return x.inner.IsRemovedOnCompletion()
+}
+
+// SetRemovedOnCompletion calls the underlying SetRemovedOnCompletion.
+func (x *Animation) SetRemovedOnCompletion(removedOnCompletion bool) {
+	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+}
+
+// IsAppliedOnCompletion calls the underlying IsAppliedOnCompletion.
+func (x *Animation) IsAppliedOnCompletion() bool {
+	return x.inner.IsAppliedOnCompletion()
+}
+
+// SetAppliedOnCompletion calls the underlying SetAppliedOnCompletion.
+func (x *Animation) SetAppliedOnCompletion(appliedOnCompletion bool) {
+	x.inner.SetAppliedOnCompletion(appliedOnCompletion)
+}
+
+// RepeatCount calls the underlying RepeatCount.
+func (x *Animation) RepeatCount() float64 {
+	return x.inner.RepeatCount()
+}
+
+// SetRepeatCount calls the underlying SetRepeatCount.
+func (x *Animation) SetRepeatCount(repeatCount float64) {
+	x.inner.SetRepeatCount(repeatCount)
+}
+
+// Autoreverses calls the underlying Autoreverses.
+func (x *Animation) Autoreverses() bool {
+	return x.inner.Autoreverses()
+}
+
+// SetAutoreverses calls the underlying SetAutoreverses.
+func (x *Animation) SetAutoreverses(autoreverses bool) {
+	x.inner.SetAutoreverses(autoreverses)
+}
+
+// StartDelay calls the underlying StartDelay.
+func (x *Animation) StartDelay() float64 {
+	return x.inner.StartDelay()
+}
+
+// SetStartDelay calls the underlying SetStartDelay.
+func (x *Animation) SetStartDelay(startDelay float64) {
+	x.inner.SetStartDelay(startDelay)
+}
+
+// TimeOffset calls the underlying TimeOffset.
+func (x *Animation) TimeOffset() float64 {
+	return x.inner.TimeOffset()
+}
+
+// SetTimeOffset calls the underlying SetTimeOffset.
+func (x *Animation) SetTimeOffset(timeOffset float64) {
+	x.inner.SetTimeOffset(timeOffset)
+}
+
+// FillsForward calls the underlying FillsForward.
+func (x *Animation) FillsForward() bool {
+	return x.inner.FillsForward()
+}
+
+// SetFillsForward calls the underlying SetFillsForward.
+func (x *Animation) SetFillsForward(fillsForward bool) {
+	x.inner.SetFillsForward(fillsForward)
+}
+
+// FillsBackward calls the underlying FillsBackward.
+func (x *Animation) FillsBackward() bool {
+	return x.inner.FillsBackward()
+}
+
+// SetFillsBackward calls the underlying SetFillsBackward.
+func (x *Animation) SetFillsBackward(fillsBackward bool) {
+	x.inner.SetFillsBackward(fillsBackward)
+}
+
+// UsesSceneTimeBase calls the underlying UsesSceneTimeBase.
+func (x *Animation) UsesSceneTimeBase() bool {
+	return x.inner.UsesSceneTimeBase()
+}
+
+// SetUsesSceneTimeBase calls the underlying SetUsesSceneTimeBase.
+func (x *Animation) SetUsesSceneTimeBase(usesSceneTimeBase bool) {
+	x.inner.SetUsesSceneTimeBase(usesSceneTimeBase)
+}
+
+// AnimationDidStart calls the underlying AnimationDidStart.
+func (x *Animation) AnimationDidStart() objc.Block {
+	return x.inner.AnimationDidStart()
+}
+
+// SetAnimationDidStart calls the underlying SetAnimationDidStart.
+func (x *Animation) SetAnimationDidStart(animationDidStart func(*raw.SCNAnimation, objc.ID)) {
+	x.inner.SetAnimationDidStart(animationDidStart)
+}
+
+// AnimationDidStop calls the underlying AnimationDidStop.
+func (x *Animation) AnimationDidStop() objc.Block {
+	return x.inner.AnimationDidStop()
+}
+
+// SetAnimationDidStop calls the underlying SetAnimationDidStop.
+func (x *Animation) SetAnimationDidStop(animationDidStop func(*raw.SCNAnimation, objc.ID, bool)) {
+	x.inner.SetAnimationDidStop(animationDidStop)
+}
+
 // AnimationEvents returns the collection as a Go slice.
 func (x *Animation) AnimationEvents() []*raw.SCNAnimationEvent {
 	arr := x.inner.AnimationEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNAnimationEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNAnimationEvent {
+		return raw.SCNAnimationEventFromID(purego.Retain(_id))
+	})
 }
+
+// SetAnimationEvents calls the underlying SetAnimationEvents.
+func (x *Animation) SetAnimationEvents(animationEvents *foundation.NSArray[*raw.SCNAnimationEvent]) {
+	x.inner.SetAnimationEvents(animationEvents)
+}
+
+// IsAdditive calls the underlying IsAdditive.
+func (x *Animation) IsAdditive() bool {
+	return x.inner.IsAdditive()
+}
+
+// SetAdditive calls the underlying SetAdditive.
+func (x *Animation) SetAdditive(additive bool) {
+	x.inner.SetAdditive(additive)
+}
+
+// IsCumulative calls the underlying IsCumulative.
+func (x *Animation) IsCumulative() bool {
+	return x.inner.IsCumulative()
+}
+
+// SetCumulative calls the underlying SetCumulative.
+func (x *Animation) SetCumulative(cumulative bool) {
+	x.inner.SetCumulative(cumulative)
+}
+
+// Animationable is the interface implemented by [Animation], for mocking and DI.
+type Animationable interface {
+	Unwrap() *raw.SCNAnimation
+	WithDuration(duration float64) *Animation
+	WithKeyPath(keyPath string) *Animation
+	WithTimingFunction(timingFunction *raw.SCNTimingFunction) *Animation
+	WithBlendInDuration(blendInDuration float64) *Animation
+	WithBlendOutDuration(blendOutDuration float64) *Animation
+	WithRemovedOnCompletion(removedOnCompletion bool) *Animation
+	WithAppliedOnCompletion(appliedOnCompletion bool) *Animation
+	WithRepeatCount(repeatCount float64) *Animation
+	WithAutoreverses(autoreverses bool) *Animation
+	WithStartDelay(startDelay float64) *Animation
+	WithTimeOffset(timeOffset float64) *Animation
+	WithFillsForward(fillsForward bool) *Animation
+	WithFillsBackward(fillsBackward bool) *Animation
+	WithUsesSceneTimeBase(usesSceneTimeBase bool) *Animation
+	WithAnimationDidStart(animationDidStart func(*raw.SCNAnimation, objc.ID)) *Animation
+	WithAnimationDidStop(animationDidStop func(*raw.SCNAnimation, objc.ID, bool)) *Animation
+	WithAnimationEvents(items ...*raw.SCNAnimationEvent) *Animation
+	WithAdditive(additive bool) *Animation
+	WithCumulative(cumulative bool) *Animation
+	Duration() float64
+	SetDuration(duration float64)
+	KeyPath() string
+	SetKeyPath(keyPath string)
+	TimingFunction() *TimingFunction
+	SetTimingFunction(timingFunction *raw.SCNTimingFunction)
+	BlendInDuration() float64
+	SetBlendInDuration(blendInDuration float64)
+	BlendOutDuration() float64
+	SetBlendOutDuration(blendOutDuration float64)
+	IsRemovedOnCompletion() bool
+	SetRemovedOnCompletion(removedOnCompletion bool)
+	IsAppliedOnCompletion() bool
+	SetAppliedOnCompletion(appliedOnCompletion bool)
+	RepeatCount() float64
+	SetRepeatCount(repeatCount float64)
+	Autoreverses() bool
+	SetAutoreverses(autoreverses bool)
+	StartDelay() float64
+	SetStartDelay(startDelay float64)
+	TimeOffset() float64
+	SetTimeOffset(timeOffset float64)
+	FillsForward() bool
+	SetFillsForward(fillsForward bool)
+	FillsBackward() bool
+	SetFillsBackward(fillsBackward bool)
+	UsesSceneTimeBase() bool
+	SetUsesSceneTimeBase(usesSceneTimeBase bool)
+	AnimationDidStart() objc.Block
+	SetAnimationDidStart(animationDidStart func(*raw.SCNAnimation, objc.ID))
+	AnimationDidStop() objc.Block
+	SetAnimationDidStop(animationDidStop func(*raw.SCNAnimation, objc.ID, bool))
+	AnimationEvents() []*raw.SCNAnimationEvent
+	SetAnimationEvents(animationEvents *foundation.NSArray[*raw.SCNAnimationEvent])
+	IsAdditive() bool
+	SetAdditive(additive bool)
+	IsCumulative() bool
+	SetCumulative(cumulative bool)
+}
+
+var _ Animationable = (*Animation)(nil)
 

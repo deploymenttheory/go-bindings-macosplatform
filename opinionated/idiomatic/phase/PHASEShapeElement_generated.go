@@ -29,3 +29,27 @@ func (x *ShapeElement) WithMaterial(material *raw.PHASEMaterial) *ShapeElement {
 	return x
 }
 
+// Material calls the underlying Material.
+func (x *ShapeElement) Material() *Material {
+	_r := x.inner.Material()
+	if _r == nil {
+		return nil
+	}
+	return &Material{inner: _r}
+}
+
+// SetMaterial calls the underlying SetMaterial.
+func (x *ShapeElement) SetMaterial(material *raw.PHASEMaterial) {
+	x.inner.SetMaterial(material)
+}
+
+// ShapeElementable is the interface implemented by [ShapeElement], for mocking and DI.
+type ShapeElementable interface {
+	Unwrap() *raw.PHASEShapeElement
+	WithMaterial(material *raw.PHASEMaterial) *ShapeElement
+	Material() *Material
+	SetMaterial(material *raw.PHASEMaterial)
+}
+
+var _ ShapeElementable = (*ShapeElement)(nil)
+

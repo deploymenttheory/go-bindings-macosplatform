@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,7 +49,120 @@ func (x *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int6
 	return x
 }
 
+// StartRecordingToOutputFileURLRecordingDelegate calls the underlying StartRecordingToOutputFileURLRecordingDelegate.
+func (x *CaptureFileOutput) StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate) {
+	x.inner.StartRecordingToOutputFileURLRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), delegate)
+}
+
+// StopRecording calls the underlying StopRecording.
+func (x *CaptureFileOutput) StopRecording() {
+	x.inner.StopRecording()
+}
+
+// PauseRecording calls the underlying PauseRecording.
+func (x *CaptureFileOutput) PauseRecording() {
+	x.inner.PauseRecording()
+}
+
+// ResumeRecording calls the underlying ResumeRecording.
+func (x *CaptureFileOutput) ResumeRecording() {
+	x.inner.ResumeRecording()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CaptureFileOutput) Delegate() raw.AVCaptureFileOutputDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CaptureFileOutput) SetDelegate(delegate raw.AVCaptureFileOutputDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// OutputFileURL calls the underlying OutputFileURL.
+func (x *CaptureFileOutput) OutputFileURL() *foundation.NSURL {
+	return x.inner.OutputFileURL()
+}
+
+// IsRecording calls the underlying IsRecording.
+func (x *CaptureFileOutput) IsRecording() bool {
+	return x.inner.IsRecording()
+}
+
+// IsRecordingPaused calls the underlying IsRecordingPaused.
+func (x *CaptureFileOutput) IsRecordingPaused() bool {
+	return x.inner.IsRecordingPaused()
+}
+
+// RecordedDuration calls the underlying RecordedDuration.
+func (x *CaptureFileOutput) RecordedDuration() coremedia.CMTime {
+	return x.inner.RecordedDuration()
+}
+
+// RecordedFileSize calls the underlying RecordedFileSize.
+func (x *CaptureFileOutput) RecordedFileSize() int64 {
+	return x.inner.RecordedFileSize()
+}
+
+// MaxRecordedDuration calls the underlying MaxRecordedDuration.
+func (x *CaptureFileOutput) MaxRecordedDuration() coremedia.CMTime {
+	return x.inner.MaxRecordedDuration()
+}
+
+// SetMaxRecordedDuration calls the underlying SetMaxRecordedDuration.
+func (x *CaptureFileOutput) SetMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) {
+	x.inner.SetMaxRecordedDuration(maxRecordedDuration)
+}
+
+// MaxRecordedFileSize calls the underlying MaxRecordedFileSize.
+func (x *CaptureFileOutput) MaxRecordedFileSize() int64 {
+	return x.inner.MaxRecordedFileSize()
+}
+
+// SetMaxRecordedFileSize calls the underlying SetMaxRecordedFileSize.
+func (x *CaptureFileOutput) SetMaxRecordedFileSize(maxRecordedFileSize int64) {
+	x.inner.SetMaxRecordedFileSize(maxRecordedFileSize)
+}
+
+// MinFreeDiskSpaceLimit calls the underlying MinFreeDiskSpaceLimit.
+func (x *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
+	return x.inner.MinFreeDiskSpaceLimit()
+}
+
+// SetMinFreeDiskSpaceLimit calls the underlying SetMinFreeDiskSpaceLimit.
+func (x *CaptureFileOutput) SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) {
+	x.inner.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+}
+
 func (x *CaptureFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return x.inner }
 
 func (x *CaptureFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureFileOutputable is the interface implemented by [CaptureFileOutput], for mocking and DI.
+type CaptureFileOutputable interface {
+	Unwrap() *raw.AVCaptureFileOutput
+	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureFileOutput
+	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput
+	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput
+	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput
+	StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate)
+	StopRecording()
+	PauseRecording()
+	ResumeRecording()
+	Delegate() raw.AVCaptureFileOutputDelegate
+	SetDelegate(delegate raw.AVCaptureFileOutputDelegate)
+	OutputFileURL() *foundation.NSURL
+	IsRecording() bool
+	IsRecordingPaused() bool
+	RecordedDuration() coremedia.CMTime
+	RecordedFileSize() int64
+	MaxRecordedDuration() coremedia.CMTime
+	SetMaxRecordedDuration(maxRecordedDuration coremedia.CMTime)
+	MaxRecordedFileSize() int64
+	SetMaxRecordedFileSize(maxRecordedFileSize int64)
+	MinFreeDiskSpaceLimit() int64
+	SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64)
+}
+
+var _ CaptureFileOutputable = (*CaptureFileOutput)(nil)
 

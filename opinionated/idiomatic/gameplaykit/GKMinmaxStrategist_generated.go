@@ -29,3 +29,35 @@ func (x *MinmaxStrategist) WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxS
 	return x
 }
 
+// BestMoveForPlayer calls the underlying BestMoveForPlayer.
+func (x *MinmaxStrategist) BestMoveForPlayer(player raw.GKGameModelPlayer) raw.GKGameModelUpdate {
+	return x.inner.BestMoveForPlayer(player)
+}
+
+// RandomMoveForPlayerFromNumberOfBestMoves calls the underlying RandomMoveForPlayerFromNumberOfBestMoves.
+func (x *MinmaxStrategist) RandomMoveForPlayerFromNumberOfBestMoves(player raw.GKGameModelPlayer, numMovesToConsider int) raw.GKGameModelUpdate {
+	return x.inner.RandomMoveForPlayerFromNumberOfBestMoves(player, numMovesToConsider)
+}
+
+// MaxLookAheadDepth calls the underlying MaxLookAheadDepth.
+func (x *MinmaxStrategist) MaxLookAheadDepth() int {
+	return x.inner.MaxLookAheadDepth()
+}
+
+// SetMaxLookAheadDepth calls the underlying SetMaxLookAheadDepth.
+func (x *MinmaxStrategist) SetMaxLookAheadDepth(maxLookAheadDepth int) {
+	x.inner.SetMaxLookAheadDepth(maxLookAheadDepth)
+}
+
+// MinmaxStrategistable is the interface implemented by [MinmaxStrategist], for mocking and DI.
+type MinmaxStrategistable interface {
+	Unwrap() *raw.GKMinmaxStrategist
+	WithMaxLookAheadDepth(maxLookAheadDepth int) *MinmaxStrategist
+	BestMoveForPlayer(player raw.GKGameModelPlayer) raw.GKGameModelUpdate
+	RandomMoveForPlayerFromNumberOfBestMoves(player raw.GKGameModelPlayer, numMovesToConsider int) raw.GKGameModelUpdate
+	MaxLookAheadDepth() int
+	SetMaxLookAheadDepth(maxLookAheadDepth int)
+}
+
+var _ MinmaxStrategistable = (*MinmaxStrategist)(nil)
+

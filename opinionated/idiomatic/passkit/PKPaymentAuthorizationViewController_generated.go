@@ -37,3 +37,23 @@ func (x *PaymentAuthorizationViewController) WithDelegate(delegate raw.PKPayment
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *PaymentAuthorizationViewController) Delegate() raw.PKPaymentAuthorizationViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PaymentAuthorizationViewController) SetDelegate(delegate raw.PKPaymentAuthorizationViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PaymentAuthorizationViewControllerable is the interface implemented by [PaymentAuthorizationViewController], for mocking and DI.
+type PaymentAuthorizationViewControllerable interface {
+	Unwrap() *raw.PKPaymentAuthorizationViewController
+	WithDelegate(delegate raw.PKPaymentAuthorizationViewControllerDelegate) *PaymentAuthorizationViewController
+	Delegate() raw.PKPaymentAuthorizationViewControllerDelegate
+	SetDelegate(delegate raw.PKPaymentAuthorizationViewControllerDelegate)
+}
+
+var _ PaymentAuthorizationViewControllerable = (*PaymentAuthorizationViewController)(nil)
+

@@ -27,3 +27,10 @@ func (x *NNBinaryGradientStateNode) asNNBinaryGradientStateNode() *raw.MPSNNBina
 
 func (x *NNBinaryGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
+// NNBinaryGradientStateNodeable is the interface implemented by [NNBinaryGradientStateNode], for mocking and DI.
+type NNBinaryGradientStateNodeable interface {
+	Unwrap() *raw.MPSNNBinaryGradientStateNode
+}
+
+var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)
+

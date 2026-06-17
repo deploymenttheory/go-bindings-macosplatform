@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,29 @@ func NewWorkout() *Workout {
 	return &Workout{inner: raw.HKWorkoutFromID(_id)}
 }
 
+// StatisticsForType calls the underlying StatisticsForType.
+func (x *Workout) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
+	_r := x.inner.StatisticsForType(quantityType)
+	if _r == nil {
+		return nil
+	}
+	return &Statistics{inner: _r}
+}
+
+// WorkoutActivityType calls the underlying WorkoutActivityType.
+func (x *Workout) WorkoutActivityType() raw.HKWorkoutActivityType {
+	return x.inner.WorkoutActivityType()
+}
+
 // WorkoutEvents returns the collection as a Go slice.
 func (x *Workout) WorkoutEvents() []*raw.HKWorkoutEvent {
 	arr := x.inner.WorkoutEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKWorkoutEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutEvent {
+		return raw.HKWorkoutEventFromID(purego.Retain(_id))
+	})
 }
 
 // WorkoutActivities returns the collection as a Go slice.
@@ -42,14 +56,75 @@ func (x *Workout) WorkoutActivities() []*raw.HKWorkoutActivity {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKWorkoutActivity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKWorkoutActivity {
+		return raw.HKWorkoutActivityFromID(purego.Retain(_id))
+	})
+}
+
+// Duration calls the underlying Duration.
+func (x *Workout) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// TotalEnergyBurned calls the underlying TotalEnergyBurned.
+func (x *Workout) TotalEnergyBurned() *Quantity {
+	_r := x.inner.TotalEnergyBurned()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Quantity{inner: _r}
+}
+
+// TotalDistance calls the underlying TotalDistance.
+func (x *Workout) TotalDistance() *Quantity {
+	_r := x.inner.TotalDistance()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// TotalSwimmingStrokeCount calls the underlying TotalSwimmingStrokeCount.
+func (x *Workout) TotalSwimmingStrokeCount() *Quantity {
+	_r := x.inner.TotalSwimmingStrokeCount()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// TotalFlightsClimbed calls the underlying TotalFlightsClimbed.
+func (x *Workout) TotalFlightsClimbed() *Quantity {
+	_r := x.inner.TotalFlightsClimbed()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// AllStatistics calls the underlying AllStatistics.
+func (x *Workout) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
+	return x.inner.AllStatistics()
 }
 
 func (x *Workout) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *Workout) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// Workoutable is the interface implemented by [Workout], for mocking and DI.
+type Workoutable interface {
+	Unwrap() *raw.HKWorkout
+	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
+	WorkoutActivityType() raw.HKWorkoutActivityType
+	WorkoutEvents() []*raw.HKWorkoutEvent
+	WorkoutActivities() []*raw.HKWorkoutActivity
+	Duration() float64
+	TotalEnergyBurned() *Quantity
+	TotalDistance() *Quantity
+	TotalSwimmingStrokeCount() *Quantity
+	TotalFlightsClimbed() *Quantity
+	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+}
+
+var _ Workoutable = (*Workout)(nil)
 

@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,4 +38,68 @@ func (x *PasskeyAssertionCredential) WithExtensionOutput(extensionOutput *raw.AS
 	x.inner.SetExtensionOutput(extensionOutput)
 	return x
 }
+
+// UserHandle calls the underlying UserHandle.
+func (x *PasskeyAssertionCredential) UserHandle() *foundation.NSData {
+	return x.inner.UserHandle()
+}
+
+// RelyingParty calls the underlying RelyingParty.
+func (x *PasskeyAssertionCredential) RelyingParty() string {
+	_r := x.inner.RelyingParty()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Signature calls the underlying Signature.
+func (x *PasskeyAssertionCredential) Signature() *foundation.NSData {
+	return x.inner.Signature()
+}
+
+// ClientDataHash calls the underlying ClientDataHash.
+func (x *PasskeyAssertionCredential) ClientDataHash() *foundation.NSData {
+	return x.inner.ClientDataHash()
+}
+
+// AuthenticatorData calls the underlying AuthenticatorData.
+func (x *PasskeyAssertionCredential) AuthenticatorData() *foundation.NSData {
+	return x.inner.AuthenticatorData()
+}
+
+// CredentialID calls the underlying CredentialID.
+func (x *PasskeyAssertionCredential) CredentialID() *foundation.NSData {
+	return x.inner.CredentialID()
+}
+
+// ExtensionOutput calls the underlying ExtensionOutput.
+func (x *PasskeyAssertionCredential) ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput {
+	_r := x.inner.ExtensionOutput()
+	if _r == nil {
+		return nil
+	}
+	return &PasskeyAssertionCredentialExtensionOutput{inner: _r}
+}
+
+// SetExtensionOutput calls the underlying SetExtensionOutput.
+func (x *PasskeyAssertionCredential) SetExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) {
+	x.inner.SetExtensionOutput(extensionOutput)
+}
+
+// PasskeyAssertionCredentialable is the interface implemented by [PasskeyAssertionCredential], for mocking and DI.
+type PasskeyAssertionCredentialable interface {
+	Unwrap() *raw.ASPasskeyAssertionCredential
+	WithExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput) *PasskeyAssertionCredential
+	UserHandle() *foundation.NSData
+	RelyingParty() string
+	Signature() *foundation.NSData
+	ClientDataHash() *foundation.NSData
+	AuthenticatorData() *foundation.NSData
+	CredentialID() *foundation.NSData
+	ExtensionOutput() *PasskeyAssertionCredentialExtensionOutput
+	SetExtensionOutput(extensionOutput *raw.ASPasskeyAssertionCredentialExtensionOutput)
+}
+
+var _ PasskeyAssertionCredentialable = (*PasskeyAssertionCredential)(nil)
 

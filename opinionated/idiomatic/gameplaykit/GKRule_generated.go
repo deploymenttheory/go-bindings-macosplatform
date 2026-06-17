@@ -29,5 +29,37 @@ func (x *Rule) WithSalience(salience int) *Rule {
 	return x
 }
 
+// EvaluatePredicateWithSystem calls the underlying EvaluatePredicateWithSystem.
+func (x *Rule) EvaluatePredicateWithSystem(system *raw.GKRuleSystem) bool {
+	return x.inner.EvaluatePredicateWithSystem(system)
+}
+
+// PerformActionWithSystem calls the underlying PerformActionWithSystem.
+func (x *Rule) PerformActionWithSystem(system *raw.GKRuleSystem) {
+	x.inner.PerformActionWithSystem(system)
+}
+
+// Salience calls the underlying Salience.
+func (x *Rule) Salience() int {
+	return x.inner.Salience()
+}
+
+// SetSalience calls the underlying SetSalience.
+func (x *Rule) SetSalience(salience int) {
+	x.inner.SetSalience(salience)
+}
+
 func (x *Rule) asRule() *raw.GKRule { return x.inner }
+
+// Ruleable is the interface implemented by [Rule], for mocking and DI.
+type Ruleable interface {
+	Unwrap() *raw.GKRule
+	WithSalience(salience int) *Rule
+	EvaluatePredicateWithSystem(system *raw.GKRuleSystem) bool
+	PerformActionWithSystem(system *raw.GKRuleSystem)
+	Salience() int
+	SetSalience(salience int)
+}
+
+var _ Ruleable = (*Rule)(nil)
 

@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewSource() *Source {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSource")), objc.RegisterName("new"))
 	return &Source{inner: raw.HKSourceFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Source) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *Source) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Sourceable is the interface implemented by [Source], for mocking and DI.
+type Sourceable interface {
+	Unwrap() *raw.HKSource
+	Name() string
+	BundleIdentifier() string
+}
+
+var _ Sourceable = (*Source)(nil)
 

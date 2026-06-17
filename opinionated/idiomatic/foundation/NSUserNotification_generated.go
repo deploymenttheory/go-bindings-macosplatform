@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -131,18 +132,318 @@ func (x *UserNotification) WithAdditionalActions(items ...*raw.NSUserNotificatio
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *UserNotification) Title() *String {
+	_r := x.inner.Title()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *UserNotification) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *UserNotification) Subtitle() *String {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *UserNotification) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// InformativeText calls the underlying InformativeText.
+func (x *UserNotification) InformativeText() *String {
+	_r := x.inner.InformativeText()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetInformativeText calls the underlying SetInformativeText.
+func (x *UserNotification) SetInformativeText(informativeText string) {
+	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+}
+
+// ActionButtonTitle calls the underlying ActionButtonTitle.
+func (x *UserNotification) ActionButtonTitle() *String {
+	_r := x.inner.ActionButtonTitle()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetActionButtonTitle calls the underlying SetActionButtonTitle.
+func (x *UserNotification) SetActionButtonTitle(actionButtonTitle string) {
+	x.inner.SetActionButtonTitle(foundation.NSStringStringWithUTF8String(actionButtonTitle))
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *UserNotification) UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *UserNotification) SetUserInfo(userInfo *raw.NSDictionary[*raw.NSString, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// DeliveryDate calls the underlying DeliveryDate.
+func (x *UserNotification) DeliveryDate() *Date {
+	_r := x.inner.DeliveryDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// SetDeliveryDate calls the underlying SetDeliveryDate.
+func (x *UserNotification) SetDeliveryDate(deliveryDate *raw.NSDate) {
+	x.inner.SetDeliveryDate(deliveryDate)
+}
+
+// DeliveryTimeZone calls the underlying DeliveryTimeZone.
+func (x *UserNotification) DeliveryTimeZone() *TimeZone {
+	_r := x.inner.DeliveryTimeZone()
+	if _r == nil {
+		return nil
+	}
+	return &TimeZone{inner: _r}
+}
+
+// SetDeliveryTimeZone calls the underlying SetDeliveryTimeZone.
+func (x *UserNotification) SetDeliveryTimeZone(deliveryTimeZone *raw.NSTimeZone) {
+	x.inner.SetDeliveryTimeZone(deliveryTimeZone)
+}
+
+// DeliveryRepeatInterval calls the underlying DeliveryRepeatInterval.
+func (x *UserNotification) DeliveryRepeatInterval() *DateComponents {
+	_r := x.inner.DeliveryRepeatInterval()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponents{inner: _r}
+}
+
+// SetDeliveryRepeatInterval calls the underlying SetDeliveryRepeatInterval.
+func (x *UserNotification) SetDeliveryRepeatInterval(deliveryRepeatInterval *raw.NSDateComponents) {
+	x.inner.SetDeliveryRepeatInterval(deliveryRepeatInterval)
+}
+
+// ActualDeliveryDate calls the underlying ActualDeliveryDate.
+func (x *UserNotification) ActualDeliveryDate() *Date {
+	_r := x.inner.ActualDeliveryDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// IsPresented calls the underlying IsPresented.
+func (x *UserNotification) IsPresented() bool {
+	return x.inner.IsPresented()
+}
+
+// IsRemote calls the underlying IsRemote.
+func (x *UserNotification) IsRemote() bool {
+	return x.inner.IsRemote()
+}
+
+// SoundName calls the underlying SoundName.
+func (x *UserNotification) SoundName() *String {
+	_r := x.inner.SoundName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetSoundName calls the underlying SetSoundName.
+func (x *UserNotification) SetSoundName(soundName string) {
+	x.inner.SetSoundName(foundation.NSStringStringWithUTF8String(soundName))
+}
+
+// HasActionButton calls the underlying HasActionButton.
+func (x *UserNotification) HasActionButton() bool {
+	return x.inner.HasActionButton()
+}
+
+// SetHasActionButton calls the underlying SetHasActionButton.
+func (x *UserNotification) SetHasActionButton(hasActionButton bool) {
+	x.inner.SetHasActionButton(hasActionButton)
+}
+
+// ActivationType calls the underlying ActivationType.
+func (x *UserNotification) ActivationType() raw.NSUserNotificationActivationType {
+	return x.inner.ActivationType()
+}
+
+// OtherButtonTitle calls the underlying OtherButtonTitle.
+func (x *UserNotification) OtherButtonTitle() *String {
+	_r := x.inner.OtherButtonTitle()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetOtherButtonTitle calls the underlying SetOtherButtonTitle.
+func (x *UserNotification) SetOtherButtonTitle(otherButtonTitle string) {
+	x.inner.SetOtherButtonTitle(foundation.NSStringStringWithUTF8String(otherButtonTitle))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *UserNotification) Identifier() *String {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *UserNotification) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// ContentImage calls the underlying ContentImage.
+func (x *UserNotification) ContentImage() objc.ID {
+	return x.inner.ContentImage()
+}
+
+// SetContentImage calls the underlying SetContentImage.
+func (x *UserNotification) SetContentImage(contentImage objc.ID) {
+	x.inner.SetContentImage(contentImage)
+}
+
+// HasReplyButton calls the underlying HasReplyButton.
+func (x *UserNotification) HasReplyButton() bool {
+	return x.inner.HasReplyButton()
+}
+
+// SetHasReplyButton calls the underlying SetHasReplyButton.
+func (x *UserNotification) SetHasReplyButton(hasReplyButton bool) {
+	x.inner.SetHasReplyButton(hasReplyButton)
+}
+
+// ResponsePlaceholder calls the underlying ResponsePlaceholder.
+func (x *UserNotification) ResponsePlaceholder() *String {
+	_r := x.inner.ResponsePlaceholder()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetResponsePlaceholder calls the underlying SetResponsePlaceholder.
+func (x *UserNotification) SetResponsePlaceholder(responsePlaceholder string) {
+	x.inner.SetResponsePlaceholder(foundation.NSStringStringWithUTF8String(responsePlaceholder))
+}
+
+// Response calls the underlying Response.
+func (x *UserNotification) Response() *AttributedString {
+	_r := x.inner.Response()
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
 // AdditionalActions returns the collection as a Go slice.
 func (x *UserNotification) AdditionalActions() []*raw.NSUserNotificationAction {
 	arr := x.inner.AdditionalActions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSUserNotificationAction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserNotificationAction {
+		return raw.NSUserNotificationActionFromID(purego.Retain(_id))
+	})
+}
+
+// SetAdditionalActions calls the underlying SetAdditionalActions.
+func (x *UserNotification) SetAdditionalActions(additionalActions *raw.NSArray[*raw.NSUserNotificationAction]) {
+	x.inner.SetAdditionalActions(additionalActions)
+}
+
+// AdditionalActivationAction calls the underlying AdditionalActivationAction.
+func (x *UserNotification) AdditionalActivationAction() *UserNotificationAction {
+	_r := x.inner.AdditionalActivationAction()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &UserNotificationAction{inner: _r}
 }
 
 func (x *UserNotification) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UserNotificationable is the interface implemented by [UserNotification], for mocking and DI.
+type UserNotificationable interface {
+	Unwrap() *raw.NSUserNotification
+	WithTitle(title string) *UserNotification
+	WithSubtitle(subtitle string) *UserNotification
+	WithInformativeText(informativeText string) *UserNotification
+	WithActionButtonTitle(actionButtonTitle string) *UserNotification
+	WithUserInfo(userInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotification
+	WithDeliveryDate(deliveryDate DateProvider) *UserNotification
+	WithDeliveryTimeZone(deliveryTimeZone *raw.NSTimeZone) *UserNotification
+	WithDeliveryRepeatInterval(deliveryRepeatInterval *raw.NSDateComponents) *UserNotification
+	WithSoundName(soundName string) *UserNotification
+	WithHasActionButton(hasActionButton bool) *UserNotification
+	WithOtherButtonTitle(otherButtonTitle string) *UserNotification
+	WithIdentifier(identifier string) *UserNotification
+	WithContentImage(contentImage objc.ID) *UserNotification
+	WithHasReplyButton(hasReplyButton bool) *UserNotification
+	WithResponsePlaceholder(responsePlaceholder string) *UserNotification
+	WithAdditionalActions(items ...*raw.NSUserNotificationAction) *UserNotification
+	Title() *String
+	SetTitle(title string)
+	Subtitle() *String
+	SetSubtitle(subtitle string)
+	InformativeText() *String
+	SetInformativeText(informativeText string)
+	ActionButtonTitle() *String
+	SetActionButtonTitle(actionButtonTitle string)
+	UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID]
+	SetUserInfo(userInfo *raw.NSDictionary[*raw.NSString, objc.ID])
+	DeliveryDate() *Date
+	SetDeliveryDate(deliveryDate *raw.NSDate)
+	DeliveryTimeZone() *TimeZone
+	SetDeliveryTimeZone(deliveryTimeZone *raw.NSTimeZone)
+	DeliveryRepeatInterval() *DateComponents
+	SetDeliveryRepeatInterval(deliveryRepeatInterval *raw.NSDateComponents)
+	ActualDeliveryDate() *Date
+	IsPresented() bool
+	IsRemote() bool
+	SoundName() *String
+	SetSoundName(soundName string)
+	HasActionButton() bool
+	SetHasActionButton(hasActionButton bool)
+	ActivationType() raw.NSUserNotificationActivationType
+	OtherButtonTitle() *String
+	SetOtherButtonTitle(otherButtonTitle string)
+	Identifier() *String
+	SetIdentifier(identifier string)
+	ContentImage() objc.ID
+	SetContentImage(contentImage objc.ID)
+	HasReplyButton() bool
+	SetHasReplyButton(hasReplyButton bool)
+	ResponsePlaceholder() *String
+	SetResponsePlaceholder(responsePlaceholder string)
+	Response() *AttributedString
+	AdditionalActions() []*raw.NSUserNotificationAction
+	SetAdditionalActions(additionalActions *raw.NSArray[*raw.NSUserNotificationAction])
+	AdditionalActivationAction() *UserNotificationAction
+}
+
+var _ UserNotificationable = (*UserNotification)(nil)
 

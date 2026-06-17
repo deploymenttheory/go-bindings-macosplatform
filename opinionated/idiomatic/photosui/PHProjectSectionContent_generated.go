@@ -5,8 +5,10 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,11 +32,19 @@ func (x *ProjectSectionContent) Elements() []*raw.PHProjectElement {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHProjectElement, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectElement {
+		return raw.PHProjectElementFromID(purego.Retain(_id))
+	})
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *ProjectSectionContent) NumberOfColumns() int {
+	return x.inner.NumberOfColumns()
+}
+
+// AspectRatio calls the underlying AspectRatio.
+func (x *ProjectSectionContent) AspectRatio() float64 {
+	return x.inner.AspectRatio()
 }
 
 // CloudAssetIdentifiers returns the collection as a Go slice.
@@ -43,10 +53,25 @@ func (x *ProjectSectionContent) CloudAssetIdentifiers() []*photos.PHCloudIdentif
 	if arr == nil {
 		return nil
 	}
-	out := make([]*photos.PHCloudIdentifier, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *photos.PHCloudIdentifier {
+		return photos.PHCloudIdentifierFromID(purego.Retain(_id))
+	})
 }
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *ProjectSectionContent) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// ProjectSectionContentable is the interface implemented by [ProjectSectionContent], for mocking and DI.
+type ProjectSectionContentable interface {
+	Unwrap() *raw.PHProjectSectionContent
+	Elements() []*raw.PHProjectElement
+	NumberOfColumns() int
+	AspectRatio() float64
+	CloudAssetIdentifiers() []*photos.PHCloudIdentifier
+	BackgroundColor() *appkit.NSColor
+}
+
+var _ ProjectSectionContentable = (*ProjectSectionContent)(nil)
 

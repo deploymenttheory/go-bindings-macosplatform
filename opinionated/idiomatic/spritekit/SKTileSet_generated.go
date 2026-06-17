@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -80,10 +81,83 @@ func (x *TileSet) TileGroups() []*raw.SKTileGroup {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKTileGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKTileGroup {
+		return raw.SKTileGroupFromID(purego.Retain(_id))
+	})
 }
+
+// SetTileGroups calls the underlying SetTileGroups.
+func (x *TileSet) SetTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup]) {
+	x.inner.SetTileGroups(tileGroups)
+}
+
+// Name calls the underlying Name.
+func (x *TileSet) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *TileSet) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Type calls the underlying Type.
+func (x *TileSet) Type() raw.SKTileSetType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *TileSet) SetType(type_ raw.SKTileSetType) {
+	x.inner.SetType(type_)
+}
+
+// DefaultTileGroup calls the underlying DefaultTileGroup.
+func (x *TileSet) DefaultTileGroup() *TileGroup {
+	_r := x.inner.DefaultTileGroup()
+	if _r == nil {
+		return nil
+	}
+	return &TileGroup{inner: _r}
+}
+
+// SetDefaultTileGroup calls the underlying SetDefaultTileGroup.
+func (x *TileSet) SetDefaultTileGroup(defaultTileGroup *raw.SKTileGroup) {
+	x.inner.SetDefaultTileGroup(defaultTileGroup)
+}
+
+// DefaultTileSize calls the underlying DefaultTileSize.
+func (x *TileSet) DefaultTileSize() corefoundation.CGSize {
+	return x.inner.DefaultTileSize()
+}
+
+// SetDefaultTileSize calls the underlying SetDefaultTileSize.
+func (x *TileSet) SetDefaultTileSize(defaultTileSize corefoundation.CGSize) {
+	x.inner.SetDefaultTileSize(defaultTileSize)
+}
+
+// TileSetable is the interface implemented by [TileSet], for mocking and DI.
+type TileSetable interface {
+	Unwrap() *raw.SKTileSet
+	WithTileGroups(items ...*raw.SKTileGroup) *TileSet
+	WithName(name string) *TileSet
+	WithType(type_ raw.SKTileSetType) *TileSet
+	WithDefaultTileGroup(defaultTileGroup *raw.SKTileGroup) *TileSet
+	WithDefaultTileSize(defaultTileSize corefoundation.CGSize) *TileSet
+	TileGroups() []*raw.SKTileGroup
+	SetTileGroups(tileGroups *foundation.NSArray[*raw.SKTileGroup])
+	Name() string
+	SetName(name string)
+	Type() raw.SKTileSetType
+	SetType(type_ raw.SKTileSetType)
+	DefaultTileGroup() *TileGroup
+	SetDefaultTileGroup(defaultTileGroup *raw.SKTileGroup)
+	DefaultTileSize() corefoundation.CGSize
+	SetDefaultTileSize(defaultTileSize corefoundation.CGSize)
+}
+
+var _ TileSetable = (*TileSet)(nil)
 

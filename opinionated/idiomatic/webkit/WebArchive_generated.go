@@ -32,3 +32,38 @@ func NewWebArchiveWithData(data *foundation.NSData) *WebArchive {
 	return &WebArchive{inner: raw.WebArchiveFromID(_id)}
 }
 
+// MainResource calls the underlying MainResource.
+func (x *WebArchive) MainResource() *WebResource {
+	_r := x.inner.MainResource()
+	if _r == nil {
+		return nil
+	}
+	return &WebResource{inner: _r}
+}
+
+// Subresources calls the underlying Subresources.
+func (x *WebArchive) Subresources() *foundation.NSArray[objc.ID] {
+	return x.inner.Subresources()
+}
+
+// SubframeArchives calls the underlying SubframeArchives.
+func (x *WebArchive) SubframeArchives() *foundation.NSArray[objc.ID] {
+	return x.inner.SubframeArchives()
+}
+
+// Data calls the underlying Data.
+func (x *WebArchive) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// WebArchiveable is the interface implemented by [WebArchive], for mocking and DI.
+type WebArchiveable interface {
+	Unwrap() *raw.WebArchive
+	MainResource() *WebResource
+	Subresources() *foundation.NSArray[objc.ID]
+	SubframeArchives() *foundation.NSArray[objc.ID]
+	Data() *foundation.NSData
+}
+
+var _ WebArchiveable = (*WebArchive)(nil)
+

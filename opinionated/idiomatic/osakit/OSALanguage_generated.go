@@ -7,6 +7,7 @@ package osakit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,77 @@ func NewLanguageWithComponent(component *carboncore.ComponentRecord) *Language {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponent:"), component)
 	return &Language{inner: raw.OSALanguageFromID(_id)}
 }
+
+// SharedLanguageInstance calls the underlying SharedLanguageInstance.
+func (x *Language) SharedLanguageInstance() *LanguageInstance {
+	_r := x.inner.SharedLanguageInstance()
+	if _r == nil {
+		return nil
+	}
+	return &LanguageInstance{inner: _r}
+}
+
+// ComponentInstance calls the underlying ComponentInstance.
+func (x *Language) ComponentInstance() *carboncore.ComponentInstanceRecord {
+	return x.inner.ComponentInstance()
+}
+
+// Name calls the underlying Name.
+func (x *Language) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Info calls the underlying Info.
+func (x *Language) Info() string {
+	_r := x.inner.Info()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *Language) Type() uint {
+	return x.inner.Type()
+}
+
+// SubType calls the underlying SubType.
+func (x *Language) SubType() uint {
+	return x.inner.SubType()
+}
+
+// Manufacturer calls the underlying Manufacturer.
+func (x *Language) Manufacturer() uint {
+	return x.inner.Manufacturer()
+}
+
+// Features calls the underlying Features.
+func (x *Language) Features() raw.OSALanguageFeatures {
+	return x.inner.Features()
+}
+
+// IsThreadSafe calls the underlying IsThreadSafe.
+func (x *Language) IsThreadSafe() bool {
+	return x.inner.IsThreadSafe()
+}
+
+// Languageable is the interface implemented by [Language], for mocking and DI.
+type Languageable interface {
+	Unwrap() *raw.OSALanguage
+	SharedLanguageInstance() *LanguageInstance
+	ComponentInstance() *carboncore.ComponentInstanceRecord
+	Name() string
+	Info() string
+	Type() uint
+	SubType() uint
+	Manufacturer() uint
+	Features() raw.OSALanguageFeatures
+	IsThreadSafe() bool
+}
+
+var _ Languageable = (*Language)(nil)
 

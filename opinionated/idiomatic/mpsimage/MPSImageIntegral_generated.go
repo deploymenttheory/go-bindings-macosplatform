@@ -25,3 +25,10 @@ func NewImageIntegral() *ImageIntegral {
 
 func (x *ImageIntegral) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
+// ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
+type ImageIntegralable interface {
+	Unwrap() *raw.MPSImageIntegral
+}
+
+var _ ImageIntegralable = (*ImageIntegral)(nil)
+

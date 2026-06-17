@@ -6,8 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TextLineFragment wraps [raw.NSTextLineFragment] with a fluent Go API.
@@ -38,4 +40,59 @@ func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes *fo
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:range:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), attributes.Ptr(), range_)
 	return &TextLineFragment{inner: raw.NSTextLineFragmentFromID(_id)}
 }
+
+// DrawAtPointInContext calls the underlying DrawAtPointInContext.
+func (x *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
+	x.inner.DrawAtPointInContext(point, context_)
+}
+
+// LocationForCharacterAtIndex calls the underlying LocationForCharacterAtIndex.
+func (x *TextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
+	return x.inner.LocationForCharacterAtIndex(index)
+}
+
+// CharacterIndexForPoint calls the underlying CharacterIndexForPoint.
+func (x *TextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
+	return x.inner.CharacterIndexForPoint(point)
+}
+
+// FractionOfDistanceThroughGlyphForPoint calls the underlying FractionOfDistanceThroughGlyphForPoint.
+func (x *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
+	return x.inner.FractionOfDistanceThroughGlyphForPoint(point)
+}
+
+// AttributedString calls the underlying AttributedString.
+func (x *TextLineFragment) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// CharacterRange calls the underlying CharacterRange.
+func (x *TextLineFragment) CharacterRange() foundation.NSRange {
+	return x.inner.CharacterRange()
+}
+
+// TypographicBounds calls the underlying TypographicBounds.
+func (x *TextLineFragment) TypographicBounds() corefoundation.CGRect {
+	return x.inner.TypographicBounds()
+}
+
+// GlyphOrigin calls the underlying GlyphOrigin.
+func (x *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
+	return x.inner.GlyphOrigin()
+}
+
+// TextLineFragmentable is the interface implemented by [TextLineFragment], for mocking and DI.
+type TextLineFragmentable interface {
+	Unwrap() *raw.NSTextLineFragment
+	DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer)
+	LocationForCharacterAtIndex(index int) corefoundation.CGPoint
+	CharacterIndexForPoint(point corefoundation.CGPoint) int
+	FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64
+	AttributedString() *foundation.NSAttributedString
+	CharacterRange() foundation.NSRange
+	TypographicBounds() corefoundation.CGRect
+	GlyphOrigin() corefoundation.CGPoint
+}
+
+var _ TextLineFragmentable = (*TextLineFragment)(nil)
 

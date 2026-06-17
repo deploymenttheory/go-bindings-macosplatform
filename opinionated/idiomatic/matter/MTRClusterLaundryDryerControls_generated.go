@@ -25,7 +25,68 @@ func NewMTRClusterLaundryDryerControlsWithDeviceEndpointIDQueue(device *raw.MTRD
 	return &MTRClusterLaundryDryerControls{inner: raw.MTRClusterLaundryDryerControlsFromID(_id)}
 }
 
+// ReadAttributeSupportedDrynessLevelsWithParams calls the underlying ReadAttributeSupportedDrynessLevelsWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeSupportedDrynessLevelsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportedDrynessLevelsWithParams(params)
+}
+
+// ReadAttributeSelectedDrynessLevelWithParams calls the underlying ReadAttributeSelectedDrynessLevelWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeSelectedDrynessLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSelectedDrynessLevelWithParams(params)
+}
+
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval calls the underlying WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval.
+func (x *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams.
+func (x *MTRClusterLaundryDryerControls) WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterLaundryDryerControls) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterLaundryDryerControls) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterLaundryDryerControls) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterLaundryDryerControlsable is the interface implemented by [MTRClusterLaundryDryerControls], for mocking and DI.
+type MTRClusterLaundryDryerControlsable interface {
+	Unwrap() *raw.MTRClusterLaundryDryerControls
+	ReadAttributeSupportedDrynessLevelsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeSelectedDrynessLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeSelectedDrynessLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeSelectedDrynessLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterLaundryDryerControlsable = (*MTRClusterLaundryDryerControls)(nil)
 

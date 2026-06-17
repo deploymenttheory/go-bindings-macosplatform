@@ -30,3 +30,23 @@ func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(v
 	return x
 }
 
+// ValveFault calls the underlying ValveFault.
+func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() *foundation.NSNumber {
+	return x.inner.ValveFault()
+}
+
+// SetValveFault calls the underlying SetValveFault.
+func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) SetValveFault(valveFault *foundation.NSNumber) {
+	x.inner.SetValveFault(valveFault)
+}
+
+// MTRValveConfigurationAndControlClusterValveFaultEventable is the interface implemented by [MTRValveConfigurationAndControlClusterValveFaultEvent], for mocking and DI.
+type MTRValveConfigurationAndControlClusterValveFaultEventable interface {
+	Unwrap() *raw.MTRValveConfigurationAndControlClusterValveFaultEvent
+	WithValveFault(valveFault *foundation.NSNumber) *MTRValveConfigurationAndControlClusterValveFaultEvent
+	ValveFault() *foundation.NSNumber
+	SetValveFault(valveFault *foundation.NSNumber)
+}
+
+var _ MTRValveConfigurationAndControlClusterValveFaultEventable = (*MTRValveConfigurationAndControlClusterValveFaultEvent)(nil)
+

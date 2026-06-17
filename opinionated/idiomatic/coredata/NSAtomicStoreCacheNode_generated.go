@@ -31,3 +31,33 @@ func (x *AtomicStoreCacheNode) WithPropertyCache(propertyCache *foundation.NSMut
 	return x
 }
 
+// ObjectID calls the underlying ObjectID.
+func (x *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
+	_r := x.inner.ObjectID()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// PropertyCache calls the underlying PropertyCache.
+func (x *AtomicStoreCacheNode) PropertyCache() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PropertyCache()
+}
+
+// SetPropertyCache calls the underlying SetPropertyCache.
+func (x *AtomicStoreCacheNode) SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPropertyCache(propertyCache)
+}
+
+// AtomicStoreCacheNodeable is the interface implemented by [AtomicStoreCacheNode], for mocking and DI.
+type AtomicStoreCacheNodeable interface {
+	Unwrap() *raw.NSAtomicStoreCacheNode
+	WithPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AtomicStoreCacheNode
+	ObjectID() *ManagedObjectID
+	PropertyCache() *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
+	SetPropertyCache(propertyCache *foundation.NSMutableDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ AtomicStoreCacheNodeable = (*AtomicStoreCacheNode)(nil)
+

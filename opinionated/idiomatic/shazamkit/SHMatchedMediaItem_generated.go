@@ -23,5 +23,36 @@ func NewMatchedMediaItem() *MatchedMediaItem {
 	return &MatchedMediaItem{inner: raw.SHMatchedMediaItemFromID(_id)}
 }
 
+// FrequencySkew calls the underlying FrequencySkew.
+func (x *MatchedMediaItem) FrequencySkew() float32 {
+	return x.inner.FrequencySkew()
+}
+
+// MatchOffset calls the underlying MatchOffset.
+func (x *MatchedMediaItem) MatchOffset() float64 {
+	return x.inner.MatchOffset()
+}
+
+// PredictedCurrentMatchOffset calls the underlying PredictedCurrentMatchOffset.
+func (x *MatchedMediaItem) PredictedCurrentMatchOffset() float64 {
+	return x.inner.PredictedCurrentMatchOffset()
+}
+
+// Confidence calls the underlying Confidence.
+func (x *MatchedMediaItem) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
 func (x *MatchedMediaItem) asMediaItem() *raw.SHMediaItem { return &x.inner.SHMediaItem }
+
+// MatchedMediaItemable is the interface implemented by [MatchedMediaItem], for mocking and DI.
+type MatchedMediaItemable interface {
+	Unwrap() *raw.SHMatchedMediaItem
+	FrequencySkew() float32
+	MatchOffset() float64
+	PredictedCurrentMatchOffset() float64
+	Confidence() float32
+}
+
+var _ MatchedMediaItemable = (*MatchedMediaItem)(nil)
 

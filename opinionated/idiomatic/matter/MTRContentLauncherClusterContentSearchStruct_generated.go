@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewMTRContentLauncherClusterContentSearchStruct() *MTRContentLauncherCluste
 	return &MTRContentLauncherClusterContentSearchStruct{inner: raw.MTRContentLauncherClusterContentSearchStructFromID(_id)}
 }
 
+// ParameterList calls the underlying ParameterList.
+func (x *MTRContentLauncherClusterContentSearchStruct) ParameterList() *foundation.NSArray[objc.ID] {
+	return x.inner.ParameterList()
+}
+
+// SetParameterList calls the underlying SetParameterList.
+func (x *MTRContentLauncherClusterContentSearchStruct) SetParameterList(parameterList *foundation.NSArray[objc.ID]) {
+	x.inner.SetParameterList(parameterList)
+}
+
 func (x *MTRContentLauncherClusterContentSearchStruct) asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct { return x.inner }
+
+// MTRContentLauncherClusterContentSearchStructable is the interface implemented by [MTRContentLauncherClusterContentSearchStruct], for mocking and DI.
+type MTRContentLauncherClusterContentSearchStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterContentSearchStruct
+	ParameterList() *foundation.NSArray[objc.ID]
+	SetParameterList(parameterList *foundation.NSArray[objc.ID])
+}
+
+var _ MTRContentLauncherClusterContentSearchStructable = (*MTRContentLauncherClusterContentSearchStruct)(nil)
 

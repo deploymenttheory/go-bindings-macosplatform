@@ -25,3 +25,10 @@ func NewNull() *Null {
 
 func (x *Null) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// Nullable is the interface implemented by [Null], for mocking and DI.
+type Nullable interface {
+	Unwrap() *raw.NSNull
+}
+
+var _ Nullable = (*Null)(nil)
+

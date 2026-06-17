@@ -35,3 +35,52 @@ func (x *AudioEnvironmentReverbParameters) WithLevel(level float32) *AudioEnviro
 	return x
 }
 
+// LoadFactoryReverbPreset calls the underlying LoadFactoryReverbPreset.
+func (x *AudioEnvironmentReverbParameters) LoadFactoryReverbPreset(preset raw.AVAudioUnitReverbPreset) {
+	x.inner.LoadFactoryReverbPreset(preset)
+}
+
+// Enable calls the underlying Enable.
+func (x *AudioEnvironmentReverbParameters) Enable() bool {
+	return x.inner.Enable()
+}
+
+// SetEnable calls the underlying SetEnable.
+func (x *AudioEnvironmentReverbParameters) SetEnable(enable bool) {
+	x.inner.SetEnable(enable)
+}
+
+// Level calls the underlying Level.
+func (x *AudioEnvironmentReverbParameters) Level() float32 {
+	return x.inner.Level()
+}
+
+// SetLevel calls the underlying SetLevel.
+func (x *AudioEnvironmentReverbParameters) SetLevel(level float32) {
+	x.inner.SetLevel(level)
+}
+
+// FilterParameters calls the underlying FilterParameters.
+func (x *AudioEnvironmentReverbParameters) FilterParameters() *AudioUnitEQFilterParameters {
+	_r := x.inner.FilterParameters()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnitEQFilterParameters{inner: _r}
+}
+
+// AudioEnvironmentReverbParametersable is the interface implemented by [AudioEnvironmentReverbParameters], for mocking and DI.
+type AudioEnvironmentReverbParametersable interface {
+	Unwrap() *raw.AVAudioEnvironmentReverbParameters
+	WithEnable(enable bool) *AudioEnvironmentReverbParameters
+	WithLevel(level float32) *AudioEnvironmentReverbParameters
+	LoadFactoryReverbPreset(preset raw.AVAudioUnitReverbPreset)
+	Enable() bool
+	SetEnable(enable bool)
+	Level() float32
+	SetLevel(level float32)
+	FilterParameters() *AudioUnitEQFilterParameters
+}
+
+var _ AudioEnvironmentReverbParametersable = (*AudioEnvironmentReverbParameters)(nil)
+

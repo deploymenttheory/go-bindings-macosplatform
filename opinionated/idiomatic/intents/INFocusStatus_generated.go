@@ -25,3 +25,16 @@ func NewFocusStatusWithIsFocused(isFocused *foundation.NSNumber) *FocusStatus {
 	return &FocusStatus{inner: raw.INFocusStatusFromID(_id)}
 }
 
+// IsFocused calls the underlying IsFocused.
+func (x *FocusStatus) IsFocused() *foundation.NSNumber {
+	return x.inner.IsFocused()
+}
+
+// FocusStatusable is the interface implemented by [FocusStatus], for mocking and DI.
+type FocusStatusable interface {
+	Unwrap() *raw.INFocusStatus
+	IsFocused() *foundation.NSNumber
+}
+
+var _ FocusStatusable = (*FocusStatus)(nil)
+

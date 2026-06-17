@@ -23,3 +23,23 @@ func NewRenderTask() *RenderTask {
 	return &RenderTask{inner: raw.CIRenderTaskFromID(_id)}
 }
 
+// WaitUntilCompletedAndReturnError calls the underlying WaitUntilCompletedAndReturnError.
+func (x *RenderTask) WaitUntilCompletedAndReturnError() (*RenderInfo, error) {
+	_r, _err := x.inner.WaitUntilCompletedAndReturnError()
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RenderInfo{inner: _r}, nil
+}
+
+// RenderTaskable is the interface implemented by [RenderTask], for mocking and DI.
+type RenderTaskable interface {
+	Unwrap() *raw.CIRenderTask
+	WaitUntilCompletedAndReturnError() (*RenderInfo, error)
+}
+
+var _ RenderTaskable = (*RenderTask)(nil)
+

@@ -48,3 +48,62 @@ func (x *MTRDoorLockClusterClearYearDayScheduleParams) WithServerSideProcessingT
 	return x
 }
 
+// YearDayIndex calls the underlying YearDayIndex.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) YearDayIndex() *foundation.NSNumber {
+	return x.inner.YearDayIndex()
+}
+
+// SetYearDayIndex calls the underlying SetYearDayIndex.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetYearDayIndex(yearDayIndex *foundation.NSNumber) {
+	x.inner.SetYearDayIndex(yearDayIndex)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearYearDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterClearYearDayScheduleParamsable is the interface implemented by [MTRDoorLockClusterClearYearDayScheduleParams], for mocking and DI.
+type MTRDoorLockClusterClearYearDayScheduleParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterClearYearDayScheduleParams
+	WithYearDayIndex(yearDayIndex *foundation.NSNumber) *MTRDoorLockClusterClearYearDayScheduleParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterClearYearDayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearYearDayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearYearDayScheduleParams
+	YearDayIndex() *foundation.NSNumber
+	SetYearDayIndex(yearDayIndex *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterClearYearDayScheduleParamsable = (*MTRDoorLockClusterClearYearDayScheduleParams)(nil)
+

@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // XPCInterface wraps [raw.NSXPCInterface] with a fluent Go API.
@@ -23,5 +24,64 @@ func NewXPCInterface() *XPCInterface {
 	return &XPCInterface{inner: raw.NSXPCInterfaceFromID(_id)}
 }
 
+// SetClassesForSelectorArgumentIndexOfReply calls the underlying SetClassesForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool) {
+	x.inner.SetClassesForSelectorArgumentIndexOfReply(classes, sel, arg, ofReply)
+}
+
+// ClassesForSelectorArgumentIndexOfReply calls the underlying ClassesForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class] {
+	return x.inner.ClassesForSelectorArgumentIndexOfReply(sel, arg, ofReply)
+}
+
+// SetInterfaceForSelectorArgumentIndexOfReply calls the underlying SetInterfaceForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool) {
+	x.inner.SetInterfaceForSelectorArgumentIndexOfReply(ifc, sel, arg, ofReply)
+}
+
+// InterfaceForSelectorArgumentIndexOfReply calls the underlying InterfaceForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *XPCInterface {
+	_r := x.inner.InterfaceForSelectorArgumentIndexOfReply(sel, arg, ofReply)
+	if _r == nil {
+		return nil
+	}
+	return &XPCInterface{inner: _r}
+}
+
+// SetXPCTypeForSelectorArgumentIndexOfReply calls the underlying SetXPCTypeForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) SetXPCTypeForSelectorArgumentIndexOfReply(type_ unsafe.Pointer, sel objc.SEL, arg uint, ofReply bool) {
+	x.inner.SetXPCTypeForSelectorArgumentIndexOfReply(type_, sel, arg, ofReply)
+}
+
+// XPCTypeForSelectorArgumentIndexOfReply calls the underlying XPCTypeForSelectorArgumentIndexOfReply.
+func (x *XPCInterface) XPCTypeForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) unsafe.Pointer {
+	return x.inner.XPCTypeForSelectorArgumentIndexOfReply(sel, arg, ofReply)
+}
+
+// Protocol calls the underlying Protocol.
+func (x *XPCInterface) Protocol() unsafe.Pointer {
+	return x.inner.Protocol()
+}
+
+// SetProtocol calls the underlying SetProtocol.
+func (x *XPCInterface) SetProtocol(protocol unsafe.Pointer) {
+	x.inner.SetProtocol(protocol)
+}
+
 func (x *XPCInterface) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// XPCInterfaceable is the interface implemented by [XPCInterface], for mocking and DI.
+type XPCInterfaceable interface {
+	Unwrap() *raw.NSXPCInterface
+	SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool)
+	ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class]
+	SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool)
+	InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *XPCInterface
+	SetXPCTypeForSelectorArgumentIndexOfReply(type_ unsafe.Pointer, sel objc.SEL, arg uint, ofReply bool)
+	XPCTypeForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) unsafe.Pointer
+	Protocol() unsafe.Pointer
+	SetProtocol(protocol unsafe.Pointer)
+}
+
+var _ XPCInterfaceable = (*XPCInterface)(nil)
 

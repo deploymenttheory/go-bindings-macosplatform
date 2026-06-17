@@ -42,5 +42,51 @@ func (x *MTRAccessControlClusterAccessControlTargetStruct) WithDeviceType(device
 	return x
 }
 
+// Cluster calls the underlying Cluster.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// SetCluster calls the underlying SetCluster.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) SetCluster(cluster *foundation.NSNumber) {
+	x.inner.SetCluster(cluster)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// DeviceType calls the underlying DeviceType.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() *foundation.NSNumber {
+	return x.inner.DeviceType()
+}
+
+// SetDeviceType calls the underlying SetDeviceType.
+func (x *MTRAccessControlClusterAccessControlTargetStruct) SetDeviceType(deviceType *foundation.NSNumber) {
+	x.inner.SetDeviceType(deviceType)
+}
+
 func (x *MTRAccessControlClusterAccessControlTargetStruct) asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct { return x.inner }
+
+// MTRAccessControlClusterAccessControlTargetStructable is the interface implemented by [MTRAccessControlClusterAccessControlTargetStruct], for mocking and DI.
+type MTRAccessControlClusterAccessControlTargetStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessControlTargetStruct
+	WithCluster(cluster *foundation.NSNumber) *MTRAccessControlClusterAccessControlTargetStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRAccessControlClusterAccessControlTargetStruct
+	WithDeviceType(deviceType *foundation.NSNumber) *MTRAccessControlClusterAccessControlTargetStruct
+	Cluster() *foundation.NSNumber
+	SetCluster(cluster *foundation.NSNumber)
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+	DeviceType() *foundation.NSNumber
+	SetDeviceType(deviceType *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessControlTargetStructable = (*MTRAccessControlClusterAccessControlTargetStruct)(nil)
 

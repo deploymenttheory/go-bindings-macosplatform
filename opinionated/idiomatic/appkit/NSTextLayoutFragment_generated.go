@@ -6,8 +6,11 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TextLayoutFragment wraps [raw.NSTextLayoutFragment] with a fluent Go API.
@@ -38,17 +41,120 @@ func (x *TextLayoutFragment) WithLayoutQueue(layoutQueue *foundation.NSOperation
 	return x
 }
 
+// TextLineFragmentForVerticalOffsetRequiresExactMatch calls the underlying TextLineFragmentForVerticalOffsetRequiresExactMatch.
+func (x *TextLayoutFragment) TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment {
+	_r := x.inner.TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset, requiresExactMatch)
+	if _r == nil {
+		return nil
+	}
+	return &TextLineFragment{inner: _r}
+}
+
+// TextLineFragmentForTextLocationIsUpstreamAffinity calls the underlying TextLineFragmentForTextLocationIsUpstreamAffinity.
+func (x *TextLayoutFragment) TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation raw.NSTextLocation, isUpstreamAffinity bool) *TextLineFragment {
+	_r := x.inner.TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation, isUpstreamAffinity)
+	if _r == nil {
+		return nil
+	}
+	return &TextLineFragment{inner: _r}
+}
+
+// InvalidateLayout calls the underlying InvalidateLayout.
+func (x *TextLayoutFragment) InvalidateLayout() {
+	x.inner.InvalidateLayout()
+}
+
+// DrawAtPointInContext calls the underlying DrawAtPointInContext.
+func (x *TextLayoutFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer) {
+	x.inner.DrawAtPointInContext(point, context_)
+}
+
+// FrameForTextAttachmentAtLocation calls the underlying FrameForTextAttachmentAtLocation.
+func (x *TextLayoutFragment) FrameForTextAttachmentAtLocation(location raw.NSTextLocation) corefoundation.CGRect {
+	return x.inner.FrameForTextAttachmentAtLocation(location)
+}
+
+// TextLayoutManager calls the underlying TextLayoutManager.
+func (x *TextLayoutFragment) TextLayoutManager() *TextLayoutManager {
+	_r := x.inner.TextLayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextLayoutManager{inner: _r}
+}
+
+// TextElement calls the underlying TextElement.
+func (x *TextLayoutFragment) TextElement() *TextElement {
+	_r := x.inner.TextElement()
+	if _r == nil {
+		return nil
+	}
+	return &TextElement{inner: _r}
+}
+
+// RangeInElement calls the underlying RangeInElement.
+func (x *TextLayoutFragment) RangeInElement() *TextRange {
+	_r := x.inner.RangeInElement()
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
 // TextLineFragments returns the collection as a Go slice.
 func (x *TextLayoutFragment) TextLineFragments() []*raw.NSTextLineFragment {
 	arr := x.inner.TextLineFragments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextLineFragment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextLineFragment {
+		return raw.NSTextLineFragmentFromID(purego.Retain(_id))
+	})
+}
+
+// LayoutQueue calls the underlying LayoutQueue.
+func (x *TextLayoutFragment) LayoutQueue() *foundation.NSOperationQueue {
+	return x.inner.LayoutQueue()
+}
+
+// SetLayoutQueue calls the underlying SetLayoutQueue.
+func (x *TextLayoutFragment) SetLayoutQueue(layoutQueue *foundation.NSOperationQueue) {
+	x.inner.SetLayoutQueue(layoutQueue)
+}
+
+// State calls the underlying State.
+func (x *TextLayoutFragment) State() raw.NSTextLayoutFragmentState {
+	return x.inner.State()
+}
+
+// LayoutFragmentFrame calls the underlying LayoutFragmentFrame.
+func (x *TextLayoutFragment) LayoutFragmentFrame() corefoundation.CGRect {
+	return x.inner.LayoutFragmentFrame()
+}
+
+// RenderingSurfaceBounds calls the underlying RenderingSurfaceBounds.
+func (x *TextLayoutFragment) RenderingSurfaceBounds() corefoundation.CGRect {
+	return x.inner.RenderingSurfaceBounds()
+}
+
+// LeadingPadding calls the underlying LeadingPadding.
+func (x *TextLayoutFragment) LeadingPadding() float64 {
+	return x.inner.LeadingPadding()
+}
+
+// TrailingPadding calls the underlying TrailingPadding.
+func (x *TextLayoutFragment) TrailingPadding() float64 {
+	return x.inner.TrailingPadding()
+}
+
+// TopMargin calls the underlying TopMargin.
+func (x *TextLayoutFragment) TopMargin() float64 {
+	return x.inner.TopMargin()
+}
+
+// BottomMargin calls the underlying BottomMargin.
+func (x *TextLayoutFragment) BottomMargin() float64 {
+	return x.inner.BottomMargin()
 }
 
 // TextAttachmentViewProviders returns the collection as a Go slice.
@@ -57,10 +163,35 @@ func (x *TextLayoutFragment) TextAttachmentViewProviders() []*raw.NSTextAttachme
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextAttachmentViewProvider, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextAttachmentViewProvider {
+		return raw.NSTextAttachmentViewProviderFromID(purego.Retain(_id))
+	})
 }
+
+// TextLayoutFragmentable is the interface implemented by [TextLayoutFragment], for mocking and DI.
+type TextLayoutFragmentable interface {
+	Unwrap() *raw.NSTextLayoutFragment
+	WithLayoutQueue(layoutQueue *foundation.NSOperationQueue) *TextLayoutFragment
+	TextLineFragmentForVerticalOffsetRequiresExactMatch(verticalOffset float64, requiresExactMatch bool) *TextLineFragment
+	TextLineFragmentForTextLocationIsUpstreamAffinity(textLocation raw.NSTextLocation, isUpstreamAffinity bool) *TextLineFragment
+	InvalidateLayout()
+	DrawAtPointInContext(point corefoundation.CGPoint, context_ unsafe.Pointer)
+	FrameForTextAttachmentAtLocation(location raw.NSTextLocation) corefoundation.CGRect
+	TextLayoutManager() *TextLayoutManager
+	TextElement() *TextElement
+	RangeInElement() *TextRange
+	TextLineFragments() []*raw.NSTextLineFragment
+	LayoutQueue() *foundation.NSOperationQueue
+	SetLayoutQueue(layoutQueue *foundation.NSOperationQueue)
+	State() raw.NSTextLayoutFragmentState
+	LayoutFragmentFrame() corefoundation.CGRect
+	RenderingSurfaceBounds() corefoundation.CGRect
+	LeadingPadding() float64
+	TrailingPadding() float64
+	TopMargin() float64
+	BottomMargin() float64
+	TextAttachmentViewProviders() []*raw.NSTextAttachmentViewProvider
+}
+
+var _ TextLayoutFragmentable = (*TextLayoutFragment)(nil)
 

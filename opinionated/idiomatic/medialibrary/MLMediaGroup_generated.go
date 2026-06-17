@@ -5,7 +5,10 @@
 package medialibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +26,89 @@ func NewMediaGroup() *MediaGroup {
 	return &MediaGroup{inner: raw.MLMediaGroupFromID(_id)}
 }
 
+// MediaLibrary calls the underlying MediaLibrary.
+func (x *MediaGroup) MediaLibrary() *MediaLibrary {
+	_r := x.inner.MediaLibrary()
+	if _r == nil {
+		return nil
+	}
+	return &MediaLibrary{inner: _r}
+}
+
+// Parent calls the underlying Parent.
+func (x *MediaGroup) Parent() *MediaGroup {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &MediaGroup{inner: _r}
+}
+
+// MediaSourceIdentifier calls the underlying MediaSourceIdentifier.
+func (x *MediaGroup) MediaSourceIdentifier() string {
+	_r := x.inner.MediaSourceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *MediaGroup) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *MediaGroup) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TypeIdentifier calls the underlying TypeIdentifier.
+func (x *MediaGroup) TypeIdentifier() string {
+	_r := x.inner.TypeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Attributes calls the underlying Attributes.
+func (x *MediaGroup) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Attributes()
+}
+
 // ChildGroups returns the collection as a Go slice.
 func (x *MediaGroup) ChildGroups() []*raw.MLMediaGroup {
 	arr := x.inner.ChildGroups()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLMediaGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLMediaGroup {
+		return raw.MLMediaGroupFromID(purego.Retain(_id))
+	})
+}
+
+// URL calls the underlying URL.
+func (x *MediaGroup) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// ModificationDate calls the underlying ModificationDate.
+func (x *MediaGroup) ModificationDate() *foundation.NSDate {
+	return x.inner.ModificationDate()
+}
+
+// IconImage calls the underlying IconImage.
+func (x *MediaGroup) IconImage() *appkit.NSImage {
+	return x.inner.IconImage()
 }
 
 // MediaObjects returns the collection as a Go slice.
@@ -42,10 +117,27 @@ func (x *MediaGroup) MediaObjects() []*raw.MLMediaObject {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLMediaObject, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLMediaObject {
+		return raw.MLMediaObjectFromID(purego.Retain(_id))
+	})
 }
+
+// MediaGroupable is the interface implemented by [MediaGroup], for mocking and DI.
+type MediaGroupable interface {
+	Unwrap() *raw.MLMediaGroup
+	MediaLibrary() *MediaLibrary
+	Parent() *MediaGroup
+	MediaSourceIdentifier() string
+	Name() string
+	Identifier() string
+	TypeIdentifier() string
+	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ChildGroups() []*raw.MLMediaGroup
+	URL() *foundation.NSURL
+	ModificationDate() *foundation.NSDate
+	IconImage() *appkit.NSImage
+	MediaObjects() []*raw.MLMediaObject
+}
+
+var _ MediaGroupable = (*MediaGroup)(nil)
 

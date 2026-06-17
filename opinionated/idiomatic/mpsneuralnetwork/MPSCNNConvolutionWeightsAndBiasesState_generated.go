@@ -39,3 +39,34 @@ func NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesO
 	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
 }
 
+// Weights calls the underlying Weights.
+func (x *CNNConvolutionWeightsAndBiasesState) Weights() metal.MTLBuffer {
+	return x.inner.Weights()
+}
+
+// Biases calls the underlying Biases.
+func (x *CNNConvolutionWeightsAndBiasesState) Biases() metal.MTLBuffer {
+	return x.inner.Biases()
+}
+
+// WeightsOffset calls the underlying WeightsOffset.
+func (x *CNNConvolutionWeightsAndBiasesState) WeightsOffset() uint {
+	return x.inner.WeightsOffset()
+}
+
+// BiasesOffset calls the underlying BiasesOffset.
+func (x *CNNConvolutionWeightsAndBiasesState) BiasesOffset() uint {
+	return x.inner.BiasesOffset()
+}
+
+// CNNConvolutionWeightsAndBiasesStateable is the interface implemented by [CNNConvolutionWeightsAndBiasesState], for mocking and DI.
+type CNNConvolutionWeightsAndBiasesStateable interface {
+	Unwrap() *raw.MPSCNNConvolutionWeightsAndBiasesState
+	Weights() metal.MTLBuffer
+	Biases() metal.MTLBuffer
+	WeightsOffset() uint
+	BiasesOffset() uint
+}
+
+var _ CNNConvolutionWeightsAndBiasesStateable = (*CNNConvolutionWeightsAndBiasesState)(nil)
+

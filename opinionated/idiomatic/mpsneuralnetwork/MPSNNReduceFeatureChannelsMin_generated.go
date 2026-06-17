@@ -37,3 +37,10 @@ func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *raw.MPSNNReduceUnary { r
 
 func (x *NNReduceFeatureChannelsMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceFeatureChannelsMinable is the interface implemented by [NNReduceFeatureChannelsMin], for mocking and DI.
+type NNReduceFeatureChannelsMinable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsMin
+}
+
+var _ NNReduceFeatureChannelsMinable = (*NNReduceFeatureChannelsMin)(nil)
+

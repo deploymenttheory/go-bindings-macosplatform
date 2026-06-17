@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,119 @@ func NewArgument() *Argument {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLArgument")), objc.RegisterName("new"))
 	return &Argument{inner: raw.MTLArgumentFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Argument) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *Argument) Type() raw.MTLArgumentType {
+	return x.inner.Type()
+}
+
+// Access calls the underlying Access.
+func (x *Argument) Access() raw.MTLBindingAccess {
+	return x.inner.Access()
+}
+
+// Index calls the underlying Index.
+func (x *Argument) Index() uint {
+	return x.inner.Index()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Argument) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// BufferAlignment calls the underlying BufferAlignment.
+func (x *Argument) BufferAlignment() uint {
+	return x.inner.BufferAlignment()
+}
+
+// BufferDataSize calls the underlying BufferDataSize.
+func (x *Argument) BufferDataSize() uint {
+	return x.inner.BufferDataSize()
+}
+
+// BufferDataType calls the underlying BufferDataType.
+func (x *Argument) BufferDataType() raw.MTLDataType {
+	return x.inner.BufferDataType()
+}
+
+// BufferStructType calls the underlying BufferStructType.
+func (x *Argument) BufferStructType() *StructType {
+	_r := x.inner.BufferStructType()
+	if _r == nil {
+		return nil
+	}
+	return &StructType{inner: _r}
+}
+
+// BufferPointerType calls the underlying BufferPointerType.
+func (x *Argument) BufferPointerType() *PointerType {
+	_r := x.inner.BufferPointerType()
+	if _r == nil {
+		return nil
+	}
+	return &PointerType{inner: _r}
+}
+
+// ThreadgroupMemoryAlignment calls the underlying ThreadgroupMemoryAlignment.
+func (x *Argument) ThreadgroupMemoryAlignment() uint {
+	return x.inner.ThreadgroupMemoryAlignment()
+}
+
+// ThreadgroupMemoryDataSize calls the underlying ThreadgroupMemoryDataSize.
+func (x *Argument) ThreadgroupMemoryDataSize() uint {
+	return x.inner.ThreadgroupMemoryDataSize()
+}
+
+// TextureType calls the underlying TextureType.
+func (x *Argument) TextureType() raw.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// TextureDataType calls the underlying TextureDataType.
+func (x *Argument) TextureDataType() raw.MTLDataType {
+	return x.inner.TextureDataType()
+}
+
+// IsDepthTexture calls the underlying IsDepthTexture.
+func (x *Argument) IsDepthTexture() bool {
+	return x.inner.IsDepthTexture()
+}
+
+// ArrayLength calls the underlying ArrayLength.
+func (x *Argument) ArrayLength() uint {
+	return x.inner.ArrayLength()
+}
+
+// Argumentable is the interface implemented by [Argument], for mocking and DI.
+type Argumentable interface {
+	Unwrap() *raw.MTLArgument
+	Name() string
+	Type() raw.MTLArgumentType
+	Access() raw.MTLBindingAccess
+	Index() uint
+	IsActive() bool
+	BufferAlignment() uint
+	BufferDataSize() uint
+	BufferDataType() raw.MTLDataType
+	BufferStructType() *StructType
+	BufferPointerType() *PointerType
+	ThreadgroupMemoryAlignment() uint
+	ThreadgroupMemoryDataSize() uint
+	TextureType() raw.MTLTextureType
+	TextureDataType() raw.MTLDataType
+	IsDepthTexture() bool
+	ArrayLength() uint
+}
+
+var _ Argumentable = (*Argument)(nil)
 

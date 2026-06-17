@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 	return &CNNDropoutGradientState{inner: raw.MPSCNNDropoutGradientStateFromID(_id)}
 }
 
+// MaskData calls the underlying MaskData.
+func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
+	return x.inner.MaskData()
+}
+
 func (x *CNNDropoutGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSNNGradientState }
+
+// CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
+type CNNDropoutGradientStateable interface {
+	Unwrap() *raw.MPSCNNDropoutGradientState
+	MaskData() *foundation.NSData
+}
+
+var _ CNNDropoutGradientStateable = (*CNNDropoutGradientState)(nil)
 

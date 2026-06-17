@@ -24,3 +24,20 @@ func NewManagedValueWithValue(value *raw.JSValue) *ManagedValue {
 	return &ManagedValue{inner: raw.JSManagedValueFromID(_id)}
 }
 
+// Value calls the underlying Value.
+func (x *ManagedValue) Value() *Value {
+	_r := x.inner.Value()
+	if _r == nil {
+		return nil
+	}
+	return &Value{inner: _r}
+}
+
+// ManagedValueable is the interface implemented by [ManagedValue], for mocking and DI.
+type ManagedValueable interface {
+	Unwrap() *raw.JSManagedValue
+	Value() *Value
+}
+
+var _ ManagedValueable = (*ManagedValue)(nil)
+

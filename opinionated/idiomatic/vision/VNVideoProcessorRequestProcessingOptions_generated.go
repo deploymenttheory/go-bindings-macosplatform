@@ -29,3 +29,27 @@ func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProces
 	return x
 }
 
+// Cadence calls the underlying Cadence.
+func (x *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
+	_r := x.inner.Cadence()
+	if _r == nil {
+		return nil
+	}
+	return &VideoProcessorCadence{inner: _r}
+}
+
+// SetCadence calls the underlying SetCadence.
+func (x *VideoProcessorRequestProcessingOptions) SetCadence(cadence *raw.VNVideoProcessorCadence) {
+	x.inner.SetCadence(cadence)
+}
+
+// VideoProcessorRequestProcessingOptionsable is the interface implemented by [VideoProcessorRequestProcessingOptions], for mocking and DI.
+type VideoProcessorRequestProcessingOptionsable interface {
+	Unwrap() *raw.VNVideoProcessorRequestProcessingOptions
+	WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions
+	Cadence() *VideoProcessorCadence
+	SetCadence(cadence *raw.VNVideoProcessorCadence)
+}
+
+var _ VideoProcessorRequestProcessingOptionsable = (*VideoProcessorRequestProcessingOptions)(nil)
+

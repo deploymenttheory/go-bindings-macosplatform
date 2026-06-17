@@ -5,7 +5,9 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,34 @@ func NewAnnotationChoiceWidget() *AnnotationChoiceWidget {
 	return &AnnotationChoiceWidget{inner: raw.PDFAnnotationChoiceWidgetFromID(_id)}
 }
 
+// StringValue calls the underlying StringValue.
+func (x *AnnotationChoiceWidget) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStringValue calls the underlying SetStringValue.
+func (x *AnnotationChoiceWidget) SetStringValue(value string) {
+	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// SetIsListChoice calls the underlying SetIsListChoice.
+func (x *AnnotationChoiceWidget) SetIsListChoice(isList bool) {
+	x.inner.SetIsListChoice(isList)
+}
+
 func (x *AnnotationChoiceWidget) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
+
+// AnnotationChoiceWidgetable is the interface implemented by [AnnotationChoiceWidget], for mocking and DI.
+type AnnotationChoiceWidgetable interface {
+	Unwrap() *raw.PDFAnnotationChoiceWidget
+	StringValue() string
+	SetStringValue(value string)
+	SetIsListChoice(isList bool)
+}
+
+var _ AnnotationChoiceWidgetable = (*AnnotationChoiceWidget)(nil)
 

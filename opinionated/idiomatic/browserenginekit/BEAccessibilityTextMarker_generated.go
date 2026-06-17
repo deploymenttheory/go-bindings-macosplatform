@@ -23,3 +23,10 @@ func NewAccessibilityTextMarker() *AccessibilityTextMarker {
 	return &AccessibilityTextMarker{inner: raw.BEAccessibilityTextMarkerFromID(_id)}
 }
 
+// AccessibilityTextMarkerable is the interface implemented by [AccessibilityTextMarker], for mocking and DI.
+type AccessibilityTextMarkerable interface {
+	Unwrap() *raw.BEAccessibilityTextMarker
+}
+
+var _ AccessibilityTextMarkerable = (*AccessibilityTextMarker)(nil)
+

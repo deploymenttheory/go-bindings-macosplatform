@@ -5,6 +5,7 @@
 package imagekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,36 @@ func (x *ImageEditPanel) WithDataSource(dataSource raw.IKImageEditPanelDataSourc
 	x.inner.SetDataSource(dataSource)
 	return x
 }
+
+// ReloadData calls the underlying ReloadData.
+func (x *ImageEditPanel) ReloadData() {
+	x.inner.ReloadData()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *ImageEditPanel) DataSource() raw.IKImageEditPanelDataSource {
+	return x.inner.DataSource()
+}
+
+// SetDataSource calls the underlying SetDataSource.
+func (x *ImageEditPanel) SetDataSource(dataSource raw.IKImageEditPanelDataSource) {
+	x.inner.SetDataSource(dataSource)
+}
+
+// FilterArray calls the underlying FilterArray.
+func (x *ImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
+	return x.inner.FilterArray()
+}
+
+// ImageEditPanelable is the interface implemented by [ImageEditPanel], for mocking and DI.
+type ImageEditPanelable interface {
+	Unwrap() *raw.IKImageEditPanel
+	WithDataSource(dataSource raw.IKImageEditPanelDataSource) *ImageEditPanel
+	ReloadData()
+	DataSource() raw.IKImageEditPanelDataSource
+	SetDataSource(dataSource raw.IKImageEditPanelDataSource)
+	FilterArray() *foundation.NSArray[objc.ID]
+}
+
+var _ ImageEditPanelable = (*ImageEditPanel)(nil)
 

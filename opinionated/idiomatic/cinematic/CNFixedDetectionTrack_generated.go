@@ -31,5 +31,28 @@ func NewFixedDetectionTrackWithOriginalDetection(originalDetection *raw.CNDetect
 	return &FixedDetectionTrack{inner: raw.CNFixedDetectionTrackFromID(_id)}
 }
 
+// FocusDisparity calls the underlying FocusDisparity.
+func (x *FixedDetectionTrack) FocusDisparity() float32 {
+	return x.inner.FocusDisparity()
+}
+
+// OriginalDetection calls the underlying OriginalDetection.
+func (x *FixedDetectionTrack) OriginalDetection() *Detection {
+	_r := x.inner.OriginalDetection()
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
 func (x *FixedDetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return &x.inner.CNDetectionTrack }
+
+// FixedDetectionTrackable is the interface implemented by [FixedDetectionTrack], for mocking and DI.
+type FixedDetectionTrackable interface {
+	Unwrap() *raw.CNFixedDetectionTrack
+	FocusDisparity() float32
+	OriginalDetection() *Detection
+}
+
+var _ FixedDetectionTrackable = (*FixedDetectionTrack)(nil)
 

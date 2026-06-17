@@ -23,9 +23,34 @@ func NewDOMProgressEvent() *DOMProgressEvent {
 	return &DOMProgressEvent{inner: raw.DOMProgressEventFromID(_id)}
 }
 
+// LengthComputable calls the underlying LengthComputable.
+func (x *DOMProgressEvent) LengthComputable() bool {
+	return x.inner.LengthComputable()
+}
+
+// Loaded calls the underlying Loaded.
+func (x *DOMProgressEvent) Loaded() uint64 {
+	return x.inner.Loaded()
+}
+
+// Total calls the underlying Total.
+func (x *DOMProgressEvent) Total() uint64 {
+	return x.inner.Total()
+}
+
 func (x *DOMProgressEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
 
 func (x *DOMProgressEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
 func (x *DOMProgressEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMProgressEventable is the interface implemented by [DOMProgressEvent], for mocking and DI.
+type DOMProgressEventable interface {
+	Unwrap() *raw.DOMProgressEvent
+	LengthComputable() bool
+	Loaded() uint64
+	Total() uint64
+}
+
+var _ DOMProgressEventable = (*DOMProgressEvent)(nil)
 

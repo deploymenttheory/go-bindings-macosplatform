@@ -25,3 +25,10 @@ func NewSymbolEffect() *SymbolEffect {
 
 func (x *SymbolEffect) asSymbolEffect() *raw.NSSymbolEffect { return x.inner }
 
+// SymbolEffectable is the interface implemented by [SymbolEffect], for mocking and DI.
+type SymbolEffectable interface {
+	Unwrap() *raw.NSSymbolEffect
+}
+
+var _ SymbolEffectable = (*SymbolEffect)(nil)
+

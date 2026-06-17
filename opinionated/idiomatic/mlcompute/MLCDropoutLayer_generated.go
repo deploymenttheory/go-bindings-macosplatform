@@ -23,5 +23,24 @@ func NewDropoutLayer() *DropoutLayer {
 	return &DropoutLayer{inner: raw.MLCDropoutLayerFromID(_id)}
 }
 
+// Rate calls the underlying Rate.
+func (x *DropoutLayer) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// Seed calls the underlying Seed.
+func (x *DropoutLayer) Seed() uint {
+	return x.inner.Seed()
+}
+
 func (x *DropoutLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// DropoutLayerable is the interface implemented by [DropoutLayer], for mocking and DI.
+type DropoutLayerable interface {
+	Unwrap() *raw.MLCDropoutLayer
+	Rate() float32
+	Seed() uint
+}
+
+var _ DropoutLayerable = (*DropoutLayer)(nil)
 

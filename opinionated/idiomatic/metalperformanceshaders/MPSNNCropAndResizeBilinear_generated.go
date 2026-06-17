@@ -35,7 +35,38 @@ func NewNNCropAndResizeBilinearWithCoderDevice(aDecoder *foundation.NSCoder, dev
 	return &NNCropAndResizeBilinear{inner: raw.MPSNNCropAndResizeBilinearFromID(_id)}
 }
 
+// ResizeWidth calls the underlying ResizeWidth.
+func (x *NNCropAndResizeBilinear) ResizeWidth() uint {
+	return x.inner.ResizeWidth()
+}
+
+// ResizeHeight calls the underlying ResizeHeight.
+func (x *NNCropAndResizeBilinear) ResizeHeight() uint {
+	return x.inner.ResizeHeight()
+}
+
+// NumberOfRegions calls the underlying NumberOfRegions.
+func (x *NNCropAndResizeBilinear) NumberOfRegions() uint {
+	return x.inner.NumberOfRegions()
+}
+
+// Regions calls the underlying Regions.
+func (x *NNCropAndResizeBilinear) Regions() *mpscore.MPSRegion {
+	return x.inner.Regions()
+}
+
 func (x *NNCropAndResizeBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *NNCropAndResizeBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// NNCropAndResizeBilinearable is the interface implemented by [NNCropAndResizeBilinear], for mocking and DI.
+type NNCropAndResizeBilinearable interface {
+	Unwrap() *raw.MPSNNCropAndResizeBilinear
+	ResizeWidth() uint
+	ResizeHeight() uint
+	NumberOfRegions() uint
+	Regions() *mpscore.MPSRegion
+}
+
+var _ NNCropAndResizeBilinearable = (*NNCropAndResizeBilinear)(nil)
 

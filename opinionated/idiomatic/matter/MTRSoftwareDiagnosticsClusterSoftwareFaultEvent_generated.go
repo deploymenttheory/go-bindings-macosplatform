@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(fau
 	x.inner.SetFaultRecording(faultRecording)
 	return x
 }
+
+// Id calls the underlying Id.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Id() *foundation.NSNumber {
+	return x.inner.Id()
+}
+
+// SetId calls the underlying SetId.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetId(id_ *foundation.NSNumber) {
+	x.inner.SetId(id_)
+}
+
+// Name calls the underlying Name.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// FaultRecording calls the underlying FaultRecording.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() *foundation.NSData {
+	return x.inner.FaultRecording()
+}
+
+// SetFaultRecording calls the underlying SetFaultRecording.
+func (x *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) SetFaultRecording(faultRecording *foundation.NSData) {
+	x.inner.SetFaultRecording(faultRecording)
+}
+
+// MTRSoftwareDiagnosticsClusterSoftwareFaultEventable is the interface implemented by [MTRSoftwareDiagnosticsClusterSoftwareFaultEvent], for mocking and DI.
+type MTRSoftwareDiagnosticsClusterSoftwareFaultEventable interface {
+	Unwrap() *raw.MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	WithName(name string) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	WithFaultRecording(faultRecording *foundation.NSData) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent
+	Id() *foundation.NSNumber
+	SetId(id_ *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	FaultRecording() *foundation.NSData
+	SetFaultRecording(faultRecording *foundation.NSData)
+}
+
+var _ MTRSoftwareDiagnosticsClusterSoftwareFaultEventable = (*MTRSoftwareDiagnosticsClusterSoftwareFaultEvent)(nil)
 

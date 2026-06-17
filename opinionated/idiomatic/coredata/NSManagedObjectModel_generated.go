@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,29 +61,131 @@ func (x *ManagedObjectModel) WithVersionIdentifiers(versionIdentifiers *foundati
 	return x
 }
 
+// EntitiesForConfiguration calls the underlying EntitiesForConfiguration.
+func (x *ManagedObjectModel) EntitiesForConfiguration(configuration string) *foundation.NSArray[*raw.NSEntityDescription] {
+	return x.inner.EntitiesForConfiguration(foundation.NSStringStringWithUTF8String(configuration))
+}
+
+// SetEntitiesForConfiguration calls the underlying SetEntitiesForConfiguration.
+func (x *ManagedObjectModel) SetEntitiesForConfiguration(entities *foundation.NSArray[*raw.NSEntityDescription], configuration string) {
+	x.inner.SetEntitiesForConfiguration(entities, foundation.NSStringStringWithUTF8String(configuration))
+}
+
+// SetFetchRequestTemplateForName calls the underlying SetFetchRequestTemplateForName.
+func (x *ManagedObjectModel) SetFetchRequestTemplateForName(fetchRequestTemplate *raw.NSFetchRequest[objc.ID], name string) {
+	x.inner.SetFetchRequestTemplateForName(fetchRequestTemplate, foundation.NSStringStringWithUTF8String(name))
+}
+
+// FetchRequestTemplateForName calls the underlying FetchRequestTemplateForName.
+func (x *ManagedObjectModel) FetchRequestTemplateForName(name string) *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequestTemplateForName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// FetchRequestFromTemplateWithNameSubstitutionVariables calls the underlying FetchRequestFromTemplateWithNameSubstitutionVariables.
+func (x *ManagedObjectModel) FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables *foundation.NSDictionary[*foundation.NSString, objc.ID]) *raw.NSFetchRequest[objc.ID] {
+	return x.inner.FetchRequestFromTemplateWithNameSubstitutionVariables(foundation.NSStringStringWithUTF8String(name), variables)
+}
+
+// IsConfigurationCompatibleWithStoreMetadata calls the underlying IsConfigurationCompatibleWithStoreMetadata.
+func (x *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.IsConfigurationCompatibleWithStoreMetadata(foundation.NSStringStringWithUTF8String(configuration), metadata)
+}
+
+// EntitiesByName calls the underlying EntitiesByName.
+func (x *ManagedObjectModel) EntitiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityDescription] {
+	return x.inner.EntitiesByName()
+}
+
 // Entities returns the collection as a Go slice.
 func (x *ManagedObjectModel) Entities() []*raw.NSEntityDescription {
 	arr := x.inner.Entities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSEntityDescription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSEntityDescription {
+		return raw.NSEntityDescriptionFromID(purego.Retain(_id))
+	})
+}
+
+// SetEntities calls the underlying SetEntities.
+func (x *ManagedObjectModel) SetEntities(entities *foundation.NSArray[*raw.NSEntityDescription]) {
+	x.inner.SetEntities(entities)
 }
 
 // Configurations returns the collection as a Go slice.
-func (x *ManagedObjectModel) Configurations() []*foundation.NSString {
+func (x *ManagedObjectModel) Configurations() []string {
 	arr := x.inner.Configurations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// LocalizationDictionary calls the underlying LocalizationDictionary.
+func (x *ManagedObjectModel) LocalizationDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.LocalizationDictionary()
+}
+
+// SetLocalizationDictionary calls the underlying SetLocalizationDictionary.
+func (x *ManagedObjectModel) SetLocalizationDictionary(localizationDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.SetLocalizationDictionary(localizationDictionary)
+}
+
+// FetchRequestTemplatesByName calls the underlying FetchRequestTemplatesByName.
+func (x *ManagedObjectModel) FetchRequestTemplatesByName() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.FetchRequestTemplatesByName()
+}
+
+// VersionIdentifiers calls the underlying VersionIdentifiers.
+func (x *ManagedObjectModel) VersionIdentifiers() *foundation.NSSet[objc.ID] {
+	return x.inner.VersionIdentifiers()
+}
+
+// SetVersionIdentifiers calls the underlying SetVersionIdentifiers.
+func (x *ManagedObjectModel) SetVersionIdentifiers(versionIdentifiers *foundation.NSSet[objc.ID]) {
+	x.inner.SetVersionIdentifiers(versionIdentifiers)
+}
+
+// EntityVersionHashesByName calls the underlying EntityVersionHashesByName.
+func (x *ManagedObjectModel) EntityVersionHashesByName() *foundation.NSDictionary[*foundation.NSString, *foundation.NSData] {
+	return x.inner.EntityVersionHashesByName()
+}
+
+// VersionChecksum calls the underlying VersionChecksum.
+func (x *ManagedObjectModel) VersionChecksum() string {
+	_r := x.inner.VersionChecksum()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ManagedObjectModelable is the interface implemented by [ManagedObjectModel], for mocking and DI.
+type ManagedObjectModelable interface {
+	Unwrap() *raw.NSManagedObjectModel
+	WithEntities(items ...*raw.NSEntityDescription) *ManagedObjectModel
+	WithLocalizationDictionary(localizationDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *ManagedObjectModel
+	WithVersionIdentifiers(versionIdentifiers *foundation.NSSet[objc.ID]) *ManagedObjectModel
+	EntitiesForConfiguration(configuration string) *foundation.NSArray[*raw.NSEntityDescription]
+	SetEntitiesForConfiguration(entities *foundation.NSArray[*raw.NSEntityDescription], configuration string)
+	SetFetchRequestTemplateForName(fetchRequestTemplate *raw.NSFetchRequest[objc.ID], name string)
+	FetchRequestTemplateForName(name string) *raw.NSFetchRequest[objc.ID]
+	FetchRequestFromTemplateWithNameSubstitutionVariables(name string, variables *foundation.NSDictionary[*foundation.NSString, objc.ID]) *raw.NSFetchRequest[objc.ID]
+	IsConfigurationCompatibleWithStoreMetadata(configuration string, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	EntitiesByName() *foundation.NSDictionary[*foundation.NSString, *raw.NSEntityDescription]
+	Entities() []*raw.NSEntityDescription
+	SetEntities(entities *foundation.NSArray[*raw.NSEntityDescription])
+	Configurations() []string
+	LocalizationDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	SetLocalizationDictionary(localizationDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	FetchRequestTemplatesByName() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	VersionIdentifiers() *foundation.NSSet[objc.ID]
+	SetVersionIdentifiers(versionIdentifiers *foundation.NSSet[objc.ID])
+	EntityVersionHashesByName() *foundation.NSDictionary[*foundation.NSString, *foundation.NSData]
+	VersionChecksum() string
+}
+
+var _ ManagedObjectModelable = (*ManagedObjectModel)(nil)
 

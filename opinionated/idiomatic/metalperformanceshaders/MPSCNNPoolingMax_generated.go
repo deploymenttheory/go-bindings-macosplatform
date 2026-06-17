@@ -41,3 +41,10 @@ func (x *CNNPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x
 
 func (x *CNNPoolingMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
 
+// CNNPoolingMaxable is the interface implemented by [CNNPoolingMax], for mocking and DI.
+type CNNPoolingMaxable interface {
+	Unwrap() *raw.MPSCNNPoolingMax
+}
+
+var _ CNNPoolingMaxable = (*CNNPoolingMax)(nil)
+

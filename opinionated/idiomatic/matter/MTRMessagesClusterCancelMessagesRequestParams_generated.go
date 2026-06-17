@@ -36,3 +36,48 @@ func (x *MTRMessagesClusterCancelMessagesRequestParams) WithServerSideProcessing
 	return x
 }
 
+// MessageIDs calls the underlying MessageIDs.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) MessageIDs() *foundation.NSArray[objc.ID] {
+	return x.inner.MessageIDs()
+}
+
+// SetMessageIDs calls the underlying SetMessageIDs.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) SetMessageIDs(messageIDs *foundation.NSArray[objc.ID]) {
+	x.inner.SetMessageIDs(messageIDs)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMessagesClusterCancelMessagesRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMessagesClusterCancelMessagesRequestParamsable is the interface implemented by [MTRMessagesClusterCancelMessagesRequestParams], for mocking and DI.
+type MTRMessagesClusterCancelMessagesRequestParamsable interface {
+	Unwrap() *raw.MTRMessagesClusterCancelMessagesRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMessagesClusterCancelMessagesRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMessagesClusterCancelMessagesRequestParams
+	MessageIDs() *foundation.NSArray[objc.ID]
+	SetMessageIDs(messageIDs *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMessagesClusterCancelMessagesRequestParamsable = (*MTRMessagesClusterCancelMessagesRequestParams)(nil)
+

@@ -25,3 +25,10 @@ func NewMemoryBalloonDevice() *MemoryBalloonDevice {
 
 func (x *MemoryBalloonDevice) asMemoryBalloonDevice() *raw.VZMemoryBalloonDevice { return x.inner }
 
+// MemoryBalloonDeviceable is the interface implemented by [MemoryBalloonDevice], for mocking and DI.
+type MemoryBalloonDeviceable interface {
+	Unwrap() *raw.VZMemoryBalloonDevice
+}
+
+var _ MemoryBalloonDeviceable = (*MemoryBalloonDevice)(nil)
+

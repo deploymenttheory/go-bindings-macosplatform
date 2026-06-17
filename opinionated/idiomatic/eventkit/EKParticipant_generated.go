@@ -5,7 +5,10 @@
 package eventkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +26,64 @@ func NewParticipant() *Participant {
 	return &Participant{inner: raw.EKParticipantFromID(_id)}
 }
 
+// ABPersonInAddressBook calls the underlying ABPersonInAddressBook.
+func (x *Participant) ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson {
+	return x.inner.ABPersonInAddressBook(addressBook)
+}
+
+// URL calls the underlying URL.
+func (x *Participant) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Name calls the underlying Name.
+func (x *Participant) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ParticipantStatus calls the underlying ParticipantStatus.
+func (x *Participant) ParticipantStatus() raw.EKParticipantStatus {
+	return x.inner.ParticipantStatus()
+}
+
+// ParticipantRole calls the underlying ParticipantRole.
+func (x *Participant) ParticipantRole() raw.EKParticipantRole {
+	return x.inner.ParticipantRole()
+}
+
+// ParticipantType calls the underlying ParticipantType.
+func (x *Participant) ParticipantType() raw.EKParticipantType {
+	return x.inner.ParticipantType()
+}
+
+// IsCurrentUser calls the underlying IsCurrentUser.
+func (x *Participant) IsCurrentUser() bool {
+	return x.inner.IsCurrentUser()
+}
+
+// ContactPredicate calls the underlying ContactPredicate.
+func (x *Participant) ContactPredicate() *foundation.NSPredicate {
+	return x.inner.ContactPredicate()
+}
+
 func (x *Participant) asObject() *raw.EKObject { return &x.inner.EKObject }
+
+// Participantable is the interface implemented by [Participant], for mocking and DI.
+type Participantable interface {
+	Unwrap() *raw.EKParticipant
+	ABPersonInAddressBook(addressBook *addressbook.ABAddressBook) *addressbook.ABPerson
+	URL() *foundation.NSURL
+	Name() string
+	ParticipantStatus() raw.EKParticipantStatus
+	ParticipantRole() raw.EKParticipantRole
+	ParticipantType() raw.EKParticipantType
+	IsCurrentUser() bool
+	ContactPredicate() *foundation.NSPredicate
+}
+
+var _ Participantable = (*Participant)(nil)
 

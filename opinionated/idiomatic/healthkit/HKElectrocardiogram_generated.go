@@ -23,7 +23,52 @@ func NewElectrocardiogram() *Electrocardiogram {
 	return &Electrocardiogram{inner: raw.HKElectrocardiogramFromID(_id)}
 }
 
+// NumberOfVoltageMeasurements calls the underlying NumberOfVoltageMeasurements.
+func (x *Electrocardiogram) NumberOfVoltageMeasurements() int {
+	return x.inner.NumberOfVoltageMeasurements()
+}
+
+// SamplingFrequency calls the underlying SamplingFrequency.
+func (x *Electrocardiogram) SamplingFrequency() *Quantity {
+	_r := x.inner.SamplingFrequency()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Classification calls the underlying Classification.
+func (x *Electrocardiogram) Classification() raw.HKElectrocardiogramClassification {
+	return x.inner.Classification()
+}
+
+// AverageHeartRate calls the underlying AverageHeartRate.
+func (x *Electrocardiogram) AverageHeartRate() *Quantity {
+	_r := x.inner.AverageHeartRate()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// SymptomsStatus calls the underlying SymptomsStatus.
+func (x *Electrocardiogram) SymptomsStatus() raw.HKElectrocardiogramSymptomsStatus {
+	return x.inner.SymptomsStatus()
+}
+
 func (x *Electrocardiogram) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *Electrocardiogram) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// Electrocardiogramable is the interface implemented by [Electrocardiogram], for mocking and DI.
+type Electrocardiogramable interface {
+	Unwrap() *raw.HKElectrocardiogram
+	NumberOfVoltageMeasurements() int
+	SamplingFrequency() *Quantity
+	Classification() raw.HKElectrocardiogramClassification
+	AverageHeartRate() *Quantity
+	SymptomsStatus() raw.HKElectrocardiogramSymptomsStatus
+}
+
+var _ Electrocardiogramable = (*Electrocardiogram)(nil)
 

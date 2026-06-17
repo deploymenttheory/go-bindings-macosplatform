@@ -6,8 +6,11 @@ package spritekit
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Texture wraps [raw.SKTexture] with a fluent Go API.
@@ -36,6 +39,48 @@ func (x *Texture) WithUsesMipmaps(usesMipmaps bool) *Texture {
 	return x
 }
 
+// TextureByApplyingCIFilter calls the underlying TextureByApplyingCIFilter.
+func (x *Texture) TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture {
+	_r := x.inner.TextureByApplyingCIFilter(filter)
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// TextureByGeneratingNormalMap calls the underlying TextureByGeneratingNormalMap.
+func (x *Texture) TextureByGeneratingNormalMap() *Texture {
+	_r := x.inner.TextureByGeneratingNormalMap()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// TextureByGeneratingNormalMapWithSmoothnessContrast calls the underlying TextureByGeneratingNormalMapWithSmoothnessContrast.
+func (x *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture {
+	_r := x.inner.TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness, contrast)
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// TextureRect calls the underlying TextureRect.
+func (x *Texture) TextureRect() corefoundation.CGRect {
+	return x.inner.TextureRect()
+}
+
+// Size calls the underlying Size.
+func (x *Texture) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// CGImage calls the underlying CGImage.
+func (x *Texture) CGImage() unsafe.Pointer {
+	return x.inner.CGImage()
+}
+
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *Texture) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -50,5 +95,45 @@ func (x *Texture) Preload(ctx context.Context) error {
 	}
 }
 
+// FilteringMode calls the underlying FilteringMode.
+func (x *Texture) FilteringMode() raw.SKTextureFilteringMode {
+	return x.inner.FilteringMode()
+}
+
+// SetFilteringMode calls the underlying SetFilteringMode.
+func (x *Texture) SetFilteringMode(filteringMode raw.SKTextureFilteringMode) {
+	x.inner.SetFilteringMode(filteringMode)
+}
+
+// UsesMipmaps calls the underlying UsesMipmaps.
+func (x *Texture) UsesMipmaps() bool {
+	return x.inner.UsesMipmaps()
+}
+
+// SetUsesMipmaps calls the underlying SetUsesMipmaps.
+func (x *Texture) SetUsesMipmaps(usesMipmaps bool) {
+	x.inner.SetUsesMipmaps(usesMipmaps)
+}
+
 func (x *Texture) asTexture() *raw.SKTexture { return x.inner }
+
+// Textureable is the interface implemented by [Texture], for mocking and DI.
+type Textureable interface {
+	Unwrap() *raw.SKTexture
+	WithFilteringMode(filteringMode raw.SKTextureFilteringMode) *Texture
+	WithUsesMipmaps(usesMipmaps bool) *Texture
+	TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture
+	TextureByGeneratingNormalMap() *Texture
+	TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture
+	TextureRect() corefoundation.CGRect
+	Size() corefoundation.CGSize
+	CGImage() unsafe.Pointer
+	Preload(ctx context.Context) error
+	FilteringMode() raw.SKTextureFilteringMode
+	SetFilteringMode(filteringMode raw.SKTextureFilteringMode)
+	UsesMipmaps() bool
+	SetUsesMipmaps(usesMipmaps bool)
+}
+
+var _ Textureable = (*Texture)(nil)
 

@@ -5,8 +5,11 @@
 package securityinterface
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // KeychainSettingsPanel wraps [raw.SFKeychainSettingsPanel] with a fluent Go API.
@@ -22,4 +25,23 @@ func NewKeychainSettingsPanel() *KeychainSettingsPanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFKeychainSettingsPanel")), objc.RegisterName("new"))
 	return &KeychainSettingsPanel{inner: raw.SFKeychainSettingsPanelFromID(_id)}
 }
+
+// RunModalForSettingsKeychain calls the underlying RunModalForSettingsKeychain.
+func (x *KeychainSettingsPanel) RunModalForSettingsKeychain(settings *security.SecKeychainSettings, keychain unsafe.Pointer) int {
+	return x.inner.RunModalForSettingsKeychain(settings, keychain)
+}
+
+// BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain.
+func (x *KeychainSettingsPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, settings *security.SecKeychainSettings, keychain unsafe.Pointer) {
+	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow, delegate, didEndSelector, contextInfo, settings, keychain)
+}
+
+// KeychainSettingsPanelable is the interface implemented by [KeychainSettingsPanel], for mocking and DI.
+type KeychainSettingsPanelable interface {
+	Unwrap() *raw.SFKeychainSettingsPanel
+	RunModalForSettingsKeychain(settings *security.SecKeychainSettings, keychain unsafe.Pointer) int
+	BeginSheetForWindowModalDelegateDidEndSelectorContextInfoSettingsKeychain(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, settings *security.SecKeychainSettings, keychain unsafe.Pointer)
+}
+
+var _ KeychainSettingsPanelable = (*KeychainSettingsPanel)(nil)
 

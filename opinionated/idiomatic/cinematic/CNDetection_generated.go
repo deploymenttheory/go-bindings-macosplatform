@@ -26,3 +26,46 @@ func NewDetectionWithTimeDetectionTypeNormalizedRectFocusDisparity(time_ coremed
 	return &Detection{inner: raw.CNDetectionFromID(_id)}
 }
 
+// Time calls the underlying Time.
+func (x *Detection) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// DetectionType calls the underlying DetectionType.
+func (x *Detection) DetectionType() raw.CNDetectionType {
+	return x.inner.DetectionType()
+}
+
+// NormalizedRect calls the underlying NormalizedRect.
+func (x *Detection) NormalizedRect() corefoundation.CGRect {
+	return x.inner.NormalizedRect()
+}
+
+// FocusDisparity calls the underlying FocusDisparity.
+func (x *Detection) FocusDisparity() float32 {
+	return x.inner.FocusDisparity()
+}
+
+// DetectionID calls the underlying DetectionID.
+func (x *Detection) DetectionID() int64 {
+	return x.inner.DetectionID()
+}
+
+// DetectionGroupID calls the underlying DetectionGroupID.
+func (x *Detection) DetectionGroupID() int64 {
+	return x.inner.DetectionGroupID()
+}
+
+// Detectionable is the interface implemented by [Detection], for mocking and DI.
+type Detectionable interface {
+	Unwrap() *raw.CNDetection
+	Time() coremedia.CMTime
+	DetectionType() raw.CNDetectionType
+	NormalizedRect() corefoundation.CGRect
+	FocusDisparity() float32
+	DetectionID() int64
+	DetectionGroupID() int64
+}
+
+var _ Detectionable = (*Detection)(nil)
+

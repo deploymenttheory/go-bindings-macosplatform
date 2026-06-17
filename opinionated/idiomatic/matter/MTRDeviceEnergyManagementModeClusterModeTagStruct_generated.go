@@ -36,3 +36,36 @@ func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) WithValue(value *fou
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRDeviceEnergyManagementModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTRDeviceEnergyManagementModeClusterModeTagStructable is the interface implemented by [MTRDeviceEnergyManagementModeClusterModeTagStruct], for mocking and DI.
+type MTRDeviceEnergyManagementModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRDeviceEnergyManagementModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTRDeviceEnergyManagementModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementModeClusterModeTagStructable = (*MTRDeviceEnergyManagementModeClusterModeTagStruct)(nil)
+

@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterSimpleStruct() *MTRTestClusterClusterSimpleStruct {
 
 func (x *MTRTestClusterClusterSimpleStruct) asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct { return &x.inner.MTRUnitTestingClusterSimpleStruct }
 
+// MTRTestClusterClusterSimpleStructable is the interface implemented by [MTRTestClusterClusterSimpleStruct], for mocking and DI.
+type MTRTestClusterClusterSimpleStructable interface {
+	Unwrap() *raw.MTRTestClusterClusterSimpleStruct
+}
+
+var _ MTRTestClusterClusterSimpleStructable = (*MTRTestClusterClusterSimpleStruct)(nil)
+

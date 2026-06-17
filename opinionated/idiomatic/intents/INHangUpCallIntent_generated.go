@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,22 @@ func NewHangUpCallIntentWithCallIdentifier(callIdentifier string) *HangUpCallInt
 	return &HangUpCallIntent{inner: raw.INHangUpCallIntentFromID(_id)}
 }
 
+// CallIdentifier calls the underlying CallIdentifier.
+func (x *HangUpCallIntent) CallIdentifier() string {
+	_r := x.inner.CallIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *HangUpCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// HangUpCallIntentable is the interface implemented by [HangUpCallIntent], for mocking and DI.
+type HangUpCallIntentable interface {
+	Unwrap() *raw.INHangUpCallIntent
+	CallIdentifier() string
+}
+
+var _ HangUpCallIntentable = (*HangUpCallIntent)(nil)
 

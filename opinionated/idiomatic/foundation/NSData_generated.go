@@ -119,7 +119,152 @@ func NewDataWithBase64Encoding(base64String string) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// Length calls the underlying Length.
+func (x *Data) Length() uint {
+	return x.inner.Length()
+}
+
+// Bytes calls the underlying Bytes.
+func (x *Data) Bytes() unsafe.Pointer {
+	return x.inner.Bytes()
+}
+
+// GetBytesLength calls the underlying GetBytesLength.
+func (x *Data) GetBytesLength(buffer unsafe.Pointer, length uint) {
+	x.inner.GetBytesLength(buffer, length)
+}
+
+// GetBytesRange calls the underlying GetBytesRange.
+func (x *Data) GetBytesRange(buffer unsafe.Pointer, range_ raw.NSRange) {
+	x.inner.GetBytesRange(buffer, range_)
+}
+
+// IsEqualToData calls the underlying IsEqualToData.
+func (x *Data) IsEqualToData(other *raw.NSData) bool {
+	return x.inner.IsEqualToData(other)
+}
+
+// SubdataWithRange calls the underlying SubdataWithRange.
+func (x *Data) SubdataWithRange(range_ raw.NSRange) *Data {
+	_r := x.inner.SubdataWithRange(range_)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// WriteToFileAtomically calls the underlying WriteToFileAtomically.
+func (x *Data) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	return x.inner.WriteToFileAtomically(foundation.NSStringStringWithUTF8String(path), useAuxiliaryFile)
+}
+
+// WriteToURLAtomically calls the underlying WriteToURLAtomically.
+func (x *Data) WriteToURLAtomically(url string, atomically bool) bool {
+	return x.inner.WriteToURLAtomically(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), atomically)
+}
+
+// WriteToFileOptionsError calls the underlying WriteToFileOptionsError.
+func (x *Data) WriteToFileOptionsError(path string, writeOptionsMask raw.NSDataWritingOptions) (bool, error) {
+	return x.inner.WriteToFileOptionsError(foundation.NSStringStringWithUTF8String(path), writeOptionsMask)
+}
+
+// WriteToURLOptionsError calls the underlying WriteToURLOptionsError.
+func (x *Data) WriteToURLOptionsError(url string, writeOptionsMask raw.NSDataWritingOptions) (bool, error) {
+	return x.inner.WriteToURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), writeOptionsMask)
+}
+
+// RangeOfDataOptionsRange calls the underlying RangeOfDataOptionsRange.
+func (x *Data) RangeOfDataOptionsRange(dataToFind *raw.NSData, mask raw.NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange {
+	return x.inner.RangeOfDataOptionsRange(dataToFind, mask, searchRange)
+}
+
+// EnumerateByteRangesUsing calls the underlying EnumerateByteRangesUsing.
+func (x *Data) EnumerateByteRangesUsing(block objc.Block) {
+	x.inner.EnumerateByteRangesUsing(block)
+}
+
+// Base64EncodedStringWithOptions calls the underlying Base64EncodedStringWithOptions.
+func (x *Data) Base64EncodedStringWithOptions(options raw.NSDataBase64EncodingOptions) *String {
+	_r := x.inner.Base64EncodedStringWithOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Base64EncodedDataWithOptions calls the underlying Base64EncodedDataWithOptions.
+func (x *Data) Base64EncodedDataWithOptions(options raw.NSDataBase64EncodingOptions) *Data {
+	_r := x.inner.Base64EncodedDataWithOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// DecompressedDataUsingAlgorithmError calls the underlying DecompressedDataUsingAlgorithmError.
+func (x *Data) DecompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error) {
+	_r, _err := x.inner.DecompressedDataUsingAlgorithmError(algorithm)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Data{inner: _r}, nil
+}
+
+// CompressedDataUsingAlgorithmError calls the underlying CompressedDataUsingAlgorithmError.
+func (x *Data) CompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error) {
+	_r, _err := x.inner.CompressedDataUsingAlgorithmError(algorithm)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Data{inner: _r}, nil
+}
+
+// GetBytes calls the underlying GetBytes.
+func (x *Data) GetBytes(buffer unsafe.Pointer) {
+	x.inner.GetBytes(buffer)
+}
+
+// Base64Encoding calls the underlying Base64Encoding.
+func (x *Data) Base64Encoding() *String {
+	_r := x.inner.Base64Encoding()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *Data) asData() *raw.NSData { return x.inner }
 
 func (x *Data) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Dataable is the interface implemented by [Data], for mocking and DI.
+type Dataable interface {
+	Unwrap() *raw.NSData
+	Length() uint
+	Bytes() unsafe.Pointer
+	GetBytesLength(buffer unsafe.Pointer, length uint)
+	GetBytesRange(buffer unsafe.Pointer, range_ raw.NSRange)
+	IsEqualToData(other *raw.NSData) bool
+	SubdataWithRange(range_ raw.NSRange) *Data
+	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
+	WriteToURLAtomically(url string, atomically bool) bool
+	WriteToFileOptionsError(path string, writeOptionsMask raw.NSDataWritingOptions) (bool, error)
+	WriteToURLOptionsError(url string, writeOptionsMask raw.NSDataWritingOptions) (bool, error)
+	RangeOfDataOptionsRange(dataToFind *raw.NSData, mask raw.NSDataSearchOptions, searchRange raw.NSRange) raw.NSRange
+	EnumerateByteRangesUsing(block objc.Block)
+	Base64EncodedStringWithOptions(options raw.NSDataBase64EncodingOptions) *String
+	Base64EncodedDataWithOptions(options raw.NSDataBase64EncodingOptions) *Data
+	DecompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error)
+	CompressedDataUsingAlgorithmError(algorithm raw.NSDataCompressionAlgorithm) (*Data, error)
+	GetBytes(buffer unsafe.Pointer)
+	Base64Encoding() *String
+}
+
+var _ Dataable = (*Data)(nil)
 

@@ -29,3 +29,10 @@ func (x *NNReshapeGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNN
 
 func (x *NNReshapeGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNReshapeGradientNodeable is the interface implemented by [NNReshapeGradientNode], for mocking and DI.
+type NNReshapeGradientNodeable interface {
+	Unwrap() *raw.MPSNNReshapeGradientNode
+}
+
+var _ NNReshapeGradientNodeable = (*NNReshapeGradientNode)(nil)
+

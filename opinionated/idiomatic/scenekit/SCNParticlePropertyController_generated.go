@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,4 +61,97 @@ func (x *ParticlePropertyController) WithInputProperty(inputProperty *foundation
 	x.inner.SetInputProperty(inputProperty)
 	return x
 }
+
+// Animation calls the underlying Animation.
+func (x *ParticlePropertyController) Animation() *quartzcore.CAAnimation {
+	return x.inner.Animation()
+}
+
+// SetAnimation calls the underlying SetAnimation.
+func (x *ParticlePropertyController) SetAnimation(animation *quartzcore.CAAnimation) {
+	x.inner.SetAnimation(animation)
+}
+
+// InputMode calls the underlying InputMode.
+func (x *ParticlePropertyController) InputMode() raw.SCNParticleInputMode {
+	return x.inner.InputMode()
+}
+
+// SetInputMode calls the underlying SetInputMode.
+func (x *ParticlePropertyController) SetInputMode(inputMode raw.SCNParticleInputMode) {
+	x.inner.SetInputMode(inputMode)
+}
+
+// InputScale calls the underlying InputScale.
+func (x *ParticlePropertyController) InputScale() float64 {
+	return x.inner.InputScale()
+}
+
+// SetInputScale calls the underlying SetInputScale.
+func (x *ParticlePropertyController) SetInputScale(inputScale float64) {
+	x.inner.SetInputScale(inputScale)
+}
+
+// InputBias calls the underlying InputBias.
+func (x *ParticlePropertyController) InputBias() float64 {
+	return x.inner.InputBias()
+}
+
+// SetInputBias calls the underlying SetInputBias.
+func (x *ParticlePropertyController) SetInputBias(inputBias float64) {
+	x.inner.SetInputBias(inputBias)
+}
+
+// InputOrigin calls the underlying InputOrigin.
+func (x *ParticlePropertyController) InputOrigin() *Node {
+	_r := x.inner.InputOrigin()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetInputOrigin calls the underlying SetInputOrigin.
+func (x *ParticlePropertyController) SetInputOrigin(inputOrigin *raw.SCNNode) {
+	x.inner.SetInputOrigin(inputOrigin)
+}
+
+// InputProperty calls the underlying InputProperty.
+func (x *ParticlePropertyController) InputProperty() string {
+	_r := x.inner.InputProperty()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInputProperty calls the underlying SetInputProperty.
+func (x *ParticlePropertyController) SetInputProperty(inputProperty *foundation.NSString) {
+	x.inner.SetInputProperty(inputProperty)
+}
+
+// ParticlePropertyControllerable is the interface implemented by [ParticlePropertyController], for mocking and DI.
+type ParticlePropertyControllerable interface {
+	Unwrap() *raw.SCNParticlePropertyController
+	WithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController
+	WithInputMode(inputMode raw.SCNParticleInputMode) *ParticlePropertyController
+	WithInputScale(inputScale float64) *ParticlePropertyController
+	WithInputBias(inputBias float64) *ParticlePropertyController
+	WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController
+	WithInputProperty(inputProperty *foundation.NSString) *ParticlePropertyController
+	Animation() *quartzcore.CAAnimation
+	SetAnimation(animation *quartzcore.CAAnimation)
+	InputMode() raw.SCNParticleInputMode
+	SetInputMode(inputMode raw.SCNParticleInputMode)
+	InputScale() float64
+	SetInputScale(inputScale float64)
+	InputBias() float64
+	SetInputBias(inputBias float64)
+	InputOrigin() *Node
+	SetInputOrigin(inputOrigin *raw.SCNNode)
+	InputProperty() string
+	SetInputProperty(inputProperty *foundation.NSString)
+}
+
+var _ ParticlePropertyControllerable = (*ParticlePropertyController)(nil)
 

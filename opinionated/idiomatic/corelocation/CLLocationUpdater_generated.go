@@ -23,3 +23,28 @@ func NewLocationUpdater() *LocationUpdater {
 	return &LocationUpdater{inner: raw.CLLocationUpdaterFromID(_id)}
 }
 
+// Resume calls the underlying Resume.
+func (x *LocationUpdater) Resume() {
+	x.inner.Resume()
+}
+
+// Pause calls the underlying Pause.
+func (x *LocationUpdater) Pause() {
+	x.inner.Pause()
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *LocationUpdater) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// LocationUpdaterable is the interface implemented by [LocationUpdater], for mocking and DI.
+type LocationUpdaterable interface {
+	Unwrap() *raw.CLLocationUpdater
+	Resume()
+	Pause()
+	Invalidate()
+}
+
+var _ LocationUpdaterable = (*LocationUpdater)(nil)
+

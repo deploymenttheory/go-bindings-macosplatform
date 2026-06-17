@@ -5,6 +5,7 @@
 package screencapturekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewDisplay() *Display {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCDisplay")), objc.RegisterName("new"))
 	return &Display{inner: raw.SCDisplayFromID(_id)}
 }
+
+// DisplayID calls the underlying DisplayID.
+func (x *Display) DisplayID() uint32 {
+	return x.inner.DisplayID()
+}
+
+// Width calls the underlying Width.
+func (x *Display) Width() int {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *Display) Height() int {
+	return x.inner.Height()
+}
+
+// Frame calls the underlying Frame.
+func (x *Display) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// Displayable is the interface implemented by [Display], for mocking and DI.
+type Displayable interface {
+	Unwrap() *raw.SCDisplay
+	DisplayID() uint32
+	Width() int
+	Height() int
+	Frame() corefoundation.CGRect
+}
+
+var _ Displayable = (*Display)(nil)
 

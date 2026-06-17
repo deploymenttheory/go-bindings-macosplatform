@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
 	return &CollectionLayoutGroupCustomItem{inner: raw.NSCollectionLayoutGroupCustomItemFromID(_id)}
 }
+
+// Frame calls the underlying Frame.
+func (x *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
+	return x.inner.Frame()
+}
+
+// ZIndex calls the underlying ZIndex.
+func (x *CollectionLayoutGroupCustomItem) ZIndex() int {
+	return x.inner.ZIndex()
+}
+
+// CollectionLayoutGroupCustomItemable is the interface implemented by [CollectionLayoutGroupCustomItem], for mocking and DI.
+type CollectionLayoutGroupCustomItemable interface {
+	Unwrap() *raw.NSCollectionLayoutGroupCustomItem
+	Frame() corefoundation.CGRect
+	ZIndex() int
+}
+
+var _ CollectionLayoutGroupCustomItemable = (*CollectionLayoutGroupCustomItem)(nil)
 

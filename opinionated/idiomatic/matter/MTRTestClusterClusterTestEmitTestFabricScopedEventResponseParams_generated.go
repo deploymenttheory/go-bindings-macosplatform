@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams() *MTRT
 
 func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams { return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams }
 
+// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams], for mocking and DI.
+type MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+}
+
+var _ MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams)(nil)
+

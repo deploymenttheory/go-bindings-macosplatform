@@ -41,3 +41,53 @@ func (x *VirtualMachineView) WithAutomaticallyReconfiguresDisplay(automaticallyR
 	return x
 }
 
+// VirtualMachine calls the underlying VirtualMachine.
+func (x *VirtualMachineView) VirtualMachine() *VirtualMachine {
+	_r := x.inner.VirtualMachine()
+	if _r == nil {
+		return nil
+	}
+	return &VirtualMachine{inner: _r}
+}
+
+// SetVirtualMachine calls the underlying SetVirtualMachine.
+func (x *VirtualMachineView) SetVirtualMachine(virtualMachine *raw.VZVirtualMachine) {
+	x.inner.SetVirtualMachine(virtualMachine)
+}
+
+// CapturesSystemKeys calls the underlying CapturesSystemKeys.
+func (x *VirtualMachineView) CapturesSystemKeys() bool {
+	return x.inner.CapturesSystemKeys()
+}
+
+// SetCapturesSystemKeys calls the underlying SetCapturesSystemKeys.
+func (x *VirtualMachineView) SetCapturesSystemKeys(capturesSystemKeys bool) {
+	x.inner.SetCapturesSystemKeys(capturesSystemKeys)
+}
+
+// AutomaticallyReconfiguresDisplay calls the underlying AutomaticallyReconfiguresDisplay.
+func (x *VirtualMachineView) AutomaticallyReconfiguresDisplay() bool {
+	return x.inner.AutomaticallyReconfiguresDisplay()
+}
+
+// SetAutomaticallyReconfiguresDisplay calls the underlying SetAutomaticallyReconfiguresDisplay.
+func (x *VirtualMachineView) SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) {
+	x.inner.SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay)
+}
+
+// VirtualMachineViewable is the interface implemented by [VirtualMachineView], for mocking and DI.
+type VirtualMachineViewable interface {
+	Unwrap() *raw.VZVirtualMachineView
+	WithVirtualMachine(virtualMachine *raw.VZVirtualMachine) *VirtualMachineView
+	WithCapturesSystemKeys(capturesSystemKeys bool) *VirtualMachineView
+	WithAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool) *VirtualMachineView
+	VirtualMachine() *VirtualMachine
+	SetVirtualMachine(virtualMachine *raw.VZVirtualMachine)
+	CapturesSystemKeys() bool
+	SetCapturesSystemKeys(capturesSystemKeys bool)
+	AutomaticallyReconfiguresDisplay() bool
+	SetAutomaticallyReconfiguresDisplay(automaticallyReconfiguresDisplay bool)
+}
+
+var _ VirtualMachineViewable = (*VirtualMachineView)(nil)
+

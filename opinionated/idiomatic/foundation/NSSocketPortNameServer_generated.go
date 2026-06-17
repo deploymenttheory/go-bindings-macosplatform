@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,7 +30,43 @@ func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServer
 	return x
 }
 
+// PortForNameHostNameServerPortNumber calls the underlying PortForNameHostNameServerPortNumber.
+func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
+	_r := x.inner.PortForNameHostNameServerPortNumber(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host), portNumber)
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// RegisterPortNameNameServerPortNumber calls the underlying RegisterPortNameNameServerPortNumber.
+func (x *SocketPortNameServer) RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool {
+	return x.inner.RegisterPortNameNameServerPortNumber(port, foundation.NSStringStringWithUTF8String(name), portNumber)
+}
+
+// DefaultNameServerPortNumber calls the underlying DefaultNameServerPortNumber.
+func (x *SocketPortNameServer) DefaultNameServerPortNumber() uint16 {
+	return x.inner.DefaultNameServerPortNumber()
+}
+
+// SetDefaultNameServerPortNumber calls the underlying SetDefaultNameServerPortNumber.
+func (x *SocketPortNameServer) SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) {
+	x.inner.SetDefaultNameServerPortNumber(defaultNameServerPortNumber)
+}
+
 func (x *SocketPortNameServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
 
 func (x *SocketPortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
+
+// SocketPortNameServerable is the interface implemented by [SocketPortNameServer], for mocking and DI.
+type SocketPortNameServerable interface {
+	Unwrap() *raw.NSSocketPortNameServer
+	WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer
+	PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port
+	RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool
+	DefaultNameServerPortNumber() uint16
+	SetDefaultNameServerPortNumber(defaultNameServerPortNumber uint16)
+}
+
+var _ SocketPortNameServerable = (*SocketPortNameServer)(nil)
 

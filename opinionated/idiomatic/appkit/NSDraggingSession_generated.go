@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -40,4 +42,78 @@ func (x *DraggingSession) WithDraggingLeaderIndex(draggingLeaderIndex int) *Drag
 	x.inner.SetDraggingLeaderIndex(draggingLeaderIndex)
 	return x
 }
+
+// EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing calls the underlying EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing.
+func (x *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts raw.NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool)) {
+	x.inner.EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts, view, classArray, searchOptions, block)
+}
+
+// DraggingFormation calls the underlying DraggingFormation.
+func (x *DraggingSession) DraggingFormation() raw.NSDraggingFormation {
+	return x.inner.DraggingFormation()
+}
+
+// SetDraggingFormation calls the underlying SetDraggingFormation.
+func (x *DraggingSession) SetDraggingFormation(draggingFormation raw.NSDraggingFormation) {
+	x.inner.SetDraggingFormation(draggingFormation)
+}
+
+// AnimatesToStartingPositionsOnCancelOrFail calls the underlying AnimatesToStartingPositionsOnCancelOrFail.
+func (x *DraggingSession) AnimatesToStartingPositionsOnCancelOrFail() bool {
+	return x.inner.AnimatesToStartingPositionsOnCancelOrFail()
+}
+
+// SetAnimatesToStartingPositionsOnCancelOrFail calls the underlying SetAnimatesToStartingPositionsOnCancelOrFail.
+func (x *DraggingSession) SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) {
+	x.inner.SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail)
+}
+
+// DraggingLeaderIndex calls the underlying DraggingLeaderIndex.
+func (x *DraggingSession) DraggingLeaderIndex() int {
+	return x.inner.DraggingLeaderIndex()
+}
+
+// SetDraggingLeaderIndex calls the underlying SetDraggingLeaderIndex.
+func (x *DraggingSession) SetDraggingLeaderIndex(draggingLeaderIndex int) {
+	x.inner.SetDraggingLeaderIndex(draggingLeaderIndex)
+}
+
+// DraggingPasteboard calls the underlying DraggingPasteboard.
+func (x *DraggingSession) DraggingPasteboard() *Pasteboard {
+	_r := x.inner.DraggingPasteboard()
+	if _r == nil {
+		return nil
+	}
+	return &Pasteboard{inner: _r}
+}
+
+// DraggingSequenceNumber calls the underlying DraggingSequenceNumber.
+func (x *DraggingSession) DraggingSequenceNumber() int {
+	return x.inner.DraggingSequenceNumber()
+}
+
+// DraggingLocation calls the underlying DraggingLocation.
+func (x *DraggingSession) DraggingLocation() corefoundation.CGPoint {
+	return x.inner.DraggingLocation()
+}
+
+// DraggingSessionable is the interface implemented by [DraggingSession], for mocking and DI.
+type DraggingSessionable interface {
+	Unwrap() *raw.NSDraggingSession
+	WithDraggingFormation(draggingFormation raw.NSDraggingFormation) *DraggingSession
+	WithAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool) *DraggingSession
+	WithDraggingLeaderIndex(draggingLeaderIndex int) *DraggingSession
+	EnumerateDraggingItemsWithOptionsForViewClassesSearchOptionsUsing(enumOpts raw.NSDraggingItemEnumerationOptions, view *raw.NSView, classArray *foundation.NSArray[objc.Class], searchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(*raw.NSDraggingItem, int, *bool))
+	DraggingFormation() raw.NSDraggingFormation
+	SetDraggingFormation(draggingFormation raw.NSDraggingFormation)
+	AnimatesToStartingPositionsOnCancelOrFail() bool
+	SetAnimatesToStartingPositionsOnCancelOrFail(animatesToStartingPositionsOnCancelOrFail bool)
+	DraggingLeaderIndex() int
+	SetDraggingLeaderIndex(draggingLeaderIndex int)
+	DraggingPasteboard() *Pasteboard
+	DraggingSequenceNumber() int
+	DraggingLocation() corefoundation.CGPoint
+}
+
+var _ DraggingSessionable = (*DraggingSession)(nil)
 

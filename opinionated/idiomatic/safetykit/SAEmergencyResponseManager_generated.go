@@ -5,8 +5,10 @@
 package safetykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EmergencyResponseManager wraps [raw.SAEmergencyResponseManager] with a fluent Go API.
@@ -28,4 +30,30 @@ func (x *EmergencyResponseManager) WithDelegate(delegate raw.SAEmergencyResponse
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// DialVoiceCallToPhoneNumberCompletionHandler calls the underlying DialVoiceCallToPhoneNumberCompletionHandler.
+func (x *EmergencyResponseManager) DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer)) {
+	x.inner.DialVoiceCallToPhoneNumberCompletionHandler(foundation.NSStringStringWithUTF8String(phoneNumber), handler)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *EmergencyResponseManager) Delegate() raw.SAEmergencyResponseDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *EmergencyResponseManager) SetDelegate(delegate raw.SAEmergencyResponseDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// EmergencyResponseManagerable is the interface implemented by [EmergencyResponseManager], for mocking and DI.
+type EmergencyResponseManagerable interface {
+	Unwrap() *raw.SAEmergencyResponseManager
+	WithDelegate(delegate raw.SAEmergencyResponseDelegate) *EmergencyResponseManager
+	DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer))
+	Delegate() raw.SAEmergencyResponseDelegate
+	SetDelegate(delegate raw.SAEmergencyResponseDelegate)
+}
+
+var _ EmergencyResponseManagerable = (*EmergencyResponseManager)(nil)
 

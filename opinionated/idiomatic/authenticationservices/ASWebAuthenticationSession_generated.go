@@ -51,3 +51,67 @@ func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFi
 	return x
 }
 
+// Start calls the underlying Start.
+func (x *WebAuthenticationSession) Start() bool {
+	return x.inner.Start()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *WebAuthenticationSession) Cancel() {
+	x.inner.Cancel()
+}
+
+// PresentationContextProvider calls the underlying PresentationContextProvider.
+func (x *WebAuthenticationSession) PresentationContextProvider() raw.ASWebAuthenticationPresentationContextProviding {
+	return x.inner.PresentationContextProvider()
+}
+
+// SetPresentationContextProvider calls the underlying SetPresentationContextProvider.
+func (x *WebAuthenticationSession) SetPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) {
+	x.inner.SetPresentationContextProvider(presentationContextProvider)
+}
+
+// PrefersEphemeralWebBrowserSession calls the underlying PrefersEphemeralWebBrowserSession.
+func (x *WebAuthenticationSession) PrefersEphemeralWebBrowserSession() bool {
+	return x.inner.PrefersEphemeralWebBrowserSession()
+}
+
+// SetPrefersEphemeralWebBrowserSession calls the underlying SetPrefersEphemeralWebBrowserSession.
+func (x *WebAuthenticationSession) SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) {
+	x.inner.SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession)
+}
+
+// AdditionalHeaderFields calls the underlying AdditionalHeaderFields.
+func (x *WebAuthenticationSession) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.AdditionalHeaderFields()
+}
+
+// SetAdditionalHeaderFields calls the underlying SetAdditionalHeaderFields.
+func (x *WebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.SetAdditionalHeaderFields(additionalHeaderFields)
+}
+
+// CanStart calls the underlying CanStart.
+func (x *WebAuthenticationSession) CanStart() bool {
+	return x.inner.CanStart()
+}
+
+// WebAuthenticationSessionable is the interface implemented by [WebAuthenticationSession], for mocking and DI.
+type WebAuthenticationSessionable interface {
+	Unwrap() *raw.ASWebAuthenticationSession
+	WithPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) *WebAuthenticationSession
+	WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession
+	WithAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WebAuthenticationSession
+	Start() bool
+	Cancel()
+	PresentationContextProvider() raw.ASWebAuthenticationPresentationContextProviding
+	SetPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding)
+	PrefersEphemeralWebBrowserSession() bool
+	SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool)
+	AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	SetAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	CanStart() bool
+}
+
+var _ WebAuthenticationSessionable = (*WebAuthenticationSession)(nil)
+

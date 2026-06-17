@@ -33,5 +33,24 @@ func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, devi
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
+// ThresholdValue calls the underlying ThresholdValue.
+func (x *ImageThresholdTruncate) ThresholdValue() float32 {
+	return x.inner.ThresholdValue()
+}
+
+// Transform calls the underlying Transform.
+func (x *ImageThresholdTruncate) Transform() *float32 {
+	return x.inner.Transform()
+}
+
 func (x *ImageThresholdTruncate) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
+type ImageThresholdTruncateable interface {
+	Unwrap() *raw.MPSImageThresholdTruncate
+	ThresholdValue() float32
+	Transform() *float32
+}
+
+var _ ImageThresholdTruncateable = (*ImageThresholdTruncate)(nil)
 

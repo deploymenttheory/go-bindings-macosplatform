@@ -7,6 +7,7 @@ package discrecording
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,71 @@ func NewMSFWithString(string_ string) *MSF {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &MSF{inner: raw.DRMSFFromID(_id)}
 }
+
+// Minutes calls the underlying Minutes.
+func (x *MSF) Minutes() uint {
+	return x.inner.Minutes()
+}
+
+// Seconds calls the underlying Seconds.
+func (x *MSF) Seconds() uint {
+	return x.inner.Seconds()
+}
+
+// Frames calls the underlying Frames.
+func (x *MSF) Frames() uint {
+	return x.inner.Frames()
+}
+
+// Sectors calls the underlying Sectors.
+func (x *MSF) Sectors() uint {
+	return x.inner.Sectors()
+}
+
+// MsfByAdding calls the underlying MsfByAdding.
+func (x *MSF) MsfByAdding(msf *raw.DRMSF) *MSF {
+	_r := x.inner.MsfByAdding(msf)
+	if _r == nil {
+		return nil
+	}
+	return &MSF{inner: _r}
+}
+
+// MsfBySubtracting calls the underlying MsfBySubtracting.
+func (x *MSF) MsfBySubtracting(msf *raw.DRMSF) *MSF {
+	_r := x.inner.MsfBySubtracting(msf)
+	if _r == nil {
+		return nil
+	}
+	return &MSF{inner: _r}
+}
+
+// DescriptionWithFormat calls the underlying DescriptionWithFormat.
+func (x *MSF) DescriptionWithFormat(format string) string {
+	_r := x.inner.DescriptionWithFormat(foundation.NSStringStringWithUTF8String(format))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsEqualToMSF calls the underlying IsEqualToMSF.
+func (x *MSF) IsEqualToMSF(otherDRMSF *raw.DRMSF) bool {
+	return x.inner.IsEqualToMSF(otherDRMSF)
+}
+
+// MSFable is the interface implemented by [MSF], for mocking and DI.
+type MSFable interface {
+	Unwrap() *raw.DRMSF
+	Minutes() uint
+	Seconds() uint
+	Frames() uint
+	Sectors() uint
+	MsfByAdding(msf *raw.DRMSF) *MSF
+	MsfBySubtracting(msf *raw.DRMSF) *MSF
+	DescriptionWithFormat(format string) string
+	IsEqualToMSF(otherDRMSF *raw.DRMSF) bool
+}
+
+var _ MSFable = (*MSF)(nil)
 

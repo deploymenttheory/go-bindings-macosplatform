@@ -42,3 +42,49 @@ func (x *CaptureExternalDisplayConfiguration) WithPreferredResolution(preferredR
 	return x
 }
 
+// ShouldMatchFrameRate calls the underlying ShouldMatchFrameRate.
+func (x *CaptureExternalDisplayConfiguration) ShouldMatchFrameRate() bool {
+	return x.inner.ShouldMatchFrameRate()
+}
+
+// SetShouldMatchFrameRate calls the underlying SetShouldMatchFrameRate.
+func (x *CaptureExternalDisplayConfiguration) SetShouldMatchFrameRate(shouldMatchFrameRate bool) {
+	x.inner.SetShouldMatchFrameRate(shouldMatchFrameRate)
+}
+
+// BypassColorSpaceConversion calls the underlying BypassColorSpaceConversion.
+func (x *CaptureExternalDisplayConfiguration) BypassColorSpaceConversion() bool {
+	return x.inner.BypassColorSpaceConversion()
+}
+
+// SetBypassColorSpaceConversion calls the underlying SetBypassColorSpaceConversion.
+func (x *CaptureExternalDisplayConfiguration) SetBypassColorSpaceConversion(bypassColorSpaceConversion bool) {
+	x.inner.SetBypassColorSpaceConversion(bypassColorSpaceConversion)
+}
+
+// PreferredResolution calls the underlying PreferredResolution.
+func (x *CaptureExternalDisplayConfiguration) PreferredResolution() coremedia.CMVideoDimensions {
+	return x.inner.PreferredResolution()
+}
+
+// SetPreferredResolution calls the underlying SetPreferredResolution.
+func (x *CaptureExternalDisplayConfiguration) SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions) {
+	x.inner.SetPreferredResolution(preferredResolution)
+}
+
+// CaptureExternalDisplayConfigurationable is the interface implemented by [CaptureExternalDisplayConfiguration], for mocking and DI.
+type CaptureExternalDisplayConfigurationable interface {
+	Unwrap() *raw.AVCaptureExternalDisplayConfiguration
+	WithShouldMatchFrameRate(shouldMatchFrameRate bool) *CaptureExternalDisplayConfiguration
+	WithBypassColorSpaceConversion(bypassColorSpaceConversion bool) *CaptureExternalDisplayConfiguration
+	WithPreferredResolution(preferredResolution coremedia.CMVideoDimensions) *CaptureExternalDisplayConfiguration
+	ShouldMatchFrameRate() bool
+	SetShouldMatchFrameRate(shouldMatchFrameRate bool)
+	BypassColorSpaceConversion() bool
+	SetBypassColorSpaceConversion(bypassColorSpaceConversion bool)
+	PreferredResolution() coremedia.CMVideoDimensions
+	SetPreferredResolution(preferredResolution coremedia.CMVideoDimensions)
+}
+
+var _ CaptureExternalDisplayConfigurationable = (*CaptureExternalDisplayConfiguration)(nil)
+

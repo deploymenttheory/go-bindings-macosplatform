@@ -35,5 +35,24 @@ func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset calls the underlying EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset.
+func (x *ImageFindKeypoints) EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint) {
+	x.inner.EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer, source, regions, numberOfRegions, keypointCountBuffer, keypointCountBufferOffset, keypointDataBuffer, keypointDataBufferOffset)
+}
+
+// KeypointRangeInfo calls the underlying KeypointRangeInfo.
+func (x *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
+	return x.inner.KeypointRangeInfo()
+}
+
 func (x *ImageFindKeypoints) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
+type ImageFindKeypointsable interface {
+	Unwrap() *raw.MPSImageFindKeypoints
+	EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint)
+	KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo
+}
+
+var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)
 

@@ -31,5 +31,62 @@ func NewIndexPathWithIndex(index uint) *IndexPath {
 	return &IndexPath{inner: raw.NSIndexPathFromID(_id)}
 }
 
+// IndexPathByAddingIndex calls the underlying IndexPathByAddingIndex.
+func (x *IndexPath) IndexPathByAddingIndex(index uint) *IndexPath {
+	_r := x.inner.IndexPathByAddingIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &IndexPath{inner: _r}
+}
+
+// IndexPathByRemovingLastIndex calls the underlying IndexPathByRemovingLastIndex.
+func (x *IndexPath) IndexPathByRemovingLastIndex() *IndexPath {
+	_r := x.inner.IndexPathByRemovingLastIndex()
+	if _r == nil {
+		return nil
+	}
+	return &IndexPath{inner: _r}
+}
+
+// IndexAtPosition calls the underlying IndexAtPosition.
+func (x *IndexPath) IndexAtPosition(position uint) uint {
+	return x.inner.IndexAtPosition(position)
+}
+
+// GetIndexesRange calls the underlying GetIndexesRange.
+func (x *IndexPath) GetIndexesRange(indexes *uint, positionRange raw.NSRange) {
+	x.inner.GetIndexesRange(indexes, positionRange)
+}
+
+// Compare calls the underlying Compare.
+func (x *IndexPath) Compare(otherObject *raw.NSIndexPath) raw.NSComparisonResult {
+	return x.inner.Compare(otherObject)
+}
+
+// Length calls the underlying Length.
+func (x *IndexPath) Length() uint {
+	return x.inner.Length()
+}
+
+// GetIndexes calls the underlying GetIndexes.
+func (x *IndexPath) GetIndexes(indexes *uint) {
+	x.inner.GetIndexes(indexes)
+}
+
 func (x *IndexPath) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// IndexPathable is the interface implemented by [IndexPath], for mocking and DI.
+type IndexPathable interface {
+	Unwrap() *raw.NSIndexPath
+	IndexPathByAddingIndex(index uint) *IndexPath
+	IndexPathByRemovingLastIndex() *IndexPath
+	IndexAtPosition(position uint) uint
+	GetIndexesRange(indexes *uint, positionRange raw.NSRange)
+	Compare(otherObject *raw.NSIndexPath) raw.NSComparisonResult
+	Length() uint
+	GetIndexes(indexes *uint)
+}
+
+var _ IndexPathable = (*IndexPath)(nil)
 

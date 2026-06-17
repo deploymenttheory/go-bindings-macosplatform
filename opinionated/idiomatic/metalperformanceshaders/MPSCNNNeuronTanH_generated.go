@@ -33,3 +33,10 @@ func (x *CNNNeuronTanH) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x
 
 func (x *CNNNeuronTanH) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronTanHable is the interface implemented by [CNNNeuronTanH], for mocking and DI.
+type CNNNeuronTanHable interface {
+	Unwrap() *raw.MPSCNNNeuronTanH
+}
+
+var _ CNNNeuronTanHable = (*CNNNeuronTanH)(nil)
+

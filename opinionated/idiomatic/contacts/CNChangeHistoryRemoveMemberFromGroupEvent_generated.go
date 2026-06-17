@@ -23,5 +23,32 @@ func NewChangeHistoryRemoveMemberFromGroupEvent() *ChangeHistoryRemoveMemberFrom
 	return &ChangeHistoryRemoveMemberFromGroupEvent{inner: raw.CNChangeHistoryRemoveMemberFromGroupEventFromID(_id)}
 }
 
+// Member calls the underlying Member.
+func (x *ChangeHistoryRemoveMemberFromGroupEvent) Member() *Contact {
+	_r := x.inner.Member()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// Group calls the underlying Group.
+func (x *ChangeHistoryRemoveMemberFromGroupEvent) Group() *Group {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
 func (x *ChangeHistoryRemoveMemberFromGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryRemoveMemberFromGroupEventable is the interface implemented by [ChangeHistoryRemoveMemberFromGroupEvent], for mocking and DI.
+type ChangeHistoryRemoveMemberFromGroupEventable interface {
+	Unwrap() *raw.CNChangeHistoryRemoveMemberFromGroupEvent
+	Member() *Contact
+	Group() *Group
+}
+
+var _ ChangeHistoryRemoveMemberFromGroupEventable = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)
 

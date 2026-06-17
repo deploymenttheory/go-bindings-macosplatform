@@ -23,5 +23,40 @@ func NewTensorReferenceType() *TensorReferenceType {
 	return &TensorReferenceType{inner: raw.MTLTensorReferenceTypeFromID(_id)}
 }
 
+// TensorDataType calls the underlying TensorDataType.
+func (x *TensorReferenceType) TensorDataType() raw.MTLTensorDataType {
+	return x.inner.TensorDataType()
+}
+
+// IndexType calls the underlying IndexType.
+func (x *TensorReferenceType) IndexType() raw.MTLDataType {
+	return x.inner.IndexType()
+}
+
+// Dimensions calls the underlying Dimensions.
+func (x *TensorReferenceType) Dimensions() *TensorExtents {
+	_r := x.inner.Dimensions()
+	if _r == nil {
+		return nil
+	}
+	return &TensorExtents{inner: _r}
+}
+
+// Access calls the underlying Access.
+func (x *TensorReferenceType) Access() raw.MTLBindingAccess {
+	return x.inner.Access()
+}
+
 func (x *TensorReferenceType) asType() *raw.MTLType { return &x.inner.MTLType }
+
+// TensorReferenceTypeable is the interface implemented by [TensorReferenceType], for mocking and DI.
+type TensorReferenceTypeable interface {
+	Unwrap() *raw.MTLTensorReferenceType
+	TensorDataType() raw.MTLTensorDataType
+	IndexType() raw.MTLDataType
+	Dimensions() *TensorExtents
+	Access() raw.MTLBindingAccess
+}
+
+var _ TensorReferenceTypeable = (*TensorReferenceType)(nil)
 

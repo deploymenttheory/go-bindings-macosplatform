@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *CardioidDirectivityModelParameters) SubbandParameters() []*raw.PHASECar
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASECardioidDirectivityModelSubbandParameters, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASECardioidDirectivityModelSubbandParameters {
+		return raw.PHASECardioidDirectivityModelSubbandParametersFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CardioidDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters { return &x.inner.PHASEDirectivityModelParameters }
+
+// CardioidDirectivityModelParametersable is the interface implemented by [CardioidDirectivityModelParameters], for mocking and DI.
+type CardioidDirectivityModelParametersable interface {
+	Unwrap() *raw.PHASECardioidDirectivityModelParameters
+	SubbandParameters() []*raw.PHASECardioidDirectivityModelSubbandParameters
+}
+
+var _ CardioidDirectivityModelParametersable = (*CardioidDirectivityModelParameters)(nil)
 

@@ -31,5 +31,44 @@ func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSU
 	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
 }
 
+// Response calls the underlying Response.
+func (x *CachedURLResponse) Response() *URLResponse {
+	_r := x.inner.Response()
+	if _r == nil {
+		return nil
+	}
+	return &URLResponse{inner: _r}
+}
+
+// Data calls the underlying Data.
+func (x *CachedURLResponse) Data() *Data {
+	_r := x.inner.Data()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *CachedURLResponse) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// StoragePolicy calls the underlying StoragePolicy.
+func (x *CachedURLResponse) StoragePolicy() raw.NSURLCacheStoragePolicy {
+	return x.inner.StoragePolicy()
+}
+
 func (x *CachedURLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// CachedURLResponseable is the interface implemented by [CachedURLResponse], for mocking and DI.
+type CachedURLResponseable interface {
+	Unwrap() *raw.NSCachedURLResponse
+	Response() *URLResponse
+	Data() *Data
+	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	StoragePolicy() raw.NSURLCacheStoragePolicy
+}
+
+var _ CachedURLResponseable = (*CachedURLResponse)(nil)
 

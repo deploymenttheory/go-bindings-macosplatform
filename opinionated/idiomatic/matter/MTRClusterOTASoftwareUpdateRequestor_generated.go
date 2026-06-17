@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterOtaSoftwareUpdateRequestor wraps [raw.MTRClusterOtaSoftwareUpdateRequestor] with a fluent Go API.
@@ -25,9 +26,40 @@ func NewMTRClusterOtaSoftwareUpdateRequestorWithDeviceEndpointQueue(device *raw.
 	return &MTRClusterOtaSoftwareUpdateRequestor{inner: raw.MTRClusterOtaSoftwareUpdateRequestorFromID(_id)}
 }
 
+// AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterOtaSoftwareUpdateRequestor) AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// ReadAttributeDefaultOtaProvidersWithParams calls the underlying ReadAttributeDefaultOtaProvidersWithParams.
+func (x *MTRClusterOtaSoftwareUpdateRequestor) ReadAttributeDefaultOtaProvidersWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDefaultOtaProvidersWithParams(params)
+}
+
+// WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval calls the underlying WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval.
+func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams calls the underlying WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams.
+func (x *MTRClusterOtaSoftwareUpdateRequestor) WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
 func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRClusterOTASoftwareUpdateRequestor() *raw.MTRClusterOTASoftwareUpdateRequestor { return &x.inner.MTRClusterOTASoftwareUpdateRequestor }
 
 func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRClusterOTASoftwareUpdateRequestor.MTRGenericCluster }
 
 func (x *MTRClusterOtaSoftwareUpdateRequestor) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRClusterOTASoftwareUpdateRequestor.MTRGenericCluster.MTRCluster }
+
+// MTRClusterOtaSoftwareUpdateRequestorable is the interface implemented by [MTRClusterOtaSoftwareUpdateRequestor], for mocking and DI.
+type MTRClusterOtaSoftwareUpdateRequestorable interface {
+	Unwrap() *raw.MTRClusterOtaSoftwareUpdateRequestor
+	AnnounceOtaProviderWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	ReadAttributeDefaultOtaProvidersWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeDefaultOtaProvidersWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeDefaultOtaProvidersWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+}
+
+var _ MTRClusterOtaSoftwareUpdateRequestorable = (*MTRClusterOtaSoftwareUpdateRequestor)(nil)
 

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetChangeRequest wraps [raw.PHAssetChangeRequest] with a fluent Go API.
@@ -48,7 +49,98 @@ func (x *AssetChangeRequest) WithContentEditingOutput(contentEditingOutput *raw.
 	return x
 }
 
+// RevertAssetContentToOriginal calls the underlying RevertAssetContentToOriginal.
+func (x *AssetChangeRequest) RevertAssetContentToOriginal() {
+	x.inner.RevertAssetContentToOriginal()
+}
+
+// PlaceholderForCreatedAsset calls the underlying PlaceholderForCreatedAsset.
+func (x *AssetChangeRequest) PlaceholderForCreatedAsset() *ObjectPlaceholder {
+	_r := x.inner.PlaceholderForCreatedAsset()
+	if _r == nil {
+		return nil
+	}
+	return &ObjectPlaceholder{inner: _r}
+}
+
+// CreationDate calls the underlying CreationDate.
+func (x *AssetChangeRequest) CreationDate() *foundation.NSDate {
+	return x.inner.CreationDate()
+}
+
+// SetCreationDate calls the underlying SetCreationDate.
+func (x *AssetChangeRequest) SetCreationDate(creationDate *foundation.NSDate) {
+	x.inner.SetCreationDate(creationDate)
+}
+
+// Location calls the underlying Location.
+func (x *AssetChangeRequest) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// SetLocation calls the underlying SetLocation.
+func (x *AssetChangeRequest) SetLocation(location unsafe.Pointer) {
+	x.inner.SetLocation(location)
+}
+
+// IsFavorite calls the underlying IsFavorite.
+func (x *AssetChangeRequest) IsFavorite() bool {
+	return x.inner.IsFavorite()
+}
+
+// SetFavorite calls the underlying SetFavorite.
+func (x *AssetChangeRequest) SetFavorite(favorite bool) {
+	x.inner.SetFavorite(favorite)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *AssetChangeRequest) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *AssetChangeRequest) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// ContentEditingOutput calls the underlying ContentEditingOutput.
+func (x *AssetChangeRequest) ContentEditingOutput() *ContentEditingOutput {
+	_r := x.inner.ContentEditingOutput()
+	if _r == nil {
+		return nil
+	}
+	return &ContentEditingOutput{inner: _r}
+}
+
+// SetContentEditingOutput calls the underlying SetContentEditingOutput.
+func (x *AssetChangeRequest) SetContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) {
+	x.inner.SetContentEditingOutput(contentEditingOutput)
+}
+
 func (x *AssetChangeRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest { return x.inner }
 
 func (x *AssetChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+
+// AssetChangeRequestable is the interface implemented by [AssetChangeRequest], for mocking and DI.
+type AssetChangeRequestable interface {
+	Unwrap() *raw.PHAssetChangeRequest
+	WithCreationDate(creationDate *foundation.NSDate) *AssetChangeRequest
+	WithFavorite(favorite bool) *AssetChangeRequest
+	WithHidden(hidden bool) *AssetChangeRequest
+	WithContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput) *AssetChangeRequest
+	RevertAssetContentToOriginal()
+	PlaceholderForCreatedAsset() *ObjectPlaceholder
+	CreationDate() *foundation.NSDate
+	SetCreationDate(creationDate *foundation.NSDate)
+	Location() unsafe.Pointer
+	SetLocation(location unsafe.Pointer)
+	IsFavorite() bool
+	SetFavorite(favorite bool)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	ContentEditingOutput() *ContentEditingOutput
+	SetContentEditingOutput(contentEditingOutput *raw.PHContentEditingOutput)
+}
+
+var _ AssetChangeRequestable = (*AssetChangeRequest)(nil)
 

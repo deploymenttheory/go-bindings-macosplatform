@@ -6,6 +6,8 @@ package addressbook
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,56 @@ func NewMutableMultiValue() *MutableMultiValue {
 	return &MutableMultiValue{inner: raw.ABMutableMultiValueFromID(_id)}
 }
 
+// AddValueWithLabel calls the underlying AddValueWithLabel.
+func (x *MutableMultiValue) AddValueWithLabel(value objc.ID, label string) string {
+	_r := x.inner.AddValueWithLabel(value, foundation.NSStringStringWithUTF8String(label))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// InsertValueWithLabelAtIndex calls the underlying InsertValueWithLabelAtIndex.
+func (x *MutableMultiValue) InsertValueWithLabelAtIndex(value objc.ID, label string, index uint) string {
+	_r := x.inner.InsertValueWithLabelAtIndex(value, foundation.NSStringStringWithUTF8String(label), index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RemoveValueAndLabelAtIndex calls the underlying RemoveValueAndLabelAtIndex.
+func (x *MutableMultiValue) RemoveValueAndLabelAtIndex(index uint) bool {
+	return x.inner.RemoveValueAndLabelAtIndex(index)
+}
+
+// ReplaceValueAtIndexWithValue calls the underlying ReplaceValueAtIndexWithValue.
+func (x *MutableMultiValue) ReplaceValueAtIndexWithValue(index uint, value objc.ID) bool {
+	return x.inner.ReplaceValueAtIndexWithValue(index, value)
+}
+
+// ReplaceLabelAtIndexWithLabel calls the underlying ReplaceLabelAtIndexWithLabel.
+func (x *MutableMultiValue) ReplaceLabelAtIndexWithLabel(index uint, label string) bool {
+	return x.inner.ReplaceLabelAtIndexWithLabel(index, foundation.NSStringStringWithUTF8String(label))
+}
+
+// SetPrimaryIdentifier calls the underlying SetPrimaryIdentifier.
+func (x *MutableMultiValue) SetPrimaryIdentifier(identifier string) bool {
+	return x.inner.SetPrimaryIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
 func (x *MutableMultiValue) asMultiValue() *raw.ABMultiValue { return &x.inner.ABMultiValue }
+
+// MutableMultiValueable is the interface implemented by [MutableMultiValue], for mocking and DI.
+type MutableMultiValueable interface {
+	Unwrap() *raw.ABMutableMultiValue
+	AddValueWithLabel(value objc.ID, label string) string
+	InsertValueWithLabelAtIndex(value objc.ID, label string, index uint) string
+	RemoveValueAndLabelAtIndex(index uint) bool
+	ReplaceValueAtIndexWithValue(index uint, value objc.ID) bool
+	ReplaceLabelAtIndexWithLabel(index uint, label string) bool
+	SetPrimaryIdentifier(identifier string) bool
+}
+
+var _ MutableMultiValueable = (*MutableMultiValue)(nil)
 

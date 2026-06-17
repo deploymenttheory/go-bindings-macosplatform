@@ -23,3 +23,16 @@ func NewWKFindResult() *WKFindResult {
 	return &WKFindResult{inner: raw.WKFindResultFromID(_id)}
 }
 
+// MatchFound calls the underlying MatchFound.
+func (x *WKFindResult) MatchFound() bool {
+	return x.inner.MatchFound()
+}
+
+// WKFindResultable is the interface implemented by [WKFindResult], for mocking and DI.
+type WKFindResultable interface {
+	Unwrap() *raw.WKFindResult
+	MatchFound() bool
+}
+
+var _ WKFindResultable = (*WKFindResult)(nil)
+

@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,41 @@ func NewAirportWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode s
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(iataCode).Ptr(), foundation.NSStringStringWithUTF8String(icaoCode).Ptr())
 	return &Airport{inner: raw.INAirportFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Airport) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IataCode calls the underlying IataCode.
+func (x *Airport) IataCode() string {
+	_r := x.inner.IataCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IcaoCode calls the underlying IcaoCode.
+func (x *Airport) IcaoCode() string {
+	_r := x.inner.IcaoCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Airportable is the interface implemented by [Airport], for mocking and DI.
+type Airportable interface {
+	Unwrap() *raw.INAirport
+	Name() string
+	IataCode() string
+	IcaoCode() string
+}
+
+var _ Airportable = (*Airport)(nil)
 

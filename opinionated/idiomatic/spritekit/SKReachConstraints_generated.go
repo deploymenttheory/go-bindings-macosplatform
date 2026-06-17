@@ -36,3 +36,36 @@ func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachCo
 	return x
 }
 
+// LowerAngleLimit calls the underlying LowerAngleLimit.
+func (x *ReachConstraints) LowerAngleLimit() float64 {
+	return x.inner.LowerAngleLimit()
+}
+
+// SetLowerAngleLimit calls the underlying SetLowerAngleLimit.
+func (x *ReachConstraints) SetLowerAngleLimit(lowerAngleLimit float64) {
+	x.inner.SetLowerAngleLimit(lowerAngleLimit)
+}
+
+// UpperAngleLimit calls the underlying UpperAngleLimit.
+func (x *ReachConstraints) UpperAngleLimit() float64 {
+	return x.inner.UpperAngleLimit()
+}
+
+// SetUpperAngleLimit calls the underlying SetUpperAngleLimit.
+func (x *ReachConstraints) SetUpperAngleLimit(upperAngleLimit float64) {
+	x.inner.SetUpperAngleLimit(upperAngleLimit)
+}
+
+// ReachConstraintsable is the interface implemented by [ReachConstraints], for mocking and DI.
+type ReachConstraintsable interface {
+	Unwrap() *raw.SKReachConstraints
+	WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints
+	WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints
+	LowerAngleLimit() float64
+	SetLowerAngleLimit(lowerAngleLimit float64)
+	UpperAngleLimit() float64
+	SetUpperAngleLimit(upperAngleLimit float64)
+}
+
+var _ ReachConstraintsable = (*ReachConstraints)(nil)
+

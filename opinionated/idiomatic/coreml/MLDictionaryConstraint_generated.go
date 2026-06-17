@@ -23,3 +23,16 @@ func NewDictionaryConstraint() *DictionaryConstraint {
 	return &DictionaryConstraint{inner: raw.MLDictionaryConstraintFromID(_id)}
 }
 
+// KeyType calls the underlying KeyType.
+func (x *DictionaryConstraint) KeyType() raw.MLFeatureType {
+	return x.inner.KeyType()
+}
+
+// DictionaryConstraintable is the interface implemented by [DictionaryConstraint], for mocking and DI.
+type DictionaryConstraintable interface {
+	Unwrap() *raw.MLDictionaryConstraint
+	KeyType() raw.MLFeatureType
+}
+
+var _ DictionaryConstraintable = (*DictionaryConstraint)(nil)
+

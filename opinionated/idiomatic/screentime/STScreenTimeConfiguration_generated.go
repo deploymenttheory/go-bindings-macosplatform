@@ -23,3 +23,16 @@ func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
 	return &ScreenTimeConfiguration{inner: raw.STScreenTimeConfigurationFromID(_id)}
 }
 
+// EnforcesChildRestrictions calls the underlying EnforcesChildRestrictions.
+func (x *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
+	return x.inner.EnforcesChildRestrictions()
+}
+
+// ScreenTimeConfigurationable is the interface implemented by [ScreenTimeConfiguration], for mocking and DI.
+type ScreenTimeConfigurationable interface {
+	Unwrap() *raw.STScreenTimeConfiguration
+	EnforcesChildRestrictions() bool
+}
+
+var _ ScreenTimeConfigurationable = (*ScreenTimeConfiguration)(nil)
+

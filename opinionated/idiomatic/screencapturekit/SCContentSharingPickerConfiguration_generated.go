@@ -7,6 +7,7 @@ package screencapturekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -69,29 +70,74 @@ func (x *ContentSharingPickerConfiguration) WithAllowsChangingSelectedContent(al
 	return x
 }
 
+// AllowedPickerModes calls the underlying AllowedPickerModes.
+func (x *ContentSharingPickerConfiguration) AllowedPickerModes() raw.SCContentSharingPickerMode {
+	return x.inner.AllowedPickerModes()
+}
+
+// SetAllowedPickerModes calls the underlying SetAllowedPickerModes.
+func (x *ContentSharingPickerConfiguration) SetAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode) {
+	x.inner.SetAllowedPickerModes(allowedPickerModes)
+}
+
 // ExcludedWindowIDs returns the collection as a Go slice.
 func (x *ContentSharingPickerConfiguration) ExcludedWindowIDs() []*foundation.NSNumber {
 	arr := x.inner.ExcludedWindowIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetExcludedWindowIDs calls the underlying SetExcludedWindowIDs.
+func (x *ContentSharingPickerConfiguration) SetExcludedWindowIDs(excludedWindowIDs *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetExcludedWindowIDs(excludedWindowIDs)
 }
 
 // ExcludedBundleIDs returns the collection as a Go slice.
-func (x *ContentSharingPickerConfiguration) ExcludedBundleIDs() []*foundation.NSString {
+func (x *ContentSharingPickerConfiguration) ExcludedBundleIDs() []string {
 	arr := x.inner.ExcludedBundleIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetExcludedBundleIDs calls the underlying SetExcludedBundleIDs.
+func (x *ContentSharingPickerConfiguration) SetExcludedBundleIDs(excludedBundleIDs *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedBundleIDs(excludedBundleIDs)
+}
+
+// AllowsChangingSelectedContent calls the underlying AllowsChangingSelectedContent.
+func (x *ContentSharingPickerConfiguration) AllowsChangingSelectedContent() bool {
+	return x.inner.AllowsChangingSelectedContent()
+}
+
+// SetAllowsChangingSelectedContent calls the underlying SetAllowsChangingSelectedContent.
+func (x *ContentSharingPickerConfiguration) SetAllowsChangingSelectedContent(allowsChangingSelectedContent bool) {
+	x.inner.SetAllowsChangingSelectedContent(allowsChangingSelectedContent)
+}
+
+// ContentSharingPickerConfigurationable is the interface implemented by [ContentSharingPickerConfiguration], for mocking and DI.
+type ContentSharingPickerConfigurationable interface {
+	Unwrap() *raw.SCContentSharingPickerConfiguration[objc.ID]
+	WithAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode) *ContentSharingPickerConfiguration
+	WithExcludedWindowIDs(items ...*foundation.NSNumber) *ContentSharingPickerConfiguration
+	WithExcludedBundleIDs(items ...*foundation.NSString) *ContentSharingPickerConfiguration
+	WithAllowsChangingSelectedContent(allowsChangingSelectedContent bool) *ContentSharingPickerConfiguration
+	AllowedPickerModes() raw.SCContentSharingPickerMode
+	SetAllowedPickerModes(allowedPickerModes raw.SCContentSharingPickerMode)
+	ExcludedWindowIDs() []*foundation.NSNumber
+	SetExcludedWindowIDs(excludedWindowIDs *foundation.NSArray[*foundation.NSNumber])
+	ExcludedBundleIDs() []string
+	SetExcludedBundleIDs(excludedBundleIDs *foundation.NSArray[*foundation.NSString])
+	AllowsChangingSelectedContent() bool
+	SetAllowsChangingSelectedContent(allowsChangingSelectedContent bool)
+}
+
+var _ ContentSharingPickerConfigurationable = (*ContentSharingPickerConfiguration)(nil)
 

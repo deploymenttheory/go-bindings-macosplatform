@@ -27,9 +27,100 @@ func NewNDArrayBinaryKernelWithDevice(device metal.MTLDevice) *NDArrayBinaryKern
 	return &NDArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferPrimarySourceArraySecondarySourceArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArray.
+func (x *NDArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf, primarySourceArray, secondarySourceArray)
+}
+
+// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray.
+func (x *NDArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, destination)
+}
+
+// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary.
+func (x *NDArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, outputStateIsTemporary)
+}
+
+// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray.
+func (x *NDArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, destination)
+}
+
+// PrimaryOffsets calls the underlying PrimaryOffsets.
+func (x *NDArrayBinaryKernel) PrimaryOffsets() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.PrimaryOffsets()
+}
+
+// PrimaryEdgeMode calls the underlying PrimaryEdgeMode.
+func (x *NDArrayBinaryKernel) PrimaryEdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.PrimaryEdgeMode()
+}
+
+// PrimaryKernelSizes calls the underlying PrimaryKernelSizes.
+func (x *NDArrayBinaryKernel) PrimaryKernelSizes() mpsndarray.MPSNDArraySizes {
+	return x.inner.PrimaryKernelSizes()
+}
+
+// PrimaryStrides calls the underlying PrimaryStrides.
+func (x *NDArrayBinaryKernel) PrimaryStrides() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.PrimaryStrides()
+}
+
+// PrimaryDilationRates calls the underlying PrimaryDilationRates.
+func (x *NDArrayBinaryKernel) PrimaryDilationRates() mpsndarray.MPSNDArraySizes {
+	return x.inner.PrimaryDilationRates()
+}
+
+// SecondaryOffsets calls the underlying SecondaryOffsets.
+func (x *NDArrayBinaryKernel) SecondaryOffsets() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.SecondaryOffsets()
+}
+
+// SecondaryEdgeMode calls the underlying SecondaryEdgeMode.
+func (x *NDArrayBinaryKernel) SecondaryEdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.SecondaryEdgeMode()
+}
+
+// SecondaryKernelSizes calls the underlying SecondaryKernelSizes.
+func (x *NDArrayBinaryKernel) SecondaryKernelSizes() mpsndarray.MPSNDArraySizes {
+	return x.inner.SecondaryKernelSizes()
+}
+
+// SecondaryStrides calls the underlying SecondaryStrides.
+func (x *NDArrayBinaryKernel) SecondaryStrides() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.SecondaryStrides()
+}
+
+// SecondaryDilationRates calls the underlying SecondaryDilationRates.
+func (x *NDArrayBinaryKernel) SecondaryDilationRates() mpsndarray.MPSNDArraySizes {
+	return x.inner.SecondaryDilationRates()
+}
+
 func (x *NDArrayBinaryKernel) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayBinaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayBinaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayBinaryKernelable is the interface implemented by [NDArrayBinaryKernel], for mocking and DI.
+type NDArrayBinaryKernelable interface {
+	Unwrap() *raw.MPSNDArrayBinaryKernel
+	EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
+	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
+	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
+	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	PrimaryOffsets() mpsndarray.MPSNDArrayOffsets
+	PrimaryEdgeMode() mpscore.MPSImageEdgeMode
+	PrimaryKernelSizes() mpsndarray.MPSNDArraySizes
+	PrimaryStrides() mpsndarray.MPSNDArrayOffsets
+	PrimaryDilationRates() mpsndarray.MPSNDArraySizes
+	SecondaryOffsets() mpsndarray.MPSNDArrayOffsets
+	SecondaryEdgeMode() mpscore.MPSImageEdgeMode
+	SecondaryKernelSizes() mpsndarray.MPSNDArraySizes
+	SecondaryStrides() mpsndarray.MPSNDArrayOffsets
+	SecondaryDilationRates() mpsndarray.MPSNDArraySizes
+}
+
+var _ NDArrayBinaryKernelable = (*NDArrayBinaryKernel)(nil)
 

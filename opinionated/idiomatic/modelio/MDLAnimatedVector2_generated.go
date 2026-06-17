@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnimatedVector2 wraps [raw.MDLAnimatedVector2] with a fluent Go API.
@@ -23,5 +24,60 @@ func NewAnimatedVector2() *AnimatedVector2 {
 	return &AnimatedVector2{inner: raw.MDLAnimatedVector2FromID(_id)}
 }
 
+// SetFloat2AtTime calls the underlying SetFloat2AtTime.
+func (x *AnimatedVector2) SetFloat2AtTime(value unsafe.Pointer, time_ float64) {
+	x.inner.SetFloat2AtTime(value, time_)
+}
+
+// SetDouble2AtTime calls the underlying SetDouble2AtTime.
+func (x *AnimatedVector2) SetDouble2AtTime(value unsafe.Pointer, time_ float64) {
+	x.inner.SetDouble2AtTime(value, time_)
+}
+
+// Float2AtTime calls the underlying Float2AtTime.
+func (x *AnimatedVector2) Float2AtTime(time_ float64) unsafe.Pointer {
+	return x.inner.Float2AtTime(time_)
+}
+
+// Double2AtTime calls the underlying Double2AtTime.
+func (x *AnimatedVector2) Double2AtTime(time_ float64) unsafe.Pointer {
+	return x.inner.Double2AtTime(time_)
+}
+
+// ResetWithFloat2ArrayAtTimesCount calls the underlying ResetWithFloat2ArrayAtTimesCount.
+func (x *AnimatedVector2) ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
+	x.inner.ResetWithFloat2ArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// ResetWithDouble2ArrayAtTimesCount calls the underlying ResetWithDouble2ArrayAtTimesCount.
+func (x *AnimatedVector2) ResetWithDouble2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
+	x.inner.ResetWithDouble2ArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// GetFloat2ArrayMaxCount calls the underlying GetFloat2ArrayMaxCount.
+func (x *AnimatedVector2) GetFloat2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetFloat2ArrayMaxCount(valuesArray, maxCount)
+}
+
+// GetDouble2ArrayMaxCount calls the underlying GetDouble2ArrayMaxCount.
+func (x *AnimatedVector2) GetDouble2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
+	return x.inner.GetDouble2ArrayMaxCount(valuesArray, maxCount)
+}
+
 func (x *AnimatedVector2) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+
+// AnimatedVector2able is the interface implemented by [AnimatedVector2], for mocking and DI.
+type AnimatedVector2able interface {
+	Unwrap() *raw.MDLAnimatedVector2
+	SetFloat2AtTime(value unsafe.Pointer, time_ float64)
+	SetDouble2AtTime(value unsafe.Pointer, time_ float64)
+	Float2AtTime(time_ float64) unsafe.Pointer
+	Double2AtTime(time_ float64) unsafe.Pointer
+	ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
+	ResetWithDouble2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
+	GetFloat2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	GetDouble2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+}
+
+var _ AnimatedVector2able = (*AnimatedVector2)(nil)
 

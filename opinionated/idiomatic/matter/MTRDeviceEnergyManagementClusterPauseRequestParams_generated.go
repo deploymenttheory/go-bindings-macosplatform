@@ -48,3 +48,62 @@ func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) WithServerSideProce
 	return x
 }
 
+// Duration calls the underlying Duration.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDeviceEnergyManagementClusterPauseRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDeviceEnergyManagementClusterPauseRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterPauseRequestParams], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPauseRequestParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPauseRequestParams
+	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPauseRequestParams
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPauseRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPauseRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPauseRequestParams
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterPauseRequestParamsable = (*MTRDeviceEnergyManagementClusterPauseRequestParams)(nil)
+

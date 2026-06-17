@@ -23,5 +23,22 @@ func NewSyncEngineDidSendChangesEvent() *SyncEngineDidSendChangesEvent {
 	return &SyncEngineDidSendChangesEvent{inner: raw.CKSyncEngineDidSendChangesEventFromID(_id)}
 }
 
+// Context calls the underlying Context.
+func (x *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
+	_r := x.inner.Context()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineSendChangesContext{inner: _r}
+}
+
 func (x *SyncEngineDidSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineDidSendChangesEventable is the interface implemented by [SyncEngineDidSendChangesEvent], for mocking and DI.
+type SyncEngineDidSendChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineDidSendChangesEvent
+	Context() *SyncEngineSendChangesContext
+}
+
+var _ SyncEngineDidSendChangesEventable = (*SyncEngineDidSendChangesEvent)(nil)
 

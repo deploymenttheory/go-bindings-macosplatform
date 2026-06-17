@@ -31,7 +31,27 @@ func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *ArrayVectorL
 	return x
 }
 
+// VectorAxis calls the underlying VectorAxis.
+func (x *ArrayVectorLUTDequantize) VectorAxis() uint {
+	return x.inner.VectorAxis()
+}
+
+// SetVectorAxis calls the underlying SetVectorAxis.
+func (x *ArrayVectorLUTDequantize) SetVectorAxis(vectorAxis uint) {
+	x.inner.SetVectorAxis(vectorAxis)
+}
+
 func (x *ArrayVectorLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *ArrayVectorLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+
+// ArrayVectorLUTDequantizeable is the interface implemented by [ArrayVectorLUTDequantize], for mocking and DI.
+type ArrayVectorLUTDequantizeable interface {
+	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
+	WithVectorAxis(vectorAxis uint) *ArrayVectorLUTDequantize
+	VectorAxis() uint
+	SetVectorAxis(vectorAxis uint)
+}
+
+var _ ArrayVectorLUTDequantizeable = (*ArrayVectorLUTDequantize)(nil)
 

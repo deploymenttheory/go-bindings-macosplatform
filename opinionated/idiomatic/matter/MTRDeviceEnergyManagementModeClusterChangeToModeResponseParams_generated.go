@@ -43,3 +43,40 @@ func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithSta
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable = (*MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams)(nil)
+

@@ -85,3 +85,152 @@ func (x *MapSnapshotOptions) WithAppearance(appearance *appkit.NSAppearance) *Ma
 	return x
 }
 
+// PreferredConfiguration calls the underlying PreferredConfiguration.
+func (x *MapSnapshotOptions) PreferredConfiguration() *MapConfiguration {
+	_r := x.inner.PreferredConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &MapConfiguration{inner: _r}
+}
+
+// SetPreferredConfiguration calls the underlying SetPreferredConfiguration.
+func (x *MapSnapshotOptions) SetPreferredConfiguration(preferredConfiguration *raw.MKMapConfiguration) {
+	x.inner.SetPreferredConfiguration(preferredConfiguration)
+}
+
+// Camera calls the underlying Camera.
+func (x *MapSnapshotOptions) Camera() *MapCamera {
+	_r := x.inner.Camera()
+	if _r == nil {
+		return nil
+	}
+	return &MapCamera{inner: _r}
+}
+
+// SetCamera calls the underlying SetCamera.
+func (x *MapSnapshotOptions) SetCamera(camera *raw.MKMapCamera) {
+	x.inner.SetCamera(camera)
+}
+
+// MapRect calls the underlying MapRect.
+func (x *MapSnapshotOptions) MapRect() raw.MKMapRect {
+	return x.inner.MapRect()
+}
+
+// SetMapRect calls the underlying SetMapRect.
+func (x *MapSnapshotOptions) SetMapRect(mapRect raw.MKMapRect) {
+	x.inner.SetMapRect(mapRect)
+}
+
+// Region calls the underlying Region.
+func (x *MapSnapshotOptions) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *MapSnapshotOptions) SetRegion(region raw.MKCoordinateRegion) {
+	x.inner.SetRegion(region)
+}
+
+// MapType calls the underlying MapType.
+func (x *MapSnapshotOptions) MapType() raw.MKMapType {
+	return x.inner.MapType()
+}
+
+// SetMapType calls the underlying SetMapType.
+func (x *MapSnapshotOptions) SetMapType(mapType raw.MKMapType) {
+	x.inner.SetMapType(mapType)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *MapSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *MapSnapshotOptions) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// ShowsPointsOfInterest calls the underlying ShowsPointsOfInterest.
+func (x *MapSnapshotOptions) ShowsPointsOfInterest() bool {
+	return x.inner.ShowsPointsOfInterest()
+}
+
+// SetShowsPointsOfInterest calls the underlying SetShowsPointsOfInterest.
+func (x *MapSnapshotOptions) SetShowsPointsOfInterest(showsPointsOfInterest bool) {
+	x.inner.SetShowsPointsOfInterest(showsPointsOfInterest)
+}
+
+// ShowsBuildings calls the underlying ShowsBuildings.
+func (x *MapSnapshotOptions) ShowsBuildings() bool {
+	return x.inner.ShowsBuildings()
+}
+
+// SetShowsBuildings calls the underlying SetShowsBuildings.
+func (x *MapSnapshotOptions) SetShowsBuildings(showsBuildings bool) {
+	x.inner.SetShowsBuildings(showsBuildings)
+}
+
+// Size calls the underlying Size.
+func (x *MapSnapshotOptions) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *MapSnapshotOptions) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// Appearance calls the underlying Appearance.
+func (x *MapSnapshotOptions) Appearance() *appkit.NSAppearance {
+	return x.inner.Appearance()
+}
+
+// SetAppearance calls the underlying SetAppearance.
+func (x *MapSnapshotOptions) SetAppearance(appearance *appkit.NSAppearance) {
+	x.inner.SetAppearance(appearance)
+}
+
+// MapSnapshotOptionsable is the interface implemented by [MapSnapshotOptions], for mocking and DI.
+type MapSnapshotOptionsable interface {
+	Unwrap() *raw.MKMapSnapshotOptions
+	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapSnapshotOptions
+	WithCamera(camera *raw.MKMapCamera) *MapSnapshotOptions
+	WithMapRect(mapRect raw.MKMapRect) *MapSnapshotOptions
+	WithRegion(region raw.MKCoordinateRegion) *MapSnapshotOptions
+	WithMapType(mapType raw.MKMapType) *MapSnapshotOptions
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapSnapshotOptions
+	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapSnapshotOptions
+	WithShowsBuildings(showsBuildings bool) *MapSnapshotOptions
+	WithSize(size corefoundation.CGSize) *MapSnapshotOptions
+	WithAppearance(appearance *appkit.NSAppearance) *MapSnapshotOptions
+	PreferredConfiguration() *MapConfiguration
+	SetPreferredConfiguration(preferredConfiguration *raw.MKMapConfiguration)
+	Camera() *MapCamera
+	SetCamera(camera *raw.MKMapCamera)
+	MapRect() raw.MKMapRect
+	SetMapRect(mapRect raw.MKMapRect)
+	Region() raw.MKCoordinateRegion
+	SetRegion(region raw.MKCoordinateRegion)
+	MapType() raw.MKMapType
+	SetMapType(mapType raw.MKMapType)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	ShowsPointsOfInterest() bool
+	SetShowsPointsOfInterest(showsPointsOfInterest bool)
+	ShowsBuildings() bool
+	SetShowsBuildings(showsBuildings bool)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	Appearance() *appkit.NSAppearance
+	SetAppearance(appearance *appkit.NSAppearance)
+}
+
+var _ MapSnapshotOptionsable = (*MapSnapshotOptions)(nil)
+

@@ -5,8 +5,11 @@
 package contactsui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contactsui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,16 +50,54 @@ func (x *ContactPicker) WithDelegate(delegate raw.CNContactPickerDelegate) *Cont
 	return x
 }
 
+// ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
+func (x *ContactPicker) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge) {
+	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
+}
+
+// Close calls the underlying Close.
+func (x *ContactPicker) Close() {
+	x.inner.Close()
+}
+
 // DisplayedKeys returns the collection as a Go slice.
-func (x *ContactPicker) DisplayedKeys() []*foundation.NSString {
+func (x *ContactPicker) DisplayedKeys() []string {
 	arr := x.inner.DisplayedKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetDisplayedKeys calls the underlying SetDisplayedKeys.
+func (x *ContactPicker) SetDisplayedKeys(displayedKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDisplayedKeys(displayedKeys)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *ContactPicker) Delegate() raw.CNContactPickerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *ContactPicker) SetDelegate(delegate raw.CNContactPickerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ContactPickerable is the interface implemented by [ContactPicker], for mocking and DI.
+type ContactPickerable interface {
+	Unwrap() *raw.CNContactPicker
+	WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker
+	WithDelegate(delegate raw.CNContactPickerDelegate) *ContactPicker
+	ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge)
+	Close()
+	DisplayedKeys() []string
+	SetDisplayedKeys(displayedKeys *foundation.NSArray[*foundation.NSString])
+	Delegate() raw.CNContactPickerDelegate
+	SetDelegate(delegate raw.CNContactPickerDelegate)
+}
+
+var _ ContactPickerable = (*ContactPicker)(nil)
 

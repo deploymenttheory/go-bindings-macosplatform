@@ -25,3 +25,16 @@ func NewPersonIdentityWithRootHash(rootHash *foundation.NSData) *PersonIdentity 
 	return &PersonIdentity{inner: raw.SWPersonIdentityFromID(_id)}
 }
 
+// RootHash calls the underlying RootHash.
+func (x *PersonIdentity) RootHash() *foundation.NSData {
+	return x.inner.RootHash()
+}
+
+// PersonIdentityable is the interface implemented by [PersonIdentity], for mocking and DI.
+type PersonIdentityable interface {
+	Unwrap() *raw.SWPersonIdentity
+	RootHash() *foundation.NSData
+}
+
+var _ PersonIdentityable = (*PersonIdentity)(nil)
+

@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,5 +55,85 @@ func (x *Transition) WithFilter(filter objc.ID) *Transition {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *Transition) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *Transition) SetType(type_ *foundation.NSString) {
+	x.inner.SetType(type_)
+}
+
+// Subtype calls the underlying Subtype.
+func (x *Transition) Subtype() string {
+	_r := x.inner.Subtype()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtype calls the underlying SetSubtype.
+func (x *Transition) SetSubtype(subtype *foundation.NSString) {
+	x.inner.SetSubtype(subtype)
+}
+
+// StartProgress calls the underlying StartProgress.
+func (x *Transition) StartProgress() float32 {
+	return x.inner.StartProgress()
+}
+
+// SetStartProgress calls the underlying SetStartProgress.
+func (x *Transition) SetStartProgress(startProgress float32) {
+	x.inner.SetStartProgress(startProgress)
+}
+
+// EndProgress calls the underlying EndProgress.
+func (x *Transition) EndProgress() float32 {
+	return x.inner.EndProgress()
+}
+
+// SetEndProgress calls the underlying SetEndProgress.
+func (x *Transition) SetEndProgress(endProgress float32) {
+	x.inner.SetEndProgress(endProgress)
+}
+
+// Filter calls the underlying Filter.
+func (x *Transition) Filter() objc.ID {
+	return x.inner.Filter()
+}
+
+// SetFilter calls the underlying SetFilter.
+func (x *Transition) SetFilter(filter objc.ID) {
+	x.inner.SetFilter(filter)
+}
+
 func (x *Transition) asAnimation() *raw.CAAnimation { return &x.inner.CAAnimation }
+
+// Transitionable is the interface implemented by [Transition], for mocking and DI.
+type Transitionable interface {
+	Unwrap() *raw.CATransition
+	WithType(type_ *foundation.NSString) *Transition
+	WithSubtype(subtype *foundation.NSString) *Transition
+	WithStartProgress(startProgress float32) *Transition
+	WithEndProgress(endProgress float32) *Transition
+	WithFilter(filter objc.ID) *Transition
+	Type() string
+	SetType(type_ *foundation.NSString)
+	Subtype() string
+	SetSubtype(subtype *foundation.NSString)
+	StartProgress() float32
+	SetStartProgress(startProgress float32)
+	EndProgress() float32
+	SetEndProgress(endProgress float32)
+	Filter() objc.ID
+	SetFilter(filter objc.ID)
+}
+
+var _ Transitionable = (*Transition)(nil)
 

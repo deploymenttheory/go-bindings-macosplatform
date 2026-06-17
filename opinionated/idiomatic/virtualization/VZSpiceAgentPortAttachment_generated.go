@@ -29,5 +29,25 @@ func (x *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *Sp
 	return x
 }
 
+// SharesClipboard calls the underlying SharesClipboard.
+func (x *SpiceAgentPortAttachment) SharesClipboard() bool {
+	return x.inner.SharesClipboard()
+}
+
+// SetSharesClipboard calls the underlying SetSharesClipboard.
+func (x *SpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
+	x.inner.SetSharesClipboard(sharesClipboard)
+}
+
 func (x *SpiceAgentPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+
+// SpiceAgentPortAttachmentable is the interface implemented by [SpiceAgentPortAttachment], for mocking and DI.
+type SpiceAgentPortAttachmentable interface {
+	Unwrap() *raw.VZSpiceAgentPortAttachment
+	WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment
+	SharesClipboard() bool
+	SetSharesClipboard(sharesClipboard bool)
+}
+
+var _ SpiceAgentPortAttachmentable = (*SpiceAgentPortAttachment)(nil)
 

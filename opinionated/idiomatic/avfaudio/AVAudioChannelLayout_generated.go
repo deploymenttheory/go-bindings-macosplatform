@@ -32,3 +32,34 @@ func NewAudioChannelLayoutWithLayout(layout *coreaudiotypes.AudioChannelLayout) 
 	return &AudioChannelLayout{inner: raw.AVAudioChannelLayoutFromID(_id)}
 }
 
+// IsEqual calls the underlying IsEqual.
+func (x *AudioChannelLayout) IsEqual(object objc.ID) bool {
+	return x.inner.IsEqual(object)
+}
+
+// LayoutTag calls the underlying LayoutTag.
+func (x *AudioChannelLayout) LayoutTag() uint {
+	return x.inner.LayoutTag()
+}
+
+// Layout calls the underlying Layout.
+func (x *AudioChannelLayout) Layout() *coreaudiotypes.AudioChannelLayout {
+	return x.inner.Layout()
+}
+
+// ChannelCount calls the underlying ChannelCount.
+func (x *AudioChannelLayout) ChannelCount() uint32 {
+	return x.inner.ChannelCount()
+}
+
+// AudioChannelLayoutable is the interface implemented by [AudioChannelLayout], for mocking and DI.
+type AudioChannelLayoutable interface {
+	Unwrap() *raw.AVAudioChannelLayout
+	IsEqual(object objc.ID) bool
+	LayoutTag() uint
+	Layout() *coreaudiotypes.AudioChannelLayout
+	ChannelCount() uint32
+}
+
+var _ AudioChannelLayoutable = (*AudioChannelLayout)(nil)
+

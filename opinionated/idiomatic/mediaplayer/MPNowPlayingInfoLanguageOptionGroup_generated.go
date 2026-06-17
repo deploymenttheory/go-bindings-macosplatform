@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,10 +32,32 @@ func (x *NowPlayingInfoLanguageOptionGroup) LanguageOptions() []*raw.MPNowPlayin
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MPNowPlayingInfoLanguageOption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MPNowPlayingInfoLanguageOption {
+		return raw.MPNowPlayingInfoLanguageOptionFromID(purego.Retain(_id))
+	})
 }
+
+// DefaultLanguageOption calls the underlying DefaultLanguageOption.
+func (x *NowPlayingInfoLanguageOptionGroup) DefaultLanguageOption() *NowPlayingInfoLanguageOption {
+	_r := x.inner.DefaultLanguageOption()
+	if _r == nil {
+		return nil
+	}
+	return &NowPlayingInfoLanguageOption{inner: _r}
+}
+
+// AllowEmptySelection calls the underlying AllowEmptySelection.
+func (x *NowPlayingInfoLanguageOptionGroup) AllowEmptySelection() bool {
+	return x.inner.AllowEmptySelection()
+}
+
+// NowPlayingInfoLanguageOptionGroupable is the interface implemented by [NowPlayingInfoLanguageOptionGroup], for mocking and DI.
+type NowPlayingInfoLanguageOptionGroupable interface {
+	Unwrap() *raw.MPNowPlayingInfoLanguageOptionGroup
+	LanguageOptions() []*raw.MPNowPlayingInfoLanguageOption
+	DefaultLanguageOption() *NowPlayingInfoLanguageOption
+	AllowEmptySelection() bool
+}
+
+var _ NowPlayingInfoLanguageOptionGroupable = (*NowPlayingInfoLanguageOptionGroup)(nil)
 

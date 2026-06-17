@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*raw.AVB17221AECPAddressAcce
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVB17221AECPAddressAccessTLV, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVB17221AECPAddressAccessTLV {
+		return raw.AVB17221AECPAddressAccessTLVFromID(purego.Retain(_id))
+	})
+}
+
+// SetTlvs calls the underlying SetTlvs.
+func (x *AVB17221AECPAddressAccessMessage) SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV]) {
+	x.inner.SetTlvs(tlvs)
 }
 
 func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+
+// AVB17221AECPAddressAccessMessageable is the interface implemented by [AVB17221AECPAddressAccessMessage], for mocking and DI.
+type AVB17221AECPAddressAccessMessageable interface {
+	Unwrap() *raw.AVB17221AECPAddressAccessMessage
+	WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage
+	Tlvs() []*raw.AVB17221AECPAddressAccessTLV
+	SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV])
+}
+
+var _ AVB17221AECPAddressAccessMessageable = (*AVB17221AECPAddressAccessMessage)(nil)
 

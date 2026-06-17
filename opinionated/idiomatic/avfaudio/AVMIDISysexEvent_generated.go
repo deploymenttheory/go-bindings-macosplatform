@@ -25,5 +25,18 @@ func NewMIDISysexEventWithData(data *foundation.NSData) *MIDISysexEvent {
 	return &MIDISysexEvent{inner: raw.AVMIDISysexEventFromID(_id)}
 }
 
+// SizeInBytes calls the underlying SizeInBytes.
+func (x *MIDISysexEvent) SizeInBytes() uint {
+	return x.inner.SizeInBytes()
+}
+
 func (x *MIDISysexEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// MIDISysexEventable is the interface implemented by [MIDISysexEvent], for mocking and DI.
+type MIDISysexEventable interface {
+	Unwrap() *raw.AVMIDISysexEvent
+	SizeInBytes() uint
+}
+
+var _ MIDISysexEventable = (*MIDISysexEvent)(nil)
 

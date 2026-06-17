@@ -36,5 +36,38 @@ func (x *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificDat
 	return x
 }
 
+// ProtocolID calls the underlying ProtocolID.
+func (x *AVB17221AECPVendorMessage) ProtocolID() uint64 {
+	return x.inner.ProtocolID()
+}
+
+// SetProtocolID calls the underlying SetProtocolID.
+func (x *AVB17221AECPVendorMessage) SetProtocolID(protocolID uint64) {
+	x.inner.SetProtocolID(protocolID)
+}
+
+// ProtocolSpecificData calls the underlying ProtocolSpecificData.
+func (x *AVB17221AECPVendorMessage) ProtocolSpecificData() *foundation.NSData {
+	return x.inner.ProtocolSpecificData()
+}
+
+// SetProtocolSpecificData calls the underlying SetProtocolSpecificData.
+func (x *AVB17221AECPVendorMessage) SetProtocolSpecificData(protocolSpecificData *foundation.NSData) {
+	x.inner.SetProtocolSpecificData(protocolSpecificData)
+}
+
 func (x *AVB17221AECPVendorMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return &x.inner.AVB17221AECPMessage }
+
+// AVB17221AECPVendorMessageable is the interface implemented by [AVB17221AECPVendorMessage], for mocking and DI.
+type AVB17221AECPVendorMessageable interface {
+	Unwrap() *raw.AVB17221AECPVendorMessage
+	WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage
+	WithProtocolSpecificData(protocolSpecificData *foundation.NSData) *AVB17221AECPVendorMessage
+	ProtocolID() uint64
+	SetProtocolID(protocolID uint64)
+	ProtocolSpecificData() *foundation.NSData
+	SetProtocolSpecificData(protocolSpecificData *foundation.NSData)
+}
+
+var _ AVB17221AECPVendorMessageable = (*AVB17221AECPVendorMessage)(nil)
 

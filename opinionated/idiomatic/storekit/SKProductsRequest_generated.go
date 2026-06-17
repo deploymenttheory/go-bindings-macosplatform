@@ -27,3 +27,10 @@ func NewProductsRequestWithProductIdentifiers(productIdentifiers *foundation.NSS
 
 func (x *ProductsRequest) asRequest() *raw.SKRequest { return &x.inner.SKRequest }
 
+// ProductsRequestable is the interface implemented by [ProductsRequest], for mocking and DI.
+type ProductsRequestable interface {
+	Unwrap() *raw.SKProductsRequest
+}
+
+var _ ProductsRequestable = (*ProductsRequest)(nil)
+

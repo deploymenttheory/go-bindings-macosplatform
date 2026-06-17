@@ -30,3 +30,48 @@ func NewAudiogramSensitivityTestWithSensitivityTypeMaskedSideClampingRangeError(
 	return &AudiogramSensitivityTest{inner: raw.HKAudiogramSensitivityTestFromID(_id)}, nil
 }
 
+// Sensitivity calls the underlying Sensitivity.
+func (x *AudiogramSensitivityTest) Sensitivity() *Quantity {
+	_r := x.inner.Sensitivity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Type calls the underlying Type.
+func (x *AudiogramSensitivityTest) Type() raw.HKAudiogramConductionType {
+	return x.inner.Type()
+}
+
+// Masked calls the underlying Masked.
+func (x *AudiogramSensitivityTest) Masked() bool {
+	return x.inner.Masked()
+}
+
+// Side calls the underlying Side.
+func (x *AudiogramSensitivityTest) Side() raw.HKAudiogramSensitivityTestSide {
+	return x.inner.Side()
+}
+
+// ClampingRange calls the underlying ClampingRange.
+func (x *AudiogramSensitivityTest) ClampingRange() *AudiogramSensitivityPointClampingRange {
+	_r := x.inner.ClampingRange()
+	if _r == nil {
+		return nil
+	}
+	return &AudiogramSensitivityPointClampingRange{inner: _r}
+}
+
+// AudiogramSensitivityTestable is the interface implemented by [AudiogramSensitivityTest], for mocking and DI.
+type AudiogramSensitivityTestable interface {
+	Unwrap() *raw.HKAudiogramSensitivityTest
+	Sensitivity() *Quantity
+	Type() raw.HKAudiogramConductionType
+	Masked() bool
+	Side() raw.HKAudiogramSensitivityTestSide
+	ClampingRange() *AudiogramSensitivityPointClampingRange
+}
+
+var _ AudiogramSensitivityTestable = (*AudiogramSensitivityTest)(nil)
+

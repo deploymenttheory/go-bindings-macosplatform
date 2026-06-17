@@ -39,5 +39,36 @@ func NewCNNPoolingNodeWithSourceFilterSize(sourceNode *mpsneuralnetwork.MPSNNIma
 	return &CNNPoolingNode{inner: raw.MPSCNNPoolingNodeFromID(_id)}
 }
 
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNPoolingNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNPoolingNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// StrideInPixelsX calls the underlying StrideInPixelsX.
+func (x *CNNPoolingNode) StrideInPixelsX() uint {
+	return x.inner.StrideInPixelsX()
+}
+
+// StrideInPixelsY calls the underlying StrideInPixelsY.
+func (x *CNNPoolingNode) StrideInPixelsY() uint {
+	return x.inner.StrideInPixelsY()
+}
+
 func (x *CNNPoolingNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNPoolingNodeable is the interface implemented by [CNNPoolingNode], for mocking and DI.
+type CNNPoolingNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingNode
+	KernelWidth() uint
+	KernelHeight() uint
+	StrideInPixelsX() uint
+	StrideInPixelsY() uint
+}
+
+var _ CNNPoolingNodeable = (*CNNPoolingNode)(nil)
 

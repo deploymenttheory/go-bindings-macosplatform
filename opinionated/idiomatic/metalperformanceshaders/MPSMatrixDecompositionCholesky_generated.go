@@ -27,7 +27,20 @@ func NewMatrixDecompositionCholeskyWithDeviceLowerOrder(device metal.MTLDevice, 
 	return &MatrixDecompositionCholesky{inner: raw.MPSMatrixDecompositionCholeskyFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixResultMatrixStatus calls the underlying EncodeToCommandBufferSourceMatrixResultMatrixStatus.
+func (x *MatrixDecompositionCholesky) EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer) {
+	x.inner.EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer, sourceMatrix, resultMatrix, status)
+}
+
 func (x *MatrixDecompositionCholesky) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
 
 func (x *MatrixDecompositionCholesky) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+
+// MatrixDecompositionCholeskyable is the interface implemented by [MatrixDecompositionCholesky], for mocking and DI.
+type MatrixDecompositionCholeskyable interface {
+	Unwrap() *raw.MPSMatrixDecompositionCholesky
+	EncodeToCommandBufferSourceMatrixResultMatrixStatus(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix, status metal.MTLBuffer)
+}
+
+var _ MatrixDecompositionCholeskyable = (*MatrixDecompositionCholesky)(nil)
 

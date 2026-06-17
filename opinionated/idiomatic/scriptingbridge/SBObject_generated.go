@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Object wraps [raw.SBObject] with a fluent Go API.
@@ -45,5 +46,56 @@ func NewObjectWithElementCodePropertiesData(code uint, properties *foundation.NS
 	return &Object{inner: raw.SBObjectFromID(_id)}
 }
 
+// Get calls the underlying Get.
+func (x *Object) Get() objc.ID {
+	return x.inner.Get()
+}
+
+// LastError calls the underlying LastError.
+func (x *Object) LastError() unsafe.Pointer {
+	return x.inner.LastError()
+}
+
+// PropertyWithCode calls the underlying PropertyWithCode.
+func (x *Object) PropertyWithCode(code uint) *Object {
+	_r := x.inner.PropertyWithCode(code)
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
+// PropertyWithClassCode calls the underlying PropertyWithClassCode.
+func (x *Object) PropertyWithClassCode(cls objc.Class, code uint) *Object {
+	_r := x.inner.PropertyWithClassCode(cls, code)
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
+// ElementArrayWithCode calls the underlying ElementArrayWithCode.
+func (x *Object) ElementArrayWithCode(code uint) *raw.SBElementArray[objc.ID] {
+	return x.inner.ElementArrayWithCode(code)
+}
+
+// SetTo calls the underlying SetTo.
+func (x *Object) SetTo(value objc.ID) {
+	x.inner.SetTo(value)
+}
+
 func (x *Object) asObject() *raw.SBObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.SBObject
+	Get() objc.ID
+	LastError() unsafe.Pointer
+	PropertyWithCode(code uint) *Object
+	PropertyWithClassCode(cls objc.Class, code uint) *Object
+	ElementArrayWithCode(code uint) *raw.SBElementArray[objc.ID]
+	SetTo(value objc.ID)
+}
+
+var _ Objectable = (*Object)(nil)
 

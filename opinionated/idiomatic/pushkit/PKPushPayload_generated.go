@@ -5,7 +5,9 @@
 package pushkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewPushPayload() *PushPayload {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPushPayload")), objc.RegisterName("new"))
 	return &PushPayload{inner: raw.PKPushPayloadFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *PushPayload) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DictionaryPayload calls the underlying DictionaryPayload.
+func (x *PushPayload) DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryPayload()
+}
+
+// PushPayloadable is the interface implemented by [PushPayload], for mocking and DI.
+type PushPayloadable interface {
+	Unwrap() *raw.PKPushPayload
+	Type() string
+	DictionaryPayload() *foundation.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ PushPayloadable = (*PushPayload)(nil)
 

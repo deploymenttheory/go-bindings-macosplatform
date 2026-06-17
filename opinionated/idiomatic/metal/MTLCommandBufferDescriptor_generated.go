@@ -41,3 +41,49 @@ func (x *CommandBufferDescriptor) WithLogState(logState raw.MTLLogState) *Comman
 	return x
 }
 
+// RetainedReferences calls the underlying RetainedReferences.
+func (x *CommandBufferDescriptor) RetainedReferences() bool {
+	return x.inner.RetainedReferences()
+}
+
+// SetRetainedReferences calls the underlying SetRetainedReferences.
+func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool) {
+	x.inner.SetRetainedReferences(retainedReferences)
+}
+
+// ErrorOptions calls the underlying ErrorOptions.
+func (x *CommandBufferDescriptor) ErrorOptions() raw.MTLCommandBufferErrorOption {
+	return x.inner.ErrorOptions()
+}
+
+// SetErrorOptions calls the underlying SetErrorOptions.
+func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions raw.MTLCommandBufferErrorOption) {
+	x.inner.SetErrorOptions(errorOptions)
+}
+
+// LogState calls the underlying LogState.
+func (x *CommandBufferDescriptor) LogState() raw.MTLLogState {
+	return x.inner.LogState()
+}
+
+// SetLogState calls the underlying SetLogState.
+func (x *CommandBufferDescriptor) SetLogState(logState raw.MTLLogState) {
+	x.inner.SetLogState(logState)
+}
+
+// CommandBufferDescriptorable is the interface implemented by [CommandBufferDescriptor], for mocking and DI.
+type CommandBufferDescriptorable interface {
+	Unwrap() *raw.MTLCommandBufferDescriptor
+	WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor
+	WithErrorOptions(errorOptions raw.MTLCommandBufferErrorOption) *CommandBufferDescriptor
+	WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor
+	RetainedReferences() bool
+	SetRetainedReferences(retainedReferences bool)
+	ErrorOptions() raw.MTLCommandBufferErrorOption
+	SetErrorOptions(errorOptions raw.MTLCommandBufferErrorOption)
+	LogState() raw.MTLLogState
+	SetLogState(logState raw.MTLLogState)
+}
+
+var _ CommandBufferDescriptorable = (*CommandBufferDescriptor)(nil)
+

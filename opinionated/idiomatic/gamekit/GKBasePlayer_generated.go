@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewBasePlayer() *BasePlayer {
 	return &BasePlayer{inner: raw.GKBasePlayerFromID(_id)}
 }
 
+// PlayerID calls the underlying PlayerID.
+func (x *BasePlayer) PlayerID() string {
+	_r := x.inner.PlayerID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *BasePlayer) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *BasePlayer) asBasePlayer() *raw.GKBasePlayer { return x.inner }
+
+// BasePlayerable is the interface implemented by [BasePlayer], for mocking and DI.
+type BasePlayerable interface {
+	Unwrap() *raw.GKBasePlayer
+	PlayerID() string
+	DisplayName() string
+}
+
+var _ BasePlayerable = (*BasePlayer)(nil)
 

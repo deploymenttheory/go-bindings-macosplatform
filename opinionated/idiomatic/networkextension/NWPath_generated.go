@@ -23,3 +23,34 @@ func NewNWPath() *NWPath {
 	return &NWPath{inner: raw.NWPathFromID(_id)}
 }
 
+// IsEqualToPath calls the underlying IsEqualToPath.
+func (x *NWPath) IsEqualToPath(path *raw.NWPath) bool {
+	return x.inner.IsEqualToPath(path)
+}
+
+// Status calls the underlying Status.
+func (x *NWPath) Status() raw.NWPathStatus {
+	return x.inner.Status()
+}
+
+// IsExpensive calls the underlying IsExpensive.
+func (x *NWPath) IsExpensive() bool {
+	return x.inner.IsExpensive()
+}
+
+// IsConstrained calls the underlying IsConstrained.
+func (x *NWPath) IsConstrained() bool {
+	return x.inner.IsConstrained()
+}
+
+// NWPathable is the interface implemented by [NWPath], for mocking and DI.
+type NWPathable interface {
+	Unwrap() *raw.NWPath
+	IsEqualToPath(path *raw.NWPath) bool
+	Status() raw.NWPathStatus
+	IsExpensive() bool
+	IsConstrained() bool
+}
+
+var _ NWPathable = (*NWPath)(nil)
+

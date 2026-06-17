@@ -7,6 +7,7 @@ package fskit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContainerStatus wraps [raw.FSContainerStatus] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewContainerStatus() *ContainerStatus {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSContainerStatus")), objc.RegisterName("new"))
 	return &ContainerStatus{inner: raw.FSContainerStatusFromID(_id)}
 }
+
+// State calls the underlying State.
+func (x *ContainerStatus) State() raw.FSContainerState {
+	return x.inner.State()
+}
+
+// Status calls the underlying Status.
+func (x *ContainerStatus) Status() unsafe.Pointer {
+	return x.inner.Status()
+}
+
+// ContainerStatusable is the interface implemented by [ContainerStatus], for mocking and DI.
+type ContainerStatusable interface {
+	Unwrap() *raw.FSContainerStatus
+	State() raw.FSContainerState
+	Status() unsafe.Pointer
+}
+
+var _ ContainerStatusable = (*ContainerStatus)(nil)
 

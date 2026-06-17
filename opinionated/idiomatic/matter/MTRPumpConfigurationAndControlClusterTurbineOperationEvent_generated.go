@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent() *MTRPumpCon
 	return &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{inner: raw.MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterTurbineOperationEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterTurbineOperationEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterTurbineOperationEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterTurbineOperationEventable = (*MTRPumpConfigurationAndControlClusterTurbineOperationEvent)(nil)
+

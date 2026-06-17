@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewHistogramBucket() *HistogramBucket {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXHistogramBucket")), objc.RegisterName("new"))
 	return &HistogramBucket{inner: raw.MXHistogramBucketFromID[objc.ID](_id)}
 }
+
+// BucketStart calls the underlying BucketStart.
+func (x *HistogramBucket) BucketStart() *foundation.NSMeasurement[objc.ID] {
+	return x.inner.BucketStart()
+}
+
+// BucketEnd calls the underlying BucketEnd.
+func (x *HistogramBucket) BucketEnd() *foundation.NSMeasurement[objc.ID] {
+	return x.inner.BucketEnd()
+}
+
+// BucketCount calls the underlying BucketCount.
+func (x *HistogramBucket) BucketCount() uint {
+	return x.inner.BucketCount()
+}
+
+// HistogramBucketable is the interface implemented by [HistogramBucket], for mocking and DI.
+type HistogramBucketable interface {
+	Unwrap() *raw.MXHistogramBucket[objc.ID]
+	BucketStart() *foundation.NSMeasurement[objc.ID]
+	BucketEnd() *foundation.NSMeasurement[objc.ID]
+	BucketCount() uint
+}
+
+var _ HistogramBucketable = (*HistogramBucket)(nil)
 

@@ -5,8 +5,10 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // XPCCoder wraps [raw.NSXPCCoder] with a fluent Go API.
@@ -29,7 +31,53 @@ func (x *XPCCoder) WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder {
 	return x
 }
 
+// EncodeXPCObjectForKey calls the underlying EncodeXPCObjectForKey.
+func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string) {
+	x.inner.EncodeXPCObjectForKey(xpcObject, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeXPCObjectOfTypeForKey calls the underlying DecodeXPCObjectOfTypeForKey.
+func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object {
+	_r := x.inner.DecodeXPCObjectOfTypeForKey(type_, foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *XPCCoder) UserInfo() raw.NSObjectProtocol {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *XPCCoder) SetUserInfo(userInfo raw.NSObjectProtocol) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// Connection calls the underlying Connection.
+func (x *XPCCoder) Connection() *XPCConnection {
+	_r := x.inner.Connection()
+	if _r == nil {
+		return nil
+	}
+	return &XPCConnection{inner: _r}
+}
+
 func (x *XPCCoder) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *XPCCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// XPCCoderable is the interface implemented by [XPCCoder], for mocking and DI.
+type XPCCoderable interface {
+	Unwrap() *raw.NSXPCCoder
+	WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder
+	EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string)
+	DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object
+	UserInfo() raw.NSObjectProtocol
+	SetUserInfo(userInfo raw.NSObjectProtocol)
+	Connection() *XPCConnection
+}
+
+var _ XPCCoderable = (*XPCCoder)(nil)
 

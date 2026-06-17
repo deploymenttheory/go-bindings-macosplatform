@@ -6,7 +6,9 @@ package corelocation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Beacon wraps [raw.CLBeacon] with a fluent Go API.
@@ -22,4 +24,59 @@ func NewBeacon() *Beacon {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeacon")), objc.RegisterName("new"))
 	return &Beacon{inner: raw.CLBeaconFromID(_id)}
 }
+
+// Timestamp calls the underlying Timestamp.
+func (x *Beacon) Timestamp() *foundation.NSDate {
+	return x.inner.Timestamp()
+}
+
+// UUID calls the underlying UUID.
+func (x *Beacon) UUID() *foundation.NSUUID {
+	return x.inner.UUID()
+}
+
+// ProximityUUID calls the underlying ProximityUUID.
+func (x *Beacon) ProximityUUID() *foundation.NSUUID {
+	return x.inner.ProximityUUID()
+}
+
+// Major calls the underlying Major.
+func (x *Beacon) Major() *foundation.NSNumber {
+	return x.inner.Major()
+}
+
+// Minor calls the underlying Minor.
+func (x *Beacon) Minor() *foundation.NSNumber {
+	return x.inner.Minor()
+}
+
+// Proximity calls the underlying Proximity.
+func (x *Beacon) Proximity() raw.CLProximity {
+	return x.inner.Proximity()
+}
+
+// Accuracy calls the underlying Accuracy.
+func (x *Beacon) Accuracy() unsafe.Pointer {
+	return x.inner.Accuracy()
+}
+
+// Rssi calls the underlying Rssi.
+func (x *Beacon) Rssi() int {
+	return x.inner.Rssi()
+}
+
+// Beaconable is the interface implemented by [Beacon], for mocking and DI.
+type Beaconable interface {
+	Unwrap() *raw.CLBeacon
+	Timestamp() *foundation.NSDate
+	UUID() *foundation.NSUUID
+	ProximityUUID() *foundation.NSUUID
+	Major() *foundation.NSNumber
+	Minor() *foundation.NSNumber
+	Proximity() raw.CLProximity
+	Accuracy() unsafe.Pointer
+	Rssi() int
+}
+
+var _ Beaconable = (*Beacon)(nil)
 

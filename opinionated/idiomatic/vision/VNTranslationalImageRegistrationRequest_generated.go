@@ -31,3 +31,10 @@ func (x *TranslationalImageRegistrationRequest) asImageBasedRequest() *raw.VNIma
 
 func (x *TranslationalImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
 
+// TranslationalImageRegistrationRequestable is the interface implemented by [TranslationalImageRegistrationRequest], for mocking and DI.
+type TranslationalImageRegistrationRequestable interface {
+	Unwrap() *raw.VNTranslationalImageRegistrationRequest
+}
+
+var _ TranslationalImageRegistrationRequestable = (*TranslationalImageRegistrationRequest)(nil)
+

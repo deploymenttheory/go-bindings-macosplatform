@@ -5,7 +5,9 @@
 package networkextension
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,39 @@ func NewNEFlowMetaData() *NEFlowMetaData {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFlowMetaData")), objc.RegisterName("new"))
 	return &NEFlowMetaData{inner: raw.NEFlowMetaDataFromID(_id)}
 }
+
+// SourceAppUniqueIdentifier calls the underlying SourceAppUniqueIdentifier.
+func (x *NEFlowMetaData) SourceAppUniqueIdentifier() *foundation.NSData {
+	return x.inner.SourceAppUniqueIdentifier()
+}
+
+// SourceAppSigningIdentifier calls the underlying SourceAppSigningIdentifier.
+func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
+	_r := x.inner.SourceAppSigningIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceAppAuditToken calls the underlying SourceAppAuditToken.
+func (x *NEFlowMetaData) SourceAppAuditToken() *foundation.NSData {
+	return x.inner.SourceAppAuditToken()
+}
+
+// FilterFlowIdentifier calls the underlying FilterFlowIdentifier.
+func (x *NEFlowMetaData) FilterFlowIdentifier() *foundation.NSUUID {
+	return x.inner.FilterFlowIdentifier()
+}
+
+// NEFlowMetaDataable is the interface implemented by [NEFlowMetaData], for mocking and DI.
+type NEFlowMetaDataable interface {
+	Unwrap() *raw.NEFlowMetaData
+	SourceAppUniqueIdentifier() *foundation.NSData
+	SourceAppSigningIdentifier() string
+	SourceAppAuditToken() *foundation.NSData
+	FilterFlowIdentifier() *foundation.NSUUID
+}
+
+var _ NEFlowMetaDataable = (*NEFlowMetaData)(nil)
 

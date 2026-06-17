@@ -29,3 +29,27 @@ func (x *DeviceLight) WithColor(color *raw.GCColor) *DeviceLight {
 	return x
 }
 
+// Color calls the underlying Color.
+func (x *DeviceLight) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *DeviceLight) SetColor(color *raw.GCColor) {
+	x.inner.SetColor(color)
+}
+
+// DeviceLightable is the interface implemented by [DeviceLight], for mocking and DI.
+type DeviceLightable interface {
+	Unwrap() *raw.GCDeviceLight
+	WithColor(color *raw.GCColor) *DeviceLight
+	Color() *Color
+	SetColor(color *raw.GCColor)
+}
+
+var _ DeviceLightable = (*DeviceLight)(nil)
+

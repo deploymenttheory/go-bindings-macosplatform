@@ -23,3 +23,10 @@ func NewRemoveParticipantAlert() *RemoveParticipantAlert {
 	return &RemoveParticipantAlert{inner: raw.SWRemoveParticipantAlertFromID(_id)}
 }
 
+// RemoveParticipantAlertable is the interface implemented by [RemoveParticipantAlert], for mocking and DI.
+type RemoveParticipantAlertable interface {
+	Unwrap() *raw.SWRemoveParticipantAlert
+}
+
+var _ RemoveParticipantAlertable = (*RemoveParticipantAlert)(nil)
+

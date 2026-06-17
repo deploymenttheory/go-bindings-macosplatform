@@ -23,5 +23,18 @@ func NewAuthorizationRequest() *AuthorizationRequest {
 	return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(_id)}
 }
 
+// Provider calls the underlying Provider.
+func (x *AuthorizationRequest) Provider() raw.ASAuthorizationProvider {
+	return x.inner.Provider()
+}
+
 func (x *AuthorizationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return x.inner }
+
+// AuthorizationRequestable is the interface implemented by [AuthorizationRequest], for mocking and DI.
+type AuthorizationRequestable interface {
+	Unwrap() *raw.ASAuthorizationRequest
+	Provider() raw.ASAuthorizationProvider
+}
+
+var _ AuthorizationRequestable = (*AuthorizationRequest)(nil)
 

@@ -6,6 +6,7 @@ package pencilkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewToolPickerItem() *ToolPickerItem {
 	return &ToolPickerItem{inner: raw.PKToolPickerItemFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *ToolPickerItem) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Tool calls the underlying Tool.
+func (x *ToolPickerItem) Tool() *Tool {
+	_r := x.inner.Tool()
+	if _r == nil {
+		return nil
+	}
+	return &Tool{inner: _r}
+}
+
 func (x *ToolPickerItem) asToolPickerItem() *raw.PKToolPickerItem { return x.inner }
+
+// ToolPickerItemable is the interface implemented by [ToolPickerItem], for mocking and DI.
+type ToolPickerItemable interface {
+	Unwrap() *raw.PKToolPickerItem
+	Identifier() string
+	Tool() *Tool
+}
+
+var _ ToolPickerItemable = (*ToolPickerItem)(nil)
 

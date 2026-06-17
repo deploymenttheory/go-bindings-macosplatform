@@ -151,11 +151,11 @@ func (x *NERelayManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NER
 func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -169,11 +169,11 @@ func (x *NERelayManager) LoadFromPreferences(ctx context.Context) error {
 func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -187,11 +187,11 @@ func (x *NERelayManager) RemoveFromPreferences(ctx context.Context) error {
 func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -201,69 +201,133 @@ func (x *NERelayManager) SaveToPreferences(ctx context.Context) error {
 	}
 }
 
+// GetLastClientErrorsCompletionHandler calls the underlying GetLastClientErrorsCompletionHandler.
+func (x *NERelayManager) GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block) {
+	x.inner.GetLastClientErrorsCompletionHandler(seconds, completionHandler)
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *NERelayManager) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *NERelayManager) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *NERelayManager) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *NERelayManager) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// IsUIToggleEnabled calls the underlying IsUIToggleEnabled.
+func (x *NERelayManager) IsUIToggleEnabled() bool {
+	return x.inner.IsUIToggleEnabled()
+}
+
+// SetUIToggleEnabled calls the underlying SetUIToggleEnabled.
+func (x *NERelayManager) SetUIToggleEnabled(uIToggleEnabled bool) {
+	x.inner.SetUIToggleEnabled(uIToggleEnabled)
+}
+
+// IsDNSFailoverAllowed calls the underlying IsDNSFailoverAllowed.
+func (x *NERelayManager) IsDNSFailoverAllowed() bool {
+	return x.inner.IsDNSFailoverAllowed()
+}
+
+// SetAllowDNSFailover calls the underlying SetAllowDNSFailover.
+func (x *NERelayManager) SetAllowDNSFailover(allowDNSFailover bool) {
+	x.inner.SetAllowDNSFailover(allowDNSFailover)
+}
+
 // Relays returns the collection as a Go slice.
 func (x *NERelayManager) Relays() []*raw.NERelay {
 	arr := x.inner.Relays()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NERelay, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NERelay {
+		return raw.NERelayFromID(purego.Retain(_id))
+	})
+}
+
+// SetRelays calls the underlying SetRelays.
+func (x *NERelayManager) SetRelays(relays *foundation.NSArray[*raw.NERelay]) {
+	x.inner.SetRelays(relays)
 }
 
 // MatchDomains returns the collection as a Go slice.
-func (x *NERelayManager) MatchDomains() []*foundation.NSString {
+func (x *NERelayManager) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetMatchDomains calls the underlying SetMatchDomains.
+func (x *NERelayManager) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMatchDomains(matchDomains)
 }
 
 // MatchFQDNs returns the collection as a Go slice.
-func (x *NERelayManager) MatchFQDNs() []*foundation.NSString {
+func (x *NERelayManager) MatchFQDNs() []string {
 	arr := x.inner.MatchFQDNs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetMatchFQDNs calls the underlying SetMatchFQDNs.
+func (x *NERelayManager) SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMatchFQDNs(matchFQDNs)
 }
 
 // ExcludedDomains returns the collection as a Go slice.
-func (x *NERelayManager) ExcludedDomains() []*foundation.NSString {
+func (x *NERelayManager) ExcludedDomains() []string {
 	arr := x.inner.ExcludedDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExcludedDomains calls the underlying SetExcludedDomains.
+func (x *NERelayManager) SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedDomains(excludedDomains)
 }
 
 // ExcludedFQDNs returns the collection as a Go slice.
-func (x *NERelayManager) ExcludedFQDNs() []*foundation.NSString {
+func (x *NERelayManager) ExcludedFQDNs() []string {
 	arr := x.inner.ExcludedFQDNs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExcludedFQDNs calls the underlying SetExcludedFQDNs.
+func (x *NERelayManager) SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedFQDNs(excludedFQDNs)
 }
 
 // OnDemandRules returns the collection as a Go slice.
@@ -272,10 +336,54 @@ func (x *NERelayManager) OnDemandRules() []*raw.NEOnDemandRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEOnDemandRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEOnDemandRule {
+		return raw.NEOnDemandRuleFromID(purego.Retain(_id))
+	})
 }
+
+// SetOnDemandRules calls the underlying SetOnDemandRules.
+func (x *NERelayManager) SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule]) {
+	x.inner.SetOnDemandRules(onDemandRules)
+}
+
+// NERelayManagerable is the interface implemented by [NERelayManager], for mocking and DI.
+type NERelayManagerable interface {
+	Unwrap() *raw.NERelayManager
+	WithLocalizedDescription(localizedDescription string) *NERelayManager
+	WithEnabled(enabled bool) *NERelayManager
+	WithUIToggleEnabled(uIToggleEnabled bool) *NERelayManager
+	WithAllowDNSFailover(allowDNSFailover bool) *NERelayManager
+	WithRelays(items ...*raw.NERelay) *NERelayManager
+	WithMatchDomains(items ...*foundation.NSString) *NERelayManager
+	WithMatchFQDNs(items ...*foundation.NSString) *NERelayManager
+	WithExcludedDomains(items ...*foundation.NSString) *NERelayManager
+	WithExcludedFQDNs(items ...*foundation.NSString) *NERelayManager
+	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NERelayManager
+	LoadFromPreferences(ctx context.Context) error
+	RemoveFromPreferences(ctx context.Context) error
+	SaveToPreferences(ctx context.Context) error
+	GetLastClientErrorsCompletionHandler(seconds float64, completionHandler objc.Block)
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	IsUIToggleEnabled() bool
+	SetUIToggleEnabled(uIToggleEnabled bool)
+	IsDNSFailoverAllowed() bool
+	SetAllowDNSFailover(allowDNSFailover bool)
+	Relays() []*raw.NERelay
+	SetRelays(relays *foundation.NSArray[*raw.NERelay])
+	MatchDomains() []string
+	SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString])
+	MatchFQDNs() []string
+	SetMatchFQDNs(matchFQDNs *foundation.NSArray[*foundation.NSString])
+	ExcludedDomains() []string
+	SetExcludedDomains(excludedDomains *foundation.NSArray[*foundation.NSString])
+	ExcludedFQDNs() []string
+	SetExcludedFQDNs(excludedFQDNs *foundation.NSArray[*foundation.NSString])
+	OnDemandRules() []*raw.NEOnDemandRule
+	SetOnDemandRules(onDemandRules *foundation.NSArray[*raw.NEOnDemandRule])
+}
+
+var _ NERelayManagerable = (*NERelayManager)(nil)
 

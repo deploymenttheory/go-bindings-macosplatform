@@ -96,3 +96,166 @@ func (x *MaterialProperty) WithBorderColor(borderColor objc.ID) *MaterialPropert
 	return x
 }
 
+// Contents calls the underlying Contents.
+func (x *MaterialProperty) Contents() objc.ID {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *MaterialProperty) SetContents(contents objc.ID) {
+	x.inner.SetContents(contents)
+}
+
+// Intensity calls the underlying Intensity.
+func (x *MaterialProperty) Intensity() float64 {
+	return x.inner.Intensity()
+}
+
+// SetIntensity calls the underlying SetIntensity.
+func (x *MaterialProperty) SetIntensity(intensity float64) {
+	x.inner.SetIntensity(intensity)
+}
+
+// MinificationFilter calls the underlying MinificationFilter.
+func (x *MaterialProperty) MinificationFilter() raw.SCNFilterMode {
+	return x.inner.MinificationFilter()
+}
+
+// SetMinificationFilter calls the underlying SetMinificationFilter.
+func (x *MaterialProperty) SetMinificationFilter(minificationFilter raw.SCNFilterMode) {
+	x.inner.SetMinificationFilter(minificationFilter)
+}
+
+// MagnificationFilter calls the underlying MagnificationFilter.
+func (x *MaterialProperty) MagnificationFilter() raw.SCNFilterMode {
+	return x.inner.MagnificationFilter()
+}
+
+// SetMagnificationFilter calls the underlying SetMagnificationFilter.
+func (x *MaterialProperty) SetMagnificationFilter(magnificationFilter raw.SCNFilterMode) {
+	x.inner.SetMagnificationFilter(magnificationFilter)
+}
+
+// MipFilter calls the underlying MipFilter.
+func (x *MaterialProperty) MipFilter() raw.SCNFilterMode {
+	return x.inner.MipFilter()
+}
+
+// SetMipFilter calls the underlying SetMipFilter.
+func (x *MaterialProperty) SetMipFilter(mipFilter raw.SCNFilterMode) {
+	x.inner.SetMipFilter(mipFilter)
+}
+
+// ContentsTransform calls the underlying ContentsTransform.
+func (x *MaterialProperty) ContentsTransform() quartzcore.CATransform3D {
+	return x.inner.ContentsTransform()
+}
+
+// SetContentsTransform calls the underlying SetContentsTransform.
+func (x *MaterialProperty) SetContentsTransform(contentsTransform quartzcore.CATransform3D) {
+	x.inner.SetContentsTransform(contentsTransform)
+}
+
+// WrapS calls the underlying WrapS.
+func (x *MaterialProperty) WrapS() raw.SCNWrapMode {
+	return x.inner.WrapS()
+}
+
+// SetWrapS calls the underlying SetWrapS.
+func (x *MaterialProperty) SetWrapS(wrapS raw.SCNWrapMode) {
+	x.inner.SetWrapS(wrapS)
+}
+
+// WrapT calls the underlying WrapT.
+func (x *MaterialProperty) WrapT() raw.SCNWrapMode {
+	return x.inner.WrapT()
+}
+
+// SetWrapT calls the underlying SetWrapT.
+func (x *MaterialProperty) SetWrapT(wrapT raw.SCNWrapMode) {
+	x.inner.SetWrapT(wrapT)
+}
+
+// MappingChannel calls the underlying MappingChannel.
+func (x *MaterialProperty) MappingChannel() int {
+	return x.inner.MappingChannel()
+}
+
+// SetMappingChannel calls the underlying SetMappingChannel.
+func (x *MaterialProperty) SetMappingChannel(mappingChannel int) {
+	x.inner.SetMappingChannel(mappingChannel)
+}
+
+// TextureComponents calls the underlying TextureComponents.
+func (x *MaterialProperty) TextureComponents() raw.SCNColorMask {
+	return x.inner.TextureComponents()
+}
+
+// SetTextureComponents calls the underlying SetTextureComponents.
+func (x *MaterialProperty) SetTextureComponents(textureComponents raw.SCNColorMask) {
+	x.inner.SetTextureComponents(textureComponents)
+}
+
+// MaxAnisotropy calls the underlying MaxAnisotropy.
+func (x *MaterialProperty) MaxAnisotropy() float64 {
+	return x.inner.MaxAnisotropy()
+}
+
+// SetMaxAnisotropy calls the underlying SetMaxAnisotropy.
+func (x *MaterialProperty) SetMaxAnisotropy(maxAnisotropy float64) {
+	x.inner.SetMaxAnisotropy(maxAnisotropy)
+}
+
+// BorderColor calls the underlying BorderColor.
+func (x *MaterialProperty) BorderColor() objc.ID {
+	return x.inner.BorderColor()
+}
+
+// SetBorderColor calls the underlying SetBorderColor.
+func (x *MaterialProperty) SetBorderColor(borderColor objc.ID) {
+	x.inner.SetBorderColor(borderColor)
+}
+
+// MaterialPropertyable is the interface implemented by [MaterialProperty], for mocking and DI.
+type MaterialPropertyable interface {
+	Unwrap() *raw.SCNMaterialProperty
+	WithContents(contents objc.ID) *MaterialProperty
+	WithIntensity(intensity float64) *MaterialProperty
+	WithMinificationFilter(minificationFilter raw.SCNFilterMode) *MaterialProperty
+	WithMagnificationFilter(magnificationFilter raw.SCNFilterMode) *MaterialProperty
+	WithMipFilter(mipFilter raw.SCNFilterMode) *MaterialProperty
+	WithContentsTransform(contentsTransform quartzcore.CATransform3D) *MaterialProperty
+	WithWrapS(wrapS raw.SCNWrapMode) *MaterialProperty
+	WithWrapT(wrapT raw.SCNWrapMode) *MaterialProperty
+	WithMappingChannel(mappingChannel int) *MaterialProperty
+	WithTextureComponents(textureComponents raw.SCNColorMask) *MaterialProperty
+	WithMaxAnisotropy(maxAnisotropy float64) *MaterialProperty
+	WithBorderColor(borderColor objc.ID) *MaterialProperty
+	Contents() objc.ID
+	SetContents(contents objc.ID)
+	Intensity() float64
+	SetIntensity(intensity float64)
+	MinificationFilter() raw.SCNFilterMode
+	SetMinificationFilter(minificationFilter raw.SCNFilterMode)
+	MagnificationFilter() raw.SCNFilterMode
+	SetMagnificationFilter(magnificationFilter raw.SCNFilterMode)
+	MipFilter() raw.SCNFilterMode
+	SetMipFilter(mipFilter raw.SCNFilterMode)
+	ContentsTransform() quartzcore.CATransform3D
+	SetContentsTransform(contentsTransform quartzcore.CATransform3D)
+	WrapS() raw.SCNWrapMode
+	SetWrapS(wrapS raw.SCNWrapMode)
+	WrapT() raw.SCNWrapMode
+	SetWrapT(wrapT raw.SCNWrapMode)
+	MappingChannel() int
+	SetMappingChannel(mappingChannel int)
+	TextureComponents() raw.SCNColorMask
+	SetTextureComponents(textureComponents raw.SCNColorMask)
+	MaxAnisotropy() float64
+	SetMaxAnisotropy(maxAnisotropy float64)
+	BorderColor() objc.ID
+	SetBorderColor(borderColor objc.ID)
+}
+
+var _ MaterialPropertyable = (*MaterialProperty)(nil)
+

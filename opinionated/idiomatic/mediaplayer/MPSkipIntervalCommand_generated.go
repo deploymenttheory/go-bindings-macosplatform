@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *SkipIntervalCommand) PreferredIntervals() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetPreferredIntervals calls the underlying SetPreferredIntervals.
+func (x *SkipIntervalCommand) SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetPreferredIntervals(preferredIntervals)
 }
 
 func (x *SkipIntervalCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+
+// SkipIntervalCommandable is the interface implemented by [SkipIntervalCommand], for mocking and DI.
+type SkipIntervalCommandable interface {
+	Unwrap() *raw.MPSkipIntervalCommand
+	WithPreferredIntervals(items ...*foundation.NSNumber) *SkipIntervalCommand
+	PreferredIntervals() []*foundation.NSNumber
+	SetPreferredIntervals(preferredIntervals *foundation.NSArray[*foundation.NSNumber])
+}
+
+var _ SkipIntervalCommandable = (*SkipIntervalCommand)(nil)
 

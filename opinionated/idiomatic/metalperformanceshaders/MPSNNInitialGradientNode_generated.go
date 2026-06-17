@@ -27,3 +27,10 @@ func NewNNInitialGradientNodeWithSource(source *mpsneuralnetwork.MPSNNImageNode)
 
 func (x *NNInitialGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNInitialGradientNodeable is the interface implemented by [NNInitialGradientNode], for mocking and DI.
+type NNInitialGradientNodeable interface {
+	Unwrap() *raw.MPSNNInitialGradientNode
+}
+
+var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)
+

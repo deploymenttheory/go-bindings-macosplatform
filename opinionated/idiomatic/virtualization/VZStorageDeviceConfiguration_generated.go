@@ -23,5 +23,22 @@ func NewStorageDeviceConfiguration() *StorageDeviceConfiguration {
 	return &StorageDeviceConfiguration{inner: raw.VZStorageDeviceConfigurationFromID(_id)}
 }
 
+// Attachment calls the underlying Attachment.
+func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &StorageDeviceAttachment{inner: _r}
+}
+
 func (x *StorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return x.inner }
+
+// StorageDeviceConfigurationable is the interface implemented by [StorageDeviceConfiguration], for mocking and DI.
+type StorageDeviceConfigurationable interface {
+	Unwrap() *raw.VZStorageDeviceConfiguration
+	Attachment() *StorageDeviceAttachment
+}
+
+var _ StorageDeviceConfigurationable = (*StorageDeviceConfiguration)(nil)
 

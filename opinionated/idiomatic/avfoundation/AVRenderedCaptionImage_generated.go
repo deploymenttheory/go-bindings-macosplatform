@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RenderedCaptionImage wraps [raw.AVRenderedCaptionImage] with a fluent Go API.
@@ -22,4 +24,23 @@ func NewRenderedCaptionImage() *RenderedCaptionImage {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVRenderedCaptionImage")), objc.RegisterName("new"))
 	return &RenderedCaptionImage{inner: raw.AVRenderedCaptionImageFromID(_id)}
 }
+
+// PixelBuffer calls the underlying PixelBuffer.
+func (x *RenderedCaptionImage) PixelBuffer() unsafe.Pointer {
+	return x.inner.PixelBuffer()
+}
+
+// Position calls the underlying Position.
+func (x *RenderedCaptionImage) Position() corefoundation.CGPoint {
+	return x.inner.Position()
+}
+
+// RenderedCaptionImageable is the interface implemented by [RenderedCaptionImage], for mocking and DI.
+type RenderedCaptionImageable interface {
+	Unwrap() *raw.AVRenderedCaptionImage
+	PixelBuffer() unsafe.Pointer
+	Position() corefoundation.CGPoint
+}
+
+var _ RenderedCaptionImageable = (*RenderedCaptionImage)(nil)
 

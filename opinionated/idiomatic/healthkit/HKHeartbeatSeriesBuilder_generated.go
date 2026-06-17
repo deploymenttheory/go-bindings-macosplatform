@@ -5,9 +5,12 @@
 package healthkit
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HeartbeatSeriesBuilder wraps [raw.HKHeartbeatSeriesBuilder] with a fluent Go API.
@@ -25,5 +28,51 @@ func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *raw.HK
 	return &HeartbeatSeriesBuilder{inner: raw.HKHeartbeatSeriesBuilderFromID(_id)}
 }
 
+// AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion calls the underlying AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion.
+func (x *HeartbeatSeriesBuilder) AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer)) {
+	x.inner.AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart, precededByGap, completion)
+}
+
+// AddMetadataCompletion calls the underlying AddMetadataCompletion.
+func (x *HeartbeatSeriesBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
+	x.inner.AddMetadataCompletion(metadata, completion)
+}
+
+// FinishSeriesWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error) {
+	type _result struct {
+		val *HeartbeatSeriesSample
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FinishSeriesWithCompletion(func(_p0 *raw.HKHeartbeatSeriesSample, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &HeartbeatSeriesSample{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *HeartbeatSeriesSample
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *HeartbeatSeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return &x.inner.HKSeriesBuilder }
+
+// HeartbeatSeriesBuilderable is the interface implemented by [HeartbeatSeriesBuilder], for mocking and DI.
+type HeartbeatSeriesBuilderable interface {
+	Unwrap() *raw.HKHeartbeatSeriesBuilder
+	AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer))
+	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
+	FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error)
+}
+
+var _ HeartbeatSeriesBuilderable = (*HeartbeatSeriesBuilder)(nil)
 

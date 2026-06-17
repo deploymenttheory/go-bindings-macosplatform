@@ -30,3 +30,10 @@ func (x *CNNFullyConnectedGradientNode) asNNGradientFilterNode() *raw.MPSNNGradi
 
 func (x *CNNFullyConnectedGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNFullyConnectedGradientNodeable is the interface implemented by [CNNFullyConnectedGradientNode], for mocking and DI.
+type CNNFullyConnectedGradientNodeable interface {
+	Unwrap() *raw.MPSCNNFullyConnectedGradientNode
+}
+
+var _ CNNFullyConnectedGradientNodeable = (*CNNFullyConnectedGradientNode)(nil)
+

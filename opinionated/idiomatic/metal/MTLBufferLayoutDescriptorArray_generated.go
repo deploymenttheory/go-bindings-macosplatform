@@ -23,3 +23,26 @@ func NewBufferLayoutDescriptorArray() *BufferLayoutDescriptorArray {
 	return &BufferLayoutDescriptorArray{inner: raw.MTLBufferLayoutDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *BufferLayoutDescriptorArray) ObjectAtIndexedSubscript(index uint) *BufferLayoutDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(index)
+	if _r == nil {
+		return nil
+	}
+	return &BufferLayoutDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *BufferLayoutDescriptorArray) SetObjectAtIndexedSubscript(bufferDesc *raw.MTLBufferLayoutDescriptor, index uint) {
+	x.inner.SetObjectAtIndexedSubscript(bufferDesc, index)
+}
+
+// BufferLayoutDescriptorArrayable is the interface implemented by [BufferLayoutDescriptorArray], for mocking and DI.
+type BufferLayoutDescriptorArrayable interface {
+	Unwrap() *raw.MTLBufferLayoutDescriptorArray
+	ObjectAtIndexedSubscript(index uint) *BufferLayoutDescriptor
+	SetObjectAtIndexedSubscript(bufferDesc *raw.MTLBufferLayoutDescriptor, index uint)
+}
+
+var _ BufferLayoutDescriptorArrayable = (*BufferLayoutDescriptorArray)(nil)
+

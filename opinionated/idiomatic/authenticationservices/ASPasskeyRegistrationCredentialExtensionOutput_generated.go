@@ -24,3 +24,20 @@ func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlo
 	return &PasskeyRegistrationCredentialExtensionOutput{inner: raw.ASPasskeyRegistrationCredentialExtensionOutputFromID(_id)}
 }
 
+// LargeBlobRegistrationOutput calls the underlying LargeBlobRegistrationOutput.
+func (x *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	_r := x.inner.LargeBlobRegistrationOutput()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{inner: _r}
+}
+
+// PasskeyRegistrationCredentialExtensionOutputable is the interface implemented by [PasskeyRegistrationCredentialExtensionOutput], for mocking and DI.
+type PasskeyRegistrationCredentialExtensionOutputable interface {
+	Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionOutput
+	LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
+}
+
+var _ PasskeyRegistrationCredentialExtensionOutputable = (*PasskeyRegistrationCredentialExtensionOutput)(nil)
+

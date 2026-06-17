@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,5 +79,189 @@ func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) WithNullableOptionalS
 	return x
 }
 
+// NullableInt calls the underlying NullableInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableInt() *foundation.NSNumber {
+	return x.inner.NullableInt()
+}
+
+// SetNullableInt calls the underlying SetNullableInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableInt(nullableInt *foundation.NSNumber) {
+	x.inner.SetNullableInt(nullableInt)
+}
+
+// OptionalInt calls the underlying OptionalInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalInt() *foundation.NSNumber {
+	return x.inner.OptionalInt()
+}
+
+// SetOptionalInt calls the underlying SetOptionalInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalInt(optionalInt *foundation.NSNumber) {
+	x.inner.SetOptionalInt(optionalInt)
+}
+
+// NullableOptionalInt calls the underlying NullableOptionalInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalInt() *foundation.NSNumber {
+	return x.inner.NullableOptionalInt()
+}
+
+// SetNullableOptionalInt calls the underlying SetNullableOptionalInt.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) {
+	x.inner.SetNullableOptionalInt(nullableOptionalInt)
+}
+
+// NullableString calls the underlying NullableString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableString() string {
+	_r := x.inner.NullableString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNullableString calls the underlying SetNullableString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableString(nullableString string) {
+	x.inner.SetNullableString(foundation.NSStringStringWithUTF8String(nullableString))
+}
+
+// OptionalString calls the underlying OptionalString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalString() string {
+	_r := x.inner.OptionalString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOptionalString calls the underlying SetOptionalString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalString(optionalString string) {
+	x.inner.SetOptionalString(foundation.NSStringStringWithUTF8String(optionalString))
+}
+
+// NullableOptionalString calls the underlying NullableOptionalString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalString() string {
+	_r := x.inner.NullableOptionalString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNullableOptionalString calls the underlying SetNullableOptionalString.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalString(nullableOptionalString string) {
+	x.inner.SetNullableOptionalString(foundation.NSStringStringWithUTF8String(nullableOptionalString))
+}
+
+// NullableStruct calls the underlying NullableStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.NullableStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetNullableStruct calls the underlying SetNullableStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetNullableStruct(nullableStruct)
+}
+
+// OptionalStruct calls the underlying OptionalStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.OptionalStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetOptionalStruct calls the underlying SetOptionalStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetOptionalStruct(optionalStruct)
+}
+
+// NullableOptionalStruct calls the underlying NullableOptionalStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.NullableOptionalStruct()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetNullableOptionalStruct calls the underlying SetNullableOptionalStruct.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetNullableOptionalStruct(nullableOptionalStruct)
+}
+
+// NullableList calls the underlying NullableList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableList() *foundation.NSArray[objc.ID] {
+	return x.inner.NullableList()
+}
+
+// SetNullableList calls the underlying SetNullableList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableList(nullableList *foundation.NSArray[objc.ID]) {
+	x.inner.SetNullableList(nullableList)
+}
+
+// OptionalList calls the underlying OptionalList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) OptionalList() *foundation.NSArray[objc.ID] {
+	return x.inner.OptionalList()
+}
+
+// SetOptionalList calls the underlying SetOptionalList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetOptionalList(optionalList *foundation.NSArray[objc.ID]) {
+	x.inner.SetOptionalList(optionalList)
+}
+
+// NullableOptionalList calls the underlying NullableOptionalList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) NullableOptionalList() *foundation.NSArray[objc.ID] {
+	return x.inner.NullableOptionalList()
+}
+
+// SetNullableOptionalList calls the underlying SetNullableOptionalList.
+func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID]) {
+	x.inner.SetNullableOptionalList(nullableOptionalList)
+}
+
 func (x *MTRUnitTestingClusterNullablesAndOptionalsStruct) asMTRUnitTestingClusterNullablesAndOptionalsStruct() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct { return x.inner }
+
+// MTRUnitTestingClusterNullablesAndOptionalsStructable is the interface implemented by [MTRUnitTestingClusterNullablesAndOptionalsStruct], for mocking and DI.
+type MTRUnitTestingClusterNullablesAndOptionalsStructable interface {
+	Unwrap() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableInt(nullableInt *foundation.NSNumber) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithOptionalInt(optionalInt *foundation.NSNumber) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableString(nullableString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithOptionalString(optionalString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableOptionalString(nullableOptionalString string) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNullablesAndOptionalsStruct
+	NullableInt() *foundation.NSNumber
+	SetNullableInt(nullableInt *foundation.NSNumber)
+	OptionalInt() *foundation.NSNumber
+	SetOptionalInt(optionalInt *foundation.NSNumber)
+	NullableOptionalInt() *foundation.NSNumber
+	SetNullableOptionalInt(nullableOptionalInt *foundation.NSNumber)
+	NullableString() string
+	SetNullableString(nullableString string)
+	OptionalString() string
+	SetOptionalString(optionalString string)
+	NullableOptionalString() string
+	SetNullableOptionalString(nullableOptionalString string)
+	NullableStruct() *MTRUnitTestingClusterSimpleStruct
+	SetNullableStruct(nullableStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	OptionalStruct() *MTRUnitTestingClusterSimpleStruct
+	SetOptionalStruct(optionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	NullableOptionalStruct() *MTRUnitTestingClusterSimpleStruct
+	SetNullableOptionalStruct(nullableOptionalStruct *raw.MTRUnitTestingClusterSimpleStruct)
+	NullableList() *foundation.NSArray[objc.ID]
+	SetNullableList(nullableList *foundation.NSArray[objc.ID])
+	OptionalList() *foundation.NSArray[objc.ID]
+	SetOptionalList(optionalList *foundation.NSArray[objc.ID])
+	NullableOptionalList() *foundation.NSArray[objc.ID]
+	SetNullableOptionalList(nullableOptionalList *foundation.NSArray[objc.ID])
+}
+
+var _ MTRUnitTestingClusterNullablesAndOptionalsStructable = (*MTRUnitTestingClusterNullablesAndOptionalsStruct)(nil)
 

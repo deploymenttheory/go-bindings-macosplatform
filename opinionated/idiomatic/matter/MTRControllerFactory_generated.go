@@ -23,3 +23,48 @@ func NewMTRControllerFactory() *MTRControllerFactory {
 	return &MTRControllerFactory{inner: raw.MTRControllerFactoryFromID(_id)}
 }
 
+// Startup calls the underlying Startup.
+func (x *MTRControllerFactory) Startup(startupParams *raw.MTRControllerFactoryParams) bool {
+	return x.inner.Startup(startupParams)
+}
+
+// Shutdown calls the underlying Shutdown.
+func (x *MTRControllerFactory) Shutdown() {
+	x.inner.Shutdown()
+}
+
+// StartControllerOnExistingFabric calls the underlying StartControllerOnExistingFabric.
+func (x *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := x.inner.StartControllerOnExistingFabric(startupParams)
+	if _r == nil {
+		return nil
+	}
+	return &MTRDeviceController{inner: _r}
+}
+
+// StartControllerOnNewFabric calls the underlying StartControllerOnNewFabric.
+func (x *MTRControllerFactory) StartControllerOnNewFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := x.inner.StartControllerOnNewFabric(startupParams)
+	if _r == nil {
+		return nil
+	}
+	return &MTRDeviceController{inner: _r}
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *MTRControllerFactory) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// MTRControllerFactoryable is the interface implemented by [MTRControllerFactory], for mocking and DI.
+type MTRControllerFactoryable interface {
+	Unwrap() *raw.MTRControllerFactory
+	Startup(startupParams *raw.MTRControllerFactoryParams) bool
+	Shutdown()
+	StartControllerOnExistingFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController
+	StartControllerOnNewFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController
+	IsRunning() bool
+}
+
+var _ MTRControllerFactoryable = (*MTRControllerFactory)(nil)
+

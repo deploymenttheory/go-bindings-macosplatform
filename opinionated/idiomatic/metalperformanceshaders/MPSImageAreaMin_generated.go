@@ -31,3 +31,10 @@ func (x *ImageAreaMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { retu
 
 func (x *ImageAreaMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageAreaMax.MPSUnaryImageKernel.MPSKernel }
 
+// ImageAreaMinable is the interface implemented by [ImageAreaMin], for mocking and DI.
+type ImageAreaMinable interface {
+	Unwrap() *raw.MPSImageAreaMin
+}
+
+var _ ImageAreaMinable = (*ImageAreaMin)(nil)
+

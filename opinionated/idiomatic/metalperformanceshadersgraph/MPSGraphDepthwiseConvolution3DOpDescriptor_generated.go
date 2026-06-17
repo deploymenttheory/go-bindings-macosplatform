@@ -7,6 +7,7 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -91,11 +92,14 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) Strides() []*foundation.NSNumb
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetStrides calls the underlying SetStrides.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetStrides(strides *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetStrides(strides)
 }
 
 // DilationRates returns the collection as a Go slice.
@@ -104,11 +108,14 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []*foundation.
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetDilationRates calls the underlying SetDilationRates.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetDilationRates(dilationRates)
 }
 
 // PaddingValues returns the collection as a Go slice.
@@ -117,12 +124,57 @@ func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingValues() []*foundation.
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetPaddingValues calls the underlying SetPaddingValues.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetPaddingValues(paddingValues)
+}
+
+// PaddingStyle calls the underlying PaddingStyle.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
+	return x.inner.PaddingStyle()
+}
+
+// SetPaddingStyle calls the underlying SetPaddingStyle.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(paddingStyle)
+}
+
+// ChannelDimensionIndex calls the underlying ChannelDimensionIndex.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) ChannelDimensionIndex() int {
+	return x.inner.ChannelDimensionIndex()
+}
+
+// SetChannelDimensionIndex calls the underlying SetChannelDimensionIndex.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetChannelDimensionIndex(channelDimensionIndex int) {
+	x.inner.SetChannelDimensionIndex(channelDimensionIndex)
 }
 
 func (x *GraphDepthwiseConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphDepthwiseConvolution3DOpDescriptorable is the interface implemented by [GraphDepthwiseConvolution3DOpDescriptor], for mocking and DI.
+type GraphDepthwiseConvolution3DOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphDepthwiseConvolution3DOpDescriptor
+	WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
+	WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
+	WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
+	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor
+	WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor
+	Strides() []*foundation.NSNumber
+	SetStrides(strides *foundation.NSArray[*foundation.NSNumber])
+	DilationRates() []*foundation.NSNumber
+	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
+	PaddingValues() []*foundation.NSNumber
+	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
+	PaddingStyle() raw.MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	ChannelDimensionIndex() int
+	SetChannelDimensionIndex(channelDimensionIndex int)
+}
+
+var _ GraphDepthwiseConvolution3DOpDescriptorable = (*GraphDepthwiseConvolution3DOpDescriptor)(nil)
 

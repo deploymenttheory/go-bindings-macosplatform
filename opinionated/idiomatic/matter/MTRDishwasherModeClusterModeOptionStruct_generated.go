@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,53 @@ func (x *MTRDishwasherModeClusterModeOptionStruct) WithMode(mode *foundation.NSN
 	x.inner.SetMode(mode)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTRDishwasherModeClusterModeOptionStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRDishwasherModeClusterModeOptionStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Mode calls the underlying Mode.
+func (x *MTRDishwasherModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *MTRDishwasherModeClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
+	x.inner.SetMode(mode)
+}
+
+// ModeTags calls the underlying ModeTags.
+func (x *MTRDishwasherModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
+	return x.inner.ModeTags()
+}
+
+// SetModeTags calls the underlying SetModeTags.
+func (x *MTRDishwasherModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
+	x.inner.SetModeTags(modeTags)
+}
+
+// MTRDishwasherModeClusterModeOptionStructable is the interface implemented by [MTRDishwasherModeClusterModeOptionStruct], for mocking and DI.
+type MTRDishwasherModeClusterModeOptionStructable interface {
+	Unwrap() *raw.MTRDishwasherModeClusterModeOptionStruct
+	WithLabel(label string) *MTRDishwasherModeClusterModeOptionStruct
+	WithMode(mode *foundation.NSNumber) *MTRDishwasherModeClusterModeOptionStruct
+	Label() string
+	SetLabel(label string)
+	Mode() *foundation.NSNumber
+	SetMode(mode *foundation.NSNumber)
+	ModeTags() *foundation.NSArray[objc.ID]
+	SetModeTags(modeTags *foundation.NSArray[objc.ID])
+}
+
+var _ MTRDishwasherModeClusterModeOptionStructable = (*MTRDishwasherModeClusterModeOptionStruct)(nil)
 

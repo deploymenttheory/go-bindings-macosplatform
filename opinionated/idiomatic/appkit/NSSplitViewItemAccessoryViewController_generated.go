@@ -41,7 +41,57 @@ func (x *SplitViewItemAccessoryViewController) WithPreferredScrollEdgeEffectStyl
 	return x
 }
 
+// IsHidden calls the underlying IsHidden.
+func (x *SplitViewItemAccessoryViewController) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *SplitViewItemAccessoryViewController) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// AutomaticallyAppliesContentInsets calls the underlying AutomaticallyAppliesContentInsets.
+func (x *SplitViewItemAccessoryViewController) AutomaticallyAppliesContentInsets() bool {
+	return x.inner.AutomaticallyAppliesContentInsets()
+}
+
+// SetAutomaticallyAppliesContentInsets calls the underlying SetAutomaticallyAppliesContentInsets.
+func (x *SplitViewItemAccessoryViewController) SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) {
+	x.inner.SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets)
+}
+
+// PreferredScrollEdgeEffectStyle calls the underlying PreferredScrollEdgeEffectStyle.
+func (x *SplitViewItemAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
+	_r := x.inner.PreferredScrollEdgeEffectStyle()
+	if _r == nil {
+		return nil
+	}
+	return &ScrollEdgeEffectStyle{inner: _r}
+}
+
+// SetPreferredScrollEdgeEffectStyle calls the underlying SetPreferredScrollEdgeEffectStyle.
+func (x *SplitViewItemAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) {
+	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+}
+
 func (x *SplitViewItemAccessoryViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
 
 func (x *SplitViewItemAccessoryViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+
+// SplitViewItemAccessoryViewControllerable is the interface implemented by [SplitViewItemAccessoryViewController], for mocking and DI.
+type SplitViewItemAccessoryViewControllerable interface {
+	Unwrap() *raw.NSSplitViewItemAccessoryViewController
+	WithHidden(hidden bool) *SplitViewItemAccessoryViewController
+	WithAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool) *SplitViewItemAccessoryViewController
+	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *SplitViewItemAccessoryViewController
+	IsHidden() bool
+	SetHidden(hidden bool)
+	AutomaticallyAppliesContentInsets() bool
+	SetAutomaticallyAppliesContentInsets(automaticallyAppliesContentInsets bool)
+	PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle
+	SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle)
+}
+
+var _ SplitViewItemAccessoryViewControllerable = (*SplitViewItemAccessoryViewController)(nil)
 

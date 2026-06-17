@@ -31,3 +31,23 @@ func (x *EditVoiceShortcutViewController) WithDelegate(delegate raw.INUIEditVoic
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *EditVoiceShortcutViewController) Delegate() raw.INUIEditVoiceShortcutViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *EditVoiceShortcutViewController) SetDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// EditVoiceShortcutViewControllerable is the interface implemented by [EditVoiceShortcutViewController], for mocking and DI.
+type EditVoiceShortcutViewControllerable interface {
+	Unwrap() *raw.INUIEditVoiceShortcutViewController
+	WithDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) *EditVoiceShortcutViewController
+	Delegate() raw.INUIEditVoiceShortcutViewControllerDelegate
+	SetDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate)
+}
+
+var _ EditVoiceShortcutViewControllerable = (*EditVoiceShortcutViewController)(nil)
+

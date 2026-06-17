@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -30,4 +31,46 @@ func (x *SharingServicePicker) WithDelegate(delegate raw.NSSharingServicePickerD
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
+func (x *SharingServicePicker) ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge) {
+	x.inner.ShowRelativeToRectOfViewPreferredEdge(rect, view, preferredEdge)
+}
+
+// Close calls the underlying Close.
+func (x *SharingServicePicker) Close() {
+	x.inner.Close()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SharingServicePicker) Delegate() raw.NSSharingServicePickerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SharingServicePicker) SetDelegate(delegate raw.NSSharingServicePickerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// StandardShareMenuItem calls the underlying StandardShareMenuItem.
+func (x *SharingServicePicker) StandardShareMenuItem() *MenuItem {
+	_r := x.inner.StandardShareMenuItem()
+	if _r == nil {
+		return nil
+	}
+	return &MenuItem{inner: _r}
+}
+
+// SharingServicePickerable is the interface implemented by [SharingServicePicker], for mocking and DI.
+type SharingServicePickerable interface {
+	Unwrap() *raw.NSSharingServicePicker
+	WithDelegate(delegate raw.NSSharingServicePickerDelegate) *SharingServicePicker
+	ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge)
+	Close()
+	Delegate() raw.NSSharingServicePickerDelegate
+	SetDelegate(delegate raw.NSSharingServicePickerDelegate)
+	StandardShareMenuItem() *MenuItem
+}
+
+var _ SharingServicePickerable = (*SharingServicePicker)(nil)
 

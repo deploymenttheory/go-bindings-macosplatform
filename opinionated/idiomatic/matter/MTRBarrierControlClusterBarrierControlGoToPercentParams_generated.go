@@ -42,3 +42,49 @@ func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) WithServerSide
 	return x
 }
 
+// PercentOpen calls the underlying PercentOpen.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) PercentOpen() *foundation.NSNumber {
+	return x.inner.PercentOpen()
+}
+
+// SetPercentOpen calls the underlying SetPercentOpen.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetPercentOpen(percentOpen *foundation.NSNumber) {
+	x.inner.SetPercentOpen(percentOpen)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRBarrierControlClusterBarrierControlGoToPercentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRBarrierControlClusterBarrierControlGoToPercentParamsable is the interface implemented by [MTRBarrierControlClusterBarrierControlGoToPercentParams], for mocking and DI.
+type MTRBarrierControlClusterBarrierControlGoToPercentParamsable interface {
+	Unwrap() *raw.MTRBarrierControlClusterBarrierControlGoToPercentParams
+	WithPercentOpen(percentOpen *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBarrierControlClusterBarrierControlGoToPercentParams
+	PercentOpen() *foundation.NSNumber
+	SetPercentOpen(percentOpen *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRBarrierControlClusterBarrierControlGoToPercentParamsable = (*MTRBarrierControlClusterBarrierControlGoToPercentParams)(nil)
+

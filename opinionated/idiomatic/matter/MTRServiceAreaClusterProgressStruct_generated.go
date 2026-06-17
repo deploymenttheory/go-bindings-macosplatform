@@ -42,3 +42,49 @@ func (x *MTRServiceAreaClusterProgressStruct) WithTotalOperationalTime(totalOper
 	return x
 }
 
+// AreaID calls the underlying AreaID.
+func (x *MTRServiceAreaClusterProgressStruct) AreaID() *foundation.NSNumber {
+	return x.inner.AreaID()
+}
+
+// SetAreaID calls the underlying SetAreaID.
+func (x *MTRServiceAreaClusterProgressStruct) SetAreaID(areaID *foundation.NSNumber) {
+	x.inner.SetAreaID(areaID)
+}
+
+// Status calls the underlying Status.
+func (x *MTRServiceAreaClusterProgressStruct) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRServiceAreaClusterProgressStruct) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// TotalOperationalTime calls the underlying TotalOperationalTime.
+func (x *MTRServiceAreaClusterProgressStruct) TotalOperationalTime() *foundation.NSNumber {
+	return x.inner.TotalOperationalTime()
+}
+
+// SetTotalOperationalTime calls the underlying SetTotalOperationalTime.
+func (x *MTRServiceAreaClusterProgressStruct) SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber) {
+	x.inner.SetTotalOperationalTime(totalOperationalTime)
+}
+
+// MTRServiceAreaClusterProgressStructable is the interface implemented by [MTRServiceAreaClusterProgressStruct], for mocking and DI.
+type MTRServiceAreaClusterProgressStructable interface {
+	Unwrap() *raw.MTRServiceAreaClusterProgressStruct
+	WithAreaID(areaID *foundation.NSNumber) *MTRServiceAreaClusterProgressStruct
+	WithStatus(status *foundation.NSNumber) *MTRServiceAreaClusterProgressStruct
+	WithTotalOperationalTime(totalOperationalTime *foundation.NSNumber) *MTRServiceAreaClusterProgressStruct
+	AreaID() *foundation.NSNumber
+	SetAreaID(areaID *foundation.NSNumber)
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	TotalOperationalTime() *foundation.NSNumber
+	SetTotalOperationalTime(totalOperationalTime *foundation.NSNumber)
+}
+
+var _ MTRServiceAreaClusterProgressStructable = (*MTRServiceAreaClusterProgressStruct)(nil)
+

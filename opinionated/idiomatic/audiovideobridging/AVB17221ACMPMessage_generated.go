@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AVB17221ACMPMessage wraps [raw.AVB17221ACMPMessage] with a fluent Go API.
@@ -148,4 +149,306 @@ func (x *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17
 	x.inner.SetSourceMAC(sourceMAC)
 	return x
 }
+
+// ErrorForStatusCode calls the underlying ErrorForStatusCode.
+func (x *AVB17221ACMPMessage) ErrorForStatusCode() unsafe.Pointer {
+	return x.inner.ErrorForStatusCode()
+}
+
+// MessageType calls the underlying MessageType.
+func (x *AVB17221ACMPMessage) MessageType() raw.AVB17221ACMPMessageType {
+	return x.inner.MessageType()
+}
+
+// SetMessageType calls the underlying SetMessageType.
+func (x *AVB17221ACMPMessage) SetMessageType(messageType raw.AVB17221ACMPMessageType) {
+	x.inner.SetMessageType(messageType)
+}
+
+// Status calls the underlying Status.
+func (x *AVB17221ACMPMessage) Status() raw.AVB17221ACMPStatusCode {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *AVB17221ACMPMessage) SetStatus(status raw.AVB17221ACMPStatusCode) {
+	x.inner.SetStatus(status)
+}
+
+// StreamID calls the underlying StreamID.
+func (x *AVB17221ACMPMessage) StreamID() uint64 {
+	return x.inner.StreamID()
+}
+
+// SetStreamID calls the underlying SetStreamID.
+func (x *AVB17221ACMPMessage) SetStreamID(streamID uint64) {
+	x.inner.SetStreamID(streamID)
+}
+
+// ControllerEntityID calls the underlying ControllerEntityID.
+func (x *AVB17221ACMPMessage) ControllerEntityID() uint64 {
+	return x.inner.ControllerEntityID()
+}
+
+// SetControllerEntityID calls the underlying SetControllerEntityID.
+func (x *AVB17221ACMPMessage) SetControllerEntityID(controllerEntityID uint64) {
+	x.inner.SetControllerEntityID(controllerEntityID)
+}
+
+// TalkerEntityID calls the underlying TalkerEntityID.
+func (x *AVB17221ACMPMessage) TalkerEntityID() uint64 {
+	return x.inner.TalkerEntityID()
+}
+
+// SetTalkerEntityID calls the underlying SetTalkerEntityID.
+func (x *AVB17221ACMPMessage) SetTalkerEntityID(talkerEntityID uint64) {
+	x.inner.SetTalkerEntityID(talkerEntityID)
+}
+
+// ListenerEntityID calls the underlying ListenerEntityID.
+func (x *AVB17221ACMPMessage) ListenerEntityID() uint64 {
+	return x.inner.ListenerEntityID()
+}
+
+// SetListenerEntityID calls the underlying SetListenerEntityID.
+func (x *AVB17221ACMPMessage) SetListenerEntityID(listenerEntityID uint64) {
+	x.inner.SetListenerEntityID(listenerEntityID)
+}
+
+// TalkerUniqueID calls the underlying TalkerUniqueID.
+func (x *AVB17221ACMPMessage) TalkerUniqueID() uint16 {
+	return x.inner.TalkerUniqueID()
+}
+
+// SetTalkerUniqueID calls the underlying SetTalkerUniqueID.
+func (x *AVB17221ACMPMessage) SetTalkerUniqueID(talkerUniqueID uint16) {
+	x.inner.SetTalkerUniqueID(talkerUniqueID)
+}
+
+// ListenerUniqueID calls the underlying ListenerUniqueID.
+func (x *AVB17221ACMPMessage) ListenerUniqueID() uint16 {
+	return x.inner.ListenerUniqueID()
+}
+
+// SetListenerUniqueID calls the underlying SetListenerUniqueID.
+func (x *AVB17221ACMPMessage) SetListenerUniqueID(listenerUniqueID uint16) {
+	x.inner.SetListenerUniqueID(listenerUniqueID)
+}
+
+// DestinationMAC calls the underlying DestinationMAC.
+func (x *AVB17221ACMPMessage) DestinationMAC() *MACAddress {
+	_r := x.inner.DestinationMAC()
+	if _r == nil {
+		return nil
+	}
+	return &MACAddress{inner: _r}
+}
+
+// SetDestinationMAC calls the underlying SetDestinationMAC.
+func (x *AVB17221ACMPMessage) SetDestinationMAC(destinationMAC *raw.AVBMACAddress) {
+	x.inner.SetDestinationMAC(destinationMAC)
+}
+
+// ConnectionCount calls the underlying ConnectionCount.
+func (x *AVB17221ACMPMessage) ConnectionCount() uint16 {
+	return x.inner.ConnectionCount()
+}
+
+// SetConnectionCount calls the underlying SetConnectionCount.
+func (x *AVB17221ACMPMessage) SetConnectionCount(connectionCount uint16) {
+	x.inner.SetConnectionCount(connectionCount)
+}
+
+// SequenceID calls the underlying SequenceID.
+func (x *AVB17221ACMPMessage) SequenceID() uint16 {
+	return x.inner.SequenceID()
+}
+
+// SetSequenceID calls the underlying SetSequenceID.
+func (x *AVB17221ACMPMessage) SetSequenceID(sequenceID uint16) {
+	x.inner.SetSequenceID(sequenceID)
+}
+
+// Flags calls the underlying Flags.
+func (x *AVB17221ACMPMessage) Flags() raw.AVB17221ACMPFlags {
+	return x.inner.Flags()
+}
+
+// SetFlags calls the underlying SetFlags.
+func (x *AVB17221ACMPMessage) SetFlags(flags raw.AVB17221ACMPFlags) {
+	x.inner.SetFlags(flags)
+}
+
+// VlanID calls the underlying VlanID.
+func (x *AVB17221ACMPMessage) VlanID() uint16 {
+	return x.inner.VlanID()
+}
+
+// SetVlanID calls the underlying SetVlanID.
+func (x *AVB17221ACMPMessage) SetVlanID(vlanID uint16) {
+	x.inner.SetVlanID(vlanID)
+}
+
+// ConnectedListenersEntries calls the underlying ConnectedListenersEntries.
+func (x *AVB17221ACMPMessage) ConnectedListenersEntries() uint16 {
+	return x.inner.ConnectedListenersEntries()
+}
+
+// SetConnectedListenersEntries calls the underlying SetConnectedListenersEntries.
+func (x *AVB17221ACMPMessage) SetConnectedListenersEntries(connectedListenersEntries uint16) {
+	x.inner.SetConnectedListenersEntries(connectedListenersEntries)
+}
+
+// ConnectedListenersEntriesValid calls the underlying ConnectedListenersEntriesValid.
+func (x *AVB17221ACMPMessage) ConnectedListenersEntriesValid() bool {
+	return x.inner.ConnectedListenersEntriesValid()
+}
+
+// SetConnectedListenersEntriesValid calls the underlying SetConnectedListenersEntriesValid.
+func (x *AVB17221ACMPMessage) SetConnectedListenersEntriesValid(connectedListenersEntriesValid bool) {
+	x.inner.SetConnectedListenersEntriesValid(connectedListenersEntriesValid)
+}
+
+// IpFlags calls the underlying IpFlags.
+func (x *AVB17221ACMPMessage) IpFlags() raw.AVB17221ACMPIPFlag {
+	return x.inner.IpFlags()
+}
+
+// SetIpFlags calls the underlying SetIpFlags.
+func (x *AVB17221ACMPMessage) SetIpFlags(ipFlags raw.AVB17221ACMPIPFlag) {
+	x.inner.SetIpFlags(ipFlags)
+}
+
+// SourcePort calls the underlying SourcePort.
+func (x *AVB17221ACMPMessage) SourcePort() uint16 {
+	return x.inner.SourcePort()
+}
+
+// SetSourcePort calls the underlying SetSourcePort.
+func (x *AVB17221ACMPMessage) SetSourcePort(sourcePort uint16) {
+	x.inner.SetSourcePort(sourcePort)
+}
+
+// DestinationPort calls the underlying DestinationPort.
+func (x *AVB17221ACMPMessage) DestinationPort() uint16 {
+	return x.inner.DestinationPort()
+}
+
+// SetDestinationPort calls the underlying SetDestinationPort.
+func (x *AVB17221ACMPMessage) SetDestinationPort(destinationPort uint16) {
+	x.inner.SetDestinationPort(destinationPort)
+}
+
+// SourceIPAddress calls the underlying SourceIPAddress.
+func (x *AVB17221ACMPMessage) SourceIPAddress() *IPAddress {
+	_r := x.inner.SourceIPAddress()
+	if _r == nil {
+		return nil
+	}
+	return &IPAddress{inner: _r}
+}
+
+// SetSourceIPAddress calls the underlying SetSourceIPAddress.
+func (x *AVB17221ACMPMessage) SetSourceIPAddress(sourceIPAddress *raw.AVBIPAddress) {
+	x.inner.SetSourceIPAddress(sourceIPAddress)
+}
+
+// DestinationIPAddress calls the underlying DestinationIPAddress.
+func (x *AVB17221ACMPMessage) DestinationIPAddress() *IPAddress {
+	_r := x.inner.DestinationIPAddress()
+	if _r == nil {
+		return nil
+	}
+	return &IPAddress{inner: _r}
+}
+
+// SetDestinationIPAddress calls the underlying SetDestinationIPAddress.
+func (x *AVB17221ACMPMessage) SetDestinationIPAddress(destinationIPAddress *raw.AVBIPAddress) {
+	x.inner.SetDestinationIPAddress(destinationIPAddress)
+}
+
+// SourceMAC calls the underlying SourceMAC.
+func (x *AVB17221ACMPMessage) SourceMAC() *MACAddress {
+	_r := x.inner.SourceMAC()
+	if _r == nil {
+		return nil
+	}
+	return &MACAddress{inner: _r}
+}
+
+// SetSourceMAC calls the underlying SetSourceMAC.
+func (x *AVB17221ACMPMessage) SetSourceMAC(sourceMAC *raw.AVBMACAddress) {
+	x.inner.SetSourceMAC(sourceMAC)
+}
+
+// AVB17221ACMPMessageable is the interface implemented by [AVB17221ACMPMessage], for mocking and DI.
+type AVB17221ACMPMessageable interface {
+	Unwrap() *raw.AVB17221ACMPMessage
+	WithMessageType(messageType raw.AVB17221ACMPMessageType) *AVB17221ACMPMessage
+	WithStatus(status raw.AVB17221ACMPStatusCode) *AVB17221ACMPMessage
+	WithStreamID(streamID uint64) *AVB17221ACMPMessage
+	WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage
+	WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage
+	WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage
+	WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage
+	WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage
+	WithDestinationMAC(destinationMAC *raw.AVBMACAddress) *AVB17221ACMPMessage
+	WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage
+	WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage
+	WithFlags(flags raw.AVB17221ACMPFlags) *AVB17221ACMPMessage
+	WithVlanID(vlanID uint16) *AVB17221ACMPMessage
+	WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage
+	WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage
+	WithIpFlags(ipFlags raw.AVB17221ACMPIPFlag) *AVB17221ACMPMessage
+	WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage
+	WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage
+	WithSourceIPAddress(sourceIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage
+	WithDestinationIPAddress(destinationIPAddress *raw.AVBIPAddress) *AVB17221ACMPMessage
+	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221ACMPMessage
+	ErrorForStatusCode() unsafe.Pointer
+	MessageType() raw.AVB17221ACMPMessageType
+	SetMessageType(messageType raw.AVB17221ACMPMessageType)
+	Status() raw.AVB17221ACMPStatusCode
+	SetStatus(status raw.AVB17221ACMPStatusCode)
+	StreamID() uint64
+	SetStreamID(streamID uint64)
+	ControllerEntityID() uint64
+	SetControllerEntityID(controllerEntityID uint64)
+	TalkerEntityID() uint64
+	SetTalkerEntityID(talkerEntityID uint64)
+	ListenerEntityID() uint64
+	SetListenerEntityID(listenerEntityID uint64)
+	TalkerUniqueID() uint16
+	SetTalkerUniqueID(talkerUniqueID uint16)
+	ListenerUniqueID() uint16
+	SetListenerUniqueID(listenerUniqueID uint16)
+	DestinationMAC() *MACAddress
+	SetDestinationMAC(destinationMAC *raw.AVBMACAddress)
+	ConnectionCount() uint16
+	SetConnectionCount(connectionCount uint16)
+	SequenceID() uint16
+	SetSequenceID(sequenceID uint16)
+	Flags() raw.AVB17221ACMPFlags
+	SetFlags(flags raw.AVB17221ACMPFlags)
+	VlanID() uint16
+	SetVlanID(vlanID uint16)
+	ConnectedListenersEntries() uint16
+	SetConnectedListenersEntries(connectedListenersEntries uint16)
+	ConnectedListenersEntriesValid() bool
+	SetConnectedListenersEntriesValid(connectedListenersEntriesValid bool)
+	IpFlags() raw.AVB17221ACMPIPFlag
+	SetIpFlags(ipFlags raw.AVB17221ACMPIPFlag)
+	SourcePort() uint16
+	SetSourcePort(sourcePort uint16)
+	DestinationPort() uint16
+	SetDestinationPort(destinationPort uint16)
+	SourceIPAddress() *IPAddress
+	SetSourceIPAddress(sourceIPAddress *raw.AVBIPAddress)
+	DestinationIPAddress() *IPAddress
+	SetDestinationIPAddress(destinationIPAddress *raw.AVBIPAddress)
+	SourceMAC() *MACAddress
+	SetSourceMAC(sourceMAC *raw.AVBMACAddress)
+}
+
+var _ AVB17221ACMPMessageable = (*AVB17221ACMPMessage)(nil)
 

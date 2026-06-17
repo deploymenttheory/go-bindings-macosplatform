@@ -23,3 +23,20 @@ func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialEx
 	return &PasskeyAssertionCredentialExtensionInput{inner: raw.ASPasskeyAssertionCredentialExtensionInputFromID(_id)}
 }
 
+// LargeBlob calls the underlying LargeBlob.
+func (x *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: _r}
+}
+
+// PasskeyAssertionCredentialExtensionInputable is the interface implemented by [PasskeyAssertionCredentialExtensionInput], for mocking and DI.
+type PasskeyAssertionCredentialExtensionInputable interface {
+	Unwrap() *raw.ASPasskeyAssertionCredentialExtensionInput
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
+}
+
+var _ PasskeyAssertionCredentialExtensionInputable = (*PasskeyAssertionCredentialExtensionInput)(nil)
+

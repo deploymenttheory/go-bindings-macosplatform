@@ -6,6 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +26,64 @@ func NewMetadataObject() *MetadataObject {
 	return &MetadataObject{inner: raw.AVMetadataObjectFromID(_id)}
 }
 
+// Time calls the underlying Time.
+func (x *MetadataObject) Time() coremedia.CMTime {
+	return x.inner.Time()
+}
+
+// Duration calls the underlying Duration.
+func (x *MetadataObject) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// Bounds calls the underlying Bounds.
+func (x *MetadataObject) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// Type calls the underlying Type.
+func (x *MetadataObject) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GroupID calls the underlying GroupID.
+func (x *MetadataObject) GroupID() int {
+	return x.inner.GroupID()
+}
+
+// ObjectID calls the underlying ObjectID.
+func (x *MetadataObject) ObjectID() int {
+	return x.inner.ObjectID()
+}
+
+// CinematicVideoFocusMode calls the underlying CinematicVideoFocusMode.
+func (x *MetadataObject) CinematicVideoFocusMode() raw.AVCaptureCinematicVideoFocusMode {
+	return x.inner.CinematicVideoFocusMode()
+}
+
+// IsFixedFocus calls the underlying IsFixedFocus.
+func (x *MetadataObject) IsFixedFocus() bool {
+	return x.inner.IsFixedFocus()
+}
+
 func (x *MetadataObject) asMetadataObject() *raw.AVMetadataObject { return x.inner }
+
+// MetadataObjectable is the interface implemented by [MetadataObject], for mocking and DI.
+type MetadataObjectable interface {
+	Unwrap() *raw.AVMetadataObject
+	Time() coremedia.CMTime
+	Duration() coremedia.CMTime
+	Bounds() corefoundation.CGRect
+	Type() string
+	GroupID() int
+	ObjectID() int
+	CinematicVideoFocusMode() raw.AVCaptureCinematicVideoFocusMode
+	IsFixedFocus() bool
+}
+
+var _ MetadataObjectable = (*MetadataObject)(nil)
 

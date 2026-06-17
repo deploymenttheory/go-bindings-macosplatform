@@ -49,3 +49,62 @@ func (x *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddVoic
 	return x
 }
 
+// Style calls the underlying Style.
+func (x *AddVoiceShortcutButton) Style() raw.INUIAddVoiceShortcutButtonStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *AddVoiceShortcutButton) SetStyle(style raw.INUIAddVoiceShortcutButtonStyle) {
+	x.inner.SetStyle(style)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AddVoiceShortcutButton) Delegate() raw.INUIAddVoiceShortcutButtonDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AddVoiceShortcutButton) SetDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Shortcut calls the underlying Shortcut.
+func (x *AddVoiceShortcutButton) Shortcut() *intents.INShortcut {
+	return x.inner.Shortcut()
+}
+
+// SetShortcut calls the underlying SetShortcut.
+func (x *AddVoiceShortcutButton) SetShortcut(shortcut *intents.INShortcut) {
+	x.inner.SetShortcut(shortcut)
+}
+
+// CornerRadius calls the underlying CornerRadius.
+func (x *AddVoiceShortcutButton) CornerRadius() float64 {
+	return x.inner.CornerRadius()
+}
+
+// SetCornerRadius calls the underlying SetCornerRadius.
+func (x *AddVoiceShortcutButton) SetCornerRadius(cornerRadius float64) {
+	x.inner.SetCornerRadius(cornerRadius)
+}
+
+// AddVoiceShortcutButtonable is the interface implemented by [AddVoiceShortcutButton], for mocking and DI.
+type AddVoiceShortcutButtonable interface {
+	Unwrap() *raw.INUIAddVoiceShortcutButton
+	WithStyle(style raw.INUIAddVoiceShortcutButtonStyle) *AddVoiceShortcutButton
+	WithDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate) *AddVoiceShortcutButton
+	WithShortcut(shortcut *intents.INShortcut) *AddVoiceShortcutButton
+	WithCornerRadius(cornerRadius float64) *AddVoiceShortcutButton
+	Style() raw.INUIAddVoiceShortcutButtonStyle
+	SetStyle(style raw.INUIAddVoiceShortcutButtonStyle)
+	Delegate() raw.INUIAddVoiceShortcutButtonDelegate
+	SetDelegate(delegate raw.INUIAddVoiceShortcutButtonDelegate)
+	Shortcut() *intents.INShortcut
+	SetShortcut(shortcut *intents.INShortcut)
+	CornerRadius() float64
+	SetCornerRadius(cornerRadius float64)
+}
+
+var _ AddVoiceShortcutButtonable = (*AddVoiceShortcutButton)(nil)
+

@@ -35,9 +35,28 @@ func NewCNNDilatedPoolingMaxWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &CNNDilatedPoolingMax{inner: raw.MPSCNNDilatedPoolingMaxFromID(_id)}
 }
 
+// DilationRateX calls the underlying DilationRateX.
+func (x *CNNDilatedPoolingMax) DilationRateX() uint {
+	return x.inner.DilationRateX()
+}
+
+// DilationRateY calls the underlying DilationRateY.
+func (x *CNNDilatedPoolingMax) DilationRateY() uint {
+	return x.inner.DilationRateY()
+}
+
 func (x *CNNDilatedPoolingMax) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
 func (x *CNNDilatedPoolingMax) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
 
 func (x *CNNDilatedPoolingMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel }
+
+// CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
+type CNNDilatedPoolingMaxable interface {
+	Unwrap() *raw.MPSCNNDilatedPoolingMax
+	DilationRateX() uint
+	DilationRateY() uint
+}
+
+var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)
 

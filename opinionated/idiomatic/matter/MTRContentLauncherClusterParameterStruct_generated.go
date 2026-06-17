@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,54 @@ func (x *MTRContentLauncherClusterParameterStruct) WithValue(value string) *MTRC
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *MTRContentLauncherClusterParameterStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRContentLauncherClusterParameterStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
+// Value calls the underlying Value.
+func (x *MTRContentLauncherClusterParameterStruct) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRContentLauncherClusterParameterStruct) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// ExternalIDList calls the underlying ExternalIDList.
+func (x *MTRContentLauncherClusterParameterStruct) ExternalIDList() *foundation.NSArray[objc.ID] {
+	return x.inner.ExternalIDList()
+}
+
+// SetExternalIDList calls the underlying SetExternalIDList.
+func (x *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList *foundation.NSArray[objc.ID]) {
+	x.inner.SetExternalIDList(externalIDList)
+}
+
 func (x *MTRContentLauncherClusterParameterStruct) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct { return x.inner }
+
+// MTRContentLauncherClusterParameterStructable is the interface implemented by [MTRContentLauncherClusterParameterStruct], for mocking and DI.
+type MTRContentLauncherClusterParameterStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterParameterStruct
+	WithType(type_ *foundation.NSNumber) *MTRContentLauncherClusterParameterStruct
+	WithValue(value string) *MTRContentLauncherClusterParameterStruct
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+	Value() string
+	SetValue(value string)
+	ExternalIDList() *foundation.NSArray[objc.ID]
+	SetExternalIDList(externalIDList *foundation.NSArray[objc.ID])
+}
+
+var _ MTRContentLauncherClusterParameterStructable = (*MTRContentLauncherClusterParameterStruct)(nil)
 

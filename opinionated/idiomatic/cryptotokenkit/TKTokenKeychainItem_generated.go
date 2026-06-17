@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +38,48 @@ func (x *TokenKeychainItem) WithConstraints(constraints *foundation.NSDictionary
 	return x
 }
 
+// ObjectID calls the underlying ObjectID.
+func (x *TokenKeychainItem) ObjectID() objc.ID {
+	return x.inner.ObjectID()
+}
+
+// Label calls the underlying Label.
+func (x *TokenKeychainItem) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *TokenKeychainItem) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Constraints calls the underlying Constraints.
+func (x *TokenKeychainItem) Constraints() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
+	return x.inner.Constraints()
+}
+
+// SetConstraints calls the underlying SetConstraints.
+func (x *TokenKeychainItem) SetConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
+	x.inner.SetConstraints(constraints)
+}
+
 func (x *TokenKeychainItem) asTokenKeychainItem() *raw.TKTokenKeychainItem { return x.inner }
+
+// TokenKeychainItemable is the interface implemented by [TokenKeychainItem], for mocking and DI.
+type TokenKeychainItemable interface {
+	Unwrap() *raw.TKTokenKeychainItem
+	WithLabel(label string) *TokenKeychainItem
+	WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainItem
+	ObjectID() objc.ID
+	Label() string
+	SetLabel(label string)
+	Constraints() *foundation.NSDictionary[*foundation.NSNumber, objc.ID]
+	SetConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID])
+}
+
+var _ TokenKeychainItemable = (*TokenKeychainItem)(nil)
 

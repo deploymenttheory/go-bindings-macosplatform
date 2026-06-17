@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MutableTexture wraps [raw.SKMutableTexture] with a fluent Go API.
@@ -32,5 +33,18 @@ func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int
 	return &MutableTexture{inner: raw.SKMutableTextureFromID(_id)}
 }
 
+// ModifyPixelDataWith calls the underlying ModifyPixelDataWith.
+func (x *MutableTexture) ModifyPixelDataWith(block func(unsafe.Pointer, uint)) {
+	x.inner.ModifyPixelDataWith(block)
+}
+
 func (x *MutableTexture) asTexture() *raw.SKTexture { return &x.inner.SKTexture }
+
+// MutableTextureable is the interface implemented by [MutableTexture], for mocking and DI.
+type MutableTextureable interface {
+	Unwrap() *raw.SKMutableTexture
+	ModifyPixelDataWith(block func(unsafe.Pointer, uint))
+}
+
+var _ MutableTextureable = (*MutableTexture)(nil)
 

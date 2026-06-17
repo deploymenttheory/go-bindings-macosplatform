@@ -36,3 +36,36 @@ func (x *MTRValveConfigurationAndControlClusterCloseParams) WithServerSideProces
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRValveConfigurationAndControlClusterCloseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRValveConfigurationAndControlClusterCloseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRValveConfigurationAndControlClusterCloseParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRValveConfigurationAndControlClusterCloseParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRValveConfigurationAndControlClusterCloseParamsable is the interface implemented by [MTRValveConfigurationAndControlClusterCloseParams], for mocking and DI.
+type MTRValveConfigurationAndControlClusterCloseParamsable interface {
+	Unwrap() *raw.MTRValveConfigurationAndControlClusterCloseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRValveConfigurationAndControlClusterCloseParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRValveConfigurationAndControlClusterCloseParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRValveConfigurationAndControlClusterCloseParamsable = (*MTRValveConfigurationAndControlClusterCloseParams)(nil)
+

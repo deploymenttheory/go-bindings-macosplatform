@@ -8,7 +8,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // State wraps [raw.MPSState] with a fluent Go API.
@@ -65,4 +67,105 @@ func (x *State) WithLabel(label string) *State {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// ResourceAtIndexAllocateMemory calls the underlying ResourceAtIndexAllocateMemory.
+func (x *State) ResourceAtIndexAllocateMemory(index uint, allocateMemory bool) metal.MTLResource {
+	return x.inner.ResourceAtIndexAllocateMemory(index, allocateMemory)
+}
+
+// BufferSizeAtIndex calls the underlying BufferSizeAtIndex.
+func (x *State) BufferSizeAtIndex(index uint) uint {
+	return x.inner.BufferSizeAtIndex(index)
+}
+
+// TextureInfoAtIndex calls the underlying TextureInfoAtIndex.
+func (x *State) TextureInfoAtIndex(index uint) raw.MPSStateTextureInfo {
+	return x.inner.TextureInfoAtIndex(index)
+}
+
+// ResourceTypeAtIndex calls the underlying ResourceTypeAtIndex.
+func (x *State) ResourceTypeAtIndex(index uint) raw.MPSStateResourceType {
+	return x.inner.ResourceTypeAtIndex(index)
+}
+
+// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
+func (x *State) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+}
+
+// ResourceSize calls the underlying ResourceSize.
+func (x *State) ResourceSize() uint {
+	return x.inner.ResourceSize()
+}
+
+// DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor calls the underlying DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor.
+func (x *State) DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages *foundation.NSArray[*raw.MPSImage], sourceStates *foundation.NSArray[*raw.MPSState], kernel *raw.MPSKernel, inDescriptor *raw.MPSImageDescriptor) *ImageDescriptor {
+	_r := x.inner.DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages, sourceStates, kernel, inDescriptor)
+	if _r == nil {
+		return nil
+	}
+	return &ImageDescriptor{inner: _r}
+}
+
+// ResourceCount calls the underlying ResourceCount.
+func (x *State) ResourceCount() uint {
+	return x.inner.ResourceCount()
+}
+
+// ReadCount calls the underlying ReadCount.
+func (x *State) ReadCount() uint {
+	return x.inner.ReadCount()
+}
+
+// SetReadCount calls the underlying SetReadCount.
+func (x *State) SetReadCount(readCount uint) {
+	x.inner.SetReadCount(readCount)
+}
+
+// IsTemporary calls the underlying IsTemporary.
+func (x *State) IsTemporary() bool {
+	return x.inner.IsTemporary()
+}
+
+// Label calls the underlying Label.
+func (x *State) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *State) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Resource calls the underlying Resource.
+func (x *State) Resource() unsafe.Pointer {
+	return x.inner.Resource()
+}
+
+// Stateable is the interface implemented by [State], for mocking and DI.
+type Stateable interface {
+	Unwrap() *raw.MPSState
+	WithReadCount(readCount uint) *State
+	WithLabel(label string) *State
+	ResourceAtIndexAllocateMemory(index uint, allocateMemory bool) metal.MTLResource
+	BufferSizeAtIndex(index uint) uint
+	TextureInfoAtIndex(index uint) raw.MPSStateTextureInfo
+	ResourceTypeAtIndex(index uint) raw.MPSStateResourceType
+	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	ResourceSize() uint
+	DestinationImageDescriptorForSourceImagesSourceStatesForKernelSuggestedDescriptor(sourceImages *foundation.NSArray[*raw.MPSImage], sourceStates *foundation.NSArray[*raw.MPSState], kernel *raw.MPSKernel, inDescriptor *raw.MPSImageDescriptor) *ImageDescriptor
+	ResourceCount() uint
+	ReadCount() uint
+	SetReadCount(readCount uint)
+	IsTemporary() bool
+	Label() string
+	SetLabel(label string)
+	Resource() unsafe.Pointer
+}
+
+var _ Stateable = (*State)(nil)
 

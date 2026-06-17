@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,4 +30,50 @@ func (x *AssetReaderOutputCaptionAdaptor) WithValidationDelegate(validationDeleg
 	x.inner.SetValidationDelegate(validationDelegate)
 	return x
 }
+
+// NextCaptionGroup calls the underlying NextCaptionGroup.
+func (x *AssetReaderOutputCaptionAdaptor) NextCaptionGroup() *CaptionGroup {
+	_r := x.inner.NextCaptionGroup()
+	if _r == nil {
+		return nil
+	}
+	return &CaptionGroup{inner: _r}
+}
+
+// CaptionsNotPresentInPreviousGroupsInCaptionGroup calls the underlying CaptionsNotPresentInPreviousGroupsInCaptionGroup.
+func (x *AssetReaderOutputCaptionAdaptor) CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *raw.AVCaptionGroup) *foundation.NSArray[*raw.AVCaption] {
+	return x.inner.CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup)
+}
+
+// AssetReaderTrackOutput calls the underlying AssetReaderTrackOutput.
+func (x *AssetReaderOutputCaptionAdaptor) AssetReaderTrackOutput() *AssetReaderTrackOutput {
+	_r := x.inner.AssetReaderTrackOutput()
+	if _r == nil {
+		return nil
+	}
+	return &AssetReaderTrackOutput{inner: _r}
+}
+
+// ValidationDelegate calls the underlying ValidationDelegate.
+func (x *AssetReaderOutputCaptionAdaptor) ValidationDelegate() raw.AVAssetReaderCaptionValidationHandling {
+	return x.inner.ValidationDelegate()
+}
+
+// SetValidationDelegate calls the underlying SetValidationDelegate.
+func (x *AssetReaderOutputCaptionAdaptor) SetValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) {
+	x.inner.SetValidationDelegate(validationDelegate)
+}
+
+// AssetReaderOutputCaptionAdaptorable is the interface implemented by [AssetReaderOutputCaptionAdaptor], for mocking and DI.
+type AssetReaderOutputCaptionAdaptorable interface {
+	Unwrap() *raw.AVAssetReaderOutputCaptionAdaptor
+	WithValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling) *AssetReaderOutputCaptionAdaptor
+	NextCaptionGroup() *CaptionGroup
+	CaptionsNotPresentInPreviousGroupsInCaptionGroup(captionGroup *raw.AVCaptionGroup) *foundation.NSArray[*raw.AVCaption]
+	AssetReaderTrackOutput() *AssetReaderTrackOutput
+	ValidationDelegate() raw.AVAssetReaderCaptionValidationHandling
+	SetValidationDelegate(validationDelegate raw.AVAssetReaderCaptionValidationHandling)
+}
+
+var _ AssetReaderOutputCaptionAdaptorable = (*AssetReaderOutputCaptionAdaptor)(nil)
 

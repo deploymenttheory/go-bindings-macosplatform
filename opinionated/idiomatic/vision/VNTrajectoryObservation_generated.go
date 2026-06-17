@@ -6,7 +6,9 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TrajectoryObservation wraps [raw.VNTrajectoryObservation] with a fluent Go API.
@@ -29,11 +31,9 @@ func (x *TrajectoryObservation) DetectedPoints() []*raw.VNPoint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNPoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNPoint {
+		return raw.VNPointFromID(purego.Retain(_id))
+	})
 }
 
 // ProjectedPoints returns the collection as a Go slice.
@@ -42,12 +42,31 @@ func (x *TrajectoryObservation) ProjectedPoints() []*raw.VNPoint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNPoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNPoint {
+		return raw.VNPointFromID(purego.Retain(_id))
+	})
+}
+
+// EquationCoefficients calls the underlying EquationCoefficients.
+func (x *TrajectoryObservation) EquationCoefficients() unsafe.Pointer {
+	return x.inner.EquationCoefficients()
+}
+
+// MovingAverageRadius calls the underlying MovingAverageRadius.
+func (x *TrajectoryObservation) MovingAverageRadius() float64 {
+	return x.inner.MovingAverageRadius()
 }
 
 func (x *TrajectoryObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// TrajectoryObservationable is the interface implemented by [TrajectoryObservation], for mocking and DI.
+type TrajectoryObservationable interface {
+	Unwrap() *raw.VNTrajectoryObservation
+	DetectedPoints() []*raw.VNPoint
+	ProjectedPoints() []*raw.VNPoint
+	EquationCoefficients() unsafe.Pointer
+	MovingAverageRadius() float64
+}
+
+var _ TrajectoryObservationable = (*TrajectoryObservation)(nil)
 

@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,32 @@ func NewChangeHistoryAddGroupEvent() *ChangeHistoryAddGroupEvent {
 	return &ChangeHistoryAddGroupEvent{inner: raw.CNChangeHistoryAddGroupEventFromID(_id)}
 }
 
+// Group calls the underlying Group.
+func (x *ChangeHistoryAddGroupEvent) Group() *Group {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
+// ContainerIdentifier calls the underlying ContainerIdentifier.
+func (x *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
+	_r := x.inner.ContainerIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ChangeHistoryAddGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryAddGroupEventable is the interface implemented by [ChangeHistoryAddGroupEvent], for mocking and DI.
+type ChangeHistoryAddGroupEventable interface {
+	Unwrap() *raw.CNChangeHistoryAddGroupEvent
+	Group() *Group
+	ContainerIdentifier() string
+}
+
+var _ ChangeHistoryAddGroupEventable = (*ChangeHistoryAddGroupEvent)(nil)
 

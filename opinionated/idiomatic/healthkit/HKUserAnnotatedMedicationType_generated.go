@@ -25,3 +25,10 @@ func NewUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
 
 func (x *UserAnnotatedMedicationType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
+// UserAnnotatedMedicationTypeable is the interface implemented by [UserAnnotatedMedicationType], for mocking and DI.
+type UserAnnotatedMedicationTypeable interface {
+	Unwrap() *raw.HKUserAnnotatedMedicationType
+}
+
+var _ UserAnnotatedMedicationTypeable = (*UserAnnotatedMedicationType)(nil)
+

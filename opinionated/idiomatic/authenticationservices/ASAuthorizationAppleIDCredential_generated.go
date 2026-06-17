@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,82 @@ func NewAuthorizationAppleIDCredential() *AuthorizationAppleIDCredential {
 	return &AuthorizationAppleIDCredential{inner: raw.ASAuthorizationAppleIDCredentialFromID(_id)}
 }
 
+// User calls the underlying User.
+func (x *AuthorizationAppleIDCredential) User() string {
+	_r := x.inner.User()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// State calls the underlying State.
+func (x *AuthorizationAppleIDCredential) State() string {
+	_r := x.inner.State()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // AuthorizedScopes returns the collection as a Go slice.
 func (x *AuthorizationAppleIDCredential) AuthorizedScopes() []*foundation.NSString {
 	arr := x.inner.AuthorizedScopes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// AuthorizationCode calls the underlying AuthorizationCode.
+func (x *AuthorizationAppleIDCredential) AuthorizationCode() *foundation.NSData {
+	return x.inner.AuthorizationCode()
+}
+
+// IdentityToken calls the underlying IdentityToken.
+func (x *AuthorizationAppleIDCredential) IdentityToken() *foundation.NSData {
+	return x.inner.IdentityToken()
+}
+
+// Email calls the underlying Email.
+func (x *AuthorizationAppleIDCredential) Email() string {
+	_r := x.inner.Email()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FullName calls the underlying FullName.
+func (x *AuthorizationAppleIDCredential) FullName() *foundation.NSPersonNameComponents {
+	return x.inner.FullName()
+}
+
+// RealUserStatus calls the underlying RealUserStatus.
+func (x *AuthorizationAppleIDCredential) RealUserStatus() raw.ASUserDetectionStatus {
+	return x.inner.RealUserStatus()
+}
+
+// UserAgeRange calls the underlying UserAgeRange.
+func (x *AuthorizationAppleIDCredential) UserAgeRange() raw.ASUserAgeRange {
+	return x.inner.UserAgeRange()
+}
+
+// AuthorizationAppleIDCredentialable is the interface implemented by [AuthorizationAppleIDCredential], for mocking and DI.
+type AuthorizationAppleIDCredentialable interface {
+	Unwrap() *raw.ASAuthorizationAppleIDCredential
+	User() string
+	State() string
+	AuthorizedScopes() []*foundation.NSString
+	AuthorizationCode() *foundation.NSData
+	IdentityToken() *foundation.NSData
+	Email() string
+	FullName() *foundation.NSPersonNameComponents
+	RealUserStatus() raw.ASUserDetectionStatus
+	UserAgeRange() raw.ASUserAgeRange
+}
+
+var _ AuthorizationAppleIDCredentialable = (*AuthorizationAppleIDCredential)(nil)
 

@@ -25,3 +25,32 @@ func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDa
 	return &EstimatedSampleLocation{inner: raw.MEEstimatedSampleLocationFromID(_id)}
 }
 
+// EstimatedSampleLocation calls the underlying EstimatedSampleLocation.
+func (x *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
+	return x.inner.EstimatedSampleLocation()
+}
+
+// RefinementDataLocation calls the underlying RefinementDataLocation.
+func (x *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
+	return x.inner.RefinementDataLocation()
+}
+
+// ByteSource calls the underlying ByteSource.
+func (x *EstimatedSampleLocation) ByteSource() *ByteSource {
+	_r := x.inner.ByteSource()
+	if _r == nil {
+		return nil
+	}
+	return &ByteSource{inner: _r}
+}
+
+// EstimatedSampleLocationable is the interface implemented by [EstimatedSampleLocation], for mocking and DI.
+type EstimatedSampleLocationable interface {
+	Unwrap() *raw.MEEstimatedSampleLocation
+	EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange
+	RefinementDataLocation() avfoundation.AVSampleCursorStorageRange
+	ByteSource() *ByteSource
+}
+
+var _ EstimatedSampleLocationable = (*EstimatedSampleLocation)(nil)
+

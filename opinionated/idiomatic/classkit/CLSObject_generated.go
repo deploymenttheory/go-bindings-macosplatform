@@ -6,6 +6,7 @@ package classkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,24 @@ func NewObject() *Object {
 	return &Object{inner: raw.CLSObjectFromID(_id)}
 }
 
+// DateCreated calls the underlying DateCreated.
+func (x *Object) DateCreated() *foundation.NSDate {
+	return x.inner.DateCreated()
+}
+
+// DateLastModified calls the underlying DateLastModified.
+func (x *Object) DateLastModified() *foundation.NSDate {
+	return x.inner.DateLastModified()
+}
+
 func (x *Object) asObject() *raw.CLSObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.CLSObject
+	DateCreated() *foundation.NSDate
+	DateLastModified() *foundation.NSDate
+}
+
+var _ Objectable = (*Object)(nil)
 

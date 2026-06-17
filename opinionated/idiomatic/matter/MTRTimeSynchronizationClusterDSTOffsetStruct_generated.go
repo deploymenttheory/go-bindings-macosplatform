@@ -42,5 +42,51 @@ func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) WithValidUntil(validUntil
 	return x
 }
 
+// Offset calls the underlying Offset.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) Offset() *foundation.NSNumber {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetOffset(offset *foundation.NSNumber) {
+	x.inner.SetOffset(offset)
+}
+
+// ValidStarting calls the underlying ValidStarting.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidStarting() *foundation.NSNumber {
+	return x.inner.ValidStarting()
+}
+
+// SetValidStarting calls the underlying SetValidStarting.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidStarting(validStarting *foundation.NSNumber) {
+	x.inner.SetValidStarting(validStarting)
+}
+
+// ValidUntil calls the underlying ValidUntil.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) ValidUntil() *foundation.NSNumber {
+	return x.inner.ValidUntil()
+}
+
+// SetValidUntil calls the underlying SetValidUntil.
+func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) SetValidUntil(validUntil *foundation.NSNumber) {
+	x.inner.SetValidUntil(validUntil)
+}
+
 func (x *MTRTimeSynchronizationClusterDSTOffsetStruct) asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct { return x.inner }
+
+// MTRTimeSynchronizationClusterDSTOffsetStructable is the interface implemented by [MTRTimeSynchronizationClusterDSTOffsetStruct], for mocking and DI.
+type MTRTimeSynchronizationClusterDSTOffsetStructable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct
+	WithOffset(offset *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	WithValidStarting(validStarting *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	WithValidUntil(validUntil *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTOffsetStruct
+	Offset() *foundation.NSNumber
+	SetOffset(offset *foundation.NSNumber)
+	ValidStarting() *foundation.NSNumber
+	SetValidStarting(validStarting *foundation.NSNumber)
+	ValidUntil() *foundation.NSNumber
+	SetValidUntil(validUntil *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterDSTOffsetStructable = (*MTRTimeSynchronizationClusterDSTOffsetStruct)(nil)
 

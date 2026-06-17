@@ -28,3 +28,10 @@ func (x *StartCallCallRecordToCallBackResolutionResult) asCallRecordResolutionRe
 
 func (x *StartCallCallRecordToCallBackResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INCallRecordResolutionResult.INIntentResolutionResult }
 
+// StartCallCallRecordToCallBackResolutionResultable is the interface implemented by [StartCallCallRecordToCallBackResolutionResult], for mocking and DI.
+type StartCallCallRecordToCallBackResolutionResultable interface {
+	Unwrap() *raw.INStartCallCallRecordToCallBackResolutionResult
+}
+
+var _ StartCallCallRecordToCallBackResolutionResultable = (*StartCallCallRecordToCallBackResolutionResult)(nil)
+

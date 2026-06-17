@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,30 @@ func NewDelegatingPlaybackCoordinatorPlayCommand() *DelegatingPlaybackCoordinato
 	return &DelegatingPlaybackCoordinatorPlayCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlayCommandFromID(_id)}
 }
 
+// Rate calls the underlying Rate.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// ItemTime calls the underlying ItemTime.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) ItemTime() coremedia.CMTime {
+	return x.inner.ItemTime()
+}
+
+// HostClockTime calls the underlying HostClockTime.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.CMTime {
+	return x.inner.HostClockTime()
+}
+
 func (x *DelegatingPlaybackCoordinatorPlayCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+
+// DelegatingPlaybackCoordinatorPlayCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlayCommand], for mocking and DI.
+type DelegatingPlaybackCoordinatorPlayCommandable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlayCommand
+	Rate() float32
+	ItemTime() coremedia.CMTime
+	HostClockTime() coremedia.CMTime
+}
+
+var _ DelegatingPlaybackCoordinatorPlayCommandable = (*DelegatingPlaybackCoordinatorPlayCommand)(nil)
 

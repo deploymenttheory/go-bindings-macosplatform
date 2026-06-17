@@ -23,3 +23,16 @@ func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
 	return &NeuralEngineComputeDevice{inner: raw.MLNeuralEngineComputeDeviceFromID(_id)}
 }
 
+// TotalCoreCount calls the underlying TotalCoreCount.
+func (x *NeuralEngineComputeDevice) TotalCoreCount() int {
+	return x.inner.TotalCoreCount()
+}
+
+// NeuralEngineComputeDeviceable is the interface implemented by [NeuralEngineComputeDevice], for mocking and DI.
+type NeuralEngineComputeDeviceable interface {
+	Unwrap() *raw.MLNeuralEngineComputeDevice
+	TotalCoreCount() int
+}
+
+var _ NeuralEngineComputeDeviceable = (*NeuralEngineComputeDevice)(nil)
+

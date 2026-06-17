@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,12 +38,47 @@ func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*raw.AVAssetTrack {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrack {
+		return raw.AVAssetTrackFromID(purego.Retain(_id))
+	})
+}
+
+// VideoSettings calls the underlying VideoSettings.
+func (x *AssetReaderVideoCompositionOutput) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.VideoSettings()
+}
+
+// VideoComposition calls the underlying VideoComposition.
+func (x *AssetReaderVideoCompositionOutput) VideoComposition() *VideoComposition {
+	_r := x.inner.VideoComposition()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &VideoComposition{inner: _r}
+}
+
+// SetVideoComposition calls the underlying SetVideoComposition.
+func (x *AssetReaderVideoCompositionOutput) SetVideoComposition(videoComposition *raw.AVVideoComposition) {
+	x.inner.SetVideoComposition(videoComposition)
+}
+
+// CustomVideoCompositor calls the underlying CustomVideoCompositor.
+func (x *AssetReaderVideoCompositionOutput) CustomVideoCompositor() raw.AVVideoCompositing {
+	return x.inner.CustomVideoCompositor()
 }
 
 func (x *AssetReaderVideoCompositionOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+
+// AssetReaderVideoCompositionOutputable is the interface implemented by [AssetReaderVideoCompositionOutput], for mocking and DI.
+type AssetReaderVideoCompositionOutputable interface {
+	Unwrap() *raw.AVAssetReaderVideoCompositionOutput
+	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput
+	VideoTracks() []*raw.AVAssetTrack
+	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	VideoComposition() *VideoComposition
+	SetVideoComposition(videoComposition *raw.AVVideoComposition)
+	CustomVideoCompositor() raw.AVVideoCompositing
+}
+
+var _ AssetReaderVideoCompositionOutputable = (*AssetReaderVideoCompositionOutput)(nil)
 

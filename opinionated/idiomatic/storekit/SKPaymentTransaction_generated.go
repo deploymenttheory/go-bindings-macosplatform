@@ -5,8 +5,11 @@
 package storekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PaymentTransaction wraps [raw.SKPaymentTransaction] with a fluent Go API.
@@ -23,16 +26,64 @@ func NewPaymentTransaction() *PaymentTransaction {
 	return &PaymentTransaction{inner: raw.SKPaymentTransactionFromID(_id)}
 }
 
+// Error calls the underlying Error.
+func (x *PaymentTransaction) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// OriginalTransaction calls the underlying OriginalTransaction.
+func (x *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
+	_r := x.inner.OriginalTransaction()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentTransaction{inner: _r}
+}
+
+// Payment calls the underlying Payment.
+func (x *PaymentTransaction) Payment() *Payment {
+	_r := x.inner.Payment()
+	if _r == nil {
+		return nil
+	}
+	return &Payment{inner: _r}
+}
+
 // Downloads returns the collection as a Go slice.
 func (x *PaymentTransaction) Downloads() []*raw.SKDownload {
 	arr := x.inner.Downloads()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKDownload, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKDownload {
+		return raw.SKDownloadFromID(purego.Retain(_id))
+	})
 }
+
+// TransactionDate calls the underlying TransactionDate.
+func (x *PaymentTransaction) TransactionDate() *foundation.NSDate {
+	return x.inner.TransactionDate()
+}
+
+// TransactionIdentifier calls the underlying TransactionIdentifier.
+func (x *PaymentTransaction) TransactionIdentifier() string {
+	_r := x.inner.TransactionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PaymentTransactionable is the interface implemented by [PaymentTransaction], for mocking and DI.
+type PaymentTransactionable interface {
+	Unwrap() *raw.SKPaymentTransaction
+	Error() unsafe.Pointer
+	OriginalTransaction() *PaymentTransaction
+	Payment() *Payment
+	Downloads() []*raw.SKDownload
+	TransactionDate() *foundation.NSDate
+	TransactionIdentifier() string
+}
+
+var _ PaymentTransactionable = (*PaymentTransaction)(nil)
 

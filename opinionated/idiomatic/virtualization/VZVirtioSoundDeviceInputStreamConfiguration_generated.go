@@ -29,5 +29,29 @@ func (x *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInput
 	return x
 }
 
+// Source calls the underlying Source.
+func (x *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &AudioInputStreamSource{inner: _r}
+}
+
+// SetSource calls the underlying SetSource.
+func (x *VirtioSoundDeviceInputStreamConfiguration) SetSource(source *raw.VZAudioInputStreamSource) {
+	x.inner.SetSource(source)
+}
+
 func (x *VirtioSoundDeviceInputStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration { return &x.inner.VZVirtioSoundDeviceStreamConfiguration }
+
+// VirtioSoundDeviceInputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceInputStreamConfiguration], for mocking and DI.
+type VirtioSoundDeviceInputStreamConfigurationable interface {
+	Unwrap() *raw.VZVirtioSoundDeviceInputStreamConfiguration
+	WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration
+	Source() *AudioInputStreamSource
+	SetSource(source *raw.VZAudioInputStreamSource)
+}
+
+var _ VirtioSoundDeviceInputStreamConfigurationable = (*VirtioSoundDeviceInputStreamConfiguration)(nil)
 

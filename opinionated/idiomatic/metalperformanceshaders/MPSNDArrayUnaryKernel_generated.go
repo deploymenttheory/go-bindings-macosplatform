@@ -27,9 +27,70 @@ func NewNDArrayUnaryKernelWithDevice(device metal.MTLDevice) *NDArrayUnaryKernel
 	return &NDArrayUnaryKernel{inner: raw.MPSNDArrayUnaryKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArray calls the underlying EncodeToCommandBufferSourceArray.
+func (x *NDArrayUnaryKernel) EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArray(cmdBuf, sourceArray)
+}
+
+// EncodeToCommandBufferSourceArrayDestinationArray calls the underlying EncodeToCommandBufferSourceArrayDestinationArray.
+func (x *NDArrayUnaryKernel) EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf, sourceArray, destination)
+}
+
+// EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary.
+func (x *NDArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf, sourceArray, outGradientState, outputStateIsTemporary)
+}
+
+// EncodeToCommandBufferSourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArrayResultStateDestinationArray.
+func (x *NDArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf, sourceArray, outGradientState, destination)
+}
+
+// Offsets calls the underlying Offsets.
+func (x *NDArrayUnaryKernel) Offsets() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.Offsets()
+}
+
+// EdgeMode calls the underlying EdgeMode.
+func (x *NDArrayUnaryKernel) EdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeMode()
+}
+
+// KernelSizes calls the underlying KernelSizes.
+func (x *NDArrayUnaryKernel) KernelSizes() mpsndarray.MPSNDArraySizes {
+	return x.inner.KernelSizes()
+}
+
+// Strides calls the underlying Strides.
+func (x *NDArrayUnaryKernel) Strides() mpsndarray.MPSNDArrayOffsets {
+	return x.inner.Strides()
+}
+
+// DilationRates calls the underlying DilationRates.
+func (x *NDArrayUnaryKernel) DilationRates() mpsndarray.MPSNDArraySizes {
+	return x.inner.DilationRates()
+}
+
 func (x *NDArrayUnaryKernel) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayUnaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayUnaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayUnaryKernelable is the interface implemented by [NDArrayUnaryKernel], for mocking and DI.
+type NDArrayUnaryKernelable interface {
+	Unwrap() *raw.MPSNDArrayUnaryKernel
+	EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
+	EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	Offsets() mpsndarray.MPSNDArrayOffsets
+	EdgeMode() mpscore.MPSImageEdgeMode
+	KernelSizes() mpsndarray.MPSNDArraySizes
+	Strides() mpsndarray.MPSNDArrayOffsets
+	DilationRates() mpsndarray.MPSNDArraySizes
+}
+
+var _ NDArrayUnaryKernelable = (*NDArrayUnaryKernel)(nil)
 

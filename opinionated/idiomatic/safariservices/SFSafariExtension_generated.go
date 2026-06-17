@@ -23,3 +23,10 @@ func NewSafariExtension() *SafariExtension {
 	return &SafariExtension{inner: raw.SFSafariExtensionFromID(_id)}
 }
 
+// SafariExtensionable is the interface implemented by [SafariExtension], for mocking and DI.
+type SafariExtensionable interface {
+	Unwrap() *raw.SFSafariExtension
+}
+
+var _ SafariExtensionable = (*SafariExtension)(nil)
+

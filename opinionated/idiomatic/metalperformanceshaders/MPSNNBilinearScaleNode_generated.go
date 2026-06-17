@@ -28,3 +28,10 @@ func (x *NNBilinearScaleNode) asNNScaleNode() *mpsneuralnetwork.MPSNNScaleNode {
 
 func (x *NNBilinearScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNScaleNode.MPSNNFilterNode }
 
+// NNBilinearScaleNodeable is the interface implemented by [NNBilinearScaleNode], for mocking and DI.
+type NNBilinearScaleNodeable interface {
+	Unwrap() *raw.MPSNNBilinearScaleNode
+}
+
+var _ NNBilinearScaleNodeable = (*NNBilinearScaleNode)(nil)
+

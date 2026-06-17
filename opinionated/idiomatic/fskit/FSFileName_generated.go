@@ -7,6 +7,7 @@ package fskit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,4 +46,27 @@ func NewFileNameWithString(name string) *FileName {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(name).Ptr())
 	return &FileName{inner: raw.FSFileNameFromID(_id)}
 }
+
+// Data calls the underlying Data.
+func (x *FileName) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// String calls the underlying String.
+func (x *FileName) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FileNameable is the interface implemented by [FileName], for mocking and DI.
+type FileNameable interface {
+	Unwrap() *raw.FSFileName
+	Data() *foundation.NSData
+	String() string
+}
+
+var _ FileNameable = (*FileName)(nil)
 

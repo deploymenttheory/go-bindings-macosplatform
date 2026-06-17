@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestNullableOptionalResponseParams() *MTRTestCluste
 
 func (x *MTRTestClusterClusterTestNullableOptionalResponseParams) asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams { return &x.inner.MTRUnitTestingClusterTestNullableOptionalResponseParams }
 
+// MTRTestClusterClusterTestNullableOptionalResponseParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalResponseParams], for mocking and DI.
+type MTRTestClusterClusterTestNullableOptionalResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalResponseParams
+}
+
+var _ MTRTestClusterClusterTestNullableOptionalResponseParamsable = (*MTRTestClusterClusterTestNullableOptionalResponseParams)(nil)
+

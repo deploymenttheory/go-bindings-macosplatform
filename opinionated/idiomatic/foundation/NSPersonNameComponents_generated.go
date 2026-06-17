@@ -66,5 +66,131 @@ func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation
 	return x
 }
 
+// NamePrefix calls the underlying NamePrefix.
+func (x *PersonNameComponents) NamePrefix() *String {
+	_r := x.inner.NamePrefix()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetNamePrefix calls the underlying SetNamePrefix.
+func (x *PersonNameComponents) SetNamePrefix(namePrefix string) {
+	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
+}
+
+// GivenName calls the underlying GivenName.
+func (x *PersonNameComponents) GivenName() *String {
+	_r := x.inner.GivenName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetGivenName calls the underlying SetGivenName.
+func (x *PersonNameComponents) SetGivenName(givenName string) {
+	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
+}
+
+// MiddleName calls the underlying MiddleName.
+func (x *PersonNameComponents) MiddleName() *String {
+	_r := x.inner.MiddleName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetMiddleName calls the underlying SetMiddleName.
+func (x *PersonNameComponents) SetMiddleName(middleName string) {
+	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
+}
+
+// FamilyName calls the underlying FamilyName.
+func (x *PersonNameComponents) FamilyName() *String {
+	_r := x.inner.FamilyName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetFamilyName calls the underlying SetFamilyName.
+func (x *PersonNameComponents) SetFamilyName(familyName string) {
+	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
+}
+
+// NameSuffix calls the underlying NameSuffix.
+func (x *PersonNameComponents) NameSuffix() *String {
+	_r := x.inner.NameSuffix()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetNameSuffix calls the underlying SetNameSuffix.
+func (x *PersonNameComponents) SetNameSuffix(nameSuffix string) {
+	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
+}
+
+// Nickname calls the underlying Nickname.
+func (x *PersonNameComponents) Nickname() *String {
+	_r := x.inner.Nickname()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetNickname calls the underlying SetNickname.
+func (x *PersonNameComponents) SetNickname(nickname string) {
+	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
+}
+
+// PhoneticRepresentation calls the underlying PhoneticRepresentation.
+func (x *PersonNameComponents) PhoneticRepresentation() *PersonNameComponents {
+	_r := x.inner.PhoneticRepresentation()
+	if _r == nil {
+		return nil
+	}
+	return &PersonNameComponents{inner: _r}
+}
+
+// SetPhoneticRepresentation calls the underlying SetPhoneticRepresentation.
+func (x *PersonNameComponents) SetPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) {
+	x.inner.SetPhoneticRepresentation(phoneticRepresentation)
+}
+
 func (x *PersonNameComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PersonNameComponentsable is the interface implemented by [PersonNameComponents], for mocking and DI.
+type PersonNameComponentsable interface {
+	Unwrap() *raw.NSPersonNameComponents
+	WithNamePrefix(namePrefix string) *PersonNameComponents
+	WithGivenName(givenName string) *PersonNameComponents
+	WithMiddleName(middleName string) *PersonNameComponents
+	WithFamilyName(familyName string) *PersonNameComponents
+	WithNameSuffix(nameSuffix string) *PersonNameComponents
+	WithNickname(nickname string) *PersonNameComponents
+	WithPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) *PersonNameComponents
+	NamePrefix() *String
+	SetNamePrefix(namePrefix string)
+	GivenName() *String
+	SetGivenName(givenName string)
+	MiddleName() *String
+	SetMiddleName(middleName string)
+	FamilyName() *String
+	SetFamilyName(familyName string)
+	NameSuffix() *String
+	SetNameSuffix(nameSuffix string)
+	Nickname() *String
+	SetNickname(nickname string)
+	PhoneticRepresentation() *PersonNameComponents
+	SetPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents)
+}
+
+var _ PersonNameComponentsable = (*PersonNameComponents)(nil)
 

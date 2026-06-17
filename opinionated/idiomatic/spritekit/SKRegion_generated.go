@@ -40,3 +40,62 @@ func NewRegionWithPath(path unsafe.Pointer) *Region {
 	return &Region{inner: raw.SKRegionFromID(_id)}
 }
 
+// InverseRegion calls the underlying InverseRegion.
+func (x *Region) InverseRegion() *Region {
+	_r := x.inner.InverseRegion()
+	if _r == nil {
+		return nil
+	}
+	return &Region{inner: _r}
+}
+
+// RegionByUnionWithRegion calls the underlying RegionByUnionWithRegion.
+func (x *Region) RegionByUnionWithRegion(region *raw.SKRegion) *Region {
+	_r := x.inner.RegionByUnionWithRegion(region)
+	if _r == nil {
+		return nil
+	}
+	return &Region{inner: _r}
+}
+
+// RegionByDifferenceFromRegion calls the underlying RegionByDifferenceFromRegion.
+func (x *Region) RegionByDifferenceFromRegion(region *raw.SKRegion) *Region {
+	_r := x.inner.RegionByDifferenceFromRegion(region)
+	if _r == nil {
+		return nil
+	}
+	return &Region{inner: _r}
+}
+
+// RegionByIntersectionWithRegion calls the underlying RegionByIntersectionWithRegion.
+func (x *Region) RegionByIntersectionWithRegion(region *raw.SKRegion) *Region {
+	_r := x.inner.RegionByIntersectionWithRegion(region)
+	if _r == nil {
+		return nil
+	}
+	return &Region{inner: _r}
+}
+
+// ContainsPoint calls the underlying ContainsPoint.
+func (x *Region) ContainsPoint(point corefoundation.CGPoint) bool {
+	return x.inner.ContainsPoint(point)
+}
+
+// Path calls the underlying Path.
+func (x *Region) Path() unsafe.Pointer {
+	return x.inner.Path()
+}
+
+// Regionable is the interface implemented by [Region], for mocking and DI.
+type Regionable interface {
+	Unwrap() *raw.SKRegion
+	InverseRegion() *Region
+	RegionByUnionWithRegion(region *raw.SKRegion) *Region
+	RegionByDifferenceFromRegion(region *raw.SKRegion) *Region
+	RegionByIntersectionWithRegion(region *raw.SKRegion) *Region
+	ContainsPoint(point corefoundation.CGPoint) bool
+	Path() unsafe.Pointer
+}
+
+var _ Regionable = (*Region)(nil)
+

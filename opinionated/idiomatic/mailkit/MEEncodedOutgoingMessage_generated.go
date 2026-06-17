@@ -25,3 +25,28 @@ func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData *foundation
 	return &EncodedOutgoingMessage{inner: raw.MEEncodedOutgoingMessageFromID(_id)}
 }
 
+// RawData calls the underlying RawData.
+func (x *EncodedOutgoingMessage) RawData() *foundation.NSData {
+	return x.inner.RawData()
+}
+
+// IsSigned calls the underlying IsSigned.
+func (x *EncodedOutgoingMessage) IsSigned() bool {
+	return x.inner.IsSigned()
+}
+
+// IsEncrypted calls the underlying IsEncrypted.
+func (x *EncodedOutgoingMessage) IsEncrypted() bool {
+	return x.inner.IsEncrypted()
+}
+
+// EncodedOutgoingMessageable is the interface implemented by [EncodedOutgoingMessage], for mocking and DI.
+type EncodedOutgoingMessageable interface {
+	Unwrap() *raw.MEEncodedOutgoingMessage
+	RawData() *foundation.NSData
+	IsSigned() bool
+	IsEncrypted() bool
+}
+
+var _ EncodedOutgoingMessageable = (*EncodedOutgoingMessage)(nil)
+

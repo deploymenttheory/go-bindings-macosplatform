@@ -44,5 +44,128 @@ func (x *Texture) WithHasAlphaValues(hasAlphaValues bool) *Texture {
 	return x
 }
 
+// WriteToURL calls the underlying WriteToURL.
+func (x *Texture) WriteToURL(uRL string) bool {
+	return x.inner.WriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// WriteToURLLevel calls the underlying WriteToURLLevel.
+func (x *Texture) WriteToURLLevel(uRL string, level uint) bool {
+	return x.inner.WriteToURLLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), level)
+}
+
+// WriteToURLType calls the underlying WriteToURLType.
+func (x *Texture) WriteToURLType(nsurl string, type_ unsafe.Pointer) bool {
+	return x.inner.WriteToURLType(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_)
+}
+
+// WriteToURLTypeLevel calls the underlying WriteToURLTypeLevel.
+func (x *Texture) WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level uint) bool {
+	return x.inner.WriteToURLTypeLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_, level)
+}
+
+// ImageFromTexture calls the underlying ImageFromTexture.
+func (x *Texture) ImageFromTexture() unsafe.Pointer {
+	return x.inner.ImageFromTexture()
+}
+
+// ImageFromTextureAtLevel calls the underlying ImageFromTextureAtLevel.
+func (x *Texture) ImageFromTextureAtLevel(level uint) unsafe.Pointer {
+	return x.inner.ImageFromTextureAtLevel(level)
+}
+
+// TexelDataWithTopLeftOrigin calls the underlying TexelDataWithTopLeftOrigin.
+func (x *Texture) TexelDataWithTopLeftOrigin() *foundation.NSData {
+	return x.inner.TexelDataWithTopLeftOrigin()
+}
+
+// TexelDataWithBottomLeftOrigin calls the underlying TexelDataWithBottomLeftOrigin.
+func (x *Texture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
+	return x.inner.TexelDataWithBottomLeftOrigin()
+}
+
+// TexelDataWithTopLeftOriginAtMipLevelCreate calls the underlying TexelDataWithTopLeftOriginAtMipLevelCreate.
+func (x *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
+	return x.inner.TexelDataWithTopLeftOriginAtMipLevelCreate(level, create)
+}
+
+// TexelDataWithBottomLeftOriginAtMipLevelCreate calls the underlying TexelDataWithBottomLeftOriginAtMipLevelCreate.
+func (x *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
+	return x.inner.TexelDataWithBottomLeftOriginAtMipLevelCreate(level, create)
+}
+
+// Dimensions calls the underlying Dimensions.
+func (x *Texture) Dimensions() unsafe.Pointer {
+	return x.inner.Dimensions()
+}
+
+// RowStride calls the underlying RowStride.
+func (x *Texture) RowStride() int {
+	return x.inner.RowStride()
+}
+
+// ChannelCount calls the underlying ChannelCount.
+func (x *Texture) ChannelCount() uint {
+	return x.inner.ChannelCount()
+}
+
+// MipLevelCount calls the underlying MipLevelCount.
+func (x *Texture) MipLevelCount() uint {
+	return x.inner.MipLevelCount()
+}
+
+// ChannelEncoding calls the underlying ChannelEncoding.
+func (x *Texture) ChannelEncoding() raw.MDLTextureChannelEncoding {
+	return x.inner.ChannelEncoding()
+}
+
+// IsCube calls the underlying IsCube.
+func (x *Texture) IsCube() bool {
+	return x.inner.IsCube()
+}
+
+// SetIsCube calls the underlying SetIsCube.
+func (x *Texture) SetIsCube(isCube bool) {
+	x.inner.SetIsCube(isCube)
+}
+
+// HasAlphaValues calls the underlying HasAlphaValues.
+func (x *Texture) HasAlphaValues() bool {
+	return x.inner.HasAlphaValues()
+}
+
+// SetHasAlphaValues calls the underlying SetHasAlphaValues.
+func (x *Texture) SetHasAlphaValues(hasAlphaValues bool) {
+	x.inner.SetHasAlphaValues(hasAlphaValues)
+}
+
 func (x *Texture) asTexture() *raw.MDLTexture { return x.inner }
+
+// Textureable is the interface implemented by [Texture], for mocking and DI.
+type Textureable interface {
+	Unwrap() *raw.MDLTexture
+	WithIsCube(isCube bool) *Texture
+	WithHasAlphaValues(hasAlphaValues bool) *Texture
+	WriteToURL(uRL string) bool
+	WriteToURLLevel(uRL string, level uint) bool
+	WriteToURLType(nsurl string, type_ unsafe.Pointer) bool
+	WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level uint) bool
+	ImageFromTexture() unsafe.Pointer
+	ImageFromTextureAtLevel(level uint) unsafe.Pointer
+	TexelDataWithTopLeftOrigin() *foundation.NSData
+	TexelDataWithBottomLeftOrigin() *foundation.NSData
+	TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData
+	TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData
+	Dimensions() unsafe.Pointer
+	RowStride() int
+	ChannelCount() uint
+	MipLevelCount() uint
+	ChannelEncoding() raw.MDLTextureChannelEncoding
+	IsCube() bool
+	SetIsCube(isCube bool)
+	HasAlphaValues() bool
+	SetHasAlphaValues(hasAlphaValues bool)
+}
+
+var _ Textureable = (*Texture)(nil)
 

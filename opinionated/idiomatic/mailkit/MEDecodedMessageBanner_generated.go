@@ -7,6 +7,7 @@ package mailkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,37 @@ func NewDecodedMessageBannerWithTitlePrimaryActionTitleDismissable(title string,
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:primaryActionTitle:dismissable:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(primaryActionTitle).Ptr(), dismissable)
 	return &DecodedMessageBanner{inner: raw.MEDecodedMessageBannerFromID(_id)}
 }
+
+// Title calls the underlying Title.
+func (x *DecodedMessageBanner) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PrimaryActionTitle calls the underlying PrimaryActionTitle.
+func (x *DecodedMessageBanner) PrimaryActionTitle() string {
+	_r := x.inner.PrimaryActionTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsDismissable calls the underlying IsDismissable.
+func (x *DecodedMessageBanner) IsDismissable() bool {
+	return x.inner.IsDismissable()
+}
+
+// DecodedMessageBannerable is the interface implemented by [DecodedMessageBanner], for mocking and DI.
+type DecodedMessageBannerable interface {
+	Unwrap() *raw.MEDecodedMessageBanner
+	Title() string
+	PrimaryActionTitle() string
+	IsDismissable() bool
+}
+
+var _ DecodedMessageBannerable = (*DecodedMessageBanner)(nil)
 

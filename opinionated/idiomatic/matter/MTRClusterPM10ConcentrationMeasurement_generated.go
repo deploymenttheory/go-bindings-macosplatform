@@ -25,7 +25,110 @@ func NewMTRClusterPM10ConcentrationMeasurementWithDeviceEndpointIDQueue(device *
 	return &MTRClusterPM10ConcentrationMeasurement{inner: raw.MTRClusterPM10ConcentrationMeasurementFromID(_id)}
 }
 
+// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+}
+
+// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+}
+
+// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+}
+
+// ReadAttributePeakMeasuredValueWithParams calls the underlying ReadAttributePeakMeasuredValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePeakMeasuredValueWithParams(params)
+}
+
+// ReadAttributePeakMeasuredValueWindowWithParams calls the underlying ReadAttributePeakMeasuredValueWindowWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePeakMeasuredValueWindowWithParams(params)
+}
+
+// ReadAttributeAverageMeasuredValueWithParams calls the underlying ReadAttributeAverageMeasuredValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAverageMeasuredValueWithParams(params)
+}
+
+// ReadAttributeAverageMeasuredValueWindowWithParams calls the underlying ReadAttributeAverageMeasuredValueWindowWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAverageMeasuredValueWindowWithParams(params)
+}
+
+// ReadAttributeUncertaintyWithParams calls the underlying ReadAttributeUncertaintyWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeUncertaintyWithParams(params)
+}
+
+// ReadAttributeMeasurementUnitWithParams calls the underlying ReadAttributeMeasurementUnitWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMeasurementUnitWithParams(params)
+}
+
+// ReadAttributeMeasurementMediumWithParams calls the underlying ReadAttributeMeasurementMediumWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeMeasurementMediumWithParams(params)
+}
+
+// ReadAttributeLevelValueWithParams calls the underlying ReadAttributeLevelValueWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeLevelValueWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterPM10ConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterPM10ConcentrationMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterPM10ConcentrationMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterPM10ConcentrationMeasurementable is the interface implemented by [MTRClusterPM10ConcentrationMeasurement], for mocking and DI.
+type MTRClusterPM10ConcentrationMeasurementable interface {
+	Unwrap() *raw.MTRClusterPM10ConcentrationMeasurement
+	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePeakMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePeakMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAverageMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAverageMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeUncertaintyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMeasurementUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeMeasurementMediumWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeLevelValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterPM10ConcentrationMeasurementable = (*MTRClusterPM10ConcentrationMeasurement)(nil)
 

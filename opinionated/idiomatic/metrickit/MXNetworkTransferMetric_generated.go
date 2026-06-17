@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewNetworkTransferMetric() *NetworkTransferMetric {
 	return &NetworkTransferMetric{inner: raw.MXNetworkTransferMetricFromID(_id)}
 }
 
+// CumulativeWifiUpload calls the underlying CumulativeWifiUpload.
+func (x *NetworkTransferMetric) CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeWifiUpload()
+}
+
+// CumulativeWifiDownload calls the underlying CumulativeWifiDownload.
+func (x *NetworkTransferMetric) CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeWifiDownload()
+}
+
+// CumulativeCellularUpload calls the underlying CumulativeCellularUpload.
+func (x *NetworkTransferMetric) CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeCellularUpload()
+}
+
+// CumulativeCellularDownload calls the underlying CumulativeCellularDownload.
+func (x *NetworkTransferMetric) CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeCellularDownload()
+}
+
 func (x *NetworkTransferMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// NetworkTransferMetricable is the interface implemented by [NetworkTransferMetric], for mocking and DI.
+type NetworkTransferMetricable interface {
+	Unwrap() *raw.MXNetworkTransferMetric
+	CumulativeWifiUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	CumulativeWifiDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	CumulativeCellularUpload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	CumulativeCellularDownload() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+}
+
+var _ NetworkTransferMetricable = (*NetworkTransferMetric)(nil)
 

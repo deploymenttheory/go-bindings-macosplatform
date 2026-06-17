@@ -26,5 +26,22 @@ func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequ
 	return &IssuerProvisioningExtensionPaymentPassEntry{inner: raw.PKIssuerProvisioningExtensionPaymentPassEntryFromID(_id)}
 }
 
+// AddRequestConfiguration calls the underlying AddRequestConfiguration.
+func (x *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
+	_r := x.inner.AddRequestConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &AddPaymentPassRequestConfiguration{inner: _r}
+}
+
 func (x *IssuerProvisioningExtensionPaymentPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry { return &x.inner.PKIssuerProvisioningExtensionPassEntry }
+
+// IssuerProvisioningExtensionPaymentPassEntryable is the interface implemented by [IssuerProvisioningExtensionPaymentPassEntry], for mocking and DI.
+type IssuerProvisioningExtensionPaymentPassEntryable interface {
+	Unwrap() *raw.PKIssuerProvisioningExtensionPaymentPassEntry
+	AddRequestConfiguration() *AddPaymentPassRequestConfiguration
+}
+
+var _ IssuerProvisioningExtensionPaymentPassEntryable = (*IssuerProvisioningExtensionPaymentPassEntry)(nil)
 

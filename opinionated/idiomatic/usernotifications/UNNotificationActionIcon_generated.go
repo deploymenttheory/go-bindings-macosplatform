@@ -23,3 +23,10 @@ func NewNotificationActionIcon() *NotificationActionIcon {
 	return &NotificationActionIcon{inner: raw.UNNotificationActionIconFromID(_id)}
 }
 
+// NotificationActionIconable is the interface implemented by [NotificationActionIcon], for mocking and DI.
+type NotificationActionIconable interface {
+	Unwrap() *raw.UNNotificationActionIcon
+}
+
+var _ NotificationActionIconable = (*NotificationActionIcon)(nil)
+

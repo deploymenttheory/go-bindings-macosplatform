@@ -5,7 +5,9 @@
 package systemextensions
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,65 @@ func NewSystemExtensionProperties() *SystemExtensionProperties {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionProperties")), objc.RegisterName("new"))
 	return &SystemExtensionProperties{inner: raw.OSSystemExtensionPropertiesFromID(_id)}
 }
+
+// URL calls the underlying URL.
+func (x *SystemExtensionProperties) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *SystemExtensionProperties) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleVersion calls the underlying BundleVersion.
+func (x *SystemExtensionProperties) BundleVersion() string {
+	_r := x.inner.BundleVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleShortVersion calls the underlying BundleShortVersion.
+func (x *SystemExtensionProperties) BundleShortVersion() string {
+	_r := x.inner.BundleShortVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *SystemExtensionProperties) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// IsAwaitingUserApproval calls the underlying IsAwaitingUserApproval.
+func (x *SystemExtensionProperties) IsAwaitingUserApproval() bool {
+	return x.inner.IsAwaitingUserApproval()
+}
+
+// IsUninstalling calls the underlying IsUninstalling.
+func (x *SystemExtensionProperties) IsUninstalling() bool {
+	return x.inner.IsUninstalling()
+}
+
+// SystemExtensionPropertiesable is the interface implemented by [SystemExtensionProperties], for mocking and DI.
+type SystemExtensionPropertiesable interface {
+	Unwrap() *raw.OSSystemExtensionProperties
+	URL() *foundation.NSURL
+	BundleIdentifier() string
+	BundleVersion() string
+	BundleShortVersion() string
+	IsEnabled() bool
+	IsAwaitingUserApproval() bool
+	IsUninstalling() bool
+}
+
+var _ SystemExtensionPropertiesable = (*SystemExtensionProperties)(nil)
 

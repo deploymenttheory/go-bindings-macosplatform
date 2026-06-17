@@ -23,5 +23,22 @@ func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
 	return &VirtioConsoleDeviceConfiguration{inner: raw.VZVirtioConsoleDeviceConfigurationFromID(_id)}
 }
 
+// Ports calls the underlying Ports.
+func (x *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
+	_r := x.inner.Ports()
+	if _r == nil {
+		return nil
+	}
+	return &VirtioConsolePortConfigurationArray{inner: _r}
+}
+
 func (x *VirtioConsoleDeviceConfiguration) asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration { return &x.inner.VZConsoleDeviceConfiguration }
+
+// VirtioConsoleDeviceConfigurationable is the interface implemented by [VirtioConsoleDeviceConfiguration], for mocking and DI.
+type VirtioConsoleDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioConsoleDeviceConfiguration
+	Ports() *VirtioConsolePortConfigurationArray
+}
+
+var _ VirtioConsoleDeviceConfigurationable = (*VirtioConsoleDeviceConfiguration)(nil)
 

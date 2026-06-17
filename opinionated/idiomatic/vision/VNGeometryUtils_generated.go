@@ -23,3 +23,10 @@ func NewGeometryUtils() *GeometryUtils {
 	return &GeometryUtils{inner: raw.VNGeometryUtilsFromID(_id)}
 }
 
+// GeometryUtilsable is the interface implemented by [GeometryUtils], for mocking and DI.
+type GeometryUtilsable interface {
+	Unwrap() *raw.VNGeometryUtils
+}
+
+var _ GeometryUtilsable = (*GeometryUtils)(nil)
+

@@ -23,5 +23,24 @@ func NewBatchUpdateResult() *BatchUpdateResult {
 	return &BatchUpdateResult{inner: raw.NSBatchUpdateResultFromID(_id)}
 }
 
+// Result calls the underlying Result.
+func (x *BatchUpdateResult) Result() objc.ID {
+	return x.inner.Result()
+}
+
+// ResultType calls the underlying ResultType.
+func (x *BatchUpdateResult) ResultType() raw.NSBatchUpdateRequestResultType {
+	return x.inner.ResultType()
+}
+
 func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// BatchUpdateResultable is the interface implemented by [BatchUpdateResult], for mocking and DI.
+type BatchUpdateResultable interface {
+	Unwrap() *raw.NSBatchUpdateResult
+	Result() objc.ID
+	ResultType() raw.NSBatchUpdateRequestResultType
+}
+
+var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)
 

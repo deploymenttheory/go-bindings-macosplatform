@@ -61,3 +61,102 @@ func (x *SampleBufferRequest) WithOverrideTime(overrideTime coremedia.CMTime) *S
 	return x
 }
 
+// StartCursor calls the underlying StartCursor.
+func (x *SampleBufferRequest) StartCursor() *SampleCursor {
+	_r := x.inner.StartCursor()
+	if _r == nil {
+		return nil
+	}
+	return &SampleCursor{inner: _r}
+}
+
+// Direction calls the underlying Direction.
+func (x *SampleBufferRequest) Direction() raw.AVSampleBufferRequestDirection {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *SampleBufferRequest) SetDirection(direction raw.AVSampleBufferRequestDirection) {
+	x.inner.SetDirection(direction)
+}
+
+// LimitCursor calls the underlying LimitCursor.
+func (x *SampleBufferRequest) LimitCursor() *SampleCursor {
+	_r := x.inner.LimitCursor()
+	if _r == nil {
+		return nil
+	}
+	return &SampleCursor{inner: _r}
+}
+
+// SetLimitCursor calls the underlying SetLimitCursor.
+func (x *SampleBufferRequest) SetLimitCursor(limitCursor *raw.AVSampleCursor) {
+	x.inner.SetLimitCursor(limitCursor)
+}
+
+// PreferredMinSampleCount calls the underlying PreferredMinSampleCount.
+func (x *SampleBufferRequest) PreferredMinSampleCount() int {
+	return x.inner.PreferredMinSampleCount()
+}
+
+// SetPreferredMinSampleCount calls the underlying SetPreferredMinSampleCount.
+func (x *SampleBufferRequest) SetPreferredMinSampleCount(preferredMinSampleCount int) {
+	x.inner.SetPreferredMinSampleCount(preferredMinSampleCount)
+}
+
+// MaxSampleCount calls the underlying MaxSampleCount.
+func (x *SampleBufferRequest) MaxSampleCount() int {
+	return x.inner.MaxSampleCount()
+}
+
+// SetMaxSampleCount calls the underlying SetMaxSampleCount.
+func (x *SampleBufferRequest) SetMaxSampleCount(maxSampleCount int) {
+	x.inner.SetMaxSampleCount(maxSampleCount)
+}
+
+// Mode calls the underlying Mode.
+func (x *SampleBufferRequest) Mode() raw.AVSampleBufferRequestMode {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *SampleBufferRequest) SetMode(mode raw.AVSampleBufferRequestMode) {
+	x.inner.SetMode(mode)
+}
+
+// OverrideTime calls the underlying OverrideTime.
+func (x *SampleBufferRequest) OverrideTime() coremedia.CMTime {
+	return x.inner.OverrideTime()
+}
+
+// SetOverrideTime calls the underlying SetOverrideTime.
+func (x *SampleBufferRequest) SetOverrideTime(overrideTime coremedia.CMTime) {
+	x.inner.SetOverrideTime(overrideTime)
+}
+
+// SampleBufferRequestable is the interface implemented by [SampleBufferRequest], for mocking and DI.
+type SampleBufferRequestable interface {
+	Unwrap() *raw.AVSampleBufferRequest
+	WithDirection(direction raw.AVSampleBufferRequestDirection) *SampleBufferRequest
+	WithLimitCursor(limitCursor *raw.AVSampleCursor) *SampleBufferRequest
+	WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest
+	WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest
+	WithMode(mode raw.AVSampleBufferRequestMode) *SampleBufferRequest
+	WithOverrideTime(overrideTime coremedia.CMTime) *SampleBufferRequest
+	StartCursor() *SampleCursor
+	Direction() raw.AVSampleBufferRequestDirection
+	SetDirection(direction raw.AVSampleBufferRequestDirection)
+	LimitCursor() *SampleCursor
+	SetLimitCursor(limitCursor *raw.AVSampleCursor)
+	PreferredMinSampleCount() int
+	SetPreferredMinSampleCount(preferredMinSampleCount int)
+	MaxSampleCount() int
+	SetMaxSampleCount(maxSampleCount int)
+	Mode() raw.AVSampleBufferRequestMode
+	SetMode(mode raw.AVSampleBufferRequestMode)
+	OverrideTime() coremedia.CMTime
+	SetOverrideTime(overrideTime coremedia.CMTime)
+}
+
+var _ SampleBufferRequestable = (*SampleBufferRequest)(nil)
+

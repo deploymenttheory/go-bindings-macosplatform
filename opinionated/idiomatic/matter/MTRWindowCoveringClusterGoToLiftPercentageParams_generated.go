@@ -42,3 +42,49 @@ func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) WithServerSideProcess
 	return x
 }
 
+// LiftPercent100thsValue calls the underlying LiftPercent100thsValue.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) LiftPercent100thsValue() *foundation.NSNumber {
+	return x.inner.LiftPercent100thsValue()
+}
+
+// SetLiftPercent100thsValue calls the underlying SetLiftPercent100thsValue.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber) {
+	x.inner.SetLiftPercent100thsValue(liftPercent100thsValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWindowCoveringClusterGoToLiftPercentageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWindowCoveringClusterGoToLiftPercentageParamsable is the interface implemented by [MTRWindowCoveringClusterGoToLiftPercentageParams], for mocking and DI.
+type MTRWindowCoveringClusterGoToLiftPercentageParamsable interface {
+	Unwrap() *raw.MTRWindowCoveringClusterGoToLiftPercentageParams
+	WithLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWindowCoveringClusterGoToLiftPercentageParams
+	LiftPercent100thsValue() *foundation.NSNumber
+	SetLiftPercent100thsValue(liftPercent100thsValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWindowCoveringClusterGoToLiftPercentageParamsable = (*MTRWindowCoveringClusterGoToLiftPercentageParams)(nil)
+

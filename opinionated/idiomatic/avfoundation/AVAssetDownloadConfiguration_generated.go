@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,16 +60,84 @@ func (x *AssetDownloadConfiguration) WithDownloadsInterstitialAssets(downloadsIn
 	return x
 }
 
+// SetInterstitialMediaSelectionCriteriaForMediaCharacteristic calls the underlying SetInterstitialMediaSelectionCriteriaForMediaCharacteristic.
+func (x *AssetDownloadConfiguration) SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*raw.AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString) {
+	x.inner.SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria, mediaCharacteristic)
+}
+
+// ArtworkData calls the underlying ArtworkData.
+func (x *AssetDownloadConfiguration) ArtworkData() *foundation.NSData {
+	return x.inner.ArtworkData()
+}
+
+// SetArtworkData calls the underlying SetArtworkData.
+func (x *AssetDownloadConfiguration) SetArtworkData(artworkData *foundation.NSData) {
+	x.inner.SetArtworkData(artworkData)
+}
+
+// PrimaryContentConfiguration calls the underlying PrimaryContentConfiguration.
+func (x *AssetDownloadConfiguration) PrimaryContentConfiguration() *AssetDownloadContentConfiguration {
+	_r := x.inner.PrimaryContentConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &AssetDownloadContentConfiguration{inner: _r}
+}
+
 // AuxiliaryContentConfigurations returns the collection as a Go slice.
 func (x *AssetDownloadConfiguration) AuxiliaryContentConfigurations() []*raw.AVAssetDownloadContentConfiguration {
 	arr := x.inner.AuxiliaryContentConfigurations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetDownloadContentConfiguration, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetDownloadContentConfiguration {
+		return raw.AVAssetDownloadContentConfigurationFromID(purego.Retain(_id))
+	})
 }
+
+// SetAuxiliaryContentConfigurations calls the underlying SetAuxiliaryContentConfigurations.
+func (x *AssetDownloadConfiguration) SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations *foundation.NSArray[*raw.AVAssetDownloadContentConfiguration]) {
+	x.inner.SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations)
+}
+
+// OptimizesAuxiliaryContentConfigurations calls the underlying OptimizesAuxiliaryContentConfigurations.
+func (x *AssetDownloadConfiguration) OptimizesAuxiliaryContentConfigurations() bool {
+	return x.inner.OptimizesAuxiliaryContentConfigurations()
+}
+
+// SetOptimizesAuxiliaryContentConfigurations calls the underlying SetOptimizesAuxiliaryContentConfigurations.
+func (x *AssetDownloadConfiguration) SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) {
+	x.inner.SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations)
+}
+
+// DownloadsInterstitialAssets calls the underlying DownloadsInterstitialAssets.
+func (x *AssetDownloadConfiguration) DownloadsInterstitialAssets() bool {
+	return x.inner.DownloadsInterstitialAssets()
+}
+
+// SetDownloadsInterstitialAssets calls the underlying SetDownloadsInterstitialAssets.
+func (x *AssetDownloadConfiguration) SetDownloadsInterstitialAssets(downloadsInterstitialAssets bool) {
+	x.inner.SetDownloadsInterstitialAssets(downloadsInterstitialAssets)
+}
+
+// AssetDownloadConfigurationable is the interface implemented by [AssetDownloadConfiguration], for mocking and DI.
+type AssetDownloadConfigurationable interface {
+	Unwrap() *raw.AVAssetDownloadConfiguration
+	WithArtworkData(artworkData *foundation.NSData) *AssetDownloadConfiguration
+	WithAuxiliaryContentConfigurations(items ...*raw.AVAssetDownloadContentConfiguration) *AssetDownloadConfiguration
+	WithOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool) *AssetDownloadConfiguration
+	WithDownloadsInterstitialAssets(downloadsInterstitialAssets bool) *AssetDownloadConfiguration
+	SetInterstitialMediaSelectionCriteriaForMediaCharacteristic(criteria *foundation.NSArray[*raw.AVPlayerMediaSelectionCriteria], mediaCharacteristic *foundation.NSString)
+	ArtworkData() *foundation.NSData
+	SetArtworkData(artworkData *foundation.NSData)
+	PrimaryContentConfiguration() *AssetDownloadContentConfiguration
+	AuxiliaryContentConfigurations() []*raw.AVAssetDownloadContentConfiguration
+	SetAuxiliaryContentConfigurations(auxiliaryContentConfigurations *foundation.NSArray[*raw.AVAssetDownloadContentConfiguration])
+	OptimizesAuxiliaryContentConfigurations() bool
+	SetOptimizesAuxiliaryContentConfigurations(optimizesAuxiliaryContentConfigurations bool)
+	DownloadsInterstitialAssets() bool
+	SetDownloadsInterstitialAssets(downloadsInterstitialAssets bool)
+}
+
+var _ AssetDownloadConfigurationable = (*AssetDownloadConfiguration)(nil)
 

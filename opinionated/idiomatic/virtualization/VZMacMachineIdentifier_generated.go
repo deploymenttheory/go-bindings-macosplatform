@@ -31,3 +31,10 @@ func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation *foundatio
 	return &MacMachineIdentifier{inner: raw.VZMacMachineIdentifierFromID(_id)}
 }
 
+// MacMachineIdentifierable is the interface implemented by [MacMachineIdentifier], for mocking and DI.
+type MacMachineIdentifierable interface {
+	Unwrap() *raw.VZMacMachineIdentifier
+}
+
+var _ MacMachineIdentifierable = (*MacMachineIdentifier)(nil)
+

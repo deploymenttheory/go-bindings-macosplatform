@@ -5,6 +5,8 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,159 @@ func NewQCView() *QCView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCView")), objc.RegisterName("new"))
 	return &QCView{inner: raw.QCViewFromID(_id)}
 }
+
+// LoadCompositionFromFile calls the underlying LoadCompositionFromFile.
+func (x *QCView) LoadCompositionFromFile(path string) bool {
+	return x.inner.LoadCompositionFromFile(foundation.NSStringStringWithUTF8String(path))
+}
+
+// LoadComposition calls the underlying LoadComposition.
+func (x *QCView) LoadComposition(composition *raw.QCComposition) bool {
+	return x.inner.LoadComposition(composition)
+}
+
+// LoadedComposition calls the underlying LoadedComposition.
+func (x *QCView) LoadedComposition() *QCComposition {
+	_r := x.inner.LoadedComposition()
+	if _r == nil {
+		return nil
+	}
+	return &QCComposition{inner: _r}
+}
+
+// UnloadComposition calls the underlying UnloadComposition.
+func (x *QCView) UnloadComposition() {
+	x.inner.UnloadComposition()
+}
+
+// SetAutostartsRendering calls the underlying SetAutostartsRendering.
+func (x *QCView) SetAutostartsRendering(flag bool) {
+	x.inner.SetAutostartsRendering(flag)
+}
+
+// AutostartsRendering calls the underlying AutostartsRendering.
+func (x *QCView) AutostartsRendering() bool {
+	return x.inner.AutostartsRendering()
+}
+
+// SetEraseColor calls the underlying SetEraseColor.
+func (x *QCView) SetEraseColor(color *appkit.NSColor) {
+	x.inner.SetEraseColor(color)
+}
+
+// EraseColor calls the underlying EraseColor.
+func (x *QCView) EraseColor() *appkit.NSColor {
+	return x.inner.EraseColor()
+}
+
+// SetEventForwardingMask calls the underlying SetEventForwardingMask.
+func (x *QCView) SetEventForwardingMask(mask uint) {
+	x.inner.SetEventForwardingMask(mask)
+}
+
+// EventForwardingMask calls the underlying EventForwardingMask.
+func (x *QCView) EventForwardingMask() uint {
+	return x.inner.EventForwardingMask()
+}
+
+// SetMaxRenderingFrameRate calls the underlying SetMaxRenderingFrameRate.
+func (x *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
+	x.inner.SetMaxRenderingFrameRate(maxFPS)
+}
+
+// MaxRenderingFrameRate calls the underlying MaxRenderingFrameRate.
+func (x *QCView) MaxRenderingFrameRate() float32 {
+	return x.inner.MaxRenderingFrameRate()
+}
+
+// Erase calls the underlying Erase.
+func (x *QCView) Erase() {
+	x.inner.Erase()
+}
+
+// StartRendering calls the underlying StartRendering.
+func (x *QCView) StartRendering() bool {
+	return x.inner.StartRendering()
+}
+
+// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
+func (x *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
+	return x.inner.RenderAtTimeArguments(time_, arguments)
+}
+
+// PauseRendering calls the underlying PauseRendering.
+func (x *QCView) PauseRendering() {
+	x.inner.PauseRendering()
+}
+
+// IsPausedRendering calls the underlying IsPausedRendering.
+func (x *QCView) IsPausedRendering() bool {
+	return x.inner.IsPausedRendering()
+}
+
+// ResumeRendering calls the underlying ResumeRendering.
+func (x *QCView) ResumeRendering() {
+	x.inner.ResumeRendering()
+}
+
+// StopRendering calls the underlying StopRendering.
+func (x *QCView) StopRendering() {
+	x.inner.StopRendering()
+}
+
+// IsRendering calls the underlying IsRendering.
+func (x *QCView) IsRendering() bool {
+	return x.inner.IsRendering()
+}
+
+// SnapshotImage calls the underlying SnapshotImage.
+func (x *QCView) SnapshotImage() *appkit.NSImage {
+	return x.inner.SnapshotImage()
+}
+
+// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
+func (x *QCView) CreateSnapshotImageOfType(type_ string) objc.ID {
+	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// OpenGLContext calls the underlying OpenGLContext.
+func (x *QCView) OpenGLContext() *appkit.NSOpenGLContext {
+	return x.inner.OpenGLContext()
+}
+
+// OpenGLPixelFormat calls the underlying OpenGLPixelFormat.
+func (x *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
+	return x.inner.OpenGLPixelFormat()
+}
+
+// QCViewable is the interface implemented by [QCView], for mocking and DI.
+type QCViewable interface {
+	Unwrap() *raw.QCView
+	LoadCompositionFromFile(path string) bool
+	LoadComposition(composition *raw.QCComposition) bool
+	LoadedComposition() *QCComposition
+	UnloadComposition()
+	SetAutostartsRendering(flag bool)
+	AutostartsRendering() bool
+	SetEraseColor(color *appkit.NSColor)
+	EraseColor() *appkit.NSColor
+	SetEventForwardingMask(mask uint)
+	EventForwardingMask() uint
+	SetMaxRenderingFrameRate(maxFPS float32)
+	MaxRenderingFrameRate() float32
+	Erase()
+	StartRendering() bool
+	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	PauseRendering()
+	IsPausedRendering() bool
+	ResumeRendering()
+	StopRendering()
+	IsRendering() bool
+	SnapshotImage() *appkit.NSImage
+	CreateSnapshotImageOfType(type_ string) objc.ID
+	OpenGLContext() *appkit.NSOpenGLContext
+	OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat
+}
+
+var _ QCViewable = (*QCView)(nil)
 

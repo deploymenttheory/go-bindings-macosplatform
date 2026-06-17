@@ -36,5 +36,38 @@ func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fa
 	return x
 }
 
+// Data calls the underlying Data.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTRAccessControlClusterAccessControlExtensionStruct) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct { return x.inner }
+
+// MTRAccessControlClusterAccessControlExtensionStructable is the interface implemented by [MTRAccessControlClusterAccessControlExtensionStruct], for mocking and DI.
+type MTRAccessControlClusterAccessControlExtensionStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessControlExtensionStruct
+	WithData(data *foundation.NSData) *MTRAccessControlClusterAccessControlExtensionStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlExtensionStruct
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessControlExtensionStructable = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)
 

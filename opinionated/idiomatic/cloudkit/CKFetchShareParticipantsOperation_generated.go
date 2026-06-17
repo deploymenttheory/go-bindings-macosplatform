@@ -74,22 +74,68 @@ func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*raw.CKUse
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKUserIdentityLookupInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKUserIdentityLookupInfo {
+		return raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))
+	})
+}
+
+// SetUserIdentityLookupInfos calls the underlying SetUserIdentityLookupInfos.
+func (x *FetchShareParticipantsOperation) SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo]) {
+	x.inner.SetUserIdentityLookupInfos(userIdentityLookupInfos)
+}
+
+// ShareParticipantFetchedBlock calls the underlying ShareParticipantFetchedBlock.
+func (x *FetchShareParticipantsOperation) ShareParticipantFetchedBlock() objc.Block {
+	return x.inner.ShareParticipantFetchedBlock()
+}
+
+// SetShareParticipantFetchedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchShareParticipantsOperation) SetShareParticipantFetchedBlock(ctx context.Context) (*ShareParticipant, error) {
+	type _result struct {
+		val *ShareParticipant
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetShareParticipantFetchedBlock(func(_p0 *raw.CKShareParticipant) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &ShareParticipant{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ShareParticipant
+		return _zero, ctx.Err()
+	}
+}
+
+// PerShareParticipantCompletionBlock calls the underlying PerShareParticipantCompletionBlock.
+func (x *FetchShareParticipantsOperation) PerShareParticipantCompletionBlock() objc.Block {
+	return x.inner.PerShareParticipantCompletionBlock()
+}
+
+// SetPerShareParticipantCompletionBlock calls the underlying SetPerShareParticipantCompletionBlock.
+func (x *FetchShareParticipantsOperation) SetPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer)) {
+	x.inner.SetPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock)
+}
+
+// FetchShareParticipantsCompletionBlock calls the underlying FetchShareParticipantsCompletionBlock.
+func (x *FetchShareParticipantsOperation) FetchShareParticipantsCompletionBlock() objc.Block {
+	return x.inner.FetchShareParticipantsCompletionBlock()
 }
 
 // SetFetchShareParticipantsCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetFetchShareParticipantsCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -100,4 +146,23 @@ func (x *FetchShareParticipantsOperation) SetFetchShareParticipantsCompletionBlo
 }
 
 func (x *FetchShareParticipantsOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// FetchShareParticipantsOperationable is the interface implemented by [FetchShareParticipantsOperation], for mocking and DI.
+type FetchShareParticipantsOperationable interface {
+	Unwrap() *raw.CKFetchShareParticipantsOperation
+	WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *FetchShareParticipantsOperation
+	WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(*raw.CKShareParticipant)) *FetchShareParticipantsOperation
+	WithPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer)) *FetchShareParticipantsOperation
+	WithFetchShareParticipantsCompletionBlock(fetchShareParticipantsCompletionBlock func(unsafe.Pointer)) *FetchShareParticipantsOperation
+	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
+	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
+	ShareParticipantFetchedBlock() objc.Block
+	SetShareParticipantFetchedBlock(ctx context.Context) (*ShareParticipant, error)
+	PerShareParticipantCompletionBlock() objc.Block
+	SetPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer))
+	FetchShareParticipantsCompletionBlock() objc.Block
+	SetFetchShareParticipantsCompletionBlock(ctx context.Context) error
+}
+
+var _ FetchShareParticipantsOperationable = (*FetchShareParticipantsOperation)(nil)
 

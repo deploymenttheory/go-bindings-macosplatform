@@ -7,6 +7,7 @@ package coreml
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,22 @@ func (x *StateConstraint) BufferShape() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// DataType calls the underlying DataType.
+func (x *StateConstraint) DataType() raw.MLMultiArrayDataType {
+	return x.inner.DataType()
+}
+
+// StateConstraintable is the interface implemented by [StateConstraint], for mocking and DI.
+type StateConstraintable interface {
+	Unwrap() *raw.MLStateConstraint
+	BufferShape() []*foundation.NSNumber
+	DataType() raw.MLMultiArrayDataType
+}
+
+var _ StateConstraintable = (*StateConstraint)(nil)
 

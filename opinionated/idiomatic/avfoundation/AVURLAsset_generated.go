@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // URLAsset wraps [raw.AVURLAsset] with a fluent Go API.
@@ -25,20 +27,96 @@ func NewURLAssetWithURLOptions(uRL string, options *foundation.NSDictionary[*fou
 	return &URLAsset{inner: raw.AVURLAssetFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *URLAsset) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// HttpSessionIdentifier calls the underlying HttpSessionIdentifier.
+func (x *URLAsset) HttpSessionIdentifier() *foundation.NSUUID {
+	return x.inner.HttpSessionIdentifier()
+}
+
+// ResourceLoader calls the underlying ResourceLoader.
+func (x *URLAsset) ResourceLoader() *AssetResourceLoader {
+	_r := x.inner.ResourceLoader()
+	if _r == nil {
+		return nil
+	}
+	return &AssetResourceLoader{inner: _r}
+}
+
+// AssetCache calls the underlying AssetCache.
+func (x *URLAsset) AssetCache() *AssetCache {
+	_r := x.inner.AssetCache()
+	if _r == nil {
+		return nil
+	}
+	return &AssetCache{inner: _r}
+}
+
+// CompatibleTrackForCompositionTrack calls the underlying CompatibleTrackForCompositionTrack.
+func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCompositionTrack) *AssetTrack {
+	_r := x.inner.CompatibleTrackForCompositionTrack(compositionTrack)
+	if _r == nil {
+		return nil
+	}
+	return &AssetTrack{inner: _r}
+}
+
+// FindCompatibleTrackForCompositionTrackCompletionHandler calls the underlying FindCompatibleTrackForCompositionTrackCompletionHandler.
+func (x *URLAsset) FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *raw.AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack, completionHandler)
+}
+
 // Variants returns the collection as a Go slice.
 func (x *URLAsset) Variants() []*raw.AVAssetVariant {
 	arr := x.inner.Variants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetVariant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariant {
+		return raw.AVAssetVariantFromID(purego.Retain(_id))
+	})
+}
+
+// MediaExtensionProperties calls the underlying MediaExtensionProperties.
+func (x *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
+	_r := x.inner.MediaExtensionProperties()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MediaExtensionProperties{inner: _r}
+}
+
+// SidecarURL calls the underlying SidecarURL.
+func (x *URLAsset) SidecarURL() *foundation.NSURL {
+	return x.inner.SidecarURL()
+}
+
+// MayRequireContentKeysForMediaDataProcessing calls the underlying MayRequireContentKeysForMediaDataProcessing.
+func (x *URLAsset) MayRequireContentKeysForMediaDataProcessing() bool {
+	return x.inner.MayRequireContentKeysForMediaDataProcessing()
 }
 
 func (x *URLAsset) asURLAsset() *raw.AVURLAsset { return x.inner }
 
 func (x *URLAsset) asAsset() *raw.AVAsset { return &x.inner.AVAsset }
+
+// URLAssetable is the interface implemented by [URLAsset], for mocking and DI.
+type URLAssetable interface {
+	Unwrap() *raw.AVURLAsset
+	URL() *foundation.NSURL
+	HttpSessionIdentifier() *foundation.NSUUID
+	ResourceLoader() *AssetResourceLoader
+	AssetCache() *AssetCache
+	CompatibleTrackForCompositionTrack(compositionTrack *raw.AVCompositionTrack) *AssetTrack
+	FindCompatibleTrackForCompositionTrackCompletionHandler(compositionTrack *raw.AVCompositionTrack, completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	Variants() []*raw.AVAssetVariant
+	MediaExtensionProperties() *MediaExtensionProperties
+	SidecarURL() *foundation.NSURL
+	MayRequireContentKeysForMediaDataProcessing() bool
+}
+
+var _ URLAssetable = (*URLAsset)(nil)
 

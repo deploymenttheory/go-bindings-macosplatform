@@ -23,5 +23,34 @@ func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 	return &MetadataQueryAttributeValueTuple{inner: raw.NSMetadataQueryAttributeValueTupleFromID(_id)}
 }
 
+// Attribute calls the underlying Attribute.
+func (x *MetadataQueryAttributeValueTuple) Attribute() *String {
+	_r := x.inner.Attribute()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *MetadataQueryAttributeValueTuple) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// Count calls the underlying Count.
+func (x *MetadataQueryAttributeValueTuple) Count() uint {
+	return x.inner.Count()
+}
+
 func (x *MetadataQueryAttributeValueTuple) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MetadataQueryAttributeValueTupleable is the interface implemented by [MetadataQueryAttributeValueTuple], for mocking and DI.
+type MetadataQueryAttributeValueTupleable interface {
+	Unwrap() *raw.NSMetadataQueryAttributeValueTuple
+	Attribute() *String
+	Value() objc.ID
+	Count() uint
+}
+
+var _ MetadataQueryAttributeValueTupleable = (*MetadataQueryAttributeValueTuple)(nil)
 

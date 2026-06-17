@@ -24,7 +24,24 @@ func NewCNNNeuronGradientNodeWithSourceGradientSourceImageGradientStateDescripto
 	return &CNNNeuronGradientNode{inner: raw.MPSCNNNeuronGradientNodeFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *CNNNeuronGradientNode) Descriptor() *NNNeuronDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &NNNeuronDescriptor{inner: _r}
+}
+
 func (x *CNNNeuronGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNNeuronGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNNeuronGradientNodeable is the interface implemented by [CNNNeuronGradientNode], for mocking and DI.
+type CNNNeuronGradientNodeable interface {
+	Unwrap() *raw.MPSCNNNeuronGradientNode
+	Descriptor() *NNNeuronDescriptor
+}
+
+var _ CNNNeuronGradientNodeable = (*CNNNeuronGradientNode)(nil)
 

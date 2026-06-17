@@ -25,5 +25,18 @@ func NewReceiptRefreshRequestWithReceiptProperties(properties *foundation.NSDict
 	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(_id)}
 }
 
+// ReceiptProperties calls the underlying ReceiptProperties.
+func (x *ReceiptRefreshRequest) ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReceiptProperties()
+}
+
 func (x *ReceiptRefreshRequest) asRequest() *raw.SKRequest { return &x.inner.SKRequest }
+
+// ReceiptRefreshRequestable is the interface implemented by [ReceiptRefreshRequest], for mocking and DI.
+type ReceiptRefreshRequestable interface {
+	Unwrap() *raw.SKReceiptRefreshRequest
+	ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ ReceiptRefreshRequestable = (*ReceiptRefreshRequest)(nil)
 

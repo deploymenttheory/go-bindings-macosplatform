@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -70,16 +71,102 @@ func (x *TextSelection) WithTypingAttributes(typingAttributes *foundation.NSDict
 	return x
 }
 
+// TextSelectionWithTextRanges calls the underlying TextSelectionWithTextRanges.
+func (x *TextSelection) TextSelectionWithTextRanges(textRanges *foundation.NSArray[*raw.NSTextRange]) *TextSelection {
+	_r := x.inner.TextSelectionWithTextRanges(textRanges)
+	if _r == nil {
+		return nil
+	}
+	return &TextSelection{inner: _r}
+}
+
 // TextRanges returns the collection as a Go slice.
 func (x *TextSelection) TextRanges() []*raw.NSTextRange {
 	arr := x.inner.TextRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextRange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextRange {
+		return raw.NSTextRangeFromID(purego.Retain(_id))
+	})
 }
+
+// Granularity calls the underlying Granularity.
+func (x *TextSelection) Granularity() raw.NSTextSelectionGranularity {
+	return x.inner.Granularity()
+}
+
+// Affinity calls the underlying Affinity.
+func (x *TextSelection) Affinity() raw.NSTextSelectionAffinity {
+	return x.inner.Affinity()
+}
+
+// IsTransient calls the underlying IsTransient.
+func (x *TextSelection) IsTransient() bool {
+	return x.inner.IsTransient()
+}
+
+// AnchorPositionOffset calls the underlying AnchorPositionOffset.
+func (x *TextSelection) AnchorPositionOffset() float64 {
+	return x.inner.AnchorPositionOffset()
+}
+
+// SetAnchorPositionOffset calls the underlying SetAnchorPositionOffset.
+func (x *TextSelection) SetAnchorPositionOffset(anchorPositionOffset float64) {
+	x.inner.SetAnchorPositionOffset(anchorPositionOffset)
+}
+
+// IsLogical calls the underlying IsLogical.
+func (x *TextSelection) IsLogical() bool {
+	return x.inner.IsLogical()
+}
+
+// SetLogical calls the underlying SetLogical.
+func (x *TextSelection) SetLogical(logical bool) {
+	x.inner.SetLogical(logical)
+}
+
+// SecondarySelectionLocation calls the underlying SecondarySelectionLocation.
+func (x *TextSelection) SecondarySelectionLocation() raw.NSTextLocation {
+	return x.inner.SecondarySelectionLocation()
+}
+
+// SetSecondarySelectionLocation calls the underlying SetSecondarySelectionLocation.
+func (x *TextSelection) SetSecondarySelectionLocation(secondarySelectionLocation raw.NSTextLocation) {
+	x.inner.SetSecondarySelectionLocation(secondarySelectionLocation)
+}
+
+// TypingAttributes calls the underlying TypingAttributes.
+func (x *TextSelection) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.TypingAttributes()
+}
+
+// SetTypingAttributes calls the underlying SetTypingAttributes.
+func (x *TextSelection) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetTypingAttributes(typingAttributes)
+}
+
+// TextSelectionable is the interface implemented by [TextSelection], for mocking and DI.
+type TextSelectionable interface {
+	Unwrap() *raw.NSTextSelection
+	WithAnchorPositionOffset(anchorPositionOffset float64) *TextSelection
+	WithLogical(logical bool) *TextSelection
+	WithSecondarySelectionLocation(secondarySelectionLocation raw.NSTextLocation) *TextSelection
+	WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextSelection
+	TextSelectionWithTextRanges(textRanges *foundation.NSArray[*raw.NSTextRange]) *TextSelection
+	TextRanges() []*raw.NSTextRange
+	Granularity() raw.NSTextSelectionGranularity
+	Affinity() raw.NSTextSelectionAffinity
+	IsTransient() bool
+	AnchorPositionOffset() float64
+	SetAnchorPositionOffset(anchorPositionOffset float64)
+	IsLogical() bool
+	SetLogical(logical bool)
+	SecondarySelectionLocation() raw.NSTextLocation
+	SetSecondarySelectionLocation(secondarySelectionLocation raw.NSTextLocation)
+	TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ TextSelectionable = (*TextSelection)(nil)
 

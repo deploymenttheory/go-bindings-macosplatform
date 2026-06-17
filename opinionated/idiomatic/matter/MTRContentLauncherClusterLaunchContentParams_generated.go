@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,97 @@ func (x *MTRContentLauncherClusterLaunchContentParams) WithServerSideProcessingT
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Search calls the underlying Search.
+func (x *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
+	_r := x.inner.Search()
+	if _r == nil {
+		return nil
+	}
+	return &MTRContentLauncherClusterContentSearchStruct{inner: _r}
+}
+
+// SetSearch calls the underlying SetSearch.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetSearch(search *raw.MTRContentLauncherClusterContentSearchStruct) {
+	x.inner.SetSearch(search)
+}
+
+// AutoPlay calls the underlying AutoPlay.
+func (x *MTRContentLauncherClusterLaunchContentParams) AutoPlay() *foundation.NSNumber {
+	return x.inner.AutoPlay()
+}
+
+// SetAutoPlay calls the underlying SetAutoPlay.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetAutoPlay(autoPlay *foundation.NSNumber) {
+	x.inner.SetAutoPlay(autoPlay)
+}
+
+// Data calls the underlying Data.
+func (x *MTRContentLauncherClusterLaunchContentParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// UseCurrentContext calls the underlying UseCurrentContext.
+func (x *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() *foundation.NSNumber {
+	return x.inner.UseCurrentContext()
+}
+
+// SetUseCurrentContext calls the underlying SetUseCurrentContext.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetUseCurrentContext(useCurrentContext *foundation.NSNumber) {
+	x.inner.SetUseCurrentContext(useCurrentContext)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLaunchContentParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRContentLauncherClusterLaunchContentParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRContentLauncherClusterLaunchContentParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRContentLauncherClusterLaunchContentParamsable is the interface implemented by [MTRContentLauncherClusterLaunchContentParams], for mocking and DI.
+type MTRContentLauncherClusterLaunchContentParamsable interface {
+	Unwrap() *raw.MTRContentLauncherClusterLaunchContentParams
+	WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams
+	WithAutoPlay(autoPlay *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	WithData(data string) *MTRContentLauncherClusterLaunchContentParams
+	WithUseCurrentContext(useCurrentContext *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentLauncherClusterLaunchContentParams
+	Search() *MTRContentLauncherClusterContentSearchStruct
+	SetSearch(search *raw.MTRContentLauncherClusterContentSearchStruct)
+	AutoPlay() *foundation.NSNumber
+	SetAutoPlay(autoPlay *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	UseCurrentContext() *foundation.NSNumber
+	SetUseCurrentContext(useCurrentContext *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRContentLauncherClusterLaunchContentParamsable = (*MTRContentLauncherClusterLaunchContentParams)(nil)
 

@@ -35,5 +35,58 @@ func (x *PhysicsBallSocketJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsBal
 	return x
 }
 
+// BodyA calls the underlying BodyA.
+func (x *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AnchorA calls the underlying AnchorA.
+func (x *PhysicsBallSocketJoint) AnchorA() raw.SCNVector3 {
+	return x.inner.AnchorA()
+}
+
+// SetAnchorA calls the underlying SetAnchorA.
+func (x *PhysicsBallSocketJoint) SetAnchorA(anchorA raw.SCNVector3) {
+	x.inner.SetAnchorA(anchorA)
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AnchorB calls the underlying AnchorB.
+func (x *PhysicsBallSocketJoint) AnchorB() raw.SCNVector3 {
+	return x.inner.AnchorB()
+}
+
+// SetAnchorB calls the underlying SetAnchorB.
+func (x *PhysicsBallSocketJoint) SetAnchorB(anchorB raw.SCNVector3) {
+	x.inner.SetAnchorB(anchorB)
+}
+
 func (x *PhysicsBallSocketJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+
+// PhysicsBallSocketJointable is the interface implemented by [PhysicsBallSocketJoint], for mocking and DI.
+type PhysicsBallSocketJointable interface {
+	Unwrap() *raw.SCNPhysicsBallSocketJoint
+	WithAnchorA(anchorA raw.SCNVector3) *PhysicsBallSocketJoint
+	WithAnchorB(anchorB raw.SCNVector3) *PhysicsBallSocketJoint
+	BodyA() *PhysicsBody
+	AnchorA() raw.SCNVector3
+	SetAnchorA(anchorA raw.SCNVector3)
+	BodyB() *PhysicsBody
+	AnchorB() raw.SCNVector3
+	SetAnchorB(anchorB raw.SCNVector3)
+}
+
+var _ PhysicsBallSocketJointable = (*PhysicsBallSocketJoint)(nil)
 

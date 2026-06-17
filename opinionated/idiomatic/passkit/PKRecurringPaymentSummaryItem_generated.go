@@ -48,5 +48,64 @@ func (x *RecurringPaymentSummaryItem) WithEndDate(endDate *foundation.NSDate) *R
 	return x
 }
 
+// StartDate calls the underlying StartDate.
+func (x *RecurringPaymentSummaryItem) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// SetStartDate calls the underlying SetStartDate.
+func (x *RecurringPaymentSummaryItem) SetStartDate(startDate *foundation.NSDate) {
+	x.inner.SetStartDate(startDate)
+}
+
+// IntervalUnit calls the underlying IntervalUnit.
+func (x *RecurringPaymentSummaryItem) IntervalUnit() foundation.NSCalendarUnit {
+	return x.inner.IntervalUnit()
+}
+
+// SetIntervalUnit calls the underlying SetIntervalUnit.
+func (x *RecurringPaymentSummaryItem) SetIntervalUnit(intervalUnit foundation.NSCalendarUnit) {
+	x.inner.SetIntervalUnit(intervalUnit)
+}
+
+// IntervalCount calls the underlying IntervalCount.
+func (x *RecurringPaymentSummaryItem) IntervalCount() int {
+	return x.inner.IntervalCount()
+}
+
+// SetIntervalCount calls the underlying SetIntervalCount.
+func (x *RecurringPaymentSummaryItem) SetIntervalCount(intervalCount int) {
+	x.inner.SetIntervalCount(intervalCount)
+}
+
+// EndDate calls the underlying EndDate.
+func (x *RecurringPaymentSummaryItem) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// SetEndDate calls the underlying SetEndDate.
+func (x *RecurringPaymentSummaryItem) SetEndDate(endDate *foundation.NSDate) {
+	x.inner.SetEndDate(endDate)
+}
+
 func (x *RecurringPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+
+// RecurringPaymentSummaryItemable is the interface implemented by [RecurringPaymentSummaryItem], for mocking and DI.
+type RecurringPaymentSummaryItemable interface {
+	Unwrap() *raw.PKRecurringPaymentSummaryItem
+	WithStartDate(startDate *foundation.NSDate) *RecurringPaymentSummaryItem
+	WithIntervalUnit(intervalUnit foundation.NSCalendarUnit) *RecurringPaymentSummaryItem
+	WithIntervalCount(intervalCount int) *RecurringPaymentSummaryItem
+	WithEndDate(endDate *foundation.NSDate) *RecurringPaymentSummaryItem
+	StartDate() *foundation.NSDate
+	SetStartDate(startDate *foundation.NSDate)
+	IntervalUnit() foundation.NSCalendarUnit
+	SetIntervalUnit(intervalUnit foundation.NSCalendarUnit)
+	IntervalCount() int
+	SetIntervalCount(intervalCount int)
+	EndDate() *foundation.NSDate
+	SetEndDate(endDate *foundation.NSDate)
+}
+
+var _ RecurringPaymentSummaryItemable = (*RecurringPaymentSummaryItem)(nil)
 

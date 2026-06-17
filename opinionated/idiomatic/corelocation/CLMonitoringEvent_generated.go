@@ -6,6 +6,8 @@ package corelocation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,103 @@ func NewMonitoringEvent() *MonitoringEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLMonitoringEvent")), objc.RegisterName("new"))
 	return &MonitoringEvent{inner: raw.CLMonitoringEventFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *MonitoringEvent) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Refinement calls the underlying Refinement.
+func (x *MonitoringEvent) Refinement() *Condition {
+	_r := x.inner.Refinement()
+	if _r == nil {
+		return nil
+	}
+	return &Condition{inner: _r}
+}
+
+// State calls the underlying State.
+func (x *MonitoringEvent) State() raw.CLMonitoringState {
+	return x.inner.State()
+}
+
+// Date calls the underlying Date.
+func (x *MonitoringEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// AuthorizationDenied calls the underlying AuthorizationDenied.
+func (x *MonitoringEvent) AuthorizationDenied() bool {
+	return x.inner.AuthorizationDenied()
+}
+
+// AuthorizationDeniedGlobally calls the underlying AuthorizationDeniedGlobally.
+func (x *MonitoringEvent) AuthorizationDeniedGlobally() bool {
+	return x.inner.AuthorizationDeniedGlobally()
+}
+
+// AuthorizationRestricted calls the underlying AuthorizationRestricted.
+func (x *MonitoringEvent) AuthorizationRestricted() bool {
+	return x.inner.AuthorizationRestricted()
+}
+
+// InsufficientlyInUse calls the underlying InsufficientlyInUse.
+func (x *MonitoringEvent) InsufficientlyInUse() bool {
+	return x.inner.InsufficientlyInUse()
+}
+
+// AccuracyLimited calls the underlying AccuracyLimited.
+func (x *MonitoringEvent) AccuracyLimited() bool {
+	return x.inner.AccuracyLimited()
+}
+
+// ConditionUnsupported calls the underlying ConditionUnsupported.
+func (x *MonitoringEvent) ConditionUnsupported() bool {
+	return x.inner.ConditionUnsupported()
+}
+
+// ConditionLimitExceeded calls the underlying ConditionLimitExceeded.
+func (x *MonitoringEvent) ConditionLimitExceeded() bool {
+	return x.inner.ConditionLimitExceeded()
+}
+
+// PersistenceUnavailable calls the underlying PersistenceUnavailable.
+func (x *MonitoringEvent) PersistenceUnavailable() bool {
+	return x.inner.PersistenceUnavailable()
+}
+
+// ServiceSessionRequired calls the underlying ServiceSessionRequired.
+func (x *MonitoringEvent) ServiceSessionRequired() bool {
+	return x.inner.ServiceSessionRequired()
+}
+
+// AuthorizationRequestInProgress calls the underlying AuthorizationRequestInProgress.
+func (x *MonitoringEvent) AuthorizationRequestInProgress() bool {
+	return x.inner.AuthorizationRequestInProgress()
+}
+
+// MonitoringEventable is the interface implemented by [MonitoringEvent], for mocking and DI.
+type MonitoringEventable interface {
+	Unwrap() *raw.CLMonitoringEvent
+	Identifier() string
+	Refinement() *Condition
+	State() raw.CLMonitoringState
+	Date() *foundation.NSDate
+	AuthorizationDenied() bool
+	AuthorizationDeniedGlobally() bool
+	AuthorizationRestricted() bool
+	InsufficientlyInUse() bool
+	AccuracyLimited() bool
+	ConditionUnsupported() bool
+	ConditionLimitExceeded() bool
+	PersistenceUnavailable() bool
+	ServiceSessionRequired() bool
+	AuthorizationRequestInProgress() bool
+}
+
+var _ MonitoringEventable = (*MonitoringEvent)(nil)
 

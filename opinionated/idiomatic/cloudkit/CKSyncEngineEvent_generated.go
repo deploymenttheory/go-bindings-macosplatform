@@ -23,5 +23,138 @@ func NewSyncEngineEvent() *SyncEngineEvent {
 	return &SyncEngineEvent{inner: raw.CKSyncEngineEventFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *SyncEngineEvent) Type() raw.CKSyncEngineEventType {
+	return x.inner.Type()
+}
+
+// StateUpdateEvent calls the underlying StateUpdateEvent.
+func (x *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
+	_r := x.inner.StateUpdateEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineStateUpdateEvent{inner: _r}
+}
+
+// AccountChangeEvent calls the underlying AccountChangeEvent.
+func (x *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
+	_r := x.inner.AccountChangeEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineAccountChangeEvent{inner: _r}
+}
+
+// WillFetchChangesEvent calls the underlying WillFetchChangesEvent.
+func (x *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
+	_r := x.inner.WillFetchChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineWillFetchChangesEvent{inner: _r}
+}
+
+// FetchedDatabaseChangesEvent calls the underlying FetchedDatabaseChangesEvent.
+func (x *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
+	_r := x.inner.FetchedDatabaseChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineFetchedDatabaseChangesEvent{inner: _r}
+}
+
+// DidFetchChangesEvent calls the underlying DidFetchChangesEvent.
+func (x *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
+	_r := x.inner.DidFetchChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineDidFetchChangesEvent{inner: _r}
+}
+
+// WillFetchRecordZoneChangesEvent calls the underlying WillFetchRecordZoneChangesEvent.
+func (x *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
+	_r := x.inner.WillFetchRecordZoneChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: _r}
+}
+
+// FetchedRecordZoneChangesEvent calls the underlying FetchedRecordZoneChangesEvent.
+func (x *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
+	_r := x.inner.FetchedRecordZoneChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineFetchedRecordZoneChangesEvent{inner: _r}
+}
+
+// DidFetchRecordZoneChangesEvent calls the underlying DidFetchRecordZoneChangesEvent.
+func (x *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
+	_r := x.inner.DidFetchRecordZoneChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineDidFetchRecordZoneChangesEvent{inner: _r}
+}
+
+// WillSendChangesEvent calls the underlying WillSendChangesEvent.
+func (x *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
+	_r := x.inner.WillSendChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineWillSendChangesEvent{inner: _r}
+}
+
+// SentDatabaseChangesEvent calls the underlying SentDatabaseChangesEvent.
+func (x *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
+	_r := x.inner.SentDatabaseChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineSentDatabaseChangesEvent{inner: _r}
+}
+
+// SentRecordZoneChangesEvent calls the underlying SentRecordZoneChangesEvent.
+func (x *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
+	_r := x.inner.SentRecordZoneChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineSentRecordZoneChangesEvent{inner: _r}
+}
+
+// DidSendChangesEvent calls the underlying DidSendChangesEvent.
+func (x *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
+	_r := x.inner.DidSendChangesEvent()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineDidSendChangesEvent{inner: _r}
+}
+
 func (x *SyncEngineEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return x.inner }
+
+// SyncEngineEventable is the interface implemented by [SyncEngineEvent], for mocking and DI.
+type SyncEngineEventable interface {
+	Unwrap() *raw.CKSyncEngineEvent
+	Type() raw.CKSyncEngineEventType
+	StateUpdateEvent() *SyncEngineStateUpdateEvent
+	AccountChangeEvent() *SyncEngineAccountChangeEvent
+	WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent
+	FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent
+	DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent
+	WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent
+	FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent
+	DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent
+	WillSendChangesEvent() *SyncEngineWillSendChangesEvent
+	SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent
+	SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent
+	DidSendChangesEvent() *SyncEngineDidSendChangesEvent
+}
+
+var _ SyncEngineEventable = (*SyncEngineEvent)(nil)
 

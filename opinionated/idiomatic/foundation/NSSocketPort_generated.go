@@ -59,7 +59,48 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
 }
 
+// ProtocolFamily calls the underlying ProtocolFamily.
+func (x *SocketPort) ProtocolFamily() int {
+	return x.inner.ProtocolFamily()
+}
+
+// SocketType calls the underlying SocketType.
+func (x *SocketPort) SocketType() int {
+	return x.inner.SocketType()
+}
+
+// Protocol calls the underlying Protocol.
+func (x *SocketPort) Protocol() int {
+	return x.inner.Protocol()
+}
+
+// Address calls the underlying Address.
+func (x *SocketPort) Address() *Data {
+	_r := x.inner.Address()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// Socket calls the underlying Socket.
+func (x *SocketPort) Socket() int {
+	return x.inner.Socket()
+}
+
 func (x *SocketPort) asPort() *raw.NSPort { return &x.inner.NSPort }
 
 func (x *SocketPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
+
+// SocketPortable is the interface implemented by [SocketPort], for mocking and DI.
+type SocketPortable interface {
+	Unwrap() *raw.NSSocketPort
+	ProtocolFamily() int
+	SocketType() int
+	Protocol() int
+	Address() *Data
+	Socket() int
+}
+
+var _ SocketPortable = (*SocketPort)(nil)
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -84,18 +85,122 @@ func (x *CollectionViewGridLayout) WithBackgroundColors(items ...*raw.NSColor) *
 	return x
 }
 
+// Margins calls the underlying Margins.
+func (x *CollectionViewGridLayout) Margins() foundation.NSEdgeInsets {
+	return x.inner.Margins()
+}
+
+// SetMargins calls the underlying SetMargins.
+func (x *CollectionViewGridLayout) SetMargins(margins foundation.NSEdgeInsets) {
+	x.inner.SetMargins(margins)
+}
+
+// MinimumInteritemSpacing calls the underlying MinimumInteritemSpacing.
+func (x *CollectionViewGridLayout) MinimumInteritemSpacing() float64 {
+	return x.inner.MinimumInteritemSpacing()
+}
+
+// SetMinimumInteritemSpacing calls the underlying SetMinimumInteritemSpacing.
+func (x *CollectionViewGridLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
+	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
+}
+
+// MinimumLineSpacing calls the underlying MinimumLineSpacing.
+func (x *CollectionViewGridLayout) MinimumLineSpacing() float64 {
+	return x.inner.MinimumLineSpacing()
+}
+
+// SetMinimumLineSpacing calls the underlying SetMinimumLineSpacing.
+func (x *CollectionViewGridLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
+	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
+}
+
+// MaximumNumberOfRows calls the underlying MaximumNumberOfRows.
+func (x *CollectionViewGridLayout) MaximumNumberOfRows() uint {
+	return x.inner.MaximumNumberOfRows()
+}
+
+// SetMaximumNumberOfRows calls the underlying SetMaximumNumberOfRows.
+func (x *CollectionViewGridLayout) SetMaximumNumberOfRows(maximumNumberOfRows uint) {
+	x.inner.SetMaximumNumberOfRows(maximumNumberOfRows)
+}
+
+// MaximumNumberOfColumns calls the underlying MaximumNumberOfColumns.
+func (x *CollectionViewGridLayout) MaximumNumberOfColumns() uint {
+	return x.inner.MaximumNumberOfColumns()
+}
+
+// SetMaximumNumberOfColumns calls the underlying SetMaximumNumberOfColumns.
+func (x *CollectionViewGridLayout) SetMaximumNumberOfColumns(maximumNumberOfColumns uint) {
+	x.inner.SetMaximumNumberOfColumns(maximumNumberOfColumns)
+}
+
+// MinimumItemSize calls the underlying MinimumItemSize.
+func (x *CollectionViewGridLayout) MinimumItemSize() corefoundation.CGSize {
+	return x.inner.MinimumItemSize()
+}
+
+// SetMinimumItemSize calls the underlying SetMinimumItemSize.
+func (x *CollectionViewGridLayout) SetMinimumItemSize(minimumItemSize corefoundation.CGSize) {
+	x.inner.SetMinimumItemSize(minimumItemSize)
+}
+
+// MaximumItemSize calls the underlying MaximumItemSize.
+func (x *CollectionViewGridLayout) MaximumItemSize() corefoundation.CGSize {
+	return x.inner.MaximumItemSize()
+}
+
+// SetMaximumItemSize calls the underlying SetMaximumItemSize.
+func (x *CollectionViewGridLayout) SetMaximumItemSize(maximumItemSize corefoundation.CGSize) {
+	x.inner.SetMaximumItemSize(maximumItemSize)
+}
+
 // BackgroundColors returns the collection as a Go slice.
 func (x *CollectionViewGridLayout) BackgroundColors() []*raw.NSColor {
 	arr := x.inner.BackgroundColors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSColor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSColor {
+		return raw.NSColorFromID(purego.Retain(_id))
+	})
+}
+
+// SetBackgroundColors calls the underlying SetBackgroundColors.
+func (x *CollectionViewGridLayout) SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor]) {
+	x.inner.SetBackgroundColors(backgroundColors)
 }
 
 func (x *CollectionViewGridLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+
+// CollectionViewGridLayoutable is the interface implemented by [CollectionViewGridLayout], for mocking and DI.
+type CollectionViewGridLayoutable interface {
+	Unwrap() *raw.NSCollectionViewGridLayout
+	WithMargins(margins foundation.NSEdgeInsets) *CollectionViewGridLayout
+	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewGridLayout
+	WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewGridLayout
+	WithMaximumNumberOfRows(maximumNumberOfRows uint) *CollectionViewGridLayout
+	WithMaximumNumberOfColumns(maximumNumberOfColumns uint) *CollectionViewGridLayout
+	WithMinimumItemSize(minimumItemSize corefoundation.CGSize) *CollectionViewGridLayout
+	WithMaximumItemSize(maximumItemSize corefoundation.CGSize) *CollectionViewGridLayout
+	WithBackgroundColors(items ...*raw.NSColor) *CollectionViewGridLayout
+	Margins() foundation.NSEdgeInsets
+	SetMargins(margins foundation.NSEdgeInsets)
+	MinimumInteritemSpacing() float64
+	SetMinimumInteritemSpacing(minimumInteritemSpacing float64)
+	MinimumLineSpacing() float64
+	SetMinimumLineSpacing(minimumLineSpacing float64)
+	MaximumNumberOfRows() uint
+	SetMaximumNumberOfRows(maximumNumberOfRows uint)
+	MaximumNumberOfColumns() uint
+	SetMaximumNumberOfColumns(maximumNumberOfColumns uint)
+	MinimumItemSize() corefoundation.CGSize
+	SetMinimumItemSize(minimumItemSize corefoundation.CGSize)
+	MaximumItemSize() corefoundation.CGSize
+	SetMaximumItemSize(maximumItemSize corefoundation.CGSize)
+	BackgroundColors() []*raw.NSColor
+	SetBackgroundColors(backgroundColors *foundation.NSArray[*raw.NSColor])
+}
+
+var _ CollectionViewGridLayoutable = (*CollectionViewGridLayout)(nil)
 

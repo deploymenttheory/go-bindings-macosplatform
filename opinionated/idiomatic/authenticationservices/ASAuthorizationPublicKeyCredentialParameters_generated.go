@@ -24,3 +24,16 @@ func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *
 	return &AuthorizationPublicKeyCredentialParameters{inner: raw.ASAuthorizationPublicKeyCredentialParametersFromID(_id)}
 }
 
+// Algorithm calls the underlying Algorithm.
+func (x *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
+	return x.inner.Algorithm()
+}
+
+// AuthorizationPublicKeyCredentialParametersable is the interface implemented by [AuthorizationPublicKeyCredentialParameters], for mocking and DI.
+type AuthorizationPublicKeyCredentialParametersable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialParameters
+	Algorithm() int
+}
+
+var _ AuthorizationPublicKeyCredentialParametersable = (*AuthorizationPublicKeyCredentialParameters)(nil)
+

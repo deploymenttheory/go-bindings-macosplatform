@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewPushStreamNode() *PushStreamNode {
 	return &PushStreamNode{inner: raw.PHASEPushStreamNodeFromID(_id)}
 }
 
+// ScheduleBuffer calls the underlying ScheduleBuffer.
+func (x *PushStreamNode) ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer) {
+	x.inner.ScheduleBuffer(buffer)
+}
+
+// ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
+func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition)) {
+	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, completionCallbackType, completionHandler)
+}
+
+// ScheduleBufferAtTimeOptions calls the underlying ScheduleBufferAtTimeOptions.
+func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions) {
+	x.inner.ScheduleBufferAtTimeOptions(buffer, when, options)
+}
+
+// ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
+func (x *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition)) {
+	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, options, completionCallbackType, completionHandler)
+}
+
 func (x *PushStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.PHASEStreamNode }
+
+// PushStreamNodeable is the interface implemented by [PushStreamNode], for mocking and DI.
+type PushStreamNodeable interface {
+	Unwrap() *raw.PHASEPushStreamNode
+	ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer)
+	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition))
+	ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions)
+	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options raw.PHASEPushStreamBufferOptions, completionCallbackType raw.PHASEPushStreamCompletionCallbackCondition, completionHandler func(raw.PHASEPushStreamCompletionCallbackCondition))
+}
+
+var _ PushStreamNodeable = (*PushStreamNode)(nil)
 

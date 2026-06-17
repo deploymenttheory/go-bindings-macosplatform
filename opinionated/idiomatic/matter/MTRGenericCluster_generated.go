@@ -23,7 +23,24 @@ func NewMTRGenericCluster() *MTRGenericCluster {
 	return &MTRGenericCluster{inner: raw.MTRGenericClusterFromID(_id)}
 }
 
+// Device calls the underlying Device.
+func (x *MTRGenericCluster) Device() *MTRDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDevice{inner: _r}
+}
+
 func (x *MTRGenericCluster) asMTRGenericCluster() *raw.MTRGenericCluster { return x.inner }
 
 func (x *MTRGenericCluster) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRCluster }
+
+// MTRGenericClusterable is the interface implemented by [MTRGenericCluster], for mocking and DI.
+type MTRGenericClusterable interface {
+	Unwrap() *raw.MTRGenericCluster
+	Device() *MTRDevice
+}
+
+var _ MTRGenericClusterable = (*MTRGenericCluster)(nil)
 

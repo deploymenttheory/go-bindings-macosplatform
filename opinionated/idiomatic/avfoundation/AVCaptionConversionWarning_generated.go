@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,37 @@ func NewCaptionConversionWarning() *CaptionConversionWarning {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionWarning")), objc.RegisterName("new"))
 	return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(_id)}
 }
+
+// WarningType calls the underlying WarningType.
+func (x *CaptionConversionWarning) WarningType() string {
+	_r := x.inner.WarningType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RangeOfCaptions calls the underlying RangeOfCaptions.
+func (x *CaptionConversionWarning) RangeOfCaptions() foundation.NSRange {
+	return x.inner.RangeOfCaptions()
+}
+
+// Adjustment calls the underlying Adjustment.
+func (x *CaptionConversionWarning) Adjustment() *CaptionConversionAdjustment {
+	_r := x.inner.Adjustment()
+	if _r == nil {
+		return nil
+	}
+	return &CaptionConversionAdjustment{inner: _r}
+}
+
+// CaptionConversionWarningable is the interface implemented by [CaptionConversionWarning], for mocking and DI.
+type CaptionConversionWarningable interface {
+	Unwrap() *raw.AVCaptionConversionWarning
+	WarningType() string
+	RangeOfCaptions() foundation.NSRange
+	Adjustment() *CaptionConversionAdjustment
+}
+
+var _ CaptionConversionWarningable = (*CaptionConversionWarning)(nil)
 

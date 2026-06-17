@@ -5,9 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserLocation wraps [raw.MKUserLocation] with a fluent Go API.
@@ -35,4 +38,63 @@ func (x *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
+
+// IsUpdating calls the underlying IsUpdating.
+func (x *UserLocation) IsUpdating() bool {
+	return x.inner.IsUpdating()
+}
+
+// Location calls the underlying Location.
+func (x *UserLocation) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// Heading calls the underlying Heading.
+func (x *UserLocation) Heading() *corelocation.CLHeading {
+	return x.inner.Heading()
+}
+
+// Title calls the underlying Title.
+func (x *UserLocation) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *UserLocation) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *UserLocation) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *UserLocation) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// UserLocationable is the interface implemented by [UserLocation], for mocking and DI.
+type UserLocationable interface {
+	Unwrap() *raw.MKUserLocation
+	WithTitle(title string) *UserLocation
+	WithSubtitle(subtitle string) *UserLocation
+	IsUpdating() bool
+	Location() unsafe.Pointer
+	Heading() *corelocation.CLHeading
+	Title() string
+	SetTitle(title string)
+	Subtitle() string
+	SetSubtitle(subtitle string)
+}
+
+var _ UserLocationable = (*UserLocation)(nil)
 

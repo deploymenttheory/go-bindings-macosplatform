@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,80 @@ func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) WithGroupId(groupId *found
 	x.inner.SetGroupId(groupId)
 	return x
 }
+
+// GroupID calls the underlying GroupID.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) GroupID() *foundation.NSNumber {
+	return x.inner.GroupID()
+}
+
+// SetGroupID calls the underlying SetGroupID.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetGroupID(groupID *foundation.NSNumber) {
+	x.inner.SetGroupID(groupID)
+}
+
+// GroupName calls the underlying GroupName.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) GroupName() string {
+	_r := x.inner.GroupName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupName calls the underlying SetGroupName.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetGroupName(groupName string) {
+	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupsClusterAddGroupIfIdentifyingParams) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// MTRGroupsClusterAddGroupIfIdentifyingParamsable is the interface implemented by [MTRGroupsClusterAddGroupIfIdentifyingParams], for mocking and DI.
+type MTRGroupsClusterAddGroupIfIdentifyingParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterAddGroupIfIdentifyingParams
+	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams
+	WithGroupName(groupName string) *MTRGroupsClusterAddGroupIfIdentifyingParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterAddGroupIfIdentifyingParams
+	GroupID() *foundation.NSNumber
+	SetGroupID(groupID *foundation.NSNumber)
+	GroupName() string
+	SetGroupName(groupName string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterAddGroupIfIdentifyingParamsable = (*MTRGroupsClusterAddGroupIfIdentifyingParams)(nil)
 

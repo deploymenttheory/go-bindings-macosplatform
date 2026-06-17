@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewAssetCache() *AssetCache {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetCache")), objc.RegisterName("new"))
 	return &AssetCache{inner: raw.AVAssetCacheFromID(_id)}
 }
+
+// MediaSelectionOptionsInMediaSelectionGroup calls the underlying MediaSelectionOptionsInMediaSelectionGroup.
+func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption] {
+	return x.inner.MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// IsPlayableOffline calls the underlying IsPlayableOffline.
+func (x *AssetCache) IsPlayableOffline() bool {
+	return x.inner.IsPlayableOffline()
+}
+
+// MediaPresentationSettingsForMediaSelectionGroup calls the underlying MediaPresentationSettingsForMediaSelectionGroup.
+func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
+	return x.inner.MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// MediaPresentationLanguagesForMediaSelectionGroup calls the underlying MediaPresentationLanguagesForMediaSelectionGroup.
+func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup)
+}
+
+// AssetCacheable is the interface implemented by [AssetCache], for mocking and DI.
+type AssetCacheable interface {
+	Unwrap() *raw.AVAssetCache
+	MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption]
+	IsPlayableOffline() bool
+	MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
+	MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString]
+}
+
+var _ AssetCacheable = (*AssetCache)(nil)
 

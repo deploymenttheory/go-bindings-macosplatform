@@ -54,3 +54,75 @@ func (x *NNNeuronDescriptor) WithData(data *foundation.NSData) *NNNeuronDescript
 	return x
 }
 
+// NeuronType calls the underlying NeuronType.
+func (x *NNNeuronDescriptor) NeuronType() raw.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// SetNeuronType calls the underlying SetNeuronType.
+func (x *NNNeuronDescriptor) SetNeuronType(neuronType raw.MPSCNNNeuronType) {
+	x.inner.SetNeuronType(neuronType)
+}
+
+// A calls the underlying A.
+func (x *NNNeuronDescriptor) A() float32 {
+	return x.inner.A()
+}
+
+// SetA calls the underlying SetA.
+func (x *NNNeuronDescriptor) SetA(a float32) {
+	x.inner.SetA(a)
+}
+
+// B calls the underlying B.
+func (x *NNNeuronDescriptor) B() float32 {
+	return x.inner.B()
+}
+
+// SetB calls the underlying SetB.
+func (x *NNNeuronDescriptor) SetB(b float32) {
+	x.inner.SetB(b)
+}
+
+// C calls the underlying C.
+func (x *NNNeuronDescriptor) C() float32 {
+	return x.inner.C()
+}
+
+// SetC calls the underlying SetC.
+func (x *NNNeuronDescriptor) SetC(c float32) {
+	x.inner.SetC(c)
+}
+
+// Data calls the underlying Data.
+func (x *NNNeuronDescriptor) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *NNNeuronDescriptor) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// NNNeuronDescriptorable is the interface implemented by [NNNeuronDescriptor], for mocking and DI.
+type NNNeuronDescriptorable interface {
+	Unwrap() *raw.MPSNNNeuronDescriptor
+	WithNeuronType(neuronType raw.MPSCNNNeuronType) *NNNeuronDescriptor
+	WithA(a float32) *NNNeuronDescriptor
+	WithB(b float32) *NNNeuronDescriptor
+	WithC(c float32) *NNNeuronDescriptor
+	WithData(data *foundation.NSData) *NNNeuronDescriptor
+	NeuronType() raw.MPSCNNNeuronType
+	SetNeuronType(neuronType raw.MPSCNNNeuronType)
+	A() float32
+	SetA(a float32)
+	B() float32
+	SetB(b float32)
+	C() float32
+	SetC(c float32)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+}
+
+var _ NNNeuronDescriptorable = (*NNNeuronDescriptor)(nil)
+

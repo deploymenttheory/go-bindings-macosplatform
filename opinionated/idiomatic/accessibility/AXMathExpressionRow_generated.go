@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *MathExpressionRow) Expressions() []*raw.AXMathExpression {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MathExpressionRow) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionRowable is the interface implemented by [MathExpressionRow], for mocking and DI.
+type MathExpressionRowable interface {
+	Unwrap() *raw.AXMathExpressionRow
+	Expressions() []*raw.AXMathExpression
+}
+
+var _ MathExpressionRowable = (*MathExpressionRow)(nil)
 

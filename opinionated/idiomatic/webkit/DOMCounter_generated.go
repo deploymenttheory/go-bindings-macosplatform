@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,44 @@ func NewDOMCounter() *DOMCounter {
 	return &DOMCounter{inner: raw.DOMCounterFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *DOMCounter) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ListStyle calls the underlying ListStyle.
+func (x *DOMCounter) ListStyle() string {
+	_r := x.inner.ListStyle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Separator calls the underlying Separator.
+func (x *DOMCounter) Separator() string {
+	_r := x.inner.Separator()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMCounter) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMCounter) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMCounterable is the interface implemented by [DOMCounter], for mocking and DI.
+type DOMCounterable interface {
+	Unwrap() *raw.DOMCounter
+	Identifier() string
+	ListStyle() string
+	Separator() string
+}
+
+var _ DOMCounterable = (*DOMCounter)(nil)
 

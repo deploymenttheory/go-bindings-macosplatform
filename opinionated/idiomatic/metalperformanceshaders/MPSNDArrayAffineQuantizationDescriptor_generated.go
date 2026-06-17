@@ -50,5 +50,51 @@ func (x *NDArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZero
 	return x
 }
 
+// HasZeroPoint calls the underlying HasZeroPoint.
+func (x *NDArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
+	return x.inner.HasZeroPoint()
+}
+
+// SetHasZeroPoint calls the underlying SetHasZeroPoint.
+func (x *NDArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool) {
+	x.inner.SetHasZeroPoint(hasZeroPoint)
+}
+
+// HasMinValue calls the underlying HasMinValue.
+func (x *NDArrayAffineQuantizationDescriptor) HasMinValue() bool {
+	return x.inner.HasMinValue()
+}
+
+// SetHasMinValue calls the underlying SetHasMinValue.
+func (x *NDArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
+	x.inner.SetHasMinValue(hasMinValue)
+}
+
+// ImplicitZeroPoint calls the underlying ImplicitZeroPoint.
+func (x *NDArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
+	return x.inner.ImplicitZeroPoint()
+}
+
+// SetImplicitZeroPoint calls the underlying SetImplicitZeroPoint.
+func (x *NDArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
+	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
+}
+
 func (x *NDArrayAffineQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor { return &x.inner.MPSNDArrayQuantizationDescriptor }
+
+// NDArrayAffineQuantizationDescriptorable is the interface implemented by [NDArrayAffineQuantizationDescriptor], for mocking and DI.
+type NDArrayAffineQuantizationDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor
+	WithHasZeroPoint(hasZeroPoint bool) *NDArrayAffineQuantizationDescriptor
+	WithHasMinValue(hasMinValue bool) *NDArrayAffineQuantizationDescriptor
+	WithImplicitZeroPoint(implicitZeroPoint bool) *NDArrayAffineQuantizationDescriptor
+	HasZeroPoint() bool
+	SetHasZeroPoint(hasZeroPoint bool)
+	HasMinValue() bool
+	SetHasMinValue(hasMinValue bool)
+	ImplicitZeroPoint() bool
+	SetImplicitZeroPoint(implicitZeroPoint bool)
+}
+
+var _ NDArrayAffineQuantizationDescriptorable = (*NDArrayAffineQuantizationDescriptor)(nil)
 

@@ -125,3 +125,231 @@ func (x *TextureDescriptor) WithPlacementSparsePageSize(placementSparsePageSize 
 	return x
 }
 
+// TextureType calls the underlying TextureType.
+func (x *TextureDescriptor) TextureType() raw.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// SetTextureType calls the underlying SetTextureType.
+func (x *TextureDescriptor) SetTextureType(textureType raw.MTLTextureType) {
+	x.inner.SetTextureType(textureType)
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *TextureDescriptor) PixelFormat() raw.MTLPixelFormat {
+	return x.inner.PixelFormat()
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *TextureDescriptor) SetPixelFormat(pixelFormat raw.MTLPixelFormat) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
+// Width calls the underlying Width.
+func (x *TextureDescriptor) Width() uint {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *TextureDescriptor) SetWidth(width uint) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *TextureDescriptor) Height() uint {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *TextureDescriptor) SetHeight(height uint) {
+	x.inner.SetHeight(height)
+}
+
+// Depth calls the underlying Depth.
+func (x *TextureDescriptor) Depth() uint {
+	return x.inner.Depth()
+}
+
+// SetDepth calls the underlying SetDepth.
+func (x *TextureDescriptor) SetDepth(depth uint) {
+	x.inner.SetDepth(depth)
+}
+
+// MipmapLevelCount calls the underlying MipmapLevelCount.
+func (x *TextureDescriptor) MipmapLevelCount() uint {
+	return x.inner.MipmapLevelCount()
+}
+
+// SetMipmapLevelCount calls the underlying SetMipmapLevelCount.
+func (x *TextureDescriptor) SetMipmapLevelCount(mipmapLevelCount uint) {
+	x.inner.SetMipmapLevelCount(mipmapLevelCount)
+}
+
+// SampleCount calls the underlying SampleCount.
+func (x *TextureDescriptor) SampleCount() uint {
+	return x.inner.SampleCount()
+}
+
+// SetSampleCount calls the underlying SetSampleCount.
+func (x *TextureDescriptor) SetSampleCount(sampleCount uint) {
+	x.inner.SetSampleCount(sampleCount)
+}
+
+// ArrayLength calls the underlying ArrayLength.
+func (x *TextureDescriptor) ArrayLength() uint {
+	return x.inner.ArrayLength()
+}
+
+// SetArrayLength calls the underlying SetArrayLength.
+func (x *TextureDescriptor) SetArrayLength(arrayLength uint) {
+	x.inner.SetArrayLength(arrayLength)
+}
+
+// ResourceOptions calls the underlying ResourceOptions.
+func (x *TextureDescriptor) ResourceOptions() raw.MTLResourceOptions {
+	return x.inner.ResourceOptions()
+}
+
+// SetResourceOptions calls the underlying SetResourceOptions.
+func (x *TextureDescriptor) SetResourceOptions(resourceOptions raw.MTLResourceOptions) {
+	x.inner.SetResourceOptions(resourceOptions)
+}
+
+// CpuCacheMode calls the underlying CpuCacheMode.
+func (x *TextureDescriptor) CpuCacheMode() raw.MTLCPUCacheMode {
+	return x.inner.CpuCacheMode()
+}
+
+// SetCpuCacheMode calls the underlying SetCpuCacheMode.
+func (x *TextureDescriptor) SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) {
+	x.inner.SetCpuCacheMode(cpuCacheMode)
+}
+
+// StorageMode calls the underlying StorageMode.
+func (x *TextureDescriptor) StorageMode() raw.MTLStorageMode {
+	return x.inner.StorageMode()
+}
+
+// SetStorageMode calls the underlying SetStorageMode.
+func (x *TextureDescriptor) SetStorageMode(storageMode raw.MTLStorageMode) {
+	x.inner.SetStorageMode(storageMode)
+}
+
+// HazardTrackingMode calls the underlying HazardTrackingMode.
+func (x *TextureDescriptor) HazardTrackingMode() raw.MTLHazardTrackingMode {
+	return x.inner.HazardTrackingMode()
+}
+
+// SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
+func (x *TextureDescriptor) SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) {
+	x.inner.SetHazardTrackingMode(hazardTrackingMode)
+}
+
+// Usage calls the underlying Usage.
+func (x *TextureDescriptor) Usage() raw.MTLTextureUsage {
+	return x.inner.Usage()
+}
+
+// SetUsage calls the underlying SetUsage.
+func (x *TextureDescriptor) SetUsage(usage raw.MTLTextureUsage) {
+	x.inner.SetUsage(usage)
+}
+
+// AllowGPUOptimizedContents calls the underlying AllowGPUOptimizedContents.
+func (x *TextureDescriptor) AllowGPUOptimizedContents() bool {
+	return x.inner.AllowGPUOptimizedContents()
+}
+
+// SetAllowGPUOptimizedContents calls the underlying SetAllowGPUOptimizedContents.
+func (x *TextureDescriptor) SetAllowGPUOptimizedContents(allowGPUOptimizedContents bool) {
+	x.inner.SetAllowGPUOptimizedContents(allowGPUOptimizedContents)
+}
+
+// CompressionType calls the underlying CompressionType.
+func (x *TextureDescriptor) CompressionType() raw.MTLTextureCompressionType {
+	return x.inner.CompressionType()
+}
+
+// SetCompressionType calls the underlying SetCompressionType.
+func (x *TextureDescriptor) SetCompressionType(compressionType raw.MTLTextureCompressionType) {
+	x.inner.SetCompressionType(compressionType)
+}
+
+// Swizzle calls the underlying Swizzle.
+func (x *TextureDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
+	return x.inner.Swizzle()
+}
+
+// SetSwizzle calls the underlying SetSwizzle.
+func (x *TextureDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels) {
+	x.inner.SetSwizzle(swizzle)
+}
+
+// PlacementSparsePageSize calls the underlying PlacementSparsePageSize.
+func (x *TextureDescriptor) PlacementSparsePageSize() raw.MTLSparsePageSize {
+	return x.inner.PlacementSparsePageSize()
+}
+
+// SetPlacementSparsePageSize calls the underlying SetPlacementSparsePageSize.
+func (x *TextureDescriptor) SetPlacementSparsePageSize(placementSparsePageSize raw.MTLSparsePageSize) {
+	x.inner.SetPlacementSparsePageSize(placementSparsePageSize)
+}
+
+// TextureDescriptorable is the interface implemented by [TextureDescriptor], for mocking and DI.
+type TextureDescriptorable interface {
+	Unwrap() *raw.MTLTextureDescriptor
+	WithTextureType(textureType raw.MTLTextureType) *TextureDescriptor
+	WithPixelFormat(pixelFormat raw.MTLPixelFormat) *TextureDescriptor
+	WithWidth(width uint) *TextureDescriptor
+	WithHeight(height uint) *TextureDescriptor
+	WithDepth(depth uint) *TextureDescriptor
+	WithMipmapLevelCount(mipmapLevelCount uint) *TextureDescriptor
+	WithSampleCount(sampleCount uint) *TextureDescriptor
+	WithArrayLength(arrayLength uint) *TextureDescriptor
+	WithResourceOptions(resourceOptions raw.MTLResourceOptions) *TextureDescriptor
+	WithCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode) *TextureDescriptor
+	WithStorageMode(storageMode raw.MTLStorageMode) *TextureDescriptor
+	WithHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode) *TextureDescriptor
+	WithUsage(usage raw.MTLTextureUsage) *TextureDescriptor
+	WithAllowGPUOptimizedContents(allowGPUOptimizedContents bool) *TextureDescriptor
+	WithCompressionType(compressionType raw.MTLTextureCompressionType) *TextureDescriptor
+	WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureDescriptor
+	WithPlacementSparsePageSize(placementSparsePageSize raw.MTLSparsePageSize) *TextureDescriptor
+	TextureType() raw.MTLTextureType
+	SetTextureType(textureType raw.MTLTextureType)
+	PixelFormat() raw.MTLPixelFormat
+	SetPixelFormat(pixelFormat raw.MTLPixelFormat)
+	Width() uint
+	SetWidth(width uint)
+	Height() uint
+	SetHeight(height uint)
+	Depth() uint
+	SetDepth(depth uint)
+	MipmapLevelCount() uint
+	SetMipmapLevelCount(mipmapLevelCount uint)
+	SampleCount() uint
+	SetSampleCount(sampleCount uint)
+	ArrayLength() uint
+	SetArrayLength(arrayLength uint)
+	ResourceOptions() raw.MTLResourceOptions
+	SetResourceOptions(resourceOptions raw.MTLResourceOptions)
+	CpuCacheMode() raw.MTLCPUCacheMode
+	SetCpuCacheMode(cpuCacheMode raw.MTLCPUCacheMode)
+	StorageMode() raw.MTLStorageMode
+	SetStorageMode(storageMode raw.MTLStorageMode)
+	HazardTrackingMode() raw.MTLHazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode raw.MTLHazardTrackingMode)
+	Usage() raw.MTLTextureUsage
+	SetUsage(usage raw.MTLTextureUsage)
+	AllowGPUOptimizedContents() bool
+	SetAllowGPUOptimizedContents(allowGPUOptimizedContents bool)
+	CompressionType() raw.MTLTextureCompressionType
+	SetCompressionType(compressionType raw.MTLTextureCompressionType)
+	Swizzle() raw.MTLTextureSwizzleChannels
+	SetSwizzle(swizzle raw.MTLTextureSwizzleChannels)
+	PlacementSparsePageSize() raw.MTLSparsePageSize
+	SetPlacementSparsePageSize(placementSparsePageSize raw.MTLSparsePageSize)
+}
+
+var _ TextureDescriptorable = (*TextureDescriptor)(nil)
+

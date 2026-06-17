@@ -42,3 +42,49 @@ func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) WithServerSideProcess
 	return x
 }
 
+// OperationalDataset calls the underlying OperationalDataset.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) OperationalDataset() *foundation.NSData {
+	return x.inner.OperationalDataset()
+}
+
+// SetOperationalDataset calls the underlying SetOperationalDataset.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) SetOperationalDataset(operationalDataset *foundation.NSData) {
+	x.inner.SetOperationalDataset(operationalDataset)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterAddNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadNetworkDirectoryClusterAddNetworkParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterAddNetworkParams], for mocking and DI.
+type MTRThreadNetworkDirectoryClusterAddNetworkParamsable interface {
+	Unwrap() *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams
+	WithOperationalDataset(operationalDataset *foundation.NSData) *MTRThreadNetworkDirectoryClusterAddNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterAddNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterAddNetworkParams
+	OperationalDataset() *foundation.NSData
+	SetOperationalDataset(operationalDataset *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDirectoryClusterAddNetworkParamsable = (*MTRThreadNetworkDirectoryClusterAddNetworkParams)(nil)
+

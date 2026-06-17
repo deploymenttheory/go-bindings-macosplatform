@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -135,4 +136,201 @@ func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
 	x.inner.SetFloatValue(floatValue)
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *Uniform) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UniformType calls the underlying UniformType.
+func (x *Uniform) UniformType() raw.SKUniformType {
+	return x.inner.UniformType()
+}
+
+// TextureValue calls the underlying TextureValue.
+func (x *Uniform) TextureValue() *Texture {
+	_r := x.inner.TextureValue()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetTextureValue calls the underlying SetTextureValue.
+func (x *Uniform) SetTextureValue(textureValue *raw.SKTexture) {
+	x.inner.SetTextureValue(textureValue)
+}
+
+// FloatValue calls the underlying FloatValue.
+func (x *Uniform) FloatValue() float32 {
+	return x.inner.FloatValue()
+}
+
+// SetFloatValue calls the underlying SetFloatValue.
+func (x *Uniform) SetFloatValue(floatValue float32) {
+	x.inner.SetFloatValue(floatValue)
+}
+
+// VectorFloat2Value calls the underlying VectorFloat2Value.
+func (x *Uniform) VectorFloat2Value() unsafe.Pointer {
+	return x.inner.VectorFloat2Value()
+}
+
+// SetVectorFloat2Value calls the underlying SetVectorFloat2Value.
+func (x *Uniform) SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer) {
+	x.inner.SetVectorFloat2Value(vectorFloat2Value)
+}
+
+// VectorFloat3Value calls the underlying VectorFloat3Value.
+func (x *Uniform) VectorFloat3Value() unsafe.Pointer {
+	return x.inner.VectorFloat3Value()
+}
+
+// SetVectorFloat3Value calls the underlying SetVectorFloat3Value.
+func (x *Uniform) SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer) {
+	x.inner.SetVectorFloat3Value(vectorFloat3Value)
+}
+
+// VectorFloat4Value calls the underlying VectorFloat4Value.
+func (x *Uniform) VectorFloat4Value() unsafe.Pointer {
+	return x.inner.VectorFloat4Value()
+}
+
+// SetVectorFloat4Value calls the underlying SetVectorFloat4Value.
+func (x *Uniform) SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer) {
+	x.inner.SetVectorFloat4Value(vectorFloat4Value)
+}
+
+// MatrixFloat2x2Value calls the underlying MatrixFloat2x2Value.
+func (x *Uniform) MatrixFloat2x2Value() unsafe.Pointer {
+	return x.inner.MatrixFloat2x2Value()
+}
+
+// SetMatrixFloat2x2Value calls the underlying SetMatrixFloat2x2Value.
+func (x *Uniform) SetMatrixFloat2x2Value(matrixFloat2x2Value unsafe.Pointer) {
+	x.inner.SetMatrixFloat2x2Value(matrixFloat2x2Value)
+}
+
+// MatrixFloat3x3Value calls the underlying MatrixFloat3x3Value.
+func (x *Uniform) MatrixFloat3x3Value() unsafe.Pointer {
+	return x.inner.MatrixFloat3x3Value()
+}
+
+// SetMatrixFloat3x3Value calls the underlying SetMatrixFloat3x3Value.
+func (x *Uniform) SetMatrixFloat3x3Value(matrixFloat3x3Value unsafe.Pointer) {
+	x.inner.SetMatrixFloat3x3Value(matrixFloat3x3Value)
+}
+
+// MatrixFloat4x4Value calls the underlying MatrixFloat4x4Value.
+func (x *Uniform) MatrixFloat4x4Value() unsafe.Pointer {
+	return x.inner.MatrixFloat4x4Value()
+}
+
+// SetMatrixFloat4x4Value calls the underlying SetMatrixFloat4x4Value.
+func (x *Uniform) SetMatrixFloat4x4Value(matrixFloat4x4Value unsafe.Pointer) {
+	x.inner.SetMatrixFloat4x4Value(matrixFloat4x4Value)
+}
+
+// FloatVector2Value calls the underlying FloatVector2Value.
+func (x *Uniform) FloatVector2Value() unsafe.Pointer {
+	return x.inner.FloatVector2Value()
+}
+
+// SetFloatVector2Value calls the underlying SetFloatVector2Value.
+func (x *Uniform) SetFloatVector2Value(floatVector2Value unsafe.Pointer) {
+	x.inner.SetFloatVector2Value(floatVector2Value)
+}
+
+// FloatVector3Value calls the underlying FloatVector3Value.
+func (x *Uniform) FloatVector3Value() unsafe.Pointer {
+	return x.inner.FloatVector3Value()
+}
+
+// SetFloatVector3Value calls the underlying SetFloatVector3Value.
+func (x *Uniform) SetFloatVector3Value(floatVector3Value unsafe.Pointer) {
+	x.inner.SetFloatVector3Value(floatVector3Value)
+}
+
+// FloatVector4Value calls the underlying FloatVector4Value.
+func (x *Uniform) FloatVector4Value() unsafe.Pointer {
+	return x.inner.FloatVector4Value()
+}
+
+// SetFloatVector4Value calls the underlying SetFloatVector4Value.
+func (x *Uniform) SetFloatVector4Value(floatVector4Value unsafe.Pointer) {
+	x.inner.SetFloatVector4Value(floatVector4Value)
+}
+
+// FloatMatrix2Value calls the underlying FloatMatrix2Value.
+func (x *Uniform) FloatMatrix2Value() unsafe.Pointer {
+	return x.inner.FloatMatrix2Value()
+}
+
+// SetFloatMatrix2Value calls the underlying SetFloatMatrix2Value.
+func (x *Uniform) SetFloatMatrix2Value(floatMatrix2Value unsafe.Pointer) {
+	x.inner.SetFloatMatrix2Value(floatMatrix2Value)
+}
+
+// FloatMatrix3Value calls the underlying FloatMatrix3Value.
+func (x *Uniform) FloatMatrix3Value() unsafe.Pointer {
+	return x.inner.FloatMatrix3Value()
+}
+
+// SetFloatMatrix3Value calls the underlying SetFloatMatrix3Value.
+func (x *Uniform) SetFloatMatrix3Value(floatMatrix3Value unsafe.Pointer) {
+	x.inner.SetFloatMatrix3Value(floatMatrix3Value)
+}
+
+// FloatMatrix4Value calls the underlying FloatMatrix4Value.
+func (x *Uniform) FloatMatrix4Value() unsafe.Pointer {
+	return x.inner.FloatMatrix4Value()
+}
+
+// SetFloatMatrix4Value calls the underlying SetFloatMatrix4Value.
+func (x *Uniform) SetFloatMatrix4Value(floatMatrix4Value unsafe.Pointer) {
+	x.inner.SetFloatMatrix4Value(floatMatrix4Value)
+}
+
+// Uniformable is the interface implemented by [Uniform], for mocking and DI.
+type Uniformable interface {
+	Unwrap() *raw.SKUniform
+	WithTextureValue(textureValue TextureProvider) *Uniform
+	WithFloatValue(floatValue float32) *Uniform
+	Name() string
+	UniformType() raw.SKUniformType
+	TextureValue() *Texture
+	SetTextureValue(textureValue *raw.SKTexture)
+	FloatValue() float32
+	SetFloatValue(floatValue float32)
+	VectorFloat2Value() unsafe.Pointer
+	SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer)
+	VectorFloat3Value() unsafe.Pointer
+	SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer)
+	VectorFloat4Value() unsafe.Pointer
+	SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer)
+	MatrixFloat2x2Value() unsafe.Pointer
+	SetMatrixFloat2x2Value(matrixFloat2x2Value unsafe.Pointer)
+	MatrixFloat3x3Value() unsafe.Pointer
+	SetMatrixFloat3x3Value(matrixFloat3x3Value unsafe.Pointer)
+	MatrixFloat4x4Value() unsafe.Pointer
+	SetMatrixFloat4x4Value(matrixFloat4x4Value unsafe.Pointer)
+	FloatVector2Value() unsafe.Pointer
+	SetFloatVector2Value(floatVector2Value unsafe.Pointer)
+	FloatVector3Value() unsafe.Pointer
+	SetFloatVector3Value(floatVector3Value unsafe.Pointer)
+	FloatVector4Value() unsafe.Pointer
+	SetFloatVector4Value(floatVector4Value unsafe.Pointer)
+	FloatMatrix2Value() unsafe.Pointer
+	SetFloatMatrix2Value(floatMatrix2Value unsafe.Pointer)
+	FloatMatrix3Value() unsafe.Pointer
+	SetFloatMatrix3Value(floatMatrix3Value unsafe.Pointer)
+	FloatMatrix4Value() unsafe.Pointer
+	SetFloatMatrix4Value(floatMatrix4Value unsafe.Pointer)
+}
+
+var _ Uniformable = (*Uniform)(nil)
 

@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -168,17 +169,297 @@ func (x *URLComponents) WithPercentEncodedQueryItems(items ...*raw.NSURLQueryIte
 	return x
 }
 
+// URLRelativeToURL calls the underlying URLRelativeToURL.
+func (x *URLComponents) URLRelativeToURL(baseURL string) *URL {
+	_r := x.inner.URLRelativeToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URL calls the underlying URL.
+func (x *URLComponents) URL() *URL {
+	_r := x.inner.URL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// String calls the underlying String.
+func (x *URLComponents) String() *String {
+	_r := x.inner.String()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Scheme calls the underlying Scheme.
+func (x *URLComponents) Scheme() *String {
+	_r := x.inner.Scheme()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetScheme calls the underlying SetScheme.
+func (x *URLComponents) SetScheme(scheme string) {
+	x.inner.SetScheme(foundation.NSStringStringWithUTF8String(scheme))
+}
+
+// User calls the underlying User.
+func (x *URLComponents) User() *String {
+	_r := x.inner.User()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetUser calls the underlying SetUser.
+func (x *URLComponents) SetUser(user string) {
+	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
+}
+
+// Password calls the underlying Password.
+func (x *URLComponents) Password() *String {
+	_r := x.inner.Password()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPassword calls the underlying SetPassword.
+func (x *URLComponents) SetPassword(password string) {
+	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+}
+
+// Host calls the underlying Host.
+func (x *URLComponents) Host() *String {
+	_r := x.inner.Host()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetHost calls the underlying SetHost.
+func (x *URLComponents) SetHost(host string) {
+	x.inner.SetHost(foundation.NSStringStringWithUTF8String(host))
+}
+
+// Port calls the underlying Port.
+func (x *URLComponents) Port() *Number {
+	_r := x.inner.Port()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// SetPort calls the underlying SetPort.
+func (x *URLComponents) SetPort(port *raw.NSNumber) {
+	x.inner.SetPort(port)
+}
+
+// Path calls the underlying Path.
+func (x *URLComponents) Path() *String {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPath calls the underlying SetPath.
+func (x *URLComponents) SetPath(path string) {
+	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+}
+
+// Query calls the underlying Query.
+func (x *URLComponents) Query() *String {
+	_r := x.inner.Query()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetQuery calls the underlying SetQuery.
+func (x *URLComponents) SetQuery(query string) {
+	x.inner.SetQuery(foundation.NSStringStringWithUTF8String(query))
+}
+
+// Fragment calls the underlying Fragment.
+func (x *URLComponents) Fragment() *String {
+	_r := x.inner.Fragment()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetFragment calls the underlying SetFragment.
+func (x *URLComponents) SetFragment(fragment string) {
+	x.inner.SetFragment(foundation.NSStringStringWithUTF8String(fragment))
+}
+
+// PercentEncodedUser calls the underlying PercentEncodedUser.
+func (x *URLComponents) PercentEncodedUser() *String {
+	_r := x.inner.PercentEncodedUser()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedUser calls the underlying SetPercentEncodedUser.
+func (x *URLComponents) SetPercentEncodedUser(percentEncodedUser string) {
+	x.inner.SetPercentEncodedUser(foundation.NSStringStringWithUTF8String(percentEncodedUser))
+}
+
+// PercentEncodedPassword calls the underlying PercentEncodedPassword.
+func (x *URLComponents) PercentEncodedPassword() *String {
+	_r := x.inner.PercentEncodedPassword()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedPassword calls the underlying SetPercentEncodedPassword.
+func (x *URLComponents) SetPercentEncodedPassword(percentEncodedPassword string) {
+	x.inner.SetPercentEncodedPassword(foundation.NSStringStringWithUTF8String(percentEncodedPassword))
+}
+
+// PercentEncodedHost calls the underlying PercentEncodedHost.
+func (x *URLComponents) PercentEncodedHost() *String {
+	_r := x.inner.PercentEncodedHost()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedHost calls the underlying SetPercentEncodedHost.
+func (x *URLComponents) SetPercentEncodedHost(percentEncodedHost string) {
+	x.inner.SetPercentEncodedHost(foundation.NSStringStringWithUTF8String(percentEncodedHost))
+}
+
+// PercentEncodedPath calls the underlying PercentEncodedPath.
+func (x *URLComponents) PercentEncodedPath() *String {
+	_r := x.inner.PercentEncodedPath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedPath calls the underlying SetPercentEncodedPath.
+func (x *URLComponents) SetPercentEncodedPath(percentEncodedPath string) {
+	x.inner.SetPercentEncodedPath(foundation.NSStringStringWithUTF8String(percentEncodedPath))
+}
+
+// PercentEncodedQuery calls the underlying PercentEncodedQuery.
+func (x *URLComponents) PercentEncodedQuery() *String {
+	_r := x.inner.PercentEncodedQuery()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedQuery calls the underlying SetPercentEncodedQuery.
+func (x *URLComponents) SetPercentEncodedQuery(percentEncodedQuery string) {
+	x.inner.SetPercentEncodedQuery(foundation.NSStringStringWithUTF8String(percentEncodedQuery))
+}
+
+// PercentEncodedFragment calls the underlying PercentEncodedFragment.
+func (x *URLComponents) PercentEncodedFragment() *String {
+	_r := x.inner.PercentEncodedFragment()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPercentEncodedFragment calls the underlying SetPercentEncodedFragment.
+func (x *URLComponents) SetPercentEncodedFragment(percentEncodedFragment string) {
+	x.inner.SetPercentEncodedFragment(foundation.NSStringStringWithUTF8String(percentEncodedFragment))
+}
+
+// EncodedHost calls the underlying EncodedHost.
+func (x *URLComponents) EncodedHost() *String {
+	_r := x.inner.EncodedHost()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetEncodedHost calls the underlying SetEncodedHost.
+func (x *URLComponents) SetEncodedHost(encodedHost string) {
+	x.inner.SetEncodedHost(foundation.NSStringStringWithUTF8String(encodedHost))
+}
+
+// RangeOfScheme calls the underlying RangeOfScheme.
+func (x *URLComponents) RangeOfScheme() raw.NSRange {
+	return x.inner.RangeOfScheme()
+}
+
+// RangeOfUser calls the underlying RangeOfUser.
+func (x *URLComponents) RangeOfUser() raw.NSRange {
+	return x.inner.RangeOfUser()
+}
+
+// RangeOfPassword calls the underlying RangeOfPassword.
+func (x *URLComponents) RangeOfPassword() raw.NSRange {
+	return x.inner.RangeOfPassword()
+}
+
+// RangeOfHost calls the underlying RangeOfHost.
+func (x *URLComponents) RangeOfHost() raw.NSRange {
+	return x.inner.RangeOfHost()
+}
+
+// RangeOfPort calls the underlying RangeOfPort.
+func (x *URLComponents) RangeOfPort() raw.NSRange {
+	return x.inner.RangeOfPort()
+}
+
+// RangeOfPath calls the underlying RangeOfPath.
+func (x *URLComponents) RangeOfPath() raw.NSRange {
+	return x.inner.RangeOfPath()
+}
+
+// RangeOfQuery calls the underlying RangeOfQuery.
+func (x *URLComponents) RangeOfQuery() raw.NSRange {
+	return x.inner.RangeOfQuery()
+}
+
+// RangeOfFragment calls the underlying RangeOfFragment.
+func (x *URLComponents) RangeOfFragment() raw.NSRange {
+	return x.inner.RangeOfFragment()
+}
+
 // QueryItems returns the collection as a Go slice.
 func (x *URLComponents) QueryItems() []*raw.NSURLQueryItem {
 	arr := x.inner.QueryItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLQueryItem {
+		return raw.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetQueryItems calls the underlying SetQueryItems.
+func (x *URLComponents) SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryItem]) {
+	x.inner.SetQueryItems(queryItems)
 }
 
 // PercentEncodedQueryItems returns the collection as a Go slice.
@@ -187,12 +468,84 @@ func (x *URLComponents) PercentEncodedQueryItems() []*raw.NSURLQueryItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSURLQueryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSURLQueryItem {
+		return raw.NSURLQueryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetPercentEncodedQueryItems calls the underlying SetPercentEncodedQueryItems.
+func (x *URLComponents) SetPercentEncodedQueryItems(percentEncodedQueryItems *raw.NSArray[*raw.NSURLQueryItem]) {
+	x.inner.SetPercentEncodedQueryItems(percentEncodedQueryItems)
 }
 
 func (x *URLComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLComponentsable is the interface implemented by [URLComponents], for mocking and DI.
+type URLComponentsable interface {
+	Unwrap() *raw.NSURLComponents
+	WithScheme(scheme string) *URLComponents
+	WithUser(user string) *URLComponents
+	WithPassword(password string) *URLComponents
+	WithHost(host string) *URLComponents
+	WithPort(port NumberProvider) *URLComponents
+	WithPath(path string) *URLComponents
+	WithQuery(query string) *URLComponents
+	WithFragment(fragment string) *URLComponents
+	WithPercentEncodedUser(percentEncodedUser string) *URLComponents
+	WithPercentEncodedPassword(percentEncodedPassword string) *URLComponents
+	WithPercentEncodedHost(percentEncodedHost string) *URLComponents
+	WithPercentEncodedPath(percentEncodedPath string) *URLComponents
+	WithPercentEncodedQuery(percentEncodedQuery string) *URLComponents
+	WithPercentEncodedFragment(percentEncodedFragment string) *URLComponents
+	WithEncodedHost(encodedHost string) *URLComponents
+	WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
+	WithPercentEncodedQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
+	URLRelativeToURL(baseURL string) *URL
+	URL() *URL
+	String() *String
+	Scheme() *String
+	SetScheme(scheme string)
+	User() *String
+	SetUser(user string)
+	Password() *String
+	SetPassword(password string)
+	Host() *String
+	SetHost(host string)
+	Port() *Number
+	SetPort(port *raw.NSNumber)
+	Path() *String
+	SetPath(path string)
+	Query() *String
+	SetQuery(query string)
+	Fragment() *String
+	SetFragment(fragment string)
+	PercentEncodedUser() *String
+	SetPercentEncodedUser(percentEncodedUser string)
+	PercentEncodedPassword() *String
+	SetPercentEncodedPassword(percentEncodedPassword string)
+	PercentEncodedHost() *String
+	SetPercentEncodedHost(percentEncodedHost string)
+	PercentEncodedPath() *String
+	SetPercentEncodedPath(percentEncodedPath string)
+	PercentEncodedQuery() *String
+	SetPercentEncodedQuery(percentEncodedQuery string)
+	PercentEncodedFragment() *String
+	SetPercentEncodedFragment(percentEncodedFragment string)
+	EncodedHost() *String
+	SetEncodedHost(encodedHost string)
+	RangeOfScheme() raw.NSRange
+	RangeOfUser() raw.NSRange
+	RangeOfPassword() raw.NSRange
+	RangeOfHost() raw.NSRange
+	RangeOfPort() raw.NSRange
+	RangeOfPath() raw.NSRange
+	RangeOfQuery() raw.NSRange
+	RangeOfFragment() raw.NSRange
+	QueryItems() []*raw.NSURLQueryItem
+	SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryItem])
+	PercentEncodedQueryItems() []*raw.NSURLQueryItem
+	SetPercentEncodedQueryItems(percentEncodedQueryItems *raw.NSArray[*raw.NSURLQueryItem])
+}
+
+var _ URLComponentsable = (*URLComponents)(nil)
 

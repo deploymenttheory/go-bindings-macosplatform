@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,41 @@ func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDistinguishedNameInfo")), objc.RegisterName("new"))
 	return &MTRDistinguishedNameInfo{inner: raw.MTRDistinguishedNameInfoFromID(_id)}
 }
+
+// NodeID calls the underlying NodeID.
+func (x *MTRDistinguishedNameInfo) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// FabricID calls the underlying FabricID.
+func (x *MTRDistinguishedNameInfo) FabricID() *foundation.NSNumber {
+	return x.inner.FabricID()
+}
+
+// RootCACertificateID calls the underlying RootCACertificateID.
+func (x *MTRDistinguishedNameInfo) RootCACertificateID() *foundation.NSNumber {
+	return x.inner.RootCACertificateID()
+}
+
+// IntermediateCACertificateID calls the underlying IntermediateCACertificateID.
+func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.NSNumber {
+	return x.inner.IntermediateCACertificateID()
+}
+
+// CaseAuthenticatedTags calls the underlying CaseAuthenticatedTags.
+func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.CaseAuthenticatedTags()
+}
+
+// MTRDistinguishedNameInfoable is the interface implemented by [MTRDistinguishedNameInfo], for mocking and DI.
+type MTRDistinguishedNameInfoable interface {
+	Unwrap() *raw.MTRDistinguishedNameInfo
+	NodeID() *foundation.NSNumber
+	FabricID() *foundation.NSNumber
+	RootCACertificateID() *foundation.NSNumber
+	IntermediateCACertificateID() *foundation.NSNumber
+	CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber]
+}
+
+var _ MTRDistinguishedNameInfoable = (*MTRDistinguishedNameInfo)(nil)
 

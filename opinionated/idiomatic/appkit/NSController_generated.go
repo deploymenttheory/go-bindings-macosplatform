@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Controller wraps [raw.NSController] with a fluent Go API.
@@ -31,5 +32,48 @@ func NewControllerWithCoder(coder *foundation.NSCoder) *Controller {
 	return &Controller{inner: raw.NSControllerFromID(_id)}
 }
 
+// ObjectDidBeginEditing calls the underlying ObjectDidBeginEditing.
+func (x *Controller) ObjectDidBeginEditing(editor raw.NSEditor) {
+	x.inner.ObjectDidBeginEditing(editor)
+}
+
+// ObjectDidEndEditing calls the underlying ObjectDidEndEditing.
+func (x *Controller) ObjectDidEndEditing(editor raw.NSEditor) {
+	x.inner.ObjectDidEndEditing(editor)
+}
+
+// DiscardEditing calls the underlying DiscardEditing.
+func (x *Controller) DiscardEditing() {
+	x.inner.DiscardEditing()
+}
+
+// CommitEditing calls the underlying CommitEditing.
+func (x *Controller) CommitEditing() bool {
+	return x.inner.CommitEditing()
+}
+
+// CommitEditingWithDelegateDidCommitSelectorContextInfo calls the underlying CommitEditingWithDelegateDidCommitSelectorContextInfo.
+func (x *Controller) CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate, didCommitSelector, contextInfo)
+}
+
+// IsEditing calls the underlying IsEditing.
+func (x *Controller) IsEditing() bool {
+	return x.inner.IsEditing()
+}
+
 func (x *Controller) asController() *raw.NSController { return x.inner }
+
+// Controllerable is the interface implemented by [Controller], for mocking and DI.
+type Controllerable interface {
+	Unwrap() *raw.NSController
+	ObjectDidBeginEditing(editor raw.NSEditor)
+	ObjectDidEndEditing(editor raw.NSEditor)
+	DiscardEditing()
+	CommitEditing() bool
+	CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer)
+	IsEditing() bool
+}
+
+var _ Controllerable = (*Controller)(nil)
 

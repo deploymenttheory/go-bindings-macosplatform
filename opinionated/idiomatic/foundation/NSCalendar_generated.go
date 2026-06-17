@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,239 +49,588 @@ func (x *Calendar) WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Cale
 	return x
 }
 
+// MinimumRangeOfUnit calls the underlying MinimumRangeOfUnit.
+func (x *Calendar) MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange {
+	return x.inner.MinimumRangeOfUnit(unit)
+}
+
+// MaximumRangeOfUnit calls the underlying MaximumRangeOfUnit.
+func (x *Calendar) MaximumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange {
+	return x.inner.MaximumRangeOfUnit(unit)
+}
+
+// RangeOfUnitInUnitForDate calls the underlying RangeOfUnitInUnitForDate.
+func (x *Calendar) RangeOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) raw.NSRange {
+	return x.inner.RangeOfUnitInUnitForDate(smaller, larger, date)
+}
+
+// OrdinalityOfUnitInUnitForDate calls the underlying OrdinalityOfUnitInUnitForDate.
+func (x *Calendar) OrdinalityOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) uint {
+	return x.inner.OrdinalityOfUnitInUnitForDate(smaller, larger, date)
+}
+
+// RangeOfUnitStartDateIntervalForDate calls the underlying RangeOfUnitStartDateIntervalForDate.
+func (x *Calendar) RangeOfUnitStartDateIntervalForDate(unit raw.NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
+	return x.inner.RangeOfUnitStartDateIntervalForDate(unit, datep, tip, date)
+}
+
+// DateFromComponents calls the underlying DateFromComponents.
+func (x *Calendar) DateFromComponents(comps *raw.NSDateComponents) *Date {
+	_r := x.inner.DateFromComponents(comps)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// ComponentsFromDate calls the underlying ComponentsFromDate.
+func (x *Calendar) ComponentsFromDate(unitFlags raw.NSCalendarUnit, date *raw.NSDate) *DateComponents {
+	_r := x.inner.ComponentsFromDate(unitFlags, date)
+	if _r == nil {
+		return nil
+	}
+	return &DateComponents{inner: _r}
+}
+
+// DateByAddingComponentsToDateOptions calls the underlying DateByAddingComponentsToDateOptions.
+func (x *Calendar) DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
+	_r := x.inner.DateByAddingComponentsToDateOptions(comps, date, opts)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// ComponentsFromDateToDateOptions calls the underlying ComponentsFromDateToDateOptions.
+func (x *Calendar) ComponentsFromDateToDateOptions(unitFlags raw.NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts raw.NSCalendarOptions) *DateComponents {
+	_r := x.inner.ComponentsFromDateToDateOptions(unitFlags, startingDate, resultDate, opts)
+	if _r == nil {
+		return nil
+	}
+	return &DateComponents{inner: _r}
+}
+
+// GetEraYearMonthDayFromDate calls the underlying GetEraYearMonthDayFromDate.
+func (x *Calendar) GetEraYearMonthDayFromDate(eraValuePointer *int64, yearValuePointer *int64, monthValuePointer *int64, dayValuePointer *int64, date *raw.NSDate) {
+	x.inner.GetEraYearMonthDayFromDate(eraValuePointer, yearValuePointer, monthValuePointer, dayValuePointer, date)
+}
+
+// GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate calls the underlying GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate.
+func (x *Calendar) GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer *int64, yearValuePointer *int64, weekValuePointer *int64, weekdayValuePointer *int64, date *raw.NSDate) {
+	x.inner.GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer, yearValuePointer, weekValuePointer, weekdayValuePointer, date)
+}
+
+// GetHourMinuteSecondNanosecondFromDate calls the underlying GetHourMinuteSecondNanosecondFromDate.
+func (x *Calendar) GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64, minuteValuePointer *int64, secondValuePointer *int64, nanosecondValuePointer *int64, date *raw.NSDate) {
+	x.inner.GetHourMinuteSecondNanosecondFromDate(hourValuePointer, minuteValuePointer, secondValuePointer, nanosecondValuePointer, date)
+}
+
+// ComponentFromDate calls the underlying ComponentFromDate.
+func (x *Calendar) ComponentFromDate(unit raw.NSCalendarUnit, date *raw.NSDate) int {
+	return x.inner.ComponentFromDate(unit, date)
+}
+
+// DateWithEraYearMonthDayHourMinuteSecondNanosecond calls the underlying DateWithEraYearMonthDayHourMinuteSecondNanosecond.
+func (x *Calendar) DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
+	_r := x.inner.DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue, yearValue, monthValue, dayValue, hourValue, minuteValue, secondValue, nanosecondValue)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond calls the underlying DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond.
+func (x *Calendar) DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date {
+	_r := x.inner.DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue, yearValue, weekValue, weekdayValue, hourValue, minuteValue, secondValue, nanosecondValue)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// StartOfDayForDate calls the underlying StartOfDayForDate.
+func (x *Calendar) StartOfDayForDate(date *raw.NSDate) *Date {
+	_r := x.inner.StartOfDayForDate(date)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// ComponentsInTimeZoneFromDate calls the underlying ComponentsInTimeZoneFromDate.
+func (x *Calendar) ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *raw.NSDate) *DateComponents {
+	_r := x.inner.ComponentsInTimeZoneFromDate(timezone, date)
+	if _r == nil {
+		return nil
+	}
+	return &DateComponents{inner: _r}
+}
+
+// CompareDateToDateToUnitGranularity calls the underlying CompareDateToDateToUnitGranularity.
+func (x *Calendar) CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) raw.NSComparisonResult {
+	return x.inner.CompareDateToDateToUnitGranularity(date1, date2, unit)
+}
+
+// IsDateEqualToDateToUnitGranularity calls the underlying IsDateEqualToDateToUnitGranularity.
+func (x *Calendar) IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) bool {
+	return x.inner.IsDateEqualToDateToUnitGranularity(date1, date2, unit)
+}
+
+// IsDateInSameDayAsDate calls the underlying IsDateInSameDayAsDate.
+func (x *Calendar) IsDateInSameDayAsDate(date1 *raw.NSDate, date2 *raw.NSDate) bool {
+	return x.inner.IsDateInSameDayAsDate(date1, date2)
+}
+
+// IsDateInToday calls the underlying IsDateInToday.
+func (x *Calendar) IsDateInToday(date *raw.NSDate) bool {
+	return x.inner.IsDateInToday(date)
+}
+
+// IsDateInYesterday calls the underlying IsDateInYesterday.
+func (x *Calendar) IsDateInYesterday(date *raw.NSDate) bool {
+	return x.inner.IsDateInYesterday(date)
+}
+
+// IsDateInTomorrow calls the underlying IsDateInTomorrow.
+func (x *Calendar) IsDateInTomorrow(date *raw.NSDate) bool {
+	return x.inner.IsDateInTomorrow(date)
+}
+
+// IsDateInWeekend calls the underlying IsDateInWeekend.
+func (x *Calendar) IsDateInWeekend(date *raw.NSDate) bool {
+	return x.inner.IsDateInWeekend(date)
+}
+
+// RangeOfWeekendStartDateIntervalContainingDate calls the underlying RangeOfWeekendStartDateIntervalContainingDate.
+func (x *Calendar) RangeOfWeekendStartDateIntervalContainingDate(datep *raw.NSDate, tip *float64, date *raw.NSDate) bool {
+	return x.inner.RangeOfWeekendStartDateIntervalContainingDate(datep, tip, date)
+}
+
+// NextWeekendStartDateIntervalOptionsAfterDate calls the underlying NextWeekendStartDateIntervalOptionsAfterDate.
+func (x *Calendar) NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options raw.NSCalendarOptions, date *raw.NSDate) bool {
+	return x.inner.NextWeekendStartDateIntervalOptionsAfterDate(datep, tip, options, date)
+}
+
+// ComponentsFromDateComponentsToDateComponentsOptions calls the underlying ComponentsFromDateComponentsToDateComponentsOptions.
+func (x *Calendar) ComponentsFromDateComponentsToDateComponentsOptions(unitFlags raw.NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options raw.NSCalendarOptions) *DateComponents {
+	_r := x.inner.ComponentsFromDateComponentsToDateComponentsOptions(unitFlags, startingDateComp, resultDateComp, options)
+	if _r == nil {
+		return nil
+	}
+	return &DateComponents{inner: _r}
+}
+
+// DateByAddingUnitValueToDateOptions calls the underlying DateByAddingUnitValueToDateOptions.
+func (x *Calendar) DateByAddingUnitValueToDateOptions(unit raw.NSCalendarUnit, value int, date *raw.NSDate, options raw.NSCalendarOptions) *Date {
+	_r := x.inner.DateByAddingUnitValueToDateOptions(unit, value, date, options)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing calls the underlying EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing.
+func (x *Calendar) EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts raw.NSCalendarOptions, block func(*raw.NSDate, bool, *bool)) {
+	x.inner.EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start, comps, opts, block)
+}
+
+// NextDateAfterDateMatchingComponentsOptions calls the underlying NextDateAfterDateMatchingComponentsOptions.
+func (x *Calendar) NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options raw.NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingComponentsOptions(date, comps, options)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// NextDateAfterDateMatchingUnitValueOptions calls the underlying NextDateAfterDateMatchingUnitValueOptions.
+func (x *Calendar) NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit raw.NSCalendarUnit, value int, options raw.NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingUnitValueOptions(date, unit, value, options)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// NextDateAfterDateMatchingHourMinuteSecondOptions calls the underlying NextDateAfterDateMatchingHourMinuteSecondOptions.
+func (x *Calendar) NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options raw.NSCalendarOptions) *Date {
+	_r := x.inner.NextDateAfterDateMatchingHourMinuteSecondOptions(date, hourValue, minuteValue, secondValue, options)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// DateBySettingUnitValueOfDateOptions calls the underlying DateBySettingUnitValueOfDateOptions.
+func (x *Calendar) DateBySettingUnitValueOfDateOptions(unit raw.NSCalendarUnit, v int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
+	_r := x.inner.DateBySettingUnitValueOfDateOptions(unit, v, date, opts)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// DateBySettingHourMinuteSecondOfDateOptions calls the underlying DateBySettingHourMinuteSecondOfDateOptions.
+func (x *Calendar) DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date {
+	_r := x.inner.DateBySettingHourMinuteSecondOfDateOptions(h, m, s, date, opts)
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// DateMatchesComponents calls the underlying DateMatchesComponents.
+func (x *Calendar) DateMatchesComponents(date *raw.NSDate, components *raw.NSDateComponents) bool {
+	return x.inner.DateMatchesComponents(date, components)
+}
+
+// CalendarIdentifier calls the underlying CalendarIdentifier.
+func (x *Calendar) CalendarIdentifier() *String {
+	_r := x.inner.CalendarIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Locale calls the underlying Locale.
+func (x *Calendar) Locale() *Locale {
+	_r := x.inner.Locale()
+	if _r == nil {
+		return nil
+	}
+	return &Locale{inner: _r}
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *Calendar) SetLocale(locale *raw.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *Calendar) TimeZone() *TimeZone {
+	_r := x.inner.TimeZone()
+	if _r == nil {
+		return nil
+	}
+	return &TimeZone{inner: _r}
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *Calendar) SetTimeZone(timeZone *raw.NSTimeZone) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// FirstWeekday calls the underlying FirstWeekday.
+func (x *Calendar) FirstWeekday() uint {
+	return x.inner.FirstWeekday()
+}
+
+// SetFirstWeekday calls the underlying SetFirstWeekday.
+func (x *Calendar) SetFirstWeekday(firstWeekday uint) {
+	x.inner.SetFirstWeekday(firstWeekday)
+}
+
+// MinimumDaysInFirstWeek calls the underlying MinimumDaysInFirstWeek.
+func (x *Calendar) MinimumDaysInFirstWeek() uint {
+	return x.inner.MinimumDaysInFirstWeek()
+}
+
+// SetMinimumDaysInFirstWeek calls the underlying SetMinimumDaysInFirstWeek.
+func (x *Calendar) SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) {
+	x.inner.SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek)
+}
+
 // EraSymbols returns the collection as a Go slice.
-func (x *Calendar) EraSymbols() []*raw.NSString {
+func (x *Calendar) EraSymbols() []string {
 	arr := x.inner.EraSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // LongEraSymbols returns the collection as a Go slice.
-func (x *Calendar) LongEraSymbols() []*raw.NSString {
+func (x *Calendar) LongEraSymbols() []string {
 	arr := x.inner.LongEraSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // MonthSymbols returns the collection as a Go slice.
-func (x *Calendar) MonthSymbols() []*raw.NSString {
+func (x *Calendar) MonthSymbols() []string {
 	arr := x.inner.MonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortMonthSymbols returns the collection as a Go slice.
-func (x *Calendar) ShortMonthSymbols() []*raw.NSString {
+func (x *Calendar) ShortMonthSymbols() []string {
 	arr := x.inner.ShortMonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // VeryShortMonthSymbols returns the collection as a Go slice.
-func (x *Calendar) VeryShortMonthSymbols() []*raw.NSString {
+func (x *Calendar) VeryShortMonthSymbols() []string {
 	arr := x.inner.VeryShortMonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // StandaloneMonthSymbols returns the collection as a Go slice.
-func (x *Calendar) StandaloneMonthSymbols() []*raw.NSString {
+func (x *Calendar) StandaloneMonthSymbols() []string {
 	arr := x.inner.StandaloneMonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
-func (x *Calendar) ShortStandaloneMonthSymbols() []*raw.NSString {
+func (x *Calendar) ShortStandaloneMonthSymbols() []string {
 	arr := x.inner.ShortStandaloneMonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
-func (x *Calendar) VeryShortStandaloneMonthSymbols() []*raw.NSString {
+func (x *Calendar) VeryShortStandaloneMonthSymbols() []string {
 	arr := x.inner.VeryShortStandaloneMonthSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // WeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) WeekdaySymbols() []*raw.NSString {
+func (x *Calendar) WeekdaySymbols() []string {
 	arr := x.inner.WeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortWeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) ShortWeekdaySymbols() []*raw.NSString {
+func (x *Calendar) ShortWeekdaySymbols() []string {
 	arr := x.inner.ShortWeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) VeryShortWeekdaySymbols() []*raw.NSString {
+func (x *Calendar) VeryShortWeekdaySymbols() []string {
 	arr := x.inner.VeryShortWeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) StandaloneWeekdaySymbols() []*raw.NSString {
+func (x *Calendar) StandaloneWeekdaySymbols() []string {
 	arr := x.inner.StandaloneWeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) ShortStandaloneWeekdaySymbols() []*raw.NSString {
+func (x *Calendar) ShortStandaloneWeekdaySymbols() []string {
 	arr := x.inner.ShortStandaloneWeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
-func (x *Calendar) VeryShortStandaloneWeekdaySymbols() []*raw.NSString {
+func (x *Calendar) VeryShortStandaloneWeekdaySymbols() []string {
 	arr := x.inner.VeryShortStandaloneWeekdaySymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // QuarterSymbols returns the collection as a Go slice.
-func (x *Calendar) QuarterSymbols() []*raw.NSString {
+func (x *Calendar) QuarterSymbols() []string {
 	arr := x.inner.QuarterSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortQuarterSymbols returns the collection as a Go slice.
-func (x *Calendar) ShortQuarterSymbols() []*raw.NSString {
+func (x *Calendar) ShortQuarterSymbols() []string {
 	arr := x.inner.ShortQuarterSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // StandaloneQuarterSymbols returns the collection as a Go slice.
-func (x *Calendar) StandaloneQuarterSymbols() []*raw.NSString {
+func (x *Calendar) StandaloneQuarterSymbols() []string {
 	arr := x.inner.StandaloneQuarterSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
-func (x *Calendar) ShortStandaloneQuarterSymbols() []*raw.NSString {
+func (x *Calendar) ShortStandaloneQuarterSymbols() []string {
 	arr := x.inner.ShortStandaloneQuarterSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// AMSymbol calls the underlying AMSymbol.
+func (x *Calendar) AMSymbol() *String {
+	_r := x.inner.AMSymbol()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// PMSymbol calls the underlying PMSymbol.
+func (x *Calendar) PMSymbol() *String {
+	_r := x.inner.PMSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
 }
 
 func (x *Calendar) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Calendarable is the interface implemented by [Calendar], for mocking and DI.
+type Calendarable interface {
+	Unwrap() *raw.NSCalendar
+	WithLocale(locale *raw.NSLocale) *Calendar
+	WithTimeZone(timeZone *raw.NSTimeZone) *Calendar
+	WithFirstWeekday(firstWeekday uint) *Calendar
+	WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Calendar
+	MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
+	MaximumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
+	RangeOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) raw.NSRange
+	OrdinalityOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) uint
+	RangeOfUnitStartDateIntervalForDate(unit raw.NSCalendarUnit, datep *raw.NSDate, tip *float64, date *raw.NSDate) bool
+	DateFromComponents(comps *raw.NSDateComponents) *Date
+	ComponentsFromDate(unitFlags raw.NSCalendarUnit, date *raw.NSDate) *DateComponents
+	DateByAddingComponentsToDateOptions(comps *raw.NSDateComponents, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
+	ComponentsFromDateToDateOptions(unitFlags raw.NSCalendarUnit, startingDate *raw.NSDate, resultDate *raw.NSDate, opts raw.NSCalendarOptions) *DateComponents
+	GetEraYearMonthDayFromDate(eraValuePointer *int64, yearValuePointer *int64, monthValuePointer *int64, dayValuePointer *int64, date *raw.NSDate)
+	GetEraYearForWeekOfYearWeekOfYearWeekdayFromDate(eraValuePointer *int64, yearValuePointer *int64, weekValuePointer *int64, weekdayValuePointer *int64, date *raw.NSDate)
+	GetHourMinuteSecondNanosecondFromDate(hourValuePointer *int64, minuteValuePointer *int64, secondValuePointer *int64, nanosecondValuePointer *int64, date *raw.NSDate)
+	ComponentFromDate(unit raw.NSCalendarUnit, date *raw.NSDate) int
+	DateWithEraYearMonthDayHourMinuteSecondNanosecond(eraValue int, yearValue int, monthValue int, dayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date
+	DateWithEraYearForWeekOfYearWeekOfYearWeekdayHourMinuteSecondNanosecond(eraValue int, yearValue int, weekValue int, weekdayValue int, hourValue int, minuteValue int, secondValue int, nanosecondValue int) *Date
+	StartOfDayForDate(date *raw.NSDate) *Date
+	ComponentsInTimeZoneFromDate(timezone *raw.NSTimeZone, date *raw.NSDate) *DateComponents
+	CompareDateToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) raw.NSComparisonResult
+	IsDateEqualToDateToUnitGranularity(date1 *raw.NSDate, date2 *raw.NSDate, unit raw.NSCalendarUnit) bool
+	IsDateInSameDayAsDate(date1 *raw.NSDate, date2 *raw.NSDate) bool
+	IsDateInToday(date *raw.NSDate) bool
+	IsDateInYesterday(date *raw.NSDate) bool
+	IsDateInTomorrow(date *raw.NSDate) bool
+	IsDateInWeekend(date *raw.NSDate) bool
+	RangeOfWeekendStartDateIntervalContainingDate(datep *raw.NSDate, tip *float64, date *raw.NSDate) bool
+	NextWeekendStartDateIntervalOptionsAfterDate(datep *raw.NSDate, tip *float64, options raw.NSCalendarOptions, date *raw.NSDate) bool
+	ComponentsFromDateComponentsToDateComponentsOptions(unitFlags raw.NSCalendarUnit, startingDateComp *raw.NSDateComponents, resultDateComp *raw.NSDateComponents, options raw.NSCalendarOptions) *DateComponents
+	DateByAddingUnitValueToDateOptions(unit raw.NSCalendarUnit, value int, date *raw.NSDate, options raw.NSCalendarOptions) *Date
+	EnumerateDatesStartingAfterDateMatchingComponentsOptionsUsing(start *raw.NSDate, comps *raw.NSDateComponents, opts raw.NSCalendarOptions, block func(*raw.NSDate, bool, *bool))
+	NextDateAfterDateMatchingComponentsOptions(date *raw.NSDate, comps *raw.NSDateComponents, options raw.NSCalendarOptions) *Date
+	NextDateAfterDateMatchingUnitValueOptions(date *raw.NSDate, unit raw.NSCalendarUnit, value int, options raw.NSCalendarOptions) *Date
+	NextDateAfterDateMatchingHourMinuteSecondOptions(date *raw.NSDate, hourValue int, minuteValue int, secondValue int, options raw.NSCalendarOptions) *Date
+	DateBySettingUnitValueOfDateOptions(unit raw.NSCalendarUnit, v int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
+	DateBySettingHourMinuteSecondOfDateOptions(h int, m int, s int, date *raw.NSDate, opts raw.NSCalendarOptions) *Date
+	DateMatchesComponents(date *raw.NSDate, components *raw.NSDateComponents) bool
+	CalendarIdentifier() *String
+	Locale() *Locale
+	SetLocale(locale *raw.NSLocale)
+	TimeZone() *TimeZone
+	SetTimeZone(timeZone *raw.NSTimeZone)
+	FirstWeekday() uint
+	SetFirstWeekday(firstWeekday uint)
+	MinimumDaysInFirstWeek() uint
+	SetMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint)
+	EraSymbols() []string
+	LongEraSymbols() []string
+	MonthSymbols() []string
+	ShortMonthSymbols() []string
+	VeryShortMonthSymbols() []string
+	StandaloneMonthSymbols() []string
+	ShortStandaloneMonthSymbols() []string
+	VeryShortStandaloneMonthSymbols() []string
+	WeekdaySymbols() []string
+	ShortWeekdaySymbols() []string
+	VeryShortWeekdaySymbols() []string
+	StandaloneWeekdaySymbols() []string
+	ShortStandaloneWeekdaySymbols() []string
+	VeryShortStandaloneWeekdaySymbols() []string
+	QuarterSymbols() []string
+	ShortQuarterSymbols() []string
+	StandaloneQuarterSymbols() []string
+	ShortStandaloneQuarterSymbols() []string
+	AMSymbol() *String
+	PMSymbol() *String
+}
+
+var _ Calendarable = (*Calendar)(nil)
 

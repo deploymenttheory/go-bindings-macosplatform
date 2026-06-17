@@ -48,3 +48,62 @@ func (x *MTRICDManagementClusterMonitoringRegistrationStruct) WithFabricIndex(fa
 	return x
 }
 
+// CheckInNodeID calls the underlying CheckInNodeID.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() *foundation.NSNumber {
+	return x.inner.CheckInNodeID()
+}
+
+// SetCheckInNodeID calls the underlying SetCheckInNodeID.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetCheckInNodeID(checkInNodeID *foundation.NSNumber) {
+	x.inner.SetCheckInNodeID(checkInNodeID)
+}
+
+// MonitoredSubject calls the underlying MonitoredSubject.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() *foundation.NSNumber {
+	return x.inner.MonitoredSubject()
+}
+
+// SetMonitoredSubject calls the underlying SetMonitoredSubject.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetMonitoredSubject(monitoredSubject *foundation.NSNumber) {
+	x.inner.SetMonitoredSubject(monitoredSubject)
+}
+
+// ClientType calls the underlying ClientType.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() *foundation.NSNumber {
+	return x.inner.ClientType()
+}
+
+// SetClientType calls the underlying SetClientType.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetClientType(clientType *foundation.NSNumber) {
+	x.inner.SetClientType(clientType)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRICDManagementClusterMonitoringRegistrationStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRICDManagementClusterMonitoringRegistrationStructable is the interface implemented by [MTRICDManagementClusterMonitoringRegistrationStruct], for mocking and DI.
+type MTRICDManagementClusterMonitoringRegistrationStructable interface {
+	Unwrap() *raw.MTRICDManagementClusterMonitoringRegistrationStruct
+	WithCheckInNodeID(checkInNodeID *foundation.NSNumber) *MTRICDManagementClusterMonitoringRegistrationStruct
+	WithMonitoredSubject(monitoredSubject *foundation.NSNumber) *MTRICDManagementClusterMonitoringRegistrationStruct
+	WithClientType(clientType *foundation.NSNumber) *MTRICDManagementClusterMonitoringRegistrationStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRICDManagementClusterMonitoringRegistrationStruct
+	CheckInNodeID() *foundation.NSNumber
+	SetCheckInNodeID(checkInNodeID *foundation.NSNumber)
+	MonitoredSubject() *foundation.NSNumber
+	SetMonitoredSubject(monitoredSubject *foundation.NSNumber)
+	ClientType() *foundation.NSNumber
+	SetClientType(clientType *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRICDManagementClusterMonitoringRegistrationStructable = (*MTRICDManagementClusterMonitoringRegistrationStruct)(nil)
+

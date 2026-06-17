@@ -7,6 +7,7 @@ package mlcompute
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TensorData wraps [raw.MLCTensorData] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewTensorData() *TensorData {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTensorData")), objc.RegisterName("new"))
 	return &TensorData{inner: raw.MLCTensorDataFromID(_id)}
 }
+
+// Bytes calls the underlying Bytes.
+func (x *TensorData) Bytes() unsafe.Pointer {
+	return x.inner.Bytes()
+}
+
+// Length calls the underlying Length.
+func (x *TensorData) Length() uint {
+	return x.inner.Length()
+}
+
+// TensorDataable is the interface implemented by [TensorData], for mocking and DI.
+type TensorDataable interface {
+	Unwrap() *raw.MLCTensorData
+	Bytes() unsafe.Pointer
+	Length() uint
+}
+
+var _ TensorDataable = (*TensorData)(nil)
 

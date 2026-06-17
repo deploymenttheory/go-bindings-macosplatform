@@ -23,5 +23,22 @@ func NewPoolingLayer() *PoolingLayer {
 	return &PoolingLayer{inner: raw.MLCPoolingLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *PoolingLayer) Descriptor() *PoolingDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &PoolingDescriptor{inner: _r}
+}
+
 func (x *PoolingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// PoolingLayerable is the interface implemented by [PoolingLayer], for mocking and DI.
+type PoolingLayerable interface {
+	Unwrap() *raw.MLCPoolingLayer
+	Descriptor() *PoolingDescriptor
+}
+
+var _ PoolingLayerable = (*PoolingLayer)(nil)
 

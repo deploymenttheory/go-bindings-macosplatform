@@ -29,3 +29,27 @@ func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorSta
 	return x
 }
 
+// ErrorState calls the underlying ErrorState.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	_r := x.inner.ErrorState()
+	if _r == nil {
+		return nil
+	}
+	return &MTROvenCavityOperationalStateClusterErrorStateStruct{inner: _r}
+}
+
+// SetErrorState calls the underlying SetErrorState.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) {
+	x.inner.SetErrorState(errorState)
+}
+
+// MTROvenCavityOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROvenCavityOperationalStateClusterOperationalErrorEvent], for mocking and DI.
+type MTROvenCavityOperationalStateClusterOperationalErrorEventable interface {
+	Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent
+	WithErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent
+	ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct
+	SetErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct)
+}
+
+var _ MTROvenCavityOperationalStateClusterOperationalErrorEventable = (*MTROvenCavityOperationalStateClusterOperationalErrorEvent)(nil)
+

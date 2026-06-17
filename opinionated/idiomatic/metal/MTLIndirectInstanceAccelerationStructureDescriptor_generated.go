@@ -113,5 +113,207 @@ func (x *IndirectInstanceAccelerationStructureDescriptor) WithMotionTransformStr
 	return x
 }
 
+// InstanceDescriptorBuffer calls the underlying InstanceDescriptorBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() raw.MTLBuffer {
+	return x.inner.InstanceDescriptorBuffer()
+}
+
+// SetInstanceDescriptorBuffer calls the underlying SetInstanceDescriptorBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer) {
+	x.inner.SetInstanceDescriptorBuffer(instanceDescriptorBuffer)
+}
+
+// InstanceDescriptorBufferOffset calls the underlying InstanceDescriptorBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorBufferOffset() uint {
+	return x.inner.InstanceDescriptorBufferOffset()
+}
+
+// SetInstanceDescriptorBufferOffset calls the underlying SetInstanceDescriptorBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset uint) {
+	x.inner.SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset)
+}
+
+// InstanceDescriptorStride calls the underlying InstanceDescriptorStride.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorStride() uint {
+	return x.inner.InstanceDescriptorStride()
+}
+
+// SetInstanceDescriptorStride calls the underlying SetInstanceDescriptorStride.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorStride(instanceDescriptorStride uint) {
+	x.inner.SetInstanceDescriptorStride(instanceDescriptorStride)
+}
+
+// MaxInstanceCount calls the underlying MaxInstanceCount.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MaxInstanceCount() uint {
+	return x.inner.MaxInstanceCount()
+}
+
+// SetMaxInstanceCount calls the underlying SetMaxInstanceCount.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxInstanceCount(maxInstanceCount uint) {
+	x.inner.SetMaxInstanceCount(maxInstanceCount)
+}
+
+// InstanceCountBuffer calls the underlying InstanceCountBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceCountBuffer() raw.MTLBuffer {
+	return x.inner.InstanceCountBuffer()
+}
+
+// SetInstanceCountBuffer calls the underlying SetInstanceCountBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceCountBuffer(instanceCountBuffer raw.MTLBuffer) {
+	x.inner.SetInstanceCountBuffer(instanceCountBuffer)
+}
+
+// InstanceCountBufferOffset calls the underlying InstanceCountBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceCountBufferOffset() uint {
+	return x.inner.InstanceCountBufferOffset()
+}
+
+// SetInstanceCountBufferOffset calls the underlying SetInstanceCountBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceCountBufferOffset(instanceCountBufferOffset uint) {
+	x.inner.SetInstanceCountBufferOffset(instanceCountBufferOffset)
+}
+
+// InstanceDescriptorType calls the underlying InstanceDescriptorType.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceDescriptorType() raw.MTLAccelerationStructureInstanceDescriptorType {
+	return x.inner.InstanceDescriptorType()
+}
+
+// SetInstanceDescriptorType calls the underlying SetInstanceDescriptorType.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType) {
+	x.inner.SetInstanceDescriptorType(instanceDescriptorType)
+}
+
+// MotionTransformBuffer calls the underlying MotionTransformBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformBuffer() raw.MTLBuffer {
+	return x.inner.MotionTransformBuffer()
+}
+
+// SetMotionTransformBuffer calls the underlying SetMotionTransformBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformBuffer(motionTransformBuffer raw.MTLBuffer) {
+	x.inner.SetMotionTransformBuffer(motionTransformBuffer)
+}
+
+// MotionTransformBufferOffset calls the underlying MotionTransformBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformBufferOffset() uint {
+	return x.inner.MotionTransformBufferOffset()
+}
+
+// SetMotionTransformBufferOffset calls the underlying SetMotionTransformBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformBufferOffset(motionTransformBufferOffset uint) {
+	x.inner.SetMotionTransformBufferOffset(motionTransformBufferOffset)
+}
+
+// MaxMotionTransformCount calls the underlying MaxMotionTransformCount.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MaxMotionTransformCount() uint {
+	return x.inner.MaxMotionTransformCount()
+}
+
+// SetMaxMotionTransformCount calls the underlying SetMaxMotionTransformCount.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMaxMotionTransformCount(maxMotionTransformCount uint) {
+	x.inner.SetMaxMotionTransformCount(maxMotionTransformCount)
+}
+
+// MotionTransformCountBuffer calls the underlying MotionTransformCountBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBuffer() raw.MTLBuffer {
+	return x.inner.MotionTransformCountBuffer()
+}
+
+// SetMotionTransformCountBuffer calls the underlying SetMotionTransformCountBuffer.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformCountBuffer(motionTransformCountBuffer raw.MTLBuffer) {
+	x.inner.SetMotionTransformCountBuffer(motionTransformCountBuffer)
+}
+
+// MotionTransformCountBufferOffset calls the underlying MotionTransformCountBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformCountBufferOffset() uint {
+	return x.inner.MotionTransformCountBufferOffset()
+}
+
+// SetMotionTransformCountBufferOffset calls the underlying SetMotionTransformCountBufferOffset.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset uint) {
+	x.inner.SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset)
+}
+
+// InstanceTransformationMatrixLayout calls the underlying InstanceTransformationMatrixLayout.
+func (x *IndirectInstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() raw.MTLMatrixLayout {
+	return x.inner.InstanceTransformationMatrixLayout()
+}
+
+// SetInstanceTransformationMatrixLayout calls the underlying SetInstanceTransformationMatrixLayout.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout) {
+	x.inner.SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout)
+}
+
+// MotionTransformType calls the underlying MotionTransformType.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformType() raw.MTLTransformType {
+	return x.inner.MotionTransformType()
+}
+
+// SetMotionTransformType calls the underlying SetMotionTransformType.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformType(motionTransformType raw.MTLTransformType) {
+	x.inner.SetMotionTransformType(motionTransformType)
+}
+
+// MotionTransformStride calls the underlying MotionTransformStride.
+func (x *IndirectInstanceAccelerationStructureDescriptor) MotionTransformStride() uint {
+	return x.inner.MotionTransformStride()
+}
+
+// SetMotionTransformStride calls the underlying SetMotionTransformStride.
+func (x *IndirectInstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride uint) {
+	x.inner.SetMotionTransformStride(motionTransformStride)
+}
+
 func (x *IndirectInstanceAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTLAccelerationStructureDescriptor }
+
+// IndirectInstanceAccelerationStructureDescriptorable is the interface implemented by [IndirectInstanceAccelerationStructureDescriptor], for mocking and DI.
+type IndirectInstanceAccelerationStructureDescriptorable interface {
+	Unwrap() *raw.MTLIndirectInstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorStride(instanceDescriptorStride uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithMaxInstanceCount(maxInstanceCount uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceCountBuffer(instanceCountBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceCountBufferOffset(instanceCountBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformBuffer(motionTransformBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformBufferOffset(motionTransformBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithMaxMotionTransformCount(maxMotionTransformCount uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformCountBuffer(motionTransformCountBuffer raw.MTLBuffer) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformCountBufferOffset(motionTransformCountBufferOffset uint) *IndirectInstanceAccelerationStructureDescriptor
+	WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformType(motionTransformType raw.MTLTransformType) *IndirectInstanceAccelerationStructureDescriptor
+	WithMotionTransformStride(motionTransformStride uint) *IndirectInstanceAccelerationStructureDescriptor
+	InstanceDescriptorBuffer() raw.MTLBuffer
+	SetInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer)
+	InstanceDescriptorBufferOffset() uint
+	SetInstanceDescriptorBufferOffset(instanceDescriptorBufferOffset uint)
+	InstanceDescriptorStride() uint
+	SetInstanceDescriptorStride(instanceDescriptorStride uint)
+	MaxInstanceCount() uint
+	SetMaxInstanceCount(maxInstanceCount uint)
+	InstanceCountBuffer() raw.MTLBuffer
+	SetInstanceCountBuffer(instanceCountBuffer raw.MTLBuffer)
+	InstanceCountBufferOffset() uint
+	SetInstanceCountBufferOffset(instanceCountBufferOffset uint)
+	InstanceDescriptorType() raw.MTLAccelerationStructureInstanceDescriptorType
+	SetInstanceDescriptorType(instanceDescriptorType raw.MTLAccelerationStructureInstanceDescriptorType)
+	MotionTransformBuffer() raw.MTLBuffer
+	SetMotionTransformBuffer(motionTransformBuffer raw.MTLBuffer)
+	MotionTransformBufferOffset() uint
+	SetMotionTransformBufferOffset(motionTransformBufferOffset uint)
+	MaxMotionTransformCount() uint
+	SetMaxMotionTransformCount(maxMotionTransformCount uint)
+	MotionTransformCountBuffer() raw.MTLBuffer
+	SetMotionTransformCountBuffer(motionTransformCountBuffer raw.MTLBuffer)
+	MotionTransformCountBufferOffset() uint
+	SetMotionTransformCountBufferOffset(motionTransformCountBufferOffset uint)
+	InstanceTransformationMatrixLayout() raw.MTLMatrixLayout
+	SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout)
+	MotionTransformType() raw.MTLTransformType
+	SetMotionTransformType(motionTransformType raw.MTLTransformType)
+	MotionTransformStride() uint
+	SetMotionTransformStride(motionTransformStride uint)
+}
+
+var _ IndirectInstanceAccelerationStructureDescriptorable = (*IndirectInstanceAccelerationStructureDescriptor)(nil)
 

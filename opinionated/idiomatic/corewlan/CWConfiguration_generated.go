@@ -6,6 +6,7 @@ package corewlan
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,48 @@ func NewConfigurationWithConfiguration(configuration *raw.CWConfiguration) *Conf
 	return &Configuration{inner: raw.CWConfigurationFromID(_id)}
 }
 
+// IsEqualToConfiguration calls the underlying IsEqualToConfiguration.
+func (x *Configuration) IsEqualToConfiguration(configuration *raw.CWConfiguration) bool {
+	return x.inner.IsEqualToConfiguration(configuration)
+}
+
+// NetworkProfiles calls the underlying NetworkProfiles.
+func (x *Configuration) NetworkProfiles() *foundation.NSOrderedSet[*raw.CWNetworkProfile] {
+	return x.inner.NetworkProfiles()
+}
+
+// RequireAdministratorForAssociation calls the underlying RequireAdministratorForAssociation.
+func (x *Configuration) RequireAdministratorForAssociation() bool {
+	return x.inner.RequireAdministratorForAssociation()
+}
+
+// RequireAdministratorForPower calls the underlying RequireAdministratorForPower.
+func (x *Configuration) RequireAdministratorForPower() bool {
+	return x.inner.RequireAdministratorForPower()
+}
+
+// RequireAdministratorForIBSSMode calls the underlying RequireAdministratorForIBSSMode.
+func (x *Configuration) RequireAdministratorForIBSSMode() bool {
+	return x.inner.RequireAdministratorForIBSSMode()
+}
+
+// RememberJoinedNetworks calls the underlying RememberJoinedNetworks.
+func (x *Configuration) RememberJoinedNetworks() bool {
+	return x.inner.RememberJoinedNetworks()
+}
+
 func (x *Configuration) asConfiguration() *raw.CWConfiguration { return x.inner }
+
+// Configurationable is the interface implemented by [Configuration], for mocking and DI.
+type Configurationable interface {
+	Unwrap() *raw.CWConfiguration
+	IsEqualToConfiguration(configuration *raw.CWConfiguration) bool
+	NetworkProfiles() *foundation.NSOrderedSet[*raw.CWNetworkProfile]
+	RequireAdministratorForAssociation() bool
+	RequireAdministratorForPower() bool
+	RequireAdministratorForIBSSMode() bool
+	RememberJoinedNetworks() bool
+}
+
+var _ Configurationable = (*Configuration)(nil)
 

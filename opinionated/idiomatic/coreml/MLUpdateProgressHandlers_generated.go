@@ -24,3 +24,10 @@ func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interest
 	return &UpdateProgressHandlers{inner: raw.MLUpdateProgressHandlersFromID(_id)}
 }
 
+// UpdateProgressHandlersable is the interface implemented by [UpdateProgressHandlers], for mocking and DI.
+type UpdateProgressHandlersable interface {
+	Unwrap() *raw.MLUpdateProgressHandlers
+}
+
+var _ UpdateProgressHandlersable = (*UpdateProgressHandlers)(nil)
+

@@ -5,8 +5,10 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,16 +40,57 @@ func (x *ContentEditingOutput) WithAdjustmentData(adjustmentData *raw.PHAdjustme
 	return x
 }
 
+// RenderedContentURLForTypeError calls the underlying RenderedContentURLForTypeError.
+func (x *ContentEditingOutput) RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error) {
+	return x.inner.RenderedContentURLForTypeError(type_)
+}
+
+// AdjustmentData calls the underlying AdjustmentData.
+func (x *ContentEditingOutput) AdjustmentData() *AdjustmentData {
+	_r := x.inner.AdjustmentData()
+	if _r == nil {
+		return nil
+	}
+	return &AdjustmentData{inner: _r}
+}
+
+// SetAdjustmentData calls the underlying SetAdjustmentData.
+func (x *ContentEditingOutput) SetAdjustmentData(adjustmentData *raw.PHAdjustmentData) {
+	x.inner.SetAdjustmentData(adjustmentData)
+}
+
+// RenderedContentURL calls the underlying RenderedContentURL.
+func (x *ContentEditingOutput) RenderedContentURL() *foundation.NSURL {
+	return x.inner.RenderedContentURL()
+}
+
+// DefaultRenderedContentType calls the underlying DefaultRenderedContentType.
+func (x *ContentEditingOutput) DefaultRenderedContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.DefaultRenderedContentType()
+}
+
 // SupportedRenderedContentTypes returns the collection as a Go slice.
 func (x *ContentEditingOutput) SupportedRenderedContentTypes() []*uniformtypeidentifiers.UTType {
 	arr := x.inner.SupportedRenderedContentTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*uniformtypeidentifiers.UTType, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *uniformtypeidentifiers.UTType {
+		return uniformtypeidentifiers.UTTypeFromID(purego.Retain(_id))
+	})
 }
+
+// ContentEditingOutputable is the interface implemented by [ContentEditingOutput], for mocking and DI.
+type ContentEditingOutputable interface {
+	Unwrap() *raw.PHContentEditingOutput
+	WithAdjustmentData(adjustmentData *raw.PHAdjustmentData) *ContentEditingOutput
+	RenderedContentURLForTypeError(type_ *uniformtypeidentifiers.UTType) (*foundation.NSURL, error)
+	AdjustmentData() *AdjustmentData
+	SetAdjustmentData(adjustmentData *raw.PHAdjustmentData)
+	RenderedContentURL() *foundation.NSURL
+	DefaultRenderedContentType() *uniformtypeidentifiers.UTType
+	SupportedRenderedContentTypes() []*uniformtypeidentifiers.UTType
+}
+
+var _ ContentEditingOutputable = (*ContentEditingOutput)(nil)
 

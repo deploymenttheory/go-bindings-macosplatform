@@ -38,5 +38,57 @@ func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *U
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *URLDownload) Cancel() {
+	x.inner.Cancel()
+}
+
+// SetDestinationAllowOverwrite calls the underlying SetDestinationAllowOverwrite.
+func (x *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
+	x.inner.SetDestinationAllowOverwrite(foundation.NSStringStringWithUTF8String(path), allowOverwrite)
+}
+
+// Request calls the underlying Request.
+func (x *URLDownload) Request() *URLRequest {
+	_r := x.inner.Request()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
+// ResumeData calls the underlying ResumeData.
+func (x *URLDownload) ResumeData() *Data {
+	_r := x.inner.ResumeData()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// DeletesFileUponFailure calls the underlying DeletesFileUponFailure.
+func (x *URLDownload) DeletesFileUponFailure() bool {
+	return x.inner.DeletesFileUponFailure()
+}
+
+// SetDeletesFileUponFailure calls the underlying SetDeletesFileUponFailure.
+func (x *URLDownload) SetDeletesFileUponFailure(deletesFileUponFailure bool) {
+	x.inner.SetDeletesFileUponFailure(deletesFileUponFailure)
+}
+
 func (x *URLDownload) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
+type URLDownloadable interface {
+	Unwrap() *raw.NSURLDownload
+	WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload
+	Cancel()
+	SetDestinationAllowOverwrite(path string, allowOverwrite bool)
+	Request() *URLRequest
+	ResumeData() *Data
+	DeletesFileUponFailure() bool
+	SetDeletesFileUponFailure(deletesFileUponFailure bool)
+}
+
+var _ URLDownloadable = (*URLDownload)(nil)
 

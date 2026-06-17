@@ -54,3 +54,75 @@ func (x *MTROnOffClusterOffWithEffectParams) WithEffectId(effectId *foundation.N
 	return x
 }
 
+// EffectIdentifier calls the underlying EffectIdentifier.
+func (x *MTROnOffClusterOffWithEffectParams) EffectIdentifier() *foundation.NSNumber {
+	return x.inner.EffectIdentifier()
+}
+
+// SetEffectIdentifier calls the underlying SetEffectIdentifier.
+func (x *MTROnOffClusterOffWithEffectParams) SetEffectIdentifier(effectIdentifier *foundation.NSNumber) {
+	x.inner.SetEffectIdentifier(effectIdentifier)
+}
+
+// EffectVariant calls the underlying EffectVariant.
+func (x *MTROnOffClusterOffWithEffectParams) EffectVariant() *foundation.NSNumber {
+	return x.inner.EffectVariant()
+}
+
+// SetEffectVariant calls the underlying SetEffectVariant.
+func (x *MTROnOffClusterOffWithEffectParams) SetEffectVariant(effectVariant *foundation.NSNumber) {
+	x.inner.SetEffectVariant(effectVariant)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOffWithEffectParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOffWithEffectParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROnOffClusterOffWithEffectParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROnOffClusterOffWithEffectParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// EffectId calls the underlying EffectId.
+func (x *MTROnOffClusterOffWithEffectParams) EffectId() *foundation.NSNumber {
+	return x.inner.EffectId()
+}
+
+// SetEffectId calls the underlying SetEffectId.
+func (x *MTROnOffClusterOffWithEffectParams) SetEffectId(effectId *foundation.NSNumber) {
+	x.inner.SetEffectId(effectId)
+}
+
+// MTROnOffClusterOffWithEffectParamsable is the interface implemented by [MTROnOffClusterOffWithEffectParams], for mocking and DI.
+type MTROnOffClusterOffWithEffectParamsable interface {
+	Unwrap() *raw.MTROnOffClusterOffWithEffectParams
+	WithEffectIdentifier(effectIdentifier *foundation.NSNumber) *MTROnOffClusterOffWithEffectParams
+	WithEffectVariant(effectVariant *foundation.NSNumber) *MTROnOffClusterOffWithEffectParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOffWithEffectParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOffWithEffectParams
+	WithEffectId(effectId *foundation.NSNumber) *MTROnOffClusterOffWithEffectParams
+	EffectIdentifier() *foundation.NSNumber
+	SetEffectIdentifier(effectIdentifier *foundation.NSNumber)
+	EffectVariant() *foundation.NSNumber
+	SetEffectVariant(effectVariant *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	EffectId() *foundation.NSNumber
+	SetEffectId(effectId *foundation.NSNumber)
+}
+
+var _ MTROnOffClusterOffWithEffectParamsable = (*MTROnOffClusterOffWithEffectParams)(nil)
+

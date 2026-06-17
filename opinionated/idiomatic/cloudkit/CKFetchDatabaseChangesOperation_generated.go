@@ -5,6 +5,7 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -85,7 +86,225 @@ func (x *FetchDatabaseChangesOperation) WithFetchDatabaseChangesCompletionBlock(
 	return x
 }
 
+// PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
+func (x *FetchDatabaseChangesOperation) PreviousServerChangeToken() *ServerChangeToken {
+	_r := x.inner.PreviousServerChangeToken()
+	if _r == nil {
+		return nil
+	}
+	return &ServerChangeToken{inner: _r}
+}
+
+// SetPreviousServerChangeToken calls the underlying SetPreviousServerChangeToken.
+func (x *FetchDatabaseChangesOperation) SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) {
+	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+}
+
+// ResultsLimit calls the underlying ResultsLimit.
+func (x *FetchDatabaseChangesOperation) ResultsLimit() uint {
+	return x.inner.ResultsLimit()
+}
+
+// SetResultsLimit calls the underlying SetResultsLimit.
+func (x *FetchDatabaseChangesOperation) SetResultsLimit(resultsLimit uint) {
+	x.inner.SetResultsLimit(resultsLimit)
+}
+
+// FetchAllChanges calls the underlying FetchAllChanges.
+func (x *FetchDatabaseChangesOperation) FetchAllChanges() bool {
+	return x.inner.FetchAllChanges()
+}
+
+// SetFetchAllChanges calls the underlying SetFetchAllChanges.
+func (x *FetchDatabaseChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
+	x.inner.SetFetchAllChanges(fetchAllChanges)
+}
+
+// RecordZoneWithIDChangedBlock calls the underlying RecordZoneWithIDChangedBlock.
+func (x *FetchDatabaseChangesOperation) RecordZoneWithIDChangedBlock() objc.Block {
+	return x.inner.RecordZoneWithIDChangedBlock()
+}
+
+// SetRecordZoneWithIDChangedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDChangedBlock(ctx context.Context) (*RecordZoneID, error) {
+	type _result struct {
+		val *RecordZoneID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordZoneWithIDChangedBlock(func(_p0 *raw.CKRecordZoneID) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &RecordZoneID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordZoneID
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordZoneWithIDWasDeletedBlock calls the underlying RecordZoneWithIDWasDeletedBlock.
+func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasDeletedBlock() objc.Block {
+	return x.inner.RecordZoneWithIDWasDeletedBlock()
+}
+
+// SetRecordZoneWithIDWasDeletedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (*RecordZoneID, error) {
+	type _result struct {
+		val *RecordZoneID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordZoneWithIDWasDeletedBlock(func(_p0 *raw.CKRecordZoneID) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &RecordZoneID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordZoneID
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordZoneWithIDWasPurgedBlock calls the underlying RecordZoneWithIDWasPurgedBlock.
+func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasPurgedBlock() objc.Block {
+	return x.inner.RecordZoneWithIDWasPurgedBlock()
+}
+
+// SetRecordZoneWithIDWasPurgedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (*RecordZoneID, error) {
+	type _result struct {
+		val *RecordZoneID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordZoneWithIDWasPurgedBlock(func(_p0 *raw.CKRecordZoneID) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &RecordZoneID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordZoneID
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock calls the underlying RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock.
+func (x *FetchDatabaseChangesOperation) RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock() objc.Block {
+	return x.inner.RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock()
+}
+
+// SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchDatabaseChangesOperation) SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (*RecordZoneID, error) {
+	type _result struct {
+		val *RecordZoneID
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(func(_p0 *raw.CKRecordZoneID) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &RecordZoneID{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *RecordZoneID
+		return _zero, ctx.Err()
+	}
+}
+
+// ChangeTokenUpdatedBlock calls the underlying ChangeTokenUpdatedBlock.
+func (x *FetchDatabaseChangesOperation) ChangeTokenUpdatedBlock() objc.Block {
+	return x.inner.ChangeTokenUpdatedBlock()
+}
+
+// SetChangeTokenUpdatedBlock blocks until the operation completes or ctx is cancelled.
+func (x *FetchDatabaseChangesOperation) SetChangeTokenUpdatedBlock(ctx context.Context) (*ServerChangeToken, error) {
+	type _result struct {
+		val *ServerChangeToken
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetChangeTokenUpdatedBlock(func(_p0 *raw.CKServerChangeToken) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &ServerChangeToken{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ServerChangeToken
+		return _zero, ctx.Err()
+	}
+}
+
+// FetchDatabaseChangesCompletionBlock calls the underlying FetchDatabaseChangesCompletionBlock.
+func (x *FetchDatabaseChangesOperation) FetchDatabaseChangesCompletionBlock() objc.Block {
+	return x.inner.FetchDatabaseChangesCompletionBlock()
+}
+
+// SetFetchDatabaseChangesCompletionBlock calls the underlying SetFetchDatabaseChangesCompletionBlock.
+func (x *FetchDatabaseChangesOperation) SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) {
+	x.inner.SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock)
+}
+
 func (x *FetchDatabaseChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchDatabaseChangesOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchDatabaseChangesOperationable is the interface implemented by [FetchDatabaseChangesOperation], for mocking and DI.
+type FetchDatabaseChangesOperationable interface {
+	Unwrap() *raw.CKFetchDatabaseChangesOperation
+	WithPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) *FetchDatabaseChangesOperation
+	WithResultsLimit(resultsLimit uint) *FetchDatabaseChangesOperation
+	WithFetchAllChanges(fetchAllChanges bool) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDChangedBlock(recordZoneWithIDChangedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasDeletedBlock(recordZoneWithIDWasDeletedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasPurgedBlock(recordZoneWithIDWasPurgedBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
+	WithRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(recordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock func(*raw.CKRecordZoneID)) *FetchDatabaseChangesOperation
+	WithChangeTokenUpdatedBlock(changeTokenUpdatedBlock func(*raw.CKServerChangeToken)) *FetchDatabaseChangesOperation
+	WithFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer)) *FetchDatabaseChangesOperation
+	PreviousServerChangeToken() *ServerChangeToken
+	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
+	ResultsLimit() uint
+	SetResultsLimit(resultsLimit uint)
+	FetchAllChanges() bool
+	SetFetchAllChanges(fetchAllChanges bool)
+	RecordZoneWithIDChangedBlock() objc.Block
+	SetRecordZoneWithIDChangedBlock(ctx context.Context) (*RecordZoneID, error)
+	RecordZoneWithIDWasDeletedBlock() objc.Block
+	SetRecordZoneWithIDWasDeletedBlock(ctx context.Context) (*RecordZoneID, error)
+	RecordZoneWithIDWasPurgedBlock() objc.Block
+	SetRecordZoneWithIDWasPurgedBlock(ctx context.Context) (*RecordZoneID, error)
+	RecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock() objc.Block
+	SetRecordZoneWithIDWasDeletedDueToUserEncryptedDataResetBlock(ctx context.Context) (*RecordZoneID, error)
+	ChangeTokenUpdatedBlock() objc.Block
+	SetChangeTokenUpdatedBlock(ctx context.Context) (*ServerChangeToken, error)
+	FetchDatabaseChangesCompletionBlock() objc.Block
+	SetFetchDatabaseChangesCompletionBlock(fetchDatabaseChangesCompletionBlock func(*raw.CKServerChangeToken, bool, unsafe.Pointer))
+}
+
+var _ FetchDatabaseChangesOperationable = (*FetchDatabaseChangesOperation)(nil)
 

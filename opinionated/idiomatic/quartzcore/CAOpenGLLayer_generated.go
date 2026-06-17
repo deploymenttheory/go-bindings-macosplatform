@@ -5,8 +5,10 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // OpenGLLayer wraps [raw.CAOpenGLLayer] with a fluent Go API.
@@ -29,5 +31,73 @@ func (x *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
 	return x
 }
 
+// CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime calls the underlying CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime.
+func (x *OpenGLLayer) CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) bool {
+	return x.inner.CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx, pf, t, ts)
+}
+
+// DrawInCGLContextPixelFormatForLayerTimeDisplayTime calls the underlying DrawInCGLContextPixelFormatForLayerTimeDisplayTime.
+func (x *OpenGLLayer) DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) {
+	x.inner.DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx, pf, t, ts)
+}
+
+// CopyCGLPixelFormatForDisplayMask calls the underlying CopyCGLPixelFormatForDisplayMask.
+func (x *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) unsafe.Pointer {
+	return x.inner.CopyCGLPixelFormatForDisplayMask(mask)
+}
+
+// ReleaseCGLPixelFormat calls the underlying ReleaseCGLPixelFormat.
+func (x *OpenGLLayer) ReleaseCGLPixelFormat(pf unsafe.Pointer) {
+	x.inner.ReleaseCGLPixelFormat(pf)
+}
+
+// CopyCGLContextForPixelFormat calls the underlying CopyCGLContextForPixelFormat.
+func (x *OpenGLLayer) CopyCGLContextForPixelFormat(pf unsafe.Pointer) unsafe.Pointer {
+	return x.inner.CopyCGLContextForPixelFormat(pf)
+}
+
+// ReleaseCGLContext calls the underlying ReleaseCGLContext.
+func (x *OpenGLLayer) ReleaseCGLContext(ctx unsafe.Pointer) {
+	x.inner.ReleaseCGLContext(ctx)
+}
+
+// IsAsynchronous calls the underlying IsAsynchronous.
+func (x *OpenGLLayer) IsAsynchronous() bool {
+	return x.inner.IsAsynchronous()
+}
+
+// SetAsynchronous calls the underlying SetAsynchronous.
+func (x *OpenGLLayer) SetAsynchronous(asynchronous bool) {
+	x.inner.SetAsynchronous(asynchronous)
+}
+
+// Colorspace calls the underlying Colorspace.
+func (x *OpenGLLayer) Colorspace() unsafe.Pointer {
+	return x.inner.Colorspace()
+}
+
+// SetColorspace calls the underlying SetColorspace.
+func (x *OpenGLLayer) SetColorspace(colorspace unsafe.Pointer) {
+	x.inner.SetColorspace(colorspace)
+}
+
 func (x *OpenGLLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// OpenGLLayerable is the interface implemented by [OpenGLLayer], for mocking and DI.
+type OpenGLLayerable interface {
+	Unwrap() *raw.CAOpenGLLayer
+	WithAsynchronous(asynchronous bool) *OpenGLLayer
+	CanDrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp) bool
+	DrawInCGLContextPixelFormatForLayerTimeDisplayTime(ctx unsafe.Pointer, pf unsafe.Pointer, t float64, ts *corevideo.CVTimeStamp)
+	CopyCGLPixelFormatForDisplayMask(mask uint32) unsafe.Pointer
+	ReleaseCGLPixelFormat(pf unsafe.Pointer)
+	CopyCGLContextForPixelFormat(pf unsafe.Pointer) unsafe.Pointer
+	ReleaseCGLContext(ctx unsafe.Pointer)
+	IsAsynchronous() bool
+	SetAsynchronous(asynchronous bool)
+	Colorspace() unsafe.Pointer
+	SetColorspace(colorspace unsafe.Pointer)
+}
+
+var _ OpenGLLayerable = (*OpenGLLayer)(nil)
 

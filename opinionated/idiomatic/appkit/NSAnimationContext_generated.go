@@ -49,6 +49,31 @@ func (x *AnimationContext) WithAllowsImplicitAnimation(allowsImplicitAnimation b
 	return x
 }
 
+// Duration calls the underlying Duration.
+func (x *AnimationContext) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *AnimationContext) SetDuration(duration float64) {
+	x.inner.SetDuration(duration)
+}
+
+// TimingFunction calls the underlying TimingFunction.
+func (x *AnimationContext) TimingFunction() *quartzcore.CAMediaTimingFunction {
+	return x.inner.TimingFunction()
+}
+
+// SetTimingFunction calls the underlying SetTimingFunction.
+func (x *AnimationContext) SetTimingFunction(timingFunction *quartzcore.CAMediaTimingFunction) {
+	x.inner.SetTimingFunction(timingFunction)
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *AnimationContext) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
 // Set blocks until the operation completes or ctx is cancelled.
 func (x *AnimationContext) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -62,4 +87,33 @@ func (x *AnimationContext) Set(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// AllowsImplicitAnimation calls the underlying AllowsImplicitAnimation.
+func (x *AnimationContext) AllowsImplicitAnimation() bool {
+	return x.inner.AllowsImplicitAnimation()
+}
+
+// SetAllowsImplicitAnimation calls the underlying SetAllowsImplicitAnimation.
+func (x *AnimationContext) SetAllowsImplicitAnimation(allowsImplicitAnimation bool) {
+	x.inner.SetAllowsImplicitAnimation(allowsImplicitAnimation)
+}
+
+// AnimationContextable is the interface implemented by [AnimationContext], for mocking and DI.
+type AnimationContextable interface {
+	Unwrap() *raw.NSAnimationContext
+	WithDuration(duration float64) *AnimationContext
+	WithTimingFunction(timingFunction *quartzcore.CAMediaTimingFunction) *AnimationContext
+	WithCompletionHandler(completionHandler func()) *AnimationContext
+	WithAllowsImplicitAnimation(allowsImplicitAnimation bool) *AnimationContext
+	Duration() float64
+	SetDuration(duration float64)
+	TimingFunction() *quartzcore.CAMediaTimingFunction
+	SetTimingFunction(timingFunction *quartzcore.CAMediaTimingFunction)
+	CompletionHandler() objc.Block
+	Set(ctx context.Context) error
+	AllowsImplicitAnimation() bool
+	SetAllowsImplicitAnimation(allowsImplicitAnimation bool)
+}
+
+var _ AnimationContextable = (*AnimationContext)(nil)
 

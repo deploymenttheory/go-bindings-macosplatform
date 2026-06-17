@@ -6,6 +6,7 @@ package glkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,59 @@ func NewSubmesh() *Submesh {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKSubmesh")), objc.RegisterName("new"))
 	return &Submesh{inner: raw.GLKSubmeshFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *Submesh) Type() uint32 {
+	return x.inner.Type()
+}
+
+// Mode calls the underlying Mode.
+func (x *Submesh) Mode() uint32 {
+	return x.inner.Mode()
+}
+
+// ElementCount calls the underlying ElementCount.
+func (x *Submesh) ElementCount() int32 {
+	return x.inner.ElementCount()
+}
+
+// ElementBuffer calls the underlying ElementBuffer.
+func (x *Submesh) ElementBuffer() *MeshBuffer {
+	_r := x.inner.ElementBuffer()
+	if _r == nil {
+		return nil
+	}
+	return &MeshBuffer{inner: _r}
+}
+
+// Mesh calls the underlying Mesh.
+func (x *Submesh) Mesh() *Mesh {
+	_r := x.inner.Mesh()
+	if _r == nil {
+		return nil
+	}
+	return &Mesh{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *Submesh) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Submeshable is the interface implemented by [Submesh], for mocking and DI.
+type Submeshable interface {
+	Unwrap() *raw.GLKSubmesh
+	Type() uint32
+	Mode() uint32
+	ElementCount() int32
+	ElementBuffer() *MeshBuffer
+	Mesh() *Mesh
+	Name() string
+}
+
+var _ Submeshable = (*Submesh)(nil)
 

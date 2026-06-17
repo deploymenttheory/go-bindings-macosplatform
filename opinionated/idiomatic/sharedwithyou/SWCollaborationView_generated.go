@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -75,6 +76,11 @@ func (x *CollaborationView) WithManageButtonTitle(manageButtonTitle string) *Col
 	return x
 }
 
+// SetContentView calls the underlying SetContentView.
+func (x *CollaborationView) SetContentView(detailViewListContentView *appkit.NSView) {
+	x.inner.SetContentView(detailViewListContentView)
+}
+
 // DismissPopover blocks until the operation completes or ctx is cancelled.
 func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -88,4 +94,141 @@ func (x *CollaborationView) DismissPopover(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// SetShowManageButton calls the underlying SetShowManageButton.
+func (x *CollaborationView) SetShowManageButton(showManageButton bool) {
+	x.inner.SetShowManageButton(showManageButton)
+}
+
+// CloudSharingDelegate calls the underlying CloudSharingDelegate.
+func (x *CollaborationView) CloudSharingDelegate() appkit.NSCloudSharingServiceDelegate {
+	return x.inner.CloudSharingDelegate()
+}
+
+// SetCloudSharingDelegate calls the underlying SetCloudSharingDelegate.
+func (x *CollaborationView) SetCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) {
+	x.inner.SetCloudSharingDelegate(cloudSharingDelegate)
+}
+
+// ActiveParticipantCount calls the underlying ActiveParticipantCount.
+func (x *CollaborationView) ActiveParticipantCount() uint {
+	return x.inner.ActiveParticipantCount()
+}
+
+// SetActiveParticipantCount calls the underlying SetActiveParticipantCount.
+func (x *CollaborationView) SetActiveParticipantCount(activeParticipantCount uint) {
+	x.inner.SetActiveParticipantCount(activeParticipantCount)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CollaborationView) Delegate() raw.SWCollaborationViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CollaborationView) SetDelegate(delegate raw.SWCollaborationViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// HeaderTitle calls the underlying HeaderTitle.
+func (x *CollaborationView) HeaderTitle() string {
+	_r := x.inner.HeaderTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeaderTitle calls the underlying SetHeaderTitle.
+func (x *CollaborationView) SetHeaderTitle(headerTitle string) {
+	x.inner.SetHeaderTitle(foundation.NSStringStringWithUTF8String(headerTitle))
+}
+
+// HeaderSubtitle calls the underlying HeaderSubtitle.
+func (x *CollaborationView) HeaderSubtitle() string {
+	_r := x.inner.HeaderSubtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeaderSubtitle calls the underlying SetHeaderSubtitle.
+func (x *CollaborationView) SetHeaderSubtitle(headerSubtitle string) {
+	x.inner.SetHeaderSubtitle(foundation.NSStringStringWithUTF8String(headerSubtitle))
+}
+
+// HeaderImage calls the underlying HeaderImage.
+func (x *CollaborationView) HeaderImage() *appkit.NSImage {
+	return x.inner.HeaderImage()
+}
+
+// SetHeaderImage calls the underlying SetHeaderImage.
+func (x *CollaborationView) SetHeaderImage(headerImage *appkit.NSImage) {
+	x.inner.SetHeaderImage(headerImage)
+}
+
+// MenuFormRepresentation calls the underlying MenuFormRepresentation.
+func (x *CollaborationView) MenuFormRepresentation() *appkit.NSMenuItem {
+	return x.inner.MenuFormRepresentation()
+}
+
+// CloudSharingServiceDelegate calls the underlying CloudSharingServiceDelegate.
+func (x *CollaborationView) CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate {
+	return x.inner.CloudSharingServiceDelegate()
+}
+
+// SetCloudSharingServiceDelegate calls the underlying SetCloudSharingServiceDelegate.
+func (x *CollaborationView) SetCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) {
+	x.inner.SetCloudSharingServiceDelegate(cloudSharingServiceDelegate)
+}
+
+// ManageButtonTitle calls the underlying ManageButtonTitle.
+func (x *CollaborationView) ManageButtonTitle() string {
+	_r := x.inner.ManageButtonTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetManageButtonTitle calls the underlying SetManageButtonTitle.
+func (x *CollaborationView) SetManageButtonTitle(manageButtonTitle string) {
+	x.inner.SetManageButtonTitle(foundation.NSStringStringWithUTF8String(manageButtonTitle))
+}
+
+// CollaborationViewable is the interface implemented by [CollaborationView], for mocking and DI.
+type CollaborationViewable interface {
+	Unwrap() *raw.SWCollaborationView
+	WithCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView
+	WithActiveParticipantCount(activeParticipantCount uint) *CollaborationView
+	WithDelegate(delegate raw.SWCollaborationViewDelegate) *CollaborationView
+	WithHeaderTitle(headerTitle string) *CollaborationView
+	WithHeaderSubtitle(headerSubtitle string) *CollaborationView
+	WithHeaderImage(headerImage *appkit.NSImage) *CollaborationView
+	WithCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate) *CollaborationView
+	WithManageButtonTitle(manageButtonTitle string) *CollaborationView
+	SetContentView(detailViewListContentView *appkit.NSView)
+	DismissPopover(ctx context.Context) error
+	SetShowManageButton(showManageButton bool)
+	CloudSharingDelegate() appkit.NSCloudSharingServiceDelegate
+	SetCloudSharingDelegate(cloudSharingDelegate appkit.NSCloudSharingServiceDelegate)
+	ActiveParticipantCount() uint
+	SetActiveParticipantCount(activeParticipantCount uint)
+	Delegate() raw.SWCollaborationViewDelegate
+	SetDelegate(delegate raw.SWCollaborationViewDelegate)
+	HeaderTitle() string
+	SetHeaderTitle(headerTitle string)
+	HeaderSubtitle() string
+	SetHeaderSubtitle(headerSubtitle string)
+	HeaderImage() *appkit.NSImage
+	SetHeaderImage(headerImage *appkit.NSImage)
+	MenuFormRepresentation() *appkit.NSMenuItem
+	CloudSharingServiceDelegate() appkit.NSCloudSharingServiceDelegate
+	SetCloudSharingServiceDelegate(cloudSharingServiceDelegate appkit.NSCloudSharingServiceDelegate)
+	ManageButtonTitle() string
+	SetManageButtonTitle(manageButtonTitle string)
+}
+
+var _ CollaborationViewable = (*CollaborationView)(nil)
 

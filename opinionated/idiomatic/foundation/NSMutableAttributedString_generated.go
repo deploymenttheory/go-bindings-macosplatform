@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,102 @@ func NewMutableAttributedString() *MutableAttributedString {
 	return &MutableAttributedString{inner: raw.NSMutableAttributedStringFromID(_id)}
 }
 
+// ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
+func (x *MutableAttributedString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string) {
+	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(str))
+}
+
+// SetAttributesRange calls the underlying SetAttributesRange.
+func (x *MutableAttributedString) SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
+	x.inner.SetAttributesRange(attrs, range_)
+}
+
+// AddAttributeValueRange calls the underlying AddAttributeValueRange.
+func (x *MutableAttributedString) AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange) {
+	x.inner.AddAttributeValueRange(name, value, range_)
+}
+
+// AddAttributesRange calls the underlying AddAttributesRange.
+func (x *MutableAttributedString) AddAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange) {
+	x.inner.AddAttributesRange(attrs, range_)
+}
+
+// RemoveAttributeRange calls the underlying RemoveAttributeRange.
+func (x *MutableAttributedString) RemoveAttributeRange(name *raw.NSString, range_ raw.NSRange) {
+	x.inner.RemoveAttributeRange(name, range_)
+}
+
+// ReplaceCharactersInRangeWithAttributedString calls the underlying ReplaceCharactersInRangeWithAttributedString.
+func (x *MutableAttributedString) ReplaceCharactersInRangeWithAttributedString(range_ raw.NSRange, attrString *raw.NSAttributedString) {
+	x.inner.ReplaceCharactersInRangeWithAttributedString(range_, attrString)
+}
+
+// InsertAttributedStringAtIndex calls the underlying InsertAttributedStringAtIndex.
+func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *raw.NSAttributedString, loc uint) {
+	x.inner.InsertAttributedStringAtIndex(attrString, loc)
+}
+
+// AppendAttributedString calls the underlying AppendAttributedString.
+func (x *MutableAttributedString) AppendAttributedString(attrString *raw.NSAttributedString) {
+	x.inner.AppendAttributedString(attrString)
+}
+
+// DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
+func (x *MutableAttributedString) DeleteCharactersInRange(range_ raw.NSRange) {
+	x.inner.DeleteCharactersInRange(range_)
+}
+
+// SetAttributedString calls the underlying SetAttributedString.
+func (x *MutableAttributedString) SetAttributedString(attrString *raw.NSAttributedString) {
+	x.inner.SetAttributedString(attrString)
+}
+
+// BeginEditing calls the underlying BeginEditing.
+func (x *MutableAttributedString) BeginEditing() {
+	x.inner.BeginEditing()
+}
+
+// EndEditing calls the underlying EndEditing.
+func (x *MutableAttributedString) EndEditing() {
+	x.inner.EndEditing()
+}
+
+// MutableString calls the underlying MutableString.
+func (x *MutableAttributedString) MutableString() *MutableString {
+	_r := x.inner.MutableString()
+	if _r == nil {
+		return nil
+	}
+	return &MutableString{inner: _r}
+}
+
+// AppendLocalizedFormat calls the underlying AppendLocalizedFormat.
+func (x *MutableAttributedString) AppendLocalizedFormat(format *raw.NSAttributedString) {
+	x.inner.AppendLocalizedFormat(format)
+}
+
 func (x *MutableAttributedString) asAttributedString() *raw.NSAttributedString { return &x.inner.NSAttributedString }
 
 func (x *MutableAttributedString) asObject() *raw.NSObject { return &x.inner.NSAttributedString.NSObject }
+
+// MutableAttributedStringable is the interface implemented by [MutableAttributedString], for mocking and DI.
+type MutableAttributedStringable interface {
+	Unwrap() *raw.NSMutableAttributedString
+	ReplaceCharactersInRangeWithString(range_ raw.NSRange, str string)
+	SetAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange)
+	AddAttributeValueRange(name *raw.NSString, value objc.ID, range_ raw.NSRange)
+	AddAttributesRange(attrs *raw.NSDictionary[*raw.NSString, objc.ID], range_ raw.NSRange)
+	RemoveAttributeRange(name *raw.NSString, range_ raw.NSRange)
+	ReplaceCharactersInRangeWithAttributedString(range_ raw.NSRange, attrString *raw.NSAttributedString)
+	InsertAttributedStringAtIndex(attrString *raw.NSAttributedString, loc uint)
+	AppendAttributedString(attrString *raw.NSAttributedString)
+	DeleteCharactersInRange(range_ raw.NSRange)
+	SetAttributedString(attrString *raw.NSAttributedString)
+	BeginEditing()
+	EndEditing()
+	MutableString() *MutableString
+	AppendLocalizedFormat(format *raw.NSAttributedString)
+}
+
+var _ MutableAttributedStringable = (*MutableAttributedString)(nil)
 

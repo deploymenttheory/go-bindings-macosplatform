@@ -25,5 +25,18 @@ func NewSCNNodeComponentWithNode(node *scenekit.SCNNode) *SCNNodeComponent {
 	return &SCNNodeComponent{inner: raw.GKSCNNodeComponentFromID(_id)}
 }
 
+// Node calls the underlying Node.
+func (x *SCNNodeComponent) Node() *scenekit.SCNNode {
+	return x.inner.Node()
+}
+
 func (x *SCNNodeComponent) asComponent() *raw.GKComponent { return &x.inner.GKComponent }
+
+// SCNNodeComponentable is the interface implemented by [SCNNodeComponent], for mocking and DI.
+type SCNNodeComponentable interface {
+	Unwrap() *raw.GKSCNNodeComponent
+	Node() *scenekit.SCNNode
+}
+
+var _ SCNNodeComponentable = (*SCNNodeComponent)(nil)
 

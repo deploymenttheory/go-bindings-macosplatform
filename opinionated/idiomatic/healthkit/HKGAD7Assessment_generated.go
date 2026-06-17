@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,11 +31,14 @@ func (x *GAD7Assessment) Answers() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// Risk calls the underlying Risk.
+func (x *GAD7Assessment) Risk() raw.HKGAD7AssessmentRisk {
+	return x.inner.Risk()
 }
 
 func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment { return &x.inner.HKScoredAssessment }
@@ -42,4 +46,13 @@ func (x *GAD7Assessment) asScoredAssessment() *raw.HKScoredAssessment { return &
 func (x *GAD7Assessment) asSample() *raw.HKSample { return &x.inner.HKScoredAssessment.HKSample }
 
 func (x *GAD7Assessment) asObject() *raw.HKObject { return &x.inner.HKScoredAssessment.HKSample.HKObject }
+
+// GAD7Assessmentable is the interface implemented by [GAD7Assessment], for mocking and DI.
+type GAD7Assessmentable interface {
+	Unwrap() *raw.HKGAD7Assessment
+	Answers() []*foundation.NSNumber
+	Risk() raw.HKGAD7AssessmentRisk
+}
+
+var _ GAD7Assessmentable = (*GAD7Assessment)(nil)
 

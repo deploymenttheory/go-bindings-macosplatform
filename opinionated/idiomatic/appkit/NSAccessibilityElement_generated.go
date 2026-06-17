@@ -30,3 +30,29 @@ func (x *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibility
 	return x
 }
 
+// AccessibilityAddChildElement calls the underlying AccessibilityAddChildElement.
+func (x *AccessibilityElement) AccessibilityAddChildElement(childElement *raw.NSAccessibilityElement) {
+	x.inner.AccessibilityAddChildElement(childElement)
+}
+
+// AccessibilityFrameInParentSpace calls the underlying AccessibilityFrameInParentSpace.
+func (x *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
+	return x.inner.AccessibilityFrameInParentSpace()
+}
+
+// SetAccessibilityFrameInParentSpace calls the underlying SetAccessibilityFrameInParentSpace.
+func (x *AccessibilityElement) SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) {
+	x.inner.SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace)
+}
+
+// AccessibilityElementable is the interface implemented by [AccessibilityElement], for mocking and DI.
+type AccessibilityElementable interface {
+	Unwrap() *raw.NSAccessibilityElement
+	WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement
+	AccessibilityAddChildElement(childElement *raw.NSAccessibilityElement)
+	AccessibilityFrameInParentSpace() corefoundation.CGRect
+	SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect)
+}
+
+var _ AccessibilityElementable = (*AccessibilityElement)(nil)
+

@@ -31,3 +31,22 @@ func NewAddressFilterExcludingOptions(options raw.MKAddressFilterOption) *Addres
 	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
 }
 
+// IncludesOptions calls the underlying IncludesOptions.
+func (x *AddressFilter) IncludesOptions(options raw.MKAddressFilterOption) bool {
+	return x.inner.IncludesOptions(options)
+}
+
+// ExcludesOptions calls the underlying ExcludesOptions.
+func (x *AddressFilter) ExcludesOptions(options raw.MKAddressFilterOption) bool {
+	return x.inner.ExcludesOptions(options)
+}
+
+// AddressFilterable is the interface implemented by [AddressFilter], for mocking and DI.
+type AddressFilterable interface {
+	Unwrap() *raw.MKAddressFilter
+	IncludesOptions(options raw.MKAddressFilterOption) bool
+	ExcludesOptions(options raw.MKAddressFilterOption) bool
+}
+
+var _ AddressFilterable = (*AddressFilter)(nil)
+

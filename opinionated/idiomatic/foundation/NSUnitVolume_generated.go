@@ -29,3 +29,10 @@ func (x *UnitVolume) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitVolume) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitVolumeable is the interface implemented by [UnitVolume], for mocking and DI.
+type UnitVolumeable interface {
+	Unwrap() *raw.NSUnitVolume
+}
+
+var _ UnitVolumeable = (*UnitVolume)(nil)
+

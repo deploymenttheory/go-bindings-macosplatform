@@ -23,5 +23,18 @@ func NewGramMatrixLayer() *GramMatrixLayer {
 	return &GramMatrixLayer{inner: raw.MLCGramMatrixLayerFromID(_id)}
 }
 
+// Scale calls the underlying Scale.
+func (x *GramMatrixLayer) Scale() float32 {
+	return x.inner.Scale()
+}
+
 func (x *GramMatrixLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// GramMatrixLayerable is the interface implemented by [GramMatrixLayer], for mocking and DI.
+type GramMatrixLayerable interface {
+	Unwrap() *raw.MLCGramMatrixLayer
+	Scale() float32
+}
+
+var _ GramMatrixLayerable = (*GramMatrixLayer)(nil)
 

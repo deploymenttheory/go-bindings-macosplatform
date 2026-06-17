@@ -35,6 +35,39 @@ func (x *ScrubberImageItemView) WithImageAlignment(imageAlignment raw.NSImageAli
 	return x
 }
 
+// ImageView calls the underlying ImageView.
+func (x *ScrubberImageItemView) ImageView() *ImageView {
+	_r := x.inner.ImageView()
+	if _r == nil {
+		return nil
+	}
+	return &ImageView{inner: _r}
+}
+
+// Image calls the underlying Image.
+func (x *ScrubberImageItemView) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *ScrubberImageItemView) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// ImageAlignment calls the underlying ImageAlignment.
+func (x *ScrubberImageItemView) ImageAlignment() raw.NSImageAlignment {
+	return x.inner.ImageAlignment()
+}
+
+// SetImageAlignment calls the underlying SetImageAlignment.
+func (x *ScrubberImageItemView) SetImageAlignment(imageAlignment raw.NSImageAlignment) {
+	x.inner.SetImageAlignment(imageAlignment)
+}
+
 func (x *ScrubberImageItemView) asScrubberItemView() *raw.NSScrubberItemView { return &x.inner.NSScrubberItemView }
 
 func (x *ScrubberImageItemView) asScrubberArrangedView() *raw.NSScrubberArrangedView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView }
@@ -42,4 +75,18 @@ func (x *ScrubberImageItemView) asScrubberArrangedView() *raw.NSScrubberArranged
 func (x *ScrubberImageItemView) asView() *raw.NSView { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView }
 
 func (x *ScrubberImageItemView) asResponder() *raw.NSResponder { return &x.inner.NSScrubberItemView.NSScrubberArrangedView.NSView.NSResponder }
+
+// ScrubberImageItemViewable is the interface implemented by [ScrubberImageItemView], for mocking and DI.
+type ScrubberImageItemViewable interface {
+	Unwrap() *raw.NSScrubberImageItemView
+	WithImage(image *raw.NSImage) *ScrubberImageItemView
+	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ScrubberImageItemView
+	ImageView() *ImageView
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	ImageAlignment() raw.NSImageAlignment
+	SetImageAlignment(imageAlignment raw.NSImageAlignment)
+}
+
+var _ ScrubberImageItemViewable = (*ScrubberImageItemView)(nil)
 

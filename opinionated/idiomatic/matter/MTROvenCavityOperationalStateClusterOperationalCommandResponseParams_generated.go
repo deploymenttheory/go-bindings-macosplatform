@@ -37,3 +37,27 @@ func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) W
 	return x
 }
 
+// CommandResponseState calls the underlying CommandResponseState.
+func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	_r := x.inner.CommandResponseState()
+	if _r == nil {
+		return nil
+	}
+	return &MTROvenCavityOperationalStateClusterErrorStateStruct{inner: _r}
+}
+
+// SetCommandResponseState calls the underlying SetCommandResponseState.
+func (x *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) {
+	x.inner.SetCommandResponseState(commandResponseState)
+}
+
+// MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTROvenCavityOperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
+type MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsable interface {
+	Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
+	WithCommandResponseState(commandResponseState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
+	CommandResponseState() *MTROvenCavityOperationalStateClusterErrorStateStruct
+	SetCommandResponseState(commandResponseState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct)
+}
+
+var _ MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsable = (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams)(nil)
+

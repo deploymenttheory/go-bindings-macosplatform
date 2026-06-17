@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -95,17 +96,120 @@ func (x *ArrayController) WithSelectionIndex(selectionIndex uint) *ArrayControll
 	return x
 }
 
+// RearrangeObjects calls the underlying RearrangeObjects.
+func (x *ArrayController) RearrangeObjects() {
+	x.inner.RearrangeObjects()
+}
+
+// DidChangeArrangementCriteria calls the underlying DidChangeArrangementCriteria.
+func (x *ArrayController) DidChangeArrangementCriteria() {
+	x.inner.DidChangeArrangementCriteria()
+}
+
+// ArrangeObjects calls the underlying ArrangeObjects.
+func (x *ArrayController) ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
+	return x.inner.ArrangeObjects(objects)
+}
+
+// SetSelectionIndexes calls the underlying SetSelectionIndexes.
+func (x *ArrayController) SetSelectionIndexes(indexes *foundation.NSIndexSet) bool {
+	return x.inner.SetSelectionIndexes(indexes)
+}
+
+// SetSelectionIndex calls the underlying SetSelectionIndex.
+func (x *ArrayController) SetSelectionIndex(index uint) bool {
+	return x.inner.SetSelectionIndex(index)
+}
+
+// AddSelectionIndexes calls the underlying AddSelectionIndexes.
+func (x *ArrayController) AddSelectionIndexes(indexes *foundation.NSIndexSet) bool {
+	return x.inner.AddSelectionIndexes(indexes)
+}
+
+// RemoveSelectionIndexes calls the underlying RemoveSelectionIndexes.
+func (x *ArrayController) RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool {
+	return x.inner.RemoveSelectionIndexes(indexes)
+}
+
+// SetSelectedObjects calls the underlying SetSelectedObjects.
+func (x *ArrayController) SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
+	return x.inner.SetSelectedObjects(objects)
+}
+
+// AddSelectedObjects calls the underlying AddSelectedObjects.
+func (x *ArrayController) AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
+	return x.inner.AddSelectedObjects(objects)
+}
+
+// RemoveSelectedObjects calls the underlying RemoveSelectedObjects.
+func (x *ArrayController) RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool {
+	return x.inner.RemoveSelectedObjects(objects)
+}
+
+// Insert calls the underlying Insert.
+func (x *ArrayController) Insert(sender objc.ID) {
+	x.inner.Insert(sender)
+}
+
+// SelectNext calls the underlying SelectNext.
+func (x *ArrayController) SelectNext(sender objc.ID) {
+	x.inner.SelectNext(sender)
+}
+
+// SelectPrevious calls the underlying SelectPrevious.
+func (x *ArrayController) SelectPrevious(sender objc.ID) {
+	x.inner.SelectPrevious(sender)
+}
+
+// AddObjects calls the underlying AddObjects.
+func (x *ArrayController) AddObjects(objects *foundation.NSArray[objc.ID]) {
+	x.inner.AddObjects(objects)
+}
+
+// InsertObjectAtArrangedObjectIndex calls the underlying InsertObjectAtArrangedObjectIndex.
+func (x *ArrayController) InsertObjectAtArrangedObjectIndex(object objc.ID, index uint) {
+	x.inner.InsertObjectAtArrangedObjectIndex(object, index)
+}
+
+// InsertObjectsAtArrangedObjectIndexes calls the underlying InsertObjectsAtArrangedObjectIndexes.
+func (x *ArrayController) InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet) {
+	x.inner.InsertObjectsAtArrangedObjectIndexes(objects, indexes)
+}
+
+// RemoveObjectAtArrangedObjectIndex calls the underlying RemoveObjectAtArrangedObjectIndex.
+func (x *ArrayController) RemoveObjectAtArrangedObjectIndex(index uint) {
+	x.inner.RemoveObjectAtArrangedObjectIndex(index)
+}
+
+// RemoveObjectsAtArrangedObjectIndexes calls the underlying RemoveObjectsAtArrangedObjectIndexes.
+func (x *ArrayController) RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet) {
+	x.inner.RemoveObjectsAtArrangedObjectIndexes(indexes)
+}
+
+// RemoveObjects calls the underlying RemoveObjects.
+func (x *ArrayController) RemoveObjects(objects *foundation.NSArray[objc.ID]) {
+	x.inner.RemoveObjects(objects)
+}
+
+// AutomaticallyRearrangesObjects calls the underlying AutomaticallyRearrangesObjects.
+func (x *ArrayController) AutomaticallyRearrangesObjects() bool {
+	return x.inner.AutomaticallyRearrangesObjects()
+}
+
+// SetAutomaticallyRearrangesObjects calls the underlying SetAutomaticallyRearrangesObjects.
+func (x *ArrayController) SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) {
+	x.inner.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
+}
+
 // AutomaticRearrangementKeyPaths returns the collection as a Go slice.
-func (x *ArrayController) AutomaticRearrangementKeyPaths() []*foundation.NSString {
+func (x *ArrayController) AutomaticRearrangementKeyPaths() []string {
 	arr := x.inner.AutomaticRearrangementKeyPaths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SortDescriptors returns the collection as a Go slice.
@@ -114,11 +218,104 @@ func (x *ArrayController) SortDescriptors() []*foundation.NSSortDescriptor {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
+		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetSortDescriptors calls the underlying SetSortDescriptors.
+func (x *ArrayController) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
+	x.inner.SetSortDescriptors(sortDescriptors)
+}
+
+// FilterPredicate calls the underlying FilterPredicate.
+func (x *ArrayController) FilterPredicate() *foundation.NSPredicate {
+	return x.inner.FilterPredicate()
+}
+
+// SetFilterPredicate calls the underlying SetFilterPredicate.
+func (x *ArrayController) SetFilterPredicate(filterPredicate *foundation.NSPredicate) {
+	x.inner.SetFilterPredicate(filterPredicate)
+}
+
+// ClearsFilterPredicateOnInsertion calls the underlying ClearsFilterPredicateOnInsertion.
+func (x *ArrayController) ClearsFilterPredicateOnInsertion() bool {
+	return x.inner.ClearsFilterPredicateOnInsertion()
+}
+
+// SetClearsFilterPredicateOnInsertion calls the underlying SetClearsFilterPredicateOnInsertion.
+func (x *ArrayController) SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) {
+	x.inner.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
+}
+
+// ArrangedObjects calls the underlying ArrangedObjects.
+func (x *ArrayController) ArrangedObjects() objc.ID {
+	return x.inner.ArrangedObjects()
+}
+
+// AvoidsEmptySelection calls the underlying AvoidsEmptySelection.
+func (x *ArrayController) AvoidsEmptySelection() bool {
+	return x.inner.AvoidsEmptySelection()
+}
+
+// SetAvoidsEmptySelection calls the underlying SetAvoidsEmptySelection.
+func (x *ArrayController) SetAvoidsEmptySelection(avoidsEmptySelection bool) {
+	x.inner.SetAvoidsEmptySelection(avoidsEmptySelection)
+}
+
+// PreservesSelection calls the underlying PreservesSelection.
+func (x *ArrayController) PreservesSelection() bool {
+	return x.inner.PreservesSelection()
+}
+
+// SetPreservesSelection calls the underlying SetPreservesSelection.
+func (x *ArrayController) SetPreservesSelection(preservesSelection bool) {
+	x.inner.SetPreservesSelection(preservesSelection)
+}
+
+// SelectsInsertedObjects calls the underlying SelectsInsertedObjects.
+func (x *ArrayController) SelectsInsertedObjects() bool {
+	return x.inner.SelectsInsertedObjects()
+}
+
+// SetSelectsInsertedObjects calls the underlying SetSelectsInsertedObjects.
+func (x *ArrayController) SetSelectsInsertedObjects(selectsInsertedObjects bool) {
+	x.inner.SetSelectsInsertedObjects(selectsInsertedObjects)
+}
+
+// AlwaysUsesMultipleValuesMarker calls the underlying AlwaysUsesMultipleValuesMarker.
+func (x *ArrayController) AlwaysUsesMultipleValuesMarker() bool {
+	return x.inner.AlwaysUsesMultipleValuesMarker()
+}
+
+// SetAlwaysUsesMultipleValuesMarker calls the underlying SetAlwaysUsesMultipleValuesMarker.
+func (x *ArrayController) SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) {
+	x.inner.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+}
+
+// SelectionIndexes calls the underlying SelectionIndexes.
+func (x *ArrayController) SelectionIndexes() *foundation.NSIndexSet {
+	return x.inner.SelectionIndexes()
+}
+
+// SelectionIndex calls the underlying SelectionIndex.
+func (x *ArrayController) SelectionIndex() uint {
+	return x.inner.SelectionIndex()
+}
+
+// CanInsert calls the underlying CanInsert.
+func (x *ArrayController) CanInsert() bool {
+	return x.inner.CanInsert()
+}
+
+// CanSelectNext calls the underlying CanSelectNext.
+func (x *ArrayController) CanSelectNext() bool {
+	return x.inner.CanSelectNext()
+}
+
+// CanSelectPrevious calls the underlying CanSelectPrevious.
+func (x *ArrayController) CanSelectPrevious() bool {
+	return x.inner.CanSelectPrevious()
 }
 
 func (x *ArrayController) asArrayController() *raw.NSArrayController { return x.inner }
@@ -126,4 +323,63 @@ func (x *ArrayController) asArrayController() *raw.NSArrayController { return x.
 func (x *ArrayController) asObjectController() *raw.NSObjectController { return &x.inner.NSObjectController }
 
 func (x *ArrayController) asController() *raw.NSController { return &x.inner.NSObjectController.NSController }
+
+// ArrayControllerable is the interface implemented by [ArrayController], for mocking and DI.
+type ArrayControllerable interface {
+	Unwrap() *raw.NSArrayController
+	WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *ArrayController
+	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *ArrayController
+	WithFilterPredicate(filterPredicate *foundation.NSPredicate) *ArrayController
+	WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *ArrayController
+	WithAvoidsEmptySelection(avoidsEmptySelection bool) *ArrayController
+	WithPreservesSelection(preservesSelection bool) *ArrayController
+	WithSelectsInsertedObjects(selectsInsertedObjects bool) *ArrayController
+	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController
+	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *ArrayController
+	WithSelectionIndex(selectionIndex uint) *ArrayController
+	RearrangeObjects()
+	DidChangeArrangementCriteria()
+	ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]
+	SetSelectionIndexes(indexes *foundation.NSIndexSet) bool
+	SetSelectionIndex(index uint) bool
+	AddSelectionIndexes(indexes *foundation.NSIndexSet) bool
+	RemoveSelectionIndexes(indexes *foundation.NSIndexSet) bool
+	SetSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
+	AddSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
+	RemoveSelectedObjects(objects *foundation.NSArray[objc.ID]) bool
+	Insert(sender objc.ID)
+	SelectNext(sender objc.ID)
+	SelectPrevious(sender objc.ID)
+	AddObjects(objects *foundation.NSArray[objc.ID])
+	InsertObjectAtArrangedObjectIndex(object objc.ID, index uint)
+	InsertObjectsAtArrangedObjectIndexes(objects *foundation.NSArray[objc.ID], indexes *foundation.NSIndexSet)
+	RemoveObjectAtArrangedObjectIndex(index uint)
+	RemoveObjectsAtArrangedObjectIndexes(indexes *foundation.NSIndexSet)
+	RemoveObjects(objects *foundation.NSArray[objc.ID])
+	AutomaticallyRearrangesObjects() bool
+	SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool)
+	AutomaticRearrangementKeyPaths() []string
+	SortDescriptors() []*foundation.NSSortDescriptor
+	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+	FilterPredicate() *foundation.NSPredicate
+	SetFilterPredicate(filterPredicate *foundation.NSPredicate)
+	ClearsFilterPredicateOnInsertion() bool
+	SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool)
+	ArrangedObjects() objc.ID
+	AvoidsEmptySelection() bool
+	SetAvoidsEmptySelection(avoidsEmptySelection bool)
+	PreservesSelection() bool
+	SetPreservesSelection(preservesSelection bool)
+	SelectsInsertedObjects() bool
+	SetSelectsInsertedObjects(selectsInsertedObjects bool)
+	AlwaysUsesMultipleValuesMarker() bool
+	SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool)
+	SelectionIndexes() *foundation.NSIndexSet
+	SelectionIndex() uint
+	CanInsert() bool
+	CanSelectNext() bool
+	CanSelectPrevious() bool
+}
+
+var _ ArrayControllerable = (*ArrayController)(nil)
 

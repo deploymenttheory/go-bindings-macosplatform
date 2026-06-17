@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +38,56 @@ func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySe
 	return x
 }
 
+// TunnelRemoteAddress calls the underlying TunnelRemoteAddress.
+func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
+	_r := x.inner.TunnelRemoteAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DNSSettings calls the underlying DNSSettings.
+func (x *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
+	_r := x.inner.DNSSettings()
+	if _r == nil {
+		return nil
+	}
+	return &NEDNSSettings{inner: _r}
+}
+
+// SetDNSSettings calls the underlying SetDNSSettings.
+func (x *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *raw.NEDNSSettings) {
+	x.inner.SetDNSSettings(dNSSettings)
+}
+
+// ProxySettings calls the underlying ProxySettings.
+func (x *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
+	_r := x.inner.ProxySettings()
+	if _r == nil {
+		return nil
+	}
+	return &NEProxySettings{inner: _r}
+}
+
+// SetProxySettings calls the underlying SetProxySettings.
+func (x *NETunnelNetworkSettings) SetProxySettings(proxySettings *raw.NEProxySettings) {
+	x.inner.SetProxySettings(proxySettings)
+}
+
 func (x *NETunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return x.inner }
+
+// NETunnelNetworkSettingsable is the interface implemented by [NETunnelNetworkSettings], for mocking and DI.
+type NETunnelNetworkSettingsable interface {
+	Unwrap() *raw.NETunnelNetworkSettings
+	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelNetworkSettings
+	TunnelRemoteAddress() string
+	DNSSettings() *NEDNSSettings
+	SetDNSSettings(dNSSettings *raw.NEDNSSettings)
+	ProxySettings() *NEProxySettings
+	SetProxySettings(proxySettings *raw.NEProxySettings)
+}
+
+var _ NETunnelNetworkSettingsable = (*NETunnelNetworkSettings)(nil)
 

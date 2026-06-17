@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,47 @@ func NewMedicationConcept() *MedicationConcept {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKMedicationConcept")), objc.RegisterName("new"))
 	return &MedicationConcept{inner: raw.HKMedicationConceptFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return nil
+	}
+	return &HealthConceptIdentifier{inner: _r}
+}
+
+// DisplayText calls the underlying DisplayText.
+func (x *MedicationConcept) DisplayText() string {
+	_r := x.inner.DisplayText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GeneralForm calls the underlying GeneralForm.
+func (x *MedicationConcept) GeneralForm() string {
+	_r := x.inner.GeneralForm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RelatedCodings calls the underlying RelatedCodings.
+func (x *MedicationConcept) RelatedCodings() *foundation.NSSet[*raw.HKClinicalCoding] {
+	return x.inner.RelatedCodings()
+}
+
+// MedicationConceptable is the interface implemented by [MedicationConcept], for mocking and DI.
+type MedicationConceptable interface {
+	Unwrap() *raw.HKMedicationConcept
+	Identifier() *HealthConceptIdentifier
+	DisplayText() string
+	GeneralForm() string
+	RelatedCodings() *foundation.NSSet[*raw.HKClinicalCoding]
+}
+
+var _ MedicationConceptable = (*MedicationConcept)(nil)
 

@@ -45,5 +45,73 @@ func (x *NNForwardLossNode) WithPropertyCallBack(propertyCallBack raw.MPSNNLossC
 	return x
 }
 
+// LossType calls the underlying LossType.
+func (x *NNForwardLossNode) LossType() raw.MPSCNNLossType {
+	return x.inner.LossType()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *NNForwardLossNode) ReductionType() raw.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// NumberOfClasses calls the underlying NumberOfClasses.
+func (x *NNForwardLossNode) NumberOfClasses() uint {
+	return x.inner.NumberOfClasses()
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *NNForwardLossNode) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
+// Weight calls the underlying Weight.
+func (x *NNForwardLossNode) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// LabelSmoothing calls the underlying LabelSmoothing.
+func (x *NNForwardLossNode) LabelSmoothing() float32 {
+	return x.inner.LabelSmoothing()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *NNForwardLossNode) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// Delta calls the underlying Delta.
+func (x *NNForwardLossNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// PropertyCallBack calls the underlying PropertyCallBack.
+func (x *NNForwardLossNode) PropertyCallBack() raw.MPSNNLossCallback {
+	return x.inner.PropertyCallBack()
+}
+
+// SetPropertyCallBack calls the underlying SetPropertyCallBack.
+func (x *NNForwardLossNode) SetPropertyCallBack(propertyCallBack raw.MPSNNLossCallback) {
+	x.inner.SetPropertyCallBack(propertyCallBack)
+}
+
 func (x *NNForwardLossNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
+type NNForwardLossNodeable interface {
+	Unwrap() *raw.MPSNNForwardLossNode
+	WithPropertyCallBack(propertyCallBack raw.MPSNNLossCallback) *NNForwardLossNode
+	LossType() raw.MPSCNNLossType
+	ReductionType() raw.MPSCNNReductionType
+	NumberOfClasses() uint
+	ReduceAcrossBatch() bool
+	Weight() float32
+	LabelSmoothing() float32
+	Epsilon() float32
+	Delta() float32
+	PropertyCallBack() raw.MPSNNLossCallback
+	SetPropertyCallBack(propertyCallBack raw.MPSNNLossCallback)
+}
+
+var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
 

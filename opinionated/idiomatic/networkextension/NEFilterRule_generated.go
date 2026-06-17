@@ -24,3 +24,26 @@ func NewNEFilterRuleWithNetworkRuleAction(networkRule *raw.NENetworkRule, action
 	return &NEFilterRule{inner: raw.NEFilterRuleFromID(_id)}
 }
 
+// NetworkRule calls the underlying NetworkRule.
+func (x *NEFilterRule) NetworkRule() *NENetworkRule {
+	_r := x.inner.NetworkRule()
+	if _r == nil {
+		return nil
+	}
+	return &NENetworkRule{inner: _r}
+}
+
+// Action calls the underlying Action.
+func (x *NEFilterRule) Action() raw.NEFilterAction {
+	return x.inner.Action()
+}
+
+// NEFilterRuleable is the interface implemented by [NEFilterRule], for mocking and DI.
+type NEFilterRuleable interface {
+	Unwrap() *raw.NEFilterRule
+	NetworkRule() *NENetworkRule
+	Action() raw.NEFilterAction
+}
+
+var _ NEFilterRuleable = (*NEFilterRule)(nil)
+

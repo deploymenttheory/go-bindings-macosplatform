@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,9 +30,89 @@ func (x *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *DOMStyleSheet) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Disabled calls the underlying Disabled.
+func (x *DOMStyleSheet) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMStyleSheet) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// OwnerNode calls the underlying OwnerNode.
+func (x *DOMStyleSheet) OwnerNode() *DOMNode {
+	_r := x.inner.OwnerNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// ParentStyleSheet calls the underlying ParentStyleSheet.
+func (x *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
+	_r := x.inner.ParentStyleSheet()
+	if _r == nil {
+		return nil
+	}
+	return &DOMStyleSheet{inner: _r}
+}
+
+// Href calls the underlying Href.
+func (x *DOMStyleSheet) Href() string {
+	_r := x.inner.Href()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *DOMStyleSheet) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Media calls the underlying Media.
+func (x *DOMStyleSheet) Media() *DOMMediaList {
+	_r := x.inner.Media()
+	if _r == nil {
+		return nil
+	}
+	return &DOMMediaList{inner: _r}
+}
+
 func (x *DOMStyleSheet) asDOMStyleSheet() *raw.DOMStyleSheet { return x.inner }
 
 func (x *DOMStyleSheet) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMStyleSheet) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMStyleSheetable is the interface implemented by [DOMStyleSheet], for mocking and DI.
+type DOMStyleSheetable interface {
+	Unwrap() *raw.DOMStyleSheet
+	WithDisabled(disabled bool) *DOMStyleSheet
+	Type() string
+	Disabled() bool
+	SetDisabled(disabled bool)
+	OwnerNode() *DOMNode
+	ParentStyleSheet() *DOMStyleSheet
+	Href() string
+	Title() string
+	Media() *DOMMediaList
+}
+
+var _ DOMStyleSheetable = (*DOMStyleSheet)(nil)
 

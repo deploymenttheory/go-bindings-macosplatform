@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(fu
 	x.inner.SetFutureMessagesPreference(futureMessagesPreference)
 	return x
 }
+
+// MessageID calls the underlying MessageID.
+func (x *MTRMessagesClusterMessageCompleteEvent) MessageID() *foundation.NSData {
+	return x.inner.MessageID()
+}
+
+// SetMessageID calls the underlying SetMessageID.
+func (x *MTRMessagesClusterMessageCompleteEvent) SetMessageID(messageID *foundation.NSData) {
+	x.inner.SetMessageID(messageID)
+}
+
+// ResponseID calls the underlying ResponseID.
+func (x *MTRMessagesClusterMessageCompleteEvent) ResponseID() *foundation.NSNumber {
+	return x.inner.ResponseID()
+}
+
+// SetResponseID calls the underlying SetResponseID.
+func (x *MTRMessagesClusterMessageCompleteEvent) SetResponseID(responseID *foundation.NSNumber) {
+	x.inner.SetResponseID(responseID)
+}
+
+// Reply calls the underlying Reply.
+func (x *MTRMessagesClusterMessageCompleteEvent) Reply() string {
+	_r := x.inner.Reply()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetReply calls the underlying SetReply.
+func (x *MTRMessagesClusterMessageCompleteEvent) SetReply(reply string) {
+	x.inner.SetReply(foundation.NSStringStringWithUTF8String(reply))
+}
+
+// FutureMessagesPreference calls the underlying FutureMessagesPreference.
+func (x *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() *foundation.NSNumber {
+	return x.inner.FutureMessagesPreference()
+}
+
+// SetFutureMessagesPreference calls the underlying SetFutureMessagesPreference.
+func (x *MTRMessagesClusterMessageCompleteEvent) SetFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) {
+	x.inner.SetFutureMessagesPreference(futureMessagesPreference)
+}
+
+// MTRMessagesClusterMessageCompleteEventable is the interface implemented by [MTRMessagesClusterMessageCompleteEvent], for mocking and DI.
+type MTRMessagesClusterMessageCompleteEventable interface {
+	Unwrap() *raw.MTRMessagesClusterMessageCompleteEvent
+	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageCompleteEvent
+	WithResponseID(responseID *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent
+	WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent
+	WithFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent
+	MessageID() *foundation.NSData
+	SetMessageID(messageID *foundation.NSData)
+	ResponseID() *foundation.NSNumber
+	SetResponseID(responseID *foundation.NSNumber)
+	Reply() string
+	SetReply(reply string)
+	FutureMessagesPreference() *foundation.NSNumber
+	SetFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber)
+}
+
+var _ MTRMessagesClusterMessageCompleteEventable = (*MTRMessagesClusterMessageCompleteEvent)(nil)
 

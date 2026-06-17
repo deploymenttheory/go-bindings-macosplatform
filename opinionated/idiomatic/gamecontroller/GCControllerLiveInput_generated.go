@@ -23,5 +23,42 @@ func NewControllerLiveInput() *ControllerLiveInput {
 	return &ControllerLiveInput{inner: raw.GCControllerLiveInputFromID(_id)}
 }
 
+// Capture calls the underlying Capture.
+func (x *ControllerLiveInput) Capture() *ControllerInputState {
+	_r := x.inner.Capture()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerInputState{inner: _r}
+}
+
+// NextInputState calls the underlying NextInputState.
+func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
+	_r := x.inner.NextInputState()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerInputState{inner: _r}
+}
+
+// UnmappedInput calls the underlying UnmappedInput.
+func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
+	_r := x.inner.UnmappedInput()
+	if _r == nil {
+		return nil
+	}
+	return &ControllerLiveInput{inner: _r}
+}
+
 func (x *ControllerLiveInput) asControllerInputState() *raw.GCControllerInputState { return &x.inner.GCControllerInputState }
+
+// ControllerLiveInputable is the interface implemented by [ControllerLiveInput], for mocking and DI.
+type ControllerLiveInputable interface {
+	Unwrap() *raw.GCControllerLiveInput
+	Capture() *ControllerInputState
+	NextInputState() *ControllerInputState
+	UnmappedInput() *ControllerLiveInput
+}
+
+var _ ControllerLiveInputable = (*ControllerLiveInput)(nil)
 

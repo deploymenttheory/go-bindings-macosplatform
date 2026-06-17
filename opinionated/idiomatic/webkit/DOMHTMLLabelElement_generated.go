@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,29 @@ func (x *DOMHTMLLabelElement) WithHtmlFor(htmlFor string) *DOMHTMLLabelElement {
 	return x
 }
 
+// Form calls the underlying Form.
+func (x *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// HtmlFor calls the underlying HtmlFor.
+func (x *DOMHTMLLabelElement) HtmlFor() string {
+	_r := x.inner.HtmlFor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHtmlFor calls the underlying SetHtmlFor.
+func (x *DOMHTMLLabelElement) SetHtmlFor(htmlFor string) {
+	x.inner.SetHtmlFor(foundation.NSStringStringWithUTF8String(htmlFor))
+}
+
 func (x *DOMHTMLLabelElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLLabelElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +63,15 @@ func (x *DOMHTMLLabelElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLLabelElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLLabelElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLLabelElementable is the interface implemented by [DOMHTMLLabelElement], for mocking and DI.
+type DOMHTMLLabelElementable interface {
+	Unwrap() *raw.DOMHTMLLabelElement
+	WithHtmlFor(htmlFor string) *DOMHTMLLabelElement
+	Form() *DOMHTMLFormElement
+	HtmlFor() string
+	SetHtmlFor(htmlFor string)
+}
+
+var _ DOMHTMLLabelElementable = (*DOMHTMLLabelElement)(nil)
 

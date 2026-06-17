@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,6 +67,100 @@ func (x *DOMHTMLScriptElement) WithType(type_ string) *DOMHTMLScriptElement {
 	return x
 }
 
+// Text calls the underlying Text.
+func (x *DOMHTMLScriptElement) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetText calls the underlying SetText.
+func (x *DOMHTMLScriptElement) SetText(text string) {
+	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+}
+
+// HtmlFor calls the underlying HtmlFor.
+func (x *DOMHTMLScriptElement) HtmlFor() string {
+	_r := x.inner.HtmlFor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHtmlFor calls the underlying SetHtmlFor.
+func (x *DOMHTMLScriptElement) SetHtmlFor(htmlFor string) {
+	x.inner.SetHtmlFor(foundation.NSStringStringWithUTF8String(htmlFor))
+}
+
+// Event calls the underlying Event.
+func (x *DOMHTMLScriptElement) Event() string {
+	_r := x.inner.Event()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEvent calls the underlying SetEvent.
+func (x *DOMHTMLScriptElement) SetEvent(event string) {
+	x.inner.SetEvent(foundation.NSStringStringWithUTF8String(event))
+}
+
+// Charset calls the underlying Charset.
+func (x *DOMHTMLScriptElement) Charset() string {
+	_r := x.inner.Charset()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCharset calls the underlying SetCharset.
+func (x *DOMHTMLScriptElement) SetCharset(charset string) {
+	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+}
+
+// Defer calls the underlying Defer.
+func (x *DOMHTMLScriptElement) Defer() bool {
+	return x.inner.Defer()
+}
+
+// SetDefer calls the underlying SetDefer.
+func (x *DOMHTMLScriptElement) SetDefer(defer_ bool) {
+	x.inner.SetDefer(defer_)
+}
+
+// Src calls the underlying Src.
+func (x *DOMHTMLScriptElement) Src() string {
+	_r := x.inner.Src()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSrc calls the underlying SetSrc.
+func (x *DOMHTMLScriptElement) SetSrc(src string) {
+	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLScriptElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLScriptElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
 func (x *DOMHTMLScriptElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLScriptElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -75,4 +170,32 @@ func (x *DOMHTMLScriptElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLScriptElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLScriptElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLScriptElementable is the interface implemented by [DOMHTMLScriptElement], for mocking and DI.
+type DOMHTMLScriptElementable interface {
+	Unwrap() *raw.DOMHTMLScriptElement
+	WithText(text string) *DOMHTMLScriptElement
+	WithHtmlFor(htmlFor string) *DOMHTMLScriptElement
+	WithEvent(event string) *DOMHTMLScriptElement
+	WithCharset(charset string) *DOMHTMLScriptElement
+	WithDefer(defer_ bool) *DOMHTMLScriptElement
+	WithSrc(src string) *DOMHTMLScriptElement
+	WithType(type_ string) *DOMHTMLScriptElement
+	Text() string
+	SetText(text string)
+	HtmlFor() string
+	SetHtmlFor(htmlFor string)
+	Event() string
+	SetEvent(event string)
+	Charset() string
+	SetCharset(charset string)
+	Defer() bool
+	SetDefer(defer_ bool)
+	Src() string
+	SetSrc(src string)
+	Type() string
+	SetType(type_ string)
+}
+
+var _ DOMHTMLScriptElementable = (*DOMHTMLScriptElement)(nil)
 

@@ -30,5 +30,25 @@ func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) WithSoftwareVersio
 	return x
 }
 
+// SoftwareVersion calls the underlying SoftwareVersion.
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SoftwareVersion() *foundation.NSNumber {
+	return x.inner.SoftwareVersion()
+}
+
+// SetSoftwareVersion calls the underlying SetSoftwareVersion.
+func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) SetSoftwareVersion(softwareVersion *foundation.NSNumber) {
+	x.inner.SetSoftwareVersion(softwareVersion)
+}
+
 func (x *MTRBridgedDeviceBasicInformationClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent { return x.inner }
+
+// MTRBridgedDeviceBasicInformationClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterStartUpEvent], for mocking and DI.
+type MTRBridgedDeviceBasicInformationClusterStartUpEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterStartUpEvent
+	SoftwareVersion() *foundation.NSNumber
+	SetSoftwareVersion(softwareVersion *foundation.NSNumber)
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterStartUpEventable = (*MTRBridgedDeviceBasicInformationClusterStartUpEvent)(nil)
 

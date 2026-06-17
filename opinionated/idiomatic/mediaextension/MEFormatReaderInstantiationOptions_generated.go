@@ -23,3 +23,16 @@ func NewFormatReaderInstantiationOptions() *FormatReaderInstantiationOptions {
 	return &FormatReaderInstantiationOptions{inner: raw.MEFormatReaderInstantiationOptionsFromID(_id)}
 }
 
+// AllowIncrementalFragmentParsing calls the underlying AllowIncrementalFragmentParsing.
+func (x *FormatReaderInstantiationOptions) AllowIncrementalFragmentParsing() bool {
+	return x.inner.AllowIncrementalFragmentParsing()
+}
+
+// FormatReaderInstantiationOptionsable is the interface implemented by [FormatReaderInstantiationOptions], for mocking and DI.
+type FormatReaderInstantiationOptionsable interface {
+	Unwrap() *raw.MEFormatReaderInstantiationOptions
+	AllowIncrementalFragmentParsing() bool
+}
+
+var _ FormatReaderInstantiationOptionsable = (*FormatReaderInstantiationOptions)(nil)
+

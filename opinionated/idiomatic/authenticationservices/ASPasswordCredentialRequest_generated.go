@@ -24,3 +24,10 @@ func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *raw.
 	return &PasswordCredentialRequest{inner: raw.ASPasswordCredentialRequestFromID(_id)}
 }
 
+// PasswordCredentialRequestable is the interface implemented by [PasswordCredentialRequest], for mocking and DI.
+type PasswordCredentialRequestable interface {
+	Unwrap() *raw.ASPasswordCredentialRequest
+}
+
+var _ PasswordCredentialRequestable = (*PasswordCredentialRequest)(nil)
+

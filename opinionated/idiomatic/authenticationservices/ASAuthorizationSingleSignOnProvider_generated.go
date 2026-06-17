@@ -6,6 +6,7 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,33 @@ func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSingleSignOnProvider")), objc.RegisterName("new"))
 	return &AuthorizationSingleSignOnProvider{inner: raw.ASAuthorizationSingleSignOnProviderFromID(_id)}
 }
+
+// CreateRequest calls the underlying CreateRequest.
+func (x *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
+	_r := x.inner.CreateRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationSingleSignOnRequest{inner: _r}
+}
+
+// Url calls the underlying Url.
+func (x *AuthorizationSingleSignOnProvider) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// CanPerformAuthorization calls the underlying CanPerformAuthorization.
+func (x *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
+	return x.inner.CanPerformAuthorization()
+}
+
+// AuthorizationSingleSignOnProviderable is the interface implemented by [AuthorizationSingleSignOnProvider], for mocking and DI.
+type AuthorizationSingleSignOnProviderable interface {
+	Unwrap() *raw.ASAuthorizationSingleSignOnProvider
+	CreateRequest() *AuthorizationSingleSignOnRequest
+	Url() *foundation.NSURL
+	CanPerformAuthorization() bool
+}
+
+var _ AuthorizationSingleSignOnProviderable = (*AuthorizationSingleSignOnProvider)(nil)
 

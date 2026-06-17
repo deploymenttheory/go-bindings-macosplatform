@@ -35,3 +35,10 @@ func (x *CNNUpsamplingNearestGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPS
 
 func (x *CNNUpsamplingNearestGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNUpsamplingNearestGradientable is the interface implemented by [CNNUpsamplingNearestGradient], for mocking and DI.
+type CNNUpsamplingNearestGradientable interface {
+	Unwrap() *raw.MPSCNNUpsamplingNearestGradient
+}
+
+var _ CNNUpsamplingNearestGradientable = (*CNNUpsamplingNearestGradient)(nil)
+

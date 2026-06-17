@@ -27,15 +27,67 @@ func NewWKContentRuleListStore() *WKContentRuleListStore {
 	return &WKContentRuleListStore{inner: raw.WKContentRuleListStoreFromID(_id)}
 }
 
+// CompileContentRuleListForIdentifierEncodedContentRuleList blocks until the operation completes or ctx is cancelled.
+func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error) {
+	type _result struct {
+		val *WKContentRuleList
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(encodedContentRuleList), func(_p0 *raw.WKContentRuleList, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &WKContentRuleList{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *WKContentRuleList
+		return _zero, ctx.Err()
+	}
+}
+
+// LookUpContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
+func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error) {
+	type _result struct {
+		val *WKContentRuleList
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LookUpContentRuleListForIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.WKContentRuleList, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &WKContentRuleList{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *WKContentRuleList
+		return _zero, ctx.Err()
+	}
+}
+
 // RemoveContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveContentRuleListForIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,4 +96,20 @@ func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.
 		return ctx.Err()
 	}
 }
+
+// GetAvailableContentRuleListIdentifiers calls the underlying GetAvailableContentRuleListIdentifiers.
+func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(completionHandler objc.Block) {
+	x.inner.GetAvailableContentRuleListIdentifiers(completionHandler)
+}
+
+// WKContentRuleListStoreable is the interface implemented by [WKContentRuleListStore], for mocking and DI.
+type WKContentRuleListStoreable interface {
+	Unwrap() *raw.WKContentRuleListStore
+	CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error)
+	LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error)
+	RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error
+	GetAvailableContentRuleListIdentifiers(completionHandler objc.Block)
+}
+
+var _ WKContentRuleListStoreable = (*WKContentRuleListStore)(nil)
 

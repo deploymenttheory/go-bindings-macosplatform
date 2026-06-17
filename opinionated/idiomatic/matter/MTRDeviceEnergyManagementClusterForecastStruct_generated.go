@@ -72,3 +72,126 @@ func (x *MTRDeviceEnergyManagementClusterForecastStruct) WithForecastUpdateReaso
 	return x
 }
 
+// ForecastID calls the underlying ForecastID.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastID() *foundation.NSNumber {
+	return x.inner.ForecastID()
+}
+
+// SetForecastID calls the underlying SetForecastID.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastID(forecastID *foundation.NSNumber) {
+	x.inner.SetForecastID(forecastID)
+}
+
+// ActiveSlotNumber calls the underlying ActiveSlotNumber.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ActiveSlotNumber() *foundation.NSNumber {
+	return x.inner.ActiveSlotNumber()
+}
+
+// SetActiveSlotNumber calls the underlying SetActiveSlotNumber.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetActiveSlotNumber(activeSlotNumber *foundation.NSNumber) {
+	x.inner.SetActiveSlotNumber(activeSlotNumber)
+}
+
+// StartTime calls the underlying StartTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// EndTime calls the underlying EndTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) EndTime() *foundation.NSNumber {
+	return x.inner.EndTime()
+}
+
+// SetEndTime calls the underlying SetEndTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEndTime(endTime *foundation.NSNumber) {
+	x.inner.SetEndTime(endTime)
+}
+
+// EarliestStartTime calls the underlying EarliestStartTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) EarliestStartTime() *foundation.NSNumber {
+	return x.inner.EarliestStartTime()
+}
+
+// SetEarliestStartTime calls the underlying SetEarliestStartTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetEarliestStartTime(earliestStartTime *foundation.NSNumber) {
+	x.inner.SetEarliestStartTime(earliestStartTime)
+}
+
+// LatestEndTime calls the underlying LatestEndTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) LatestEndTime() *foundation.NSNumber {
+	return x.inner.LatestEndTime()
+}
+
+// SetLatestEndTime calls the underlying SetLatestEndTime.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetLatestEndTime(latestEndTime *foundation.NSNumber) {
+	x.inner.SetLatestEndTime(latestEndTime)
+}
+
+// IsPausable calls the underlying IsPausable.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) IsPausable() *foundation.NSNumber {
+	return x.inner.IsPausable()
+}
+
+// SetIsPausable calls the underlying SetIsPausable.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetIsPausable(isPausable *foundation.NSNumber) {
+	x.inner.SetIsPausable(isPausable)
+}
+
+// Slots calls the underlying Slots.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) Slots() *foundation.NSArray[objc.ID] {
+	return x.inner.Slots()
+}
+
+// SetSlots calls the underlying SetSlots.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetSlots(slots *foundation.NSArray[objc.ID]) {
+	x.inner.SetSlots(slots)
+}
+
+// ForecastUpdateReason calls the underlying ForecastUpdateReason.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) ForecastUpdateReason() *foundation.NSNumber {
+	return x.inner.ForecastUpdateReason()
+}
+
+// SetForecastUpdateReason calls the underlying SetForecastUpdateReason.
+func (x *MTRDeviceEnergyManagementClusterForecastStruct) SetForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) {
+	x.inner.SetForecastUpdateReason(forecastUpdateReason)
+}
+
+// MTRDeviceEnergyManagementClusterForecastStructable is the interface implemented by [MTRDeviceEnergyManagementClusterForecastStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterForecastStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterForecastStruct
+	WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithActiveSlotNumber(activeSlotNumber *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithStartTime(startTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithEndTime(endTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithEarliestStartTime(earliestStartTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithLatestEndTime(latestEndTime *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithIsPausable(isPausable *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	WithForecastUpdateReason(forecastUpdateReason *foundation.NSNumber) *MTRDeviceEnergyManagementClusterForecastStruct
+	ForecastID() *foundation.NSNumber
+	SetForecastID(forecastID *foundation.NSNumber)
+	ActiveSlotNumber() *foundation.NSNumber
+	SetActiveSlotNumber(activeSlotNumber *foundation.NSNumber)
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	EndTime() *foundation.NSNumber
+	SetEndTime(endTime *foundation.NSNumber)
+	EarliestStartTime() *foundation.NSNumber
+	SetEarliestStartTime(earliestStartTime *foundation.NSNumber)
+	LatestEndTime() *foundation.NSNumber
+	SetLatestEndTime(latestEndTime *foundation.NSNumber)
+	IsPausable() *foundation.NSNumber
+	SetIsPausable(isPausable *foundation.NSNumber)
+	Slots() *foundation.NSArray[objc.ID]
+	SetSlots(slots *foundation.NSArray[objc.ID])
+	ForecastUpdateReason() *foundation.NSNumber
+	SetForecastUpdateReason(forecastUpdateReason *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterForecastStructable = (*MTRDeviceEnergyManagementClusterForecastStruct)(nil)
+

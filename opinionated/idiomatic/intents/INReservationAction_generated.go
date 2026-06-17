@@ -25,3 +25,32 @@ func NewReservationActionWithTypeValidDurationUserActivity(type_ raw.INReservati
 	return &ReservationAction{inner: raw.INReservationActionFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *ReservationAction) Type() raw.INReservationActionType {
+	return x.inner.Type()
+}
+
+// ValidDuration calls the underlying ValidDuration.
+func (x *ReservationAction) ValidDuration() *DateComponentsRange {
+	_r := x.inner.ValidDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// UserActivity calls the underlying UserActivity.
+func (x *ReservationAction) UserActivity() *foundation.NSUserActivity {
+	return x.inner.UserActivity()
+}
+
+// ReservationActionable is the interface implemented by [ReservationAction], for mocking and DI.
+type ReservationActionable interface {
+	Unwrap() *raw.INReservationAction
+	Type() raw.INReservationActionType
+	ValidDuration() *DateComponentsRange
+	UserActivity() *foundation.NSUserActivity
+}
+
+var _ ReservationActionable = (*ReservationAction)(nil)
+

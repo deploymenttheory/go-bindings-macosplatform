@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,28 @@ func NewAssetSegmentReport() *AssetSegmentReport {
 	return &AssetSegmentReport{inner: raw.AVAssetSegmentReportFromID(_id)}
 }
 
+// SegmentType calls the underlying SegmentType.
+func (x *AssetSegmentReport) SegmentType() raw.AVAssetSegmentType {
+	return x.inner.SegmentType()
+}
+
 // TrackReports returns the collection as a Go slice.
 func (x *AssetSegmentReport) TrackReports() []*raw.AVAssetSegmentTrackReport {
 	arr := x.inner.TrackReports()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetSegmentTrackReport, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetSegmentTrackReport {
+		return raw.AVAssetSegmentTrackReportFromID(purego.Retain(_id))
+	})
 }
+
+// AssetSegmentReportable is the interface implemented by [AssetSegmentReport], for mocking and DI.
+type AssetSegmentReportable interface {
+	Unwrap() *raw.AVAssetSegmentReport
+	SegmentType() raw.AVAssetSegmentType
+	TrackReports() []*raw.AVAssetSegmentTrackReport
+}
+
+var _ AssetSegmentReportable = (*AssetSegmentReport)(nil)
 

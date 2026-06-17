@@ -23,5 +23,24 @@ func NewCatalog() *Catalog {
 	return &Catalog{inner: raw.SHCatalogFromID(_id)}
 }
 
+// MinimumQuerySignatureDuration calls the underlying MinimumQuerySignatureDuration.
+func (x *Catalog) MinimumQuerySignatureDuration() float64 {
+	return x.inner.MinimumQuerySignatureDuration()
+}
+
+// MaximumQuerySignatureDuration calls the underlying MaximumQuerySignatureDuration.
+func (x *Catalog) MaximumQuerySignatureDuration() float64 {
+	return x.inner.MaximumQuerySignatureDuration()
+}
+
 func (x *Catalog) asCatalog() *raw.SHCatalog { return x.inner }
+
+// Catalogable is the interface implemented by [Catalog], for mocking and DI.
+type Catalogable interface {
+	Unwrap() *raw.SHCatalog
+	MinimumQuerySignatureDuration() float64
+	MaximumQuerySignatureDuration() float64
+}
+
+var _ Catalogable = (*Catalog)(nil)
 

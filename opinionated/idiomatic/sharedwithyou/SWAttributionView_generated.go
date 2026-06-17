@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,4 +67,116 @@ func (x *AttributionView) WithSupplementalMenu(supplementalMenu *appkit.NSMenuIt
 	x.inner.SetSupplementalMenu(supplementalMenu)
 	return x
 }
+
+// Highlight calls the underlying Highlight.
+func (x *AttributionView) Highlight() *Highlight {
+	_r := x.inner.Highlight()
+	if _r == nil {
+		return nil
+	}
+	return &Highlight{inner: _r}
+}
+
+// SetHighlight calls the underlying SetHighlight.
+func (x *AttributionView) SetHighlight(highlight *raw.SWHighlight) {
+	x.inner.SetHighlight(highlight)
+}
+
+// DisplayContext calls the underlying DisplayContext.
+func (x *AttributionView) DisplayContext() raw.SWAttributionViewDisplayContext {
+	return x.inner.DisplayContext()
+}
+
+// SetDisplayContext calls the underlying SetDisplayContext.
+func (x *AttributionView) SetDisplayContext(displayContext raw.SWAttributionViewDisplayContext) {
+	x.inner.SetDisplayContext(displayContext)
+}
+
+// HorizontalAlignment calls the underlying HorizontalAlignment.
+func (x *AttributionView) HorizontalAlignment() raw.SWAttributionViewHorizontalAlignment {
+	return x.inner.HorizontalAlignment()
+}
+
+// SetHorizontalAlignment calls the underlying SetHorizontalAlignment.
+func (x *AttributionView) SetHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment) {
+	x.inner.SetHorizontalAlignment(horizontalAlignment)
+}
+
+// BackgroundStyle calls the underlying BackgroundStyle.
+func (x *AttributionView) BackgroundStyle() raw.SWAttributionViewBackgroundStyle {
+	return x.inner.BackgroundStyle()
+}
+
+// SetBackgroundStyle calls the underlying SetBackgroundStyle.
+func (x *AttributionView) SetBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle) {
+	x.inner.SetBackgroundStyle(backgroundStyle)
+}
+
+// PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
+func (x *AttributionView) PreferredMaxLayoutWidth() float64 {
+	return x.inner.PreferredMaxLayoutWidth()
+}
+
+// SetPreferredMaxLayoutWidth calls the underlying SetPreferredMaxLayoutWidth.
+func (x *AttributionView) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
+	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+}
+
+// HighlightMenu calls the underlying HighlightMenu.
+func (x *AttributionView) HighlightMenu() *appkit.NSMenu {
+	return x.inner.HighlightMenu()
+}
+
+// MenuTitleForHideAction calls the underlying MenuTitleForHideAction.
+func (x *AttributionView) MenuTitleForHideAction() string {
+	_r := x.inner.MenuTitleForHideAction()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMenuTitleForHideAction calls the underlying SetMenuTitleForHideAction.
+func (x *AttributionView) SetMenuTitleForHideAction(menuTitleForHideAction string) {
+	x.inner.SetMenuTitleForHideAction(foundation.NSStringStringWithUTF8String(menuTitleForHideAction))
+}
+
+// SupplementalMenu calls the underlying SupplementalMenu.
+func (x *AttributionView) SupplementalMenu() *appkit.NSMenuItem {
+	return x.inner.SupplementalMenu()
+}
+
+// SetSupplementalMenu calls the underlying SetSupplementalMenu.
+func (x *AttributionView) SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem) {
+	x.inner.SetSupplementalMenu(supplementalMenu)
+}
+
+// AttributionViewable is the interface implemented by [AttributionView], for mocking and DI.
+type AttributionViewable interface {
+	Unwrap() *raw.SWAttributionView
+	WithHighlight(highlight HighlightProvider) *AttributionView
+	WithDisplayContext(displayContext raw.SWAttributionViewDisplayContext) *AttributionView
+	WithHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment) *AttributionView
+	WithBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle) *AttributionView
+	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *AttributionView
+	WithMenuTitleForHideAction(menuTitleForHideAction string) *AttributionView
+	WithSupplementalMenu(supplementalMenu *appkit.NSMenuItem) *AttributionView
+	Highlight() *Highlight
+	SetHighlight(highlight *raw.SWHighlight)
+	DisplayContext() raw.SWAttributionViewDisplayContext
+	SetDisplayContext(displayContext raw.SWAttributionViewDisplayContext)
+	HorizontalAlignment() raw.SWAttributionViewHorizontalAlignment
+	SetHorizontalAlignment(horizontalAlignment raw.SWAttributionViewHorizontalAlignment)
+	BackgroundStyle() raw.SWAttributionViewBackgroundStyle
+	SetBackgroundStyle(backgroundStyle raw.SWAttributionViewBackgroundStyle)
+	PreferredMaxLayoutWidth() float64
+	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
+	HighlightMenu() *appkit.NSMenu
+	MenuTitleForHideAction() string
+	SetMenuTitleForHideAction(menuTitleForHideAction string)
+	SupplementalMenu() *appkit.NSMenuItem
+	SetSupplementalMenu(supplementalMenu *appkit.NSMenuItem)
+}
+
+var _ AttributionViewable = (*AttributionView)(nil)
 

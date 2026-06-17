@@ -23,3 +23,28 @@ func NewExposureBiasRange() *ExposureBiasRange {
 	return &ExposureBiasRange{inner: raw.AVExposureBiasRangeFromID(_id)}
 }
 
+// ContainsExposureBias calls the underlying ContainsExposureBias.
+func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
+	return x.inner.ContainsExposureBias(exposureBias)
+}
+
+// MinExposureBias calls the underlying MinExposureBias.
+func (x *ExposureBiasRange) MinExposureBias() float32 {
+	return x.inner.MinExposureBias()
+}
+
+// MaxExposureBias calls the underlying MaxExposureBias.
+func (x *ExposureBiasRange) MaxExposureBias() float32 {
+	return x.inner.MaxExposureBias()
+}
+
+// ExposureBiasRangeable is the interface implemented by [ExposureBiasRange], for mocking and DI.
+type ExposureBiasRangeable interface {
+	Unwrap() *raw.AVExposureBiasRange
+	ContainsExposureBias(exposureBias float32) bool
+	MinExposureBias() float32
+	MaxExposureBias() float32
+}
+
+var _ ExposureBiasRangeable = (*ExposureBiasRange)(nil)
+

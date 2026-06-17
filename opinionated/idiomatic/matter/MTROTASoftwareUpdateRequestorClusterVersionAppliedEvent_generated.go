@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwar
 
 func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent }
 
+// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
+type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+}
+
+var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)
+

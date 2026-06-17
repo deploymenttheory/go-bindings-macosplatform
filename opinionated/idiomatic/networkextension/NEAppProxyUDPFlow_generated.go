@@ -27,15 +27,25 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(_id)}
 }
 
+// ReadDatagramsAndFlowEndpointsWithCompletionHandler calls the underlying ReadDatagramsAndFlowEndpointsWithCompletionHandler.
+func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler)
+}
+
+// ReadDatagramsWithCompletionHandler calls the underlying ReadDatagramsWithCompletionHandler.
+func (x *NEAppProxyUDPFlow) ReadDatagramsWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.ReadDatagramsWithCompletionHandler(completionHandler)
+}
+
 // WriteDatagramsSentByFlowEndpoints blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDatagramsSentByFlowEndpointsCompletionHandler(datagrams, remoteEndpoints, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -49,11 +59,11 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByFlowEndpoints(ctx context.Contex
 func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDatagramsSentByEndpointsCompletionHandler(datagrams, remoteEndpoints, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,5 +73,28 @@ func (x *NEAppProxyUDPFlow) WriteDatagramsSentByEndpoints(ctx context.Context, d
 	}
 }
 
+// LocalFlowEndpoint calls the underlying LocalFlowEndpoint.
+func (x *NEAppProxyUDPFlow) LocalFlowEndpoint() *foundation.NSObject {
+	return x.inner.LocalFlowEndpoint()
+}
+
+// LocalEndpoint calls the underlying LocalEndpoint.
+func (x *NEAppProxyUDPFlow) LocalEndpoint() unsafe.Pointer {
+	return x.inner.LocalEndpoint()
+}
+
 func (x *NEAppProxyUDPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.inner.NEAppProxyFlow }
+
+// NEAppProxyUDPFlowable is the interface implemented by [NEAppProxyUDPFlow], for mocking and DI.
+type NEAppProxyUDPFlowable interface {
+	Unwrap() *raw.NEAppProxyUDPFlow
+	ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block)
+	ReadDatagramsWithCompletionHandler(completionHandler objc.Block)
+	WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error
+	WriteDatagramsSentByEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints *foundation.NSArray[objc.ID]) error
+	LocalFlowEndpoint() *foundation.NSObject
+	LocalEndpoint() unsafe.Pointer
+}
+
+var _ NEAppProxyUDPFlowable = (*NEAppProxyUDPFlow)(nil)
 

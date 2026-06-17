@@ -25,3 +25,10 @@ func NewNNLabelsNode() *NNLabelsNode {
 
 func (x *NNLabelsNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
+// NNLabelsNodeable is the interface implemented by [NNLabelsNode], for mocking and DI.
+type NNLabelsNodeable interface {
+	Unwrap() *raw.MPSNNLabelsNode
+}
+
+var _ NNLabelsNodeable = (*NNLabelsNode)(nil)
+

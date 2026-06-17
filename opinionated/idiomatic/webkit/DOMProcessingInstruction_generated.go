@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,6 +24,15 @@ func NewDOMProcessingInstruction() *DOMProcessingInstruction {
 	return &DOMProcessingInstruction{inner: raw.DOMProcessingInstructionFromID(_id)}
 }
 
+// Target calls the underlying Target.
+func (x *DOMProcessingInstruction) Target() string {
+	_r := x.inner.Target()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMProcessingInstruction) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
 
 func (x *DOMProcessingInstruction) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
@@ -30,4 +40,12 @@ func (x *DOMProcessingInstruction) asDOMNode() *raw.DOMNode { return &x.inner.DO
 func (x *DOMProcessingInstruction) asDOMObject() *raw.DOMObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject }
 
 func (x *DOMProcessingInstruction) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject }
+
+// DOMProcessingInstructionable is the interface implemented by [DOMProcessingInstruction], for mocking and DI.
+type DOMProcessingInstructionable interface {
+	Unwrap() *raw.DOMProcessingInstruction
+	Target() string
+}
+
+var _ DOMProcessingInstructionable = (*DOMProcessingInstruction)(nil)
 

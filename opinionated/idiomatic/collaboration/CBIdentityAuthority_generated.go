@@ -6,7 +6,9 @@ package collaboration
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // IdentityAuthority wraps [raw.CBIdentityAuthority] with a fluent Go API.
@@ -22,4 +24,27 @@ func NewIdentityAuthority() *IdentityAuthority {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBIdentityAuthority")), objc.RegisterName("new"))
 	return &IdentityAuthority{inner: raw.CBIdentityAuthorityFromID(_id)}
 }
+
+// CSIdentityAuthority calls the underlying CSIdentityAuthority.
+func (x *IdentityAuthority) CSIdentityAuthority() unsafe.Pointer {
+	return x.inner.CSIdentityAuthority()
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *IdentityAuthority) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IdentityAuthorityable is the interface implemented by [IdentityAuthority], for mocking and DI.
+type IdentityAuthorityable interface {
+	Unwrap() *raw.CBIdentityAuthority
+	CSIdentityAuthority() unsafe.Pointer
+	LocalizedName() string
+}
+
+var _ IdentityAuthorityable = (*IdentityAuthority)(nil)
 

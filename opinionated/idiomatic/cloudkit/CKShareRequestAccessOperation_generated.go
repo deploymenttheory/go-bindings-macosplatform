@@ -68,22 +68,59 @@ func (x *ShareRequestAccessOperation) ShareURLs() []*foundation.NSURL {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
+}
+
+// SetShareURLs calls the underlying SetShareURLs.
+func (x *ShareRequestAccessOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
+	x.inner.SetShareURLs(shareURLs)
+}
+
+// PerShareAccessRequestCompletionBlock calls the underlying PerShareAccessRequestCompletionBlock.
+func (x *ShareRequestAccessOperation) PerShareAccessRequestCompletionBlock() objc.Block {
+	return x.inner.PerShareAccessRequestCompletionBlock()
+}
+
+// SetPerShareAccessRequestCompletionBlock blocks until the operation completes or ctx is cancelled.
+func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (*foundation.NSURL, error) {
+	type _result struct {
+		val *foundation.NSURL
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetPerShareAccessRequestCompletionBlock(func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSURL
+		return _zero, ctx.Err()
+	}
+}
+
+// ShareRequestAccessCompletionBlock calls the underlying ShareRequestAccessCompletionBlock.
+func (x *ShareRequestAccessOperation) ShareRequestAccessCompletionBlock() objc.Block {
+	return x.inner.ShareRequestAccessCompletionBlock()
 }
 
 // SetShareRequestAccessCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetShareRequestAccessCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -94,4 +131,20 @@ func (x *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx c
 }
 
 func (x *ShareRequestAccessOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// ShareRequestAccessOperationable is the interface implemented by [ShareRequestAccessOperation], for mocking and DI.
+type ShareRequestAccessOperationable interface {
+	Unwrap() *raw.CKShareRequestAccessOperation
+	WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation
+	WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation
+	WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation
+	ShareURLs() []*foundation.NSURL
+	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
+	PerShareAccessRequestCompletionBlock() objc.Block
+	SetPerShareAccessRequestCompletionBlock(ctx context.Context) (*foundation.NSURL, error)
+	ShareRequestAccessCompletionBlock() objc.Block
+	SetShareRequestAccessCompletionBlock(ctx context.Context) error
+}
+
+var _ ShareRequestAccessOperationable = (*ShareRequestAccessOperation)(nil)
 

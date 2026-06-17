@@ -23,3 +23,16 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput() *Authoriza
 	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_id)}
 }
 
+// IsSupported calls the underlying IsSupported.
+func (x *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
+	return x.inner.IsSupported()
+}
+
+// AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput], for mocking and DI.
+type AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable interface {
+	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
+	IsSupported() bool
+}
+
+var _ AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputable = (*AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput)(nil)
+

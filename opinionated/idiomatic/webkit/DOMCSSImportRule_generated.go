@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,46 @@ func NewDOMCSSImportRule() *DOMCSSImportRule {
 	return &DOMCSSImportRule{inner: raw.DOMCSSImportRuleFromID(_id)}
 }
 
+// Href calls the underlying Href.
+func (x *DOMCSSImportRule) Href() string {
+	_r := x.inner.Href()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Media calls the underlying Media.
+func (x *DOMCSSImportRule) Media() *DOMMediaList {
+	_r := x.inner.Media()
+	if _r == nil {
+		return nil
+	}
+	return &DOMMediaList{inner: _r}
+}
+
+// StyleSheet calls the underlying StyleSheet.
+func (x *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
+	_r := x.inner.StyleSheet()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleSheet{inner: _r}
+}
+
 func (x *DOMCSSImportRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSImportRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
 func (x *DOMCSSImportRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+
+// DOMCSSImportRuleable is the interface implemented by [DOMCSSImportRule], for mocking and DI.
+type DOMCSSImportRuleable interface {
+	Unwrap() *raw.DOMCSSImportRule
+	Href() string
+	Media() *DOMMediaList
+	StyleSheet() *DOMCSSStyleSheet
+}
+
+var _ DOMCSSImportRuleable = (*DOMCSSImportRule)(nil)
 

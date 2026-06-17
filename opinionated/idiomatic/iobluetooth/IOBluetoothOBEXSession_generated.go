@@ -39,5 +39,62 @@ func NewIOBluetoothOBEXSessionWithIncomingRFCOMMChannelEventSelectorSelectorTarg
 	return &IOBluetoothOBEXSession{inner: raw.IOBluetoothOBEXSessionFromID(_id)}
 }
 
+// GetRFCOMMChannel calls the underlying GetRFCOMMChannel.
+func (x *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
+	_r := x.inner.GetRFCOMMChannel()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothRFCOMMChannel{inner: _r}
+}
+
+// GetDevice calls the underlying GetDevice.
+func (x *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
+	_r := x.inner.GetDevice()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothDevice{inner: _r}
+}
+
+// SendBufferTroughChannel calls the underlying SendBufferTroughChannel.
+func (x *IOBluetoothOBEXSession) SendBufferTroughChannel() int {
+	return x.inner.SendBufferTroughChannel()
+}
+
+// RestartTransmission calls the underlying RestartTransmission.
+func (x *IOBluetoothOBEXSession) RestartTransmission() {
+	x.inner.RestartTransmission()
+}
+
+// IsSessionTargetAMac calls the underlying IsSessionTargetAMac.
+func (x *IOBluetoothOBEXSession) IsSessionTargetAMac() bool {
+	return x.inner.IsSessionTargetAMac()
+}
+
+// SetOpenTransportConnectionAsyncSelectorTargetRefCon calls the underlying SetOpenTransportConnectionAsyncSelectorTargetRefCon.
+func (x *IOBluetoothOBEXSession) SetOpenTransportConnectionAsyncSelectorTargetRefCon(inSelector objc.SEL, inSelectorTarget objc.ID, inUserRefCon unsafe.Pointer) {
+	x.inner.SetOpenTransportConnectionAsyncSelectorTargetRefCon(inSelector, inSelectorTarget, inUserRefCon)
+}
+
+// SetOBEXSessionOpenConnectionCallbackRefCon calls the underlying SetOBEXSessionOpenConnectionCallbackRefCon.
+func (x *IOBluetoothOBEXSession) SetOBEXSessionOpenConnectionCallbackRefCon(inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) {
+	x.inner.SetOBEXSessionOpenConnectionCallbackRefCon(inCallback, inUserRefCon)
+}
+
 func (x *IOBluetoothOBEXSession) asOBEXSession() *raw.OBEXSession { return &x.inner.OBEXSession }
+
+// IOBluetoothOBEXSessionable is the interface implemented by [IOBluetoothOBEXSession], for mocking and DI.
+type IOBluetoothOBEXSessionable interface {
+	Unwrap() *raw.IOBluetoothOBEXSession
+	GetRFCOMMChannel() *IOBluetoothRFCOMMChannel
+	GetDevice() *IOBluetoothDevice
+	SendBufferTroughChannel() int
+	RestartTransmission()
+	IsSessionTargetAMac() bool
+	SetOpenTransportConnectionAsyncSelectorTargetRefCon(inSelector objc.SEL, inSelectorTarget objc.ID, inUserRefCon unsafe.Pointer)
+	SetOBEXSessionOpenConnectionCallbackRefCon(inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer)
+}
+
+var _ IOBluetoothOBEXSessionable = (*IOBluetoothOBEXSession)(nil)
 

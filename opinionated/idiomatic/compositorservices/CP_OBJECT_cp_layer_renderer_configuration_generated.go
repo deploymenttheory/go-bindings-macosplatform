@@ -23,3 +23,10 @@ func New_cp_layer_renderer_configuration() *_cp_layer_renderer_configuration {
 	return &_cp_layer_renderer_configuration{inner: raw.CP_OBJECT_cp_layer_renderer_configurationFromID(_id)}
 }
 
+// _cp_layer_renderer_configurationable is the interface implemented by [_cp_layer_renderer_configuration], for mocking and DI.
+type _cp_layer_renderer_configurationable interface {
+	Unwrap() *raw.CP_OBJECT_cp_layer_renderer_configuration
+}
+
+var _ _cp_layer_renderer_configurationable = (*_cp_layer_renderer_configuration)(nil)
+

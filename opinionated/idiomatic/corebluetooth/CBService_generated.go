@@ -6,6 +6,7 @@ package corebluetooth
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,29 @@ func NewService() *Service {
 	return &Service{inner: raw.CBServiceFromID(_id)}
 }
 
+// Peripheral calls the underlying Peripheral.
+func (x *Service) Peripheral() *Peripheral {
+	_r := x.inner.Peripheral()
+	if _r == nil {
+		return nil
+	}
+	return &Peripheral{inner: _r}
+}
+
+// IsPrimary calls the underlying IsPrimary.
+func (x *Service) IsPrimary() bool {
+	return x.inner.IsPrimary()
+}
+
 // IncludedServices returns the collection as a Go slice.
 func (x *Service) IncludedServices() []*raw.CBService {
 	arr := x.inner.IncludedServices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBService, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBService {
+		return raw.CBServiceFromID(purego.Retain(_id))
+	})
 }
 
 // Characteristics returns the collection as a Go slice.
@@ -42,14 +55,23 @@ func (x *Service) Characteristics() []*raw.CBCharacteristic {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBCharacteristic, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBCharacteristic {
+		return raw.CBCharacteristicFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Service) asService() *raw.CBService { return x.inner }
 
 func (x *Service) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
+
+// Serviceable is the interface implemented by [Service], for mocking and DI.
+type Serviceable interface {
+	Unwrap() *raw.CBService
+	Peripheral() *Peripheral
+	IsPrimary() bool
+	IncludedServices() []*raw.CBService
+	Characteristics() []*raw.CBCharacteristic
+}
+
+var _ Serviceable = (*Service)(nil)
 

@@ -37,3 +37,64 @@ func (x *CommandBuffer) WithHeapProvider(heapProvider raw.MPSHeapProvider) *Comm
 	return x
 }
 
+// CommitAndContinue calls the underlying CommitAndContinue.
+func (x *CommandBuffer) CommitAndContinue() {
+	x.inner.CommitAndContinue()
+}
+
+// PrefetchHeapForWorkloadSize calls the underlying PrefetchHeapForWorkloadSize.
+func (x *CommandBuffer) PrefetchHeapForWorkloadSize(size uint) {
+	x.inner.PrefetchHeapForWorkloadSize(size)
+}
+
+// CommandBuffer calls the underlying CommandBuffer.
+func (x *CommandBuffer) CommandBuffer() metal.MTLCommandBuffer {
+	return x.inner.CommandBuffer()
+}
+
+// RootCommandBuffer calls the underlying RootCommandBuffer.
+func (x *CommandBuffer) RootCommandBuffer() metal.MTLCommandBuffer {
+	return x.inner.RootCommandBuffer()
+}
+
+// Predicate calls the underlying Predicate.
+func (x *CommandBuffer) Predicate() *Predicate {
+	_r := x.inner.Predicate()
+	if _r == nil {
+		return nil
+	}
+	return &Predicate{inner: _r}
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *CommandBuffer) SetPredicate(predicate *raw.MPSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
+// HeapProvider calls the underlying HeapProvider.
+func (x *CommandBuffer) HeapProvider() raw.MPSHeapProvider {
+	return x.inner.HeapProvider()
+}
+
+// SetHeapProvider calls the underlying SetHeapProvider.
+func (x *CommandBuffer) SetHeapProvider(heapProvider raw.MPSHeapProvider) {
+	x.inner.SetHeapProvider(heapProvider)
+}
+
+// CommandBufferable is the interface implemented by [CommandBuffer], for mocking and DI.
+type CommandBufferable interface {
+	Unwrap() *raw.MPSCommandBuffer
+	WithPredicate(predicate *raw.MPSPredicate) *CommandBuffer
+	WithHeapProvider(heapProvider raw.MPSHeapProvider) *CommandBuffer
+	CommitAndContinue()
+	PrefetchHeapForWorkloadSize(size uint)
+	CommandBuffer() metal.MTLCommandBuffer
+	RootCommandBuffer() metal.MTLCommandBuffer
+	Predicate() *Predicate
+	SetPredicate(predicate *raw.MPSPredicate)
+	HeapProvider() raw.MPSHeapProvider
+	SetHeapProvider(heapProvider raw.MPSHeapProvider)
+}
+
+var _ CommandBufferable = (*CommandBuffer)(nil)
+

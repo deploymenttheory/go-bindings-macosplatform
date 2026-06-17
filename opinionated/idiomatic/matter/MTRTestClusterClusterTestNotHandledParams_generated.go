@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestNotHandledParams() *MTRTestClusterClusterTestNo
 
 func (x *MTRTestClusterClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams { return &x.inner.MTRUnitTestingClusterTestNotHandledParams }
 
+// MTRTestClusterClusterTestNotHandledParamsable is the interface implemented by [MTRTestClusterClusterTestNotHandledParams], for mocking and DI.
+type MTRTestClusterClusterTestNotHandledParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestNotHandledParams
+}
+
+var _ MTRTestClusterClusterTestNotHandledParamsable = (*MTRTestClusterClusterTestNotHandledParams)(nil)
+

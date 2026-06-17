@@ -47,5 +47,64 @@ func (x *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 	return x
 }
 
+// ButtonMask calls the underlying ButtonMask.
+func (x *PressGestureRecognizer) ButtonMask() uint {
+	return x.inner.ButtonMask()
+}
+
+// SetButtonMask calls the underlying SetButtonMask.
+func (x *PressGestureRecognizer) SetButtonMask(buttonMask uint) {
+	x.inner.SetButtonMask(buttonMask)
+}
+
+// MinimumPressDuration calls the underlying MinimumPressDuration.
+func (x *PressGestureRecognizer) MinimumPressDuration() float64 {
+	return x.inner.MinimumPressDuration()
+}
+
+// SetMinimumPressDuration calls the underlying SetMinimumPressDuration.
+func (x *PressGestureRecognizer) SetMinimumPressDuration(minimumPressDuration float64) {
+	x.inner.SetMinimumPressDuration(minimumPressDuration)
+}
+
+// AllowableMovement calls the underlying AllowableMovement.
+func (x *PressGestureRecognizer) AllowableMovement() float64 {
+	return x.inner.AllowableMovement()
+}
+
+// SetAllowableMovement calls the underlying SetAllowableMovement.
+func (x *PressGestureRecognizer) SetAllowableMovement(allowableMovement float64) {
+	x.inner.SetAllowableMovement(allowableMovement)
+}
+
+// NumberOfTouchesRequired calls the underlying NumberOfTouchesRequired.
+func (x *PressGestureRecognizer) NumberOfTouchesRequired() int {
+	return x.inner.NumberOfTouchesRequired()
+}
+
+// SetNumberOfTouchesRequired calls the underlying SetNumberOfTouchesRequired.
+func (x *PressGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
+	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
+}
+
 func (x *PressGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+
+// PressGestureRecognizerable is the interface implemented by [PressGestureRecognizer], for mocking and DI.
+type PressGestureRecognizerable interface {
+	Unwrap() *raw.NSPressGestureRecognizer
+	WithButtonMask(buttonMask uint) *PressGestureRecognizer
+	WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer
+	WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer
+	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer
+	ButtonMask() uint
+	SetButtonMask(buttonMask uint)
+	MinimumPressDuration() float64
+	SetMinimumPressDuration(minimumPressDuration float64)
+	AllowableMovement() float64
+	SetAllowableMovement(allowableMovement float64)
+	NumberOfTouchesRequired() int
+	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
+}
+
+var _ PressGestureRecognizerable = (*PressGestureRecognizer)(nil)
 

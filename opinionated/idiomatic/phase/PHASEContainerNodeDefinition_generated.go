@@ -31,7 +31,20 @@ func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeD
 	return &ContainerNodeDefinition{inner: raw.PHASEContainerNodeDefinitionFromID(_id)}
 }
 
+// AddSubtree calls the underlying AddSubtree.
+func (x *ContainerNodeDefinition) AddSubtree(subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddSubtree(subtree)
+}
+
 func (x *ContainerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
 
 func (x *ContainerNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// ContainerNodeDefinitionable is the interface implemented by [ContainerNodeDefinition], for mocking and DI.
+type ContainerNodeDefinitionable interface {
+	Unwrap() *raw.PHASEContainerNodeDefinition
+	AddSubtree(subtree *raw.PHASESoundEventNodeDefinition)
+}
+
+var _ ContainerNodeDefinitionable = (*ContainerNodeDefinition)(nil)
 

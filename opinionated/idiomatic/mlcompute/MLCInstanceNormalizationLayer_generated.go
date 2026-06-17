@@ -23,5 +23,90 @@ func NewInstanceNormalizationLayer() *InstanceNormalizationLayer {
 	return &InstanceNormalizationLayer{inner: raw.MLCInstanceNormalizationLayerFromID(_id)}
 }
 
+// FeatureChannelCount calls the underlying FeatureChannelCount.
+func (x *InstanceNormalizationLayer) FeatureChannelCount() uint {
+	return x.inner.FeatureChannelCount()
+}
+
+// Mean calls the underlying Mean.
+func (x *InstanceNormalizationLayer) Mean() *Tensor {
+	_r := x.inner.Mean()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Variance calls the underlying Variance.
+func (x *InstanceNormalizationLayer) Variance() *Tensor {
+	_r := x.inner.Variance()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Beta calls the underlying Beta.
+func (x *InstanceNormalizationLayer) Beta() *Tensor {
+	_r := x.inner.Beta()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Gamma calls the underlying Gamma.
+func (x *InstanceNormalizationLayer) Gamma() *Tensor {
+	_r := x.inner.Gamma()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// BetaParameter calls the underlying BetaParameter.
+func (x *InstanceNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := x.inner.BetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// GammaParameter calls the underlying GammaParameter.
+func (x *InstanceNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := x.inner.GammaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// VarianceEpsilon calls the underlying VarianceEpsilon.
+func (x *InstanceNormalizationLayer) VarianceEpsilon() float32 {
+	return x.inner.VarianceEpsilon()
+}
+
+// Momentum calls the underlying Momentum.
+func (x *InstanceNormalizationLayer) Momentum() float32 {
+	return x.inner.Momentum()
+}
+
 func (x *InstanceNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// InstanceNormalizationLayerable is the interface implemented by [InstanceNormalizationLayer], for mocking and DI.
+type InstanceNormalizationLayerable interface {
+	Unwrap() *raw.MLCInstanceNormalizationLayer
+	FeatureChannelCount() uint
+	Mean() *Tensor
+	Variance() *Tensor
+	Beta() *Tensor
+	Gamma() *Tensor
+	BetaParameter() *TensorParameter
+	GammaParameter() *TensorParameter
+	VarianceEpsilon() float32
+	Momentum() float32
+}
+
+var _ InstanceNormalizationLayerable = (*InstanceNormalizationLayer)(nil)
 

@@ -65,3 +65,147 @@ func (x *Motion) WithRotationRate(rotationRate raw.GCRotationRate) *Motion {
 	return x
 }
 
+// SetGravity calls the underlying SetGravity.
+func (x *Motion) SetGravity(gravity raw.GCAcceleration) {
+	x.inner.SetGravity(gravity)
+}
+
+// SetUserAcceleration calls the underlying SetUserAcceleration.
+func (x *Motion) SetUserAcceleration(userAcceleration raw.GCAcceleration) {
+	x.inner.SetUserAcceleration(userAcceleration)
+}
+
+// SetAcceleration calls the underlying SetAcceleration.
+func (x *Motion) SetAcceleration(acceleration raw.GCAcceleration) {
+	x.inner.SetAcceleration(acceleration)
+}
+
+// SetAttitude calls the underlying SetAttitude.
+func (x *Motion) SetAttitude(attitude raw.GCQuaternion) {
+	x.inner.SetAttitude(attitude)
+}
+
+// SetRotationRate calls the underlying SetRotationRate.
+func (x *Motion) SetRotationRate(rotationRate raw.GCRotationRate) {
+	x.inner.SetRotationRate(rotationRate)
+}
+
+// SetStateFromMotion calls the underlying SetStateFromMotion.
+func (x *Motion) SetStateFromMotion(motion *raw.GCMotion) {
+	x.inner.SetStateFromMotion(motion)
+}
+
+// Controller calls the underlying Controller.
+func (x *Motion) Controller() *Controller {
+	_r := x.inner.Controller()
+	if _r == nil {
+		return nil
+	}
+	return &Controller{inner: _r}
+}
+
+// ValueChangedHandler calls the underlying ValueChangedHandler.
+func (x *Motion) ValueChangedHandler() objc.Block {
+	return x.inner.ValueChangedHandler()
+}
+
+// SetValueChangedHandler calls the underlying SetValueChangedHandler.
+func (x *Motion) SetValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) {
+	x.inner.SetValueChangedHandler(valueChangedHandler)
+}
+
+// SensorsRequireManualActivation calls the underlying SensorsRequireManualActivation.
+func (x *Motion) SensorsRequireManualActivation() bool {
+	return x.inner.SensorsRequireManualActivation()
+}
+
+// SensorsActive calls the underlying SensorsActive.
+func (x *Motion) SensorsActive() bool {
+	return x.inner.SensorsActive()
+}
+
+// SetSensorsActive calls the underlying SetSensorsActive.
+func (x *Motion) SetSensorsActive(sensorsActive bool) {
+	x.inner.SetSensorsActive(sensorsActive)
+}
+
+// HasGravityAndUserAcceleration calls the underlying HasGravityAndUserAcceleration.
+func (x *Motion) HasGravityAndUserAcceleration() bool {
+	return x.inner.HasGravityAndUserAcceleration()
+}
+
+// Gravity calls the underlying Gravity.
+func (x *Motion) Gravity() raw.GCAcceleration {
+	return x.inner.Gravity()
+}
+
+// UserAcceleration calls the underlying UserAcceleration.
+func (x *Motion) UserAcceleration() raw.GCAcceleration {
+	return x.inner.UserAcceleration()
+}
+
+// Acceleration calls the underlying Acceleration.
+func (x *Motion) Acceleration() raw.GCAcceleration {
+	return x.inner.Acceleration()
+}
+
+// HasAttitudeAndRotationRate calls the underlying HasAttitudeAndRotationRate.
+func (x *Motion) HasAttitudeAndRotationRate() bool {
+	return x.inner.HasAttitudeAndRotationRate()
+}
+
+// HasAttitude calls the underlying HasAttitude.
+func (x *Motion) HasAttitude() bool {
+	return x.inner.HasAttitude()
+}
+
+// HasRotationRate calls the underlying HasRotationRate.
+func (x *Motion) HasRotationRate() bool {
+	return x.inner.HasRotationRate()
+}
+
+// Attitude calls the underlying Attitude.
+func (x *Motion) Attitude() raw.GCQuaternion {
+	return x.inner.Attitude()
+}
+
+// RotationRate calls the underlying RotationRate.
+func (x *Motion) RotationRate() raw.GCRotationRate {
+	return x.inner.RotationRate()
+}
+
+// Motionable is the interface implemented by [Motion], for mocking and DI.
+type Motionable interface {
+	Unwrap() *raw.GCMotion
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) *Motion
+	WithSensorsActive(sensorsActive bool) *Motion
+	WithGravity(gravity raw.GCAcceleration) *Motion
+	WithUserAcceleration(userAcceleration raw.GCAcceleration) *Motion
+	WithAcceleration(acceleration raw.GCAcceleration) *Motion
+	WithAttitude(attitude raw.GCQuaternion) *Motion
+	WithRotationRate(rotationRate raw.GCRotationRate) *Motion
+	SetGravity(gravity raw.GCAcceleration)
+	SetUserAcceleration(userAcceleration raw.GCAcceleration)
+	SetAcceleration(acceleration raw.GCAcceleration)
+	SetAttitude(attitude raw.GCQuaternion)
+	SetRotationRate(rotationRate raw.GCRotationRate)
+	SetStateFromMotion(motion *raw.GCMotion)
+	Controller() *Controller
+	ValueChangedHandler() objc.Block
+	SetValueChangedHandler(valueChangedHandler func(*raw.GCMotion))
+	SensorsRequireManualActivation() bool
+	SensorsActive() bool
+	SetSensorsActive(sensorsActive bool)
+	HasGravityAndUserAcceleration() bool
+	Gravity() raw.GCAcceleration
+	UserAcceleration() raw.GCAcceleration
+	Acceleration() raw.GCAcceleration
+	HasAttitudeAndRotationRate() bool
+	HasAttitude() bool
+	HasRotationRate() bool
+	Attitude() raw.GCQuaternion
+	RotationRate() raw.GCRotationRate
+}
+
+var _ Motionable = (*Motion)(nil)
+

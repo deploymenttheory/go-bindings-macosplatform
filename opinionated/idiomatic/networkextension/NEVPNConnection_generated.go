@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -32,15 +33,25 @@ func (x *NEVPNConnection) StartVPNTunnelAndReturnError() error {
 	return err
 }
 
+// StartVPNTunnelWithOptionsAndReturnError calls the underlying StartVPNTunnelWithOptionsAndReturnError.
+func (x *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) (bool, error) {
+	return x.inner.StartVPNTunnelWithOptionsAndReturnError(options)
+}
+
+// StopVPNTunnel calls the underlying StopVPNTunnel.
+func (x *NEVPNConnection) StopVPNTunnel() {
+	x.inner.StopVPNTunnel()
+}
+
 // FetchLastDisconnectError blocks until the operation completes or ctx is cancelled.
 func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.FetchLastDisconnectErrorWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -50,5 +61,38 @@ func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 	}
 }
 
+// Status calls the underlying Status.
+func (x *NEVPNConnection) Status() raw.NEVPNStatus {
+	return x.inner.Status()
+}
+
+// ConnectedDate calls the underlying ConnectedDate.
+func (x *NEVPNConnection) ConnectedDate() *foundation.NSDate {
+	return x.inner.ConnectedDate()
+}
+
+// Manager calls the underlying Manager.
+func (x *NEVPNConnection) Manager() *NEVPNManager {
+	_r := x.inner.Manager()
+	if _r == nil {
+		return nil
+	}
+	return &NEVPNManager{inner: _r}
+}
+
 func (x *NEVPNConnection) asNEVPNConnection() *raw.NEVPNConnection { return x.inner }
+
+// NEVPNConnectionable is the interface implemented by [NEVPNConnection], for mocking and DI.
+type NEVPNConnectionable interface {
+	Unwrap() *raw.NEVPNConnection
+	StartVPNTunnelAndReturnError() error
+	StartVPNTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) (bool, error)
+	StopVPNTunnel()
+	FetchLastDisconnectError(ctx context.Context) error
+	Status() raw.NEVPNStatus
+	ConnectedDate() *foundation.NSDate
+	Manager() *NEVPNManager
+}
+
+var _ NEVPNConnectionable = (*NEVPNConnection)(nil)
 

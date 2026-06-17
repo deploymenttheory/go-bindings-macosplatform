@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -84,6 +85,173 @@ func (x *DOMHTMLIFrameElement) WithWidth(width string) *DOMHTMLIFrameElement {
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLIFrameElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLIFrameElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// FrameBorder calls the underlying FrameBorder.
+func (x *DOMHTMLIFrameElement) FrameBorder() string {
+	_r := x.inner.FrameBorder()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFrameBorder calls the underlying SetFrameBorder.
+func (x *DOMHTMLIFrameElement) SetFrameBorder(frameBorder string) {
+	x.inner.SetFrameBorder(foundation.NSStringStringWithUTF8String(frameBorder))
+}
+
+// Height calls the underlying Height.
+func (x *DOMHTMLIFrameElement) Height() string {
+	_r := x.inner.Height()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *DOMHTMLIFrameElement) SetHeight(height string) {
+	x.inner.SetHeight(foundation.NSStringStringWithUTF8String(height))
+}
+
+// LongDesc calls the underlying LongDesc.
+func (x *DOMHTMLIFrameElement) LongDesc() string {
+	_r := x.inner.LongDesc()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLongDesc calls the underlying SetLongDesc.
+func (x *DOMHTMLIFrameElement) SetLongDesc(longDesc string) {
+	x.inner.SetLongDesc(foundation.NSStringStringWithUTF8String(longDesc))
+}
+
+// MarginHeight calls the underlying MarginHeight.
+func (x *DOMHTMLIFrameElement) MarginHeight() string {
+	_r := x.inner.MarginHeight()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMarginHeight calls the underlying SetMarginHeight.
+func (x *DOMHTMLIFrameElement) SetMarginHeight(marginHeight string) {
+	x.inner.SetMarginHeight(foundation.NSStringStringWithUTF8String(marginHeight))
+}
+
+// MarginWidth calls the underlying MarginWidth.
+func (x *DOMHTMLIFrameElement) MarginWidth() string {
+	_r := x.inner.MarginWidth()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMarginWidth calls the underlying SetMarginWidth.
+func (x *DOMHTMLIFrameElement) SetMarginWidth(marginWidth string) {
+	x.inner.SetMarginWidth(foundation.NSStringStringWithUTF8String(marginWidth))
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLIFrameElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLIFrameElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Scrolling calls the underlying Scrolling.
+func (x *DOMHTMLIFrameElement) Scrolling() string {
+	_r := x.inner.Scrolling()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetScrolling calls the underlying SetScrolling.
+func (x *DOMHTMLIFrameElement) SetScrolling(scrolling string) {
+	x.inner.SetScrolling(foundation.NSStringStringWithUTF8String(scrolling))
+}
+
+// Src calls the underlying Src.
+func (x *DOMHTMLIFrameElement) Src() string {
+	_r := x.inner.Src()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSrc calls the underlying SetSrc.
+func (x *DOMHTMLIFrameElement) SetSrc(src string) {
+	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLIFrameElement) Width() string {
+	_r := x.inner.Width()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLIFrameElement) SetWidth(width string) {
+	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+}
+
+// ContentDocument calls the underlying ContentDocument.
+func (x *DOMHTMLIFrameElement) ContentDocument() *DOMDocument {
+	_r := x.inner.ContentDocument()
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocument{inner: _r}
+}
+
+// ContentWindow calls the underlying ContentWindow.
+func (x *DOMHTMLIFrameElement) ContentWindow() *DOMAbstractView {
+	_r := x.inner.ContentWindow()
+	if _r == nil {
+		return nil
+	}
+	return &DOMAbstractView{inner: _r}
+}
+
+// ContentFrame calls the underlying ContentFrame.
+func (x *DOMHTMLIFrameElement) ContentFrame() *WebFrame {
+	_r := x.inner.ContentFrame()
+	if _r == nil {
+		return nil
+	}
+	return &WebFrame{inner: _r}
+}
+
 func (x *DOMHTMLIFrameElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLIFrameElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -93,4 +261,44 @@ func (x *DOMHTMLIFrameElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLIFrameElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLIFrameElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLIFrameElementable is the interface implemented by [DOMHTMLIFrameElement], for mocking and DI.
+type DOMHTMLIFrameElementable interface {
+	Unwrap() *raw.DOMHTMLIFrameElement
+	WithAlign(align string) *DOMHTMLIFrameElement
+	WithFrameBorder(frameBorder string) *DOMHTMLIFrameElement
+	WithHeight(height string) *DOMHTMLIFrameElement
+	WithLongDesc(longDesc string) *DOMHTMLIFrameElement
+	WithMarginHeight(marginHeight string) *DOMHTMLIFrameElement
+	WithMarginWidth(marginWidth string) *DOMHTMLIFrameElement
+	WithName(name string) *DOMHTMLIFrameElement
+	WithScrolling(scrolling string) *DOMHTMLIFrameElement
+	WithSrc(src string) *DOMHTMLIFrameElement
+	WithWidth(width string) *DOMHTMLIFrameElement
+	Align() string
+	SetAlign(align string)
+	FrameBorder() string
+	SetFrameBorder(frameBorder string)
+	Height() string
+	SetHeight(height string)
+	LongDesc() string
+	SetLongDesc(longDesc string)
+	MarginHeight() string
+	SetMarginHeight(marginHeight string)
+	MarginWidth() string
+	SetMarginWidth(marginWidth string)
+	Name() string
+	SetName(name string)
+	Scrolling() string
+	SetScrolling(scrolling string)
+	Src() string
+	SetSrc(src string)
+	Width() string
+	SetWidth(width string)
+	ContentDocument() *DOMDocument
+	ContentWindow() *DOMAbstractView
+	ContentFrame() *WebFrame
+}
+
+var _ DOMHTMLIFrameElementable = (*DOMHTMLIFrameElement)(nil)
 

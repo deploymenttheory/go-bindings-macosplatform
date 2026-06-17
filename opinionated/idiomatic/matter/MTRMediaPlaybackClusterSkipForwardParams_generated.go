@@ -42,3 +42,49 @@ func (x *MTRMediaPlaybackClusterSkipForwardParams) WithServerSideProcessingTimeo
 	return x
 }
 
+// DeltaPositionMilliseconds calls the underlying DeltaPositionMilliseconds.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) DeltaPositionMilliseconds() *foundation.NSNumber {
+	return x.inner.DeltaPositionMilliseconds()
+}
+
+// SetDeltaPositionMilliseconds calls the underlying SetDeltaPositionMilliseconds.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) SetDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber) {
+	x.inner.SetDeltaPositionMilliseconds(deltaPositionMilliseconds)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterSkipForwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterSkipForwardParamsable is the interface implemented by [MTRMediaPlaybackClusterSkipForwardParams], for mocking and DI.
+type MTRMediaPlaybackClusterSkipForwardParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterSkipForwardParams
+	WithDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber) *MTRMediaPlaybackClusterSkipForwardParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterSkipForwardParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterSkipForwardParams
+	DeltaPositionMilliseconds() *foundation.NSNumber
+	SetDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterSkipForwardParamsable = (*MTRMediaPlaybackClusterSkipForwardParams)(nil)
+

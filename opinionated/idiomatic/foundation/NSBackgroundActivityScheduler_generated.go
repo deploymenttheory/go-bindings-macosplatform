@@ -49,5 +49,92 @@ func (x *BackgroundActivityScheduler) WithTolerance(tolerance float64) *Backgrou
 	return x
 }
 
+// ScheduleWith calls the underlying ScheduleWith.
+func (x *BackgroundActivityScheduler) ScheduleWith(block func(objc.Block)) {
+	x.inner.ScheduleWith(block)
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *BackgroundActivityScheduler) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *BackgroundActivityScheduler) Identifier() *String {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *BackgroundActivityScheduler) QualityOfService() raw.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *BackgroundActivityScheduler) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// Repeats calls the underlying Repeats.
+func (x *BackgroundActivityScheduler) Repeats() bool {
+	return x.inner.Repeats()
+}
+
+// SetRepeats calls the underlying SetRepeats.
+func (x *BackgroundActivityScheduler) SetRepeats(repeats bool) {
+	x.inner.SetRepeats(repeats)
+}
+
+// Interval calls the underlying Interval.
+func (x *BackgroundActivityScheduler) Interval() float64 {
+	return x.inner.Interval()
+}
+
+// SetInterval calls the underlying SetInterval.
+func (x *BackgroundActivityScheduler) SetInterval(interval float64) {
+	x.inner.SetInterval(interval)
+}
+
+// Tolerance calls the underlying Tolerance.
+func (x *BackgroundActivityScheduler) Tolerance() float64 {
+	return x.inner.Tolerance()
+}
+
+// SetTolerance calls the underlying SetTolerance.
+func (x *BackgroundActivityScheduler) SetTolerance(tolerance float64) {
+	x.inner.SetTolerance(tolerance)
+}
+
+// ShouldDefer calls the underlying ShouldDefer.
+func (x *BackgroundActivityScheduler) ShouldDefer() bool {
+	return x.inner.ShouldDefer()
+}
+
 func (x *BackgroundActivityScheduler) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// BackgroundActivitySchedulerable is the interface implemented by [BackgroundActivityScheduler], for mocking and DI.
+type BackgroundActivitySchedulerable interface {
+	Unwrap() *raw.NSBackgroundActivityScheduler
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *BackgroundActivityScheduler
+	WithRepeats(repeats bool) *BackgroundActivityScheduler
+	WithInterval(interval float64) *BackgroundActivityScheduler
+	WithTolerance(tolerance float64) *BackgroundActivityScheduler
+	ScheduleWith(block func(objc.Block))
+	Invalidate()
+	Identifier() *String
+	QualityOfService() raw.NSQualityOfService
+	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	Repeats() bool
+	SetRepeats(repeats bool)
+	Interval() float64
+	SetInterval(interval float64)
+	Tolerance() float64
+	SetTolerance(tolerance float64)
+	ShouldDefer() bool
+}
+
+var _ BackgroundActivitySchedulerable = (*BackgroundActivityScheduler)(nil)
 

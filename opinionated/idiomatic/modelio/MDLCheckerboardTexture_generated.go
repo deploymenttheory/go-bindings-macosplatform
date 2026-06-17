@@ -32,5 +32,49 @@ func (x *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardText
 	return x
 }
 
+// Divisions calls the underlying Divisions.
+func (x *CheckerboardTexture) Divisions() float32 {
+	return x.inner.Divisions()
+}
+
+// SetDivisions calls the underlying SetDivisions.
+func (x *CheckerboardTexture) SetDivisions(divisions float32) {
+	x.inner.SetDivisions(divisions)
+}
+
+// Color1 calls the underlying Color1.
+func (x *CheckerboardTexture) Color1() unsafe.Pointer {
+	return x.inner.Color1()
+}
+
+// SetColor1 calls the underlying SetColor1.
+func (x *CheckerboardTexture) SetColor1(color1 unsafe.Pointer) {
+	x.inner.SetColor1(color1)
+}
+
+// Color2 calls the underlying Color2.
+func (x *CheckerboardTexture) Color2() unsafe.Pointer {
+	return x.inner.Color2()
+}
+
+// SetColor2 calls the underlying SetColor2.
+func (x *CheckerboardTexture) SetColor2(color2 unsafe.Pointer) {
+	x.inner.SetColor2(color2)
+}
+
 func (x *CheckerboardTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
+
+// CheckerboardTextureable is the interface implemented by [CheckerboardTexture], for mocking and DI.
+type CheckerboardTextureable interface {
+	Unwrap() *raw.MDLCheckerboardTexture
+	WithDivisions(divisions float32) *CheckerboardTexture
+	Divisions() float32
+	SetDivisions(divisions float32)
+	Color1() unsafe.Pointer
+	SetColor1(color1 unsafe.Pointer)
+	Color2() unsafe.Pointer
+	SetColor2(color2 unsafe.Pointer)
+}
+
+var _ CheckerboardTextureable = (*CheckerboardTexture)(nil)
 

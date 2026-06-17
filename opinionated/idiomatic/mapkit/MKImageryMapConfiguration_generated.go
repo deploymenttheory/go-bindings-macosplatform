@@ -32,3 +32,10 @@ func NewImageryMapConfigurationWithElevationStyle(elevationStyle raw.MKMapElevat
 
 func (x *ImageryMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
 
+// ImageryMapConfigurationable is the interface implemented by [ImageryMapConfiguration], for mocking and DI.
+type ImageryMapConfigurationable interface {
+	Unwrap() *raw.MKImageryMapConfiguration
+}
+
+var _ ImageryMapConfigurationable = (*ImageryMapConfiguration)(nil)
+

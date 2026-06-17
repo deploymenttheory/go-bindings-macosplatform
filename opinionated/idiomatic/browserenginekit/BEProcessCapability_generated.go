@@ -23,3 +23,16 @@ func NewProcessCapability() *ProcessCapability {
 	return &ProcessCapability{inner: raw.BEProcessCapabilityFromID(_id)}
 }
 
+// RequestWithError calls the underlying RequestWithError.
+func (x *ProcessCapability) RequestWithError() (raw.BEProcessCapabilityGrant, error) {
+	return x.inner.RequestWithError()
+}
+
+// ProcessCapabilityable is the interface implemented by [ProcessCapability], for mocking and DI.
+type ProcessCapabilityable interface {
+	Unwrap() *raw.BEProcessCapability
+	RequestWithError() (raw.BEProcessCapabilityGrant, error)
+}
+
+var _ ProcessCapabilityable = (*ProcessCapability)(nil)
+

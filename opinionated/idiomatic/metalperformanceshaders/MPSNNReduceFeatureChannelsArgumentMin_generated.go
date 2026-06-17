@@ -41,3 +41,10 @@ func (x *NNReduceFeatureChannelsArgumentMin) asCNNKernel() *mpsneuralnetwork.MPS
 
 func (x *NNReduceFeatureChannelsArgumentMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceFeatureChannelsArgumentMinable is the interface implemented by [NNReduceFeatureChannelsArgumentMin], for mocking and DI.
+type NNReduceFeatureChannelsArgumentMinable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsArgumentMin
+}
+
+var _ NNReduceFeatureChannelsArgumentMinable = (*NNReduceFeatureChannelsArgumentMin)(nil)
+

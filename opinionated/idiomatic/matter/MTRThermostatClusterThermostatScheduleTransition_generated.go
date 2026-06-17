@@ -25,3 +25,10 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 
 func (x *MTRThermostatClusterThermostatScheduleTransition) asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct { return &x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct }
 
+// MTRThermostatClusterThermostatScheduleTransitionable is the interface implemented by [MTRThermostatClusterThermostatScheduleTransition], for mocking and DI.
+type MTRThermostatClusterThermostatScheduleTransitionable interface {
+	Unwrap() *raw.MTRThermostatClusterThermostatScheduleTransition
+}
+
+var _ MTRThermostatClusterThermostatScheduleTransitionable = (*MTRThermostatClusterThermostatScheduleTransition)(nil)
+

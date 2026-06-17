@@ -49,3 +49,53 @@ func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) WithTimedInvokeT
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// Data calls the underlying Data.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) Data() string {
+	_r := x.inner.Data()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetData(data string) {
+	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTargetNavigatorClusterNavigateTargetResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRTargetNavigatorClusterNavigateTargetResponseParamsable is the interface implemented by [MTRTargetNavigatorClusterNavigateTargetResponseParams], for mocking and DI.
+type MTRTargetNavigatorClusterNavigateTargetResponseParamsable interface {
+	Unwrap() *raw.MTRTargetNavigatorClusterNavigateTargetResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetResponseParams
+	WithData(data string) *MTRTargetNavigatorClusterNavigateTargetResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTargetNavigatorClusterNavigateTargetResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	Data() string
+	SetData(data string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRTargetNavigatorClusterNavigateTargetResponseParamsable = (*MTRTargetNavigatorClusterNavigateTargetResponseParams)(nil)
+

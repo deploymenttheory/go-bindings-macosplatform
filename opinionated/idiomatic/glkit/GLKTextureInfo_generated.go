@@ -23,3 +23,70 @@ func NewTextureInfo() *TextureInfo {
 	return &TextureInfo{inner: raw.GLKTextureInfoFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *TextureInfo) Name() uint32 {
+	return x.inner.Name()
+}
+
+// Target calls the underlying Target.
+func (x *TextureInfo) Target() uint32 {
+	return x.inner.Target()
+}
+
+// Width calls the underlying Width.
+func (x *TextureInfo) Width() uint32 {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *TextureInfo) Height() uint32 {
+	return x.inner.Height()
+}
+
+// Depth calls the underlying Depth.
+func (x *TextureInfo) Depth() uint32 {
+	return x.inner.Depth()
+}
+
+// AlphaState calls the underlying AlphaState.
+func (x *TextureInfo) AlphaState() raw.GLKTextureInfoAlphaState {
+	return x.inner.AlphaState()
+}
+
+// TextureOrigin calls the underlying TextureOrigin.
+func (x *TextureInfo) TextureOrigin() raw.GLKTextureInfoOrigin {
+	return x.inner.TextureOrigin()
+}
+
+// ContainsMipmaps calls the underlying ContainsMipmaps.
+func (x *TextureInfo) ContainsMipmaps() bool {
+	return x.inner.ContainsMipmaps()
+}
+
+// MimapLevelCount calls the underlying MimapLevelCount.
+func (x *TextureInfo) MimapLevelCount() uint32 {
+	return x.inner.MimapLevelCount()
+}
+
+// ArrayLength calls the underlying ArrayLength.
+func (x *TextureInfo) ArrayLength() uint32 {
+	return x.inner.ArrayLength()
+}
+
+// TextureInfoable is the interface implemented by [TextureInfo], for mocking and DI.
+type TextureInfoable interface {
+	Unwrap() *raw.GLKTextureInfo
+	Name() uint32
+	Target() uint32
+	Width() uint32
+	Height() uint32
+	Depth() uint32
+	AlphaState() raw.GLKTextureInfoAlphaState
+	TextureOrigin() raw.GLKTextureInfoOrigin
+	ContainsMipmaps() bool
+	MimapLevelCount() uint32
+	ArrayLength() uint32
+}
+
+var _ TextureInfoable = (*TextureInfo)(nil)
+

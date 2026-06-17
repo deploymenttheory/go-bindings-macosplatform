@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,106 @@ func NewURLCredentialStorage() *URLCredentialStorage {
 	return &URLCredentialStorage{inner: raw.NSURLCredentialStorageFromID(_id)}
 }
 
+// CredentialsForProtectionSpace calls the underlying CredentialsForProtectionSpace.
+func (x *URLCredentialStorage) CredentialsForProtectionSpace(space *raw.NSURLProtectionSpace) *raw.NSDictionary[*raw.NSString, *raw.NSURLCredential] {
+	return x.inner.CredentialsForProtectionSpace(space)
+}
+
+// SetCredentialForProtectionSpace calls the underlying SetCredentialForProtectionSpace.
+func (x *URLCredentialStorage) SetCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
+	x.inner.SetCredentialForProtectionSpace(credential, space)
+}
+
+// RemoveCredentialForProtectionSpace calls the underlying RemoveCredentialForProtectionSpace.
+func (x *URLCredentialStorage) RemoveCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
+	x.inner.RemoveCredentialForProtectionSpace(credential, space)
+}
+
+// RemoveCredentialForProtectionSpaceOptions calls the underlying RemoveCredentialForProtectionSpaceOptions.
+func (x *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace, options *raw.NSDictionary[*raw.NSString, objc.ID]) {
+	x.inner.RemoveCredentialForProtectionSpaceOptions(credential, space, options)
+}
+
+// DefaultCredentialForProtectionSpace calls the underlying DefaultCredentialForProtectionSpace.
+func (x *URLCredentialStorage) DefaultCredentialForProtectionSpace(space *raw.NSURLProtectionSpace) *URLCredential {
+	_r := x.inner.DefaultCredentialForProtectionSpace(space)
+	if _r == nil {
+		return nil
+	}
+	return &URLCredential{inner: _r}
+}
+
+// SetDefaultCredentialForProtectionSpace calls the underlying SetDefaultCredentialForProtectionSpace.
+func (x *URLCredentialStorage) SetDefaultCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace) {
+	x.inner.SetDefaultCredentialForProtectionSpace(credential, space)
+}
+
+// AllCredentials calls the underlying AllCredentials.
+func (x *URLCredentialStorage) AllCredentials() *raw.NSDictionary[*raw.NSURLProtectionSpace, objc.ID] {
+	return x.inner.AllCredentials()
+}
+
+// GetCredentialsForProtectionSpaceTaskCompletionHandler calls the underlying GetCredentialsForProtectionSpaceTaskCompletionHandler.
+func (x *URLCredentialStorage) GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask, completionHandler func(*raw.NSDictionary[*raw.NSString, *raw.NSURLCredential])) {
+	x.inner.GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace, task, completionHandler)
+}
+
+// SetCredentialForProtectionSpaceTask calls the underlying SetCredentialForProtectionSpaceTask.
+func (x *URLCredentialStorage) SetCredentialForProtectionSpaceTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask) {
+	x.inner.SetCredentialForProtectionSpaceTask(credential, protectionSpace, task)
+}
+
+// RemoveCredentialForProtectionSpaceOptionsTask calls the underlying RemoveCredentialForProtectionSpaceOptionsTask.
+func (x *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptionsTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, options *raw.NSDictionary[*raw.NSString, objc.ID], task *raw.NSURLSessionTask) {
+	x.inner.RemoveCredentialForProtectionSpaceOptionsTask(credential, protectionSpace, options, task)
+}
+
+// GetDefaultCredentialForProtectionSpaceTask blocks until the operation completes or ctx is cancelled.
+func (x *URLCredentialStorage) GetDefaultCredentialForProtectionSpaceTask(ctx context.Context, space *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask) (*URLCredential, error) {
+	type _result struct {
+		val *URLCredential
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetDefaultCredentialForProtectionSpaceTaskCompletionHandler(space, task, func(_p0 *raw.NSURLCredential) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &URLCredential{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *URLCredential
+		return _zero, ctx.Err()
+	}
+}
+
+// SetDefaultCredentialForProtectionSpaceTask calls the underlying SetDefaultCredentialForProtectionSpaceTask.
+func (x *URLCredentialStorage) SetDefaultCredentialForProtectionSpaceTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask) {
+	x.inner.SetDefaultCredentialForProtectionSpaceTask(credential, protectionSpace, task)
+}
+
 func (x *URLCredentialStorage) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLCredentialStorageable is the interface implemented by [URLCredentialStorage], for mocking and DI.
+type URLCredentialStorageable interface {
+	Unwrap() *raw.NSURLCredentialStorage
+	CredentialsForProtectionSpace(space *raw.NSURLProtectionSpace) *raw.NSDictionary[*raw.NSString, *raw.NSURLCredential]
+	SetCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace)
+	RemoveCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace)
+	RemoveCredentialForProtectionSpaceOptions(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace, options *raw.NSDictionary[*raw.NSString, objc.ID])
+	DefaultCredentialForProtectionSpace(space *raw.NSURLProtectionSpace) *URLCredential
+	SetDefaultCredentialForProtectionSpace(credential *raw.NSURLCredential, space *raw.NSURLProtectionSpace)
+	AllCredentials() *raw.NSDictionary[*raw.NSURLProtectionSpace, objc.ID]
+	GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask, completionHandler func(*raw.NSDictionary[*raw.NSString, *raw.NSURLCredential]))
+	SetCredentialForProtectionSpaceTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask)
+	RemoveCredentialForProtectionSpaceOptionsTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, options *raw.NSDictionary[*raw.NSString, objc.ID], task *raw.NSURLSessionTask)
+	GetDefaultCredentialForProtectionSpaceTask(ctx context.Context, space *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask) (*URLCredential, error)
+	SetDefaultCredentialForProtectionSpaceTask(credential *raw.NSURLCredential, protectionSpace *raw.NSURLProtectionSpace, task *raw.NSURLSessionTask)
+}
+
+var _ URLCredentialStorageable = (*URLCredentialStorage)(nil)
 

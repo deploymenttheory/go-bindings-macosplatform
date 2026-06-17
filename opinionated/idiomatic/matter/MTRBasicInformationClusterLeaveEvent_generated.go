@@ -30,5 +30,25 @@ func (x *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex *foun
 	return x
 }
 
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRBasicInformationClusterLeaveEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRBasicInformationClusterLeaveEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTRBasicInformationClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent { return x.inner }
+
+// MTRBasicInformationClusterLeaveEventable is the interface implemented by [MTRBasicInformationClusterLeaveEvent], for mocking and DI.
+type MTRBasicInformationClusterLeaveEventable interface {
+	Unwrap() *raw.MTRBasicInformationClusterLeaveEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBasicInformationClusterLeaveEvent
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRBasicInformationClusterLeaveEventable = (*MTRBasicInformationClusterLeaveEvent)(nil)
 

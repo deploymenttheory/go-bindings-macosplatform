@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewHistogram() *Histogram {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXHistogram")), objc.RegisterName("new"))
 	return &Histogram{inner: raw.MXHistogramFromID[objc.ID](_id)}
 }
+
+// TotalBucketCount calls the underlying TotalBucketCount.
+func (x *Histogram) TotalBucketCount() uint {
+	return x.inner.TotalBucketCount()
+}
+
+// BucketEnumerator calls the underlying BucketEnumerator.
+func (x *Histogram) BucketEnumerator() *foundation.NSEnumerator[objc.ID] {
+	return x.inner.BucketEnumerator()
+}
+
+// Histogramable is the interface implemented by [Histogram], for mocking and DI.
+type Histogramable interface {
+	Unwrap() *raw.MXHistogram[objc.ID]
+	TotalBucketCount() uint
+	BucketEnumerator() *foundation.NSEnumerator[objc.ID]
+}
+
+var _ Histogramable = (*Histogram)(nil)
 

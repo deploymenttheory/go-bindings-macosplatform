@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,63 @@ func (x *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *r
 	return x
 }
 
+// FunctionDescriptor calls the underlying FunctionDescriptor.
+func (x *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := x.inner.FunctionDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4FunctionDescriptor{inner: _r}
+}
+
+// SetFunctionDescriptor calls the underlying SetFunctionDescriptor.
+func (x *MTL4SpecializedFunctionDescriptor) SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor) {
+	x.inner.SetFunctionDescriptor(functionDescriptor)
+}
+
+// SpecializedName calls the underlying SpecializedName.
+func (x *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
+	_r := x.inner.SpecializedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSpecializedName calls the underlying SetSpecializedName.
+func (x *MTL4SpecializedFunctionDescriptor) SetSpecializedName(specializedName string) {
+	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
+}
+
+// ConstantValues calls the underlying ConstantValues.
+func (x *MTL4SpecializedFunctionDescriptor) ConstantValues() *FunctionConstantValues {
+	_r := x.inner.ConstantValues()
+	if _r == nil {
+		return nil
+	}
+	return &FunctionConstantValues{inner: _r}
+}
+
+// SetConstantValues calls the underlying SetConstantValues.
+func (x *MTL4SpecializedFunctionDescriptor) SetConstantValues(constantValues *raw.MTLFunctionConstantValues) {
+	x.inner.SetConstantValues(constantValues)
+}
+
 func (x *MTL4SpecializedFunctionDescriptor) asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor { return &x.inner.MTL4FunctionDescriptor }
+
+// MTL4SpecializedFunctionDescriptorable is the interface implemented by [MTL4SpecializedFunctionDescriptor], for mocking and DI.
+type MTL4SpecializedFunctionDescriptorable interface {
+	Unwrap() *raw.MTL4SpecializedFunctionDescriptor
+	WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor
+	WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor
+	WithConstantValues(constantValues *raw.MTLFunctionConstantValues) *MTL4SpecializedFunctionDescriptor
+	FunctionDescriptor() *MTL4FunctionDescriptor
+	SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor)
+	SpecializedName() string
+	SetSpecializedName(specializedName string)
+	ConstantValues() *FunctionConstantValues
+	SetConstantValues(constantValues *raw.MTLFunctionConstantValues)
+}
+
+var _ MTL4SpecializedFunctionDescriptorable = (*MTL4SpecializedFunctionDescriptor)(nil)
 

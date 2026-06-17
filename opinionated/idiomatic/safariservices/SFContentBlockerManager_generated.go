@@ -23,3 +23,10 @@ func NewContentBlockerManager() *ContentBlockerManager {
 	return &ContentBlockerManager{inner: raw.SFContentBlockerManagerFromID(_id)}
 }
 
+// ContentBlockerManagerable is the interface implemented by [ContentBlockerManager], for mocking and DI.
+type ContentBlockerManagerable interface {
+	Unwrap() *raw.SFContentBlockerManager
+}
+
+var _ ContentBlockerManagerable = (*ContentBlockerManager)(nil)
+

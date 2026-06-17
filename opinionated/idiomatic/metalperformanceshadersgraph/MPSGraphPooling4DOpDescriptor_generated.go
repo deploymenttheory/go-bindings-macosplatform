@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -126,11 +127,14 @@ func (x *GraphPooling4DOpDescriptor) KernelSizes() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetKernelSizes calls the underlying SetKernelSizes.
+func (x *GraphPooling4DOpDescriptor) SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetKernelSizes(kernelSizes)
 }
 
 // Strides returns the collection as a Go slice.
@@ -139,11 +143,14 @@ func (x *GraphPooling4DOpDescriptor) Strides() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetStrides calls the underlying SetStrides.
+func (x *GraphPooling4DOpDescriptor) SetStrides(strides *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetStrides(strides)
 }
 
 // DilationRates returns the collection as a Go slice.
@@ -152,11 +159,14 @@ func (x *GraphPooling4DOpDescriptor) DilationRates() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetDilationRates calls the underlying SetDilationRates.
+func (x *GraphPooling4DOpDescriptor) SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetDilationRates(dilationRates)
 }
 
 // PaddingValues returns the collection as a Go slice.
@@ -165,12 +175,99 @@ func (x *GraphPooling4DOpDescriptor) PaddingValues() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetPaddingValues calls the underlying SetPaddingValues.
+func (x *GraphPooling4DOpDescriptor) SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetPaddingValues(paddingValues)
+}
+
+// PaddingStyle calls the underlying PaddingStyle.
+func (x *GraphPooling4DOpDescriptor) PaddingStyle() raw.MPSGraphPaddingStyle {
+	return x.inner.PaddingStyle()
+}
+
+// SetPaddingStyle calls the underlying SetPaddingStyle.
+func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) {
+	x.inner.SetPaddingStyle(paddingStyle)
+}
+
+// CeilMode calls the underlying CeilMode.
+func (x *GraphPooling4DOpDescriptor) CeilMode() bool {
+	return x.inner.CeilMode()
+}
+
+// SetCeilMode calls the underlying SetCeilMode.
+func (x *GraphPooling4DOpDescriptor) SetCeilMode(ceilMode bool) {
+	x.inner.SetCeilMode(ceilMode)
+}
+
+// IncludeZeroPadToAverage calls the underlying IncludeZeroPadToAverage.
+func (x *GraphPooling4DOpDescriptor) IncludeZeroPadToAverage() bool {
+	return x.inner.IncludeZeroPadToAverage()
+}
+
+// SetIncludeZeroPadToAverage calls the underlying SetIncludeZeroPadToAverage.
+func (x *GraphPooling4DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
+	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
+}
+
+// ReturnIndicesMode calls the underlying ReturnIndicesMode.
+func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode {
+	return x.inner.ReturnIndicesMode()
+}
+
+// SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
+func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) {
+	x.inner.SetReturnIndicesMode(returnIndicesMode)
+}
+
+// ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
+func (x *GraphPooling4DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
+	return x.inner.ReturnIndicesDataType()
+}
+
+// SetReturnIndicesDataType calls the underlying SetReturnIndicesDataType.
+func (x *GraphPooling4DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
+	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
 }
 
 func (x *GraphPooling4DOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphPooling4DOpDescriptorable is the interface implemented by [GraphPooling4DOpDescriptor], for mocking and DI.
+type GraphPooling4DOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphPooling4DOpDescriptor
+	WithKernelSizes(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
+	WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
+	WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
+	WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
+	WithPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor
+	WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor
+	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor
+	WithReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
+	WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling4DOpDescriptor
+	KernelSizes() []*foundation.NSNumber
+	SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber])
+	Strides() []*foundation.NSNumber
+	SetStrides(strides *foundation.NSArray[*foundation.NSNumber])
+	DilationRates() []*foundation.NSNumber
+	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
+	PaddingValues() []*foundation.NSNumber
+	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
+	PaddingStyle() raw.MPSGraphPaddingStyle
+	SetPaddingStyle(paddingStyle raw.MPSGraphPaddingStyle)
+	CeilMode() bool
+	SetCeilMode(ceilMode bool)
+	IncludeZeroPadToAverage() bool
+	SetIncludeZeroPadToAverage(includeZeroPadToAverage bool)
+	ReturnIndicesMode() raw.MPSGraphPoolingReturnIndicesMode
+	SetReturnIndicesMode(returnIndicesMode raw.MPSGraphPoolingReturnIndicesMode)
+	ReturnIndicesDataType() mpscore.MPSDataType
+	SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType)
+}
+
+var _ GraphPooling4DOpDescriptorable = (*GraphPooling4DOpDescriptor)(nil)
 

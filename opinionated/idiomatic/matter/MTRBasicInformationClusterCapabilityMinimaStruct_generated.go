@@ -36,5 +36,38 @@ func (x *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerF
 	return x
 }
 
+// CaseSessionsPerFabric calls the underlying CaseSessionsPerFabric.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() *foundation.NSNumber {
+	return x.inner.CaseSessionsPerFabric()
+}
+
+// SetCaseSessionsPerFabric calls the underlying SetCaseSessionsPerFabric.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetCaseSessionsPerFabric(caseSessionsPerFabric *foundation.NSNumber) {
+	x.inner.SetCaseSessionsPerFabric(caseSessionsPerFabric)
+}
+
+// SubscriptionsPerFabric calls the underlying SubscriptionsPerFabric.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() *foundation.NSNumber {
+	return x.inner.SubscriptionsPerFabric()
+}
+
+// SetSubscriptionsPerFabric calls the underlying SetSubscriptionsPerFabric.
+func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber) {
+	x.inner.SetSubscriptionsPerFabric(subscriptionsPerFabric)
+}
+
 func (x *MTRBasicInformationClusterCapabilityMinimaStruct) asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct { return x.inner }
+
+// MTRBasicInformationClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicInformationClusterCapabilityMinimaStruct], for mocking and DI.
+type MTRBasicInformationClusterCapabilityMinimaStructable interface {
+	Unwrap() *raw.MTRBasicInformationClusterCapabilityMinimaStruct
+	WithCaseSessionsPerFabric(caseSessionsPerFabric *foundation.NSNumber) *MTRBasicInformationClusterCapabilityMinimaStruct
+	WithSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber) *MTRBasicInformationClusterCapabilityMinimaStruct
+	CaseSessionsPerFabric() *foundation.NSNumber
+	SetCaseSessionsPerFabric(caseSessionsPerFabric *foundation.NSNumber)
+	SubscriptionsPerFabric() *foundation.NSNumber
+	SetSubscriptionsPerFabric(subscriptionsPerFabric *foundation.NSNumber)
+}
+
+var _ MTRBasicInformationClusterCapabilityMinimaStructable = (*MTRBasicInformationClusterCapabilityMinimaStruct)(nil)
 

@@ -5,8 +5,16 @@
 package photos
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LivePhotoEditingContext wraps [raw.PHLivePhotoEditingContext] with a fluent Go API.
@@ -35,4 +43,100 @@ func (x *LivePhotoEditingContext) WithAudioVolume(audioVolume float32) *LivePhot
 	x.inner.SetAudioVolume(audioVolume)
 	return x
 }
+
+// PrepareLivePhotoForPlaybackWithTargetSizeOptions blocks until the operation completes or ctx is cancelled.
+func (x *LivePhotoEditingContext) PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error) {
+	type _result struct {
+		val *LivePhoto
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.PrepareLivePhotoForPlaybackWithTargetSizeOptionsCompletionHandler(targetSize, options, func(_p0 *raw.PHLivePhoto, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &LivePhoto{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *LivePhoto
+		return _zero, ctx.Err()
+	}
+}
+
+// SaveLivePhotoToOutputOptionsCompletionHandler calls the underlying SaveLivePhotoToOutputOptionsCompletionHandler.
+func (x *LivePhotoEditingContext) SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer)) {
+	x.inner.SaveLivePhotoToOutputOptionsCompletionHandler(output, options, handler)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *LivePhotoEditingContext) Cancel() {
+	x.inner.Cancel()
+}
+
+// FullSizeImage calls the underlying FullSizeImage.
+func (x *LivePhotoEditingContext) FullSizeImage() *coreimage.CIImage {
+	return x.inner.FullSizeImage()
+}
+
+// Duration calls the underlying Duration.
+func (x *LivePhotoEditingContext) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// PhotoTime calls the underlying PhotoTime.
+func (x *LivePhotoEditingContext) PhotoTime() coremedia.CMTime {
+	return x.inner.PhotoTime()
+}
+
+// FrameProcessor calls the underlying FrameProcessor.
+func (x *LivePhotoEditingContext) FrameProcessor() objc.Block {
+	return x.inner.FrameProcessor()
+}
+
+// SetFrameProcessor calls the underlying SetFrameProcessor.
+func (x *LivePhotoEditingContext) SetFrameProcessor(frameProcessor objc.Block) {
+	x.inner.SetFrameProcessor(frameProcessor)
+}
+
+// AudioVolume calls the underlying AudioVolume.
+func (x *LivePhotoEditingContext) AudioVolume() float32 {
+	return x.inner.AudioVolume()
+}
+
+// SetAudioVolume calls the underlying SetAudioVolume.
+func (x *LivePhotoEditingContext) SetAudioVolume(audioVolume float32) {
+	x.inner.SetAudioVolume(audioVolume)
+}
+
+// Orientation calls the underlying Orientation.
+func (x *LivePhotoEditingContext) Orientation() imageio.CGImagePropertyOrientation {
+	return x.inner.Orientation()
+}
+
+// LivePhotoEditingContextable is the interface implemented by [LivePhotoEditingContext], for mocking and DI.
+type LivePhotoEditingContextable interface {
+	Unwrap() *raw.PHLivePhotoEditingContext
+	WithFrameProcessor(frameProcessor objc.Block) *LivePhotoEditingContext
+	WithAudioVolume(audioVolume float32) *LivePhotoEditingContext
+	PrepareLivePhotoForPlaybackWithTargetSizeOptions(ctx context.Context, targetSize corefoundation.CGSize, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*LivePhoto, error)
+	SaveLivePhotoToOutputOptionsCompletionHandler(output *raw.PHContentEditingOutput, options *foundation.NSDictionary[*foundation.NSString, objc.ID], handler func(bool, unsafe.Pointer))
+	Cancel()
+	FullSizeImage() *coreimage.CIImage
+	Duration() coremedia.CMTime
+	PhotoTime() coremedia.CMTime
+	FrameProcessor() objc.Block
+	SetFrameProcessor(frameProcessor objc.Block)
+	AudioVolume() float32
+	SetAudioVolume(audioVolume float32)
+	Orientation() imageio.CGImagePropertyOrientation
+}
+
+var _ LivePhotoEditingContextable = (*LivePhotoEditingContext)(nil)
 

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,44 @@ func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *Scrub
 	return x
 }
 
+// InvalidateLayoutForItemsAtIndexes calls the underlying InvalidateLayoutForItemsAtIndexes.
+func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet) {
+	x.inner.InvalidateLayoutForItemsAtIndexes(invalidItemIndexes)
+}
+
+// ItemSpacing calls the underlying ItemSpacing.
+func (x *ScrubberFlowLayout) ItemSpacing() float64 {
+	return x.inner.ItemSpacing()
+}
+
+// SetItemSpacing calls the underlying SetItemSpacing.
+func (x *ScrubberFlowLayout) SetItemSpacing(itemSpacing float64) {
+	x.inner.SetItemSpacing(itemSpacing)
+}
+
+// ItemSize calls the underlying ItemSize.
+func (x *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
+	return x.inner.ItemSize()
+}
+
+// SetItemSize calls the underlying SetItemSize.
+func (x *ScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
+	x.inner.SetItemSize(itemSize)
+}
+
 func (x *ScrubberFlowLayout) asScrubberLayout() *raw.NSScrubberLayout { return &x.inner.NSScrubberLayout }
+
+// ScrubberFlowLayoutable is the interface implemented by [ScrubberFlowLayout], for mocking and DI.
+type ScrubberFlowLayoutable interface {
+	Unwrap() *raw.NSScrubberFlowLayout
+	WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout
+	WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout
+	InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet)
+	ItemSpacing() float64
+	SetItemSpacing(itemSpacing float64)
+	ItemSize() corefoundation.CGSize
+	SetItemSize(itemSize corefoundation.CGSize)
+}
+
+var _ ScrubberFlowLayoutable = (*ScrubberFlowLayout)(nil)
 

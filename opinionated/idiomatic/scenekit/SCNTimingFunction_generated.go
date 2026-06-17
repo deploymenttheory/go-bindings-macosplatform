@@ -23,3 +23,10 @@ func NewTimingFunction() *TimingFunction {
 	return &TimingFunction{inner: raw.SCNTimingFunctionFromID(_id)}
 }
 
+// TimingFunctionable is the interface implemented by [TimingFunction], for mocking and DI.
+type TimingFunctionable interface {
+	Unwrap() *raw.SCNTimingFunction
+}
+
+var _ TimingFunctionable = (*TimingFunction)(nil)
+

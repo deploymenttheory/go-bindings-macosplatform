@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewMTRUnitTestingClusterDoubleNestedStructList() *MTRUnitTestingClusterDoub
 	return &MTRUnitTestingClusterDoubleNestedStructList{inner: raw.MTRUnitTestingClusterDoubleNestedStructListFromID(_id)}
 }
 
+// A calls the underlying A.
+func (x *MTRUnitTestingClusterDoubleNestedStructList) A() *foundation.NSArray[objc.ID] {
+	return x.inner.A()
+}
+
+// SetA calls the underlying SetA.
+func (x *MTRUnitTestingClusterDoubleNestedStructList) SetA(a *foundation.NSArray[objc.ID]) {
+	x.inner.SetA(a)
+}
+
 func (x *MTRUnitTestingClusterDoubleNestedStructList) asMTRUnitTestingClusterDoubleNestedStructList() *raw.MTRUnitTestingClusterDoubleNestedStructList { return x.inner }
+
+// MTRUnitTestingClusterDoubleNestedStructListable is the interface implemented by [MTRUnitTestingClusterDoubleNestedStructList], for mocking and DI.
+type MTRUnitTestingClusterDoubleNestedStructListable interface {
+	Unwrap() *raw.MTRUnitTestingClusterDoubleNestedStructList
+	A() *foundation.NSArray[objc.ID]
+	SetA(a *foundation.NSArray[objc.ID])
+}
+
+var _ MTRUnitTestingClusterDoubleNestedStructListable = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)
 

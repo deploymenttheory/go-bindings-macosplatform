@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -90,16 +91,163 @@ func (x *AddPaymentPassRequestConfiguration) WithRequiresFelicaSecureElement(req
 	return x
 }
 
+// EncryptionScheme calls the underlying EncryptionScheme.
+func (x *AddPaymentPassRequestConfiguration) EncryptionScheme() string {
+	_r := x.inner.EncryptionScheme()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Style calls the underlying Style.
+func (x *AddPaymentPassRequestConfiguration) Style() raw.PKAddPaymentPassStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *AddPaymentPassRequestConfiguration) SetStyle(style raw.PKAddPaymentPassStyle) {
+	x.inner.SetStyle(style)
+}
+
+// CardholderName calls the underlying CardholderName.
+func (x *AddPaymentPassRequestConfiguration) CardholderName() string {
+	_r := x.inner.CardholderName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCardholderName calls the underlying SetCardholderName.
+func (x *AddPaymentPassRequestConfiguration) SetCardholderName(cardholderName string) {
+	x.inner.SetCardholderName(foundation.NSStringStringWithUTF8String(cardholderName))
+}
+
+// PrimaryAccountSuffix calls the underlying PrimaryAccountSuffix.
+func (x *AddPaymentPassRequestConfiguration) PrimaryAccountSuffix() string {
+	_r := x.inner.PrimaryAccountSuffix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrimaryAccountSuffix calls the underlying SetPrimaryAccountSuffix.
+func (x *AddPaymentPassRequestConfiguration) SetPrimaryAccountSuffix(primaryAccountSuffix string) {
+	x.inner.SetPrimaryAccountSuffix(foundation.NSStringStringWithUTF8String(primaryAccountSuffix))
+}
+
 // CardDetails returns the collection as a Go slice.
 func (x *AddPaymentPassRequestConfiguration) CardDetails() []*raw.PKLabeledValue {
 	arr := x.inner.CardDetails()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKLabeledValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKLabeledValue {
+		return raw.PKLabeledValueFromID(purego.Retain(_id))
+	})
 }
+
+// SetCardDetails calls the underlying SetCardDetails.
+func (x *AddPaymentPassRequestConfiguration) SetCardDetails(cardDetails *foundation.NSArray[*raw.PKLabeledValue]) {
+	x.inner.SetCardDetails(cardDetails)
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *AddPaymentPassRequestConfiguration) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *AddPaymentPassRequestConfiguration) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// PrimaryAccountIdentifier calls the underlying PrimaryAccountIdentifier.
+func (x *AddPaymentPassRequestConfiguration) PrimaryAccountIdentifier() string {
+	_r := x.inner.PrimaryAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrimaryAccountIdentifier calls the underlying SetPrimaryAccountIdentifier.
+func (x *AddPaymentPassRequestConfiguration) SetPrimaryAccountIdentifier(primaryAccountIdentifier string) {
+	x.inner.SetPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
+}
+
+// PaymentNetwork calls the underlying PaymentNetwork.
+func (x *AddPaymentPassRequestConfiguration) PaymentNetwork() string {
+	_r := x.inner.PaymentNetwork()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPaymentNetwork calls the underlying SetPaymentNetwork.
+func (x *AddPaymentPassRequestConfiguration) SetPaymentNetwork(paymentNetwork *foundation.NSString) {
+	x.inner.SetPaymentNetwork(paymentNetwork)
+}
+
+// ProductIdentifiers calls the underlying ProductIdentifiers.
+func (x *AddPaymentPassRequestConfiguration) ProductIdentifiers() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.ProductIdentifiers()
+}
+
+// SetProductIdentifiers calls the underlying SetProductIdentifiers.
+func (x *AddPaymentPassRequestConfiguration) SetProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetProductIdentifiers(productIdentifiers)
+}
+
+// RequiresFelicaSecureElement calls the underlying RequiresFelicaSecureElement.
+func (x *AddPaymentPassRequestConfiguration) RequiresFelicaSecureElement() bool {
+	return x.inner.RequiresFelicaSecureElement()
+}
+
+// SetRequiresFelicaSecureElement calls the underlying SetRequiresFelicaSecureElement.
+func (x *AddPaymentPassRequestConfiguration) SetRequiresFelicaSecureElement(requiresFelicaSecureElement bool) {
+	x.inner.SetRequiresFelicaSecureElement(requiresFelicaSecureElement)
+}
+
+// AddPaymentPassRequestConfigurationable is the interface implemented by [AddPaymentPassRequestConfiguration], for mocking and DI.
+type AddPaymentPassRequestConfigurationable interface {
+	Unwrap() *raw.PKAddPaymentPassRequestConfiguration
+	WithStyle(style raw.PKAddPaymentPassStyle) *AddPaymentPassRequestConfiguration
+	WithCardholderName(cardholderName string) *AddPaymentPassRequestConfiguration
+	WithPrimaryAccountSuffix(primaryAccountSuffix string) *AddPaymentPassRequestConfiguration
+	WithCardDetails(items ...*raw.PKLabeledValue) *AddPaymentPassRequestConfiguration
+	WithLocalizedDescription(localizedDescription string) *AddPaymentPassRequestConfiguration
+	WithPrimaryAccountIdentifier(primaryAccountIdentifier string) *AddPaymentPassRequestConfiguration
+	WithPaymentNetwork(paymentNetwork *foundation.NSString) *AddPaymentPassRequestConfiguration
+	WithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *AddPaymentPassRequestConfiguration
+	WithRequiresFelicaSecureElement(requiresFelicaSecureElement bool) *AddPaymentPassRequestConfiguration
+	EncryptionScheme() string
+	Style() raw.PKAddPaymentPassStyle
+	SetStyle(style raw.PKAddPaymentPassStyle)
+	CardholderName() string
+	SetCardholderName(cardholderName string)
+	PrimaryAccountSuffix() string
+	SetPrimaryAccountSuffix(primaryAccountSuffix string)
+	CardDetails() []*raw.PKLabeledValue
+	SetCardDetails(cardDetails *foundation.NSArray[*raw.PKLabeledValue])
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	PrimaryAccountIdentifier() string
+	SetPrimaryAccountIdentifier(primaryAccountIdentifier string)
+	PaymentNetwork() string
+	SetPaymentNetwork(paymentNetwork *foundation.NSString)
+	ProductIdentifiers() *foundation.NSSet[*foundation.NSString]
+	SetProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString])
+	RequiresFelicaSecureElement() bool
+	SetRequiresFelicaSecureElement(requiresFelicaSecureElement bool)
+}
+
+var _ AddPaymentPassRequestConfigurationable = (*AddPaymentPassRequestConfiguration)(nil)
 

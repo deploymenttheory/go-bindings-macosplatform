@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) WithTimedInvokeT
 	return x
 }
 
+// ReturnValue calls the underlying ReturnValue.
+func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) ReturnValue() *foundation.NSNumber {
+	return x.inner.ReturnValue()
+}
+
+// SetReturnValue calls the underlying SetReturnValue.
+func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) SetReturnValue(returnValue *foundation.NSNumber) {
+	x.inner.SetReturnValue(returnValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestSimpleArgumentResponseParams) asMTRUnitTestingClusterTestSimpleArgumentResponseParams() *raw.MTRUnitTestingClusterTestSimpleArgumentResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestSimpleArgumentResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestSimpleArgumentResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestSimpleArgumentResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestSimpleArgumentResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRUnitTestingClusterTestSimpleArgumentResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestSimpleArgumentResponseParams
+	ReturnValue() *foundation.NSNumber
+	SetReturnValue(returnValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestSimpleArgumentResponseParamsable = (*MTRUnitTestingClusterTestSimpleArgumentResponseParams)(nil)
 

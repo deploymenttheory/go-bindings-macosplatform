@@ -25,3 +25,38 @@ func NewNEPacketWithDataProtocolFamily(data *foundation.NSData, protocolFamily u
 	return &NEPacket{inner: raw.NEPacketFromID(_id)}
 }
 
+// Data calls the underlying Data.
+func (x *NEPacket) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// ProtocolFamily calls the underlying ProtocolFamily.
+func (x *NEPacket) ProtocolFamily() uint8 {
+	return x.inner.ProtocolFamily()
+}
+
+// Direction calls the underlying Direction.
+func (x *NEPacket) Direction() raw.NETrafficDirection {
+	return x.inner.Direction()
+}
+
+// Metadata calls the underlying Metadata.
+func (x *NEPacket) Metadata() *NEFlowMetaData {
+	_r := x.inner.Metadata()
+	if _r == nil {
+		return nil
+	}
+	return &NEFlowMetaData{inner: _r}
+}
+
+// NEPacketable is the interface implemented by [NEPacket], for mocking and DI.
+type NEPacketable interface {
+	Unwrap() *raw.NEPacket
+	Data() *foundation.NSData
+	ProtocolFamily() uint8
+	Direction() raw.NETrafficDirection
+	Metadata() *NEFlowMetaData
+}
+
+var _ NEPacketable = (*NEPacket)(nil)
+

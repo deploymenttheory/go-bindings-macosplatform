@@ -34,3 +34,10 @@ func NewAudioSourceNodeWithFormatRenderBlock(format *raw.AVAudioFormat, block fu
 
 func (x *AudioSourceNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
+// AudioSourceNodeable is the interface implemented by [AudioSourceNode], for mocking and DI.
+type AudioSourceNodeable interface {
+	Unwrap() *raw.AVAudioSourceNode
+}
+
+var _ AudioSourceNodeable = (*AudioSourceNode)(nil)
+

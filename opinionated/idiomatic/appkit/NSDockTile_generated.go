@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +43,76 @@ func (x *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
 	x.inner.SetBadgeLabel(foundation.NSStringStringWithUTF8String(badgeLabel))
 	return x
 }
+
+// Display calls the underlying Display.
+func (x *DockTile) Display() {
+	x.inner.Display()
+}
+
+// Size calls the underlying Size.
+func (x *DockTile) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// ContentView calls the underlying ContentView.
+func (x *DockTile) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *DockTile) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// ShowsApplicationBadge calls the underlying ShowsApplicationBadge.
+func (x *DockTile) ShowsApplicationBadge() bool {
+	return x.inner.ShowsApplicationBadge()
+}
+
+// SetShowsApplicationBadge calls the underlying SetShowsApplicationBadge.
+func (x *DockTile) SetShowsApplicationBadge(showsApplicationBadge bool) {
+	x.inner.SetShowsApplicationBadge(showsApplicationBadge)
+}
+
+// BadgeLabel calls the underlying BadgeLabel.
+func (x *DockTile) BadgeLabel() string {
+	_r := x.inner.BadgeLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBadgeLabel calls the underlying SetBadgeLabel.
+func (x *DockTile) SetBadgeLabel(badgeLabel string) {
+	x.inner.SetBadgeLabel(foundation.NSStringStringWithUTF8String(badgeLabel))
+}
+
+// Owner calls the underlying Owner.
+func (x *DockTile) Owner() objc.ID {
+	return x.inner.Owner()
+}
+
+// DockTileable is the interface implemented by [DockTile], for mocking and DI.
+type DockTileable interface {
+	Unwrap() *raw.NSDockTile
+	WithContentView(contentView ViewProvider) *DockTile
+	WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile
+	WithBadgeLabel(badgeLabel string) *DockTile
+	Display()
+	Size() corefoundation.CGSize
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	ShowsApplicationBadge() bool
+	SetShowsApplicationBadge(showsApplicationBadge bool)
+	BadgeLabel() string
+	SetBadgeLabel(badgeLabel string)
+	Owner() objc.ID
+}
+
+var _ DockTileable = (*DockTile)(nil)
 

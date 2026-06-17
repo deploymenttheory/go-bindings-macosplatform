@@ -25,3 +25,10 @@ func NewDoubleResolutionResult() *DoubleResolutionResult {
 
 func (x *DoubleResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// DoubleResolutionResultable is the interface implemented by [DoubleResolutionResult], for mocking and DI.
+type DoubleResolutionResultable interface {
+	Unwrap() *raw.INDoubleResolutionResult
+}
+
+var _ DoubleResolutionResultable = (*DoubleResolutionResult)(nil)
+

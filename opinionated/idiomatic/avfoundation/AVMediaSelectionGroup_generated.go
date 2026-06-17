@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,60 @@ func NewMediaSelectionGroup() *MediaSelectionGroup {
 	return &MediaSelectionGroup{inner: raw.AVMediaSelectionGroupFromID(_id)}
 }
 
+// MediaSelectionOptionWithPropertyList calls the underlying MediaSelectionOptionWithPropertyList.
+func (x *MediaSelectionGroup) MediaSelectionOptionWithPropertyList(plist objc.ID) *MediaSelectionOption {
+	_r := x.inner.MediaSelectionOptionWithPropertyList(plist)
+	if _r == nil {
+		return nil
+	}
+	return &MediaSelectionOption{inner: _r}
+}
+
 // Options returns the collection as a Go slice.
 func (x *MediaSelectionGroup) Options() []*raw.AVMediaSelectionOption {
 	arr := x.inner.Options()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMediaSelectionOption, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMediaSelectionOption {
+		return raw.AVMediaSelectionOptionFromID(purego.Retain(_id))
+	})
+}
+
+// DefaultOption calls the underlying DefaultOption.
+func (x *MediaSelectionGroup) DefaultOption() *MediaSelectionOption {
+	_r := x.inner.DefaultOption()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MediaSelectionOption{inner: _r}
+}
+
+// AllowsEmptySelection calls the underlying AllowsEmptySelection.
+func (x *MediaSelectionGroup) AllowsEmptySelection() bool {
+	return x.inner.AllowsEmptySelection()
+}
+
+// CustomMediaSelectionScheme calls the underlying CustomMediaSelectionScheme.
+func (x *MediaSelectionGroup) CustomMediaSelectionScheme() *CustomMediaSelectionScheme {
+	_r := x.inner.CustomMediaSelectionScheme()
+	if _r == nil {
+		return nil
+	}
+	return &CustomMediaSelectionScheme{inner: _r}
 }
 
 func (x *MediaSelectionGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup { return x.inner }
+
+// MediaSelectionGroupable is the interface implemented by [MediaSelectionGroup], for mocking and DI.
+type MediaSelectionGroupable interface {
+	Unwrap() *raw.AVMediaSelectionGroup
+	MediaSelectionOptionWithPropertyList(plist objc.ID) *MediaSelectionOption
+	Options() []*raw.AVMediaSelectionOption
+	DefaultOption() *MediaSelectionOption
+	AllowsEmptySelection() bool
+	CustomMediaSelectionScheme() *CustomMediaSelectionScheme
+}
+
+var _ MediaSelectionGroupable = (*MediaSelectionGroup)(nil)
 

@@ -6,6 +6,8 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,40 @@ func NewImageSizeConstraint() *ImageSizeConstraint {
 	return &ImageSizeConstraint{inner: raw.MLImageSizeConstraintFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *ImageSizeConstraint) Type() raw.MLImageSizeConstraintType {
+	return x.inner.Type()
+}
+
+// PixelsWideRange calls the underlying PixelsWideRange.
+func (x *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
+	return x.inner.PixelsWideRange()
+}
+
+// PixelsHighRange calls the underlying PixelsHighRange.
+func (x *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
+	return x.inner.PixelsHighRange()
+}
+
 // EnumeratedImageSizes returns the collection as a Go slice.
 func (x *ImageSizeConstraint) EnumeratedImageSizes() []*raw.MLImageSize {
 	arr := x.inner.EnumeratedImageSizes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLImageSize, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLImageSize {
+		return raw.MLImageSizeFromID(purego.Retain(_id))
+	})
 }
+
+// ImageSizeConstraintable is the interface implemented by [ImageSizeConstraint], for mocking and DI.
+type ImageSizeConstraintable interface {
+	Unwrap() *raw.MLImageSizeConstraint
+	Type() raw.MLImageSizeConstraintType
+	PixelsWideRange() foundation.NSRange
+	PixelsHighRange() foundation.NSRange
+	EnumeratedImageSizes() []*raw.MLImageSize
+}
+
+var _ ImageSizeConstraintable = (*ImageSizeConstraint)(nil)
 

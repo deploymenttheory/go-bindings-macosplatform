@@ -5,7 +5,9 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +25,24 @@ func NewColorKernel() *ColorKernel {
 	return &ColorKernel{inner: raw.CIColorKernelFromID(_id)}
 }
 
+// ApplyWithExtentArguments calls the underlying ApplyWithExtentArguments.
+func (x *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *Image {
+	_r := x.inner.ApplyWithExtentArguments(extent, args)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
 func (x *ColorKernel) asColorKernel() *raw.CIColorKernel { return x.inner }
 
 func (x *ColorKernel) asKernel() *raw.CIKernel { return &x.inner.CIKernel }
+
+// ColorKernelable is the interface implemented by [ColorKernel], for mocking and DI.
+type ColorKernelable interface {
+	Unwrap() *raw.CIColorKernel
+	ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *Image
+}
+
+var _ ColorKernelable = (*ColorKernel)(nil)
 

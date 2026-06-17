@@ -41,9 +41,29 @@ func (x *NNReduceFeatureChannelsSum) WithWeight(weight float32) *NNReduceFeature
 	return x
 }
 
+// Weight calls the underlying Weight.
+func (x *NNReduceFeatureChannelsSum) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// SetWeight calls the underlying SetWeight.
+func (x *NNReduceFeatureChannelsSum) SetWeight(weight float32) {
+	x.inner.SetWeight(weight)
+}
+
 func (x *NNReduceFeatureChannelsSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceFeatureChannelsSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
 func (x *NNReduceFeatureChannelsSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
+
+// NNReduceFeatureChannelsSumable is the interface implemented by [NNReduceFeatureChannelsSum], for mocking and DI.
+type NNReduceFeatureChannelsSumable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsSum
+	WithWeight(weight float32) *NNReduceFeatureChannelsSum
+	Weight() float32
+	SetWeight(weight float32)
+}
+
+var _ NNReduceFeatureChannelsSumable = (*NNReduceFeatureChannelsSum)(nil)
 

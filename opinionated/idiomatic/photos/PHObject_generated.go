@@ -6,6 +6,7 @@ package photos
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewObject() *Object {
 	return &Object{inner: raw.PHObjectFromID(_id)}
 }
 
+// LocalIdentifier calls the underlying LocalIdentifier.
+func (x *Object) LocalIdentifier() string {
+	_r := x.inner.LocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Object) asObject() *raw.PHObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.PHObject
+	LocalIdentifier() string
+}
+
+var _ Objectable = (*Object)(nil)
 

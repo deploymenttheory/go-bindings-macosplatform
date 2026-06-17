@@ -6,8 +6,10 @@ package networkextension
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NEProvider wraps [raw.NEProvider] with a fluent Go API.
@@ -38,5 +40,55 @@ func (x *NEProvider) Sleep(ctx context.Context) error {
 	}
 }
 
+// Wake calls the underlying Wake.
+func (x *NEProvider) Wake() {
+	x.inner.Wake()
+}
+
+// CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate.
+func (x *NEProvider) CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
+	_r := x.inner.CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint, enableTLS, tLSParameters, delegate)
+	if _r == nil {
+		return nil
+	}
+	return &NWTCPConnection{inner: _r}
+}
+
+// CreateUDPSessionToEndpointFromEndpoint calls the underlying CreateUDPSessionToEndpointFromEndpoint.
+func (x *NEProvider) CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
+	_r := x.inner.CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint, localEndpoint)
+	if _r == nil {
+		return nil
+	}
+	return &NWUDPSession{inner: _r}
+}
+
+// DisplayMessageCompletionHandler calls the underlying DisplayMessageCompletionHandler.
+func (x *NEProvider) DisplayMessageCompletionHandler(message string, completionHandler func(bool)) {
+	x.inner.DisplayMessageCompletionHandler(foundation.NSStringStringWithUTF8String(message), completionHandler)
+}
+
+// DefaultPath calls the underlying DefaultPath.
+func (x *NEProvider) DefaultPath() *NWPath {
+	_r := x.inner.DefaultPath()
+	if _r == nil {
+		return nil
+	}
+	return &NWPath{inner: _r}
+}
+
 func (x *NEProvider) asNEProvider() *raw.NEProvider { return x.inner }
+
+// NEProviderable is the interface implemented by [NEProvider], for mocking and DI.
+type NEProviderable interface {
+	Unwrap() *raw.NEProvider
+	Sleep(ctx context.Context) error
+	Wake()
+	CreateTCPConnectionToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection
+	CreateUDPSessionToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession
+	DisplayMessageCompletionHandler(message string, completionHandler func(bool))
+	DefaultPath() *NWPath
+}
+
+var _ NEProviderable = (*NEProvider)(nil)
 

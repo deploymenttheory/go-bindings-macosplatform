@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -108,6 +109,195 @@ func (x *DOMHTMLTableCellElement) WithScope(scope string) *DOMHTMLTableCellEleme
 	return x
 }
 
+// CellIndex calls the underlying CellIndex.
+func (x *DOMHTMLTableCellElement) CellIndex() int {
+	return x.inner.CellIndex()
+}
+
+// Align calls the underlying Align.
+func (x *DOMHTMLTableCellElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLTableCellElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// Axis calls the underlying Axis.
+func (x *DOMHTMLTableCellElement) Axis() string {
+	_r := x.inner.Axis()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAxis calls the underlying SetAxis.
+func (x *DOMHTMLTableCellElement) SetAxis(axis string) {
+	x.inner.SetAxis(foundation.NSStringStringWithUTF8String(axis))
+}
+
+// BgColor calls the underlying BgColor.
+func (x *DOMHTMLTableCellElement) BgColor() string {
+	_r := x.inner.BgColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBgColor calls the underlying SetBgColor.
+func (x *DOMHTMLTableCellElement) SetBgColor(bgColor string) {
+	x.inner.SetBgColor(foundation.NSStringStringWithUTF8String(bgColor))
+}
+
+// Ch calls the underlying Ch.
+func (x *DOMHTMLTableCellElement) Ch() string {
+	_r := x.inner.Ch()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCh calls the underlying SetCh.
+func (x *DOMHTMLTableCellElement) SetCh(ch string) {
+	x.inner.SetCh(foundation.NSStringStringWithUTF8String(ch))
+}
+
+// ChOff calls the underlying ChOff.
+func (x *DOMHTMLTableCellElement) ChOff() string {
+	_r := x.inner.ChOff()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetChOff calls the underlying SetChOff.
+func (x *DOMHTMLTableCellElement) SetChOff(chOff string) {
+	x.inner.SetChOff(foundation.NSStringStringWithUTF8String(chOff))
+}
+
+// ColSpan calls the underlying ColSpan.
+func (x *DOMHTMLTableCellElement) ColSpan() int {
+	return x.inner.ColSpan()
+}
+
+// SetColSpan calls the underlying SetColSpan.
+func (x *DOMHTMLTableCellElement) SetColSpan(colSpan int) {
+	x.inner.SetColSpan(colSpan)
+}
+
+// RowSpan calls the underlying RowSpan.
+func (x *DOMHTMLTableCellElement) RowSpan() int {
+	return x.inner.RowSpan()
+}
+
+// SetRowSpan calls the underlying SetRowSpan.
+func (x *DOMHTMLTableCellElement) SetRowSpan(rowSpan int) {
+	x.inner.SetRowSpan(rowSpan)
+}
+
+// Headers calls the underlying Headers.
+func (x *DOMHTMLTableCellElement) Headers() string {
+	_r := x.inner.Headers()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeaders calls the underlying SetHeaders.
+func (x *DOMHTMLTableCellElement) SetHeaders(headers string) {
+	x.inner.SetHeaders(foundation.NSStringStringWithUTF8String(headers))
+}
+
+// Height calls the underlying Height.
+func (x *DOMHTMLTableCellElement) Height() string {
+	_r := x.inner.Height()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *DOMHTMLTableCellElement) SetHeight(height string) {
+	x.inner.SetHeight(foundation.NSStringStringWithUTF8String(height))
+}
+
+// NoWrap calls the underlying NoWrap.
+func (x *DOMHTMLTableCellElement) NoWrap() bool {
+	return x.inner.NoWrap()
+}
+
+// SetNoWrap calls the underlying SetNoWrap.
+func (x *DOMHTMLTableCellElement) SetNoWrap(noWrap bool) {
+	x.inner.SetNoWrap(noWrap)
+}
+
+// VAlign calls the underlying VAlign.
+func (x *DOMHTMLTableCellElement) VAlign() string {
+	_r := x.inner.VAlign()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVAlign calls the underlying SetVAlign.
+func (x *DOMHTMLTableCellElement) SetVAlign(vAlign string) {
+	x.inner.SetVAlign(foundation.NSStringStringWithUTF8String(vAlign))
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLTableCellElement) Width() string {
+	_r := x.inner.Width()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLTableCellElement) SetWidth(width string) {
+	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+}
+
+// Abbr calls the underlying Abbr.
+func (x *DOMHTMLTableCellElement) Abbr() string {
+	_r := x.inner.Abbr()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAbbr calls the underlying SetAbbr.
+func (x *DOMHTMLTableCellElement) SetAbbr(abbr string) {
+	x.inner.SetAbbr(foundation.NSStringStringWithUTF8String(abbr))
+}
+
+// Scope calls the underlying Scope.
+func (x *DOMHTMLTableCellElement) Scope() string {
+	_r := x.inner.Scope()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetScope calls the underlying SetScope.
+func (x *DOMHTMLTableCellElement) SetScope(scope string) {
+	x.inner.SetScope(foundation.NSStringStringWithUTF8String(scope))
+}
+
 func (x *DOMHTMLTableCellElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLTableCellElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -117,4 +307,54 @@ func (x *DOMHTMLTableCellElement) asDOMNode() *raw.DOMNode { return &x.inner.DOM
 func (x *DOMHTMLTableCellElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLTableCellElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLTableCellElementable is the interface implemented by [DOMHTMLTableCellElement], for mocking and DI.
+type DOMHTMLTableCellElementable interface {
+	Unwrap() *raw.DOMHTMLTableCellElement
+	WithAlign(align string) *DOMHTMLTableCellElement
+	WithAxis(axis string) *DOMHTMLTableCellElement
+	WithBgColor(bgColor string) *DOMHTMLTableCellElement
+	WithCh(ch string) *DOMHTMLTableCellElement
+	WithChOff(chOff string) *DOMHTMLTableCellElement
+	WithColSpan(colSpan int) *DOMHTMLTableCellElement
+	WithRowSpan(rowSpan int) *DOMHTMLTableCellElement
+	WithHeaders(headers string) *DOMHTMLTableCellElement
+	WithHeight(height string) *DOMHTMLTableCellElement
+	WithNoWrap(noWrap bool) *DOMHTMLTableCellElement
+	WithVAlign(vAlign string) *DOMHTMLTableCellElement
+	WithWidth(width string) *DOMHTMLTableCellElement
+	WithAbbr(abbr string) *DOMHTMLTableCellElement
+	WithScope(scope string) *DOMHTMLTableCellElement
+	CellIndex() int
+	Align() string
+	SetAlign(align string)
+	Axis() string
+	SetAxis(axis string)
+	BgColor() string
+	SetBgColor(bgColor string)
+	Ch() string
+	SetCh(ch string)
+	ChOff() string
+	SetChOff(chOff string)
+	ColSpan() int
+	SetColSpan(colSpan int)
+	RowSpan() int
+	SetRowSpan(rowSpan int)
+	Headers() string
+	SetHeaders(headers string)
+	Height() string
+	SetHeight(height string)
+	NoWrap() bool
+	SetNoWrap(noWrap bool)
+	VAlign() string
+	SetVAlign(vAlign string)
+	Width() string
+	SetWidth(width string)
+	Abbr() string
+	SetAbbr(abbr string)
+	Scope() string
+	SetScope(scope string)
+}
+
+var _ DOMHTMLTableCellElementable = (*DOMHTMLTableCellElement)(nil)
 

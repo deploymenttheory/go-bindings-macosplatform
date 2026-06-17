@@ -125,5 +125,233 @@ func (x *LSTMDescriptor) WithCellToOutputNeuronParamC(cellToOutputNeuronParamC f
 	return x
 }
 
+// MemoryWeightsAreDiagonal calls the underlying MemoryWeightsAreDiagonal.
+func (x *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
+	return x.inner.MemoryWeightsAreDiagonal()
+}
+
+// SetMemoryWeightsAreDiagonal calls the underlying SetMemoryWeightsAreDiagonal.
+func (x *LSTMDescriptor) SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) {
+	x.inner.SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal)
+}
+
+// InputGateInputWeights calls the underlying InputGateInputWeights.
+func (x *LSTMDescriptor) InputGateInputWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.InputGateInputWeights()
+}
+
+// SetInputGateInputWeights calls the underlying SetInputGateInputWeights.
+func (x *LSTMDescriptor) SetInputGateInputWeights(inputGateInputWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputGateInputWeights(inputGateInputWeights)
+}
+
+// InputGateRecurrentWeights calls the underlying InputGateRecurrentWeights.
+func (x *LSTMDescriptor) InputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.InputGateRecurrentWeights()
+}
+
+// SetInputGateRecurrentWeights calls the underlying SetInputGateRecurrentWeights.
+func (x *LSTMDescriptor) SetInputGateRecurrentWeights(inputGateRecurrentWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
+}
+
+// InputGateMemoryWeights calls the underlying InputGateMemoryWeights.
+func (x *LSTMDescriptor) InputGateMemoryWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.InputGateMemoryWeights()
+}
+
+// SetInputGateMemoryWeights calls the underlying SetInputGateMemoryWeights.
+func (x *LSTMDescriptor) SetInputGateMemoryWeights(inputGateMemoryWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputGateMemoryWeights(inputGateMemoryWeights)
+}
+
+// ForgetGateInputWeights calls the underlying ForgetGateInputWeights.
+func (x *LSTMDescriptor) ForgetGateInputWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.ForgetGateInputWeights()
+}
+
+// SetForgetGateInputWeights calls the underlying SetForgetGateInputWeights.
+func (x *LSTMDescriptor) SetForgetGateInputWeights(forgetGateInputWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetForgetGateInputWeights(forgetGateInputWeights)
+}
+
+// ForgetGateRecurrentWeights calls the underlying ForgetGateRecurrentWeights.
+func (x *LSTMDescriptor) ForgetGateRecurrentWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.ForgetGateRecurrentWeights()
+}
+
+// SetForgetGateRecurrentWeights calls the underlying SetForgetGateRecurrentWeights.
+func (x *LSTMDescriptor) SetForgetGateRecurrentWeights(forgetGateRecurrentWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetForgetGateRecurrentWeights(forgetGateRecurrentWeights)
+}
+
+// ForgetGateMemoryWeights calls the underlying ForgetGateMemoryWeights.
+func (x *LSTMDescriptor) ForgetGateMemoryWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.ForgetGateMemoryWeights()
+}
+
+// SetForgetGateMemoryWeights calls the underlying SetForgetGateMemoryWeights.
+func (x *LSTMDescriptor) SetForgetGateMemoryWeights(forgetGateMemoryWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetForgetGateMemoryWeights(forgetGateMemoryWeights)
+}
+
+// OutputGateInputWeights calls the underlying OutputGateInputWeights.
+func (x *LSTMDescriptor) OutputGateInputWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateInputWeights()
+}
+
+// SetOutputGateInputWeights calls the underlying SetOutputGateInputWeights.
+func (x *LSTMDescriptor) SetOutputGateInputWeights(outputGateInputWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
+}
+
+// OutputGateRecurrentWeights calls the underlying OutputGateRecurrentWeights.
+func (x *LSTMDescriptor) OutputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateRecurrentWeights()
+}
+
+// SetOutputGateRecurrentWeights calls the underlying SetOutputGateRecurrentWeights.
+func (x *LSTMDescriptor) SetOutputGateRecurrentWeights(outputGateRecurrentWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
+}
+
+// OutputGateMemoryWeights calls the underlying OutputGateMemoryWeights.
+func (x *LSTMDescriptor) OutputGateMemoryWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateMemoryWeights()
+}
+
+// SetOutputGateMemoryWeights calls the underlying SetOutputGateMemoryWeights.
+func (x *LSTMDescriptor) SetOutputGateMemoryWeights(outputGateMemoryWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateMemoryWeights(outputGateMemoryWeights)
+}
+
+// CellGateInputWeights calls the underlying CellGateInputWeights.
+func (x *LSTMDescriptor) CellGateInputWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.CellGateInputWeights()
+}
+
+// SetCellGateInputWeights calls the underlying SetCellGateInputWeights.
+func (x *LSTMDescriptor) SetCellGateInputWeights(cellGateInputWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetCellGateInputWeights(cellGateInputWeights)
+}
+
+// CellGateRecurrentWeights calls the underlying CellGateRecurrentWeights.
+func (x *LSTMDescriptor) CellGateRecurrentWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.CellGateRecurrentWeights()
+}
+
+// SetCellGateRecurrentWeights calls the underlying SetCellGateRecurrentWeights.
+func (x *LSTMDescriptor) SetCellGateRecurrentWeights(cellGateRecurrentWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetCellGateRecurrentWeights(cellGateRecurrentWeights)
+}
+
+// CellGateMemoryWeights calls the underlying CellGateMemoryWeights.
+func (x *LSTMDescriptor) CellGateMemoryWeights() raw.MPSCNNConvolutionDataSource {
+	return x.inner.CellGateMemoryWeights()
+}
+
+// SetCellGateMemoryWeights calls the underlying SetCellGateMemoryWeights.
+func (x *LSTMDescriptor) SetCellGateMemoryWeights(cellGateMemoryWeights raw.MPSCNNConvolutionDataSource) {
+	x.inner.SetCellGateMemoryWeights(cellGateMemoryWeights)
+}
+
+// CellToOutputNeuronType calls the underlying CellToOutputNeuronType.
+func (x *LSTMDescriptor) CellToOutputNeuronType() raw.MPSCNNNeuronType {
+	return x.inner.CellToOutputNeuronType()
+}
+
+// SetCellToOutputNeuronType calls the underlying SetCellToOutputNeuronType.
+func (x *LSTMDescriptor) SetCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType) {
+	x.inner.SetCellToOutputNeuronType(cellToOutputNeuronType)
+}
+
+// CellToOutputNeuronParamA calls the underlying CellToOutputNeuronParamA.
+func (x *LSTMDescriptor) CellToOutputNeuronParamA() float32 {
+	return x.inner.CellToOutputNeuronParamA()
+}
+
+// SetCellToOutputNeuronParamA calls the underlying SetCellToOutputNeuronParamA.
+func (x *LSTMDescriptor) SetCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) {
+	x.inner.SetCellToOutputNeuronParamA(cellToOutputNeuronParamA)
+}
+
+// CellToOutputNeuronParamB calls the underlying CellToOutputNeuronParamB.
+func (x *LSTMDescriptor) CellToOutputNeuronParamB() float32 {
+	return x.inner.CellToOutputNeuronParamB()
+}
+
+// SetCellToOutputNeuronParamB calls the underlying SetCellToOutputNeuronParamB.
+func (x *LSTMDescriptor) SetCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) {
+	x.inner.SetCellToOutputNeuronParamB(cellToOutputNeuronParamB)
+}
+
+// CellToOutputNeuronParamC calls the underlying CellToOutputNeuronParamC.
+func (x *LSTMDescriptor) CellToOutputNeuronParamC() float32 {
+	return x.inner.CellToOutputNeuronParamC()
+}
+
+// SetCellToOutputNeuronParamC calls the underlying SetCellToOutputNeuronParamC.
+func (x *LSTMDescriptor) SetCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) {
+	x.inner.SetCellToOutputNeuronParamC(cellToOutputNeuronParamC)
+}
+
 func (x *LSTMDescriptor) asRNNDescriptor() *raw.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+
+// LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
+type LSTMDescriptorable interface {
+	Unwrap() *raw.MPSLSTMDescriptor
+	WithMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) *LSTMDescriptor
+	WithInputGateInputWeights(inputGateInputWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithInputGateRecurrentWeights(inputGateRecurrentWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithInputGateMemoryWeights(inputGateMemoryWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithForgetGateInputWeights(forgetGateInputWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithForgetGateRecurrentWeights(forgetGateRecurrentWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithForgetGateMemoryWeights(forgetGateMemoryWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithOutputGateInputWeights(outputGateInputWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithOutputGateRecurrentWeights(outputGateRecurrentWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithOutputGateMemoryWeights(outputGateMemoryWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithCellGateInputWeights(cellGateInputWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithCellGateRecurrentWeights(cellGateRecurrentWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithCellGateMemoryWeights(cellGateMemoryWeights raw.MPSCNNConvolutionDataSource) *LSTMDescriptor
+	WithCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType) *LSTMDescriptor
+	WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor
+	WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor
+	WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor
+	MemoryWeightsAreDiagonal() bool
+	SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool)
+	InputGateInputWeights() raw.MPSCNNConvolutionDataSource
+	SetInputGateInputWeights(inputGateInputWeights raw.MPSCNNConvolutionDataSource)
+	InputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource
+	SetInputGateRecurrentWeights(inputGateRecurrentWeights raw.MPSCNNConvolutionDataSource)
+	InputGateMemoryWeights() raw.MPSCNNConvolutionDataSource
+	SetInputGateMemoryWeights(inputGateMemoryWeights raw.MPSCNNConvolutionDataSource)
+	ForgetGateInputWeights() raw.MPSCNNConvolutionDataSource
+	SetForgetGateInputWeights(forgetGateInputWeights raw.MPSCNNConvolutionDataSource)
+	ForgetGateRecurrentWeights() raw.MPSCNNConvolutionDataSource
+	SetForgetGateRecurrentWeights(forgetGateRecurrentWeights raw.MPSCNNConvolutionDataSource)
+	ForgetGateMemoryWeights() raw.MPSCNNConvolutionDataSource
+	SetForgetGateMemoryWeights(forgetGateMemoryWeights raw.MPSCNNConvolutionDataSource)
+	OutputGateInputWeights() raw.MPSCNNConvolutionDataSource
+	SetOutputGateInputWeights(outputGateInputWeights raw.MPSCNNConvolutionDataSource)
+	OutputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource
+	SetOutputGateRecurrentWeights(outputGateRecurrentWeights raw.MPSCNNConvolutionDataSource)
+	OutputGateMemoryWeights() raw.MPSCNNConvolutionDataSource
+	SetOutputGateMemoryWeights(outputGateMemoryWeights raw.MPSCNNConvolutionDataSource)
+	CellGateInputWeights() raw.MPSCNNConvolutionDataSource
+	SetCellGateInputWeights(cellGateInputWeights raw.MPSCNNConvolutionDataSource)
+	CellGateRecurrentWeights() raw.MPSCNNConvolutionDataSource
+	SetCellGateRecurrentWeights(cellGateRecurrentWeights raw.MPSCNNConvolutionDataSource)
+	CellGateMemoryWeights() raw.MPSCNNConvolutionDataSource
+	SetCellGateMemoryWeights(cellGateMemoryWeights raw.MPSCNNConvolutionDataSource)
+	CellToOutputNeuronType() raw.MPSCNNNeuronType
+	SetCellToOutputNeuronType(cellToOutputNeuronType raw.MPSCNNNeuronType)
+	CellToOutputNeuronParamA() float32
+	SetCellToOutputNeuronParamA(cellToOutputNeuronParamA float32)
+	CellToOutputNeuronParamB() float32
+	SetCellToOutputNeuronParamB(cellToOutputNeuronParamB float32)
+	CellToOutputNeuronParamC() float32
+	SetCellToOutputNeuronParamC(cellToOutputNeuronParamC float32)
+}
+
+var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)
 

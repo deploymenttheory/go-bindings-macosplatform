@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -89,4 +90,84 @@ func (x *SpeechSynthesisMarker) WithPhoneme(phoneme string) *SpeechSynthesisMark
 	x.inner.SetPhoneme(foundation.NSStringStringWithUTF8String(phoneme))
 	return x
 }
+
+// Mark calls the underlying Mark.
+func (x *SpeechSynthesisMarker) Mark() raw.AVSpeechSynthesisMarkerMark {
+	return x.inner.Mark()
+}
+
+// SetMark calls the underlying SetMark.
+func (x *SpeechSynthesisMarker) SetMark(mark raw.AVSpeechSynthesisMarkerMark) {
+	x.inner.SetMark(mark)
+}
+
+// ByteSampleOffset calls the underlying ByteSampleOffset.
+func (x *SpeechSynthesisMarker) ByteSampleOffset() uint {
+	return x.inner.ByteSampleOffset()
+}
+
+// SetByteSampleOffset calls the underlying SetByteSampleOffset.
+func (x *SpeechSynthesisMarker) SetByteSampleOffset(byteSampleOffset uint) {
+	x.inner.SetByteSampleOffset(byteSampleOffset)
+}
+
+// TextRange calls the underlying TextRange.
+func (x *SpeechSynthesisMarker) TextRange() foundation.NSRange {
+	return x.inner.TextRange()
+}
+
+// SetTextRange calls the underlying SetTextRange.
+func (x *SpeechSynthesisMarker) SetTextRange(textRange foundation.NSRange) {
+	x.inner.SetTextRange(textRange)
+}
+
+// BookmarkName calls the underlying BookmarkName.
+func (x *SpeechSynthesisMarker) BookmarkName() string {
+	_r := x.inner.BookmarkName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBookmarkName calls the underlying SetBookmarkName.
+func (x *SpeechSynthesisMarker) SetBookmarkName(bookmarkName string) {
+	x.inner.SetBookmarkName(foundation.NSStringStringWithUTF8String(bookmarkName))
+}
+
+// Phoneme calls the underlying Phoneme.
+func (x *SpeechSynthesisMarker) Phoneme() string {
+	_r := x.inner.Phoneme()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPhoneme calls the underlying SetPhoneme.
+func (x *SpeechSynthesisMarker) SetPhoneme(phoneme string) {
+	x.inner.SetPhoneme(foundation.NSStringStringWithUTF8String(phoneme))
+}
+
+// SpeechSynthesisMarkerable is the interface implemented by [SpeechSynthesisMarker], for mocking and DI.
+type SpeechSynthesisMarkerable interface {
+	Unwrap() *raw.AVSpeechSynthesisMarker
+	WithMark(mark raw.AVSpeechSynthesisMarkerMark) *SpeechSynthesisMarker
+	WithByteSampleOffset(byteSampleOffset uint) *SpeechSynthesisMarker
+	WithTextRange(textRange foundation.NSRange) *SpeechSynthesisMarker
+	WithBookmarkName(bookmarkName string) *SpeechSynthesisMarker
+	WithPhoneme(phoneme string) *SpeechSynthesisMarker
+	Mark() raw.AVSpeechSynthesisMarkerMark
+	SetMark(mark raw.AVSpeechSynthesisMarkerMark)
+	ByteSampleOffset() uint
+	SetByteSampleOffset(byteSampleOffset uint)
+	TextRange() foundation.NSRange
+	SetTextRange(textRange foundation.NSRange)
+	BookmarkName() string
+	SetBookmarkName(bookmarkName string)
+	Phoneme() string
+	SetPhoneme(phoneme string)
+}
+
+var _ SpeechSynthesisMarkerable = (*SpeechSynthesisMarker)(nil)
 

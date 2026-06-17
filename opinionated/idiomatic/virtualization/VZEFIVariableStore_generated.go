@@ -38,3 +38,16 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, optio
 	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(_id)}, nil
 }
 
+// URL calls the underlying URL.
+func (x *EFIVariableStore) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// EFIVariableStoreable is the interface implemented by [EFIVariableStore], for mocking and DI.
+type EFIVariableStoreable interface {
+	Unwrap() *raw.VZEFIVariableStore
+	URL() *foundation.NSURL
+}
+
+var _ EFIVariableStoreable = (*EFIVariableStore)(nil)
+

@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,31 +26,68 @@ func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUs
 	return &Exception{inner: raw.NSExceptionFromID(_id)}
 }
 
+// Raise calls the underlying Raise.
+func (x *Exception) Raise() {
+	x.inner.Raise()
+}
+
+// Name calls the underlying Name.
+func (x *Exception) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Reason calls the underlying Reason.
+func (x *Exception) Reason() *String {
+	_r := x.inner.Reason()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *Exception) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
 // CallStackReturnAddresses returns the collection as a Go slice.
 func (x *Exception) CallStackReturnAddresses() []*raw.NSNumber {
 	arr := x.inner.CallStackReturnAddresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
+		return raw.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // CallStackSymbols returns the collection as a Go slice.
-func (x *Exception) CallStackSymbols() []*raw.NSString {
+func (x *Exception) CallStackSymbols() []string {
 	arr := x.inner.CallStackSymbols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *Exception) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Exceptionable is the interface implemented by [Exception], for mocking and DI.
+type Exceptionable interface {
+	Unwrap() *raw.NSException
+	Raise()
+	Name() *String
+	Reason() *String
+	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
+	CallStackReturnAddresses() []*raw.NSNumber
+	CallStackSymbols() []string
+}
+
+var _ Exceptionable = (*Exception)(nil)
 

@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent() *MTRP
 	return &MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent)(nil)
+

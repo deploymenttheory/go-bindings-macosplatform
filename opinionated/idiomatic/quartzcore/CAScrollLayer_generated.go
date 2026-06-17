@@ -5,8 +5,10 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +32,41 @@ func (x *ScrollLayer) WithScrollMode(scrollMode *foundation.NSString) *ScrollLay
 	return x
 }
 
+// ScrollToPoint calls the underlying ScrollToPoint.
+func (x *ScrollLayer) ScrollToPoint(p corefoundation.CGPoint) {
+	x.inner.ScrollToPoint(p)
+}
+
+// ScrollToRect calls the underlying ScrollToRect.
+func (x *ScrollLayer) ScrollToRect(r corefoundation.CGRect) {
+	x.inner.ScrollToRect(r)
+}
+
+// ScrollMode calls the underlying ScrollMode.
+func (x *ScrollLayer) ScrollMode() string {
+	_r := x.inner.ScrollMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetScrollMode calls the underlying SetScrollMode.
+func (x *ScrollLayer) SetScrollMode(scrollMode *foundation.NSString) {
+	x.inner.SetScrollMode(scrollMode)
+}
+
 func (x *ScrollLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// ScrollLayerable is the interface implemented by [ScrollLayer], for mocking and DI.
+type ScrollLayerable interface {
+	Unwrap() *raw.CAScrollLayer
+	WithScrollMode(scrollMode *foundation.NSString) *ScrollLayer
+	ScrollToPoint(p corefoundation.CGPoint)
+	ScrollToRect(r corefoundation.CGRect)
+	ScrollMode() string
+	SetScrollMode(scrollMode *foundation.NSString)
+}
+
+var _ ScrollLayerable = (*ScrollLayer)(nil)
 

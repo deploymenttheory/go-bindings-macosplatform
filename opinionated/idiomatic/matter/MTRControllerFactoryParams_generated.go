@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -63,17 +64,35 @@ func (x *MTRControllerFactoryParams) WithCdCerts(items ...*foundation.NSData) *M
 	return x
 }
 
+// StorageDelegate calls the underlying StorageDelegate.
+func (x *MTRControllerFactoryParams) StorageDelegate() raw.MTRPersistentStorageDelegate {
+	return x.inner.StorageDelegate()
+}
+
+// StartServer calls the underlying StartServer.
+func (x *MTRControllerFactoryParams) StartServer() bool {
+	return x.inner.StartServer()
+}
+
+// SetStartServer calls the underlying SetStartServer.
+func (x *MTRControllerFactoryParams) SetStartServer(startServer bool) {
+	x.inner.SetStartServer(startServer)
+}
+
 // PaaCerts returns the collection as a Go slice.
 func (x *MTRControllerFactoryParams) PaaCerts() []*foundation.NSData {
 	arr := x.inner.PaaCerts()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetPaaCerts calls the underlying SetPaaCerts.
+func (x *MTRControllerFactoryParams) SetPaaCerts(paaCerts *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetPaaCerts(paaCerts)
 }
 
 // CdCerts returns the collection as a Go slice.
@@ -82,12 +101,32 @@ func (x *MTRControllerFactoryParams) CdCerts() []*foundation.NSData {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetCdCerts calls the underlying SetCdCerts.
+func (x *MTRControllerFactoryParams) SetCdCerts(cdCerts *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetCdCerts(cdCerts)
 }
 
 func (x *MTRControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams { return &x.inner.MTRDeviceControllerFactoryParams }
+
+// MTRControllerFactoryParamsable is the interface implemented by [MTRControllerFactoryParams], for mocking and DI.
+type MTRControllerFactoryParamsable interface {
+	Unwrap() *raw.MTRControllerFactoryParams
+	WithStartServer(startServer bool) *MTRControllerFactoryParams
+	WithPaaCerts(items ...*foundation.NSData) *MTRControllerFactoryParams
+	WithCdCerts(items ...*foundation.NSData) *MTRControllerFactoryParams
+	StorageDelegate() raw.MTRPersistentStorageDelegate
+	StartServer() bool
+	SetStartServer(startServer bool)
+	PaaCerts() []*foundation.NSData
+	SetPaaCerts(paaCerts *foundation.NSArray[*foundation.NSData])
+	CdCerts() []*foundation.NSData
+	SetCdCerts(cdCerts *foundation.NSArray[*foundation.NSData])
+}
+
+var _ MTRControllerFactoryParamsable = (*MTRControllerFactoryParams)(nil)
 

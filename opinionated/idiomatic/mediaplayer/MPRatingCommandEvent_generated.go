@@ -23,5 +23,18 @@ func NewRatingCommandEvent() *RatingCommandEvent {
 	return &RatingCommandEvent{inner: raw.MPRatingCommandEventFromID(_id)}
 }
 
+// Rating calls the underlying Rating.
+func (x *RatingCommandEvent) Rating() float32 {
+	return x.inner.Rating()
+}
+
 func (x *RatingCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// RatingCommandEventable is the interface implemented by [RatingCommandEvent], for mocking and DI.
+type RatingCommandEventable interface {
+	Unwrap() *raw.MPRatingCommandEvent
+	Rating() float32
+}
+
+var _ RatingCommandEventable = (*RatingCommandEvent)(nil)
 

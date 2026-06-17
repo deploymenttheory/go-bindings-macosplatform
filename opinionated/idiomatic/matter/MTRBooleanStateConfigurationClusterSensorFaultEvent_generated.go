@@ -30,3 +30,23 @@ func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(se
 	return x
 }
 
+// SensorFault calls the underlying SensorFault.
+func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() *foundation.NSNumber {
+	return x.inner.SensorFault()
+}
+
+// SetSensorFault calls the underlying SetSensorFault.
+func (x *MTRBooleanStateConfigurationClusterSensorFaultEvent) SetSensorFault(sensorFault *foundation.NSNumber) {
+	x.inner.SetSensorFault(sensorFault)
+}
+
+// MTRBooleanStateConfigurationClusterSensorFaultEventable is the interface implemented by [MTRBooleanStateConfigurationClusterSensorFaultEvent], for mocking and DI.
+type MTRBooleanStateConfigurationClusterSensorFaultEventable interface {
+	Unwrap() *raw.MTRBooleanStateConfigurationClusterSensorFaultEvent
+	WithSensorFault(sensorFault *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSensorFaultEvent
+	SensorFault() *foundation.NSNumber
+	SetSensorFault(sensorFault *foundation.NSNumber)
+}
+
+var _ MTRBooleanStateConfigurationClusterSensorFaultEventable = (*MTRBooleanStateConfigurationClusterSensorFaultEvent)(nil)
+

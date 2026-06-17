@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebsiteDataRecord")), objc.RegisterName("new"))
 	return &WKWebsiteDataRecord{inner: raw.WKWebsiteDataRecordFromID(_id)}
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *WKWebsiteDataRecord) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DataTypes calls the underlying DataTypes.
+func (x *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.DataTypes()
+}
+
+// WKWebsiteDataRecordable is the interface implemented by [WKWebsiteDataRecord], for mocking and DI.
+type WKWebsiteDataRecordable interface {
+	Unwrap() *raw.WKWebsiteDataRecord
+	DisplayName() string
+	DataTypes() *foundation.NSSet[*foundation.NSString]
+}
+
+var _ WKWebsiteDataRecordable = (*WKWebsiteDataRecord)(nil)
 

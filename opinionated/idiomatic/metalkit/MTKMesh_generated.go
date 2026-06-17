@@ -45,11 +45,14 @@ func (x *Mesh) VertexBuffers() []*raw.MTKMeshBuffer {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTKMeshBuffer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTKMeshBuffer {
+		return raw.MTKMeshBufferFromID(purego.Retain(_id))
+	})
+}
+
+// VertexDescriptor calls the underlying VertexDescriptor.
+func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
+	return x.inner.VertexDescriptor()
 }
 
 // Submeshes returns the collection as a Go slice.
@@ -58,10 +61,41 @@ func (x *Mesh) Submeshes() []*raw.MTKSubmesh {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTKSubmesh, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTKSubmesh {
+		return raw.MTKSubmeshFromID(purego.Retain(_id))
+	})
 }
+
+// VertexCount calls the underlying VertexCount.
+func (x *Mesh) VertexCount() uint {
+	return x.inner.VertexCount()
+}
+
+// Name calls the underlying Name.
+func (x *Mesh) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Mesh) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Meshable is the interface implemented by [Mesh], for mocking and DI.
+type Meshable interface {
+	Unwrap() *raw.MTKMesh
+	WithName(name string) *Mesh
+	VertexBuffers() []*raw.MTKMeshBuffer
+	VertexDescriptor() *modelio.MDLVertexDescriptor
+	Submeshes() []*raw.MTKSubmesh
+	VertexCount() uint
+	Name() string
+	SetName(name string)
+}
+
+var _ Meshable = (*Mesh)(nil)
 

@@ -32,7 +32,168 @@ func NewURLRequestWithURLCachePolicyTimeoutInterval(uRL string, cachePolicy raw.
 	return &URLRequest{inner: raw.NSURLRequestFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *URLRequest) URL() *URL {
+	_r := x.inner.URL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// CachePolicy calls the underlying CachePolicy.
+func (x *URLRequest) CachePolicy() raw.NSURLRequestCachePolicy {
+	return x.inner.CachePolicy()
+}
+
+// TimeoutInterval calls the underlying TimeoutInterval.
+func (x *URLRequest) TimeoutInterval() float64 {
+	return x.inner.TimeoutInterval()
+}
+
+// MainDocumentURL calls the underlying MainDocumentURL.
+func (x *URLRequest) MainDocumentURL() *URL {
+	_r := x.inner.MainDocumentURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// NetworkServiceType calls the underlying NetworkServiceType.
+func (x *URLRequest) NetworkServiceType() raw.NSURLRequestNetworkServiceType {
+	return x.inner.NetworkServiceType()
+}
+
+// AllowsCellularAccess calls the underlying AllowsCellularAccess.
+func (x *URLRequest) AllowsCellularAccess() bool {
+	return x.inner.AllowsCellularAccess()
+}
+
+// AllowsExpensiveNetworkAccess calls the underlying AllowsExpensiveNetworkAccess.
+func (x *URLRequest) AllowsExpensiveNetworkAccess() bool {
+	return x.inner.AllowsExpensiveNetworkAccess()
+}
+
+// AllowsConstrainedNetworkAccess calls the underlying AllowsConstrainedNetworkAccess.
+func (x *URLRequest) AllowsConstrainedNetworkAccess() bool {
+	return x.inner.AllowsConstrainedNetworkAccess()
+}
+
+// AllowsUltraConstrainedNetworkAccess calls the underlying AllowsUltraConstrainedNetworkAccess.
+func (x *URLRequest) AllowsUltraConstrainedNetworkAccess() bool {
+	return x.inner.AllowsUltraConstrainedNetworkAccess()
+}
+
+// AssumesHTTP3Capable calls the underlying AssumesHTTP3Capable.
+func (x *URLRequest) AssumesHTTP3Capable() bool {
+	return x.inner.AssumesHTTP3Capable()
+}
+
+// Attribution calls the underlying Attribution.
+func (x *URLRequest) Attribution() raw.NSURLRequestAttribution {
+	return x.inner.Attribution()
+}
+
+// RequiresDNSSECValidation calls the underlying RequiresDNSSECValidation.
+func (x *URLRequest) RequiresDNSSECValidation() bool {
+	return x.inner.RequiresDNSSECValidation()
+}
+
+// AllowsPersistentDNS calls the underlying AllowsPersistentDNS.
+func (x *URLRequest) AllowsPersistentDNS() bool {
+	return x.inner.AllowsPersistentDNS()
+}
+
+// CookiePartitionIdentifier calls the underlying CookiePartitionIdentifier.
+func (x *URLRequest) CookiePartitionIdentifier() *String {
+	_r := x.inner.CookiePartitionIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
+func (x *URLRequest) ValueForHTTPHeaderField(field string) *String {
+	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// HTTPMethod calls the underlying HTTPMethod.
+func (x *URLRequest) HTTPMethod() *String {
+	_r := x.inner.HTTPMethod()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AllHTTPHeaderFields calls the underlying AllHTTPHeaderFields.
+func (x *URLRequest) AllHTTPHeaderFields() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
+	return x.inner.AllHTTPHeaderFields()
+}
+
+// HTTPBody calls the underlying HTTPBody.
+func (x *URLRequest) HTTPBody() *Data {
+	_r := x.inner.HTTPBody()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// HTTPBodyStream calls the underlying HTTPBodyStream.
+func (x *URLRequest) HTTPBodyStream() *InputStream {
+	_r := x.inner.HTTPBodyStream()
+	if _r == nil {
+		return nil
+	}
+	return &InputStream{inner: _r}
+}
+
+// HTTPShouldHandleCookies calls the underlying HTTPShouldHandleCookies.
+func (x *URLRequest) HTTPShouldHandleCookies() bool {
+	return x.inner.HTTPShouldHandleCookies()
+}
+
+// HTTPShouldUsePipelining calls the underlying HTTPShouldUsePipelining.
+func (x *URLRequest) HTTPShouldUsePipelining() bool {
+	return x.inner.HTTPShouldUsePipelining()
+}
+
 func (x *URLRequest) asURLRequest() *raw.NSURLRequest { return x.inner }
 
 func (x *URLRequest) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLRequestable is the interface implemented by [URLRequest], for mocking and DI.
+type URLRequestable interface {
+	Unwrap() *raw.NSURLRequest
+	URL() *URL
+	CachePolicy() raw.NSURLRequestCachePolicy
+	TimeoutInterval() float64
+	MainDocumentURL() *URL
+	NetworkServiceType() raw.NSURLRequestNetworkServiceType
+	AllowsCellularAccess() bool
+	AllowsExpensiveNetworkAccess() bool
+	AllowsConstrainedNetworkAccess() bool
+	AllowsUltraConstrainedNetworkAccess() bool
+	AssumesHTTP3Capable() bool
+	Attribution() raw.NSURLRequestAttribution
+	RequiresDNSSECValidation() bool
+	AllowsPersistentDNS() bool
+	CookiePartitionIdentifier() *String
+	ValueForHTTPHeaderField(field string) *String
+	HTTPMethod() *String
+	AllHTTPHeaderFields() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	HTTPBody() *Data
+	HTTPBodyStream() *InputStream
+	HTTPShouldHandleCookies() bool
+	HTTPShouldUsePipelining() bool
+}
+
+var _ URLRequestable = (*URLRequest)(nil)
 

@@ -30,3 +30,57 @@ func (x *AssessmentSession) WithDelegate(delegate raw.AEAssessmentSessionDelegat
 	return x
 }
 
+// Begin calls the underlying Begin.
+func (x *AssessmentSession) Begin() {
+	x.inner.Begin()
+}
+
+// End calls the underlying End.
+func (x *AssessmentSession) End() {
+	x.inner.End()
+}
+
+// UpdateToConfiguration calls the underlying UpdateToConfiguration.
+func (x *AssessmentSession) UpdateToConfiguration(configuration *raw.AEAssessmentConfiguration) {
+	x.inner.UpdateToConfiguration(configuration)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AssessmentSession) Delegate() raw.AEAssessmentSessionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AssessmentSession) SetDelegate(delegate raw.AEAssessmentSessionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Configuration calls the underlying Configuration.
+func (x *AssessmentSession) Configuration() *AssessmentConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &AssessmentConfiguration{inner: _r}
+}
+
+// IsActive calls the underlying IsActive.
+func (x *AssessmentSession) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// AssessmentSessionable is the interface implemented by [AssessmentSession], for mocking and DI.
+type AssessmentSessionable interface {
+	Unwrap() *raw.AEAssessmentSession
+	WithDelegate(delegate raw.AEAssessmentSessionDelegate) *AssessmentSession
+	Begin()
+	End()
+	UpdateToConfiguration(configuration *raw.AEAssessmentConfiguration)
+	Delegate() raw.AEAssessmentSessionDelegate
+	SetDelegate(delegate raw.AEAssessmentSessionDelegate)
+	Configuration() *AssessmentConfiguration
+	IsActive() bool
+}
+
+var _ AssessmentSessionable = (*AssessmentSession)(nil)
+

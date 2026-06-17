@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRMediaPlaybackClusterActivateTextTrackParams) WithServerSideProcessin
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// TrackID calls the underlying TrackID.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) TrackID() string {
+	_r := x.inner.TrackID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTrackID calls the underlying SetTrackID.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetTrackID(trackID string) {
+	x.inner.SetTrackID(foundation.NSStringStringWithUTF8String(trackID))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterActivateTextTrackParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterActivateTextTrackParamsable is the interface implemented by [MTRMediaPlaybackClusterActivateTextTrackParams], for mocking and DI.
+type MTRMediaPlaybackClusterActivateTextTrackParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterActivateTextTrackParams
+	WithTrackID(trackID string) *MTRMediaPlaybackClusterActivateTextTrackParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterActivateTextTrackParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterActivateTextTrackParams
+	TrackID() string
+	SetTrackID(trackID string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterActivateTextTrackParamsable = (*MTRMediaPlaybackClusterActivateTextTrackParams)(nil)
 

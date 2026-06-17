@@ -27,3 +27,10 @@ func (x *MetricPlayerItemSeekEvent) asMetricPlayerItemRateChangeEvent() *raw.AVM
 
 func (x *MetricPlayerItemSeekEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent }
 
+// MetricPlayerItemSeekEventable is the interface implemented by [MetricPlayerItemSeekEvent], for mocking and DI.
+type MetricPlayerItemSeekEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemSeekEvent
+}
+
+var _ MetricPlayerItemSeekEventable = (*MetricPlayerItemSeekEvent)(nil)
+

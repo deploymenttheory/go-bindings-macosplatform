@@ -23,5 +23,50 @@ func NewRacingWheelInputState() *RacingWheelInputState {
 	return &RacingWheelInputState{inner: raw.GCRacingWheelInputStateFromID(_id)}
 }
 
+// Wheel calls the underlying Wheel.
+func (x *RacingWheelInputState) Wheel() *SteeringWheelElement {
+	_r := x.inner.Wheel()
+	if _r == nil {
+		return nil
+	}
+	return &SteeringWheelElement{inner: _r}
+}
+
+// AcceleratorPedal calls the underlying AcceleratorPedal.
+func (x *RacingWheelInputState) AcceleratorPedal() raw.GCButtonElement {
+	return x.inner.AcceleratorPedal()
+}
+
+// BrakePedal calls the underlying BrakePedal.
+func (x *RacingWheelInputState) BrakePedal() raw.GCButtonElement {
+	return x.inner.BrakePedal()
+}
+
+// ClutchPedal calls the underlying ClutchPedal.
+func (x *RacingWheelInputState) ClutchPedal() raw.GCButtonElement {
+	return x.inner.ClutchPedal()
+}
+
+// Shifter calls the underlying Shifter.
+func (x *RacingWheelInputState) Shifter() *GearShifterElement {
+	_r := x.inner.Shifter()
+	if _r == nil {
+		return nil
+	}
+	return &GearShifterElement{inner: _r}
+}
+
 func (x *RacingWheelInputState) asRacingWheelInputState() *raw.GCRacingWheelInputState { return x.inner }
+
+// RacingWheelInputStateable is the interface implemented by [RacingWheelInputState], for mocking and DI.
+type RacingWheelInputStateable interface {
+	Unwrap() *raw.GCRacingWheelInputState
+	Wheel() *SteeringWheelElement
+	AcceleratorPedal() raw.GCButtonElement
+	BrakePedal() raw.GCButtonElement
+	ClutchPedal() raw.GCButtonElement
+	Shifter() *GearShifterElement
+}
+
+var _ RacingWheelInputStateable = (*RacingWheelInputState)(nil)
 

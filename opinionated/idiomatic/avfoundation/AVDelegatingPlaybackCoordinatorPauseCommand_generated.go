@@ -23,5 +23,24 @@ func NewDelegatingPlaybackCoordinatorPauseCommand() *DelegatingPlaybackCoordinat
 	return &DelegatingPlaybackCoordinatorPauseCommand{inner: raw.AVDelegatingPlaybackCoordinatorPauseCommandFromID(_id)}
 }
 
+// ShouldBufferInAnticipationOfPlayback calls the underlying ShouldBufferInAnticipationOfPlayback.
+func (x *DelegatingPlaybackCoordinatorPauseCommand) ShouldBufferInAnticipationOfPlayback() bool {
+	return x.inner.ShouldBufferInAnticipationOfPlayback()
+}
+
+// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
+func (x *DelegatingPlaybackCoordinatorPauseCommand) AnticipatedPlaybackRate() float32 {
+	return x.inner.AnticipatedPlaybackRate()
+}
+
 func (x *DelegatingPlaybackCoordinatorPauseCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand { return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand }
+
+// DelegatingPlaybackCoordinatorPauseCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPauseCommand], for mocking and DI.
+type DelegatingPlaybackCoordinatorPauseCommandable interface {
+	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPauseCommand
+	ShouldBufferInAnticipationOfPlayback() bool
+	AnticipatedPlaybackRate() float32
+}
+
+var _ DelegatingPlaybackCoordinatorPauseCommandable = (*DelegatingPlaybackCoordinatorPauseCommand)(nil)
 

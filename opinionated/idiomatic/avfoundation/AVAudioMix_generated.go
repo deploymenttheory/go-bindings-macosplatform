@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,12 +30,18 @@ func (x *AudioMix) InputParameters() []*raw.AVAudioMixInputParameters {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAudioMixInputParameters, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAudioMixInputParameters {
+		return raw.AVAudioMixInputParametersFromID(purego.Retain(_id))
+	})
 }
 
 func (x *AudioMix) asAudioMix() *raw.AVAudioMix { return x.inner }
+
+// AudioMixable is the interface implemented by [AudioMix], for mocking and DI.
+type AudioMixable interface {
+	Unwrap() *raw.AVAudioMix
+	InputParameters() []*raw.AVAudioMixInputParameters
+}
+
+var _ AudioMixable = (*AudioMix)(nil)
 

@@ -31,5 +31,80 @@ func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunction
 	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
 }
 
+// ObjectForKey calls the underlying ObjectForKey.
+func (x *MapTable) ObjectForKey(aKey objc.ID) objc.ID {
+	return x.inner.ObjectForKey(aKey)
+}
+
+// RemoveObjectForKey calls the underlying RemoveObjectForKey.
+func (x *MapTable) RemoveObjectForKey(aKey objc.ID) {
+	x.inner.RemoveObjectForKey(aKey)
+}
+
+// SetObjectForKey calls the underlying SetObjectForKey.
+func (x *MapTable) SetObjectForKey(anObject objc.ID, aKey objc.ID) {
+	x.inner.SetObjectForKey(anObject, aKey)
+}
+
+// KeyEnumerator calls the underlying KeyEnumerator.
+func (x *MapTable) KeyEnumerator() *raw.NSEnumerator[objc.ID] {
+	return x.inner.KeyEnumerator()
+}
+
+// ObjectEnumerator calls the underlying ObjectEnumerator.
+func (x *MapTable) ObjectEnumerator() *raw.NSEnumerator[objc.ID] {
+	return x.inner.ObjectEnumerator()
+}
+
+// RemoveAllObjects calls the underlying RemoveAllObjects.
+func (x *MapTable) RemoveAllObjects() {
+	x.inner.RemoveAllObjects()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *MapTable) DictionaryRepresentation() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// KeyPointerFunctions calls the underlying KeyPointerFunctions.
+func (x *MapTable) KeyPointerFunctions() *PointerFunctions {
+	_r := x.inner.KeyPointerFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &PointerFunctions{inner: _r}
+}
+
+// ValuePointerFunctions calls the underlying ValuePointerFunctions.
+func (x *MapTable) ValuePointerFunctions() *PointerFunctions {
+	_r := x.inner.ValuePointerFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &PointerFunctions{inner: _r}
+}
+
+// Count calls the underlying Count.
+func (x *MapTable) Count() uint {
+	return x.inner.Count()
+}
+
 func (x *MapTable) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MapTableable is the interface implemented by [MapTable], for mocking and DI.
+type MapTableable interface {
+	Unwrap() *raw.NSMapTable[objc.ID, objc.ID]
+	ObjectForKey(aKey objc.ID) objc.ID
+	RemoveObjectForKey(aKey objc.ID)
+	SetObjectForKey(anObject objc.ID, aKey objc.ID)
+	KeyEnumerator() *raw.NSEnumerator[objc.ID]
+	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
+	RemoveAllObjects()
+	DictionaryRepresentation() *raw.NSDictionary[objc.ID, objc.ID]
+	KeyPointerFunctions() *PointerFunctions
+	ValuePointerFunctions() *PointerFunctions
+	Count() uint
+}
+
+var _ MapTableable = (*MapTable)(nil)
 

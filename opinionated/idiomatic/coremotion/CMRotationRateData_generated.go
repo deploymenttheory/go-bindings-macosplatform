@@ -23,7 +23,20 @@ func NewRotationRateData() *RotationRateData {
 	return &RotationRateData{inner: raw.CMRotationRateDataFromID(_id)}
 }
 
+// RotationRate calls the underlying RotationRate.
+func (x *RotationRateData) RotationRate() raw.CMRotationRate {
+	return x.inner.RotationRate()
+}
+
 func (x *RotationRateData) asRotationRateData() *raw.CMRotationRateData { return x.inner }
 
 func (x *RotationRateData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// RotationRateDataable is the interface implemented by [RotationRateData], for mocking and DI.
+type RotationRateDataable interface {
+	Unwrap() *raw.CMRotationRateData
+	RotationRate() raw.CMRotationRate
+}
+
+var _ RotationRateDataable = (*RotationRateData)(nil)
 

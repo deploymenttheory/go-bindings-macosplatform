@@ -32,3 +32,28 @@ func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs *foundation.NSSet
 	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(_id)}
 }
 
+// ContainsZoneID calls the underlying ContainsZoneID.
+func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *raw.CKRecordZoneID) bool {
+	return x.inner.ContainsZoneID(zoneID)
+}
+
+// ZoneIDs calls the underlying ZoneIDs.
+func (x *SyncEngineFetchChangesScope) ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
+	return x.inner.ZoneIDs()
+}
+
+// ExcludedZoneIDs calls the underlying ExcludedZoneIDs.
+func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
+	return x.inner.ExcludedZoneIDs()
+}
+
+// SyncEngineFetchChangesScopeable is the interface implemented by [SyncEngineFetchChangesScope], for mocking and DI.
+type SyncEngineFetchChangesScopeable interface {
+	Unwrap() *raw.CKSyncEngineFetchChangesScope
+	ContainsZoneID(zoneID *raw.CKRecordZoneID) bool
+	ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
+	ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
+}
+
+var _ SyncEngineFetchChangesScopeable = (*SyncEngineFetchChangesScope)(nil)
+

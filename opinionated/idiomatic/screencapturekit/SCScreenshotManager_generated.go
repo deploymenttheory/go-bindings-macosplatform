@@ -23,3 +23,10 @@ func NewScreenshotManager() *ScreenshotManager {
 	return &ScreenshotManager{inner: raw.SCScreenshotManagerFromID(_id)}
 }
 
+// ScreenshotManagerable is the interface implemented by [ScreenshotManager], for mocking and DI.
+type ScreenshotManagerable interface {
+	Unwrap() *raw.SCScreenshotManager
+}
+
+var _ ScreenshotManagerable = (*ScreenshotManager)(nil)
+

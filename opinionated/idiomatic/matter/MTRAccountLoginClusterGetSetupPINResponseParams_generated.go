@@ -43,3 +43,40 @@ func (x *MTRAccountLoginClusterGetSetupPINResponseParams) WithTimedInvokeTimeout
 	return x
 }
 
+// SetupPIN calls the underlying SetupPIN.
+func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() string {
+	_r := x.inner.SetupPIN()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSetupPIN calls the underlying SetSetupPIN.
+func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetSetupPIN(setupPIN string) {
+	x.inner.SetSetupPIN(foundation.NSStringStringWithUTF8String(setupPIN))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterGetSetupPINResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRAccountLoginClusterGetSetupPINResponseParamsable is the interface implemented by [MTRAccountLoginClusterGetSetupPINResponseParams], for mocking and DI.
+type MTRAccountLoginClusterGetSetupPINResponseParamsable interface {
+	Unwrap() *raw.MTRAccountLoginClusterGetSetupPINResponseParams
+	WithSetupPIN(setupPIN string) *MTRAccountLoginClusterGetSetupPINResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccountLoginClusterGetSetupPINResponseParams
+	SetupPIN() string
+	SetSetupPIN(setupPIN string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRAccountLoginClusterGetSetupPINResponseParamsable = (*MTRAccountLoginClusterGetSetupPINResponseParams)(nil)
+

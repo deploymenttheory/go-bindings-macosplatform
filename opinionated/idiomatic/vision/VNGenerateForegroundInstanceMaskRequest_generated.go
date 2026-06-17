@@ -27,3 +27,10 @@ func (x *GenerateForegroundInstanceMaskRequest) asImageBasedRequest() *raw.VNIma
 
 func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
+type GenerateForegroundInstanceMaskRequestable interface {
+	Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest
+}
+
+var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)
+

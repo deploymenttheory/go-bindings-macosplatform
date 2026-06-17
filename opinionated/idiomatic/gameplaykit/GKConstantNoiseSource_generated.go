@@ -30,5 +30,25 @@ func (x *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *ConstantNoiseSource) Value() float64 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *ConstantNoiseSource) SetValue(value float64) {
+	x.inner.SetValue(value)
+}
+
 func (x *ConstantNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// ConstantNoiseSourceable is the interface implemented by [ConstantNoiseSource], for mocking and DI.
+type ConstantNoiseSourceable interface {
+	Unwrap() *raw.GKConstantNoiseSource
+	WithValue(value float64) *ConstantNoiseSource
+	Value() float64
+	SetValue(value float64)
+}
+
+var _ ConstantNoiseSourceable = (*ConstantNoiseSource)(nil)
 

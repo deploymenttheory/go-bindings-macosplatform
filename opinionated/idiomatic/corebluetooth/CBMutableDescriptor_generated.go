@@ -28,3 +28,10 @@ func (x *MutableDescriptor) asDescriptor() *raw.CBDescriptor { return &x.inner.C
 
 func (x *MutableDescriptor) asAttribute() *raw.CBAttribute { return &x.inner.CBDescriptor.CBAttribute }
 
+// MutableDescriptorable is the interface implemented by [MutableDescriptor], for mocking and DI.
+type MutableDescriptorable interface {
+	Unwrap() *raw.CBMutableDescriptor
+}
+
+var _ MutableDescriptorable = (*MutableDescriptor)(nil)
+

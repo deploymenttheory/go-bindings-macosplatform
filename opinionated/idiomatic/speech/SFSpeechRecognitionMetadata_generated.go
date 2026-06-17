@@ -23,3 +23,44 @@ func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	return &SpeechRecognitionMetadata{inner: raw.SFSpeechRecognitionMetadataFromID(_id)}
 }
 
+// SpeakingRate calls the underlying SpeakingRate.
+func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
+	return x.inner.SpeakingRate()
+}
+
+// AveragePauseDuration calls the underlying AveragePauseDuration.
+func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
+	return x.inner.AveragePauseDuration()
+}
+
+// SpeechStartTimestamp calls the underlying SpeechStartTimestamp.
+func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
+	return x.inner.SpeechStartTimestamp()
+}
+
+// SpeechDuration calls the underlying SpeechDuration.
+func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
+	return x.inner.SpeechDuration()
+}
+
+// VoiceAnalytics calls the underlying VoiceAnalytics.
+func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
+	_r := x.inner.VoiceAnalytics()
+	if _r == nil {
+		return nil
+	}
+	return &VoiceAnalytics{inner: _r}
+}
+
+// SpeechRecognitionMetadataable is the interface implemented by [SpeechRecognitionMetadata], for mocking and DI.
+type SpeechRecognitionMetadataable interface {
+	Unwrap() *raw.SFSpeechRecognitionMetadata
+	SpeakingRate() float64
+	AveragePauseDuration() float64
+	SpeechStartTimestamp() float64
+	SpeechDuration() float64
+	VoiceAnalytics() *VoiceAnalytics
+}
+
+var _ SpeechRecognitionMetadataable = (*SpeechRecognitionMetadata)(nil)
+

@@ -6,7 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +25,14 @@ func NewModelStructurePipeline() *ModelStructurePipeline {
 }
 
 // SubModelNames returns the collection as a Go slice.
-func (x *ModelStructurePipeline) SubModelNames() []*foundation.NSString {
+func (x *ModelStructurePipeline) SubModelNames() []string {
 	arr := x.inner.SubModelNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SubModels returns the collection as a Go slice.
@@ -43,10 +41,17 @@ func (x *ModelStructurePipeline) SubModels() []*raw.MLModelStructure {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructure, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructure {
+		return raw.MLModelStructureFromID(purego.Retain(_id))
+	})
 }
+
+// ModelStructurePipelineable is the interface implemented by [ModelStructurePipeline], for mocking and DI.
+type ModelStructurePipelineable interface {
+	Unwrap() *raw.MLModelStructurePipeline
+	SubModelNames() []string
+	SubModels() []*raw.MLModelStructure
+}
+
+var _ ModelStructurePipelineable = (*ModelStructurePipeline)(nil)
 

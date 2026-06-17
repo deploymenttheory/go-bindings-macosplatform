@@ -6,6 +6,7 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -61,4 +62,82 @@ func (x *MatrixMultiplication) WithBatchSize(batchSize uint) *MatrixMultiplicati
 	x.inner.SetBatchSize(batchSize)
 	return x
 }
+
+// EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix calls the underlying EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix.
+func (x *MatrixMultiplication) EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer, leftMatrix, rightMatrix, resultMatrix)
+}
+
+// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+func (x *MatrixMultiplication) ResultMatrixOrigin() metal.MTLOrigin {
+	return x.inner.ResultMatrixOrigin()
+}
+
+// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+func (x *MatrixMultiplication) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+}
+
+// LeftMatrixOrigin calls the underlying LeftMatrixOrigin.
+func (x *MatrixMultiplication) LeftMatrixOrigin() metal.MTLOrigin {
+	return x.inner.LeftMatrixOrigin()
+}
+
+// SetLeftMatrixOrigin calls the underlying SetLeftMatrixOrigin.
+func (x *MatrixMultiplication) SetLeftMatrixOrigin(leftMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetLeftMatrixOrigin(leftMatrixOrigin)
+}
+
+// RightMatrixOrigin calls the underlying RightMatrixOrigin.
+func (x *MatrixMultiplication) RightMatrixOrigin() metal.MTLOrigin {
+	return x.inner.RightMatrixOrigin()
+}
+
+// SetRightMatrixOrigin calls the underlying SetRightMatrixOrigin.
+func (x *MatrixMultiplication) SetRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetRightMatrixOrigin(rightMatrixOrigin)
+}
+
+// BatchStart calls the underlying BatchStart.
+func (x *MatrixMultiplication) BatchStart() uint {
+	return x.inner.BatchStart()
+}
+
+// SetBatchStart calls the underlying SetBatchStart.
+func (x *MatrixMultiplication) SetBatchStart(batchStart uint) {
+	x.inner.SetBatchStart(batchStart)
+}
+
+// BatchSize calls the underlying BatchSize.
+func (x *MatrixMultiplication) BatchSize() uint {
+	return x.inner.BatchSize()
+}
+
+// SetBatchSize calls the underlying SetBatchSize.
+func (x *MatrixMultiplication) SetBatchSize(batchSize uint) {
+	x.inner.SetBatchSize(batchSize)
+}
+
+// MatrixMultiplicationable is the interface implemented by [MatrixMultiplication], for mocking and DI.
+type MatrixMultiplicationable interface {
+	Unwrap() *raw.MPSMatrixMultiplication
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixMultiplication
+	WithLeftMatrixOrigin(leftMatrixOrigin metal.MTLOrigin) *MatrixMultiplication
+	WithRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin) *MatrixMultiplication
+	WithBatchStart(batchStart uint) *MatrixMultiplication
+	WithBatchSize(batchSize uint) *MatrixMultiplication
+	EncodeToCommandBufferLeftMatrixRightMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, leftMatrix *mpscore.MPSMatrix, rightMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
+	LeftMatrixOrigin() metal.MTLOrigin
+	SetLeftMatrixOrigin(leftMatrixOrigin metal.MTLOrigin)
+	RightMatrixOrigin() metal.MTLOrigin
+	SetRightMatrixOrigin(rightMatrixOrigin metal.MTLOrigin)
+	BatchStart() uint
+	SetBatchStart(batchStart uint)
+	BatchSize() uint
+	SetBatchSize(batchSize uint)
+}
+
+var _ MatrixMultiplicationable = (*MatrixMultiplication)(nil)
 

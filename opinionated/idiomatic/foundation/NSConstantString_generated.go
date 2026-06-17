@@ -29,3 +29,10 @@ func (x *ConstantString) asString() *raw.NSString { return &x.inner.NSSimpleCStr
 
 func (x *ConstantString) asObject() *raw.NSObject { return &x.inner.NSSimpleCString.NSString.NSObject }
 
+// ConstantStringable is the interface implemented by [ConstantString], for mocking and DI.
+type ConstantStringable interface {
+	Unwrap() *raw.NSConstantString
+}
+
+var _ ConstantStringable = (*ConstantString)(nil)
+

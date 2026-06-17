@@ -41,3 +41,10 @@ func (x *NNReduceColumnSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retur
 
 func (x *NNReduceColumnSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceColumnSumable is the interface implemented by [NNReduceColumnSum], for mocking and DI.
+type NNReduceColumnSumable interface {
+	Unwrap() *raw.MPSNNReduceColumnSum
+}
+
+var _ NNReduceColumnSumable = (*NNReduceColumnSum)(nil)
+

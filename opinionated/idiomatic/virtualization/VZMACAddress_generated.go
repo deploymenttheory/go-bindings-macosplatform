@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -32,4 +33,57 @@ func NewMACAddressWithString(string_ string) *MACAddress {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &MACAddress{inner: raw.VZMACAddressFromID(_id)}
 }
+
+// EthernetAddress calls the underlying EthernetAddress.
+func (x *MACAddress) EthernetAddress() unsafe.Pointer {
+	return x.inner.EthernetAddress()
+}
+
+// String calls the underlying String.
+func (x *MACAddress) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsBroadcastAddress calls the underlying IsBroadcastAddress.
+func (x *MACAddress) IsBroadcastAddress() bool {
+	return x.inner.IsBroadcastAddress()
+}
+
+// IsMulticastAddress calls the underlying IsMulticastAddress.
+func (x *MACAddress) IsMulticastAddress() bool {
+	return x.inner.IsMulticastAddress()
+}
+
+// IsUnicastAddress calls the underlying IsUnicastAddress.
+func (x *MACAddress) IsUnicastAddress() bool {
+	return x.inner.IsUnicastAddress()
+}
+
+// IsLocallyAdministeredAddress calls the underlying IsLocallyAdministeredAddress.
+func (x *MACAddress) IsLocallyAdministeredAddress() bool {
+	return x.inner.IsLocallyAdministeredAddress()
+}
+
+// IsUniversallyAdministeredAddress calls the underlying IsUniversallyAdministeredAddress.
+func (x *MACAddress) IsUniversallyAdministeredAddress() bool {
+	return x.inner.IsUniversallyAdministeredAddress()
+}
+
+// MACAddressable is the interface implemented by [MACAddress], for mocking and DI.
+type MACAddressable interface {
+	Unwrap() *raw.VZMACAddress
+	EthernetAddress() unsafe.Pointer
+	String() string
+	IsBroadcastAddress() bool
+	IsMulticastAddress() bool
+	IsUnicastAddress() bool
+	IsLocallyAdministeredAddress() bool
+	IsUniversallyAdministeredAddress() bool
+}
+
+var _ MACAddressable = (*MACAddress)(nil)
 

@@ -10,6 +10,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UnaryImageKernel wraps [raw.MPSUnaryImageKernel] with a fluent Go API.
@@ -52,5 +53,75 @@ func (x *UnaryImageKernel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *Unar
 	return x
 }
 
+// EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator.
+func (x *UnaryImageKernel) EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
+	return x.inner.EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer, texture, copyAllocator)
+}
+
+// EncodeToCommandBufferSourceTextureDestinationTexture calls the underlying EncodeToCommandBufferSourceTextureDestinationTexture.
+func (x *UnaryImageKernel) EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture) {
+	x.inner.EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer, sourceTexture, destinationTexture)
+}
+
+// EncodeToCommandBufferSourceImageDestinationImage calls the underlying EncodeToCommandBufferSourceImageDestinationImage.
+func (x *UnaryImageKernel) EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceImageDestinationImage(commandBuffer, sourceImage, destinationImage)
+}
+
+// SourceRegionForDestinationSize calls the underlying SourceRegionForDestinationSize.
+func (x *UnaryImageKernel) SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	return x.inner.SourceRegionForDestinationSize(destinationSize)
+}
+
+// Offset calls the underlying Offset.
+func (x *UnaryImageKernel) Offset() mpscore.MPSOffset {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *UnaryImageKernel) SetOffset(offset mpscore.MPSOffset) {
+	x.inner.SetOffset(offset)
+}
+
+// ClipRect calls the underlying ClipRect.
+func (x *UnaryImageKernel) ClipRect() metal.MTLRegion {
+	return x.inner.ClipRect()
+}
+
+// SetClipRect calls the underlying SetClipRect.
+func (x *UnaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
+	x.inner.SetClipRect(clipRect)
+}
+
+// EdgeMode calls the underlying EdgeMode.
+func (x *UnaryImageKernel) EdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeMode()
+}
+
+// SetEdgeMode calls the underlying SetEdgeMode.
+func (x *UnaryImageKernel) SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode) {
+	x.inner.SetEdgeMode(edgeMode)
+}
+
 func (x *UnaryImageKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// UnaryImageKernelable is the interface implemented by [UnaryImageKernel], for mocking and DI.
+type UnaryImageKernelable interface {
+	Unwrap() *raw.MPSUnaryImageKernel
+	WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel
+	WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *UnaryImageKernel
+	EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
+	EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
+	EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
+	SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
+	Offset() mpscore.MPSOffset
+	SetOffset(offset mpscore.MPSOffset)
+	ClipRect() metal.MTLRegion
+	SetClipRect(clipRect metal.MTLRegion)
+	EdgeMode() mpscore.MPSImageEdgeMode
+	SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode)
+}
+
+var _ UnaryImageKernelable = (*UnaryImageKernel)(nil)
 

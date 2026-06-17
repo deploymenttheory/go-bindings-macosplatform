@@ -37,3 +37,10 @@ func (x *CNNFullyConnected) asCNNConvolution() *raw.MPSCNNConvolution { return &
 
 func (x *CNNFullyConnected) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNConvolution.MPSCNNKernel }
 
+// CNNFullyConnectedable is the interface implemented by [CNNFullyConnected], for mocking and DI.
+type CNNFullyConnectedable interface {
+	Unwrap() *raw.MPSCNNFullyConnected
+}
+
+var _ CNNFullyConnectedable = (*CNNFullyConnected)(nil)
+

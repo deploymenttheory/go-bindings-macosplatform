@@ -35,5 +35,46 @@ func (x *NetworkDeviceConfiguration) WithAttachment(attachment NetworkDeviceAtta
 	return x
 }
 
+// MACAddress calls the underlying MACAddress.
+func (x *NetworkDeviceConfiguration) MACAddress() *MACAddress {
+	_r := x.inner.MACAddress()
+	if _r == nil {
+		return nil
+	}
+	return &MACAddress{inner: _r}
+}
+
+// SetMACAddress calls the underlying SetMACAddress.
+func (x *NetworkDeviceConfiguration) SetMACAddress(mACAddress *raw.VZMACAddress) {
+	x.inner.SetMACAddress(mACAddress)
+}
+
+// Attachment calls the underlying Attachment.
+func (x *NetworkDeviceConfiguration) Attachment() *NetworkDeviceAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &NetworkDeviceAttachment{inner: _r}
+}
+
+// SetAttachment calls the underlying SetAttachment.
+func (x *NetworkDeviceConfiguration) SetAttachment(attachment *raw.VZNetworkDeviceAttachment) {
+	x.inner.SetAttachment(attachment)
+}
+
 func (x *NetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration { return x.inner }
+
+// NetworkDeviceConfigurationable is the interface implemented by [NetworkDeviceConfiguration], for mocking and DI.
+type NetworkDeviceConfigurationable interface {
+	Unwrap() *raw.VZNetworkDeviceConfiguration
+	WithMACAddress(mACAddress *raw.VZMACAddress) *NetworkDeviceConfiguration
+	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDeviceConfiguration
+	MACAddress() *MACAddress
+	SetMACAddress(mACAddress *raw.VZMACAddress)
+	Attachment() *NetworkDeviceAttachment
+	SetAttachment(attachment *raw.VZNetworkDeviceAttachment)
+}
+
+var _ NetworkDeviceConfigurationable = (*NetworkDeviceConfiguration)(nil)
 

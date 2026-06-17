@@ -58,5 +58,37 @@ func (x *RAWProcessingBooleanParameter) WithCurrentValue(currentValue bool) *RAW
 	return x
 }
 
+// HasNeutralValue calls the underlying HasNeutralValue.
+func (x *RAWProcessingBooleanParameter) HasNeutralValue(outNeutralValue *bool) bool {
+	return x.inner.HasNeutralValue(outNeutralValue)
+}
+
+// HasCameraValue calls the underlying HasCameraValue.
+func (x *RAWProcessingBooleanParameter) HasCameraValue(outCameraValue *bool) bool {
+	return x.inner.HasCameraValue(outCameraValue)
+}
+
+// CurrentValue calls the underlying CurrentValue.
+func (x *RAWProcessingBooleanParameter) CurrentValue() bool {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *RAWProcessingBooleanParameter) SetCurrentValue(currentValue bool) {
+	x.inner.SetCurrentValue(currentValue)
+}
+
 func (x *RAWProcessingBooleanParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingBooleanParameterable is the interface implemented by [RAWProcessingBooleanParameter], for mocking and DI.
+type RAWProcessingBooleanParameterable interface {
+	Unwrap() *raw.MERAWProcessingBooleanParameter
+	WithCurrentValue(currentValue bool) *RAWProcessingBooleanParameter
+	HasNeutralValue(outNeutralValue *bool) bool
+	HasCameraValue(outCameraValue *bool) bool
+	CurrentValue() bool
+	SetCurrentValue(currentValue bool)
+}
+
+var _ RAWProcessingBooleanParameterable = (*RAWProcessingBooleanParameter)(nil)
 

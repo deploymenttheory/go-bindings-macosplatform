@@ -40,3 +40,80 @@ func NewCursorWithImageForegroundColorHintBackgroundColorHintHotSpot(newImage *r
 	return &Cursor{inner: raw.NSCursorFromID(_id)}
 }
 
+// Pop calls the underlying Pop.
+func (x *Cursor) Pop() {
+	x.inner.Pop()
+}
+
+// Push calls the underlying Push.
+func (x *Cursor) Push() {
+	x.inner.Push()
+}
+
+// Set calls the underlying Set.
+func (x *Cursor) Set() {
+	x.inner.Set()
+}
+
+// Image calls the underlying Image.
+func (x *Cursor) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// HotSpot calls the underlying HotSpot.
+func (x *Cursor) HotSpot() corefoundation.CGPoint {
+	return x.inner.HotSpot()
+}
+
+// SetOnMouseExited calls the underlying SetOnMouseExited.
+func (x *Cursor) SetOnMouseExited(flag bool) {
+	x.inner.SetOnMouseExited(flag)
+}
+
+// SetOnMouseEntered calls the underlying SetOnMouseEntered.
+func (x *Cursor) SetOnMouseEntered(flag bool) {
+	x.inner.SetOnMouseEntered(flag)
+}
+
+// MouseEntered calls the underlying MouseEntered.
+func (x *Cursor) MouseEntered(event *raw.NSEvent) {
+	x.inner.MouseEntered(event)
+}
+
+// MouseExited calls the underlying MouseExited.
+func (x *Cursor) MouseExited(event *raw.NSEvent) {
+	x.inner.MouseExited(event)
+}
+
+// IsSetOnMouseExited calls the underlying IsSetOnMouseExited.
+func (x *Cursor) IsSetOnMouseExited() bool {
+	return x.inner.IsSetOnMouseExited()
+}
+
+// IsSetOnMouseEntered calls the underlying IsSetOnMouseEntered.
+func (x *Cursor) IsSetOnMouseEntered() bool {
+	return x.inner.IsSetOnMouseEntered()
+}
+
+// Cursorable is the interface implemented by [Cursor], for mocking and DI.
+type Cursorable interface {
+	Unwrap() *raw.NSCursor
+	Pop()
+	Push()
+	Set()
+	Image() *Image
+	HotSpot() corefoundation.CGPoint
+	SetOnMouseExited(flag bool)
+	SetOnMouseEntered(flag bool)
+	MouseEntered(event *raw.NSEvent)
+	MouseExited(event *raw.NSEvent)
+	IsSetOnMouseExited() bool
+	IsSetOnMouseEntered() bool
+}
+
+var _ Cursorable = (*Cursor)(nil)
+

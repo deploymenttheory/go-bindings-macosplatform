@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioRoutingArbiter wraps [raw.AVAudioRoutingArbiter] with a fluent Go API.
@@ -22,4 +23,23 @@ func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRoutingArbiter")), objc.RegisterName("new"))
 	return &AudioRoutingArbiter{inner: raw.AVAudioRoutingArbiterFromID(_id)}
 }
+
+// BeginArbitrationWithCategoryCompletionHandler calls the underlying BeginArbitrationWithCategoryCompletionHandler.
+func (x *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category raw.AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
+	x.inner.BeginArbitrationWithCategoryCompletionHandler(category, handler)
+}
+
+// LeaveArbitration calls the underlying LeaveArbitration.
+func (x *AudioRoutingArbiter) LeaveArbitration() {
+	x.inner.LeaveArbitration()
+}
+
+// AudioRoutingArbiterable is the interface implemented by [AudioRoutingArbiter], for mocking and DI.
+type AudioRoutingArbiterable interface {
+	Unwrap() *raw.AVAudioRoutingArbiter
+	BeginArbitrationWithCategoryCompletionHandler(category raw.AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer))
+	LeaveArbitration()
+}
+
+var _ AudioRoutingArbiterable = (*AudioRoutingArbiter)(nil)
 

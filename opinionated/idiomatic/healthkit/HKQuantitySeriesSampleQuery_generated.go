@@ -45,5 +45,38 @@ func (x *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQu
 	return x
 }
 
+// IncludeSample calls the underlying IncludeSample.
+func (x *QuantitySeriesSampleQuery) IncludeSample() bool {
+	return x.inner.IncludeSample()
+}
+
+// SetIncludeSample calls the underlying SetIncludeSample.
+func (x *QuantitySeriesSampleQuery) SetIncludeSample(includeSample bool) {
+	x.inner.SetIncludeSample(includeSample)
+}
+
+// OrderByQuantitySampleStartDate calls the underlying OrderByQuantitySampleStartDate.
+func (x *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
+	return x.inner.OrderByQuantitySampleStartDate()
+}
+
+// SetOrderByQuantitySampleStartDate calls the underlying SetOrderByQuantitySampleStartDate.
+func (x *QuantitySeriesSampleQuery) SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) {
+	x.inner.SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate)
+}
+
 func (x *QuantitySeriesSampleQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// QuantitySeriesSampleQueryable is the interface implemented by [QuantitySeriesSampleQuery], for mocking and DI.
+type QuantitySeriesSampleQueryable interface {
+	Unwrap() *raw.HKQuantitySeriesSampleQuery
+	WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery
+	WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery
+	IncludeSample() bool
+	SetIncludeSample(includeSample bool)
+	OrderByQuantitySampleStartDate() bool
+	SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool)
+}
+
+var _ QuantitySeriesSampleQueryable = (*QuantitySeriesSampleQuery)(nil)
 

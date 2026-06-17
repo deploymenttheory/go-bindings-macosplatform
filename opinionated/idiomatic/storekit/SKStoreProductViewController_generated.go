@@ -5,8 +5,10 @@
 package storekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StoreProductViewController wraps [raw.SKStoreProductViewController] with a fluent Go API.
@@ -28,4 +30,30 @@ func (x *StoreProductViewController) WithDelegate(delegate raw.SKStoreProductVie
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// LoadProductWithParametersCompletionBlock calls the underlying LoadProductWithParametersCompletionBlock.
+func (x *StoreProductViewController) LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer)) {
+	x.inner.LoadProductWithParametersCompletionBlock(parameters, block)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *StoreProductViewController) Delegate() raw.SKStoreProductViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *StoreProductViewController) SetDelegate(delegate raw.SKStoreProductViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// StoreProductViewControllerable is the interface implemented by [StoreProductViewController], for mocking and DI.
+type StoreProductViewControllerable interface {
+	Unwrap() *raw.SKStoreProductViewController
+	WithDelegate(delegate raw.SKStoreProductViewControllerDelegate) *StoreProductViewController
+	LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer))
+	Delegate() raw.SKStoreProductViewControllerDelegate
+	SetDelegate(delegate raw.SKStoreProductViewControllerDelegate)
+}
+
+var _ StoreProductViewControllerable = (*StoreProductViewController)(nil)
 

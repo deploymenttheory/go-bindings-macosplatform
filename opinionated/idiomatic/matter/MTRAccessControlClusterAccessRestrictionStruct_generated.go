@@ -36,3 +36,36 @@ func (x *MTRAccessControlClusterAccessRestrictionStruct) WithId(id_ *foundation.
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *MTRAccessControlClusterAccessRestrictionStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRAccessControlClusterAccessRestrictionStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
+// Id calls the underlying Id.
+func (x *MTRAccessControlClusterAccessRestrictionStruct) Id() *foundation.NSNumber {
+	return x.inner.Id()
+}
+
+// SetId calls the underlying SetId.
+func (x *MTRAccessControlClusterAccessRestrictionStruct) SetId(id_ *foundation.NSNumber) {
+	x.inner.SetId(id_)
+}
+
+// MTRAccessControlClusterAccessRestrictionStructable is the interface implemented by [MTRAccessControlClusterAccessRestrictionStruct], for mocking and DI.
+type MTRAccessControlClusterAccessRestrictionStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessRestrictionStruct
+	WithType(type_ *foundation.NSNumber) *MTRAccessControlClusterAccessRestrictionStruct
+	WithId(id_ *foundation.NSNumber) *MTRAccessControlClusterAccessRestrictionStruct
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+	Id() *foundation.NSNumber
+	SetId(id_ *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessRestrictionStructable = (*MTRAccessControlClusterAccessRestrictionStruct)(nil)
+

@@ -34,21 +34,135 @@ func (x *LocalPlayer) WithAuthenticateHandler(authenticateHandler func(*appkit.N
 	return x
 }
 
+// LoadRecentPlayers blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadRecentPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadRecentPlayersWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// LoadChallengableFriends blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadChallengableFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadChallengableFriendsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// FetchItemsForIdentityVerificationSignature calls the underlying FetchItemsForIdentityVerificationSignature.
+func (x *LocalPlayer) FetchItemsForIdentityVerificationSignature(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
+	x.inner.FetchItemsForIdentityVerificationSignature(completionHandler)
+}
+
+// IsAuthenticated calls the underlying IsAuthenticated.
+func (x *LocalPlayer) IsAuthenticated() bool {
+	return x.inner.IsAuthenticated()
+}
+
+// IsUnderage calls the underlying IsUnderage.
+func (x *LocalPlayer) IsUnderage() bool {
+	return x.inner.IsUnderage()
+}
+
+// IsMultiplayerGamingRestricted calls the underlying IsMultiplayerGamingRestricted.
+func (x *LocalPlayer) IsMultiplayerGamingRestricted() bool {
+	return x.inner.IsMultiplayerGamingRestricted()
+}
+
+// IsPersonalizedCommunicationRestricted calls the underlying IsPersonalizedCommunicationRestricted.
+func (x *LocalPlayer) IsPersonalizedCommunicationRestricted() bool {
+	return x.inner.IsPersonalizedCommunicationRestricted()
+}
+
+// RegisterListener calls the underlying RegisterListener.
+func (x *LocalPlayer) RegisterListener(listener raw.GKLocalPlayerListener) {
+	x.inner.RegisterListener(listener)
+}
+
+// UnregisterListener calls the underlying UnregisterListener.
+func (x *LocalPlayer) UnregisterListener(listener raw.GKLocalPlayerListener) {
+	x.inner.UnregisterListener(listener)
+}
+
+// UnregisterAllListeners calls the underlying UnregisterAllListeners.
+func (x *LocalPlayer) UnregisterAllListeners() {
+	x.inner.UnregisterAllListeners()
+}
+
 // SetDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categoryID string) error {
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultLeaderboardCategoryIDCompletionHandler(foundation.NSStringStringWithUTF8String(categoryID), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
+	}
+}
+
+// LoadDefaultLeaderboardCategoryID blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadDefaultLeaderboardCategoryID(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadDefaultLeaderboardCategoryIDWithCompletionHandler(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
 	}
 }
 
@@ -56,17 +170,72 @@ func (x *LocalPlayer) SetDefaultLeaderboardCategoryID(ctx context.Context, categ
 func (x *LocalPlayer) Authenticate(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.AuthenticateWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
+	}
+}
+
+// LoadFriendPlayers blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadFriendPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadFriendPlayersWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// GenerateIdentityVerificationSignatureWithCompletionHandler calls the underlying GenerateIdentityVerificationSignatureWithCompletionHandler.
+func (x *LocalPlayer) GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer)) {
+	x.inner.GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler)
+}
+
+// LoadDefaultLeaderboardIdentifier blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadDefaultLeaderboardIdentifierWithCompletionHandler(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
 	}
 }
 
@@ -74,11 +243,11 @@ func (x *LocalPlayer) Authenticate(ctx context.Context) error {
 func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error {
 	_ch := make(chan error, 1)
 	x.inner.SetDefaultLeaderboardIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(leaderboardIdentifier), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -88,28 +257,173 @@ func (x *LocalPlayer) SetDefaultLeaderboardIdentifier(ctx context.Context, leade
 	}
 }
 
+// LoadFriendsWithCompletionHandler calls the underlying LoadFriendsWithCompletionHandler.
+func (x *LocalPlayer) LoadFriendsWithCompletionHandler(completionHandler objc.Block) {
+	x.inner.LoadFriendsWithCompletionHandler(completionHandler)
+}
+
 // Friends returns the collection as a Go slice.
-func (x *LocalPlayer) Friends() []*foundation.NSString {
+func (x *LocalPlayer) Friends() []string {
 	arr := x.inner.Friends()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// LoadFriendsAuthorizationStatus calls the underlying LoadFriendsAuthorizationStatus.
+func (x *LocalPlayer) LoadFriendsAuthorizationStatus(completionHandler func(raw.GKFriendsAuthorizationStatus, unsafe.Pointer)) {
+	x.inner.LoadFriendsAuthorizationStatus(completionHandler)
+}
+
+// LoadFriends blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.LoadFriends(func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// LoadFriendsWithIdentifiers blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) LoadFriendsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKPlayer]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadFriendsWithIdentifiersCompletionHandler(identifiers, func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKPlayer]
+		return _zero, ctx.Err()
+	}
+}
+
+// PresentFriendRequestCreatorFromWindowError calls the underlying PresentFriendRequestCreatorFromWindowError.
+func (x *LocalPlayer) PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error) {
+	return x.inner.PresentFriendRequestCreatorFromWindowError(window)
+}
+
+// AuthenticateHandler calls the underlying AuthenticateHandler.
+func (x *LocalPlayer) AuthenticateHandler() objc.Block {
+	return x.inner.AuthenticateHandler()
+}
+
+// SetAuthenticateHandler blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) SetAuthenticateHandler(ctx context.Context) (*appkit.NSViewController, error) {
+	type _result struct {
+		val *appkit.NSViewController
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetAuthenticateHandler(func(_p0 *appkit.NSViewController, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *appkit.NSViewController
+		return _zero, ctx.Err()
+	}
+}
+
+// IsPresentingFriendRequestViewController calls the underlying IsPresentingFriendRequestViewController.
+func (x *LocalPlayer) IsPresentingFriendRequestViewController() bool {
+	return x.inner.IsPresentingFriendRequestViewController()
+}
+
+// FetchSavedGames blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) FetchSavedGames(ctx context.Context) (*foundation.NSArray[*raw.GKSavedGame], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKSavedGame]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchSavedGamesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKSavedGame], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKSavedGame]
+		return _zero, ctx.Err()
+	}
+}
+
+// SaveGameDataWithName blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) SaveGameDataWithName(ctx context.Context, data *foundation.NSData, name string) (*SavedGame, error) {
+	type _result struct {
+		val *SavedGame
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SaveGameDataWithNameCompletionHandler(data, foundation.NSStringStringWithUTF8String(name), func(_p0 *raw.GKSavedGame, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &SavedGame{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SavedGame
+		return _zero, ctx.Err()
+	}
 }
 
 // DeleteSavedGamesWithName blocks until the operation completes or ctx is cancelled.
 func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteSavedGamesWithNameCompletionHandler(foundation.NSStringStringWithUTF8String(name), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -119,7 +433,69 @@ func (x *LocalPlayer) DeleteSavedGamesWithName(ctx context.Context, name string)
 	}
 }
 
+// ResolveConflictingSavedGamesWithData blocks until the operation completes or ctx is cancelled.
+func (x *LocalPlayer) ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames *foundation.NSArray[*raw.GKSavedGame], data *foundation.NSData) (*foundation.NSArray[*raw.GKSavedGame], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.GKSavedGame]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ResolveConflictingSavedGamesWithDataCompletionHandler(conflictingSavedGames, data, func(_p0 *foundation.NSArray[*raw.GKSavedGame], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.GKSavedGame]
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *LocalPlayer) asPlayer() *raw.GKPlayer { return &x.inner.GKPlayer }
 
 func (x *LocalPlayer) asBasePlayer() *raw.GKBasePlayer { return &x.inner.GKPlayer.GKBasePlayer }
+
+// LocalPlayerable is the interface implemented by [LocalPlayer], for mocking and DI.
+type LocalPlayerable interface {
+	Unwrap() *raw.GKLocalPlayer
+	WithAuthenticateHandler(authenticateHandler func(*appkit.NSViewController, unsafe.Pointer)) *LocalPlayer
+	LoadRecentPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
+	LoadChallengableFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
+	FetchItemsForIdentityVerificationSignature(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer))
+	IsAuthenticated() bool
+	IsUnderage() bool
+	IsMultiplayerGamingRestricted() bool
+	IsPersonalizedCommunicationRestricted() bool
+	RegisterListener(listener raw.GKLocalPlayerListener)
+	UnregisterListener(listener raw.GKLocalPlayerListener)
+	UnregisterAllListeners()
+	SetDefaultLeaderboardCategoryID(ctx context.Context, categoryID string) error
+	LoadDefaultLeaderboardCategoryID(ctx context.Context) (string, error)
+	Authenticate(ctx context.Context) error
+	LoadFriendPlayers(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
+	GenerateIdentityVerificationSignatureWithCompletionHandler(completionHandler func(*foundation.NSURL, *foundation.NSData, *foundation.NSData, uint64, unsafe.Pointer))
+	LoadDefaultLeaderboardIdentifier(ctx context.Context) (string, error)
+	SetDefaultLeaderboardIdentifier(ctx context.Context, leaderboardIdentifier string) error
+	LoadFriendsWithCompletionHandler(completionHandler objc.Block)
+	Friends() []string
+	LoadFriendsAuthorizationStatus(completionHandler func(raw.GKFriendsAuthorizationStatus, unsafe.Pointer))
+	LoadFriends(ctx context.Context) (*foundation.NSArray[*raw.GKPlayer], error)
+	LoadFriendsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error)
+	PresentFriendRequestCreatorFromWindowError(window *appkit.NSWindow) (bool, error)
+	AuthenticateHandler() objc.Block
+	SetAuthenticateHandler(ctx context.Context) (*appkit.NSViewController, error)
+	IsPresentingFriendRequestViewController() bool
+	FetchSavedGames(ctx context.Context) (*foundation.NSArray[*raw.GKSavedGame], error)
+	SaveGameDataWithName(ctx context.Context, data *foundation.NSData, name string) (*SavedGame, error)
+	DeleteSavedGamesWithName(ctx context.Context, name string) error
+	ResolveConflictingSavedGamesWithData(ctx context.Context, conflictingSavedGames *foundation.NSArray[*raw.GKSavedGame], data *foundation.NSData) (*foundation.NSArray[*raw.GKSavedGame], error)
+}
+
+var _ LocalPlayerable = (*LocalPlayer)(nil)
 

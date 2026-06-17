@@ -30,5 +30,25 @@ func (x *PullStreamNode) WithRenderBlock(renderBlock func(*bool, *coreaudiotypes
 	return x
 }
 
+// RenderBlock calls the underlying RenderBlock.
+func (x *PullStreamNode) RenderBlock() objc.Block {
+	return x.inner.RenderBlock()
+}
+
+// SetRenderBlock calls the underlying SetRenderBlock.
+func (x *PullStreamNode) SetRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) {
+	x.inner.SetRenderBlock(renderBlock)
+}
+
 func (x *PullStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.PHASEStreamNode }
+
+// PullStreamNodeable is the interface implemented by [PullStreamNode], for mocking and DI.
+type PullStreamNodeable interface {
+	Unwrap() *raw.PHASEPullStreamNode
+	WithRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *PullStreamNode
+	RenderBlock() objc.Block
+	SetRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int)
+}
+
+var _ PullStreamNodeable = (*PullStreamNode)(nil)
 

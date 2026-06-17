@@ -25,3 +25,10 @@ func NewVirtioNetworkDeviceConfiguration() *VirtioNetworkDeviceConfiguration {
 
 func (x *VirtioNetworkDeviceConfiguration) asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration { return &x.inner.VZNetworkDeviceConfiguration }
 
+// VirtioNetworkDeviceConfigurationable is the interface implemented by [VirtioNetworkDeviceConfiguration], for mocking and DI.
+type VirtioNetworkDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioNetworkDeviceConfiguration
+}
+
+var _ VirtioNetworkDeviceConfigurationable = (*VirtioNetworkDeviceConfiguration)(nil)
+

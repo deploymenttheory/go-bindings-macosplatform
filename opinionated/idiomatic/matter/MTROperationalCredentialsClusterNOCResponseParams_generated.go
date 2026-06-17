@@ -55,3 +55,66 @@ func (x *MTROperationalCredentialsClusterNOCResponseParams) WithTimedInvokeTimeo
 	return x
 }
 
+// StatusCode calls the underlying StatusCode.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) StatusCode() *foundation.NSNumber {
+	return x.inner.StatusCode()
+}
+
+// SetStatusCode calls the underlying SetStatusCode.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetStatusCode(statusCode *foundation.NSNumber) {
+	x.inner.SetStatusCode(statusCode)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterNOCResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTROperationalCredentialsClusterNOCResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterNOCResponseParams], for mocking and DI.
+type MTROperationalCredentialsClusterNOCResponseParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterNOCResponseParams
+	WithStatusCode(statusCode *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
+	WithDebugText(debugText string) *MTROperationalCredentialsClusterNOCResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterNOCResponseParams
+	StatusCode() *foundation.NSNumber
+	SetStatusCode(statusCode *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterNOCResponseParamsable = (*MTROperationalCredentialsClusterNOCResponseParams)(nil)
+

@@ -23,3 +23,10 @@ func NewMTRSmokeCOAlarmClusterAlarmMutedEvent() *MTRSmokeCOAlarmClusterAlarmMute
 	return &MTRSmokeCOAlarmClusterAlarmMutedEvent{inner: raw.MTRSmokeCOAlarmClusterAlarmMutedEventFromID(_id)}
 }
 
+// MTRSmokeCOAlarmClusterAlarmMutedEventable is the interface implemented by [MTRSmokeCOAlarmClusterAlarmMutedEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterAlarmMutedEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterAlarmMutedEvent
+}
+
+var _ MTRSmokeCOAlarmClusterAlarmMutedEventable = (*MTRSmokeCOAlarmClusterAlarmMutedEvent)(nil)
+

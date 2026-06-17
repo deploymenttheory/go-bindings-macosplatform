@@ -23,5 +23,62 @@ func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
 	return &SymbolDrawOffEffect{inner: raw.NSSymbolDrawOffEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOffEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOffEffect{inner: _r}
+}
+
+// EffectWithIndividually calls the underlying EffectWithIndividually.
+func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
+	_r := x.inner.EffectWithIndividually()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOffEffect{inner: _r}
+}
+
+// EffectWithReversed calls the underlying EffectWithReversed.
+func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
+	_r := x.inner.EffectWithReversed()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOffEffect{inner: _r}
+}
+
+// EffectWithNonReversed calls the underlying EffectWithNonReversed.
+func (x *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
+	_r := x.inner.EffectWithNonReversed()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOffEffect{inner: _r}
+}
+
 func (x *SymbolDrawOffEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolDrawOffEffectable is the interface implemented by [SymbolDrawOffEffect], for mocking and DI.
+type SymbolDrawOffEffectable interface {
+	Unwrap() *raw.NSSymbolDrawOffEffect
+	EffectWithByLayer() *SymbolDrawOffEffect
+	EffectWithWholeSymbol() *SymbolDrawOffEffect
+	EffectWithIndividually() *SymbolDrawOffEffect
+	EffectWithReversed() *SymbolDrawOffEffect
+	EffectWithNonReversed() *SymbolDrawOffEffect
+}
+
+var _ SymbolDrawOffEffectable = (*SymbolDrawOffEffect)(nil)
 

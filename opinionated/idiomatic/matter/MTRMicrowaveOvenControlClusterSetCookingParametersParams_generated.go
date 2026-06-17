@@ -60,3 +60,88 @@ func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithServerSid
 	return x
 }
 
+// CookMode calls the underlying CookMode.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() *foundation.NSNumber {
+	return x.inner.CookMode()
+}
+
+// SetCookMode calls the underlying SetCookMode.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookMode(cookMode *foundation.NSNumber) {
+	x.inner.SetCookMode(cookMode)
+}
+
+// CookTime calls the underlying CookTime.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() *foundation.NSNumber {
+	return x.inner.CookTime()
+}
+
+// SetCookTime calls the underlying SetCookTime.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetCookTime(cookTime *foundation.NSNumber) {
+	x.inner.SetCookTime(cookTime)
+}
+
+// PowerSetting calls the underlying PowerSetting.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() *foundation.NSNumber {
+	return x.inner.PowerSetting()
+}
+
+// SetPowerSetting calls the underlying SetPowerSetting.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetPowerSetting(powerSetting *foundation.NSNumber) {
+	x.inner.SetPowerSetting(powerSetting)
+}
+
+// StartAfterSetting calls the underlying StartAfterSetting.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() *foundation.NSNumber {
+	return x.inner.StartAfterSetting()
+}
+
+// SetStartAfterSetting calls the underlying SetStartAfterSetting.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetStartAfterSetting(startAfterSetting *foundation.NSNumber) {
+	x.inner.SetStartAfterSetting(startAfterSetting)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMicrowaveOvenControlClusterSetCookingParametersParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMicrowaveOvenControlClusterSetCookingParametersParamsable is the interface implemented by [MTRMicrowaveOvenControlClusterSetCookingParametersParams], for mocking and DI.
+type MTRMicrowaveOvenControlClusterSetCookingParametersParamsable interface {
+	Unwrap() *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithCookMode(cookMode *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithCookTime(cookTime *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithPowerSetting(powerSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithStartAfterSetting(startAfterSetting *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMicrowaveOvenControlClusterSetCookingParametersParams
+	CookMode() *foundation.NSNumber
+	SetCookMode(cookMode *foundation.NSNumber)
+	CookTime() *foundation.NSNumber
+	SetCookTime(cookTime *foundation.NSNumber)
+	PowerSetting() *foundation.NSNumber
+	SetPowerSetting(powerSetting *foundation.NSNumber)
+	StartAfterSetting() *foundation.NSNumber
+	SetStartAfterSetting(startAfterSetting *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMicrowaveOvenControlClusterSetCookingParametersParamsable = (*MTRMicrowaveOvenControlClusterSetCookingParametersParams)(nil)
+

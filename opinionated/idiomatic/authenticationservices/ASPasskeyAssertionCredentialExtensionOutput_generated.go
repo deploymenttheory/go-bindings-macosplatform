@@ -24,3 +24,20 @@ func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *
 	return &PasskeyAssertionCredentialExtensionOutput{inner: raw.ASPasskeyAssertionCredentialExtensionOutputFromID(_id)}
 }
 
+// LargeBlobAssertionOutput calls the underlying LargeBlobAssertionOutput.
+func (x *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	_r := x.inner.LargeBlobAssertionOutput()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: _r}
+}
+
+// PasskeyAssertionCredentialExtensionOutputable is the interface implemented by [PasskeyAssertionCredentialExtensionOutput], for mocking and DI.
+type PasskeyAssertionCredentialExtensionOutputable interface {
+	Unwrap() *raw.ASPasskeyAssertionCredentialExtensionOutput
+	LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
+}
+
+var _ PasskeyAssertionCredentialExtensionOutputable = (*PasskeyAssertionCredentialExtensionOutput)(nil)
+

@@ -23,3 +23,16 @@ func NewQuartzFilterView() *QuartzFilterView {
 	return &QuartzFilterView{inner: raw.QuartzFilterViewFromID(_id)}
 }
 
+// SizeToFit calls the underlying SizeToFit.
+func (x *QuartzFilterView) SizeToFit() {
+	x.inner.SizeToFit()
+}
+
+// QuartzFilterViewable is the interface implemented by [QuartzFilterView], for mocking and DI.
+type QuartzFilterViewable interface {
+	Unwrap() *raw.QuartzFilterView
+	SizeToFit()
+}
+
+var _ QuartzFilterViewable = (*QuartzFilterView)(nil)
+

@@ -30,5 +30,29 @@ func (x *ActionGoTo) WithDestination(destination *raw.PDFDestination) *ActionGoT
 	return x
 }
 
+// Destination calls the underlying Destination.
+func (x *ActionGoTo) Destination() *Destination {
+	_r := x.inner.Destination()
+	if _r == nil {
+		return nil
+	}
+	return &Destination{inner: _r}
+}
+
+// SetDestination calls the underlying SetDestination.
+func (x *ActionGoTo) SetDestination(destination *raw.PDFDestination) {
+	x.inner.SetDestination(destination)
+}
+
 func (x *ActionGoTo) asAction() *raw.PDFAction { return &x.inner.PDFAction }
+
+// ActionGoToable is the interface implemented by [ActionGoTo], for mocking and DI.
+type ActionGoToable interface {
+	Unwrap() *raw.PDFActionGoTo
+	WithDestination(destination *raw.PDFDestination) *ActionGoTo
+	Destination() *Destination
+	SetDestination(destination *raw.PDFDestination)
+}
+
+var _ ActionGoToable = (*ActionGoTo)(nil)
 

@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,24 @@ func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscrip
 	return &MathExpressionMultiscript{inner: raw.AXMathExpressionMultiscriptFromID(_id)}
 }
 
+// BaseExpression calls the underlying BaseExpression.
+func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
+	_r := x.inner.BaseExpression()
+	if _r == nil {
+		return nil
+	}
+	return &MathExpression{inner: _r}
+}
+
 // PrescriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionMultiscript) PrescriptExpressions() []*raw.AXMathExpressionSubSuperscript {
 	arr := x.inner.PrescriptExpressions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpressionSubSuperscript, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpressionSubSuperscript {
+		return raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))
+	})
 }
 
 // PostscriptExpressions returns the collection as a Go slice.
@@ -44,12 +52,20 @@ func (x *MathExpressionMultiscript) PostscriptExpressions() []*raw.AXMathExpress
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpressionSubSuperscript, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpressionSubSuperscript {
+		return raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MathExpressionMultiscript) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionMultiscriptable is the interface implemented by [MathExpressionMultiscript], for mocking and DI.
+type MathExpressionMultiscriptable interface {
+	Unwrap() *raw.AXMathExpressionMultiscript
+	BaseExpression() *MathExpression
+	PrescriptExpressions() []*raw.AXMathExpressionSubSuperscript
+	PostscriptExpressions() []*raw.AXMathExpressionSubSuperscript
+}
+
+var _ MathExpressionMultiscriptable = (*MathExpressionMultiscript)(nil)
 

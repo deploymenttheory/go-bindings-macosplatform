@@ -29,3 +29,10 @@ func (x *NNReductionSpatialMeanGradientNode) asNNGradientFilterNode() *mpsneural
 
 func (x *NNReductionSpatialMeanGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNReductionSpatialMeanGradientNodeable is the interface implemented by [NNReductionSpatialMeanGradientNode], for mocking and DI.
+type NNReductionSpatialMeanGradientNodeable interface {
+	Unwrap() *raw.MPSNNReductionSpatialMeanGradientNode
+}
+
+var _ NNReductionSpatialMeanGradientNodeable = (*NNReductionSpatialMeanGradientNode)(nil)
+

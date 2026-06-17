@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,30 @@ func (x *DOMHTMLUListElement) WithType(type_ string) *DOMHTMLUListElement {
 	return x
 }
 
+// Compact calls the underlying Compact.
+func (x *DOMHTMLUListElement) Compact() bool {
+	return x.inner.Compact()
+}
+
+// SetCompact calls the underlying SetCompact.
+func (x *DOMHTMLUListElement) SetCompact(compact bool) {
+	x.inner.SetCompact(compact)
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLUListElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLUListElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
 func (x *DOMHTMLUListElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLUListElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +70,17 @@ func (x *DOMHTMLUListElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLUListElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLUListElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLUListElementable is the interface implemented by [DOMHTMLUListElement], for mocking and DI.
+type DOMHTMLUListElementable interface {
+	Unwrap() *raw.DOMHTMLUListElement
+	WithCompact(compact bool) *DOMHTMLUListElement
+	WithType(type_ string) *DOMHTMLUListElement
+	Compact() bool
+	SetCompact(compact bool)
+	Type() string
+	SetType(type_ string)
+}
+
+var _ DOMHTMLUListElementable = (*DOMHTMLUListElement)(nil)
 

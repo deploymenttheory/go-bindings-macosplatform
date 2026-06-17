@@ -24,7 +24,24 @@ func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *raw.MKMultiPolygon) *
 	return &MultiPolygonRenderer{inner: raw.MKMultiPolygonRendererFromID(_id)}
 }
 
+// MultiPolygon calls the underlying MultiPolygon.
+func (x *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
+	_r := x.inner.MultiPolygon()
+	if _r == nil {
+		return nil
+	}
+	return &MultiPolygon{inner: _r}
+}
+
 func (x *MultiPolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
 
 func (x *MultiPolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// MultiPolygonRendererable is the interface implemented by [MultiPolygonRenderer], for mocking and DI.
+type MultiPolygonRendererable interface {
+	Unwrap() *raw.MKMultiPolygonRenderer
+	MultiPolygon() *MultiPolygon
+}
+
+var _ MultiPolygonRendererable = (*MultiPolygonRenderer)(nil)
 

@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,34 @@ func NewTermOfAddress() *TermOfAddress {
 	return &TermOfAddress{inner: raw.NSTermOfAddressFromID(_id)}
 }
 
+// LanguageIdentifier calls the underlying LanguageIdentifier.
+func (x *TermOfAddress) LanguageIdentifier() *String {
+	_r := x.inner.LanguageIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 // Pronouns returns the collection as a Go slice.
 func (x *TermOfAddress) Pronouns() []*raw.NSMorphologyPronoun {
 	arr := x.inner.Pronouns()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSMorphologyPronoun, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMorphologyPronoun {
+		return raw.NSMorphologyPronounFromID(purego.Retain(_id))
+	})
 }
 
 func (x *TermOfAddress) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// TermOfAddressable is the interface implemented by [TermOfAddress], for mocking and DI.
+type TermOfAddressable interface {
+	Unwrap() *raw.NSTermOfAddress
+	LanguageIdentifier() *String
+	Pronouns() []*raw.NSMorphologyPronoun
+}
+
+var _ TermOfAddressable = (*TermOfAddress)(nil)
 

@@ -91,17 +91,135 @@ func (x *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 	return x
 }
 
+// ElementsForName calls the underlying ElementsForName.
+func (x *XMLElement) ElementsForName(name string) *raw.NSArray[*raw.NSXMLElement] {
+	return x.inner.ElementsForName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ElementsForLocalNameURI calls the underlying ElementsForLocalNameURI.
+func (x *XMLElement) ElementsForLocalNameURI(localName string, uRI string) *raw.NSArray[*raw.NSXMLElement] {
+	return x.inner.ElementsForLocalNameURI(foundation.NSStringStringWithUTF8String(localName), foundation.NSStringStringWithUTF8String(uRI))
+}
+
+// AddAttribute calls the underlying AddAttribute.
+func (x *XMLElement) AddAttribute(attribute *raw.NSXMLNode) {
+	x.inner.AddAttribute(attribute)
+}
+
+// RemoveAttributeForName calls the underlying RemoveAttributeForName.
+func (x *XMLElement) RemoveAttributeForName(name string) {
+	x.inner.RemoveAttributeForName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// SetAttributesWithDictionary calls the underlying SetAttributesWithDictionary.
+func (x *XMLElement) SetAttributesWithDictionary(attributes *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
+	x.inner.SetAttributesWithDictionary(attributes)
+}
+
+// AttributeForName calls the underlying AttributeForName.
+func (x *XMLElement) AttributeForName(name string) *XMLNode {
+	_r := x.inner.AttributeForName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// AttributeForLocalNameURI calls the underlying AttributeForLocalNameURI.
+func (x *XMLElement) AttributeForLocalNameURI(localName string, uRI string) *XMLNode {
+	_r := x.inner.AttributeForLocalNameURI(foundation.NSStringStringWithUTF8String(localName), foundation.NSStringStringWithUTF8String(uRI))
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// AddNamespace calls the underlying AddNamespace.
+func (x *XMLElement) AddNamespace(aNamespace *raw.NSXMLNode) {
+	x.inner.AddNamespace(aNamespace)
+}
+
+// RemoveNamespaceForPrefix calls the underlying RemoveNamespaceForPrefix.
+func (x *XMLElement) RemoveNamespaceForPrefix(name string) {
+	x.inner.RemoveNamespaceForPrefix(foundation.NSStringStringWithUTF8String(name))
+}
+
+// NamespaceForPrefix calls the underlying NamespaceForPrefix.
+func (x *XMLElement) NamespaceForPrefix(name string) *XMLNode {
+	_r := x.inner.NamespaceForPrefix(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// ResolveNamespaceForName calls the underlying ResolveNamespaceForName.
+func (x *XMLElement) ResolveNamespaceForName(name string) *XMLNode {
+	_r := x.inner.ResolveNamespaceForName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &XMLNode{inner: _r}
+}
+
+// ResolvePrefixForNamespaceURI calls the underlying ResolvePrefixForNamespaceURI.
+func (x *XMLElement) ResolvePrefixForNamespaceURI(namespaceURI string) *String {
+	_r := x.inner.ResolvePrefixForNamespaceURI(foundation.NSStringStringWithUTF8String(namespaceURI))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// InsertChildAtIndex calls the underlying InsertChildAtIndex.
+func (x *XMLElement) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
+	x.inner.InsertChildAtIndex(child, index)
+}
+
+// InsertChildrenAtIndex calls the underlying InsertChildrenAtIndex.
+func (x *XMLElement) InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint) {
+	x.inner.InsertChildrenAtIndex(children, index)
+}
+
+// RemoveChildAtIndex calls the underlying RemoveChildAtIndex.
+func (x *XMLElement) RemoveChildAtIndex(index uint) {
+	x.inner.RemoveChildAtIndex(index)
+}
+
+// SetChildren calls the underlying SetChildren.
+func (x *XMLElement) SetChildren(children *raw.NSArray[*raw.NSXMLNode]) {
+	x.inner.SetChildren(children)
+}
+
+// AddChild calls the underlying AddChild.
+func (x *XMLElement) AddChild(child *raw.NSXMLNode) {
+	x.inner.AddChild(child)
+}
+
+// ReplaceChildAtIndexWithNode calls the underlying ReplaceChildAtIndexWithNode.
+func (x *XMLElement) ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode) {
+	x.inner.ReplaceChildAtIndexWithNode(index, node)
+}
+
+// NormalizeAdjacentTextNodesPreservingCDATA calls the underlying NormalizeAdjacentTextNodesPreservingCDATA.
+func (x *XMLElement) NormalizeAdjacentTextNodesPreservingCDATA(preserve bool) {
+	x.inner.NormalizeAdjacentTextNodesPreservingCDATA(preserve)
+}
+
 // Attributes returns the collection as a Go slice.
 func (x *XMLElement) Attributes() []*raw.NSXMLNode {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSXMLNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
+		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	})
+}
+
+// SetAttributes calls the underlying SetAttributes.
+func (x *XMLElement) SetAttributes(attributes *raw.NSArray[*raw.NSXMLNode]) {
+	x.inner.SetAttributes(attributes)
 }
 
 // Namespaces returns the collection as a Go slice.
@@ -110,14 +228,55 @@ func (x *XMLElement) Namespaces() []*raw.NSXMLNode {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSXMLNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSXMLNode {
+		return raw.NSXMLNodeFromID(purego.Retain(_id))
+	})
+}
+
+// SetNamespaces calls the underlying SetNamespaces.
+func (x *XMLElement) SetNamespaces(namespaces *raw.NSArray[*raw.NSXMLNode]) {
+	x.inner.SetNamespaces(namespaces)
+}
+
+// SetAttributesAsDictionary calls the underlying SetAttributesAsDictionary.
+func (x *XMLElement) SetAttributesAsDictionary(attributes *raw.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetAttributesAsDictionary(attributes)
 }
 
 func (x *XMLElement) asXMLNode() *raw.NSXMLNode { return &x.inner.NSXMLNode }
 
 func (x *XMLElement) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObject }
+
+// XMLElementable is the interface implemented by [XMLElement], for mocking and DI.
+type XMLElementable interface {
+	Unwrap() *raw.NSXMLElement
+	WithAttributes(items ...XMLNodeProvider) *XMLElement
+	WithNamespaces(items ...XMLNodeProvider) *XMLElement
+	ElementsForName(name string) *raw.NSArray[*raw.NSXMLElement]
+	ElementsForLocalNameURI(localName string, uRI string) *raw.NSArray[*raw.NSXMLElement]
+	AddAttribute(attribute *raw.NSXMLNode)
+	RemoveAttributeForName(name string)
+	SetAttributesWithDictionary(attributes *raw.NSDictionary[*raw.NSString, *raw.NSString])
+	AttributeForName(name string) *XMLNode
+	AttributeForLocalNameURI(localName string, uRI string) *XMLNode
+	AddNamespace(aNamespace *raw.NSXMLNode)
+	RemoveNamespaceForPrefix(name string)
+	NamespaceForPrefix(name string) *XMLNode
+	ResolveNamespaceForName(name string) *XMLNode
+	ResolvePrefixForNamespaceURI(namespaceURI string) *String
+	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
+	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
+	RemoveChildAtIndex(index uint)
+	SetChildren(children *raw.NSArray[*raw.NSXMLNode])
+	AddChild(child *raw.NSXMLNode)
+	ReplaceChildAtIndexWithNode(index uint, node *raw.NSXMLNode)
+	NormalizeAdjacentTextNodesPreservingCDATA(preserve bool)
+	Attributes() []*raw.NSXMLNode
+	SetAttributes(attributes *raw.NSArray[*raw.NSXMLNode])
+	Namespaces() []*raw.NSXMLNode
+	SetNamespaces(namespaces *raw.NSArray[*raw.NSXMLNode])
+	SetAttributesAsDictionary(attributes *raw.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ XMLElementable = (*XMLElement)(nil)
 

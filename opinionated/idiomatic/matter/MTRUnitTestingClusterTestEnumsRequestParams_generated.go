@@ -48,5 +48,64 @@ func (x *MTRUnitTestingClusterTestEnumsRequestParams) WithServerSideProcessingTi
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) Arg2() *foundation.NSNumber {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) SetArg2(arg2 *foundation.NSNumber) {
+	x.inner.SetArg2(arg2)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEnumsRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestEnumsRequestParams) asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestEnumsRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEnumsRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestEnumsRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEnumsRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsRequestParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsRequestParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	Arg2() *foundation.NSNumber
+	SetArg2(arg2 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEnumsRequestParamsable = (*MTRUnitTestingClusterTestEnumsRequestParams)(nil)
 

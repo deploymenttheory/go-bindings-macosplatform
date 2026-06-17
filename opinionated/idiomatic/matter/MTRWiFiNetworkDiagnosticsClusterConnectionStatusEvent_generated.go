@@ -30,3 +30,23 @@ func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionSt
 	return x
 }
 
+// ConnectionStatus calls the underlying ConnectionStatus.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
+	return x.inner.ConnectionStatus()
+}
+
+// SetConnectionStatus calls the underlying SetConnectionStatus.
+func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
+	x.inner.SetConnectionStatus(connectionStatus)
+}
+
+// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
+type MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable interface {
+	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
+	WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
+	ConnectionStatus() *foundation.NSNumber
+	SetConnectionStatus(connectionStatus *foundation.NSNumber)
+}
+
+var _ MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent)(nil)
+

@@ -66,3 +66,101 @@ func (x *MTRColorControlClusterEnhancedMoveToHueParams) WithServerSideProcessing
 	return x
 }
 
+// EnhancedHue calls the underlying EnhancedHue.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) EnhancedHue() *foundation.NSNumber {
+	return x.inner.EnhancedHue()
+}
+
+// SetEnhancedHue calls the underlying SetEnhancedHue.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetEnhancedHue(enhancedHue *foundation.NSNumber) {
+	x.inner.SetEnhancedHue(enhancedHue)
+}
+
+// Direction calls the underlying Direction.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) Direction() *foundation.NSNumber {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetDirection(direction *foundation.NSNumber) {
+	x.inner.SetDirection(direction)
+}
+
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRColorControlClusterEnhancedMoveToHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRColorControlClusterEnhancedMoveToHueParamsable is the interface implemented by [MTRColorControlClusterEnhancedMoveToHueParams], for mocking and DI.
+type MTRColorControlClusterEnhancedMoveToHueParamsable interface {
+	Unwrap() *raw.MTRColorControlClusterEnhancedMoveToHueParams
+	WithEnhancedHue(enhancedHue *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithDirection(direction *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterEnhancedMoveToHueParams
+	EnhancedHue() *foundation.NSNumber
+	SetEnhancedHue(enhancedHue *foundation.NSNumber)
+	Direction() *foundation.NSNumber
+	SetDirection(direction *foundation.NSNumber)
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRColorControlClusterEnhancedMoveToHueParamsable = (*MTRColorControlClusterEnhancedMoveToHueParams)(nil)
+

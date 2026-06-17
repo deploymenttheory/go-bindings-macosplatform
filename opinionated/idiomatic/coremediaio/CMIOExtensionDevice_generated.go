@@ -7,6 +7,7 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,72 @@ func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedNa
 	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(_id)}
 }
 
+// AddStreamError calls the underlying AddStreamError.
+func (x *ExtensionDevice) AddStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
+	return x.inner.AddStreamError(stream)
+}
+
+// RemoveStreamError calls the underlying RemoveStreamError.
+func (x *ExtensionDevice) RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
+	return x.inner.RemoveStreamError(stream)
+}
+
+// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
+func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.NotifyPropertiesChanged(propertyStates)
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *ExtensionDevice) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DeviceID calls the underlying DeviceID.
+func (x *ExtensionDevice) DeviceID() *foundation.NSUUID {
+	return x.inner.DeviceID()
+}
+
+// LegacyDeviceID calls the underlying LegacyDeviceID.
+func (x *ExtensionDevice) LegacyDeviceID() string {
+	_r := x.inner.LegacyDeviceID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Source calls the underlying Source.
+func (x *ExtensionDevice) Source() raw.CMIOExtensionDeviceSource {
+	return x.inner.Source()
+}
+
 // Streams returns the collection as a Go slice.
 func (x *ExtensionDevice) Streams() []*raw.CMIOExtensionStream {
 	arr := x.inner.Streams()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CMIOExtensionStream, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionStream {
+		return raw.CMIOExtensionStreamFromID(purego.Retain(_id))
+	})
 }
+
+// ExtensionDeviceable is the interface implemented by [ExtensionDevice], for mocking and DI.
+type ExtensionDeviceable interface {
+	Unwrap() *raw.CMIOExtensionDevice
+	AddStreamError(stream *raw.CMIOExtensionStream) (bool, error)
+	RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error)
+	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	LocalizedName() string
+	DeviceID() *foundation.NSUUID
+	LegacyDeviceID() string
+	Source() raw.CMIOExtensionDeviceSource
+	Streams() []*raw.CMIOExtensionStream
+}
+
+var _ ExtensionDeviceable = (*ExtensionDevice)(nil)
 

@@ -23,5 +23,18 @@ func NewMagnetometerData() *MagnetometerData {
 	return &MagnetometerData{inner: raw.CMMagnetometerDataFromID(_id)}
 }
 
+// MagneticField calls the underlying MagneticField.
+func (x *MagnetometerData) MagneticField() raw.CMMagneticField {
+	return x.inner.MagneticField()
+}
+
 func (x *MagnetometerData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// MagnetometerDataable is the interface implemented by [MagnetometerData], for mocking and DI.
+type MagnetometerDataable interface {
+	Unwrap() *raw.CMMagnetometerData
+	MagneticField() raw.CMMagneticField
+}
+
+var _ MagnetometerDataable = (*MagnetometerData)(nil)
 

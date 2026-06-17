@@ -35,3 +35,10 @@ func NewNNSliceWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDev
 
 func (x *NNSlice) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
+// NNSliceable is the interface implemented by [NNSlice], for mocking and DI.
+type NNSliceable interface {
+	Unwrap() *raw.MPSNNSlice
+}
+
+var _ NNSliceable = (*NNSlice)(nil)
+

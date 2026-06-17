@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewSharedEventHandle() *SharedEventHandle {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedEventHandle")), objc.RegisterName("new"))
 	return &SharedEventHandle{inner: raw.MTLSharedEventHandleFromID(_id)}
 }
+
+// Label calls the underlying Label.
+func (x *SharedEventHandle) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SharedEventHandleable is the interface implemented by [SharedEventHandle], for mocking and DI.
+type SharedEventHandleable interface {
+	Unwrap() *raw.MTLSharedEventHandle
+	Label() string
+}
+
+var _ SharedEventHandleable = (*SharedEventHandle)(nil)
 

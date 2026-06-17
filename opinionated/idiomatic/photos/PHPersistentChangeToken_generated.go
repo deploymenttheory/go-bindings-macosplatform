@@ -23,3 +23,10 @@ func NewPersistentChangeToken() *PersistentChangeToken {
 	return &PersistentChangeToken{inner: raw.PHPersistentChangeTokenFromID(_id)}
 }
 
+// PersistentChangeTokenable is the interface implemented by [PersistentChangeToken], for mocking and DI.
+type PersistentChangeTokenable interface {
+	Unwrap() *raw.PHPersistentChangeToken
+}
+
+var _ PersistentChangeTokenable = (*PersistentChangeToken)(nil)
+

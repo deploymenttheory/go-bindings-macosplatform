@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,37 @@ func NewSourceRevisionWithSourceVersion(source *raw.HKSource, version string) *S
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:version:"), source.Ptr(), foundation.NSStringStringWithUTF8String(version).Ptr())
 	return &SourceRevision{inner: raw.HKSourceRevisionFromID(_id)}
 }
+
+// Source calls the underlying Source.
+func (x *SourceRevision) Source() *Source {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &Source{inner: _r}
+}
+
+// ProductType calls the underlying ProductType.
+func (x *SourceRevision) ProductType() string {
+	_r := x.inner.ProductType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OperatingSystemVersion calls the underlying OperatingSystemVersion.
+func (x *SourceRevision) OperatingSystemVersion() foundation.NSOperatingSystemVersion {
+	return x.inner.OperatingSystemVersion()
+}
+
+// SourceRevisionable is the interface implemented by [SourceRevision], for mocking and DI.
+type SourceRevisionable interface {
+	Unwrap() *raw.HKSourceRevision
+	Source() *Source
+	ProductType() string
+	OperatingSystemVersion() foundation.NSOperatingSystemVersion
+}
+
+var _ SourceRevisionable = (*SourceRevision)(nil)
 

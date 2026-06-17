@@ -29,3 +29,27 @@ func (x *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvide
 	return x
 }
 
+// Attachment calls the underlying Attachment.
+func (x *NetworkDevice) Attachment() *NetworkDeviceAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &NetworkDeviceAttachment{inner: _r}
+}
+
+// SetAttachment calls the underlying SetAttachment.
+func (x *NetworkDevice) SetAttachment(attachment *raw.VZNetworkDeviceAttachment) {
+	x.inner.SetAttachment(attachment)
+}
+
+// NetworkDeviceable is the interface implemented by [NetworkDevice], for mocking and DI.
+type NetworkDeviceable interface {
+	Unwrap() *raw.VZNetworkDevice
+	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice
+	Attachment() *NetworkDeviceAttachment
+	SetAttachment(attachment *raw.VZNetworkDeviceAttachment)
+}
+
+var _ NetworkDeviceable = (*NetworkDevice)(nil)
+

@@ -23,5 +23,24 @@ func NewScriptCoercionHandler() *ScriptCoercionHandler {
 	return &ScriptCoercionHandler{inner: raw.NSScriptCoercionHandlerFromID(_id)}
 }
 
+// CoerceValueToClass calls the underlying CoerceValueToClass.
+func (x *ScriptCoercionHandler) CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID {
+	return x.inner.CoerceValueToClass(value, toClass)
+}
+
+// RegisterCoercerSelectorToConvertFromClassToClass calls the underlying RegisterCoercerSelectorToConvertFromClassToClass.
+func (x *ScriptCoercionHandler) RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class) {
+	x.inner.RegisterCoercerSelectorToConvertFromClassToClass(coercer, selector, fromClass, toClass)
+}
+
 func (x *ScriptCoercionHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ScriptCoercionHandlerable is the interface implemented by [ScriptCoercionHandler], for mocking and DI.
+type ScriptCoercionHandlerable interface {
+	Unwrap() *raw.NSScriptCoercionHandler
+	CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID
+	RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class)
+}
+
+var _ ScriptCoercionHandlerable = (*ScriptCoercionHandler)(nil)
 

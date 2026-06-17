@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,4 +43,54 @@ func (x *FileInfo) WithSidecarFileName(sidecarFileName string) *FileInfo {
 	x.inner.SetSidecarFileName(foundation.NSStringStringWithUTF8String(sidecarFileName))
 	return x
 }
+
+// Duration calls the underlying Duration.
+func (x *FileInfo) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *FileInfo) SetDuration(duration coremedia.CMTime) {
+	x.inner.SetDuration(duration)
+}
+
+// FragmentsStatus calls the underlying FragmentsStatus.
+func (x *FileInfo) FragmentsStatus() raw.MEFileInfoFragmentsStatus {
+	return x.inner.FragmentsStatus()
+}
+
+// SetFragmentsStatus calls the underlying SetFragmentsStatus.
+func (x *FileInfo) SetFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus) {
+	x.inner.SetFragmentsStatus(fragmentsStatus)
+}
+
+// SidecarFileName calls the underlying SidecarFileName.
+func (x *FileInfo) SidecarFileName() string {
+	_r := x.inner.SidecarFileName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSidecarFileName calls the underlying SetSidecarFileName.
+func (x *FileInfo) SetSidecarFileName(sidecarFileName string) {
+	x.inner.SetSidecarFileName(foundation.NSStringStringWithUTF8String(sidecarFileName))
+}
+
+// FileInfoable is the interface implemented by [FileInfo], for mocking and DI.
+type FileInfoable interface {
+	Unwrap() *raw.MEFileInfo
+	WithDuration(duration coremedia.CMTime) *FileInfo
+	WithFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus) *FileInfo
+	WithSidecarFileName(sidecarFileName string) *FileInfo
+	Duration() coremedia.CMTime
+	SetDuration(duration coremedia.CMTime)
+	FragmentsStatus() raw.MEFileInfoFragmentsStatus
+	SetFragmentsStatus(fragmentsStatus raw.MEFileInfoFragmentsStatus)
+	SidecarFileName() string
+	SetSidecarFileName(sidecarFileName string)
+}
+
+var _ FileInfoable = (*FileInfo)(nil)
 

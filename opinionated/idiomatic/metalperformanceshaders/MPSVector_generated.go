@@ -40,3 +40,64 @@ func NewVectorWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.M
 	return &Vector{inner: raw.MPSVectorFromID(_id)}
 }
 
+// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
+func (x *Vector) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+}
+
+// ResourceSize calls the underlying ResourceSize.
+func (x *Vector) ResourceSize() uint {
+	return x.inner.ResourceSize()
+}
+
+// Device calls the underlying Device.
+func (x *Vector) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// Length calls the underlying Length.
+func (x *Vector) Length() uint {
+	return x.inner.Length()
+}
+
+// Vectors calls the underlying Vectors.
+func (x *Vector) Vectors() uint {
+	return x.inner.Vectors()
+}
+
+// DataType calls the underlying DataType.
+func (x *Vector) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// VectorBytes calls the underlying VectorBytes.
+func (x *Vector) VectorBytes() uint {
+	return x.inner.VectorBytes()
+}
+
+// Offset calls the underlying Offset.
+func (x *Vector) Offset() uint {
+	return x.inner.Offset()
+}
+
+// Data calls the underlying Data.
+func (x *Vector) Data() metal.MTLBuffer {
+	return x.inner.Data()
+}
+
+// Vectorable is the interface implemented by [Vector], for mocking and DI.
+type Vectorable interface {
+	Unwrap() *raw.MPSVector
+	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	ResourceSize() uint
+	Device() metal.MTLDevice
+	Length() uint
+	Vectors() uint
+	DataType() mpscore.MPSDataType
+	VectorBytes() uint
+	Offset() uint
+	Data() metal.MTLBuffer
+}
+
+var _ Vectorable = (*Vector)(nil)
+

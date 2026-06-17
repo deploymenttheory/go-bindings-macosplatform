@@ -42,3 +42,49 @@ func (x *MTRAccountLoginClusterLogoutParams) WithServerSideProcessingTimeout(ser
 	return x
 }
 
+// Node calls the underlying Node.
+func (x *MTRAccountLoginClusterLogoutParams) Node() *foundation.NSNumber {
+	return x.inner.Node()
+}
+
+// SetNode calls the underlying SetNode.
+func (x *MTRAccountLoginClusterLogoutParams) SetNode(node *foundation.NSNumber) {
+	x.inner.SetNode(node)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterLogoutParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAccountLoginClusterLogoutParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAccountLoginClusterLogoutParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAccountLoginClusterLogoutParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAccountLoginClusterLogoutParamsable is the interface implemented by [MTRAccountLoginClusterLogoutParams], for mocking and DI.
+type MTRAccountLoginClusterLogoutParamsable interface {
+	Unwrap() *raw.MTRAccountLoginClusterLogoutParams
+	WithNode(node *foundation.NSNumber) *MTRAccountLoginClusterLogoutParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccountLoginClusterLogoutParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAccountLoginClusterLogoutParams
+	Node() *foundation.NSNumber
+	SetNode(node *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAccountLoginClusterLogoutParamsable = (*MTRAccountLoginClusterLogoutParams)(nil)
+

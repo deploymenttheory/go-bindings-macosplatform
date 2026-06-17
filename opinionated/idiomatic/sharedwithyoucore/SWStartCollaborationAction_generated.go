@@ -5,6 +5,7 @@
 package sharedwithyoucore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,28 @@ func NewStartCollaborationAction() *StartCollaborationAction {
 	return &StartCollaborationAction{inner: raw.SWStartCollaborationActionFromID(_id)}
 }
 
+// FulfillUsingURLCollaborationIdentifier calls the underlying FulfillUsingURLCollaborationIdentifier.
+func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier *foundation.NSString) {
+	x.inner.FulfillUsingURLCollaborationIdentifier(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), collaborationIdentifier)
+}
+
+// CollaborationMetadata calls the underlying CollaborationMetadata.
+func (x *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := x.inner.CollaborationMetadata()
+	if _r == nil {
+		return nil
+	}
+	return &CollaborationMetadata{inner: _r}
+}
+
 func (x *StartCollaborationAction) asAction() *raw.SWAction { return &x.inner.SWAction }
+
+// StartCollaborationActionable is the interface implemented by [StartCollaborationAction], for mocking and DI.
+type StartCollaborationActionable interface {
+	Unwrap() *raw.SWStartCollaborationAction
+	FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier *foundation.NSString)
+	CollaborationMetadata() *CollaborationMetadata
+}
+
+var _ StartCollaborationActionable = (*StartCollaborationAction)(nil)
 

@@ -39,3 +39,10 @@ func (x *CNNFullyConnectedGradient) asCNNGradientKernel() *raw.MPSCNNGradientKer
 
 func (x *CNNFullyConnectedGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNConvolutionGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNFullyConnectedGradientable is the interface implemented by [CNNFullyConnectedGradient], for mocking and DI.
+type CNNFullyConnectedGradientable interface {
+	Unwrap() *raw.MPSCNNFullyConnectedGradient
+}
+
+var _ CNNFullyConnectedGradientable = (*CNNFullyConnectedGradient)(nil)
+

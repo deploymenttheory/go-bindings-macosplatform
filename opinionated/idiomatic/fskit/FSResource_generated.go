@@ -23,5 +23,34 @@ func NewResource() *Resource {
 	return &Resource{inner: raw.FSResourceFromID(_id)}
 }
 
+// MakeProxy calls the underlying MakeProxy.
+func (x *Resource) MakeProxy() *Resource {
+	_r := x.inner.MakeProxy()
+	if _r == nil {
+		return nil
+	}
+	return &Resource{inner: _r}
+}
+
+// Revoke calls the underlying Revoke.
+func (x *Resource) Revoke() {
+	x.inner.Revoke()
+}
+
+// IsRevoked calls the underlying IsRevoked.
+func (x *Resource) IsRevoked() bool {
+	return x.inner.IsRevoked()
+}
+
 func (x *Resource) asResource() *raw.FSResource { return x.inner }
+
+// Resourceable is the interface implemented by [Resource], for mocking and DI.
+type Resourceable interface {
+	Unwrap() *raw.FSResource
+	MakeProxy() *Resource
+	Revoke()
+	IsRevoked() bool
+}
+
+var _ Resourceable = (*Resource)(nil)
 

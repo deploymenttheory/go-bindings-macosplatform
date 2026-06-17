@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VideoOutputSpecification wraps [raw.AVVideoOutputSpecification] with a fluent Go API.
@@ -36,4 +37,55 @@ func (x *VideoOutputSpecification) WithDefaultOutputSettings(defaultOutputSettin
 	x.inner.SetDefaultOutputSettings(defaultOutputSettings)
 	return x
 }
+
+// SetOutputPixelBufferAttributesForTagCollection calls the underlying SetOutputPixelBufferAttributesForTagCollection.
+func (x *VideoOutputSpecification) SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], tagCollection unsafe.Pointer) {
+	x.inner.SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes, tagCollection)
+}
+
+// SetOutputSettingsForTagCollection calls the underlying SetOutputSettingsForTagCollection.
+func (x *VideoOutputSpecification) SetOutputSettingsForTagCollection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], tagCollection unsafe.Pointer) {
+	x.inner.SetOutputSettingsForTagCollection(outputSettings, tagCollection)
+}
+
+// PreferredTagCollections calls the underlying PreferredTagCollections.
+func (x *VideoOutputSpecification) PreferredTagCollections() *foundation.NSArray[objc.ID] {
+	return x.inner.PreferredTagCollections()
+}
+
+// DefaultPixelBufferAttributes calls the underlying DefaultPixelBufferAttributes.
+func (x *VideoOutputSpecification) DefaultPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DefaultPixelBufferAttributes()
+}
+
+// SetDefaultPixelBufferAttributes calls the underlying SetDefaultPixelBufferAttributes.
+func (x *VideoOutputSpecification) SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes)
+}
+
+// DefaultOutputSettings calls the underlying DefaultOutputSettings.
+func (x *VideoOutputSpecification) DefaultOutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DefaultOutputSettings()
+}
+
+// SetDefaultOutputSettings calls the underlying SetDefaultOutputSettings.
+func (x *VideoOutputSpecification) SetDefaultOutputSettings(defaultOutputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetDefaultOutputSettings(defaultOutputSettings)
+}
+
+// VideoOutputSpecificationable is the interface implemented by [VideoOutputSpecification], for mocking and DI.
+type VideoOutputSpecificationable interface {
+	Unwrap() *raw.AVVideoOutputSpecification
+	WithDefaultPixelBufferAttributes(defaultPixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoOutputSpecification
+	WithDefaultOutputSettings(defaultOutputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoOutputSpecification
+	SetOutputPixelBufferAttributesForTagCollection(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID], tagCollection unsafe.Pointer)
+	SetOutputSettingsForTagCollection(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], tagCollection unsafe.Pointer)
+	PreferredTagCollections() *foundation.NSArray[objc.ID]
+	DefaultPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetDefaultPixelBufferAttributes(defaultPixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	DefaultOutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetDefaultOutputSettings(defaultOutputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ VideoOutputSpecificationable = (*VideoOutputSpecification)(nil)
 

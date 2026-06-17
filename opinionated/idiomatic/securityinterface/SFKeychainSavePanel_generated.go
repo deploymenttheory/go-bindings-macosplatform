@@ -5,8 +5,10 @@
 package securityinterface
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // KeychainSavePanel wraps [raw.SFKeychainSavePanel] with a fluent Go API.
@@ -22,4 +24,29 @@ func NewKeychainSavePanel() *KeychainSavePanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFKeychainSavePanel")), objc.RegisterName("new"))
 	return &KeychainSavePanel{inner: raw.SFKeychainSavePanelFromID(_id)}
 }
+
+// SetPassword calls the underlying SetPassword.
+func (x *KeychainSavePanel) SetPassword(password string) {
+	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+}
+
+// Keychain calls the underlying Keychain.
+func (x *KeychainSavePanel) Keychain() unsafe.Pointer {
+	return x.inner.Keychain()
+}
+
+// Error calls the underlying Error.
+func (x *KeychainSavePanel) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// KeychainSavePanelable is the interface implemented by [KeychainSavePanel], for mocking and DI.
+type KeychainSavePanelable interface {
+	Unwrap() *raw.SFKeychainSavePanel
+	SetPassword(password string)
+	Keychain() unsafe.Pointer
+	Error() unsafe.Pointer
+}
+
+var _ KeychainSavePanelable = (*KeychainSavePanel)(nil)
 

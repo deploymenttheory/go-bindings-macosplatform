@@ -5,8 +5,11 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ProjectMapElement wraps [raw.PHProjectMapElement] with a fluent Go API.
@@ -23,5 +26,48 @@ func NewProjectMapElement() *ProjectMapElement {
 	return &ProjectMapElement{inner: raw.PHProjectMapElementFromID(_id)}
 }
 
+// MapType calls the underlying MapType.
+func (x *ProjectMapElement) MapType() mapkit.MKMapType {
+	return x.inner.MapType()
+}
+
+// CenterCoordinate calls the underlying CenterCoordinate.
+func (x *ProjectMapElement) CenterCoordinate() unsafe.Pointer {
+	return x.inner.CenterCoordinate()
+}
+
+// Heading calls the underlying Heading.
+func (x *ProjectMapElement) Heading() unsafe.Pointer {
+	return x.inner.Heading()
+}
+
+// Pitch calls the underlying Pitch.
+func (x *ProjectMapElement) Pitch() float64 {
+	return x.inner.Pitch()
+}
+
+// Altitude calls the underlying Altitude.
+func (x *ProjectMapElement) Altitude() unsafe.Pointer {
+	return x.inner.Altitude()
+}
+
+// Annotations calls the underlying Annotations.
+func (x *ProjectMapElement) Annotations() *foundation.NSArray[mapkit.MKAnnotation] {
+	return x.inner.Annotations()
+}
+
 func (x *ProjectMapElement) asProjectElement() *raw.PHProjectElement { return &x.inner.PHProjectElement }
+
+// ProjectMapElementable is the interface implemented by [ProjectMapElement], for mocking and DI.
+type ProjectMapElementable interface {
+	Unwrap() *raw.PHProjectMapElement
+	MapType() mapkit.MKMapType
+	CenterCoordinate() unsafe.Pointer
+	Heading() unsafe.Pointer
+	Pitch() float64
+	Altitude() unsafe.Pointer
+	Annotations() *foundation.NSArray[mapkit.MKAnnotation]
+}
+
+var _ ProjectMapElementable = (*ProjectMapElement)(nil)
 

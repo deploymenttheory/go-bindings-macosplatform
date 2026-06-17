@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewWKNavigationResponse() *WKNavigationResponse {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKNavigationResponse")), objc.RegisterName("new"))
 	return &WKNavigationResponse{inner: raw.WKNavigationResponseFromID(_id)}
 }
+
+// IsForMainFrame calls the underlying IsForMainFrame.
+func (x *WKNavigationResponse) IsForMainFrame() bool {
+	return x.inner.IsForMainFrame()
+}
+
+// Response calls the underlying Response.
+func (x *WKNavigationResponse) Response() *foundation.NSURLResponse {
+	return x.inner.Response()
+}
+
+// CanShowMIMEType calls the underlying CanShowMIMEType.
+func (x *WKNavigationResponse) CanShowMIMEType() bool {
+	return x.inner.CanShowMIMEType()
+}
+
+// WKNavigationResponseable is the interface implemented by [WKNavigationResponse], for mocking and DI.
+type WKNavigationResponseable interface {
+	Unwrap() *raw.WKNavigationResponse
+	IsForMainFrame() bool
+	Response() *foundation.NSURLResponse
+	CanShowMIMEType() bool
+}
+
+var _ WKNavigationResponseable = (*WKNavigationResponse)(nil)
 

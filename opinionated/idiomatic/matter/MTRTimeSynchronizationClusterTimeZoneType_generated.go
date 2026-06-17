@@ -25,3 +25,10 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 
 func (x *MTRTimeSynchronizationClusterTimeZoneType) asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct { return &x.inner.MTRTimeSynchronizationClusterTimeZoneStruct }
 
+// MTRTimeSynchronizationClusterTimeZoneTypeable is the interface implemented by [MTRTimeSynchronizationClusterTimeZoneType], for mocking and DI.
+type MTRTimeSynchronizationClusterTimeZoneTypeable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterTimeZoneType
+}
+
+var _ MTRTimeSynchronizationClusterTimeZoneTypeable = (*MTRTimeSynchronizationClusterTimeZoneType)(nil)
+

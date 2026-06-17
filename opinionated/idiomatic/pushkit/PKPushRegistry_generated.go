@@ -37,3 +37,42 @@ func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*
 	return x
 }
 
+// PushTokenForType calls the underlying PushTokenForType.
+func (x *PushRegistry) PushTokenForType(type_ *foundation.NSString) *foundation.NSData {
+	return x.inner.PushTokenForType(type_)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PushRegistry) Delegate() raw.PKPushRegistryDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PushRegistry) SetDelegate(delegate raw.PKPushRegistryDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// DesiredPushTypes calls the underlying DesiredPushTypes.
+func (x *PushRegistry) DesiredPushTypes() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.DesiredPushTypes()
+}
+
+// SetDesiredPushTypes calls the underlying SetDesiredPushTypes.
+func (x *PushRegistry) SetDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetDesiredPushTypes(desiredPushTypes)
+}
+
+// PushRegistryable is the interface implemented by [PushRegistry], for mocking and DI.
+type PushRegistryable interface {
+	Unwrap() *raw.PKPushRegistry
+	WithDelegate(delegate raw.PKPushRegistryDelegate) *PushRegistry
+	WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) *PushRegistry
+	PushTokenForType(type_ *foundation.NSString) *foundation.NSData
+	Delegate() raw.PKPushRegistryDelegate
+	SetDelegate(delegate raw.PKPushRegistryDelegate)
+	DesiredPushTypes() *foundation.NSSet[*foundation.NSString]
+	SetDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString])
+}
+
+var _ PushRegistryable = (*PushRegistry)(nil)
+

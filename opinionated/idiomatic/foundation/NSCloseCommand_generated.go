@@ -23,7 +23,20 @@ func NewCloseCommand() *CloseCommand {
 	return &CloseCommand{inner: raw.NSCloseCommandFromID(_id)}
 }
 
+// SaveOptions calls the underlying SaveOptions.
+func (x *CloseCommand) SaveOptions() raw.NSSaveOptions {
+	return x.inner.SaveOptions()
+}
+
 func (x *CloseCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *CloseCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// CloseCommandable is the interface implemented by [CloseCommand], for mocking and DI.
+type CloseCommandable interface {
+	Unwrap() *raw.NSCloseCommand
+	SaveOptions() raw.NSSaveOptions
+}
+
+var _ CloseCommandable = (*CloseCommand)(nil)
 

@@ -38,6 +38,78 @@ func (x *WKWebExtensionController) WithDelegate(delegate raw.WKWebExtensionContr
 	return x
 }
 
+// LoadExtensionContextError calls the underlying LoadExtensionContextError.
+func (x *WKWebExtensionController) LoadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error) {
+	return x.inner.LoadExtensionContextError(extensionContext)
+}
+
+// UnloadExtensionContextError calls the underlying UnloadExtensionContextError.
+func (x *WKWebExtensionController) UnloadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error) {
+	return x.inner.UnloadExtensionContextError(extensionContext)
+}
+
+// ExtensionContextForExtension calls the underlying ExtensionContextForExtension.
+func (x *WKWebExtensionController) ExtensionContextForExtension(extension *raw.WKWebExtension) *WKWebExtensionContext {
+	_r := x.inner.ExtensionContextForExtension(extension)
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionContext{inner: _r}
+}
+
+// ExtensionContextForURL calls the underlying ExtensionContextForURL.
+func (x *WKWebExtensionController) ExtensionContextForURL(uRL string) *WKWebExtensionContext {
+	_r := x.inner.ExtensionContextForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionContext{inner: _r}
+}
+
+// FetchDataRecordsOfTypes blocks until the operation completes or ctx is cancelled.
+func (x *WKWebExtensionController) FetchDataRecordsOfTypes(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString]) (*foundation.NSArray[*raw.WKWebExtensionDataRecord], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.WKWebExtensionDataRecord]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchDataRecordsOfTypesCompletionHandler(dataTypes, func(_p0 *foundation.NSArray[*raw.WKWebExtensionDataRecord]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.WKWebExtensionDataRecord]
+		return _zero, ctx.Err()
+	}
+}
+
+// FetchDataRecordOfTypesForExtensionContext blocks until the operation completes or ctx is cancelled.
+func (x *WKWebExtensionController) FetchDataRecordOfTypesForExtensionContext(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], extensionContext *raw.WKWebExtensionContext) (*WKWebExtensionDataRecord, error) {
+	type _result struct {
+		val *WKWebExtensionDataRecord
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchDataRecordOfTypesForExtensionContextCompletionHandler(dataTypes, extensionContext, func(_p0 *raw.WKWebExtensionDataRecord) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &WKWebExtensionDataRecord{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *WKWebExtensionDataRecord
+		return _zero, ctx.Err()
+	}
+}
+
 // RemoveDataOfTypesFromDataRecords blocks until the operation completes or ctx is cancelled.
 func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*raw.WKWebExtensionDataRecord]) error {
 	_ch := make(chan error, 1)
@@ -51,4 +123,119 @@ func (x *WKWebExtensionController) RemoveDataOfTypesFromDataRecords(ctx context.
 		return ctx.Err()
 	}
 }
+
+// DidOpenWindow calls the underlying DidOpenWindow.
+func (x *WKWebExtensionController) DidOpenWindow(newWindow raw.WKWebExtensionWindow) {
+	x.inner.DidOpenWindow(newWindow)
+}
+
+// DidCloseWindow calls the underlying DidCloseWindow.
+func (x *WKWebExtensionController) DidCloseWindow(closedWindow raw.WKWebExtensionWindow) {
+	x.inner.DidCloseWindow(closedWindow)
+}
+
+// DidFocusWindow calls the underlying DidFocusWindow.
+func (x *WKWebExtensionController) DidFocusWindow(focusedWindow raw.WKWebExtensionWindow) {
+	x.inner.DidFocusWindow(focusedWindow)
+}
+
+// DidOpenTab calls the underlying DidOpenTab.
+func (x *WKWebExtensionController) DidOpenTab(newTab raw.WKWebExtensionTab) {
+	x.inner.DidOpenTab(newTab)
+}
+
+// DidCloseTabWindowIsClosing calls the underlying DidCloseTabWindowIsClosing.
+func (x *WKWebExtensionController) DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool) {
+	x.inner.DidCloseTabWindowIsClosing(closedTab, windowIsClosing)
+}
+
+// DidActivateTabPreviousActiveTab calls the underlying DidActivateTabPreviousActiveTab.
+func (x *WKWebExtensionController) DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab) {
+	x.inner.DidActivateTabPreviousActiveTab(activatedTab, previousTab)
+}
+
+// DidSelectTabs calls the underlying DidSelectTabs.
+func (x *WKWebExtensionController) DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
+	x.inner.DidSelectTabs(selectedTabs)
+}
+
+// DidDeselectTabs calls the underlying DidDeselectTabs.
+func (x *WKWebExtensionController) DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab]) {
+	x.inner.DidDeselectTabs(deselectedTabs)
+}
+
+// DidMoveTabFromIndexInWindow calls the underlying DidMoveTabFromIndexInWindow.
+func (x *WKWebExtensionController) DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow) {
+	x.inner.DidMoveTabFromIndexInWindow(movedTab, index, oldWindow)
+}
+
+// DidReplaceTabWithTab calls the underlying DidReplaceTabWithTab.
+func (x *WKWebExtensionController) DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab) {
+	x.inner.DidReplaceTabWithTab(oldTab, newTab)
+}
+
+// DidChangeTabPropertiesForTab calls the underlying DidChangeTabPropertiesForTab.
+func (x *WKWebExtensionController) DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab) {
+	x.inner.DidChangeTabPropertiesForTab(properties, changedTab)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *WKWebExtensionController) Delegate() raw.WKWebExtensionControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WKWebExtensionController) SetDelegate(delegate raw.WKWebExtensionControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Configuration calls the underlying Configuration.
+func (x *WKWebExtensionController) Configuration() *WKWebExtensionControllerConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionControllerConfiguration{inner: _r}
+}
+
+// Extensions calls the underlying Extensions.
+func (x *WKWebExtensionController) Extensions() *foundation.NSSet[*raw.WKWebExtension] {
+	return x.inner.Extensions()
+}
+
+// ExtensionContexts calls the underlying ExtensionContexts.
+func (x *WKWebExtensionController) ExtensionContexts() *foundation.NSSet[*raw.WKWebExtensionContext] {
+	return x.inner.ExtensionContexts()
+}
+
+// WKWebExtensionControllerable is the interface implemented by [WKWebExtensionController], for mocking and DI.
+type WKWebExtensionControllerable interface {
+	Unwrap() *raw.WKWebExtensionController
+	WithDelegate(delegate raw.WKWebExtensionControllerDelegate) *WKWebExtensionController
+	LoadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error)
+	UnloadExtensionContextError(extensionContext *raw.WKWebExtensionContext) (bool, error)
+	ExtensionContextForExtension(extension *raw.WKWebExtension) *WKWebExtensionContext
+	ExtensionContextForURL(uRL string) *WKWebExtensionContext
+	FetchDataRecordsOfTypes(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString]) (*foundation.NSArray[*raw.WKWebExtensionDataRecord], error)
+	FetchDataRecordOfTypesForExtensionContext(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], extensionContext *raw.WKWebExtensionContext) (*WKWebExtensionDataRecord, error)
+	RemoveDataOfTypesFromDataRecords(ctx context.Context, dataTypes *foundation.NSSet[*foundation.NSString], dataRecords *foundation.NSArray[*raw.WKWebExtensionDataRecord]) error
+	DidOpenWindow(newWindow raw.WKWebExtensionWindow)
+	DidCloseWindow(closedWindow raw.WKWebExtensionWindow)
+	DidFocusWindow(focusedWindow raw.WKWebExtensionWindow)
+	DidOpenTab(newTab raw.WKWebExtensionTab)
+	DidCloseTabWindowIsClosing(closedTab raw.WKWebExtensionTab, windowIsClosing bool)
+	DidActivateTabPreviousActiveTab(activatedTab raw.WKWebExtensionTab, previousTab raw.WKWebExtensionTab)
+	DidSelectTabs(selectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
+	DidDeselectTabs(deselectedTabs *foundation.NSArray[raw.WKWebExtensionTab])
+	DidMoveTabFromIndexInWindow(movedTab raw.WKWebExtensionTab, index uint, oldWindow raw.WKWebExtensionWindow)
+	DidReplaceTabWithTab(oldTab raw.WKWebExtensionTab, newTab raw.WKWebExtensionTab)
+	DidChangeTabPropertiesForTab(properties raw.WKWebExtensionTabChangedProperties, changedTab raw.WKWebExtensionTab)
+	Delegate() raw.WKWebExtensionControllerDelegate
+	SetDelegate(delegate raw.WKWebExtensionControllerDelegate)
+	Configuration() *WKWebExtensionControllerConfiguration
+	Extensions() *foundation.NSSet[*raw.WKWebExtension]
+	ExtensionContexts() *foundation.NSSet[*raw.WKWebExtensionContext]
+}
+
+var _ WKWebExtensionControllerable = (*WKWebExtensionController)(nil)
 

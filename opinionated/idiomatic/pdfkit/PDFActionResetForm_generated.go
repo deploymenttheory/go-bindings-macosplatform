@@ -7,6 +7,7 @@ package pdfkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,17 +49,43 @@ func (x *ActionResetForm) WithFieldsIncludedAreCleared(fieldsIncludedAreCleared 
 }
 
 // Fields returns the collection as a Go slice.
-func (x *ActionResetForm) Fields() []*foundation.NSString {
+func (x *ActionResetForm) Fields() []string {
 	arr := x.inner.Fields()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetFields calls the underlying SetFields.
+func (x *ActionResetForm) SetFields(fields *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetFields(fields)
+}
+
+// FieldsIncludedAreCleared calls the underlying FieldsIncludedAreCleared.
+func (x *ActionResetForm) FieldsIncludedAreCleared() bool {
+	return x.inner.FieldsIncludedAreCleared()
+}
+
+// SetFieldsIncludedAreCleared calls the underlying SetFieldsIncludedAreCleared.
+func (x *ActionResetForm) SetFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) {
+	x.inner.SetFieldsIncludedAreCleared(fieldsIncludedAreCleared)
 }
 
 func (x *ActionResetForm) asAction() *raw.PDFAction { return &x.inner.PDFAction }
+
+// ActionResetFormable is the interface implemented by [ActionResetForm], for mocking and DI.
+type ActionResetFormable interface {
+	Unwrap() *raw.PDFActionResetForm
+	WithFields(items ...*foundation.NSString) *ActionResetForm
+	WithFieldsIncludedAreCleared(fieldsIncludedAreCleared bool) *ActionResetForm
+	Fields() []string
+	SetFields(fields *foundation.NSArray[*foundation.NSString])
+	FieldsIncludedAreCleared() bool
+	SetFieldsIncludedAreCleared(fieldsIncludedAreCleared bool)
+}
+
+var _ ActionResetFormable = (*ActionResetForm)(nil)
 

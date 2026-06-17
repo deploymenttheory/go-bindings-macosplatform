@@ -7,6 +7,7 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,7 +34,44 @@ func NewArrayMultiaryKernelWithCoderDevice(coder *foundation.NSCoder, device met
 	return &ArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArrays calls the underlying EncodeToCommandBufferSourceArrays.
+func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArrays(cmdBuf, sourceArrays)
+}
+
+// EncodeToCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandBufferSourceArraysDestinationArray.
+func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf, sourceArrays, destination)
+}
+
+// EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary.
+func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf, sourceArrays, outGradientState, outputStateIsTemporary)
+}
+
+// EncodeToCommandBufferSourceArraysResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraysResultStateDestinationArray.
+func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf, sourceArrays, outGradientState, destination)
+}
+
+// EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray.
+func (x *ArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder, commandBuffer, sourceArrays, destination)
+}
+
 func (x *ArrayMultiaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return x.inner }
 
 func (x *ArrayMultiaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+
+// ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
+type ArrayMultiaryKernelable interface {
+	Unwrap() *raw.MPSNDArrayMultiaryKernel
+	EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
+	EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
+}
+
+var _ ArrayMultiaryKernelable = (*ArrayMultiaryKernel)(nil)
 

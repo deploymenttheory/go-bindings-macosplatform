@@ -23,3 +23,10 @@ func NewExtensionViewController() *ExtensionViewController {
 	return &ExtensionViewController{inner: raw.MEExtensionViewControllerFromID(_id)}
 }
 
+// ExtensionViewControllerable is the interface implemented by [ExtensionViewController], for mocking and DI.
+type ExtensionViewControllerable interface {
+	Unwrap() *raw.MEExtensionViewController
+}
+
+var _ ExtensionViewControllerable = (*ExtensionViewController)(nil)
+

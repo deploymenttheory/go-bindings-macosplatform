@@ -42,3 +42,49 @@ func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) WithMaximumCurrent(maxi
 	return x
 }
 
+// SessionID calls the underlying SessionID.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SessionID() *foundation.NSNumber {
+	return x.inner.SessionID()
+}
+
+// SetSessionID calls the underlying SetSessionID.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetSessionID(sessionID *foundation.NSNumber) {
+	x.inner.SetSessionID(sessionID)
+}
+
+// State calls the underlying State.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// MaximumCurrent calls the underlying MaximumCurrent.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) MaximumCurrent() *foundation.NSNumber {
+	return x.inner.MaximumCurrent()
+}
+
+// SetMaximumCurrent calls the underlying SetMaximumCurrent.
+func (x *MTREnergyEVSEClusterEnergyTransferStartedEvent) SetMaximumCurrent(maximumCurrent *foundation.NSNumber) {
+	x.inner.SetMaximumCurrent(maximumCurrent)
+}
+
+// MTREnergyEVSEClusterEnergyTransferStartedEventable is the interface implemented by [MTREnergyEVSEClusterEnergyTransferStartedEvent], for mocking and DI.
+type MTREnergyEVSEClusterEnergyTransferStartedEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStartedEvent
+	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	WithMaximumCurrent(maximumCurrent *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStartedEvent
+	SessionID() *foundation.NSNumber
+	SetSessionID(sessionID *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	MaximumCurrent() *foundation.NSNumber
+	SetMaximumCurrent(maximumCurrent *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterEnergyTransferStartedEventable = (*MTREnergyEVSEClusterEnergyTransferStartedEvent)(nil)
+

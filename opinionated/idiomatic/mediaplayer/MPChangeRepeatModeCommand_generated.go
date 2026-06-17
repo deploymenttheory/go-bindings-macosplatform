@@ -29,5 +29,25 @@ func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType raw.MP
 	return x
 }
 
+// CurrentRepeatType calls the underlying CurrentRepeatType.
+func (x *ChangeRepeatModeCommand) CurrentRepeatType() raw.MPRepeatType {
+	return x.inner.CurrentRepeatType()
+}
+
+// SetCurrentRepeatType calls the underlying SetCurrentRepeatType.
+func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType raw.MPRepeatType) {
+	x.inner.SetCurrentRepeatType(currentRepeatType)
+}
+
 func (x *ChangeRepeatModeCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+
+// ChangeRepeatModeCommandable is the interface implemented by [ChangeRepeatModeCommand], for mocking and DI.
+type ChangeRepeatModeCommandable interface {
+	Unwrap() *raw.MPChangeRepeatModeCommand
+	WithCurrentRepeatType(currentRepeatType raw.MPRepeatType) *ChangeRepeatModeCommand
+	CurrentRepeatType() raw.MPRepeatType
+	SetCurrentRepeatType(currentRepeatType raw.MPRepeatType)
+}
+
+var _ ChangeRepeatModeCommandable = (*ChangeRepeatModeCommand)(nil)
 

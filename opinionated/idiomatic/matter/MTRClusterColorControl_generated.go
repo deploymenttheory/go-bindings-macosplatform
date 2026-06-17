@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterColorControl wraps [raw.MTRClusterColorControl] with a fluent Go API.
@@ -32,7 +33,740 @@ func NewMTRClusterColorControlWithDeviceEndpointQueue(device *raw.MTRDevice, end
 	return &MTRClusterColorControl{inner: raw.MTRClusterColorControlFromID(_id)}
 }
 
+// MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterColorControl) StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeCurrentHueWithParams calls the underlying ReadAttributeCurrentHueWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCurrentHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentHueWithParams(params)
+}
+
+// ReadAttributeCurrentSaturationWithParams calls the underlying ReadAttributeCurrentSaturationWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCurrentSaturationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentSaturationWithParams(params)
+}
+
+// ReadAttributeRemainingTimeWithParams calls the underlying ReadAttributeRemainingTimeWithParams.
+func (x *MTRClusterColorControl) ReadAttributeRemainingTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRemainingTimeWithParams(params)
+}
+
+// ReadAttributeCurrentXWithParams calls the underlying ReadAttributeCurrentXWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCurrentXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentXWithParams(params)
+}
+
+// ReadAttributeCurrentYWithParams calls the underlying ReadAttributeCurrentYWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCurrentYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentYWithParams(params)
+}
+
+// ReadAttributeDriftCompensationWithParams calls the underlying ReadAttributeDriftCompensationWithParams.
+func (x *MTRClusterColorControl) ReadAttributeDriftCompensationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDriftCompensationWithParams(params)
+}
+
+// ReadAttributeCompensationTextWithParams calls the underlying ReadAttributeCompensationTextWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCompensationTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCompensationTextWithParams(params)
+}
+
+// ReadAttributeColorTemperatureMiredsWithParams calls the underlying ReadAttributeColorTemperatureMiredsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorTemperatureMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorTemperatureMiredsWithParams(params)
+}
+
+// ReadAttributeColorModeWithParams calls the underlying ReadAttributeColorModeWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorModeWithParams(params)
+}
+
+// ReadAttributeOptionsWithParams calls the underlying ReadAttributeOptionsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeOptionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeOptionsWithParams(params)
+}
+
+// WriteAttributeOptionsWithValueExpectedValueInterval calls the underlying WriteAttributeOptionsWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeOptionsWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOptionsWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeNumberOfPrimariesWithParams calls the underlying ReadAttributeNumberOfPrimariesWithParams.
+func (x *MTRClusterColorControl) ReadAttributeNumberOfPrimariesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeNumberOfPrimariesWithParams(params)
+}
+
+// ReadAttributePrimary1XWithParams calls the underlying ReadAttributePrimary1XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary1XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary1XWithParams(params)
+}
+
+// ReadAttributePrimary1YWithParams calls the underlying ReadAttributePrimary1YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary1YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary1YWithParams(params)
+}
+
+// ReadAttributePrimary1IntensityWithParams calls the underlying ReadAttributePrimary1IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary1IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary1IntensityWithParams(params)
+}
+
+// ReadAttributePrimary2XWithParams calls the underlying ReadAttributePrimary2XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary2XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary2XWithParams(params)
+}
+
+// ReadAttributePrimary2YWithParams calls the underlying ReadAttributePrimary2YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary2YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary2YWithParams(params)
+}
+
+// ReadAttributePrimary2IntensityWithParams calls the underlying ReadAttributePrimary2IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary2IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary2IntensityWithParams(params)
+}
+
+// ReadAttributePrimary3XWithParams calls the underlying ReadAttributePrimary3XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary3XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary3XWithParams(params)
+}
+
+// ReadAttributePrimary3YWithParams calls the underlying ReadAttributePrimary3YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary3YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary3YWithParams(params)
+}
+
+// ReadAttributePrimary3IntensityWithParams calls the underlying ReadAttributePrimary3IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary3IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary3IntensityWithParams(params)
+}
+
+// ReadAttributePrimary4XWithParams calls the underlying ReadAttributePrimary4XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary4XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary4XWithParams(params)
+}
+
+// ReadAttributePrimary4YWithParams calls the underlying ReadAttributePrimary4YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary4YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary4YWithParams(params)
+}
+
+// ReadAttributePrimary4IntensityWithParams calls the underlying ReadAttributePrimary4IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary4IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary4IntensityWithParams(params)
+}
+
+// ReadAttributePrimary5XWithParams calls the underlying ReadAttributePrimary5XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary5XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary5XWithParams(params)
+}
+
+// ReadAttributePrimary5YWithParams calls the underlying ReadAttributePrimary5YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary5YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary5YWithParams(params)
+}
+
+// ReadAttributePrimary5IntensityWithParams calls the underlying ReadAttributePrimary5IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary5IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary5IntensityWithParams(params)
+}
+
+// ReadAttributePrimary6XWithParams calls the underlying ReadAttributePrimary6XWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary6XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary6XWithParams(params)
+}
+
+// ReadAttributePrimary6YWithParams calls the underlying ReadAttributePrimary6YWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary6YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary6YWithParams(params)
+}
+
+// ReadAttributePrimary6IntensityWithParams calls the underlying ReadAttributePrimary6IntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributePrimary6IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePrimary6IntensityWithParams(params)
+}
+
+// ReadAttributeWhitePointXWithParams calls the underlying ReadAttributeWhitePointXWithParams.
+func (x *MTRClusterColorControl) ReadAttributeWhitePointXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeWhitePointXWithParams(params)
+}
+
+// ReadAttributeWhitePointYWithParams calls the underlying ReadAttributeWhitePointYWithParams.
+func (x *MTRClusterColorControl) ReadAttributeWhitePointYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeWhitePointYWithParams(params)
+}
+
+// ReadAttributeColorPointRXWithParams calls the underlying ReadAttributeColorPointRXWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointRXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointRXWithParams(params)
+}
+
+// ReadAttributeColorPointRYWithParams calls the underlying ReadAttributeColorPointRYWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointRYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointRYWithParams(params)
+}
+
+// ReadAttributeColorPointRIntensityWithParams calls the underlying ReadAttributeColorPointRIntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointRIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointRIntensityWithParams(params)
+}
+
+// ReadAttributeColorPointGXWithParams calls the underlying ReadAttributeColorPointGXWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointGXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointGXWithParams(params)
+}
+
+// ReadAttributeColorPointGYWithParams calls the underlying ReadAttributeColorPointGYWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointGYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointGYWithParams(params)
+}
+
+// ReadAttributeColorPointGIntensityWithParams calls the underlying ReadAttributeColorPointGIntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointGIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointGIntensityWithParams(params)
+}
+
+// ReadAttributeColorPointBXWithParams calls the underlying ReadAttributeColorPointBXWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointBXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointBXWithParams(params)
+}
+
+// ReadAttributeColorPointBYWithParams calls the underlying ReadAttributeColorPointBYWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointBYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointBYWithParams(params)
+}
+
+// ReadAttributeColorPointBIntensityWithParams calls the underlying ReadAttributeColorPointBIntensityWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorPointBIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorPointBIntensityWithParams(params)
+}
+
+// ReadAttributeEnhancedCurrentHueWithParams calls the underlying ReadAttributeEnhancedCurrentHueWithParams.
+func (x *MTRClusterColorControl) ReadAttributeEnhancedCurrentHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeEnhancedCurrentHueWithParams(params)
+}
+
+// ReadAttributeEnhancedColorModeWithParams calls the underlying ReadAttributeEnhancedColorModeWithParams.
+func (x *MTRClusterColorControl) ReadAttributeEnhancedColorModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeEnhancedColorModeWithParams(params)
+}
+
+// ReadAttributeColorLoopActiveWithParams calls the underlying ReadAttributeColorLoopActiveWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorLoopActiveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorLoopActiveWithParams(params)
+}
+
+// ReadAttributeColorLoopDirectionWithParams calls the underlying ReadAttributeColorLoopDirectionWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorLoopDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorLoopDirectionWithParams(params)
+}
+
+// ReadAttributeColorLoopTimeWithParams calls the underlying ReadAttributeColorLoopTimeWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorLoopTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorLoopTimeWithParams(params)
+}
+
+// ReadAttributeColorLoopStartEnhancedHueWithParams calls the underlying ReadAttributeColorLoopStartEnhancedHueWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorLoopStartEnhancedHueWithParams(params)
+}
+
+// ReadAttributeColorLoopStoredEnhancedHueWithParams calls the underlying ReadAttributeColorLoopStoredEnhancedHueWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorLoopStoredEnhancedHueWithParams(params)
+}
+
+// ReadAttributeColorCapabilitiesWithParams calls the underlying ReadAttributeColorCapabilitiesWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorCapabilitiesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorCapabilitiesWithParams(params)
+}
+
+// ReadAttributeColorTempPhysicalMinMiredsWithParams calls the underlying ReadAttributeColorTempPhysicalMinMiredsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorTempPhysicalMinMiredsWithParams(params)
+}
+
+// ReadAttributeColorTempPhysicalMaxMiredsWithParams calls the underlying ReadAttributeColorTempPhysicalMaxMiredsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeColorTempPhysicalMaxMiredsWithParams(params)
+}
+
+// ReadAttributeCoupleColorTempToLevelMinMiredsWithParams calls the underlying ReadAttributeCoupleColorTempToLevelMinMiredsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCoupleColorTempToLevelMinMiredsWithParams(params)
+}
+
+// ReadAttributeStartUpColorTemperatureMiredsWithParams calls the underlying ReadAttributeStartUpColorTemperatureMiredsWithParams.
+func (x *MTRClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeStartUpColorTemperatureMiredsWithParams(params)
+}
+
+// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval calls the underlying WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams calls the underlying WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterColorControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterColorControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterColorControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterColorControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterColorControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterColorControl) StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
+// WriteAttributeWhitePointXWithValueExpectedValueInterval calls the underlying WriteAttributeWhitePointXWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeWhitePointXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeWhitePointXWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeWhitePointXWithValueExpectedValueIntervalParams calls the underlying WriteAttributeWhitePointXWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeWhitePointXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeWhitePointXWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeWhitePointYWithValueExpectedValueInterval calls the underlying WriteAttributeWhitePointYWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeWhitePointYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeWhitePointYWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeWhitePointYWithValueExpectedValueIntervalParams calls the underlying WriteAttributeWhitePointYWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeWhitePointYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeWhitePointYWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointRXWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointRXWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointRXWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointRXWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointRXWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointRXWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointRYWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointRYWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointRYWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointRYWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointRYWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointRYWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointRIntensityWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointRIntensityWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointRIntensityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointGXWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointGXWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointGXWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointGXWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointGXWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointGXWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointGYWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointGYWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointGYWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointGYWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointGYWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointGYWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointGIntensityWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointGIntensityWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointGIntensityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointBXWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointBXWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointBXWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointBXWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointBXWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointBXWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointBYWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointBYWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointBYWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointBYWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointBYWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointBYWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// WriteAttributeColorPointBIntensityWithValueExpectedValueInterval calls the underlying WriteAttributeColorPointBIntensityWithValueExpectedValueInterval.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeColorPointBIntensityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams.
+func (x *MTRClusterColorControl) WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
 func (x *MTRClusterColorControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterColorControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterColorControlable is the interface implemented by [MTRClusterColorControl], for mocking and DI.
+type MTRClusterColorControlable interface {
+	Unwrap() *raw.MTRClusterColorControl
+	MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	StepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	StepColorWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeCurrentHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentSaturationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRemainingTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeDriftCompensationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCompensationTextWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorTemperatureMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeOptionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeNumberOfPrimariesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary1XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary1YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary1IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary2XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary2YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary2IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary3XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary3YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary3IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary4XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary4YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary4IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary5XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary5YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary5IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary6XWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary6YWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePrimary6IntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeWhitePointXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeWhitePointYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointRXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointRYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointRIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointGXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointGYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointGIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointBXWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointBYWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorPointBIntensityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeEnhancedCurrentHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeEnhancedColorModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorLoopActiveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorLoopDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorLoopTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorLoopStartEnhancedHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorLoopStoredEnhancedHueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorCapabilitiesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorTempPhysicalMinMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeColorTempPhysicalMaxMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCoupleColorTempToLevelMinMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeStartUpColorTemperatureMiredsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	MoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	StepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveToSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	StepSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveToColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	StepColorWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepColorParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveToColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveToColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	EnhancedMoveToHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveToHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	EnhancedMoveHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	EnhancedStepHueWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedStepHueParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	EnhancedMoveToHueAndSaturationWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterEnhancedMoveToHueAndSaturationParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	ColorLoopSetWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterColorLoopSetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	StopMoveStepWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStopMoveStepParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	MoveColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterMoveColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	StepColorTemperatureWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRColorControlClusterStepColorTemperatureParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	WriteAttributeWhitePointXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeWhitePointXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeWhitePointYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeWhitePointYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointRXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointRXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointRYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointRYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointRIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointGXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointGXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointGYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointGYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointGIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointBXWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointBXWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointBYWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointBYWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	WriteAttributeColorPointBIntensityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+}
+
+var _ MTRClusterColorControlable = (*MTRClusterColorControl)(nil)
 

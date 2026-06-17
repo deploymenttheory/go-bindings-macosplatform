@@ -36,3 +36,36 @@ func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) WithServerSideProces
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWiFiNetworkDiagnosticsClusterResetCountsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterResetCountsParams], for mocking and DI.
+type MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable interface {
+	Unwrap() *raw.MTRWiFiNetworkDiagnosticsClusterResetCountsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWiFiNetworkDiagnosticsClusterResetCountsParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWiFiNetworkDiagnosticsClusterResetCountsParamsable = (*MTRWiFiNetworkDiagnosticsClusterResetCountsParams)(nil)
+

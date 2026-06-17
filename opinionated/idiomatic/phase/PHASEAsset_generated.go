@@ -6,6 +6,7 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewAsset() *Asset {
 	return &Asset{inner: raw.PHASEAssetFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Asset) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Asset) asAsset() *raw.PHASEAsset { return x.inner }
+
+// Assetable is the interface implemented by [Asset], for mocking and DI.
+type Assetable interface {
+	Unwrap() *raw.PHASEAsset
+	Identifier() string
+}
+
+var _ Assetable = (*Asset)(nil)
 

@@ -6,6 +6,7 @@ package mpsmatrix
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -32,5 +33,18 @@ func NewMatrixVectorMultiplicationWithDeviceRowsColumns(device metal.MTLDevice, 
 	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
 }
 
+// EncodeToCommandBufferInputMatrixInputVectorResultVector calls the underlying EncodeToCommandBufferInputMatrixInputVectorResultVector.
+func (x *MatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer, inputMatrix, inputVector, resultVector)
+}
+
 func (x *MatrixVectorMultiplication) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
+
+// MatrixVectorMultiplicationable is the interface implemented by [MatrixVectorMultiplication], for mocking and DI.
+type MatrixVectorMultiplicationable interface {
+	Unwrap() *raw.MPSMatrixVectorMultiplication
+	EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector)
+}
+
+var _ MatrixVectorMultiplicationable = (*MatrixVectorMultiplication)(nil)
 

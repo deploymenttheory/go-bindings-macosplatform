@@ -31,5 +31,25 @@ func (x *ActionURL) WithURL(uRL string) *ActionURL {
 	return x
 }
 
+// URL calls the underlying URL.
+func (x *ActionURL) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *ActionURL) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
 func (x *ActionURL) asAction() *raw.PDFAction { return &x.inner.PDFAction }
+
+// ActionURLable is the interface implemented by [ActionURL], for mocking and DI.
+type ActionURLable interface {
+	Unwrap() *raw.PDFActionURL
+	WithURL(uRL string) *ActionURL
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+}
+
+var _ ActionURLable = (*ActionURL)(nil)
 

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewMTREventPath() *MTREventPath {
 	return &MTREventPath{inner: raw.MTREventPathFromID(_id)}
 }
 
+// Event calls the underlying Event.
+func (x *MTREventPath) Event() *foundation.NSNumber {
+	return x.inner.Event()
+}
+
 func (x *MTREventPath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
+
+// MTREventPathable is the interface implemented by [MTREventPath], for mocking and DI.
+type MTREventPathable interface {
+	Unwrap() *raw.MTREventPath
+	Event() *foundation.NSNumber
+}
+
+var _ MTREventPathable = (*MTREventPath)(nil)
 

@@ -5,8 +5,12 @@
 package linkpresentation
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/linkpresentation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MetadataProvider wraps [raw.LPMetadataProvider] with a fluent Go API.
@@ -34,4 +38,97 @@ func (x *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
 	x.inner.SetTimeout(timeout)
 	return x
 }
+
+// StartFetchingMetadataForURL blocks until the operation completes or ctx is cancelled.
+func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (*LinkMetadata, error) {
+	type _result struct {
+		val *LinkMetadata
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StartFetchingMetadataForURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), func(_p0 *raw.LPLinkMetadata, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &LinkMetadata{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *LinkMetadata
+		return _zero, ctx.Err()
+	}
+}
+
+// StartFetchingMetadataForRequest blocks until the operation completes or ctx is cancelled.
+func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request *foundation.NSURLRequest) (*LinkMetadata, error) {
+	type _result struct {
+		val *LinkMetadata
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.StartFetchingMetadataForRequestCompletionHandler(request, func(_p0 *raw.LPLinkMetadata, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &LinkMetadata{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *LinkMetadata
+		return _zero, ctx.Err()
+	}
+}
+
+// Cancel calls the underlying Cancel.
+func (x *MetadataProvider) Cancel() {
+	x.inner.Cancel()
+}
+
+// ShouldFetchSubresources calls the underlying ShouldFetchSubresources.
+func (x *MetadataProvider) ShouldFetchSubresources() bool {
+	return x.inner.ShouldFetchSubresources()
+}
+
+// SetShouldFetchSubresources calls the underlying SetShouldFetchSubresources.
+func (x *MetadataProvider) SetShouldFetchSubresources(shouldFetchSubresources bool) {
+	x.inner.SetShouldFetchSubresources(shouldFetchSubresources)
+}
+
+// Timeout calls the underlying Timeout.
+func (x *MetadataProvider) Timeout() float64 {
+	return x.inner.Timeout()
+}
+
+// SetTimeout calls the underlying SetTimeout.
+func (x *MetadataProvider) SetTimeout(timeout float64) {
+	x.inner.SetTimeout(timeout)
+}
+
+// MetadataProviderable is the interface implemented by [MetadataProvider], for mocking and DI.
+type MetadataProviderable interface {
+	Unwrap() *raw.LPMetadataProvider
+	WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider
+	WithTimeout(timeout float64) *MetadataProvider
+	StartFetchingMetadataForURL(ctx context.Context, uRL string) (*LinkMetadata, error)
+	StartFetchingMetadataForRequest(ctx context.Context, request *foundation.NSURLRequest) (*LinkMetadata, error)
+	Cancel()
+	ShouldFetchSubresources() bool
+	SetShouldFetchSubresources(shouldFetchSubresources bool)
+	Timeout() float64
+	SetTimeout(timeout float64)
+}
+
+var _ MetadataProviderable = (*MetadataProvider)(nil)
 

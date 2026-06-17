@@ -25,5 +25,18 @@ func NewSignedPersonIdentityProofWithPersonIdentityProofSignatureData(personIden
 	return &SignedPersonIdentityProof{inner: raw.SWSignedPersonIdentityProofFromID(_id)}
 }
 
+// SignatureData calls the underlying SignatureData.
+func (x *SignedPersonIdentityProof) SignatureData() *foundation.NSData {
+	return x.inner.SignatureData()
+}
+
 func (x *SignedPersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof { return &x.inner.SWPersonIdentityProof }
+
+// SignedPersonIdentityProofable is the interface implemented by [SignedPersonIdentityProof], for mocking and DI.
+type SignedPersonIdentityProofable interface {
+	Unwrap() *raw.SWSignedPersonIdentityProof
+	SignatureData() *foundation.NSData
+}
+
+var _ SignedPersonIdentityProofable = (*SignedPersonIdentityProof)(nil)
 

@@ -23,3 +23,10 @@ func NewNSArray() *NSArray {
 	return &NSArray{inner: raw.NSArrayFromID[objc.ID](_id)}
 }
 
+// NSArrayable is the interface implemented by [NSArray], for mocking and DI.
+type NSArrayable interface {
+	Unwrap() *raw.NSArray[objc.ID]
+}
+
+var _ NSArrayable = (*NSArray)(nil)
+

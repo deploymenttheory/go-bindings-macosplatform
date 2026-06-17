@@ -42,5 +42,55 @@ func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) WithServerSidePro
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.Arg1()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestStructArgumentRequestParams) asMTRUnitTestingClusterTestStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArgumentRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestStructArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestStructArgumentRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestStructArgumentRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestStructArgumentRequestParams
+	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestStructArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestStructArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestStructArgumentRequestParams
+	Arg1() *MTRUnitTestingClusterSimpleStruct
+	SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestStructArgumentRequestParamsable = (*MTRUnitTestingClusterTestStructArgumentRequestParams)(nil)
 

@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ExternalSyncDevice wraps [raw.AVExternalSyncDevice] with a fluent Go API.
@@ -29,4 +31,54 @@ func (x *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay
 	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
 	return x
 }
+
+// Status calls the underlying Status.
+func (x *ExternalSyncDevice) Status() raw.AVExternalSyncDeviceStatus {
+	return x.inner.Status()
+}
+
+// Clock calls the underlying Clock.
+func (x *ExternalSyncDevice) Clock() unsafe.Pointer {
+	return x.inner.Clock()
+}
+
+// SignalCompensationDelay calls the underlying SignalCompensationDelay.
+func (x *ExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
+	return x.inner.SignalCompensationDelay()
+}
+
+// SetSignalCompensationDelay calls the underlying SetSignalCompensationDelay.
+func (x *ExternalSyncDevice) SetSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) {
+	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
+}
+
+// Uuid calls the underlying Uuid.
+func (x *ExternalSyncDevice) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// VendorID calls the underlying VendorID.
+func (x *ExternalSyncDevice) VendorID() uint {
+	return x.inner.VendorID()
+}
+
+// ProductID calls the underlying ProductID.
+func (x *ExternalSyncDevice) ProductID() uint {
+	return x.inner.ProductID()
+}
+
+// ExternalSyncDeviceable is the interface implemented by [ExternalSyncDevice], for mocking and DI.
+type ExternalSyncDeviceable interface {
+	Unwrap() *raw.AVExternalSyncDevice
+	WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice
+	Status() raw.AVExternalSyncDeviceStatus
+	Clock() unsafe.Pointer
+	SignalCompensationDelay() coremedia.CMTime
+	SetSignalCompensationDelay(signalCompensationDelay coremedia.CMTime)
+	Uuid() *foundation.NSUUID
+	VendorID() uint
+	ProductID() uint
+}
+
+var _ ExternalSyncDeviceable = (*ExternalSyncDevice)(nil)
 

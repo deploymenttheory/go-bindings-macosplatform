@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewAnimationMetric() *AnimationMetric {
 	return &AnimationMetric{inner: raw.MXAnimationMetricFromID(_id)}
 }
 
+// ScrollHitchTimeRatio calls the underlying ScrollHitchTimeRatio.
+func (x *AnimationMetric) ScrollHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
+	return x.inner.ScrollHitchTimeRatio()
+}
+
+// HitchTimeRatio calls the underlying HitchTimeRatio.
+func (x *AnimationMetric) HitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
+	return x.inner.HitchTimeRatio()
+}
+
 func (x *AnimationMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// AnimationMetricable is the interface implemented by [AnimationMetric], for mocking and DI.
+type AnimationMetricable interface {
+	Unwrap() *raw.MXAnimationMetric
+	ScrollHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
+	HitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
+}
+
+var _ AnimationMetricable = (*AnimationMetric)(nil)
 

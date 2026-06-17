@@ -47,5 +47,84 @@ func (x *PhysicsHingeJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsHingeJoi
 	return x
 }
 
+// BodyA calls the underlying BodyA.
+func (x *PhysicsHingeJoint) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AxisA calls the underlying AxisA.
+func (x *PhysicsHingeJoint) AxisA() raw.SCNVector3 {
+	return x.inner.AxisA()
+}
+
+// SetAxisA calls the underlying SetAxisA.
+func (x *PhysicsHingeJoint) SetAxisA(axisA raw.SCNVector3) {
+	x.inner.SetAxisA(axisA)
+}
+
+// AnchorA calls the underlying AnchorA.
+func (x *PhysicsHingeJoint) AnchorA() raw.SCNVector3 {
+	return x.inner.AnchorA()
+}
+
+// SetAnchorA calls the underlying SetAnchorA.
+func (x *PhysicsHingeJoint) SetAnchorA(anchorA raw.SCNVector3) {
+	x.inner.SetAnchorA(anchorA)
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsHingeJoint) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AxisB calls the underlying AxisB.
+func (x *PhysicsHingeJoint) AxisB() raw.SCNVector3 {
+	return x.inner.AxisB()
+}
+
+// SetAxisB calls the underlying SetAxisB.
+func (x *PhysicsHingeJoint) SetAxisB(axisB raw.SCNVector3) {
+	x.inner.SetAxisB(axisB)
+}
+
+// AnchorB calls the underlying AnchorB.
+func (x *PhysicsHingeJoint) AnchorB() raw.SCNVector3 {
+	return x.inner.AnchorB()
+}
+
+// SetAnchorB calls the underlying SetAnchorB.
+func (x *PhysicsHingeJoint) SetAnchorB(anchorB raw.SCNVector3) {
+	x.inner.SetAnchorB(anchorB)
+}
+
 func (x *PhysicsHingeJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+
+// PhysicsHingeJointable is the interface implemented by [PhysicsHingeJoint], for mocking and DI.
+type PhysicsHingeJointable interface {
+	Unwrap() *raw.SCNPhysicsHingeJoint
+	WithAxisA(axisA raw.SCNVector3) *PhysicsHingeJoint
+	WithAnchorA(anchorA raw.SCNVector3) *PhysicsHingeJoint
+	WithAxisB(axisB raw.SCNVector3) *PhysicsHingeJoint
+	WithAnchorB(anchorB raw.SCNVector3) *PhysicsHingeJoint
+	BodyA() *PhysicsBody
+	AxisA() raw.SCNVector3
+	SetAxisA(axisA raw.SCNVector3)
+	AnchorA() raw.SCNVector3
+	SetAnchorA(anchorA raw.SCNVector3)
+	BodyB() *PhysicsBody
+	AxisB() raw.SCNVector3
+	SetAxisB(axisB raw.SCNVector3)
+	AnchorB() raw.SCNVector3
+	SetAnchorB(anchorB raw.SCNVector3)
+}
+
+var _ PhysicsHingeJointable = (*PhysicsHingeJoint)(nil)
 

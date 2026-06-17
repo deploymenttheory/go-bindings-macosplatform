@@ -35,9 +35,42 @@ func (x *ImageLaplacianPyramid) WithLaplacianScale(laplacianScale float32) *Imag
 	return x
 }
 
+// GetLaplacianBias calls the underlying GetLaplacianBias.
+func (x *ImageLaplacianPyramid) GetLaplacianBias() float32 {
+	return x.inner.GetLaplacianBias()
+}
+
+// SetLaplacianBias calls the underlying SetLaplacianBias.
+func (x *ImageLaplacianPyramid) SetLaplacianBias(laplacianBias float32) {
+	x.inner.SetLaplacianBias(laplacianBias)
+}
+
+// GetLaplacianScale calls the underlying GetLaplacianScale.
+func (x *ImageLaplacianPyramid) GetLaplacianScale() float32 {
+	return x.inner.GetLaplacianScale()
+}
+
+// SetLaplacianScale calls the underlying SetLaplacianScale.
+func (x *ImageLaplacianPyramid) SetLaplacianScale(laplacianScale float32) {
+	x.inner.SetLaplacianScale(laplacianScale)
+}
+
 func (x *ImageLaplacianPyramid) asImageLaplacianPyramid() *raw.MPSImageLaplacianPyramid { return x.inner }
 
 func (x *ImageLaplacianPyramid) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImagePyramid }
 
 func (x *ImageLaplacianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel }
+
+// ImageLaplacianPyramidable is the interface implemented by [ImageLaplacianPyramid], for mocking and DI.
+type ImageLaplacianPyramidable interface {
+	Unwrap() *raw.MPSImageLaplacianPyramid
+	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid
+	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid
+	GetLaplacianBias() float32
+	SetLaplacianBias(laplacianBias float32)
+	GetLaplacianScale() float32
+	SetLaplacianScale(laplacianScale float32)
+}
+
+var _ ImageLaplacianPyramidable = (*ImageLaplacianPyramid)(nil)
 

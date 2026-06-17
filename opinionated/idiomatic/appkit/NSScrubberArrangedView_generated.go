@@ -35,9 +35,48 @@ func (x *ScrubberArrangedView) WithHighlighted(highlighted bool) *ScrubberArrang
 	return x
 }
 
+// ApplyLayoutAttributes calls the underlying ApplyLayoutAttributes.
+func (x *ScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *raw.NSScrubberLayoutAttributes) {
+	x.inner.ApplyLayoutAttributes(layoutAttributes)
+}
+
+// IsSelected calls the underlying IsSelected.
+func (x *ScrubberArrangedView) IsSelected() bool {
+	return x.inner.IsSelected()
+}
+
+// SetSelected calls the underlying SetSelected.
+func (x *ScrubberArrangedView) SetSelected(selected bool) {
+	x.inner.SetSelected(selected)
+}
+
+// IsHighlighted calls the underlying IsHighlighted.
+func (x *ScrubberArrangedView) IsHighlighted() bool {
+	return x.inner.IsHighlighted()
+}
+
+// SetHighlighted calls the underlying SetHighlighted.
+func (x *ScrubberArrangedView) SetHighlighted(highlighted bool) {
+	x.inner.SetHighlighted(highlighted)
+}
+
 func (x *ScrubberArrangedView) asScrubberArrangedView() *raw.NSScrubberArrangedView { return x.inner }
 
 func (x *ScrubberArrangedView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *ScrubberArrangedView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// ScrubberArrangedViewable is the interface implemented by [ScrubberArrangedView], for mocking and DI.
+type ScrubberArrangedViewable interface {
+	Unwrap() *raw.NSScrubberArrangedView
+	WithSelected(selected bool) *ScrubberArrangedView
+	WithHighlighted(highlighted bool) *ScrubberArrangedView
+	ApplyLayoutAttributes(layoutAttributes *raw.NSScrubberLayoutAttributes)
+	IsSelected() bool
+	SetSelected(selected bool)
+	IsHighlighted() bool
+	SetHighlighted(highlighted bool)
+}
+
+var _ ScrubberArrangedViewable = (*ScrubberArrangedView)(nil)
 

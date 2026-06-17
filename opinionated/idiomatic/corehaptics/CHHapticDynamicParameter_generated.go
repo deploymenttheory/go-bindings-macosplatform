@@ -7,6 +7,7 @@ package corehaptics
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +37,47 @@ func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticD
 	x.inner.SetRelativeTime(relativeTime)
 	return x
 }
+
+// ParameterID calls the underlying ParameterID.
+func (x *HapticDynamicParameter) ParameterID() string {
+	_r := x.inner.ParameterID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *HapticDynamicParameter) Value() float32 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *HapticDynamicParameter) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// RelativeTime calls the underlying RelativeTime.
+func (x *HapticDynamicParameter) RelativeTime() float64 {
+	return x.inner.RelativeTime()
+}
+
+// SetRelativeTime calls the underlying SetRelativeTime.
+func (x *HapticDynamicParameter) SetRelativeTime(relativeTime float64) {
+	x.inner.SetRelativeTime(relativeTime)
+}
+
+// HapticDynamicParameterable is the interface implemented by [HapticDynamicParameter], for mocking and DI.
+type HapticDynamicParameterable interface {
+	Unwrap() *raw.CHHapticDynamicParameter
+	WithValue(value float32) *HapticDynamicParameter
+	WithRelativeTime(relativeTime float64) *HapticDynamicParameter
+	ParameterID() string
+	Value() float32
+	SetValue(value float32)
+	RelativeTime() float64
+	SetRelativeTime(relativeTime float64)
+}
+
+var _ HapticDynamicParameterable = (*HapticDynamicParameter)(nil)
 

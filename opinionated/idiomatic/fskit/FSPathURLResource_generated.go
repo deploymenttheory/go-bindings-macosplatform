@@ -25,5 +25,24 @@ func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResour
 	return &PathURLResource{inner: raw.FSPathURLResourceFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *PathURLResource) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// IsWritable calls the underlying IsWritable.
+func (x *PathURLResource) IsWritable() bool {
+	return x.inner.IsWritable()
+}
+
 func (x *PathURLResource) asResource() *raw.FSResource { return &x.inner.FSResource }
+
+// PathURLResourceable is the interface implemented by [PathURLResource], for mocking and DI.
+type PathURLResourceable interface {
+	Unwrap() *raw.FSPathURLResource
+	Url() *foundation.NSURL
+	IsWritable() bool
+}
+
+var _ PathURLResourceable = (*PathURLResource)(nil)
 

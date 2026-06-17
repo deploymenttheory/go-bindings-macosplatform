@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,29 +49,60 @@ func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConn
 	return x
 }
 
+// Action calls the underlying Action.
+func (x *NEEvaluateConnectionRule) Action() raw.NEEvaluateConnectionRuleAction {
+	return x.inner.Action()
+}
+
 // MatchDomains returns the collection as a Go slice.
-func (x *NEEvaluateConnectionRule) MatchDomains() []*foundation.NSString {
+func (x *NEEvaluateConnectionRule) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // UseDNSServers returns the collection as a Go slice.
-func (x *NEEvaluateConnectionRule) UseDNSServers() []*foundation.NSString {
+func (x *NEEvaluateConnectionRule) UseDNSServers() []string {
 	arr := x.inner.UseDNSServers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetUseDNSServers calls the underlying SetUseDNSServers.
+func (x *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetUseDNSServers(useDNSServers)
+}
+
+// ProbeURL calls the underlying ProbeURL.
+func (x *NEEvaluateConnectionRule) ProbeURL() *foundation.NSURL {
+	return x.inner.ProbeURL()
+}
+
+// SetProbeURL calls the underlying SetProbeURL.
+func (x *NEEvaluateConnectionRule) SetProbeURL(probeURL string) {
+	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+}
+
+// NEEvaluateConnectionRuleable is the interface implemented by [NEEvaluateConnectionRule], for mocking and DI.
+type NEEvaluateConnectionRuleable interface {
+	Unwrap() *raw.NEEvaluateConnectionRule
+	WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule
+	WithProbeURL(probeURL string) *NEEvaluateConnectionRule
+	Action() raw.NEEvaluateConnectionRuleAction
+	MatchDomains() []string
+	UseDNSServers() []string
+	SetUseDNSServers(useDNSServers *foundation.NSArray[*foundation.NSString])
+	ProbeURL() *foundation.NSURL
+	SetProbeURL(probeURL string)
+}
+
+var _ NEEvaluateConnectionRuleable = (*NEEvaluateConnectionRule)(nil)
 

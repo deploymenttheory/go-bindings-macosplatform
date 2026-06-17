@@ -25,3 +25,10 @@ func NewMTRBasicClusterReachableChangedEvent() *MTRBasicClusterReachableChangedE
 
 func (x *MTRBasicClusterReachableChangedEvent) asMTRBasicInformationClusterReachableChangedEvent() *raw.MTRBasicInformationClusterReachableChangedEvent { return &x.inner.MTRBasicInformationClusterReachableChangedEvent }
 
+// MTRBasicClusterReachableChangedEventable is the interface implemented by [MTRBasicClusterReachableChangedEvent], for mocking and DI.
+type MTRBasicClusterReachableChangedEventable interface {
+	Unwrap() *raw.MTRBasicClusterReachableChangedEvent
+}
+
+var _ MTRBasicClusterReachableChangedEventable = (*MTRBasicClusterReachableChangedEvent)(nil)
+

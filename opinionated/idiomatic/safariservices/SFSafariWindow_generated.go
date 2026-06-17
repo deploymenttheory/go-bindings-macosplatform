@@ -5,6 +5,8 @@
 package safariservices
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +24,111 @@ func NewSafariWindow() *SafariWindow {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariWindow")), objc.RegisterName("new"))
 	return &SafariWindow{inner: raw.SFSafariWindowFromID(_id)}
 }
+
+// GetActiveTab blocks until the operation completes or ctx is cancelled.
+func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
+	type _result struct {
+		val *SafariTab
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetActiveTabWithCompletionHandler(func(_p0 *raw.SFSafariTab) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &SafariTab{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SafariTab
+		return _zero, ctx.Err()
+	}
+}
+
+// GetAllTabs blocks until the operation completes or ctx is cancelled.
+func (x *SafariWindow) GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw.SFSafariTab], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.SFSafariTab]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetAllTabsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.SFSafariTab]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.SFSafariTab]
+		return _zero, ctx.Err()
+	}
+}
+
+// OpenTabWithURLMakeActiveIfPossible blocks until the operation completes or ctx is cancelled.
+func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error) {
+	type _result struct {
+		val *SafariTab
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.OpenTabWithURLMakeActiveIfPossibleCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), activateTab, func(_p0 *raw.SFSafariTab) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &SafariTab{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SafariTab
+		return _zero, ctx.Err()
+	}
+}
+
+// GetToolbarItem blocks until the operation completes or ctx is cancelled.
+func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error) {
+	type _result struct {
+		val *SafariToolbarItem
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetToolbarItemWithCompletionHandler(func(_p0 *raw.SFSafariToolbarItem) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &SafariToolbarItem{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *SafariToolbarItem
+		return _zero, ctx.Err()
+	}
+}
+
+// Close calls the underlying Close.
+func (x *SafariWindow) Close() {
+	x.inner.Close()
+}
+
+// SafariWindowable is the interface implemented by [SafariWindow], for mocking and DI.
+type SafariWindowable interface {
+	Unwrap() *raw.SFSafariWindow
+	GetActiveTab(ctx context.Context) (*SafariTab, error)
+	GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw.SFSafariTab], error)
+	OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error)
+	GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error)
+	Close()
+}
+
+var _ SafariWindowable = (*SafariWindow)(nil)
 

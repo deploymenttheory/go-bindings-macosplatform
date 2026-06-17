@@ -36,3 +36,48 @@ func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data *foundation.
 	return x
 }
 
+// TargetList calls the underlying TargetList.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() *foundation.NSArray[objc.ID] {
+	return x.inner.TargetList()
+}
+
+// SetTargetList calls the underlying SetTargetList.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(targetList *foundation.NSArray[objc.ID]) {
+	x.inner.SetTargetList(targetList)
+}
+
+// CurrentTarget calls the underlying CurrentTarget.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() *foundation.NSNumber {
+	return x.inner.CurrentTarget()
+}
+
+// SetCurrentTarget calls the underlying SetCurrentTarget.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetCurrentTarget(currentTarget *foundation.NSNumber) {
+	x.inner.SetCurrentTarget(currentTarget)
+}
+
+// Data calls the underlying Data.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRTargetNavigatorClusterTargetUpdatedEvent) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// MTRTargetNavigatorClusterTargetUpdatedEventable is the interface implemented by [MTRTargetNavigatorClusterTargetUpdatedEvent], for mocking and DI.
+type MTRTargetNavigatorClusterTargetUpdatedEventable interface {
+	Unwrap() *raw.MTRTargetNavigatorClusterTargetUpdatedEvent
+	WithCurrentTarget(currentTarget *foundation.NSNumber) *MTRTargetNavigatorClusterTargetUpdatedEvent
+	WithData(data *foundation.NSData) *MTRTargetNavigatorClusterTargetUpdatedEvent
+	TargetList() *foundation.NSArray[objc.ID]
+	SetTargetList(targetList *foundation.NSArray[objc.ID])
+	CurrentTarget() *foundation.NSNumber
+	SetCurrentTarget(currentTarget *foundation.NSNumber)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+}
+
+var _ MTRTargetNavigatorClusterTargetUpdatedEventable = (*MTRTargetNavigatorClusterTargetUpdatedEvent)(nil)
+

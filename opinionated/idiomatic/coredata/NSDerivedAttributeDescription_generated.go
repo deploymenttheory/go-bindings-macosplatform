@@ -30,7 +30,27 @@ func (x *DerivedAttributeDescription) WithDerivationExpression(derivationExpress
 	return x
 }
 
+// DerivationExpression calls the underlying DerivationExpression.
+func (x *DerivedAttributeDescription) DerivationExpression() *foundation.NSExpression {
+	return x.inner.DerivationExpression()
+}
+
+// SetDerivationExpression calls the underlying SetDerivationExpression.
+func (x *DerivedAttributeDescription) SetDerivationExpression(derivationExpression *foundation.NSExpression) {
+	x.inner.SetDerivationExpression(derivationExpression)
+}
+
 func (x *DerivedAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription { return &x.inner.NSAttributeDescription }
 
 func (x *DerivedAttributeDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSAttributeDescription.NSPropertyDescription }
+
+// DerivedAttributeDescriptionable is the interface implemented by [DerivedAttributeDescription], for mocking and DI.
+type DerivedAttributeDescriptionable interface {
+	Unwrap() *raw.NSDerivedAttributeDescription
+	WithDerivationExpression(derivationExpression *foundation.NSExpression) *DerivedAttributeDescription
+	DerivationExpression() *foundation.NSExpression
+	SetDerivationExpression(derivationExpression *foundation.NSExpression)
+}
+
+var _ DerivedAttributeDescriptionable = (*DerivedAttributeDescription)(nil)
 

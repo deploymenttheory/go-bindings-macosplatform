@@ -35,3 +35,10 @@ func (x *CNNUpsamplingBilinearGradient) asCNNBinaryKernel() *mpsneuralnetwork.MP
 
 func (x *CNNUpsamplingBilinearGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsamplingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNUpsamplingBilinearGradientable is the interface implemented by [CNNUpsamplingBilinearGradient], for mocking and DI.
+type CNNUpsamplingBilinearGradientable interface {
+	Unwrap() *raw.MPSCNNUpsamplingBilinearGradient
+}
+
+var _ CNNUpsamplingBilinearGradientable = (*CNNUpsamplingBilinearGradient)(nil)
+

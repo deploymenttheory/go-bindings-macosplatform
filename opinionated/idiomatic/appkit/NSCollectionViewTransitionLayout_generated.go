@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,57 @@ func (x *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgre
 	return x
 }
 
+// UpdateValueForAnimatedKey calls the underlying UpdateValueForAnimatedKey.
+func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key *foundation.NSString) {
+	x.inner.UpdateValueForAnimatedKey(value, key)
+}
+
+// ValueForAnimatedKey calls the underlying ValueForAnimatedKey.
+func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key *foundation.NSString) float64 {
+	return x.inner.ValueForAnimatedKey(key)
+}
+
+// TransitionProgress calls the underlying TransitionProgress.
+func (x *CollectionViewTransitionLayout) TransitionProgress() float64 {
+	return x.inner.TransitionProgress()
+}
+
+// SetTransitionProgress calls the underlying SetTransitionProgress.
+func (x *CollectionViewTransitionLayout) SetTransitionProgress(transitionProgress float64) {
+	x.inner.SetTransitionProgress(transitionProgress)
+}
+
+// CurrentLayout calls the underlying CurrentLayout.
+func (x *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
+	_r := x.inner.CurrentLayout()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionViewLayout{inner: _r}
+}
+
+// NextLayout calls the underlying NextLayout.
+func (x *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
+	_r := x.inner.NextLayout()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionViewLayout{inner: _r}
+}
+
 func (x *CollectionViewTransitionLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+
+// CollectionViewTransitionLayoutable is the interface implemented by [CollectionViewTransitionLayout], for mocking and DI.
+type CollectionViewTransitionLayoutable interface {
+	Unwrap() *raw.NSCollectionViewTransitionLayout
+	WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout
+	UpdateValueForAnimatedKey(value float64, key *foundation.NSString)
+	ValueForAnimatedKey(key *foundation.NSString) float64
+	TransitionProgress() float64
+	SetTransitionProgress(transitionProgress float64)
+	CurrentLayout() *CollectionViewLayout
+	NextLayout() *CollectionViewLayout
+}
+
+var _ CollectionViewTransitionLayoutable = (*CollectionViewTransitionLayout)(nil)
 

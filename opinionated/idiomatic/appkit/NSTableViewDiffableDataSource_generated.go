@@ -43,6 +43,16 @@ func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimatio
 	return x
 }
 
+// Snapshot calls the underlying Snapshot.
+func (x *TableViewDiffableDataSource) Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
+	return x.inner.Snapshot()
+}
+
+// ApplySnapshotAnimatingDifferences calls the underlying ApplySnapshotAnimatingDifferences.
+func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) {
+	x.inner.ApplySnapshotAnimatingDifferences(snapshot, animatingDifferences)
+}
+
 // ApplySnapshotAnimatingDifferencesCompletion blocks until the operation completes or ctx is cancelled.
 func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) error {
 	_ch := make(chan error, 1)
@@ -56,4 +66,77 @@ func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletio
 		return ctx.Err()
 	}
 }
+
+// ItemIdentifierForRow calls the underlying ItemIdentifierForRow.
+func (x *TableViewDiffableDataSource) ItemIdentifierForRow(row int) objc.ID {
+	return x.inner.ItemIdentifierForRow(row)
+}
+
+// RowForItemIdentifier calls the underlying RowForItemIdentifier.
+func (x *TableViewDiffableDataSource) RowForItemIdentifier(identifier objc.ID) int {
+	return x.inner.RowForItemIdentifier(identifier)
+}
+
+// SectionIdentifierForRow calls the underlying SectionIdentifierForRow.
+func (x *TableViewDiffableDataSource) SectionIdentifierForRow(row int) objc.ID {
+	return x.inner.SectionIdentifierForRow(row)
+}
+
+// RowForSectionIdentifier calls the underlying RowForSectionIdentifier.
+func (x *TableViewDiffableDataSource) RowForSectionIdentifier(identifier objc.ID) int {
+	return x.inner.RowForSectionIdentifier(identifier)
+}
+
+// RowViewProvider calls the underlying RowViewProvider.
+func (x *TableViewDiffableDataSource) RowViewProvider() objc.Block {
+	return x.inner.RowViewProvider()
+}
+
+// SetRowViewProvider calls the underlying SetRowViewProvider.
+func (x *TableViewDiffableDataSource) SetRowViewProvider(rowViewProvider objc.Block) {
+	x.inner.SetRowViewProvider(rowViewProvider)
+}
+
+// SectionHeaderViewProvider calls the underlying SectionHeaderViewProvider.
+func (x *TableViewDiffableDataSource) SectionHeaderViewProvider() objc.Block {
+	return x.inner.SectionHeaderViewProvider()
+}
+
+// SetSectionHeaderViewProvider calls the underlying SetSectionHeaderViewProvider.
+func (x *TableViewDiffableDataSource) SetSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) {
+	x.inner.SetSectionHeaderViewProvider(sectionHeaderViewProvider)
+}
+
+// DefaultRowAnimation calls the underlying DefaultRowAnimation.
+func (x *TableViewDiffableDataSource) DefaultRowAnimation() raw.NSTableViewAnimationOptions {
+	return x.inner.DefaultRowAnimation()
+}
+
+// SetDefaultRowAnimation calls the underlying SetDefaultRowAnimation.
+func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions) {
+	x.inner.SetDefaultRowAnimation(defaultRowAnimation)
+}
+
+// TableViewDiffableDataSourceable is the interface implemented by [TableViewDiffableDataSource], for mocking and DI.
+type TableViewDiffableDataSourceable interface {
+	Unwrap() *raw.NSTableViewDiffableDataSource[objc.ID, objc.ID]
+	WithRowViewProvider(rowViewProvider objc.Block) *TableViewDiffableDataSource
+	WithSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block) *TableViewDiffableDataSource
+	WithDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions) *TableViewDiffableDataSource
+	Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
+	ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool)
+	ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) error
+	ItemIdentifierForRow(row int) objc.ID
+	RowForItemIdentifier(identifier objc.ID) int
+	SectionIdentifierForRow(row int) objc.ID
+	RowForSectionIdentifier(identifier objc.ID) int
+	RowViewProvider() objc.Block
+	SetRowViewProvider(rowViewProvider objc.Block)
+	SectionHeaderViewProvider() objc.Block
+	SetSectionHeaderViewProvider(sectionHeaderViewProvider objc.Block)
+	DefaultRowAnimation() raw.NSTableViewAnimationOptions
+	SetDefaultRowAnimation(defaultRowAnimation raw.NSTableViewAnimationOptions)
+}
+
+var _ TableViewDiffableDataSourceable = (*TableViewDiffableDataSource)(nil)
 

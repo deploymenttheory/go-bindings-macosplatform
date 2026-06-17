@@ -23,3 +23,10 @@ func NewAuthenticationRequirement() *AuthenticationRequirement {
 	return &AuthenticationRequirement{inner: raw.LAAuthenticationRequirementFromID(_id)}
 }
 
+// AuthenticationRequirementable is the interface implemented by [AuthenticationRequirement], for mocking and DI.
+type AuthenticationRequirementable interface {
+	Unwrap() *raw.LAAuthenticationRequirement
+}
+
+var _ AuthenticationRequirementable = (*AuthenticationRequirement)(nil)
+

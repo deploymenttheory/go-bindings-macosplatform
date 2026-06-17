@@ -23,5 +23,24 @@ func NewPersistentHistoryResult() *PersistentHistoryResult {
 	return &PersistentHistoryResult{inner: raw.NSPersistentHistoryResultFromID(_id)}
 }
 
+// Result calls the underlying Result.
+func (x *PersistentHistoryResult) Result() objc.ID {
+	return x.inner.Result()
+}
+
+// ResultType calls the underlying ResultType.
+func (x *PersistentHistoryResult) ResultType() raw.NSPersistentHistoryResultType {
+	return x.inner.ResultType()
+}
+
 func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// PersistentHistoryResultable is the interface implemented by [PersistentHistoryResult], for mocking and DI.
+type PersistentHistoryResultable interface {
+	Unwrap() *raw.NSPersistentHistoryResult
+	Result() objc.ID
+	ResultType() raw.NSPersistentHistoryResultType
+}
+
+var _ PersistentHistoryResultable = (*PersistentHistoryResult)(nil)
 

@@ -37,3 +37,39 @@ func (x *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *raw.MTR
 	return x
 }
 
+// Paging calls the underlying Paging.
+func (x *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
+	_r := x.inner.Paging()
+	if _r == nil {
+		return nil
+	}
+	return &MTRChannelClusterChannelPagingStruct{inner: _r}
+}
+
+// SetPaging calls the underlying SetPaging.
+func (x *MTRChannelClusterProgramGuideResponseParams) SetPaging(paging *raw.MTRChannelClusterChannelPagingStruct) {
+	x.inner.SetPaging(paging)
+}
+
+// ProgramList calls the underlying ProgramList.
+func (x *MTRChannelClusterProgramGuideResponseParams) ProgramList() *foundation.NSArray[objc.ID] {
+	return x.inner.ProgramList()
+}
+
+// SetProgramList calls the underlying SetProgramList.
+func (x *MTRChannelClusterProgramGuideResponseParams) SetProgramList(programList *foundation.NSArray[objc.ID]) {
+	x.inner.SetProgramList(programList)
+}
+
+// MTRChannelClusterProgramGuideResponseParamsable is the interface implemented by [MTRChannelClusterProgramGuideResponseParams], for mocking and DI.
+type MTRChannelClusterProgramGuideResponseParamsable interface {
+	Unwrap() *raw.MTRChannelClusterProgramGuideResponseParams
+	WithPaging(paging *raw.MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams
+	Paging() *MTRChannelClusterChannelPagingStruct
+	SetPaging(paging *raw.MTRChannelClusterChannelPagingStruct)
+	ProgramList() *foundation.NSArray[objc.ID]
+	SetProgramList(programList *foundation.NSArray[objc.ID])
+}
+
+var _ MTRChannelClusterProgramGuideResponseParamsable = (*MTRChannelClusterProgramGuideResponseParams)(nil)
+

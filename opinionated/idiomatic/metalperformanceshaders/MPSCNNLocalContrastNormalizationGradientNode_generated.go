@@ -61,7 +61,104 @@ func (x *CNNLocalContrastNormalizationGradientNode) WithPs(ps float32) *CNNLocal
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNLocalContrastNormalizationGradientNode) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNLocalContrastNormalizationGradientNode) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNLocalContrastNormalizationGradientNode) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNLocalContrastNormalizationGradientNode) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNLocalContrastNormalizationGradientNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNLocalContrastNormalizationGradientNode) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// P0 calls the underlying P0.
+func (x *CNNLocalContrastNormalizationGradientNode) P0() float32 {
+	return x.inner.P0()
+}
+
+// SetP0 calls the underlying SetP0.
+func (x *CNNLocalContrastNormalizationGradientNode) SetP0(p0 float32) {
+	x.inner.SetP0(p0)
+}
+
+// Pm calls the underlying Pm.
+func (x *CNNLocalContrastNormalizationGradientNode) Pm() float32 {
+	return x.inner.Pm()
+}
+
+// SetPm calls the underlying SetPm.
+func (x *CNNLocalContrastNormalizationGradientNode) SetPm(pm float32) {
+	x.inner.SetPm(pm)
+}
+
+// Ps calls the underlying Ps.
+func (x *CNNLocalContrastNormalizationGradientNode) Ps() float32 {
+	return x.inner.Ps()
+}
+
+// SetPs calls the underlying SetPs.
+func (x *CNNLocalContrastNormalizationGradientNode) SetPs(ps float32) {
+	x.inner.SetPs(ps)
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNLocalContrastNormalizationGradientNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNLocalContrastNormalizationGradientNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
 func (x *CNNLocalContrastNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNLocalContrastNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNLocalContrastNormalizationGradientNodeable is the interface implemented by [CNNLocalContrastNormalizationGradientNode], for mocking and DI.
+type CNNLocalContrastNormalizationGradientNodeable interface {
+	Unwrap() *raw.MPSCNNLocalContrastNormalizationGradientNode
+	WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradientNode
+	WithBeta(beta float32) *CNNLocalContrastNormalizationGradientNode
+	WithDelta(delta float32) *CNNLocalContrastNormalizationGradientNode
+	WithP0(p0 float32) *CNNLocalContrastNormalizationGradientNode
+	WithPm(pm float32) *CNNLocalContrastNormalizationGradientNode
+	WithPs(ps float32) *CNNLocalContrastNormalizationGradientNode
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+	P0() float32
+	SetP0(p0 float32)
+	Pm() float32
+	SetPm(pm float32)
+	Ps() float32
+	SetPs(ps float32)
+	KernelWidth() uint
+	KernelHeight() uint
+}
+
+var _ CNNLocalContrastNormalizationGradientNodeable = (*CNNLocalContrastNormalizationGradientNode)(nil)
 

@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PolygonBuffer wraps [raw.MPSPolygonBuffer] with a fluent Go API.
@@ -73,4 +74,112 @@ func (x *PolygonBuffer) WithPolygonCount(polygonCount uint) *PolygonBuffer {
 	x.inner.SetPolygonCount(polygonCount)
 	return x
 }
+
+// CopyWithZone calls the underlying CopyWithZone.
+func (x *PolygonBuffer) CopyWithZone(zone unsafe.Pointer) *PolygonBuffer {
+	_r := x.inner.CopyWithZone(zone)
+	if _r == nil {
+		return nil
+	}
+	return &PolygonBuffer{inner: _r}
+}
+
+// VertexBuffer calls the underlying VertexBuffer.
+func (x *PolygonBuffer) VertexBuffer() metal.MTLBuffer {
+	return x.inner.VertexBuffer()
+}
+
+// SetVertexBuffer calls the underlying SetVertexBuffer.
+func (x *PolygonBuffer) SetVertexBuffer(vertexBuffer metal.MTLBuffer) {
+	x.inner.SetVertexBuffer(vertexBuffer)
+}
+
+// VertexBufferOffset calls the underlying VertexBufferOffset.
+func (x *PolygonBuffer) VertexBufferOffset() uint {
+	return x.inner.VertexBufferOffset()
+}
+
+// SetVertexBufferOffset calls the underlying SetVertexBufferOffset.
+func (x *PolygonBuffer) SetVertexBufferOffset(vertexBufferOffset uint) {
+	x.inner.SetVertexBufferOffset(vertexBufferOffset)
+}
+
+// IndexBuffer calls the underlying IndexBuffer.
+func (x *PolygonBuffer) IndexBuffer() metal.MTLBuffer {
+	return x.inner.IndexBuffer()
+}
+
+// SetIndexBuffer calls the underlying SetIndexBuffer.
+func (x *PolygonBuffer) SetIndexBuffer(indexBuffer metal.MTLBuffer) {
+	x.inner.SetIndexBuffer(indexBuffer)
+}
+
+// IndexBufferOffset calls the underlying IndexBufferOffset.
+func (x *PolygonBuffer) IndexBufferOffset() uint {
+	return x.inner.IndexBufferOffset()
+}
+
+// SetIndexBufferOffset calls the underlying SetIndexBufferOffset.
+func (x *PolygonBuffer) SetIndexBufferOffset(indexBufferOffset uint) {
+	x.inner.SetIndexBufferOffset(indexBufferOffset)
+}
+
+// MaskBuffer calls the underlying MaskBuffer.
+func (x *PolygonBuffer) MaskBuffer() metal.MTLBuffer {
+	return x.inner.MaskBuffer()
+}
+
+// SetMaskBuffer calls the underlying SetMaskBuffer.
+func (x *PolygonBuffer) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
+	x.inner.SetMaskBuffer(maskBuffer)
+}
+
+// MaskBufferOffset calls the underlying MaskBufferOffset.
+func (x *PolygonBuffer) MaskBufferOffset() uint {
+	return x.inner.MaskBufferOffset()
+}
+
+// SetMaskBufferOffset calls the underlying SetMaskBufferOffset.
+func (x *PolygonBuffer) SetMaskBufferOffset(maskBufferOffset uint) {
+	x.inner.SetMaskBufferOffset(maskBufferOffset)
+}
+
+// PolygonCount calls the underlying PolygonCount.
+func (x *PolygonBuffer) PolygonCount() uint {
+	return x.inner.PolygonCount()
+}
+
+// SetPolygonCount calls the underlying SetPolygonCount.
+func (x *PolygonBuffer) SetPolygonCount(polygonCount uint) {
+	x.inner.SetPolygonCount(polygonCount)
+}
+
+// PolygonBufferable is the interface implemented by [PolygonBuffer], for mocking and DI.
+type PolygonBufferable interface {
+	Unwrap() *raw.MPSPolygonBuffer
+	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonBuffer
+	WithVertexBufferOffset(vertexBufferOffset uint) *PolygonBuffer
+	WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonBuffer
+	WithIndexBufferOffset(indexBufferOffset uint) *PolygonBuffer
+	WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonBuffer
+	WithMaskBufferOffset(maskBufferOffset uint) *PolygonBuffer
+	WithPolygonCount(polygonCount uint) *PolygonBuffer
+	CopyWithZone(zone unsafe.Pointer) *PolygonBuffer
+	VertexBuffer() metal.MTLBuffer
+	SetVertexBuffer(vertexBuffer metal.MTLBuffer)
+	VertexBufferOffset() uint
+	SetVertexBufferOffset(vertexBufferOffset uint)
+	IndexBuffer() metal.MTLBuffer
+	SetIndexBuffer(indexBuffer metal.MTLBuffer)
+	IndexBufferOffset() uint
+	SetIndexBufferOffset(indexBufferOffset uint)
+	MaskBuffer() metal.MTLBuffer
+	SetMaskBuffer(maskBuffer metal.MTLBuffer)
+	MaskBufferOffset() uint
+	SetMaskBufferOffset(maskBufferOffset uint)
+	PolygonCount() uint
+	SetPolygonCount(polygonCount uint)
+}
+
+var _ PolygonBufferable = (*PolygonBuffer)(nil)
 

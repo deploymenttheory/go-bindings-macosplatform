@@ -48,9 +48,68 @@ func (x *TokenFieldCell) WithDelegate(delegate raw.NSTokenFieldCellDelegate) *To
 	return x
 }
 
+// TokenStyle calls the underlying TokenStyle.
+func (x *TokenFieldCell) TokenStyle() raw.NSTokenStyle {
+	return x.inner.TokenStyle()
+}
+
+// SetTokenStyle calls the underlying SetTokenStyle.
+func (x *TokenFieldCell) SetTokenStyle(tokenStyle raw.NSTokenStyle) {
+	x.inner.SetTokenStyle(tokenStyle)
+}
+
+// CompletionDelay calls the underlying CompletionDelay.
+func (x *TokenFieldCell) CompletionDelay() float64 {
+	return x.inner.CompletionDelay()
+}
+
+// SetCompletionDelay calls the underlying SetCompletionDelay.
+func (x *TokenFieldCell) SetCompletionDelay(completionDelay float64) {
+	x.inner.SetCompletionDelay(completionDelay)
+}
+
+// TokenizingCharacterSet calls the underlying TokenizingCharacterSet.
+func (x *TokenFieldCell) TokenizingCharacterSet() *foundation.NSCharacterSet {
+	return x.inner.TokenizingCharacterSet()
+}
+
+// SetTokenizingCharacterSet calls the underlying SetTokenizingCharacterSet.
+func (x *TokenFieldCell) SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) {
+	x.inner.SetTokenizingCharacterSet(tokenizingCharacterSet)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TokenFieldCell) Delegate() raw.NSTokenFieldCellDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TokenFieldCell) SetDelegate(delegate raw.NSTokenFieldCellDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *TokenFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
 func (x *TokenFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
 
 func (x *TokenFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+
+// TokenFieldCellable is the interface implemented by [TokenFieldCell], for mocking and DI.
+type TokenFieldCellable interface {
+	Unwrap() *raw.NSTokenFieldCell
+	WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenFieldCell
+	WithCompletionDelay(completionDelay float64) *TokenFieldCell
+	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenFieldCell
+	WithDelegate(delegate raw.NSTokenFieldCellDelegate) *TokenFieldCell
+	TokenStyle() raw.NSTokenStyle
+	SetTokenStyle(tokenStyle raw.NSTokenStyle)
+	CompletionDelay() float64
+	SetCompletionDelay(completionDelay float64)
+	TokenizingCharacterSet() *foundation.NSCharacterSet
+	SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet)
+	Delegate() raw.NSTokenFieldCellDelegate
+	SetDelegate(delegate raw.NSTokenFieldCellDelegate)
+}
+
+var _ TokenFieldCellable = (*TokenFieldCell)(nil)
 

@@ -37,3 +37,10 @@ func (x *NNReduceFeatureChannelsMax) asNNReduceUnary() *raw.MPSNNReduceUnary { r
 
 func (x *NNReduceFeatureChannelsMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceFeatureChannelsMaxable is the interface implemented by [NNReduceFeatureChannelsMax], for mocking and DI.
+type NNReduceFeatureChannelsMaxable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsMax
+}
+
+var _ NNReduceFeatureChannelsMaxable = (*NNReduceFeatureChannelsMax)(nil)
+

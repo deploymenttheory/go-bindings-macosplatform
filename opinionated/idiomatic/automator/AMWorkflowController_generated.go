@@ -41,3 +41,105 @@ func (x *WorkflowController) WithDelegate(delegate raw.AMWorkflowControllerDeleg
 	return x
 }
 
+// Run calls the underlying Run.
+func (x *WorkflowController) Run(sender objc.ID) {
+	x.inner.Run(sender)
+}
+
+// Stop calls the underlying Stop.
+func (x *WorkflowController) Stop(sender objc.ID) {
+	x.inner.Stop(sender)
+}
+
+// Pause calls the underlying Pause.
+func (x *WorkflowController) Pause(sender objc.ID) {
+	x.inner.Pause(sender)
+}
+
+// Step calls the underlying Step.
+func (x *WorkflowController) Step(sender objc.ID) {
+	x.inner.Step(sender)
+}
+
+// Reset calls the underlying Reset.
+func (x *WorkflowController) Reset(sender objc.ID) {
+	x.inner.Reset(sender)
+}
+
+// Workflow calls the underlying Workflow.
+func (x *WorkflowController) Workflow() *Workflow {
+	_r := x.inner.Workflow()
+	if _r == nil {
+		return nil
+	}
+	return &Workflow{inner: _r}
+}
+
+// SetWorkflow calls the underlying SetWorkflow.
+func (x *WorkflowController) SetWorkflow(workflow *raw.AMWorkflow) {
+	x.inner.SetWorkflow(workflow)
+}
+
+// WorkflowView calls the underlying WorkflowView.
+func (x *WorkflowController) WorkflowView() *WorkflowView {
+	_r := x.inner.WorkflowView()
+	if _r == nil {
+		return nil
+	}
+	return &WorkflowView{inner: _r}
+}
+
+// SetWorkflowView calls the underlying SetWorkflowView.
+func (x *WorkflowController) SetWorkflowView(workflowView *raw.AMWorkflowView) {
+	x.inner.SetWorkflowView(workflowView)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *WorkflowController) Delegate() raw.AMWorkflowControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WorkflowController) SetDelegate(delegate raw.AMWorkflowControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CanRun calls the underlying CanRun.
+func (x *WorkflowController) CanRun() bool {
+	return x.inner.CanRun()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *WorkflowController) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *WorkflowController) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// WorkflowControllerable is the interface implemented by [WorkflowController], for mocking and DI.
+type WorkflowControllerable interface {
+	Unwrap() *raw.AMWorkflowController
+	WithWorkflow(workflow *raw.AMWorkflow) *WorkflowController
+	WithWorkflowView(workflowView *raw.AMWorkflowView) *WorkflowController
+	WithDelegate(delegate raw.AMWorkflowControllerDelegate) *WorkflowController
+	Run(sender objc.ID)
+	Stop(sender objc.ID)
+	Pause(sender objc.ID)
+	Step(sender objc.ID)
+	Reset(sender objc.ID)
+	Workflow() *Workflow
+	SetWorkflow(workflow *raw.AMWorkflow)
+	WorkflowView() *WorkflowView
+	SetWorkflowView(workflowView *raw.AMWorkflowView)
+	Delegate() raw.AMWorkflowControllerDelegate
+	SetDelegate(delegate raw.AMWorkflowControllerDelegate)
+	CanRun() bool
+	IsRunning() bool
+	IsPaused() bool
+}
+
+var _ WorkflowControllerable = (*WorkflowController)(nil)
+

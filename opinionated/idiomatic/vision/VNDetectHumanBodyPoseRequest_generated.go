@@ -7,6 +7,7 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,11 +34,9 @@ func (x *DetectHumanBodyPoseRequest) SupportedJointNames() ([]*foundation.NSStri
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 // SupportedJointsGroupNames returns the collection as a Go slice.
@@ -49,14 +48,21 @@ func (x *DetectHumanBodyPoseRequest) SupportedJointsGroupNames() ([]*foundation.
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	}), nil
 }
 
 func (x *DetectHumanBodyPoseRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectHumanBodyPoseRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectHumanBodyPoseRequestable is the interface implemented by [DetectHumanBodyPoseRequest], for mocking and DI.
+type DetectHumanBodyPoseRequestable interface {
+	Unwrap() *raw.VNDetectHumanBodyPoseRequest
+	SupportedJointNames() ([]*foundation.NSString, error)
+	SupportedJointsGroupNames() ([]*foundation.NSString, error)
+}
+
+var _ DetectHumanBodyPoseRequestable = (*DetectHumanBodyPoseRequest)(nil)
 

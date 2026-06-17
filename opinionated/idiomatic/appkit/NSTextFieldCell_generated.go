@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -85,17 +86,97 @@ func (x *TextFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSStr
 	return x
 }
 
+// SetWantsNotificationForMarkedText calls the underlying SetWantsNotificationForMarkedText.
+func (x *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
+	x.inner.SetWantsNotificationForMarkedText(flag)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *TextFieldCell) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *TextFieldCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *TextFieldCell) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *TextFieldCell) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// TextColor calls the underlying TextColor.
+func (x *TextFieldCell) TextColor() *Color {
+	_r := x.inner.TextColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetTextColor calls the underlying SetTextColor.
+func (x *TextFieldCell) SetTextColor(textColor *raw.NSColor) {
+	x.inner.SetTextColor(textColor)
+}
+
+// BezelStyle calls the underlying BezelStyle.
+func (x *TextFieldCell) BezelStyle() raw.NSTextFieldBezelStyle {
+	return x.inner.BezelStyle()
+}
+
+// SetBezelStyle calls the underlying SetBezelStyle.
+func (x *TextFieldCell) SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) {
+	x.inner.SetBezelStyle(bezelStyle)
+}
+
+// PlaceholderString calls the underlying PlaceholderString.
+func (x *TextFieldCell) PlaceholderString() string {
+	_r := x.inner.PlaceholderString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPlaceholderString calls the underlying SetPlaceholderString.
+func (x *TextFieldCell) SetPlaceholderString(placeholderString string) {
+	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+}
+
+// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
+func (x *TextFieldCell) PlaceholderAttributedString() *foundation.NSAttributedString {
+	return x.inner.PlaceholderAttributedString()
+}
+
+// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
+func (x *TextFieldCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
+	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+}
+
 // AllowedInputSourceLocales returns the collection as a Go slice.
-func (x *TextFieldCell) AllowedInputSourceLocales() []*foundation.NSString {
+func (x *TextFieldCell) AllowedInputSourceLocales() []string {
 	arr := x.inner.AllowedInputSourceLocales()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedInputSourceLocales calls the underlying SetAllowedInputSourceLocales.
+func (x *TextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedInputSourceLocales(allowedInputSourceLocales)
 }
 
 func (x *TextFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return x.inner }
@@ -103,4 +184,33 @@ func (x *TextFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return x.inner 
 func (x *TextFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *TextFieldCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// TextFieldCellable is the interface implemented by [TextFieldCell], for mocking and DI.
+type TextFieldCellable interface {
+	Unwrap() *raw.NSTextFieldCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *TextFieldCell
+	WithDrawsBackground(drawsBackground bool) *TextFieldCell
+	WithTextColor(textColor *raw.NSColor) *TextFieldCell
+	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TextFieldCell
+	WithPlaceholderString(placeholderString string) *TextFieldCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextFieldCell
+	SetWantsNotificationForMarkedText(flag bool)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	TextColor() *Color
+	SetTextColor(textColor *raw.NSColor)
+	BezelStyle() raw.NSTextFieldBezelStyle
+	SetBezelStyle(bezelStyle raw.NSTextFieldBezelStyle)
+	PlaceholderString() string
+	SetPlaceholderString(placeholderString string)
+	PlaceholderAttributedString() *foundation.NSAttributedString
+	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
+	AllowedInputSourceLocales() []string
+	SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString])
+}
+
+var _ TextFieldCellable = (*TextFieldCell)(nil)
 

@@ -7,6 +7,7 @@ package photos
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CloudIdentifierMapping wraps [raw.PHCloudIdentifierMapping] with a fluent Go API.
@@ -22,4 +23,27 @@ func NewCloudIdentifierMapping() *CloudIdentifierMapping {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCloudIdentifierMapping")), objc.RegisterName("new"))
 	return &CloudIdentifierMapping{inner: raw.PHCloudIdentifierMappingFromID(_id)}
 }
+
+// CloudIdentifier calls the underlying CloudIdentifier.
+func (x *CloudIdentifierMapping) CloudIdentifier() *CloudIdentifier {
+	_r := x.inner.CloudIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &CloudIdentifier{inner: _r}
+}
+
+// Error calls the underlying Error.
+func (x *CloudIdentifierMapping) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// CloudIdentifierMappingable is the interface implemented by [CloudIdentifierMapping], for mocking and DI.
+type CloudIdentifierMappingable interface {
+	Unwrap() *raw.PHCloudIdentifierMapping
+	CloudIdentifier() *CloudIdentifier
+	Error() unsafe.Pointer
+}
+
+var _ CloudIdentifierMappingable = (*CloudIdentifierMapping)(nil)
 

@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AVB17221ACMPInterface wraps [raw.AVB17221ACMPInterface] with a fluent Go API.
@@ -23,5 +24,46 @@ func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
 	return &AVB17221ACMPInterface{inner: raw.AVB17221ACMPInterfaceFromID(_id)}
 }
 
+// SetHandlerForEntityID calls the underlying SetHandlerForEntityID.
+func (x *AVB17221ACMPInterface) SetHandlerForEntityID(handler raw.AVB17221ACMPClient, targetEntityID uint64) bool {
+	return x.inner.SetHandlerForEntityID(handler, targetEntityID)
+}
+
+// RemoveHandlerForEntityID calls the underlying RemoveHandlerForEntityID.
+func (x *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
+	x.inner.RemoveHandlerForEntityID(targetEntityID)
+}
+
+// SendACMPResponseMessageError calls the underlying SendACMPResponseMessageError.
+func (x *AVB17221ACMPInterface) SendACMPResponseMessageError(message *raw.AVB17221ACMPMessage) (bool, error) {
+	return x.inner.SendACMPResponseMessageError(message)
+}
+
+// SendACMPCommandMessageCompletionHandler calls the underlying SendACMPCommandMessageCompletionHandler.
+func (x *AVB17221ACMPInterface) SendACMPCommandMessageCompletionHandler(message *raw.AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, *raw.AVB17221ACMPMessage)) bool {
+	return x.inner.SendACMPCommandMessageCompletionHandler(message, completionHandler)
+}
+
+// MulticastDestinationAddress calls the underlying MulticastDestinationAddress.
+func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
+	_r := x.inner.MulticastDestinationAddress()
+	if _r == nil {
+		return nil
+	}
+	return &MACAddress{inner: _r}
+}
+
 func (x *AVB17221ACMPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface { return &x.inner.AVB1722ControlInterface }
+
+// AVB17221ACMPInterfaceable is the interface implemented by [AVB17221ACMPInterface], for mocking and DI.
+type AVB17221ACMPInterfaceable interface {
+	Unwrap() *raw.AVB17221ACMPInterface
+	SetHandlerForEntityID(handler raw.AVB17221ACMPClient, targetEntityID uint64) bool
+	RemoveHandlerForEntityID(targetEntityID uint64)
+	SendACMPResponseMessageError(message *raw.AVB17221ACMPMessage) (bool, error)
+	SendACMPCommandMessageCompletionHandler(message *raw.AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, *raw.AVB17221ACMPMessage)) bool
+	MulticastDestinationAddress() *MACAddress
+}
+
+var _ AVB17221ACMPInterfaceable = (*AVB17221ACMPInterface)(nil)
 

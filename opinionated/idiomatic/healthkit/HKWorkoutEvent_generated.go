@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewWorkoutEvent() *WorkoutEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutEvent")), objc.RegisterName("new"))
 	return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *WorkoutEvent) Type() raw.HKWorkoutEventType {
+	return x.inner.Type()
+}
+
+// Date calls the underlying Date.
+func (x *WorkoutEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// DateInterval calls the underlying DateInterval.
+func (x *WorkoutEvent) DateInterval() *foundation.NSDateInterval {
+	return x.inner.DateInterval()
+}
+
+// Metadata calls the underlying Metadata.
+func (x *WorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
+// WorkoutEventable is the interface implemented by [WorkoutEvent], for mocking and DI.
+type WorkoutEventable interface {
+	Unwrap() *raw.HKWorkoutEvent
+	Type() raw.HKWorkoutEventType
+	Date() *foundation.NSDate
+	DateInterval() *foundation.NSDateInterval
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ WorkoutEventable = (*WorkoutEvent)(nil)
 

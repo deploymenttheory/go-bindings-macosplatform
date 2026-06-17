@@ -25,3 +25,10 @@ func NewVirtioSocketDeviceConfiguration() *VirtioSocketDeviceConfiguration {
 
 func (x *VirtioSocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration { return &x.inner.VZSocketDeviceConfiguration }
 
+// VirtioSocketDeviceConfigurationable is the interface implemented by [VirtioSocketDeviceConfiguration], for mocking and DI.
+type VirtioSocketDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioSocketDeviceConfiguration
+}
+
+var _ VirtioSocketDeviceConfigurationable = (*VirtioSocketDeviceConfiguration)(nil)
+

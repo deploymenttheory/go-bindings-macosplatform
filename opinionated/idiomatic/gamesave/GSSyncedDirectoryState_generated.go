@@ -5,8 +5,11 @@
 package gamesave
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamesave"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SyncedDirectoryState wraps [raw.GSSyncedDirectoryState] with a fluent Go API.
@@ -23,16 +26,40 @@ func NewSyncedDirectoryState() *SyncedDirectoryState {
 	return &SyncedDirectoryState{inner: raw.GSSyncedDirectoryStateFromID(_id)}
 }
 
+// State calls the underlying State.
+func (x *SyncedDirectoryState) State() raw.GSSyncState {
+	return x.inner.State()
+}
+
+// Url calls the underlying Url.
+func (x *SyncedDirectoryState) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
 // ConflictedVersions returns the collection as a Go slice.
 func (x *SyncedDirectoryState) ConflictedVersions() []*raw.GSSyncedDirectoryVersion {
 	arr := x.inner.ConflictedVersions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GSSyncedDirectoryVersion, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GSSyncedDirectoryVersion {
+		return raw.GSSyncedDirectoryVersionFromID(purego.Retain(_id))
+	})
 }
+
+// Error calls the underlying Error.
+func (x *SyncedDirectoryState) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// SyncedDirectoryStateable is the interface implemented by [SyncedDirectoryState], for mocking and DI.
+type SyncedDirectoryStateable interface {
+	Unwrap() *raw.GSSyncedDirectoryState
+	State() raw.GSSyncState
+	Url() *foundation.NSURL
+	ConflictedVersions() []*raw.GSSyncedDirectoryVersion
+	Error() unsafe.Pointer
+}
+
+var _ SyncedDirectoryStateable = (*SyncedDirectoryState)(nil)
 

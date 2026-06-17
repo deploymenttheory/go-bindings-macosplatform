@@ -53,3 +53,75 @@ func (x *IOCommandQueueDescriptor) WithScratchBufferAllocator(scratchBufferAlloc
 	return x
 }
 
+// MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
+func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() uint {
+	return x.inner.MaxCommandBufferCount()
+}
+
+// SetMaxCommandBufferCount calls the underlying SetMaxCommandBufferCount.
+func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount uint) {
+	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
+}
+
+// Priority calls the underlying Priority.
+func (x *IOCommandQueueDescriptor) Priority() raw.MTLIOPriority {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *IOCommandQueueDescriptor) SetPriority(priority raw.MTLIOPriority) {
+	x.inner.SetPriority(priority)
+}
+
+// Type calls the underlying Type.
+func (x *IOCommandQueueDescriptor) Type() raw.MTLIOCommandQueueType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *IOCommandQueueDescriptor) SetType(type_ raw.MTLIOCommandQueueType) {
+	x.inner.SetType(type_)
+}
+
+// MaxCommandsInFlight calls the underlying MaxCommandsInFlight.
+func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() uint {
+	return x.inner.MaxCommandsInFlight()
+}
+
+// SetMaxCommandsInFlight calls the underlying SetMaxCommandsInFlight.
+func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight uint) {
+	x.inner.SetMaxCommandsInFlight(maxCommandsInFlight)
+}
+
+// ScratchBufferAllocator calls the underlying ScratchBufferAllocator.
+func (x *IOCommandQueueDescriptor) ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator {
+	return x.inner.ScratchBufferAllocator()
+}
+
+// SetScratchBufferAllocator calls the underlying SetScratchBufferAllocator.
+func (x *IOCommandQueueDescriptor) SetScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) {
+	x.inner.SetScratchBufferAllocator(scratchBufferAllocator)
+}
+
+// IOCommandQueueDescriptorable is the interface implemented by [IOCommandQueueDescriptor], for mocking and DI.
+type IOCommandQueueDescriptorable interface {
+	Unwrap() *raw.MTLIOCommandQueueDescriptor
+	WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor
+	WithPriority(priority raw.MTLIOPriority) *IOCommandQueueDescriptor
+	WithType(type_ raw.MTLIOCommandQueueType) *IOCommandQueueDescriptor
+	WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor
+	WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor
+	MaxCommandBufferCount() uint
+	SetMaxCommandBufferCount(maxCommandBufferCount uint)
+	Priority() raw.MTLIOPriority
+	SetPriority(priority raw.MTLIOPriority)
+	Type() raw.MTLIOCommandQueueType
+	SetType(type_ raw.MTLIOCommandQueueType)
+	MaxCommandsInFlight() uint
+	SetMaxCommandsInFlight(maxCommandsInFlight uint)
+	ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator
+	SetScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator)
+}
+
+var _ IOCommandQueueDescriptorable = (*IOCommandQueueDescriptor)(nil)
+

@@ -29,3 +29,10 @@ func (x *NETransparentProxyProvider) asNETunnelProvider() *raw.NETunnelProvider 
 
 func (x *NETransparentProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEAppProxyProvider.NETunnelProvider.NEProvider }
 
+// NETransparentProxyProviderable is the interface implemented by [NETransparentProxyProvider], for mocking and DI.
+type NETransparentProxyProviderable interface {
+	Unwrap() *raw.NETransparentProxyProvider
+}
+
+var _ NETransparentProxyProviderable = (*NETransparentProxyProvider)(nil)
+

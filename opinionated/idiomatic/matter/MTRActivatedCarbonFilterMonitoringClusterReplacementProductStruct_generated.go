@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) With
 	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
 	return x
 }
+
+// ProductIdentifierType calls the underlying ProductIdentifierType.
+func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.NSNumber {
+	return x.inner.ProductIdentifierType()
+}
+
+// SetProductIdentifierType calls the underlying SetProductIdentifierType.
+func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType *foundation.NSNumber) {
+	x.inner.SetProductIdentifierType(productIdentifierType)
+}
+
+// ProductIdentifierValue calls the underlying ProductIdentifierValue.
+func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
+	_r := x.inner.ProductIdentifierValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetProductIdentifierValue calls the underlying SetProductIdentifierValue.
+func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
+	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
+}
+
+// MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable is the interface implemented by [MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct], for mocking and DI.
+type MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable interface {
+	Unwrap() *raw.MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct
+	WithProductIdentifierType(productIdentifierType *foundation.NSNumber) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct
+	WithProductIdentifierValue(productIdentifierValue string) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct
+	ProductIdentifierType() *foundation.NSNumber
+	SetProductIdentifierType(productIdentifierType *foundation.NSNumber)
+	ProductIdentifierValue() string
+	SetProductIdentifierValue(productIdentifierValue string)
+}
+
+var _ MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable = (*MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct)(nil)
 

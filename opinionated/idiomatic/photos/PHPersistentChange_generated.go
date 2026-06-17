@@ -23,3 +23,33 @@ func NewPersistentChange() *PersistentChange {
 	return &PersistentChange{inner: raw.PHPersistentChangeFromID(_id)}
 }
 
+// ChangeDetailsForObjectTypeError calls the underlying ChangeDetailsForObjectTypeError.
+func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType raw.PHObjectType) (*PersistentObjectChangeDetails, error) {
+	_r, _err := x.inner.ChangeDetailsForObjectTypeError(objectType)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &PersistentObjectChangeDetails{inner: _r}, nil
+}
+
+// ChangeToken calls the underlying ChangeToken.
+func (x *PersistentChange) ChangeToken() *PersistentChangeToken {
+	_r := x.inner.ChangeToken()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentChangeToken{inner: _r}
+}
+
+// PersistentChangeable is the interface implemented by [PersistentChange], for mocking and DI.
+type PersistentChangeable interface {
+	Unwrap() *raw.PHPersistentChange
+	ChangeDetailsForObjectTypeError(objectType raw.PHObjectType) (*PersistentObjectChangeDetails, error)
+	ChangeToken() *PersistentChangeToken
+}
+
+var _ PersistentChangeable = (*PersistentChange)(nil)
+

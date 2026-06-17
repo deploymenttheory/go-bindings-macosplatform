@@ -24,3 +24,28 @@ func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 	return &Color{inner: raw.GCColorFromID(_id)}
 }
 
+// Red calls the underlying Red.
+func (x *Color) Red() float32 {
+	return x.inner.Red()
+}
+
+// Green calls the underlying Green.
+func (x *Color) Green() float32 {
+	return x.inner.Green()
+}
+
+// Blue calls the underlying Blue.
+func (x *Color) Blue() float32 {
+	return x.inner.Blue()
+}
+
+// Colorable is the interface implemented by [Color], for mocking and DI.
+type Colorable interface {
+	Unwrap() *raw.GCColor
+	Red() float32
+	Green() float32
+	Blue() float32
+}
+
+var _ Colorable = (*Color)(nil)
+

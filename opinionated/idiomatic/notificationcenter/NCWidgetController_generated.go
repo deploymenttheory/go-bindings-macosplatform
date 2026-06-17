@@ -5,6 +5,7 @@
 package notificationcenter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewWidgetController() *WidgetController {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NCWidgetController")), objc.RegisterName("new"))
 	return &WidgetController{inner: raw.NCWidgetControllerFromID(_id)}
 }
+
+// SetHasContentForWidgetWithBundleIdentifier calls the underlying SetHasContentForWidgetWithBundleIdentifier.
+func (x *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
+	x.inner.SetHasContentForWidgetWithBundleIdentifier(flag, foundation.NSStringStringWithUTF8String(bundleID))
+}
+
+// WidgetControllerable is the interface implemented by [WidgetController], for mocking and DI.
+type WidgetControllerable interface {
+	Unwrap() *raw.NCWidgetController
+	SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string)
+}
+
+var _ WidgetControllerable = (*WidgetController)(nil)
 

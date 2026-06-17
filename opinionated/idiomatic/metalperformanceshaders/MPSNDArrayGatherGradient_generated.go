@@ -33,3 +33,10 @@ func (x *NDArrayGatherGradient) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMu
 
 func (x *NDArrayGatherGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel }
 
+// NDArrayGatherGradientable is the interface implemented by [NDArrayGatherGradient], for mocking and DI.
+type NDArrayGatherGradientable interface {
+	Unwrap() *raw.MPSNDArrayGatherGradient
+}
+
+var _ NDArrayGatherGradientable = (*NDArrayGatherGradient)(nil)
+

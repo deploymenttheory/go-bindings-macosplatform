@@ -32,3 +32,42 @@ func NewDecodedMessageWithDataSecurityInformationContextBanner(rawData *foundati
 	return &DecodedMessage{inner: raw.MEDecodedMessageFromID(_id)}
 }
 
+// RawData calls the underlying RawData.
+func (x *DecodedMessage) RawData() *foundation.NSData {
+	return x.inner.RawData()
+}
+
+// SecurityInformation calls the underlying SecurityInformation.
+func (x *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
+	_r := x.inner.SecurityInformation()
+	if _r == nil {
+		return nil
+	}
+	return &MessageSecurityInformation{inner: _r}
+}
+
+// Context calls the underlying Context.
+func (x *DecodedMessage) Context() *foundation.NSData {
+	return x.inner.Context()
+}
+
+// Banner calls the underlying Banner.
+func (x *DecodedMessage) Banner() *DecodedMessageBanner {
+	_r := x.inner.Banner()
+	if _r == nil {
+		return nil
+	}
+	return &DecodedMessageBanner{inner: _r}
+}
+
+// DecodedMessageable is the interface implemented by [DecodedMessage], for mocking and DI.
+type DecodedMessageable interface {
+	Unwrap() *raw.MEDecodedMessage
+	RawData() *foundation.NSData
+	SecurityInformation() *MessageSecurityInformation
+	Context() *foundation.NSData
+	Banner() *DecodedMessageBanner
+}
+
+var _ DecodedMessageable = (*DecodedMessage)(nil)
+

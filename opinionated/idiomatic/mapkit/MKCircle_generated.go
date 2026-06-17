@@ -7,6 +7,7 @@ package mapkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Circle wraps [raw.MKCircle] with a fluent Go API.
@@ -23,5 +24,30 @@ func NewCircle() *Circle {
 	return &Circle{inner: raw.MKCircleFromID(_id)}
 }
 
+// Coordinate calls the underlying Coordinate.
+func (x *Circle) Coordinate() unsafe.Pointer {
+	return x.inner.Coordinate()
+}
+
+// Radius calls the underlying Radius.
+func (x *Circle) Radius() unsafe.Pointer {
+	return x.inner.Radius()
+}
+
+// BoundingMapRect calls the underlying BoundingMapRect.
+func (x *Circle) BoundingMapRect() raw.MKMapRect {
+	return x.inner.BoundingMapRect()
+}
+
 func (x *Circle) asShape() *raw.MKShape { return &x.inner.MKShape }
+
+// Circleable is the interface implemented by [Circle], for mocking and DI.
+type Circleable interface {
+	Unwrap() *raw.MKCircle
+	Coordinate() unsafe.Pointer
+	Radius() unsafe.Pointer
+	BoundingMapRect() raw.MKMapRect
+}
+
+var _ Circleable = (*Circle)(nil)
 

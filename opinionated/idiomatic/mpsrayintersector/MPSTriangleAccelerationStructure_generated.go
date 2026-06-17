@@ -29,7 +29,27 @@ func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount uint) *T
 	return x
 }
 
+// TriangleCount calls the underlying TriangleCount.
+func (x *TriangleAccelerationStructure) TriangleCount() uint {
+	return x.inner.TriangleCount()
+}
+
+// SetTriangleCount calls the underlying SetTriangleCount.
+func (x *TriangleAccelerationStructure) SetTriangleCount(triangleCount uint) {
+	x.inner.SetTriangleCount(triangleCount)
+}
+
 func (x *TriangleAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure }
 
 func (x *TriangleAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure }
+
+// TriangleAccelerationStructureable is the interface implemented by [TriangleAccelerationStructure], for mocking and DI.
+type TriangleAccelerationStructureable interface {
+	Unwrap() *raw.MPSTriangleAccelerationStructure
+	WithTriangleCount(triangleCount uint) *TriangleAccelerationStructure
+	TriangleCount() uint
+	SetTriangleCount(triangleCount uint)
+}
+
+var _ TriangleAccelerationStructureable = (*TriangleAccelerationStructure)(nil)
 

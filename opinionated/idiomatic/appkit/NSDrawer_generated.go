@@ -80,5 +80,185 @@ func (x *Drawer) WithTrailingOffset(trailingOffset float64) *Drawer {
 	return x
 }
 
+// Open calls the underlying Open.
+func (x *Drawer) Open() {
+	x.inner.Open()
+}
+
+// OpenOnEdge calls the underlying OpenOnEdge.
+func (x *Drawer) OpenOnEdge(edge foundation.NSRectEdge) {
+	x.inner.OpenOnEdge(edge)
+}
+
+// Close calls the underlying Close.
+func (x *Drawer) Close() {
+	x.inner.Close()
+}
+
+// Open2 calls the underlying Open2.
+func (x *Drawer) Open2(sender objc.ID) {
+	x.inner.Open2(sender)
+}
+
+// Close2 calls the underlying Close2.
+func (x *Drawer) Close2(sender objc.ID) {
+	x.inner.Close2(sender)
+}
+
+// Toggle calls the underlying Toggle.
+func (x *Drawer) Toggle(sender objc.ID) {
+	x.inner.Toggle(sender)
+}
+
+// ParentWindow calls the underlying ParentWindow.
+func (x *Drawer) ParentWindow() *Window {
+	_r := x.inner.ParentWindow()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// SetParentWindow calls the underlying SetParentWindow.
+func (x *Drawer) SetParentWindow(parentWindow *raw.NSWindow) {
+	x.inner.SetParentWindow(parentWindow)
+}
+
+// ContentView calls the underlying ContentView.
+func (x *Drawer) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *Drawer) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// PreferredEdge calls the underlying PreferredEdge.
+func (x *Drawer) PreferredEdge() foundation.NSRectEdge {
+	return x.inner.PreferredEdge()
+}
+
+// SetPreferredEdge calls the underlying SetPreferredEdge.
+func (x *Drawer) SetPreferredEdge(preferredEdge foundation.NSRectEdge) {
+	x.inner.SetPreferredEdge(preferredEdge)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Drawer) Delegate() raw.NSDrawerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Drawer) SetDelegate(delegate raw.NSDrawerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// State calls the underlying State.
+func (x *Drawer) State() int {
+	return x.inner.State()
+}
+
+// Edge calls the underlying Edge.
+func (x *Drawer) Edge() foundation.NSRectEdge {
+	return x.inner.Edge()
+}
+
+// ContentSize calls the underlying ContentSize.
+func (x *Drawer) ContentSize() corefoundation.CGSize {
+	return x.inner.ContentSize()
+}
+
+// SetContentSize calls the underlying SetContentSize.
+func (x *Drawer) SetContentSize(contentSize corefoundation.CGSize) {
+	x.inner.SetContentSize(contentSize)
+}
+
+// MinContentSize calls the underlying MinContentSize.
+func (x *Drawer) MinContentSize() corefoundation.CGSize {
+	return x.inner.MinContentSize()
+}
+
+// SetMinContentSize calls the underlying SetMinContentSize.
+func (x *Drawer) SetMinContentSize(minContentSize corefoundation.CGSize) {
+	x.inner.SetMinContentSize(minContentSize)
+}
+
+// MaxContentSize calls the underlying MaxContentSize.
+func (x *Drawer) MaxContentSize() corefoundation.CGSize {
+	return x.inner.MaxContentSize()
+}
+
+// SetMaxContentSize calls the underlying SetMaxContentSize.
+func (x *Drawer) SetMaxContentSize(maxContentSize corefoundation.CGSize) {
+	x.inner.SetMaxContentSize(maxContentSize)
+}
+
+// LeadingOffset calls the underlying LeadingOffset.
+func (x *Drawer) LeadingOffset() float64 {
+	return x.inner.LeadingOffset()
+}
+
+// SetLeadingOffset calls the underlying SetLeadingOffset.
+func (x *Drawer) SetLeadingOffset(leadingOffset float64) {
+	x.inner.SetLeadingOffset(leadingOffset)
+}
+
+// TrailingOffset calls the underlying TrailingOffset.
+func (x *Drawer) TrailingOffset() float64 {
+	return x.inner.TrailingOffset()
+}
+
+// SetTrailingOffset calls the underlying SetTrailingOffset.
+func (x *Drawer) SetTrailingOffset(trailingOffset float64) {
+	x.inner.SetTrailingOffset(trailingOffset)
+}
+
 func (x *Drawer) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
+
+// Drawerable is the interface implemented by [Drawer], for mocking and DI.
+type Drawerable interface {
+	Unwrap() *raw.NSDrawer
+	WithParentWindow(parentWindow WindowProvider) *Drawer
+	WithContentView(contentView ViewProvider) *Drawer
+	WithPreferredEdge(preferredEdge foundation.NSRectEdge) *Drawer
+	WithDelegate(delegate raw.NSDrawerDelegate) *Drawer
+	WithContentSize(contentSize corefoundation.CGSize) *Drawer
+	WithMinContentSize(minContentSize corefoundation.CGSize) *Drawer
+	WithMaxContentSize(maxContentSize corefoundation.CGSize) *Drawer
+	WithLeadingOffset(leadingOffset float64) *Drawer
+	WithTrailingOffset(trailingOffset float64) *Drawer
+	Open()
+	OpenOnEdge(edge foundation.NSRectEdge)
+	Close()
+	Open2(sender objc.ID)
+	Close2(sender objc.ID)
+	Toggle(sender objc.ID)
+	ParentWindow() *Window
+	SetParentWindow(parentWindow *raw.NSWindow)
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	PreferredEdge() foundation.NSRectEdge
+	SetPreferredEdge(preferredEdge foundation.NSRectEdge)
+	Delegate() raw.NSDrawerDelegate
+	SetDelegate(delegate raw.NSDrawerDelegate)
+	State() int
+	Edge() foundation.NSRectEdge
+	ContentSize() corefoundation.CGSize
+	SetContentSize(contentSize corefoundation.CGSize)
+	MinContentSize() corefoundation.CGSize
+	SetMinContentSize(minContentSize corefoundation.CGSize)
+	MaxContentSize() corefoundation.CGSize
+	SetMaxContentSize(maxContentSize corefoundation.CGSize)
+	LeadingOffset() float64
+	SetLeadingOffset(leadingOffset float64)
+	TrailingOffset() float64
+	SetTrailingOffset(trailingOffset float64)
+}
+
+var _ Drawerable = (*Drawer)(nil)
 

@@ -48,5 +48,64 @@ func (x *MatrixUnaryKernel) WithBatchSize(batchSize uint) *MatrixUnaryKernel {
 	return x
 }
 
+// SourceMatrixOrigin calls the underlying SourceMatrixOrigin.
+func (x *MatrixUnaryKernel) SourceMatrixOrigin() metal.MTLOrigin {
+	return x.inner.SourceMatrixOrigin()
+}
+
+// SetSourceMatrixOrigin calls the underlying SetSourceMatrixOrigin.
+func (x *MatrixUnaryKernel) SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetSourceMatrixOrigin(sourceMatrixOrigin)
+}
+
+// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+func (x *MatrixUnaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
+	return x.inner.ResultMatrixOrigin()
+}
+
+// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+func (x *MatrixUnaryKernel) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+}
+
+// BatchStart calls the underlying BatchStart.
+func (x *MatrixUnaryKernel) BatchStart() uint {
+	return x.inner.BatchStart()
+}
+
+// SetBatchStart calls the underlying SetBatchStart.
+func (x *MatrixUnaryKernel) SetBatchStart(batchStart uint) {
+	x.inner.SetBatchStart(batchStart)
+}
+
+// BatchSize calls the underlying BatchSize.
+func (x *MatrixUnaryKernel) BatchSize() uint {
+	return x.inner.BatchSize()
+}
+
+// SetBatchSize calls the underlying SetBatchSize.
+func (x *MatrixUnaryKernel) SetBatchSize(batchSize uint) {
+	x.inner.SetBatchSize(batchSize)
+}
+
 func (x *MatrixUnaryKernel) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return x.inner }
+
+// MatrixUnaryKernelable is the interface implemented by [MatrixUnaryKernel], for mocking and DI.
+type MatrixUnaryKernelable interface {
+	Unwrap() *raw.MPSMatrixUnaryKernel
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel
+	WithBatchStart(batchStart uint) *MatrixUnaryKernel
+	WithBatchSize(batchSize uint) *MatrixUnaryKernel
+	SourceMatrixOrigin() metal.MTLOrigin
+	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
+	BatchStart() uint
+	SetBatchStart(batchStart uint)
+	BatchSize() uint
+	SetBatchSize(batchSize uint)
+}
+
+var _ MatrixUnaryKernelable = (*MatrixUnaryKernel)(nil)
 

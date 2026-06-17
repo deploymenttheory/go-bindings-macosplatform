@@ -23,3 +23,10 @@ func NewMTRSmokeCOAlarmClusterHardwareFaultEvent() *MTRSmokeCOAlarmClusterHardwa
 	return &MTRSmokeCOAlarmClusterHardwareFaultEvent{inner: raw.MTRSmokeCOAlarmClusterHardwareFaultEventFromID(_id)}
 }
 
+// MTRSmokeCOAlarmClusterHardwareFaultEventable is the interface implemented by [MTRSmokeCOAlarmClusterHardwareFaultEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterHardwareFaultEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterHardwareFaultEvent
+}
+
+var _ MTRSmokeCOAlarmClusterHardwareFaultEventable = (*MTRSmokeCOAlarmClusterHardwareFaultEvent)(nil)
+

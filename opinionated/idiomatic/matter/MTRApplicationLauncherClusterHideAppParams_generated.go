@@ -42,3 +42,53 @@ func (x *MTRApplicationLauncherClusterHideAppParams) WithServerSideProcessingTim
 	return x
 }
 
+// Application calls the underlying Application.
+func (x *MTRApplicationLauncherClusterHideAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := x.inner.Application()
+	if _r == nil {
+		return nil
+	}
+	return &MTRApplicationLauncherClusterApplicationStruct{inner: _r}
+}
+
+// SetApplication calls the underlying SetApplication.
+func (x *MTRApplicationLauncherClusterHideAppParams) SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct) {
+	x.inner.SetApplication(application)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterHideAppParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterHideAppParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterHideAppParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterHideAppParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRApplicationLauncherClusterHideAppParamsable is the interface implemented by [MTRApplicationLauncherClusterHideAppParams], for mocking and DI.
+type MTRApplicationLauncherClusterHideAppParamsable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterHideAppParams
+	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterHideAppParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRApplicationLauncherClusterHideAppParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRApplicationLauncherClusterHideAppParams
+	Application() *MTRApplicationLauncherClusterApplicationStruct
+	SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRApplicationLauncherClusterHideAppParamsable = (*MTRApplicationLauncherClusterHideAppParams)(nil)
+

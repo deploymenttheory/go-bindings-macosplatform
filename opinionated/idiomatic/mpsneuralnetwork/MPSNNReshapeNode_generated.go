@@ -26,3 +26,10 @@ func NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels(sour
 
 func (x *NNReshapeNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
+// NNReshapeNodeable is the interface implemented by [NNReshapeNode], for mocking and DI.
+type NNReshapeNodeable interface {
+	Unwrap() *raw.MPSNNReshapeNode
+}
+
+var _ NNReshapeNodeable = (*NNReshapeNode)(nil)
+

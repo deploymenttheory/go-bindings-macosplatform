@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,33 @@ func NewContentKeySpecifierForKeySystemIdentifierOptions(keySystem *foundation.N
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForKeySystem:identifier:options:"), keySystem.Ptr(), contentKeyIdentifier, options.Ptr())
 	return &ContentKeySpecifier{inner: raw.AVContentKeySpecifierFromID(_id)}
 }
+
+// KeySystem calls the underlying KeySystem.
+func (x *ContentKeySpecifier) KeySystem() string {
+	_r := x.inner.KeySystem()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ContentKeySpecifier) Identifier() objc.ID {
+	return x.inner.Identifier()
+}
+
+// Options calls the underlying Options.
+func (x *ContentKeySpecifier) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Options()
+}
+
+// ContentKeySpecifierable is the interface implemented by [ContentKeySpecifier], for mocking and DI.
+type ContentKeySpecifierable interface {
+	Unwrap() *raw.AVContentKeySpecifier
+	KeySystem() string
+	Identifier() objc.ID
+	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ ContentKeySpecifierable = (*ContentKeySpecifier)(nil)
 

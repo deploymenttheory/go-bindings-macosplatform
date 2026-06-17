@@ -7,6 +7,7 @@ package syncservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ISyncSessionDriver wraps [raw.ISyncSessionDriver] with a fluent Go API.
@@ -23,9 +24,85 @@ func NewISyncSessionDriver() *ISyncSessionDriver {
 	return &ISyncSessionDriver{inner: raw.ISyncSessionDriverFromID(_id)}
 }
 
+// Sync calls the underlying Sync.
+func (x *ISyncSessionDriver) Sync() bool {
+	return x.inner.Sync()
+}
+
 // StartAsynchronousSync returns any validation error.
 func (x *ISyncSessionDriver) StartAsynchronousSync() error {
 	_, err := x.inner.StartAsynchronousSync()
 	return err
 }
+
+// LastError calls the underlying LastError.
+func (x *ISyncSessionDriver) LastError() unsafe.Pointer {
+	return x.inner.LastError()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *ISyncSessionDriver) DataSource() raw.ISyncSessionDriverDataSource {
+	return x.inner.DataSource()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *ISyncSessionDriver) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *ISyncSessionDriver) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetHandlesSyncAlerts calls the underlying SetHandlesSyncAlerts.
+func (x *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
+	x.inner.SetHandlesSyncAlerts(yesOrNo)
+}
+
+// HandlesSyncAlerts calls the underlying HandlesSyncAlerts.
+func (x *ISyncSessionDriver) HandlesSyncAlerts() bool {
+	return x.inner.HandlesSyncAlerts()
+}
+
+// Client calls the underlying Client.
+func (x *ISyncSessionDriver) Client() *ISyncClient {
+	_r := x.inner.Client()
+	if _r == nil {
+		return nil
+	}
+	return &ISyncClient{inner: _r}
+}
+
+// Session calls the underlying Session.
+func (x *ISyncSessionDriver) Session() *ISyncSession {
+	_r := x.inner.Session()
+	if _r == nil {
+		return nil
+	}
+	return &ISyncSession{inner: _r}
+}
+
+// FinishSyncing calls the underlying FinishSyncing.
+func (x *ISyncSessionDriver) FinishSyncing() {
+	x.inner.FinishSyncing()
+}
+
+// ISyncSessionDriverable is the interface implemented by [ISyncSessionDriver], for mocking and DI.
+type ISyncSessionDriverable interface {
+	Unwrap() *raw.ISyncSessionDriver
+	Sync() bool
+	StartAsynchronousSync() error
+	LastError() unsafe.Pointer
+	DataSource() raw.ISyncSessionDriverDataSource
+	SetDelegate(delegate objc.ID)
+	Delegate() objc.ID
+	SetHandlesSyncAlerts(yesOrNo bool)
+	HandlesSyncAlerts() bool
+	Client() *ISyncClient
+	Session() *ISyncSession
+	FinishSyncing()
+}
+
+var _ ISyncSessionDriverable = (*ISyncSessionDriver)(nil)
 

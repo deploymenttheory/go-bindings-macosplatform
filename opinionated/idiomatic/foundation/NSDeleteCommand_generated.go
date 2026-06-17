@@ -23,7 +23,24 @@ func NewDeleteCommand() *DeleteCommand {
 	return &DeleteCommand{inner: raw.NSDeleteCommandFromID(_id)}
 }
 
+// KeySpecifier calls the underlying KeySpecifier.
+func (x *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.KeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
 func (x *DeleteCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *DeleteCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// DeleteCommandable is the interface implemented by [DeleteCommand], for mocking and DI.
+type DeleteCommandable interface {
+	Unwrap() *raw.NSDeleteCommand
+	KeySpecifier() *ScriptObjectSpecifier
+}
+
+var _ DeleteCommandable = (*DeleteCommand)(nil)
 

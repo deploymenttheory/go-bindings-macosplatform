@@ -27,3 +27,10 @@ func (x *ActionCell) asActionCell() *raw.NSActionCell { return x.inner }
 
 func (x *ActionCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
+// ActionCellable is the interface implemented by [ActionCell], for mocking and DI.
+type ActionCellable interface {
+	Unwrap() *raw.NSActionCell
+}
+
+var _ ActionCellable = (*ActionCell)(nil)
+

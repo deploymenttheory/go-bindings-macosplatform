@@ -7,6 +7,7 @@ package contacts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,18 +66,95 @@ func (x *ChangeHistoryFetchRequest) WithExcludedTransactionAuthors(items ...*fou
 	return x
 }
 
+// StartingToken calls the underlying StartingToken.
+func (x *ChangeHistoryFetchRequest) StartingToken() *foundation.NSData {
+	return x.inner.StartingToken()
+}
+
+// SetStartingToken calls the underlying SetStartingToken.
+func (x *ChangeHistoryFetchRequest) SetStartingToken(startingToken *foundation.NSData) {
+	x.inner.SetStartingToken(startingToken)
+}
+
+// AdditionalContactKeyDescriptors calls the underlying AdditionalContactKeyDescriptors.
+func (x *ChangeHistoryFetchRequest) AdditionalContactKeyDescriptors() *foundation.NSArray[raw.CNKeyDescriptor] {
+	return x.inner.AdditionalContactKeyDescriptors()
+}
+
+// SetAdditionalContactKeyDescriptors calls the underlying SetAdditionalContactKeyDescriptors.
+func (x *ChangeHistoryFetchRequest) SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors *foundation.NSArray[raw.CNKeyDescriptor]) {
+	x.inner.SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors)
+}
+
+// ShouldUnifyResults calls the underlying ShouldUnifyResults.
+func (x *ChangeHistoryFetchRequest) ShouldUnifyResults() bool {
+	return x.inner.ShouldUnifyResults()
+}
+
+// SetShouldUnifyResults calls the underlying SetShouldUnifyResults.
+func (x *ChangeHistoryFetchRequest) SetShouldUnifyResults(shouldUnifyResults bool) {
+	x.inner.SetShouldUnifyResults(shouldUnifyResults)
+}
+
+// MutableObjects calls the underlying MutableObjects.
+func (x *ChangeHistoryFetchRequest) MutableObjects() bool {
+	return x.inner.MutableObjects()
+}
+
+// SetMutableObjects calls the underlying SetMutableObjects.
+func (x *ChangeHistoryFetchRequest) SetMutableObjects(mutableObjects bool) {
+	x.inner.SetMutableObjects(mutableObjects)
+}
+
+// IncludeGroupChanges calls the underlying IncludeGroupChanges.
+func (x *ChangeHistoryFetchRequest) IncludeGroupChanges() bool {
+	return x.inner.IncludeGroupChanges()
+}
+
+// SetIncludeGroupChanges calls the underlying SetIncludeGroupChanges.
+func (x *ChangeHistoryFetchRequest) SetIncludeGroupChanges(includeGroupChanges bool) {
+	x.inner.SetIncludeGroupChanges(includeGroupChanges)
+}
+
 // ExcludedTransactionAuthors returns the collection as a Go slice.
-func (x *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []*foundation.NSString {
+func (x *ChangeHistoryFetchRequest) ExcludedTransactionAuthors() []string {
 	arr := x.inner.ExcludedTransactionAuthors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExcludedTransactionAuthors calls the underlying SetExcludedTransactionAuthors.
+func (x *ChangeHistoryFetchRequest) SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedTransactionAuthors(excludedTransactionAuthors)
 }
 
 func (x *ChangeHistoryFetchRequest) asFetchRequest() *raw.CNFetchRequest { return &x.inner.CNFetchRequest }
+
+// ChangeHistoryFetchRequestable is the interface implemented by [ChangeHistoryFetchRequest], for mocking and DI.
+type ChangeHistoryFetchRequestable interface {
+	Unwrap() *raw.CNChangeHistoryFetchRequest
+	WithStartingToken(startingToken *foundation.NSData) *ChangeHistoryFetchRequest
+	WithShouldUnifyResults(shouldUnifyResults bool) *ChangeHistoryFetchRequest
+	WithMutableObjects(mutableObjects bool) *ChangeHistoryFetchRequest
+	WithIncludeGroupChanges(includeGroupChanges bool) *ChangeHistoryFetchRequest
+	WithExcludedTransactionAuthors(items ...*foundation.NSString) *ChangeHistoryFetchRequest
+	StartingToken() *foundation.NSData
+	SetStartingToken(startingToken *foundation.NSData)
+	AdditionalContactKeyDescriptors() *foundation.NSArray[raw.CNKeyDescriptor]
+	SetAdditionalContactKeyDescriptors(additionalContactKeyDescriptors *foundation.NSArray[raw.CNKeyDescriptor])
+	ShouldUnifyResults() bool
+	SetShouldUnifyResults(shouldUnifyResults bool)
+	MutableObjects() bool
+	SetMutableObjects(mutableObjects bool)
+	IncludeGroupChanges() bool
+	SetIncludeGroupChanges(includeGroupChanges bool)
+	ExcludedTransactionAuthors() []string
+	SetExcludedTransactionAuthors(excludedTransactionAuthors *foundation.NSArray[*foundation.NSString])
+}
+
+var _ ChangeHistoryFetchRequestable = (*ChangeHistoryFetchRequest)(nil)
 

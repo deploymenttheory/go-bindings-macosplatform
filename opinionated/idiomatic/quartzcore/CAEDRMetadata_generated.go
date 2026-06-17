@@ -23,3 +23,10 @@ func NewEDRMetadata() *EDRMetadata {
 	return &EDRMetadata{inner: raw.CAEDRMetadataFromID(_id)}
 }
 
+// EDRMetadataable is the interface implemented by [EDRMetadata], for mocking and DI.
+type EDRMetadataable interface {
+	Unwrap() *raw.CAEDRMetadata
+}
+
+var _ EDRMetadataable = (*EDRMetadata)(nil)
+

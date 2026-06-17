@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserAutomatorTask wraps [raw.NSUserAutomatorTask] with a fluent Go API.
@@ -29,7 +30,33 @@ func (x *UserAutomatorTask) WithVariables(variables *raw.NSDictionary[*raw.NSStr
 	return x
 }
 
+// ExecuteWithInputCompletionHandler calls the underlying ExecuteWithInputCompletionHandler.
+func (x *UserAutomatorTask) ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer)) {
+	x.inner.ExecuteWithInputCompletionHandler(input, handler)
+}
+
+// Variables calls the underlying Variables.
+func (x *UserAutomatorTask) Variables() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.Variables()
+}
+
+// SetVariables calls the underlying SetVariables.
+func (x *UserAutomatorTask) SetVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) {
+	x.inner.SetVariables(variables)
+}
+
 func (x *UserAutomatorTask) asUserScriptTask() *raw.NSUserScriptTask { return &x.inner.NSUserScriptTask }
 
 func (x *UserAutomatorTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
+
+// UserAutomatorTaskable is the interface implemented by [UserAutomatorTask], for mocking and DI.
+type UserAutomatorTaskable interface {
+	Unwrap() *raw.NSUserAutomatorTask
+	WithVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask
+	ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer))
+	Variables() *raw.NSDictionary[*raw.NSString, objc.ID]
+	SetVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID])
+}
+
+var _ UserAutomatorTaskable = (*UserAutomatorTask)(nil)
 

@@ -44,7 +44,40 @@ func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight uint) *CNNSp
 	return x
 }
 
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNSpatialNormalizationNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// SetKernelWidth calls the underlying SetKernelWidth.
+func (x *CNNSpatialNormalizationNode) SetKernelWidth(kernelWidth uint) {
+	x.inner.SetKernelWidth(kernelWidth)
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNSpatialNormalizationNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// SetKernelHeight calls the underlying SetKernelHeight.
+func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight uint) {
+	x.inner.SetKernelHeight(kernelHeight)
+}
+
 func (x *CNNSpatialNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
 
 func (x *CNNSpatialNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+
+// CNNSpatialNormalizationNodeable is the interface implemented by [CNNSpatialNormalizationNode], for mocking and DI.
+type CNNSpatialNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNSpatialNormalizationNode
+	WithKernelWidth(kernelWidth uint) *CNNSpatialNormalizationNode
+	WithKernelHeight(kernelHeight uint) *CNNSpatialNormalizationNode
+	KernelWidth() uint
+	SetKernelWidth(kernelWidth uint)
+	KernelHeight() uint
+	SetKernelHeight(kernelHeight uint)
+}
+
+var _ CNNSpatialNormalizationNodeable = (*CNNSpatialNormalizationNode)(nil)
 

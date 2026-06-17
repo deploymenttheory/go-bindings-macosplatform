@@ -7,6 +7,7 @@ package cloudkit
 import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,6 +73,48 @@ func (x *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource fl
 	return x
 }
 
+// Configuration calls the underlying Configuration.
+func (x *Operation) Configuration() *OperationConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &OperationConfiguration{inner: _r}
+}
+
+// SetConfiguration calls the underlying SetConfiguration.
+func (x *Operation) SetConfiguration(configuration *raw.CKOperationConfiguration) {
+	x.inner.SetConfiguration(configuration)
+}
+
+// Group calls the underlying Group.
+func (x *Operation) Group() *OperationGroup {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &OperationGroup{inner: _r}
+}
+
+// SetGroup calls the underlying SetGroup.
+func (x *Operation) SetGroup(group *raw.CKOperationGroup) {
+	x.inner.SetGroup(group)
+}
+
+// OperationID calls the underlying OperationID.
+func (x *Operation) OperationID() string {
+	_r := x.inner.OperationID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LongLivedOperationWasPersistedBlock calls the underlying LongLivedOperationWasPersistedBlock.
+func (x *Operation) LongLivedOperationWasPersistedBlock() objc.Block {
+	return x.inner.LongLivedOperationWasPersistedBlock()
+}
+
 // SetLongLivedOperationWasPersistedBlock blocks until the operation completes or ctx is cancelled.
 func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -86,5 +129,91 @@ func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) 
 	}
 }
 
+// Container calls the underlying Container.
+func (x *Operation) Container() *Container {
+	_r := x.inner.Container()
+	if _r == nil {
+		return nil
+	}
+	return &Container{inner: _r}
+}
+
+// SetContainer calls the underlying SetContainer.
+func (x *Operation) SetContainer(container *raw.CKContainer) {
+	x.inner.SetContainer(container)
+}
+
+// AllowsCellularAccess calls the underlying AllowsCellularAccess.
+func (x *Operation) AllowsCellularAccess() bool {
+	return x.inner.AllowsCellularAccess()
+}
+
+// SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
+func (x *Operation) SetAllowsCellularAccess(allowsCellularAccess bool) {
+	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+}
+
+// IsLongLived calls the underlying IsLongLived.
+func (x *Operation) IsLongLived() bool {
+	return x.inner.IsLongLived()
+}
+
+// SetLongLived calls the underlying SetLongLived.
+func (x *Operation) SetLongLived(longLived bool) {
+	x.inner.SetLongLived(longLived)
+}
+
+// TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
+func (x *Operation) TimeoutIntervalForRequest() float64 {
+	return x.inner.TimeoutIntervalForRequest()
+}
+
+// SetTimeoutIntervalForRequest calls the underlying SetTimeoutIntervalForRequest.
+func (x *Operation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
+	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+}
+
+// TimeoutIntervalForResource calls the underlying TimeoutIntervalForResource.
+func (x *Operation) TimeoutIntervalForResource() float64 {
+	return x.inner.TimeoutIntervalForResource()
+}
+
+// SetTimeoutIntervalForResource calls the underlying SetTimeoutIntervalForResource.
+func (x *Operation) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
+	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+}
+
 func (x *Operation) asOperation() *raw.CKOperation { return x.inner }
+
+// Operationable is the interface implemented by [Operation], for mocking and DI.
+type Operationable interface {
+	Unwrap() *raw.CKOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *Operation
+	WithGroup(group *raw.CKOperationGroup) *Operation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation
+	WithContainer(container *raw.CKContainer) *Operation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *Operation
+	WithLongLived(longLived bool) *Operation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation
+	Configuration() *OperationConfiguration
+	SetConfiguration(configuration *raw.CKOperationConfiguration)
+	Group() *OperationGroup
+	SetGroup(group *raw.CKOperationGroup)
+	OperationID() string
+	LongLivedOperationWasPersistedBlock() objc.Block
+	SetLongLivedOperationWasPersistedBlock(ctx context.Context) error
+	Container() *Container
+	SetContainer(container *raw.CKContainer)
+	AllowsCellularAccess() bool
+	SetAllowsCellularAccess(allowsCellularAccess bool)
+	IsLongLived() bool
+	SetLongLived(longLived bool)
+	TimeoutIntervalForRequest() float64
+	SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64)
+	TimeoutIntervalForResource() float64
+	SetTimeoutIntervalForResource(timeoutIntervalForResource float64)
+}
+
+var _ Operationable = (*Operation)(nil)
 

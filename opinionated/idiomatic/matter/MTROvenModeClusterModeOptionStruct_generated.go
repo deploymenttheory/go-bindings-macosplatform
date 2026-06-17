@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,53 @@ func (x *MTROvenModeClusterModeOptionStruct) WithMode(mode *foundation.NSNumber)
 	x.inner.SetMode(mode)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTROvenModeClusterModeOptionStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTROvenModeClusterModeOptionStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Mode calls the underlying Mode.
+func (x *MTROvenModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *MTROvenModeClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
+	x.inner.SetMode(mode)
+}
+
+// ModeTags calls the underlying ModeTags.
+func (x *MTROvenModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
+	return x.inner.ModeTags()
+}
+
+// SetModeTags calls the underlying SetModeTags.
+func (x *MTROvenModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
+	x.inner.SetModeTags(modeTags)
+}
+
+// MTROvenModeClusterModeOptionStructable is the interface implemented by [MTROvenModeClusterModeOptionStruct], for mocking and DI.
+type MTROvenModeClusterModeOptionStructable interface {
+	Unwrap() *raw.MTROvenModeClusterModeOptionStruct
+	WithLabel(label string) *MTROvenModeClusterModeOptionStruct
+	WithMode(mode *foundation.NSNumber) *MTROvenModeClusterModeOptionStruct
+	Label() string
+	SetLabel(label string)
+	Mode() *foundation.NSNumber
+	SetMode(mode *foundation.NSNumber)
+	ModeTags() *foundation.NSArray[objc.ID]
+	SetModeTags(modeTags *foundation.NSArray[objc.ID])
+}
+
+var _ MTROvenModeClusterModeOptionStructable = (*MTROvenModeClusterModeOptionStruct)(nil)
 

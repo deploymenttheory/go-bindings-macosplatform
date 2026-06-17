@@ -25,3 +25,10 @@ func NewTimeIntervalResolutionResult() *TimeIntervalResolutionResult {
 
 func (x *TimeIntervalResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// TimeIntervalResolutionResultable is the interface implemented by [TimeIntervalResolutionResult], for mocking and DI.
+type TimeIntervalResolutionResultable interface {
+	Unwrap() *raw.INTimeIntervalResolutionResult
+}
+
+var _ TimeIntervalResolutionResultable = (*TimeIntervalResolutionResult)(nil)
+

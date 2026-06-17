@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,6 +67,154 @@ func (x *DOMHTMLSelectElement) WithValue(value string) *DOMHTMLSelectElement {
 	return x
 }
 
+// Item calls the underlying Item.
+func (x *DOMHTMLSelectElement) Item(index uint) *DOMNode {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// NamedItem calls the underlying NamedItem.
+func (x *DOMHTMLSelectElement) NamedItem(name string) *DOMNode {
+	_r := x.inner.NamedItem(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// AddBefore calls the underlying AddBefore.
+func (x *DOMHTMLSelectElement) AddBefore(element *raw.DOMHTMLElement, before *raw.DOMHTMLElement) {
+	x.inner.AddBefore(element, before)
+}
+
+// Remove calls the underlying Remove.
+func (x *DOMHTMLSelectElement) Remove(index int) {
+	x.inner.Remove(index)
+}
+
+// Autofocus calls the underlying Autofocus.
+func (x *DOMHTMLSelectElement) Autofocus() bool {
+	return x.inner.Autofocus()
+}
+
+// SetAutofocus calls the underlying SetAutofocus.
+func (x *DOMHTMLSelectElement) SetAutofocus(autofocus bool) {
+	x.inner.SetAutofocus(autofocus)
+}
+
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLSelectElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLSelectElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Form calls the underlying Form.
+func (x *DOMHTMLSelectElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// Multiple calls the underlying Multiple.
+func (x *DOMHTMLSelectElement) Multiple() bool {
+	return x.inner.Multiple()
+}
+
+// SetMultiple calls the underlying SetMultiple.
+func (x *DOMHTMLSelectElement) SetMultiple(multiple bool) {
+	x.inner.SetMultiple(multiple)
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLSelectElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLSelectElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Size calls the underlying Size.
+func (x *DOMHTMLSelectElement) Size() int {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *DOMHTMLSelectElement) SetSize(size int) {
+	x.inner.SetSize(size)
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLSelectElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Options calls the underlying Options.
+func (x *DOMHTMLSelectElement) Options() *DOMHTMLOptionsCollection {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLOptionsCollection{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMHTMLSelectElement) Length() int {
+	return x.inner.Length()
+}
+
+// SelectedIndex calls the underlying SelectedIndex.
+func (x *DOMHTMLSelectElement) SelectedIndex() int {
+	return x.inner.SelectedIndex()
+}
+
+// SetSelectedIndex calls the underlying SetSelectedIndex.
+func (x *DOMHTMLSelectElement) SetSelectedIndex(selectedIndex int) {
+	x.inner.SetSelectedIndex(selectedIndex)
+}
+
+// Value calls the underlying Value.
+func (x *DOMHTMLSelectElement) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMHTMLSelectElement) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// WillValidate calls the underlying WillValidate.
+func (x *DOMHTMLSelectElement) WillValidate() bool {
+	return x.inner.WillValidate()
+}
+
+// Add calls the underlying Add.
+func (x *DOMHTMLSelectElement) Add(element *raw.DOMHTMLElement, before *raw.DOMHTMLElement) {
+	x.inner.Add(element, before)
+}
+
 func (x *DOMHTMLSelectElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLSelectElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -75,4 +224,42 @@ func (x *DOMHTMLSelectElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLSelectElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLSelectElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLSelectElementable is the interface implemented by [DOMHTMLSelectElement], for mocking and DI.
+type DOMHTMLSelectElementable interface {
+	Unwrap() *raw.DOMHTMLSelectElement
+	WithAutofocus(autofocus bool) *DOMHTMLSelectElement
+	WithDisabled(disabled bool) *DOMHTMLSelectElement
+	WithMultiple(multiple bool) *DOMHTMLSelectElement
+	WithName(name string) *DOMHTMLSelectElement
+	WithSize(size int) *DOMHTMLSelectElement
+	WithSelectedIndex(selectedIndex int) *DOMHTMLSelectElement
+	WithValue(value string) *DOMHTMLSelectElement
+	Item(index uint) *DOMNode
+	NamedItem(name string) *DOMNode
+	AddBefore(element *raw.DOMHTMLElement, before *raw.DOMHTMLElement)
+	Remove(index int)
+	Autofocus() bool
+	SetAutofocus(autofocus bool)
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Form() *DOMHTMLFormElement
+	Multiple() bool
+	SetMultiple(multiple bool)
+	Name() string
+	SetName(name string)
+	Size() int
+	SetSize(size int)
+	Type() string
+	Options() *DOMHTMLOptionsCollection
+	Length() int
+	SelectedIndex() int
+	SetSelectedIndex(selectedIndex int)
+	Value() string
+	SetValue(value string)
+	WillValidate() bool
+	Add(element *raw.DOMHTMLElement, before *raw.DOMHTMLElement)
+}
+
+var _ DOMHTMLSelectElementable = (*DOMHTMLSelectElement)(nil)
 

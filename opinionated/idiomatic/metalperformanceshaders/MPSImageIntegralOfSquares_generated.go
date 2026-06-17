@@ -29,3 +29,10 @@ func (x *ImageIntegralOfSquares) asUnaryImageKernel() *mpsimage.MPSUnaryImageKer
 
 func (x *ImageIntegralOfSquares) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
+// ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
+type ImageIntegralOfSquaresable interface {
+	Unwrap() *raw.MPSImageIntegralOfSquares
+}
+
+var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
+

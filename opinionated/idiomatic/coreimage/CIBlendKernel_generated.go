@@ -7,6 +7,7 @@ package coreimage
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BlendKernel wraps [raw.CIBlendKernel] with a fluent Go API.
@@ -23,7 +24,34 @@ func NewBlendKernel() *BlendKernel {
 	return &BlendKernel{inner: raw.CIBlendKernelFromID(_id)}
 }
 
+// ApplyWithForegroundBackground calls the underlying ApplyWithForegroundBackground.
+func (x *BlendKernel) ApplyWithForegroundBackground(foreground *raw.CIImage, background *raw.CIImage) *Image {
+	_r := x.inner.ApplyWithForegroundBackground(foreground, background)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// ApplyWithForegroundBackgroundColorSpace calls the underlying ApplyWithForegroundBackgroundColorSpace.
+func (x *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *raw.CIImage, background *raw.CIImage, colorSpace unsafe.Pointer) *Image {
+	_r := x.inner.ApplyWithForegroundBackgroundColorSpace(foreground, background, colorSpace)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
 func (x *BlendKernel) asColorKernel() *raw.CIColorKernel { return &x.inner.CIColorKernel }
 
 func (x *BlendKernel) asKernel() *raw.CIKernel { return &x.inner.CIColorKernel.CIKernel }
+
+// BlendKernelable is the interface implemented by [BlendKernel], for mocking and DI.
+type BlendKernelable interface {
+	Unwrap() *raw.CIBlendKernel
+	ApplyWithForegroundBackground(foreground *raw.CIImage, background *raw.CIImage) *Image
+	ApplyWithForegroundBackgroundColorSpace(foreground *raw.CIImage, background *raw.CIImage, colorSpace unsafe.Pointer) *Image
+}
+
+var _ BlendKernelable = (*BlendKernel)(nil)
 

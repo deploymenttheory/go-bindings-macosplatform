@@ -25,5 +25,22 @@ func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingIn
 	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(_id)}
 }
 
+// Preview calls the underlying Preview.
+func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
+	_r := x.inner.Preview()
+	if _r == nil {
+		return nil
+	}
+	return &AddPassMetadataPreview{inner: _r}
+}
+
 func (x *AddIdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata { return &x.inner.PKIdentityDocumentMetadata }
+
+// AddIdentityDocumentMetadataable is the interface implemented by [AddIdentityDocumentMetadata], for mocking and DI.
+type AddIdentityDocumentMetadataable interface {
+	Unwrap() *raw.PKAddIdentityDocumentMetadata
+	Preview() *AddPassMetadataPreview
+}
+
+var _ AddIdentityDocumentMetadataable = (*AddIdentityDocumentMetadata)(nil)
 

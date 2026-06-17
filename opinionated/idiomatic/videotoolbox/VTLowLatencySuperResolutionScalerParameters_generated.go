@@ -24,3 +24,30 @@ func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame
 	return &LowLatencySuperResolutionScalerParameters{inner: raw.VTLowLatencySuperResolutionScalerParametersFromID(_id)}
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// DestinationFrame calls the underlying DestinationFrame.
+func (x *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := x.inner.DestinationFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// LowLatencySuperResolutionScalerParametersable is the interface implemented by [LowLatencySuperResolutionScalerParameters], for mocking and DI.
+type LowLatencySuperResolutionScalerParametersable interface {
+	Unwrap() *raw.VTLowLatencySuperResolutionScalerParameters
+	SourceFrame() *FrameProcessorFrame
+	DestinationFrame() *FrameProcessorFrame
+}
+
+var _ LowLatencySuperResolutionScalerParametersable = (*LowLatencySuperResolutionScalerParameters)(nil)
+

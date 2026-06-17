@@ -6,7 +6,9 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Object wraps [raw.PHASEObject] with a fluent Go API.
@@ -24,18 +26,76 @@ func NewObjectWithEngine(engine *raw.PHASEEngine) *Object {
 	return &Object{inner: raw.PHASEObjectFromID(_id)}
 }
 
+// AddChildError calls the underlying AddChildError.
+func (x *Object) AddChildError(child *raw.PHASEObject) (bool, error) {
+	return x.inner.AddChildError(child)
+}
+
+// RemoveChild calls the underlying RemoveChild.
+func (x *Object) RemoveChild(child *raw.PHASEObject) {
+	x.inner.RemoveChild(child)
+}
+
+// RemoveChildren calls the underlying RemoveChildren.
+func (x *Object) RemoveChildren() {
+	x.inner.RemoveChildren()
+}
+
+// Parent calls the underlying Parent.
+func (x *Object) Parent() *Object {
+	_r := x.inner.Parent()
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
 // Children returns the collection as a Go slice.
 func (x *Object) Children() []*raw.PHASEObject {
 	arr := x.inner.Children()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEObject, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEObject {
+		return raw.PHASEObjectFromID(purego.Retain(_id))
+	})
+}
+
+// Transform calls the underlying Transform.
+func (x *Object) Transform() unsafe.Pointer {
+	return x.inner.Transform()
+}
+
+// SetTransform calls the underlying SetTransform.
+func (x *Object) SetTransform(transform unsafe.Pointer) {
+	x.inner.SetTransform(transform)
+}
+
+// WorldTransform calls the underlying WorldTransform.
+func (x *Object) WorldTransform() unsafe.Pointer {
+	return x.inner.WorldTransform()
+}
+
+// SetWorldTransform calls the underlying SetWorldTransform.
+func (x *Object) SetWorldTransform(worldTransform unsafe.Pointer) {
+	x.inner.SetWorldTransform(worldTransform)
 }
 
 func (x *Object) asObject() *raw.PHASEObject { return x.inner }
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.PHASEObject
+	AddChildError(child *raw.PHASEObject) (bool, error)
+	RemoveChild(child *raw.PHASEObject)
+	RemoveChildren()
+	Parent() *Object
+	Children() []*raw.PHASEObject
+	Transform() unsafe.Pointer
+	SetTransform(transform unsafe.Pointer)
+	WorldTransform() unsafe.Pointer
+	SetWorldTransform(worldTransform unsafe.Pointer)
+}
+
+var _ Objectable = (*Object)(nil)
 

@@ -7,6 +7,7 @@ package imagecapturecore
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ScannerBandData wraps [raw.ICScannerBandData] with a fluent Go API.
@@ -22,4 +23,89 @@ func NewScannerBandData() *ScannerBandData {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerBandData")), objc.RegisterName("new"))
 	return &ScannerBandData{inner: raw.ICScannerBandDataFromID(_id)}
 }
+
+// FullImageWidth calls the underlying FullImageWidth.
+func (x *ScannerBandData) FullImageWidth() uint {
+	return x.inner.FullImageWidth()
+}
+
+// FullImageHeight calls the underlying FullImageHeight.
+func (x *ScannerBandData) FullImageHeight() uint {
+	return x.inner.FullImageHeight()
+}
+
+// BitsPerPixel calls the underlying BitsPerPixel.
+func (x *ScannerBandData) BitsPerPixel() uint {
+	return x.inner.BitsPerPixel()
+}
+
+// BitsPerComponent calls the underlying BitsPerComponent.
+func (x *ScannerBandData) BitsPerComponent() uint {
+	return x.inner.BitsPerComponent()
+}
+
+// NumComponents calls the underlying NumComponents.
+func (x *ScannerBandData) NumComponents() uint {
+	return x.inner.NumComponents()
+}
+
+// IsBigEndian calls the underlying IsBigEndian.
+func (x *ScannerBandData) IsBigEndian() bool {
+	return x.inner.IsBigEndian()
+}
+
+// PixelDataType calls the underlying PixelDataType.
+func (x *ScannerBandData) PixelDataType() raw.ICScannerPixelDataType {
+	return x.inner.PixelDataType()
+}
+
+// ColorSyncProfilePath calls the underlying ColorSyncProfilePath.
+func (x *ScannerBandData) ColorSyncProfilePath() unsafe.Pointer {
+	return x.inner.ColorSyncProfilePath()
+}
+
+// BytesPerRow calls the underlying BytesPerRow.
+func (x *ScannerBandData) BytesPerRow() uint {
+	return x.inner.BytesPerRow()
+}
+
+// DataStartRow calls the underlying DataStartRow.
+func (x *ScannerBandData) DataStartRow() uint {
+	return x.inner.DataStartRow()
+}
+
+// DataNumRows calls the underlying DataNumRows.
+func (x *ScannerBandData) DataNumRows() uint {
+	return x.inner.DataNumRows()
+}
+
+// DataSize calls the underlying DataSize.
+func (x *ScannerBandData) DataSize() uint {
+	return x.inner.DataSize()
+}
+
+// DataBuffer calls the underlying DataBuffer.
+func (x *ScannerBandData) DataBuffer() unsafe.Pointer {
+	return x.inner.DataBuffer()
+}
+
+// ScannerBandDataable is the interface implemented by [ScannerBandData], for mocking and DI.
+type ScannerBandDataable interface {
+	Unwrap() *raw.ICScannerBandData
+	FullImageWidth() uint
+	FullImageHeight() uint
+	BitsPerPixel() uint
+	BitsPerComponent() uint
+	NumComponents() uint
+	IsBigEndian() bool
+	PixelDataType() raw.ICScannerPixelDataType
+	ColorSyncProfilePath() unsafe.Pointer
+	BytesPerRow() uint
+	DataStartRow() uint
+	DataNumRows() uint
+	DataSize() uint
+	DataBuffer() unsafe.Pointer
+}
+
+var _ ScannerBandDataable = (*ScannerBandData)(nil)
 

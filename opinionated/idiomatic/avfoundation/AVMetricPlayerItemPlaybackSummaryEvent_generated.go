@@ -23,5 +23,76 @@ func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryE
 	return &MetricPlayerItemPlaybackSummaryEvent{inner: raw.AVMetricPlayerItemPlaybackSummaryEventFromID(_id)}
 }
 
+// ErrorEvent calls the underlying ErrorEvent.
+func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
+	_r := x.inner.ErrorEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricErrorEvent{inner: _r}
+}
+
+// RecoverableErrorCount calls the underlying RecoverableErrorCount.
+func (x *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
+	return x.inner.RecoverableErrorCount()
+}
+
+// StallCount calls the underlying StallCount.
+func (x *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
+	return x.inner.StallCount()
+}
+
+// VariantSwitchCount calls the underlying VariantSwitchCount.
+func (x *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
+	return x.inner.VariantSwitchCount()
+}
+
+// PlaybackDuration calls the underlying PlaybackDuration.
+func (x *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
+	return x.inner.PlaybackDuration()
+}
+
+// MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
+func (x *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
+	return x.inner.MediaResourceRequestCount()
+}
+
+// TimeSpentRecoveringFromStall calls the underlying TimeSpentRecoveringFromStall.
+func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
+	return x.inner.TimeSpentRecoveringFromStall()
+}
+
+// TimeSpentInInitialStartup calls the underlying TimeSpentInInitialStartup.
+func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
+	return x.inner.TimeSpentInInitialStartup()
+}
+
+// TimeWeightedAverageBitrate calls the underlying TimeWeightedAverageBitrate.
+func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
+	return x.inner.TimeWeightedAverageBitrate()
+}
+
+// TimeWeightedPeakBitrate calls the underlying TimeWeightedPeakBitrate.
+func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
+	return x.inner.TimeWeightedPeakBitrate()
+}
+
 func (x *MetricPlayerItemPlaybackSummaryEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricPlayerItemPlaybackSummaryEventable is the interface implemented by [MetricPlayerItemPlaybackSummaryEvent], for mocking and DI.
+type MetricPlayerItemPlaybackSummaryEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemPlaybackSummaryEvent
+	ErrorEvent() *MetricErrorEvent
+	RecoverableErrorCount() int
+	StallCount() int
+	VariantSwitchCount() int
+	PlaybackDuration() int
+	MediaResourceRequestCount() int
+	TimeSpentRecoveringFromStall() float64
+	TimeSpentInInitialStartup() float64
+	TimeWeightedAverageBitrate() int
+	TimeWeightedPeakBitrate() int
+}
+
+var _ MetricPlayerItemPlaybackSummaryEventable = (*MetricPlayerItemPlaybackSummaryEvent)(nil)
 

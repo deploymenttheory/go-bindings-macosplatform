@@ -25,3 +25,10 @@ func NewMetadataDogHeadObject() *MetadataDogHeadObject {
 
 func (x *MetadataDogHeadObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
 
+// MetadataDogHeadObjectable is the interface implemented by [MetadataDogHeadObject], for mocking and DI.
+type MetadataDogHeadObjectable interface {
+	Unwrap() *raw.AVMetadataDogHeadObject
+}
+
+var _ MetadataDogHeadObjectable = (*MetadataDogHeadObject)(nil)
+

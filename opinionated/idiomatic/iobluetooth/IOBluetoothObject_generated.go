@@ -25,3 +25,10 @@ func NewIOBluetoothObject() *IOBluetoothObject {
 
 func (x *IOBluetoothObject) asIOBluetoothObject() *raw.IOBluetoothObject { return x.inner }
 
+// IOBluetoothObjectable is the interface implemented by [IOBluetoothObject], for mocking and DI.
+type IOBluetoothObjectable interface {
+	Unwrap() *raw.IOBluetoothObject
+}
+
+var _ IOBluetoothObjectable = (*IOBluetoothObject)(nil)
+

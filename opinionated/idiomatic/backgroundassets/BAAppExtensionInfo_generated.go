@@ -6,6 +6,7 @@ package backgroundassets
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewAppExtensionInfo() *AppExtensionInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAppExtensionInfo")), objc.RegisterName("new"))
 	return &AppExtensionInfo{inner: raw.BAAppExtensionInfoFromID(_id)}
 }
+
+// RestrictedDownloadSizeRemaining calls the underlying RestrictedDownloadSizeRemaining.
+func (x *AppExtensionInfo) RestrictedDownloadSizeRemaining() *foundation.NSNumber {
+	return x.inner.RestrictedDownloadSizeRemaining()
+}
+
+// RestrictedEssentialDownloadSizeRemaining calls the underlying RestrictedEssentialDownloadSizeRemaining.
+func (x *AppExtensionInfo) RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber {
+	return x.inner.RestrictedEssentialDownloadSizeRemaining()
+}
+
+// AppExtensionInfoable is the interface implemented by [AppExtensionInfo], for mocking and DI.
+type AppExtensionInfoable interface {
+	Unwrap() *raw.BAAppExtensionInfo
+	RestrictedDownloadSizeRemaining() *foundation.NSNumber
+	RestrictedEssentialDownloadSizeRemaining() *foundation.NSNumber
+}
+
+var _ AppExtensionInfoable = (*AppExtensionInfo)(nil)
 

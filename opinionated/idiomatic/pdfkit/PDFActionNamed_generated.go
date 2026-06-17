@@ -30,5 +30,25 @@ func (x *ActionNamed) WithName(name raw.PDFActionNamedName) *ActionNamed {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *ActionNamed) Name() raw.PDFActionNamedName {
+	return x.inner.Name()
+}
+
+// SetName calls the underlying SetName.
+func (x *ActionNamed) SetName(name raw.PDFActionNamedName) {
+	x.inner.SetName(name)
+}
+
 func (x *ActionNamed) asAction() *raw.PDFAction { return &x.inner.PDFAction }
+
+// ActionNamedable is the interface implemented by [ActionNamed], for mocking and DI.
+type ActionNamedable interface {
+	Unwrap() *raw.PDFActionNamed
+	WithName(name raw.PDFActionNamedName) *ActionNamed
+	Name() raw.PDFActionNamedName
+	SetName(name raw.PDFActionNamedName)
+}
+
+var _ ActionNamedable = (*ActionNamed)(nil)
 

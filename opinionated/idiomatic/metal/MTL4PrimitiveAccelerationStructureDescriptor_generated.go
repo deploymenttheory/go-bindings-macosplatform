@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -77,14 +78,92 @@ func (x *MTL4PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTL4AccelerationStructureGeometryDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTL4AccelerationStructureGeometryDescriptor {
+		return raw.MTL4AccelerationStructureGeometryDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetGeometryDescriptors calls the underlying SetGeometryDescriptors.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTL4AccelerationStructureGeometryDescriptor]) {
+	x.inner.SetGeometryDescriptors(geometryDescriptors)
+}
+
+// MotionStartBorderMode calls the underlying MotionStartBorderMode.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartBorderMode() raw.MTLMotionBorderMode {
+	return x.inner.MotionStartBorderMode()
+}
+
+// SetMotionStartBorderMode calls the underlying SetMotionStartBorderMode.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode) {
+	x.inner.SetMotionStartBorderMode(motionStartBorderMode)
+}
+
+// MotionEndBorderMode calls the underlying MotionEndBorderMode.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndBorderMode() raw.MTLMotionBorderMode {
+	return x.inner.MotionEndBorderMode()
+}
+
+// SetMotionEndBorderMode calls the underlying SetMotionEndBorderMode.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode) {
+	x.inner.SetMotionEndBorderMode(motionEndBorderMode)
+}
+
+// MotionStartTime calls the underlying MotionStartTime.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionStartTime() float32 {
+	return x.inner.MotionStartTime()
+}
+
+// SetMotionStartTime calls the underlying SetMotionStartTime.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionStartTime(motionStartTime float32) {
+	x.inner.SetMotionStartTime(motionStartTime)
+}
+
+// MotionEndTime calls the underlying MotionEndTime.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionEndTime() float32 {
+	return x.inner.MotionEndTime()
+}
+
+// SetMotionEndTime calls the underlying SetMotionEndTime.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionEndTime(motionEndTime float32) {
+	x.inner.SetMotionEndTime(motionEndTime)
+}
+
+// MotionKeyframeCount calls the underlying MotionKeyframeCount.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) MotionKeyframeCount() uint {
+	return x.inner.MotionKeyframeCount()
+}
+
+// SetMotionKeyframeCount calls the underlying SetMotionKeyframeCount.
+func (x *MTL4PrimitiveAccelerationStructureDescriptor) SetMotionKeyframeCount(motionKeyframeCount uint) {
+	x.inner.SetMotionKeyframeCount(motionKeyframeCount)
 }
 
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor }
 
 func (x *MTL4PrimitiveAccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor { return &x.inner.MTL4AccelerationStructureDescriptor.MTLAccelerationStructureDescriptor }
+
+// MTL4PrimitiveAccelerationStructureDescriptorable is the interface implemented by [MTL4PrimitiveAccelerationStructureDescriptor], for mocking and DI.
+type MTL4PrimitiveAccelerationStructureDescriptorable interface {
+	Unwrap() *raw.MTL4PrimitiveAccelerationStructureDescriptor
+	WithGeometryDescriptors(items ...MTL4AccelerationStructureGeometryDescriptorProvider) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionStartTime(motionStartTime float32) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionEndTime(motionEndTime float32) *MTL4PrimitiveAccelerationStructureDescriptor
+	WithMotionKeyframeCount(motionKeyframeCount uint) *MTL4PrimitiveAccelerationStructureDescriptor
+	GeometryDescriptors() []*raw.MTL4AccelerationStructureGeometryDescriptor
+	SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTL4AccelerationStructureGeometryDescriptor])
+	MotionStartBorderMode() raw.MTLMotionBorderMode
+	SetMotionStartBorderMode(motionStartBorderMode raw.MTLMotionBorderMode)
+	MotionEndBorderMode() raw.MTLMotionBorderMode
+	SetMotionEndBorderMode(motionEndBorderMode raw.MTLMotionBorderMode)
+	MotionStartTime() float32
+	SetMotionStartTime(motionStartTime float32)
+	MotionEndTime() float32
+	SetMotionEndTime(motionEndTime float32)
+	MotionKeyframeCount() uint
+	SetMotionKeyframeCount(motionKeyframeCount uint)
+}
+
+var _ MTL4PrimitiveAccelerationStructureDescriptorable = (*MTL4PrimitiveAccelerationStructureDescriptor)(nil)
 

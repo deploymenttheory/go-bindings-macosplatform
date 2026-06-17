@@ -29,3 +29,10 @@ func (x *PurgeableData) asData() *raw.NSData { return &x.inner.NSMutableData.NSD
 
 func (x *PurgeableData) asObject() *raw.NSObject { return &x.inner.NSMutableData.NSData.NSObject }
 
+// PurgeableDataable is the interface implemented by [PurgeableData], for mocking and DI.
+type PurgeableDataable interface {
+	Unwrap() *raw.NSPurgeableData
+}
+
+var _ PurgeableDataable = (*PurgeableData)(nil)
+

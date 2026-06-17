@@ -35,6 +35,26 @@ func (x *DOMHTMLPreElement) WithWrap(wrap bool) *DOMHTMLPreElement {
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *DOMHTMLPreElement) Width() int {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLPreElement) SetWidth(width int) {
+	x.inner.SetWidth(width)
+}
+
+// Wrap calls the underlying Wrap.
+func (x *DOMHTMLPreElement) Wrap() bool {
+	return x.inner.Wrap()
+}
+
+// SetWrap calls the underlying SetWrap.
+func (x *DOMHTMLPreElement) SetWrap(wrap bool) {
+	x.inner.SetWrap(wrap)
+}
+
 func (x *DOMHTMLPreElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLPreElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -44,4 +64,17 @@ func (x *DOMHTMLPreElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEl
 func (x *DOMHTMLPreElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLPreElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLPreElementable is the interface implemented by [DOMHTMLPreElement], for mocking and DI.
+type DOMHTMLPreElementable interface {
+	Unwrap() *raw.DOMHTMLPreElement
+	WithWidth(width int) *DOMHTMLPreElement
+	WithWrap(wrap bool) *DOMHTMLPreElement
+	Width() int
+	SetWidth(width int)
+	Wrap() bool
+	SetWrap(wrap bool)
+}
+
+var _ DOMHTMLPreElementable = (*DOMHTMLPreElement)(nil)
 

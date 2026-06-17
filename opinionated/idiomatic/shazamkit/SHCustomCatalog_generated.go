@@ -37,5 +37,36 @@ func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.
 	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}, nil
 }
 
+// AddReferenceSignatureRepresentingMediaItemsError calls the underlying AddReferenceSignatureRepresentingMediaItemsError.
+func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems *foundation.NSArray[*raw.SHMediaItem]) (bool, error) {
+	return x.inner.AddReferenceSignatureRepresentingMediaItemsError(signature, mediaItems)
+}
+
+// AddCustomCatalogFromURLError calls the underlying AddCustomCatalogFromURLError.
+func (x *CustomCatalog) AddCustomCatalogFromURLError(customCatalogURL string) (bool, error) {
+	return x.inner.AddCustomCatalogFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(customCatalogURL)))
+}
+
+// WriteToURLError calls the underlying WriteToURLError.
+func (x *CustomCatalog) WriteToURLError(destinationURL string) (bool, error) {
+	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)))
+}
+
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *CustomCatalog) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
 func (x *CustomCatalog) asCatalog() *raw.SHCatalog { return &x.inner.SHCatalog }
+
+// CustomCatalogable is the interface implemented by [CustomCatalog], for mocking and DI.
+type CustomCatalogable interface {
+	Unwrap() *raw.SHCustomCatalog
+	AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems *foundation.NSArray[*raw.SHMediaItem]) (bool, error)
+	AddCustomCatalogFromURLError(customCatalogURL string) (bool, error)
+	WriteToURLError(destinationURL string) (bool, error)
+	DataRepresentation() *foundation.NSData
+}
+
+var _ CustomCatalogable = (*CustomCatalog)(nil)
 

@@ -54,5 +54,77 @@ func (x *MatrixBinaryKernel) WithBatchSize(batchSize uint) *MatrixBinaryKernel {
 	return x
 }
 
+// PrimarySourceMatrixOrigin calls the underlying PrimarySourceMatrixOrigin.
+func (x *MatrixBinaryKernel) PrimarySourceMatrixOrigin() metal.MTLOrigin {
+	return x.inner.PrimarySourceMatrixOrigin()
+}
+
+// SetPrimarySourceMatrixOrigin calls the underlying SetPrimarySourceMatrixOrigin.
+func (x *MatrixBinaryKernel) SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+}
+
+// SecondarySourceMatrixOrigin calls the underlying SecondarySourceMatrixOrigin.
+func (x *MatrixBinaryKernel) SecondarySourceMatrixOrigin() metal.MTLOrigin {
+	return x.inner.SecondarySourceMatrixOrigin()
+}
+
+// SetSecondarySourceMatrixOrigin calls the underlying SetSecondarySourceMatrixOrigin.
+func (x *MatrixBinaryKernel) SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+}
+
+// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+func (x *MatrixBinaryKernel) ResultMatrixOrigin() metal.MTLOrigin {
+	return x.inner.ResultMatrixOrigin()
+}
+
+// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+func (x *MatrixBinaryKernel) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+}
+
+// BatchStart calls the underlying BatchStart.
+func (x *MatrixBinaryKernel) BatchStart() uint {
+	return x.inner.BatchStart()
+}
+
+// SetBatchStart calls the underlying SetBatchStart.
+func (x *MatrixBinaryKernel) SetBatchStart(batchStart uint) {
+	x.inner.SetBatchStart(batchStart)
+}
+
+// BatchSize calls the underlying BatchSize.
+func (x *MatrixBinaryKernel) BatchSize() uint {
+	return x.inner.BatchSize()
+}
+
+// SetBatchSize calls the underlying SetBatchSize.
+func (x *MatrixBinaryKernel) SetBatchSize(batchSize uint) {
+	x.inner.SetBatchSize(batchSize)
+}
+
 func (x *MatrixBinaryKernel) asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel { return x.inner }
+
+// MatrixBinaryKernelable is the interface implemented by [MatrixBinaryKernel], for mocking and DI.
+type MatrixBinaryKernelable interface {
+	Unwrap() *raw.MPSMatrixBinaryKernel
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
+	WithBatchStart(batchStart uint) *MatrixBinaryKernel
+	WithBatchSize(batchSize uint) *MatrixBinaryKernel
+	PrimarySourceMatrixOrigin() metal.MTLOrigin
+	SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin)
+	SecondarySourceMatrixOrigin() metal.MTLOrigin
+	SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin)
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
+	BatchStart() uint
+	SetBatchStart(batchStart uint)
+	BatchSize() uint
+	SetBatchSize(batchSize uint)
+}
+
+var _ MatrixBinaryKernelable = (*MatrixBinaryKernel)(nil)
 

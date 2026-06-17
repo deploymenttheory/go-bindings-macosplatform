@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,46 @@ func NewDOMEntity() *DOMEntity {
 	return &DOMEntity{inner: raw.DOMEntityFromID(_id)}
 }
 
+// PublicId calls the underlying PublicId.
+func (x *DOMEntity) PublicId() string {
+	_r := x.inner.PublicId()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SystemId calls the underlying SystemId.
+func (x *DOMEntity) SystemId() string {
+	_r := x.inner.SystemId()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NotationName calls the underlying NotationName.
+func (x *DOMEntity) NotationName() string {
+	_r := x.inner.NotationName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMEntity) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMEntity) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
 
 func (x *DOMEntity) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMNode.DOMObject.WebScriptObject }
+
+// DOMEntityable is the interface implemented by [DOMEntity], for mocking and DI.
+type DOMEntityable interface {
+	Unwrap() *raw.DOMEntity
+	PublicId() string
+	SystemId() string
+	NotationName() string
+}
+
+var _ DOMEntityable = (*DOMEntity)(nil)
 

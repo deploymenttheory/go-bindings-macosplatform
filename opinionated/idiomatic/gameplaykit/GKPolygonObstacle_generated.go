@@ -25,5 +25,24 @@ func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *P
 	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(_id)}
 }
 
+// VertexAtIndex calls the underlying VertexAtIndex.
+func (x *PolygonObstacle) VertexAtIndex(index uint) unsafe.Pointer {
+	return x.inner.VertexAtIndex(index)
+}
+
+// VertexCount calls the underlying VertexCount.
+func (x *PolygonObstacle) VertexCount() uint {
+	return x.inner.VertexCount()
+}
+
 func (x *PolygonObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
+
+// PolygonObstacleable is the interface implemented by [PolygonObstacle], for mocking and DI.
+type PolygonObstacleable interface {
+	Unwrap() *raw.GKPolygonObstacle
+	VertexAtIndex(index uint) unsafe.Pointer
+	VertexCount() uint
+}
+
+var _ PolygonObstacleable = (*PolygonObstacle)(nil)
 

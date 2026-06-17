@@ -25,3 +25,10 @@ func NewVirtioTraditionalMemoryBalloonDeviceConfiguration() *VirtioTraditionalMe
 
 func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration { return &x.inner.VZMemoryBalloonDeviceConfiguration }
 
+// VirtioTraditionalMemoryBalloonDeviceConfigurationable is the interface implemented by [VirtioTraditionalMemoryBalloonDeviceConfiguration], for mocking and DI.
+type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration
+}
+
+var _ VirtioTraditionalMemoryBalloonDeviceConfigurationable = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)
+

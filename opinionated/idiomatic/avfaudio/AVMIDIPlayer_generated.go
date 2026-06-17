@@ -54,3 +54,66 @@ func (x *MIDIPlayer) WithCurrentPosition(currentPosition float64) *MIDIPlayer {
 	return x
 }
 
+// PrepareToPlay calls the underlying PrepareToPlay.
+func (x *MIDIPlayer) PrepareToPlay() {
+	x.inner.PrepareToPlay()
+}
+
+// Play calls the underlying Play.
+func (x *MIDIPlayer) Play(completionHandler func()) {
+	x.inner.Play(completionHandler)
+}
+
+// Stop calls the underlying Stop.
+func (x *MIDIPlayer) Stop() {
+	x.inner.Stop()
+}
+
+// Duration calls the underlying Duration.
+func (x *MIDIPlayer) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// IsPlaying calls the underlying IsPlaying.
+func (x *MIDIPlayer) IsPlaying() bool {
+	return x.inner.IsPlaying()
+}
+
+// Rate calls the underlying Rate.
+func (x *MIDIPlayer) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *MIDIPlayer) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// CurrentPosition calls the underlying CurrentPosition.
+func (x *MIDIPlayer) CurrentPosition() float64 {
+	return x.inner.CurrentPosition()
+}
+
+// SetCurrentPosition calls the underlying SetCurrentPosition.
+func (x *MIDIPlayer) SetCurrentPosition(currentPosition float64) {
+	x.inner.SetCurrentPosition(currentPosition)
+}
+
+// MIDIPlayerable is the interface implemented by [MIDIPlayer], for mocking and DI.
+type MIDIPlayerable interface {
+	Unwrap() *raw.AVMIDIPlayer
+	WithRate(rate float32) *MIDIPlayer
+	WithCurrentPosition(currentPosition float64) *MIDIPlayer
+	PrepareToPlay()
+	Play(completionHandler func())
+	Stop()
+	Duration() float64
+	IsPlaying() bool
+	Rate() float32
+	SetRate(rate float32)
+	CurrentPosition() float64
+	SetCurrentPosition(currentPosition float64)
+}
+
+var _ MIDIPlayerable = (*MIDIPlayer)(nil)
+

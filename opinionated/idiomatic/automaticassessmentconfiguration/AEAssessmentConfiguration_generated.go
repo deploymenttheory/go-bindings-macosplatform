@@ -6,6 +6,7 @@ package automaticassessmentconfiguration
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -70,4 +71,143 @@ func (x *AssessmentConfiguration) WithAllowsScreenshots(allowsScreenshots bool) 
 	x.inner.SetAllowsScreenshots(allowsScreenshots)
 	return x
 }
+
+// SetConfigurationForApplication calls the underlying SetConfigurationForApplication.
+func (x *AssessmentConfiguration) SetConfigurationForApplication(configuration *raw.AEAssessmentParticipantConfiguration, application *raw.AEAssessmentApplication) {
+	x.inner.SetConfigurationForApplication(configuration, application)
+}
+
+// RemoveApplication calls the underlying RemoveApplication.
+func (x *AssessmentConfiguration) RemoveApplication(application *raw.AEAssessmentApplication) {
+	x.inner.RemoveApplication(application)
+}
+
+// AutocorrectMode calls the underlying AutocorrectMode.
+func (x *AssessmentConfiguration) AutocorrectMode() raw.AEAutocorrectMode {
+	return x.inner.AutocorrectMode()
+}
+
+// SetAutocorrectMode calls the underlying SetAutocorrectMode.
+func (x *AssessmentConfiguration) SetAutocorrectMode(autocorrectMode raw.AEAutocorrectMode) {
+	x.inner.SetAutocorrectMode(autocorrectMode)
+}
+
+// AllowsSpellCheck calls the underlying AllowsSpellCheck.
+func (x *AssessmentConfiguration) AllowsSpellCheck() bool {
+	return x.inner.AllowsSpellCheck()
+}
+
+// SetAllowsSpellCheck calls the underlying SetAllowsSpellCheck.
+func (x *AssessmentConfiguration) SetAllowsSpellCheck(allowsSpellCheck bool) {
+	x.inner.SetAllowsSpellCheck(allowsSpellCheck)
+}
+
+// AllowsPredictiveKeyboard calls the underlying AllowsPredictiveKeyboard.
+func (x *AssessmentConfiguration) AllowsPredictiveKeyboard() bool {
+	return x.inner.AllowsPredictiveKeyboard()
+}
+
+// SetAllowsPredictiveKeyboard calls the underlying SetAllowsPredictiveKeyboard.
+func (x *AssessmentConfiguration) SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) {
+	x.inner.SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard)
+}
+
+// AllowsKeyboardShortcuts calls the underlying AllowsKeyboardShortcuts.
+func (x *AssessmentConfiguration) AllowsKeyboardShortcuts() bool {
+	return x.inner.AllowsKeyboardShortcuts()
+}
+
+// SetAllowsKeyboardShortcuts calls the underlying SetAllowsKeyboardShortcuts.
+func (x *AssessmentConfiguration) SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) {
+	x.inner.SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts)
+}
+
+// AllowsAccessibilityKeyboard calls the underlying AllowsAccessibilityKeyboard.
+func (x *AssessmentConfiguration) AllowsAccessibilityKeyboard() bool {
+	return x.inner.AllowsAccessibilityKeyboard()
+}
+
+// SetAllowsAccessibilityKeyboard calls the underlying SetAllowsAccessibilityKeyboard.
+func (x *AssessmentConfiguration) SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool) {
+	x.inner.SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard)
+}
+
+// AllowsAccessibilityLiveCaptions calls the underlying AllowsAccessibilityLiveCaptions.
+func (x *AssessmentConfiguration) AllowsAccessibilityLiveCaptions() bool {
+	return x.inner.AllowsAccessibilityLiveCaptions()
+}
+
+// SetAllowsAccessibilityLiveCaptions calls the underlying SetAllowsAccessibilityLiveCaptions.
+func (x *AssessmentConfiguration) SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool) {
+	x.inner.SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions)
+}
+
+// AllowsAccessibilityReader calls the underlying AllowsAccessibilityReader.
+func (x *AssessmentConfiguration) AllowsAccessibilityReader() bool {
+	return x.inner.AllowsAccessibilityReader()
+}
+
+// SetAllowsAccessibilityReader calls the underlying SetAllowsAccessibilityReader.
+func (x *AssessmentConfiguration) SetAllowsAccessibilityReader(allowsAccessibilityReader bool) {
+	x.inner.SetAllowsAccessibilityReader(allowsAccessibilityReader)
+}
+
+// AllowsScreenshots calls the underlying AllowsScreenshots.
+func (x *AssessmentConfiguration) AllowsScreenshots() bool {
+	return x.inner.AllowsScreenshots()
+}
+
+// SetAllowsScreenshots calls the underlying SetAllowsScreenshots.
+func (x *AssessmentConfiguration) SetAllowsScreenshots(allowsScreenshots bool) {
+	x.inner.SetAllowsScreenshots(allowsScreenshots)
+}
+
+// MainParticipantConfiguration calls the underlying MainParticipantConfiguration.
+func (x *AssessmentConfiguration) MainParticipantConfiguration() *AssessmentParticipantConfiguration {
+	_r := x.inner.MainParticipantConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &AssessmentParticipantConfiguration{inner: _r}
+}
+
+// ConfigurationsByApplication calls the underlying ConfigurationsByApplication.
+func (x *AssessmentConfiguration) ConfigurationsByApplication() *foundation.NSDictionary[*raw.AEAssessmentApplication, *raw.AEAssessmentParticipantConfiguration] {
+	return x.inner.ConfigurationsByApplication()
+}
+
+// AssessmentConfigurationable is the interface implemented by [AssessmentConfiguration], for mocking and DI.
+type AssessmentConfigurationable interface {
+	Unwrap() *raw.AEAssessmentConfiguration
+	WithAutocorrectMode(autocorrectMode raw.AEAutocorrectMode) *AssessmentConfiguration
+	WithAllowsSpellCheck(allowsSpellCheck bool) *AssessmentConfiguration
+	WithAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool) *AssessmentConfiguration
+	WithAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool) *AssessmentConfiguration
+	WithAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool) *AssessmentConfiguration
+	WithAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool) *AssessmentConfiguration
+	WithAllowsAccessibilityReader(allowsAccessibilityReader bool) *AssessmentConfiguration
+	WithAllowsScreenshots(allowsScreenshots bool) *AssessmentConfiguration
+	SetConfigurationForApplication(configuration *raw.AEAssessmentParticipantConfiguration, application *raw.AEAssessmentApplication)
+	RemoveApplication(application *raw.AEAssessmentApplication)
+	AutocorrectMode() raw.AEAutocorrectMode
+	SetAutocorrectMode(autocorrectMode raw.AEAutocorrectMode)
+	AllowsSpellCheck() bool
+	SetAllowsSpellCheck(allowsSpellCheck bool)
+	AllowsPredictiveKeyboard() bool
+	SetAllowsPredictiveKeyboard(allowsPredictiveKeyboard bool)
+	AllowsKeyboardShortcuts() bool
+	SetAllowsKeyboardShortcuts(allowsKeyboardShortcuts bool)
+	AllowsAccessibilityKeyboard() bool
+	SetAllowsAccessibilityKeyboard(allowsAccessibilityKeyboard bool)
+	AllowsAccessibilityLiveCaptions() bool
+	SetAllowsAccessibilityLiveCaptions(allowsAccessibilityLiveCaptions bool)
+	AllowsAccessibilityReader() bool
+	SetAllowsAccessibilityReader(allowsAccessibilityReader bool)
+	AllowsScreenshots() bool
+	SetAllowsScreenshots(allowsScreenshots bool)
+	MainParticipantConfiguration() *AssessmentParticipantConfiguration
+	ConfigurationsByApplication() *foundation.NSDictionary[*raw.AEAssessmentApplication, *raw.AEAssessmentParticipantConfiguration]
+}
+
+var _ AssessmentConfigurationable = (*AssessmentConfiguration)(nil)
 

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,4 +26,83 @@ func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationD
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:busName:busNumber:tripDuration:departureBusStopLocation:departurePlatform:arrivalBusStopLocation:arrivalPlatform:"), foundation.NSStringStringWithUTF8String(provider).Ptr(), foundation.NSStringStringWithUTF8String(busName).Ptr(), foundation.NSStringStringWithUTF8String(busNumber).Ptr(), tripDuration.Ptr(), departureBusStopLocation.Ptr(), foundation.NSStringStringWithUTF8String(departurePlatform).Ptr(), arrivalBusStopLocation.Ptr(), foundation.NSStringStringWithUTF8String(arrivalPlatform).Ptr())
 	return &BusTrip{inner: raw.INBusTripFromID(_id)}
 }
+
+// Provider calls the underlying Provider.
+func (x *BusTrip) Provider() string {
+	_r := x.inner.Provider()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BusName calls the underlying BusName.
+func (x *BusTrip) BusName() string {
+	_r := x.inner.BusName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BusNumber calls the underlying BusNumber.
+func (x *BusTrip) BusNumber() string {
+	_r := x.inner.BusNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TripDuration calls the underlying TripDuration.
+func (x *BusTrip) TripDuration() *DateComponentsRange {
+	_r := x.inner.TripDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// DepartureBusStopLocation calls the underlying DepartureBusStopLocation.
+func (x *BusTrip) DepartureBusStopLocation() *corelocation.CLPlacemark {
+	return x.inner.DepartureBusStopLocation()
+}
+
+// DeparturePlatform calls the underlying DeparturePlatform.
+func (x *BusTrip) DeparturePlatform() string {
+	_r := x.inner.DeparturePlatform()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ArrivalBusStopLocation calls the underlying ArrivalBusStopLocation.
+func (x *BusTrip) ArrivalBusStopLocation() *corelocation.CLPlacemark {
+	return x.inner.ArrivalBusStopLocation()
+}
+
+// ArrivalPlatform calls the underlying ArrivalPlatform.
+func (x *BusTrip) ArrivalPlatform() string {
+	_r := x.inner.ArrivalPlatform()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BusTripable is the interface implemented by [BusTrip], for mocking and DI.
+type BusTripable interface {
+	Unwrap() *raw.INBusTrip
+	Provider() string
+	BusName() string
+	BusNumber() string
+	TripDuration() *DateComponentsRange
+	DepartureBusStopLocation() *corelocation.CLPlacemark
+	DeparturePlatform() string
+	ArrivalBusStopLocation() *corelocation.CLPlacemark
+	ArrivalPlatform() string
+}
+
+var _ BusTripable = (*BusTrip)(nil)
 

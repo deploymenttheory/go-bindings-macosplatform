@@ -35,3 +35,36 @@ func (x *CommandQueueDescriptor) WithLogState(logState raw.MTLLogState) *Command
 	return x
 }
 
+// MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
+func (x *CommandQueueDescriptor) MaxCommandBufferCount() uint {
+	return x.inner.MaxCommandBufferCount()
+}
+
+// SetMaxCommandBufferCount calls the underlying SetMaxCommandBufferCount.
+func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount uint) {
+	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
+}
+
+// LogState calls the underlying LogState.
+func (x *CommandQueueDescriptor) LogState() raw.MTLLogState {
+	return x.inner.LogState()
+}
+
+// SetLogState calls the underlying SetLogState.
+func (x *CommandQueueDescriptor) SetLogState(logState raw.MTLLogState) {
+	x.inner.SetLogState(logState)
+}
+
+// CommandQueueDescriptorable is the interface implemented by [CommandQueueDescriptor], for mocking and DI.
+type CommandQueueDescriptorable interface {
+	Unwrap() *raw.MTLCommandQueueDescriptor
+	WithMaxCommandBufferCount(maxCommandBufferCount uint) *CommandQueueDescriptor
+	WithLogState(logState raw.MTLLogState) *CommandQueueDescriptor
+	MaxCommandBufferCount() uint
+	SetMaxCommandBufferCount(maxCommandBufferCount uint)
+	LogState() raw.MTLLogState
+	SetLogState(logState raw.MTLLogState)
+}
+
+var _ CommandQueueDescriptorable = (*CommandQueueDescriptor)(nil)
+

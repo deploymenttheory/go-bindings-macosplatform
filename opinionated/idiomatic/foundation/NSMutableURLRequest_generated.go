@@ -144,7 +144,166 @@ func (x *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining 
 	return x
 }
 
+// SetURL calls the underlying SetURL.
+func (x *MutableURLRequest) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// SetCachePolicy calls the underlying SetCachePolicy.
+func (x *MutableURLRequest) SetCachePolicy(cachePolicy raw.NSURLRequestCachePolicy) {
+	x.inner.SetCachePolicy(cachePolicy)
+}
+
+// SetTimeoutInterval calls the underlying SetTimeoutInterval.
+func (x *MutableURLRequest) SetTimeoutInterval(timeoutInterval float64) {
+	x.inner.SetTimeoutInterval(timeoutInterval)
+}
+
+// SetMainDocumentURL calls the underlying SetMainDocumentURL.
+func (x *MutableURLRequest) SetMainDocumentURL(mainDocumentURL string) {
+	x.inner.SetMainDocumentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mainDocumentURL)))
+}
+
+// SetNetworkServiceType calls the underlying SetNetworkServiceType.
+func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) {
+	x.inner.SetNetworkServiceType(networkServiceType)
+}
+
+// SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
+func (x *MutableURLRequest) SetAllowsCellularAccess(allowsCellularAccess bool) {
+	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+}
+
+// SetAllowsExpensiveNetworkAccess calls the underlying SetAllowsExpensiveNetworkAccess.
+func (x *MutableURLRequest) SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) {
+	x.inner.SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess)
+}
+
+// SetAllowsConstrainedNetworkAccess calls the underlying SetAllowsConstrainedNetworkAccess.
+func (x *MutableURLRequest) SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) {
+	x.inner.SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess)
+}
+
+// SetAllowsUltraConstrainedNetworkAccess calls the underlying SetAllowsUltraConstrainedNetworkAccess.
+func (x *MutableURLRequest) SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) {
+	x.inner.SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess)
+}
+
+// SetAssumesHTTP3Capable calls the underlying SetAssumesHTTP3Capable.
+func (x *MutableURLRequest) SetAssumesHTTP3Capable(assumesHTTP3Capable bool) {
+	x.inner.SetAssumesHTTP3Capable(assumesHTTP3Capable)
+}
+
+// SetAttribution calls the underlying SetAttribution.
+func (x *MutableURLRequest) SetAttribution(attribution raw.NSURLRequestAttribution) {
+	x.inner.SetAttribution(attribution)
+}
+
+// SetRequiresDNSSECValidation calls the underlying SetRequiresDNSSECValidation.
+func (x *MutableURLRequest) SetRequiresDNSSECValidation(requiresDNSSECValidation bool) {
+	x.inner.SetRequiresDNSSECValidation(requiresDNSSECValidation)
+}
+
+// SetAllowsPersistentDNS calls the underlying SetAllowsPersistentDNS.
+func (x *MutableURLRequest) SetAllowsPersistentDNS(allowsPersistentDNS bool) {
+	x.inner.SetAllowsPersistentDNS(allowsPersistentDNS)
+}
+
+// SetCookiePartitionIdentifier calls the underlying SetCookiePartitionIdentifier.
+func (x *MutableURLRequest) SetCookiePartitionIdentifier(cookiePartitionIdentifier string) {
+	x.inner.SetCookiePartitionIdentifier(foundation.NSStringStringWithUTF8String(cookiePartitionIdentifier))
+}
+
+// SetValueForHTTPHeaderField calls the underlying SetValueForHTTPHeaderField.
+func (x *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
+	x.inner.SetValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))
+}
+
+// AddValueForHTTPHeaderField calls the underlying AddValueForHTTPHeaderField.
+func (x *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
+	x.inner.AddValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))
+}
+
+// SetHTTPMethod calls the underlying SetHTTPMethod.
+func (x *MutableURLRequest) SetHTTPMethod(hTTPMethod string) {
+	x.inner.SetHTTPMethod(foundation.NSStringStringWithUTF8String(hTTPMethod))
+}
+
+// SetAllHTTPHeaderFields calls the underlying SetAllHTTPHeaderFields.
+func (x *MutableURLRequest) SetAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
+	x.inner.SetAllHTTPHeaderFields(allHTTPHeaderFields)
+}
+
+// SetHTTPBody calls the underlying SetHTTPBody.
+func (x *MutableURLRequest) SetHTTPBody(hTTPBody *raw.NSData) {
+	x.inner.SetHTTPBody(hTTPBody)
+}
+
+// SetHTTPBodyStream calls the underlying SetHTTPBodyStream.
+func (x *MutableURLRequest) SetHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) {
+	x.inner.SetHTTPBodyStream(hTTPBodyStream)
+}
+
+// SetHTTPShouldHandleCookies calls the underlying SetHTTPShouldHandleCookies.
+func (x *MutableURLRequest) SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) {
+	x.inner.SetHTTPShouldHandleCookies(hTTPShouldHandleCookies)
+}
+
+// SetHTTPShouldUsePipelining calls the underlying SetHTTPShouldUsePipelining.
+func (x *MutableURLRequest) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
+	x.inner.SetHTTPShouldUsePipelining(hTTPShouldUsePipelining)
+}
+
 func (x *MutableURLRequest) asURLRequest() *raw.NSURLRequest { return &x.inner.NSURLRequest }
 
 func (x *MutableURLRequest) asObject() *raw.NSObject { return &x.inner.NSURLRequest.NSObject }
+
+// MutableURLRequestable is the interface implemented by [MutableURLRequest], for mocking and DI.
+type MutableURLRequestable interface {
+	Unwrap() *raw.NSMutableURLRequest
+	WithURL(uRL string) *MutableURLRequest
+	WithCachePolicy(cachePolicy raw.NSURLRequestCachePolicy) *MutableURLRequest
+	WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest
+	WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest
+	WithNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType) *MutableURLRequest
+	WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest
+	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest
+	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest
+	WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest
+	WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest
+	WithAttribution(attribution raw.NSURLRequestAttribution) *MutableURLRequest
+	WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest
+	WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest
+	WithCookiePartitionIdentifier(cookiePartitionIdentifier string) *MutableURLRequest
+	WithHTTPMethod(hTTPMethod string) *MutableURLRequest
+	WithAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *MutableURLRequest
+	WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest
+	WithHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) *MutableURLRequest
+	WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest
+	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
+	SetURL(uRL string)
+	SetCachePolicy(cachePolicy raw.NSURLRequestCachePolicy)
+	SetTimeoutInterval(timeoutInterval float64)
+	SetMainDocumentURL(mainDocumentURL string)
+	SetNetworkServiceType(networkServiceType raw.NSURLRequestNetworkServiceType)
+	SetAllowsCellularAccess(allowsCellularAccess bool)
+	SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool)
+	SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool)
+	SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool)
+	SetAssumesHTTP3Capable(assumesHTTP3Capable bool)
+	SetAttribution(attribution raw.NSURLRequestAttribution)
+	SetRequiresDNSSECValidation(requiresDNSSECValidation bool)
+	SetAllowsPersistentDNS(allowsPersistentDNS bool)
+	SetCookiePartitionIdentifier(cookiePartitionIdentifier string)
+	SetValueForHTTPHeaderField(value string, field string)
+	AddValueForHTTPHeaderField(value string, field string)
+	SetHTTPMethod(hTTPMethod string)
+	SetAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString])
+	SetHTTPBody(hTTPBody *raw.NSData)
+	SetHTTPBodyStream(hTTPBodyStream *raw.NSInputStream)
+	SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool)
+	SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool)
+}
+
+var _ MutableURLRequestable = (*MutableURLRequest)(nil)
 

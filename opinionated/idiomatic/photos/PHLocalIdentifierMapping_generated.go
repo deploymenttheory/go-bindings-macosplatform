@@ -6,7 +6,9 @@ package photos
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LocalIdentifierMapping wraps [raw.PHLocalIdentifierMapping] with a fluent Go API.
@@ -22,4 +24,27 @@ func NewLocalIdentifierMapping() *LocalIdentifierMapping {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLocalIdentifierMapping")), objc.RegisterName("new"))
 	return &LocalIdentifierMapping{inner: raw.PHLocalIdentifierMappingFromID(_id)}
 }
+
+// LocalIdentifier calls the underlying LocalIdentifier.
+func (x *LocalIdentifierMapping) LocalIdentifier() string {
+	_r := x.inner.LocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Error calls the underlying Error.
+func (x *LocalIdentifierMapping) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// LocalIdentifierMappingable is the interface implemented by [LocalIdentifierMapping], for mocking and DI.
+type LocalIdentifierMappingable interface {
+	Unwrap() *raw.PHLocalIdentifierMapping
+	LocalIdentifier() string
+	Error() unsafe.Pointer
+}
+
+var _ LocalIdentifierMappingable = (*LocalIdentifierMapping)(nil)
 

@@ -5,7 +5,9 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,38 @@ func NewGeoJSONFeature() *GeoJSONFeature {
 	return &GeoJSONFeature{inner: raw.MKGeoJSONFeatureFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *GeoJSONFeature) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Properties calls the underlying Properties.
+func (x *GeoJSONFeature) Properties() *foundation.NSData {
+	return x.inner.Properties()
+}
+
 // Geometry returns the collection as a Go slice.
 func (x *GeoJSONFeature) Geometry() []*raw.MKShape {
 	arr := x.inner.Geometry()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKShape, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKShape {
+		return raw.MKShapeFromID(purego.Retain(_id))
+	})
 }
+
+// GeoJSONFeatureable is the interface implemented by [GeoJSONFeature], for mocking and DI.
+type GeoJSONFeatureable interface {
+	Unwrap() *raw.MKGeoJSONFeature
+	Identifier() string
+	Properties() *foundation.NSData
+	Geometry() []*raw.MKShape
+}
+
+var _ GeoJSONFeatureable = (*GeoJSONFeature)(nil)
 

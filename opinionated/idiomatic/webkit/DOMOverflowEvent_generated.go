@@ -24,9 +24,34 @@ func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient u
 	return &DOMOverflowEvent{inner: raw.DOMOverflowEventFromID(_id)}
 }
 
+// Orient calls the underlying Orient.
+func (x *DOMOverflowEvent) Orient() uint16 {
+	return x.inner.Orient()
+}
+
+// HorizontalOverflow calls the underlying HorizontalOverflow.
+func (x *DOMOverflowEvent) HorizontalOverflow() bool {
+	return x.inner.HorizontalOverflow()
+}
+
+// VerticalOverflow calls the underlying VerticalOverflow.
+func (x *DOMOverflowEvent) VerticalOverflow() bool {
+	return x.inner.VerticalOverflow()
+}
+
 func (x *DOMOverflowEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
 
 func (x *DOMOverflowEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
 func (x *DOMOverflowEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMOverflowEventable is the interface implemented by [DOMOverflowEvent], for mocking and DI.
+type DOMOverflowEventable interface {
+	Unwrap() *raw.DOMOverflowEvent
+	Orient() uint16
+	HorizontalOverflow() bool
+	VerticalOverflow() bool
+}
+
+var _ DOMOverflowEventable = (*DOMOverflowEvent)(nil)
 

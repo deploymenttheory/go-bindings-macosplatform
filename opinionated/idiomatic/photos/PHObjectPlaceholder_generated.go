@@ -25,3 +25,10 @@ func NewObjectPlaceholder() *ObjectPlaceholder {
 
 func (x *ObjectPlaceholder) asObject() *raw.PHObject { return &x.inner.PHObject }
 
+// ObjectPlaceholderable is the interface implemented by [ObjectPlaceholder], for mocking and DI.
+type ObjectPlaceholderable interface {
+	Unwrap() *raw.PHObjectPlaceholder
+}
+
+var _ ObjectPlaceholderable = (*ObjectPlaceholder)(nil)
+

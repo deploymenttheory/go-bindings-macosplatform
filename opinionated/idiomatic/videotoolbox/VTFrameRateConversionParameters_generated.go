@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,17 +26,47 @@ func NewFrameRateConversionParametersWithSourceFrameNextFrameOpticalFlowInterpol
 	return &FrameRateConversionParameters{inner: raw.VTFrameRateConversionParametersFromID(_id)}
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *FrameRateConversionParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// NextFrame calls the underlying NextFrame.
+func (x *FrameRateConversionParameters) NextFrame() *FrameProcessorFrame {
+	_r := x.inner.NextFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// OpticalFlow calls the underlying OpticalFlow.
+func (x *FrameRateConversionParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	_r := x.inner.OpticalFlow()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorOpticalFlow{inner: _r}
+}
+
 // InterpolationPhase returns the collection as a Go slice.
 func (x *FrameRateConversionParameters) InterpolationPhase() []*foundation.NSNumber {
 	arr := x.inner.InterpolationPhase()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SubmissionMode calls the underlying SubmissionMode.
+func (x *FrameRateConversionParameters) SubmissionMode() raw.VTFrameRateConversionParametersSubmissionMode {
+	return x.inner.SubmissionMode()
 }
 
 // DestinationFrames returns the collection as a Go slice.
@@ -44,10 +75,21 @@ func (x *FrameRateConversionParameters) DestinationFrames() []*raw.VTFrameProces
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VTFrameProcessorFrame, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VTFrameProcessorFrame {
+		return raw.VTFrameProcessorFrameFromID(purego.Retain(_id))
+	})
 }
+
+// FrameRateConversionParametersable is the interface implemented by [FrameRateConversionParameters], for mocking and DI.
+type FrameRateConversionParametersable interface {
+	Unwrap() *raw.VTFrameRateConversionParameters
+	SourceFrame() *FrameProcessorFrame
+	NextFrame() *FrameProcessorFrame
+	OpticalFlow() *FrameProcessorOpticalFlow
+	InterpolationPhase() []*foundation.NSNumber
+	SubmissionMode() raw.VTFrameRateConversionParametersSubmissionMode
+	DestinationFrames() []*raw.VTFrameProcessorFrame
+}
+
+var _ FrameRateConversionParametersable = (*FrameRateConversionParameters)(nil)
 

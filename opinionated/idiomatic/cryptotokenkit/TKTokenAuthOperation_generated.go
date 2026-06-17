@@ -31,3 +31,11 @@ func (x *TokenAuthOperation) Finish() error {
 
 func (x *TokenAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return x.inner }
 
+// TokenAuthOperationable is the interface implemented by [TokenAuthOperation], for mocking and DI.
+type TokenAuthOperationable interface {
+	Unwrap() *raw.TKTokenAuthOperation
+	Finish() error
+}
+
+var _ TokenAuthOperationable = (*TokenAuthOperation)(nil)
+

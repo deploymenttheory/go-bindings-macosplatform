@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -113,17 +114,85 @@ func (x *TextStorage) WithForegroundColor(foregroundColor *raw.NSColor) *TextSto
 	return x
 }
 
+// AddLayoutManager calls the underlying AddLayoutManager.
+func (x *TextStorage) AddLayoutManager(aLayoutManager *raw.NSLayoutManager) {
+	x.inner.AddLayoutManager(aLayoutManager)
+}
+
+// RemoveLayoutManager calls the underlying RemoveLayoutManager.
+func (x *TextStorage) RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager) {
+	x.inner.RemoveLayoutManager(aLayoutManager)
+}
+
+// EditedRangeChangeInLength calls the underlying EditedRangeChangeInLength.
+func (x *TextStorage) EditedRangeChangeInLength(editedMask raw.NSTextStorageEditActions, editedRange foundation.NSRange, delta int) {
+	x.inner.EditedRangeChangeInLength(editedMask, editedRange, delta)
+}
+
+// ProcessEditing calls the underlying ProcessEditing.
+func (x *TextStorage) ProcessEditing() {
+	x.inner.ProcessEditing()
+}
+
+// InvalidateAttributesInRange calls the underlying InvalidateAttributesInRange.
+func (x *TextStorage) InvalidateAttributesInRange(range_ foundation.NSRange) {
+	x.inner.InvalidateAttributesInRange(range_)
+}
+
+// EnsureAttributesAreFixedInRange calls the underlying EnsureAttributesAreFixedInRange.
+func (x *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange) {
+	x.inner.EnsureAttributesAreFixedInRange(range_)
+}
+
 // LayoutManagers returns the collection as a Go slice.
 func (x *TextStorage) LayoutManagers() []*raw.NSLayoutManager {
 	arr := x.inner.LayoutManagers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSLayoutManager, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSLayoutManager {
+		return raw.NSLayoutManagerFromID(purego.Retain(_id))
+	})
+}
+
+// EditedMask calls the underlying EditedMask.
+func (x *TextStorage) EditedMask() raw.NSTextStorageEditActions {
+	return x.inner.EditedMask()
+}
+
+// EditedRange calls the underlying EditedRange.
+func (x *TextStorage) EditedRange() foundation.NSRange {
+	return x.inner.EditedRange()
+}
+
+// ChangeInLength calls the underlying ChangeInLength.
+func (x *TextStorage) ChangeInLength() int {
+	return x.inner.ChangeInLength()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TextStorage) Delegate() raw.NSTextStorageDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TextStorage) SetDelegate(delegate raw.NSTextStorageDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// FixesAttributesLazily calls the underlying FixesAttributesLazily.
+func (x *TextStorage) FixesAttributesLazily() bool {
+	return x.inner.FixesAttributesLazily()
+}
+
+// TextStorageObserver calls the underlying TextStorageObserver.
+func (x *TextStorage) TextStorageObserver() raw.NSTextStorageObserving {
+	return x.inner.TextStorageObserver()
+}
+
+// SetTextStorageObserver calls the underlying SetTextStorageObserver.
+func (x *TextStorage) SetTextStorageObserver(textStorageObserver raw.NSTextStorageObserving) {
+	x.inner.SetTextStorageObserver(textStorageObserver)
 }
 
 // AttributeRuns returns the collection as a Go slice.
@@ -132,11 +201,14 @@ func (x *TextStorage) AttributeRuns() []*raw.NSTextStorage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextStorage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
+		return raw.NSTextStorageFromID(purego.Retain(_id))
+	})
+}
+
+// SetAttributeRuns calls the underlying SetAttributeRuns.
+func (x *TextStorage) SetAttributeRuns(attributeRuns *foundation.NSArray[*raw.NSTextStorage]) {
+	x.inner.SetAttributeRuns(attributeRuns)
 }
 
 // Paragraphs returns the collection as a Go slice.
@@ -145,11 +217,14 @@ func (x *TextStorage) Paragraphs() []*raw.NSTextStorage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextStorage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
+		return raw.NSTextStorageFromID(purego.Retain(_id))
+	})
+}
+
+// SetParagraphs calls the underlying SetParagraphs.
+func (x *TextStorage) SetParagraphs(paragraphs *foundation.NSArray[*raw.NSTextStorage]) {
+	x.inner.SetParagraphs(paragraphs)
 }
 
 // Words returns the collection as a Go slice.
@@ -158,11 +233,14 @@ func (x *TextStorage) Words() []*raw.NSTextStorage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextStorage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
+		return raw.NSTextStorageFromID(purego.Retain(_id))
+	})
+}
+
+// SetWords calls the underlying SetWords.
+func (x *TextStorage) SetWords(words *foundation.NSArray[*raw.NSTextStorage]) {
+	x.inner.SetWords(words)
 }
 
 // Characters returns the collection as a Go slice.
@@ -171,10 +249,83 @@ func (x *TextStorage) Characters() []*raw.NSTextStorage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextStorage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextStorage {
+		return raw.NSTextStorageFromID(purego.Retain(_id))
+	})
 }
+
+// SetCharacters calls the underlying SetCharacters.
+func (x *TextStorage) SetCharacters(characters *foundation.NSArray[*raw.NSTextStorage]) {
+	x.inner.SetCharacters(characters)
+}
+
+// Font calls the underlying Font.
+func (x *TextStorage) Font() *Font {
+	_r := x.inner.Font()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetFont calls the underlying SetFont.
+func (x *TextStorage) SetFont(font *raw.NSFont) {
+	x.inner.SetFont(font)
+}
+
+// ForegroundColor calls the underlying ForegroundColor.
+func (x *TextStorage) ForegroundColor() *Color {
+	_r := x.inner.ForegroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetForegroundColor calls the underlying SetForegroundColor.
+func (x *TextStorage) SetForegroundColor(foregroundColor *raw.NSColor) {
+	x.inner.SetForegroundColor(foregroundColor)
+}
+
+// TextStorageable is the interface implemented by [TextStorage], for mocking and DI.
+type TextStorageable interface {
+	Unwrap() *raw.NSTextStorage
+	WithDelegate(delegate raw.NSTextStorageDelegate) *TextStorage
+	WithTextStorageObserver(textStorageObserver raw.NSTextStorageObserving) *TextStorage
+	WithAttributeRuns(items ...*raw.NSTextStorage) *TextStorage
+	WithParagraphs(items ...*raw.NSTextStorage) *TextStorage
+	WithWords(items ...*raw.NSTextStorage) *TextStorage
+	WithCharacters(items ...*raw.NSTextStorage) *TextStorage
+	WithFont(font *raw.NSFont) *TextStorage
+	WithForegroundColor(foregroundColor *raw.NSColor) *TextStorage
+	AddLayoutManager(aLayoutManager *raw.NSLayoutManager)
+	RemoveLayoutManager(aLayoutManager *raw.NSLayoutManager)
+	EditedRangeChangeInLength(editedMask raw.NSTextStorageEditActions, editedRange foundation.NSRange, delta int)
+	ProcessEditing()
+	InvalidateAttributesInRange(range_ foundation.NSRange)
+	EnsureAttributesAreFixedInRange(range_ foundation.NSRange)
+	LayoutManagers() []*raw.NSLayoutManager
+	EditedMask() raw.NSTextStorageEditActions
+	EditedRange() foundation.NSRange
+	ChangeInLength() int
+	Delegate() raw.NSTextStorageDelegate
+	SetDelegate(delegate raw.NSTextStorageDelegate)
+	FixesAttributesLazily() bool
+	TextStorageObserver() raw.NSTextStorageObserving
+	SetTextStorageObserver(textStorageObserver raw.NSTextStorageObserving)
+	AttributeRuns() []*raw.NSTextStorage
+	SetAttributeRuns(attributeRuns *foundation.NSArray[*raw.NSTextStorage])
+	Paragraphs() []*raw.NSTextStorage
+	SetParagraphs(paragraphs *foundation.NSArray[*raw.NSTextStorage])
+	Words() []*raw.NSTextStorage
+	SetWords(words *foundation.NSArray[*raw.NSTextStorage])
+	Characters() []*raw.NSTextStorage
+	SetCharacters(characters *foundation.NSArray[*raw.NSTextStorage])
+	Font() *Font
+	SetFont(font *raw.NSFont)
+	ForegroundColor() *Color
+	SetForegroundColor(foregroundColor *raw.NSColor)
+}
+
+var _ TextStorageable = (*TextStorage)(nil)
 

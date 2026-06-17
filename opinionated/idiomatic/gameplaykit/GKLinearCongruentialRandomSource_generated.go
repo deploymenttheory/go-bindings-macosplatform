@@ -36,5 +36,25 @@ func (x *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongruenti
 	return x
 }
 
+// Seed calls the underlying Seed.
+func (x *LinearCongruentialRandomSource) Seed() uint64 {
+	return x.inner.Seed()
+}
+
+// SetSeed calls the underlying SetSeed.
+func (x *LinearCongruentialRandomSource) SetSeed(seed uint64) {
+	x.inner.SetSeed(seed)
+}
+
 func (x *LinearCongruentialRandomSource) asRandomSource() *raw.GKRandomSource { return &x.inner.GKRandomSource }
+
+// LinearCongruentialRandomSourceable is the interface implemented by [LinearCongruentialRandomSource], for mocking and DI.
+type LinearCongruentialRandomSourceable interface {
+	Unwrap() *raw.GKLinearCongruentialRandomSource
+	WithSeed(seed uint64) *LinearCongruentialRandomSource
+	Seed() uint64
+	SetSeed(seed uint64)
+}
+
+var _ LinearCongruentialRandomSourceable = (*LinearCongruentialRandomSource)(nil)
 

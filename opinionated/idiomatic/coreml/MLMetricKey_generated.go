@@ -25,3 +25,10 @@ func NewMetricKey() *MetricKey {
 
 func (x *MetricKey) asKey() *raw.MLKey { return &x.inner.MLKey }
 
+// MetricKeyable is the interface implemented by [MetricKey], for mocking and DI.
+type MetricKeyable interface {
+	Unwrap() *raw.MLMetricKey
+}
+
+var _ MetricKeyable = (*MetricKey)(nil)
+

@@ -25,3 +25,22 @@ func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirecto
 	return &SharedDirectory{inner: raw.VZSharedDirectoryFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *SharedDirectory) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *SharedDirectory) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// SharedDirectoryable is the interface implemented by [SharedDirectory], for mocking and DI.
+type SharedDirectoryable interface {
+	Unwrap() *raw.VZSharedDirectory
+	URL() *foundation.NSURL
+	IsReadOnly() bool
+}
+
+var _ SharedDirectoryable = (*SharedDirectory)(nil)
+

@@ -36,3 +36,36 @@ func (x *MTRSwitchClusterMultiPressOngoingEvent) WithCurrentNumberOfPressesCount
 	return x
 }
 
+// GetNewPosition calls the underlying GetNewPosition.
+func (x *MTRSwitchClusterMultiPressOngoingEvent) GetNewPosition() *foundation.NSNumber {
+	return x.inner.GetNewPosition()
+}
+
+// SetNewPosition calls the underlying SetNewPosition.
+func (x *MTRSwitchClusterMultiPressOngoingEvent) SetNewPosition(newPosition *foundation.NSNumber) {
+	x.inner.SetNewPosition(newPosition)
+}
+
+// CurrentNumberOfPressesCounted calls the underlying CurrentNumberOfPressesCounted.
+func (x *MTRSwitchClusterMultiPressOngoingEvent) CurrentNumberOfPressesCounted() *foundation.NSNumber {
+	return x.inner.CurrentNumberOfPressesCounted()
+}
+
+// SetCurrentNumberOfPressesCounted calls the underlying SetCurrentNumberOfPressesCounted.
+func (x *MTRSwitchClusterMultiPressOngoingEvent) SetCurrentNumberOfPressesCounted(currentNumberOfPressesCounted *foundation.NSNumber) {
+	x.inner.SetCurrentNumberOfPressesCounted(currentNumberOfPressesCounted)
+}
+
+// MTRSwitchClusterMultiPressOngoingEventable is the interface implemented by [MTRSwitchClusterMultiPressOngoingEvent], for mocking and DI.
+type MTRSwitchClusterMultiPressOngoingEventable interface {
+	Unwrap() *raw.MTRSwitchClusterMultiPressOngoingEvent
+	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterMultiPressOngoingEvent
+	WithCurrentNumberOfPressesCounted(currentNumberOfPressesCounted *foundation.NSNumber) *MTRSwitchClusterMultiPressOngoingEvent
+	GetNewPosition() *foundation.NSNumber
+	SetNewPosition(newPosition *foundation.NSNumber)
+	CurrentNumberOfPressesCounted() *foundation.NSNumber
+	SetCurrentNumberOfPressesCounted(currentNumberOfPressesCounted *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterMultiPressOngoingEventable = (*MTRSwitchClusterMultiPressOngoingEvent)(nil)
+

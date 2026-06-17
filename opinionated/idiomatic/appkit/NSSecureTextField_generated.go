@@ -31,3 +31,10 @@ func (x *SecureTextField) asView() *raw.NSView { return &x.inner.NSTextField.NSC
 
 func (x *SecureTextField) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
 
+// SecureTextFieldable is the interface implemented by [SecureTextField], for mocking and DI.
+type SecureTextFieldable interface {
+	Unwrap() *raw.NSSecureTextField
+}
+
+var _ SecureTextFieldable = (*SecureTextField)(nil)
+

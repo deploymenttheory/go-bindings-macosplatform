@@ -46,3 +46,49 @@ func (x *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *Deci
 	return x
 }
 
+// ExportToURLError calls the underlying ExportToURLError.
+func (x *DecisionTree) ExportToURLError(url string, error_ unsafe.Pointer) bool {
+	return x.inner.ExportToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), error_)
+}
+
+// FindActionForAnswers calls the underlying FindActionForAnswers.
+func (x *DecisionTree) FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol {
+	return x.inner.FindActionForAnswers(answers)
+}
+
+// RootNode calls the underlying RootNode.
+func (x *DecisionTree) RootNode() *DecisionNode {
+	_r := x.inner.RootNode()
+	if _r == nil {
+		return nil
+	}
+	return &DecisionNode{inner: _r}
+}
+
+// RandomSource calls the underlying RandomSource.
+func (x *DecisionTree) RandomSource() *RandomSource {
+	_r := x.inner.RandomSource()
+	if _r == nil {
+		return nil
+	}
+	return &RandomSource{inner: _r}
+}
+
+// SetRandomSource calls the underlying SetRandomSource.
+func (x *DecisionTree) SetRandomSource(randomSource *raw.GKRandomSource) {
+	x.inner.SetRandomSource(randomSource)
+}
+
+// DecisionTreeable is the interface implemented by [DecisionTree], for mocking and DI.
+type DecisionTreeable interface {
+	Unwrap() *raw.GKDecisionTree
+	WithRandomSource(randomSource RandomSourceProvider) *DecisionTree
+	ExportToURLError(url string, error_ unsafe.Pointer) bool
+	FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol
+	RootNode() *DecisionNode
+	RandomSource() *RandomSource
+	SetRandomSource(randomSource *raw.GKRandomSource)
+}
+
+var _ DecisionTreeable = (*DecisionTree)(nil)
+

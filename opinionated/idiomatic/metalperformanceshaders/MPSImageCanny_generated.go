@@ -61,7 +61,65 @@ func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
 	return x
 }
 
+// ColorTransform calls the underlying ColorTransform.
+func (x *ImageCanny) ColorTransform() *float32 {
+	return x.inner.ColorTransform()
+}
+
+// Sigma calls the underlying Sigma.
+func (x *ImageCanny) Sigma() float32 {
+	return x.inner.Sigma()
+}
+
+// HighThreshold calls the underlying HighThreshold.
+func (x *ImageCanny) HighThreshold() float32 {
+	return x.inner.HighThreshold()
+}
+
+// SetHighThreshold calls the underlying SetHighThreshold.
+func (x *ImageCanny) SetHighThreshold(highThreshold float32) {
+	x.inner.SetHighThreshold(highThreshold)
+}
+
+// LowThreshold calls the underlying LowThreshold.
+func (x *ImageCanny) LowThreshold() float32 {
+	return x.inner.LowThreshold()
+}
+
+// SetLowThreshold calls the underlying SetLowThreshold.
+func (x *ImageCanny) SetLowThreshold(lowThreshold float32) {
+	x.inner.SetLowThreshold(lowThreshold)
+}
+
+// UseFastMode calls the underlying UseFastMode.
+func (x *ImageCanny) UseFastMode() bool {
+	return x.inner.UseFastMode()
+}
+
+// SetUseFastMode calls the underlying SetUseFastMode.
+func (x *ImageCanny) SetUseFastMode(useFastMode bool) {
+	x.inner.SetUseFastMode(useFastMode)
+}
+
 func (x *ImageCanny) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageCanny) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageCannyable is the interface implemented by [ImageCanny], for mocking and DI.
+type ImageCannyable interface {
+	Unwrap() *raw.MPSImageCanny
+	WithHighThreshold(highThreshold float32) *ImageCanny
+	WithLowThreshold(lowThreshold float32) *ImageCanny
+	WithUseFastMode(useFastMode bool) *ImageCanny
+	ColorTransform() *float32
+	Sigma() float32
+	HighThreshold() float32
+	SetHighThreshold(highThreshold float32)
+	LowThreshold() float32
+	SetLowThreshold(lowThreshold float32)
+	UseFastMode() bool
+	SetUseFastMode(useFastMode bool)
+}
+
+var _ ImageCannyable = (*ImageCanny)(nil)
 

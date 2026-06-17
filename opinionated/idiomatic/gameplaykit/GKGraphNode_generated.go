@@ -5,7 +5,9 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,60 @@ func NewGraphNode() *GraphNode {
 	return &GraphNode{inner: raw.GKGraphNodeFromID(_id)}
 }
 
+// AddConnectionsToNodesBidirectional calls the underlying AddConnectionsToNodesBidirectional.
+func (x *GraphNode) AddConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool) {
+	x.inner.AddConnectionsToNodesBidirectional(nodes, bidirectional)
+}
+
+// RemoveConnectionsToNodesBidirectional calls the underlying RemoveConnectionsToNodesBidirectional.
+func (x *GraphNode) RemoveConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool) {
+	x.inner.RemoveConnectionsToNodesBidirectional(nodes, bidirectional)
+}
+
+// EstimatedCostToNode calls the underlying EstimatedCostToNode.
+func (x *GraphNode) EstimatedCostToNode(node *raw.GKGraphNode) float32 {
+	return x.inner.EstimatedCostToNode(node)
+}
+
+// CostToNode calls the underlying CostToNode.
+func (x *GraphNode) CostToNode(node *raw.GKGraphNode) float32 {
+	return x.inner.CostToNode(node)
+}
+
+// FindPathToNode calls the underlying FindPathToNode.
+func (x *GraphNode) FindPathToNode(goalNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
+	return x.inner.FindPathToNode(goalNode)
+}
+
+// FindPathFromNode calls the underlying FindPathFromNode.
+func (x *GraphNode) FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
+	return x.inner.FindPathFromNode(startNode)
+}
+
 // ConnectedNodes returns the collection as a Go slice.
 func (x *GraphNode) ConnectedNodes() []*raw.GKGraphNode {
 	arr := x.inner.ConnectedNodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKGraphNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKGraphNode {
+		return raw.GKGraphNodeFromID(purego.Retain(_id))
+	})
 }
 
 func (x *GraphNode) asGraphNode() *raw.GKGraphNode { return x.inner }
+
+// GraphNodeable is the interface implemented by [GraphNode], for mocking and DI.
+type GraphNodeable interface {
+	Unwrap() *raw.GKGraphNode
+	AddConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool)
+	RemoveConnectionsToNodesBidirectional(nodes *foundation.NSArray[*raw.GKGraphNode], bidirectional bool)
+	EstimatedCostToNode(node *raw.GKGraphNode) float32
+	CostToNode(node *raw.GKGraphNode) float32
+	FindPathToNode(goalNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
+	FindPathFromNode(startNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
+	ConnectedNodes() []*raw.GKGraphNode
+}
+
+var _ GraphNodeable = (*GraphNode)(nil)
 

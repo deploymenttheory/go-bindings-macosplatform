@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -98,17 +99,30 @@ func (x *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentRequest
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *PaymentRequestUpdate) Status() raw.PKPaymentAuthorizationStatus {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *PaymentRequestUpdate) SetStatus(status raw.PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(status)
+}
+
 // PaymentSummaryItems returns the collection as a Go slice.
 func (x *PaymentRequestUpdate) PaymentSummaryItems() []*raw.PKPaymentSummaryItem {
 	arr := x.inner.PaymentSummaryItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentSummaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentSummaryItem {
+		return raw.PKPaymentSummaryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetPaymentSummaryItems calls the underlying SetPaymentSummaryItems.
+func (x *PaymentRequestUpdate) SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
+	x.inner.SetPaymentSummaryItems(paymentSummaryItems)
 }
 
 // ShippingMethods returns the collection as a Go slice.
@@ -117,11 +131,14 @@ func (x *PaymentRequestUpdate) ShippingMethods() []*raw.PKShippingMethod {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKShippingMethod, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKShippingMethod {
+		return raw.PKShippingMethodFromID(purego.Retain(_id))
+	})
+}
+
+// SetShippingMethods calls the underlying SetShippingMethods.
+func (x *PaymentRequestUpdate) SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod]) {
+	x.inner.SetShippingMethods(shippingMethods)
 }
 
 // MultiTokenContexts returns the collection as a Go slice.
@@ -130,12 +147,85 @@ func (x *PaymentRequestUpdate) MultiTokenContexts() []*raw.PKPaymentTokenContext
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentTokenContext, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentTokenContext {
+		return raw.PKPaymentTokenContextFromID(purego.Retain(_id))
+	})
+}
+
+// SetMultiTokenContexts calls the underlying SetMultiTokenContexts.
+func (x *PaymentRequestUpdate) SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext]) {
+	x.inner.SetMultiTokenContexts(multiTokenContexts)
+}
+
+// RecurringPaymentRequest calls the underlying RecurringPaymentRequest.
+func (x *PaymentRequestUpdate) RecurringPaymentRequest() *RecurringPaymentRequest {
+	_r := x.inner.RecurringPaymentRequest()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &RecurringPaymentRequest{inner: _r}
+}
+
+// SetRecurringPaymentRequest calls the underlying SetRecurringPaymentRequest.
+func (x *PaymentRequestUpdate) SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) {
+	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest)
+}
+
+// AutomaticReloadPaymentRequest calls the underlying AutomaticReloadPaymentRequest.
+func (x *PaymentRequestUpdate) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
+	_r := x.inner.AutomaticReloadPaymentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AutomaticReloadPaymentRequest{inner: _r}
+}
+
+// SetAutomaticReloadPaymentRequest calls the underlying SetAutomaticReloadPaymentRequest.
+func (x *PaymentRequestUpdate) SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) {
+	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+}
+
+// DeferredPaymentRequest calls the underlying DeferredPaymentRequest.
+func (x *PaymentRequestUpdate) DeferredPaymentRequest() *DeferredPaymentRequest {
+	_r := x.inner.DeferredPaymentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &DeferredPaymentRequest{inner: _r}
+}
+
+// SetDeferredPaymentRequest calls the underlying SetDeferredPaymentRequest.
+func (x *PaymentRequestUpdate) SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) {
+	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest)
 }
 
 func (x *PaymentRequestUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return x.inner }
+
+// PaymentRequestUpdateable is the interface implemented by [PaymentRequestUpdate], for mocking and DI.
+type PaymentRequestUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestUpdate
+	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestUpdate
+	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestUpdate
+	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequestUpdate
+	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequestUpdate
+	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequestUpdate
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequestUpdate
+	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequestUpdate
+	Status() raw.PKPaymentAuthorizationStatus
+	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	PaymentSummaryItems() []*raw.PKPaymentSummaryItem
+	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	ShippingMethods() []*raw.PKShippingMethod
+	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
+	MultiTokenContexts() []*raw.PKPaymentTokenContext
+	SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext])
+	RecurringPaymentRequest() *RecurringPaymentRequest
+	SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest)
+	AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest
+	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest)
+	DeferredPaymentRequest() *DeferredPaymentRequest
+	SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest)
+}
+
+var _ PaymentRequestUpdateable = (*PaymentRequestUpdate)(nil)
 

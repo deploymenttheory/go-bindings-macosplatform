@@ -51,3 +51,96 @@ func (x *KeyframeSequence) WithRepeatMode(repeatMode raw.SKRepeatMode) *Keyframe
 	return x
 }
 
+// Count calls the underlying Count.
+func (x *KeyframeSequence) Count() uint {
+	return x.inner.Count()
+}
+
+// AddKeyframeValueTime calls the underlying AddKeyframeValueTime.
+func (x *KeyframeSequence) AddKeyframeValueTime(value objc.ID, time_ float64) {
+	x.inner.AddKeyframeValueTime(value, time_)
+}
+
+// RemoveLastKeyframe calls the underlying RemoveLastKeyframe.
+func (x *KeyframeSequence) RemoveLastKeyframe() {
+	x.inner.RemoveLastKeyframe()
+}
+
+// RemoveKeyframeAtIndex calls the underlying RemoveKeyframeAtIndex.
+func (x *KeyframeSequence) RemoveKeyframeAtIndex(index uint) {
+	x.inner.RemoveKeyframeAtIndex(index)
+}
+
+// SetKeyframeValueForIndex calls the underlying SetKeyframeValueForIndex.
+func (x *KeyframeSequence) SetKeyframeValueForIndex(value objc.ID, index uint) {
+	x.inner.SetKeyframeValueForIndex(value, index)
+}
+
+// SetKeyframeTimeForIndex calls the underlying SetKeyframeTimeForIndex.
+func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index uint) {
+	x.inner.SetKeyframeTimeForIndex(time_, index)
+}
+
+// SetKeyframeValueTimeForIndex calls the underlying SetKeyframeValueTimeForIndex.
+func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint) {
+	x.inner.SetKeyframeValueTimeForIndex(value, time_, index)
+}
+
+// GetKeyframeValueForIndex calls the underlying GetKeyframeValueForIndex.
+func (x *KeyframeSequence) GetKeyframeValueForIndex(index uint) objc.ID {
+	return x.inner.GetKeyframeValueForIndex(index)
+}
+
+// GetKeyframeTimeForIndex calls the underlying GetKeyframeTimeForIndex.
+func (x *KeyframeSequence) GetKeyframeTimeForIndex(index uint) float64 {
+	return x.inner.GetKeyframeTimeForIndex(index)
+}
+
+// SampleAtTime calls the underlying SampleAtTime.
+func (x *KeyframeSequence) SampleAtTime(time_ float64) objc.ID {
+	return x.inner.SampleAtTime(time_)
+}
+
+// InterpolationMode calls the underlying InterpolationMode.
+func (x *KeyframeSequence) InterpolationMode() raw.SKInterpolationMode {
+	return x.inner.InterpolationMode()
+}
+
+// SetInterpolationMode calls the underlying SetInterpolationMode.
+func (x *KeyframeSequence) SetInterpolationMode(interpolationMode raw.SKInterpolationMode) {
+	x.inner.SetInterpolationMode(interpolationMode)
+}
+
+// RepeatMode calls the underlying RepeatMode.
+func (x *KeyframeSequence) RepeatMode() raw.SKRepeatMode {
+	return x.inner.RepeatMode()
+}
+
+// SetRepeatMode calls the underlying SetRepeatMode.
+func (x *KeyframeSequence) SetRepeatMode(repeatMode raw.SKRepeatMode) {
+	x.inner.SetRepeatMode(repeatMode)
+}
+
+// KeyframeSequenceable is the interface implemented by [KeyframeSequence], for mocking and DI.
+type KeyframeSequenceable interface {
+	Unwrap() *raw.SKKeyframeSequence
+	WithInterpolationMode(interpolationMode raw.SKInterpolationMode) *KeyframeSequence
+	WithRepeatMode(repeatMode raw.SKRepeatMode) *KeyframeSequence
+	Count() uint
+	AddKeyframeValueTime(value objc.ID, time_ float64)
+	RemoveLastKeyframe()
+	RemoveKeyframeAtIndex(index uint)
+	SetKeyframeValueForIndex(value objc.ID, index uint)
+	SetKeyframeTimeForIndex(time_ float64, index uint)
+	SetKeyframeValueTimeForIndex(value objc.ID, time_ float64, index uint)
+	GetKeyframeValueForIndex(index uint) objc.ID
+	GetKeyframeTimeForIndex(index uint) float64
+	SampleAtTime(time_ float64) objc.ID
+	InterpolationMode() raw.SKInterpolationMode
+	SetInterpolationMode(interpolationMode raw.SKInterpolationMode)
+	RepeatMode() raw.SKRepeatMode
+	SetRepeatMode(repeatMode raw.SKRepeatMode)
+}
+
+var _ KeyframeSequenceable = (*KeyframeSequence)(nil)
+

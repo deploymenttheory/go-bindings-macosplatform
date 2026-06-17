@@ -5,6 +5,7 @@
 package networkextension
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,42 @@ func NewNEFilterFlow() *NEFilterFlow {
 	return &NEFilterFlow{inner: raw.NEFilterFlowFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *NEFilterFlow) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Direction calls the underlying Direction.
+func (x *NEFilterFlow) Direction() raw.NETrafficDirection {
+	return x.inner.Direction()
+}
+
+// SourceAppAuditToken calls the underlying SourceAppAuditToken.
+func (x *NEFilterFlow) SourceAppAuditToken() *foundation.NSData {
+	return x.inner.SourceAppAuditToken()
+}
+
+// SourceProcessAuditToken calls the underlying SourceProcessAuditToken.
+func (x *NEFilterFlow) SourceProcessAuditToken() *foundation.NSData {
+	return x.inner.SourceProcessAuditToken()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *NEFilterFlow) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
 func (x *NEFilterFlow) asNEFilterFlow() *raw.NEFilterFlow { return x.inner }
+
+// NEFilterFlowable is the interface implemented by [NEFilterFlow], for mocking and DI.
+type NEFilterFlowable interface {
+	Unwrap() *raw.NEFilterFlow
+	URL() *foundation.NSURL
+	Direction() raw.NETrafficDirection
+	SourceAppAuditToken() *foundation.NSData
+	SourceProcessAuditToken() *foundation.NSData
+	Identifier() *foundation.NSUUID
+}
+
+var _ NEFilterFlowable = (*NEFilterFlow)(nil)
 

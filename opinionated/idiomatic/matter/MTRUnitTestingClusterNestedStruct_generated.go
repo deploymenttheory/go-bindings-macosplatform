@@ -42,5 +42,55 @@ func (x *MTRUnitTestingClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleS
 	return x
 }
 
+// A calls the underlying A.
+func (x *MTRUnitTestingClusterNestedStruct) A() *foundation.NSNumber {
+	return x.inner.A()
+}
+
+// SetA calls the underlying SetA.
+func (x *MTRUnitTestingClusterNestedStruct) SetA(a *foundation.NSNumber) {
+	x.inner.SetA(a)
+}
+
+// B calls the underlying B.
+func (x *MTRUnitTestingClusterNestedStruct) B() *foundation.NSNumber {
+	return x.inner.B()
+}
+
+// SetB calls the underlying SetB.
+func (x *MTRUnitTestingClusterNestedStruct) SetB(b *foundation.NSNumber) {
+	x.inner.SetB(b)
+}
+
+// C calls the underlying C.
+func (x *MTRUnitTestingClusterNestedStruct) C() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.C()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetC calls the underlying SetC.
+func (x *MTRUnitTestingClusterNestedStruct) SetC(c *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetC(c)
+}
+
 func (x *MTRUnitTestingClusterNestedStruct) asMTRUnitTestingClusterNestedStruct() *raw.MTRUnitTestingClusterNestedStruct { return x.inner }
+
+// MTRUnitTestingClusterNestedStructable is the interface implemented by [MTRUnitTestingClusterNestedStruct], for mocking and DI.
+type MTRUnitTestingClusterNestedStructable interface {
+	Unwrap() *raw.MTRUnitTestingClusterNestedStruct
+	WithA(a *foundation.NSNumber) *MTRUnitTestingClusterNestedStruct
+	WithB(b *foundation.NSNumber) *MTRUnitTestingClusterNestedStruct
+	WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNestedStruct
+	A() *foundation.NSNumber
+	SetA(a *foundation.NSNumber)
+	B() *foundation.NSNumber
+	SetB(b *foundation.NSNumber)
+	C() *MTRUnitTestingClusterSimpleStruct
+	SetC(c *raw.MTRUnitTestingClusterSimpleStruct)
+}
+
+var _ MTRUnitTestingClusterNestedStructable = (*MTRUnitTestingClusterNestedStruct)(nil)
 

@@ -78,3 +78,127 @@ func (x *MTRDoorLockClusterSetWeekDayScheduleParams) WithServerSideProcessingTim
 	return x
 }
 
+// WeekDayIndex calls the underlying WeekDayIndex.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) WeekDayIndex() *foundation.NSNumber {
+	return x.inner.WeekDayIndex()
+}
+
+// SetWeekDayIndex calls the underlying SetWeekDayIndex.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetWeekDayIndex(weekDayIndex *foundation.NSNumber) {
+	x.inner.SetWeekDayIndex(weekDayIndex)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// DaysMask calls the underlying DaysMask.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) DaysMask() *foundation.NSNumber {
+	return x.inner.DaysMask()
+}
+
+// SetDaysMask calls the underlying SetDaysMask.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetDaysMask(daysMask *foundation.NSNumber) {
+	x.inner.SetDaysMask(daysMask)
+}
+
+// StartHour calls the underlying StartHour.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) StartHour() *foundation.NSNumber {
+	return x.inner.StartHour()
+}
+
+// SetStartHour calls the underlying SetStartHour.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetStartHour(startHour *foundation.NSNumber) {
+	x.inner.SetStartHour(startHour)
+}
+
+// StartMinute calls the underlying StartMinute.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) StartMinute() *foundation.NSNumber {
+	return x.inner.StartMinute()
+}
+
+// SetStartMinute calls the underlying SetStartMinute.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetStartMinute(startMinute *foundation.NSNumber) {
+	x.inner.SetStartMinute(startMinute)
+}
+
+// EndHour calls the underlying EndHour.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) EndHour() *foundation.NSNumber {
+	return x.inner.EndHour()
+}
+
+// SetEndHour calls the underlying SetEndHour.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetEndHour(endHour *foundation.NSNumber) {
+	x.inner.SetEndHour(endHour)
+}
+
+// EndMinute calls the underlying EndMinute.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) EndMinute() *foundation.NSNumber {
+	return x.inner.EndMinute()
+}
+
+// SetEndMinute calls the underlying SetEndMinute.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetEndMinute(endMinute *foundation.NSNumber) {
+	x.inner.SetEndMinute(endMinute)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetWeekDayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterSetWeekDayScheduleParamsable is the interface implemented by [MTRDoorLockClusterSetWeekDayScheduleParams], for mocking and DI.
+type MTRDoorLockClusterSetWeekDayScheduleParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetWeekDayScheduleParams
+	WithWeekDayIndex(weekDayIndex *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithDaysMask(daysMask *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithStartHour(startHour *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithStartMinute(startMinute *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithEndHour(endHour *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithEndMinute(endMinute *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterSetWeekDayScheduleParams
+	WeekDayIndex() *foundation.NSNumber
+	SetWeekDayIndex(weekDayIndex *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	DaysMask() *foundation.NSNumber
+	SetDaysMask(daysMask *foundation.NSNumber)
+	StartHour() *foundation.NSNumber
+	SetStartHour(startHour *foundation.NSNumber)
+	StartMinute() *foundation.NSNumber
+	SetStartMinute(startMinute *foundation.NSNumber)
+	EndHour() *foundation.NSNumber
+	SetEndHour(endHour *foundation.NSNumber)
+	EndMinute() *foundation.NSNumber
+	SetEndMinute(endMinute *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetWeekDayScheduleParamsable = (*MTRDoorLockClusterSetWeekDayScheduleParams)(nil)
+

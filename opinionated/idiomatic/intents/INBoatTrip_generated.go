@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,4 +26,63 @@ func NewBoatTripWithProviderBoatNameBoatNumberTripDurationDepartureBoatTerminalL
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:boatName:boatNumber:tripDuration:departureBoatTerminalLocation:arrivalBoatTerminalLocation:"), foundation.NSStringStringWithUTF8String(provider).Ptr(), foundation.NSStringStringWithUTF8String(boatName).Ptr(), foundation.NSStringStringWithUTF8String(boatNumber).Ptr(), tripDuration.Ptr(), departureBoatTerminalLocation.Ptr(), arrivalBoatTerminalLocation.Ptr())
 	return &BoatTrip{inner: raw.INBoatTripFromID(_id)}
 }
+
+// Provider calls the underlying Provider.
+func (x *BoatTrip) Provider() string {
+	_r := x.inner.Provider()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BoatName calls the underlying BoatName.
+func (x *BoatTrip) BoatName() string {
+	_r := x.inner.BoatName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BoatNumber calls the underlying BoatNumber.
+func (x *BoatTrip) BoatNumber() string {
+	_r := x.inner.BoatNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TripDuration calls the underlying TripDuration.
+func (x *BoatTrip) TripDuration() *DateComponentsRange {
+	_r := x.inner.TripDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// DepartureBoatTerminalLocation calls the underlying DepartureBoatTerminalLocation.
+func (x *BoatTrip) DepartureBoatTerminalLocation() *corelocation.CLPlacemark {
+	return x.inner.DepartureBoatTerminalLocation()
+}
+
+// ArrivalBoatTerminalLocation calls the underlying ArrivalBoatTerminalLocation.
+func (x *BoatTrip) ArrivalBoatTerminalLocation() *corelocation.CLPlacemark {
+	return x.inner.ArrivalBoatTerminalLocation()
+}
+
+// BoatTripable is the interface implemented by [BoatTrip], for mocking and DI.
+type BoatTripable interface {
+	Unwrap() *raw.INBoatTrip
+	Provider() string
+	BoatName() string
+	BoatNumber() string
+	TripDuration() *DateComponentsRange
+	DepartureBoatTerminalLocation() *corelocation.CLPlacemark
+	ArrivalBoatTerminalLocation() *corelocation.CLPlacemark
+}
+
+var _ BoatTripable = (*BoatTrip)(nil)
 

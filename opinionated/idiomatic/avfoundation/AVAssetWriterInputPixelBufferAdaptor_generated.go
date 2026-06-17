@@ -6,8 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetWriterInputPixelBufferAdaptor wraps [raw.AVAssetWriterInputPixelBufferAdaptor] with a fluent Go API.
@@ -24,4 +26,39 @@ func NewAssetWriterInputPixelBufferAdaptorWithAssetWriterInputSourcePixelBufferA
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAssetWriterInput:sourcePixelBufferAttributes:"), input.Ptr(), sourcePixelBufferAttributes.Ptr())
 	return &AssetWriterInputPixelBufferAdaptor{inner: raw.AVAssetWriterInputPixelBufferAdaptorFromID(_id)}
 }
+
+// AppendPixelBufferWithPresentationTime calls the underlying AppendPixelBufferWithPresentationTime.
+func (x *AssetWriterInputPixelBufferAdaptor) AppendPixelBufferWithPresentationTime(pixelBuffer unsafe.Pointer, presentationTime coremedia.CMTime) bool {
+	return x.inner.AppendPixelBufferWithPresentationTime(pixelBuffer, presentationTime)
+}
+
+// AssetWriterInput calls the underlying AssetWriterInput.
+func (x *AssetWriterInputPixelBufferAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := x.inner.AssetWriterInput()
+	if _r == nil {
+		return nil
+	}
+	return &AssetWriterInput{inner: _r}
+}
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *AssetWriterInputPixelBufferAdaptor) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// PixelBufferPool calls the underlying PixelBufferPool.
+func (x *AssetWriterInputPixelBufferAdaptor) PixelBufferPool() unsafe.Pointer {
+	return x.inner.PixelBufferPool()
+}
+
+// AssetWriterInputPixelBufferAdaptorable is the interface implemented by [AssetWriterInputPixelBufferAdaptor], for mocking and DI.
+type AssetWriterInputPixelBufferAdaptorable interface {
+	Unwrap() *raw.AVAssetWriterInputPixelBufferAdaptor
+	AppendPixelBufferWithPresentationTime(pixelBuffer unsafe.Pointer, presentationTime coremedia.CMTime) bool
+	AssetWriterInput() *AssetWriterInput
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	PixelBufferPool() unsafe.Pointer
+}
+
+var _ AssetWriterInputPixelBufferAdaptorable = (*AssetWriterInputPixelBufferAdaptor)(nil)
 

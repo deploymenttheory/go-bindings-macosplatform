@@ -37,5 +37,58 @@ func (x *CustomMigrationStage) WithDidMigrateHandler(didMigrateHandler func(*raw
 	return x
 }
 
+// CurrentModel calls the underlying CurrentModel.
+func (x *CustomMigrationStage) CurrentModel() *ManagedObjectModelReference {
+	_r := x.inner.CurrentModel()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectModelReference{inner: _r}
+}
+
+// NextModel calls the underlying NextModel.
+func (x *CustomMigrationStage) NextModel() *ManagedObjectModelReference {
+	_r := x.inner.NextModel()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectModelReference{inner: _r}
+}
+
+// WillMigrateHandler calls the underlying WillMigrateHandler.
+func (x *CustomMigrationStage) WillMigrateHandler() objc.Block {
+	return x.inner.WillMigrateHandler()
+}
+
+// SetWillMigrateHandler calls the underlying SetWillMigrateHandler.
+func (x *CustomMigrationStage) SetWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) {
+	x.inner.SetWillMigrateHandler(willMigrateHandler)
+}
+
+// DidMigrateHandler calls the underlying DidMigrateHandler.
+func (x *CustomMigrationStage) DidMigrateHandler() objc.Block {
+	return x.inner.DidMigrateHandler()
+}
+
+// SetDidMigrateHandler calls the underlying SetDidMigrateHandler.
+func (x *CustomMigrationStage) SetDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) {
+	x.inner.SetDidMigrateHandler(didMigrateHandler)
+}
+
 func (x *CustomMigrationStage) asMigrationStage() *raw.NSMigrationStage { return &x.inner.NSMigrationStage }
+
+// CustomMigrationStageable is the interface implemented by [CustomMigrationStage], for mocking and DI.
+type CustomMigrationStageable interface {
+	Unwrap() *raw.NSCustomMigrationStage
+	WithWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
+	WithDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool) *CustomMigrationStage
+	CurrentModel() *ManagedObjectModelReference
+	NextModel() *ManagedObjectModelReference
+	WillMigrateHandler() objc.Block
+	SetWillMigrateHandler(willMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool)
+	DidMigrateHandler() objc.Block
+	SetDidMigrateHandler(didMigrateHandler func(*raw.NSStagedMigrationManager, *raw.NSCustomMigrationStage, unsafe.Pointer) bool)
+}
+
+var _ CustomMigrationStageable = (*CustomMigrationStage)(nil)
 

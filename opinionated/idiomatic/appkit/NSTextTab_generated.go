@@ -32,3 +32,34 @@ func NewTextTabWithTypeLocation(type_ raw.NSTextTabType, loc float64) *TextTab {
 	return &TextTab{inner: raw.NSTextTabFromID(_id)}
 }
 
+// Location calls the underlying Location.
+func (x *TextTab) Location() float64 {
+	return x.inner.Location()
+}
+
+// Options calls the underlying Options.
+func (x *TextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Options()
+}
+
+// Alignment calls the underlying Alignment.
+func (x *TextTab) Alignment() raw.NSTextAlignment {
+	return x.inner.Alignment()
+}
+
+// TabStopType calls the underlying TabStopType.
+func (x *TextTab) TabStopType() raw.NSTextTabType {
+	return x.inner.TabStopType()
+}
+
+// TextTabable is the interface implemented by [TextTab], for mocking and DI.
+type TextTabable interface {
+	Unwrap() *raw.NSTextTab
+	Location() float64
+	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Alignment() raw.NSTextAlignment
+	TabStopType() raw.NSTextTabType
+}
+
+var _ TextTabable = (*TextTab)(nil)
+

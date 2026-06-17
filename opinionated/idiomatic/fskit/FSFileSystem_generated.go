@@ -23,3 +23,10 @@ func NewFileSystem() *FileSystem {
 	return &FileSystem{inner: raw.FSFileSystemFromID(_id)}
 }
 
+// FileSystemable is the interface implemented by [FileSystem], for mocking and DI.
+type FileSystemable interface {
+	Unwrap() *raw.FSFileSystem
+}
+
+var _ FileSystemable = (*FileSystem)(nil)
+

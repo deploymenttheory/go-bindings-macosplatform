@@ -10,7 +10,9 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatrixBatchNormalization wraps [raw.MPSMatrixBatchNormalization] with a fluent Go API.
@@ -59,7 +61,112 @@ func (x *MatrixBatchNormalization) WithComputeStatistics(computeStatistics bool)
 	return x
 }
 
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixBatchNormalization) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixBatchNormalization) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixBatchNormalization) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixBatchNormalization) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixBatchNormalization) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// EncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix calls the underlying EncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix.
+func (x *MatrixBatchNormalization) EncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix(commandBuffer, inputMatrix, meanVector, varianceVector, gammaVector, betaVector, resultMatrix)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *MatrixBatchNormalization) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixBatchNormalization {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &MatrixBatchNormalization{inner: _r}
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixBatchNormalization) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixBatchNormalization) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixBatchNormalization) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixBatchNormalization) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *MatrixBatchNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *MatrixBatchNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// ComputeStatistics calls the underlying ComputeStatistics.
+func (x *MatrixBatchNormalization) ComputeStatistics() bool {
+	return x.inner.ComputeStatistics()
+}
+
+// SetComputeStatistics calls the underlying SetComputeStatistics.
+func (x *MatrixBatchNormalization) SetComputeStatistics(computeStatistics bool) {
+	x.inner.SetComputeStatistics(computeStatistics)
+}
+
 func (x *MatrixBatchNormalization) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
 
 func (x *MatrixBatchNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+
+// MatrixBatchNormalizationable is the interface implemented by [MatrixBatchNormalization], for mocking and DI.
+type MatrixBatchNormalizationable interface {
+	Unwrap() *raw.MPSMatrixBatchNormalization
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalization
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalization
+	WithEpsilon(epsilon float32) *MatrixBatchNormalization
+	WithComputeStatistics(computeStatistics bool) *MatrixBatchNormalization
+	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	EncodeToCommandBufferInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixBatchNormalization
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	ComputeStatistics() bool
+	SetComputeStatistics(computeStatistics bool)
+}
+
+var _ MatrixBatchNormalizationable = (*MatrixBatchNormalization)(nil)
 

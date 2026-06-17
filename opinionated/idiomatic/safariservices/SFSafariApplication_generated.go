@@ -23,3 +23,10 @@ func NewSafariApplication() *SafariApplication {
 	return &SafariApplication{inner: raw.SFSafariApplicationFromID(_id)}
 }
 
+// SafariApplicationable is the interface implemented by [SafariApplication], for mocking and DI.
+type SafariApplicationable interface {
+	Unwrap() *raw.SFSafariApplication
+}
+
+var _ SafariApplicationable = (*SafariApplication)(nil)
+

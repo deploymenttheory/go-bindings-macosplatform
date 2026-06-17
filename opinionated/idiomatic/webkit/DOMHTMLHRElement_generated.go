@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +49,58 @@ func (x *DOMHTMLHRElement) WithWidth(width string) *DOMHTMLHRElement {
 	return x
 }
 
+// Align calls the underlying Align.
+func (x *DOMHTMLHRElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLHRElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// NoShade calls the underlying NoShade.
+func (x *DOMHTMLHRElement) NoShade() bool {
+	return x.inner.NoShade()
+}
+
+// SetNoShade calls the underlying SetNoShade.
+func (x *DOMHTMLHRElement) SetNoShade(noShade bool) {
+	x.inner.SetNoShade(noShade)
+}
+
+// Size calls the underlying Size.
+func (x *DOMHTMLHRElement) Size() string {
+	_r := x.inner.Size()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSize calls the underlying SetSize.
+func (x *DOMHTMLHRElement) SetSize(size string) {
+	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLHRElement) Width() string {
+	_r := x.inner.Width()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLHRElement) SetWidth(width string) {
+	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+}
+
 func (x *DOMHTMLHRElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLHRElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -57,4 +110,23 @@ func (x *DOMHTMLHRElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEle
 func (x *DOMHTMLHRElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLHRElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLHRElementable is the interface implemented by [DOMHTMLHRElement], for mocking and DI.
+type DOMHTMLHRElementable interface {
+	Unwrap() *raw.DOMHTMLHRElement
+	WithAlign(align string) *DOMHTMLHRElement
+	WithNoShade(noShade bool) *DOMHTMLHRElement
+	WithSize(size string) *DOMHTMLHRElement
+	WithWidth(width string) *DOMHTMLHRElement
+	Align() string
+	SetAlign(align string)
+	NoShade() bool
+	SetNoShade(noShade bool)
+	Size() string
+	SetSize(size string)
+	Width() string
+	SetWidth(width string)
+}
+
+var _ DOMHTMLHRElementable = (*DOMHTMLHRElement)(nil)
 

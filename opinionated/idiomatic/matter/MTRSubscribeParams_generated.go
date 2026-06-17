@@ -73,5 +73,103 @@ func (x *MTRSubscribeParams) WithAutoResubscribe(autoResubscribe *foundation.NSN
 	return x
 }
 
+// ShouldReplaceExistingSubscriptions calls the underlying ShouldReplaceExistingSubscriptions.
+func (x *MTRSubscribeParams) ShouldReplaceExistingSubscriptions() bool {
+	return x.inner.ShouldReplaceExistingSubscriptions()
+}
+
+// SetReplaceExistingSubscriptions calls the underlying SetReplaceExistingSubscriptions.
+func (x *MTRSubscribeParams) SetReplaceExistingSubscriptions(replaceExistingSubscriptions bool) {
+	x.inner.SetReplaceExistingSubscriptions(replaceExistingSubscriptions)
+}
+
+// ShouldResubscribeAutomatically calls the underlying ShouldResubscribeAutomatically.
+func (x *MTRSubscribeParams) ShouldResubscribeAutomatically() bool {
+	return x.inner.ShouldResubscribeAutomatically()
+}
+
+// SetResubscribeAutomatically calls the underlying SetResubscribeAutomatically.
+func (x *MTRSubscribeParams) SetResubscribeAutomatically(resubscribeAutomatically bool) {
+	x.inner.SetResubscribeAutomatically(resubscribeAutomatically)
+}
+
+// MinInterval calls the underlying MinInterval.
+func (x *MTRSubscribeParams) MinInterval() *foundation.NSNumber {
+	return x.inner.MinInterval()
+}
+
+// SetMinInterval calls the underlying SetMinInterval.
+func (x *MTRSubscribeParams) SetMinInterval(minInterval *foundation.NSNumber) {
+	x.inner.SetMinInterval(minInterval)
+}
+
+// MaxInterval calls the underlying MaxInterval.
+func (x *MTRSubscribeParams) MaxInterval() *foundation.NSNumber {
+	return x.inner.MaxInterval()
+}
+
+// SetMaxInterval calls the underlying SetMaxInterval.
+func (x *MTRSubscribeParams) SetMaxInterval(maxInterval *foundation.NSNumber) {
+	x.inner.SetMaxInterval(maxInterval)
+}
+
+// ShouldReportEventsUrgently calls the underlying ShouldReportEventsUrgently.
+func (x *MTRSubscribeParams) ShouldReportEventsUrgently() bool {
+	return x.inner.ShouldReportEventsUrgently()
+}
+
+// SetReportEventsUrgently calls the underlying SetReportEventsUrgently.
+func (x *MTRSubscribeParams) SetReportEventsUrgently(reportEventsUrgently bool) {
+	x.inner.SetReportEventsUrgently(reportEventsUrgently)
+}
+
+// KeepPreviousSubscriptions calls the underlying KeepPreviousSubscriptions.
+func (x *MTRSubscribeParams) KeepPreviousSubscriptions() *foundation.NSNumber {
+	return x.inner.KeepPreviousSubscriptions()
+}
+
+// SetKeepPreviousSubscriptions calls the underlying SetKeepPreviousSubscriptions.
+func (x *MTRSubscribeParams) SetKeepPreviousSubscriptions(keepPreviousSubscriptions *foundation.NSNumber) {
+	x.inner.SetKeepPreviousSubscriptions(keepPreviousSubscriptions)
+}
+
+// AutoResubscribe calls the underlying AutoResubscribe.
+func (x *MTRSubscribeParams) AutoResubscribe() *foundation.NSNumber {
+	return x.inner.AutoResubscribe()
+}
+
+// SetAutoResubscribe calls the underlying SetAutoResubscribe.
+func (x *MTRSubscribeParams) SetAutoResubscribe(autoResubscribe *foundation.NSNumber) {
+	x.inner.SetAutoResubscribe(autoResubscribe)
+}
+
 func (x *MTRSubscribeParams) asMTRReadParams() *raw.MTRReadParams { return &x.inner.MTRReadParams }
+
+// MTRSubscribeParamsable is the interface implemented by [MTRSubscribeParams], for mocking and DI.
+type MTRSubscribeParamsable interface {
+	Unwrap() *raw.MTRSubscribeParams
+	WithReplaceExistingSubscriptions(replaceExistingSubscriptions bool) *MTRSubscribeParams
+	WithResubscribeAutomatically(resubscribeAutomatically bool) *MTRSubscribeParams
+	WithMinInterval(minInterval *foundation.NSNumber) *MTRSubscribeParams
+	WithMaxInterval(maxInterval *foundation.NSNumber) *MTRSubscribeParams
+	WithReportEventsUrgently(reportEventsUrgently bool) *MTRSubscribeParams
+	WithKeepPreviousSubscriptions(keepPreviousSubscriptions *foundation.NSNumber) *MTRSubscribeParams
+	WithAutoResubscribe(autoResubscribe *foundation.NSNumber) *MTRSubscribeParams
+	ShouldReplaceExistingSubscriptions() bool
+	SetReplaceExistingSubscriptions(replaceExistingSubscriptions bool)
+	ShouldResubscribeAutomatically() bool
+	SetResubscribeAutomatically(resubscribeAutomatically bool)
+	MinInterval() *foundation.NSNumber
+	SetMinInterval(minInterval *foundation.NSNumber)
+	MaxInterval() *foundation.NSNumber
+	SetMaxInterval(maxInterval *foundation.NSNumber)
+	ShouldReportEventsUrgently() bool
+	SetReportEventsUrgently(reportEventsUrgently bool)
+	KeepPreviousSubscriptions() *foundation.NSNumber
+	SetKeepPreviousSubscriptions(keepPreviousSubscriptions *foundation.NSNumber)
+	AutoResubscribe() *foundation.NSNumber
+	SetAutoResubscribe(autoResubscribe *foundation.NSNumber)
+}
+
+var _ MTRSubscribeParamsable = (*MTRSubscribeParams)(nil)
 

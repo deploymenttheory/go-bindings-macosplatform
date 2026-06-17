@@ -23,3 +23,10 @@ func NewSymbolEffectOptionsRepeatBehavior() *SymbolEffectOptionsRepeatBehavior {
 	return &SymbolEffectOptionsRepeatBehavior{inner: raw.NSSymbolEffectOptionsRepeatBehaviorFromID(_id)}
 }
 
+// SymbolEffectOptionsRepeatBehaviorable is the interface implemented by [SymbolEffectOptionsRepeatBehavior], for mocking and DI.
+type SymbolEffectOptionsRepeatBehaviorable interface {
+	Unwrap() *raw.NSSymbolEffectOptionsRepeatBehavior
+}
+
+var _ SymbolEffectOptionsRepeatBehaviorable = (*SymbolEffectOptionsRepeatBehavior)(nil)
+

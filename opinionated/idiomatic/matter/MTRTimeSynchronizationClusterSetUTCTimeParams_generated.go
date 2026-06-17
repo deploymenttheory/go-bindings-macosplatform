@@ -25,3 +25,10 @@ func NewMTRTimeSynchronizationClusterSetUtcTimeParams() *MTRTimeSynchronizationC
 
 func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams { return &x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams }
 
+// MTRTimeSynchronizationClusterSetUtcTimeParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetUtcTimeParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetUtcTimeParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams
+}
+
+var _ MTRTimeSynchronizationClusterSetUtcTimeParamsable = (*MTRTimeSynchronizationClusterSetUtcTimeParams)(nil)
+

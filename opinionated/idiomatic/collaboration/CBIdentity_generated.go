@@ -5,9 +5,12 @@
 package collaboration
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Identity wraps [raw.CBIdentity] with a fluent Go API.
@@ -24,18 +27,110 @@ func NewIdentity() *Identity {
 	return &Identity{inner: raw.CBIdentityFromID(_id)}
 }
 
+// IsMemberOfGroup calls the underlying IsMemberOfGroup.
+func (x *Identity) IsMemberOfGroup(group *raw.CBGroupIdentity) bool {
+	return x.inner.IsMemberOfGroup(group)
+}
+
+// Authority calls the underlying Authority.
+func (x *Identity) Authority() *IdentityAuthority {
+	_r := x.inner.Authority()
+	if _r == nil {
+		return nil
+	}
+	return &IdentityAuthority{inner: _r}
+}
+
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *Identity) UniqueIdentifier() *foundation.NSUUID {
+	return x.inner.UniqueIdentifier()
+}
+
+// UUIDString calls the underlying UUIDString.
+func (x *Identity) UUIDString() string {
+	_r := x.inner.UUIDString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FullName calls the underlying FullName.
+func (x *Identity) FullName() string {
+	_r := x.inner.FullName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PosixName calls the underlying PosixName.
+func (x *Identity) PosixName() string {
+	_r := x.inner.PosixName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Aliases returns the collection as a Go slice.
-func (x *Identity) Aliases() []*foundation.NSString {
+func (x *Identity) Aliases() []string {
 	arr := x.inner.Aliases()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// EmailAddress calls the underlying EmailAddress.
+func (x *Identity) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Image calls the underlying Image.
+func (x *Identity) Image() *appkit.NSImage {
+	return x.inner.Image()
+}
+
+// PersistentReference calls the underlying PersistentReference.
+func (x *Identity) PersistentReference() *foundation.NSData {
+	return x.inner.PersistentReference()
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *Identity) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// CSIdentity calls the underlying CSIdentity.
+func (x *Identity) CSIdentity() unsafe.Pointer {
+	return x.inner.CSIdentity()
 }
 
 func (x *Identity) asIdentity() *raw.CBIdentity { return x.inner }
+
+// Identityable is the interface implemented by [Identity], for mocking and DI.
+type Identityable interface {
+	Unwrap() *raw.CBIdentity
+	IsMemberOfGroup(group *raw.CBGroupIdentity) bool
+	Authority() *IdentityAuthority
+	UniqueIdentifier() *foundation.NSUUID
+	UUIDString() string
+	FullName() string
+	PosixName() string
+	Aliases() []string
+	EmailAddress() string
+	Image() *appkit.NSImage
+	PersistentReference() *foundation.NSData
+	IsHidden() bool
+	CSIdentity() unsafe.Pointer
+}
+
+var _ Identityable = (*Identity)(nil)
 

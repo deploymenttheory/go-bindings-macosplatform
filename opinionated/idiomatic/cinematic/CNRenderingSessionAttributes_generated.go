@@ -23,3 +23,16 @@ func NewRenderingSessionAttributes() *RenderingSessionAttributes {
 	return &RenderingSessionAttributes{inner: raw.CNRenderingSessionAttributesFromID(_id)}
 }
 
+// RenderingVersion calls the underlying RenderingVersion.
+func (x *RenderingSessionAttributes) RenderingVersion() int {
+	return x.inner.RenderingVersion()
+}
+
+// RenderingSessionAttributesable is the interface implemented by [RenderingSessionAttributes], for mocking and DI.
+type RenderingSessionAttributesable interface {
+	Unwrap() *raw.CNRenderingSessionAttributes
+	RenderingVersion() int
+}
+
+var _ RenderingSessionAttributesable = (*RenderingSessionAttributes)(nil)
+

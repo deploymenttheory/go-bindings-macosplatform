@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,4 +26,45 @@ func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetT
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:"), foundation.NSStringStringWithUTF8String(clockName).Ptr(), sourceIdentifier.Ptr(), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
 	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(_id)}
 }
+
+// ClockName calls the underlying ClockName.
+func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
+	_r := x.inner.ClockName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceIdentifier calls the underlying SourceIdentifier.
+func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() *foundation.NSUUID {
+	return x.inner.SourceIdentifier()
+}
+
+// GetTimeCallMinimumInterval calls the underlying GetTimeCallMinimumInterval.
+func (x *ExtensionStreamCustomClockConfiguration) GetTimeCallMinimumInterval() coremedia.CMTime {
+	return x.inner.GetTimeCallMinimumInterval()
+}
+
+// NumberOfEventsForRateSmoothing calls the underlying NumberOfEventsForRateSmoothing.
+func (x *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
+	return x.inner.NumberOfEventsForRateSmoothing()
+}
+
+// NumberOfAveragesForRateSmoothing calls the underlying NumberOfAveragesForRateSmoothing.
+func (x *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
+	return x.inner.NumberOfAveragesForRateSmoothing()
+}
+
+// ExtensionStreamCustomClockConfigurationable is the interface implemented by [ExtensionStreamCustomClockConfiguration], for mocking and DI.
+type ExtensionStreamCustomClockConfigurationable interface {
+	Unwrap() *raw.CMIOExtensionStreamCustomClockConfiguration
+	ClockName() string
+	SourceIdentifier() *foundation.NSUUID
+	GetTimeCallMinimumInterval() coremedia.CMTime
+	NumberOfEventsForRateSmoothing() uint32
+	NumberOfAveragesForRateSmoothing() uint32
+}
+
+var _ ExtensionStreamCustomClockConfigurationable = (*ExtensionStreamCustomClockConfiguration)(nil)
 

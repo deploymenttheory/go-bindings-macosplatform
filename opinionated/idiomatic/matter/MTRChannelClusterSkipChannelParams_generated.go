@@ -42,3 +42,49 @@ func (x *MTRChannelClusterSkipChannelParams) WithServerSideProcessingTimeout(ser
 	return x
 }
 
+// GetCount calls the underlying GetCount.
+func (x *MTRChannelClusterSkipChannelParams) GetCount() *foundation.NSNumber {
+	return x.inner.GetCount()
+}
+
+// SetCount calls the underlying SetCount.
+func (x *MTRChannelClusterSkipChannelParams) SetCount(count *foundation.NSNumber) {
+	x.inner.SetCount(count)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterSkipChannelParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterSkipChannelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRChannelClusterSkipChannelParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRChannelClusterSkipChannelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRChannelClusterSkipChannelParamsable is the interface implemented by [MTRChannelClusterSkipChannelParams], for mocking and DI.
+type MTRChannelClusterSkipChannelParamsable interface {
+	Unwrap() *raw.MTRChannelClusterSkipChannelParams
+	WithCount(count *foundation.NSNumber) *MTRChannelClusterSkipChannelParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterSkipChannelParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterSkipChannelParams
+	GetCount() *foundation.NSNumber
+	SetCount(count *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterSkipChannelParamsable = (*MTRChannelClusterSkipChannelParams)(nil)
+

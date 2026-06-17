@@ -28,3 +28,10 @@ func (x *CNNConvolutionTransposeNode) asCNNConvolutionNode() *raw.MPSCNNConvolut
 
 func (x *CNNConvolutionTransposeNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode }
 
+// CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
+type CNNConvolutionTransposeNodeable interface {
+	Unwrap() *raw.MPSCNNConvolutionTransposeNode
+}
+
+var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)
+

@@ -8,6 +8,7 @@ import (
 	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,6 +56,16 @@ func (x *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *Op
 	return x
 }
 
+// AddOperation calls the underlying AddOperation.
+func (x *OperationQueue) AddOperation(op *raw.NSOperation) {
+	x.inner.AddOperation(op)
+}
+
+// AddOperationsWaitUntilFinished calls the underlying AddOperationsWaitUntilFinished.
+func (x *OperationQueue) AddOperationsWaitUntilFinished(ops *raw.NSArray[*raw.NSOperation], wait bool) {
+	x.inner.AddOperationsWaitUntilFinished(ops, wait)
+}
+
 // AddOperationWith blocks until the operation completes or ctx is cancelled.
 func (x *OperationQueue) AddOperationWith(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -83,18 +94,129 @@ func (x *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	}
 }
 
+// CancelAllOperations calls the underlying CancelAllOperations.
+func (x *OperationQueue) CancelAllOperations() {
+	x.inner.CancelAllOperations()
+}
+
+// WaitUntilAllOperationsAreFinished calls the underlying WaitUntilAllOperationsAreFinished.
+func (x *OperationQueue) WaitUntilAllOperationsAreFinished() {
+	x.inner.WaitUntilAllOperationsAreFinished()
+}
+
+// Progress calls the underlying Progress.
+func (x *OperationQueue) Progress() *Progress {
+	_r := x.inner.Progress()
+	if _r == nil {
+		return nil
+	}
+	return &Progress{inner: _r}
+}
+
+// MaxConcurrentOperationCount calls the underlying MaxConcurrentOperationCount.
+func (x *OperationQueue) MaxConcurrentOperationCount() int {
+	return x.inner.MaxConcurrentOperationCount()
+}
+
+// SetMaxConcurrentOperationCount calls the underlying SetMaxConcurrentOperationCount.
+func (x *OperationQueue) SetMaxConcurrentOperationCount(maxConcurrentOperationCount int) {
+	x.inner.SetMaxConcurrentOperationCount(maxConcurrentOperationCount)
+}
+
+// IsSuspended calls the underlying IsSuspended.
+func (x *OperationQueue) IsSuspended() bool {
+	return x.inner.IsSuspended()
+}
+
+// SetSuspended calls the underlying SetSuspended.
+func (x *OperationQueue) SetSuspended(suspended bool) {
+	x.inner.SetSuspended(suspended)
+}
+
+// Name calls the underlying Name.
+func (x *OperationQueue) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *OperationQueue) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// QualityOfService calls the underlying QualityOfService.
+func (x *OperationQueue) QualityOfService() raw.NSQualityOfService {
+	return x.inner.QualityOfService()
+}
+
+// SetQualityOfService calls the underlying SetQualityOfService.
+func (x *OperationQueue) SetQualityOfService(qualityOfService raw.NSQualityOfService) {
+	x.inner.SetQualityOfService(qualityOfService)
+}
+
+// UnderlyingQueue calls the underlying UnderlyingQueue.
+func (x *OperationQueue) UnderlyingQueue() *Object {
+	_r := x.inner.UnderlyingQueue()
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
+// SetUnderlyingQueue calls the underlying SetUnderlyingQueue.
+func (x *OperationQueue) SetUnderlyingQueue(underlyingQueue *raw.NSObject) {
+	x.inner.SetUnderlyingQueue(underlyingQueue)
+}
+
 // Operations returns the collection as a Go slice.
 func (x *OperationQueue) Operations() []*raw.NSOperation {
 	arr := x.inner.Operations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSOperation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSOperation {
+		return raw.NSOperationFromID(purego.Retain(_id))
+	})
+}
+
+// OperationCount calls the underlying OperationCount.
+func (x *OperationQueue) OperationCount() uint {
+	return x.inner.OperationCount()
 }
 
 func (x *OperationQueue) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// OperationQueueable is the interface implemented by [OperationQueue], for mocking and DI.
+type OperationQueueable interface {
+	Unwrap() *raw.NSOperationQueue
+	WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue
+	WithSuspended(suspended bool) *OperationQueue
+	WithName(name string) *OperationQueue
+	WithQualityOfService(qualityOfService raw.NSQualityOfService) *OperationQueue
+	WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue
+	AddOperation(op *raw.NSOperation)
+	AddOperationsWaitUntilFinished(ops *raw.NSArray[*raw.NSOperation], wait bool)
+	AddOperationWith(ctx context.Context) error
+	AddBarrierBlock(ctx context.Context) error
+	CancelAllOperations()
+	WaitUntilAllOperationsAreFinished()
+	Progress() *Progress
+	MaxConcurrentOperationCount() int
+	SetMaxConcurrentOperationCount(maxConcurrentOperationCount int)
+	IsSuspended() bool
+	SetSuspended(suspended bool)
+	Name() *String
+	SetName(name string)
+	QualityOfService() raw.NSQualityOfService
+	SetQualityOfService(qualityOfService raw.NSQualityOfService)
+	UnderlyingQueue() *Object
+	SetUnderlyingQueue(underlyingQueue *raw.NSObject)
+	Operations() []*raw.NSOperation
+	OperationCount() uint
+}
+
+var _ OperationQueueable = (*OperationQueue)(nil)
 

@@ -7,6 +7,7 @@ package mapkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LocalSearch wraps [raw.MKLocalSearch] with a fluent Go API.
@@ -30,4 +31,29 @@ func NewLocalSearchWithPointsOfInterestRequest(request *raw.MKLocalPointsOfInter
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), request.Ptr())
 	return &LocalSearch{inner: raw.MKLocalSearchFromID(_id)}
 }
+
+// StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
+func (x *LocalSearch) StartWithCompletionHandler(completionHandler func(*raw.MKLocalSearchResponse, unsafe.Pointer)) {
+	x.inner.StartWithCompletionHandler(completionHandler)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *LocalSearch) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsSearching calls the underlying IsSearching.
+func (x *LocalSearch) IsSearching() bool {
+	return x.inner.IsSearching()
+}
+
+// LocalSearchable is the interface implemented by [LocalSearch], for mocking and DI.
+type LocalSearchable interface {
+	Unwrap() *raw.MKLocalSearch
+	StartWithCompletionHandler(completionHandler func(*raw.MKLocalSearchResponse, unsafe.Pointer))
+	Cancel()
+	IsSearching() bool
+}
+
+var _ LocalSearchable = (*LocalSearch)(nil)
 

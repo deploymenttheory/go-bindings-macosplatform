@@ -36,5 +36,76 @@ func (x *TextContentStorage) WithAttributedString(attributedString *foundation.N
 	return x
 }
 
+// AttributedStringForTextElement calls the underlying AttributedStringForTextElement.
+func (x *TextContentStorage) AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString {
+	return x.inner.AttributedStringForTextElement(textElement)
+}
+
+// TextElementForAttributedString calls the underlying TextElementForAttributedString.
+func (x *TextContentStorage) TextElementForAttributedString(attributedString *foundation.NSAttributedString) *TextElement {
+	_r := x.inner.TextElementForAttributedString(attributedString)
+	if _r == nil {
+		return nil
+	}
+	return &TextElement{inner: _r}
+}
+
+// LocationFromLocationWithOffset calls the underlying LocationFromLocationWithOffset.
+func (x *TextContentStorage) LocationFromLocationWithOffset(location raw.NSTextLocation, offset int) raw.NSTextLocation {
+	return x.inner.LocationFromLocationWithOffset(location, offset)
+}
+
+// OffsetFromLocationToLocation calls the underlying OffsetFromLocationToLocation.
+func (x *TextContentStorage) OffsetFromLocationToLocation(from raw.NSTextLocation, to raw.NSTextLocation) int {
+	return x.inner.OffsetFromLocationToLocation(from, to)
+}
+
+// AdjustedRangeFromRangeForEditingTextSelection calls the underlying AdjustedRangeFromRangeForEditingTextSelection.
+func (x *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *raw.NSTextRange, forEditingTextSelection bool) *TextRange {
+	_r := x.inner.AdjustedRangeFromRangeForEditingTextSelection(textRange, forEditingTextSelection)
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
+// IncludesTextListMarkers calls the underlying IncludesTextListMarkers.
+func (x *TextContentStorage) IncludesTextListMarkers() bool {
+	return x.inner.IncludesTextListMarkers()
+}
+
+// SetIncludesTextListMarkers calls the underlying SetIncludesTextListMarkers.
+func (x *TextContentStorage) SetIncludesTextListMarkers(includesTextListMarkers bool) {
+	x.inner.SetIncludesTextListMarkers(includesTextListMarkers)
+}
+
+// AttributedString calls the underlying AttributedString.
+func (x *TextContentStorage) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// SetAttributedString calls the underlying SetAttributedString.
+func (x *TextContentStorage) SetAttributedString(attributedString *foundation.NSAttributedString) {
+	x.inner.SetAttributedString(attributedString)
+}
+
 func (x *TextContentStorage) asTextContentManager() *raw.NSTextContentManager { return &x.inner.NSTextContentManager }
+
+// TextContentStorageable is the interface implemented by [TextContentStorage], for mocking and DI.
+type TextContentStorageable interface {
+	Unwrap() *raw.NSTextContentStorage
+	WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage
+	WithAttributedString(attributedString *foundation.NSAttributedString) *TextContentStorage
+	AttributedStringForTextElement(textElement *raw.NSTextElement) *foundation.NSAttributedString
+	TextElementForAttributedString(attributedString *foundation.NSAttributedString) *TextElement
+	LocationFromLocationWithOffset(location raw.NSTextLocation, offset int) raw.NSTextLocation
+	OffsetFromLocationToLocation(from raw.NSTextLocation, to raw.NSTextLocation) int
+	AdjustedRangeFromRangeForEditingTextSelection(textRange *raw.NSTextRange, forEditingTextSelection bool) *TextRange
+	IncludesTextListMarkers() bool
+	SetIncludesTextListMarkers(includesTextListMarkers bool)
+	AttributedString() *foundation.NSAttributedString
+	SetAttributedString(attributedString *foundation.NSAttributedString)
+}
+
+var _ TextContentStorageable = (*TextContentStorage)(nil)
 

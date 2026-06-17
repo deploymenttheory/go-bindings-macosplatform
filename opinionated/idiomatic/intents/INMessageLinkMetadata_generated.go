@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,4 +55,92 @@ func (x *MessageLinkMetadata) WithLinkURL(linkURL string) *MessageLinkMetadata {
 	x.inner.SetLinkURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(linkURL)))
 	return x
 }
+
+// SiteName calls the underlying SiteName.
+func (x *MessageLinkMetadata) SiteName() string {
+	_r := x.inner.SiteName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSiteName calls the underlying SetSiteName.
+func (x *MessageLinkMetadata) SetSiteName(siteName string) {
+	x.inner.SetSiteName(foundation.NSStringStringWithUTF8String(siteName))
+}
+
+// Summary calls the underlying Summary.
+func (x *MessageLinkMetadata) Summary() string {
+	_r := x.inner.Summary()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSummary calls the underlying SetSummary.
+func (x *MessageLinkMetadata) SetSummary(summary string) {
+	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+}
+
+// Title calls the underlying Title.
+func (x *MessageLinkMetadata) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *MessageLinkMetadata) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// OpenGraphType calls the underlying OpenGraphType.
+func (x *MessageLinkMetadata) OpenGraphType() string {
+	_r := x.inner.OpenGraphType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOpenGraphType calls the underlying SetOpenGraphType.
+func (x *MessageLinkMetadata) SetOpenGraphType(openGraphType string) {
+	x.inner.SetOpenGraphType(foundation.NSStringStringWithUTF8String(openGraphType))
+}
+
+// LinkURL calls the underlying LinkURL.
+func (x *MessageLinkMetadata) LinkURL() *foundation.NSURL {
+	return x.inner.LinkURL()
+}
+
+// SetLinkURL calls the underlying SetLinkURL.
+func (x *MessageLinkMetadata) SetLinkURL(linkURL string) {
+	x.inner.SetLinkURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(linkURL)))
+}
+
+// MessageLinkMetadataable is the interface implemented by [MessageLinkMetadata], for mocking and DI.
+type MessageLinkMetadataable interface {
+	Unwrap() *raw.INMessageLinkMetadata
+	WithSiteName(siteName string) *MessageLinkMetadata
+	WithSummary(summary string) *MessageLinkMetadata
+	WithTitle(title string) *MessageLinkMetadata
+	WithOpenGraphType(openGraphType string) *MessageLinkMetadata
+	WithLinkURL(linkURL string) *MessageLinkMetadata
+	SiteName() string
+	SetSiteName(siteName string)
+	Summary() string
+	SetSummary(summary string)
+	Title() string
+	SetTitle(title string)
+	OpenGraphType() string
+	SetOpenGraphType(openGraphType string)
+	LinkURL() *foundation.NSURL
+	SetLinkURL(linkURL string)
+}
+
+var _ MessageLinkMetadataable = (*MessageLinkMetadata)(nil)
 

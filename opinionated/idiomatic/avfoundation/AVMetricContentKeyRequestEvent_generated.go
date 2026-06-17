@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,48 @@ func NewMetricContentKeyRequestEvent() *MetricContentKeyRequestEvent {
 	return &MetricContentKeyRequestEvent{inner: raw.AVMetricContentKeyRequestEventFromID(_id)}
 }
 
+// ContentKeySpecifier calls the underlying ContentKeySpecifier.
+func (x *MetricContentKeyRequestEvent) ContentKeySpecifier() *ContentKeySpecifier {
+	_r := x.inner.ContentKeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ContentKeySpecifier{inner: _r}
+}
+
+// MediaType calls the underlying MediaType.
+func (x *MetricContentKeyRequestEvent) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsClientInitiated calls the underlying IsClientInitiated.
+func (x *MetricContentKeyRequestEvent) IsClientInitiated() bool {
+	return x.inner.IsClientInitiated()
+}
+
+// MediaResourceRequestEvent calls the underlying MediaResourceRequestEvent.
+func (x *MetricContentKeyRequestEvent) MediaResourceRequestEvent() *MetricMediaResourceRequestEvent {
+	_r := x.inner.MediaResourceRequestEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MetricMediaResourceRequestEvent{inner: _r}
+}
+
 func (x *MetricContentKeyRequestEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricContentKeyRequestEventable is the interface implemented by [MetricContentKeyRequestEvent], for mocking and DI.
+type MetricContentKeyRequestEventable interface {
+	Unwrap() *raw.AVMetricContentKeyRequestEvent
+	ContentKeySpecifier() *ContentKeySpecifier
+	MediaType() string
+	IsClientInitiated() bool
+	MediaResourceRequestEvent() *MetricMediaResourceRequestEvent
+}
+
+var _ MetricContentKeyRequestEventable = (*MetricContentKeyRequestEvent)(nil)
 

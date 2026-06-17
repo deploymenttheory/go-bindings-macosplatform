@@ -29,3 +29,10 @@ func (x *UnitDispersion) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUn
 
 func (x *UnitDispersion) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitDispersionable is the interface implemented by [UnitDispersion], for mocking and DI.
+type UnitDispersionable interface {
+	Unwrap() *raw.NSUnitDispersion
+}
+
+var _ UnitDispersionable = (*UnitDispersion)(nil)
+

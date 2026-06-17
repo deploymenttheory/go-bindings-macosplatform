@@ -25,5 +25,30 @@ func NewUMPMutableFunctionBlockWithNameDirectionFirstGroupTotalGroupsSpannedMaxS
 	return &UMPMutableFunctionBlock{inner: raw.MIDIUMPMutableFunctionBlockFromID(_id)}
 }
 
+// SetEnabledError calls the underlying SetEnabledError.
+func (x *UMPMutableFunctionBlock) SetEnabledError(isEnabled bool) (bool, error) {
+	return x.inner.SetEnabledError(isEnabled)
+}
+
+// SetNameError calls the underlying SetNameError.
+func (x *UMPMutableFunctionBlock) SetNameError(name string) (bool, error) {
+	return x.inner.SetNameError(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError calls the underlying ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError.
+func (x *UMPMutableFunctionBlock) ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction raw.MIDIUMPFunctionBlockDirection, mIDI1Info raw.MIDIUMPFunctionBlockMIDI1Info, uIHint raw.MIDIUMPFunctionBlockUIHint) (bool, error) {
+	return x.inner.ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup, direction, mIDI1Info, uIHint)
+}
+
 func (x *UMPMutableFunctionBlock) asUMPFunctionBlock() *raw.MIDIUMPFunctionBlock { return &x.inner.MIDIUMPFunctionBlock }
+
+// UMPMutableFunctionBlockable is the interface implemented by [UMPMutableFunctionBlock], for mocking and DI.
+type UMPMutableFunctionBlockable interface {
+	Unwrap() *raw.MIDIUMPMutableFunctionBlock
+	SetEnabledError(isEnabled bool) (bool, error)
+	SetNameError(name string) (bool, error)
+	ReconfigureWithFirstGroupDirectionMIDI1InfoUIHintError(firstGroup uint8, direction raw.MIDIUMPFunctionBlockDirection, mIDI1Info raw.MIDIUMPFunctionBlockMIDI1Info, uIHint raw.MIDIUMPFunctionBlockUIHint) (bool, error)
+}
+
+var _ UMPMutableFunctionBlockable = (*UMPMutableFunctionBlock)(nil)
 

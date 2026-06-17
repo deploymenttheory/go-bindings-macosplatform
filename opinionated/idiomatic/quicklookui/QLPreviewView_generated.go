@@ -56,3 +56,74 @@ func (x *PreviewView) WithAutostarts(autostarts bool) *PreviewView {
 	return x
 }
 
+// RefreshPreviewItem calls the underlying RefreshPreviewItem.
+func (x *PreviewView) RefreshPreviewItem() {
+	x.inner.RefreshPreviewItem()
+}
+
+// Close calls the underlying Close.
+func (x *PreviewView) Close() {
+	x.inner.Close()
+}
+
+// PreviewItem calls the underlying PreviewItem.
+func (x *PreviewView) PreviewItem() raw.QLPreviewItem {
+	return x.inner.PreviewItem()
+}
+
+// SetPreviewItem calls the underlying SetPreviewItem.
+func (x *PreviewView) SetPreviewItem(previewItem raw.QLPreviewItem) {
+	x.inner.SetPreviewItem(previewItem)
+}
+
+// DisplayState calls the underlying DisplayState.
+func (x *PreviewView) DisplayState() objc.ID {
+	return x.inner.DisplayState()
+}
+
+// SetDisplayState calls the underlying SetDisplayState.
+func (x *PreviewView) SetDisplayState(displayState objc.ID) {
+	x.inner.SetDisplayState(displayState)
+}
+
+// ShouldCloseWithWindow calls the underlying ShouldCloseWithWindow.
+func (x *PreviewView) ShouldCloseWithWindow() bool {
+	return x.inner.ShouldCloseWithWindow()
+}
+
+// SetShouldCloseWithWindow calls the underlying SetShouldCloseWithWindow.
+func (x *PreviewView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
+	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
+}
+
+// Autostarts calls the underlying Autostarts.
+func (x *PreviewView) Autostarts() bool {
+	return x.inner.Autostarts()
+}
+
+// SetAutostarts calls the underlying SetAutostarts.
+func (x *PreviewView) SetAutostarts(autostarts bool) {
+	x.inner.SetAutostarts(autostarts)
+}
+
+// PreviewViewable is the interface implemented by [PreviewView], for mocking and DI.
+type PreviewViewable interface {
+	Unwrap() *raw.QLPreviewView
+	WithPreviewItem(previewItem raw.QLPreviewItem) *PreviewView
+	WithDisplayState(displayState objc.ID) *PreviewView
+	WithShouldCloseWithWindow(shouldCloseWithWindow bool) *PreviewView
+	WithAutostarts(autostarts bool) *PreviewView
+	RefreshPreviewItem()
+	Close()
+	PreviewItem() raw.QLPreviewItem
+	SetPreviewItem(previewItem raw.QLPreviewItem)
+	DisplayState() objc.ID
+	SetDisplayState(displayState objc.ID)
+	ShouldCloseWithWindow() bool
+	SetShouldCloseWithWindow(shouldCloseWithWindow bool)
+	Autostarts() bool
+	SetAutostarts(autostarts bool)
+}
+
+var _ PreviewViewable = (*PreviewView)(nil)
+

@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:label:recordIdentifier:"), serviceIdentifier.Ptr(), foundation.NSStringStringWithUTF8String(label).Ptr(), foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr())
 	return &OneTimeCodeCredentialIdentity{inner: raw.ASOneTimeCodeCredentialIdentityFromID(_id)}
 }
+
+// Label calls the underlying Label.
+func (x *OneTimeCodeCredentialIdentity) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OneTimeCodeCredentialIdentityable is the interface implemented by [OneTimeCodeCredentialIdentity], for mocking and DI.
+type OneTimeCodeCredentialIdentityable interface {
+	Unwrap() *raw.ASOneTimeCodeCredentialIdentity
+	Label() string
+}
+
+var _ OneTimeCodeCredentialIdentityable = (*OneTimeCodeCredentialIdentity)(nil)
 

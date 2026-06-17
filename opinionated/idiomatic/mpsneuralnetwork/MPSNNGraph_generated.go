@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NNGraph wraps [raw.MPSNNGraph] with a fluent Go API.
@@ -65,4 +66,134 @@ func (x *NNGraph) WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNGra
 	x.inner.SetFormat(format)
 	return x
 }
+
+// ReloadFromDataSources calls the underlying ReloadFromDataSources.
+func (x *NNGraph) ReloadFromDataSources() {
+	x.inner.ReloadFromDataSources()
+}
+
+// EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates calls the underlying EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates.
+func (x *NNGraph) EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState], intermediateImages *foundation.NSMutableArray[*mpscore.MPSImage], destinationStates *foundation.NSMutableArray[*mpscore.MPSState]) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer, sourceImages, sourceStates, intermediateImages, destinationStates)
+}
+
+// EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates calls the underlying EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates.
+func (x *NNGraph) EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID], intermediateImages *foundation.NSMutableArray[objc.ID], destinationStates *foundation.NSMutableArray[objc.ID]) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer, sourceImages, sourceStates, intermediateImages, destinationStates)
+}
+
+// EncodeToCommandBufferSourceImages calls the underlying EncodeToCommandBufferSourceImages.
+func (x *NNGraph) EncodeToCommandBufferSourceImages(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage]) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImages(commandBuffer, sourceImages)
+}
+
+// EncodeBatchToCommandBufferSourceImagesSourceStates calls the underlying EncodeBatchToCommandBufferSourceImagesSourceStates.
+func (x *NNGraph) EncodeBatchToCommandBufferSourceImagesSourceStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID]) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesSourceStates(commandBuffer, sourceImages, sourceStates)
+}
+
+// ExecuteAsyncWithSourceImagesCompletionHandler calls the underlying ExecuteAsyncWithSourceImagesCompletionHandler.
+func (x *NNGraph) ExecuteAsyncWithSourceImagesCompletionHandler(sourceImages *foundation.NSArray[*mpscore.MPSImage], handler func(*mpscore.MPSImage, unsafe.Pointer)) *mpscore.MPSImage {
+	return x.inner.ExecuteAsyncWithSourceImagesCompletionHandler(sourceImages, handler)
+}
+
+// ReadCountForSourceImageAtIndex calls the underlying ReadCountForSourceImageAtIndex.
+func (x *NNGraph) ReadCountForSourceImageAtIndex(index uint) uint {
+	return x.inner.ReadCountForSourceImageAtIndex(index)
+}
+
+// ReadCountForSourceStateAtIndex calls the underlying ReadCountForSourceStateAtIndex.
+func (x *NNGraph) ReadCountForSourceStateAtIndex(index uint) uint {
+	return x.inner.ReadCountForSourceStateAtIndex(index)
+}
+
+// SourceImageHandles calls the underlying SourceImageHandles.
+func (x *NNGraph) SourceImageHandles() *foundation.NSArray[raw.MPSHandle] {
+	return x.inner.SourceImageHandles()
+}
+
+// SourceStateHandles calls the underlying SourceStateHandles.
+func (x *NNGraph) SourceStateHandles() *foundation.NSArray[raw.MPSHandle] {
+	return x.inner.SourceStateHandles()
+}
+
+// IntermediateImageHandles calls the underlying IntermediateImageHandles.
+func (x *NNGraph) IntermediateImageHandles() *foundation.NSArray[raw.MPSHandle] {
+	return x.inner.IntermediateImageHandles()
+}
+
+// ResultStateHandles calls the underlying ResultStateHandles.
+func (x *NNGraph) ResultStateHandles() *foundation.NSArray[raw.MPSHandle] {
+	return x.inner.ResultStateHandles()
+}
+
+// ResultHandle calls the underlying ResultHandle.
+func (x *NNGraph) ResultHandle() raw.MPSHandle {
+	return x.inner.ResultHandle()
+}
+
+// OutputStateIsTemporary calls the underlying OutputStateIsTemporary.
+func (x *NNGraph) OutputStateIsTemporary() bool {
+	return x.inner.OutputStateIsTemporary()
+}
+
+// SetOutputStateIsTemporary calls the underlying SetOutputStateIsTemporary.
+func (x *NNGraph) SetOutputStateIsTemporary(outputStateIsTemporary bool) {
+	x.inner.SetOutputStateIsTemporary(outputStateIsTemporary)
+}
+
+// DestinationImageAllocator calls the underlying DestinationImageAllocator.
+func (x *NNGraph) DestinationImageAllocator() mpscore.MPSImageAllocator {
+	return x.inner.DestinationImageAllocator()
+}
+
+// SetDestinationImageAllocator calls the underlying SetDestinationImageAllocator.
+func (x *NNGraph) SetDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) {
+	x.inner.SetDestinationImageAllocator(destinationImageAllocator)
+}
+
+// Format calls the underlying Format.
+func (x *NNGraph) Format() mpscore.MPSImageFeatureChannelFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *NNGraph) SetFormat(format mpscore.MPSImageFeatureChannelFormat) {
+	x.inner.SetFormat(format)
+}
+
+// ResultImageIsNeeded calls the underlying ResultImageIsNeeded.
+func (x *NNGraph) ResultImageIsNeeded() bool {
+	return x.inner.ResultImageIsNeeded()
+}
+
+// NNGraphable is the interface implemented by [NNGraph], for mocking and DI.
+type NNGraphable interface {
+	Unwrap() *raw.MPSNNGraph
+	WithOutputStateIsTemporary(outputStateIsTemporary bool) *NNGraph
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGraph
+	WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNGraph
+	ReloadFromDataSources()
+	EncodeToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState], intermediateImages *foundation.NSMutableArray[*mpscore.MPSImage], destinationStates *foundation.NSMutableArray[*mpscore.MPSState]) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceImagesSourceStatesIntermediateImagesDestinationStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID], intermediateImages *foundation.NSMutableArray[objc.ID], destinationStates *foundation.NSMutableArray[objc.ID]) unsafe.Pointer
+	EncodeToCommandBufferSourceImages(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage]) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceImagesSourceStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[objc.ID], sourceStates *foundation.NSArray[objc.ID]) unsafe.Pointer
+	ExecuteAsyncWithSourceImagesCompletionHandler(sourceImages *foundation.NSArray[*mpscore.MPSImage], handler func(*mpscore.MPSImage, unsafe.Pointer)) *mpscore.MPSImage
+	ReadCountForSourceImageAtIndex(index uint) uint
+	ReadCountForSourceStateAtIndex(index uint) uint
+	SourceImageHandles() *foundation.NSArray[raw.MPSHandle]
+	SourceStateHandles() *foundation.NSArray[raw.MPSHandle]
+	IntermediateImageHandles() *foundation.NSArray[raw.MPSHandle]
+	ResultStateHandles() *foundation.NSArray[raw.MPSHandle]
+	ResultHandle() raw.MPSHandle
+	OutputStateIsTemporary() bool
+	SetOutputStateIsTemporary(outputStateIsTemporary bool)
+	DestinationImageAllocator() mpscore.MPSImageAllocator
+	SetDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator)
+	Format() mpscore.MPSImageFeatureChannelFormat
+	SetFormat(format mpscore.MPSImageFeatureChannelFormat)
+	ResultImageIsNeeded() bool
+}
+
+var _ NNGraphable = (*NNGraph)(nil)
 

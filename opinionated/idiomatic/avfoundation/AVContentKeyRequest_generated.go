@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContentKeyRequest wraps [raw.AVContentKeyRequest] with a fluent Go API.
@@ -23,11 +27,118 @@ func NewContentKeyRequest() *ContentKeyRequest {
 	return &ContentKeyRequest{inner: raw.AVContentKeyRequestFromID(_id)}
 }
 
+// MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions blocks until the operation completes or ctx is cancelled.
+func (x *ContentKeyRequest) MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.MakeStreamingContentKeyRequestDataForAppContentIdentifierOptionsCompletionHandler(appIdentifier, contentIdentifier, options, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ProcessContentKeyResponse calls the underlying ProcessContentKeyResponse.
+func (x *ContentKeyRequest) ProcessContentKeyResponse(keyResponse *raw.AVContentKeyResponse) {
+	x.inner.ProcessContentKeyResponse(keyResponse)
+}
+
+// ProcessContentKeyResponseError calls the underlying ProcessContentKeyResponseError.
+func (x *ContentKeyRequest) ProcessContentKeyResponseError(error_ unsafe.Pointer) {
+	x.inner.ProcessContentKeyResponseError(error_)
+}
+
 // RespondByRequestingPersistableContentKeyRequestAndReturnError returns any validation error.
 func (x *ContentKeyRequest) RespondByRequestingPersistableContentKeyRequestAndReturnError() error {
 	_, err := x.inner.RespondByRequestingPersistableContentKeyRequestAndReturnError()
 	return err
 }
 
+// Status calls the underlying Status.
+func (x *ContentKeyRequest) Status() raw.AVContentKeyRequestStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *ContentKeyRequest) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ContentKeyRequest) Identifier() objc.ID {
+	return x.inner.Identifier()
+}
+
+// Options calls the underlying Options.
+func (x *ContentKeyRequest) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Options()
+}
+
+// CanProvidePersistableContentKey calls the underlying CanProvidePersistableContentKey.
+func (x *ContentKeyRequest) CanProvidePersistableContentKey() bool {
+	return x.inner.CanProvidePersistableContentKey()
+}
+
+// ContentKeySpecifier calls the underlying ContentKeySpecifier.
+func (x *ContentKeyRequest) ContentKeySpecifier() *ContentKeySpecifier {
+	_r := x.inner.ContentKeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ContentKeySpecifier{inner: _r}
+}
+
+// ContentKey calls the underlying ContentKey.
+func (x *ContentKeyRequest) ContentKey() *ContentKey {
+	_r := x.inner.ContentKey()
+	if _r == nil {
+		return nil
+	}
+	return &ContentKey{inner: _r}
+}
+
+// OriginatingRecipient calls the underlying OriginatingRecipient.
+func (x *ContentKeyRequest) OriginatingRecipient() raw.AVContentKeyRecipient {
+	return x.inner.OriginatingRecipient()
+}
+
+// RenewsExpiringResponseData calls the underlying RenewsExpiringResponseData.
+func (x *ContentKeyRequest) RenewsExpiringResponseData() bool {
+	return x.inner.RenewsExpiringResponseData()
+}
+
 func (x *ContentKeyRequest) asContentKeyRequest() *raw.AVContentKeyRequest { return x.inner }
+
+// ContentKeyRequestable is the interface implemented by [ContentKeyRequest], for mocking and DI.
+type ContentKeyRequestable interface {
+	Unwrap() *raw.AVContentKeyRequest
+	MakeStreamingContentKeyRequestDataForAppContentIdentifierOptions(ctx context.Context, appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	ProcessContentKeyResponse(keyResponse *raw.AVContentKeyResponse)
+	ProcessContentKeyResponseError(error_ unsafe.Pointer)
+	RespondByRequestingPersistableContentKeyRequestAndReturnError() error
+	Status() raw.AVContentKeyRequestStatus
+	Error() unsafe.Pointer
+	Identifier() objc.ID
+	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	CanProvidePersistableContentKey() bool
+	ContentKeySpecifier() *ContentKeySpecifier
+	ContentKey() *ContentKey
+	OriginatingRecipient() raw.AVContentKeyRecipient
+	RenewsExpiringResponseData() bool
+}
+
+var _ ContentKeyRequestable = (*ContentKeyRequest)(nil)
 

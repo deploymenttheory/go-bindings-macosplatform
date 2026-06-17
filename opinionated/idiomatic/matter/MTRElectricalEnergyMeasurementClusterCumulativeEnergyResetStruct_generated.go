@@ -48,3 +48,62 @@ func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) WithE
 	return x
 }
 
+// ImportedResetTimestamp calls the underlying ImportedResetTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetTimestamp() *foundation.NSNumber {
+	return x.inner.ImportedResetTimestamp()
+}
+
+// SetImportedResetTimestamp calls the underlying SetImportedResetTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetImportedResetTimestamp(importedResetTimestamp *foundation.NSNumber) {
+	x.inner.SetImportedResetTimestamp(importedResetTimestamp)
+}
+
+// ExportedResetTimestamp calls the underlying ExportedResetTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetTimestamp() *foundation.NSNumber {
+	return x.inner.ExportedResetTimestamp()
+}
+
+// SetExportedResetTimestamp calls the underlying SetExportedResetTimestamp.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetExportedResetTimestamp(exportedResetTimestamp *foundation.NSNumber) {
+	x.inner.SetExportedResetTimestamp(exportedResetTimestamp)
+}
+
+// ImportedResetSystime calls the underlying ImportedResetSystime.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ImportedResetSystime() *foundation.NSNumber {
+	return x.inner.ImportedResetSystime()
+}
+
+// SetImportedResetSystime calls the underlying SetImportedResetSystime.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetImportedResetSystime(importedResetSystime *foundation.NSNumber) {
+	x.inner.SetImportedResetSystime(importedResetSystime)
+}
+
+// ExportedResetSystime calls the underlying ExportedResetSystime.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) ExportedResetSystime() *foundation.NSNumber {
+	return x.inner.ExportedResetSystime()
+}
+
+// SetExportedResetSystime calls the underlying SetExportedResetSystime.
+func (x *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct) SetExportedResetSystime(exportedResetSystime *foundation.NSNumber) {
+	x.inner.SetExportedResetSystime(exportedResetSystime)
+}
+
+// MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct], for mocking and DI.
+type MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable interface {
+	Unwrap() *raw.MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
+	WithImportedResetTimestamp(importedResetTimestamp *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
+	WithExportedResetTimestamp(exportedResetTimestamp *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
+	WithImportedResetSystime(importedResetSystime *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
+	WithExportedResetSystime(exportedResetSystime *foundation.NSNumber) *MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct
+	ImportedResetTimestamp() *foundation.NSNumber
+	SetImportedResetTimestamp(importedResetTimestamp *foundation.NSNumber)
+	ExportedResetTimestamp() *foundation.NSNumber
+	SetExportedResetTimestamp(exportedResetTimestamp *foundation.NSNumber)
+	ImportedResetSystime() *foundation.NSNumber
+	SetImportedResetSystime(importedResetSystime *foundation.NSNumber)
+	ExportedResetSystime() *foundation.NSNumber
+	SetExportedResetSystime(exportedResetSystime *foundation.NSNumber)
+}
+
+var _ MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStructable = (*MTRElectricalEnergyMeasurementClusterCumulativeEnergyResetStruct)(nil)
+

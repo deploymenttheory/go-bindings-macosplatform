@@ -25,3 +25,40 @@ func NewSVGFDefaultTextureAllocatorWithDevice(device metal.MTLDevice) *SVGFDefau
 	return &SVGFDefaultTextureAllocator{inner: raw.MPSSVGFDefaultTextureAllocatorFromID(_id)}
 }
 
+// TextureWithPixelFormatWidthHeight calls the underlying TextureWithPixelFormatWidthHeight.
+func (x *SVGFDefaultTextureAllocator) TextureWithPixelFormatWidthHeight(pixelFormat metal.MTLPixelFormat, width uint, height uint) metal.MTLTexture {
+	return x.inner.TextureWithPixelFormatWidthHeight(pixelFormat, width, height)
+}
+
+// ReturnTexture calls the underlying ReturnTexture.
+func (x *SVGFDefaultTextureAllocator) ReturnTexture(texture metal.MTLTexture) {
+	x.inner.ReturnTexture(texture)
+}
+
+// Reset calls the underlying Reset.
+func (x *SVGFDefaultTextureAllocator) Reset() {
+	x.inner.Reset()
+}
+
+// Device calls the underlying Device.
+func (x *SVGFDefaultTextureAllocator) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// AllocatedTextureCount calls the underlying AllocatedTextureCount.
+func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() uint {
+	return x.inner.AllocatedTextureCount()
+}
+
+// SVGFDefaultTextureAllocatorable is the interface implemented by [SVGFDefaultTextureAllocator], for mocking and DI.
+type SVGFDefaultTextureAllocatorable interface {
+	Unwrap() *raw.MPSSVGFDefaultTextureAllocator
+	TextureWithPixelFormatWidthHeight(pixelFormat metal.MTLPixelFormat, width uint, height uint) metal.MTLTexture
+	ReturnTexture(texture metal.MTLTexture)
+	Reset()
+	Device() metal.MTLDevice
+	AllocatedTextureCount() uint
+}
+
+var _ SVGFDefaultTextureAllocatorable = (*SVGFDefaultTextureAllocator)(nil)
+

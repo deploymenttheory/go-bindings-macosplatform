@@ -54,5 +54,77 @@ func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) WithServerSideProc
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg2() *foundation.NSNumber {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetArg2(arg2 *foundation.NSNumber) {
+	x.inner.SetArg2(arg2)
+}
+
+// Arg3 calls the underlying Arg3.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) Arg3() *foundation.NSNumber {
+	return x.inner.Arg3()
+}
+
+// SetArg3 calls the underlying SetArg3.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetArg3(arg3 *foundation.NSNumber) {
+	x.inner.SetArg3(arg3)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestEmitTestEventRequestParams) asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestEmitTestEventRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestEventRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestEmitTestEventRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventRequestParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventRequestParams
+	WithArg3(arg3 *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestEventRequestParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	Arg2() *foundation.NSNumber
+	SetArg2(arg2 *foundation.NSNumber)
+	Arg3() *foundation.NSNumber
+	SetArg3(arg3 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEmitTestEventRequestParamsable = (*MTRUnitTestingClusterTestEmitTestEventRequestParams)(nil)
 

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Authorization wraps [raw.SFAuthorization] with a fluent Go API.
@@ -30,4 +31,47 @@ func NewAuthorizationWithFlagsRightsEnvironment(flags security.AuthorizationFlag
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:rights:environment:"), flags, rights, environment)
 	return &Authorization{inner: raw.SFAuthorizationFromID(_id)}
 }
+
+// AuthorizationRef calls the underlying AuthorizationRef.
+func (x *Authorization) AuthorizationRef() unsafe.Pointer {
+	return x.inner.AuthorizationRef()
+}
+
+// InvalidateCredentials calls the underlying InvalidateCredentials.
+func (x *Authorization) InvalidateCredentials() {
+	x.inner.InvalidateCredentials()
+}
+
+// ObtainWithRightFlagsError calls the underlying ObtainWithRightFlagsError.
+func (x *Authorization) ObtainWithRightFlagsError(rightName string, flags security.AuthorizationFlags) (bool, error) {
+	return x.inner.ObtainWithRightFlagsError(rightName, flags)
+}
+
+// ObtainWithRightsFlagsEnvironmentAuthorizedRightsError calls the underlying ObtainWithRightsFlagsEnvironmentAuthorizedRightsError.
+func (x *Authorization) ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) (bool, error) {
+	return x.inner.ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights, flags, environment, authorizedRights)
+}
+
+// PermitWithRightsFlagsEnvironmentAuthorizedRights calls the underlying PermitWithRightsFlagsEnvironmentAuthorizedRights.
+func (x *Authorization) PermitWithRightsFlagsEnvironmentAuthorizedRights(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) int {
+	return x.inner.PermitWithRightsFlagsEnvironmentAuthorizedRights(rights, flags, environment, authorizedRights)
+}
+
+// PermitWithRightFlags calls the underlying PermitWithRightFlags.
+func (x *Authorization) PermitWithRightFlags(rightName string, flags security.AuthorizationFlags) int {
+	return x.inner.PermitWithRightFlags(rightName, flags)
+}
+
+// Authorizationable is the interface implemented by [Authorization], for mocking and DI.
+type Authorizationable interface {
+	Unwrap() *raw.SFAuthorization
+	AuthorizationRef() unsafe.Pointer
+	InvalidateCredentials()
+	ObtainWithRightFlagsError(rightName string, flags security.AuthorizationFlags) (bool, error)
+	ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) (bool, error)
+	PermitWithRightsFlagsEnvironmentAuthorizedRights(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) int
+	PermitWithRightFlags(rightName string, flags security.AuthorizationFlags) int
+}
+
+var _ Authorizationable = (*Authorization)(nil)
 

@@ -42,3 +42,49 @@ func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithServerSideProc
 	return x
 }
 
+// ExtendedPanID calls the underlying ExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ExtendedPanID() *foundation.NSData {
+	return x.inner.ExtendedPanID()
+}
+
+// SetExtendedPanID calls the underlying SetExtendedPanID.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetExtendedPanID(extendedPanID *foundation.NSData) {
+	x.inner.SetExtendedPanID(extendedPanID)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterRemoveNetworkParams], for mocking and DI.
+type MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable interface {
+	Unwrap() *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	WithExtendedPanID(extendedPanID *foundation.NSData) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	ExtendedPanID() *foundation.NSData
+	SetExtendedPanID(extendedPanID *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable = (*MTRThreadNetworkDirectoryClusterRemoveNetworkParams)(nil)
+

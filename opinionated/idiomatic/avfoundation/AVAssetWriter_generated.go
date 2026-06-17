@@ -5,7 +5,6 @@
 package avfoundation
 
 import (
-	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
@@ -135,18 +134,58 @@ func (x *AssetWriter) WithDelegate(delegate raw.AVAssetWriterDelegate) *AssetWri
 	return x
 }
 
-// FinishWriting blocks until the operation completes or ctx is cancelled.
-func (x *AssetWriter) FinishWriting(ctx context.Context) error {
-	_ch := make(chan error, 1)
-	x.inner.FinishWritingWithCompletionHandler(func() {
-		_ch <- nil
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
+// CanApplyOutputSettingsForMediaType calls the underlying CanApplyOutputSettingsForMediaType.
+func (x *AssetWriter) CanApplyOutputSettingsForMediaType(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], mediaType *foundation.NSString) bool {
+	return x.inner.CanApplyOutputSettingsForMediaType(outputSettings, mediaType)
+}
+
+// CanAddInput calls the underlying CanAddInput.
+func (x *AssetWriter) CanAddInput(input *raw.AVAssetWriterInput) bool {
+	return x.inner.CanAddInput(input)
+}
+
+// AddInput calls the underlying AddInput.
+func (x *AssetWriter) AddInput(input *raw.AVAssetWriterInput) {
+	x.inner.AddInput(input)
+}
+
+// StartWriting calls the underlying StartWriting.
+func (x *AssetWriter) StartWriting() bool {
+	return x.inner.StartWriting()
+}
+
+// StartSessionAtSourceTime calls the underlying StartSessionAtSourceTime.
+func (x *AssetWriter) StartSessionAtSourceTime(startTime coremedia.CMTime) {
+	x.inner.StartSessionAtSourceTime(startTime)
+}
+
+// EndSessionAtSourceTime calls the underlying EndSessionAtSourceTime.
+func (x *AssetWriter) EndSessionAtSourceTime(endTime coremedia.CMTime) {
+	x.inner.EndSessionAtSourceTime(endTime)
+}
+
+// CancelWriting calls the underlying CancelWriting.
+func (x *AssetWriter) CancelWriting() {
+	x.inner.CancelWriting()
+}
+
+// FinishWriting calls the underlying FinishWriting.
+func (x *AssetWriter) FinishWriting() bool {
+	return x.inner.FinishWriting()
+}
+
+// OutputURL calls the underlying OutputURL.
+func (x *AssetWriter) OutputURL() *foundation.NSURL {
+	return x.inner.OutputURL()
+}
+
+// OutputFileType calls the underlying OutputFileType.
+func (x *AssetWriter) OutputFileType() string {
+	_r := x.inner.OutputFileType()
+	if _r == nil {
+		return ""
 	}
+	return purego.GoString(_r.Ptr())
 }
 
 // AvailableMediaTypes returns the collection as a Go slice.
@@ -155,11 +194,19 @@ func (x *AssetWriter) AvailableMediaTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// Status calls the underlying Status.
+func (x *AssetWriter) Status() raw.AVAssetWriterStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *AssetWriter) Error() unsafe.Pointer {
+	return x.inner.Error()
 }
 
 // Metadata returns the collection as a Go slice.
@@ -168,11 +215,34 @@ func (x *AssetWriter) Metadata() []*raw.AVMetadataItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *AssetWriter) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// ShouldOptimizeForNetworkUse calls the underlying ShouldOptimizeForNetworkUse.
+func (x *AssetWriter) ShouldOptimizeForNetworkUse() bool {
+	return x.inner.ShouldOptimizeForNetworkUse()
+}
+
+// SetShouldOptimizeForNetworkUse calls the underlying SetShouldOptimizeForNetworkUse.
+func (x *AssetWriter) SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) {
+	x.inner.SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse)
+}
+
+// DirectoryForTemporaryFiles calls the underlying DirectoryForTemporaryFiles.
+func (x *AssetWriter) DirectoryForTemporaryFiles() *foundation.NSURL {
+	return x.inner.DirectoryForTemporaryFiles()
+}
+
+// SetDirectoryForTemporaryFiles calls the underlying SetDirectoryForTemporaryFiles.
+func (x *AssetWriter) SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string) {
+	x.inner.SetDirectoryForTemporaryFiles(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryForTemporaryFiles)))
 }
 
 // Inputs returns the collection as a Go slice.
@@ -181,11 +251,69 @@ func (x *AssetWriter) Inputs() []*raw.AVAssetWriterInput {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetWriterInput, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInput {
+		return raw.AVAssetWriterInputFromID(purego.Retain(_id))
+	})
+}
+
+// MovieFragmentInterval calls the underlying MovieFragmentInterval.
+func (x *AssetWriter) MovieFragmentInterval() coremedia.CMTime {
+	return x.inner.MovieFragmentInterval()
+}
+
+// SetMovieFragmentInterval calls the underlying SetMovieFragmentInterval.
+func (x *AssetWriter) SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) {
+	x.inner.SetMovieFragmentInterval(movieFragmentInterval)
+}
+
+// SetInitialMovieFragmentInterval calls the underlying SetInitialMovieFragmentInterval.
+func (x *AssetWriter) SetInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime) {
+	x.inner.SetInitialMovieFragmentInterval(initialMovieFragmentInterval)
+}
+
+// SetInitialMovieFragmentSequenceNumber calls the underlying SetInitialMovieFragmentSequenceNumber.
+func (x *AssetWriter) SetInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber int) {
+	x.inner.SetInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber)
+}
+
+// ProducesCombinableFragments calls the underlying ProducesCombinableFragments.
+func (x *AssetWriter) ProducesCombinableFragments() bool {
+	return x.inner.ProducesCombinableFragments()
+}
+
+// SetProducesCombinableFragments calls the underlying SetProducesCombinableFragments.
+func (x *AssetWriter) SetProducesCombinableFragments(producesCombinableFragments bool) {
+	x.inner.SetProducesCombinableFragments(producesCombinableFragments)
+}
+
+// OverallDurationHint calls the underlying OverallDurationHint.
+func (x *AssetWriter) OverallDurationHint() coremedia.CMTime {
+	return x.inner.OverallDurationHint()
+}
+
+// SetOverallDurationHint calls the underlying SetOverallDurationHint.
+func (x *AssetWriter) SetOverallDurationHint(overallDurationHint coremedia.CMTime) {
+	x.inner.SetOverallDurationHint(overallDurationHint)
+}
+
+// MovieTimeScale calls the underlying MovieTimeScale.
+func (x *AssetWriter) MovieTimeScale() int32 {
+	return x.inner.MovieTimeScale()
+}
+
+// SetMovieTimeScale calls the underlying SetMovieTimeScale.
+func (x *AssetWriter) SetMovieTimeScale(movieTimeScale int32) {
+	x.inner.SetMovieTimeScale(movieTimeScale)
+}
+
+// CanAddInputGroup calls the underlying CanAddInputGroup.
+func (x *AssetWriter) CanAddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) bool {
+	return x.inner.CanAddInputGroup(inputGroup)
+}
+
+// AddInputGroup calls the underlying AddInputGroup.
+func (x *AssetWriter) AddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) {
+	x.inner.AddInputGroup(inputGroup)
 }
 
 // InputGroups returns the collection as a Go slice.
@@ -194,10 +322,113 @@ func (x *AssetWriter) InputGroups() []*raw.AVAssetWriterInputGroup {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetWriterInputGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInputGroup {
+		return raw.AVAssetWriterInputGroupFromID(purego.Retain(_id))
+	})
 }
+
+// FlushSegment calls the underlying FlushSegment.
+func (x *AssetWriter) FlushSegment() {
+	x.inner.FlushSegment()
+}
+
+// PreferredOutputSegmentInterval calls the underlying PreferredOutputSegmentInterval.
+func (x *AssetWriter) PreferredOutputSegmentInterval() coremedia.CMTime {
+	return x.inner.PreferredOutputSegmentInterval()
+}
+
+// SetPreferredOutputSegmentInterval calls the underlying SetPreferredOutputSegmentInterval.
+func (x *AssetWriter) SetPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime) {
+	x.inner.SetPreferredOutputSegmentInterval(preferredOutputSegmentInterval)
+}
+
+// SetInitialSegmentStartTime calls the underlying SetInitialSegmentStartTime.
+func (x *AssetWriter) SetInitialSegmentStartTime(initialSegmentStartTime coremedia.CMTime) {
+	x.inner.SetInitialSegmentStartTime(initialSegmentStartTime)
+}
+
+// OutputFileTypeProfile calls the underlying OutputFileTypeProfile.
+func (x *AssetWriter) OutputFileTypeProfile() string {
+	_r := x.inner.OutputFileTypeProfile()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOutputFileTypeProfile calls the underlying SetOutputFileTypeProfile.
+func (x *AssetWriter) SetOutputFileTypeProfile(outputFileTypeProfile *foundation.NSString) {
+	x.inner.SetOutputFileTypeProfile(outputFileTypeProfile)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AssetWriter) Delegate() raw.AVAssetWriterDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AssetWriter) SetDelegate(delegate raw.AVAssetWriterDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// AssetWriterable is the interface implemented by [AssetWriter], for mocking and DI.
+type AssetWriterable interface {
+	Unwrap() *raw.AVAssetWriter
+	WithMetadata(items ...MetadataItemProvider) *AssetWriter
+	WithShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool) *AssetWriter
+	WithDirectoryForTemporaryFiles(directoryForTemporaryFiles string) *AssetWriter
+	WithMovieFragmentInterval(movieFragmentInterval coremedia.CMTime) *AssetWriter
+	WithInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime) *AssetWriter
+	WithInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber int) *AssetWriter
+	WithProducesCombinableFragments(producesCombinableFragments bool) *AssetWriter
+	WithOverallDurationHint(overallDurationHint coremedia.CMTime) *AssetWriter
+	WithMovieTimeScale(movieTimeScale int32) *AssetWriter
+	WithPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime) *AssetWriter
+	WithInitialSegmentStartTime(initialSegmentStartTime coremedia.CMTime) *AssetWriter
+	WithOutputFileTypeProfile(outputFileTypeProfile *foundation.NSString) *AssetWriter
+	WithDelegate(delegate raw.AVAssetWriterDelegate) *AssetWriter
+	CanApplyOutputSettingsForMediaType(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID], mediaType *foundation.NSString) bool
+	CanAddInput(input *raw.AVAssetWriterInput) bool
+	AddInput(input *raw.AVAssetWriterInput)
+	StartWriting() bool
+	StartSessionAtSourceTime(startTime coremedia.CMTime)
+	EndSessionAtSourceTime(endTime coremedia.CMTime)
+	CancelWriting()
+	FinishWriting() bool
+	OutputURL() *foundation.NSURL
+	OutputFileType() string
+	AvailableMediaTypes() []*foundation.NSString
+	Status() raw.AVAssetWriterStatus
+	Error() unsafe.Pointer
+	Metadata() []*raw.AVMetadataItem
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	ShouldOptimizeForNetworkUse() bool
+	SetShouldOptimizeForNetworkUse(shouldOptimizeForNetworkUse bool)
+	DirectoryForTemporaryFiles() *foundation.NSURL
+	SetDirectoryForTemporaryFiles(directoryForTemporaryFiles string)
+	Inputs() []*raw.AVAssetWriterInput
+	MovieFragmentInterval() coremedia.CMTime
+	SetMovieFragmentInterval(movieFragmentInterval coremedia.CMTime)
+	SetInitialMovieFragmentInterval(initialMovieFragmentInterval coremedia.CMTime)
+	SetInitialMovieFragmentSequenceNumber(initialMovieFragmentSequenceNumber int)
+	ProducesCombinableFragments() bool
+	SetProducesCombinableFragments(producesCombinableFragments bool)
+	OverallDurationHint() coremedia.CMTime
+	SetOverallDurationHint(overallDurationHint coremedia.CMTime)
+	MovieTimeScale() int32
+	SetMovieTimeScale(movieTimeScale int32)
+	CanAddInputGroup(inputGroup *raw.AVAssetWriterInputGroup) bool
+	AddInputGroup(inputGroup *raw.AVAssetWriterInputGroup)
+	InputGroups() []*raw.AVAssetWriterInputGroup
+	FlushSegment()
+	PreferredOutputSegmentInterval() coremedia.CMTime
+	SetPreferredOutputSegmentInterval(preferredOutputSegmentInterval coremedia.CMTime)
+	SetInitialSegmentStartTime(initialSegmentStartTime coremedia.CMTime)
+	OutputFileTypeProfile() string
+	SetOutputFileTypeProfile(outputFileTypeProfile *foundation.NSString)
+	Delegate() raw.AVAssetWriterDelegate
+	SetDelegate(delegate raw.AVAssetWriterDelegate)
+}
+
+var _ AssetWriterable = (*AssetWriter)(nil)
 

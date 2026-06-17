@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewTokenKeyExchangeParameters() *TokenKeyExchangeParameters {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeyExchangeParameters")), objc.RegisterName("new"))
 	return &TokenKeyExchangeParameters{inner: raw.TKTokenKeyExchangeParametersFromID(_id)}
 }
+
+// RequestedSize calls the underlying RequestedSize.
+func (x *TokenKeyExchangeParameters) RequestedSize() int {
+	return x.inner.RequestedSize()
+}
+
+// SharedInfo calls the underlying SharedInfo.
+func (x *TokenKeyExchangeParameters) SharedInfo() *foundation.NSData {
+	return x.inner.SharedInfo()
+}
+
+// TokenKeyExchangeParametersable is the interface implemented by [TokenKeyExchangeParameters], for mocking and DI.
+type TokenKeyExchangeParametersable interface {
+	Unwrap() *raw.TKTokenKeyExchangeParameters
+	RequestedSize() int
+	SharedInfo() *foundation.NSData
+}
+
+var _ TokenKeyExchangeParametersable = (*TokenKeyExchangeParameters)(nil)
 

@@ -33,3 +33,10 @@ func (x *CNNNeuronSigmoid) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return
 
 func (x *CNNNeuronSigmoid) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronSigmoidable is the interface implemented by [CNNNeuronSigmoid], for mocking and DI.
+type CNNNeuronSigmoidable interface {
+	Unwrap() *raw.MPSCNNNeuronSigmoid
+}
+
+var _ CNNNeuronSigmoidable = (*CNNNeuronSigmoid)(nil)
+

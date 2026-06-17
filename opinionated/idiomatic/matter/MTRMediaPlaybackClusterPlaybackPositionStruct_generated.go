@@ -36,5 +36,38 @@ func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) WithPosition(position *f
 	return x
 }
 
+// UpdatedAt calls the underlying UpdatedAt.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) UpdatedAt() *foundation.NSNumber {
+	return x.inner.UpdatedAt()
+}
+
+// SetUpdatedAt calls the underlying SetUpdatedAt.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetUpdatedAt(updatedAt *foundation.NSNumber) {
+	x.inner.SetUpdatedAt(updatedAt)
+}
+
+// Position calls the underlying Position.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) Position() *foundation.NSNumber {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) SetPosition(position *foundation.NSNumber) {
+	x.inner.SetPosition(position)
+}
+
 func (x *MTRMediaPlaybackClusterPlaybackPositionStruct) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct { return x.inner }
+
+// MTRMediaPlaybackClusterPlaybackPositionStructable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPositionStruct], for mocking and DI.
+type MTRMediaPlaybackClusterPlaybackPositionStructable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct
+	WithUpdatedAt(updatedAt *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPositionStruct
+	WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPositionStruct
+	UpdatedAt() *foundation.NSNumber
+	SetUpdatedAt(updatedAt *foundation.NSNumber)
+	Position() *foundation.NSNumber
+	SetPosition(position *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterPlaybackPositionStructable = (*MTRMediaPlaybackClusterPlaybackPositionStruct)(nil)
 

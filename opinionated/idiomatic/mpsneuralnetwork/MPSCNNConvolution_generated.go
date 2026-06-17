@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNConvolution wraps [raw.MPSCNNConvolution] with a fluent Go API.
@@ -46,7 +47,131 @@ func (x *CNNConvolution) WithAccumulatorPrecisionOption(accumulatorPrecisionOpti
 	return x
 }
 
+// ReloadWeightsAndBiasesFromDataSource calls the underlying ReloadWeightsAndBiasesFromDataSource.
+func (x *CNNConvolution) ReloadWeightsAndBiasesFromDataSource() {
+	x.inner.ReloadWeightsAndBiasesFromDataSource()
+}
+
+// ReloadWeightsAndBiasesWithDataSource calls the underlying ReloadWeightsAndBiasesWithDataSource.
+func (x *CNNConvolution) ReloadWeightsAndBiasesWithDataSource(dataSource raw.MPSCNNConvolutionDataSource) {
+	x.inner.ReloadWeightsAndBiasesWithDataSource(dataSource)
+}
+
+// ReloadWeightsAndBiasesWithCommandBufferState calls the underlying ReloadWeightsAndBiasesWithCommandBufferState.
+func (x *CNNConvolution) ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *raw.MPSCNNConvolutionWeightsAndBiasesState) {
+	x.inner.ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer, state)
+}
+
+// ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary calls the underlying ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary.
+func (x *CNNConvolution) ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer metal.MTLCommandBuffer, resultStateCanBeTemporary bool) *CNNConvolutionWeightsAndBiasesState {
+	_r := x.inner.ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer, resultStateCanBeTemporary)
+	if _r == nil {
+		return nil
+	}
+	return &CNNConvolutionWeightsAndBiasesState{inner: _r}
+}
+
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *CNNConvolution) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *CNNConvolution) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
+// Groups calls the underlying Groups.
+func (x *CNNConvolution) Groups() uint {
+	return x.inner.Groups()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNConvolution) DataSource() raw.MPSCNNConvolutionDataSource {
+	return x.inner.DataSource()
+}
+
+// SubPixelScaleFactor calls the underlying SubPixelScaleFactor.
+func (x *CNNConvolution) SubPixelScaleFactor() uint {
+	return x.inner.SubPixelScaleFactor()
+}
+
+// Neuron calls the underlying Neuron.
+func (x *CNNConvolution) Neuron() unsafe.Pointer {
+	return x.inner.Neuron()
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *CNNConvolution) NeuronType() raw.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *CNNConvolution) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *CNNConvolution) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *CNNConvolution) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// FusedNeuronDescriptor calls the underlying FusedNeuronDescriptor.
+func (x *CNNConvolution) FusedNeuronDescriptor() *NNNeuronDescriptor {
+	_r := x.inner.FusedNeuronDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &NNNeuronDescriptor{inner: _r}
+}
+
+// ChannelMultiplier calls the underlying ChannelMultiplier.
+func (x *CNNConvolution) ChannelMultiplier() uint {
+	return x.inner.ChannelMultiplier()
+}
+
+// AccumulatorPrecisionOption calls the underlying AccumulatorPrecisionOption.
+func (x *CNNConvolution) AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption {
+	return x.inner.AccumulatorPrecisionOption()
+}
+
+// SetAccumulatorPrecisionOption calls the underlying SetAccumulatorPrecisionOption.
+func (x *CNNConvolution) SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) {
+	x.inner.SetAccumulatorPrecisionOption(accumulatorPrecisionOption)
+}
+
 func (x *CNNConvolution) asCNNConvolution() *raw.MPSCNNConvolution { return x.inner }
 
 func (x *CNNConvolution) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNConvolutionable is the interface implemented by [CNNConvolution], for mocking and DI.
+type CNNConvolutionable interface {
+	Unwrap() *raw.MPSCNNConvolution
+	WithAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolution
+	ReloadWeightsAndBiasesFromDataSource()
+	ReloadWeightsAndBiasesWithDataSource(dataSource raw.MPSCNNConvolutionDataSource)
+	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *raw.MPSCNNConvolutionWeightsAndBiasesState)
+	ExportWeightsAndBiasesWithCommandBufferResultStateCanBeTemporary(commandBuffer metal.MTLCommandBuffer, resultStateCanBeTemporary bool) *CNNConvolutionWeightsAndBiasesState
+	InputFeatureChannels() uint
+	OutputFeatureChannels() uint
+	Groups() uint
+	DataSource() raw.MPSCNNConvolutionDataSource
+	SubPixelScaleFactor() uint
+	Neuron() unsafe.Pointer
+	NeuronType() raw.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	FusedNeuronDescriptor() *NNNeuronDescriptor
+	ChannelMultiplier() uint
+	AccumulatorPrecisionOption() raw.MPSNNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecisionOption(accumulatorPrecisionOption raw.MPSNNConvolutionAccumulatorPrecisionOption)
+}
+
+var _ CNNConvolutionable = (*CNNConvolution)(nil)
 

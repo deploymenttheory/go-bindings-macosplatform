@@ -29,3 +29,10 @@ func (x *UnitPower) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitPower) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitPowerable is the interface implemented by [UnitPower], for mocking and DI.
+type UnitPowerable interface {
+	Unwrap() *raw.NSUnitPower
+}
+
+var _ UnitPowerable = (*UnitPower)(nil)
+

@@ -32,3 +32,10 @@ func NewChatButtonWithCoder(coder *foundation.NSCoder) *ChatButton {
 	return &ChatButton{inner: raw.BCChatButtonFromID(_id)}
 }
 
+// ChatButtonable is the interface implemented by [ChatButton], for mocking and DI.
+type ChatButtonable interface {
+	Unwrap() *raw.BCChatButton
+}
+
+var _ ChatButtonable = (*ChatButton)(nil)
+

@@ -81,7 +81,124 @@ func (x *NNArithmeticGradientNode) WithMaximumValue(maximumValue float32) *NNAri
 	return x
 }
 
+// PrimaryScale calls the underlying PrimaryScale.
+func (x *NNArithmeticGradientNode) PrimaryScale() float32 {
+	return x.inner.PrimaryScale()
+}
+
+// SetPrimaryScale calls the underlying SetPrimaryScale.
+func (x *NNArithmeticGradientNode) SetPrimaryScale(primaryScale float32) {
+	x.inner.SetPrimaryScale(primaryScale)
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *NNArithmeticGradientNode) SecondaryScale() float32 {
+	return x.inner.SecondaryScale()
+}
+
+// SetSecondaryScale calls the underlying SetSecondaryScale.
+func (x *NNArithmeticGradientNode) SetSecondaryScale(secondaryScale float32) {
+	x.inner.SetSecondaryScale(secondaryScale)
+}
+
+// Bias calls the underlying Bias.
+func (x *NNArithmeticGradientNode) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *NNArithmeticGradientNode) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
+// SecondaryStrideInPixelsX calls the underlying SecondaryStrideInPixelsX.
+func (x *NNArithmeticGradientNode) SecondaryStrideInPixelsX() uint {
+	return x.inner.SecondaryStrideInPixelsX()
+}
+
+// SetSecondaryStrideInPixelsX calls the underlying SetSecondaryStrideInPixelsX.
+func (x *NNArithmeticGradientNode) SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) {
+	x.inner.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+}
+
+// SecondaryStrideInPixelsY calls the underlying SecondaryStrideInPixelsY.
+func (x *NNArithmeticGradientNode) SecondaryStrideInPixelsY() uint {
+	return x.inner.SecondaryStrideInPixelsY()
+}
+
+// SetSecondaryStrideInPixelsY calls the underlying SetSecondaryStrideInPixelsY.
+func (x *NNArithmeticGradientNode) SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) {
+	x.inner.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+}
+
+// SecondaryStrideInFeatureChannels calls the underlying SecondaryStrideInFeatureChannels.
+func (x *NNArithmeticGradientNode) SecondaryStrideInFeatureChannels() uint {
+	return x.inner.SecondaryStrideInFeatureChannels()
+}
+
+// SetSecondaryStrideInFeatureChannels calls the underlying SetSecondaryStrideInFeatureChannels.
+func (x *NNArithmeticGradientNode) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) {
+	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *NNArithmeticGradientNode) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// SetMinimumValue calls the underlying SetMinimumValue.
+func (x *NNArithmeticGradientNode) SetMinimumValue(minimumValue float32) {
+	x.inner.SetMinimumValue(minimumValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *NNArithmeticGradientNode) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// SetMaximumValue calls the underlying SetMaximumValue.
+func (x *NNArithmeticGradientNode) SetMaximumValue(maximumValue float32) {
+	x.inner.SetMaximumValue(maximumValue)
+}
+
+// IsSecondarySourceFilter calls the underlying IsSecondarySourceFilter.
+func (x *NNArithmeticGradientNode) IsSecondarySourceFilter() bool {
+	return x.inner.IsSecondarySourceFilter()
+}
+
 func (x *NNArithmeticGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *NNArithmeticGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// NNArithmeticGradientNodeable is the interface implemented by [NNArithmeticGradientNode], for mocking and DI.
+type NNArithmeticGradientNodeable interface {
+	Unwrap() *raw.MPSNNArithmeticGradientNode
+	WithPrimaryScale(primaryScale float32) *NNArithmeticGradientNode
+	WithSecondaryScale(secondaryScale float32) *NNArithmeticGradientNode
+	WithBias(bias float32) *NNArithmeticGradientNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNArithmeticGradientNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNArithmeticGradientNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNArithmeticGradientNode
+	WithMinimumValue(minimumValue float32) *NNArithmeticGradientNode
+	WithMaximumValue(maximumValue float32) *NNArithmeticGradientNode
+	PrimaryScale() float32
+	SetPrimaryScale(primaryScale float32)
+	SecondaryScale() float32
+	SetSecondaryScale(secondaryScale float32)
+	Bias() float32
+	SetBias(bias float32)
+	SecondaryStrideInPixelsX() uint
+	SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint)
+	SecondaryStrideInPixelsY() uint
+	SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint)
+	SecondaryStrideInFeatureChannels() uint
+	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint)
+	MinimumValue() float32
+	SetMinimumValue(minimumValue float32)
+	MaximumValue() float32
+	SetMaximumValue(maximumValue float32)
+	IsSecondarySourceFilter() bool
+}
+
+var _ NNArithmeticGradientNodeable = (*NNArithmeticGradientNode)(nil)
 

@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,58 @@ func NewTemporalNoiseFilterConfigurationWithFrameWidthFrameHeightSourcePixelForm
 	return &TemporalNoiseFilterConfiguration{inner: raw.VTTemporalNoiseFilterConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *TemporalNoiseFilterConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *TemporalNoiseFilterConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *TemporalNoiseFilterConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *TemporalNoiseFilterConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *TemporalNoiseFilterConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// NextFrameCount calls the underlying NextFrameCount.
+func (x *TemporalNoiseFilterConfiguration) NextFrameCount() int {
+	return x.inner.NextFrameCount()
+}
+
+// PreviousFrameCount calls the underlying PreviousFrameCount.
+func (x *TemporalNoiseFilterConfiguration) PreviousFrameCount() int {
+	return x.inner.PreviousFrameCount()
+}
+
+// TemporalNoiseFilterConfigurationable is the interface implemented by [TemporalNoiseFilterConfiguration], for mocking and DI.
+type TemporalNoiseFilterConfigurationable interface {
+	Unwrap() *raw.VTTemporalNoiseFilterConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	NextFrameCount() int
+	PreviousFrameCount() int
+}
+
+var _ TemporalNoiseFilterConfigurationable = (*TemporalNoiseFilterConfiguration)(nil)
 

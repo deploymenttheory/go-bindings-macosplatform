@@ -5,7 +5,9 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,99 @@ func NewBarcodeEventSignatureRequest() *BarcodeEventSignatureRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventSignatureRequest")), objc.RegisterName("new"))
 	return &BarcodeEventSignatureRequest{inner: raw.PKBarcodeEventSignatureRequestFromID(_id)}
 }
+
+// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+func (x *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
+	_r := x.inner.DeviceAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TransactionIdentifier calls the underlying TransactionIdentifier.
+func (x *BarcodeEventSignatureRequest) TransactionIdentifier() string {
+	_r := x.inner.TransactionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BarcodeIdentifier calls the underlying BarcodeIdentifier.
+func (x *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
+	_r := x.inner.BarcodeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RawMerchantName calls the underlying RawMerchantName.
+func (x *BarcodeEventSignatureRequest) RawMerchantName() string {
+	_r := x.inner.RawMerchantName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MerchantName calls the underlying MerchantName.
+func (x *BarcodeEventSignatureRequest) MerchantName() string {
+	_r := x.inner.MerchantName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TransactionDate calls the underlying TransactionDate.
+func (x *BarcodeEventSignatureRequest) TransactionDate() *foundation.NSDate {
+	return x.inner.TransactionDate()
+}
+
+// CurrencyCode calls the underlying CurrencyCode.
+func (x *BarcodeEventSignatureRequest) CurrencyCode() string {
+	_r := x.inner.CurrencyCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Amount calls the underlying Amount.
+func (x *BarcodeEventSignatureRequest) Amount() *foundation.NSNumber {
+	return x.inner.Amount()
+}
+
+// TransactionStatus calls the underlying TransactionStatus.
+func (x *BarcodeEventSignatureRequest) TransactionStatus() string {
+	_r := x.inner.TransactionStatus()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PartialSignature calls the underlying PartialSignature.
+func (x *BarcodeEventSignatureRequest) PartialSignature() *foundation.NSData {
+	return x.inner.PartialSignature()
+}
+
+// BarcodeEventSignatureRequestable is the interface implemented by [BarcodeEventSignatureRequest], for mocking and DI.
+type BarcodeEventSignatureRequestable interface {
+	Unwrap() *raw.PKBarcodeEventSignatureRequest
+	DeviceAccountIdentifier() string
+	TransactionIdentifier() string
+	BarcodeIdentifier() string
+	RawMerchantName() string
+	MerchantName() string
+	TransactionDate() *foundation.NSDate
+	CurrencyCode() string
+	Amount() *foundation.NSNumber
+	TransactionStatus() string
+	PartialSignature() *foundation.NSData
+}
+
+var _ BarcodeEventSignatureRequestable = (*BarcodeEventSignatureRequest)(nil)
 

@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,34 @@ func (x *DOMHTMLBaseElement) WithTarget(target string) *DOMHTMLBaseElement {
 	return x
 }
 
+// Href calls the underlying Href.
+func (x *DOMHTMLBaseElement) Href() string {
+	_r := x.inner.Href()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHref calls the underlying SetHref.
+func (x *DOMHTMLBaseElement) SetHref(href string) {
+	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+}
+
+// Target calls the underlying Target.
+func (x *DOMHTMLBaseElement) Target() string {
+	_r := x.inner.Target()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *DOMHTMLBaseElement) SetTarget(target string) {
+	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+}
+
 func (x *DOMHTMLBaseElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLBaseElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +74,17 @@ func (x *DOMHTMLBaseElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLBaseElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLBaseElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLBaseElementable is the interface implemented by [DOMHTMLBaseElement], for mocking and DI.
+type DOMHTMLBaseElementable interface {
+	Unwrap() *raw.DOMHTMLBaseElement
+	WithHref(href string) *DOMHTMLBaseElement
+	WithTarget(target string) *DOMHTMLBaseElement
+	Href() string
+	SetHref(href string)
+	Target() string
+	SetTarget(target string)
+}
+
+var _ DOMHTMLBaseElementable = (*DOMHTMLBaseElement)(nil)
 

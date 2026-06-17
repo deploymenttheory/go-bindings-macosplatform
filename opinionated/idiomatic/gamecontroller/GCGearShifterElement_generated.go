@@ -23,3 +23,22 @@ func NewGearShifterElement() *GearShifterElement {
 	return &GearShifterElement{inner: raw.GCGearShifterElementFromID(_id)}
 }
 
+// PatternInput calls the underlying PatternInput.
+func (x *GearShifterElement) PatternInput() raw.GCSwitchPositionInput {
+	return x.inner.PatternInput()
+}
+
+// SequentialInput calls the underlying SequentialInput.
+func (x *GearShifterElement) SequentialInput() raw.GCRelativeInput {
+	return x.inner.SequentialInput()
+}
+
+// GearShifterElementable is the interface implemented by [GearShifterElement], for mocking and DI.
+type GearShifterElementable interface {
+	Unwrap() *raw.GCGearShifterElement
+	PatternInput() raw.GCSwitchPositionInput
+	SequentialInput() raw.GCRelativeInput
+}
+
+var _ GearShifterElementable = (*GearShifterElement)(nil)
+

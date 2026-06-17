@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,4 +24,23 @@ func NewSpatialPipelineWithFlags(flags raw.PHASESpatialPipelineFlags) *SpatialPi
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), flags)
 	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(_id)}
 }
+
+// Flags calls the underlying Flags.
+func (x *SpatialPipeline) Flags() raw.PHASESpatialPipelineFlags {
+	return x.inner.Flags()
+}
+
+// Entries calls the underlying Entries.
+func (x *SpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry] {
+	return x.inner.Entries()
+}
+
+// SpatialPipelineable is the interface implemented by [SpatialPipeline], for mocking and DI.
+type SpatialPipelineable interface {
+	Unwrap() *raw.PHASESpatialPipeline
+	Flags() raw.PHASESpatialPipelineFlags
+	Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry]
+}
+
+var _ SpatialPipelineable = (*SpatialPipeline)(nil)
 

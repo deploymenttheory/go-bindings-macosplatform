@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRServiceAreaClusterMapStruct) WithName(name string) *MTRServiceAreaCl
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
+
+// MapID calls the underlying MapID.
+func (x *MTRServiceAreaClusterMapStruct) MapID() *foundation.NSNumber {
+	return x.inner.MapID()
+}
+
+// SetMapID calls the underlying SetMapID.
+func (x *MTRServiceAreaClusterMapStruct) SetMapID(mapID *foundation.NSNumber) {
+	x.inner.SetMapID(mapID)
+}
+
+// Name calls the underlying Name.
+func (x *MTRServiceAreaClusterMapStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRServiceAreaClusterMapStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// MTRServiceAreaClusterMapStructable is the interface implemented by [MTRServiceAreaClusterMapStruct], for mocking and DI.
+type MTRServiceAreaClusterMapStructable interface {
+	Unwrap() *raw.MTRServiceAreaClusterMapStruct
+	WithMapID(mapID *foundation.NSNumber) *MTRServiceAreaClusterMapStruct
+	WithName(name string) *MTRServiceAreaClusterMapStruct
+	MapID() *foundation.NSNumber
+	SetMapID(mapID *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTRServiceAreaClusterMapStructable = (*MTRServiceAreaClusterMapStruct)(nil)
 

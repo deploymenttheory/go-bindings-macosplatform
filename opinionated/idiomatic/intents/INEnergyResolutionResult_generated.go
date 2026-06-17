@@ -25,3 +25,10 @@ func NewEnergyResolutionResult() *EnergyResolutionResult {
 
 func (x *EnergyResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// EnergyResolutionResultable is the interface implemented by [EnergyResolutionResult], for mocking and DI.
+type EnergyResolutionResultable interface {
+	Unwrap() *raw.INEnergyResolutionResult
+}
+
+var _ EnergyResolutionResultable = (*EnergyResolutionResult)(nil)
+

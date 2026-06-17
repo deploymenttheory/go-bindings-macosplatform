@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,55 @@ func (x *LeaderboardViewController) WithLeaderboardDelegate(leaderboardDelegate 
 	return x
 }
 
+// TimeScope calls the underlying TimeScope.
+func (x *LeaderboardViewController) TimeScope() raw.GKLeaderboardTimeScope {
+	return x.inner.TimeScope()
+}
+
+// SetTimeScope calls the underlying SetTimeScope.
+func (x *LeaderboardViewController) SetTimeScope(timeScope raw.GKLeaderboardTimeScope) {
+	x.inner.SetTimeScope(timeScope)
+}
+
+// Category calls the underlying Category.
+func (x *LeaderboardViewController) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCategory calls the underlying SetCategory.
+func (x *LeaderboardViewController) SetCategory(category string) {
+	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+}
+
+// LeaderboardDelegate calls the underlying LeaderboardDelegate.
+func (x *LeaderboardViewController) LeaderboardDelegate() raw.GKLeaderboardViewControllerDelegate {
+	return x.inner.LeaderboardDelegate()
+}
+
+// SetLeaderboardDelegate calls the underlying SetLeaderboardDelegate.
+func (x *LeaderboardViewController) SetLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) {
+	x.inner.SetLeaderboardDelegate(leaderboardDelegate)
+}
+
 func (x *LeaderboardViewController) asGameCenterViewController() *raw.GKGameCenterViewController { return &x.inner.GKGameCenterViewController }
+
+// LeaderboardViewControllerable is the interface implemented by [LeaderboardViewController], for mocking and DI.
+type LeaderboardViewControllerable interface {
+	Unwrap() *raw.GKLeaderboardViewController
+	WithTimeScope(timeScope raw.GKLeaderboardTimeScope) *LeaderboardViewController
+	WithCategory(category string) *LeaderboardViewController
+	WithLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate) *LeaderboardViewController
+	TimeScope() raw.GKLeaderboardTimeScope
+	SetTimeScope(timeScope raw.GKLeaderboardTimeScope)
+	Category() string
+	SetCategory(category string)
+	LeaderboardDelegate() raw.GKLeaderboardViewControllerDelegate
+	SetLeaderboardDelegate(leaderboardDelegate raw.GKLeaderboardViewControllerDelegate)
+}
+
+var _ LeaderboardViewControllerable = (*LeaderboardViewController)(nil)
 

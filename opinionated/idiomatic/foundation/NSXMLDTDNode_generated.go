@@ -62,7 +62,84 @@ func (x *XMLDTDNode) WithNotationName(notationName string) *XMLDTDNode {
 	return x
 }
 
+// DTDKind calls the underlying DTDKind.
+func (x *XMLDTDNode) DTDKind() raw.NSXMLDTDNodeKind {
+	return x.inner.DTDKind()
+}
+
+// SetDTDKind calls the underlying SetDTDKind.
+func (x *XMLDTDNode) SetDTDKind(dTDKind raw.NSXMLDTDNodeKind) {
+	x.inner.SetDTDKind(dTDKind)
+}
+
+// IsExternal calls the underlying IsExternal.
+func (x *XMLDTDNode) IsExternal() bool {
+	return x.inner.IsExternal()
+}
+
+// PublicID calls the underlying PublicID.
+func (x *XMLDTDNode) PublicID() *String {
+	_r := x.inner.PublicID()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetPublicID calls the underlying SetPublicID.
+func (x *XMLDTDNode) SetPublicID(publicID string) {
+	x.inner.SetPublicID(foundation.NSStringStringWithUTF8String(publicID))
+}
+
+// SystemID calls the underlying SystemID.
+func (x *XMLDTDNode) SystemID() *String {
+	_r := x.inner.SystemID()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetSystemID calls the underlying SetSystemID.
+func (x *XMLDTDNode) SetSystemID(systemID string) {
+	x.inner.SetSystemID(foundation.NSStringStringWithUTF8String(systemID))
+}
+
+// NotationName calls the underlying NotationName.
+func (x *XMLDTDNode) NotationName() *String {
+	_r := x.inner.NotationName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetNotationName calls the underlying SetNotationName.
+func (x *XMLDTDNode) SetNotationName(notationName string) {
+	x.inner.SetNotationName(foundation.NSStringStringWithUTF8String(notationName))
+}
+
 func (x *XMLDTDNode) asXMLNode() *raw.NSXMLNode { return &x.inner.NSXMLNode }
 
 func (x *XMLDTDNode) asObject() *raw.NSObject { return &x.inner.NSXMLNode.NSObject }
+
+// XMLDTDNodeable is the interface implemented by [XMLDTDNode], for mocking and DI.
+type XMLDTDNodeable interface {
+	Unwrap() *raw.NSXMLDTDNode
+	WithDTDKind(dTDKind raw.NSXMLDTDNodeKind) *XMLDTDNode
+	WithPublicID(publicID string) *XMLDTDNode
+	WithSystemID(systemID string) *XMLDTDNode
+	WithNotationName(notationName string) *XMLDTDNode
+	DTDKind() raw.NSXMLDTDNodeKind
+	SetDTDKind(dTDKind raw.NSXMLDTDNodeKind)
+	IsExternal() bool
+	PublicID() *String
+	SetPublicID(publicID string)
+	SystemID() *String
+	SetSystemID(systemID string)
+	NotationName() *String
+	SetNotationName(notationName string)
+}
+
+var _ XMLDTDNodeable = (*XMLDTDNode)(nil)
 

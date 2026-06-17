@@ -5,7 +5,9 @@
 package coreml
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,35 @@ func NewState() *State {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLState")), objc.RegisterName("new"))
 	return &State{inner: raw.MLStateFromID(_id)}
 }
+
+// GetMultiArrayForStateNamedHandler blocks until the operation completes or ctx is cancelled.
+func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error) {
+	type _result struct {
+		val *MultiArray
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetMultiArrayForStateNamedHandler(foundation.NSStringStringWithUTF8String(stateName), func(_p0 *raw.MLMultiArray) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &MultiArray{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MultiArray
+		return _zero, ctx.Err()
+	}
+}
+
+// Stateable is the interface implemented by [State], for mocking and DI.
+type Stateable interface {
+	Unwrap() *raw.MLState
+	GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error)
+}
+
+var _ Stateable = (*State)(nil)
 

@@ -42,5 +42,103 @@ func (x *MTRUnitTestingClusterNestedStructList) WithC(c MTRUnitTestingClusterSim
 	return x
 }
 
+// A calls the underlying A.
+func (x *MTRUnitTestingClusterNestedStructList) A() *foundation.NSNumber {
+	return x.inner.A()
+}
+
+// SetA calls the underlying SetA.
+func (x *MTRUnitTestingClusterNestedStructList) SetA(a *foundation.NSNumber) {
+	x.inner.SetA(a)
+}
+
+// B calls the underlying B.
+func (x *MTRUnitTestingClusterNestedStructList) B() *foundation.NSNumber {
+	return x.inner.B()
+}
+
+// SetB calls the underlying SetB.
+func (x *MTRUnitTestingClusterNestedStructList) SetB(b *foundation.NSNumber) {
+	x.inner.SetB(b)
+}
+
+// C calls the underlying C.
+func (x *MTRUnitTestingClusterNestedStructList) C() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.C()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetC calls the underlying SetC.
+func (x *MTRUnitTestingClusterNestedStructList) SetC(c *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetC(c)
+}
+
+// D calls the underlying D.
+func (x *MTRUnitTestingClusterNestedStructList) D() *foundation.NSArray[objc.ID] {
+	return x.inner.D()
+}
+
+// SetD calls the underlying SetD.
+func (x *MTRUnitTestingClusterNestedStructList) SetD(d *foundation.NSArray[objc.ID]) {
+	x.inner.SetD(d)
+}
+
+// E calls the underlying E.
+func (x *MTRUnitTestingClusterNestedStructList) E() *foundation.NSArray[objc.ID] {
+	return x.inner.E()
+}
+
+// SetE calls the underlying SetE.
+func (x *MTRUnitTestingClusterNestedStructList) SetE(e *foundation.NSArray[objc.ID]) {
+	x.inner.SetE(e)
+}
+
+// F calls the underlying F.
+func (x *MTRUnitTestingClusterNestedStructList) F() *foundation.NSArray[objc.ID] {
+	return x.inner.F()
+}
+
+// SetF calls the underlying SetF.
+func (x *MTRUnitTestingClusterNestedStructList) SetF(f *foundation.NSArray[objc.ID]) {
+	x.inner.SetF(f)
+}
+
+// G calls the underlying G.
+func (x *MTRUnitTestingClusterNestedStructList) G() *foundation.NSArray[objc.ID] {
+	return x.inner.G()
+}
+
+// SetG calls the underlying SetG.
+func (x *MTRUnitTestingClusterNestedStructList) SetG(g *foundation.NSArray[objc.ID]) {
+	x.inner.SetG(g)
+}
+
 func (x *MTRUnitTestingClusterNestedStructList) asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList { return x.inner }
+
+// MTRUnitTestingClusterNestedStructListable is the interface implemented by [MTRUnitTestingClusterNestedStructList], for mocking and DI.
+type MTRUnitTestingClusterNestedStructListable interface {
+	Unwrap() *raw.MTRUnitTestingClusterNestedStructList
+	WithA(a *foundation.NSNumber) *MTRUnitTestingClusterNestedStructList
+	WithB(b *foundation.NSNumber) *MTRUnitTestingClusterNestedStructList
+	WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterNestedStructList
+	A() *foundation.NSNumber
+	SetA(a *foundation.NSNumber)
+	B() *foundation.NSNumber
+	SetB(b *foundation.NSNumber)
+	C() *MTRUnitTestingClusterSimpleStruct
+	SetC(c *raw.MTRUnitTestingClusterSimpleStruct)
+	D() *foundation.NSArray[objc.ID]
+	SetD(d *foundation.NSArray[objc.ID])
+	E() *foundation.NSArray[objc.ID]
+	SetE(e *foundation.NSArray[objc.ID])
+	F() *foundation.NSArray[objc.ID]
+	SetF(f *foundation.NSArray[objc.ID])
+	G() *foundation.NSArray[objc.ID]
+	SetG(g *foundation.NSArray[objc.ID])
+}
+
+var _ MTRUnitTestingClusterNestedStructListable = (*MTRUnitTestingClusterNestedStructList)(nil)
 

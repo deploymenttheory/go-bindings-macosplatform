@@ -36,7 +36,50 @@ func (x *PolygonRenderer) WithStrokeEnd(strokeEnd float64) *PolygonRenderer {
 	return x
 }
 
+// Polygon calls the underlying Polygon.
+func (x *PolygonRenderer) Polygon() *Polygon {
+	_r := x.inner.Polygon()
+	if _r == nil {
+		return nil
+	}
+	return &Polygon{inner: _r}
+}
+
+// StrokeStart calls the underlying StrokeStart.
+func (x *PolygonRenderer) StrokeStart() float64 {
+	return x.inner.StrokeStart()
+}
+
+// SetStrokeStart calls the underlying SetStrokeStart.
+func (x *PolygonRenderer) SetStrokeStart(strokeStart float64) {
+	x.inner.SetStrokeStart(strokeStart)
+}
+
+// StrokeEnd calls the underlying StrokeEnd.
+func (x *PolygonRenderer) StrokeEnd() float64 {
+	return x.inner.StrokeEnd()
+}
+
+// SetStrokeEnd calls the underlying SetStrokeEnd.
+func (x *PolygonRenderer) SetStrokeEnd(strokeEnd float64) {
+	x.inner.SetStrokeEnd(strokeEnd)
+}
+
 func (x *PolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
 
 func (x *PolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// PolygonRendererable is the interface implemented by [PolygonRenderer], for mocking and DI.
+type PolygonRendererable interface {
+	Unwrap() *raw.MKPolygonRenderer
+	WithStrokeStart(strokeStart float64) *PolygonRenderer
+	WithStrokeEnd(strokeEnd float64) *PolygonRenderer
+	Polygon() *Polygon
+	StrokeStart() float64
+	SetStrokeStart(strokeStart float64)
+	StrokeEnd() float64
+	SetStrokeEnd(strokeEnd float64)
+}
+
+var _ PolygonRendererable = (*PolygonRenderer)(nil)
 

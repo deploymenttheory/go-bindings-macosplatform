@@ -91,5 +91,89 @@ func (x *MutableMetadataItem) WithKey(key objc.ID) *MutableMetadataItem {
 	return x
 }
 
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *MutableMetadataItem) SetIdentifier(identifier *foundation.NSString) {
+	x.inner.SetIdentifier(identifier)
+}
+
+// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+func (x *MutableMetadataItem) SetExtendedLanguageTag(extendedLanguageTag string) {
+	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *MutableMetadataItem) SetLocale(locale *foundation.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// SetTime calls the underlying SetTime.
+func (x *MutableMetadataItem) SetTime(time_ coremedia.CMTime) {
+	x.inner.SetTime(time_)
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MutableMetadataItem) SetDuration(duration coremedia.CMTime) {
+	x.inner.SetDuration(duration)
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *MutableMetadataItem) SetDataType(dataType string) {
+	x.inner.SetDataType(foundation.NSStringStringWithUTF8String(dataType))
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MutableMetadataItem) SetValue(value objc.ID) {
+	x.inner.SetValue(value)
+}
+
+// SetExtraAttributes calls the underlying SetExtraAttributes.
+func (x *MutableMetadataItem) SetExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetExtraAttributes(extraAttributes)
+}
+
+// SetStartDate calls the underlying SetStartDate.
+func (x *MutableMetadataItem) SetStartDate(startDate *foundation.NSDate) {
+	x.inner.SetStartDate(startDate)
+}
+
+// SetKeySpace calls the underlying SetKeySpace.
+func (x *MutableMetadataItem) SetKeySpace(keySpace *foundation.NSString) {
+	x.inner.SetKeySpace(keySpace)
+}
+
+// SetKey calls the underlying SetKey.
+func (x *MutableMetadataItem) SetKey(key objc.ID) {
+	x.inner.SetKey(key)
+}
+
 func (x *MutableMetadataItem) asMetadataItem() *raw.AVMetadataItem { return &x.inner.AVMetadataItem }
+
+// MutableMetadataItemable is the interface implemented by [MutableMetadataItem], for mocking and DI.
+type MutableMetadataItemable interface {
+	Unwrap() *raw.AVMutableMetadataItem
+	WithIdentifier(identifier *foundation.NSString) *MutableMetadataItem
+	WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem
+	WithLocale(locale *foundation.NSLocale) *MutableMetadataItem
+	WithTime(time_ coremedia.CMTime) *MutableMetadataItem
+	WithDuration(duration coremedia.CMTime) *MutableMetadataItem
+	WithDataType(dataType string) *MutableMetadataItem
+	WithValue(value objc.ID) *MutableMetadataItem
+	WithExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMetadataItem
+	WithStartDate(startDate *foundation.NSDate) *MutableMetadataItem
+	WithKeySpace(keySpace *foundation.NSString) *MutableMetadataItem
+	WithKey(key objc.ID) *MutableMetadataItem
+	SetIdentifier(identifier *foundation.NSString)
+	SetExtendedLanguageTag(extendedLanguageTag string)
+	SetLocale(locale *foundation.NSLocale)
+	SetTime(time_ coremedia.CMTime)
+	SetDuration(duration coremedia.CMTime)
+	SetDataType(dataType string)
+	SetValue(value objc.ID)
+	SetExtraAttributes(extraAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SetStartDate(startDate *foundation.NSDate)
+	SetKeySpace(keySpace *foundation.NSString)
+	SetKey(key objc.ID)
+}
+
+var _ MutableMetadataItemable = (*MutableMetadataItem)(nil)
 

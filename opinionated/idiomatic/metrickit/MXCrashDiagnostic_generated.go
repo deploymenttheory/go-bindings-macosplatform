@@ -5,7 +5,9 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,70 @@ func NewCrashDiagnostic() *CrashDiagnostic {
 	return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(_id)}
 }
 
+// CallStackTree calls the underlying CallStackTree.
+func (x *CrashDiagnostic) CallStackTree() *CallStackTree {
+	_r := x.inner.CallStackTree()
+	if _r == nil {
+		return nil
+	}
+	return &CallStackTree{inner: _r}
+}
+
+// TerminationReason calls the underlying TerminationReason.
+func (x *CrashDiagnostic) TerminationReason() string {
+	_r := x.inner.TerminationReason()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VirtualMemoryRegionInfo calls the underlying VirtualMemoryRegionInfo.
+func (x *CrashDiagnostic) VirtualMemoryRegionInfo() string {
+	_r := x.inner.VirtualMemoryRegionInfo()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExceptionType calls the underlying ExceptionType.
+func (x *CrashDiagnostic) ExceptionType() *foundation.NSNumber {
+	return x.inner.ExceptionType()
+}
+
+// ExceptionCode calls the underlying ExceptionCode.
+func (x *CrashDiagnostic) ExceptionCode() *foundation.NSNumber {
+	return x.inner.ExceptionCode()
+}
+
+// Signal calls the underlying Signal.
+func (x *CrashDiagnostic) Signal() *foundation.NSNumber {
+	return x.inner.Signal()
+}
+
+// ExceptionReason calls the underlying ExceptionReason.
+func (x *CrashDiagnostic) ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason {
+	_r := x.inner.ExceptionReason()
+	if _r == nil {
+		return nil
+	}
+	return &CrashDiagnosticObjectiveCExceptionReason{inner: _r}
+}
+
 func (x *CrashDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+
+// CrashDiagnosticable is the interface implemented by [CrashDiagnostic], for mocking and DI.
+type CrashDiagnosticable interface {
+	Unwrap() *raw.MXCrashDiagnostic
+	CallStackTree() *CallStackTree
+	TerminationReason() string
+	VirtualMemoryRegionInfo() string
+	ExceptionType() *foundation.NSNumber
+	ExceptionCode() *foundation.NSNumber
+	Signal() *foundation.NSNumber
+	ExceptionReason() *CrashDiagnosticObjectiveCExceptionReason
+}
+
+var _ CrashDiagnosticable = (*CrashDiagnostic)(nil)
 

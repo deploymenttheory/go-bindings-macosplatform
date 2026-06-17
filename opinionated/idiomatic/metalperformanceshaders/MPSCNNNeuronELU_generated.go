@@ -33,3 +33,10 @@ func (x *CNNNeuronELU) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.
 
 func (x *CNNNeuronELU) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronELUable is the interface implemented by [CNNNeuronELU], for mocking and DI.
+type CNNNeuronELUable interface {
+	Unwrap() *raw.MPSCNNNeuronELU
+}
+
+var _ CNNNeuronELUable = (*CNNNeuronELU)(nil)
+

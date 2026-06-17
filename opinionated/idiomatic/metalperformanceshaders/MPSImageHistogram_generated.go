@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ImageHistogram wraps [raw.MPSImageHistogram] with a fluent Go API.
@@ -47,5 +48,68 @@ func (x *ImageHistogram) WithZeroHistogram(zeroHistogram bool) *ImageHistogram {
 	return x
 }
 
+// EncodeToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureHistogramHistogramOffset.
+func (x *ImageHistogram) EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
+	x.inner.EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
+}
+
+// HistogramSizeForSourceFormat calls the underlying HistogramSizeForSourceFormat.
+func (x *ImageHistogram) HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint {
+	return x.inner.HistogramSizeForSourceFormat(sourceFormat)
+}
+
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *ImageHistogram) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *ImageHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
+// ZeroHistogram calls the underlying ZeroHistogram.
+func (x *ImageHistogram) ZeroHistogram() bool {
+	return x.inner.ZeroHistogram()
+}
+
+// SetZeroHistogram calls the underlying SetZeroHistogram.
+func (x *ImageHistogram) SetZeroHistogram(zeroHistogram bool) {
+	x.inner.SetZeroHistogram(zeroHistogram)
+}
+
+// MinPixelThresholdValue calls the underlying MinPixelThresholdValue.
+func (x *ImageHistogram) MinPixelThresholdValue() unsafe.Pointer {
+	return x.inner.MinPixelThresholdValue()
+}
+
+// SetMinPixelThresholdValue calls the underlying SetMinPixelThresholdValue.
+func (x *ImageHistogram) SetMinPixelThresholdValue(minPixelThresholdValue unsafe.Pointer) {
+	x.inner.SetMinPixelThresholdValue(minPixelThresholdValue)
+}
+
+// HistogramInfo calls the underlying HistogramInfo.
+func (x *ImageHistogram) HistogramInfo() mpsimage.MPSImageHistogramInfo {
+	return x.inner.HistogramInfo()
+}
+
 func (x *ImageHistogram) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// ImageHistogramable is the interface implemented by [ImageHistogram], for mocking and DI.
+type ImageHistogramable interface {
+	Unwrap() *raw.MPSImageHistogram
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageHistogram
+	WithZeroHistogram(zeroHistogram bool) *ImageHistogram
+	EncodeToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
+	HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+	ZeroHistogram() bool
+	SetZeroHistogram(zeroHistogram bool)
+	MinPixelThresholdValue() unsafe.Pointer
+	SetMinPixelThresholdValue(minPixelThresholdValue unsafe.Pointer)
+	HistogramInfo() mpsimage.MPSImageHistogramInfo
+}
+
+var _ ImageHistogramable = (*ImageHistogram)(nil)
 

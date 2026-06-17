@@ -32,3 +32,50 @@ func NewLookAroundSceneRequestWithMapItem(mapItem *raw.MKMapItem) *LookAroundSce
 	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(_id)}
 }
 
+// GetSceneWithCompletionHandler calls the underlying GetSceneWithCompletionHandler.
+func (x *LookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
+	x.inner.GetSceneWithCompletionHandler(completionHandler)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *LookAroundSceneRequest) Cancel() {
+	x.inner.Cancel()
+}
+
+// Coordinate calls the underlying Coordinate.
+func (x *LookAroundSceneRequest) Coordinate() unsafe.Pointer {
+	return x.inner.Coordinate()
+}
+
+// MapItem calls the underlying MapItem.
+func (x *LookAroundSceneRequest) MapItem() *MapItem {
+	_r := x.inner.MapItem()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// IsCancelled calls the underlying IsCancelled.
+func (x *LookAroundSceneRequest) IsCancelled() bool {
+	return x.inner.IsCancelled()
+}
+
+// IsLoading calls the underlying IsLoading.
+func (x *LookAroundSceneRequest) IsLoading() bool {
+	return x.inner.IsLoading()
+}
+
+// LookAroundSceneRequestable is the interface implemented by [LookAroundSceneRequest], for mocking and DI.
+type LookAroundSceneRequestable interface {
+	Unwrap() *raw.MKLookAroundSceneRequest
+	GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	Cancel()
+	Coordinate() unsafe.Pointer
+	MapItem() *MapItem
+	IsCancelled() bool
+	IsLoading() bool
+}
+
+var _ LookAroundSceneRequestable = (*LookAroundSceneRequest)(nil)
+

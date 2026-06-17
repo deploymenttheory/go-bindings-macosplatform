@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,48 @@ func NewFaceObservation() *FaceObservation {
 	return &FaceObservation{inner: raw.VNFaceObservationFromID(_id)}
 }
 
+// Landmarks calls the underlying Landmarks.
+func (x *FaceObservation) Landmarks() *FaceLandmarks2D {
+	_r := x.inner.Landmarks()
+	if _r == nil {
+		return nil
+	}
+	return &FaceLandmarks2D{inner: _r}
+}
+
+// FaceCaptureQuality calls the underlying FaceCaptureQuality.
+func (x *FaceObservation) FaceCaptureQuality() *foundation.NSNumber {
+	return x.inner.FaceCaptureQuality()
+}
+
+// Roll calls the underlying Roll.
+func (x *FaceObservation) Roll() *foundation.NSNumber {
+	return x.inner.Roll()
+}
+
+// Yaw calls the underlying Yaw.
+func (x *FaceObservation) Yaw() *foundation.NSNumber {
+	return x.inner.Yaw()
+}
+
+// Pitch calls the underlying Pitch.
+func (x *FaceObservation) Pitch() *foundation.NSNumber {
+	return x.inner.Pitch()
+}
+
 func (x *FaceObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
 
 func (x *FaceObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+
+// FaceObservationable is the interface implemented by [FaceObservation], for mocking and DI.
+type FaceObservationable interface {
+	Unwrap() *raw.VNFaceObservation
+	Landmarks() *FaceLandmarks2D
+	FaceCaptureQuality() *foundation.NSNumber
+	Roll() *foundation.NSNumber
+	Yaw() *foundation.NSNumber
+	Pitch() *foundation.NSNumber
+}
+
+var _ FaceObservationable = (*FaceObservation)(nil)
 

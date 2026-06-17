@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -88,11 +89,14 @@ func (x *FetchRecordsOperation) RecordIDs() []*raw.CKRecordID {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordID {
+		return raw.CKRecordIDFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecordIDs calls the underlying SetRecordIDs.
+func (x *FetchRecordsOperation) SetRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) {
+	x.inner.SetRecordIDs(recordIDs)
 }
 
 // DesiredKeys returns the collection as a Go slice.
@@ -101,14 +105,69 @@ func (x *FetchRecordsOperation) DesiredKeys() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetDesiredKeys calls the underlying SetDesiredKeys.
+func (x *FetchRecordsOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDesiredKeys(desiredKeys)
+}
+
+// PerRecordProgressBlock calls the underlying PerRecordProgressBlock.
+func (x *FetchRecordsOperation) PerRecordProgressBlock() objc.Block {
+	return x.inner.PerRecordProgressBlock()
+}
+
+// SetPerRecordProgressBlock calls the underlying SetPerRecordProgressBlock.
+func (x *FetchRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) {
+	x.inner.SetPerRecordProgressBlock(perRecordProgressBlock)
+}
+
+// PerRecordCompletionBlock calls the underlying PerRecordCompletionBlock.
+func (x *FetchRecordsOperation) PerRecordCompletionBlock() objc.Block {
+	return x.inner.PerRecordCompletionBlock()
+}
+
+// SetPerRecordCompletionBlock calls the underlying SetPerRecordCompletionBlock.
+func (x *FetchRecordsOperation) SetPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) {
+	x.inner.SetPerRecordCompletionBlock(perRecordCompletionBlock)
+}
+
+// FetchRecordsCompletionBlock calls the underlying FetchRecordsCompletionBlock.
+func (x *FetchRecordsOperation) FetchRecordsCompletionBlock() objc.Block {
+	return x.inner.FetchRecordsCompletionBlock()
+}
+
+// SetFetchRecordsCompletionBlock calls the underlying SetFetchRecordsCompletionBlock.
+func (x *FetchRecordsOperation) SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) {
+	x.inner.SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock)
 }
 
 func (x *FetchRecordsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchRecordsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchRecordsOperationable is the interface implemented by [FetchRecordsOperation], for mocking and DI.
+type FetchRecordsOperationable interface {
+	Unwrap() *raw.CKFetchRecordsOperation
+	WithRecordIDs(items ...*raw.CKRecordID) *FetchRecordsOperation
+	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordsOperation
+	WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) *FetchRecordsOperation
+	WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) *FetchRecordsOperation
+	WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) *FetchRecordsOperation
+	RecordIDs() []*raw.CKRecordID
+	SetRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID])
+	DesiredKeys() []*foundation.NSString
+	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
+	PerRecordProgressBlock() objc.Block
+	SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64))
+	PerRecordCompletionBlock() objc.Block
+	SetPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer))
+	FetchRecordsCompletionBlock() objc.Block
+	SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer))
+}
+
+var _ FetchRecordsOperationable = (*FetchRecordsOperation)(nil)
 

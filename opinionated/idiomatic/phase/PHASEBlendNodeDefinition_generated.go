@@ -46,7 +46,58 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerD
 	return &BlendNodeDefinition{inner: raw.PHASEBlendNodeDefinitionFromID(_id)}
 }
 
+// AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree.
+func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, fadeCurveType, subtree)
+}
+
+// AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree.
+func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType raw.PHASECurveType, highFadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, subtree)
+}
+
+// AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree calls the underlying AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree.
+func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value, fullGainAtValue, fadeCurveType, subtree)
+}
+
+// AddRangeWithEnvelopeSubtree calls the underlying AddRangeWithEnvelopeSubtree.
+func (x *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *raw.PHASEEnvelope, subtree *raw.PHASESoundEventNodeDefinition) {
+	x.inner.AddRangeWithEnvelopeSubtree(envelope, subtree)
+}
+
+// BlendParameterDefinition calls the underlying BlendParameterDefinition.
+func (x *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
+	_r := x.inner.BlendParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameterDefinition{inner: _r}
+}
+
+// SpatialMixerDefinitionForDistance calls the underlying SpatialMixerDefinitionForDistance.
+func (x *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
+	_r := x.inner.SpatialMixerDefinitionForDistance()
+	if _r == nil {
+		return nil
+	}
+	return &SpatialMixerDefinition{inner: _r}
+}
+
 func (x *BlendNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
 
 func (x *BlendNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// BlendNodeDefinitionable is the interface implemented by [BlendNodeDefinition], for mocking and DI.
+type BlendNodeDefinitionable interface {
+	Unwrap() *raw.PHASEBlendNodeDefinition
+	AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType raw.PHASECurveType, highFadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType raw.PHASECurveType, subtree *raw.PHASESoundEventNodeDefinition)
+	AddRangeWithEnvelopeSubtree(envelope *raw.PHASEEnvelope, subtree *raw.PHASESoundEventNodeDefinition)
+	BlendParameterDefinition() *NumberMetaParameterDefinition
+	SpatialMixerDefinitionForDistance() *SpatialMixerDefinition
+}
+
+var _ BlendNodeDefinitionable = (*BlendNodeDefinition)(nil)
 

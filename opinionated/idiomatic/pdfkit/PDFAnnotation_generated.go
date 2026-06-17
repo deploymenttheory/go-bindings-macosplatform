@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -300,43 +301,531 @@ func (x *Annotation) WithStampName(stampName string) *Annotation {
 	return x
 }
 
+// DrawWithBoxInContext calls the underlying DrawWithBoxInContext.
+func (x *Annotation) DrawWithBoxInContext(box raw.PDFDisplayBox, context_ unsafe.Pointer) {
+	x.inner.DrawWithBoxInContext(box, context_)
+}
+
+// SetValueForAnnotationKey calls the underlying SetValueForAnnotationKey.
+func (x *Annotation) SetValueForAnnotationKey(value objc.ID, key unsafe.Pointer) bool {
+	return x.inner.SetValueForAnnotationKey(value, key)
+}
+
+// SetBooleanForAnnotationKey calls the underlying SetBooleanForAnnotationKey.
+func (x *Annotation) SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool {
+	return x.inner.SetBooleanForAnnotationKey(value, key)
+}
+
+// SetRectForAnnotationKey calls the underlying SetRectForAnnotationKey.
+func (x *Annotation) SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool {
+	return x.inner.SetRectForAnnotationKey(value, key)
+}
+
+// ValueForAnnotationKey calls the underlying ValueForAnnotationKey.
+func (x *Annotation) ValueForAnnotationKey(key unsafe.Pointer) objc.ID {
+	return x.inner.ValueForAnnotationKey(key)
+}
+
+// RemoveValueForAnnotationKey calls the underlying RemoveValueForAnnotationKey.
+func (x *Annotation) RemoveValueForAnnotationKey(key unsafe.Pointer) {
+	x.inner.RemoveValueForAnnotationKey(key)
+}
+
+// Page calls the underlying Page.
+func (x *Annotation) Page() *Page {
+	_r := x.inner.Page()
+	if _r == nil {
+		return nil
+	}
+	return &Page{inner: _r}
+}
+
+// SetPage calls the underlying SetPage.
+func (x *Annotation) SetPage(page *raw.PDFPage) {
+	x.inner.SetPage(page)
+}
+
+// Type calls the underlying Type.
+func (x *Annotation) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *Annotation) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Bounds calls the underlying Bounds.
+func (x *Annotation) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// SetBounds calls the underlying SetBounds.
+func (x *Annotation) SetBounds(bounds corefoundation.CGRect) {
+	x.inner.SetBounds(bounds)
+}
+
+// ShouldDisplay calls the underlying ShouldDisplay.
+func (x *Annotation) ShouldDisplay() bool {
+	return x.inner.ShouldDisplay()
+}
+
+// SetShouldDisplay calls the underlying SetShouldDisplay.
+func (x *Annotation) SetShouldDisplay(shouldDisplay bool) {
+	x.inner.SetShouldDisplay(shouldDisplay)
+}
+
+// ShouldPrint calls the underlying ShouldPrint.
+func (x *Annotation) ShouldPrint() bool {
+	return x.inner.ShouldPrint()
+}
+
+// SetShouldPrint calls the underlying SetShouldPrint.
+func (x *Annotation) SetShouldPrint(shouldPrint bool) {
+	x.inner.SetShouldPrint(shouldPrint)
+}
+
+// ModificationDate calls the underlying ModificationDate.
+func (x *Annotation) ModificationDate() unsafe.Pointer {
+	return x.inner.ModificationDate()
+}
+
+// SetModificationDate calls the underlying SetModificationDate.
+func (x *Annotation) SetModificationDate(modificationDate unsafe.Pointer) {
+	x.inner.SetModificationDate(modificationDate)
+}
+
+// UserName calls the underlying UserName.
+func (x *Annotation) UserName() unsafe.Pointer {
+	return x.inner.UserName()
+}
+
+// SetUserName calls the underlying SetUserName.
+func (x *Annotation) SetUserName(userName unsafe.Pointer) {
+	x.inner.SetUserName(userName)
+}
+
+// Popup calls the underlying Popup.
+func (x *Annotation) Popup() unsafe.Pointer {
+	return x.inner.Popup()
+}
+
+// SetPopup calls the underlying SetPopup.
+func (x *Annotation) SetPopup(popup unsafe.Pointer) {
+	x.inner.SetPopup(popup)
+}
+
+// Border calls the underlying Border.
+func (x *Annotation) Border() unsafe.Pointer {
+	return x.inner.Border()
+}
+
+// SetBorder calls the underlying SetBorder.
+func (x *Annotation) SetBorder(border unsafe.Pointer) {
+	x.inner.SetBorder(border)
+}
+
+// Color calls the underlying Color.
+func (x *Annotation) Color() unsafe.Pointer {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *Annotation) SetColor(color unsafe.Pointer) {
+	x.inner.SetColor(color)
+}
+
+// Contents calls the underlying Contents.
+func (x *Annotation) Contents() unsafe.Pointer {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *Annotation) SetContents(contents unsafe.Pointer) {
+	x.inner.SetContents(contents)
+}
+
+// Action calls the underlying Action.
+func (x *Annotation) Action() unsafe.Pointer {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *Annotation) SetAction(action unsafe.Pointer) {
+	x.inner.SetAction(action)
+}
+
+// HasAppearanceStream calls the underlying HasAppearanceStream.
+func (x *Annotation) HasAppearanceStream() bool {
+	return x.inner.HasAppearanceStream()
+}
+
+// IsHighlighted calls the underlying IsHighlighted.
+func (x *Annotation) IsHighlighted() bool {
+	return x.inner.IsHighlighted()
+}
+
+// SetHighlighted calls the underlying SetHighlighted.
+func (x *Annotation) SetHighlighted(highlighted bool) {
+	x.inner.SetHighlighted(highlighted)
+}
+
+// AnnotationKeyValues calls the underlying AnnotationKeyValues.
+func (x *Annotation) AnnotationKeyValues() unsafe.Pointer {
+	return x.inner.AnnotationKeyValues()
+}
+
+// RemoveAllAppearanceStreams calls the underlying RemoveAllAppearanceStreams.
+func (x *Annotation) RemoveAllAppearanceStreams() {
+	x.inner.RemoveAllAppearanceStreams()
+}
+
+// DrawWithBox calls the underlying DrawWithBox.
+func (x *Annotation) DrawWithBox(box raw.PDFDisplayBox) {
+	x.inner.DrawWithBox(box)
+}
+
+// ToolTip calls the underlying ToolTip.
+func (x *Annotation) ToolTip() unsafe.Pointer {
+	return x.inner.ToolTip()
+}
+
+// MouseUpAction calls the underlying MouseUpAction.
+func (x *Annotation) MouseUpAction() unsafe.Pointer {
+	return x.inner.MouseUpAction()
+}
+
+// SetMouseUpAction calls the underlying SetMouseUpAction.
+func (x *Annotation) SetMouseUpAction(mouseUpAction unsafe.Pointer) {
+	x.inner.SetMouseUpAction(mouseUpAction)
+}
+
+// AddBezierPath calls the underlying AddBezierPath.
+func (x *Annotation) AddBezierPath(path *appkit.NSBezierPath) {
+	x.inner.AddBezierPath(path)
+}
+
+// RemoveBezierPath calls the underlying RemoveBezierPath.
+func (x *Annotation) RemoveBezierPath(path *appkit.NSBezierPath) {
+	x.inner.RemoveBezierPath(path)
+}
+
+// Font calls the underlying Font.
+func (x *Annotation) Font() *appkit.NSFont {
+	return x.inner.Font()
+}
+
+// SetFont calls the underlying SetFont.
+func (x *Annotation) SetFont(font *appkit.NSFont) {
+	x.inner.SetFont(font)
+}
+
+// FontColor calls the underlying FontColor.
+func (x *Annotation) FontColor() *appkit.NSColor {
+	return x.inner.FontColor()
+}
+
+// SetFontColor calls the underlying SetFontColor.
+func (x *Annotation) SetFontColor(fontColor *appkit.NSColor) {
+	x.inner.SetFontColor(fontColor)
+}
+
+// InteriorColor calls the underlying InteriorColor.
+func (x *Annotation) InteriorColor() *appkit.NSColor {
+	return x.inner.InteriorColor()
+}
+
+// SetInteriorColor calls the underlying SetInteriorColor.
+func (x *Annotation) SetInteriorColor(interiorColor *appkit.NSColor) {
+	x.inner.SetInteriorColor(interiorColor)
+}
+
+// Alignment calls the underlying Alignment.
+func (x *Annotation) Alignment() appkit.NSTextAlignment {
+	return x.inner.Alignment()
+}
+
+// SetAlignment calls the underlying SetAlignment.
+func (x *Annotation) SetAlignment(alignment appkit.NSTextAlignment) {
+	x.inner.SetAlignment(alignment)
+}
+
+// StartPoint calls the underlying StartPoint.
+func (x *Annotation) StartPoint() corefoundation.CGPoint {
+	return x.inner.StartPoint()
+}
+
+// SetStartPoint calls the underlying SetStartPoint.
+func (x *Annotation) SetStartPoint(startPoint corefoundation.CGPoint) {
+	x.inner.SetStartPoint(startPoint)
+}
+
+// EndPoint calls the underlying EndPoint.
+func (x *Annotation) EndPoint() corefoundation.CGPoint {
+	return x.inner.EndPoint()
+}
+
+// SetEndPoint calls the underlying SetEndPoint.
+func (x *Annotation) SetEndPoint(endPoint corefoundation.CGPoint) {
+	x.inner.SetEndPoint(endPoint)
+}
+
+// StartLineStyle calls the underlying StartLineStyle.
+func (x *Annotation) StartLineStyle() raw.PDFLineStyle {
+	return x.inner.StartLineStyle()
+}
+
+// SetStartLineStyle calls the underlying SetStartLineStyle.
+func (x *Annotation) SetStartLineStyle(startLineStyle raw.PDFLineStyle) {
+	x.inner.SetStartLineStyle(startLineStyle)
+}
+
+// EndLineStyle calls the underlying EndLineStyle.
+func (x *Annotation) EndLineStyle() raw.PDFLineStyle {
+	return x.inner.EndLineStyle()
+}
+
+// SetEndLineStyle calls the underlying SetEndLineStyle.
+func (x *Annotation) SetEndLineStyle(endLineStyle raw.PDFLineStyle) {
+	x.inner.SetEndLineStyle(endLineStyle)
+}
+
+// IconType calls the underlying IconType.
+func (x *Annotation) IconType() raw.PDFTextAnnotationIconType {
+	return x.inner.IconType()
+}
+
+// SetIconType calls the underlying SetIconType.
+func (x *Annotation) SetIconType(iconType raw.PDFTextAnnotationIconType) {
+	x.inner.SetIconType(iconType)
+}
+
 // QuadrilateralPoints returns the collection as a Go slice.
 func (x *Annotation) QuadrilateralPoints() []*foundation.NSValue {
 	arr := x.inner.QuadrilateralPoints()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// SetQuadrilateralPoints calls the underlying SetQuadrilateralPoints.
+func (x *Annotation) SetQuadrilateralPoints(quadrilateralPoints *foundation.NSArray[*foundation.NSValue]) {
+	x.inner.SetQuadrilateralPoints(quadrilateralPoints)
+}
+
+// MarkupType calls the underlying MarkupType.
+func (x *Annotation) MarkupType() raw.PDFMarkupType {
+	return x.inner.MarkupType()
+}
+
+// SetMarkupType calls the underlying SetMarkupType.
+func (x *Annotation) SetMarkupType(markupType raw.PDFMarkupType) {
+	x.inner.SetMarkupType(markupType)
+}
+
+// WidgetFieldType calls the underlying WidgetFieldType.
+func (x *Annotation) WidgetFieldType() string {
+	_r := x.inner.WidgetFieldType()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidgetFieldType calls the underlying SetWidgetFieldType.
+func (x *Annotation) SetWidgetFieldType(widgetFieldType string) {
+	x.inner.SetWidgetFieldType(foundation.NSStringStringWithUTF8String(widgetFieldType))
+}
+
+// WidgetControlType calls the underlying WidgetControlType.
+func (x *Annotation) WidgetControlType() raw.PDFWidgetControlType {
+	return x.inner.WidgetControlType()
+}
+
+// SetWidgetControlType calls the underlying SetWidgetControlType.
+func (x *Annotation) SetWidgetControlType(widgetControlType raw.PDFWidgetControlType) {
+	x.inner.SetWidgetControlType(widgetControlType)
+}
+
+// IsMultiline calls the underlying IsMultiline.
+func (x *Annotation) IsMultiline() bool {
+	return x.inner.IsMultiline()
+}
+
+// SetMultiline calls the underlying SetMultiline.
+func (x *Annotation) SetMultiline(multiline bool) {
+	x.inner.SetMultiline(multiline)
+}
+
+// IsActivatableTextField calls the underlying IsActivatableTextField.
+func (x *Annotation) IsActivatableTextField() bool {
+	return x.inner.IsActivatableTextField()
+}
+
+// IsPasswordField calls the underlying IsPasswordField.
+func (x *Annotation) IsPasswordField() bool {
+	return x.inner.IsPasswordField()
+}
+
+// HasComb calls the underlying HasComb.
+func (x *Annotation) HasComb() bool {
+	return x.inner.HasComb()
+}
+
+// SetComb calls the underlying SetComb.
+func (x *Annotation) SetComb(comb bool) {
+	x.inner.SetComb(comb)
+}
+
+// MaximumLength calls the underlying MaximumLength.
+func (x *Annotation) MaximumLength() int {
+	return x.inner.MaximumLength()
+}
+
+// SetMaximumLength calls the underlying SetMaximumLength.
+func (x *Annotation) SetMaximumLength(maximumLength int) {
+	x.inner.SetMaximumLength(maximumLength)
+}
+
+// WidgetStringValue calls the underlying WidgetStringValue.
+func (x *Annotation) WidgetStringValue() string {
+	_r := x.inner.WidgetStringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidgetStringValue calls the underlying SetWidgetStringValue.
+func (x *Annotation) SetWidgetStringValue(widgetStringValue string) {
+	x.inner.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+}
+
+// WidgetDefaultStringValue calls the underlying WidgetDefaultStringValue.
+func (x *Annotation) WidgetDefaultStringValue() string {
+	_r := x.inner.WidgetDefaultStringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetWidgetDefaultStringValue calls the underlying SetWidgetDefaultStringValue.
+func (x *Annotation) SetWidgetDefaultStringValue(widgetDefaultStringValue string) {
+	x.inner.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+}
+
+// AllowsToggleToOff calls the underlying AllowsToggleToOff.
+func (x *Annotation) AllowsToggleToOff() bool {
+	return x.inner.AllowsToggleToOff()
+}
+
+// SetAllowsToggleToOff calls the underlying SetAllowsToggleToOff.
+func (x *Annotation) SetAllowsToggleToOff(allowsToggleToOff bool) {
+	x.inner.SetAllowsToggleToOff(allowsToggleToOff)
+}
+
+// RadiosInUnison calls the underlying RadiosInUnison.
+func (x *Annotation) RadiosInUnison() bool {
+	return x.inner.RadiosInUnison()
+}
+
+// SetRadiosInUnison calls the underlying SetRadiosInUnison.
+func (x *Annotation) SetRadiosInUnison(radiosInUnison bool) {
+	x.inner.SetRadiosInUnison(radiosInUnison)
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *Annotation) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// SetReadOnly calls the underlying SetReadOnly.
+func (x *Annotation) SetReadOnly(readOnly bool) {
+	x.inner.SetReadOnly(readOnly)
+}
+
+// IsListChoice calls the underlying IsListChoice.
+func (x *Annotation) IsListChoice() bool {
+	return x.inner.IsListChoice()
+}
+
+// SetListChoice calls the underlying SetListChoice.
+func (x *Annotation) SetListChoice(listChoice bool) {
+	x.inner.SetListChoice(listChoice)
 }
 
 // Choices returns the collection as a Go slice.
-func (x *Annotation) Choices() []*foundation.NSString {
+func (x *Annotation) Choices() []string {
 	arr := x.inner.Choices()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetChoices calls the underlying SetChoices.
+func (x *Annotation) SetChoices(choices *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetChoices(choices)
 }
 
 // Values returns the collection as a Go slice.
-func (x *Annotation) Values() []*foundation.NSString {
+func (x *Annotation) Values() []string {
 	arr := x.inner.Values()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetValues calls the underlying SetValues.
+func (x *Annotation) SetValues(values *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetValues(values)
+}
+
+// ButtonWidgetState calls the underlying ButtonWidgetState.
+func (x *Annotation) ButtonWidgetState() raw.PDFWidgetCellState {
+	return x.inner.ButtonWidgetState()
+}
+
+// SetButtonWidgetState calls the underlying SetButtonWidgetState.
+func (x *Annotation) SetButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) {
+	x.inner.SetButtonWidgetState(buttonWidgetState)
+}
+
+// ButtonWidgetStateString calls the underlying ButtonWidgetStateString.
+func (x *Annotation) ButtonWidgetStateString() string {
+	_r := x.inner.ButtonWidgetStateString()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetButtonWidgetStateString calls the underlying SetButtonWidgetStateString.
+func (x *Annotation) SetButtonWidgetStateString(buttonWidgetStateString string) {
+	x.inner.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+}
+
+// IsOpen calls the underlying IsOpen.
+func (x *Annotation) IsOpen() bool {
+	return x.inner.IsOpen()
+}
+
+// SetOpen calls the underlying SetOpen.
+func (x *Annotation) SetOpen(open bool) {
+	x.inner.SetOpen(open)
 }
 
 // Paths returns the collection as a Go slice.
@@ -345,12 +834,241 @@ func (x *Annotation) Paths() []*appkit.NSBezierPath {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*appkit.NSBezierPath, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *appkit.NSBezierPath {
+		return appkit.NSBezierPathFromID(purego.Retain(_id))
+	})
+}
+
+// Destination calls the underlying Destination.
+func (x *Annotation) Destination() *Destination {
+	_r := x.inner.Destination()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Destination{inner: _r}
+}
+
+// SetDestination calls the underlying SetDestination.
+func (x *Annotation) SetDestination(destination *raw.PDFDestination) {
+	x.inner.SetDestination(destination)
+}
+
+// URL calls the underlying URL.
+func (x *Annotation) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *Annotation) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// FieldName calls the underlying FieldName.
+func (x *Annotation) FieldName() string {
+	_r := x.inner.FieldName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFieldName calls the underlying SetFieldName.
+func (x *Annotation) SetFieldName(fieldName string) {
+	x.inner.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+}
+
+// Caption calls the underlying Caption.
+func (x *Annotation) Caption() string {
+	_r := x.inner.Caption()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCaption calls the underlying SetCaption.
+func (x *Annotation) SetCaption(caption string) {
+	x.inner.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *Annotation) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *Annotation) SetBackgroundColor(backgroundColor *appkit.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// StampName calls the underlying StampName.
+func (x *Annotation) StampName() string {
+	_r := x.inner.StampName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStampName calls the underlying SetStampName.
+func (x *Annotation) SetStampName(stampName string) {
+	x.inner.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
 }
 
 func (x *Annotation) asAnnotation() *raw.PDFAnnotation { return x.inner }
+
+// Annotationable is the interface implemented by [Annotation], for mocking and DI.
+type Annotationable interface {
+	Unwrap() *raw.PDFAnnotation
+	WithPage(page *raw.PDFPage) *Annotation
+	WithType(type_ string) *Annotation
+	WithBounds(bounds corefoundation.CGRect) *Annotation
+	WithShouldDisplay(shouldDisplay bool) *Annotation
+	WithShouldPrint(shouldPrint bool) *Annotation
+	WithHighlighted(highlighted bool) *Annotation
+	WithFont(font *appkit.NSFont) *Annotation
+	WithFontColor(fontColor *appkit.NSColor) *Annotation
+	WithInteriorColor(interiorColor *appkit.NSColor) *Annotation
+	WithAlignment(alignment appkit.NSTextAlignment) *Annotation
+	WithStartPoint(startPoint corefoundation.CGPoint) *Annotation
+	WithEndPoint(endPoint corefoundation.CGPoint) *Annotation
+	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *Annotation
+	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *Annotation
+	WithIconType(iconType raw.PDFTextAnnotationIconType) *Annotation
+	WithQuadrilateralPoints(items ...*foundation.NSValue) *Annotation
+	WithMarkupType(markupType raw.PDFMarkupType) *Annotation
+	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *Annotation
+	WithMultiline(multiline bool) *Annotation
+	WithComb(comb bool) *Annotation
+	WithMaximumLength(maximumLength int) *Annotation
+	WithWidgetStringValue(widgetStringValue string) *Annotation
+	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *Annotation
+	WithAllowsToggleToOff(allowsToggleToOff bool) *Annotation
+	WithRadiosInUnison(radiosInUnison bool) *Annotation
+	WithReadOnly(readOnly bool) *Annotation
+	WithListChoice(listChoice bool) *Annotation
+	WithChoices(items ...*foundation.NSString) *Annotation
+	WithValues(items ...*foundation.NSString) *Annotation
+	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *Annotation
+	WithButtonWidgetStateString(buttonWidgetStateString string) *Annotation
+	WithOpen(open bool) *Annotation
+	WithDestination(destination *raw.PDFDestination) *Annotation
+	WithURL(uRL string) *Annotation
+	WithFieldName(fieldName string) *Annotation
+	WithCaption(caption string) *Annotation
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *Annotation
+	WithStampName(stampName string) *Annotation
+	DrawWithBoxInContext(box raw.PDFDisplayBox, context_ unsafe.Pointer)
+	SetValueForAnnotationKey(value objc.ID, key unsafe.Pointer) bool
+	SetBooleanForAnnotationKey(value bool, key unsafe.Pointer) bool
+	SetRectForAnnotationKey(value corefoundation.CGRect, key unsafe.Pointer) bool
+	ValueForAnnotationKey(key unsafe.Pointer) objc.ID
+	RemoveValueForAnnotationKey(key unsafe.Pointer)
+	Page() *Page
+	SetPage(page *raw.PDFPage)
+	Type() string
+	SetType(type_ string)
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
+	ShouldDisplay() bool
+	SetShouldDisplay(shouldDisplay bool)
+	ShouldPrint() bool
+	SetShouldPrint(shouldPrint bool)
+	ModificationDate() unsafe.Pointer
+	SetModificationDate(modificationDate unsafe.Pointer)
+	UserName() unsafe.Pointer
+	SetUserName(userName unsafe.Pointer)
+	Popup() unsafe.Pointer
+	SetPopup(popup unsafe.Pointer)
+	Border() unsafe.Pointer
+	SetBorder(border unsafe.Pointer)
+	Color() unsafe.Pointer
+	SetColor(color unsafe.Pointer)
+	Contents() unsafe.Pointer
+	SetContents(contents unsafe.Pointer)
+	Action() unsafe.Pointer
+	SetAction(action unsafe.Pointer)
+	HasAppearanceStream() bool
+	IsHighlighted() bool
+	SetHighlighted(highlighted bool)
+	AnnotationKeyValues() unsafe.Pointer
+	RemoveAllAppearanceStreams()
+	DrawWithBox(box raw.PDFDisplayBox)
+	ToolTip() unsafe.Pointer
+	MouseUpAction() unsafe.Pointer
+	SetMouseUpAction(mouseUpAction unsafe.Pointer)
+	AddBezierPath(path *appkit.NSBezierPath)
+	RemoveBezierPath(path *appkit.NSBezierPath)
+	Font() *appkit.NSFont
+	SetFont(font *appkit.NSFont)
+	FontColor() *appkit.NSColor
+	SetFontColor(fontColor *appkit.NSColor)
+	InteriorColor() *appkit.NSColor
+	SetInteriorColor(interiorColor *appkit.NSColor)
+	Alignment() appkit.NSTextAlignment
+	SetAlignment(alignment appkit.NSTextAlignment)
+	StartPoint() corefoundation.CGPoint
+	SetStartPoint(startPoint corefoundation.CGPoint)
+	EndPoint() corefoundation.CGPoint
+	SetEndPoint(endPoint corefoundation.CGPoint)
+	StartLineStyle() raw.PDFLineStyle
+	SetStartLineStyle(startLineStyle raw.PDFLineStyle)
+	EndLineStyle() raw.PDFLineStyle
+	SetEndLineStyle(endLineStyle raw.PDFLineStyle)
+	IconType() raw.PDFTextAnnotationIconType
+	SetIconType(iconType raw.PDFTextAnnotationIconType)
+	QuadrilateralPoints() []*foundation.NSValue
+	SetQuadrilateralPoints(quadrilateralPoints *foundation.NSArray[*foundation.NSValue])
+	MarkupType() raw.PDFMarkupType
+	SetMarkupType(markupType raw.PDFMarkupType)
+	WidgetFieldType() string
+	SetWidgetFieldType(widgetFieldType string)
+	WidgetControlType() raw.PDFWidgetControlType
+	SetWidgetControlType(widgetControlType raw.PDFWidgetControlType)
+	IsMultiline() bool
+	SetMultiline(multiline bool)
+	IsActivatableTextField() bool
+	IsPasswordField() bool
+	HasComb() bool
+	SetComb(comb bool)
+	MaximumLength() int
+	SetMaximumLength(maximumLength int)
+	WidgetStringValue() string
+	SetWidgetStringValue(widgetStringValue string)
+	WidgetDefaultStringValue() string
+	SetWidgetDefaultStringValue(widgetDefaultStringValue string)
+	AllowsToggleToOff() bool
+	SetAllowsToggleToOff(allowsToggleToOff bool)
+	RadiosInUnison() bool
+	SetRadiosInUnison(radiosInUnison bool)
+	IsReadOnly() bool
+	SetReadOnly(readOnly bool)
+	IsListChoice() bool
+	SetListChoice(listChoice bool)
+	Choices() []string
+	SetChoices(choices *foundation.NSArray[*foundation.NSString])
+	Values() []string
+	SetValues(values *foundation.NSArray[*foundation.NSString])
+	ButtonWidgetState() raw.PDFWidgetCellState
+	SetButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState)
+	ButtonWidgetStateString() string
+	SetButtonWidgetStateString(buttonWidgetStateString string)
+	IsOpen() bool
+	SetOpen(open bool)
+	Paths() []*appkit.NSBezierPath
+	Destination() *Destination
+	SetDestination(destination *raw.PDFDestination)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	FieldName() string
+	SetFieldName(fieldName string)
+	Caption() string
+	SetCaption(caption string)
+	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(backgroundColor *appkit.NSColor)
+	StampName() string
+	SetStampName(stampName string)
+}
+
+var _ Annotationable = (*Annotation)(nil)
 

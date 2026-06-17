@@ -54,3 +54,75 @@ func (x *MTREnergyEVSEClusterEnableChargingParams) WithServerSideProcessingTimeo
 	return x
 }
 
+// ChargingEnabledUntil calls the underlying ChargingEnabledUntil.
+func (x *MTREnergyEVSEClusterEnableChargingParams) ChargingEnabledUntil() *foundation.NSNumber {
+	return x.inner.ChargingEnabledUntil()
+}
+
+// SetChargingEnabledUntil calls the underlying SetChargingEnabledUntil.
+func (x *MTREnergyEVSEClusterEnableChargingParams) SetChargingEnabledUntil(chargingEnabledUntil *foundation.NSNumber) {
+	x.inner.SetChargingEnabledUntil(chargingEnabledUntil)
+}
+
+// MinimumChargeCurrent calls the underlying MinimumChargeCurrent.
+func (x *MTREnergyEVSEClusterEnableChargingParams) MinimumChargeCurrent() *foundation.NSNumber {
+	return x.inner.MinimumChargeCurrent()
+}
+
+// SetMinimumChargeCurrent calls the underlying SetMinimumChargeCurrent.
+func (x *MTREnergyEVSEClusterEnableChargingParams) SetMinimumChargeCurrent(minimumChargeCurrent *foundation.NSNumber) {
+	x.inner.SetMinimumChargeCurrent(minimumChargeCurrent)
+}
+
+// MaximumChargeCurrent calls the underlying MaximumChargeCurrent.
+func (x *MTREnergyEVSEClusterEnableChargingParams) MaximumChargeCurrent() *foundation.NSNumber {
+	return x.inner.MaximumChargeCurrent()
+}
+
+// SetMaximumChargeCurrent calls the underlying SetMaximumChargeCurrent.
+func (x *MTREnergyEVSEClusterEnableChargingParams) SetMaximumChargeCurrent(maximumChargeCurrent *foundation.NSNumber) {
+	x.inner.SetMaximumChargeCurrent(maximumChargeCurrent)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterEnableChargingParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTREnergyEVSEClusterEnableChargingParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterEnableChargingParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTREnergyEVSEClusterEnableChargingParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTREnergyEVSEClusterEnableChargingParamsable is the interface implemented by [MTREnergyEVSEClusterEnableChargingParams], for mocking and DI.
+type MTREnergyEVSEClusterEnableChargingParamsable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterEnableChargingParams
+	WithChargingEnabledUntil(chargingEnabledUntil *foundation.NSNumber) *MTREnergyEVSEClusterEnableChargingParams
+	WithMinimumChargeCurrent(minimumChargeCurrent *foundation.NSNumber) *MTREnergyEVSEClusterEnableChargingParams
+	WithMaximumChargeCurrent(maximumChargeCurrent *foundation.NSNumber) *MTREnergyEVSEClusterEnableChargingParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTREnergyEVSEClusterEnableChargingParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTREnergyEVSEClusterEnableChargingParams
+	ChargingEnabledUntil() *foundation.NSNumber
+	SetChargingEnabledUntil(chargingEnabledUntil *foundation.NSNumber)
+	MinimumChargeCurrent() *foundation.NSNumber
+	SetMinimumChargeCurrent(minimumChargeCurrent *foundation.NSNumber)
+	MaximumChargeCurrent() *foundation.NSNumber
+	SetMaximumChargeCurrent(maximumChargeCurrent *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterEnableChargingParamsable = (*MTREnergyEVSEClusterEnableChargingParams)(nil)
+

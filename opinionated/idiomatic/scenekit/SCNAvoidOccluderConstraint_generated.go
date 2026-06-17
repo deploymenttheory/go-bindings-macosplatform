@@ -47,5 +47,68 @@ func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstrain
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *AvoidOccluderConstraint) Delegate() raw.SCNAvoidOccluderConstraintDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AvoidOccluderConstraint) SetDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Target calls the underlying Target.
+func (x *AvoidOccluderConstraint) Target() *Node {
+	_r := x.inner.Target()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *AvoidOccluderConstraint) SetTarget(target *raw.SCNNode) {
+	x.inner.SetTarget(target)
+}
+
+// OccluderCategoryBitMask calls the underlying OccluderCategoryBitMask.
+func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() uint {
+	return x.inner.OccluderCategoryBitMask()
+}
+
+// SetOccluderCategoryBitMask calls the underlying SetOccluderCategoryBitMask.
+func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBitMask uint) {
+	x.inner.SetOccluderCategoryBitMask(occluderCategoryBitMask)
+}
+
+// Bias calls the underlying Bias.
+func (x *AvoidOccluderConstraint) Bias() float64 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *AvoidOccluderConstraint) SetBias(bias float64) {
+	x.inner.SetBias(bias)
+}
+
 func (x *AvoidOccluderConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// AvoidOccluderConstraintable is the interface implemented by [AvoidOccluderConstraint], for mocking and DI.
+type AvoidOccluderConstraintable interface {
+	Unwrap() *raw.SCNAvoidOccluderConstraint
+	WithDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) *AvoidOccluderConstraint
+	WithTarget(target NodeProvider) *AvoidOccluderConstraint
+	WithOccluderCategoryBitMask(occluderCategoryBitMask uint) *AvoidOccluderConstraint
+	WithBias(bias float64) *AvoidOccluderConstraint
+	Delegate() raw.SCNAvoidOccluderConstraintDelegate
+	SetDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate)
+	Target() *Node
+	SetTarget(target *raw.SCNNode)
+	OccluderCategoryBitMask() uint
+	SetOccluderCategoryBitMask(occluderCategoryBitMask uint)
+	Bias() float64
+	SetBias(bias float64)
+}
+
+var _ AvoidOccluderConstraintable = (*AvoidOccluderConstraint)(nil)
 

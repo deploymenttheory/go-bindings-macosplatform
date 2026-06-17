@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,54 @@ func (x *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
 	return x
 }
 
+// LayerID calls the underlying LayerID.
+func (x *Layer) LayerID() uint {
+	return x.inner.LayerID()
+}
+
+// Label calls the underlying Label.
+func (x *Layer) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *Layer) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// IsDebuggingEnabled calls the underlying IsDebuggingEnabled.
+func (x *Layer) IsDebuggingEnabled() bool {
+	return x.inner.IsDebuggingEnabled()
+}
+
+// SetIsDebuggingEnabled calls the underlying SetIsDebuggingEnabled.
+func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
+	x.inner.SetIsDebuggingEnabled(isDebuggingEnabled)
+}
+
+// DeviceType calls the underlying DeviceType.
+func (x *Layer) DeviceType() raw.MLCDeviceType {
+	return x.inner.DeviceType()
+}
+
 func (x *Layer) asLayer() *raw.MLCLayer { return x.inner }
+
+// Layerable is the interface implemented by [Layer], for mocking and DI.
+type Layerable interface {
+	Unwrap() *raw.MLCLayer
+	WithLabel(label string) *Layer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer
+	LayerID() uint
+	Label() string
+	SetLabel(label string)
+	IsDebuggingEnabled() bool
+	SetIsDebuggingEnabled(isDebuggingEnabled bool)
+	DeviceType() raw.MLCDeviceType
+}
+
+var _ Layerable = (*Layer)(nil)
 

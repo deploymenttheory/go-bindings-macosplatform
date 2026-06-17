@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *ShareableContent) Windows() []*raw.SCWindow {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCWindow, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCWindow {
+		return raw.SCWindowFromID(purego.Retain(_id))
+	})
 }
 
 // Displays returns the collection as a Go slice.
@@ -42,11 +41,9 @@ func (x *ShareableContent) Displays() []*raw.SCDisplay {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCDisplay, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCDisplay {
+		return raw.SCDisplayFromID(purego.Retain(_id))
+	})
 }
 
 // Applications returns the collection as a Go slice.
@@ -55,10 +52,18 @@ func (x *ShareableContent) Applications() []*raw.SCRunningApplication {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCRunningApplication, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCRunningApplication {
+		return raw.SCRunningApplicationFromID(purego.Retain(_id))
+	})
 }
+
+// ShareableContentable is the interface implemented by [ShareableContent], for mocking and DI.
+type ShareableContentable interface {
+	Unwrap() *raw.SCShareableContent
+	Windows() []*raw.SCWindow
+	Displays() []*raw.SCDisplay
+	Applications() []*raw.SCRunningApplication
+}
+
+var _ ShareableContentable = (*ShareableContent)(nil)
 

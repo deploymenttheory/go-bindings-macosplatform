@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NDArray wraps [raw.MPSNDArray] with a fluent Go API.
@@ -46,4 +48,148 @@ func (x *NDArray) WithLabel(label string) *NDArray {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// LengthOfDimension calls the underlying LengthOfDimension.
+func (x *NDArray) LengthOfDimension(dimensionIndex uint) uint {
+	return x.inner.LengthOfDimension(dimensionIndex)
+}
+
+// Descriptor calls the underlying Descriptor.
+func (x *NDArray) Descriptor() *mpscore.MPSNDArrayDescriptor {
+	return x.inner.Descriptor()
+}
+
+// UserBuffer calls the underlying UserBuffer.
+func (x *NDArray) UserBuffer() metal.MTLBuffer {
+	return x.inner.UserBuffer()
+}
+
+// ResourceSize calls the underlying ResourceSize.
+func (x *NDArray) ResourceSize() uint {
+	return x.inner.ResourceSize()
+}
+
+// ArrayViewWithCommandBufferDescriptorAliasing calls the underlying ArrayViewWithCommandBufferDescriptorAliasing.
+func (x *NDArray) ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *mpscore.MPSNDArrayDescriptor, aliasing mpscore.MPSAliasingStrategy) *mpscore.MPSNDArray {
+	return x.inner.ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf, descriptor, aliasing)
+}
+
+// ArrayViewWithDescriptor calls the underlying ArrayViewWithDescriptor.
+func (x *NDArray) ArrayViewWithDescriptor(descriptor *mpscore.MPSNDArrayDescriptor) *mpscore.MPSNDArray {
+	return x.inner.ArrayViewWithDescriptor(descriptor)
+}
+
+// ArrayViewWithShapeStrides calls the underlying ArrayViewWithShapeStrides.
+func (x *NDArray) ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *mpscore.MPSNDArray {
+	return x.inner.ArrayViewWithShapeStrides(shape, strides)
+}
+
+// ArrayViewWithDimensionCountDimensionSizesStrides calls the underlying ArrayViewWithDimensionCountDimensionSizesStrides.
+func (x *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *mpscore.MPSNDArray {
+	return x.inner.ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions, dimensionSizes, dimStrides)
+}
+
+// ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides calls the underlying ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides.
+func (x *NDArray) ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType mpscore.MPSDataType, offset uint, rowStrides *int64) {
+	x.inner.ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf, buffer, destinationDataType, offset, rowStrides)
+}
+
+// ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides calls the underlying ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides.
+func (x *NDArray) ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType mpscore.MPSDataType, offset uint, rowStrides *int64) {
+	x.inner.ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf, buffer, sourceDataType, offset, rowStrides)
+}
+
+// ExportDataWithCommandBufferToImagesOffset calls the underlying ExportDataWithCommandBufferToImagesOffset.
+func (x *NDArray) ExportDataWithCommandBufferToImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate) {
+	x.inner.ExportDataWithCommandBufferToImagesOffset(cmdBuf, images, offset)
+}
+
+// ImportDataWithCommandBufferFromImagesOffset calls the underlying ImportDataWithCommandBufferFromImagesOffset.
+func (x *NDArray) ImportDataWithCommandBufferFromImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate) {
+	x.inner.ImportDataWithCommandBufferFromImagesOffset(cmdBuf, images, offset)
+}
+
+// ReadBytesStrideBytes calls the underlying ReadBytesStrideBytes.
+func (x *NDArray) ReadBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64) {
+	x.inner.ReadBytesStrideBytes(buffer, strideBytesPerDimension)
+}
+
+// WriteBytesStrideBytes calls the underlying WriteBytesStrideBytes.
+func (x *NDArray) WriteBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64) {
+	x.inner.WriteBytesStrideBytes(buffer, strideBytesPerDimension)
+}
+
+// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
+func (x *NDArray) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+}
+
+// Label calls the underlying Label.
+func (x *NDArray) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *NDArray) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// DataType calls the underlying DataType.
+func (x *NDArray) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// DataTypeSize calls the underlying DataTypeSize.
+func (x *NDArray) DataTypeSize() uint {
+	return x.inner.DataTypeSize()
+}
+
+// NumberOfDimensions calls the underlying NumberOfDimensions.
+func (x *NDArray) NumberOfDimensions() uint {
+	return x.inner.NumberOfDimensions()
+}
+
+// Device calls the underlying Device.
+func (x *NDArray) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// Parent calls the underlying Parent.
+func (x *NDArray) Parent() *mpscore.MPSNDArray {
+	return x.inner.Parent()
+}
+
+// NDArrayable is the interface implemented by [NDArray], for mocking and DI.
+type NDArrayable interface {
+	Unwrap() *raw.MPSNDArray
+	WithLabel(label string) *NDArray
+	LengthOfDimension(dimensionIndex uint) uint
+	Descriptor() *mpscore.MPSNDArrayDescriptor
+	UserBuffer() metal.MTLBuffer
+	ResourceSize() uint
+	ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *mpscore.MPSNDArrayDescriptor, aliasing mpscore.MPSAliasingStrategy) *mpscore.MPSNDArray
+	ArrayViewWithDescriptor(descriptor *mpscore.MPSNDArrayDescriptor) *mpscore.MPSNDArray
+	ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *mpscore.MPSNDArray
+	ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *mpscore.MPSNDArray
+	ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType mpscore.MPSDataType, offset uint, rowStrides *int64)
+	ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType mpscore.MPSDataType, offset uint, rowStrides *int64)
+	ExportDataWithCommandBufferToImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate)
+	ImportDataWithCommandBufferFromImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate)
+	ReadBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64)
+	WriteBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64)
+	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	Label() string
+	SetLabel(label string)
+	DataType() mpscore.MPSDataType
+	DataTypeSize() uint
+	NumberOfDimensions() uint
+	Device() metal.MTLDevice
+	Parent() *mpscore.MPSNDArray
+}
+
+var _ NDArrayable = (*NDArray)(nil)
 

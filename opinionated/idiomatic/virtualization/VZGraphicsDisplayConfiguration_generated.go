@@ -25,3 +25,10 @@ func NewGraphicsDisplayConfiguration() *GraphicsDisplayConfiguration {
 
 func (x *GraphicsDisplayConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration { return x.inner }
 
+// GraphicsDisplayConfigurationable is the interface implemented by [GraphicsDisplayConfiguration], for mocking and DI.
+type GraphicsDisplayConfigurationable interface {
+	Unwrap() *raw.VZGraphicsDisplayConfiguration
+}
+
+var _ GraphicsDisplayConfigurationable = (*GraphicsDisplayConfiguration)(nil)
+

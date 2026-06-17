@@ -53,5 +53,81 @@ func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAt
 	return x
 }
 
+// Target calls the underlying Target.
+func (x *LookAtConstraint) Target() *Node {
+	_r := x.inner.Target()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *LookAtConstraint) SetTarget(target *raw.SCNNode) {
+	x.inner.SetTarget(target)
+}
+
+// TargetOffset calls the underlying TargetOffset.
+func (x *LookAtConstraint) TargetOffset() raw.SCNVector3 {
+	return x.inner.TargetOffset()
+}
+
+// SetTargetOffset calls the underlying SetTargetOffset.
+func (x *LookAtConstraint) SetTargetOffset(targetOffset raw.SCNVector3) {
+	x.inner.SetTargetOffset(targetOffset)
+}
+
+// LocalFront calls the underlying LocalFront.
+func (x *LookAtConstraint) LocalFront() raw.SCNVector3 {
+	return x.inner.LocalFront()
+}
+
+// SetLocalFront calls the underlying SetLocalFront.
+func (x *LookAtConstraint) SetLocalFront(localFront raw.SCNVector3) {
+	x.inner.SetLocalFront(localFront)
+}
+
+// WorldUp calls the underlying WorldUp.
+func (x *LookAtConstraint) WorldUp() raw.SCNVector3 {
+	return x.inner.WorldUp()
+}
+
+// SetWorldUp calls the underlying SetWorldUp.
+func (x *LookAtConstraint) SetWorldUp(worldUp raw.SCNVector3) {
+	x.inner.SetWorldUp(worldUp)
+}
+
+// GimbalLockEnabled calls the underlying GimbalLockEnabled.
+func (x *LookAtConstraint) GimbalLockEnabled() bool {
+	return x.inner.GimbalLockEnabled()
+}
+
+// SetGimbalLockEnabled calls the underlying SetGimbalLockEnabled.
+func (x *LookAtConstraint) SetGimbalLockEnabled(gimbalLockEnabled bool) {
+	x.inner.SetGimbalLockEnabled(gimbalLockEnabled)
+}
+
 func (x *LookAtConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// LookAtConstraintable is the interface implemented by [LookAtConstraint], for mocking and DI.
+type LookAtConstraintable interface {
+	Unwrap() *raw.SCNLookAtConstraint
+	WithTarget(target NodeProvider) *LookAtConstraint
+	WithTargetOffset(targetOffset raw.SCNVector3) *LookAtConstraint
+	WithLocalFront(localFront raw.SCNVector3) *LookAtConstraint
+	WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint
+	WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint
+	Target() *Node
+	SetTarget(target *raw.SCNNode)
+	TargetOffset() raw.SCNVector3
+	SetTargetOffset(targetOffset raw.SCNVector3)
+	LocalFront() raw.SCNVector3
+	SetLocalFront(localFront raw.SCNVector3)
+	WorldUp() raw.SCNVector3
+	SetWorldUp(worldUp raw.SCNVector3)
+	GimbalLockEnabled() bool
+	SetGimbalLockEnabled(gimbalLockEnabled bool)
+}
+
+var _ LookAtConstraintable = (*LookAtConstraint)(nil)
 

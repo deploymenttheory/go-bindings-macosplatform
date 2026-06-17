@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,28 @@ func (x *AssetWriterInputGroup) Inputs() []*raw.AVAssetWriterInput {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetWriterInput, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetWriterInput {
+		return raw.AVAssetWriterInputFromID(purego.Retain(_id))
+	})
+}
+
+// DefaultInput calls the underlying DefaultInput.
+func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
+	_r := x.inner.DefaultInput()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &AssetWriterInput{inner: _r}
 }
 
 func (x *AssetWriterInputGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup { return &x.inner.AVMediaSelectionGroup }
+
+// AssetWriterInputGroupable is the interface implemented by [AssetWriterInputGroup], for mocking and DI.
+type AssetWriterInputGroupable interface {
+	Unwrap() *raw.AVAssetWriterInputGroup
+	Inputs() []*raw.AVAssetWriterInput
+	DefaultInput() *AssetWriterInput
+}
+
+var _ AssetWriterInputGroupable = (*AssetWriterInputGroup)(nil)
 

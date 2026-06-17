@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,71 @@ func NewIncrementalStore() *IncrementalStore {
 	return &IncrementalStore{inner: raw.NSIncrementalStoreFromID(_id)}
 }
 
+// ExecuteRequestWithContextError calls the underlying ExecuteRequestWithContextError.
+func (x *IncrementalStore) ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
+	return x.inner.ExecuteRequestWithContextError(request, context_)
+}
+
+// NewValuesForObjectWithIDWithContextError calls the underlying NewValuesForObjectWithIDWithContextError.
+func (x *IncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error) {
+	_r, _err := x.inner.NewValuesForObjectWithIDWithContextError(objectID, context_)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &IncrementalStoreNode{inner: _r}, nil
+}
+
+// NewValueForRelationshipForObjectWithIDWithContextError calls the underlying NewValueForRelationshipForObjectWithIDWithContextError.
+func (x *IncrementalStore) NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
+	return x.inner.NewValueForRelationshipForObjectWithIDWithContextError(relationship, objectID, context_)
+}
+
+// ObtainPermanentIDsForObjectsError calls the underlying ObtainPermanentIDsForObjectsError.
+func (x *IncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*raw.NSManagedObject]) (*foundation.NSArray[*raw.NSManagedObjectID], error) {
+	return x.inner.ObtainPermanentIDsForObjectsError(array)
+}
+
+// ManagedObjectContextDidRegisterObjectsWithIDs calls the underlying ManagedObjectContextDidRegisterObjectsWithIDs.
+func (x *IncrementalStore) ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
+	x.inner.ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs)
+}
+
+// ManagedObjectContextDidUnregisterObjectsWithIDs calls the underlying ManagedObjectContextDidUnregisterObjectsWithIDs.
+func (x *IncrementalStore) ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
+	x.inner.ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs)
+}
+
+// NewObjectIDForEntityReferenceObject calls the underlying NewObjectIDForEntityReferenceObject.
+func (x *IncrementalStore) NewObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID {
+	_r := x.inner.NewObjectIDForEntityReferenceObject(entity, data)
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// ReferenceObjectForObjectID calls the underlying ReferenceObjectForObjectID.
+func (x *IncrementalStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID {
+	return x.inner.ReferenceObjectForObjectID(objectID)
+}
+
 func (x *IncrementalStore) asPersistentStore() *raw.NSPersistentStore { return &x.inner.NSPersistentStore }
+
+// IncrementalStoreable is the interface implemented by [IncrementalStore], for mocking and DI.
+type IncrementalStoreable interface {
+	Unwrap() *raw.NSIncrementalStore
+	ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error)
+	NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error)
+	NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error)
+	ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*raw.NSManagedObject]) (*foundation.NSArray[*raw.NSManagedObjectID], error)
+	ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID])
+	ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID])
+	NewObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID
+	ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID
+}
+
+var _ IncrementalStoreable = (*IncrementalStore)(nil)
 

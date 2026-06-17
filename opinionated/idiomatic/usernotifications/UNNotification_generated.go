@@ -5,6 +5,7 @@
 package usernotifications
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,27 @@ func NewNotification() *Notification {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotification")), objc.RegisterName("new"))
 	return &Notification{inner: raw.UNNotificationFromID(_id)}
 }
+
+// Date calls the underlying Date.
+func (x *Notification) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// Request calls the underlying Request.
+func (x *Notification) Request() *NotificationRequest {
+	_r := x.inner.Request()
+	if _r == nil {
+		return nil
+	}
+	return &NotificationRequest{inner: _r}
+}
+
+// Notificationable is the interface implemented by [Notification], for mocking and DI.
+type Notificationable interface {
+	Unwrap() *raw.UNNotification
+	Date() *foundation.NSDate
+	Request() *NotificationRequest
+}
+
+var _ Notificationable = (*Notification)(nil)
 

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +38,56 @@ func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize 
 	return x
 }
 
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *PlayerItemRenderedLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerItemRenderedLegibleOutput) Delegate() raw.AVPlayerItemRenderedLegibleOutputPushDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *PlayerItemRenderedLegibleOutput) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
+// AdvanceIntervalForDelegateInvocation calls the underlying AdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemRenderedLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	return x.inner.AdvanceIntervalForDelegateInvocation()
+}
+
+// SetAdvanceIntervalForDelegateInvocation calls the underlying SetAdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemRenderedLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
+	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
+}
+
+// VideoDisplaySize calls the underlying VideoDisplaySize.
+func (x *PlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CGSize {
+	return x.inner.VideoDisplaySize()
+}
+
+// SetVideoDisplaySize calls the underlying SetVideoDisplaySize.
+func (x *PlayerItemRenderedLegibleOutput) SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize) {
+	x.inner.SetVideoDisplaySize(videoDisplaySize)
+}
+
 func (x *PlayerItemRenderedLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+
+// PlayerItemRenderedLegibleOutputable is the interface implemented by [PlayerItemRenderedLegibleOutput], for mocking and DI.
+type PlayerItemRenderedLegibleOutputable interface {
+	Unwrap() *raw.AVPlayerItemRenderedLegibleOutput
+	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput
+	WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput
+	SetDelegateQueue(delegate raw.AVPlayerItemRenderedLegibleOutputPushDelegate, delegateQueue *foundation.NSObject)
+	Delegate() raw.AVPlayerItemRenderedLegibleOutputPushDelegate
+	DelegateQueue() *foundation.NSObject
+	AdvanceIntervalForDelegateInvocation() float64
+	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
+	VideoDisplaySize() corefoundation.CGSize
+	SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize)
+}
+
+var _ PlayerItemRenderedLegibleOutputable = (*PlayerItemRenderedLegibleOutput)(nil)
 

@@ -43,3 +43,49 @@ func (x *WKSnapshotConfiguration) WithAfterScreenUpdates(afterScreenUpdates bool
 	return x
 }
 
+// Rect calls the underlying Rect.
+func (x *WKSnapshotConfiguration) Rect() corefoundation.CGRect {
+	return x.inner.Rect()
+}
+
+// SetRect calls the underlying SetRect.
+func (x *WKSnapshotConfiguration) SetRect(rect corefoundation.CGRect) {
+	x.inner.SetRect(rect)
+}
+
+// SnapshotWidth calls the underlying SnapshotWidth.
+func (x *WKSnapshotConfiguration) SnapshotWidth() *foundation.NSNumber {
+	return x.inner.SnapshotWidth()
+}
+
+// SetSnapshotWidth calls the underlying SetSnapshotWidth.
+func (x *WKSnapshotConfiguration) SetSnapshotWidth(snapshotWidth *foundation.NSNumber) {
+	x.inner.SetSnapshotWidth(snapshotWidth)
+}
+
+// AfterScreenUpdates calls the underlying AfterScreenUpdates.
+func (x *WKSnapshotConfiguration) AfterScreenUpdates() bool {
+	return x.inner.AfterScreenUpdates()
+}
+
+// SetAfterScreenUpdates calls the underlying SetAfterScreenUpdates.
+func (x *WKSnapshotConfiguration) SetAfterScreenUpdates(afterScreenUpdates bool) {
+	x.inner.SetAfterScreenUpdates(afterScreenUpdates)
+}
+
+// WKSnapshotConfigurationable is the interface implemented by [WKSnapshotConfiguration], for mocking and DI.
+type WKSnapshotConfigurationable interface {
+	Unwrap() *raw.WKSnapshotConfiguration
+	WithRect(rect corefoundation.CGRect) *WKSnapshotConfiguration
+	WithSnapshotWidth(snapshotWidth *foundation.NSNumber) *WKSnapshotConfiguration
+	WithAfterScreenUpdates(afterScreenUpdates bool) *WKSnapshotConfiguration
+	Rect() corefoundation.CGRect
+	SetRect(rect corefoundation.CGRect)
+	SnapshotWidth() *foundation.NSNumber
+	SetSnapshotWidth(snapshotWidth *foundation.NSNumber)
+	AfterScreenUpdates() bool
+	SetAfterScreenUpdates(afterScreenUpdates bool)
+}
+
+var _ WKSnapshotConfigurationable = (*WKSnapshotConfiguration)(nil)
+

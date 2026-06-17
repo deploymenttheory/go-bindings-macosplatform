@@ -48,5 +48,92 @@ func (x *MTRUnitTestingClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingCluste
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg2() *foundation.NSNumber {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg2(arg2 *foundation.NSNumber) {
+	x.inner.SetArg2(arg2)
+}
+
+// Arg3 calls the underlying Arg3.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg3() *foundation.NSNumber {
+	return x.inner.Arg3()
+}
+
+// SetArg3 calls the underlying SetArg3.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg3(arg3 *foundation.NSNumber) {
+	x.inner.SetArg3(arg3)
+}
+
+// Arg4 calls the underlying Arg4.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg4() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.Arg4()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetArg4 calls the underlying SetArg4.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg4(arg4 *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetArg4(arg4)
+}
+
+// Arg5 calls the underlying Arg5.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg5() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg5()
+}
+
+// SetArg5 calls the underlying SetArg5.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg5(arg5 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg5(arg5)
+}
+
+// Arg6 calls the underlying Arg6.
+func (x *MTRUnitTestingClusterTestEventEvent) Arg6() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg6()
+}
+
+// SetArg6 calls the underlying SetArg6.
+func (x *MTRUnitTestingClusterTestEventEvent) SetArg6(arg6 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg6(arg6)
+}
+
 func (x *MTRUnitTestingClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent { return x.inner }
+
+// MTRUnitTestingClusterTestEventEventable is the interface implemented by [MTRUnitTestingClusterTestEventEvent], for mocking and DI.
+type MTRUnitTestingClusterTestEventEventable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEventEvent
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
+	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
+	WithArg3(arg3 *foundation.NSNumber) *MTRUnitTestingClusterTestEventEvent
+	WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestEventEvent
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	Arg2() *foundation.NSNumber
+	SetArg2(arg2 *foundation.NSNumber)
+	Arg3() *foundation.NSNumber
+	SetArg3(arg3 *foundation.NSNumber)
+	Arg4() *MTRUnitTestingClusterSimpleStruct
+	SetArg4(arg4 *raw.MTRUnitTestingClusterSimpleStruct)
+	Arg5() *foundation.NSArray[objc.ID]
+	SetArg5(arg5 *foundation.NSArray[objc.ID])
+	Arg6() *foundation.NSArray[objc.ID]
+	SetArg6(arg6 *foundation.NSArray[objc.ID])
+}
+
+var _ MTRUnitTestingClusterTestEventEventable = (*MTRUnitTestingClusterTestEventEvent)(nil)
 

@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SyncEngineFailedZoneSave wraps [raw.CKSyncEngineFailedZoneSave] with a fluent Go API.
@@ -22,4 +23,27 @@ func NewSyncEngineFailedZoneSave() *SyncEngineFailedZoneSave {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFailedZoneSave")), objc.RegisterName("new"))
 	return &SyncEngineFailedZoneSave{inner: raw.CKSyncEngineFailedZoneSaveFromID(_id)}
 }
+
+// RecordZone calls the underlying RecordZone.
+func (x *SyncEngineFailedZoneSave) RecordZone() *RecordZone {
+	_r := x.inner.RecordZone()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZone{inner: _r}
+}
+
+// Error calls the underlying Error.
+func (x *SyncEngineFailedZoneSave) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// SyncEngineFailedZoneSaveable is the interface implemented by [SyncEngineFailedZoneSave], for mocking and DI.
+type SyncEngineFailedZoneSaveable interface {
+	Unwrap() *raw.CKSyncEngineFailedZoneSave
+	RecordZone() *RecordZone
+	Error() unsafe.Pointer
+}
+
+var _ SyncEngineFailedZoneSaveable = (*SyncEngineFailedZoneSave)(nil)
 

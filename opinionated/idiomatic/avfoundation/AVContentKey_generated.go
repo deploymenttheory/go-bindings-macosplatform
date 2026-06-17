@@ -23,3 +23,32 @@ func NewContentKey() *ContentKey {
 	return &ContentKey{inner: raw.AVContentKeyFromID(_id)}
 }
 
+// Revoke calls the underlying Revoke.
+func (x *ContentKey) Revoke() {
+	x.inner.Revoke()
+}
+
+// ContentKeySpecifier calls the underlying ContentKeySpecifier.
+func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
+	_r := x.inner.ContentKeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ContentKeySpecifier{inner: _r}
+}
+
+// ExternalContentProtectionStatus calls the underlying ExternalContentProtectionStatus.
+func (x *ContentKey) ExternalContentProtectionStatus() raw.AVExternalContentProtectionStatus {
+	return x.inner.ExternalContentProtectionStatus()
+}
+
+// ContentKeyable is the interface implemented by [ContentKey], for mocking and DI.
+type ContentKeyable interface {
+	Unwrap() *raw.AVContentKey
+	Revoke()
+	ContentKeySpecifier() *ContentKeySpecifier
+	ExternalContentProtectionStatus() raw.AVExternalContentProtectionStatus
+}
+
+var _ ContentKeyable = (*ContentKey)(nil)
+

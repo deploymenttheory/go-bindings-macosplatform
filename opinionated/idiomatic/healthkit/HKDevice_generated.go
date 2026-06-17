@@ -7,6 +7,7 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,91 @@ func NewDeviceWithNameManufacturerModelHardwareVersionFirmwareVersionSoftwareVer
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:manufacturer:model:hardwareVersion:firmwareVersion:softwareVersion:localIdentifier:UDIDeviceIdentifier:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(manufacturer).Ptr(), foundation.NSStringStringWithUTF8String(model).Ptr(), foundation.NSStringStringWithUTF8String(hardwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(firmwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(softwareVersion).Ptr(), foundation.NSStringStringWithUTF8String(localIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(uDIDeviceIdentifier).Ptr())
 	return &Device{inner: raw.HKDeviceFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Device) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Manufacturer calls the underlying Manufacturer.
+func (x *Device) Manufacturer() string {
+	_r := x.inner.Manufacturer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Model calls the underlying Model.
+func (x *Device) Model() string {
+	_r := x.inner.Model()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HardwareVersion calls the underlying HardwareVersion.
+func (x *Device) HardwareVersion() string {
+	_r := x.inner.HardwareVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FirmwareVersion calls the underlying FirmwareVersion.
+func (x *Device) FirmwareVersion() string {
+	_r := x.inner.FirmwareVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SoftwareVersion calls the underlying SoftwareVersion.
+func (x *Device) SoftwareVersion() string {
+	_r := x.inner.SoftwareVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalIdentifier calls the underlying LocalIdentifier.
+func (x *Device) LocalIdentifier() string {
+	_r := x.inner.LocalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UDIDeviceIdentifier calls the underlying UDIDeviceIdentifier.
+func (x *Device) UDIDeviceIdentifier() string {
+	_r := x.inner.UDIDeviceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Deviceable is the interface implemented by [Device], for mocking and DI.
+type Deviceable interface {
+	Unwrap() *raw.HKDevice
+	Name() string
+	Manufacturer() string
+	Model() string
+	HardwareVersion() string
+	FirmwareVersion() string
+	SoftwareVersion() string
+	LocalIdentifier() string
+	UDIDeviceIdentifier() string
+}
+
+var _ Deviceable = (*Device)(nil)
 

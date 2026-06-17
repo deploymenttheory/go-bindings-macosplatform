@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -42,18 +43,37 @@ func (x *AnswerCallIntentResponse) WithCallRecords(items ...*raw.INCallRecord) *
 	return x
 }
 
+// Code calls the underlying Code.
+func (x *AnswerCallIntentResponse) Code() raw.INAnswerCallIntentResponseCode {
+	return x.inner.Code()
+}
+
 // CallRecords returns the collection as a Go slice.
 func (x *AnswerCallIntentResponse) CallRecords() []*raw.INCallRecord {
 	arr := x.inner.CallRecords()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INCallRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INCallRecord {
+		return raw.INCallRecordFromID(purego.Retain(_id))
+	})
+}
+
+// SetCallRecords calls the underlying SetCallRecords.
+func (x *AnswerCallIntentResponse) SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord]) {
+	x.inner.SetCallRecords(callRecords)
 }
 
 func (x *AnswerCallIntentResponse) asIntentResponse() *raw.INIntentResponse { return &x.inner.INIntentResponse }
+
+// AnswerCallIntentResponseable is the interface implemented by [AnswerCallIntentResponse], for mocking and DI.
+type AnswerCallIntentResponseable interface {
+	Unwrap() *raw.INAnswerCallIntentResponse
+	WithCallRecords(items ...*raw.INCallRecord) *AnswerCallIntentResponse
+	Code() raw.INAnswerCallIntentResponseCode
+	CallRecords() []*raw.INCallRecord
+	SetCallRecords(callRecords *foundation.NSArray[*raw.INCallRecord])
+}
+
+var _ AnswerCallIntentResponseable = (*AnswerCallIntentResponse)(nil)
 

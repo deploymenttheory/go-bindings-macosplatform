@@ -23,5 +23,28 @@ func NewRecordZoneNotification() *RecordZoneNotification {
 	return &RecordZoneNotification{inner: raw.CKRecordZoneNotificationFromID(_id)}
 }
 
+// RecordZoneID calls the underlying RecordZoneID.
+func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
+	_r := x.inner.RecordZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// DatabaseScope calls the underlying DatabaseScope.
+func (x *RecordZoneNotification) DatabaseScope() raw.CKDatabaseScope {
+	return x.inner.DatabaseScope()
+}
+
 func (x *RecordZoneNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
+
+// RecordZoneNotificationable is the interface implemented by [RecordZoneNotification], for mocking and DI.
+type RecordZoneNotificationable interface {
+	Unwrap() *raw.CKRecordZoneNotification
+	RecordZoneID() *RecordZoneID
+	DatabaseScope() raw.CKDatabaseScope
+}
+
+var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)
 

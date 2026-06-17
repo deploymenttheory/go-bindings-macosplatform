@@ -23,3 +23,22 @@ func NewWKOpenPanelParameters() *WKOpenPanelParameters {
 	return &WKOpenPanelParameters{inner: raw.WKOpenPanelParametersFromID(_id)}
 }
 
+// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
+func (x *WKOpenPanelParameters) AllowsMultipleSelection() bool {
+	return x.inner.AllowsMultipleSelection()
+}
+
+// AllowsDirectories calls the underlying AllowsDirectories.
+func (x *WKOpenPanelParameters) AllowsDirectories() bool {
+	return x.inner.AllowsDirectories()
+}
+
+// WKOpenPanelParametersable is the interface implemented by [WKOpenPanelParameters], for mocking and DI.
+type WKOpenPanelParametersable interface {
+	Unwrap() *raw.WKOpenPanelParameters
+	AllowsMultipleSelection() bool
+	AllowsDirectories() bool
+}
+
+var _ WKOpenPanelParametersable = (*WKOpenPanelParameters)(nil)
+

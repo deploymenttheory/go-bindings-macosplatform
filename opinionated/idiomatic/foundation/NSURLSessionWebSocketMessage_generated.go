@@ -32,5 +32,38 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 	return &URLSessionWebSocketMessage{inner: raw.NSURLSessionWebSocketMessageFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *URLSessionWebSocketMessage) Type() raw.NSURLSessionWebSocketMessageType {
+	return x.inner.Type()
+}
+
+// Data calls the underlying Data.
+func (x *URLSessionWebSocketMessage) Data() *Data {
+	_r := x.inner.Data()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// String calls the underlying String.
+func (x *URLSessionWebSocketMessage) String() *String {
+	_r := x.inner.String()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *URLSessionWebSocketMessage) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLSessionWebSocketMessageable is the interface implemented by [URLSessionWebSocketMessage], for mocking and DI.
+type URLSessionWebSocketMessageable interface {
+	Unwrap() *raw.NSURLSessionWebSocketMessage
+	Type() raw.NSURLSessionWebSocketMessageType
+	Data() *Data
+	String() *String
+}
+
+var _ URLSessionWebSocketMessageable = (*URLSessionWebSocketMessage)(nil)
 

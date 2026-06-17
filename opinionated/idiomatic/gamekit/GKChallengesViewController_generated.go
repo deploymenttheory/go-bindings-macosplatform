@@ -29,3 +29,23 @@ func (x *ChallengesViewController) WithChallengeDelegate(challengeDelegate raw.G
 	return x
 }
 
+// ChallengeDelegate calls the underlying ChallengeDelegate.
+func (x *ChallengesViewController) ChallengeDelegate() raw.GKChallengesViewControllerDelegate {
+	return x.inner.ChallengeDelegate()
+}
+
+// SetChallengeDelegate calls the underlying SetChallengeDelegate.
+func (x *ChallengesViewController) SetChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate) {
+	x.inner.SetChallengeDelegate(challengeDelegate)
+}
+
+// ChallengesViewControllerable is the interface implemented by [ChallengesViewController], for mocking and DI.
+type ChallengesViewControllerable interface {
+	Unwrap() *raw.GKChallengesViewController
+	WithChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate) *ChallengesViewController
+	ChallengeDelegate() raw.GKChallengesViewControllerDelegate
+	SetChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate)
+}
+
+var _ ChallengesViewControllerable = (*ChallengesViewController)(nil)
+

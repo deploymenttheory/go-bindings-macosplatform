@@ -32,3 +32,32 @@ func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *raw.MTRDescr
 	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(_id)}
 }
 
+// DeviceTypeID calls the underlying DeviceTypeID.
+func (x *MTRDeviceTypeRevision) DeviceTypeID() *foundation.NSNumber {
+	return x.inner.DeviceTypeID()
+}
+
+// DeviceTypeRevision calls the underlying DeviceTypeRevision.
+func (x *MTRDeviceTypeRevision) DeviceTypeRevision() *foundation.NSNumber {
+	return x.inner.DeviceTypeRevision()
+}
+
+// TypeInformation calls the underlying TypeInformation.
+func (x *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
+	_r := x.inner.TypeInformation()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDeviceType{inner: _r}
+}
+
+// MTRDeviceTypeRevisionable is the interface implemented by [MTRDeviceTypeRevision], for mocking and DI.
+type MTRDeviceTypeRevisionable interface {
+	Unwrap() *raw.MTRDeviceTypeRevision
+	DeviceTypeID() *foundation.NSNumber
+	DeviceTypeRevision() *foundation.NSNumber
+	TypeInformation() *MTRDeviceType
+}
+
+var _ MTRDeviceTypeRevisionable = (*MTRDeviceTypeRevision)(nil)
+

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,53 @@ func (x *MTRModeSelectClusterModeOptionStruct) WithMode(mode *foundation.NSNumbe
 	x.inner.SetMode(mode)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTRModeSelectClusterModeOptionStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRModeSelectClusterModeOptionStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Mode calls the underlying Mode.
+func (x *MTRModeSelectClusterModeOptionStruct) Mode() *foundation.NSNumber {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *MTRModeSelectClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
+	x.inner.SetMode(mode)
+}
+
+// SemanticTags calls the underlying SemanticTags.
+func (x *MTRModeSelectClusterModeOptionStruct) SemanticTags() *foundation.NSArray[objc.ID] {
+	return x.inner.SemanticTags()
+}
+
+// SetSemanticTags calls the underlying SetSemanticTags.
+func (x *MTRModeSelectClusterModeOptionStruct) SetSemanticTags(semanticTags *foundation.NSArray[objc.ID]) {
+	x.inner.SetSemanticTags(semanticTags)
+}
+
+// MTRModeSelectClusterModeOptionStructable is the interface implemented by [MTRModeSelectClusterModeOptionStruct], for mocking and DI.
+type MTRModeSelectClusterModeOptionStructable interface {
+	Unwrap() *raw.MTRModeSelectClusterModeOptionStruct
+	WithLabel(label string) *MTRModeSelectClusterModeOptionStruct
+	WithMode(mode *foundation.NSNumber) *MTRModeSelectClusterModeOptionStruct
+	Label() string
+	SetLabel(label string)
+	Mode() *foundation.NSNumber
+	SetMode(mode *foundation.NSNumber)
+	SemanticTags() *foundation.NSArray[objc.ID]
+	SetSemanticTags(semanticTags *foundation.NSArray[objc.ID])
+}
+
+var _ MTRModeSelectClusterModeOptionStructable = (*MTRModeSelectClusterModeOptionStruct)(nil)
 

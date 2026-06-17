@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,38 @@ func NewTextAlternativesWithPrimaryStringAlternativeStrings(primaryString string
 	return &TextAlternatives{inner: raw.NSTextAlternativesFromID(_id)}
 }
 
+// NoteSelectedAlternativeString calls the underlying NoteSelectedAlternativeString.
+func (x *TextAlternatives) NoteSelectedAlternativeString(alternativeString string) {
+	x.inner.NoteSelectedAlternativeString(foundation.NSStringStringWithUTF8String(alternativeString))
+}
+
+// PrimaryString calls the underlying PrimaryString.
+func (x *TextAlternatives) PrimaryString() string {
+	_r := x.inner.PrimaryString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // AlternativeStrings returns the collection as a Go slice.
-func (x *TextAlternatives) AlternativeStrings() []*foundation.NSString {
+func (x *TextAlternatives) AlternativeStrings() []string {
 	arr := x.inner.AlternativeStrings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// TextAlternativesable is the interface implemented by [TextAlternatives], for mocking and DI.
+type TextAlternativesable interface {
+	Unwrap() *raw.NSTextAlternatives
+	NoteSelectedAlternativeString(alternativeString string)
+	PrimaryString() string
+	AlternativeStrings() []string
+}
+
+var _ TextAlternativesable = (*TextAlternatives)(nil)
 

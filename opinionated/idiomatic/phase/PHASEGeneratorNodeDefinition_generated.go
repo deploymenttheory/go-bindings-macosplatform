@@ -47,9 +47,108 @@ func (x *GeneratorNodeDefinition) WithRateMetaParameterDefinition(rateMetaParame
 	return x
 }
 
+// SetCalibrationModeLevel calls the underlying SetCalibrationModeLevel.
+func (x *GeneratorNodeDefinition) SetCalibrationModeLevel(calibrationMode raw.PHASECalibrationMode, level float64) {
+	x.inner.SetCalibrationModeLevel(calibrationMode, level)
+}
+
+// CalibrationMode calls the underlying CalibrationMode.
+func (x *GeneratorNodeDefinition) CalibrationMode() raw.PHASECalibrationMode {
+	return x.inner.CalibrationMode()
+}
+
+// Level calls the underlying Level.
+func (x *GeneratorNodeDefinition) Level() float64 {
+	return x.inner.Level()
+}
+
+// Rate calls the underlying Rate.
+func (x *GeneratorNodeDefinition) Rate() float64 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *GeneratorNodeDefinition) SetRate(rate float64) {
+	x.inner.SetRate(rate)
+}
+
+// Group calls the underlying Group.
+func (x *GeneratorNodeDefinition) Group() *Group {
+	_r := x.inner.Group()
+	if _r == nil {
+		return nil
+	}
+	return &Group{inner: _r}
+}
+
+// SetGroup calls the underlying SetGroup.
+func (x *GeneratorNodeDefinition) SetGroup(group *raw.PHASEGroup) {
+	x.inner.SetGroup(group)
+}
+
+// GainMetaParameterDefinition calls the underlying GainMetaParameterDefinition.
+func (x *GeneratorNodeDefinition) GainMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := x.inner.GainMetaParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameterDefinition{inner: _r}
+}
+
+// SetGainMetaParameterDefinition calls the underlying SetGainMetaParameterDefinition.
+func (x *GeneratorNodeDefinition) SetGainMetaParameterDefinition(gainMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition) {
+	x.inner.SetGainMetaParameterDefinition(gainMetaParameterDefinition)
+}
+
+// RateMetaParameterDefinition calls the underlying RateMetaParameterDefinition.
+func (x *GeneratorNodeDefinition) RateMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := x.inner.RateMetaParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameterDefinition{inner: _r}
+}
+
+// SetRateMetaParameterDefinition calls the underlying SetRateMetaParameterDefinition.
+func (x *GeneratorNodeDefinition) SetRateMetaParameterDefinition(rateMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition) {
+	x.inner.SetRateMetaParameterDefinition(rateMetaParameterDefinition)
+}
+
+// MixerDefinition calls the underlying MixerDefinition.
+func (x *GeneratorNodeDefinition) MixerDefinition() *MixerDefinition {
+	_r := x.inner.MixerDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &MixerDefinition{inner: _r}
+}
+
 func (x *GeneratorNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return x.inner }
 
 func (x *GeneratorNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
 
 func (x *GeneratorNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// GeneratorNodeDefinitionable is the interface implemented by [GeneratorNodeDefinition], for mocking and DI.
+type GeneratorNodeDefinitionable interface {
+	Unwrap() *raw.PHASEGeneratorNodeDefinition
+	WithRate(rate float64) *GeneratorNodeDefinition
+	WithGroup(group *raw.PHASEGroup) *GeneratorNodeDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
+	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *GeneratorNodeDefinition
+	SetCalibrationModeLevel(calibrationMode raw.PHASECalibrationMode, level float64)
+	CalibrationMode() raw.PHASECalibrationMode
+	Level() float64
+	Rate() float64
+	SetRate(rate float64)
+	Group() *Group
+	SetGroup(group *raw.PHASEGroup)
+	GainMetaParameterDefinition() *NumberMetaParameterDefinition
+	SetGainMetaParameterDefinition(gainMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition)
+	RateMetaParameterDefinition() *NumberMetaParameterDefinition
+	SetRateMetaParameterDefinition(rateMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition)
+	MixerDefinition() *MixerDefinition
+}
+
+var _ GeneratorNodeDefinitionable = (*GeneratorNodeDefinition)(nil)
 

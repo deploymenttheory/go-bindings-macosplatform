@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewCallGroupWithGroupNameGroupId(groupName string, groupId string) *CallGro
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroupName:groupId:"), foundation.NSStringStringWithUTF8String(groupName).Ptr(), foundation.NSStringStringWithUTF8String(groupId).Ptr())
 	return &CallGroup{inner: raw.INCallGroupFromID(_id)}
 }
+
+// GroupName calls the underlying GroupName.
+func (x *CallGroup) GroupName() string {
+	_r := x.inner.GroupName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GroupId calls the underlying GroupId.
+func (x *CallGroup) GroupId() string {
+	_r := x.inner.GroupId()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CallGroupable is the interface implemented by [CallGroup], for mocking and DI.
+type CallGroupable interface {
+	Unwrap() *raw.INCallGroup
+	GroupName() string
+	GroupId() string
+}
+
+var _ CallGroupable = (*CallGroup)(nil)
 

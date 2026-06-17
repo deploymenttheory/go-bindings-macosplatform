@@ -30,3 +30,23 @@ func (x *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOff
 	return x
 }
 
+// DstOffsetActive calls the underlying DstOffsetActive.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() *foundation.NSNumber {
+	return x.inner.DstOffsetActive()
+}
+
+// SetDstOffsetActive calls the underlying SetDstOffsetActive.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) SetDstOffsetActive(dstOffsetActive *foundation.NSNumber) {
+	x.inner.SetDstOffsetActive(dstOffsetActive)
+}
+
+// MTRTimeSynchronizationClusterDSTStatusEventable is the interface implemented by [MTRTimeSynchronizationClusterDSTStatusEvent], for mocking and DI.
+type MTRTimeSynchronizationClusterDSTStatusEventable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterDSTStatusEvent
+	WithDstOffsetActive(dstOffsetActive *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTStatusEvent
+	DstOffsetActive() *foundation.NSNumber
+	SetDstOffsetActive(dstOffsetActive *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterDSTStatusEventable = (*MTRTimeSynchronizationClusterDSTStatusEvent)(nil)
+

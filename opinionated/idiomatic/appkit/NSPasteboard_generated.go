@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,142 @@ func NewPasteboard() *Pasteboard {
 	return &Pasteboard{inner: raw.NSPasteboardFromID(_id)}
 }
 
+// ReleaseGlobally calls the underlying ReleaseGlobally.
+func (x *Pasteboard) ReleaseGlobally() {
+	x.inner.ReleaseGlobally()
+}
+
+// PrepareForNewContentsWithOptions calls the underlying PrepareForNewContentsWithOptions.
+func (x *Pasteboard) PrepareForNewContentsWithOptions(options raw.NSPasteboardContentsOptions) int {
+	return x.inner.PrepareForNewContentsWithOptions(options)
+}
+
+// ClearContents calls the underlying ClearContents.
+func (x *Pasteboard) ClearContents() int {
+	return x.inner.ClearContents()
+}
+
+// WriteObjects calls the underlying WriteObjects.
+func (x *Pasteboard) WriteObjects(objects *foundation.NSArray[raw.NSPasteboardWriting]) bool {
+	return x.inner.WriteObjects(objects)
+}
+
+// ReadObjectsForClassesOptions calls the underlying ReadObjectsForClassesOptions.
+func (x *Pasteboard) ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID] {
+	return x.inner.ReadObjectsForClassesOptions(classArray, options)
+}
+
+// IndexOfPasteboardItem calls the underlying IndexOfPasteboardItem.
+func (x *Pasteboard) IndexOfPasteboardItem(pasteboardItem *raw.NSPasteboardItem) uint {
+	return x.inner.IndexOfPasteboardItem(pasteboardItem)
+}
+
+// CanReadItemWithDataConformingToTypes calls the underlying CanReadItemWithDataConformingToTypes.
+func (x *Pasteboard) CanReadItemWithDataConformingToTypes(types *foundation.NSArray[*foundation.NSString]) bool {
+	return x.inner.CanReadItemWithDataConformingToTypes(types)
+}
+
+// CanReadObjectForClassesOptions calls the underlying CanReadObjectForClassesOptions.
+func (x *Pasteboard) CanReadObjectForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.CanReadObjectForClassesOptions(classArray, options)
+}
+
+// DeclareTypesOwner calls the underlying DeclareTypesOwner.
+func (x *Pasteboard) DeclareTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
+	return x.inner.DeclareTypesOwner(newTypes, newOwner)
+}
+
+// AddTypesOwner calls the underlying AddTypesOwner.
+func (x *Pasteboard) AddTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int {
+	return x.inner.AddTypesOwner(newTypes, newOwner)
+}
+
+// AvailableTypeFromArray calls the underlying AvailableTypeFromArray.
+func (x *Pasteboard) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) string {
+	_r := x.inner.AvailableTypeFromArray(types)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDataForType calls the underlying SetDataForType.
+func (x *Pasteboard) SetDataForType(data *foundation.NSData, dataType *foundation.NSString) bool {
+	return x.inner.SetDataForType(data, dataType)
+}
+
+// SetPropertyListForType calls the underlying SetPropertyListForType.
+func (x *Pasteboard) SetPropertyListForType(plist objc.ID, dataType *foundation.NSString) bool {
+	return x.inner.SetPropertyListForType(plist, dataType)
+}
+
+// SetStringForType calls the underlying SetStringForType.
+func (x *Pasteboard) SetStringForType(string_ string, dataType *foundation.NSString) bool {
+	return x.inner.SetStringForType(foundation.NSStringStringWithUTF8String(string_), dataType)
+}
+
+// DataForType calls the underlying DataForType.
+func (x *Pasteboard) DataForType(dataType *foundation.NSString) *foundation.NSData {
+	return x.inner.DataForType(dataType)
+}
+
+// PropertyListForType calls the underlying PropertyListForType.
+func (x *Pasteboard) PropertyListForType(dataType *foundation.NSString) objc.ID {
+	return x.inner.PropertyListForType(dataType)
+}
+
+// StringForType calls the underlying StringForType.
+func (x *Pasteboard) StringForType(dataType *foundation.NSString) string {
+	_r := x.inner.StringForType(dataType)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DetectPatternsForPatternsCompletionHandler calls the underlying DetectPatternsForPatternsCompletionHandler.
+func (x *Pasteboard) DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
+	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, completionHandler)
+}
+
+// DetectValuesForPatternsCompletionHandler calls the underlying DetectValuesForPatternsCompletionHandler.
+func (x *Pasteboard) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
+	x.inner.DetectValuesForPatternsCompletionHandler(patterns, completionHandler)
+}
+
+// DetectMetadataForTypesCompletionHandler calls the underlying DetectMetadataForTypesCompletionHandler.
+func (x *Pasteboard) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block) {
+	x.inner.DetectMetadataForTypesCompletionHandler(types, completionHandler)
+}
+
+// Name calls the underlying Name.
+func (x *Pasteboard) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ChangeCount calls the underlying ChangeCount.
+func (x *Pasteboard) ChangeCount() int {
+	return x.inner.ChangeCount()
+}
+
+// AccessBehavior calls the underlying AccessBehavior.
+func (x *Pasteboard) AccessBehavior() raw.NSPasteboardAccessBehavior {
+	return x.inner.AccessBehavior()
+}
+
 // PasteboardItems returns the collection as a Go slice.
 func (x *Pasteboard) PasteboardItems() []*raw.NSPasteboardItem {
 	arr := x.inner.PasteboardItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPasteboardItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPasteboardItem {
+		return raw.NSPasteboardItemFromID(purego.Retain(_id))
+	})
 }
 
 // Types returns the collection as a Go slice.
@@ -43,10 +169,68 @@ func (x *Pasteboard) Types() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// WriteFileContents calls the underlying WriteFileContents.
+func (x *Pasteboard) WriteFileContents(filename string) bool {
+	return x.inner.WriteFileContents(foundation.NSStringStringWithUTF8String(filename))
+}
+
+// ReadFileContentsTypeToFile calls the underlying ReadFileContentsTypeToFile.
+func (x *Pasteboard) ReadFileContentsTypeToFile(type_ *foundation.NSString, filename string) string {
+	_r := x.inner.ReadFileContentsTypeToFile(type_, foundation.NSStringStringWithUTF8String(filename))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// WriteFileWrapper calls the underlying WriteFileWrapper.
+func (x *Pasteboard) WriteFileWrapper(wrapper *foundation.NSFileWrapper) bool {
+	return x.inner.WriteFileWrapper(wrapper)
+}
+
+// ReadFileWrapper calls the underlying ReadFileWrapper.
+func (x *Pasteboard) ReadFileWrapper() *foundation.NSFileWrapper {
+	return x.inner.ReadFileWrapper()
+}
+
+// Pasteboardable is the interface implemented by [Pasteboard], for mocking and DI.
+type Pasteboardable interface {
+	Unwrap() *raw.NSPasteboard
+	ReleaseGlobally()
+	PrepareForNewContentsWithOptions(options raw.NSPasteboardContentsOptions) int
+	ClearContents() int
+	WriteObjects(objects *foundation.NSArray[raw.NSPasteboardWriting]) bool
+	ReadObjectsForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[objc.ID]
+	IndexOfPasteboardItem(pasteboardItem *raw.NSPasteboardItem) uint
+	CanReadItemWithDataConformingToTypes(types *foundation.NSArray[*foundation.NSString]) bool
+	CanReadObjectForClassesOptions(classArray *foundation.NSArray[objc.Class], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	DeclareTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int
+	AddTypesOwner(newTypes *foundation.NSArray[*foundation.NSString], newOwner objc.ID) int
+	AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) string
+	SetDataForType(data *foundation.NSData, dataType *foundation.NSString) bool
+	SetPropertyListForType(plist objc.ID, dataType *foundation.NSString) bool
+	SetStringForType(string_ string, dataType *foundation.NSString) bool
+	DataForType(dataType *foundation.NSString) *foundation.NSData
+	PropertyListForType(dataType *foundation.NSString) objc.ID
+	StringForType(dataType *foundation.NSString) string
+	DetectPatternsForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
+	DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
+	DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler objc.Block)
+	Name() string
+	ChangeCount() int
+	AccessBehavior() raw.NSPasteboardAccessBehavior
+	PasteboardItems() []*raw.NSPasteboardItem
+	Types() []*foundation.NSString
+	WriteFileContents(filename string) bool
+	ReadFileContentsTypeToFile(type_ *foundation.NSString, filename string) string
+	WriteFileWrapper(wrapper *foundation.NSFileWrapper) bool
+	ReadFileWrapper() *foundation.NSFileWrapper
+}
+
+var _ Pasteboardable = (*Pasteboard)(nil)
 

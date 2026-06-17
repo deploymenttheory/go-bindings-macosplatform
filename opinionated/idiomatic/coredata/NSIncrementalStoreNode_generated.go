@@ -25,3 +25,32 @@ func NewIncrementalStoreNodeWithObjectIDWithValuesVersion(objectID *raw.NSManage
 	return &IncrementalStoreNode{inner: raw.NSIncrementalStoreNodeFromID(_id)}
 }
 
+// UpdateWithValuesVersion calls the underlying UpdateWithValuesVersion.
+func (x *IncrementalStoreNode) UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64) {
+	x.inner.UpdateWithValuesVersion(values, version)
+}
+
+// ValueForPropertyDescription calls the underlying ValueForPropertyDescription.
+func (x *IncrementalStoreNode) ValueForPropertyDescription(prop *raw.NSPropertyDescription) objc.ID {
+	return x.inner.ValueForPropertyDescription(prop)
+}
+
+// ObjectID calls the underlying ObjectID.
+func (x *IncrementalStoreNode) ObjectID() *ManagedObjectID {
+	_r := x.inner.ObjectID()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// IncrementalStoreNodeable is the interface implemented by [IncrementalStoreNode], for mocking and DI.
+type IncrementalStoreNodeable interface {
+	Unwrap() *raw.NSIncrementalStoreNode
+	UpdateWithValuesVersion(values *foundation.NSDictionary[*foundation.NSString, objc.ID], version uint64)
+	ValueForPropertyDescription(prop *raw.NSPropertyDescription) objc.ID
+	ObjectID() *ManagedObjectID
+}
+
+var _ IncrementalStoreNodeable = (*IncrementalStoreNode)(nil)
+

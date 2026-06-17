@@ -33,3 +33,10 @@ func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDev
 
 func (x *CaptureSystemExposureBiasSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
 
+// CaptureSystemExposureBiasSliderable is the interface implemented by [CaptureSystemExposureBiasSlider], for mocking and DI.
+type CaptureSystemExposureBiasSliderable interface {
+	Unwrap() *raw.AVCaptureSystemExposureBiasSlider
+}
+
+var _ CaptureSystemExposureBiasSliderable = (*CaptureSystemExposureBiasSlider)(nil)
+

@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,55 @@ func (x *PaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *Payme
 	return x
 }
 
+// Label calls the underlying Label.
+func (x *PaymentSummaryItem) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *PaymentSummaryItem) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Amount calls the underlying Amount.
+func (x *PaymentSummaryItem) Amount() *foundation.NSDecimalNumber {
+	return x.inner.Amount()
+}
+
+// SetAmount calls the underlying SetAmount.
+func (x *PaymentSummaryItem) SetAmount(amount *foundation.NSDecimalNumber) {
+	x.inner.SetAmount(amount)
+}
+
+// Type calls the underlying Type.
+func (x *PaymentSummaryItem) Type() raw.PKPaymentSummaryItemType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *PaymentSummaryItem) SetType(type_ raw.PKPaymentSummaryItemType) {
+	x.inner.SetType(type_)
+}
+
 func (x *PaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return x.inner }
+
+// PaymentSummaryItemable is the interface implemented by [PaymentSummaryItem], for mocking and DI.
+type PaymentSummaryItemable interface {
+	Unwrap() *raw.PKPaymentSummaryItem
+	WithLabel(label string) *PaymentSummaryItem
+	WithAmount(amount *foundation.NSDecimalNumber) *PaymentSummaryItem
+	WithType(type_ raw.PKPaymentSummaryItemType) *PaymentSummaryItem
+	Label() string
+	SetLabel(label string)
+	Amount() *foundation.NSDecimalNumber
+	SetAmount(amount *foundation.NSDecimalNumber)
+	Type() raw.PKPaymentSummaryItemType
+	SetType(type_ raw.PKPaymentSummaryItemType)
+}
+
+var _ PaymentSummaryItemable = (*PaymentSummaryItem)(nil)
 

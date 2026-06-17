@@ -43,3 +43,10 @@ func (x *CNNPoolingMaxGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBina
 
 func (x *CNNPoolingMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNPoolingMaxGradientable is the interface implemented by [CNNPoolingMaxGradient], for mocking and DI.
+type CNNPoolingMaxGradientable interface {
+	Unwrap() *raw.MPSCNNPoolingMaxGradient
+}
+
+var _ CNNPoolingMaxGradientable = (*CNNPoolingMaxGradient)(nil)
+

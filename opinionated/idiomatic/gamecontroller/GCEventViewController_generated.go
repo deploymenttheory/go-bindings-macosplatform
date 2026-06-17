@@ -29,3 +29,23 @@ func (x *EventViewController) WithControllerUserInteractionEnabled(controllerUse
 	return x
 }
 
+// ControllerUserInteractionEnabled calls the underlying ControllerUserInteractionEnabled.
+func (x *EventViewController) ControllerUserInteractionEnabled() bool {
+	return x.inner.ControllerUserInteractionEnabled()
+}
+
+// SetControllerUserInteractionEnabled calls the underlying SetControllerUserInteractionEnabled.
+func (x *EventViewController) SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) {
+	x.inner.SetControllerUserInteractionEnabled(controllerUserInteractionEnabled)
+}
+
+// EventViewControllerable is the interface implemented by [EventViewController], for mocking and DI.
+type EventViewControllerable interface {
+	Unwrap() *raw.GCEventViewController
+	WithControllerUserInteractionEnabled(controllerUserInteractionEnabled bool) *EventViewController
+	ControllerUserInteractionEnabled() bool
+	SetControllerUserInteractionEnabled(controllerUserInteractionEnabled bool)
+}
+
+var _ EventViewControllerable = (*EventViewController)(nil)
+

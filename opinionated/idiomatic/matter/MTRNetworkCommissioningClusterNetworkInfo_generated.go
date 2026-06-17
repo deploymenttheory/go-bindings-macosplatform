@@ -25,3 +25,10 @@ func NewMTRNetworkCommissioningClusterNetworkInfo() *MTRNetworkCommissioningClus
 
 func (x *MTRNetworkCommissioningClusterNetworkInfo) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct { return &x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct }
 
+// MTRNetworkCommissioningClusterNetworkInfoable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfo], for mocking and DI.
+type MTRNetworkCommissioningClusterNetworkInfoable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfo
+}
+
+var _ MTRNetworkCommissioningClusterNetworkInfoable = (*MTRNetworkCommissioningClusterNetworkInfo)(nil)
+

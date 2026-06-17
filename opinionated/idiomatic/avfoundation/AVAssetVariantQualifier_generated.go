@@ -23,3 +23,10 @@ func NewAssetVariantQualifier() *AssetVariantQualifier {
 	return &AssetVariantQualifier{inner: raw.AVAssetVariantQualifierFromID(_id)}
 }
 
+// AssetVariantQualifierable is the interface implemented by [AssetVariantQualifier], for mocking and DI.
+type AssetVariantQualifierable interface {
+	Unwrap() *raw.AVAssetVariantQualifier
+}
+
+var _ AssetVariantQualifierable = (*AssetVariantQualifier)(nil)
+

@@ -7,6 +7,7 @@ package speech
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,22 @@ func (x *AcousticFeature) AcousticFeatureValuePerFrame() []*foundation.NSNumber 
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// FrameDuration calls the underlying FrameDuration.
+func (x *AcousticFeature) FrameDuration() float64 {
+	return x.inner.FrameDuration()
+}
+
+// AcousticFeatureable is the interface implemented by [AcousticFeature], for mocking and DI.
+type AcousticFeatureable interface {
+	Unwrap() *raw.SFAcousticFeature
+	AcousticFeatureValuePerFrame() []*foundation.NSNumber
+	FrameDuration() float64
+}
+
+var _ AcousticFeatureable = (*AcousticFeature)(nil)
 

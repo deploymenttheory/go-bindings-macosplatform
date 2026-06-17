@@ -23,5 +23,32 @@ func NewUserNotificationAction() *UserNotificationAction {
 	return &UserNotificationAction{inner: raw.NSUserNotificationActionFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *UserNotificationAction) Identifier() *String {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *UserNotificationAction) Title() *String {
+	_r := x.inner.Title()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *UserNotificationAction) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UserNotificationActionable is the interface implemented by [UserNotificationAction], for mocking and DI.
+type UserNotificationActionable interface {
+	Unwrap() *raw.NSUserNotificationAction
+	Identifier() *String
+	Title() *String
+}
+
+var _ UserNotificationActionable = (*UserNotificationAction)(nil)
 

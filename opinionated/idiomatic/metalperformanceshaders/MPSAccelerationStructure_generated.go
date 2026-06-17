@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AccelerationStructure wraps [raw.MPSAccelerationStructure] with a fluent Go API.
@@ -55,5 +56,87 @@ func (x *AccelerationStructure) WithUsage(usage mpsrayintersector.MPSAcceleratio
 	return x
 }
 
+// Rebuild calls the underlying Rebuild.
+func (x *AccelerationStructure) Rebuild() {
+	x.inner.Rebuild()
+}
+
+// RebuildWithCompletionHandler calls the underlying RebuildWithCompletionHandler.
+func (x *AccelerationStructure) RebuildWithCompletionHandler(completionHandler func(*mpsrayintersector.MPSAccelerationStructure)) {
+	x.inner.RebuildWithCompletionHandler(completionHandler)
+}
+
+// EncodeRefitToCommandBuffer calls the underlying EncodeRefitToCommandBuffer.
+func (x *AccelerationStructure) EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.EncodeRefitToCommandBuffer(commandBuffer)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *AccelerationStructure) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *AccelerationStructure {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &AccelerationStructure{inner: _r}
+}
+
+// CopyWithZoneGroup calls the underlying CopyWithZoneGroup.
+func (x *AccelerationStructure) CopyWithZoneGroup(zone unsafe.Pointer, group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure {
+	_r := x.inner.CopyWithZoneGroup(zone, group)
+	if _r == nil {
+		return nil
+	}
+	return &AccelerationStructure{inner: _r}
+}
+
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *AccelerationStructure) EncodeWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(coder)
+}
+
+// Group calls the underlying Group.
+func (x *AccelerationStructure) Group() *mpsrayintersector.MPSAccelerationStructureGroup {
+	return x.inner.Group()
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *AccelerationStructure) BoundingBox() mpsrayintersector.MPSAxisAlignedBoundingBox {
+	return x.inner.BoundingBox()
+}
+
+// Status calls the underlying Status.
+func (x *AccelerationStructure) Status() mpsrayintersector.MPSAccelerationStructureStatus {
+	return x.inner.Status()
+}
+
+// Usage calls the underlying Usage.
+func (x *AccelerationStructure) Usage() mpsrayintersector.MPSAccelerationStructureUsage {
+	return x.inner.Usage()
+}
+
+// SetUsage calls the underlying SetUsage.
+func (x *AccelerationStructure) SetUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) {
+	x.inner.SetUsage(usage)
+}
+
 func (x *AccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// AccelerationStructureable is the interface implemented by [AccelerationStructure], for mocking and DI.
+type AccelerationStructureable interface {
+	Unwrap() *raw.MPSAccelerationStructure
+	WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *AccelerationStructure
+	Rebuild()
+	RebuildWithCompletionHandler(completionHandler func(*mpsrayintersector.MPSAccelerationStructure))
+	EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *AccelerationStructure
+	CopyWithZoneGroup(zone unsafe.Pointer, group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure
+	EncodeWithCoder(coder *foundation.NSCoder)
+	Group() *mpsrayintersector.MPSAccelerationStructureGroup
+	BoundingBox() mpsrayintersector.MPSAxisAlignedBoundingBox
+	Status() mpsrayintersector.MPSAccelerationStructureStatus
+	Usage() mpsrayintersector.MPSAccelerationStructureUsage
+	SetUsage(usage mpsrayintersector.MPSAccelerationStructureUsage)
+}
+
+var _ AccelerationStructureable = (*AccelerationStructure)(nil)
 

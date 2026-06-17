@@ -7,6 +7,7 @@ package mediaextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,18 +59,49 @@ func (x *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProc
 	return x
 }
 
+// HasNeutralValue calls the underlying HasNeutralValue.
+func (x *RAWProcessingListParameter) HasNeutralValue(outNeutralValue *int64) bool {
+	return x.inner.HasNeutralValue(outNeutralValue)
+}
+
+// HasCameraValue calls the underlying HasCameraValue.
+func (x *RAWProcessingListParameter) HasCameraValue(outCameraValue *int64) bool {
+	return x.inner.HasCameraValue(outCameraValue)
+}
+
 // ListElements returns the collection as a Go slice.
 func (x *RAWProcessingListParameter) ListElements() []*raw.MERAWProcessingListElementParameter {
 	arr := x.inner.ListElements()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MERAWProcessingListElementParameter, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MERAWProcessingListElementParameter {
+		return raw.MERAWProcessingListElementParameterFromID(purego.Retain(_id))
+	})
+}
+
+// CurrentValue calls the underlying CurrentValue.
+func (x *RAWProcessingListParameter) CurrentValue() int {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *RAWProcessingListParameter) SetCurrentValue(currentValue int) {
+	x.inner.SetCurrentValue(currentValue)
 }
 
 func (x *RAWProcessingListParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingListParameterable is the interface implemented by [RAWProcessingListParameter], for mocking and DI.
+type RAWProcessingListParameterable interface {
+	Unwrap() *raw.MERAWProcessingListParameter
+	WithCurrentValue(currentValue int) *RAWProcessingListParameter
+	HasNeutralValue(outNeutralValue *int64) bool
+	HasCameraValue(outCameraValue *int64) bool
+	ListElements() []*raw.MERAWProcessingListElementParameter
+	CurrentValue() int
+	SetCurrentValue(currentValue int)
+}
+
+var _ RAWProcessingListParameterable = (*RAWProcessingListParameter)(nil)
 

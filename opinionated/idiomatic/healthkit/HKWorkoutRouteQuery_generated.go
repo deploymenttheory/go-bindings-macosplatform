@@ -34,3 +34,10 @@ func NewWorkoutRouteQueryWithRouteDateIntervalDataHandler(workoutRoute *raw.HKWo
 
 func (x *WorkoutRouteQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// WorkoutRouteQueryable is the interface implemented by [WorkoutRouteQuery], for mocking and DI.
+type WorkoutRouteQueryable interface {
+	Unwrap() *raw.HKWorkoutRouteQuery
+}
+
+var _ WorkoutRouteQueryable = (*WorkoutRouteQuery)(nil)
+

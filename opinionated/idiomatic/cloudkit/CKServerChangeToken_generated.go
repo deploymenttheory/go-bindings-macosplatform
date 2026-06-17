@@ -23,3 +23,10 @@ func NewServerChangeToken() *ServerChangeToken {
 	return &ServerChangeToken{inner: raw.CKServerChangeTokenFromID(_id)}
 }
 
+// ServerChangeTokenable is the interface implemented by [ServerChangeToken], for mocking and DI.
+type ServerChangeTokenable interface {
+	Unwrap() *raw.CKServerChangeToken
+}
+
+var _ ServerChangeTokenable = (*ServerChangeToken)(nil)
+

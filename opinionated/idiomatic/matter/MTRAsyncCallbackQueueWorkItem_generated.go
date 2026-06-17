@@ -37,3 +37,48 @@ func (x *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) 
 	return x
 }
 
+// EndWork calls the underlying EndWork.
+func (x *MTRAsyncCallbackQueueWorkItem) EndWork() {
+	x.inner.EndWork()
+}
+
+// RetryWork calls the underlying RetryWork.
+func (x *MTRAsyncCallbackQueueWorkItem) RetryWork() {
+	x.inner.RetryWork()
+}
+
+// ReadyHandler calls the underlying ReadyHandler.
+func (x *MTRAsyncCallbackQueueWorkItem) ReadyHandler() objc.Block {
+	return x.inner.ReadyHandler()
+}
+
+// SetReadyHandler calls the underlying SetReadyHandler.
+func (x *MTRAsyncCallbackQueueWorkItem) SetReadyHandler(readyHandler func(objc.ID, uint)) {
+	x.inner.SetReadyHandler(readyHandler)
+}
+
+// CancelHandler calls the underlying CancelHandler.
+func (x *MTRAsyncCallbackQueueWorkItem) CancelHandler() objc.Block {
+	return x.inner.CancelHandler()
+}
+
+// SetCancelHandler calls the underlying SetCancelHandler.
+func (x *MTRAsyncCallbackQueueWorkItem) SetCancelHandler(cancelHandler func()) {
+	x.inner.SetCancelHandler(cancelHandler)
+}
+
+// MTRAsyncCallbackQueueWorkItemable is the interface implemented by [MTRAsyncCallbackQueueWorkItem], for mocking and DI.
+type MTRAsyncCallbackQueueWorkItemable interface {
+	Unwrap() *raw.MTRAsyncCallbackQueueWorkItem
+	WithReadyHandler(readyHandler func(objc.ID, uint)) *MTRAsyncCallbackQueueWorkItem
+	WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem
+	EndWork()
+	RetryWork()
+	ReadyHandler() objc.Block
+	SetReadyHandler(readyHandler func(objc.ID, uint))
+	CancelHandler() objc.Block
+	SetCancelHandler(cancelHandler func())
+}
+
+var _ MTRAsyncCallbackQueueWorkItemable = (*MTRAsyncCallbackQueueWorkItem)(nil)
+

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -102,4 +103,192 @@ func (x *IKScannerDeviceView) WithPostProcessApplication(postProcessApplication 
 	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
 	return x
 }
+
+// Delegate calls the underlying Delegate.
+func (x *IKScannerDeviceView) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IKScannerDeviceView) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ScannerDevice calls the underlying ScannerDevice.
+func (x *IKScannerDeviceView) ScannerDevice() *imagecapturecore.ICScannerDevice {
+	return x.inner.ScannerDevice()
+}
+
+// SetScannerDevice calls the underlying SetScannerDevice.
+func (x *IKScannerDeviceView) SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) {
+	x.inner.SetScannerDevice(scannerDevice)
+}
+
+// Mode calls the underlying Mode.
+func (x *IKScannerDeviceView) Mode() objc.ID {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *IKScannerDeviceView) SetMode(mode objc.ID) {
+	x.inner.SetMode(mode)
+}
+
+// HasDisplayModeSimple calls the underlying HasDisplayModeSimple.
+func (x *IKScannerDeviceView) HasDisplayModeSimple() bool {
+	return x.inner.HasDisplayModeSimple()
+}
+
+// SetHasDisplayModeSimple calls the underlying SetHasDisplayModeSimple.
+func (x *IKScannerDeviceView) SetHasDisplayModeSimple(hasDisplayModeSimple bool) {
+	x.inner.SetHasDisplayModeSimple(hasDisplayModeSimple)
+}
+
+// HasDisplayModeAdvanced calls the underlying HasDisplayModeAdvanced.
+func (x *IKScannerDeviceView) HasDisplayModeAdvanced() bool {
+	return x.inner.HasDisplayModeAdvanced()
+}
+
+// SetHasDisplayModeAdvanced calls the underlying SetHasDisplayModeAdvanced.
+func (x *IKScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) {
+	x.inner.SetHasDisplayModeAdvanced(hasDisplayModeAdvanced)
+}
+
+// TransferMode calls the underlying TransferMode.
+func (x *IKScannerDeviceView) TransferMode() objc.ID {
+	return x.inner.TransferMode()
+}
+
+// SetTransferMode calls the underlying SetTransferMode.
+func (x *IKScannerDeviceView) SetTransferMode(transferMode objc.ID) {
+	x.inner.SetTransferMode(transferMode)
+}
+
+// ScanControlLabel calls the underlying ScanControlLabel.
+func (x *IKScannerDeviceView) ScanControlLabel() string {
+	_r := x.inner.ScanControlLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetScanControlLabel calls the underlying SetScanControlLabel.
+func (x *IKScannerDeviceView) SetScanControlLabel(scanControlLabel string) {
+	x.inner.SetScanControlLabel(foundation.NSStringStringWithUTF8String(scanControlLabel))
+}
+
+// OverviewControlLabel calls the underlying OverviewControlLabel.
+func (x *IKScannerDeviceView) OverviewControlLabel() string {
+	_r := x.inner.OverviewControlLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOverviewControlLabel calls the underlying SetOverviewControlLabel.
+func (x *IKScannerDeviceView) SetOverviewControlLabel(overviewControlLabel string) {
+	x.inner.SetOverviewControlLabel(foundation.NSStringStringWithUTF8String(overviewControlLabel))
+}
+
+// DisplaysDownloadsDirectoryControl calls the underlying DisplaysDownloadsDirectoryControl.
+func (x *IKScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	return x.inner.DisplaysDownloadsDirectoryControl()
+}
+
+// SetDisplaysDownloadsDirectoryControl calls the underlying SetDisplaysDownloadsDirectoryControl.
+func (x *IKScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
+	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
+}
+
+// DownloadsDirectory calls the underlying DownloadsDirectory.
+func (x *IKScannerDeviceView) DownloadsDirectory() *foundation.NSURL {
+	return x.inner.DownloadsDirectory()
+}
+
+// SetDownloadsDirectory calls the underlying SetDownloadsDirectory.
+func (x *IKScannerDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
+	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
+}
+
+// DocumentName calls the underlying DocumentName.
+func (x *IKScannerDeviceView) DocumentName() string {
+	_r := x.inner.DocumentName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDocumentName calls the underlying SetDocumentName.
+func (x *IKScannerDeviceView) SetDocumentName(documentName string) {
+	x.inner.SetDocumentName(foundation.NSStringStringWithUTF8String(documentName))
+}
+
+// DisplaysPostProcessApplicationControl calls the underlying DisplaysPostProcessApplicationControl.
+func (x *IKScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
+	return x.inner.DisplaysPostProcessApplicationControl()
+}
+
+// SetDisplaysPostProcessApplicationControl calls the underlying SetDisplaysPostProcessApplicationControl.
+func (x *IKScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
+	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
+}
+
+// PostProcessApplication calls the underlying PostProcessApplication.
+func (x *IKScannerDeviceView) PostProcessApplication() *foundation.NSURL {
+	return x.inner.PostProcessApplication()
+}
+
+// SetPostProcessApplication calls the underlying SetPostProcessApplication.
+func (x *IKScannerDeviceView) SetPostProcessApplication(postProcessApplication string) {
+	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
+}
+
+// IKScannerDeviceViewable is the interface implemented by [IKScannerDeviceView], for mocking and DI.
+type IKScannerDeviceViewable interface {
+	Unwrap() *raw.IKScannerDeviceView
+	WithDelegate(delegate objc.ID) *IKScannerDeviceView
+	WithScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) *IKScannerDeviceView
+	WithMode(mode objc.ID) *IKScannerDeviceView
+	WithHasDisplayModeSimple(hasDisplayModeSimple bool) *IKScannerDeviceView
+	WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *IKScannerDeviceView
+	WithTransferMode(transferMode objc.ID) *IKScannerDeviceView
+	WithScanControlLabel(scanControlLabel string) *IKScannerDeviceView
+	WithOverviewControlLabel(overviewControlLabel string) *IKScannerDeviceView
+	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKScannerDeviceView
+	WithDownloadsDirectory(downloadsDirectory string) *IKScannerDeviceView
+	WithDocumentName(documentName string) *IKScannerDeviceView
+	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKScannerDeviceView
+	WithPostProcessApplication(postProcessApplication string) *IKScannerDeviceView
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	ScannerDevice() *imagecapturecore.ICScannerDevice
+	SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice)
+	Mode() objc.ID
+	SetMode(mode objc.ID)
+	HasDisplayModeSimple() bool
+	SetHasDisplayModeSimple(hasDisplayModeSimple bool)
+	HasDisplayModeAdvanced() bool
+	SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool)
+	TransferMode() objc.ID
+	SetTransferMode(transferMode objc.ID)
+	ScanControlLabel() string
+	SetScanControlLabel(scanControlLabel string)
+	OverviewControlLabel() string
+	SetOverviewControlLabel(overviewControlLabel string)
+	DisplaysDownloadsDirectoryControl() bool
+	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
+	DownloadsDirectory() *foundation.NSURL
+	SetDownloadsDirectory(downloadsDirectory string)
+	DocumentName() string
+	SetDocumentName(documentName string)
+	DisplaysPostProcessApplicationControl() bool
+	SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool)
+	PostProcessApplication() *foundation.NSURL
+	SetPostProcessApplication(postProcessApplication string)
+}
+
+var _ IKScannerDeviceViewable = (*IKScannerDeviceView)(nil)
 

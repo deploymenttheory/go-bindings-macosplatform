@@ -53,7 +53,35 @@ func (x *MutableDateRangeMetadataGroup) WithItems(items ...MetadataItemProvider)
 	return x
 }
 
+// SetStartDate calls the underlying SetStartDate.
+func (x *MutableDateRangeMetadataGroup) SetStartDate(startDate *foundation.NSDate) {
+	x.inner.SetStartDate(startDate)
+}
+
+// SetEndDate calls the underlying SetEndDate.
+func (x *MutableDateRangeMetadataGroup) SetEndDate(endDate *foundation.NSDate) {
+	x.inner.SetEndDate(endDate)
+}
+
+// SetItems calls the underlying SetItems.
+func (x *MutableDateRangeMetadataGroup) SetItems(items *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetItems(items)
+}
+
 func (x *MutableDateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup { return &x.inner.AVDateRangeMetadataGroup }
 
 func (x *MutableDateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVDateRangeMetadataGroup.AVMetadataGroup }
+
+// MutableDateRangeMetadataGroupable is the interface implemented by [MutableDateRangeMetadataGroup], for mocking and DI.
+type MutableDateRangeMetadataGroupable interface {
+	Unwrap() *raw.AVMutableDateRangeMetadataGroup
+	WithStartDate(startDate *foundation.NSDate) *MutableDateRangeMetadataGroup
+	WithEndDate(endDate *foundation.NSDate) *MutableDateRangeMetadataGroup
+	WithItems(items ...MetadataItemProvider) *MutableDateRangeMetadataGroup
+	SetStartDate(startDate *foundation.NSDate)
+	SetEndDate(endDate *foundation.NSDate)
+	SetItems(items *foundation.NSArray[*raw.AVMetadataItem])
+}
+
+var _ MutableDateRangeMetadataGroupable = (*MutableDateRangeMetadataGroup)(nil)
 

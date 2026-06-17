@@ -49,3 +49,77 @@ func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithTimedInvo
 	return x
 }
 
+// NetworkingStatus calls the underlying NetworkingStatus.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() *foundation.NSNumber {
+	return x.inner.NetworkingStatus()
+}
+
+// SetNetworkingStatus calls the underlying SetNetworkingStatus.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetNetworkingStatus(networkingStatus *foundation.NSNumber) {
+	x.inner.SetNetworkingStatus(networkingStatus)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// WiFiScanResults calls the underlying WiFiScanResults.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WiFiScanResults() *foundation.NSArray[objc.ID] {
+	return x.inner.WiFiScanResults()
+}
+
+// SetWiFiScanResults calls the underlying SetWiFiScanResults.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetWiFiScanResults(wiFiScanResults *foundation.NSArray[objc.ID]) {
+	x.inner.SetWiFiScanResults(wiFiScanResults)
+}
+
+// ThreadScanResults calls the underlying ThreadScanResults.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) ThreadScanResults() *foundation.NSArray[objc.ID] {
+	return x.inner.ThreadScanResults()
+}
+
+// SetThreadScanResults calls the underlying SetThreadScanResults.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetThreadScanResults(threadScanResults *foundation.NSArray[objc.ID]) {
+	x.inner.SetThreadScanResults(threadScanResults)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRNetworkCommissioningClusterScanNetworksResponseParamsable is the interface implemented by [MTRNetworkCommissioningClusterScanNetworksResponseParams], for mocking and DI.
+type MTRNetworkCommissioningClusterScanNetworksResponseParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterScanNetworksResponseParams
+	WithNetworkingStatus(networkingStatus *foundation.NSNumber) *MTRNetworkCommissioningClusterScanNetworksResponseParams
+	WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterScanNetworksResponseParams
+	NetworkingStatus() *foundation.NSNumber
+	SetNetworkingStatus(networkingStatus *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	WiFiScanResults() *foundation.NSArray[objc.ID]
+	SetWiFiScanResults(wiFiScanResults *foundation.NSArray[objc.ID])
+	ThreadScanResults() *foundation.NSArray[objc.ID]
+	SetThreadScanResults(threadScanResults *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterScanNetworksResponseParamsable = (*MTRNetworkCommissioningClusterScanNetworksResponseParams)(nil)
+

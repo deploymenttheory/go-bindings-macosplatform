@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,71 @@ func (x *LeaderboardScore) WithLeaderboardID(leaderboardID string) *LeaderboardS
 	x.inner.SetLeaderboardID(foundation.NSStringStringWithUTF8String(leaderboardID))
 	return x
 }
+
+// Player calls the underlying Player.
+func (x *LeaderboardScore) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// SetPlayer calls the underlying SetPlayer.
+func (x *LeaderboardScore) SetPlayer(player *raw.GKPlayer) {
+	x.inner.SetPlayer(player)
+}
+
+// Value calls the underlying Value.
+func (x *LeaderboardScore) Value() int {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *LeaderboardScore) SetValue(value int) {
+	x.inner.SetValue(value)
+}
+
+// Context calls the underlying Context.
+func (x *LeaderboardScore) Context() uint {
+	return x.inner.Context()
+}
+
+// SetContext calls the underlying SetContext.
+func (x *LeaderboardScore) SetContext(context_ uint) {
+	x.inner.SetContext(context_)
+}
+
+// LeaderboardID calls the underlying LeaderboardID.
+func (x *LeaderboardScore) LeaderboardID() string {
+	_r := x.inner.LeaderboardID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLeaderboardID calls the underlying SetLeaderboardID.
+func (x *LeaderboardScore) SetLeaderboardID(leaderboardID string) {
+	x.inner.SetLeaderboardID(foundation.NSStringStringWithUTF8String(leaderboardID))
+}
+
+// LeaderboardScoreable is the interface implemented by [LeaderboardScore], for mocking and DI.
+type LeaderboardScoreable interface {
+	Unwrap() *raw.GKLeaderboardScore
+	WithPlayer(player PlayerProvider) *LeaderboardScore
+	WithValue(value int) *LeaderboardScore
+	WithContext(context_ uint) *LeaderboardScore
+	WithLeaderboardID(leaderboardID string) *LeaderboardScore
+	Player() *Player
+	SetPlayer(player *raw.GKPlayer)
+	Value() int
+	SetValue(value int)
+	Context() uint
+	SetContext(context_ uint)
+	LeaderboardID() string
+	SetLeaderboardID(leaderboardID string)
+}
+
+var _ LeaderboardScoreable = (*LeaderboardScore)(nil)
 

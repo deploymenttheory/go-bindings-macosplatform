@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,105 @@ func (x *MTRMessagesClusterMessageStruct) WithMessageText(messageText string) *M
 	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
 	return x
 }
+
+// MessageID calls the underlying MessageID.
+func (x *MTRMessagesClusterMessageStruct) MessageID() *foundation.NSData {
+	return x.inner.MessageID()
+}
+
+// SetMessageID calls the underlying SetMessageID.
+func (x *MTRMessagesClusterMessageStruct) SetMessageID(messageID *foundation.NSData) {
+	x.inner.SetMessageID(messageID)
+}
+
+// Priority calls the underlying Priority.
+func (x *MTRMessagesClusterMessageStruct) Priority() *foundation.NSNumber {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *MTRMessagesClusterMessageStruct) SetPriority(priority *foundation.NSNumber) {
+	x.inner.SetPriority(priority)
+}
+
+// MessageControl calls the underlying MessageControl.
+func (x *MTRMessagesClusterMessageStruct) MessageControl() *foundation.NSNumber {
+	return x.inner.MessageControl()
+}
+
+// SetMessageControl calls the underlying SetMessageControl.
+func (x *MTRMessagesClusterMessageStruct) SetMessageControl(messageControl *foundation.NSNumber) {
+	x.inner.SetMessageControl(messageControl)
+}
+
+// StartTime calls the underlying StartTime.
+func (x *MTRMessagesClusterMessageStruct) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRMessagesClusterMessageStruct) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRMessagesClusterMessageStruct) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRMessagesClusterMessageStruct) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// MessageText calls the underlying MessageText.
+func (x *MTRMessagesClusterMessageStruct) MessageText() string {
+	_r := x.inner.MessageText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessageText calls the underlying SetMessageText.
+func (x *MTRMessagesClusterMessageStruct) SetMessageText(messageText string) {
+	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+}
+
+// Responses calls the underlying Responses.
+func (x *MTRMessagesClusterMessageStruct) Responses() *foundation.NSArray[objc.ID] {
+	return x.inner.Responses()
+}
+
+// SetResponses calls the underlying SetResponses.
+func (x *MTRMessagesClusterMessageStruct) SetResponses(responses *foundation.NSArray[objc.ID]) {
+	x.inner.SetResponses(responses)
+}
+
+// MTRMessagesClusterMessageStructable is the interface implemented by [MTRMessagesClusterMessageStruct], for mocking and DI.
+type MTRMessagesClusterMessageStructable interface {
+	Unwrap() *raw.MTRMessagesClusterMessageStruct
+	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageStruct
+	WithPriority(priority *foundation.NSNumber) *MTRMessagesClusterMessageStruct
+	WithMessageControl(messageControl *foundation.NSNumber) *MTRMessagesClusterMessageStruct
+	WithStartTime(startTime *foundation.NSNumber) *MTRMessagesClusterMessageStruct
+	WithDuration(duration *foundation.NSNumber) *MTRMessagesClusterMessageStruct
+	WithMessageText(messageText string) *MTRMessagesClusterMessageStruct
+	MessageID() *foundation.NSData
+	SetMessageID(messageID *foundation.NSData)
+	Priority() *foundation.NSNumber
+	SetPriority(priority *foundation.NSNumber)
+	MessageControl() *foundation.NSNumber
+	SetMessageControl(messageControl *foundation.NSNumber)
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	MessageText() string
+	SetMessageText(messageText string)
+	Responses() *foundation.NSArray[objc.ID]
+	SetResponses(responses *foundation.NSArray[objc.ID])
+}
+
+var _ MTRMessagesClusterMessageStructable = (*MTRMessagesClusterMessageStruct)(nil)
 

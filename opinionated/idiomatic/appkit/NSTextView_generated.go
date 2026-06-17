@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -314,17 +315,354 @@ func (x *TextView) WithTextHighlightAttributes(textHighlightAttributes *foundati
 	return x
 }
 
+// ReplaceTextContainer calls the underlying ReplaceTextContainer.
+func (x *TextView) ReplaceTextContainer(newContainer *raw.NSTextContainer) {
+	x.inner.ReplaceTextContainer(newContainer)
+}
+
+// InvalidateTextContainerOrigin calls the underlying InvalidateTextContainerOrigin.
+func (x *TextView) InvalidateTextContainerOrigin() {
+	x.inner.InvalidateTextContainerOrigin()
+}
+
+// InsertText calls the underlying InsertText.
+func (x *TextView) InsertText(insertString objc.ID) {
+	x.inner.InsertText(insertString)
+}
+
+// SetConstrainedFrameSize calls the underlying SetConstrainedFrameSize.
+func (x *TextView) SetConstrainedFrameSize(desiredSize corefoundation.CGSize) {
+	x.inner.SetConstrainedFrameSize(desiredSize)
+}
+
+// SetAlignmentRange calls the underlying SetAlignmentRange.
+func (x *TextView) SetAlignmentRange(alignment raw.NSTextAlignment, range_ foundation.NSRange) {
+	x.inner.SetAlignmentRange(alignment, range_)
+}
+
+// SetBaseWritingDirectionRange calls the underlying SetBaseWritingDirectionRange.
+func (x *TextView) SetBaseWritingDirectionRange(writingDirection raw.NSWritingDirection, range_ foundation.NSRange) {
+	x.inner.SetBaseWritingDirectionRange(writingDirection, range_)
+}
+
+// TurnOffKerning calls the underlying TurnOffKerning.
+func (x *TextView) TurnOffKerning(sender objc.ID) {
+	x.inner.TurnOffKerning(sender)
+}
+
+// TightenKerning calls the underlying TightenKerning.
+func (x *TextView) TightenKerning(sender objc.ID) {
+	x.inner.TightenKerning(sender)
+}
+
+// LoosenKerning calls the underlying LoosenKerning.
+func (x *TextView) LoosenKerning(sender objc.ID) {
+	x.inner.LoosenKerning(sender)
+}
+
+// UseStandardKerning calls the underlying UseStandardKerning.
+func (x *TextView) UseStandardKerning(sender objc.ID) {
+	x.inner.UseStandardKerning(sender)
+}
+
+// TurnOffLigatures calls the underlying TurnOffLigatures.
+func (x *TextView) TurnOffLigatures(sender objc.ID) {
+	x.inner.TurnOffLigatures(sender)
+}
+
+// UseStandardLigatures calls the underlying UseStandardLigatures.
+func (x *TextView) UseStandardLigatures(sender objc.ID) {
+	x.inner.UseStandardLigatures(sender)
+}
+
+// UseAllLigatures calls the underlying UseAllLigatures.
+func (x *TextView) UseAllLigatures(sender objc.ID) {
+	x.inner.UseAllLigatures(sender)
+}
+
+// RaiseBaseline calls the underlying RaiseBaseline.
+func (x *TextView) RaiseBaseline(sender objc.ID) {
+	x.inner.RaiseBaseline(sender)
+}
+
+// LowerBaseline calls the underlying LowerBaseline.
+func (x *TextView) LowerBaseline(sender objc.ID) {
+	x.inner.LowerBaseline(sender)
+}
+
+// ToggleTraditionalCharacterShape calls the underlying ToggleTraditionalCharacterShape.
+func (x *TextView) ToggleTraditionalCharacterShape(sender objc.ID) {
+	x.inner.ToggleTraditionalCharacterShape(sender)
+}
+
+// Outline calls the underlying Outline.
+func (x *TextView) Outline(sender objc.ID) {
+	x.inner.Outline(sender)
+}
+
+// PerformFindPanelAction calls the underlying PerformFindPanelAction.
+func (x *TextView) PerformFindPanelAction(sender objc.ID) {
+	x.inner.PerformFindPanelAction(sender)
+}
+
+// AlignJustified calls the underlying AlignJustified.
+func (x *TextView) AlignJustified(sender objc.ID) {
+	x.inner.AlignJustified(sender)
+}
+
+// ChangeColor calls the underlying ChangeColor.
+func (x *TextView) ChangeColor(sender objc.ID) {
+	x.inner.ChangeColor(sender)
+}
+
+// ChangeAttributes calls the underlying ChangeAttributes.
+func (x *TextView) ChangeAttributes(sender objc.ID) {
+	x.inner.ChangeAttributes(sender)
+}
+
+// ChangeDocumentBackgroundColor calls the underlying ChangeDocumentBackgroundColor.
+func (x *TextView) ChangeDocumentBackgroundColor(sender objc.ID) {
+	x.inner.ChangeDocumentBackgroundColor(sender)
+}
+
+// OrderFrontSpacingPanel calls the underlying OrderFrontSpacingPanel.
+func (x *TextView) OrderFrontSpacingPanel(sender objc.ID) {
+	x.inner.OrderFrontSpacingPanel(sender)
+}
+
+// OrderFrontLinkPanel calls the underlying OrderFrontLinkPanel.
+func (x *TextView) OrderFrontLinkPanel(sender objc.ID) {
+	x.inner.OrderFrontLinkPanel(sender)
+}
+
+// OrderFrontListPanel calls the underlying OrderFrontListPanel.
+func (x *TextView) OrderFrontListPanel(sender objc.ID) {
+	x.inner.OrderFrontListPanel(sender)
+}
+
+// OrderFrontTablePanel calls the underlying OrderFrontTablePanel.
+func (x *TextView) OrderFrontTablePanel(sender objc.ID) {
+	x.inner.OrderFrontTablePanel(sender)
+}
+
+// SetNeedsDisplayInRectAvoidAdditionalLayout calls the underlying SetNeedsDisplayInRectAvoidAdditionalLayout.
+func (x *TextView) SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool) {
+	x.inner.SetNeedsDisplayInRectAvoidAdditionalLayout(rect, flag)
+}
+
+// DrawInsertionPointInRectColorTurnedOn calls the underlying DrawInsertionPointInRectColorTurnedOn.
+func (x *TextView) DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *raw.NSColor, flag bool) {
+	x.inner.DrawInsertionPointInRectColorTurnedOn(rect, color, flag)
+}
+
+// DrawViewBackgroundInRect calls the underlying DrawViewBackgroundInRect.
+func (x *TextView) DrawViewBackgroundInRect(rect corefoundation.CGRect) {
+	x.inner.DrawViewBackgroundInRect(rect)
+}
+
+// UpdateRuler calls the underlying UpdateRuler.
+func (x *TextView) UpdateRuler() {
+	x.inner.UpdateRuler()
+}
+
+// UpdateFontPanel calls the underlying UpdateFontPanel.
+func (x *TextView) UpdateFontPanel() {
+	x.inner.UpdateFontPanel()
+}
+
+// UpdateDragTypeRegistration calls the underlying UpdateDragTypeRegistration.
+func (x *TextView) UpdateDragTypeRegistration() {
+	x.inner.UpdateDragTypeRegistration()
+}
+
+// SelectionRangeForProposedRangeGranularity calls the underlying SelectionRangeForProposedRangeGranularity.
+func (x *TextView) SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity raw.NSSelectionGranularity) foundation.NSRange {
+	return x.inner.SelectionRangeForProposedRangeGranularity(proposedCharRange, granularity)
+}
+
+// ClickedOnLinkAtIndex calls the underlying ClickedOnLinkAtIndex.
+func (x *TextView) ClickedOnLinkAtIndex(link objc.ID, charIndex uint) {
+	x.inner.ClickedOnLinkAtIndex(link, charIndex)
+}
+
+// StartSpeaking calls the underlying StartSpeaking.
+func (x *TextView) StartSpeaking(sender objc.ID) {
+	x.inner.StartSpeaking(sender)
+}
+
+// StopSpeaking calls the underlying StopSpeaking.
+func (x *TextView) StopSpeaking(sender objc.ID) {
+	x.inner.StopSpeaking(sender)
+}
+
+// SetLayoutOrientation calls the underlying SetLayoutOrientation.
+func (x *TextView) SetLayoutOrientation(orientation raw.NSTextLayoutOrientation) {
+	x.inner.SetLayoutOrientation(orientation)
+}
+
+// ChangeLayoutOrientation calls the underlying ChangeLayoutOrientation.
+func (x *TextView) ChangeLayoutOrientation(sender objc.ID) {
+	x.inner.ChangeLayoutOrientation(sender)
+}
+
+// CharacterIndexForInsertionAtPoint calls the underlying CharacterIndexForInsertionAtPoint.
+func (x *TextView) CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint {
+	return x.inner.CharacterIndexForInsertionAtPoint(point)
+}
+
+// PerformValidatedReplacementInRangeWithAttributedString calls the underlying PerformValidatedReplacementInRangeWithAttributedString.
+func (x *TextView) PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool {
+	return x.inner.PerformValidatedReplacementInRangeWithAttributedString(range_, attributedString)
+}
+
+// TextContainer calls the underlying TextContainer.
+func (x *TextView) TextContainer() *TextContainer {
+	_r := x.inner.TextContainer()
+	if _r == nil {
+		return nil
+	}
+	return &TextContainer{inner: _r}
+}
+
+// SetTextContainer calls the underlying SetTextContainer.
+func (x *TextView) SetTextContainer(textContainer *raw.NSTextContainer) {
+	x.inner.SetTextContainer(textContainer)
+}
+
+// TextContainerInset calls the underlying TextContainerInset.
+func (x *TextView) TextContainerInset() corefoundation.CGSize {
+	return x.inner.TextContainerInset()
+}
+
+// SetTextContainerInset calls the underlying SetTextContainerInset.
+func (x *TextView) SetTextContainerInset(textContainerInset corefoundation.CGSize) {
+	x.inner.SetTextContainerInset(textContainerInset)
+}
+
+// TextContainerOrigin calls the underlying TextContainerOrigin.
+func (x *TextView) TextContainerOrigin() corefoundation.CGPoint {
+	return x.inner.TextContainerOrigin()
+}
+
+// LayoutManager calls the underlying LayoutManager.
+func (x *TextView) LayoutManager() *LayoutManager {
+	_r := x.inner.LayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &LayoutManager{inner: _r}
+}
+
+// TextStorage calls the underlying TextStorage.
+func (x *TextView) TextStorage() *TextStorage {
+	_r := x.inner.TextStorage()
+	if _r == nil {
+		return nil
+	}
+	return &TextStorage{inner: _r}
+}
+
+// TextLayoutManager calls the underlying TextLayoutManager.
+func (x *TextView) TextLayoutManager() *TextLayoutManager {
+	_r := x.inner.TextLayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextLayoutManager{inner: _r}
+}
+
+// TextContentStorage calls the underlying TextContentStorage.
+func (x *TextView) TextContentStorage() *TextContentStorage {
+	_r := x.inner.TextContentStorage()
+	if _r == nil {
+		return nil
+	}
+	return &TextContentStorage{inner: _r}
+}
+
+// ShouldDrawInsertionPoint calls the underlying ShouldDrawInsertionPoint.
+func (x *TextView) ShouldDrawInsertionPoint() bool {
+	return x.inner.ShouldDrawInsertionPoint()
+}
+
+// UsesAdaptiveColorMappingForDarkAppearance calls the underlying UsesAdaptiveColorMappingForDarkAppearance.
+func (x *TextView) UsesAdaptiveColorMappingForDarkAppearance() bool {
+	return x.inner.UsesAdaptiveColorMappingForDarkAppearance()
+}
+
+// SetUsesAdaptiveColorMappingForDarkAppearance calls the underlying SetUsesAdaptiveColorMappingForDarkAppearance.
+func (x *TextView) SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) {
+	x.inner.SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance)
+}
+
+// Complete calls the underlying Complete.
+func (x *TextView) Complete(sender objc.ID) {
+	x.inner.Complete(sender)
+}
+
+// CompletionsForPartialWordRangeIndexOfSelectedItem calls the underlying CompletionsForPartialWordRangeIndexOfSelectedItem.
+func (x *TextView) CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange, index *int64) *foundation.NSArray[*foundation.NSString] {
+	return x.inner.CompletionsForPartialWordRangeIndexOfSelectedItem(charRange, index)
+}
+
+// InsertCompletionForPartialWordRangeMovementIsFinal calls the underlying InsertCompletionForPartialWordRangeMovementIsFinal.
+func (x *TextView) InsertCompletionForPartialWordRangeMovementIsFinal(word string, charRange foundation.NSRange, movement int, flag bool) {
+	x.inner.InsertCompletionForPartialWordRangeMovementIsFinal(foundation.NSStringStringWithUTF8String(word), charRange, movement, flag)
+}
+
+// RangeForUserCompletion calls the underlying RangeForUserCompletion.
+func (x *TextView) RangeForUserCompletion() foundation.NSRange {
+	return x.inner.RangeForUserCompletion()
+}
+
+// WriteSelectionToPasteboardType calls the underlying WriteSelectionToPasteboardType.
+func (x *TextView) WriteSelectionToPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool {
+	return x.inner.WriteSelectionToPasteboardType(pboard, type_)
+}
+
+// WriteSelectionToPasteboardTypes calls the underlying WriteSelectionToPasteboardTypes.
+func (x *TextView) WriteSelectionToPasteboardTypes(pboard *raw.NSPasteboard, types *foundation.NSArray[*foundation.NSString]) bool {
+	return x.inner.WriteSelectionToPasteboardTypes(pboard, types)
+}
+
+// PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray calls the underlying PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray.
+func (x *TextView) PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) string {
+	_r := x.inner.PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes, allowedTypes)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ReadSelectionFromPasteboardType calls the underlying ReadSelectionFromPasteboardType.
+func (x *TextView) ReadSelectionFromPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool {
+	return x.inner.ReadSelectionFromPasteboardType(pboard, type_)
+}
+
+// ReadSelectionFromPasteboard calls the underlying ReadSelectionFromPasteboard.
+func (x *TextView) ReadSelectionFromPasteboard(pboard *raw.NSPasteboard) bool {
+	return x.inner.ReadSelectionFromPasteboard(pboard)
+}
+
+// PasteAsPlainText calls the underlying PasteAsPlainText.
+func (x *TextView) PasteAsPlainText(sender objc.ID) {
+	x.inner.PasteAsPlainText(sender)
+}
+
+// PasteAsRichText calls the underlying PasteAsRichText.
+func (x *TextView) PasteAsRichText(sender objc.ID) {
+	x.inner.PasteAsRichText(sender)
+}
+
 // WritablePasteboardTypes returns the collection as a Go slice.
 func (x *TextView) WritablePasteboardTypes() []*foundation.NSString {
 	arr := x.inner.WritablePasteboardTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // ReadablePasteboardTypes returns the collection as a Go slice.
@@ -333,11 +671,33 @@ func (x *TextView) ReadablePasteboardTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// DragSelectionWithEventOffsetSlideBack calls the underlying DragSelectionWithEventOffsetSlideBack.
+func (x *TextView) DragSelectionWithEventOffsetSlideBack(event *raw.NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool {
+	return x.inner.DragSelectionWithEventOffsetSlideBack(event, mouseOffset, slideBack)
+}
+
+// DragImageForSelectionWithEventOrigin calls the underlying DragImageForSelectionWithEventOrigin.
+func (x *TextView) DragImageForSelectionWithEventOrigin(event *raw.NSEvent, origin *corefoundation.CGPoint) *Image {
+	_r := x.inner.DragImageForSelectionWithEventOrigin(event, origin)
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Image{inner: _r}
+}
+
+// DragOperationForDraggingInfoType calls the underlying DragOperationForDraggingInfoType.
+func (x *TextView) DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) raw.NSDragOperation {
+	return x.inner.DragOperationForDraggingInfoType(dragInfo, type_)
+}
+
+// CleanUpAfterDragOperation calls the underlying CleanUpAfterDragOperation.
+func (x *TextView) CleanUpAfterDragOperation() {
+	x.inner.CleanUpAfterDragOperation()
 }
 
 // AcceptableDragTypes returns the collection as a Go slice.
@@ -346,11 +706,64 @@ func (x *TextView) AcceptableDragTypes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSelectedRangesAffinityStillSelecting calls the underlying SetSelectedRangesAffinityStillSelecting.
+func (x *TextView) SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity raw.NSSelectionAffinity, stillSelectingFlag bool) {
+	x.inner.SetSelectedRangesAffinityStillSelecting(ranges, affinity, stillSelectingFlag)
+}
+
+// SetSelectedRangeAffinityStillSelecting calls the underlying SetSelectedRangeAffinityStillSelecting.
+func (x *TextView) SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity raw.NSSelectionAffinity, stillSelectingFlag bool) {
+	x.inner.SetSelectedRangeAffinityStillSelecting(charRange, affinity, stillSelectingFlag)
+}
+
+// UpdateInsertionPointStateAndRestartTimer calls the underlying UpdateInsertionPointStateAndRestartTimer.
+func (x *TextView) UpdateInsertionPointStateAndRestartTimer(restartFlag bool) {
+	x.inner.UpdateInsertionPointStateAndRestartTimer(restartFlag)
+}
+
+// ToggleContinuousSpellChecking calls the underlying ToggleContinuousSpellChecking.
+func (x *TextView) ToggleContinuousSpellChecking(sender objc.ID) {
+	x.inner.ToggleContinuousSpellChecking(sender)
+}
+
+// ToggleGrammarChecking calls the underlying ToggleGrammarChecking.
+func (x *TextView) ToggleGrammarChecking(sender objc.ID) {
+	x.inner.ToggleGrammarChecking(sender)
+}
+
+// SetSpellingStateRange calls the underlying SetSpellingStateRange.
+func (x *TextView) SetSpellingStateRange(value int, charRange foundation.NSRange) {
+	x.inner.SetSpellingStateRange(value, charRange)
+}
+
+// ShouldChangeTextInRangesReplacementStrings calls the underlying ShouldChangeTextInRangesReplacementStrings.
+func (x *TextView) ShouldChangeTextInRangesReplacementStrings(affectedRanges *foundation.NSArray[*foundation.NSValue], replacementStrings *foundation.NSArray[*foundation.NSString]) bool {
+	return x.inner.ShouldChangeTextInRangesReplacementStrings(affectedRanges, replacementStrings)
+}
+
+// ShouldChangeTextInRangeReplacementString calls the underlying ShouldChangeTextInRangeReplacementString.
+func (x *TextView) ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString string) bool {
+	return x.inner.ShouldChangeTextInRangeReplacementString(affectedCharRange, foundation.NSStringStringWithUTF8String(replacementString))
+}
+
+// DidChangeText calls the underlying DidChangeText.
+func (x *TextView) DidChangeText() {
+	x.inner.DidChangeText()
+}
+
+// BreakUndoCoalescing calls the underlying BreakUndoCoalescing.
+func (x *TextView) BreakUndoCoalescing() {
+	x.inner.BreakUndoCoalescing()
+}
+
+// ShowFindIndicatorForRange calls the underlying ShowFindIndicatorForRange.
+func (x *TextView) ShowFindIndicatorForRange(charRange foundation.NSRange) {
+	x.inner.ShowFindIndicatorForRange(charRange)
 }
 
 // SelectedRanges returns the collection as a Go slice.
@@ -359,11 +772,148 @@ func (x *TextView) SelectedRanges() []*foundation.NSValue {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// SetSelectedRanges calls the underlying SetSelectedRanges.
+func (x *TextView) SetSelectedRanges(selectedRanges *foundation.NSArray[*foundation.NSValue]) {
+	x.inner.SetSelectedRanges(selectedRanges)
+}
+
+// SelectionAffinity calls the underlying SelectionAffinity.
+func (x *TextView) SelectionAffinity() raw.NSSelectionAffinity {
+	return x.inner.SelectionAffinity()
+}
+
+// SelectionGranularity calls the underlying SelectionGranularity.
+func (x *TextView) SelectionGranularity() raw.NSSelectionGranularity {
+	return x.inner.SelectionGranularity()
+}
+
+// SetSelectionGranularity calls the underlying SetSelectionGranularity.
+func (x *TextView) SetSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) {
+	x.inner.SetSelectionGranularity(selectionGranularity)
+}
+
+// SelectedTextAttributes calls the underlying SelectedTextAttributes.
+func (x *TextView) SelectedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SelectedTextAttributes()
+}
+
+// SetSelectedTextAttributes calls the underlying SetSelectedTextAttributes.
+func (x *TextView) SetSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetSelectedTextAttributes(selectedTextAttributes)
+}
+
+// InsertionPointColor calls the underlying InsertionPointColor.
+func (x *TextView) InsertionPointColor() *Color {
+	_r := x.inner.InsertionPointColor()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Color{inner: _r}
+}
+
+// SetInsertionPointColor calls the underlying SetInsertionPointColor.
+func (x *TextView) SetInsertionPointColor(insertionPointColor *raw.NSColor) {
+	x.inner.SetInsertionPointColor(insertionPointColor)
+}
+
+// MarkedTextAttributes calls the underlying MarkedTextAttributes.
+func (x *TextView) MarkedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.MarkedTextAttributes()
+}
+
+// SetMarkedTextAttributes calls the underlying SetMarkedTextAttributes.
+func (x *TextView) SetMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetMarkedTextAttributes(markedTextAttributes)
+}
+
+// LinkTextAttributes calls the underlying LinkTextAttributes.
+func (x *TextView) LinkTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.LinkTextAttributes()
+}
+
+// SetLinkTextAttributes calls the underlying SetLinkTextAttributes.
+func (x *TextView) SetLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetLinkTextAttributes(linkTextAttributes)
+}
+
+// DisplaysLinkToolTips calls the underlying DisplaysLinkToolTips.
+func (x *TextView) DisplaysLinkToolTips() bool {
+	return x.inner.DisplaysLinkToolTips()
+}
+
+// SetDisplaysLinkToolTips calls the underlying SetDisplaysLinkToolTips.
+func (x *TextView) SetDisplaysLinkToolTips(displaysLinkToolTips bool) {
+	x.inner.SetDisplaysLinkToolTips(displaysLinkToolTips)
+}
+
+// AcceptsGlyphInfo calls the underlying AcceptsGlyphInfo.
+func (x *TextView) AcceptsGlyphInfo() bool {
+	return x.inner.AcceptsGlyphInfo()
+}
+
+// SetAcceptsGlyphInfo calls the underlying SetAcceptsGlyphInfo.
+func (x *TextView) SetAcceptsGlyphInfo(acceptsGlyphInfo bool) {
+	x.inner.SetAcceptsGlyphInfo(acceptsGlyphInfo)
+}
+
+// UsesRuler calls the underlying UsesRuler.
+func (x *TextView) UsesRuler() bool {
+	return x.inner.UsesRuler()
+}
+
+// SetUsesRuler calls the underlying SetUsesRuler.
+func (x *TextView) SetUsesRuler(usesRuler bool) {
+	x.inner.SetUsesRuler(usesRuler)
+}
+
+// UsesInspectorBar calls the underlying UsesInspectorBar.
+func (x *TextView) UsesInspectorBar() bool {
+	return x.inner.UsesInspectorBar()
+}
+
+// SetUsesInspectorBar calls the underlying SetUsesInspectorBar.
+func (x *TextView) SetUsesInspectorBar(usesInspectorBar bool) {
+	x.inner.SetUsesInspectorBar(usesInspectorBar)
+}
+
+// IsContinuousSpellCheckingEnabled calls the underlying IsContinuousSpellCheckingEnabled.
+func (x *TextView) IsContinuousSpellCheckingEnabled() bool {
+	return x.inner.IsContinuousSpellCheckingEnabled()
+}
+
+// SetContinuousSpellCheckingEnabled calls the underlying SetContinuousSpellCheckingEnabled.
+func (x *TextView) SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) {
+	x.inner.SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled)
+}
+
+// SpellCheckerDocumentTag calls the underlying SpellCheckerDocumentTag.
+func (x *TextView) SpellCheckerDocumentTag() int {
+	return x.inner.SpellCheckerDocumentTag()
+}
+
+// IsGrammarCheckingEnabled calls the underlying IsGrammarCheckingEnabled.
+func (x *TextView) IsGrammarCheckingEnabled() bool {
+	return x.inner.IsGrammarCheckingEnabled()
+}
+
+// SetGrammarCheckingEnabled calls the underlying SetGrammarCheckingEnabled.
+func (x *TextView) SetGrammarCheckingEnabled(grammarCheckingEnabled bool) {
+	x.inner.SetGrammarCheckingEnabled(grammarCheckingEnabled)
+}
+
+// TypingAttributes calls the underlying TypingAttributes.
+func (x *TextView) TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.TypingAttributes()
+}
+
+// SetTypingAttributes calls the underlying SetTypingAttributes.
+func (x *TextView) SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetTypingAttributes(typingAttributes)
 }
 
 // RangesForUserTextChange returns the collection as a Go slice.
@@ -372,11 +922,9 @@ func (x *TextView) RangesForUserTextChange() []*foundation.NSValue {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
 // RangesForUserCharacterAttributeChange returns the collection as a Go slice.
@@ -385,11 +933,9 @@ func (x *TextView) RangesForUserCharacterAttributeChange() []*foundation.NSValue
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
 // RangesForUserParagraphAttributeChange returns the collection as a Go slice.
@@ -398,24 +944,432 @@ func (x *TextView) RangesForUserParagraphAttributeChange() []*foundation.NSValue
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// RangeForUserTextChange calls the underlying RangeForUserTextChange.
+func (x *TextView) RangeForUserTextChange() foundation.NSRange {
+	return x.inner.RangeForUserTextChange()
+}
+
+// RangeForUserCharacterAttributeChange calls the underlying RangeForUserCharacterAttributeChange.
+func (x *TextView) RangeForUserCharacterAttributeChange() foundation.NSRange {
+	return x.inner.RangeForUserCharacterAttributeChange()
+}
+
+// RangeForUserParagraphAttributeChange calls the underlying RangeForUserParagraphAttributeChange.
+func (x *TextView) RangeForUserParagraphAttributeChange() foundation.NSRange {
+	return x.inner.RangeForUserParagraphAttributeChange()
+}
+
+// AllowsDocumentBackgroundColorChange calls the underlying AllowsDocumentBackgroundColorChange.
+func (x *TextView) AllowsDocumentBackgroundColorChange() bool {
+	return x.inner.AllowsDocumentBackgroundColorChange()
+}
+
+// SetAllowsDocumentBackgroundColorChange calls the underlying SetAllowsDocumentBackgroundColorChange.
+func (x *TextView) SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool) {
+	x.inner.SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange)
+}
+
+// DefaultParagraphStyle calls the underlying DefaultParagraphStyle.
+func (x *TextView) DefaultParagraphStyle() *ParagraphStyle {
+	_r := x.inner.DefaultParagraphStyle()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ParagraphStyle{inner: _r}
+}
+
+// SetDefaultParagraphStyle calls the underlying SetDefaultParagraphStyle.
+func (x *TextView) SetDefaultParagraphStyle(defaultParagraphStyle *raw.NSParagraphStyle) {
+	x.inner.SetDefaultParagraphStyle(defaultParagraphStyle)
+}
+
+// AllowsUndo calls the underlying AllowsUndo.
+func (x *TextView) AllowsUndo() bool {
+	return x.inner.AllowsUndo()
+}
+
+// SetAllowsUndo calls the underlying SetAllowsUndo.
+func (x *TextView) SetAllowsUndo(allowsUndo bool) {
+	x.inner.SetAllowsUndo(allowsUndo)
+}
+
+// IsCoalescingUndo calls the underlying IsCoalescingUndo.
+func (x *TextView) IsCoalescingUndo() bool {
+	return x.inner.IsCoalescingUndo()
+}
+
+// AllowsImageEditing calls the underlying AllowsImageEditing.
+func (x *TextView) AllowsImageEditing() bool {
+	return x.inner.AllowsImageEditing()
+}
+
+// SetAllowsImageEditing calls the underlying SetAllowsImageEditing.
+func (x *TextView) SetAllowsImageEditing(allowsImageEditing bool) {
+	x.inner.SetAllowsImageEditing(allowsImageEditing)
+}
+
+// UsesRolloverButtonForSelection calls the underlying UsesRolloverButtonForSelection.
+func (x *TextView) UsesRolloverButtonForSelection() bool {
+	return x.inner.UsesRolloverButtonForSelection()
+}
+
+// SetUsesRolloverButtonForSelection calls the underlying SetUsesRolloverButtonForSelection.
+func (x *TextView) SetUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) {
+	x.inner.SetUsesRolloverButtonForSelection(usesRolloverButtonForSelection)
+}
+
+// SetRulerVisible calls the underlying SetRulerVisible.
+func (x *TextView) SetRulerVisible(rulerVisible bool) {
+	x.inner.SetRulerVisible(rulerVisible)
 }
 
 // AllowedInputSourceLocales returns the collection as a Go slice.
-func (x *TextView) AllowedInputSourceLocales() []*foundation.NSString {
+func (x *TextView) AllowedInputSourceLocales() []string {
 	arr := x.inner.AllowedInputSourceLocales()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetAllowedInputSourceLocales calls the underlying SetAllowedInputSourceLocales.
+func (x *TextView) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetAllowedInputSourceLocales(allowedInputSourceLocales)
+}
+
+// IsWritingToolsActive calls the underlying IsWritingToolsActive.
+func (x *TextView) IsWritingToolsActive() bool {
+	return x.inner.IsWritingToolsActive()
+}
+
+// WritingToolsBehavior calls the underlying WritingToolsBehavior.
+func (x *TextView) WritingToolsBehavior() raw.NSWritingToolsBehavior {
+	return x.inner.WritingToolsBehavior()
+}
+
+// SetWritingToolsBehavior calls the underlying SetWritingToolsBehavior.
+func (x *TextView) SetWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior) {
+	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
+}
+
+// AllowedWritingToolsResultOptions calls the underlying AllowedWritingToolsResultOptions.
+func (x *TextView) AllowedWritingToolsResultOptions() raw.NSWritingToolsResultOptions {
+	return x.inner.AllowedWritingToolsResultOptions()
+}
+
+// SetAllowedWritingToolsResultOptions calls the underlying SetAllowedWritingToolsResultOptions.
+func (x *TextView) SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions) {
+	x.inner.SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions)
+}
+
+// SmartDeleteRangeForProposedRange calls the underlying SmartDeleteRangeForProposedRange.
+func (x *TextView) SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange {
+	return x.inner.SmartDeleteRangeForProposedRange(proposedCharRange)
+}
+
+// ToggleSmartInsertDelete calls the underlying ToggleSmartInsertDelete.
+func (x *TextView) ToggleSmartInsertDelete(sender objc.ID) {
+	x.inner.ToggleSmartInsertDelete(sender)
+}
+
+// SmartInsertForStringReplacingRangeBeforeStringAfterString calls the underlying SmartInsertForStringReplacingRangeBeforeStringAfterString.
+func (x *TextView) SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string) {
+	x.inner.SmartInsertForStringReplacingRangeBeforeStringAfterString(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace, foundation.NSStringStringWithUTF8String(beforeString), foundation.NSStringStringWithUTF8String(afterString))
+}
+
+// SmartInsertBeforeStringForStringReplacingRange calls the underlying SmartInsertBeforeStringForStringReplacingRange.
+func (x *TextView) SmartInsertBeforeStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
+	_r := x.inner.SmartInsertBeforeStringForStringReplacingRange(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace)
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SmartInsertAfterStringForStringReplacingRange calls the underlying SmartInsertAfterStringForStringReplacingRange.
+func (x *TextView) SmartInsertAfterStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string {
+	_r := x.inner.SmartInsertAfterStringForStringReplacingRange(foundation.NSStringStringWithUTF8String(pasteString), charRangeToReplace)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ToggleAutomaticQuoteSubstitution calls the underlying ToggleAutomaticQuoteSubstitution.
+func (x *TextView) ToggleAutomaticQuoteSubstitution(sender objc.ID) {
+	x.inner.ToggleAutomaticQuoteSubstitution(sender)
+}
+
+// ToggleAutomaticLinkDetection calls the underlying ToggleAutomaticLinkDetection.
+func (x *TextView) ToggleAutomaticLinkDetection(sender objc.ID) {
+	x.inner.ToggleAutomaticLinkDetection(sender)
+}
+
+// ToggleAutomaticDataDetection calls the underlying ToggleAutomaticDataDetection.
+func (x *TextView) ToggleAutomaticDataDetection(sender objc.ID) {
+	x.inner.ToggleAutomaticDataDetection(sender)
+}
+
+// ToggleAutomaticDashSubstitution calls the underlying ToggleAutomaticDashSubstitution.
+func (x *TextView) ToggleAutomaticDashSubstitution(sender objc.ID) {
+	x.inner.ToggleAutomaticDashSubstitution(sender)
+}
+
+// ToggleAutomaticTextReplacement calls the underlying ToggleAutomaticTextReplacement.
+func (x *TextView) ToggleAutomaticTextReplacement(sender objc.ID) {
+	x.inner.ToggleAutomaticTextReplacement(sender)
+}
+
+// ToggleAutomaticSpellingCorrection calls the underlying ToggleAutomaticSpellingCorrection.
+func (x *TextView) ToggleAutomaticSpellingCorrection(sender objc.ID) {
+	x.inner.ToggleAutomaticSpellingCorrection(sender)
+}
+
+// CheckTextInRangeTypesOptions calls the underlying CheckTextInRangeTypesOptions.
+func (x *TextView) CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.CheckTextInRangeTypesOptions(range_, checkingTypes, options)
+}
+
+// HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount calls the underlying HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount.
+func (x *TextView) HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results *foundation.NSArray[*foundation.NSTextCheckingResult], range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], orthography *foundation.NSOrthography, wordCount int) {
+	x.inner.HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results, range_, checkingTypes, options, orthography, wordCount)
+}
+
+// OrderFrontSubstitutionsPanel calls the underlying OrderFrontSubstitutionsPanel.
+func (x *TextView) OrderFrontSubstitutionsPanel(sender objc.ID) {
+	x.inner.OrderFrontSubstitutionsPanel(sender)
+}
+
+// CheckTextInSelection calls the underlying CheckTextInSelection.
+func (x *TextView) CheckTextInSelection(sender objc.ID) {
+	x.inner.CheckTextInSelection(sender)
+}
+
+// CheckTextInDocument calls the underlying CheckTextInDocument.
+func (x *TextView) CheckTextInDocument(sender objc.ID) {
+	x.inner.CheckTextInDocument(sender)
+}
+
+// SmartInsertDeleteEnabled calls the underlying SmartInsertDeleteEnabled.
+func (x *TextView) SmartInsertDeleteEnabled() bool {
+	return x.inner.SmartInsertDeleteEnabled()
+}
+
+// SetSmartInsertDeleteEnabled calls the underlying SetSmartInsertDeleteEnabled.
+func (x *TextView) SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) {
+	x.inner.SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled)
+}
+
+// IsAutomaticQuoteSubstitutionEnabled calls the underlying IsAutomaticQuoteSubstitutionEnabled.
+func (x *TextView) IsAutomaticQuoteSubstitutionEnabled() bool {
+	return x.inner.IsAutomaticQuoteSubstitutionEnabled()
+}
+
+// SetAutomaticQuoteSubstitutionEnabled calls the underlying SetAutomaticQuoteSubstitutionEnabled.
+func (x *TextView) SetAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) {
+	x.inner.SetAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled)
+}
+
+// IsAutomaticLinkDetectionEnabled calls the underlying IsAutomaticLinkDetectionEnabled.
+func (x *TextView) IsAutomaticLinkDetectionEnabled() bool {
+	return x.inner.IsAutomaticLinkDetectionEnabled()
+}
+
+// SetAutomaticLinkDetectionEnabled calls the underlying SetAutomaticLinkDetectionEnabled.
+func (x *TextView) SetAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) {
+	x.inner.SetAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled)
+}
+
+// IsAutomaticDataDetectionEnabled calls the underlying IsAutomaticDataDetectionEnabled.
+func (x *TextView) IsAutomaticDataDetectionEnabled() bool {
+	return x.inner.IsAutomaticDataDetectionEnabled()
+}
+
+// SetAutomaticDataDetectionEnabled calls the underlying SetAutomaticDataDetectionEnabled.
+func (x *TextView) SetAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool) {
+	x.inner.SetAutomaticDataDetectionEnabled(automaticDataDetectionEnabled)
+}
+
+// IsAutomaticDashSubstitutionEnabled calls the underlying IsAutomaticDashSubstitutionEnabled.
+func (x *TextView) IsAutomaticDashSubstitutionEnabled() bool {
+	return x.inner.IsAutomaticDashSubstitutionEnabled()
+}
+
+// SetAutomaticDashSubstitutionEnabled calls the underlying SetAutomaticDashSubstitutionEnabled.
+func (x *TextView) SetAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool) {
+	x.inner.SetAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled)
+}
+
+// IsAutomaticTextReplacementEnabled calls the underlying IsAutomaticTextReplacementEnabled.
+func (x *TextView) IsAutomaticTextReplacementEnabled() bool {
+	return x.inner.IsAutomaticTextReplacementEnabled()
+}
+
+// SetAutomaticTextReplacementEnabled calls the underlying SetAutomaticTextReplacementEnabled.
+func (x *TextView) SetAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool) {
+	x.inner.SetAutomaticTextReplacementEnabled(automaticTextReplacementEnabled)
+}
+
+// IsAutomaticSpellingCorrectionEnabled calls the underlying IsAutomaticSpellingCorrectionEnabled.
+func (x *TextView) IsAutomaticSpellingCorrectionEnabled() bool {
+	return x.inner.IsAutomaticSpellingCorrectionEnabled()
+}
+
+// SetAutomaticSpellingCorrectionEnabled calls the underlying SetAutomaticSpellingCorrectionEnabled.
+func (x *TextView) SetAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool) {
+	x.inner.SetAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled)
+}
+
+// EnabledTextCheckingTypes calls the underlying EnabledTextCheckingTypes.
+func (x *TextView) EnabledTextCheckingTypes() uint64 {
+	return x.inner.EnabledTextCheckingTypes()
+}
+
+// SetEnabledTextCheckingTypes calls the underlying SetEnabledTextCheckingTypes.
+func (x *TextView) SetEnabledTextCheckingTypes(enabledTextCheckingTypes uint64) {
+	x.inner.SetEnabledTextCheckingTypes(enabledTextCheckingTypes)
+}
+
+// UsesFindPanel calls the underlying UsesFindPanel.
+func (x *TextView) UsesFindPanel() bool {
+	return x.inner.UsesFindPanel()
+}
+
+// SetUsesFindPanel calls the underlying SetUsesFindPanel.
+func (x *TextView) SetUsesFindPanel(usesFindPanel bool) {
+	x.inner.SetUsesFindPanel(usesFindPanel)
+}
+
+// UsesFindBar calls the underlying UsesFindBar.
+func (x *TextView) UsesFindBar() bool {
+	return x.inner.UsesFindBar()
+}
+
+// SetUsesFindBar calls the underlying SetUsesFindBar.
+func (x *TextView) SetUsesFindBar(usesFindBar bool) {
+	x.inner.SetUsesFindBar(usesFindBar)
+}
+
+// IsIncrementalSearchingEnabled calls the underlying IsIncrementalSearchingEnabled.
+func (x *TextView) IsIncrementalSearchingEnabled() bool {
+	return x.inner.IsIncrementalSearchingEnabled()
+}
+
+// SetIncrementalSearchingEnabled calls the underlying SetIncrementalSearchingEnabled.
+func (x *TextView) SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool) {
+	x.inner.SetIncrementalSearchingEnabled(incrementalSearchingEnabled)
+}
+
+// InlinePredictionType calls the underlying InlinePredictionType.
+func (x *TextView) InlinePredictionType() raw.NSTextInputTraitType {
+	return x.inner.InlinePredictionType()
+}
+
+// SetInlinePredictionType calls the underlying SetInlinePredictionType.
+func (x *TextView) SetInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType) {
+	x.inner.SetInlinePredictionType(inlinePredictionType)
+}
+
+// MathExpressionCompletionType calls the underlying MathExpressionCompletionType.
+func (x *TextView) MathExpressionCompletionType() raw.NSTextInputTraitType {
+	return x.inner.MathExpressionCompletionType()
+}
+
+// SetMathExpressionCompletionType calls the underlying SetMathExpressionCompletionType.
+func (x *TextView) SetMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType) {
+	x.inner.SetMathExpressionCompletionType(mathExpressionCompletionType)
+}
+
+// ToggleQuickLookPreviewPanel calls the underlying ToggleQuickLookPreviewPanel.
+func (x *TextView) ToggleQuickLookPreviewPanel(sender objc.ID) {
+	x.inner.ToggleQuickLookPreviewPanel(sender)
+}
+
+// QuickLookPreviewableItemsInRanges calls the underlying QuickLookPreviewableItemsInRanges.
+func (x *TextView) QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID] {
+	return x.inner.QuickLookPreviewableItemsInRanges(ranges)
+}
+
+// UpdateQuickLookPreviewPanel calls the underlying UpdateQuickLookPreviewPanel.
+func (x *TextView) UpdateQuickLookPreviewPanel() {
+	x.inner.UpdateQuickLookPreviewPanel()
+}
+
+// OrderFrontSharingServicePicker calls the underlying OrderFrontSharingServicePicker.
+func (x *TextView) OrderFrontSharingServicePicker(sender objc.ID) {
+	x.inner.OrderFrontSharingServicePicker(sender)
+}
+
+// ToggleAutomaticTextCompletion calls the underlying ToggleAutomaticTextCompletion.
+func (x *TextView) ToggleAutomaticTextCompletion(sender objc.ID) {
+	x.inner.ToggleAutomaticTextCompletion(sender)
+}
+
+// UpdateTouchBarItemIdentifiers calls the underlying UpdateTouchBarItemIdentifiers.
+func (x *TextView) UpdateTouchBarItemIdentifiers() {
+	x.inner.UpdateTouchBarItemIdentifiers()
+}
+
+// UpdateTextTouchBarItems calls the underlying UpdateTextTouchBarItems.
+func (x *TextView) UpdateTextTouchBarItems() {
+	x.inner.UpdateTextTouchBarItems()
+}
+
+// UpdateCandidates calls the underlying UpdateCandidates.
+func (x *TextView) UpdateCandidates() {
+	x.inner.UpdateCandidates()
+}
+
+// IsAutomaticTextCompletionEnabled calls the underlying IsAutomaticTextCompletionEnabled.
+func (x *TextView) IsAutomaticTextCompletionEnabled() bool {
+	return x.inner.IsAutomaticTextCompletionEnabled()
+}
+
+// SetAutomaticTextCompletionEnabled calls the underlying SetAutomaticTextCompletionEnabled.
+func (x *TextView) SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) {
+	x.inner.SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled)
+}
+
+// AllowsCharacterPickerTouchBarItem calls the underlying AllowsCharacterPickerTouchBarItem.
+func (x *TextView) AllowsCharacterPickerTouchBarItem() bool {
+	return x.inner.AllowsCharacterPickerTouchBarItem()
+}
+
+// SetAllowsCharacterPickerTouchBarItem calls the underlying SetAllowsCharacterPickerTouchBarItem.
+func (x *TextView) SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) {
+	x.inner.SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem)
+}
+
+// DrawTextHighlightBackgroundForTextRangeOrigin calls the underlying DrawTextHighlightBackgroundForTextRangeOrigin.
+func (x *TextView) DrawTextHighlightBackgroundForTextRangeOrigin(textRange *raw.NSTextRange, origin corefoundation.CGPoint) {
+	x.inner.DrawTextHighlightBackgroundForTextRangeOrigin(textRange, origin)
+}
+
+// Highlight calls the underlying Highlight.
+func (x *TextView) Highlight(sender objc.ID) {
+	x.inner.Highlight(sender)
+}
+
+// TextHighlightAttributes calls the underlying TextHighlightAttributes.
+func (x *TextView) TextHighlightAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.TextHighlightAttributes()
+}
+
+// SetTextHighlightAttributes calls the underlying SetTextHighlightAttributes.
+func (x *TextView) SetTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetTextHighlightAttributes(textHighlightAttributes)
+}
+
+// ToggleBaseWritingDirection calls the underlying ToggleBaseWritingDirection.
+func (x *TextView) ToggleBaseWritingDirection(sender objc.ID) {
+	x.inner.ToggleBaseWritingDirection(sender)
 }
 
 func (x *TextView) asText() *raw.NSText { return &x.inner.NSText }
@@ -423,4 +1377,245 @@ func (x *TextView) asText() *raw.NSText { return &x.inner.NSText }
 func (x *TextView) asView() *raw.NSView { return &x.inner.NSText.NSView }
 
 func (x *TextView) asResponder() *raw.NSResponder { return &x.inner.NSText.NSView.NSResponder }
+
+// TextViewable is the interface implemented by [TextView], for mocking and DI.
+type TextViewable interface {
+	Unwrap() *raw.NSTextView
+	WithTextContainer(textContainer *raw.NSTextContainer) *TextView
+	WithTextContainerInset(textContainerInset corefoundation.CGSize) *TextView
+	WithUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool) *TextView
+	WithSelectedRanges(items ...*foundation.NSValue) *TextView
+	WithSelectionGranularity(selectionGranularity raw.NSSelectionGranularity) *TextView
+	WithSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
+	WithInsertionPointColor(insertionPointColor *raw.NSColor) *TextView
+	WithMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
+	WithLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
+	WithDisplaysLinkToolTips(displaysLinkToolTips bool) *TextView
+	WithAcceptsGlyphInfo(acceptsGlyphInfo bool) *TextView
+	WithUsesRuler(usesRuler bool) *TextView
+	WithUsesInspectorBar(usesInspectorBar bool) *TextView
+	WithContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool) *TextView
+	WithGrammarCheckingEnabled(grammarCheckingEnabled bool) *TextView
+	WithTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
+	WithAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool) *TextView
+	WithDefaultParagraphStyle(defaultParagraphStyle ParagraphStyleProvider) *TextView
+	WithAllowsUndo(allowsUndo bool) *TextView
+	WithAllowsImageEditing(allowsImageEditing bool) *TextView
+	WithUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool) *TextView
+	WithRulerVisible(rulerVisible bool) *TextView
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextView
+	WithWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior) *TextView
+	WithAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions) *TextView
+	WithSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool) *TextView
+	WithAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool) *TextView
+	WithAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool) *TextView
+	WithAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool) *TextView
+	WithAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool) *TextView
+	WithAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool) *TextView
+	WithAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool) *TextView
+	WithEnabledTextCheckingTypes(enabledTextCheckingTypes uint64) *TextView
+	WithUsesFindPanel(usesFindPanel bool) *TextView
+	WithUsesFindBar(usesFindBar bool) *TextView
+	WithIncrementalSearchingEnabled(incrementalSearchingEnabled bool) *TextView
+	WithInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType) *TextView
+	WithMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType) *TextView
+	WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *TextView
+	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *TextView
+	WithTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *TextView
+	ReplaceTextContainer(newContainer *raw.NSTextContainer)
+	InvalidateTextContainerOrigin()
+	InsertText(insertString objc.ID)
+	SetConstrainedFrameSize(desiredSize corefoundation.CGSize)
+	SetAlignmentRange(alignment raw.NSTextAlignment, range_ foundation.NSRange)
+	SetBaseWritingDirectionRange(writingDirection raw.NSWritingDirection, range_ foundation.NSRange)
+	TurnOffKerning(sender objc.ID)
+	TightenKerning(sender objc.ID)
+	LoosenKerning(sender objc.ID)
+	UseStandardKerning(sender objc.ID)
+	TurnOffLigatures(sender objc.ID)
+	UseStandardLigatures(sender objc.ID)
+	UseAllLigatures(sender objc.ID)
+	RaiseBaseline(sender objc.ID)
+	LowerBaseline(sender objc.ID)
+	ToggleTraditionalCharacterShape(sender objc.ID)
+	Outline(sender objc.ID)
+	PerformFindPanelAction(sender objc.ID)
+	AlignJustified(sender objc.ID)
+	ChangeColor(sender objc.ID)
+	ChangeAttributes(sender objc.ID)
+	ChangeDocumentBackgroundColor(sender objc.ID)
+	OrderFrontSpacingPanel(sender objc.ID)
+	OrderFrontLinkPanel(sender objc.ID)
+	OrderFrontListPanel(sender objc.ID)
+	OrderFrontTablePanel(sender objc.ID)
+	SetNeedsDisplayInRectAvoidAdditionalLayout(rect corefoundation.CGRect, flag bool)
+	DrawInsertionPointInRectColorTurnedOn(rect corefoundation.CGRect, color *raw.NSColor, flag bool)
+	DrawViewBackgroundInRect(rect corefoundation.CGRect)
+	UpdateRuler()
+	UpdateFontPanel()
+	UpdateDragTypeRegistration()
+	SelectionRangeForProposedRangeGranularity(proposedCharRange foundation.NSRange, granularity raw.NSSelectionGranularity) foundation.NSRange
+	ClickedOnLinkAtIndex(link objc.ID, charIndex uint)
+	StartSpeaking(sender objc.ID)
+	StopSpeaking(sender objc.ID)
+	SetLayoutOrientation(orientation raw.NSTextLayoutOrientation)
+	ChangeLayoutOrientation(sender objc.ID)
+	CharacterIndexForInsertionAtPoint(point corefoundation.CGPoint) uint
+	PerformValidatedReplacementInRangeWithAttributedString(range_ foundation.NSRange, attributedString *foundation.NSAttributedString) bool
+	TextContainer() *TextContainer
+	SetTextContainer(textContainer *raw.NSTextContainer)
+	TextContainerInset() corefoundation.CGSize
+	SetTextContainerInset(textContainerInset corefoundation.CGSize)
+	TextContainerOrigin() corefoundation.CGPoint
+	LayoutManager() *LayoutManager
+	TextStorage() *TextStorage
+	TextLayoutManager() *TextLayoutManager
+	TextContentStorage() *TextContentStorage
+	ShouldDrawInsertionPoint() bool
+	UsesAdaptiveColorMappingForDarkAppearance() bool
+	SetUsesAdaptiveColorMappingForDarkAppearance(usesAdaptiveColorMappingForDarkAppearance bool)
+	Complete(sender objc.ID)
+	CompletionsForPartialWordRangeIndexOfSelectedItem(charRange foundation.NSRange, index *int64) *foundation.NSArray[*foundation.NSString]
+	InsertCompletionForPartialWordRangeMovementIsFinal(word string, charRange foundation.NSRange, movement int, flag bool)
+	RangeForUserCompletion() foundation.NSRange
+	WriteSelectionToPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool
+	WriteSelectionToPasteboardTypes(pboard *raw.NSPasteboard, types *foundation.NSArray[*foundation.NSString]) bool
+	PreferredPasteboardTypeFromArrayRestrictedToTypesFromArray(availableTypes *foundation.NSArray[*foundation.NSString], allowedTypes *foundation.NSArray[*foundation.NSString]) string
+	ReadSelectionFromPasteboardType(pboard *raw.NSPasteboard, type_ *foundation.NSString) bool
+	ReadSelectionFromPasteboard(pboard *raw.NSPasteboard) bool
+	PasteAsPlainText(sender objc.ID)
+	PasteAsRichText(sender objc.ID)
+	WritablePasteboardTypes() []*foundation.NSString
+	ReadablePasteboardTypes() []*foundation.NSString
+	DragSelectionWithEventOffsetSlideBack(event *raw.NSEvent, mouseOffset corefoundation.CGSize, slideBack bool) bool
+	DragImageForSelectionWithEventOrigin(event *raw.NSEvent, origin *corefoundation.CGPoint) *Image
+	DragOperationForDraggingInfoType(dragInfo raw.NSDraggingInfo, type_ *foundation.NSString) raw.NSDragOperation
+	CleanUpAfterDragOperation()
+	AcceptableDragTypes() []*foundation.NSString
+	SetSelectedRangesAffinityStillSelecting(ranges *foundation.NSArray[*foundation.NSValue], affinity raw.NSSelectionAffinity, stillSelectingFlag bool)
+	SetSelectedRangeAffinityStillSelecting(charRange foundation.NSRange, affinity raw.NSSelectionAffinity, stillSelectingFlag bool)
+	UpdateInsertionPointStateAndRestartTimer(restartFlag bool)
+	ToggleContinuousSpellChecking(sender objc.ID)
+	ToggleGrammarChecking(sender objc.ID)
+	SetSpellingStateRange(value int, charRange foundation.NSRange)
+	ShouldChangeTextInRangesReplacementStrings(affectedRanges *foundation.NSArray[*foundation.NSValue], replacementStrings *foundation.NSArray[*foundation.NSString]) bool
+	ShouldChangeTextInRangeReplacementString(affectedCharRange foundation.NSRange, replacementString string) bool
+	DidChangeText()
+	BreakUndoCoalescing()
+	ShowFindIndicatorForRange(charRange foundation.NSRange)
+	SelectedRanges() []*foundation.NSValue
+	SetSelectedRanges(selectedRanges *foundation.NSArray[*foundation.NSValue])
+	SelectionAffinity() raw.NSSelectionAffinity
+	SelectionGranularity() raw.NSSelectionGranularity
+	SetSelectionGranularity(selectionGranularity raw.NSSelectionGranularity)
+	SelectedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetSelectedTextAttributes(selectedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	InsertionPointColor() *Color
+	SetInsertionPointColor(insertionPointColor *raw.NSColor)
+	MarkedTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetMarkedTextAttributes(markedTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	LinkTextAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetLinkTextAttributes(linkTextAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	DisplaysLinkToolTips() bool
+	SetDisplaysLinkToolTips(displaysLinkToolTips bool)
+	AcceptsGlyphInfo() bool
+	SetAcceptsGlyphInfo(acceptsGlyphInfo bool)
+	UsesRuler() bool
+	SetUsesRuler(usesRuler bool)
+	UsesInspectorBar() bool
+	SetUsesInspectorBar(usesInspectorBar bool)
+	IsContinuousSpellCheckingEnabled() bool
+	SetContinuousSpellCheckingEnabled(continuousSpellCheckingEnabled bool)
+	SpellCheckerDocumentTag() int
+	IsGrammarCheckingEnabled() bool
+	SetGrammarCheckingEnabled(grammarCheckingEnabled bool)
+	TypingAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetTypingAttributes(typingAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	RangesForUserTextChange() []*foundation.NSValue
+	RangesForUserCharacterAttributeChange() []*foundation.NSValue
+	RangesForUserParagraphAttributeChange() []*foundation.NSValue
+	RangeForUserTextChange() foundation.NSRange
+	RangeForUserCharacterAttributeChange() foundation.NSRange
+	RangeForUserParagraphAttributeChange() foundation.NSRange
+	AllowsDocumentBackgroundColorChange() bool
+	SetAllowsDocumentBackgroundColorChange(allowsDocumentBackgroundColorChange bool)
+	DefaultParagraphStyle() *ParagraphStyle
+	SetDefaultParagraphStyle(defaultParagraphStyle *raw.NSParagraphStyle)
+	AllowsUndo() bool
+	SetAllowsUndo(allowsUndo bool)
+	IsCoalescingUndo() bool
+	AllowsImageEditing() bool
+	SetAllowsImageEditing(allowsImageEditing bool)
+	UsesRolloverButtonForSelection() bool
+	SetUsesRolloverButtonForSelection(usesRolloverButtonForSelection bool)
+	SetRulerVisible(rulerVisible bool)
+	AllowedInputSourceLocales() []string
+	SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString])
+	IsWritingToolsActive() bool
+	WritingToolsBehavior() raw.NSWritingToolsBehavior
+	SetWritingToolsBehavior(writingToolsBehavior raw.NSWritingToolsBehavior)
+	AllowedWritingToolsResultOptions() raw.NSWritingToolsResultOptions
+	SetAllowedWritingToolsResultOptions(allowedWritingToolsResultOptions raw.NSWritingToolsResultOptions)
+	SmartDeleteRangeForProposedRange(proposedCharRange foundation.NSRange) foundation.NSRange
+	ToggleSmartInsertDelete(sender objc.ID)
+	SmartInsertForStringReplacingRangeBeforeStringAfterString(pasteString string, charRangeToReplace foundation.NSRange, beforeString string, afterString string)
+	SmartInsertBeforeStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string
+	SmartInsertAfterStringForStringReplacingRange(pasteString string, charRangeToReplace foundation.NSRange) string
+	ToggleAutomaticQuoteSubstitution(sender objc.ID)
+	ToggleAutomaticLinkDetection(sender objc.ID)
+	ToggleAutomaticDataDetection(sender objc.ID)
+	ToggleAutomaticDashSubstitution(sender objc.ID)
+	ToggleAutomaticTextReplacement(sender objc.ID)
+	ToggleAutomaticSpellingCorrection(sender objc.ID)
+	CheckTextInRangeTypesOptions(range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	HandleTextCheckingResultsForRangeTypesOptionsOrthographyWordCount(results *foundation.NSArray[*foundation.NSTextCheckingResult], range_ foundation.NSRange, checkingTypes uint64, options *foundation.NSDictionary[*foundation.NSString, objc.ID], orthography *foundation.NSOrthography, wordCount int)
+	OrderFrontSubstitutionsPanel(sender objc.ID)
+	CheckTextInSelection(sender objc.ID)
+	CheckTextInDocument(sender objc.ID)
+	SmartInsertDeleteEnabled() bool
+	SetSmartInsertDeleteEnabled(smartInsertDeleteEnabled bool)
+	IsAutomaticQuoteSubstitutionEnabled() bool
+	SetAutomaticQuoteSubstitutionEnabled(automaticQuoteSubstitutionEnabled bool)
+	IsAutomaticLinkDetectionEnabled() bool
+	SetAutomaticLinkDetectionEnabled(automaticLinkDetectionEnabled bool)
+	IsAutomaticDataDetectionEnabled() bool
+	SetAutomaticDataDetectionEnabled(automaticDataDetectionEnabled bool)
+	IsAutomaticDashSubstitutionEnabled() bool
+	SetAutomaticDashSubstitutionEnabled(automaticDashSubstitutionEnabled bool)
+	IsAutomaticTextReplacementEnabled() bool
+	SetAutomaticTextReplacementEnabled(automaticTextReplacementEnabled bool)
+	IsAutomaticSpellingCorrectionEnabled() bool
+	SetAutomaticSpellingCorrectionEnabled(automaticSpellingCorrectionEnabled bool)
+	EnabledTextCheckingTypes() uint64
+	SetEnabledTextCheckingTypes(enabledTextCheckingTypes uint64)
+	UsesFindPanel() bool
+	SetUsesFindPanel(usesFindPanel bool)
+	UsesFindBar() bool
+	SetUsesFindBar(usesFindBar bool)
+	IsIncrementalSearchingEnabled() bool
+	SetIncrementalSearchingEnabled(incrementalSearchingEnabled bool)
+	InlinePredictionType() raw.NSTextInputTraitType
+	SetInlinePredictionType(inlinePredictionType raw.NSTextInputTraitType)
+	MathExpressionCompletionType() raw.NSTextInputTraitType
+	SetMathExpressionCompletionType(mathExpressionCompletionType raw.NSTextInputTraitType)
+	ToggleQuickLookPreviewPanel(sender objc.ID)
+	QuickLookPreviewableItemsInRanges(ranges *foundation.NSArray[*foundation.NSValue]) *foundation.NSArray[objc.ID]
+	UpdateQuickLookPreviewPanel()
+	OrderFrontSharingServicePicker(sender objc.ID)
+	ToggleAutomaticTextCompletion(sender objc.ID)
+	UpdateTouchBarItemIdentifiers()
+	UpdateTextTouchBarItems()
+	UpdateCandidates()
+	IsAutomaticTextCompletionEnabled() bool
+	SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool)
+	AllowsCharacterPickerTouchBarItem() bool
+	SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool)
+	DrawTextHighlightBackgroundForTextRangeOrigin(textRange *raw.NSTextRange, origin corefoundation.CGPoint)
+	Highlight(sender objc.ID)
+	TextHighlightAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetTextHighlightAttributes(textHighlightAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ToggleBaseWritingDirection(sender objc.ID)
+}
+
+var _ TextViewable = (*TextView)(nil)
 

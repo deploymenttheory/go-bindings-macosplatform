@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // View wraps [raw.SCNView] with a fluent Go API.
@@ -68,4 +69,170 @@ func (x *View) WithAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) *V
 	x.inner.SetAntialiasingMode(antialiasingMode)
 	return x
 }
+
+// Snapshot calls the underlying Snapshot.
+func (x *View) Snapshot() *appkit.NSImage {
+	return x.inner.Snapshot()
+}
+
+// Play calls the underlying Play.
+func (x *View) Play(sender objc.ID) {
+	x.inner.Play(sender)
+}
+
+// Pause calls the underlying Pause.
+func (x *View) Pause(sender objc.ID) {
+	x.inner.Pause(sender)
+}
+
+// Stop calls the underlying Stop.
+func (x *View) Stop(sender objc.ID) {
+	x.inner.Stop(sender)
+}
+
+// Scene calls the underlying Scene.
+func (x *View) Scene() *Scene {
+	_r := x.inner.Scene()
+	if _r == nil {
+		return nil
+	}
+	return &Scene{inner: _r}
+}
+
+// SetScene calls the underlying SetScene.
+func (x *View) SetScene(scene *raw.SCNScene) {
+	x.inner.SetScene(scene)
+}
+
+// RendersContinuously calls the underlying RendersContinuously.
+func (x *View) RendersContinuously() bool {
+	return x.inner.RendersContinuously()
+}
+
+// SetRendersContinuously calls the underlying SetRendersContinuously.
+func (x *View) SetRendersContinuously(rendersContinuously bool) {
+	x.inner.SetRendersContinuously(rendersContinuously)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *View) BackgroundColor() *appkit.NSColor {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *View) SetBackgroundColor(backgroundColor *appkit.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// AllowsCameraControl calls the underlying AllowsCameraControl.
+func (x *View) AllowsCameraControl() bool {
+	return x.inner.AllowsCameraControl()
+}
+
+// SetAllowsCameraControl calls the underlying SetAllowsCameraControl.
+func (x *View) SetAllowsCameraControl(allowsCameraControl bool) {
+	x.inner.SetAllowsCameraControl(allowsCameraControl)
+}
+
+// CameraControlConfiguration calls the underlying CameraControlConfiguration.
+func (x *View) CameraControlConfiguration() raw.SCNCameraControlConfiguration {
+	return x.inner.CameraControlConfiguration()
+}
+
+// DefaultCameraController calls the underlying DefaultCameraController.
+func (x *View) DefaultCameraController() *CameraController {
+	_r := x.inner.DefaultCameraController()
+	if _r == nil {
+		return nil
+	}
+	return &CameraController{inner: _r}
+}
+
+// PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
+func (x *View) PreferredFramesPerSecond() int {
+	return x.inner.PreferredFramesPerSecond()
+}
+
+// SetPreferredFramesPerSecond calls the underlying SetPreferredFramesPerSecond.
+func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
+	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
+}
+
+// DrawableResizesAsynchronously calls the underlying DrawableResizesAsynchronously.
+func (x *View) DrawableResizesAsynchronously() bool {
+	return x.inner.DrawableResizesAsynchronously()
+}
+
+// SetDrawableResizesAsynchronously calls the underlying SetDrawableResizesAsynchronously.
+func (x *View) SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool) {
+	x.inner.SetDrawableResizesAsynchronously(drawableResizesAsynchronously)
+}
+
+// OpenGLContext calls the underlying OpenGLContext.
+func (x *View) OpenGLContext() unsafe.Pointer {
+	return x.inner.OpenGLContext()
+}
+
+// SetOpenGLContext calls the underlying SetOpenGLContext.
+func (x *View) SetOpenGLContext(openGLContext unsafe.Pointer) {
+	x.inner.SetOpenGLContext(openGLContext)
+}
+
+// AntialiasingMode calls the underlying AntialiasingMode.
+func (x *View) AntialiasingMode() raw.SCNAntialiasingMode {
+	return x.inner.AntialiasingMode()
+}
+
+// SetAntialiasingMode calls the underlying SetAntialiasingMode.
+func (x *View) SetAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) {
+	x.inner.SetAntialiasingMode(antialiasingMode)
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *View) PixelFormat() unsafe.Pointer {
+	return x.inner.PixelFormat()
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *View) SetPixelFormat(pixelFormat unsafe.Pointer) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
+// Viewable is the interface implemented by [View], for mocking and DI.
+type Viewable interface {
+	Unwrap() *raw.SCNView
+	WithScene(scene *raw.SCNScene) *View
+	WithRendersContinuously(rendersContinuously bool) *View
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *View
+	WithAllowsCameraControl(allowsCameraControl bool) *View
+	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
+	WithDrawableResizesAsynchronously(drawableResizesAsynchronously bool) *View
+	WithAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode) *View
+	Snapshot() *appkit.NSImage
+	Play(sender objc.ID)
+	Pause(sender objc.ID)
+	Stop(sender objc.ID)
+	Scene() *Scene
+	SetScene(scene *raw.SCNScene)
+	RendersContinuously() bool
+	SetRendersContinuously(rendersContinuously bool)
+	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(backgroundColor *appkit.NSColor)
+	AllowsCameraControl() bool
+	SetAllowsCameraControl(allowsCameraControl bool)
+	CameraControlConfiguration() raw.SCNCameraControlConfiguration
+	DefaultCameraController() *CameraController
+	PreferredFramesPerSecond() int
+	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
+	DrawableResizesAsynchronously() bool
+	SetDrawableResizesAsynchronously(drawableResizesAsynchronously bool)
+	OpenGLContext() unsafe.Pointer
+	SetOpenGLContext(openGLContext unsafe.Pointer)
+	AntialiasingMode() raw.SCNAntialiasingMode
+	SetAntialiasingMode(antialiasingMode raw.SCNAntialiasingMode)
+	PixelFormat() unsafe.Pointer
+	SetPixelFormat(pixelFormat unsafe.Pointer)
+}
+
+var _ Viewable = (*View)(nil)
 

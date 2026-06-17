@@ -53,7 +53,83 @@ func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(pre
 	return x
 }
 
+// LayoutAttribute calls the underlying LayoutAttribute.
+func (x *TitlebarAccessoryViewController) LayoutAttribute() raw.NSLayoutAttribute {
+	return x.inner.LayoutAttribute()
+}
+
+// SetLayoutAttribute calls the underlying SetLayoutAttribute.
+func (x *TitlebarAccessoryViewController) SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute) {
+	x.inner.SetLayoutAttribute(layoutAttribute)
+}
+
+// FullScreenMinHeight calls the underlying FullScreenMinHeight.
+func (x *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
+	return x.inner.FullScreenMinHeight()
+}
+
+// SetFullScreenMinHeight calls the underlying SetFullScreenMinHeight.
+func (x *TitlebarAccessoryViewController) SetFullScreenMinHeight(fullScreenMinHeight float64) {
+	x.inner.SetFullScreenMinHeight(fullScreenMinHeight)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *TitlebarAccessoryViewController) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *TitlebarAccessoryViewController) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// AutomaticallyAdjustsSize calls the underlying AutomaticallyAdjustsSize.
+func (x *TitlebarAccessoryViewController) AutomaticallyAdjustsSize() bool {
+	return x.inner.AutomaticallyAdjustsSize()
+}
+
+// SetAutomaticallyAdjustsSize calls the underlying SetAutomaticallyAdjustsSize.
+func (x *TitlebarAccessoryViewController) SetAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) {
+	x.inner.SetAutomaticallyAdjustsSize(automaticallyAdjustsSize)
+}
+
+// PreferredScrollEdgeEffectStyle calls the underlying PreferredScrollEdgeEffectStyle.
+func (x *TitlebarAccessoryViewController) PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
+	_r := x.inner.PreferredScrollEdgeEffectStyle()
+	if _r == nil {
+		return nil
+	}
+	return &ScrollEdgeEffectStyle{inner: _r}
+}
+
+// SetPreferredScrollEdgeEffectStyle calls the underlying SetPreferredScrollEdgeEffectStyle.
+func (x *TitlebarAccessoryViewController) SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) {
+	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+}
+
 func (x *TitlebarAccessoryViewController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
 
 func (x *TitlebarAccessoryViewController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
+
+// TitlebarAccessoryViewControllerable is the interface implemented by [TitlebarAccessoryViewController], for mocking and DI.
+type TitlebarAccessoryViewControllerable interface {
+	Unwrap() *raw.NSTitlebarAccessoryViewController
+	WithLayoutAttribute(layoutAttribute raw.NSLayoutAttribute) *TitlebarAccessoryViewController
+	WithFullScreenMinHeight(fullScreenMinHeight float64) *TitlebarAccessoryViewController
+	WithHidden(hidden bool) *TitlebarAccessoryViewController
+	WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController
+	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *TitlebarAccessoryViewController
+	LayoutAttribute() raw.NSLayoutAttribute
+	SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute)
+	FullScreenMinHeight() float64
+	SetFullScreenMinHeight(fullScreenMinHeight float64)
+	IsHidden() bool
+	SetHidden(hidden bool)
+	AutomaticallyAdjustsSize() bool
+	SetAutomaticallyAdjustsSize(automaticallyAdjustsSize bool)
+	PreferredScrollEdgeEffectStyle() *ScrollEdgeEffectStyle
+	SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle)
+}
+
+var _ TitlebarAccessoryViewControllerable = (*TitlebarAccessoryViewController)(nil)
 

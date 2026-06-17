@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewArrayQuantizationDescriptor() *ArrayQuantizationDescriptor {
 	return &ArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(_id)}
 }
 
+// QuantizationDataType calls the underlying QuantizationDataType.
+func (x *ArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType {
+	return x.inner.QuantizationDataType()
+}
+
+// QuantizationScheme calls the underlying QuantizationScheme.
+func (x *ArrayQuantizationDescriptor) QuantizationScheme() raw.MPSNDArrayQuantizationScheme {
+	return x.inner.QuantizationScheme()
+}
+
 func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor { return x.inner }
+
+// ArrayQuantizationDescriptorable is the interface implemented by [ArrayQuantizationDescriptor], for mocking and DI.
+type ArrayQuantizationDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayQuantizationDescriptor
+	QuantizationDataType() mpscore.MPSDataType
+	QuantizationScheme() raw.MPSNDArrayQuantizationScheme
+}
+
+var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)
 

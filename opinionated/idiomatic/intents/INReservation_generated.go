@@ -5,7 +5,9 @@
 package intents
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,72 @@ func NewReservation() *Reservation {
 	return &Reservation{inner: raw.INReservationFromID(_id)}
 }
 
+// ItemReference calls the underlying ItemReference.
+func (x *Reservation) ItemReference() *SpeakableString {
+	_r := x.inner.ItemReference()
+	if _r == nil {
+		return nil
+	}
+	return &SpeakableString{inner: _r}
+}
+
+// ReservationNumber calls the underlying ReservationNumber.
+func (x *Reservation) ReservationNumber() string {
+	_r := x.inner.ReservationNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BookingTime calls the underlying BookingTime.
+func (x *Reservation) BookingTime() *foundation.NSDate {
+	return x.inner.BookingTime()
+}
+
+// ReservationStatus calls the underlying ReservationStatus.
+func (x *Reservation) ReservationStatus() raw.INReservationStatus {
+	return x.inner.ReservationStatus()
+}
+
+// ReservationHolderName calls the underlying ReservationHolderName.
+func (x *Reservation) ReservationHolderName() string {
+	_r := x.inner.ReservationHolderName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Actions returns the collection as a Go slice.
 func (x *Reservation) Actions() []*raw.INReservationAction {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INReservationAction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INReservationAction {
+		return raw.INReservationActionFromID(purego.Retain(_id))
+	})
+}
+
+// URL calls the underlying URL.
+func (x *Reservation) URL() *foundation.NSURL {
+	return x.inner.URL()
 }
 
 func (x *Reservation) asReservation() *raw.INReservation { return x.inner }
+
+// Reservationable is the interface implemented by [Reservation], for mocking and DI.
+type Reservationable interface {
+	Unwrap() *raw.INReservation
+	ItemReference() *SpeakableString
+	ReservationNumber() string
+	BookingTime() *foundation.NSDate
+	ReservationStatus() raw.INReservationStatus
+	ReservationHolderName() string
+	Actions() []*raw.INReservationAction
+	URL() *foundation.NSURL
+}
+
+var _ Reservationable = (*Reservation)(nil)
 

@@ -7,6 +7,7 @@ package avfaudio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, v
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:voice:"), foundation.NSStringStringWithUTF8String(text).Ptr(), voice.Ptr())
 	return &SpeechSynthesisProviderRequest{inner: raw.AVSpeechSynthesisProviderRequestFromID(_id)}
 }
+
+// SsmlRepresentation calls the underlying SsmlRepresentation.
+func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
+	_r := x.inner.SsmlRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Voice calls the underlying Voice.
+func (x *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
+	_r := x.inner.Voice()
+	if _r == nil {
+		return nil
+	}
+	return &SpeechSynthesisProviderVoice{inner: _r}
+}
+
+// SpeechSynthesisProviderRequestable is the interface implemented by [SpeechSynthesisProviderRequest], for mocking and DI.
+type SpeechSynthesisProviderRequestable interface {
+	Unwrap() *raw.AVSpeechSynthesisProviderRequest
+	SsmlRepresentation() string
+	Voice() *SpeechSynthesisProviderVoice
+}
+
+var _ SpeechSynthesisProviderRequestable = (*SpeechSynthesisProviderRequest)(nil)
 

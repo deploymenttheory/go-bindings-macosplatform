@@ -24,3 +24,10 @@ func NewMaterialWithEnginePreset(engine *raw.PHASEEngine, preset raw.PHASEMateri
 	return &Material{inner: raw.PHASEMaterialFromID(_id)}
 }
 
+// Materialable is the interface implemented by [Material], for mocking and DI.
+type Materialable interface {
+	Unwrap() *raw.PHASEMaterial
+}
+
+var _ Materialable = (*Material)(nil)
+

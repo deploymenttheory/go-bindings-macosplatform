@@ -23,3 +23,10 @@ func NewUnaryFileSystem() *UnaryFileSystem {
 	return &UnaryFileSystem{inner: raw.FSUnaryFileSystemFromID(_id)}
 }
 
+// UnaryFileSystemable is the interface implemented by [UnaryFileSystem], for mocking and DI.
+type UnaryFileSystemable interface {
+	Unwrap() *raw.FSUnaryFileSystem
+}
+
+var _ UnaryFileSystemable = (*UnaryFileSystem)(nil)
+

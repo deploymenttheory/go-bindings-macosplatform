@@ -29,5 +29,35 @@ func (x *VirtioConsoleDevice) WithDelegate(delegate raw.VZVirtioConsoleDeviceDel
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *VirtioConsoleDevice) Delegate() raw.VZVirtioConsoleDeviceDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *VirtioConsoleDevice) SetDelegate(delegate raw.VZVirtioConsoleDeviceDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Ports calls the underlying Ports.
+func (x *VirtioConsoleDevice) Ports() *VirtioConsolePortArray {
+	_r := x.inner.Ports()
+	if _r == nil {
+		return nil
+	}
+	return &VirtioConsolePortArray{inner: _r}
+}
+
 func (x *VirtioConsoleDevice) asConsoleDevice() *raw.VZConsoleDevice { return &x.inner.VZConsoleDevice }
+
+// VirtioConsoleDeviceable is the interface implemented by [VirtioConsoleDevice], for mocking and DI.
+type VirtioConsoleDeviceable interface {
+	Unwrap() *raw.VZVirtioConsoleDevice
+	WithDelegate(delegate raw.VZVirtioConsoleDeviceDelegate) *VirtioConsoleDevice
+	Delegate() raw.VZVirtioConsoleDeviceDelegate
+	SetDelegate(delegate raw.VZVirtioConsoleDeviceDelegate)
+	Ports() *VirtioConsolePortArray
+}
+
+var _ VirtioConsoleDeviceable = (*VirtioConsoleDevice)(nil)
 

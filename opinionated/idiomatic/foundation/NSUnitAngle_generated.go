@@ -29,3 +29,10 @@ func (x *UnitAngle) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitAngle) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitAngleable is the interface implemented by [UnitAngle], for mocking and DI.
+type UnitAngleable interface {
+	Unwrap() *raw.NSUnitAngle
+}
+
+var _ UnitAngleable = (*UnitAngle)(nil)
+

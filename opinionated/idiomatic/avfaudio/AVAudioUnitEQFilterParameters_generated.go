@@ -53,3 +53,75 @@ func (x *AudioUnitEQFilterParameters) WithBypass(bypass bool) *AudioUnitEQFilter
 	return x
 }
 
+// FilterType calls the underlying FilterType.
+func (x *AudioUnitEQFilterParameters) FilterType() raw.AVAudioUnitEQFilterType {
+	return x.inner.FilterType()
+}
+
+// SetFilterType calls the underlying SetFilterType.
+func (x *AudioUnitEQFilterParameters) SetFilterType(filterType raw.AVAudioUnitEQFilterType) {
+	x.inner.SetFilterType(filterType)
+}
+
+// Frequency calls the underlying Frequency.
+func (x *AudioUnitEQFilterParameters) Frequency() float32 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *AudioUnitEQFilterParameters) SetFrequency(frequency float32) {
+	x.inner.SetFrequency(frequency)
+}
+
+// Bandwidth calls the underlying Bandwidth.
+func (x *AudioUnitEQFilterParameters) Bandwidth() float32 {
+	return x.inner.Bandwidth()
+}
+
+// SetBandwidth calls the underlying SetBandwidth.
+func (x *AudioUnitEQFilterParameters) SetBandwidth(bandwidth float32) {
+	x.inner.SetBandwidth(bandwidth)
+}
+
+// Gain calls the underlying Gain.
+func (x *AudioUnitEQFilterParameters) Gain() float32 {
+	return x.inner.Gain()
+}
+
+// SetGain calls the underlying SetGain.
+func (x *AudioUnitEQFilterParameters) SetGain(gain float32) {
+	x.inner.SetGain(gain)
+}
+
+// Bypass calls the underlying Bypass.
+func (x *AudioUnitEQFilterParameters) Bypass() bool {
+	return x.inner.Bypass()
+}
+
+// SetBypass calls the underlying SetBypass.
+func (x *AudioUnitEQFilterParameters) SetBypass(bypass bool) {
+	x.inner.SetBypass(bypass)
+}
+
+// AudioUnitEQFilterParametersable is the interface implemented by [AudioUnitEQFilterParameters], for mocking and DI.
+type AudioUnitEQFilterParametersable interface {
+	Unwrap() *raw.AVAudioUnitEQFilterParameters
+	WithFilterType(filterType raw.AVAudioUnitEQFilterType) *AudioUnitEQFilterParameters
+	WithFrequency(frequency float32) *AudioUnitEQFilterParameters
+	WithBandwidth(bandwidth float32) *AudioUnitEQFilterParameters
+	WithGain(gain float32) *AudioUnitEQFilterParameters
+	WithBypass(bypass bool) *AudioUnitEQFilterParameters
+	FilterType() raw.AVAudioUnitEQFilterType
+	SetFilterType(filterType raw.AVAudioUnitEQFilterType)
+	Frequency() float32
+	SetFrequency(frequency float32)
+	Bandwidth() float32
+	SetBandwidth(bandwidth float32)
+	Gain() float32
+	SetGain(gain float32)
+	Bypass() bool
+	SetBypass(bypass bool)
+}
+
+var _ AudioUnitEQFilterParametersable = (*AudioUnitEQFilterParameters)(nil)
+

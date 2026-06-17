@@ -7,7 +7,9 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DistanceFormatter wraps [raw.MKDistanceFormatter] with a fluent Go API.
@@ -41,4 +43,66 @@ func (x *DistanceFormatter) WithUnitStyle(unitStyle raw.MKDistanceFormatterUnitS
 	x.inner.SetUnitStyle(unitStyle)
 	return x
 }
+
+// StringFromDistance calls the underlying StringFromDistance.
+func (x *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
+	_r := x.inner.StringFromDistance(distance)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DistanceFromString calls the underlying DistanceFromString.
+func (x *DistanceFormatter) DistanceFromString(distance string) unsafe.Pointer {
+	return x.inner.DistanceFromString(foundation.NSStringStringWithUTF8String(distance))
+}
+
+// Locale calls the underlying Locale.
+func (x *DistanceFormatter) Locale() *foundation.NSLocale {
+	return x.inner.Locale()
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *DistanceFormatter) SetLocale(locale *foundation.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// Units calls the underlying Units.
+func (x *DistanceFormatter) Units() raw.MKDistanceFormatterUnits {
+	return x.inner.Units()
+}
+
+// SetUnits calls the underlying SetUnits.
+func (x *DistanceFormatter) SetUnits(units raw.MKDistanceFormatterUnits) {
+	x.inner.SetUnits(units)
+}
+
+// UnitStyle calls the underlying UnitStyle.
+func (x *DistanceFormatter) UnitStyle() raw.MKDistanceFormatterUnitStyle {
+	return x.inner.UnitStyle()
+}
+
+// SetUnitStyle calls the underlying SetUnitStyle.
+func (x *DistanceFormatter) SetUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle) {
+	x.inner.SetUnitStyle(unitStyle)
+}
+
+// DistanceFormatterable is the interface implemented by [DistanceFormatter], for mocking and DI.
+type DistanceFormatterable interface {
+	Unwrap() *raw.MKDistanceFormatter
+	WithLocale(locale *foundation.NSLocale) *DistanceFormatter
+	WithUnits(units raw.MKDistanceFormatterUnits) *DistanceFormatter
+	WithUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle) *DistanceFormatter
+	StringFromDistance(distance unsafe.Pointer) string
+	DistanceFromString(distance string) unsafe.Pointer
+	Locale() *foundation.NSLocale
+	SetLocale(locale *foundation.NSLocale)
+	Units() raw.MKDistanceFormatterUnits
+	SetUnits(units raw.MKDistanceFormatterUnits)
+	UnitStyle() raw.MKDistanceFormatterUnitStyle
+	SetUnitStyle(unitStyle raw.MKDistanceFormatterUnitStyle)
+}
+
+var _ DistanceFormatterable = (*DistanceFormatter)(nil)
 

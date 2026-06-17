@@ -42,3 +42,49 @@ func (x *MTRSwitchClusterMultiPressCompleteEvent) WithTotalNumberOfPressesCounte
 	return x
 }
 
+// PreviousPosition calls the underlying PreviousPosition.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) PreviousPosition() *foundation.NSNumber {
+	return x.inner.PreviousPosition()
+}
+
+// SetPreviousPosition calls the underlying SetPreviousPosition.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) SetPreviousPosition(previousPosition *foundation.NSNumber) {
+	x.inner.SetPreviousPosition(previousPosition)
+}
+
+// GetNewPosition calls the underlying GetNewPosition.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) GetNewPosition() *foundation.NSNumber {
+	return x.inner.GetNewPosition()
+}
+
+// SetNewPosition calls the underlying SetNewPosition.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) SetNewPosition(newPosition *foundation.NSNumber) {
+	x.inner.SetNewPosition(newPosition)
+}
+
+// TotalNumberOfPressesCounted calls the underlying TotalNumberOfPressesCounted.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) TotalNumberOfPressesCounted() *foundation.NSNumber {
+	return x.inner.TotalNumberOfPressesCounted()
+}
+
+// SetTotalNumberOfPressesCounted calls the underlying SetTotalNumberOfPressesCounted.
+func (x *MTRSwitchClusterMultiPressCompleteEvent) SetTotalNumberOfPressesCounted(totalNumberOfPressesCounted *foundation.NSNumber) {
+	x.inner.SetTotalNumberOfPressesCounted(totalNumberOfPressesCounted)
+}
+
+// MTRSwitchClusterMultiPressCompleteEventable is the interface implemented by [MTRSwitchClusterMultiPressCompleteEvent], for mocking and DI.
+type MTRSwitchClusterMultiPressCompleteEventable interface {
+	Unwrap() *raw.MTRSwitchClusterMultiPressCompleteEvent
+	WithPreviousPosition(previousPosition *foundation.NSNumber) *MTRSwitchClusterMultiPressCompleteEvent
+	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterMultiPressCompleteEvent
+	WithTotalNumberOfPressesCounted(totalNumberOfPressesCounted *foundation.NSNumber) *MTRSwitchClusterMultiPressCompleteEvent
+	PreviousPosition() *foundation.NSNumber
+	SetPreviousPosition(previousPosition *foundation.NSNumber)
+	GetNewPosition() *foundation.NSNumber
+	SetNewPosition(newPosition *foundation.NSNumber)
+	TotalNumberOfPressesCounted() *foundation.NSNumber
+	SetTotalNumberOfPressesCounted(totalNumberOfPressesCounted *foundation.NSNumber)
+}
+
+var _ MTRSwitchClusterMultiPressCompleteEventable = (*MTRSwitchClusterMultiPressCompleteEvent)(nil)
+

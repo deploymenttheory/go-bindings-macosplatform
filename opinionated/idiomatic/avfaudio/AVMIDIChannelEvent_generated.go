@@ -29,7 +29,27 @@ func (x *MIDIChannelEvent) WithChannel(channel uint) *MIDIChannelEvent {
 	return x
 }
 
+// Channel calls the underlying Channel.
+func (x *MIDIChannelEvent) Channel() uint {
+	return x.inner.Channel()
+}
+
+// SetChannel calls the underlying SetChannel.
+func (x *MIDIChannelEvent) SetChannel(channel uint) {
+	x.inner.SetChannel(channel)
+}
+
 func (x *MIDIChannelEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return x.inner }
 
 func (x *MIDIChannelEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// MIDIChannelEventable is the interface implemented by [MIDIChannelEvent], for mocking and DI.
+type MIDIChannelEventable interface {
+	Unwrap() *raw.AVMIDIChannelEvent
+	WithChannel(channel uint) *MIDIChannelEvent
+	Channel() uint
+	SetChannel(channel uint)
+}
+
+var _ MIDIChannelEventable = (*MIDIChannelEvent)(nil)
 

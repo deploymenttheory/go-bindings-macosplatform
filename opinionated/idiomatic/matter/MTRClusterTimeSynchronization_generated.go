@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterTimeSynchronization wraps [raw.MTRClusterTimeSynchronization] with a fluent Go API.
@@ -25,7 +28,173 @@ func NewMTRClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *raw.MTRDe
 	return &MTRClusterTimeSynchronization{inner: raw.MTRClusterTimeSynchronizationFromID(_id)}
 }
 
+// SetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterTimeSynchronization) SetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetUTCTimeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.SetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// SetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterTimeSynchronization) SetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.SetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterTimeSynchronization) SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error) {
+	type _result struct {
+		val *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRTimeSynchronizationClusterSetTimeZoneResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRTimeSynchronizationClusterSetTimeZoneResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// SetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterTimeSynchronization) SetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.SetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// SetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterTimeSynchronization) SetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.SetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeUTCTimeWithParams calls the underlying ReadAttributeUTCTimeWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeUTCTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeUTCTimeWithParams(params)
+}
+
+// ReadAttributeGranularityWithParams calls the underlying ReadAttributeGranularityWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeGranularityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGranularityWithParams(params)
+}
+
+// ReadAttributeTimeSourceWithParams calls the underlying ReadAttributeTimeSourceWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeTimeSourceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTimeSourceWithParams(params)
+}
+
+// ReadAttributeTrustedTimeSourceWithParams calls the underlying ReadAttributeTrustedTimeSourceWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTrustedTimeSourceWithParams(params)
+}
+
+// ReadAttributeDefaultNTPWithParams calls the underlying ReadAttributeDefaultNTPWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeDefaultNTPWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDefaultNTPWithParams(params)
+}
+
+// ReadAttributeTimeZoneWithParams calls the underlying ReadAttributeTimeZoneWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTimeZoneWithParams(params)
+}
+
+// ReadAttributeDSTOffsetWithParams calls the underlying ReadAttributeDSTOffsetWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDSTOffsetWithParams(params)
+}
+
+// ReadAttributeLocalTimeWithParams calls the underlying ReadAttributeLocalTimeWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeLocalTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeLocalTimeWithParams(params)
+}
+
+// ReadAttributeTimeZoneDatabaseWithParams calls the underlying ReadAttributeTimeZoneDatabaseWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTimeZoneDatabaseWithParams(params)
+}
+
+// ReadAttributeNTPServerAvailableWithParams calls the underlying ReadAttributeNTPServerAvailableWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeNTPServerAvailableWithParams(params)
+}
+
+// ReadAttributeTimeZoneListMaxSizeWithParams calls the underlying ReadAttributeTimeZoneListMaxSizeWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTimeZoneListMaxSizeWithParams(params)
+}
+
+// ReadAttributeDSTOffsetListMaxSizeWithParams calls the underlying ReadAttributeDSTOffsetListMaxSizeWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDSTOffsetListMaxSizeWithParams(params)
+}
+
+// ReadAttributeSupportsDNSResolveWithParams calls the underlying ReadAttributeSupportsDNSResolveWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportsDNSResolveWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterTimeSynchronization) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterTimeSynchronization) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterTimeSynchronization) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterTimeSynchronizationable is the interface implemented by [MTRClusterTimeSynchronization], for mocking and DI.
+type MTRClusterTimeSynchronizationable interface {
+	Unwrap() *raw.MTRClusterTimeSynchronization
+	SetUTCTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetUTCTimeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	SetTrustedTimeSourceWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetTrustedTimeSourceParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	SetTimeZoneWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRTimeSynchronizationClusterSetTimeZoneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error)
+	SetDSTOffsetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	SetDefaultNTPWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeUTCTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGranularityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTimeSourceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTrustedTimeSourceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeDefaultNTPWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTimeZoneWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeDSTOffsetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeLocalTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTimeZoneDatabaseWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeNTPServerAvailableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTimeZoneListMaxSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeDSTOffsetListMaxSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeSupportsDNSResolveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterTimeSynchronizationable = (*MTRClusterTimeSynchronization)(nil)
 

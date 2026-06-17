@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // UserAppleScriptTask wraps [raw.NSUserAppleScriptTask] with a fluent Go API.
@@ -23,7 +24,20 @@ func NewUserAppleScriptTask() *UserAppleScriptTask {
 	return &UserAppleScriptTask{inner: raw.NSUserAppleScriptTaskFromID(_id)}
 }
 
+// ExecuteWithAppleEventCompletionHandler calls the underlying ExecuteWithAppleEventCompletionHandler.
+func (x *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer)) {
+	x.inner.ExecuteWithAppleEventCompletionHandler(event, handler)
+}
+
 func (x *UserAppleScriptTask) asUserScriptTask() *raw.NSUserScriptTask { return &x.inner.NSUserScriptTask }
 
 func (x *UserAppleScriptTask) asObject() *raw.NSObject { return &x.inner.NSUserScriptTask.NSObject }
+
+// UserAppleScriptTaskable is the interface implemented by [UserAppleScriptTask], for mocking and DI.
+type UserAppleScriptTaskable interface {
+	Unwrap() *raw.NSUserAppleScriptTask
+	ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer))
+}
+
+var _ UserAppleScriptTaskable = (*UserAppleScriptTask)(nil)
 

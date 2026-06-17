@@ -40,7 +40,26 @@ func NewCNNBinaryConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
 }
 
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *CNNBinaryConvolution) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *CNNBinaryConvolution) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
 func (x *CNNBinaryConvolution) asCNNBinaryConvolution() *raw.MPSCNNBinaryConvolution { return x.inner }
 
 func (x *CNNBinaryConvolution) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNBinaryConvolutionable is the interface implemented by [CNNBinaryConvolution], for mocking and DI.
+type CNNBinaryConvolutionable interface {
+	Unwrap() *raw.MPSCNNBinaryConvolution
+	InputFeatureChannels() uint
+	OutputFeatureChannels() uint
+}
+
+var _ CNNBinaryConvolutionable = (*CNNBinaryConvolution)(nil)
 

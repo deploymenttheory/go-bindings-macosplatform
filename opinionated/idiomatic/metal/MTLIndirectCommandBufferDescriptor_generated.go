@@ -137,3 +137,257 @@ func (x *IndirectCommandBufferDescriptor) WithSupportColorAttachmentMapping(supp
 	return x
 }
 
+// CommandTypes calls the underlying CommandTypes.
+func (x *IndirectCommandBufferDescriptor) CommandTypes() raw.MTLIndirectCommandType {
+	return x.inner.CommandTypes()
+}
+
+// SetCommandTypes calls the underlying SetCommandTypes.
+func (x *IndirectCommandBufferDescriptor) SetCommandTypes(commandTypes raw.MTLIndirectCommandType) {
+	x.inner.SetCommandTypes(commandTypes)
+}
+
+// InheritPipelineState calls the underlying InheritPipelineState.
+func (x *IndirectCommandBufferDescriptor) InheritPipelineState() bool {
+	return x.inner.InheritPipelineState()
+}
+
+// SetInheritPipelineState calls the underlying SetInheritPipelineState.
+func (x *IndirectCommandBufferDescriptor) SetInheritPipelineState(inheritPipelineState bool) {
+	x.inner.SetInheritPipelineState(inheritPipelineState)
+}
+
+// InheritBuffers calls the underlying InheritBuffers.
+func (x *IndirectCommandBufferDescriptor) InheritBuffers() bool {
+	return x.inner.InheritBuffers()
+}
+
+// SetInheritBuffers calls the underlying SetInheritBuffers.
+func (x *IndirectCommandBufferDescriptor) SetInheritBuffers(inheritBuffers bool) {
+	x.inner.SetInheritBuffers(inheritBuffers)
+}
+
+// InheritDepthStencilState calls the underlying InheritDepthStencilState.
+func (x *IndirectCommandBufferDescriptor) InheritDepthStencilState() bool {
+	return x.inner.InheritDepthStencilState()
+}
+
+// SetInheritDepthStencilState calls the underlying SetInheritDepthStencilState.
+func (x *IndirectCommandBufferDescriptor) SetInheritDepthStencilState(inheritDepthStencilState bool) {
+	x.inner.SetInheritDepthStencilState(inheritDepthStencilState)
+}
+
+// InheritDepthBias calls the underlying InheritDepthBias.
+func (x *IndirectCommandBufferDescriptor) InheritDepthBias() bool {
+	return x.inner.InheritDepthBias()
+}
+
+// SetInheritDepthBias calls the underlying SetInheritDepthBias.
+func (x *IndirectCommandBufferDescriptor) SetInheritDepthBias(inheritDepthBias bool) {
+	x.inner.SetInheritDepthBias(inheritDepthBias)
+}
+
+// InheritDepthClipMode calls the underlying InheritDepthClipMode.
+func (x *IndirectCommandBufferDescriptor) InheritDepthClipMode() bool {
+	return x.inner.InheritDepthClipMode()
+}
+
+// SetInheritDepthClipMode calls the underlying SetInheritDepthClipMode.
+func (x *IndirectCommandBufferDescriptor) SetInheritDepthClipMode(inheritDepthClipMode bool) {
+	x.inner.SetInheritDepthClipMode(inheritDepthClipMode)
+}
+
+// InheritCullMode calls the underlying InheritCullMode.
+func (x *IndirectCommandBufferDescriptor) InheritCullMode() bool {
+	return x.inner.InheritCullMode()
+}
+
+// SetInheritCullMode calls the underlying SetInheritCullMode.
+func (x *IndirectCommandBufferDescriptor) SetInheritCullMode(inheritCullMode bool) {
+	x.inner.SetInheritCullMode(inheritCullMode)
+}
+
+// InheritFrontFacingWinding calls the underlying InheritFrontFacingWinding.
+func (x *IndirectCommandBufferDescriptor) InheritFrontFacingWinding() bool {
+	return x.inner.InheritFrontFacingWinding()
+}
+
+// SetInheritFrontFacingWinding calls the underlying SetInheritFrontFacingWinding.
+func (x *IndirectCommandBufferDescriptor) SetInheritFrontFacingWinding(inheritFrontFacingWinding bool) {
+	x.inner.SetInheritFrontFacingWinding(inheritFrontFacingWinding)
+}
+
+// InheritTriangleFillMode calls the underlying InheritTriangleFillMode.
+func (x *IndirectCommandBufferDescriptor) InheritTriangleFillMode() bool {
+	return x.inner.InheritTriangleFillMode()
+}
+
+// SetInheritTriangleFillMode calls the underlying SetInheritTriangleFillMode.
+func (x *IndirectCommandBufferDescriptor) SetInheritTriangleFillMode(inheritTriangleFillMode bool) {
+	x.inner.SetInheritTriangleFillMode(inheritTriangleFillMode)
+}
+
+// MaxVertexBufferBindCount calls the underlying MaxVertexBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxVertexBufferBindCount() uint {
+	return x.inner.MaxVertexBufferBindCount()
+}
+
+// SetMaxVertexBufferBindCount calls the underlying SetMaxVertexBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxVertexBufferBindCount(maxVertexBufferBindCount uint) {
+	x.inner.SetMaxVertexBufferBindCount(maxVertexBufferBindCount)
+}
+
+// MaxFragmentBufferBindCount calls the underlying MaxFragmentBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxFragmentBufferBindCount() uint {
+	return x.inner.MaxFragmentBufferBindCount()
+}
+
+// SetMaxFragmentBufferBindCount calls the underlying SetMaxFragmentBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount uint) {
+	x.inner.SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount)
+}
+
+// MaxKernelBufferBindCount calls the underlying MaxKernelBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxKernelBufferBindCount() uint {
+	return x.inner.MaxKernelBufferBindCount()
+}
+
+// SetMaxKernelBufferBindCount calls the underlying SetMaxKernelBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxKernelBufferBindCount(maxKernelBufferBindCount uint) {
+	x.inner.SetMaxKernelBufferBindCount(maxKernelBufferBindCount)
+}
+
+// MaxKernelThreadgroupMemoryBindCount calls the underlying MaxKernelThreadgroupMemoryBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxKernelThreadgroupMemoryBindCount() uint {
+	return x.inner.MaxKernelThreadgroupMemoryBindCount()
+}
+
+// SetMaxKernelThreadgroupMemoryBindCount calls the underlying SetMaxKernelThreadgroupMemoryBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount uint) {
+	x.inner.SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount)
+}
+
+// MaxObjectBufferBindCount calls the underlying MaxObjectBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxObjectBufferBindCount() uint {
+	return x.inner.MaxObjectBufferBindCount()
+}
+
+// SetMaxObjectBufferBindCount calls the underlying SetMaxObjectBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxObjectBufferBindCount(maxObjectBufferBindCount uint) {
+	x.inner.SetMaxObjectBufferBindCount(maxObjectBufferBindCount)
+}
+
+// MaxMeshBufferBindCount calls the underlying MaxMeshBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxMeshBufferBindCount() uint {
+	return x.inner.MaxMeshBufferBindCount()
+}
+
+// SetMaxMeshBufferBindCount calls the underlying SetMaxMeshBufferBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxMeshBufferBindCount(maxMeshBufferBindCount uint) {
+	x.inner.SetMaxMeshBufferBindCount(maxMeshBufferBindCount)
+}
+
+// MaxObjectThreadgroupMemoryBindCount calls the underlying MaxObjectThreadgroupMemoryBindCount.
+func (x *IndirectCommandBufferDescriptor) MaxObjectThreadgroupMemoryBindCount() uint {
+	return x.inner.MaxObjectThreadgroupMemoryBindCount()
+}
+
+// SetMaxObjectThreadgroupMemoryBindCount calls the underlying SetMaxObjectThreadgroupMemoryBindCount.
+func (x *IndirectCommandBufferDescriptor) SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount uint) {
+	x.inner.SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount)
+}
+
+// SupportRayTracing calls the underlying SupportRayTracing.
+func (x *IndirectCommandBufferDescriptor) SupportRayTracing() bool {
+	return x.inner.SupportRayTracing()
+}
+
+// SetSupportRayTracing calls the underlying SetSupportRayTracing.
+func (x *IndirectCommandBufferDescriptor) SetSupportRayTracing(supportRayTracing bool) {
+	x.inner.SetSupportRayTracing(supportRayTracing)
+}
+
+// SupportDynamicAttributeStride calls the underlying SupportDynamicAttributeStride.
+func (x *IndirectCommandBufferDescriptor) SupportDynamicAttributeStride() bool {
+	return x.inner.SupportDynamicAttributeStride()
+}
+
+// SetSupportDynamicAttributeStride calls the underlying SetSupportDynamicAttributeStride.
+func (x *IndirectCommandBufferDescriptor) SetSupportDynamicAttributeStride(supportDynamicAttributeStride bool) {
+	x.inner.SetSupportDynamicAttributeStride(supportDynamicAttributeStride)
+}
+
+// SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
+func (x *IndirectCommandBufferDescriptor) SupportColorAttachmentMapping() bool {
+	return x.inner.SupportColorAttachmentMapping()
+}
+
+// SetSupportColorAttachmentMapping calls the underlying SetSupportColorAttachmentMapping.
+func (x *IndirectCommandBufferDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
+	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
+}
+
+// IndirectCommandBufferDescriptorable is the interface implemented by [IndirectCommandBufferDescriptor], for mocking and DI.
+type IndirectCommandBufferDescriptorable interface {
+	Unwrap() *raw.MTLIndirectCommandBufferDescriptor
+	WithCommandTypes(commandTypes raw.MTLIndirectCommandType) *IndirectCommandBufferDescriptor
+	WithInheritPipelineState(inheritPipelineState bool) *IndirectCommandBufferDescriptor
+	WithInheritBuffers(inheritBuffers bool) *IndirectCommandBufferDescriptor
+	WithInheritDepthStencilState(inheritDepthStencilState bool) *IndirectCommandBufferDescriptor
+	WithInheritDepthBias(inheritDepthBias bool) *IndirectCommandBufferDescriptor
+	WithInheritDepthClipMode(inheritDepthClipMode bool) *IndirectCommandBufferDescriptor
+	WithInheritCullMode(inheritCullMode bool) *IndirectCommandBufferDescriptor
+	WithInheritFrontFacingWinding(inheritFrontFacingWinding bool) *IndirectCommandBufferDescriptor
+	WithInheritTriangleFillMode(inheritTriangleFillMode bool) *IndirectCommandBufferDescriptor
+	WithMaxVertexBufferBindCount(maxVertexBufferBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxFragmentBufferBindCount(maxFragmentBufferBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxKernelBufferBindCount(maxKernelBufferBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxObjectBufferBindCount(maxObjectBufferBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxMeshBufferBindCount(maxMeshBufferBindCount uint) *IndirectCommandBufferDescriptor
+	WithMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount uint) *IndirectCommandBufferDescriptor
+	WithSupportRayTracing(supportRayTracing bool) *IndirectCommandBufferDescriptor
+	WithSupportDynamicAttributeStride(supportDynamicAttributeStride bool) *IndirectCommandBufferDescriptor
+	WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *IndirectCommandBufferDescriptor
+	CommandTypes() raw.MTLIndirectCommandType
+	SetCommandTypes(commandTypes raw.MTLIndirectCommandType)
+	InheritPipelineState() bool
+	SetInheritPipelineState(inheritPipelineState bool)
+	InheritBuffers() bool
+	SetInheritBuffers(inheritBuffers bool)
+	InheritDepthStencilState() bool
+	SetInheritDepthStencilState(inheritDepthStencilState bool)
+	InheritDepthBias() bool
+	SetInheritDepthBias(inheritDepthBias bool)
+	InheritDepthClipMode() bool
+	SetInheritDepthClipMode(inheritDepthClipMode bool)
+	InheritCullMode() bool
+	SetInheritCullMode(inheritCullMode bool)
+	InheritFrontFacingWinding() bool
+	SetInheritFrontFacingWinding(inheritFrontFacingWinding bool)
+	InheritTriangleFillMode() bool
+	SetInheritTriangleFillMode(inheritTriangleFillMode bool)
+	MaxVertexBufferBindCount() uint
+	SetMaxVertexBufferBindCount(maxVertexBufferBindCount uint)
+	MaxFragmentBufferBindCount() uint
+	SetMaxFragmentBufferBindCount(maxFragmentBufferBindCount uint)
+	MaxKernelBufferBindCount() uint
+	SetMaxKernelBufferBindCount(maxKernelBufferBindCount uint)
+	MaxKernelThreadgroupMemoryBindCount() uint
+	SetMaxKernelThreadgroupMemoryBindCount(maxKernelThreadgroupMemoryBindCount uint)
+	MaxObjectBufferBindCount() uint
+	SetMaxObjectBufferBindCount(maxObjectBufferBindCount uint)
+	MaxMeshBufferBindCount() uint
+	SetMaxMeshBufferBindCount(maxMeshBufferBindCount uint)
+	MaxObjectThreadgroupMemoryBindCount() uint
+	SetMaxObjectThreadgroupMemoryBindCount(maxObjectThreadgroupMemoryBindCount uint)
+	SupportRayTracing() bool
+	SetSupportRayTracing(supportRayTracing bool)
+	SupportDynamicAttributeStride() bool
+	SetSupportDynamicAttributeStride(supportDynamicAttributeStride bool)
+	SupportColorAttachmentMapping() bool
+	SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool)
+}
+
+var _ IndirectCommandBufferDescriptorable = (*IndirectCommandBufferDescriptor)(nil)
+

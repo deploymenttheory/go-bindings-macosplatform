@@ -63,3 +63,88 @@ func (x *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
 	return x
 }
 
+// Handle calls the underlying Handle.
+func (x *NNImageNode) Handle() mpsneuralnetwork.MPSHandle {
+	return x.inner.Handle()
+}
+
+// SetHandle calls the underlying SetHandle.
+func (x *NNImageNode) SetHandle(handle mpsneuralnetwork.MPSHandle) {
+	x.inner.SetHandle(handle)
+}
+
+// Format calls the underlying Format.
+func (x *NNImageNode) Format() mpscore.MPSImageFeatureChannelFormat {
+	return x.inner.Format()
+}
+
+// SetFormat calls the underlying SetFormat.
+func (x *NNImageNode) SetFormat(format mpscore.MPSImageFeatureChannelFormat) {
+	x.inner.SetFormat(format)
+}
+
+// ImageAllocator calls the underlying ImageAllocator.
+func (x *NNImageNode) ImageAllocator() mpscore.MPSImageAllocator {
+	return x.inner.ImageAllocator()
+}
+
+// SetImageAllocator calls the underlying SetImageAllocator.
+func (x *NNImageNode) SetImageAllocator(imageAllocator mpscore.MPSImageAllocator) {
+	x.inner.SetImageAllocator(imageAllocator)
+}
+
+// ExportFromGraph calls the underlying ExportFromGraph.
+func (x *NNImageNode) ExportFromGraph() bool {
+	return x.inner.ExportFromGraph()
+}
+
+// SetExportFromGraph calls the underlying SetExportFromGraph.
+func (x *NNImageNode) SetExportFromGraph(exportFromGraph bool) {
+	x.inner.SetExportFromGraph(exportFromGraph)
+}
+
+// SynchronizeResource calls the underlying SynchronizeResource.
+func (x *NNImageNode) SynchronizeResource() bool {
+	return x.inner.SynchronizeResource()
+}
+
+// SetSynchronizeResource calls the underlying SetSynchronizeResource.
+func (x *NNImageNode) SetSynchronizeResource(synchronizeResource bool) {
+	x.inner.SetSynchronizeResource(synchronizeResource)
+}
+
+// StopGradient calls the underlying StopGradient.
+func (x *NNImageNode) StopGradient() bool {
+	return x.inner.StopGradient()
+}
+
+// SetStopGradient calls the underlying SetStopGradient.
+func (x *NNImageNode) SetStopGradient(stopGradient bool) {
+	x.inner.SetStopGradient(stopGradient)
+}
+
+// NNImageNodeable is the interface implemented by [NNImageNode], for mocking and DI.
+type NNImageNodeable interface {
+	Unwrap() *raw.MPSNNImageNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNImageNode
+	WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNImageNode
+	WithImageAllocator(imageAllocator mpscore.MPSImageAllocator) *NNImageNode
+	WithExportFromGraph(exportFromGraph bool) *NNImageNode
+	WithSynchronizeResource(synchronizeResource bool) *NNImageNode
+	WithStopGradient(stopGradient bool) *NNImageNode
+	Handle() mpsneuralnetwork.MPSHandle
+	SetHandle(handle mpsneuralnetwork.MPSHandle)
+	Format() mpscore.MPSImageFeatureChannelFormat
+	SetFormat(format mpscore.MPSImageFeatureChannelFormat)
+	ImageAllocator() mpscore.MPSImageAllocator
+	SetImageAllocator(imageAllocator mpscore.MPSImageAllocator)
+	ExportFromGraph() bool
+	SetExportFromGraph(exportFromGraph bool)
+	SynchronizeResource() bool
+	SetSynchronizeResource(synchronizeResource bool)
+	StopGradient() bool
+	SetStopGradient(stopGradient bool)
+}
+
+var _ NNImageNodeable = (*NNImageNode)(nil)
+

@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUp
 
 func (x *MTROtaSoftwareUpdateRequestorClusterProviderLocation) asMTROTASoftwareUpdateRequestorClusterProviderLocation() *raw.MTROTASoftwareUpdateRequestorClusterProviderLocation { return &x.inner.MTROTASoftwareUpdateRequestorClusterProviderLocation }
 
+// MTROtaSoftwareUpdateRequestorClusterProviderLocationable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterProviderLocation], for mocking and DI.
+type MTROtaSoftwareUpdateRequestorClusterProviderLocationable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterProviderLocation
+}
+
+var _ MTROtaSoftwareUpdateRequestorClusterProviderLocationable = (*MTROtaSoftwareUpdateRequestorClusterProviderLocation)(nil)
+

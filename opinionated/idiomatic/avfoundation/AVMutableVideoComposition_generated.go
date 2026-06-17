@@ -97,5 +97,100 @@ func (x *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameH
 	return x
 }
 
+// SetCustomVideoCompositorClass calls the underlying SetCustomVideoCompositorClass.
+func (x *MutableVideoComposition) SetCustomVideoCompositorClass(customVideoCompositorClass unsafe.Pointer) {
+	x.inner.SetCustomVideoCompositorClass(customVideoCompositorClass)
+}
+
+// SetFrameDuration calls the underlying SetFrameDuration.
+func (x *MutableVideoComposition) SetFrameDuration(frameDuration coremedia.CMTime) {
+	x.inner.SetFrameDuration(frameDuration)
+}
+
+// SetSourceTrackIDForFrameTiming calls the underlying SetSourceTrackIDForFrameTiming.
+func (x *MutableVideoComposition) SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) {
+	x.inner.SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming)
+}
+
+// SetRenderSize calls the underlying SetRenderSize.
+func (x *MutableVideoComposition) SetRenderSize(renderSize corefoundation.CGSize) {
+	x.inner.SetRenderSize(renderSize)
+}
+
+// SetRenderScale calls the underlying SetRenderScale.
+func (x *MutableVideoComposition) SetRenderScale(renderScale float32) {
+	x.inner.SetRenderScale(renderScale)
+}
+
+// SetInstructions calls the underlying SetInstructions.
+func (x *MutableVideoComposition) SetInstructions(instructions *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol]) {
+	x.inner.SetInstructions(instructions)
+}
+
+// SetAnimationTool calls the underlying SetAnimationTool.
+func (x *MutableVideoComposition) SetAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool) {
+	x.inner.SetAnimationTool(animationTool)
+}
+
+// SetSourceSampleDataTrackIDs calls the underlying SetSourceSampleDataTrackIDs.
+func (x *MutableVideoComposition) SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs)
+}
+
+// SetOutputBufferDescription calls the underlying SetOutputBufferDescription.
+func (x *MutableVideoComposition) SetOutputBufferDescription(outputBufferDescription *foundation.NSArray[objc.ID]) {
+	x.inner.SetOutputBufferDescription(outputBufferDescription)
+}
+
+// SetColorPrimaries calls the underlying SetColorPrimaries.
+func (x *MutableVideoComposition) SetColorPrimaries(colorPrimaries string) {
+	x.inner.SetColorPrimaries(foundation.NSStringStringWithUTF8String(colorPrimaries))
+}
+
+// SetColorYCbCrMatrix calls the underlying SetColorYCbCrMatrix.
+func (x *MutableVideoComposition) SetColorYCbCrMatrix(colorYCbCrMatrix string) {
+	x.inner.SetColorYCbCrMatrix(foundation.NSStringStringWithUTF8String(colorYCbCrMatrix))
+}
+
+// SetColorTransferFunction calls the underlying SetColorTransferFunction.
+func (x *MutableVideoComposition) SetColorTransferFunction(colorTransferFunction string) {
+	x.inner.SetColorTransferFunction(foundation.NSStringStringWithUTF8String(colorTransferFunction))
+}
+
+// SetPerFrameHDRDisplayMetadataPolicy calls the underlying SetPerFrameHDRDisplayMetadataPolicy.
+func (x *MutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy *foundation.NSString) {
+	x.inner.SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy)
+}
+
 func (x *MutableVideoComposition) asVideoComposition() *raw.AVVideoComposition { return &x.inner.AVVideoComposition }
+
+// MutableVideoCompositionable is the interface implemented by [MutableVideoComposition], for mocking and DI.
+type MutableVideoCompositionable interface {
+	Unwrap() *raw.AVMutableVideoComposition
+	WithFrameDuration(frameDuration coremedia.CMTime) *MutableVideoComposition
+	WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition
+	WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition
+	WithRenderScale(renderScale float32) *MutableVideoComposition
+	WithAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool) *MutableVideoComposition
+	WithSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoComposition
+	WithColorPrimaries(colorPrimaries string) *MutableVideoComposition
+	WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition
+	WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition
+	WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy *foundation.NSString) *MutableVideoComposition
+	SetCustomVideoCompositorClass(customVideoCompositorClass unsafe.Pointer)
+	SetFrameDuration(frameDuration coremedia.CMTime)
+	SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32)
+	SetRenderSize(renderSize corefoundation.CGSize)
+	SetRenderScale(renderScale float32)
+	SetInstructions(instructions *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol])
+	SetAnimationTool(animationTool *raw.AVVideoCompositionCoreAnimationTool)
+	SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber])
+	SetOutputBufferDescription(outputBufferDescription *foundation.NSArray[objc.ID])
+	SetColorPrimaries(colorPrimaries string)
+	SetColorYCbCrMatrix(colorYCbCrMatrix string)
+	SetColorTransferFunction(colorTransferFunction string)
+	SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy *foundation.NSString)
+}
+
+var _ MutableVideoCompositionable = (*MutableVideoComposition)(nil)
 

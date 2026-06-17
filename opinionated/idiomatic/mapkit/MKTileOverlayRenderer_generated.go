@@ -24,5 +24,18 @@ func NewTileOverlayRendererWithTileOverlay(overlay *raw.MKTileOverlay) *TileOver
 	return &TileOverlayRenderer{inner: raw.MKTileOverlayRendererFromID(_id)}
 }
 
+// ReloadData calls the underlying ReloadData.
+func (x *TileOverlayRenderer) ReloadData() {
+	x.inner.ReloadData()
+}
+
 func (x *TileOverlayRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayRenderer }
+
+// TileOverlayRendererable is the interface implemented by [TileOverlayRenderer], for mocking and DI.
+type TileOverlayRendererable interface {
+	Unwrap() *raw.MKTileOverlayRenderer
+	ReloadData()
+}
+
+var _ TileOverlayRendererable = (*TileOverlayRenderer)(nil)
 

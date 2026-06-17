@@ -30,5 +30,41 @@ func (x *RecursiveLock) WithName(name string) *RecursiveLock {
 	return x
 }
 
+// TryLock calls the underlying TryLock.
+func (x *RecursiveLock) TryLock() bool {
+	return x.inner.TryLock()
+}
+
+// LockBeforeDate calls the underlying LockBeforeDate.
+func (x *RecursiveLock) LockBeforeDate(limit *raw.NSDate) bool {
+	return x.inner.LockBeforeDate(limit)
+}
+
+// Name calls the underlying Name.
+func (x *RecursiveLock) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *RecursiveLock) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *RecursiveLock) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// RecursiveLockable is the interface implemented by [RecursiveLock], for mocking and DI.
+type RecursiveLockable interface {
+	Unwrap() *raw.NSRecursiveLock
+	WithName(name string) *RecursiveLock
+	TryLock() bool
+	LockBeforeDate(limit *raw.NSDate) bool
+	Name() *String
+	SetName(name string)
+}
+
+var _ RecursiveLockable = (*RecursiveLock)(nil)
 

@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -67,16 +68,72 @@ func (x *DataSeriesDescriptor) WithDataPoints(items ...*raw.AXDataPoint) *DataSe
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *DataSeriesDescriptor) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DataSeriesDescriptor) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// AttributedName calls the underlying AttributedName.
+func (x *DataSeriesDescriptor) AttributedName() *foundation.NSAttributedString {
+	return x.inner.AttributedName()
+}
+
+// SetAttributedName calls the underlying SetAttributedName.
+func (x *DataSeriesDescriptor) SetAttributedName(attributedName *foundation.NSAttributedString) {
+	x.inner.SetAttributedName(attributedName)
+}
+
+// IsContinuous calls the underlying IsContinuous.
+func (x *DataSeriesDescriptor) IsContinuous() bool {
+	return x.inner.IsContinuous()
+}
+
+// SetIsContinuous calls the underlying SetIsContinuous.
+func (x *DataSeriesDescriptor) SetIsContinuous(isContinuous bool) {
+	x.inner.SetIsContinuous(isContinuous)
+}
+
 // DataPoints returns the collection as a Go slice.
 func (x *DataSeriesDescriptor) DataPoints() []*raw.AXDataPoint {
 	arr := x.inner.DataPoints()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXDataPoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXDataPoint {
+		return raw.AXDataPointFromID(purego.Retain(_id))
+	})
 }
+
+// SetDataPoints calls the underlying SetDataPoints.
+func (x *DataSeriesDescriptor) SetDataPoints(dataPoints *foundation.NSArray[*raw.AXDataPoint]) {
+	x.inner.SetDataPoints(dataPoints)
+}
+
+// DataSeriesDescriptorable is the interface implemented by [DataSeriesDescriptor], for mocking and DI.
+type DataSeriesDescriptorable interface {
+	Unwrap() *raw.AXDataSeriesDescriptor
+	WithName(name string) *DataSeriesDescriptor
+	WithAttributedName(attributedName *foundation.NSAttributedString) *DataSeriesDescriptor
+	WithIsContinuous(isContinuous bool) *DataSeriesDescriptor
+	WithDataPoints(items ...*raw.AXDataPoint) *DataSeriesDescriptor
+	Name() string
+	SetName(name string)
+	AttributedName() *foundation.NSAttributedString
+	SetAttributedName(attributedName *foundation.NSAttributedString)
+	IsContinuous() bool
+	SetIsContinuous(isContinuous bool)
+	DataPoints() []*raw.AXDataPoint
+	SetDataPoints(dataPoints *foundation.NSArray[*raw.AXDataPoint])
+}
+
+var _ DataSeriesDescriptorable = (*DataSeriesDescriptor)(nil)
 

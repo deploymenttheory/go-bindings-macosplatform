@@ -5,6 +5,7 @@
 package osakit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/ebitengine/purego/objc"
@@ -30,4 +31,46 @@ func (x *LanguageInstance) WithDefaultTarget(defaultTarget *foundation.NSAppleEv
 	x.inner.SetDefaultTarget(defaultTarget)
 	return x
 }
+
+// RichTextFromDescriptor calls the underlying RichTextFromDescriptor.
+func (x *LanguageInstance) RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString {
+	return x.inner.RichTextFromDescriptor(descriptor)
+}
+
+// Language calls the underlying Language.
+func (x *LanguageInstance) Language() *Language {
+	_r := x.inner.Language()
+	if _r == nil {
+		return nil
+	}
+	return &Language{inner: _r}
+}
+
+// ComponentInstance calls the underlying ComponentInstance.
+func (x *LanguageInstance) ComponentInstance() *carboncore.ComponentInstanceRecord {
+	return x.inner.ComponentInstance()
+}
+
+// DefaultTarget calls the underlying DefaultTarget.
+func (x *LanguageInstance) DefaultTarget() *foundation.NSAppleEventDescriptor {
+	return x.inner.DefaultTarget()
+}
+
+// SetDefaultTarget calls the underlying SetDefaultTarget.
+func (x *LanguageInstance) SetDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) {
+	x.inner.SetDefaultTarget(defaultTarget)
+}
+
+// LanguageInstanceable is the interface implemented by [LanguageInstance], for mocking and DI.
+type LanguageInstanceable interface {
+	Unwrap() *raw.OSALanguageInstance
+	WithDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor) *LanguageInstance
+	RichTextFromDescriptor(descriptor *foundation.NSAppleEventDescriptor) *foundation.NSAttributedString
+	Language() *Language
+	ComponentInstance() *carboncore.ComponentInstanceRecord
+	DefaultTarget() *foundation.NSAppleEventDescriptor
+	SetDefaultTarget(defaultTarget *foundation.NSAppleEventDescriptor)
+}
+
+var _ LanguageInstanceable = (*LanguageInstance)(nil)
 

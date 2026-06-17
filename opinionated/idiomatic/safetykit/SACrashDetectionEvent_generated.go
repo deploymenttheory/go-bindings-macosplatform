@@ -5,8 +5,10 @@
 package safetykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CrashDetectionEvent wraps [raw.SACrashDetectionEvent] with a fluent Go API.
@@ -22,4 +24,29 @@ func NewCrashDetectionEvent() *CrashDetectionEvent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SACrashDetectionEvent")), objc.RegisterName("new"))
 	return &CrashDetectionEvent{inner: raw.SACrashDetectionEventFromID(_id)}
 }
+
+// Date calls the underlying Date.
+func (x *CrashDetectionEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// Response calls the underlying Response.
+func (x *CrashDetectionEvent) Response() raw.SACrashDetectionEventResponse {
+	return x.inner.Response()
+}
+
+// Location calls the underlying Location.
+func (x *CrashDetectionEvent) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// CrashDetectionEventable is the interface implemented by [CrashDetectionEvent], for mocking and DI.
+type CrashDetectionEventable interface {
+	Unwrap() *raw.SACrashDetectionEvent
+	Date() *foundation.NSDate
+	Response() raw.SACrashDetectionEventResponse
+	Location() unsafe.Pointer
+}
+
+var _ CrashDetectionEventable = (*CrashDetectionEvent)(nil)
 

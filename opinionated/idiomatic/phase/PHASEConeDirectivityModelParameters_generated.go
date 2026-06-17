@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *ConeDirectivityModelParameters) SubbandParameters() []*raw.PHASEConeDir
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEConeDirectivityModelSubbandParameters, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEConeDirectivityModelSubbandParameters {
+		return raw.PHASEConeDirectivityModelSubbandParametersFromID(purego.Retain(_id))
+	})
 }
 
 func (x *ConeDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters { return &x.inner.PHASEDirectivityModelParameters }
+
+// ConeDirectivityModelParametersable is the interface implemented by [ConeDirectivityModelParameters], for mocking and DI.
+type ConeDirectivityModelParametersable interface {
+	Unwrap() *raw.PHASEConeDirectivityModelParameters
+	SubbandParameters() []*raw.PHASEConeDirectivityModelSubbandParameters
+}
+
+var _ ConeDirectivityModelParametersable = (*ConeDirectivityModelParameters)(nil)
 

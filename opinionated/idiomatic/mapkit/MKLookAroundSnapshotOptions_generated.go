@@ -36,3 +36,40 @@ func (x *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *LookAr
 	return x
 }
 
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *LookAroundSnapshotOptions) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// Size calls the underlying Size.
+func (x *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *LookAroundSnapshotOptions) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// LookAroundSnapshotOptionsable is the interface implemented by [LookAroundSnapshotOptions], for mocking and DI.
+type LookAroundSnapshotOptionsable interface {
+	Unwrap() *raw.MKLookAroundSnapshotOptions
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LookAroundSnapshotOptions
+	WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+}
+
+var _ LookAroundSnapshotOptionsable = (*LookAroundSnapshotOptions)(nil)
+

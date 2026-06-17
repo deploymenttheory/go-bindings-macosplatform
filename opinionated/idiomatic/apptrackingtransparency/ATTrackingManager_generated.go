@@ -23,3 +23,10 @@ func NewTrackingManager() *TrackingManager {
 	return &TrackingManager{inner: raw.ATTrackingManagerFromID(_id)}
 }
 
+// TrackingManagerable is the interface implemented by [TrackingManager], for mocking and DI.
+type TrackingManagerable interface {
+	Unwrap() *raw.ATTrackingManager
+}
+
+var _ TrackingManagerable = (*TrackingManager)(nil)
+

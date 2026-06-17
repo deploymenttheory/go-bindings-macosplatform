@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterSimpleStructEchoRequestParams() *MTRTestClusterClus
 
 func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams { return &x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams }
 
+// MTRTestClusterClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRTestClusterClusterSimpleStructEchoRequestParams], for mocking and DI.
+type MTRTestClusterClusterSimpleStructEchoRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterSimpleStructEchoRequestParams
+}
+
+var _ MTRTestClusterClusterSimpleStructEchoRequestParamsable = (*MTRTestClusterClusterSimpleStructEchoRequestParams)(nil)
+

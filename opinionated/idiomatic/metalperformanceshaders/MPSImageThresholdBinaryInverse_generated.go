@@ -35,7 +35,32 @@ func NewImageThresholdBinaryInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdBinaryInverse{inner: raw.MPSImageThresholdBinaryInverseFromID(_id)}
 }
 
+// ThresholdValue calls the underlying ThresholdValue.
+func (x *ImageThresholdBinaryInverse) ThresholdValue() float32 {
+	return x.inner.ThresholdValue()
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *ImageThresholdBinaryInverse) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// Transform calls the underlying Transform.
+func (x *ImageThresholdBinaryInverse) Transform() *float32 {
+	return x.inner.Transform()
+}
+
 func (x *ImageThresholdBinaryInverse) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageThresholdBinaryInverse) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageThresholdBinaryInverseable is the interface implemented by [ImageThresholdBinaryInverse], for mocking and DI.
+type ImageThresholdBinaryInverseable interface {
+	Unwrap() *raw.MPSImageThresholdBinaryInverse
+	ThresholdValue() float32
+	MaximumValue() float32
+	Transform() *float32
+}
+
+var _ ImageThresholdBinaryInverseable = (*ImageThresholdBinaryInverse)(nil)
 

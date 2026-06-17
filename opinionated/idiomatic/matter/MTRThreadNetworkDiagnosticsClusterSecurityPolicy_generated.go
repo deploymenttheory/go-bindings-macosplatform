@@ -36,3 +36,36 @@ func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags *foun
 	return x
 }
 
+// RotationTime calls the underlying RotationTime.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() *foundation.NSNumber {
+	return x.inner.RotationTime()
+}
+
+// SetRotationTime calls the underlying SetRotationTime.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetRotationTime(rotationTime *foundation.NSNumber) {
+	x.inner.SetRotationTime(rotationTime)
+}
+
+// Flags calls the underlying Flags.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() *foundation.NSNumber {
+	return x.inner.Flags()
+}
+
+// SetFlags calls the underlying SetFlags.
+func (x *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) SetFlags(flags *foundation.NSNumber) {
+	x.inner.SetFlags(flags)
+}
+
+// MTRThreadNetworkDiagnosticsClusterSecurityPolicyable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterSecurityPolicy], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterSecurityPolicyable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	WithRotationTime(rotationTime *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	WithFlags(flags *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
+	RotationTime() *foundation.NSNumber
+	SetRotationTime(rotationTime *foundation.NSNumber)
+	Flags() *foundation.NSNumber
+	SetFlags(flags *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterSecurityPolicyable = (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy)(nil)
+

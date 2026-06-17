@@ -36,3 +36,36 @@ func (x *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBack
 	return x
 }
 
+// Rect calls the underlying Rect.
+func (x *WKPDFConfiguration) Rect() corefoundation.CGRect {
+	return x.inner.Rect()
+}
+
+// SetRect calls the underlying SetRect.
+func (x *WKPDFConfiguration) SetRect(rect corefoundation.CGRect) {
+	x.inner.SetRect(rect)
+}
+
+// AllowTransparentBackground calls the underlying AllowTransparentBackground.
+func (x *WKPDFConfiguration) AllowTransparentBackground() bool {
+	return x.inner.AllowTransparentBackground()
+}
+
+// SetAllowTransparentBackground calls the underlying SetAllowTransparentBackground.
+func (x *WKPDFConfiguration) SetAllowTransparentBackground(allowTransparentBackground bool) {
+	x.inner.SetAllowTransparentBackground(allowTransparentBackground)
+}
+
+// WKPDFConfigurationable is the interface implemented by [WKPDFConfiguration], for mocking and DI.
+type WKPDFConfigurationable interface {
+	Unwrap() *raw.WKPDFConfiguration
+	WithRect(rect corefoundation.CGRect) *WKPDFConfiguration
+	WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration
+	Rect() corefoundation.CGRect
+	SetRect(rect corefoundation.CGRect)
+	AllowTransparentBackground() bool
+	SetAllowTransparentBackground(allowTransparentBackground bool)
+}
+
+var _ WKPDFConfigurationable = (*WKPDFConfiguration)(nil)
+

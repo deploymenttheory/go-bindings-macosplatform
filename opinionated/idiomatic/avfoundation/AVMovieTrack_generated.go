@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,42 @@ func NewMovieTrack() *MovieTrack {
 	return &MovieTrack{inner: raw.AVMovieTrackFromID(_id)}
 }
 
+// MediaPresentationTimeRange calls the underlying MediaPresentationTimeRange.
+func (x *MovieTrack) MediaPresentationTimeRange() coremedia.CMTimeRange {
+	return x.inner.MediaPresentationTimeRange()
+}
+
+// MediaDecodeTimeRange calls the underlying MediaDecodeTimeRange.
+func (x *MovieTrack) MediaDecodeTimeRange() coremedia.CMTimeRange {
+	return x.inner.MediaDecodeTimeRange()
+}
+
+// AlternateGroupID calls the underlying AlternateGroupID.
+func (x *MovieTrack) AlternateGroupID() int {
+	return x.inner.AlternateGroupID()
+}
+
+// MediaDataStorage calls the underlying MediaDataStorage.
+func (x *MovieTrack) MediaDataStorage() *MediaDataStorage {
+	_r := x.inner.MediaDataStorage()
+	if _r == nil {
+		return nil
+	}
+	return &MediaDataStorage{inner: _r}
+}
+
 func (x *MovieTrack) asMovieTrack() *raw.AVMovieTrack { return x.inner }
 
 func (x *MovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVAssetTrack }
+
+// MovieTrackable is the interface implemented by [MovieTrack], for mocking and DI.
+type MovieTrackable interface {
+	Unwrap() *raw.AVMovieTrack
+	MediaPresentationTimeRange() coremedia.CMTimeRange
+	MediaDecodeTimeRange() coremedia.CMTimeRange
+	AlternateGroupID() int
+	MediaDataStorage() *MediaDataStorage
+}
+
+var _ MovieTrackable = (*MovieTrack)(nil)
 

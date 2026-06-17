@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -192,4 +193,413 @@ func (x *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMedia
 	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
 	return x
 }
+
+// Identifier calls the underlying Identifier.
+func (x *WebPreferences) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// StandardFontFamily calls the underlying StandardFontFamily.
+func (x *WebPreferences) StandardFontFamily() string {
+	_r := x.inner.StandardFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStandardFontFamily calls the underlying SetStandardFontFamily.
+func (x *WebPreferences) SetStandardFontFamily(standardFontFamily string) {
+	x.inner.SetStandardFontFamily(foundation.NSStringStringWithUTF8String(standardFontFamily))
+}
+
+// FixedFontFamily calls the underlying FixedFontFamily.
+func (x *WebPreferences) FixedFontFamily() string {
+	_r := x.inner.FixedFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFixedFontFamily calls the underlying SetFixedFontFamily.
+func (x *WebPreferences) SetFixedFontFamily(fixedFontFamily string) {
+	x.inner.SetFixedFontFamily(foundation.NSStringStringWithUTF8String(fixedFontFamily))
+}
+
+// SerifFontFamily calls the underlying SerifFontFamily.
+func (x *WebPreferences) SerifFontFamily() string {
+	_r := x.inner.SerifFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSerifFontFamily calls the underlying SetSerifFontFamily.
+func (x *WebPreferences) SetSerifFontFamily(serifFontFamily string) {
+	x.inner.SetSerifFontFamily(foundation.NSStringStringWithUTF8String(serifFontFamily))
+}
+
+// SansSerifFontFamily calls the underlying SansSerifFontFamily.
+func (x *WebPreferences) SansSerifFontFamily() string {
+	_r := x.inner.SansSerifFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSansSerifFontFamily calls the underlying SetSansSerifFontFamily.
+func (x *WebPreferences) SetSansSerifFontFamily(sansSerifFontFamily string) {
+	x.inner.SetSansSerifFontFamily(foundation.NSStringStringWithUTF8String(sansSerifFontFamily))
+}
+
+// CursiveFontFamily calls the underlying CursiveFontFamily.
+func (x *WebPreferences) CursiveFontFamily() string {
+	_r := x.inner.CursiveFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCursiveFontFamily calls the underlying SetCursiveFontFamily.
+func (x *WebPreferences) SetCursiveFontFamily(cursiveFontFamily string) {
+	x.inner.SetCursiveFontFamily(foundation.NSStringStringWithUTF8String(cursiveFontFamily))
+}
+
+// FantasyFontFamily calls the underlying FantasyFontFamily.
+func (x *WebPreferences) FantasyFontFamily() string {
+	_r := x.inner.FantasyFontFamily()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFantasyFontFamily calls the underlying SetFantasyFontFamily.
+func (x *WebPreferences) SetFantasyFontFamily(fantasyFontFamily string) {
+	x.inner.SetFantasyFontFamily(foundation.NSStringStringWithUTF8String(fantasyFontFamily))
+}
+
+// DefaultFontSize calls the underlying DefaultFontSize.
+func (x *WebPreferences) DefaultFontSize() int {
+	return x.inner.DefaultFontSize()
+}
+
+// SetDefaultFontSize calls the underlying SetDefaultFontSize.
+func (x *WebPreferences) SetDefaultFontSize(defaultFontSize int) {
+	x.inner.SetDefaultFontSize(defaultFontSize)
+}
+
+// DefaultFixedFontSize calls the underlying DefaultFixedFontSize.
+func (x *WebPreferences) DefaultFixedFontSize() int {
+	return x.inner.DefaultFixedFontSize()
+}
+
+// SetDefaultFixedFontSize calls the underlying SetDefaultFixedFontSize.
+func (x *WebPreferences) SetDefaultFixedFontSize(defaultFixedFontSize int) {
+	x.inner.SetDefaultFixedFontSize(defaultFixedFontSize)
+}
+
+// MinimumFontSize calls the underlying MinimumFontSize.
+func (x *WebPreferences) MinimumFontSize() int {
+	return x.inner.MinimumFontSize()
+}
+
+// SetMinimumFontSize calls the underlying SetMinimumFontSize.
+func (x *WebPreferences) SetMinimumFontSize(minimumFontSize int) {
+	x.inner.SetMinimumFontSize(minimumFontSize)
+}
+
+// MinimumLogicalFontSize calls the underlying MinimumLogicalFontSize.
+func (x *WebPreferences) MinimumLogicalFontSize() int {
+	return x.inner.MinimumLogicalFontSize()
+}
+
+// SetMinimumLogicalFontSize calls the underlying SetMinimumLogicalFontSize.
+func (x *WebPreferences) SetMinimumLogicalFontSize(minimumLogicalFontSize int) {
+	x.inner.SetMinimumLogicalFontSize(minimumLogicalFontSize)
+}
+
+// DefaultTextEncodingName calls the underlying DefaultTextEncodingName.
+func (x *WebPreferences) DefaultTextEncodingName() string {
+	_r := x.inner.DefaultTextEncodingName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDefaultTextEncodingName calls the underlying SetDefaultTextEncodingName.
+func (x *WebPreferences) SetDefaultTextEncodingName(defaultTextEncodingName string) {
+	x.inner.SetDefaultTextEncodingName(foundation.NSStringStringWithUTF8String(defaultTextEncodingName))
+}
+
+// UserStyleSheetEnabled calls the underlying UserStyleSheetEnabled.
+func (x *WebPreferences) UserStyleSheetEnabled() bool {
+	return x.inner.UserStyleSheetEnabled()
+}
+
+// SetUserStyleSheetEnabled calls the underlying SetUserStyleSheetEnabled.
+func (x *WebPreferences) SetUserStyleSheetEnabled(userStyleSheetEnabled bool) {
+	x.inner.SetUserStyleSheetEnabled(userStyleSheetEnabled)
+}
+
+// UserStyleSheetLocation calls the underlying UserStyleSheetLocation.
+func (x *WebPreferences) UserStyleSheetLocation() *foundation.NSURL {
+	return x.inner.UserStyleSheetLocation()
+}
+
+// SetUserStyleSheetLocation calls the underlying SetUserStyleSheetLocation.
+func (x *WebPreferences) SetUserStyleSheetLocation(userStyleSheetLocation string) {
+	x.inner.SetUserStyleSheetLocation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(userStyleSheetLocation)))
+}
+
+// IsJavaEnabled calls the underlying IsJavaEnabled.
+func (x *WebPreferences) IsJavaEnabled() bool {
+	return x.inner.IsJavaEnabled()
+}
+
+// SetJavaEnabled calls the underlying SetJavaEnabled.
+func (x *WebPreferences) SetJavaEnabled(javaEnabled bool) {
+	x.inner.SetJavaEnabled(javaEnabled)
+}
+
+// IsJavaScriptEnabled calls the underlying IsJavaScriptEnabled.
+func (x *WebPreferences) IsJavaScriptEnabled() bool {
+	return x.inner.IsJavaScriptEnabled()
+}
+
+// SetJavaScriptEnabled calls the underlying SetJavaScriptEnabled.
+func (x *WebPreferences) SetJavaScriptEnabled(javaScriptEnabled bool) {
+	x.inner.SetJavaScriptEnabled(javaScriptEnabled)
+}
+
+// JavaScriptCanOpenWindowsAutomatically calls the underlying JavaScriptCanOpenWindowsAutomatically.
+func (x *WebPreferences) JavaScriptCanOpenWindowsAutomatically() bool {
+	return x.inner.JavaScriptCanOpenWindowsAutomatically()
+}
+
+// SetJavaScriptCanOpenWindowsAutomatically calls the underlying SetJavaScriptCanOpenWindowsAutomatically.
+func (x *WebPreferences) SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) {
+	x.inner.SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically)
+}
+
+// ArePlugInsEnabled calls the underlying ArePlugInsEnabled.
+func (x *WebPreferences) ArePlugInsEnabled() bool {
+	return x.inner.ArePlugInsEnabled()
+}
+
+// SetPlugInsEnabled calls the underlying SetPlugInsEnabled.
+func (x *WebPreferences) SetPlugInsEnabled(plugInsEnabled bool) {
+	x.inner.SetPlugInsEnabled(plugInsEnabled)
+}
+
+// AllowsAnimatedImages calls the underlying AllowsAnimatedImages.
+func (x *WebPreferences) AllowsAnimatedImages() bool {
+	return x.inner.AllowsAnimatedImages()
+}
+
+// SetAllowsAnimatedImages calls the underlying SetAllowsAnimatedImages.
+func (x *WebPreferences) SetAllowsAnimatedImages(allowsAnimatedImages bool) {
+	x.inner.SetAllowsAnimatedImages(allowsAnimatedImages)
+}
+
+// AllowsAnimatedImageLooping calls the underlying AllowsAnimatedImageLooping.
+func (x *WebPreferences) AllowsAnimatedImageLooping() bool {
+	return x.inner.AllowsAnimatedImageLooping()
+}
+
+// SetAllowsAnimatedImageLooping calls the underlying SetAllowsAnimatedImageLooping.
+func (x *WebPreferences) SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) {
+	x.inner.SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping)
+}
+
+// LoadsImagesAutomatically calls the underlying LoadsImagesAutomatically.
+func (x *WebPreferences) LoadsImagesAutomatically() bool {
+	return x.inner.LoadsImagesAutomatically()
+}
+
+// SetLoadsImagesAutomatically calls the underlying SetLoadsImagesAutomatically.
+func (x *WebPreferences) SetLoadsImagesAutomatically(loadsImagesAutomatically bool) {
+	x.inner.SetLoadsImagesAutomatically(loadsImagesAutomatically)
+}
+
+// Autosaves calls the underlying Autosaves.
+func (x *WebPreferences) Autosaves() bool {
+	return x.inner.Autosaves()
+}
+
+// SetAutosaves calls the underlying SetAutosaves.
+func (x *WebPreferences) SetAutosaves(autosaves bool) {
+	x.inner.SetAutosaves(autosaves)
+}
+
+// ShouldPrintBackgrounds calls the underlying ShouldPrintBackgrounds.
+func (x *WebPreferences) ShouldPrintBackgrounds() bool {
+	return x.inner.ShouldPrintBackgrounds()
+}
+
+// SetShouldPrintBackgrounds calls the underlying SetShouldPrintBackgrounds.
+func (x *WebPreferences) SetShouldPrintBackgrounds(shouldPrintBackgrounds bool) {
+	x.inner.SetShouldPrintBackgrounds(shouldPrintBackgrounds)
+}
+
+// PrivateBrowsingEnabled calls the underlying PrivateBrowsingEnabled.
+func (x *WebPreferences) PrivateBrowsingEnabled() bool {
+	return x.inner.PrivateBrowsingEnabled()
+}
+
+// SetPrivateBrowsingEnabled calls the underlying SetPrivateBrowsingEnabled.
+func (x *WebPreferences) SetPrivateBrowsingEnabled(privateBrowsingEnabled bool) {
+	x.inner.SetPrivateBrowsingEnabled(privateBrowsingEnabled)
+}
+
+// TabsToLinks calls the underlying TabsToLinks.
+func (x *WebPreferences) TabsToLinks() bool {
+	return x.inner.TabsToLinks()
+}
+
+// SetTabsToLinks calls the underlying SetTabsToLinks.
+func (x *WebPreferences) SetTabsToLinks(tabsToLinks bool) {
+	x.inner.SetTabsToLinks(tabsToLinks)
+}
+
+// UsesPageCache calls the underlying UsesPageCache.
+func (x *WebPreferences) UsesPageCache() bool {
+	return x.inner.UsesPageCache()
+}
+
+// SetUsesPageCache calls the underlying SetUsesPageCache.
+func (x *WebPreferences) SetUsesPageCache(usesPageCache bool) {
+	x.inner.SetUsesPageCache(usesPageCache)
+}
+
+// CacheModel calls the underlying CacheModel.
+func (x *WebPreferences) CacheModel() raw.WebCacheModel {
+	return x.inner.CacheModel()
+}
+
+// SetCacheModel calls the underlying SetCacheModel.
+func (x *WebPreferences) SetCacheModel(cacheModel raw.WebCacheModel) {
+	x.inner.SetCacheModel(cacheModel)
+}
+
+// SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
+func (x *WebPreferences) SuppressesIncrementalRendering() bool {
+	return x.inner.SuppressesIncrementalRendering()
+}
+
+// SetSuppressesIncrementalRendering calls the underlying SetSuppressesIncrementalRendering.
+func (x *WebPreferences) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
+	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
+}
+
+// AllowsAirPlayForMediaPlayback calls the underlying AllowsAirPlayForMediaPlayback.
+func (x *WebPreferences) AllowsAirPlayForMediaPlayback() bool {
+	return x.inner.AllowsAirPlayForMediaPlayback()
+}
+
+// SetAllowsAirPlayForMediaPlayback calls the underlying SetAllowsAirPlayForMediaPlayback.
+func (x *WebPreferences) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
+	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
+}
+
+// WebPreferencesable is the interface implemented by [WebPreferences], for mocking and DI.
+type WebPreferencesable interface {
+	Unwrap() *raw.WebPreferences
+	WithStandardFontFamily(standardFontFamily string) *WebPreferences
+	WithFixedFontFamily(fixedFontFamily string) *WebPreferences
+	WithSerifFontFamily(serifFontFamily string) *WebPreferences
+	WithSansSerifFontFamily(sansSerifFontFamily string) *WebPreferences
+	WithCursiveFontFamily(cursiveFontFamily string) *WebPreferences
+	WithFantasyFontFamily(fantasyFontFamily string) *WebPreferences
+	WithDefaultFontSize(defaultFontSize int) *WebPreferences
+	WithDefaultFixedFontSize(defaultFixedFontSize int) *WebPreferences
+	WithMinimumFontSize(minimumFontSize int) *WebPreferences
+	WithMinimumLogicalFontSize(minimumLogicalFontSize int) *WebPreferences
+	WithDefaultTextEncodingName(defaultTextEncodingName string) *WebPreferences
+	WithUserStyleSheetEnabled(userStyleSheetEnabled bool) *WebPreferences
+	WithUserStyleSheetLocation(userStyleSheetLocation string) *WebPreferences
+	WithJavaEnabled(javaEnabled bool) *WebPreferences
+	WithJavaScriptEnabled(javaScriptEnabled bool) *WebPreferences
+	WithJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool) *WebPreferences
+	WithPlugInsEnabled(plugInsEnabled bool) *WebPreferences
+	WithAllowsAnimatedImages(allowsAnimatedImages bool) *WebPreferences
+	WithAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool) *WebPreferences
+	WithLoadsImagesAutomatically(loadsImagesAutomatically bool) *WebPreferences
+	WithAutosaves(autosaves bool) *WebPreferences
+	WithShouldPrintBackgrounds(shouldPrintBackgrounds bool) *WebPreferences
+	WithPrivateBrowsingEnabled(privateBrowsingEnabled bool) *WebPreferences
+	WithTabsToLinks(tabsToLinks bool) *WebPreferences
+	WithUsesPageCache(usesPageCache bool) *WebPreferences
+	WithCacheModel(cacheModel raw.WebCacheModel) *WebPreferences
+	WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WebPreferences
+	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences
+	Identifier() string
+	StandardFontFamily() string
+	SetStandardFontFamily(standardFontFamily string)
+	FixedFontFamily() string
+	SetFixedFontFamily(fixedFontFamily string)
+	SerifFontFamily() string
+	SetSerifFontFamily(serifFontFamily string)
+	SansSerifFontFamily() string
+	SetSansSerifFontFamily(sansSerifFontFamily string)
+	CursiveFontFamily() string
+	SetCursiveFontFamily(cursiveFontFamily string)
+	FantasyFontFamily() string
+	SetFantasyFontFamily(fantasyFontFamily string)
+	DefaultFontSize() int
+	SetDefaultFontSize(defaultFontSize int)
+	DefaultFixedFontSize() int
+	SetDefaultFixedFontSize(defaultFixedFontSize int)
+	MinimumFontSize() int
+	SetMinimumFontSize(minimumFontSize int)
+	MinimumLogicalFontSize() int
+	SetMinimumLogicalFontSize(minimumLogicalFontSize int)
+	DefaultTextEncodingName() string
+	SetDefaultTextEncodingName(defaultTextEncodingName string)
+	UserStyleSheetEnabled() bool
+	SetUserStyleSheetEnabled(userStyleSheetEnabled bool)
+	UserStyleSheetLocation() *foundation.NSURL
+	SetUserStyleSheetLocation(userStyleSheetLocation string)
+	IsJavaEnabled() bool
+	SetJavaEnabled(javaEnabled bool)
+	IsJavaScriptEnabled() bool
+	SetJavaScriptEnabled(javaScriptEnabled bool)
+	JavaScriptCanOpenWindowsAutomatically() bool
+	SetJavaScriptCanOpenWindowsAutomatically(javaScriptCanOpenWindowsAutomatically bool)
+	ArePlugInsEnabled() bool
+	SetPlugInsEnabled(plugInsEnabled bool)
+	AllowsAnimatedImages() bool
+	SetAllowsAnimatedImages(allowsAnimatedImages bool)
+	AllowsAnimatedImageLooping() bool
+	SetAllowsAnimatedImageLooping(allowsAnimatedImageLooping bool)
+	LoadsImagesAutomatically() bool
+	SetLoadsImagesAutomatically(loadsImagesAutomatically bool)
+	Autosaves() bool
+	SetAutosaves(autosaves bool)
+	ShouldPrintBackgrounds() bool
+	SetShouldPrintBackgrounds(shouldPrintBackgrounds bool)
+	PrivateBrowsingEnabled() bool
+	SetPrivateBrowsingEnabled(privateBrowsingEnabled bool)
+	TabsToLinks() bool
+	SetTabsToLinks(tabsToLinks bool)
+	UsesPageCache() bool
+	SetUsesPageCache(usesPageCache bool)
+	CacheModel() raw.WebCacheModel
+	SetCacheModel(cacheModel raw.WebCacheModel)
+	SuppressesIncrementalRendering() bool
+	SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool)
+	AllowsAirPlayForMediaPlayback() bool
+	SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool)
+}
+
+var _ WebPreferencesable = (*WebPreferences)(nil)
 

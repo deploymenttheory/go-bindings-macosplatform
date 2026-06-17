@@ -23,3 +23,50 @@ func NewVoiceAnalytics() *VoiceAnalytics {
 	return &VoiceAnalytics{inner: raw.SFVoiceAnalyticsFromID(_id)}
 }
 
+// Jitter calls the underlying Jitter.
+func (x *VoiceAnalytics) Jitter() *AcousticFeature {
+	_r := x.inner.Jitter()
+	if _r == nil {
+		return nil
+	}
+	return &AcousticFeature{inner: _r}
+}
+
+// Shimmer calls the underlying Shimmer.
+func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
+	_r := x.inner.Shimmer()
+	if _r == nil {
+		return nil
+	}
+	return &AcousticFeature{inner: _r}
+}
+
+// Pitch calls the underlying Pitch.
+func (x *VoiceAnalytics) Pitch() *AcousticFeature {
+	_r := x.inner.Pitch()
+	if _r == nil {
+		return nil
+	}
+	return &AcousticFeature{inner: _r}
+}
+
+// Voicing calls the underlying Voicing.
+func (x *VoiceAnalytics) Voicing() *AcousticFeature {
+	_r := x.inner.Voicing()
+	if _r == nil {
+		return nil
+	}
+	return &AcousticFeature{inner: _r}
+}
+
+// VoiceAnalyticsable is the interface implemented by [VoiceAnalytics], for mocking and DI.
+type VoiceAnalyticsable interface {
+	Unwrap() *raw.SFVoiceAnalytics
+	Jitter() *AcousticFeature
+	Shimmer() *AcousticFeature
+	Pitch() *AcousticFeature
+	Voicing() *AcousticFeature
+}
+
+var _ VoiceAnalyticsable = (*VoiceAnalytics)(nil)
+

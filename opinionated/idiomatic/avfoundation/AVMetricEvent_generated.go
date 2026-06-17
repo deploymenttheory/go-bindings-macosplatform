@@ -6,6 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +26,34 @@ func NewMetricEvent() *MetricEvent {
 	return &MetricEvent{inner: raw.AVMetricEventFromID(_id)}
 }
 
+// Date calls the underlying Date.
+func (x *MetricEvent) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// MediaTime calls the underlying MediaTime.
+func (x *MetricEvent) MediaTime() coremedia.CMTime {
+	return x.inner.MediaTime()
+}
+
+// SessionID calls the underlying SessionID.
+func (x *MetricEvent) SessionID() string {
+	_r := x.inner.SessionID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MetricEvent) asMetricEvent() *raw.AVMetricEvent { return x.inner }
+
+// MetricEventable is the interface implemented by [MetricEvent], for mocking and DI.
+type MetricEventable interface {
+	Unwrap() *raw.AVMetricEvent
+	Date() *foundation.NSDate
+	MediaTime() coremedia.CMTime
+	SessionID() string
+}
+
+var _ MetricEventable = (*MetricEvent)(nil)
 

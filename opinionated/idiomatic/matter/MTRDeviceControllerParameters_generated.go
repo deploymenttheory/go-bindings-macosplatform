@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -75,17 +76,30 @@ func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storage
 	return x
 }
 
+// SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
+func (x *MTRDeviceControllerParameters) SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject) {
+	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuer, queue)
+}
+
+// SetOTAProviderDelegateQueue calls the underlying SetOTAProviderDelegateQueue.
+func (x *MTRDeviceControllerParameters) SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject) {
+	x.inner.SetOTAProviderDelegateQueue(otaProviderDelegate, queue)
+}
+
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (x *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() []*foundation.NSData {
 	arr := x.inner.ProductAttestationAuthorityCertificates()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetProductAttestationAuthorityCertificates calls the underlying SetProductAttestationAuthorityCertificates.
+func (x *MTRDeviceControllerParameters) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates)
 }
 
 // CertificationDeclarationCertificates returns the collection as a Go slice.
@@ -94,14 +108,75 @@ func (x *MTRDeviceControllerParameters) CertificationDeclarationCertificates() [
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetCertificationDeclarationCertificates calls the underlying SetCertificationDeclarationCertificates.
+func (x *MTRDeviceControllerParameters) SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetCertificationDeclarationCertificates(certificationDeclarationCertificates)
+}
+
+// ShouldAdvertiseOperational calls the underlying ShouldAdvertiseOperational.
+func (x *MTRDeviceControllerParameters) ShouldAdvertiseOperational() bool {
+	return x.inner.ShouldAdvertiseOperational()
+}
+
+// SetShouldAdvertiseOperational calls the underlying SetShouldAdvertiseOperational.
+func (x *MTRDeviceControllerParameters) SetShouldAdvertiseOperational(shouldAdvertiseOperational bool) {
+	x.inner.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
+}
+
+// ConcurrentSubscriptionEstablishmentsAllowedOnThread calls the underlying ConcurrentSubscriptionEstablishmentsAllowedOnThread.
+func (x *MTRDeviceControllerParameters) ConcurrentSubscriptionEstablishmentsAllowedOnThread() uint {
+	return x.inner.ConcurrentSubscriptionEstablishmentsAllowedOnThread()
+}
+
+// SetConcurrentSubscriptionEstablishmentsAllowedOnThread calls the underlying SetConcurrentSubscriptionEstablishmentsAllowedOnThread.
+func (x *MTRDeviceControllerParameters) SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) {
+	x.inner.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
+}
+
+// StorageBehaviorConfiguration calls the underlying StorageBehaviorConfiguration.
+func (x *MTRDeviceControllerParameters) StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
+	_r := x.inner.StorageBehaviorConfiguration()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MTRDeviceStorageBehaviorConfiguration{inner: _r}
+}
+
+// SetStorageBehaviorConfiguration calls the underlying SetStorageBehaviorConfiguration.
+func (x *MTRDeviceControllerParameters) SetStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) {
+	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
 }
 
 func (x *MTRDeviceControllerParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters { return x.inner }
 
 func (x *MTRDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerAbstractParameters }
+
+// MTRDeviceControllerParametersable is the interface implemented by [MTRDeviceControllerParameters], for mocking and DI.
+type MTRDeviceControllerParametersable interface {
+	Unwrap() *raw.MTRDeviceControllerParameters
+	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters
+	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters
+	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters
+	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters
+	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters
+	SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject)
+	SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject)
+	ProductAttestationAuthorityCertificates() []*foundation.NSData
+	SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData])
+	CertificationDeclarationCertificates() []*foundation.NSData
+	SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData])
+	ShouldAdvertiseOperational() bool
+	SetShouldAdvertiseOperational(shouldAdvertiseOperational bool)
+	ConcurrentSubscriptionEstablishmentsAllowedOnThread() uint
+	SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint)
+	StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration
+	SetStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration)
+}
+
+var _ MTRDeviceControllerParametersable = (*MTRDeviceControllerParameters)(nil)
 

@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AsynchronousCIImageFilteringRequest wraps [raw.AVAsynchronousCIImageFilteringRequest] with a fluent Go API.
@@ -22,4 +25,41 @@ func NewAsynchronousCIImageFilteringRequest() *AsynchronousCIImageFilteringReque
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAsynchronousCIImageFilteringRequest")), objc.RegisterName("new"))
 	return &AsynchronousCIImageFilteringRequest{inner: raw.AVAsynchronousCIImageFilteringRequestFromID(_id)}
 }
+
+// FinishWithImageContext calls the underlying FinishWithImageContext.
+func (x *AsynchronousCIImageFilteringRequest) FinishWithImageContext(filteredImage objc.ID, context_ objc.ID) {
+	x.inner.FinishWithImageContext(filteredImage, context_)
+}
+
+// FinishWithError calls the underlying FinishWithError.
+func (x *AsynchronousCIImageFilteringRequest) FinishWithError(error_ unsafe.Pointer) {
+	x.inner.FinishWithError(error_)
+}
+
+// RenderSize calls the underlying RenderSize.
+func (x *AsynchronousCIImageFilteringRequest) RenderSize() corefoundation.CGSize {
+	return x.inner.RenderSize()
+}
+
+// CompositionTime calls the underlying CompositionTime.
+func (x *AsynchronousCIImageFilteringRequest) CompositionTime() coremedia.CMTime {
+	return x.inner.CompositionTime()
+}
+
+// SourceImage calls the underlying SourceImage.
+func (x *AsynchronousCIImageFilteringRequest) SourceImage() objc.ID {
+	return x.inner.SourceImage()
+}
+
+// AsynchronousCIImageFilteringRequestable is the interface implemented by [AsynchronousCIImageFilteringRequest], for mocking and DI.
+type AsynchronousCIImageFilteringRequestable interface {
+	Unwrap() *raw.AVAsynchronousCIImageFilteringRequest
+	FinishWithImageContext(filteredImage objc.ID, context_ objc.ID)
+	FinishWithError(error_ unsafe.Pointer)
+	RenderSize() corefoundation.CGSize
+	CompositionTime() coremedia.CMTime
+	SourceImage() objc.ID
+}
+
+var _ AsynchronousCIImageFilteringRequestable = (*AsynchronousCIImageFilteringRequest)(nil)
 

@@ -36,3 +36,36 @@ func (x *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value *foundation.NSNu
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTREnergyEVSEModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTREnergyEVSEModeClusterModeTagStructable is the interface implemented by [MTREnergyEVSEModeClusterModeTagStruct], for mocking and DI.
+type MTREnergyEVSEModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTREnergyEVSEModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTREnergyEVSEModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEModeClusterModeTagStructable = (*MTREnergyEVSEModeClusterModeTagStruct)(nil)
+

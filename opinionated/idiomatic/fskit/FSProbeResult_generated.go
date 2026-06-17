@@ -6,6 +6,7 @@ package fskit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewProbeResult() *ProbeResult {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSProbeResult")), objc.RegisterName("new"))
 	return &ProbeResult{inner: raw.FSProbeResultFromID(_id)}
 }
+
+// Result calls the underlying Result.
+func (x *ProbeResult) Result() raw.FSMatchResult {
+	return x.inner.Result()
+}
+
+// Name calls the underlying Name.
+func (x *ProbeResult) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContainerID calls the underlying ContainerID.
+func (x *ProbeResult) ContainerID() *ContainerIdentifier {
+	_r := x.inner.ContainerID()
+	if _r == nil {
+		return nil
+	}
+	return &ContainerIdentifier{inner: _r}
+}
+
+// ProbeResultable is the interface implemented by [ProbeResult], for mocking and DI.
+type ProbeResultable interface {
+	Unwrap() *raw.FSProbeResult
+	Result() raw.FSMatchResult
+	Name() string
+	ContainerID() *ContainerIdentifier
+}
+
+var _ ProbeResultable = (*ProbeResult)(nil)
 

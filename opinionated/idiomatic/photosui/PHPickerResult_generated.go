@@ -5,7 +5,9 @@
 package photosui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewPickerResult() *PickerResult {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerResult")), objc.RegisterName("new"))
 	return &PickerResult{inner: raw.PHPickerResultFromID(_id)}
 }
+
+// ItemProvider calls the underlying ItemProvider.
+func (x *PickerResult) ItemProvider() *foundation.NSItemProvider {
+	return x.inner.ItemProvider()
+}
+
+// AssetIdentifier calls the underlying AssetIdentifier.
+func (x *PickerResult) AssetIdentifier() string {
+	_r := x.inner.AssetIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PickerResultable is the interface implemented by [PickerResult], for mocking and DI.
+type PickerResultable interface {
+	Unwrap() *raw.PHPickerResult
+	ItemProvider() *foundation.NSItemProvider
+	AssetIdentifier() string
+}
+
+var _ PickerResultable = (*PickerResult)(nil)
 

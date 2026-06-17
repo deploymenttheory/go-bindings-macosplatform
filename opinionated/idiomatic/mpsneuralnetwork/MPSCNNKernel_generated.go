@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CNNKernel wraps [raw.MPSCNNKernel] with a fluent Go API.
@@ -82,5 +83,266 @@ func (x *CNNKernel) WithDestinationImageAllocator(destinationImageAllocator mpsc
 	return x
 }
 
+// EncodeToCommandBufferSourceImageDestinationImage calls the underlying EncodeToCommandBufferSourceImageDestinationImage.
+func (x *CNNKernel) EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceImageDestinationImage(commandBuffer, sourceImage, destinationImage)
+}
+
+// EncodeToCommandBufferSourceImageDestinationStateDestinationImage calls the underlying EncodeToCommandBufferSourceImageDestinationStateDestinationImage.
+func (x *CNNKernel) EncodeToCommandBufferSourceImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationState *mpscore.MPSState, destinationImage *mpscore.MPSImage) {
+	x.inner.EncodeToCommandBufferSourceImageDestinationStateDestinationImage(commandBuffer, sourceImage, destinationState, destinationImage)
+}
+
+// EncodeBatchToCommandBufferSourceImagesDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesDestinationImages.
+func (x *CNNKernel) EncodeBatchToCommandBufferSourceImagesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationImages unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceImagesDestinationImages(commandBuffer, sourceImages, destinationImages)
+}
+
+// EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationImages.
+func (x *CNNKernel) EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer) {
+	x.inner.EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationImages(commandBuffer, sourceImages, destinationStates, destinationImages)
+}
+
+// EncodeToCommandBufferSourceImage calls the underlying EncodeToCommandBufferSourceImage.
+func (x *CNNKernel) EncodeToCommandBufferSourceImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImage(commandBuffer, sourceImage)
+}
+
+// EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporary calls the underlying EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporary.
+func (x *CNNKernel) EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool) *mpscore.MPSImage {
+	return x.inner.EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporary(commandBuffer, sourceImage, outState, isTemporary)
+}
+
+// EncodeBatchToCommandBufferSourceImages calls the underlying EncodeBatchToCommandBufferSourceImages.
+func (x *CNNKernel) EncodeBatchToCommandBufferSourceImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImages(commandBuffer, sourceImages)
+}
+
+// EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporary calls the underlying EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporary.
+func (x *CNNKernel) EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool) unsafe.Pointer {
+	return x.inner.EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporary(commandBuffer, sourceImages, outStates, isTemporary)
+}
+
+// ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpscore.MPSState {
+	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// ResultStateBatchForSourceImageSourceStatesDestinationImage calls the underlying ResultStateBatchForSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
+	return x.inner.ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpscore.MPSState {
+	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
+	return x.inner.TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
+}
+
+// IsResultStateReusedAcrossBatch calls the underlying IsResultStateReusedAcrossBatch.
+func (x *CNNKernel) IsResultStateReusedAcrossBatch() bool {
+	return x.inner.IsResultStateReusedAcrossBatch()
+}
+
+// AppendBatchBarrier calls the underlying AppendBatchBarrier.
+func (x *CNNKernel) AppendBatchBarrier() bool {
+	return x.inner.AppendBatchBarrier()
+}
+
+// DestinationImageDescriptorForSourceImagesSourceStates calls the underlying DestinationImageDescriptorForSourceImagesSourceStates.
+func (x *CNNKernel) DestinationImageDescriptorForSourceImagesSourceStates(sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState]) *mpscore.MPSImageDescriptor {
+	return x.inner.DestinationImageDescriptorForSourceImagesSourceStates(sourceImages, sourceStates)
+}
+
+// EncodingStorageSizeForSourceImageSourceStatesDestinationImage calls the underlying EncodingStorageSizeForSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) EncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) uint {
+	return x.inner.EncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage calls the underlying BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage.
+func (x *CNNKernel) BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) uint {
+	return x.inner.BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+}
+
+// Offset calls the underlying Offset.
+func (x *CNNKernel) Offset() mpscore.MPSOffset {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *CNNKernel) SetOffset(offset mpscore.MPSOffset) {
+	x.inner.SetOffset(offset)
+}
+
+// ClipRect calls the underlying ClipRect.
+func (x *CNNKernel) ClipRect() metal.MTLRegion {
+	return x.inner.ClipRect()
+}
+
+// SetClipRect calls the underlying SetClipRect.
+func (x *CNNKernel) SetClipRect(clipRect metal.MTLRegion) {
+	x.inner.SetClipRect(clipRect)
+}
+
+// DestinationFeatureChannelOffset calls the underlying DestinationFeatureChannelOffset.
+func (x *CNNKernel) DestinationFeatureChannelOffset() uint {
+	return x.inner.DestinationFeatureChannelOffset()
+}
+
+// SetDestinationFeatureChannelOffset calls the underlying SetDestinationFeatureChannelOffset.
+func (x *CNNKernel) SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) {
+	x.inner.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+}
+
+// SourceFeatureChannelOffset calls the underlying SourceFeatureChannelOffset.
+func (x *CNNKernel) SourceFeatureChannelOffset() uint {
+	return x.inner.SourceFeatureChannelOffset()
+}
+
+// SetSourceFeatureChannelOffset calls the underlying SetSourceFeatureChannelOffset.
+func (x *CNNKernel) SetSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) {
+	x.inner.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+}
+
+// SourceFeatureChannelMaxCount calls the underlying SourceFeatureChannelMaxCount.
+func (x *CNNKernel) SourceFeatureChannelMaxCount() uint {
+	return x.inner.SourceFeatureChannelMaxCount()
+}
+
+// SetSourceFeatureChannelMaxCount calls the underlying SetSourceFeatureChannelMaxCount.
+func (x *CNNKernel) SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) {
+	x.inner.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+}
+
+// EdgeMode calls the underlying EdgeMode.
+func (x *CNNKernel) EdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeMode()
+}
+
+// SetEdgeMode calls the underlying SetEdgeMode.
+func (x *CNNKernel) SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode) {
+	x.inner.SetEdgeMode(edgeMode)
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNKernel) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNKernel) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// StrideInPixelsX calls the underlying StrideInPixelsX.
+func (x *CNNKernel) StrideInPixelsX() uint {
+	return x.inner.StrideInPixelsX()
+}
+
+// StrideInPixelsY calls the underlying StrideInPixelsY.
+func (x *CNNKernel) StrideInPixelsY() uint {
+	return x.inner.StrideInPixelsY()
+}
+
+// DilationRateX calls the underlying DilationRateX.
+func (x *CNNKernel) DilationRateX() uint {
+	return x.inner.DilationRateX()
+}
+
+// DilationRateY calls the underlying DilationRateY.
+func (x *CNNKernel) DilationRateY() uint {
+	return x.inner.DilationRateY()
+}
+
+// IsBackwards calls the underlying IsBackwards.
+func (x *CNNKernel) IsBackwards() bool {
+	return x.inner.IsBackwards()
+}
+
+// IsStateModified calls the underlying IsStateModified.
+func (x *CNNKernel) IsStateModified() bool {
+	return x.inner.IsStateModified()
+}
+
+// Padding calls the underlying Padding.
+func (x *CNNKernel) Padding() raw.MPSNNPadding {
+	return x.inner.Padding()
+}
+
+// SetPadding calls the underlying SetPadding.
+func (x *CNNKernel) SetPadding(padding raw.MPSNNPadding) {
+	x.inner.SetPadding(padding)
+}
+
+// DestinationImageAllocator calls the underlying DestinationImageAllocator.
+func (x *CNNKernel) DestinationImageAllocator() mpscore.MPSImageAllocator {
+	return x.inner.DestinationImageAllocator()
+}
+
+// SetDestinationImageAllocator calls the underlying SetDestinationImageAllocator.
+func (x *CNNKernel) SetDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) {
+	x.inner.SetDestinationImageAllocator(destinationImageAllocator)
+}
+
 func (x *CNNKernel) asCNNKernel() *raw.MPSCNNKernel { return x.inner }
+
+// CNNKernelable is the interface implemented by [CNNKernel], for mocking and DI.
+type CNNKernelable interface {
+	Unwrap() *raw.MPSCNNKernel
+	WithOffset(offset mpscore.MPSOffset) *CNNKernel
+	WithClipRect(clipRect metal.MTLRegion) *CNNKernel
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNKernel
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNKernel
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNKernel
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNKernel
+	WithPadding(padding raw.MPSNNPadding) *CNNKernel
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNKernel
+	EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
+	EncodeToCommandBufferSourceImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationState *mpscore.MPSState, destinationImage *mpscore.MPSImage)
+	EncodeBatchToCommandBufferSourceImagesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationImages unsafe.Pointer)
+	EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
+	EncodeToCommandBufferSourceImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage) *mpscore.MPSImage
+	EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool) *mpscore.MPSImage
+	EncodeBatchToCommandBufferSourceImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer) unsafe.Pointer
+	EncodeBatchToCommandBufferSourceImagesDestinationStatesDestinationStateIsTemporary(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, outStates unsafe.Pointer, isTemporary bool) unsafe.Pointer
+	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpscore.MPSState
+	ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer
+	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpscore.MPSState
+	TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer
+	IsResultStateReusedAcrossBatch() bool
+	AppendBatchBarrier() bool
+	DestinationImageDescriptorForSourceImagesSourceStates(sourceImages *foundation.NSArray[*mpscore.MPSImage], sourceStates *foundation.NSArray[*mpscore.MPSState]) *mpscore.MPSImageDescriptor
+	EncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) uint
+	BatchEncodingStorageSizeForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) uint
+	Offset() mpscore.MPSOffset
+	SetOffset(offset mpscore.MPSOffset)
+	ClipRect() metal.MTLRegion
+	SetClipRect(clipRect metal.MTLRegion)
+	DestinationFeatureChannelOffset() uint
+	SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint)
+	SourceFeatureChannelOffset() uint
+	SetSourceFeatureChannelOffset(sourceFeatureChannelOffset uint)
+	SourceFeatureChannelMaxCount() uint
+	SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint)
+	EdgeMode() mpscore.MPSImageEdgeMode
+	SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode)
+	KernelWidth() uint
+	KernelHeight() uint
+	StrideInPixelsX() uint
+	StrideInPixelsY() uint
+	DilationRateX() uint
+	DilationRateY() uint
+	IsBackwards() bool
+	IsStateModified() bool
+	Padding() raw.MPSNNPadding
+	SetPadding(padding raw.MPSNNPadding)
+	DestinationImageAllocator() mpscore.MPSImageAllocator
+	SetDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator)
+}
+
+var _ CNNKernelable = (*CNNKernel)(nil)
 

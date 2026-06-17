@@ -48,3 +48,62 @@ func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithEnergyTransferred(e
 	return x
 }
 
+// SessionID calls the underlying SessionID.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SessionID() *foundation.NSNumber {
+	return x.inner.SessionID()
+}
+
+// SetSessionID calls the underlying SetSessionID.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetSessionID(sessionID *foundation.NSNumber) {
+	x.inner.SetSessionID(sessionID)
+}
+
+// State calls the underlying State.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// Reason calls the underlying Reason.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) Reason() *foundation.NSNumber {
+	return x.inner.Reason()
+}
+
+// SetReason calls the underlying SetReason.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetReason(reason *foundation.NSNumber) {
+	x.inner.SetReason(reason)
+}
+
+// EnergyTransferred calls the underlying EnergyTransferred.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) EnergyTransferred() *foundation.NSNumber {
+	return x.inner.EnergyTransferred()
+}
+
+// SetEnergyTransferred calls the underlying SetEnergyTransferred.
+func (x *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SetEnergyTransferred(energyTransferred *foundation.NSNumber) {
+	x.inner.SetEnergyTransferred(energyTransferred)
+}
+
+// MTREnergyEVSEClusterEnergyTransferStoppedEventable is the interface implemented by [MTREnergyEVSEClusterEnergyTransferStoppedEvent], for mocking and DI.
+type MTREnergyEVSEClusterEnergyTransferStoppedEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterEnergyTransferStoppedEvent
+	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStoppedEvent
+	WithState(state *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStoppedEvent
+	WithReason(reason *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStoppedEvent
+	WithEnergyTransferred(energyTransferred *foundation.NSNumber) *MTREnergyEVSEClusterEnergyTransferStoppedEvent
+	SessionID() *foundation.NSNumber
+	SetSessionID(sessionID *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+	Reason() *foundation.NSNumber
+	SetReason(reason *foundation.NSNumber)
+	EnergyTransferred() *foundation.NSNumber
+	SetEnergyTransferred(energyTransferred *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterEnergyTransferStoppedEventable = (*MTREnergyEVSEClusterEnergyTransferStoppedEvent)(nil)
+

@@ -35,7 +35,26 @@ func NewImageThresholdToZeroInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdToZeroInverse{inner: raw.MPSImageThresholdToZeroInverseFromID(_id)}
 }
 
+// ThresholdValue calls the underlying ThresholdValue.
+func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
+	return x.inner.ThresholdValue()
+}
+
+// Transform calls the underlying Transform.
+func (x *ImageThresholdToZeroInverse) Transform() *float32 {
+	return x.inner.Transform()
+}
+
 func (x *ImageThresholdToZeroInverse) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageThresholdToZeroInverse) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
+type ImageThresholdToZeroInverseable interface {
+	Unwrap() *raw.MPSImageThresholdToZeroInverse
+	ThresholdValue() float32
+	Transform() *float32
+}
+
+var _ ImageThresholdToZeroInverseable = (*ImageThresholdToZeroInverse)(nil)
 

@@ -23,3 +23,34 @@ func NewObjectChangeDetails() *ObjectChangeDetails {
 	return &ObjectChangeDetails{inner: raw.PHObjectChangeDetailsFromID[objc.ID](_id)}
 }
 
+// ObjectBeforeChanges calls the underlying ObjectBeforeChanges.
+func (x *ObjectChangeDetails) ObjectBeforeChanges() objc.ID {
+	return x.inner.ObjectBeforeChanges()
+}
+
+// ObjectAfterChanges calls the underlying ObjectAfterChanges.
+func (x *ObjectChangeDetails) ObjectAfterChanges() objc.ID {
+	return x.inner.ObjectAfterChanges()
+}
+
+// AssetContentChanged calls the underlying AssetContentChanged.
+func (x *ObjectChangeDetails) AssetContentChanged() bool {
+	return x.inner.AssetContentChanged()
+}
+
+// ObjectWasDeleted calls the underlying ObjectWasDeleted.
+func (x *ObjectChangeDetails) ObjectWasDeleted() bool {
+	return x.inner.ObjectWasDeleted()
+}
+
+// ObjectChangeDetailsable is the interface implemented by [ObjectChangeDetails], for mocking and DI.
+type ObjectChangeDetailsable interface {
+	Unwrap() *raw.PHObjectChangeDetails[objc.ID]
+	ObjectBeforeChanges() objc.ID
+	ObjectAfterChanges() objc.ID
+	AssetContentChanged() bool
+	ObjectWasDeleted() bool
+}
+
+var _ ObjectChangeDetailsable = (*ObjectChangeDetails)(nil)
+

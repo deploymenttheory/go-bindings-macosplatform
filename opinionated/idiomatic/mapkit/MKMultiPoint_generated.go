@@ -5,8 +5,10 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MultiPoint wraps [raw.MKMultiPoint] with a fluent Go API.
@@ -23,7 +25,44 @@ func NewMultiPoint() *MultiPoint {
 	return &MultiPoint{inner: raw.MKMultiPointFromID(_id)}
 }
 
+// Points calls the underlying Points.
+func (x *MultiPoint) Points() *raw.MKMapPoint {
+	return x.inner.Points()
+}
+
+// GetCoordinatesRange calls the underlying GetCoordinatesRange.
+func (x *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
+	x.inner.GetCoordinatesRange(coords, range_)
+}
+
+// LocationAtPointIndex calls the underlying LocationAtPointIndex.
+func (x *MultiPoint) LocationAtPointIndex(index uint) float64 {
+	return x.inner.LocationAtPointIndex(index)
+}
+
+// LocationsAtPointIndexes calls the underlying LocationsAtPointIndexes.
+func (x *MultiPoint) LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber] {
+	return x.inner.LocationsAtPointIndexes(indexes)
+}
+
+// PointCount calls the underlying PointCount.
+func (x *MultiPoint) PointCount() uint {
+	return x.inner.PointCount()
+}
+
 func (x *MultiPoint) asMultiPoint() *raw.MKMultiPoint { return x.inner }
 
 func (x *MultiPoint) asShape() *raw.MKShape { return &x.inner.MKShape }
+
+// MultiPointable is the interface implemented by [MultiPoint], for mocking and DI.
+type MultiPointable interface {
+	Unwrap() *raw.MKMultiPoint
+	Points() *raw.MKMapPoint
+	GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange)
+	LocationAtPointIndex(index uint) float64
+	LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber]
+	PointCount() uint
+}
+
+var _ MultiPointable = (*MultiPoint)(nil)
 

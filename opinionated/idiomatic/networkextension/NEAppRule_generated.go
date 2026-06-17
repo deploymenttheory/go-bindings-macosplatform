@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,16 +49,78 @@ func (x *NEAppRule) WithMatchTools(items ...*raw.NEAppRule) *NEAppRule {
 	return x
 }
 
+// MatchSigningIdentifier calls the underlying MatchSigningIdentifier.
+func (x *NEAppRule) MatchSigningIdentifier() string {
+	_r := x.inner.MatchSigningIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MatchDesignatedRequirement calls the underlying MatchDesignatedRequirement.
+func (x *NEAppRule) MatchDesignatedRequirement() string {
+	_r := x.inner.MatchDesignatedRequirement()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MatchPath calls the underlying MatchPath.
+func (x *NEAppRule) MatchPath() string {
+	_r := x.inner.MatchPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMatchPath calls the underlying SetMatchPath.
+func (x *NEAppRule) SetMatchPath(matchPath string) {
+	x.inner.SetMatchPath(foundation.NSStringStringWithUTF8String(matchPath))
+}
+
+// MatchDomains calls the underlying MatchDomains.
+func (x *NEAppRule) MatchDomains() *foundation.NSArray[objc.ID] {
+	return x.inner.MatchDomains()
+}
+
+// SetMatchDomains calls the underlying SetMatchDomains.
+func (x *NEAppRule) SetMatchDomains(matchDomains *foundation.NSArray[objc.ID]) {
+	x.inner.SetMatchDomains(matchDomains)
+}
+
 // MatchTools returns the collection as a Go slice.
 func (x *NEAppRule) MatchTools() []*raw.NEAppRule {
 	arr := x.inner.MatchTools()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEAppRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEAppRule {
+		return raw.NEAppRuleFromID(purego.Retain(_id))
+	})
 }
+
+// SetMatchTools calls the underlying SetMatchTools.
+func (x *NEAppRule) SetMatchTools(matchTools *foundation.NSArray[*raw.NEAppRule]) {
+	x.inner.SetMatchTools(matchTools)
+}
+
+// NEAppRuleable is the interface implemented by [NEAppRule], for mocking and DI.
+type NEAppRuleable interface {
+	Unwrap() *raw.NEAppRule
+	WithMatchPath(matchPath string) *NEAppRule
+	WithMatchTools(items ...*raw.NEAppRule) *NEAppRule
+	MatchSigningIdentifier() string
+	MatchDesignatedRequirement() string
+	MatchPath() string
+	SetMatchPath(matchPath string)
+	MatchDomains() *foundation.NSArray[objc.ID]
+	SetMatchDomains(matchDomains *foundation.NSArray[objc.ID])
+	MatchTools() []*raw.NEAppRule
+	SetMatchTools(matchTools *foundation.NSArray[*raw.NEAppRule])
+}
+
+var _ NEAppRuleable = (*NEAppRule)(nil)
 

@@ -31,5 +31,25 @@ func (x *NNPadNode) WithFillValue(fillValue float32) *NNPadNode {
 	return x
 }
 
+// FillValue calls the underlying FillValue.
+func (x *NNPadNode) FillValue() float32 {
+	return x.inner.FillValue()
+}
+
+// SetFillValue calls the underlying SetFillValue.
+func (x *NNPadNode) SetFillValue(fillValue float32) {
+	x.inner.SetFillValue(fillValue)
+}
+
 func (x *NNPadNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// NNPadNodeable is the interface implemented by [NNPadNode], for mocking and DI.
+type NNPadNodeable interface {
+	Unwrap() *raw.MPSNNPadNode
+	WithFillValue(fillValue float32) *NNPadNode
+	FillValue() float32
+	SetFillValue(fillValue float32)
+}
+
+var _ NNPadNodeable = (*NNPadNode)(nil)
 

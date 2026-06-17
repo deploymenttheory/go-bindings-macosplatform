@@ -42,3 +42,53 @@ func (x *MTRDoorLockClusterClearCredentialParams) WithServerSideProcessingTimeou
 	return x
 }
 
+// Credential calls the underlying Credential.
+func (x *MTRDoorLockClusterClearCredentialParams) Credential() *MTRDoorLockClusterCredentialStruct {
+	_r := x.inner.Credential()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDoorLockClusterCredentialStruct{inner: _r}
+}
+
+// SetCredential calls the underlying SetCredential.
+func (x *MTRDoorLockClusterClearCredentialParams) SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct) {
+	x.inner.SetCredential(credential)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearCredentialParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterClearCredentialParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearCredentialParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterClearCredentialParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterClearCredentialParamsable is the interface implemented by [MTRDoorLockClusterClearCredentialParams], for mocking and DI.
+type MTRDoorLockClusterClearCredentialParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterClearCredentialParams
+	WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterClearCredentialParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearCredentialParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearCredentialParams
+	Credential() *MTRDoorLockClusterCredentialStruct
+	SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterClearCredentialParamsable = (*MTRDoorLockClusterClearCredentialParams)(nil)
+

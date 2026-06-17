@@ -25,3 +25,50 @@ func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapsh
 	return &MergeConflict{inner: raw.NSMergeConflictFromID(_id)}
 }
 
+// SourceObject calls the underlying SourceObject.
+func (x *MergeConflict) SourceObject() *ManagedObject {
+	_r := x.inner.SourceObject()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObject{inner: _r}
+}
+
+// ObjectSnapshot calls the underlying ObjectSnapshot.
+func (x *MergeConflict) ObjectSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ObjectSnapshot()
+}
+
+// CachedSnapshot calls the underlying CachedSnapshot.
+func (x *MergeConflict) CachedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.CachedSnapshot()
+}
+
+// PersistedSnapshot calls the underlying PersistedSnapshot.
+func (x *MergeConflict) PersistedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PersistedSnapshot()
+}
+
+// NewVersionNumber calls the underlying NewVersionNumber.
+func (x *MergeConflict) NewVersionNumber() uint {
+	return x.inner.NewVersionNumber()
+}
+
+// OldVersionNumber calls the underlying OldVersionNumber.
+func (x *MergeConflict) OldVersionNumber() uint {
+	return x.inner.OldVersionNumber()
+}
+
+// MergeConflictable is the interface implemented by [MergeConflict], for mocking and DI.
+type MergeConflictable interface {
+	Unwrap() *raw.NSMergeConflict
+	SourceObject() *ManagedObject
+	ObjectSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	CachedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	PersistedSnapshot() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	NewVersionNumber() uint
+	OldVersionNumber() uint
+}
+
+var _ MergeConflictable = (*MergeConflict)(nil)
+

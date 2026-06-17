@@ -36,3 +36,36 @@ func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) WithServerSideProcessingTi
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRSmokeCOAlarmClusterSelfTestRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRSmokeCOAlarmClusterSelfTestRequestParamsable is the interface implemented by [MTRSmokeCOAlarmClusterSelfTestRequestParams], for mocking and DI.
+type MTRSmokeCOAlarmClusterSelfTestRequestParamsable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRSmokeCOAlarmClusterSelfTestRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRSmokeCOAlarmClusterSelfTestRequestParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRSmokeCOAlarmClusterSelfTestRequestParamsable = (*MTRSmokeCOAlarmClusterSelfTestRequestParams)(nil)
+

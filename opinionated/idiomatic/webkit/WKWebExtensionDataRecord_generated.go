@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,55 @@ func NewWKWebExtensionDataRecord() *WKWebExtensionDataRecord {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionDataRecord")), objc.RegisterName("new"))
 	return &WKWebExtensionDataRecord{inner: raw.WKWebExtensionDataRecordFromID(_id)}
 }
+
+// SizeInBytesOfTypes calls the underlying SizeInBytesOfTypes.
+func (x *WKWebExtensionDataRecord) SizeInBytesOfTypes(dataTypes *foundation.NSSet[*foundation.NSString]) uint {
+	return x.inner.SizeInBytesOfTypes(dataTypes)
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *WKWebExtensionDataRecord) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *WKWebExtensionDataRecord) UniqueIdentifier() string {
+	_r := x.inner.UniqueIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContainedDataTypes calls the underlying ContainedDataTypes.
+func (x *WKWebExtensionDataRecord) ContainedDataTypes() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.ContainedDataTypes()
+}
+
+// Errors calls the underlying Errors.
+func (x *WKWebExtensionDataRecord) Errors() *foundation.NSArray[objc.ID] {
+	return x.inner.Errors()
+}
+
+// TotalSizeInBytes calls the underlying TotalSizeInBytes.
+func (x *WKWebExtensionDataRecord) TotalSizeInBytes() uint {
+	return x.inner.TotalSizeInBytes()
+}
+
+// WKWebExtensionDataRecordable is the interface implemented by [WKWebExtensionDataRecord], for mocking and DI.
+type WKWebExtensionDataRecordable interface {
+	Unwrap() *raw.WKWebExtensionDataRecord
+	SizeInBytesOfTypes(dataTypes *foundation.NSSet[*foundation.NSString]) uint
+	DisplayName() string
+	UniqueIdentifier() string
+	ContainedDataTypes() *foundation.NSSet[*foundation.NSString]
+	Errors() *foundation.NSArray[objc.ID]
+	TotalSizeInBytes() uint
+}
+
+var _ WKWebExtensionDataRecordable = (*WKWebExtensionDataRecord)(nil)
 

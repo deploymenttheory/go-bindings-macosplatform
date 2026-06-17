@@ -25,5 +25,24 @@ func NewCircularGeographicConditionWithCenterRadius(center unsafe.Pointer, radiu
 	return &CircularGeographicCondition{inner: raw.CLCircularGeographicConditionFromID(_id)}
 }
 
+// Center calls the underlying Center.
+func (x *CircularGeographicCondition) Center() unsafe.Pointer {
+	return x.inner.Center()
+}
+
+// Radius calls the underlying Radius.
+func (x *CircularGeographicCondition) Radius() unsafe.Pointer {
+	return x.inner.Radius()
+}
+
 func (x *CircularGeographicCondition) asCondition() *raw.CLCondition { return &x.inner.CLCondition }
+
+// CircularGeographicConditionable is the interface implemented by [CircularGeographicCondition], for mocking and DI.
+type CircularGeographicConditionable interface {
+	Unwrap() *raw.CLCircularGeographicCondition
+	Center() unsafe.Pointer
+	Radius() unsafe.Pointer
+}
+
+var _ CircularGeographicConditionable = (*CircularGeographicCondition)(nil)
 

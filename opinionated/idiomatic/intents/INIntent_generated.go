@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,92 @@ func (x *Intent) WithDonationMetadata(donationMetadata IntentDonationMetadataPro
 	return x
 }
 
+// SetImageForParameterNamed calls the underlying SetImageForParameterNamed.
+func (x *Intent) SetImageForParameterNamed(image *raw.INImage, parameterName string) {
+	x.inner.SetImageForParameterNamed(image, foundation.NSStringStringWithUTF8String(parameterName))
+}
+
+// ImageForParameterNamed calls the underlying ImageForParameterNamed.
+func (x *Intent) ImageForParameterNamed(parameterName string) *Image {
+	_r := x.inner.ImageForParameterNamed(foundation.NSStringStringWithUTF8String(parameterName))
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// KeyImage calls the underlying KeyImage.
+func (x *Intent) KeyImage() *Image {
+	_r := x.inner.KeyImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Intent) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IntentDescription calls the underlying IntentDescription.
+func (x *Intent) IntentDescription() string {
+	_r := x.inner.IntentDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SuggestedInvocationPhrase calls the underlying SuggestedInvocationPhrase.
+func (x *Intent) SuggestedInvocationPhrase() string {
+	_r := x.inner.SuggestedInvocationPhrase()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSuggestedInvocationPhrase calls the underlying SetSuggestedInvocationPhrase.
+func (x *Intent) SetSuggestedInvocationPhrase(suggestedInvocationPhrase string) {
+	x.inner.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+}
+
+// DonationMetadata calls the underlying DonationMetadata.
+func (x *Intent) DonationMetadata() *IntentDonationMetadata {
+	_r := x.inner.DonationMetadata()
+	if _r == nil {
+		return nil
+	}
+	return &IntentDonationMetadata{inner: _r}
+}
+
+// SetDonationMetadata calls the underlying SetDonationMetadata.
+func (x *Intent) SetDonationMetadata(donationMetadata *raw.INIntentDonationMetadata) {
+	x.inner.SetDonationMetadata(donationMetadata)
+}
+
 func (x *Intent) asIntent() *raw.INIntent { return x.inner }
+
+// Intentable is the interface implemented by [Intent], for mocking and DI.
+type Intentable interface {
+	Unwrap() *raw.INIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *Intent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *Intent
+	SetImageForParameterNamed(image *raw.INImage, parameterName string)
+	ImageForParameterNamed(parameterName string) *Image
+	KeyImage() *Image
+	Identifier() string
+	IntentDescription() string
+	SuggestedInvocationPhrase() string
+	SetSuggestedInvocationPhrase(suggestedInvocationPhrase string)
+	DonationMetadata() *IntentDonationMetadata
+	SetDonationMetadata(donationMetadata *raw.INIntentDonationMetadata)
+}
+
+var _ Intentable = (*Intent)(nil)
 

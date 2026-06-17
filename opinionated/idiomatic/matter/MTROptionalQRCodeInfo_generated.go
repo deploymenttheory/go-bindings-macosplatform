@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -67,4 +68,80 @@ func (x *MTROptionalQRCodeInfo) WithInfoType(infoType *foundation.NSNumber) *MTR
 	x.inner.SetInfoType(infoType)
 	return x
 }
+
+// Type calls the underlying Type.
+func (x *MTROptionalQRCodeInfo) Type() raw.MTROptionalQRCodeInfoType {
+	return x.inner.Type()
+}
+
+// Tag calls the underlying Tag.
+func (x *MTROptionalQRCodeInfo) Tag() *foundation.NSNumber {
+	return x.inner.Tag()
+}
+
+// IntegerValue calls the underlying IntegerValue.
+func (x *MTROptionalQRCodeInfo) IntegerValue() *foundation.NSNumber {
+	return x.inner.IntegerValue()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *MTROptionalQRCodeInfo) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *MTROptionalQRCodeInfo) SetType(type_ raw.MTROptionalQRCodeInfoType) {
+	x.inner.SetType(type_)
+}
+
+// SetTag calls the underlying SetTag.
+func (x *MTROptionalQRCodeInfo) SetTag(tag *foundation.NSNumber) {
+	x.inner.SetTag(tag)
+}
+
+// SetIntegerValue calls the underlying SetIntegerValue.
+func (x *MTROptionalQRCodeInfo) SetIntegerValue(integerValue *foundation.NSNumber) {
+	x.inner.SetIntegerValue(integerValue)
+}
+
+// SetStringValue calls the underlying SetStringValue.
+func (x *MTROptionalQRCodeInfo) SetStringValue(stringValue string) {
+	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+}
+
+// InfoType calls the underlying InfoType.
+func (x *MTROptionalQRCodeInfo) InfoType() *foundation.NSNumber {
+	return x.inner.InfoType()
+}
+
+// SetInfoType calls the underlying SetInfoType.
+func (x *MTROptionalQRCodeInfo) SetInfoType(infoType *foundation.NSNumber) {
+	x.inner.SetInfoType(infoType)
+}
+
+// MTROptionalQRCodeInfoable is the interface implemented by [MTROptionalQRCodeInfo], for mocking and DI.
+type MTROptionalQRCodeInfoable interface {
+	Unwrap() *raw.MTROptionalQRCodeInfo
+	WithType(type_ raw.MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo
+	WithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo
+	WithIntegerValue(integerValue *foundation.NSNumber) *MTROptionalQRCodeInfo
+	WithStringValue(stringValue string) *MTROptionalQRCodeInfo
+	WithInfoType(infoType *foundation.NSNumber) *MTROptionalQRCodeInfo
+	Type() raw.MTROptionalQRCodeInfoType
+	Tag() *foundation.NSNumber
+	IntegerValue() *foundation.NSNumber
+	StringValue() string
+	SetType(type_ raw.MTROptionalQRCodeInfoType)
+	SetTag(tag *foundation.NSNumber)
+	SetIntegerValue(integerValue *foundation.NSNumber)
+	SetStringValue(stringValue string)
+	InfoType() *foundation.NSNumber
+	SetInfoType(infoType *foundation.NSNumber)
+}
+
+var _ MTROptionalQRCodeInfoable = (*MTROptionalQRCodeInfo)(nil)
 

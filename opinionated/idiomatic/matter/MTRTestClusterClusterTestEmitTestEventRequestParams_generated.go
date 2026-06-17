@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEmitTestEventRequestParams() *MTRTestClusterClu
 
 func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams { return &x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams }
 
+// MTRTestClusterClusterTestEmitTestEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestEmitTestEventRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventRequestParams
+}
+
+var _ MTRTestClusterClusterTestEmitTestEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestEventRequestParams)(nil)
+

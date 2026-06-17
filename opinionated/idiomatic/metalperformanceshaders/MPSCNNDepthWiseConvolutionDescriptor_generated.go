@@ -24,5 +24,18 @@ func NewCNNDepthWiseConvolutionDescriptor() *CNNDepthWiseConvolutionDescriptor {
 	return &CNNDepthWiseConvolutionDescriptor{inner: raw.MPSCNNDepthWiseConvolutionDescriptorFromID(_id)}
 }
 
+// ChannelMultiplier calls the underlying ChannelMultiplier.
+func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() uint {
+	return x.inner.ChannelMultiplier()
+}
+
 func (x *CNNDepthWiseConvolutionDescriptor) asCNNConvolutionDescriptor() *mpsneuralnetwork.MPSCNNConvolutionDescriptor { return &x.inner.MPSCNNConvolutionDescriptor }
+
+// CNNDepthWiseConvolutionDescriptorable is the interface implemented by [CNNDepthWiseConvolutionDescriptor], for mocking and DI.
+type CNNDepthWiseConvolutionDescriptorable interface {
+	Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor
+	ChannelMultiplier() uint
+}
+
+var _ CNNDepthWiseConvolutionDescriptorable = (*CNNDepthWiseConvolutionDescriptor)(nil)
 

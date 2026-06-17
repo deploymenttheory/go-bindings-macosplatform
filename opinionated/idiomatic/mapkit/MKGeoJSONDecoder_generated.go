@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewGeoJSONDecoder() *GeoJSONDecoder {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGeoJSONDecoder")), objc.RegisterName("new"))
 	return &GeoJSONDecoder{inner: raw.MKGeoJSONDecoderFromID(_id)}
 }
+
+// GeoJSONObjectsWithDataError calls the underlying GeoJSONObjectsWithDataError.
+func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[raw.MKGeoJSONObject], error) {
+	return x.inner.GeoJSONObjectsWithDataError(data)
+}
+
+// GeoJSONDecoderable is the interface implemented by [GeoJSONDecoder], for mocking and DI.
+type GeoJSONDecoderable interface {
+	Unwrap() *raw.MKGeoJSONDecoder
+	GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[raw.MKGeoJSONObject], error)
+}
+
+var _ GeoJSONDecoderable = (*GeoJSONDecoder)(nil)
 

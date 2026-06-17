@@ -35,7 +35,44 @@ func (x *GlassEffectContainerView) WithSpacing(spacing float64) *GlassEffectCont
 	return x
 }
 
+// ContentView calls the underlying ContentView.
+func (x *GlassEffectContainerView) ContentView() *View {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *GlassEffectContainerView) SetContentView(contentView *raw.NSView) {
+	x.inner.SetContentView(contentView)
+}
+
+// Spacing calls the underlying Spacing.
+func (x *GlassEffectContainerView) Spacing() float64 {
+	return x.inner.Spacing()
+}
+
+// SetSpacing calls the underlying SetSpacing.
+func (x *GlassEffectContainerView) SetSpacing(spacing float64) {
+	x.inner.SetSpacing(spacing)
+}
+
 func (x *GlassEffectContainerView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *GlassEffectContainerView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// GlassEffectContainerViewable is the interface implemented by [GlassEffectContainerView], for mocking and DI.
+type GlassEffectContainerViewable interface {
+	Unwrap() *raw.NSGlassEffectContainerView
+	WithContentView(contentView ViewProvider) *GlassEffectContainerView
+	WithSpacing(spacing float64) *GlassEffectContainerView
+	ContentView() *View
+	SetContentView(contentView *raw.NSView)
+	Spacing() float64
+	SetSpacing(spacing float64)
+}
+
+var _ GlassEffectContainerViewable = (*GlassEffectContainerView)(nil)
 

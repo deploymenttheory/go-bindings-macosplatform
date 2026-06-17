@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,45 @@ func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr raw.CAConstra
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), attr, foundation.NSStringStringWithUTF8String(srcId).Ptr(), srcAttr, m, c)
 	return &Constraint{inner: raw.CAConstraintFromID(_id)}
 }
+
+// Attribute calls the underlying Attribute.
+func (x *Constraint) Attribute() raw.CAConstraintAttribute {
+	return x.inner.Attribute()
+}
+
+// SourceName calls the underlying SourceName.
+func (x *Constraint) SourceName() string {
+	_r := x.inner.SourceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceAttribute calls the underlying SourceAttribute.
+func (x *Constraint) SourceAttribute() raw.CAConstraintAttribute {
+	return x.inner.SourceAttribute()
+}
+
+// Scale calls the underlying Scale.
+func (x *Constraint) Scale() float64 {
+	return x.inner.Scale()
+}
+
+// Offset calls the underlying Offset.
+func (x *Constraint) Offset() float64 {
+	return x.inner.Offset()
+}
+
+// Constraintable is the interface implemented by [Constraint], for mocking and DI.
+type Constraintable interface {
+	Unwrap() *raw.CAConstraint
+	Attribute() raw.CAConstraintAttribute
+	SourceName() string
+	SourceAttribute() raw.CAConstraintAttribute
+	Scale() float64
+	Offset() float64
+}
+
+var _ Constraintable = (*Constraint)(nil)
 

@@ -23,9 +23,26 @@ func NewCDADocumentSample() *CDADocumentSample {
 	return &CDADocumentSample{inner: raw.HKCDADocumentSampleFromID(_id)}
 }
 
+// Document calls the underlying Document.
+func (x *CDADocumentSample) Document() *CDADocument {
+	_r := x.inner.Document()
+	if _r == nil {
+		return nil
+	}
+	return &CDADocument{inner: _r}
+}
+
 func (x *CDADocumentSample) asDocumentSample() *raw.HKDocumentSample { return &x.inner.HKDocumentSample }
 
 func (x *CDADocumentSample) asSample() *raw.HKSample { return &x.inner.HKDocumentSample.HKSample }
 
 func (x *CDADocumentSample) asObject() *raw.HKObject { return &x.inner.HKDocumentSample.HKSample.HKObject }
+
+// CDADocumentSampleable is the interface implemented by [CDADocumentSample], for mocking and DI.
+type CDADocumentSampleable interface {
+	Unwrap() *raw.HKCDADocumentSample
+	Document() *CDADocument
+}
+
+var _ CDADocumentSampleable = (*CDADocumentSample)(nil)
 

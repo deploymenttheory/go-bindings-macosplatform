@@ -43,3 +43,53 @@ func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse *
 	return x
 }
 
+// Path calls the underlying Path.
+func (x *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &MTRCommandPath{inner: _r}
+}
+
+// SetPath calls the underlying SetPath.
+func (x *MTRCommandWithRequiredResponse) SetPath(path *raw.MTRCommandPath) {
+	x.inner.SetPath(path)
+}
+
+// CommandFields calls the underlying CommandFields.
+func (x *MTRCommandWithRequiredResponse) CommandFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.CommandFields()
+}
+
+// SetCommandFields calls the underlying SetCommandFields.
+func (x *MTRCommandWithRequiredResponse) SetCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetCommandFields(commandFields)
+}
+
+// RequiredResponse calls the underlying RequiredResponse.
+func (x *MTRCommandWithRequiredResponse) RequiredResponse() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
+	return x.inner.RequiredResponse()
+}
+
+// SetRequiredResponse calls the underlying SetRequiredResponse.
+func (x *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
+	x.inner.SetRequiredResponse(requiredResponse)
+}
+
+// MTRCommandWithRequiredResponseable is the interface implemented by [MTRCommandWithRequiredResponse], for mocking and DI.
+type MTRCommandWithRequiredResponseable interface {
+	Unwrap() *raw.MTRCommandWithRequiredResponse
+	WithPath(path *raw.MTRCommandPath) *MTRCommandWithRequiredResponse
+	WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse
+	WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse
+	Path() *MTRCommandPath
+	SetPath(path *raw.MTRCommandPath)
+	CommandFields() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	RequiredResponse() *foundation.NSDictionary[*foundation.NSNumber, objc.ID]
+	SetRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID])
+}
+
+var _ MTRCommandWithRequiredResponseable = (*MTRCommandWithRequiredResponse)(nil)
+

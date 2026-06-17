@@ -37,9 +37,42 @@ func (x *NDArrayMatrixMultiplication) WithBeta(beta float64) *NDArrayMatrixMulti
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *NDArrayMatrixMultiplication) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *NDArrayMatrixMultiplication) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *NDArrayMatrixMultiplication) Beta() float64 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *NDArrayMatrixMultiplication) SetBeta(beta float64) {
+	x.inner.SetBeta(beta)
+}
+
 func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayMatrixMultiplication) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayMatrixMultiplicationable is the interface implemented by [NDArrayMatrixMultiplication], for mocking and DI.
+type NDArrayMatrixMultiplicationable interface {
+	Unwrap() *raw.MPSNDArrayMatrixMultiplication
+	WithAlpha(alpha float64) *NDArrayMatrixMultiplication
+	WithBeta(beta float64) *NDArrayMatrixMultiplication
+	Alpha() float64
+	SetAlpha(alpha float64)
+	Beta() float64
+	SetBeta(beta float64)
+}
+
+var _ NDArrayMatrixMultiplicationable = (*NDArrayMatrixMultiplication)(nil)
 

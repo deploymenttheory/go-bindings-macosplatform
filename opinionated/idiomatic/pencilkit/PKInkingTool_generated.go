@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,5 +48,56 @@ func NewInkingToolWithInkWidth(ink *raw.PKInk, width float64) *InkingTool {
 	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
 }
 
+// InkType calls the underlying InkType.
+func (x *InkingTool) InkType() string {
+	_r := x.inner.InkType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Color calls the underlying Color.
+func (x *InkingTool) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// Width calls the underlying Width.
+func (x *InkingTool) Width() float64 {
+	return x.inner.Width()
+}
+
+// Azimuth calls the underlying Azimuth.
+func (x *InkingTool) Azimuth() float64 {
+	return x.inner.Azimuth()
+}
+
+// Ink calls the underlying Ink.
+func (x *InkingTool) Ink() *Ink {
+	_r := x.inner.Ink()
+	if _r == nil {
+		return nil
+	}
+	return &Ink{inner: _r}
+}
+
+// RequiredContentVersion calls the underlying RequiredContentVersion.
+func (x *InkingTool) RequiredContentVersion() raw.PKContentVersion {
+	return x.inner.RequiredContentVersion()
+}
+
 func (x *InkingTool) asTool() *raw.PKTool { return &x.inner.PKTool }
+
+// InkingToolable is the interface implemented by [InkingTool], for mocking and DI.
+type InkingToolable interface {
+	Unwrap() *raw.PKInkingTool
+	InkType() string
+	Color() *appkit.NSColor
+	Width() float64
+	Azimuth() float64
+	Ink() *Ink
+	RequiredContentVersion() raw.PKContentVersion
+}
+
+var _ InkingToolable = (*InkingTool)(nil)
 

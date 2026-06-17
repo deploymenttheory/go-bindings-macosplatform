@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SphereObstacle wraps [raw.GKSphereObstacle] with a fluent Go API.
@@ -30,5 +31,37 @@ func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
 	return x
 }
 
+// Radius calls the underlying Radius.
+func (x *SphereObstacle) Radius() float32 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *SphereObstacle) SetRadius(radius float32) {
+	x.inner.SetRadius(radius)
+}
+
+// Position calls the underlying Position.
+func (x *SphereObstacle) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *SphereObstacle) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
 func (x *SphereObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
+
+// SphereObstacleable is the interface implemented by [SphereObstacle], for mocking and DI.
+type SphereObstacleable interface {
+	Unwrap() *raw.GKSphereObstacle
+	WithRadius(radius float32) *SphereObstacle
+	Radius() float32
+	SetRadius(radius float32)
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+}
+
+var _ SphereObstacleable = (*SphereObstacle)(nil)
 

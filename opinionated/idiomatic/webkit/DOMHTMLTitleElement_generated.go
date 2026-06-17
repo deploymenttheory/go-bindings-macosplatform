@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,6 +31,20 @@ func (x *DOMHTMLTitleElement) WithText(text string) *DOMHTMLTitleElement {
 	return x
 }
 
+// Text calls the underlying Text.
+func (x *DOMHTMLTitleElement) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetText calls the underlying SetText.
+func (x *DOMHTMLTitleElement) SetText(text string) {
+	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+}
+
 func (x *DOMHTMLTitleElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLTitleElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -39,4 +54,14 @@ func (x *DOMHTMLTitleElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLTitleElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLTitleElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLTitleElementable is the interface implemented by [DOMHTMLTitleElement], for mocking and DI.
+type DOMHTMLTitleElementable interface {
+	Unwrap() *raw.DOMHTMLTitleElement
+	WithText(text string) *DOMHTMLTitleElement
+	Text() string
+	SetText(text string)
+}
+
+var _ DOMHTMLTitleElementable = (*DOMHTMLTitleElement)(nil)
 

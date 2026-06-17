@@ -31,3 +31,10 @@ func (x *ImageRegistrationRequest) asImageBasedRequest() *raw.VNImageBasedReques
 
 func (x *ImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
 
+// ImageRegistrationRequestable is the interface implemented by [ImageRegistrationRequest], for mocking and DI.
+type ImageRegistrationRequestable interface {
+	Unwrap() *raw.VNImageRegistrationRequest
+}
+
+var _ ImageRegistrationRequestable = (*ImageRegistrationRequest)(nil)
+

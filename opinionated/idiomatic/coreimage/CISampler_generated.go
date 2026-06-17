@@ -5,6 +5,7 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
@@ -38,4 +39,27 @@ func NewSamplerWithImageOptions(im *raw.CIImage, dict *foundation.NSDictionary[o
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), im.Ptr(), dict.Ptr())
 	return &Sampler{inner: raw.CISamplerFromID(_id)}
 }
+
+// Definition calls the underlying Definition.
+func (x *Sampler) Definition() *FilterShape {
+	_r := x.inner.Definition()
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// Extent calls the underlying Extent.
+func (x *Sampler) Extent() corefoundation.CGRect {
+	return x.inner.Extent()
+}
+
+// Samplerable is the interface implemented by [Sampler], for mocking and DI.
+type Samplerable interface {
+	Unwrap() *raw.CISampler
+	Definition() *FilterShape
+	Extent() corefoundation.CGRect
+}
+
+var _ Samplerable = (*Sampler)(nil)
 

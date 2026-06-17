@@ -23,3 +23,10 @@ func NewNEURLFilter() *NEURLFilter {
 	return &NEURLFilter{inner: raw.NEURLFilterFromID(_id)}
 }
 
+// NEURLFilterable is the interface implemented by [NEURLFilter], for mocking and DI.
+type NEURLFilterable interface {
+	Unwrap() *raw.NEURLFilter
+}
+
+var _ NEURLFilterable = (*NEURLFilter)(nil)
+

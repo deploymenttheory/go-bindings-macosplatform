@@ -29,3 +29,23 @@ func (x *CollaborationCoordinator) WithActionHandler(actionHandler raw.SWCollabo
 	return x
 }
 
+// ActionHandler calls the underlying ActionHandler.
+func (x *CollaborationCoordinator) ActionHandler() raw.SWCollaborationActionHandler {
+	return x.inner.ActionHandler()
+}
+
+// SetActionHandler calls the underlying SetActionHandler.
+func (x *CollaborationCoordinator) SetActionHandler(actionHandler raw.SWCollaborationActionHandler) {
+	x.inner.SetActionHandler(actionHandler)
+}
+
+// CollaborationCoordinatorable is the interface implemented by [CollaborationCoordinator], for mocking and DI.
+type CollaborationCoordinatorable interface {
+	Unwrap() *raw.SWCollaborationCoordinator
+	WithActionHandler(actionHandler raw.SWCollaborationActionHandler) *CollaborationCoordinator
+	ActionHandler() raw.SWCollaborationActionHandler
+	SetActionHandler(actionHandler raw.SWCollaborationActionHandler)
+}
+
+var _ CollaborationCoordinatorable = (*CollaborationCoordinator)(nil)
+

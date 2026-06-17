@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *ResourceViewPoolDescriptor) WithLabel(label string) *ResourceViewPoolDe
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// ResourceViewCount calls the underlying ResourceViewCount.
+func (x *ResourceViewPoolDescriptor) ResourceViewCount() uint {
+	return x.inner.ResourceViewCount()
+}
+
+// SetResourceViewCount calls the underlying SetResourceViewCount.
+func (x *ResourceViewPoolDescriptor) SetResourceViewCount(resourceViewCount uint) {
+	x.inner.SetResourceViewCount(resourceViewCount)
+}
+
+// Label calls the underlying Label.
+func (x *ResourceViewPoolDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *ResourceViewPoolDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// ResourceViewPoolDescriptorable is the interface implemented by [ResourceViewPoolDescriptor], for mocking and DI.
+type ResourceViewPoolDescriptorable interface {
+	Unwrap() *raw.MTLResourceViewPoolDescriptor
+	WithResourceViewCount(resourceViewCount uint) *ResourceViewPoolDescriptor
+	WithLabel(label string) *ResourceViewPoolDescriptor
+	ResourceViewCount() uint
+	SetResourceViewCount(resourceViewCount uint)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ ResourceViewPoolDescriptorable = (*ResourceViewPoolDescriptor)(nil)
 

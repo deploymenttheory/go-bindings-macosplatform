@@ -66,3 +66,101 @@ func (x *MTRDoorLockClusterLockUserChangeEvent) WithDataIndex(dataIndex *foundat
 	return x
 }
 
+// LockDataType calls the underlying LockDataType.
+func (x *MTRDoorLockClusterLockUserChangeEvent) LockDataType() *foundation.NSNumber {
+	return x.inner.LockDataType()
+}
+
+// SetLockDataType calls the underlying SetLockDataType.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetLockDataType(lockDataType *foundation.NSNumber) {
+	x.inner.SetLockDataType(lockDataType)
+}
+
+// DataOperationType calls the underlying DataOperationType.
+func (x *MTRDoorLockClusterLockUserChangeEvent) DataOperationType() *foundation.NSNumber {
+	return x.inner.DataOperationType()
+}
+
+// SetDataOperationType calls the underlying SetDataOperationType.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetDataOperationType(dataOperationType *foundation.NSNumber) {
+	x.inner.SetDataOperationType(dataOperationType)
+}
+
+// OperationSource calls the underlying OperationSource.
+func (x *MTRDoorLockClusterLockUserChangeEvent) OperationSource() *foundation.NSNumber {
+	return x.inner.OperationSource()
+}
+
+// SetOperationSource calls the underlying SetOperationSource.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetOperationSource(operationSource *foundation.NSNumber) {
+	x.inner.SetOperationSource(operationSource)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// SourceNode calls the underlying SourceNode.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SourceNode() *foundation.NSNumber {
+	return x.inner.SourceNode()
+}
+
+// SetSourceNode calls the underlying SetSourceNode.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetSourceNode(sourceNode *foundation.NSNumber) {
+	x.inner.SetSourceNode(sourceNode)
+}
+
+// DataIndex calls the underlying DataIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) DataIndex() *foundation.NSNumber {
+	return x.inner.DataIndex()
+}
+
+// SetDataIndex calls the underlying SetDataIndex.
+func (x *MTRDoorLockClusterLockUserChangeEvent) SetDataIndex(dataIndex *foundation.NSNumber) {
+	x.inner.SetDataIndex(dataIndex)
+}
+
+// MTRDoorLockClusterLockUserChangeEventable is the interface implemented by [MTRDoorLockClusterLockUserChangeEvent], for mocking and DI.
+type MTRDoorLockClusterLockUserChangeEventable interface {
+	Unwrap() *raw.MTRDoorLockClusterLockUserChangeEvent
+	WithLockDataType(lockDataType *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithDataOperationType(dataOperationType *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithOperationSource(operationSource *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithSourceNode(sourceNode *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	WithDataIndex(dataIndex *foundation.NSNumber) *MTRDoorLockClusterLockUserChangeEvent
+	LockDataType() *foundation.NSNumber
+	SetLockDataType(lockDataType *foundation.NSNumber)
+	DataOperationType() *foundation.NSNumber
+	SetDataOperationType(dataOperationType *foundation.NSNumber)
+	OperationSource() *foundation.NSNumber
+	SetOperationSource(operationSource *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	SourceNode() *foundation.NSNumber
+	SetSourceNode(sourceNode *foundation.NSNumber)
+	DataIndex() *foundation.NSNumber
+	SetDataIndex(dataIndex *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterLockUserChangeEventable = (*MTRDoorLockClusterLockUserChangeEvent)(nil)
+

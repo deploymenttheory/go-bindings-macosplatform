@@ -6,7 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,29 +24,54 @@ func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
 	return &ModelStructureNeuralNetworkLayer{inner: raw.MLModelStructureNeuralNetworkLayerFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *ModelStructureNeuralNetworkLayer) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *ModelStructureNeuralNetworkLayer) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // InputNames returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetworkLayer) InputNames() []*foundation.NSString {
+func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
 	arr := x.inner.InputNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // OutputNames returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetworkLayer) OutputNames() []*foundation.NSString {
+func (x *ModelStructureNeuralNetworkLayer) OutputNames() []string {
 	arr := x.inner.OutputNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ModelStructureNeuralNetworkLayerable is the interface implemented by [ModelStructureNeuralNetworkLayer], for mocking and DI.
+type ModelStructureNeuralNetworkLayerable interface {
+	Unwrap() *raw.MLModelStructureNeuralNetworkLayer
+	Name() string
+	Type() string
+	InputNames() []string
+	OutputNames() []string
+}
+
+var _ ModelStructureNeuralNetworkLayerable = (*ModelStructureNeuralNetworkLayer)(nil)
 

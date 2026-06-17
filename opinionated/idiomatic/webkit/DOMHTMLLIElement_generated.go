@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,6 +37,30 @@ func (x *DOMHTMLLIElement) WithValue(value int) *DOMHTMLLIElement {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *DOMHTMLLIElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLLIElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Value calls the underlying Value.
+func (x *DOMHTMLLIElement) Value() int {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMHTMLLIElement) SetValue(value int) {
+	x.inner.SetValue(value)
+}
+
 func (x *DOMHTMLLIElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLLIElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -45,4 +70,17 @@ func (x *DOMHTMLLIElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLEle
 func (x *DOMHTMLLIElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLLIElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLLIElementable is the interface implemented by [DOMHTMLLIElement], for mocking and DI.
+type DOMHTMLLIElementable interface {
+	Unwrap() *raw.DOMHTMLLIElement
+	WithType(type_ string) *DOMHTMLLIElement
+	WithValue(value int) *DOMHTMLLIElement
+	Type() string
+	SetType(type_ string)
+	Value() int
+	SetValue(value int)
+}
+
+var _ DOMHTMLLIElementable = (*DOMHTMLLIElement)(nil)
 

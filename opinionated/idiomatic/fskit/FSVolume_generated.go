@@ -30,3 +30,37 @@ func (x *Volume) WithName(name *raw.FSFileName) *Volume {
 	return x
 }
 
+// VolumeID calls the underlying VolumeID.
+func (x *Volume) VolumeID() *VolumeIdentifier {
+	_r := x.inner.VolumeID()
+	if _r == nil {
+		return nil
+	}
+	return &VolumeIdentifier{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *Volume) Name() *FileName {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &FileName{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *Volume) SetName(name *raw.FSFileName) {
+	x.inner.SetName(name)
+}
+
+// Volumeable is the interface implemented by [Volume], for mocking and DI.
+type Volumeable interface {
+	Unwrap() *raw.FSVolume
+	WithName(name *raw.FSFileName) *Volume
+	VolumeID() *VolumeIdentifier
+	Name() *FileName
+	SetName(name *raw.FSFileName)
+}
+
+var _ Volumeable = (*Volume)(nil)
+

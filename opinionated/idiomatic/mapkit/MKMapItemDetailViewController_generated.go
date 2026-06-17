@@ -43,3 +43,40 @@ func (x *MapItemDetailViewController) WithDelegate(delegate raw.MKMapItemDetailV
 	return x
 }
 
+// MapItem calls the underlying MapItem.
+func (x *MapItemDetailViewController) MapItem() *MapItem {
+	_r := x.inner.MapItem()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// SetMapItem calls the underlying SetMapItem.
+func (x *MapItemDetailViewController) SetMapItem(mapItem *raw.MKMapItem) {
+	x.inner.SetMapItem(mapItem)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *MapItemDetailViewController) Delegate() raw.MKMapItemDetailViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *MapItemDetailViewController) SetDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MapItemDetailViewControllerable is the interface implemented by [MapItemDetailViewController], for mocking and DI.
+type MapItemDetailViewControllerable interface {
+	Unwrap() *raw.MKMapItemDetailViewController
+	WithMapItem(mapItem *raw.MKMapItem) *MapItemDetailViewController
+	WithDelegate(delegate raw.MKMapItemDetailViewControllerDelegate) *MapItemDetailViewController
+	MapItem() *MapItem
+	SetMapItem(mapItem *raw.MKMapItem)
+	Delegate() raw.MKMapItemDetailViewControllerDelegate
+	SetDelegate(delegate raw.MKMapItemDetailViewControllerDelegate)
+}
+
+var _ MapItemDetailViewControllerable = (*MapItemDetailViewController)(nil)
+

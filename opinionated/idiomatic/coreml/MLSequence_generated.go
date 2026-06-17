@@ -7,6 +7,7 @@ package coreml
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,20 @@ func NewSequence() *Sequence {
 	return &Sequence{inner: raw.MLSequenceFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *Sequence) Type() raw.MLFeatureType {
+	return x.inner.Type()
+}
+
 // StringValues returns the collection as a Go slice.
-func (x *Sequence) StringValues() []*foundation.NSString {
+func (x *Sequence) StringValues() []string {
 	arr := x.inner.StringValues()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // Int64Values returns the collection as a Go slice.
@@ -43,10 +47,18 @@ func (x *Sequence) Int64Values() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// Sequenceable is the interface implemented by [Sequence], for mocking and DI.
+type Sequenceable interface {
+	Unwrap() *raw.MLSequence
+	Type() raw.MLFeatureType
+	StringValues() []string
+	Int64Values() []*foundation.NSNumber
+}
+
+var _ Sequenceable = (*Sequence)(nil)
 

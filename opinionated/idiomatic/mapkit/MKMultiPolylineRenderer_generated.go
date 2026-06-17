@@ -24,7 +24,24 @@ func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *raw.MKMultiPolylin
 	return &MultiPolylineRenderer{inner: raw.MKMultiPolylineRendererFromID(_id)}
 }
 
+// MultiPolyline calls the underlying MultiPolyline.
+func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
+	_r := x.inner.MultiPolyline()
+	if _r == nil {
+		return nil
+	}
+	return &MultiPolyline{inner: _r}
+}
+
 func (x *MultiPolylineRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return &x.inner.MKOverlayPathRenderer }
 
 func (x *MultiPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer }
+
+// MultiPolylineRendererable is the interface implemented by [MultiPolylineRenderer], for mocking and DI.
+type MultiPolylineRendererable interface {
+	Unwrap() *raw.MKMultiPolylineRenderer
+	MultiPolyline() *MultiPolyline
+}
+
+var _ MultiPolylineRendererable = (*MultiPolylineRenderer)(nil)
 

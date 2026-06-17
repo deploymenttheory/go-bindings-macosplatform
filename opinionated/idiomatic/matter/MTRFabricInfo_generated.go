@@ -5,7 +5,9 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,87 @@ func NewMTRFabricInfo() *MTRFabricInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRFabricInfo")), objc.RegisterName("new"))
 	return &MTRFabricInfo{inner: raw.MTRFabricInfoFromID(_id)}
 }
+
+// RootPublicKey calls the underlying RootPublicKey.
+func (x *MTRFabricInfo) RootPublicKey() *foundation.NSData {
+	return x.inner.RootPublicKey()
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRFabricInfo) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// FabricID calls the underlying FabricID.
+func (x *MTRFabricInfo) FabricID() *foundation.NSNumber {
+	return x.inner.FabricID()
+}
+
+// NodeID calls the underlying NodeID.
+func (x *MTRFabricInfo) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// Label calls the underlying Label.
+func (x *MTRFabricInfo) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RootCertificate calls the underlying RootCertificate.
+func (x *MTRFabricInfo) RootCertificate() *foundation.NSData {
+	return x.inner.RootCertificate()
+}
+
+// RootCertificateTLV calls the underlying RootCertificateTLV.
+func (x *MTRFabricInfo) RootCertificateTLV() *foundation.NSData {
+	return x.inner.RootCertificateTLV()
+}
+
+// IntermediateCertificate calls the underlying IntermediateCertificate.
+func (x *MTRFabricInfo) IntermediateCertificate() *foundation.NSData {
+	return x.inner.IntermediateCertificate()
+}
+
+// IntermediateCertificateTLV calls the underlying IntermediateCertificateTLV.
+func (x *MTRFabricInfo) IntermediateCertificateTLV() *foundation.NSData {
+	return x.inner.IntermediateCertificateTLV()
+}
+
+// OperationalCertificate calls the underlying OperationalCertificate.
+func (x *MTRFabricInfo) OperationalCertificate() *foundation.NSData {
+	return x.inner.OperationalCertificate()
+}
+
+// OperationalCertificateTLV calls the underlying OperationalCertificateTLV.
+func (x *MTRFabricInfo) OperationalCertificateTLV() *foundation.NSData {
+	return x.inner.OperationalCertificateTLV()
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRFabricInfo) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// MTRFabricInfoable is the interface implemented by [MTRFabricInfo], for mocking and DI.
+type MTRFabricInfoable interface {
+	Unwrap() *raw.MTRFabricInfo
+	RootPublicKey() *foundation.NSData
+	VendorID() *foundation.NSNumber
+	FabricID() *foundation.NSNumber
+	NodeID() *foundation.NSNumber
+	Label() string
+	RootCertificate() *foundation.NSData
+	RootCertificateTLV() *foundation.NSData
+	IntermediateCertificate() *foundation.NSData
+	IntermediateCertificateTLV() *foundation.NSData
+	OperationalCertificate() *foundation.NSData
+	OperationalCertificateTLV() *foundation.NSData
+	FabricIndex() *foundation.NSNumber
+}
+
+var _ MTRFabricInfoable = (*MTRFabricInfo)(nil)
 

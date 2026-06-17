@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -76,44 +77,111 @@ func (x *NEDNSSettings) WithAllowFailover(allowFailover bool) *NEDNSSettings {
 	return x
 }
 
+// DnsProtocol calls the underlying DnsProtocol.
+func (x *NEDNSSettings) DnsProtocol() raw.NEDNSProtocol {
+	return x.inner.DnsProtocol()
+}
+
 // Servers returns the collection as a Go slice.
-func (x *NEDNSSettings) Servers() []*foundation.NSString {
+func (x *NEDNSSettings) Servers() []string {
 	arr := x.inner.Servers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // SearchDomains returns the collection as a Go slice.
-func (x *NEDNSSettings) SearchDomains() []*foundation.NSString {
+func (x *NEDNSSettings) SearchDomains() []string {
 	arr := x.inner.SearchDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetSearchDomains calls the underlying SetSearchDomains.
+func (x *NEDNSSettings) SetSearchDomains(searchDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSearchDomains(searchDomains)
+}
+
+// DomainName calls the underlying DomainName.
+func (x *NEDNSSettings) DomainName() string {
+	_r := x.inner.DomainName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDomainName calls the underlying SetDomainName.
+func (x *NEDNSSettings) SetDomainName(domainName string) {
+	x.inner.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
 }
 
 // MatchDomains returns the collection as a Go slice.
-func (x *NEDNSSettings) MatchDomains() []*foundation.NSString {
+func (x *NEDNSSettings) MatchDomains() []string {
 	arr := x.inner.MatchDomains()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetMatchDomains calls the underlying SetMatchDomains.
+func (x *NEDNSSettings) SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetMatchDomains(matchDomains)
+}
+
+// MatchDomainsNoSearch calls the underlying MatchDomainsNoSearch.
+func (x *NEDNSSettings) MatchDomainsNoSearch() bool {
+	return x.inner.MatchDomainsNoSearch()
+}
+
+// SetMatchDomainsNoSearch calls the underlying SetMatchDomainsNoSearch.
+func (x *NEDNSSettings) SetMatchDomainsNoSearch(matchDomainsNoSearch bool) {
+	x.inner.SetMatchDomainsNoSearch(matchDomainsNoSearch)
+}
+
+// AllowFailover calls the underlying AllowFailover.
+func (x *NEDNSSettings) AllowFailover() bool {
+	return x.inner.AllowFailover()
+}
+
+// SetAllowFailover calls the underlying SetAllowFailover.
+func (x *NEDNSSettings) SetAllowFailover(allowFailover bool) {
+	x.inner.SetAllowFailover(allowFailover)
 }
 
 func (x *NEDNSSettings) asNEDNSSettings() *raw.NEDNSSettings { return x.inner }
+
+// NEDNSSettingsable is the interface implemented by [NEDNSSettings], for mocking and DI.
+type NEDNSSettingsable interface {
+	Unwrap() *raw.NEDNSSettings
+	WithSearchDomains(items ...*foundation.NSString) *NEDNSSettings
+	WithDomainName(domainName string) *NEDNSSettings
+	WithMatchDomains(items ...*foundation.NSString) *NEDNSSettings
+	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSSettings
+	WithAllowFailover(allowFailover bool) *NEDNSSettings
+	DnsProtocol() raw.NEDNSProtocol
+	Servers() []string
+	SearchDomains() []string
+	SetSearchDomains(searchDomains *foundation.NSArray[*foundation.NSString])
+	DomainName() string
+	SetDomainName(domainName string)
+	MatchDomains() []string
+	SetMatchDomains(matchDomains *foundation.NSArray[*foundation.NSString])
+	MatchDomainsNoSearch() bool
+	SetMatchDomainsNoSearch(matchDomainsNoSearch bool)
+	AllowFailover() bool
+	SetAllowFailover(allowFailover bool)
+}
+
+var _ NEDNSSettingsable = (*NEDNSSettings)(nil)
 

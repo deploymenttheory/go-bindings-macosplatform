@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -30,11 +31,11 @@ func NewUSBController() *USBController {
 func (x *USBController) AttachDevice(ctx context.Context, device raw.VZUSBDevice) error {
 	_ch := make(chan error, 1)
 	x.inner.AttachDeviceCompletionHandler(device, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -48,11 +49,11 @@ func (x *USBController) AttachDevice(ctx context.Context, device raw.VZUSBDevice
 func (x *USBController) DetachDevice(ctx context.Context, device raw.VZUSBDevice) error {
 	_ch := make(chan error, 1)
 	x.inner.DetachDeviceCompletionHandler(device, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -62,5 +63,20 @@ func (x *USBController) DetachDevice(ctx context.Context, device raw.VZUSBDevice
 	}
 }
 
+// UsbDevices calls the underlying UsbDevices.
+func (x *USBController) UsbDevices() *foundation.NSArray[raw.VZUSBDevice] {
+	return x.inner.UsbDevices()
+}
+
 func (x *USBController) asUSBController() *raw.VZUSBController { return x.inner }
+
+// USBControllerable is the interface implemented by [USBController], for mocking and DI.
+type USBControllerable interface {
+	Unwrap() *raw.VZUSBController
+	AttachDevice(ctx context.Context, device raw.VZUSBDevice) error
+	DetachDevice(ctx context.Context, device raw.VZUSBDevice) error
+	UsbDevices() *foundation.NSArray[raw.VZUSBDevice]
+}
+
+var _ USBControllerable = (*USBController)(nil)
 

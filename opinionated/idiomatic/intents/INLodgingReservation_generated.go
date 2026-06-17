@@ -33,5 +33,40 @@ func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservati
 	return &LodgingReservation{inner: raw.INLodgingReservationFromID(_id)}
 }
 
+// LodgingBusinessLocation calls the underlying LodgingBusinessLocation.
+func (x *LodgingReservation) LodgingBusinessLocation() *corelocation.CLPlacemark {
+	return x.inner.LodgingBusinessLocation()
+}
+
+// ReservationDuration calls the underlying ReservationDuration.
+func (x *LodgingReservation) ReservationDuration() *DateComponentsRange {
+	_r := x.inner.ReservationDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// NumberOfAdults calls the underlying NumberOfAdults.
+func (x *LodgingReservation) NumberOfAdults() *foundation.NSNumber {
+	return x.inner.NumberOfAdults()
+}
+
+// NumberOfChildren calls the underlying NumberOfChildren.
+func (x *LodgingReservation) NumberOfChildren() *foundation.NSNumber {
+	return x.inner.NumberOfChildren()
+}
+
 func (x *LodgingReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// LodgingReservationable is the interface implemented by [LodgingReservation], for mocking and DI.
+type LodgingReservationable interface {
+	Unwrap() *raw.INLodgingReservation
+	LodgingBusinessLocation() *corelocation.CLPlacemark
+	ReservationDuration() *DateComponentsRange
+	NumberOfAdults() *foundation.NSNumber
+	NumberOfChildren() *foundation.NSNumber
+}
+
+var _ LodgingReservationable = (*LodgingReservation)(nil)
 

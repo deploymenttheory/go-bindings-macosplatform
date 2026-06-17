@@ -29,3 +29,23 @@ func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount uint) *
 	return x
 }
 
+// FunctionCount calls the underlying FunctionCount.
+func (x *VisibleFunctionTableDescriptor) FunctionCount() uint {
+	return x.inner.FunctionCount()
+}
+
+// SetFunctionCount calls the underlying SetFunctionCount.
+func (x *VisibleFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
+	x.inner.SetFunctionCount(functionCount)
+}
+
+// VisibleFunctionTableDescriptorable is the interface implemented by [VisibleFunctionTableDescriptor], for mocking and DI.
+type VisibleFunctionTableDescriptorable interface {
+	Unwrap() *raw.MTLVisibleFunctionTableDescriptor
+	WithFunctionCount(functionCount uint) *VisibleFunctionTableDescriptor
+	FunctionCount() uint
+	SetFunctionCount(functionCount uint)
+}
+
+var _ VisibleFunctionTableDescriptorable = (*VisibleFunctionTableDescriptor)(nil)
+

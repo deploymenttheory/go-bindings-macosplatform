@@ -35,9 +35,46 @@ func NewCNNNeuronGradientWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &CNNNeuronGradient{inner: raw.MPSCNNNeuronGradientFromID(_id)}
 }
 
+// NeuronType calls the underlying NeuronType.
+func (x *CNNNeuronGradient) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// A calls the underlying A.
+func (x *CNNNeuronGradient) A() float32 {
+	return x.inner.A()
+}
+
+// B calls the underlying B.
+func (x *CNNNeuronGradient) B() float32 {
+	return x.inner.B()
+}
+
+// C calls the underlying C.
+func (x *CNNNeuronGradient) C() float32 {
+	return x.inner.C()
+}
+
+// Data calls the underlying Data.
+func (x *CNNNeuronGradient) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
 func (x *CNNNeuronGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNNeuronGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNNeuronGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNNeuronGradientable is the interface implemented by [CNNNeuronGradient], for mocking and DI.
+type CNNNeuronGradientable interface {
+	Unwrap() *raw.MPSCNNNeuronGradient
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	A() float32
+	B() float32
+	C() float32
+	Data() *foundation.NSData
+}
+
+var _ CNNNeuronGradientable = (*CNNNeuronGradient)(nil)
 

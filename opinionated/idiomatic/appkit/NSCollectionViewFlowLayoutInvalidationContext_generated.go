@@ -35,5 +35,38 @@ func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutAt
 	return x
 }
 
+// InvalidateFlowLayoutDelegateMetrics calls the underlying InvalidateFlowLayoutDelegateMetrics.
+func (x *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
+	return x.inner.InvalidateFlowLayoutDelegateMetrics()
+}
+
+// SetInvalidateFlowLayoutDelegateMetrics calls the underlying SetInvalidateFlowLayoutDelegateMetrics.
+func (x *CollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) {
+	x.inner.SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics)
+}
+
+// InvalidateFlowLayoutAttributes calls the underlying InvalidateFlowLayoutAttributes.
+func (x *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutAttributes() bool {
+	return x.inner.InvalidateFlowLayoutAttributes()
+}
+
+// SetInvalidateFlowLayoutAttributes calls the underlying SetInvalidateFlowLayoutAttributes.
+func (x *CollectionViewFlowLayoutInvalidationContext) SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) {
+	x.inner.SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes)
+}
+
 func (x *CollectionViewFlowLayoutInvalidationContext) asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext { return &x.inner.NSCollectionViewLayoutInvalidationContext }
+
+// CollectionViewFlowLayoutInvalidationContextable is the interface implemented by [CollectionViewFlowLayoutInvalidationContext], for mocking and DI.
+type CollectionViewFlowLayoutInvalidationContextable interface {
+	Unwrap() *raw.NSCollectionViewFlowLayoutInvalidationContext
+	WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext
+	WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext
+	InvalidateFlowLayoutDelegateMetrics() bool
+	SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool)
+	InvalidateFlowLayoutAttributes() bool
+	SetInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool)
+}
+
+var _ CollectionViewFlowLayoutInvalidationContextable = (*CollectionViewFlowLayoutInvalidationContext)(nil)
 

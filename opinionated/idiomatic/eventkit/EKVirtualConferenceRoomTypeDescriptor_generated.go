@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, ide
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), foundation.NSStringStringWithUTF8String(title).Ptr(), identifier.Ptr())
 	return &VirtualConferenceRoomTypeDescriptor{inner: raw.EKVirtualConferenceRoomTypeDescriptorFromID(_id)}
 }
+
+// Title calls the underlying Title.
+func (x *VirtualConferenceRoomTypeDescriptor) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *VirtualConferenceRoomTypeDescriptor) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VirtualConferenceRoomTypeDescriptorable is the interface implemented by [VirtualConferenceRoomTypeDescriptor], for mocking and DI.
+type VirtualConferenceRoomTypeDescriptorable interface {
+	Unwrap() *raw.EKVirtualConferenceRoomTypeDescriptor
+	Title() string
+	Identifier() string
+}
+
+var _ VirtualConferenceRoomTypeDescriptorable = (*VirtualConferenceRoomTypeDescriptor)(nil)
 

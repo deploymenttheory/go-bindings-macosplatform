@@ -25,3 +25,10 @@ func NewGraphObject() *GraphObject {
 
 func (x *GraphObject) asGraphObject() *raw.MPSGraphObject { return x.inner }
 
+// GraphObjectable is the interface implemented by [GraphObject], for mocking and DI.
+type GraphObjectable interface {
+	Unwrap() *raw.MPSGraphObject
+}
+
+var _ GraphObjectable = (*GraphObject)(nil)
+

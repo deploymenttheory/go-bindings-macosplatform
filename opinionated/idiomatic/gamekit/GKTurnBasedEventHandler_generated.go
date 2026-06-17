@@ -30,3 +30,23 @@ func (x *TurnBasedEventHandler) WithDelegate(delegate *foundation.NSObject) *Tur
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *TurnBasedEventHandler) Delegate() *foundation.NSObject {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TurnBasedEventHandler) SetDelegate(delegate *foundation.NSObject) {
+	x.inner.SetDelegate(delegate)
+}
+
+// TurnBasedEventHandlerable is the interface implemented by [TurnBasedEventHandler], for mocking and DI.
+type TurnBasedEventHandlerable interface {
+	Unwrap() *raw.GKTurnBasedEventHandler
+	WithDelegate(delegate *foundation.NSObject) *TurnBasedEventHandler
+	Delegate() *foundation.NSObject
+	SetDelegate(delegate *foundation.NSObject)
+}
+
+var _ TurnBasedEventHandlerable = (*TurnBasedEventHandler)(nil)
+

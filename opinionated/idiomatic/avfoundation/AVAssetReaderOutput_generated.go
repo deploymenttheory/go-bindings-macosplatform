@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetReaderOutput wraps [raw.AVAssetReaderOutput] with a fluent Go API.
@@ -35,5 +38,66 @@ func (x *AssetReaderOutput) WithSupportsRandomAccess(supportsRandomAccess bool) 
 	return x
 }
 
+// CopyNextSampleBuffer calls the underlying CopyNextSampleBuffer.
+func (x *AssetReaderOutput) CopyNextSampleBuffer() unsafe.Pointer {
+	return x.inner.CopyNextSampleBuffer()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *AssetReaderOutput) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AlwaysCopiesSampleData calls the underlying AlwaysCopiesSampleData.
+func (x *AssetReaderOutput) AlwaysCopiesSampleData() bool {
+	return x.inner.AlwaysCopiesSampleData()
+}
+
+// SetAlwaysCopiesSampleData calls the underlying SetAlwaysCopiesSampleData.
+func (x *AssetReaderOutput) SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool) {
+	x.inner.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+}
+
+// ResetForReadingTimeRanges calls the underlying ResetForReadingTimeRanges.
+func (x *AssetReaderOutput) ResetForReadingTimeRanges(timeRanges *foundation.NSArray[*foundation.NSValue]) {
+	x.inner.ResetForReadingTimeRanges(timeRanges)
+}
+
+// MarkConfigurationAsFinal calls the underlying MarkConfigurationAsFinal.
+func (x *AssetReaderOutput) MarkConfigurationAsFinal() {
+	x.inner.MarkConfigurationAsFinal()
+}
+
+// SupportsRandomAccess calls the underlying SupportsRandomAccess.
+func (x *AssetReaderOutput) SupportsRandomAccess() bool {
+	return x.inner.SupportsRandomAccess()
+}
+
+// SetSupportsRandomAccess calls the underlying SetSupportsRandomAccess.
+func (x *AssetReaderOutput) SetSupportsRandomAccess(supportsRandomAccess bool) {
+	x.inner.SetSupportsRandomAccess(supportsRandomAccess)
+}
+
 func (x *AssetReaderOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return x.inner }
+
+// AssetReaderOutputable is the interface implemented by [AssetReaderOutput], for mocking and DI.
+type AssetReaderOutputable interface {
+	Unwrap() *raw.AVAssetReaderOutput
+	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderOutput
+	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderOutput
+	CopyNextSampleBuffer() unsafe.Pointer
+	MediaType() string
+	AlwaysCopiesSampleData() bool
+	SetAlwaysCopiesSampleData(alwaysCopiesSampleData bool)
+	ResetForReadingTimeRanges(timeRanges *foundation.NSArray[*foundation.NSValue])
+	MarkConfigurationAsFinal()
+	SupportsRandomAccess() bool
+	SetSupportsRandomAccess(supportsRandomAccess bool)
+}
+
+var _ AssetReaderOutputable = (*AssetReaderOutput)(nil)
 

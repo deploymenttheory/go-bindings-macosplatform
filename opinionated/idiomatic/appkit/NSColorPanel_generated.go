@@ -59,9 +59,132 @@ func (x *ColorPanel) WithMaximumLinearExposure(maximumLinearExposure float64) *C
 	return x
 }
 
+// SetAction calls the underlying SetAction.
+func (x *ColorPanel) SetAction(selector objc.SEL) {
+	x.inner.SetAction(selector)
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *ColorPanel) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// AttachColorList calls the underlying AttachColorList.
+func (x *ColorPanel) AttachColorList(colorList *raw.NSColorList) {
+	x.inner.AttachColorList(colorList)
+}
+
+// DetachColorList calls the underlying DetachColorList.
+func (x *ColorPanel) DetachColorList(colorList *raw.NSColorList) {
+	x.inner.DetachColorList(colorList)
+}
+
+// AccessoryView calls the underlying AccessoryView.
+func (x *ColorPanel) AccessoryView() *View {
+	_r := x.inner.AccessoryView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetAccessoryView calls the underlying SetAccessoryView.
+func (x *ColorPanel) SetAccessoryView(accessoryView *raw.NSView) {
+	x.inner.SetAccessoryView(accessoryView)
+}
+
+// IsContinuous calls the underlying IsContinuous.
+func (x *ColorPanel) IsContinuous() bool {
+	return x.inner.IsContinuous()
+}
+
+// SetContinuous calls the underlying SetContinuous.
+func (x *ColorPanel) SetContinuous(continuous bool) {
+	x.inner.SetContinuous(continuous)
+}
+
+// ShowsAlpha calls the underlying ShowsAlpha.
+func (x *ColorPanel) ShowsAlpha() bool {
+	return x.inner.ShowsAlpha()
+}
+
+// SetShowsAlpha calls the underlying SetShowsAlpha.
+func (x *ColorPanel) SetShowsAlpha(showsAlpha bool) {
+	x.inner.SetShowsAlpha(showsAlpha)
+}
+
+// Mode calls the underlying Mode.
+func (x *ColorPanel) Mode() raw.NSColorPanelMode {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *ColorPanel) SetMode(mode raw.NSColorPanelMode) {
+	x.inner.SetMode(mode)
+}
+
+// Color calls the underlying Color.
+func (x *ColorPanel) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *ColorPanel) SetColor(color *raw.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *ColorPanel) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// MaximumLinearExposure calls the underlying MaximumLinearExposure.
+func (x *ColorPanel) MaximumLinearExposure() float64 {
+	return x.inner.MaximumLinearExposure()
+}
+
+// SetMaximumLinearExposure calls the underlying SetMaximumLinearExposure.
+func (x *ColorPanel) SetMaximumLinearExposure(maximumLinearExposure float64) {
+	x.inner.SetMaximumLinearExposure(maximumLinearExposure)
+}
+
 func (x *ColorPanel) asPanel() *raw.NSPanel { return &x.inner.NSPanel }
 
 func (x *ColorPanel) asWindow() *raw.NSWindow { return &x.inner.NSPanel.NSWindow }
 
 func (x *ColorPanel) asResponder() *raw.NSResponder { return &x.inner.NSPanel.NSWindow.NSResponder }
+
+// ColorPanelable is the interface implemented by [ColorPanel], for mocking and DI.
+type ColorPanelable interface {
+	Unwrap() *raw.NSColorPanel
+	WithAccessoryView(accessoryView ViewProvider) *ColorPanel
+	WithContinuous(continuous bool) *ColorPanel
+	WithShowsAlpha(showsAlpha bool) *ColorPanel
+	WithMode(mode raw.NSColorPanelMode) *ColorPanel
+	WithColor(color *raw.NSColor) *ColorPanel
+	WithMaximumLinearExposure(maximumLinearExposure float64) *ColorPanel
+	SetAction(selector objc.SEL)
+	SetTarget(target objc.ID)
+	AttachColorList(colorList *raw.NSColorList)
+	DetachColorList(colorList *raw.NSColorList)
+	AccessoryView() *View
+	SetAccessoryView(accessoryView *raw.NSView)
+	IsContinuous() bool
+	SetContinuous(continuous bool)
+	ShowsAlpha() bool
+	SetShowsAlpha(showsAlpha bool)
+	Mode() raw.NSColorPanelMode
+	SetMode(mode raw.NSColorPanelMode)
+	Color() *Color
+	SetColor(color *raw.NSColor)
+	Alpha() float64
+	MaximumLinearExposure() float64
+	SetMaximumLinearExposure(maximumLinearExposure float64)
+}
+
+var _ ColorPanelable = (*ColorPanel)(nil)
 

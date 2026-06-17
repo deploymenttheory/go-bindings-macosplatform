@@ -5,6 +5,7 @@
 package localauthentication
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,37 @@ func NewDomainState() *DomainState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainState")), objc.RegisterName("new"))
 	return &DomainState{inner: raw.LADomainStateFromID(_id)}
 }
+
+// Biometry calls the underlying Biometry.
+func (x *DomainState) Biometry() *DomainStateBiometry {
+	_r := x.inner.Biometry()
+	if _r == nil {
+		return nil
+	}
+	return &DomainStateBiometry{inner: _r}
+}
+
+// Companion calls the underlying Companion.
+func (x *DomainState) Companion() *DomainStateCompanion {
+	_r := x.inner.Companion()
+	if _r == nil {
+		return nil
+	}
+	return &DomainStateCompanion{inner: _r}
+}
+
+// StateHash calls the underlying StateHash.
+func (x *DomainState) StateHash() *foundation.NSData {
+	return x.inner.StateHash()
+}
+
+// DomainStateable is the interface implemented by [DomainState], for mocking and DI.
+type DomainStateable interface {
+	Unwrap() *raw.LADomainState
+	Biometry() *DomainStateBiometry
+	Companion() *DomainStateCompanion
+	StateHash() *foundation.NSData
+}
+
+var _ DomainStateable = (*DomainState)(nil)
 

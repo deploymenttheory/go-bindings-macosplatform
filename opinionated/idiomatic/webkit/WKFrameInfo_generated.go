@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,43 @@ func NewWKFrameInfo() *WKFrameInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKFrameInfo")), objc.RegisterName("new"))
 	return &WKFrameInfo{inner: raw.WKFrameInfoFromID(_id)}
 }
+
+// IsMainFrame calls the underlying IsMainFrame.
+func (x *WKFrameInfo) IsMainFrame() bool {
+	return x.inner.IsMainFrame()
+}
+
+// Request calls the underlying Request.
+func (x *WKFrameInfo) Request() *foundation.NSURLRequest {
+	return x.inner.Request()
+}
+
+// SecurityOrigin calls the underlying SecurityOrigin.
+func (x *WKFrameInfo) SecurityOrigin() *WKSecurityOrigin {
+	_r := x.inner.SecurityOrigin()
+	if _r == nil {
+		return nil
+	}
+	return &WKSecurityOrigin{inner: _r}
+}
+
+// WebView calls the underlying WebView.
+func (x *WKFrameInfo) WebView() *WKWebView {
+	_r := x.inner.WebView()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebView{inner: _r}
+}
+
+// WKFrameInfoable is the interface implemented by [WKFrameInfo], for mocking and DI.
+type WKFrameInfoable interface {
+	Unwrap() *raw.WKFrameInfo
+	IsMainFrame() bool
+	Request() *foundation.NSURLRequest
+	SecurityOrigin() *WKSecurityOrigin
+	WebView() *WKWebView
+}
+
+var _ WKFrameInfoable = (*WKFrameInfo)(nil)
 

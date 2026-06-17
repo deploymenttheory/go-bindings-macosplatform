@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent() *MTRE
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")), objc.RegisterName("new"))
 	return &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{inner: raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(_id)}
 }
+
+// Ranges calls the underlying Ranges.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() *foundation.NSArray[objc.ID] {
+	return x.inner.Ranges()
+}
+
+// SetRanges calls the underlying SetRanges.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges *foundation.NSArray[objc.ID]) {
+	x.inner.SetRanges(ranges)
+}
+
+// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent], for mocking and DI.
+type MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable interface {
+	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent
+	Ranges() *foundation.NSArray[objc.ID]
+	SetRanges(ranges *foundation.NSArray[objc.ID])
+}
+
+var _ MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable = (*MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent)(nil)
 

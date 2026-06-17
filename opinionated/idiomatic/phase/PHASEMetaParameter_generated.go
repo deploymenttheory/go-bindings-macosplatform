@@ -6,6 +6,7 @@ package phase
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +30,35 @@ func (x *MetaParameter) WithValue(value objc.ID) *MetaParameter {
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *MetaParameter) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *MetaParameter) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MetaParameter) SetValue(value objc.ID) {
+	x.inner.SetValue(value)
+}
+
 func (x *MetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return x.inner }
+
+// MetaParameterable is the interface implemented by [MetaParameter], for mocking and DI.
+type MetaParameterable interface {
+	Unwrap() *raw.PHASEMetaParameter
+	WithValue(value objc.ID) *MetaParameter
+	Identifier() string
+	Value() objc.ID
+	SetValue(value objc.ID)
+}
+
+var _ MetaParameterable = (*MetaParameter)(nil)
 

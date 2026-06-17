@@ -23,5 +23,32 @@ func NewSymbolPulseEffect() *SymbolPulseEffect {
 	return &SymbolPulseEffect{inner: raw.NSSymbolPulseEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolPulseEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolPulseEffect{inner: _r}
+}
+
 func (x *SymbolPulseEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolPulseEffectable is the interface implemented by [SymbolPulseEffect], for mocking and DI.
+type SymbolPulseEffectable interface {
+	Unwrap() *raw.NSSymbolPulseEffect
+	EffectWithByLayer() *SymbolPulseEffect
+	EffectWithWholeSymbol() *SymbolPulseEffect
+}
+
+var _ SymbolPulseEffectable = (*SymbolPulseEffect)(nil)
 

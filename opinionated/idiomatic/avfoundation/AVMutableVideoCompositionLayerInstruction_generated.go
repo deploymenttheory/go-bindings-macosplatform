@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,5 +31,61 @@ func (x *MutableVideoCompositionLayerInstruction) WithTrackID(trackID int32) *Mu
 	return x
 }
 
+// SetTransformRampFromStartTransformToEndTransformTimeRange calls the underlying SetTransformRampFromStartTransformToEndTransformTimeRange.
+func (x *MutableVideoCompositionLayerInstruction) SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform corefoundation.CGAffineTransform, endTransform corefoundation.CGAffineTransform, timeRange coremedia.CMTimeRange) {
+	x.inner.SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform, endTransform, timeRange)
+}
+
+// SetTransformAtTime calls the underlying SetTransformAtTime.
+func (x *MutableVideoCompositionLayerInstruction) SetTransformAtTime(transform corefoundation.CGAffineTransform, time_ coremedia.CMTime) {
+	x.inner.SetTransformAtTime(transform, time_)
+}
+
+// SetOpacityRampFromStartOpacityToEndOpacityTimeRange calls the underlying SetOpacityRampFromStartOpacityToEndOpacityTimeRange.
+func (x *MutableVideoCompositionLayerInstruction) SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity float32, endOpacity float32, timeRange coremedia.CMTimeRange) {
+	x.inner.SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity, endOpacity, timeRange)
+}
+
+// SetOpacityAtTime calls the underlying SetOpacityAtTime.
+func (x *MutableVideoCompositionLayerInstruction) SetOpacityAtTime(opacity float32, time_ coremedia.CMTime) {
+	x.inner.SetOpacityAtTime(opacity, time_)
+}
+
+// SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange calls the underlying SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange.
+func (x *MutableVideoCompositionLayerInstruction) SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle corefoundation.CGRect, endCropRectangle corefoundation.CGRect, timeRange coremedia.CMTimeRange) {
+	x.inner.SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle, endCropRectangle, timeRange)
+}
+
+// SetCropRectangleAtTime calls the underlying SetCropRectangleAtTime.
+func (x *MutableVideoCompositionLayerInstruction) SetCropRectangleAtTime(cropRectangle corefoundation.CGRect, time_ coremedia.CMTime) {
+	x.inner.SetCropRectangleAtTime(cropRectangle, time_)
+}
+
+// TrackID calls the underlying TrackID.
+func (x *MutableVideoCompositionLayerInstruction) TrackID() int32 {
+	return x.inner.TrackID()
+}
+
+// SetTrackID calls the underlying SetTrackID.
+func (x *MutableVideoCompositionLayerInstruction) SetTrackID(trackID int32) {
+	x.inner.SetTrackID(trackID)
+}
+
 func (x *MutableVideoCompositionLayerInstruction) asVideoCompositionLayerInstruction() *raw.AVVideoCompositionLayerInstruction { return &x.inner.AVVideoCompositionLayerInstruction }
+
+// MutableVideoCompositionLayerInstructionable is the interface implemented by [MutableVideoCompositionLayerInstruction], for mocking and DI.
+type MutableVideoCompositionLayerInstructionable interface {
+	Unwrap() *raw.AVMutableVideoCompositionLayerInstruction
+	WithTrackID(trackID int32) *MutableVideoCompositionLayerInstruction
+	SetTransformRampFromStartTransformToEndTransformTimeRange(startTransform corefoundation.CGAffineTransform, endTransform corefoundation.CGAffineTransform, timeRange coremedia.CMTimeRange)
+	SetTransformAtTime(transform corefoundation.CGAffineTransform, time_ coremedia.CMTime)
+	SetOpacityRampFromStartOpacityToEndOpacityTimeRange(startOpacity float32, endOpacity float32, timeRange coremedia.CMTimeRange)
+	SetOpacityAtTime(opacity float32, time_ coremedia.CMTime)
+	SetCropRectangleRampFromStartCropRectangleToEndCropRectangleTimeRange(startCropRectangle corefoundation.CGRect, endCropRectangle corefoundation.CGRect, timeRange coremedia.CMTimeRange)
+	SetCropRectangleAtTime(cropRectangle corefoundation.CGRect, time_ coremedia.CMTime)
+	TrackID() int32
+	SetTrackID(trackID int32)
+}
+
+var _ MutableVideoCompositionLayerInstructionable = (*MutableVideoCompositionLayerInstruction)(nil)
 

@@ -41,3 +41,49 @@ func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate uint) *VertexBuffer
 	return x
 }
 
+// Stride calls the underlying Stride.
+func (x *VertexBufferLayoutDescriptor) Stride() uint {
+	return x.inner.Stride()
+}
+
+// SetStride calls the underlying SetStride.
+func (x *VertexBufferLayoutDescriptor) SetStride(stride uint) {
+	x.inner.SetStride(stride)
+}
+
+// StepFunction calls the underlying StepFunction.
+func (x *VertexBufferLayoutDescriptor) StepFunction() raw.MTLVertexStepFunction {
+	return x.inner.StepFunction()
+}
+
+// SetStepFunction calls the underlying SetStepFunction.
+func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction raw.MTLVertexStepFunction) {
+	x.inner.SetStepFunction(stepFunction)
+}
+
+// StepRate calls the underlying StepRate.
+func (x *VertexBufferLayoutDescriptor) StepRate() uint {
+	return x.inner.StepRate()
+}
+
+// SetStepRate calls the underlying SetStepRate.
+func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate uint) {
+	x.inner.SetStepRate(stepRate)
+}
+
+// VertexBufferLayoutDescriptorable is the interface implemented by [VertexBufferLayoutDescriptor], for mocking and DI.
+type VertexBufferLayoutDescriptorable interface {
+	Unwrap() *raw.MTLVertexBufferLayoutDescriptor
+	WithStride(stride uint) *VertexBufferLayoutDescriptor
+	WithStepFunction(stepFunction raw.MTLVertexStepFunction) *VertexBufferLayoutDescriptor
+	WithStepRate(stepRate uint) *VertexBufferLayoutDescriptor
+	Stride() uint
+	SetStride(stride uint)
+	StepFunction() raw.MTLVertexStepFunction
+	SetStepFunction(stepFunction raw.MTLVertexStepFunction)
+	StepRate() uint
+	SetStepRate(stepRate uint)
+}
+
+var _ VertexBufferLayoutDescriptorable = (*VertexBufferLayoutDescriptor)(nil)
+

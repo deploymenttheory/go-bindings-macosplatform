@@ -42,3 +42,49 @@ func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) WithEndpoint(endp
 	return x
 }
 
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// NodeID calls the underlying NodeID.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// SetNodeID calls the underlying SetNodeID.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetNodeID(nodeID *foundation.NSNumber) {
+	x.inner.SetNodeID(nodeID)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRTimeSynchronizationClusterTrustedTimeSourceStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// MTRTimeSynchronizationClusterTrustedTimeSourceStructable is the interface implemented by [MTRTimeSynchronizationClusterTrustedTimeSourceStruct], for mocking and DI.
+type MTRTimeSynchronizationClusterTrustedTimeSourceStructable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterTrustedTimeSourceStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct
+	WithNodeID(nodeID *foundation.NSNumber) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRTimeSynchronizationClusterTrustedTimeSourceStruct
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	NodeID() *foundation.NSNumber
+	SetNodeID(nodeID *foundation.NSNumber)
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterTrustedTimeSourceStructable = (*MTRTimeSynchronizationClusterTrustedTimeSourceStruct)(nil)
+

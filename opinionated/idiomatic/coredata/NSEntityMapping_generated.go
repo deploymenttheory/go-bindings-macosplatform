@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -111,17 +112,92 @@ func (x *EntityMapping) WithEntityMigrationPolicyClassName(entityMigrationPolicy
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *EntityMapping) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *EntityMapping) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// MappingType calls the underlying MappingType.
+func (x *EntityMapping) MappingType() raw.NSEntityMappingType {
+	return x.inner.MappingType()
+}
+
+// SetMappingType calls the underlying SetMappingType.
+func (x *EntityMapping) SetMappingType(mappingType raw.NSEntityMappingType) {
+	x.inner.SetMappingType(mappingType)
+}
+
+// SourceEntityName calls the underlying SourceEntityName.
+func (x *EntityMapping) SourceEntityName() string {
+	_r := x.inner.SourceEntityName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSourceEntityName calls the underlying SetSourceEntityName.
+func (x *EntityMapping) SetSourceEntityName(sourceEntityName string) {
+	x.inner.SetSourceEntityName(foundation.NSStringStringWithUTF8String(sourceEntityName))
+}
+
+// SourceEntityVersionHash calls the underlying SourceEntityVersionHash.
+func (x *EntityMapping) SourceEntityVersionHash() *foundation.NSData {
+	return x.inner.SourceEntityVersionHash()
+}
+
+// SetSourceEntityVersionHash calls the underlying SetSourceEntityVersionHash.
+func (x *EntityMapping) SetSourceEntityVersionHash(sourceEntityVersionHash *foundation.NSData) {
+	x.inner.SetSourceEntityVersionHash(sourceEntityVersionHash)
+}
+
+// DestinationEntityName calls the underlying DestinationEntityName.
+func (x *EntityMapping) DestinationEntityName() string {
+	_r := x.inner.DestinationEntityName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDestinationEntityName calls the underlying SetDestinationEntityName.
+func (x *EntityMapping) SetDestinationEntityName(destinationEntityName string) {
+	x.inner.SetDestinationEntityName(foundation.NSStringStringWithUTF8String(destinationEntityName))
+}
+
+// DestinationEntityVersionHash calls the underlying DestinationEntityVersionHash.
+func (x *EntityMapping) DestinationEntityVersionHash() *foundation.NSData {
+	return x.inner.DestinationEntityVersionHash()
+}
+
+// SetDestinationEntityVersionHash calls the underlying SetDestinationEntityVersionHash.
+func (x *EntityMapping) SetDestinationEntityVersionHash(destinationEntityVersionHash *foundation.NSData) {
+	x.inner.SetDestinationEntityVersionHash(destinationEntityVersionHash)
+}
+
 // AttributeMappings returns the collection as a Go slice.
 func (x *EntityMapping) AttributeMappings() []*raw.NSPropertyMapping {
 	arr := x.inner.AttributeMappings()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPropertyMapping, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPropertyMapping {
+		return raw.NSPropertyMappingFromID(purego.Retain(_id))
+	})
+}
+
+// SetAttributeMappings calls the underlying SetAttributeMappings.
+func (x *EntityMapping) SetAttributeMappings(attributeMappings *foundation.NSArray[*raw.NSPropertyMapping]) {
+	x.inner.SetAttributeMappings(attributeMappings)
 }
 
 // RelationshipMappings returns the collection as a Go slice.
@@ -130,10 +206,87 @@ func (x *EntityMapping) RelationshipMappings() []*raw.NSPropertyMapping {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPropertyMapping, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPropertyMapping {
+		return raw.NSPropertyMappingFromID(purego.Retain(_id))
+	})
 }
+
+// SetRelationshipMappings calls the underlying SetRelationshipMappings.
+func (x *EntityMapping) SetRelationshipMappings(relationshipMappings *foundation.NSArray[*raw.NSPropertyMapping]) {
+	x.inner.SetRelationshipMappings(relationshipMappings)
+}
+
+// SourceExpression calls the underlying SourceExpression.
+func (x *EntityMapping) SourceExpression() *foundation.NSExpression {
+	return x.inner.SourceExpression()
+}
+
+// SetSourceExpression calls the underlying SetSourceExpression.
+func (x *EntityMapping) SetSourceExpression(sourceExpression *foundation.NSExpression) {
+	x.inner.SetSourceExpression(sourceExpression)
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *EntityMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *EntityMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// EntityMigrationPolicyClassName calls the underlying EntityMigrationPolicyClassName.
+func (x *EntityMapping) EntityMigrationPolicyClassName() string {
+	_r := x.inner.EntityMigrationPolicyClassName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEntityMigrationPolicyClassName calls the underlying SetEntityMigrationPolicyClassName.
+func (x *EntityMapping) SetEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) {
+	x.inner.SetEntityMigrationPolicyClassName(foundation.NSStringStringWithUTF8String(entityMigrationPolicyClassName))
+}
+
+// EntityMappingable is the interface implemented by [EntityMapping], for mocking and DI.
+type EntityMappingable interface {
+	Unwrap() *raw.NSEntityMapping
+	WithName(name string) *EntityMapping
+	WithMappingType(mappingType raw.NSEntityMappingType) *EntityMapping
+	WithSourceEntityName(sourceEntityName string) *EntityMapping
+	WithSourceEntityVersionHash(sourceEntityVersionHash *foundation.NSData) *EntityMapping
+	WithDestinationEntityName(destinationEntityName string) *EntityMapping
+	WithDestinationEntityVersionHash(destinationEntityVersionHash *foundation.NSData) *EntityMapping
+	WithAttributeMappings(items ...*raw.NSPropertyMapping) *EntityMapping
+	WithRelationshipMappings(items ...*raw.NSPropertyMapping) *EntityMapping
+	WithSourceExpression(sourceExpression *foundation.NSExpression) *EntityMapping
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *EntityMapping
+	WithEntityMigrationPolicyClassName(entityMigrationPolicyClassName string) *EntityMapping
+	Name() string
+	SetName(name string)
+	MappingType() raw.NSEntityMappingType
+	SetMappingType(mappingType raw.NSEntityMappingType)
+	SourceEntityName() string
+	SetSourceEntityName(sourceEntityName string)
+	SourceEntityVersionHash() *foundation.NSData
+	SetSourceEntityVersionHash(sourceEntityVersionHash *foundation.NSData)
+	DestinationEntityName() string
+	SetDestinationEntityName(destinationEntityName string)
+	DestinationEntityVersionHash() *foundation.NSData
+	SetDestinationEntityVersionHash(destinationEntityVersionHash *foundation.NSData)
+	AttributeMappings() []*raw.NSPropertyMapping
+	SetAttributeMappings(attributeMappings *foundation.NSArray[*raw.NSPropertyMapping])
+	RelationshipMappings() []*raw.NSPropertyMapping
+	SetRelationshipMappings(relationshipMappings *foundation.NSArray[*raw.NSPropertyMapping])
+	SourceExpression() *foundation.NSExpression
+	SetSourceExpression(sourceExpression *foundation.NSExpression)
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	EntityMigrationPolicyClassName() string
+	SetEntityMigrationPolicyClassName(entityMigrationPolicyClassName string)
+}
+
+var _ EntityMappingable = (*EntityMapping)(nil)
 

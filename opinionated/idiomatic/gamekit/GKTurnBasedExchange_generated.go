@@ -31,11 +31,11 @@ func NewTurnBasedExchange() *TurnBasedExchange {
 func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
 	x.inner.CancelWithLocalizableMessageKeyArgumentsCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -49,11 +49,11 @@ func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context
 func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.ReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, data, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,17 +63,67 @@ func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx cont
 	}
 }
 
+// ExchangeID calls the underlying ExchangeID.
+func (x *TurnBasedExchange) ExchangeID() string {
+	_r := x.inner.ExchangeID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Sender calls the underlying Sender.
+func (x *TurnBasedExchange) Sender() *TurnBasedParticipant {
+	_r := x.inner.Sender()
+	if _r == nil {
+		return nil
+	}
+	return &TurnBasedParticipant{inner: _r}
+}
+
 // Recipients returns the collection as a Go slice.
 func (x *TurnBasedExchange) Recipients() []*raw.GKTurnBasedParticipant {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKTurnBasedParticipant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedParticipant {
+		return raw.GKTurnBasedParticipantFromID(purego.Retain(_id))
+	})
+}
+
+// Status calls the underlying Status.
+func (x *TurnBasedExchange) Status() raw.GKTurnBasedExchangeStatus {
+	return x.inner.Status()
+}
+
+// Message calls the underlying Message.
+func (x *TurnBasedExchange) Message() string {
+	_r := x.inner.Message()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *TurnBasedExchange) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SendDate calls the underlying SendDate.
+func (x *TurnBasedExchange) SendDate() *foundation.NSDate {
+	return x.inner.SendDate()
+}
+
+// TimeoutDate calls the underlying TimeoutDate.
+func (x *TurnBasedExchange) TimeoutDate() *foundation.NSDate {
+	return x.inner.TimeoutDate()
+}
+
+// CompletionDate calls the underlying CompletionDate.
+func (x *TurnBasedExchange) CompletionDate() *foundation.NSDate {
+	return x.inner.CompletionDate()
 }
 
 // Replies returns the collection as a Go slice.
@@ -82,10 +132,27 @@ func (x *TurnBasedExchange) Replies() []*raw.GKTurnBasedExchangeReply {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKTurnBasedExchangeReply, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKTurnBasedExchangeReply {
+		return raw.GKTurnBasedExchangeReplyFromID(purego.Retain(_id))
+	})
 }
+
+// TurnBasedExchangeable is the interface implemented by [TurnBasedExchange], for mocking and DI.
+type TurnBasedExchangeable interface {
+	Unwrap() *raw.GKTurnBasedExchange
+	CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString]) error
+	ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error
+	ExchangeID() string
+	Sender() *TurnBasedParticipant
+	Recipients() []*raw.GKTurnBasedParticipant
+	Status() raw.GKTurnBasedExchangeStatus
+	Message() string
+	Data() *foundation.NSData
+	SendDate() *foundation.NSDate
+	TimeoutDate() *foundation.NSDate
+	CompletionDate() *foundation.NSDate
+	Replies() []*raw.GKTurnBasedExchangeReply
+}
+
+var _ TurnBasedExchangeable = (*TurnBasedExchange)(nil)
 

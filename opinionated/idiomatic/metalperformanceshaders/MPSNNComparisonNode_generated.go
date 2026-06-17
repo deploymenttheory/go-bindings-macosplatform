@@ -30,7 +30,27 @@ func (x *NNComparisonNode) WithComparisonType(comparisonType mpsneuralnetwork.MP
 	return x
 }
 
+// ComparisonType calls the underlying ComparisonType.
+func (x *NNComparisonNode) ComparisonType() mpsneuralnetwork.MPSNNComparisonType {
+	return x.inner.ComparisonType()
+}
+
+// SetComparisonType calls the underlying SetComparisonType.
+func (x *NNComparisonNode) SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) {
+	x.inner.SetComparisonType(comparisonType)
+}
+
 func (x *NNComparisonNode) asNNBinaryArithmeticNode() *mpsneuralnetwork.MPSNNBinaryArithmeticNode { return &x.inner.MPSNNBinaryArithmeticNode }
 
 func (x *NNComparisonNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode }
+
+// NNComparisonNodeable is the interface implemented by [NNComparisonNode], for mocking and DI.
+type NNComparisonNodeable interface {
+	Unwrap() *raw.MPSNNComparisonNode
+	WithComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) *NNComparisonNode
+	ComparisonType() mpsneuralnetwork.MPSNNComparisonType
+	SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType)
+}
+
+var _ NNComparisonNodeable = (*NNComparisonNode)(nil)
 

@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewNWHostEndpoint() *NWHostEndpoint {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWHostEndpoint")), objc.RegisterName("new"))
 	return &NWHostEndpoint{inner: raw.NWHostEndpointFromID(_id)}
 }
+
+// Hostname calls the underlying Hostname.
+func (x *NWHostEndpoint) Hostname() string {
+	_r := x.inner.Hostname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Port calls the underlying Port.
+func (x *NWHostEndpoint) Port() string {
+	_r := x.inner.Port()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NWHostEndpointable is the interface implemented by [NWHostEndpoint], for mocking and DI.
+type NWHostEndpointable interface {
+	Unwrap() *raw.NWHostEndpoint
+	Hostname() string
+	Port() string
+}
+
+var _ NWHostEndpointable = (*NWHostEndpoint)(nil)
 

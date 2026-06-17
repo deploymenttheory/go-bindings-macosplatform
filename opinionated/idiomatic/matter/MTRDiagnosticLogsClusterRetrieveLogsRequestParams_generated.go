@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,80 @@ func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSideProces
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Intent calls the underlying Intent.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() *foundation.NSNumber {
+	return x.inner.Intent()
+}
+
+// SetIntent calls the underlying SetIntent.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetIntent(intent *foundation.NSNumber) {
+	x.inner.SetIntent(intent)
+}
+
+// RequestedProtocol calls the underlying RequestedProtocol.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() *foundation.NSNumber {
+	return x.inner.RequestedProtocol()
+}
+
+// SetRequestedProtocol calls the underlying SetRequestedProtocol.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetRequestedProtocol(requestedProtocol *foundation.NSNumber) {
+	x.inner.SetRequestedProtocol(requestedProtocol)
+}
+
+// TransferFileDesignator calls the underlying TransferFileDesignator.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignator() string {
+	_r := x.inner.TransferFileDesignator()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTransferFileDesignator calls the underlying SetTransferFileDesignator.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTransferFileDesignator(transferFileDesignator string) {
+	x.inner.SetTransferFileDesignator(foundation.NSStringStringWithUTF8String(transferFileDesignator))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable is the interface implemented by [MTRDiagnosticLogsClusterRetrieveLogsRequestParams], for mocking and DI.
+type MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable interface {
+	Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithIntent(intent *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithRequestedProtocol(requestedProtocol *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithTransferFileDesignator(transferFileDesignator string) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	Intent() *foundation.NSNumber
+	SetIntent(intent *foundation.NSNumber)
+	RequestedProtocol() *foundation.NSNumber
+	SetRequestedProtocol(requestedProtocol *foundation.NSNumber)
+	TransferFileDesignator() string
+	SetTransferFileDesignator(transferFileDesignator string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable = (*MTRDiagnosticLogsClusterRetrieveLogsRequestParams)(nil)
 

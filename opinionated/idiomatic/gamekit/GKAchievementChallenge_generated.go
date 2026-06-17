@@ -23,5 +23,22 @@ func NewAchievementChallenge() *AchievementChallenge {
 	return &AchievementChallenge{inner: raw.GKAchievementChallengeFromID(_id)}
 }
 
+// Achievement calls the underlying Achievement.
+func (x *AchievementChallenge) Achievement() *Achievement {
+	_r := x.inner.Achievement()
+	if _r == nil {
+		return nil
+	}
+	return &Achievement{inner: _r}
+}
+
 func (x *AchievementChallenge) asChallenge() *raw.GKChallenge { return &x.inner.GKChallenge }
+
+// AchievementChallengeable is the interface implemented by [AchievementChallenge], for mocking and DI.
+type AchievementChallengeable interface {
+	Unwrap() *raw.GKAchievementChallenge
+	Achievement() *Achievement
+}
+
+var _ AchievementChallengeable = (*AchievementChallenge)(nil)
 

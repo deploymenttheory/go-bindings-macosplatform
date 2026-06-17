@@ -5,8 +5,11 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MapSnapshot wraps [raw.MKMapSnapshot] with a fluent Go API.
@@ -22,4 +25,23 @@ func NewMapSnapshot() *MapSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapSnapshot")), objc.RegisterName("new"))
 	return &MapSnapshot{inner: raw.MKMapSnapshotFromID(_id)}
 }
+
+// PointForCoordinate calls the underlying PointForCoordinate.
+func (x *MapSnapshot) PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint {
+	return x.inner.PointForCoordinate(coordinate)
+}
+
+// Appearance calls the underlying Appearance.
+func (x *MapSnapshot) Appearance() *appkit.NSAppearance {
+	return x.inner.Appearance()
+}
+
+// MapSnapshotable is the interface implemented by [MapSnapshot], for mocking and DI.
+type MapSnapshotable interface {
+	Unwrap() *raw.MKMapSnapshot
+	PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint
+	Appearance() *appkit.NSAppearance
+}
+
+var _ MapSnapshotable = (*MapSnapshot)(nil)
 

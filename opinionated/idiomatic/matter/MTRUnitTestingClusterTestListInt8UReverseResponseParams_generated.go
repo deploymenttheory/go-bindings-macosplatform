@@ -37,5 +37,37 @@ func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) WithTimedInvok
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) Arg1() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestListInt8UReverseResponseParams) asMTRUnitTestingClusterTestListInt8UReverseResponseParams() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestListInt8UReverseResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestListInt8UReverseResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestListInt8UReverseResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestListInt8UReverseResponseParams
+	Arg1() *foundation.NSArray[objc.ID]
+	SetArg1(arg1 *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestListInt8UReverseResponseParamsable = (*MTRUnitTestingClusterTestListInt8UReverseResponseParams)(nil)
 

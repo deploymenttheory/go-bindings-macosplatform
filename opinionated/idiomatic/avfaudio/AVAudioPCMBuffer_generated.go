@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioPCMBuffer wraps [raw.AVAudioPCMBuffer] with a fluent Go API.
@@ -38,5 +39,55 @@ func (x *AudioPCMBuffer) WithFrameLength(frameLength uint32) *AudioPCMBuffer {
 	return x
 }
 
+// FrameCapacity calls the underlying FrameCapacity.
+func (x *AudioPCMBuffer) FrameCapacity() uint32 {
+	return x.inner.FrameCapacity()
+}
+
+// FrameLength calls the underlying FrameLength.
+func (x *AudioPCMBuffer) FrameLength() uint32 {
+	return x.inner.FrameLength()
+}
+
+// SetFrameLength calls the underlying SetFrameLength.
+func (x *AudioPCMBuffer) SetFrameLength(frameLength uint32) {
+	x.inner.SetFrameLength(frameLength)
+}
+
+// Stride calls the underlying Stride.
+func (x *AudioPCMBuffer) Stride() uint {
+	return x.inner.Stride()
+}
+
+// FloatChannelData calls the underlying FloatChannelData.
+func (x *AudioPCMBuffer) FloatChannelData() unsafe.Pointer {
+	return x.inner.FloatChannelData()
+}
+
+// Int16ChannelData calls the underlying Int16ChannelData.
+func (x *AudioPCMBuffer) Int16ChannelData() unsafe.Pointer {
+	return x.inner.Int16ChannelData()
+}
+
+// Int32ChannelData calls the underlying Int32ChannelData.
+func (x *AudioPCMBuffer) Int32ChannelData() unsafe.Pointer {
+	return x.inner.Int32ChannelData()
+}
+
 func (x *AudioPCMBuffer) asAudioBuffer() *raw.AVAudioBuffer { return &x.inner.AVAudioBuffer }
+
+// AudioPCMBufferable is the interface implemented by [AudioPCMBuffer], for mocking and DI.
+type AudioPCMBufferable interface {
+	Unwrap() *raw.AVAudioPCMBuffer
+	WithFrameLength(frameLength uint32) *AudioPCMBuffer
+	FrameCapacity() uint32
+	FrameLength() uint32
+	SetFrameLength(frameLength uint32)
+	Stride() uint
+	FloatChannelData() unsafe.Pointer
+	Int16ChannelData() unsafe.Pointer
+	Int32ChannelData() unsafe.Pointer
+}
+
+var _ AudioPCMBufferable = (*AudioPCMBuffer)(nil)
 

@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewCallStackTree() *CallStackTree {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXCallStackTree")), objc.RegisterName("new"))
 	return &CallStackTree{inner: raw.MXCallStackTreeFromID(_id)}
 }
+
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *CallStackTree) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// CallStackTreeable is the interface implemented by [CallStackTree], for mocking and DI.
+type CallStackTreeable interface {
+	Unwrap() *raw.MXCallStackTree
+	JSONRepresentation() *foundation.NSData
+}
+
+var _ CallStackTreeable = (*CallStackTree)(nil)
 

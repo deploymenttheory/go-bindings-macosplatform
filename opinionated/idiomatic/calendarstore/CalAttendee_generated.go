@@ -6,6 +6,8 @@ package calendarstore
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,37 @@ func NewCalAttendee() *CalAttendee {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalAttendee")), objc.RegisterName("new"))
 	return &CalAttendee{inner: raw.CalAttendeeFromID(_id)}
 }
+
+// Address calls the underlying Address.
+func (x *CalAttendee) Address() *foundation.NSURL {
+	return x.inner.Address()
+}
+
+// CommonName calls the underlying CommonName.
+func (x *CalAttendee) CommonName() string {
+	_r := x.inner.CommonName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Status calls the underlying Status.
+func (x *CalAttendee) Status() string {
+	_r := x.inner.Status()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CalAttendeeable is the interface implemented by [CalAttendee], for mocking and DI.
+type CalAttendeeable interface {
+	Unwrap() *raw.CalAttendee
+	Address() *foundation.NSURL
+	CommonName() string
+	Status() string
+}
+
+var _ CalAttendeeable = (*CalAttendee)(nil)
 

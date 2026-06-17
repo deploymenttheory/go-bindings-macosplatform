@@ -37,7 +37,27 @@ func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kerne
 	return x
 }
 
+// KernelSizeInFeatureChannels calls the underlying KernelSizeInFeatureChannels.
+func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() uint {
+	return x.inner.KernelSizeInFeatureChannels()
+}
+
+// SetKernelSizeInFeatureChannels calls the underlying SetKernelSizeInFeatureChannels.
+func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) {
+	x.inner.SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels)
+}
+
 func (x *CNNCrossChannelNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
 
 func (x *CNNCrossChannelNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+
+// CNNCrossChannelNormalizationNodeable is the interface implemented by [CNNCrossChannelNormalizationNode], for mocking and DI.
+type CNNCrossChannelNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNCrossChannelNormalizationNode
+	WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint) *CNNCrossChannelNormalizationNode
+	KernelSizeInFeatureChannels() uint
+	SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels uint)
+}
+
+var _ CNNCrossChannelNormalizationNodeable = (*CNNCrossChannelNormalizationNode)(nil)
 

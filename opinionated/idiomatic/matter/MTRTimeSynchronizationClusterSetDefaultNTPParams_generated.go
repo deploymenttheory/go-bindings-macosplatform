@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) WithServerSideProcess
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// DefaultNTP calls the underlying DefaultNTP.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) DefaultNTP() string {
+	_r := x.inner.DefaultNTP()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDefaultNTP calls the underlying SetDefaultNTP.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetDefaultNTP(defaultNTP string) {
+	x.inner.SetDefaultNTP(foundation.NSStringStringWithUTF8String(defaultNTP))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetDefaultNTPParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTimeSynchronizationClusterSetDefaultNTPParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetDefaultNTPParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetDefaultNTPParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetDefaultNTPParams
+	WithDefaultNTP(defaultNTP string) *MTRTimeSynchronizationClusterSetDefaultNTPParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetDefaultNTPParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetDefaultNTPParams
+	DefaultNTP() string
+	SetDefaultNTP(defaultNTP string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterSetDefaultNTPParamsable = (*MTRTimeSynchronizationClusterSetDefaultNTPParams)(nil)
 

@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,16 +54,71 @@ func (x *AnimationBindComponent) WithJointPaths(items ...*foundation.NSString) *
 	return x
 }
 
+// Skeleton calls the underlying Skeleton.
+func (x *AnimationBindComponent) Skeleton() *Skeleton {
+	_r := x.inner.Skeleton()
+	if _r == nil {
+		return nil
+	}
+	return &Skeleton{inner: _r}
+}
+
+// SetSkeleton calls the underlying SetSkeleton.
+func (x *AnimationBindComponent) SetSkeleton(skeleton *raw.MDLSkeleton) {
+	x.inner.SetSkeleton(skeleton)
+}
+
+// JointAnimation calls the underlying JointAnimation.
+func (x *AnimationBindComponent) JointAnimation() raw.MDLJointAnimation {
+	return x.inner.JointAnimation()
+}
+
+// SetJointAnimation calls the underlying SetJointAnimation.
+func (x *AnimationBindComponent) SetJointAnimation(jointAnimation raw.MDLJointAnimation) {
+	x.inner.SetJointAnimation(jointAnimation)
+}
+
 // JointPaths returns the collection as a Go slice.
-func (x *AnimationBindComponent) JointPaths() []*foundation.NSString {
+func (x *AnimationBindComponent) JointPaths() []string {
 	arr := x.inner.JointPaths()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetJointPaths calls the underlying SetJointPaths.
+func (x *AnimationBindComponent) SetJointPaths(jointPaths *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetJointPaths(jointPaths)
+}
+
+// GeometryBindTransform calls the underlying GeometryBindTransform.
+func (x *AnimationBindComponent) GeometryBindTransform() unsafe.Pointer {
+	return x.inner.GeometryBindTransform()
+}
+
+// SetGeometryBindTransform calls the underlying SetGeometryBindTransform.
+func (x *AnimationBindComponent) SetGeometryBindTransform(geometryBindTransform unsafe.Pointer) {
+	x.inner.SetGeometryBindTransform(geometryBindTransform)
+}
+
+// AnimationBindComponentable is the interface implemented by [AnimationBindComponent], for mocking and DI.
+type AnimationBindComponentable interface {
+	Unwrap() *raw.MDLAnimationBindComponent
+	WithSkeleton(skeleton *raw.MDLSkeleton) *AnimationBindComponent
+	WithJointAnimation(jointAnimation raw.MDLJointAnimation) *AnimationBindComponent
+	WithJointPaths(items ...*foundation.NSString) *AnimationBindComponent
+	Skeleton() *Skeleton
+	SetSkeleton(skeleton *raw.MDLSkeleton)
+	JointAnimation() raw.MDLJointAnimation
+	SetJointAnimation(jointAnimation raw.MDLJointAnimation)
+	JointPaths() []string
+	SetJointPaths(jointPaths *foundation.NSArray[*foundation.NSString])
+	GeometryBindTransform() unsafe.Pointer
+	SetGeometryBindTransform(geometryBindTransform unsafe.Pointer)
+}
+
+var _ AnimationBindComponentable = (*AnimationBindComponent)(nil)
 

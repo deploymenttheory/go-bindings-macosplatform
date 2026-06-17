@@ -25,5 +25,24 @@ func NewPaymentRequestPaymentMethodUpdateWithErrorsPaymentSummaryItems(errors_ *
 	return &PaymentRequestPaymentMethodUpdate{inner: raw.PKPaymentRequestPaymentMethodUpdateFromID(_id)}
 }
 
+// Errors calls the underlying Errors.
+func (x *PaymentRequestPaymentMethodUpdate) Errors() *foundation.NSArray[objc.ID] {
+	return x.inner.Errors()
+}
+
+// SetErrors calls the underlying SetErrors.
+func (x *PaymentRequestPaymentMethodUpdate) SetErrors() error {
+	return x.inner.SetErrors()
+}
+
 func (x *PaymentRequestPaymentMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
+
+// PaymentRequestPaymentMethodUpdateable is the interface implemented by [PaymentRequestPaymentMethodUpdate], for mocking and DI.
+type PaymentRequestPaymentMethodUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestPaymentMethodUpdate
+	Errors() *foundation.NSArray[objc.ID]
+	SetErrors() error
+}
+
+var _ PaymentRequestPaymentMethodUpdateable = (*PaymentRequestPaymentMethodUpdate)(nil)
 

@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,16 +38,66 @@ func (x *AuthorizationController) WithPresentationContextProvider(presentationCo
 	return x
 }
 
+// PerformRequests calls the underlying PerformRequests.
+func (x *AuthorizationController) PerformRequests() {
+	x.inner.PerformRequests()
+}
+
+// PerformRequestsWithOptions calls the underlying PerformRequestsWithOptions.
+func (x *AuthorizationController) PerformRequestsWithOptions(options raw.ASAuthorizationControllerRequestOptions) {
+	x.inner.PerformRequestsWithOptions(options)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *AuthorizationController) Cancel() {
+	x.inner.Cancel()
+}
+
 // AuthorizationRequests returns the collection as a Go slice.
 func (x *AuthorizationController) AuthorizationRequests() []*raw.ASAuthorizationRequest {
 	arr := x.inner.AuthorizationRequests()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationRequest, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationRequest {
+		return raw.ASAuthorizationRequestFromID(purego.Retain(_id))
+	})
 }
+
+// Delegate calls the underlying Delegate.
+func (x *AuthorizationController) Delegate() raw.ASAuthorizationControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AuthorizationController) SetDelegate(delegate raw.ASAuthorizationControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PresentationContextProvider calls the underlying PresentationContextProvider.
+func (x *AuthorizationController) PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding {
+	return x.inner.PresentationContextProvider()
+}
+
+// SetPresentationContextProvider calls the underlying SetPresentationContextProvider.
+func (x *AuthorizationController) SetPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) {
+	x.inner.SetPresentationContextProvider(presentationContextProvider)
+}
+
+// AuthorizationControllerable is the interface implemented by [AuthorizationController], for mocking and DI.
+type AuthorizationControllerable interface {
+	Unwrap() *raw.ASAuthorizationController
+	WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController
+	WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController
+	PerformRequests()
+	PerformRequestsWithOptions(options raw.ASAuthorizationControllerRequestOptions)
+	Cancel()
+	AuthorizationRequests() []*raw.ASAuthorizationRequest
+	Delegate() raw.ASAuthorizationControllerDelegate
+	SetDelegate(delegate raw.ASAuthorizationControllerDelegate)
+	PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding
+	SetPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding)
+}
+
+var _ AuthorizationControllerable = (*AuthorizationController)(nil)
 

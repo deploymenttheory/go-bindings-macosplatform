@@ -23,3 +23,10 @@ func NewWKProcessPool() *WKProcessPool {
 	return &WKProcessPool{inner: raw.WKProcessPoolFromID(_id)}
 }
 
+// WKProcessPoolable is the interface implemented by [WKProcessPool], for mocking and DI.
+type WKProcessPoolable interface {
+	Unwrap() *raw.WKProcessPool
+}
+
+var _ WKProcessPoolable = (*WKProcessPool)(nil)
+

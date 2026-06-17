@@ -27,15 +27,20 @@ func NewAssetResourceManager() *AssetResourceManager {
 	return &AssetResourceManager{inner: raw.PHAssetResourceManagerFromID(_id)}
 }
 
+// RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler calls the underlying RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler.
+func (x *AssetResourceManager) RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *raw.PHAssetResource, options *raw.PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32 {
+	return x.inner.RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource, options, handler, completionHandler)
+}
+
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
 func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *raw.PHAssetResource, fileURL string, options *raw.PHAssetResourceRequestOptions) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDataForAssetResourceToFileOptionsCompletionHandler(resource, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -44,4 +49,19 @@ func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx contex
 		return ctx.Err()
 	}
 }
+
+// CancelDataRequest calls the underlying CancelDataRequest.
+func (x *AssetResourceManager) CancelDataRequest(requestID int32) {
+	x.inner.CancelDataRequest(requestID)
+}
+
+// AssetResourceManagerable is the interface implemented by [AssetResourceManager], for mocking and DI.
+type AssetResourceManagerable interface {
+	Unwrap() *raw.PHAssetResourceManager
+	RequestDataForAssetResourceOptionsDataReceivedHandlerCompletionHandler(resource *raw.PHAssetResource, options *raw.PHAssetResourceRequestOptions, handler func(*foundation.NSData), completionHandler func(unsafe.Pointer)) int32
+	WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *raw.PHAssetResource, fileURL string, options *raw.PHAssetResourceRequestOptions) error
+	CancelDataRequest(requestID int32)
+}
+
+var _ AssetResourceManagerable = (*AssetResourceManager)(nil)
 

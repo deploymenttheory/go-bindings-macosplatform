@@ -24,7 +24,20 @@ func NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGra
 	return &CNNCrossChannelNormalizationGradientNode{inner: raw.MPSCNNCrossChannelNormalizationGradientNodeFromID(_id)}
 }
 
+// KernelSize calls the underlying KernelSize.
+func (x *CNNCrossChannelNormalizationGradientNode) KernelSize() uint {
+	return x.inner.KernelSize()
+}
+
 func (x *CNNCrossChannelNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNCrossChannelNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNCrossChannelNormalizationGradientNodeable is the interface implemented by [CNNCrossChannelNormalizationGradientNode], for mocking and DI.
+type CNNCrossChannelNormalizationGradientNodeable interface {
+	Unwrap() *raw.MPSCNNCrossChannelNormalizationGradientNode
+	KernelSize() uint
+}
+
+var _ CNNCrossChannelNormalizationGradientNodeable = (*CNNCrossChannelNormalizationGradientNode)(nil)
 

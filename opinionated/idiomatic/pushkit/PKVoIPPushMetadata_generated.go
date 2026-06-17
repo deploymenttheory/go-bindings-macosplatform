@@ -23,3 +23,16 @@ func NewVoIPPushMetadata() *VoIPPushMetadata {
 	return &VoIPPushMetadata{inner: raw.PKVoIPPushMetadataFromID(_id)}
 }
 
+// MustReport calls the underlying MustReport.
+func (x *VoIPPushMetadata) MustReport() bool {
+	return x.inner.MustReport()
+}
+
+// VoIPPushMetadataable is the interface implemented by [VoIPPushMetadata], for mocking and DI.
+type VoIPPushMetadataable interface {
+	Unwrap() *raw.PKVoIPPushMetadata
+	MustReport() bool
+}
+
+var _ VoIPPushMetadataable = (*VoIPPushMetadata)(nil)
+

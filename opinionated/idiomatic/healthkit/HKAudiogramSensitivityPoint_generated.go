@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,52 @@ func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 	return &AudiogramSensitivityPoint{inner: raw.HKAudiogramSensitivityPointFromID(_id)}
 }
 
+// Frequency calls the underlying Frequency.
+func (x *AudiogramSensitivityPoint) Frequency() *Quantity {
+	_r := x.inner.Frequency()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// LeftEarSensitivity calls the underlying LeftEarSensitivity.
+func (x *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
+	_r := x.inner.LeftEarSensitivity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// RightEarSensitivity calls the underlying RightEarSensitivity.
+func (x *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
+	_r := x.inner.RightEarSensitivity()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
 // Tests returns the collection as a Go slice.
 func (x *AudiogramSensitivityPoint) Tests() []*raw.HKAudiogramSensitivityTest {
 	arr := x.inner.Tests()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKAudiogramSensitivityTest, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKAudiogramSensitivityTest {
+		return raw.HKAudiogramSensitivityTestFromID(purego.Retain(_id))
+	})
 }
+
+// AudiogramSensitivityPointable is the interface implemented by [AudiogramSensitivityPoint], for mocking and DI.
+type AudiogramSensitivityPointable interface {
+	Unwrap() *raw.HKAudiogramSensitivityPoint
+	Frequency() *Quantity
+	LeftEarSensitivity() *Quantity
+	RightEarSensitivity() *Quantity
+	Tests() []*raw.HKAudiogramSensitivityTest
+}
+
+var _ AudiogramSensitivityPointable = (*AudiogramSensitivityPoint)(nil)
 

@@ -53,5 +53,77 @@ func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *U
 	return x
 }
 
+// EnableRankedResults calls the underlying EnableRankedResults.
+func (x *UserQueryContext) EnableRankedResults() bool {
+	return x.inner.EnableRankedResults()
+}
+
+// SetEnableRankedResults calls the underlying SetEnableRankedResults.
+func (x *UserQueryContext) SetEnableRankedResults(enableRankedResults bool) {
+	x.inner.SetEnableRankedResults(enableRankedResults)
+}
+
+// DisableSemanticSearch calls the underlying DisableSemanticSearch.
+func (x *UserQueryContext) DisableSemanticSearch() bool {
+	return x.inner.DisableSemanticSearch()
+}
+
+// SetDisableSemanticSearch calls the underlying SetDisableSemanticSearch.
+func (x *UserQueryContext) SetDisableSemanticSearch(disableSemanticSearch bool) {
+	x.inner.SetDisableSemanticSearch(disableSemanticSearch)
+}
+
+// MaxResultCount calls the underlying MaxResultCount.
+func (x *UserQueryContext) MaxResultCount() int {
+	return x.inner.MaxResultCount()
+}
+
+// SetMaxResultCount calls the underlying SetMaxResultCount.
+func (x *UserQueryContext) SetMaxResultCount(maxResultCount int) {
+	x.inner.SetMaxResultCount(maxResultCount)
+}
+
+// MaxSuggestionCount calls the underlying MaxSuggestionCount.
+func (x *UserQueryContext) MaxSuggestionCount() int {
+	return x.inner.MaxSuggestionCount()
+}
+
+// SetMaxSuggestionCount calls the underlying SetMaxSuggestionCount.
+func (x *UserQueryContext) SetMaxSuggestionCount(maxSuggestionCount int) {
+	x.inner.SetMaxSuggestionCount(maxSuggestionCount)
+}
+
+// MaxRankedResultCount calls the underlying MaxRankedResultCount.
+func (x *UserQueryContext) MaxRankedResultCount() int {
+	return x.inner.MaxRankedResultCount()
+}
+
+// SetMaxRankedResultCount calls the underlying SetMaxRankedResultCount.
+func (x *UserQueryContext) SetMaxRankedResultCount(maxRankedResultCount int) {
+	x.inner.SetMaxRankedResultCount(maxRankedResultCount)
+}
+
 func (x *UserQueryContext) asSearchQueryContext() *raw.CSSearchQueryContext { return &x.inner.CSSearchQueryContext }
+
+// UserQueryContextable is the interface implemented by [UserQueryContext], for mocking and DI.
+type UserQueryContextable interface {
+	Unwrap() *raw.CSUserQueryContext
+	WithEnableRankedResults(enableRankedResults bool) *UserQueryContext
+	WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext
+	WithMaxResultCount(maxResultCount int) *UserQueryContext
+	WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext
+	WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext
+	EnableRankedResults() bool
+	SetEnableRankedResults(enableRankedResults bool)
+	DisableSemanticSearch() bool
+	SetDisableSemanticSearch(disableSemanticSearch bool)
+	MaxResultCount() int
+	SetMaxResultCount(maxResultCount int)
+	MaxSuggestionCount() int
+	SetMaxSuggestionCount(maxSuggestionCount int)
+	MaxRankedResultCount() int
+	SetMaxRankedResultCount(maxRankedResultCount int)
+}
+
+var _ UserQueryContextable = (*UserQueryContext)(nil)
 

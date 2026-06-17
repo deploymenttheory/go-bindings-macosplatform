@@ -25,3 +25,10 @@ func NewIntegerResolutionResult() *IntegerResolutionResult {
 
 func (x *IntegerResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// IntegerResolutionResultable is the interface implemented by [IntegerResolutionResult], for mocking and DI.
+type IntegerResolutionResultable interface {
+	Unwrap() *raw.INIntegerResolutionResult
+}
+
+var _ IntegerResolutionResultable = (*IntegerResolutionResult)(nil)
+

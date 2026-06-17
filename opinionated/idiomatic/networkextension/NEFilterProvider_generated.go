@@ -30,11 +30,11 @@ func NewNEFilterProvider() *NEFilterProvider {
 func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.StartFilterWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -58,7 +58,32 @@ func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason raw.
 	}
 }
 
+// HandleReport calls the underlying HandleReport.
+func (x *NEFilterProvider) HandleReport(report *raw.NEFilterReport) {
+	x.inner.HandleReport(report)
+}
+
+// FilterConfiguration calls the underlying FilterConfiguration.
+func (x *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
+	_r := x.inner.FilterConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterProviderConfiguration{inner: _r}
+}
+
 func (x *NEFilterProvider) asNEFilterProvider() *raw.NEFilterProvider { return x.inner }
 
 func (x *NEFilterProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEProvider }
+
+// NEFilterProviderable is the interface implemented by [NEFilterProvider], for mocking and DI.
+type NEFilterProviderable interface {
+	Unwrap() *raw.NEFilterProvider
+	StartFilter(ctx context.Context) error
+	StopFilterWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
+	HandleReport(report *raw.NEFilterReport)
+	FilterConfiguration() *NEFilterProviderConfiguration
+}
+
+var _ NEFilterProviderable = (*NEFilterProvider)(nil)
 

@@ -35,7 +35,32 @@ func NewImageThresholdBinaryWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &ImageThresholdBinary{inner: raw.MPSImageThresholdBinaryFromID(_id)}
 }
 
+// ThresholdValue calls the underlying ThresholdValue.
+func (x *ImageThresholdBinary) ThresholdValue() float32 {
+	return x.inner.ThresholdValue()
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *ImageThresholdBinary) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// Transform calls the underlying Transform.
+func (x *ImageThresholdBinary) Transform() *float32 {
+	return x.inner.Transform()
+}
+
 func (x *ImageThresholdBinary) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageThresholdBinary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageThresholdBinaryable is the interface implemented by [ImageThresholdBinary], for mocking and DI.
+type ImageThresholdBinaryable interface {
+	Unwrap() *raw.MPSImageThresholdBinary
+	ThresholdValue() float32
+	MaximumValue() float32
+	Transform() *float32
+}
+
+var _ ImageThresholdBinaryable = (*ImageThresholdBinary)(nil)
 

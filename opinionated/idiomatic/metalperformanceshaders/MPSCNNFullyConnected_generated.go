@@ -41,3 +41,10 @@ func (x *CNNFullyConnected) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retur
 
 func (x *CNNFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNConvolution.MPSCNNKernel.MPSKernel }
 
+// CNNFullyConnectedable is the interface implemented by [CNNFullyConnected], for mocking and DI.
+type CNNFullyConnectedable interface {
+	Unwrap() *raw.MPSCNNFullyConnected
+}
+
+var _ CNNFullyConnectedable = (*CNNFullyConnected)(nil)
+

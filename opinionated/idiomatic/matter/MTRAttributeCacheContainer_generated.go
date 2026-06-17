@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewMTRAttributeCacheContainer() *MTRAttributeCacheContainer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeCacheContainer")), objc.RegisterName("new"))
 	return &MTRAttributeCacheContainer{inner: raw.MTRAttributeCacheContainerFromID(_id)}
 }
+
+// ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion calls the underlying ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion.
+func (x *MTRAttributeCacheContainer) ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion objc.Block) {
+	x.inner.ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId, clusterId, attributeId, clientQueue, completion)
+}
+
+// MTRAttributeCacheContainerable is the interface implemented by [MTRAttributeCacheContainer], for mocking and DI.
+type MTRAttributeCacheContainerable interface {
+	Unwrap() *raw.MTRAttributeCacheContainer
+	ReadAttributeWithEndpointIdClusterIdAttributeIdClientQueueCompletion(endpointId *foundation.NSNumber, clusterId *foundation.NSNumber, attributeId *foundation.NSNumber, clientQueue *foundation.NSObject, completion objc.Block)
+}
+
+var _ MTRAttributeCacheContainerable = (*MTRAttributeCacheContainer)(nil)
 

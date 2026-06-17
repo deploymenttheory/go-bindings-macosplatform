@@ -5,7 +5,9 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,80 @@ func NewRuleSystem() *RuleSystem {
 	return &RuleSystem{inner: raw.GKRuleSystemFromID(_id)}
 }
 
+// Evaluate calls the underlying Evaluate.
+func (x *RuleSystem) Evaluate() {
+	x.inner.Evaluate()
+}
+
+// AddRule calls the underlying AddRule.
+func (x *RuleSystem) AddRule(rule *raw.GKRule) {
+	x.inner.AddRule(rule)
+}
+
+// AddRulesFromArray calls the underlying AddRulesFromArray.
+func (x *RuleSystem) AddRulesFromArray(rules *foundation.NSArray[*raw.GKRule]) {
+	x.inner.AddRulesFromArray(rules)
+}
+
+// RemoveAllRules calls the underlying RemoveAllRules.
+func (x *RuleSystem) RemoveAllRules() {
+	x.inner.RemoveAllRules()
+}
+
+// GradeForFact calls the underlying GradeForFact.
+func (x *RuleSystem) GradeForFact(fact foundation.NSObjectProtocol) float32 {
+	return x.inner.GradeForFact(fact)
+}
+
+// MinimumGradeForFacts calls the underlying MinimumGradeForFacts.
+func (x *RuleSystem) MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
+	return x.inner.MinimumGradeForFacts(facts)
+}
+
+// MaximumGradeForFacts calls the underlying MaximumGradeForFacts.
+func (x *RuleSystem) MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32 {
+	return x.inner.MaximumGradeForFacts(facts)
+}
+
+// AssertFact calls the underlying AssertFact.
+func (x *RuleSystem) AssertFact(fact foundation.NSObjectProtocol) {
+	x.inner.AssertFact(fact)
+}
+
+// AssertFactGrade calls the underlying AssertFactGrade.
+func (x *RuleSystem) AssertFactGrade(fact foundation.NSObjectProtocol, grade float32) {
+	x.inner.AssertFactGrade(fact, grade)
+}
+
+// RetractFact calls the underlying RetractFact.
+func (x *RuleSystem) RetractFact(fact foundation.NSObjectProtocol) {
+	x.inner.RetractFact(fact)
+}
+
+// RetractFactGrade calls the underlying RetractFactGrade.
+func (x *RuleSystem) RetractFactGrade(fact foundation.NSObjectProtocol, grade float32) {
+	x.inner.RetractFactGrade(fact, grade)
+}
+
+// Reset calls the underlying Reset.
+func (x *RuleSystem) Reset() {
+	x.inner.Reset()
+}
+
+// State calls the underlying State.
+func (x *RuleSystem) State() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
+	return x.inner.State()
+}
+
 // Rules returns the collection as a Go slice.
 func (x *RuleSystem) Rules() []*raw.GKRule {
 	arr := x.inner.Rules()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
+		return raw.GKRuleFromID(purego.Retain(_id))
+	})
 }
 
 // Agenda returns the collection as a Go slice.
@@ -42,11 +107,9 @@ func (x *RuleSystem) Agenda() []*raw.GKRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
+		return raw.GKRuleFromID(purego.Retain(_id))
+	})
 }
 
 // Executed returns the collection as a Go slice.
@@ -55,10 +118,37 @@ func (x *RuleSystem) Executed() []*raw.GKRule {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKRule, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKRule {
+		return raw.GKRuleFromID(purego.Retain(_id))
+	})
 }
+
+// Facts calls the underlying Facts.
+func (x *RuleSystem) Facts() *foundation.NSArray[objc.ID] {
+	return x.inner.Facts()
+}
+
+// RuleSystemable is the interface implemented by [RuleSystem], for mocking and DI.
+type RuleSystemable interface {
+	Unwrap() *raw.GKRuleSystem
+	Evaluate()
+	AddRule(rule *raw.GKRule)
+	AddRulesFromArray(rules *foundation.NSArray[*raw.GKRule])
+	RemoveAllRules()
+	GradeForFact(fact foundation.NSObjectProtocol) float32
+	MinimumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32
+	MaximumGradeForFacts(facts *foundation.NSArray[objc.ID]) float32
+	AssertFact(fact foundation.NSObjectProtocol)
+	AssertFactGrade(fact foundation.NSObjectProtocol, grade float32)
+	RetractFact(fact foundation.NSObjectProtocol)
+	RetractFactGrade(fact foundation.NSObjectProtocol, grade float32)
+	Reset()
+	State() *foundation.NSMutableDictionary[objc.ID, objc.ID]
+	Rules() []*raw.GKRule
+	Agenda() []*raw.GKRule
+	Executed() []*raw.GKRule
+	Facts() *foundation.NSArray[objc.ID]
+}
+
+var _ RuleSystemable = (*RuleSystem)(nil)
 

@@ -5,7 +5,10 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +26,38 @@ func NewKernel() *Kernel {
 	return &Kernel{inner: raw.CIKernelFromID(_id)}
 }
 
+// SetROISelector calls the underlying SetROISelector.
+func (x *Kernel) SetROISelector(method objc.SEL) {
+	x.inner.SetROISelector(method)
+}
+
+// ApplyWithExtentRoiCallbackArguments calls the underlying ApplyWithExtentRoiCallbackArguments.
+func (x *Kernel) ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *Image {
+	_r := x.inner.ApplyWithExtentRoiCallbackArguments(extent, callback, args)
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *Kernel) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *Kernel) asKernel() *raw.CIKernel { return x.inner }
+
+// Kernelable is the interface implemented by [Kernel], for mocking and DI.
+type Kernelable interface {
+	Unwrap() *raw.CIKernel
+	SetROISelector(method objc.SEL)
+	ApplyWithExtentRoiCallbackArguments(extent corefoundation.CGRect, callback objc.Block, args *foundation.NSArray[objc.ID]) *Image
+	Name() string
+}
+
+var _ Kernelable = (*Kernel)(nil)
 

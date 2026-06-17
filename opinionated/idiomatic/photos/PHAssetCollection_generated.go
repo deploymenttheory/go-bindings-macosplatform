@@ -7,7 +7,9 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AssetCollection wraps [raw.PHAssetCollection] with a fluent Go API.
@@ -24,17 +26,45 @@ func NewAssetCollection() *AssetCollection {
 	return &AssetCollection{inner: raw.PHAssetCollectionFromID(_id)}
 }
 
+// AssetCollectionType calls the underlying AssetCollectionType.
+func (x *AssetCollection) AssetCollectionType() raw.PHAssetCollectionType {
+	return x.inner.AssetCollectionType()
+}
+
+// AssetCollectionSubtype calls the underlying AssetCollectionSubtype.
+func (x *AssetCollection) AssetCollectionSubtype() unsafe.Pointer {
+	return x.inner.AssetCollectionSubtype()
+}
+
+// EstimatedAssetCount calls the underlying EstimatedAssetCount.
+func (x *AssetCollection) EstimatedAssetCount() uint {
+	return x.inner.EstimatedAssetCount()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *AssetCollection) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *AssetCollection) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// ApproximateLocation calls the underlying ApproximateLocation.
+func (x *AssetCollection) ApproximateLocation() unsafe.Pointer {
+	return x.inner.ApproximateLocation()
+}
+
 // LocalizedLocationNames returns the collection as a Go slice.
-func (x *AssetCollection) LocalizedLocationNames() []*foundation.NSString {
+func (x *AssetCollection) LocalizedLocationNames() []string {
 	arr := x.inner.LocalizedLocationNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *AssetCollection) asAssetCollection() *raw.PHAssetCollection { return x.inner }
@@ -42,4 +72,18 @@ func (x *AssetCollection) asAssetCollection() *raw.PHAssetCollection { return x.
 func (x *AssetCollection) asCollection() *raw.PHCollection { return &x.inner.PHCollection }
 
 func (x *AssetCollection) asObject() *raw.PHObject { return &x.inner.PHCollection.PHObject }
+
+// AssetCollectionable is the interface implemented by [AssetCollection], for mocking and DI.
+type AssetCollectionable interface {
+	Unwrap() *raw.PHAssetCollection
+	AssetCollectionType() raw.PHAssetCollectionType
+	AssetCollectionSubtype() unsafe.Pointer
+	EstimatedAssetCount() uint
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	ApproximateLocation() unsafe.Pointer
+	LocalizedLocationNames() []string
+}
+
+var _ AssetCollectionable = (*AssetCollection)(nil)
 

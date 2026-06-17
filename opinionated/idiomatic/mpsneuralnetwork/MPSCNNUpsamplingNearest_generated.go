@@ -29,3 +29,10 @@ func (x *CNNUpsamplingNearest) asCNNUpsampling() *raw.MPSCNNUpsampling { return 
 
 func (x *CNNUpsamplingNearest) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
 
+// CNNUpsamplingNearestable is the interface implemented by [CNNUpsamplingNearest], for mocking and DI.
+type CNNUpsamplingNearestable interface {
+	Unwrap() *raw.MPSCNNUpsamplingNearest
+}
+
+var _ CNNUpsamplingNearestable = (*CNNUpsamplingNearest)(nil)
+

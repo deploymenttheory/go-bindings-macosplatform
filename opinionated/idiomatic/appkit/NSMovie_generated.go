@@ -39,3 +39,16 @@ func NewMovieWithMovie(movie unsafe.Pointer) *Movie {
 	return &Movie{inner: raw.NSMovieFromID(_id)}
 }
 
+// QTMovie calls the underlying QTMovie.
+func (x *Movie) QTMovie() unsafe.Pointer {
+	return x.inner.QTMovie()
+}
+
+// Movieable is the interface implemented by [Movie], for mocking and DI.
+type Movieable interface {
+	Unwrap() *raw.NSMovie
+	QTMovie() unsafe.Pointer
+}
+
+var _ Movieable = (*Movie)(nil)
+

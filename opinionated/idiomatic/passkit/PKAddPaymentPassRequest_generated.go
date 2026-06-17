@@ -48,3 +48,62 @@ func (x *AddPaymentPassRequest) WithWrappedKey(wrappedKey *foundation.NSData) *A
 	return x
 }
 
+// EncryptedPassData calls the underlying EncryptedPassData.
+func (x *AddPaymentPassRequest) EncryptedPassData() *foundation.NSData {
+	return x.inner.EncryptedPassData()
+}
+
+// SetEncryptedPassData calls the underlying SetEncryptedPassData.
+func (x *AddPaymentPassRequest) SetEncryptedPassData(encryptedPassData *foundation.NSData) {
+	x.inner.SetEncryptedPassData(encryptedPassData)
+}
+
+// ActivationData calls the underlying ActivationData.
+func (x *AddPaymentPassRequest) ActivationData() *foundation.NSData {
+	return x.inner.ActivationData()
+}
+
+// SetActivationData calls the underlying SetActivationData.
+func (x *AddPaymentPassRequest) SetActivationData(activationData *foundation.NSData) {
+	x.inner.SetActivationData(activationData)
+}
+
+// EphemeralPublicKey calls the underlying EphemeralPublicKey.
+func (x *AddPaymentPassRequest) EphemeralPublicKey() *foundation.NSData {
+	return x.inner.EphemeralPublicKey()
+}
+
+// SetEphemeralPublicKey calls the underlying SetEphemeralPublicKey.
+func (x *AddPaymentPassRequest) SetEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) {
+	x.inner.SetEphemeralPublicKey(ephemeralPublicKey)
+}
+
+// WrappedKey calls the underlying WrappedKey.
+func (x *AddPaymentPassRequest) WrappedKey() *foundation.NSData {
+	return x.inner.WrappedKey()
+}
+
+// SetWrappedKey calls the underlying SetWrappedKey.
+func (x *AddPaymentPassRequest) SetWrappedKey(wrappedKey *foundation.NSData) {
+	x.inner.SetWrappedKey(wrappedKey)
+}
+
+// AddPaymentPassRequestable is the interface implemented by [AddPaymentPassRequest], for mocking and DI.
+type AddPaymentPassRequestable interface {
+	Unwrap() *raw.PKAddPaymentPassRequest
+	WithEncryptedPassData(encryptedPassData *foundation.NSData) *AddPaymentPassRequest
+	WithActivationData(activationData *foundation.NSData) *AddPaymentPassRequest
+	WithEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) *AddPaymentPassRequest
+	WithWrappedKey(wrappedKey *foundation.NSData) *AddPaymentPassRequest
+	EncryptedPassData() *foundation.NSData
+	SetEncryptedPassData(encryptedPassData *foundation.NSData)
+	ActivationData() *foundation.NSData
+	SetActivationData(activationData *foundation.NSData)
+	EphemeralPublicKey() *foundation.NSData
+	SetEphemeralPublicKey(ephemeralPublicKey *foundation.NSData)
+	WrappedKey() *foundation.NSData
+	SetWrappedKey(wrappedKey *foundation.NSData)
+}
+
+var _ AddPaymentPassRequestable = (*AddPaymentPassRequest)(nil)
+

@@ -38,9 +38,22 @@ func NewCountedSetWithSet(set *raw.NSSet[objc.ID]) *CountedSet {
 	return &CountedSet{inner: raw.NSCountedSetFromID[objc.ID](_id)}
 }
 
+// CountForObject calls the underlying CountForObject.
+func (x *CountedSet) CountForObject(object objc.ID) uint {
+	return x.inner.CountForObject(object)
+}
+
 func (x *CountedSet) asMutableSet() *raw.NSMutableSet[objc.ID] { return &x.inner.NSMutableSet }
 
 func (x *CountedSet) asSet() *raw.NSSet[objc.ID] { return &x.inner.NSMutableSet.NSSet }
 
 func (x *CountedSet) asObject() *raw.NSObject { return &x.inner.NSMutableSet.NSSet.NSObject }
+
+// CountedSetable is the interface implemented by [CountedSet], for mocking and DI.
+type CountedSetable interface {
+	Unwrap() *raw.NSCountedSet[objc.ID]
+	CountForObject(object objc.ID) uint
+}
+
+var _ CountedSetable = (*CountedSet)(nil)
 

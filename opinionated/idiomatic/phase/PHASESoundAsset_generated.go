@@ -5,6 +5,7 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,30 @@ func NewSoundAsset() *SoundAsset {
 	return &SoundAsset{inner: raw.PHASESoundAssetFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *SoundAsset) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// Data calls the underlying Data.
+func (x *SoundAsset) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// Type calls the underlying Type.
+func (x *SoundAsset) Type() raw.PHASEAssetType {
+	return x.inner.Type()
+}
+
 func (x *SoundAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
+
+// SoundAssetable is the interface implemented by [SoundAsset], for mocking and DI.
+type SoundAssetable interface {
+	Unwrap() *raw.PHASESoundAsset
+	Url() *foundation.NSURL
+	Data() *foundation.NSData
+	Type() raw.PHASEAssetType
+}
+
+var _ SoundAssetable = (*SoundAsset)(nil)
 

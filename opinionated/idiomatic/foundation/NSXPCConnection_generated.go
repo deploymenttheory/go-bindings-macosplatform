@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // XPCConnection wraps [raw.NSXPCConnection] with a fluent Go API.
@@ -70,6 +71,36 @@ func (x *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XPC
 	return x
 }
 
+// RemoteObjectProxyWithErrorHandler calls the underlying RemoteObjectProxyWithErrorHandler.
+func (x *XPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
+	return x.inner.RemoteObjectProxyWithErrorHandler(handler)
+}
+
+// SynchronousRemoteObjectProxyWithErrorHandler calls the underlying SynchronousRemoteObjectProxyWithErrorHandler.
+func (x *XPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
+	return x.inner.SynchronousRemoteObjectProxyWithErrorHandler(handler)
+}
+
+// Resume calls the underlying Resume.
+func (x *XPCConnection) Resume() {
+	x.inner.Resume()
+}
+
+// Suspend calls the underlying Suspend.
+func (x *XPCConnection) Suspend() {
+	x.inner.Suspend()
+}
+
+// Activate calls the underlying Activate.
+func (x *XPCConnection) Activate() {
+	x.inner.Activate()
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *XPCConnection) Invalidate() {
+	x.inner.Invalidate()
+}
+
 // ScheduleSendBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -82,6 +113,77 @@ func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// SetCodeSigningRequirement calls the underlying SetCodeSigningRequirement.
+func (x *XPCConnection) SetCodeSigningRequirement(requirement string) {
+	x.inner.SetCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))
+}
+
+// ServiceName calls the underlying ServiceName.
+func (x *XPCConnection) ServiceName() *String {
+	_r := x.inner.ServiceName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *XPCConnection) Endpoint() *XPCListenerEndpoint {
+	_r := x.inner.Endpoint()
+	if _r == nil {
+		return nil
+	}
+	return &XPCListenerEndpoint{inner: _r}
+}
+
+// ExportedInterface calls the underlying ExportedInterface.
+func (x *XPCConnection) ExportedInterface() *XPCInterface {
+	_r := x.inner.ExportedInterface()
+	if _r == nil {
+		return nil
+	}
+	return &XPCInterface{inner: _r}
+}
+
+// SetExportedInterface calls the underlying SetExportedInterface.
+func (x *XPCConnection) SetExportedInterface(exportedInterface *raw.NSXPCInterface) {
+	x.inner.SetExportedInterface(exportedInterface)
+}
+
+// ExportedObject calls the underlying ExportedObject.
+func (x *XPCConnection) ExportedObject() objc.ID {
+	return x.inner.ExportedObject()
+}
+
+// SetExportedObject calls the underlying SetExportedObject.
+func (x *XPCConnection) SetExportedObject(exportedObject objc.ID) {
+	x.inner.SetExportedObject(exportedObject)
+}
+
+// RemoteObjectInterface calls the underlying RemoteObjectInterface.
+func (x *XPCConnection) RemoteObjectInterface() *XPCInterface {
+	_r := x.inner.RemoteObjectInterface()
+	if _r == nil {
+		return nil
+	}
+	return &XPCInterface{inner: _r}
+}
+
+// SetRemoteObjectInterface calls the underlying SetRemoteObjectInterface.
+func (x *XPCConnection) SetRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) {
+	x.inner.SetRemoteObjectInterface(remoteObjectInterface)
+}
+
+// RemoteObjectProxy calls the underlying RemoteObjectProxy.
+func (x *XPCConnection) RemoteObjectProxy() objc.ID {
+	return x.inner.RemoteObjectProxy()
+}
+
+// InterruptionHandler calls the underlying InterruptionHandler.
+func (x *XPCConnection) InterruptionHandler() objc.Block {
+	return x.inner.InterruptionHandler()
 }
 
 // SetInterruptionHandler blocks until the operation completes or ctx is cancelled.
@@ -98,6 +200,11 @@ func (x *XPCConnection) SetInterruptionHandler(ctx context.Context) error {
 	}
 }
 
+// InvalidationHandler calls the underlying InvalidationHandler.
+func (x *XPCConnection) InvalidationHandler() objc.Block {
+	return x.inner.InvalidationHandler()
+}
+
 // SetInvalidationHandler blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) SetInvalidationHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -112,5 +219,62 @@ func (x *XPCConnection) SetInvalidationHandler(ctx context.Context) error {
 	}
 }
 
+// AuditSessionIdentifier calls the underlying AuditSessionIdentifier.
+func (x *XPCConnection) AuditSessionIdentifier() int {
+	return x.inner.AuditSessionIdentifier()
+}
+
+// ProcessIdentifier calls the underlying ProcessIdentifier.
+func (x *XPCConnection) ProcessIdentifier() int {
+	return x.inner.ProcessIdentifier()
+}
+
+// EffectiveUserIdentifier calls the underlying EffectiveUserIdentifier.
+func (x *XPCConnection) EffectiveUserIdentifier() uint {
+	return x.inner.EffectiveUserIdentifier()
+}
+
+// EffectiveGroupIdentifier calls the underlying EffectiveGroupIdentifier.
+func (x *XPCConnection) EffectiveGroupIdentifier() uint {
+	return x.inner.EffectiveGroupIdentifier()
+}
+
 func (x *XPCConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// XPCConnectionable is the interface implemented by [XPCConnection], for mocking and DI.
+type XPCConnectionable interface {
+	Unwrap() *raw.NSXPCConnection
+	WithExportedInterface(exportedInterface *raw.NSXPCInterface) *XPCConnection
+	WithExportedObject(exportedObject objc.ID) *XPCConnection
+	WithRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) *XPCConnection
+	WithInterruptionHandler(interruptionHandler func()) *XPCConnection
+	WithInvalidationHandler(invalidationHandler func()) *XPCConnection
+	RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
+	SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
+	Resume()
+	Suspend()
+	Activate()
+	Invalidate()
+	ScheduleSendBarrierBlock(ctx context.Context) error
+	SetCodeSigningRequirement(requirement string)
+	ServiceName() *String
+	Endpoint() *XPCListenerEndpoint
+	ExportedInterface() *XPCInterface
+	SetExportedInterface(exportedInterface *raw.NSXPCInterface)
+	ExportedObject() objc.ID
+	SetExportedObject(exportedObject objc.ID)
+	RemoteObjectInterface() *XPCInterface
+	SetRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface)
+	RemoteObjectProxy() objc.ID
+	InterruptionHandler() objc.Block
+	SetInterruptionHandler(ctx context.Context) error
+	InvalidationHandler() objc.Block
+	SetInvalidationHandler(ctx context.Context) error
+	AuditSessionIdentifier() int
+	ProcessIdentifier() int
+	EffectiveUserIdentifier() uint
+	EffectiveGroupIdentifier() uint
+}
+
+var _ XPCConnectionable = (*XPCConnection)(nil)
 

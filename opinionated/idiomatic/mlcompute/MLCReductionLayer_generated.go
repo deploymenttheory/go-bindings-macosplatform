@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,36 @@ func NewReductionLayer() *ReductionLayer {
 	return &ReductionLayer{inner: raw.MLCReductionLayerFromID(_id)}
 }
 
+// ReductionType calls the underlying ReductionType.
+func (x *ReductionLayer) ReductionType() raw.MLCReductionType {
+	return x.inner.ReductionType()
+}
+
+// Dimension calls the underlying Dimension.
+func (x *ReductionLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
 // Dimensions returns the collection as a Go slice.
 func (x *ReductionLayer) Dimensions() []*foundation.NSNumber {
 	arr := x.inner.Dimensions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *ReductionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ReductionLayerable is the interface implemented by [ReductionLayer], for mocking and DI.
+type ReductionLayerable interface {
+	Unwrap() *raw.MLCReductionLayer
+	ReductionType() raw.MLCReductionType
+	Dimension() uint
+	Dimensions() []*foundation.NSNumber
+}
+
+var _ ReductionLayerable = (*ReductionLayer)(nil)
 

@@ -28,3 +28,10 @@ func (x *NNReductionFeatureChannelsArgumentMinNode) asNNUnaryReductionNode() *mp
 
 func (x *NNReductionFeatureChannelsArgumentMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionFeatureChannelsArgumentMinNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMinNode], for mocking and DI.
+type NNReductionFeatureChannelsArgumentMinNodeable interface {
+	Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMinNode
+}
+
+var _ NNReductionFeatureChannelsArgumentMinNodeable = (*NNReductionFeatureChannelsArgumentMinNode)(nil)
+

@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,98 @@ func NewPresentationIntent() *PresentationIntent {
 	return &PresentationIntent{inner: raw.NSPresentationIntentFromID(_id)}
 }
 
+// IsEquivalentToPresentationIntent calls the underlying IsEquivalentToPresentationIntent.
+func (x *PresentationIntent) IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool {
+	return x.inner.IsEquivalentToPresentationIntent(other)
+}
+
+// IntentKind calls the underlying IntentKind.
+func (x *PresentationIntent) IntentKind() raw.NSPresentationIntentKind {
+	return x.inner.IntentKind()
+}
+
+// ParentIntent calls the underlying ParentIntent.
+func (x *PresentationIntent) ParentIntent() *PresentationIntent {
+	_r := x.inner.ParentIntent()
+	if _r == nil {
+		return nil
+	}
+	return &PresentationIntent{inner: _r}
+}
+
+// Identity calls the underlying Identity.
+func (x *PresentationIntent) Identity() int {
+	return x.inner.Identity()
+}
+
+// Ordinal calls the underlying Ordinal.
+func (x *PresentationIntent) Ordinal() int {
+	return x.inner.Ordinal()
+}
+
 // ColumnAlignments returns the collection as a Go slice.
 func (x *PresentationIntent) ColumnAlignments() []*raw.NSNumber {
 	arr := x.inner.ColumnAlignments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
+		return raw.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// ColumnCount calls the underlying ColumnCount.
+func (x *PresentationIntent) ColumnCount() int {
+	return x.inner.ColumnCount()
+}
+
+// HeaderLevel calls the underlying HeaderLevel.
+func (x *PresentationIntent) HeaderLevel() int {
+	return x.inner.HeaderLevel()
+}
+
+// LanguageHint calls the underlying LanguageHint.
+func (x *PresentationIntent) LanguageHint() *String {
+	_r := x.inner.LanguageHint()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// Column calls the underlying Column.
+func (x *PresentationIntent) Column() int {
+	return x.inner.Column()
+}
+
+// Row calls the underlying Row.
+func (x *PresentationIntent) Row() int {
+	return x.inner.Row()
+}
+
+// IndentationLevel calls the underlying IndentationLevel.
+func (x *PresentationIntent) IndentationLevel() int {
+	return x.inner.IndentationLevel()
 }
 
 func (x *PresentationIntent) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PresentationIntentable is the interface implemented by [PresentationIntent], for mocking and DI.
+type PresentationIntentable interface {
+	Unwrap() *raw.NSPresentationIntent
+	IsEquivalentToPresentationIntent(other *raw.NSPresentationIntent) bool
+	IntentKind() raw.NSPresentationIntentKind
+	ParentIntent() *PresentationIntent
+	Identity() int
+	Ordinal() int
+	ColumnAlignments() []*raw.NSNumber
+	ColumnCount() int
+	HeaderLevel() int
+	LanguageHint() *String
+	Column() int
+	Row() int
+	IndentationLevel() int
+}
+
+var _ PresentationIntentable = (*PresentationIntent)(nil)
 

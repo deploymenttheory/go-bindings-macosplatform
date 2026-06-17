@@ -7,6 +7,7 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,34 @@ func NewPhysicsShape() *PhysicsShape {
 	return &PhysicsShape{inner: raw.SCNPhysicsShapeFromID(_id)}
 }
 
+// Options calls the underlying Options.
+func (x *PhysicsShape) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Options()
+}
+
+// SourceObject calls the underlying SourceObject.
+func (x *PhysicsShape) SourceObject() objc.ID {
+	return x.inner.SourceObject()
+}
+
 // Transforms returns the collection as a Go slice.
 func (x *PhysicsShape) Transforms() []*foundation.NSValue {
 	arr := x.inner.Transforms()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// PhysicsShapeable is the interface implemented by [PhysicsShape], for mocking and DI.
+type PhysicsShapeable interface {
+	Unwrap() *raw.SCNPhysicsShape
+	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SourceObject() objc.ID
+	Transforms() []*foundation.NSValue
+}
+
+var _ PhysicsShapeable = (*PhysicsShape)(nil)
 

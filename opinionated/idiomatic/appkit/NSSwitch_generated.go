@@ -29,9 +29,29 @@ func (x *Switch) WithState(state int) *Switch {
 	return x
 }
 
+// State calls the underlying State.
+func (x *Switch) State() int {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *Switch) SetState(state int) {
+	x.inner.SetState(state)
+}
+
 func (x *Switch) asControl() *raw.NSControl { return &x.inner.NSControl }
 
 func (x *Switch) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *Switch) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// Switchable is the interface implemented by [Switch], for mocking and DI.
+type Switchable interface {
+	Unwrap() *raw.NSSwitch
+	WithState(state int) *Switch
+	State() int
+	SetState(state int)
+}
+
+var _ Switchable = (*Switch)(nil)
 

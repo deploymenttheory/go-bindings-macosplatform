@@ -28,3 +28,10 @@ func (x *NNConcatenationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradien
 
 func (x *NNConcatenationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNConcatenationGradientNodeable is the interface implemented by [NNConcatenationGradientNode], for mocking and DI.
+type NNConcatenationGradientNodeable interface {
+	Unwrap() *raw.MPSNNConcatenationGradientNode
+}
+
+var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)
+

@@ -41,5 +41,51 @@ func (x *ClickGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequ
 	return x
 }
 
+// ButtonMask calls the underlying ButtonMask.
+func (x *ClickGestureRecognizer) ButtonMask() uint {
+	return x.inner.ButtonMask()
+}
+
+// SetButtonMask calls the underlying SetButtonMask.
+func (x *ClickGestureRecognizer) SetButtonMask(buttonMask uint) {
+	x.inner.SetButtonMask(buttonMask)
+}
+
+// NumberOfClicksRequired calls the underlying NumberOfClicksRequired.
+func (x *ClickGestureRecognizer) NumberOfClicksRequired() int {
+	return x.inner.NumberOfClicksRequired()
+}
+
+// SetNumberOfClicksRequired calls the underlying SetNumberOfClicksRequired.
+func (x *ClickGestureRecognizer) SetNumberOfClicksRequired(numberOfClicksRequired int) {
+	x.inner.SetNumberOfClicksRequired(numberOfClicksRequired)
+}
+
+// NumberOfTouchesRequired calls the underlying NumberOfTouchesRequired.
+func (x *ClickGestureRecognizer) NumberOfTouchesRequired() int {
+	return x.inner.NumberOfTouchesRequired()
+}
+
+// SetNumberOfTouchesRequired calls the underlying SetNumberOfTouchesRequired.
+func (x *ClickGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
+	x.inner.SetNumberOfTouchesRequired(numberOfTouchesRequired)
+}
+
 func (x *ClickGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+
+// ClickGestureRecognizerable is the interface implemented by [ClickGestureRecognizer], for mocking and DI.
+type ClickGestureRecognizerable interface {
+	Unwrap() *raw.NSClickGestureRecognizer
+	WithButtonMask(buttonMask uint) *ClickGestureRecognizer
+	WithNumberOfClicksRequired(numberOfClicksRequired int) *ClickGestureRecognizer
+	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *ClickGestureRecognizer
+	ButtonMask() uint
+	SetButtonMask(buttonMask uint)
+	NumberOfClicksRequired() int
+	SetNumberOfClicksRequired(numberOfClicksRequired int)
+	NumberOfTouchesRequired() int
+	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
+}
+
+var _ ClickGestureRecognizerable = (*ClickGestureRecognizer)(nil)
 

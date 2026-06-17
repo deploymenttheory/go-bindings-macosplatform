@@ -23,7 +23,24 @@ func NewCloneCommand() *CloneCommand {
 	return &CloneCommand{inner: raw.NSCloneCommandFromID(_id)}
 }
 
+// KeySpecifier calls the underlying KeySpecifier.
+func (x *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.KeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
 func (x *CloneCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *CloneCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// CloneCommandable is the interface implemented by [CloneCommand], for mocking and DI.
+type CloneCommandable interface {
+	Unwrap() *raw.NSCloneCommand
+	KeySpecifier() *ScriptObjectSpecifier
+}
+
+var _ CloneCommandable = (*CloneCommand)(nil)
 

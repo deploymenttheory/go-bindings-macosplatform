@@ -41,5 +41,19 @@ func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersPr
 	return x
 }
 
+// SetInputParameters calls the underlying SetInputParameters.
+func (x *MutableAudioMix) SetInputParameters(inputParameters *foundation.NSArray[*raw.AVAudioMixInputParameters]) {
+	x.inner.SetInputParameters(inputParameters)
+}
+
 func (x *MutableAudioMix) asAudioMix() *raw.AVAudioMix { return &x.inner.AVAudioMix }
+
+// MutableAudioMixable is the interface implemented by [MutableAudioMix], for mocking and DI.
+type MutableAudioMixable interface {
+	Unwrap() *raw.AVMutableAudioMix
+	WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix
+	SetInputParameters(inputParameters *foundation.NSArray[*raw.AVAudioMixInputParameters])
+}
+
+var _ MutableAudioMixable = (*MutableAudioMix)(nil)
 

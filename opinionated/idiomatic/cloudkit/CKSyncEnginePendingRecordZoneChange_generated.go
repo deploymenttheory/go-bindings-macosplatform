@@ -24,3 +24,26 @@ func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecord
 	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(_id)}
 }
 
+// RecordID calls the underlying RecordID.
+func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
+	_r := x.inner.RecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// Type calls the underlying Type.
+func (x *SyncEnginePendingRecordZoneChange) Type() raw.CKSyncEnginePendingRecordZoneChangeType {
+	return x.inner.Type()
+}
+
+// SyncEnginePendingRecordZoneChangeable is the interface implemented by [SyncEnginePendingRecordZoneChange], for mocking and DI.
+type SyncEnginePendingRecordZoneChangeable interface {
+	Unwrap() *raw.CKSyncEnginePendingRecordZoneChange
+	RecordID() *RecordID
+	Type() raw.CKSyncEnginePendingRecordZoneChangeType
+}
+
+var _ SyncEnginePendingRecordZoneChangeable = (*SyncEnginePendingRecordZoneChange)(nil)
+

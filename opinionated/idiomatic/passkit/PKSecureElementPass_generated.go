@@ -6,6 +6,7 @@ package passkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,80 @@ func NewSecureElementPass() *SecureElementPass {
 	return &SecureElementPass{inner: raw.PKSecureElementPassFromID(_id)}
 }
 
+// PrimaryAccountIdentifier calls the underlying PrimaryAccountIdentifier.
+func (x *SecureElementPass) PrimaryAccountIdentifier() string {
+	_r := x.inner.PrimaryAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PrimaryAccountNumberSuffix calls the underlying PrimaryAccountNumberSuffix.
+func (x *SecureElementPass) PrimaryAccountNumberSuffix() string {
+	_r := x.inner.PrimaryAccountNumberSuffix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+func (x *SecureElementPass) DeviceAccountIdentifier() string {
+	_r := x.inner.DeviceAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DeviceAccountNumberSuffix calls the underlying DeviceAccountNumberSuffix.
+func (x *SecureElementPass) DeviceAccountNumberSuffix() string {
+	_r := x.inner.DeviceAccountNumberSuffix()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PassActivationState calls the underlying PassActivationState.
+func (x *SecureElementPass) PassActivationState() raw.PKSecureElementPassActivationState {
+	return x.inner.PassActivationState()
+}
+
+// DevicePassIdentifier calls the underlying DevicePassIdentifier.
+func (x *SecureElementPass) DevicePassIdentifier() string {
+	_r := x.inner.DevicePassIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PairedTerminalIdentifier calls the underlying PairedTerminalIdentifier.
+func (x *SecureElementPass) PairedTerminalIdentifier() string {
+	_r := x.inner.PairedTerminalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *SecureElementPass) asSecureElementPass() *raw.PKSecureElementPass { return x.inner }
 
 func (x *SecureElementPass) asPass() *raw.PKPass { return &x.inner.PKPass }
+
+// SecureElementPassable is the interface implemented by [SecureElementPass], for mocking and DI.
+type SecureElementPassable interface {
+	Unwrap() *raw.PKSecureElementPass
+	PrimaryAccountIdentifier() string
+	PrimaryAccountNumberSuffix() string
+	DeviceAccountIdentifier() string
+	DeviceAccountNumberSuffix() string
+	PassActivationState() raw.PKSecureElementPassActivationState
+	DevicePassIdentifier() string
+	PairedTerminalIdentifier() string
+}
+
+var _ SecureElementPassable = (*SecureElementPass)(nil)
 

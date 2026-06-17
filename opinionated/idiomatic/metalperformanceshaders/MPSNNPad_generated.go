@@ -67,7 +67,53 @@ func (x *NNPad) WithFillValue(fillValue float32) *NNPad {
 	return x
 }
 
+// PaddingSizeBefore calls the underlying PaddingSizeBefore.
+func (x *NNPad) PaddingSizeBefore() mpscore.MPSImageCoordinate {
+	return x.inner.PaddingSizeBefore()
+}
+
+// SetPaddingSizeBefore calls the underlying SetPaddingSizeBefore.
+func (x *NNPad) SetPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) {
+	x.inner.SetPaddingSizeBefore(paddingSizeBefore)
+}
+
+// PaddingSizeAfter calls the underlying PaddingSizeAfter.
+func (x *NNPad) PaddingSizeAfter() mpscore.MPSImageCoordinate {
+	return x.inner.PaddingSizeAfter()
+}
+
+// SetPaddingSizeAfter calls the underlying SetPaddingSizeAfter.
+func (x *NNPad) SetPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) {
+	x.inner.SetPaddingSizeAfter(paddingSizeAfter)
+}
+
+// FillValue calls the underlying FillValue.
+func (x *NNPad) FillValue() float32 {
+	return x.inner.FillValue()
+}
+
+// SetFillValue calls the underlying SetFillValue.
+func (x *NNPad) SetFillValue(fillValue float32) {
+	x.inner.SetFillValue(fillValue)
+}
+
 func (x *NNPad) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
 func (x *NNPad) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
+
+// NNPadable is the interface implemented by [NNPad], for mocking and DI.
+type NNPadable interface {
+	Unwrap() *raw.MPSNNPad
+	WithPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) *NNPad
+	WithPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) *NNPad
+	WithFillValue(fillValue float32) *NNPad
+	PaddingSizeBefore() mpscore.MPSImageCoordinate
+	SetPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate)
+	PaddingSizeAfter() mpscore.MPSImageCoordinate
+	SetPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate)
+	FillValue() float32
+	SetFillValue(fillValue float32)
+}
+
+var _ NNPadable = (*NNPad)(nil)
 

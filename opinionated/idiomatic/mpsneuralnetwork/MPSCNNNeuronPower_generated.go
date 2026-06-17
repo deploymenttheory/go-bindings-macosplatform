@@ -29,3 +29,10 @@ func (x *CNNNeuronPower) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCN
 
 func (x *CNNNeuronPower) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
 
+// CNNNeuronPowerable is the interface implemented by [CNNNeuronPower], for mocking and DI.
+type CNNNeuronPowerable interface {
+	Unwrap() *raw.MPSCNNNeuronPower
+}
+
+var _ CNNNeuronPowerable = (*CNNNeuronPower)(nil)
+

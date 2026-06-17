@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,6 +67,128 @@ func (x *DOMHTMLFormElement) WithTarget(target string) *DOMHTMLFormElement {
 	return x
 }
 
+// Submit calls the underlying Submit.
+func (x *DOMHTMLFormElement) Submit() {
+	x.inner.Submit()
+}
+
+// Reset calls the underlying Reset.
+func (x *DOMHTMLFormElement) Reset() {
+	x.inner.Reset()
+}
+
+// AcceptCharset calls the underlying AcceptCharset.
+func (x *DOMHTMLFormElement) AcceptCharset() string {
+	_r := x.inner.AcceptCharset()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAcceptCharset calls the underlying SetAcceptCharset.
+func (x *DOMHTMLFormElement) SetAcceptCharset(acceptCharset string) {
+	x.inner.SetAcceptCharset(foundation.NSStringStringWithUTF8String(acceptCharset))
+}
+
+// Action calls the underlying Action.
+func (x *DOMHTMLFormElement) Action() string {
+	_r := x.inner.Action()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAction calls the underlying SetAction.
+func (x *DOMHTMLFormElement) SetAction(action string) {
+	x.inner.SetAction(foundation.NSStringStringWithUTF8String(action))
+}
+
+// Enctype calls the underlying Enctype.
+func (x *DOMHTMLFormElement) Enctype() string {
+	_r := x.inner.Enctype()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEnctype calls the underlying SetEnctype.
+func (x *DOMHTMLFormElement) SetEnctype(enctype string) {
+	x.inner.SetEnctype(foundation.NSStringStringWithUTF8String(enctype))
+}
+
+// Encoding calls the underlying Encoding.
+func (x *DOMHTMLFormElement) Encoding() string {
+	_r := x.inner.Encoding()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEncoding calls the underlying SetEncoding.
+func (x *DOMHTMLFormElement) SetEncoding(encoding string) {
+	x.inner.SetEncoding(foundation.NSStringStringWithUTF8String(encoding))
+}
+
+// Method calls the underlying Method.
+func (x *DOMHTMLFormElement) Method() string {
+	_r := x.inner.Method()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMethod calls the underlying SetMethod.
+func (x *DOMHTMLFormElement) SetMethod(method string) {
+	x.inner.SetMethod(foundation.NSStringStringWithUTF8String(method))
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLFormElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLFormElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Target calls the underlying Target.
+func (x *DOMHTMLFormElement) Target() string {
+	_r := x.inner.Target()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *DOMHTMLFormElement) SetTarget(target string) {
+	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+}
+
+// Elements calls the underlying Elements.
+func (x *DOMHTMLFormElement) Elements() *DOMHTMLCollection {
+	_r := x.inner.Elements()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMHTMLFormElement) Length() int {
+	return x.inner.Length()
+}
+
 func (x *DOMHTMLFormElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLFormElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -75,4 +198,36 @@ func (x *DOMHTMLFormElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLFormElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLFormElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLFormElementable is the interface implemented by [DOMHTMLFormElement], for mocking and DI.
+type DOMHTMLFormElementable interface {
+	Unwrap() *raw.DOMHTMLFormElement
+	WithAcceptCharset(acceptCharset string) *DOMHTMLFormElement
+	WithAction(action string) *DOMHTMLFormElement
+	WithEnctype(enctype string) *DOMHTMLFormElement
+	WithEncoding(encoding string) *DOMHTMLFormElement
+	WithMethod(method string) *DOMHTMLFormElement
+	WithName(name string) *DOMHTMLFormElement
+	WithTarget(target string) *DOMHTMLFormElement
+	Submit()
+	Reset()
+	AcceptCharset() string
+	SetAcceptCharset(acceptCharset string)
+	Action() string
+	SetAction(action string)
+	Enctype() string
+	SetEnctype(enctype string)
+	Encoding() string
+	SetEncoding(encoding string)
+	Method() string
+	SetMethod(method string)
+	Name() string
+	SetName(name string)
+	Target() string
+	SetTarget(target string)
+	Elements() *DOMHTMLCollection
+	Length() int
+}
+
+var _ DOMHTMLFormElementable = (*DOMHTMLFormElement)(nil)
 

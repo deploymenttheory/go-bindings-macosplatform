@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,70 @@ func NewNowPlayingInfoLanguageOptionWithTypeLanguageTagCharacteristicsDisplayNam
 	return &NowPlayingInfoLanguageOption{inner: raw.MPNowPlayingInfoLanguageOptionFromID(_id)}
 }
 
+// IsAutomaticLegibleLanguageOption calls the underlying IsAutomaticLegibleLanguageOption.
+func (x *NowPlayingInfoLanguageOption) IsAutomaticLegibleLanguageOption() bool {
+	return x.inner.IsAutomaticLegibleLanguageOption()
+}
+
+// IsAutomaticAudibleLanguageOption calls the underlying IsAutomaticAudibleLanguageOption.
+func (x *NowPlayingInfoLanguageOption) IsAutomaticAudibleLanguageOption() bool {
+	return x.inner.IsAutomaticAudibleLanguageOption()
+}
+
+// LanguageOptionType calls the underlying LanguageOptionType.
+func (x *NowPlayingInfoLanguageOption) LanguageOptionType() raw.MPNowPlayingInfoLanguageOptionType {
+	return x.inner.LanguageOptionType()
+}
+
+// LanguageTag calls the underlying LanguageTag.
+func (x *NowPlayingInfoLanguageOption) LanguageTag() string {
+	_r := x.inner.LanguageTag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // LanguageOptionCharacteristics returns the collection as a Go slice.
-func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []*foundation.NSString {
+func (x *NowPlayingInfoLanguageOption) LanguageOptionCharacteristics() []string {
 	arr := x.inner.LanguageOptionCharacteristics()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *NowPlayingInfoLanguageOption) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *NowPlayingInfoLanguageOption) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NowPlayingInfoLanguageOptionable is the interface implemented by [NowPlayingInfoLanguageOption], for mocking and DI.
+type NowPlayingInfoLanguageOptionable interface {
+	Unwrap() *raw.MPNowPlayingInfoLanguageOption
+	IsAutomaticLegibleLanguageOption() bool
+	IsAutomaticAudibleLanguageOption() bool
+	LanguageOptionType() raw.MPNowPlayingInfoLanguageOptionType
+	LanguageTag() string
+	LanguageOptionCharacteristics() []string
+	DisplayName() string
+	Identifier() string
+}
+
+var _ NowPlayingInfoLanguageOptionable = (*NowPlayingInfoLanguageOption)(nil)
 

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,28 @@ func NewTableHeaderCell() *TableHeaderCell {
 	return &TableHeaderCell{inner: raw.NSTableHeaderCellFromID(_id)}
 }
 
+// DrawSortIndicatorWithFrameInViewAscendingPriority calls the underlying DrawSortIndicatorWithFrameInViewAscendingPriority.
+func (x *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int) {
+	x.inner.DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame, controlView, ascending, priority)
+}
+
+// SortIndicatorRectForBounds calls the underlying SortIndicatorRectForBounds.
+func (x *TableHeaderCell) SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.SortIndicatorRectForBounds(rect)
+}
+
 func (x *TableHeaderCell) asTextFieldCell() *raw.NSTextFieldCell { return &x.inner.NSTextFieldCell }
 
 func (x *TableHeaderCell) asActionCell() *raw.NSActionCell { return &x.inner.NSTextFieldCell.NSActionCell }
 
 func (x *TableHeaderCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell.NSActionCell.NSCell }
+
+// TableHeaderCellable is the interface implemented by [TableHeaderCell], for mocking and DI.
+type TableHeaderCellable interface {
+	Unwrap() *raw.NSTableHeaderCell
+	DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int)
+	SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
+}
+
+var _ TableHeaderCellable = (*TableHeaderCell)(nil)
 

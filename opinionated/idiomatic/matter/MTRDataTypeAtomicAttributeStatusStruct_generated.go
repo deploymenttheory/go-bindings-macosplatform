@@ -36,3 +36,36 @@ func (x *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode *foun
 	return x
 }
 
+// AttributeID calls the underlying AttributeID.
+func (x *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() *foundation.NSNumber {
+	return x.inner.AttributeID()
+}
+
+// SetAttributeID calls the underlying SetAttributeID.
+func (x *MTRDataTypeAtomicAttributeStatusStruct) SetAttributeID(attributeID *foundation.NSNumber) {
+	x.inner.SetAttributeID(attributeID)
+}
+
+// StatusCode calls the underlying StatusCode.
+func (x *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() *foundation.NSNumber {
+	return x.inner.StatusCode()
+}
+
+// SetStatusCode calls the underlying SetStatusCode.
+func (x *MTRDataTypeAtomicAttributeStatusStruct) SetStatusCode(statusCode *foundation.NSNumber) {
+	x.inner.SetStatusCode(statusCode)
+}
+
+// MTRDataTypeAtomicAttributeStatusStructable is the interface implemented by [MTRDataTypeAtomicAttributeStatusStruct], for mocking and DI.
+type MTRDataTypeAtomicAttributeStatusStructable interface {
+	Unwrap() *raw.MTRDataTypeAtomicAttributeStatusStruct
+	WithAttributeID(attributeID *foundation.NSNumber) *MTRDataTypeAtomicAttributeStatusStruct
+	WithStatusCode(statusCode *foundation.NSNumber) *MTRDataTypeAtomicAttributeStatusStruct
+	AttributeID() *foundation.NSNumber
+	SetAttributeID(attributeID *foundation.NSNumber)
+	StatusCode() *foundation.NSNumber
+	SetStatusCode(statusCode *foundation.NSNumber)
+}
+
+var _ MTRDataTypeAtomicAttributeStatusStructable = (*MTRDataTypeAtomicAttributeStatusStruct)(nil)
+

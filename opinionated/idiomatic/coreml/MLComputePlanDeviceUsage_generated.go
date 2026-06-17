@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLComputePlanDeviceUsage")), objc.RegisterName("new"))
 	return &ComputePlanDeviceUsage{inner: raw.MLComputePlanDeviceUsageFromID(_id)}
 }
+
+// SupportedComputeDevices calls the underlying SupportedComputeDevices.
+func (x *ComputePlanDeviceUsage) SupportedComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol] {
+	return x.inner.SupportedComputeDevices()
+}
+
+// PreferredComputeDevice calls the underlying PreferredComputeDevice.
+func (x *ComputePlanDeviceUsage) PreferredComputeDevice() raw.MLComputeDeviceProtocol {
+	return x.inner.PreferredComputeDevice()
+}
+
+// ComputePlanDeviceUsageable is the interface implemented by [ComputePlanDeviceUsage], for mocking and DI.
+type ComputePlanDeviceUsageable interface {
+	Unwrap() *raw.MLComputePlanDeviceUsage
+	SupportedComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol]
+	PreferredComputeDevice() raw.MLComputeDeviceProtocol
+}
+
+var _ ComputePlanDeviceUsageable = (*ComputePlanDeviceUsage)(nil)
 

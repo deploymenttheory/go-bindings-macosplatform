@@ -5,8 +5,11 @@
 package ituneslibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LibMediaItem wraps [raw.ITLibMediaItem] with a fluent Go API.
@@ -23,5 +26,356 @@ func NewLibMediaItem() *LibMediaItem {
 	return &LibMediaItem{inner: raw.ITLibMediaItemFromID(_id)}
 }
 
+// Title calls the underlying Title.
+func (x *LibMediaItem) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SortTitle calls the underlying SortTitle.
+func (x *LibMediaItem) SortTitle() string {
+	_r := x.inner.SortTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Artist calls the underlying Artist.
+func (x *LibMediaItem) Artist() *LibArtist {
+	_r := x.inner.Artist()
+	if _r == nil {
+		return nil
+	}
+	return &LibArtist{inner: _r}
+}
+
+// Composer calls the underlying Composer.
+func (x *LibMediaItem) Composer() string {
+	_r := x.inner.Composer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SortComposer calls the underlying SortComposer.
+func (x *LibMediaItem) SortComposer() string {
+	_r := x.inner.SortComposer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Rating calls the underlying Rating.
+func (x *LibMediaItem) Rating() int {
+	return x.inner.Rating()
+}
+
+// IsRatingComputed calls the underlying IsRatingComputed.
+func (x *LibMediaItem) IsRatingComputed() bool {
+	return x.inner.IsRatingComputed()
+}
+
+// StartTime calls the underlying StartTime.
+func (x *LibMediaItem) StartTime() uint {
+	return x.inner.StartTime()
+}
+
+// StopTime calls the underlying StopTime.
+func (x *LibMediaItem) StopTime() uint {
+	return x.inner.StopTime()
+}
+
+// Album calls the underlying Album.
+func (x *LibMediaItem) Album() *LibAlbum {
+	_r := x.inner.Album()
+	if _r == nil {
+		return nil
+	}
+	return &LibAlbum{inner: _r}
+}
+
+// Genre calls the underlying Genre.
+func (x *LibMediaItem) Genre() string {
+	_r := x.inner.Genre()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Kind calls the underlying Kind.
+func (x *LibMediaItem) Kind() string {
+	_r := x.inner.Kind()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaKind calls the underlying MediaKind.
+func (x *LibMediaItem) MediaKind() raw.ITLibMediaItemMediaKind {
+	return x.inner.MediaKind()
+}
+
+// FileSize calls the underlying FileSize.
+func (x *LibMediaItem) FileSize() uint64 {
+	return x.inner.FileSize()
+}
+
+// Size calls the underlying Size.
+func (x *LibMediaItem) Size() uint {
+	return x.inner.Size()
+}
+
+// TotalTime calls the underlying TotalTime.
+func (x *LibMediaItem) TotalTime() uint {
+	return x.inner.TotalTime()
+}
+
+// TrackNumber calls the underlying TrackNumber.
+func (x *LibMediaItem) TrackNumber() uint {
+	return x.inner.TrackNumber()
+}
+
+// Category calls the underlying Category.
+func (x *LibMediaItem) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LyricsContentRating calls the underlying LyricsContentRating.
+func (x *LibMediaItem) LyricsContentRating() raw.ITLibMediaItemLyricsContentRating {
+	return x.inner.LyricsContentRating()
+}
+
+// ContentRating calls the underlying ContentRating.
+func (x *LibMediaItem) ContentRating() string {
+	_r := x.inner.ContentRating()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ModifiedDate calls the underlying ModifiedDate.
+func (x *LibMediaItem) ModifiedDate() *foundation.NSDate {
+	return x.inner.ModifiedDate()
+}
+
+// AddedDate calls the underlying AddedDate.
+func (x *LibMediaItem) AddedDate() *foundation.NSDate {
+	return x.inner.AddedDate()
+}
+
+// Bitrate calls the underlying Bitrate.
+func (x *LibMediaItem) Bitrate() uint {
+	return x.inner.Bitrate()
+}
+
+// SampleRate calls the underlying SampleRate.
+func (x *LibMediaItem) SampleRate() uint {
+	return x.inner.SampleRate()
+}
+
+// BeatsPerMinute calls the underlying BeatsPerMinute.
+func (x *LibMediaItem) BeatsPerMinute() uint {
+	return x.inner.BeatsPerMinute()
+}
+
+// PlayCount calls the underlying PlayCount.
+func (x *LibMediaItem) PlayCount() uint {
+	return x.inner.PlayCount()
+}
+
+// LastPlayedDate calls the underlying LastPlayedDate.
+func (x *LibMediaItem) LastPlayedDate() *foundation.NSDate {
+	return x.inner.LastPlayedDate()
+}
+
+// PlayStatus calls the underlying PlayStatus.
+func (x *LibMediaItem) PlayStatus() raw.ITLibMediaItemPlayStatus {
+	return x.inner.PlayStatus()
+}
+
+// Location calls the underlying Location.
+func (x *LibMediaItem) Location() *foundation.NSURL {
+	return x.inner.Location()
+}
+
+// HasArtworkAvailable calls the underlying HasArtworkAvailable.
+func (x *LibMediaItem) HasArtworkAvailable() bool {
+	return x.inner.HasArtworkAvailable()
+}
+
+// Artwork calls the underlying Artwork.
+func (x *LibMediaItem) Artwork() *LibArtwork {
+	_r := x.inner.Artwork()
+	if _r == nil {
+		return nil
+	}
+	return &LibArtwork{inner: _r}
+}
+
+// Comments calls the underlying Comments.
+func (x *LibMediaItem) Comments() string {
+	_r := x.inner.Comments()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsPurchased calls the underlying IsPurchased.
+func (x *LibMediaItem) IsPurchased() bool {
+	return x.inner.IsPurchased()
+}
+
+// IsCloud calls the underlying IsCloud.
+func (x *LibMediaItem) IsCloud() bool {
+	return x.inner.IsCloud()
+}
+
+// IsDRMProtected calls the underlying IsDRMProtected.
+func (x *LibMediaItem) IsDRMProtected() bool {
+	return x.inner.IsDRMProtected()
+}
+
+// IsVideo calls the underlying IsVideo.
+func (x *LibMediaItem) IsVideo() bool {
+	return x.inner.IsVideo()
+}
+
+// VideoInfo calls the underlying VideoInfo.
+func (x *LibMediaItem) VideoInfo() *LibMediaItemVideoInfo {
+	_r := x.inner.VideoInfo()
+	if _r == nil {
+		return nil
+	}
+	return &LibMediaItemVideoInfo{inner: _r}
+}
+
+// ReleaseDate calls the underlying ReleaseDate.
+func (x *LibMediaItem) ReleaseDate() *foundation.NSDate {
+	return x.inner.ReleaseDate()
+}
+
+// Year calls the underlying Year.
+func (x *LibMediaItem) Year() uint {
+	return x.inner.Year()
+}
+
+// FileType calls the underlying FileType.
+func (x *LibMediaItem) FileType() uint {
+	return x.inner.FileType()
+}
+
+// SkipCount calls the underlying SkipCount.
+func (x *LibMediaItem) SkipCount() uint {
+	return x.inner.SkipCount()
+}
+
+// SkipDate calls the underlying SkipDate.
+func (x *LibMediaItem) SkipDate() *foundation.NSDate {
+	return x.inner.SkipDate()
+}
+
+// VoiceOverLanguage calls the underlying VoiceOverLanguage.
+func (x *LibMediaItem) VoiceOverLanguage() unsafe.Pointer {
+	return x.inner.VoiceOverLanguage()
+}
+
+// VolumeAdjustment calls the underlying VolumeAdjustment.
+func (x *LibMediaItem) VolumeAdjustment() int {
+	return x.inner.VolumeAdjustment()
+}
+
+// VolumeNormalizationEnergy calls the underlying VolumeNormalizationEnergy.
+func (x *LibMediaItem) VolumeNormalizationEnergy() uint {
+	return x.inner.VolumeNormalizationEnergy()
+}
+
+// IsUserDisabled calls the underlying IsUserDisabled.
+func (x *LibMediaItem) IsUserDisabled() bool {
+	return x.inner.IsUserDisabled()
+}
+
+// Grouping calls the underlying Grouping.
+func (x *LibMediaItem) Grouping() string {
+	_r := x.inner.Grouping()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocationType calls the underlying LocationType.
+func (x *LibMediaItem) LocationType() raw.ITLibMediaItemLocationType {
+	return x.inner.LocationType()
+}
+
 func (x *LibMediaItem) asLibMediaEntity() *raw.ITLibMediaEntity { return &x.inner.ITLibMediaEntity }
+
+// LibMediaItemable is the interface implemented by [LibMediaItem], for mocking and DI.
+type LibMediaItemable interface {
+	Unwrap() *raw.ITLibMediaItem
+	Title() string
+	SortTitle() string
+	Artist() *LibArtist
+	Composer() string
+	SortComposer() string
+	Rating() int
+	IsRatingComputed() bool
+	StartTime() uint
+	StopTime() uint
+	Album() *LibAlbum
+	Genre() string
+	Kind() string
+	MediaKind() raw.ITLibMediaItemMediaKind
+	FileSize() uint64
+	Size() uint
+	TotalTime() uint
+	TrackNumber() uint
+	Category() string
+	LyricsContentRating() raw.ITLibMediaItemLyricsContentRating
+	ContentRating() string
+	ModifiedDate() *foundation.NSDate
+	AddedDate() *foundation.NSDate
+	Bitrate() uint
+	SampleRate() uint
+	BeatsPerMinute() uint
+	PlayCount() uint
+	LastPlayedDate() *foundation.NSDate
+	PlayStatus() raw.ITLibMediaItemPlayStatus
+	Location() *foundation.NSURL
+	HasArtworkAvailable() bool
+	Artwork() *LibArtwork
+	Comments() string
+	IsPurchased() bool
+	IsCloud() bool
+	IsDRMProtected() bool
+	IsVideo() bool
+	VideoInfo() *LibMediaItemVideoInfo
+	ReleaseDate() *foundation.NSDate
+	Year() uint
+	FileType() uint
+	SkipCount() uint
+	SkipDate() *foundation.NSDate
+	VoiceOverLanguage() unsafe.Pointer
+	VolumeAdjustment() int
+	VolumeNormalizationEnergy() uint
+	IsUserDisabled() bool
+	Grouping() string
+	LocationType() raw.ITLibMediaItemLocationType
+}
+
+var _ LibMediaItemable = (*LibMediaItem)(nil)
 

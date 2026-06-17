@@ -23,3 +23,26 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptorArray() *Accele
 	return &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &AccelerationStructurePassSampleBufferAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *AccelerationStructurePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [AccelerationStructurePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
+type AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *AccelerationStructurePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLAccelerationStructurePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ AccelerationStructurePassSampleBufferAttachmentDescriptorArrayable = (*AccelerationStructurePassSampleBufferAttachmentDescriptorArray)(nil)
+

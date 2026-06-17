@@ -36,3 +36,36 @@ func (x *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction 
 	return x
 }
 
+// NormalizedBounds calls the underlying NormalizedBounds.
+func (x *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
+	return x.inner.NormalizedBounds()
+}
+
+// SetNormalizedBounds calls the underlying SetNormalizedBounds.
+func (x *BoundsPrediction) SetNormalizedBounds(normalizedBounds corefoundation.CGRect) {
+	x.inner.SetNormalizedBounds(normalizedBounds)
+}
+
+// Confidence calls the underlying Confidence.
+func (x *BoundsPrediction) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
+// SetConfidence calls the underlying SetConfidence.
+func (x *BoundsPrediction) SetConfidence(confidence float32) {
+	x.inner.SetConfidence(confidence)
+}
+
+// BoundsPredictionable is the interface implemented by [BoundsPrediction], for mocking and DI.
+type BoundsPredictionable interface {
+	Unwrap() *raw.CNBoundsPrediction
+	WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction
+	WithConfidence(confidence float32) *BoundsPrediction
+	NormalizedBounds() corefoundation.CGRect
+	SetNormalizedBounds(normalizedBounds corefoundation.CGRect)
+	Confidence() float32
+	SetConfidence(confidence float32)
+}
+
+var _ BoundsPredictionable = (*BoundsPrediction)(nil)
+

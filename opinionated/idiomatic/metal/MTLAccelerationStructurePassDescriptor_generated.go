@@ -23,3 +23,20 @@ func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescript
 	return &AccelerationStructurePassDescriptor{inner: raw.MTLAccelerationStructurePassDescriptorFromID(_id)}
 }
 
+// SampleBufferAttachments calls the underlying SampleBufferAttachments.
+func (x *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	_r := x.inner.SampleBufferAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{inner: _r}
+}
+
+// AccelerationStructurePassDescriptorable is the interface implemented by [AccelerationStructurePassDescriptor], for mocking and DI.
+type AccelerationStructurePassDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructurePassDescriptor
+	SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray
+}
+
+var _ AccelerationStructurePassDescriptorable = (*AccelerationStructurePassDescriptor)(nil)
+

@@ -29,7 +29,27 @@ func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConf
 	return x
 }
 
+// PINConfirmation calls the underlying PINConfirmation.
+func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() raw.TKSmartCardPINConfirmation {
+	return x.inner.PINConfirmation()
+}
+
+// SetPINConfirmation calls the underlying SetPINConfirmation.
+func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) {
+	x.inner.SetPINConfirmation(pINConfirmation)
+}
+
 func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation { return &x.inner.TKSmartCardUserInteractionForPINOperation }
 
 func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction }
+
+// SmartCardUserInteractionForSecurePINChangeable is the interface implemented by [SmartCardUserInteractionForSecurePINChange], for mocking and DI.
+type SmartCardUserInteractionForSecurePINChangeable interface {
+	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange
+	WithPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
+	PINConfirmation() raw.TKSmartCardPINConfirmation
+	SetPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation)
+}
+
+var _ SmartCardUserInteractionForSecurePINChangeable = (*SmartCardUserInteractionForSecurePINChange)(nil)
 

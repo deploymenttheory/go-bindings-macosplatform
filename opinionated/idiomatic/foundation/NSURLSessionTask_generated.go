@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // URLSessionTask wraps [raw.NSURLSessionTask] with a fluent Go API.
@@ -66,7 +67,213 @@ func (x *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelive
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *URLSessionTask) Cancel() {
+	x.inner.Cancel()
+}
+
+// Suspend calls the underlying Suspend.
+func (x *URLSessionTask) Suspend() {
+	x.inner.Suspend()
+}
+
+// Resume calls the underlying Resume.
+func (x *URLSessionTask) Resume() {
+	x.inner.Resume()
+}
+
+// TaskIdentifier calls the underlying TaskIdentifier.
+func (x *URLSessionTask) TaskIdentifier() uint {
+	return x.inner.TaskIdentifier()
+}
+
+// OriginalRequest calls the underlying OriginalRequest.
+func (x *URLSessionTask) OriginalRequest() *URLRequest {
+	_r := x.inner.OriginalRequest()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
+// CurrentRequest calls the underlying CurrentRequest.
+func (x *URLSessionTask) CurrentRequest() *URLRequest {
+	_r := x.inner.CurrentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
+// Response calls the underlying Response.
+func (x *URLSessionTask) Response() *URLResponse {
+	_r := x.inner.Response()
+	if _r == nil {
+		return nil
+	}
+	return &URLResponse{inner: _r}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *URLSessionTask) Delegate() raw.NSURLSessionTaskDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *URLSessionTask) SetDelegate(delegate raw.NSURLSessionTaskDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Progress calls the underlying Progress.
+func (x *URLSessionTask) Progress() *Progress {
+	_r := x.inner.Progress()
+	if _r == nil {
+		return nil
+	}
+	return &Progress{inner: _r}
+}
+
+// EarliestBeginDate calls the underlying EarliestBeginDate.
+func (x *URLSessionTask) EarliestBeginDate() *Date {
+	_r := x.inner.EarliestBeginDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// SetEarliestBeginDate calls the underlying SetEarliestBeginDate.
+func (x *URLSessionTask) SetEarliestBeginDate(earliestBeginDate *raw.NSDate) {
+	x.inner.SetEarliestBeginDate(earliestBeginDate)
+}
+
+// CountOfBytesClientExpectsToSend calls the underlying CountOfBytesClientExpectsToSend.
+func (x *URLSessionTask) CountOfBytesClientExpectsToSend() int64 {
+	return x.inner.CountOfBytesClientExpectsToSend()
+}
+
+// SetCountOfBytesClientExpectsToSend calls the underlying SetCountOfBytesClientExpectsToSend.
+func (x *URLSessionTask) SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) {
+	x.inner.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+}
+
+// CountOfBytesClientExpectsToReceive calls the underlying CountOfBytesClientExpectsToReceive.
+func (x *URLSessionTask) CountOfBytesClientExpectsToReceive() int64 {
+	return x.inner.CountOfBytesClientExpectsToReceive()
+}
+
+// SetCountOfBytesClientExpectsToReceive calls the underlying SetCountOfBytesClientExpectsToReceive.
+func (x *URLSessionTask) SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) {
+	x.inner.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+}
+
+// CountOfBytesSent calls the underlying CountOfBytesSent.
+func (x *URLSessionTask) CountOfBytesSent() int64 {
+	return x.inner.CountOfBytesSent()
+}
+
+// CountOfBytesReceived calls the underlying CountOfBytesReceived.
+func (x *URLSessionTask) CountOfBytesReceived() int64 {
+	return x.inner.CountOfBytesReceived()
+}
+
+// CountOfBytesExpectedToSend calls the underlying CountOfBytesExpectedToSend.
+func (x *URLSessionTask) CountOfBytesExpectedToSend() int64 {
+	return x.inner.CountOfBytesExpectedToSend()
+}
+
+// CountOfBytesExpectedToReceive calls the underlying CountOfBytesExpectedToReceive.
+func (x *URLSessionTask) CountOfBytesExpectedToReceive() int64 {
+	return x.inner.CountOfBytesExpectedToReceive()
+}
+
+// TaskDescription calls the underlying TaskDescription.
+func (x *URLSessionTask) TaskDescription() *String {
+	_r := x.inner.TaskDescription()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetTaskDescription calls the underlying SetTaskDescription.
+func (x *URLSessionTask) SetTaskDescription(taskDescription string) {
+	x.inner.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+}
+
+// State calls the underlying State.
+func (x *URLSessionTask) State() raw.NSURLSessionTaskState {
+	return x.inner.State()
+}
+
+// Error calls the underlying Error.
+func (x *URLSessionTask) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Priority calls the underlying Priority.
+func (x *URLSessionTask) Priority() float32 {
+	return x.inner.Priority()
+}
+
+// SetPriority calls the underlying SetPriority.
+func (x *URLSessionTask) SetPriority(priority float32) {
+	x.inner.SetPriority(priority)
+}
+
+// PrefersIncrementalDelivery calls the underlying PrefersIncrementalDelivery.
+func (x *URLSessionTask) PrefersIncrementalDelivery() bool {
+	return x.inner.PrefersIncrementalDelivery()
+}
+
+// SetPrefersIncrementalDelivery calls the underlying SetPrefersIncrementalDelivery.
+func (x *URLSessionTask) SetPrefersIncrementalDelivery(prefersIncrementalDelivery bool) {
+	x.inner.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+}
+
 func (x *URLSessionTask) asURLSessionTask() *raw.NSURLSessionTask { return x.inner }
 
 func (x *URLSessionTask) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLSessionTaskable is the interface implemented by [URLSessionTask], for mocking and DI.
+type URLSessionTaskable interface {
+	Unwrap() *raw.NSURLSessionTask
+	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionTask
+	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionTask
+	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionTask
+	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionTask
+	WithTaskDescription(taskDescription string) *URLSessionTask
+	WithPriority(priority float32) *URLSessionTask
+	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask
+	Cancel()
+	Suspend()
+	Resume()
+	TaskIdentifier() uint
+	OriginalRequest() *URLRequest
+	CurrentRequest() *URLRequest
+	Response() *URLResponse
+	Delegate() raw.NSURLSessionTaskDelegate
+	SetDelegate(delegate raw.NSURLSessionTaskDelegate)
+	Progress() *Progress
+	EarliestBeginDate() *Date
+	SetEarliestBeginDate(earliestBeginDate *raw.NSDate)
+	CountOfBytesClientExpectsToSend() int64
+	SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64)
+	CountOfBytesClientExpectsToReceive() int64
+	SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64)
+	CountOfBytesSent() int64
+	CountOfBytesReceived() int64
+	CountOfBytesExpectedToSend() int64
+	CountOfBytesExpectedToReceive() int64
+	TaskDescription() *String
+	SetTaskDescription(taskDescription string)
+	State() raw.NSURLSessionTaskState
+	Error() unsafe.Pointer
+	Priority() float32
+	SetPriority(priority float32)
+	PrefersIncrementalDelivery() bool
+	SetPrefersIncrementalDelivery(prefersIncrementalDelivery bool)
+}
+
+var _ URLSessionTaskable = (*URLSessionTask)(nil)
 

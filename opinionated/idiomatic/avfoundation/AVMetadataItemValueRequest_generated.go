@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MetadataItemValueRequest wraps [raw.AVMetadataItemValueRequest] with a fluent Go API.
@@ -22,4 +23,33 @@ func NewMetadataItemValueRequest() *MetadataItemValueRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataItemValueRequest")), objc.RegisterName("new"))
 	return &MetadataItemValueRequest{inner: raw.AVMetadataItemValueRequestFromID(_id)}
 }
+
+// RespondWithValue calls the underlying RespondWithValue.
+func (x *MetadataItemValueRequest) RespondWithValue(value objc.ID) {
+	x.inner.RespondWithValue(value)
+}
+
+// RespondWithError calls the underlying RespondWithError.
+func (x *MetadataItemValueRequest) RespondWithError(error_ unsafe.Pointer) {
+	x.inner.RespondWithError(error_)
+}
+
+// MetadataItem calls the underlying MetadataItem.
+func (x *MetadataItemValueRequest) MetadataItem() *MetadataItem {
+	_r := x.inner.MetadataItem()
+	if _r == nil {
+		return nil
+	}
+	return &MetadataItem{inner: _r}
+}
+
+// MetadataItemValueRequestable is the interface implemented by [MetadataItemValueRequest], for mocking and DI.
+type MetadataItemValueRequestable interface {
+	Unwrap() *raw.AVMetadataItemValueRequest
+	RespondWithValue(value objc.ID)
+	RespondWithError(error_ unsafe.Pointer)
+	MetadataItem() *MetadataItem
+}
+
+var _ MetadataItemValueRequestable = (*MetadataItemValueRequest)(nil)
 

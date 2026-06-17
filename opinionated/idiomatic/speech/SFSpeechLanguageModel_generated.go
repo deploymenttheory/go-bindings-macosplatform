@@ -23,3 +23,10 @@ func NewSpeechLanguageModel() *SpeechLanguageModel {
 	return &SpeechLanguageModel{inner: raw.SFSpeechLanguageModelFromID(_id)}
 }
 
+// SpeechLanguageModelable is the interface implemented by [SpeechLanguageModel], for mocking and DI.
+type SpeechLanguageModelable interface {
+	Unwrap() *raw.SFSpeechLanguageModel
+}
+
+var _ SpeechLanguageModelable = (*SpeechLanguageModel)(nil)
+

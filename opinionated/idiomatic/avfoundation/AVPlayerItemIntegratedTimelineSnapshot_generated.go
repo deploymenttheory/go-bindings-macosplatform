@@ -6,6 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +26,56 @@ func NewPlayerItemIntegratedTimelineSnapshot() *PlayerItemIntegratedTimelineSnap
 	return &PlayerItemIntegratedTimelineSnapshot{inner: raw.AVPlayerItemIntegratedTimelineSnapshotFromID(_id)}
 }
 
+// MapTimeToSegmentAtSegmentOffset calls the underlying MapTimeToSegmentAtSegmentOffset.
+func (x *PlayerItemIntegratedTimelineSnapshot) MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *raw.AVPlayerItemSegment, segmentOffsetOut *coremedia.CMTime) {
+	x.inner.MapTimeToSegmentAtSegmentOffset(time_, timeSegmentOut, segmentOffsetOut)
+}
+
+// Duration calls the underlying Duration.
+func (x *PlayerItemIntegratedTimelineSnapshot) Duration() coremedia.CMTime {
+	return x.inner.Duration()
+}
+
+// CurrentSegment calls the underlying CurrentSegment.
+func (x *PlayerItemIntegratedTimelineSnapshot) CurrentSegment() *PlayerItemSegment {
+	_r := x.inner.CurrentSegment()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItemSegment{inner: _r}
+}
+
 // Segments returns the collection as a Go slice.
 func (x *PlayerItemIntegratedTimelineSnapshot) Segments() []*raw.AVPlayerItemSegment {
 	arr := x.inner.Segments()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItemSegment, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItemSegment {
+		return raw.AVPlayerItemSegmentFromID(purego.Retain(_id))
+	})
 }
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *PlayerItemIntegratedTimelineSnapshot) CurrentTime() coremedia.CMTime {
+	return x.inner.CurrentTime()
+}
+
+// CurrentDate calls the underlying CurrentDate.
+func (x *PlayerItemIntegratedTimelineSnapshot) CurrentDate() *foundation.NSDate {
+	return x.inner.CurrentDate()
+}
+
+// PlayerItemIntegratedTimelineSnapshotable is the interface implemented by [PlayerItemIntegratedTimelineSnapshot], for mocking and DI.
+type PlayerItemIntegratedTimelineSnapshotable interface {
+	Unwrap() *raw.AVPlayerItemIntegratedTimelineSnapshot
+	MapTimeToSegmentAtSegmentOffset(time_ coremedia.CMTime, timeSegmentOut *raw.AVPlayerItemSegment, segmentOffsetOut *coremedia.CMTime)
+	Duration() coremedia.CMTime
+	CurrentSegment() *PlayerItemSegment
+	Segments() []*raw.AVPlayerItemSegment
+	CurrentTime() coremedia.CMTime
+	CurrentDate() *foundation.NSDate
+}
+
+var _ PlayerItemIntegratedTimelineSnapshotable = (*PlayerItemIntegratedTimelineSnapshot)(nil)
 

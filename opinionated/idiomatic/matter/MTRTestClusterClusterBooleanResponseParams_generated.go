@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterBooleanResponseParams() *MTRTestClusterClusterBoole
 
 func (x *MTRTestClusterClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams { return &x.inner.MTRUnitTestingClusterBooleanResponseParams }
 
+// MTRTestClusterClusterBooleanResponseParamsable is the interface implemented by [MTRTestClusterClusterBooleanResponseParams], for mocking and DI.
+type MTRTestClusterClusterBooleanResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterBooleanResponseParams
+}
+
+var _ MTRTestClusterClusterBooleanResponseParamsable = (*MTRTestClusterClusterBooleanResponseParams)(nil)
+

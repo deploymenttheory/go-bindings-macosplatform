@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,58 @@ func NewPasskeyCredentialRequestParameters() *PasskeyCredentialRequestParameters
 	return &PasskeyCredentialRequestParameters{inner: raw.ASPasskeyCredentialRequestParametersFromID(_id)}
 }
 
+// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+func (x *PasskeyCredentialRequestParameters) RelyingPartyIdentifier() string {
+	_r := x.inner.RelyingPartyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ClientDataHash calls the underlying ClientDataHash.
+func (x *PasskeyCredentialRequestParameters) ClientDataHash() *foundation.NSData {
+	return x.inner.ClientDataHash()
+}
+
+// UserVerificationPreference calls the underlying UserVerificationPreference.
+func (x *PasskeyCredentialRequestParameters) UserVerificationPreference() string {
+	_r := x.inner.UserVerificationPreference()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // AllowedCredentials returns the collection as a Go slice.
 func (x *PasskeyCredentialRequestParameters) AllowedCredentials() []*foundation.NSData {
 	arr := x.inner.AllowedCredentials()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
 }
+
+// ExtensionInput calls the underlying ExtensionInput.
+func (x *PasskeyCredentialRequestParameters) ExtensionInput() *PasskeyAssertionCredentialExtensionInput {
+	_r := x.inner.ExtensionInput()
+	if _r == nil {
+		return nil
+	}
+	return &PasskeyAssertionCredentialExtensionInput{inner: _r}
+}
+
+// PasskeyCredentialRequestParametersable is the interface implemented by [PasskeyCredentialRequestParameters], for mocking and DI.
+type PasskeyCredentialRequestParametersable interface {
+	Unwrap() *raw.ASPasskeyCredentialRequestParameters
+	RelyingPartyIdentifier() string
+	ClientDataHash() *foundation.NSData
+	UserVerificationPreference() string
+	AllowedCredentials() []*foundation.NSData
+	ExtensionInput() *PasskeyAssertionCredentialExtensionInput
+}
+
+var _ PasskeyCredentialRequestParametersable = (*PasskeyCredentialRequestParameters)(nil)
 

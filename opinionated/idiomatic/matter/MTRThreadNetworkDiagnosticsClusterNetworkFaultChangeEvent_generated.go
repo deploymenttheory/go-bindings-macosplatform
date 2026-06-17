@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNe
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent")), objc.RegisterName("new"))
 	return &MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent{inner: raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventFromID(_id)}
 }
+
+// Current calls the underlying Current.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
+	return x.inner.Current()
+}
+
+// SetCurrent calls the underlying SetCurrent.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
+	x.inner.SetCurrent(current)
+}
+
+// Previous calls the underlying Previous.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
+	return x.inner.Previous()
+}
+
+// SetPrevious calls the underlying SetPrevious.
+func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
+	x.inner.SetPrevious(previous)
+}
+
+// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent
+	Current() *foundation.NSArray[objc.ID]
+	SetCurrent(current *foundation.NSArray[objc.ID])
+	Previous() *foundation.NSArray[objc.ID]
+	SetPrevious(previous *foundation.NSArray[objc.ID])
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable = (*MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent)(nil)
 

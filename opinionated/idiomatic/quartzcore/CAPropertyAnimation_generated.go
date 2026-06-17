@@ -7,6 +7,7 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,7 +49,74 @@ func (x *PropertyAnimation) WithValueFunction(valueFunction *raw.CAValueFunction
 	return x
 }
 
+// KeyPath calls the underlying KeyPath.
+func (x *PropertyAnimation) KeyPath() string {
+	_r := x.inner.KeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKeyPath calls the underlying SetKeyPath.
+func (x *PropertyAnimation) SetKeyPath(keyPath string) {
+	x.inner.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
+}
+
+// IsAdditive calls the underlying IsAdditive.
+func (x *PropertyAnimation) IsAdditive() bool {
+	return x.inner.IsAdditive()
+}
+
+// SetAdditive calls the underlying SetAdditive.
+func (x *PropertyAnimation) SetAdditive(additive bool) {
+	x.inner.SetAdditive(additive)
+}
+
+// IsCumulative calls the underlying IsCumulative.
+func (x *PropertyAnimation) IsCumulative() bool {
+	return x.inner.IsCumulative()
+}
+
+// SetCumulative calls the underlying SetCumulative.
+func (x *PropertyAnimation) SetCumulative(cumulative bool) {
+	x.inner.SetCumulative(cumulative)
+}
+
+// ValueFunction calls the underlying ValueFunction.
+func (x *PropertyAnimation) ValueFunction() *ValueFunction {
+	_r := x.inner.ValueFunction()
+	if _r == nil {
+		return nil
+	}
+	return &ValueFunction{inner: _r}
+}
+
+// SetValueFunction calls the underlying SetValueFunction.
+func (x *PropertyAnimation) SetValueFunction(valueFunction *raw.CAValueFunction) {
+	x.inner.SetValueFunction(valueFunction)
+}
+
 func (x *PropertyAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return x.inner }
 
 func (x *PropertyAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CAAnimation }
+
+// PropertyAnimationable is the interface implemented by [PropertyAnimation], for mocking and DI.
+type PropertyAnimationable interface {
+	Unwrap() *raw.CAPropertyAnimation
+	WithKeyPath(keyPath string) *PropertyAnimation
+	WithAdditive(additive bool) *PropertyAnimation
+	WithCumulative(cumulative bool) *PropertyAnimation
+	WithValueFunction(valueFunction *raw.CAValueFunction) *PropertyAnimation
+	KeyPath() string
+	SetKeyPath(keyPath string)
+	IsAdditive() bool
+	SetAdditive(additive bool)
+	IsCumulative() bool
+	SetCumulative(cumulative bool)
+	ValueFunction() *ValueFunction
+	SetValueFunction(valueFunction *raw.CAValueFunction)
+}
+
+var _ PropertyAnimationable = (*PropertyAnimation)(nil)
 

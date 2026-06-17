@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,38 @@ func NewMTRMetrics() *MTRMetrics {
 	return &MTRMetrics{inner: raw.MTRMetricsFromID(_id)}
 }
 
+// MetricDataForKey calls the underlying MetricDataForKey.
+func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
+	_r := x.inner.MetricDataForKey(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &MTRMetricData{inner: _r}
+}
+
+// UniqueIdentifier calls the underlying UniqueIdentifier.
+func (x *MTRMetrics) UniqueIdentifier() *foundation.NSUUID {
+	return x.inner.UniqueIdentifier()
+}
+
 // AllKeys returns the collection as a Go slice.
-func (x *MTRMetrics) AllKeys() []*foundation.NSString {
+func (x *MTRMetrics) AllKeys() []string {
 	arr := x.inner.AllKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// MTRMetricsable is the interface implemented by [MTRMetrics], for mocking and DI.
+type MTRMetricsable interface {
+	Unwrap() *raw.MTRMetrics
+	MetricDataForKey(key string) *MTRMetricData
+	UniqueIdentifier() *foundation.NSUUID
+	AllKeys() []string
+}
+
+var _ MTRMetricsable = (*MTRMetrics)(nil)
 

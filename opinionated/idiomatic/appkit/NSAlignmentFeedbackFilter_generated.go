@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,47 @@ func NewAlignmentFeedbackFilter() *AlignmentFeedbackFilter {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAlignmentFeedbackFilter")), objc.RegisterName("new"))
 	return &AlignmentFeedbackFilter{inner: raw.NSAlignmentFeedbackFilterFromID(_id)}
 }
+
+// UpdateWithEvent calls the underlying UpdateWithEvent.
+func (x *AlignmentFeedbackFilter) UpdateWithEvent(event *raw.NSEvent) {
+	x.inner.UpdateWithEvent(event)
+}
+
+// UpdateWithPanRecognizer calls the underlying UpdateWithPanRecognizer.
+func (x *AlignmentFeedbackFilter) UpdateWithPanRecognizer(panRecognizer *raw.NSPanGestureRecognizer) {
+	x.inner.UpdateWithPanRecognizer(panRecognizer)
+}
+
+// AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint calls the underlying AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint.
+func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken {
+	return x.inner.AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view, previousPoint, alignedPoint, defaultPoint)
+}
+
+// AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX calls the underlying AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX.
+func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken {
+	return x.inner.AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view, previousX, alignedX, defaultX)
+}
+
+// AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY calls the underlying AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY.
+func (x *AlignmentFeedbackFilter) AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken {
+	return x.inner.AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view, previousY, alignedY, defaultY)
+}
+
+// PerformFeedbackPerformanceTime calls the underlying PerformFeedbackPerformanceTime.
+func (x *AlignmentFeedbackFilter) PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime raw.NSHapticFeedbackPerformanceTime) {
+	x.inner.PerformFeedbackPerformanceTime(alignmentFeedbackTokens, performanceTime)
+}
+
+// AlignmentFeedbackFilterable is the interface implemented by [AlignmentFeedbackFilter], for mocking and DI.
+type AlignmentFeedbackFilterable interface {
+	Unwrap() *raw.NSAlignmentFeedbackFilter
+	UpdateWithEvent(event *raw.NSEvent)
+	UpdateWithPanRecognizer(panRecognizer *raw.NSPanGestureRecognizer)
+	AlignmentFeedbackTokenForMovementInViewPreviousPointAlignedPointDefaultPoint(view *raw.NSView, previousPoint corefoundation.CGPoint, alignedPoint corefoundation.CGPoint, defaultPoint corefoundation.CGPoint) raw.NSAlignmentFeedbackToken
+	AlignmentFeedbackTokenForHorizontalMovementInViewPreviousXAlignedXDefaultX(view *raw.NSView, previousX float64, alignedX float64, defaultX float64) raw.NSAlignmentFeedbackToken
+	AlignmentFeedbackTokenForVerticalMovementInViewPreviousYAlignedYDefaultY(view *raw.NSView, previousY float64, alignedY float64, defaultY float64) raw.NSAlignmentFeedbackToken
+	PerformFeedbackPerformanceTime(alignmentFeedbackTokens *foundation.NSArray[raw.NSAlignmentFeedbackToken], performanceTime raw.NSHapticFeedbackPerformanceTime)
+}
+
+var _ AlignmentFeedbackFilterable = (*AlignmentFeedbackFilter)(nil)
 

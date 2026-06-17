@@ -5,7 +5,9 @@
 package coreimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,28 @@ func NewFeature() *Feature {
 	return &Feature{inner: raw.CIFeatureFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *Feature) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Bounds calls the underlying Bounds.
+func (x *Feature) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
 func (x *Feature) asFeature() *raw.CIFeature { return x.inner }
+
+// Featureable is the interface implemented by [Feature], for mocking and DI.
+type Featureable interface {
+	Unwrap() *raw.CIFeature
+	Type() string
+	Bounds() corefoundation.CGRect
+}
+
+var _ Featureable = (*Feature)(nil)
 

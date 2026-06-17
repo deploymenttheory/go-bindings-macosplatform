@@ -33,3 +33,16 @@ func NewCompositionLayerWithComposition(composition *quartz.QCComposition) *Comp
 	return &CompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
 }
 
+// Composition calls the underlying Composition.
+func (x *CompositionLayer) Composition() *quartz.QCComposition {
+	return x.inner.Composition()
+}
+
+// CompositionLayerable is the interface implemented by [CompositionLayer], for mocking and DI.
+type CompositionLayerable interface {
+	Unwrap() *raw.QCCompositionLayer
+	Composition() *quartz.QCComposition
+}
+
+var _ CompositionLayerable = (*CompositionLayer)(nil)
+

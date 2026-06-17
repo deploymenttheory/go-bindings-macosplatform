@@ -6,7 +6,10 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContactStore wraps [raw.CNContactStore] with a fluent Go API.
@@ -22,4 +25,101 @@ func NewContactStore() *ContactStore {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactStore")), objc.RegisterName("new"))
 	return &ContactStore{inner: raw.CNContactStoreFromID(_id)}
 }
+
+// RequestAccessForEntityTypeCompletionHandler calls the underlying RequestAccessForEntityTypeCompletionHandler.
+func (x *ContactStore) RequestAccessForEntityTypeCompletionHandler(entityType raw.CNEntityType, completionHandler func(bool, unsafe.Pointer)) {
+	x.inner.RequestAccessForEntityTypeCompletionHandler(entityType, completionHandler)
+}
+
+// UnifiedContactsMatchingPredicateKeysToFetchError calls the underlying UnifiedContactsMatchingPredicateKeysToFetchError.
+func (x *ContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*foundation.NSArray[*raw.CNContact], error) {
+	return x.inner.UnifiedContactsMatchingPredicateKeysToFetchError(predicate, keys)
+}
+
+// UnifiedContactWithIdentifierKeysToFetchError calls the underlying UnifiedContactWithIdentifierKeysToFetchError.
+func (x *ContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error) {
+	_r, _err := x.inner.UnifiedContactWithIdentifierKeysToFetchError(foundation.NSStringStringWithUTF8String(identifier), keys)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Contact{inner: _r}, nil
+}
+
+// UnifiedMeContactWithKeysToFetchError calls the underlying UnifiedMeContactWithKeysToFetchError.
+func (x *ContactStore) UnifiedMeContactWithKeysToFetchError(keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error) {
+	_r, _err := x.inner.UnifiedMeContactWithKeysToFetchError(keys)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Contact{inner: _r}, nil
+}
+
+// EnumeratorForContactFetchRequestError calls the underlying EnumeratorForContactFetchRequestError.
+func (x *ContactStore) EnumeratorForContactFetchRequestError(request *raw.CNContactFetchRequest) (*raw.CNFetchResult[objc.ID], error) {
+	return x.inner.EnumeratorForContactFetchRequestError(request)
+}
+
+// EnumeratorForChangeHistoryFetchRequestError calls the underlying EnumeratorForChangeHistoryFetchRequestError.
+func (x *ContactStore) EnumeratorForChangeHistoryFetchRequestError(request *raw.CNChangeHistoryFetchRequest) (*raw.CNFetchResult[objc.ID], error) {
+	return x.inner.EnumeratorForChangeHistoryFetchRequestError(request)
+}
+
+// EnumerateContactsWithFetchRequestErrorUsing calls the underlying EnumerateContactsWithFetchRequestErrorUsing.
+func (x *ContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *raw.CNContactFetchRequest, error_ unsafe.Pointer, block func(*raw.CNContact, *bool)) bool {
+	return x.inner.EnumerateContactsWithFetchRequestErrorUsing(fetchRequest, error_, block)
+}
+
+// GroupsMatchingPredicateError calls the underlying GroupsMatchingPredicateError.
+func (x *ContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNGroup], error) {
+	return x.inner.GroupsMatchingPredicateError(predicate)
+}
+
+// ContainersMatchingPredicateError calls the underlying ContainersMatchingPredicateError.
+func (x *ContactStore) ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNContainer], error) {
+	return x.inner.ContainersMatchingPredicateError(predicate)
+}
+
+// ExecuteSaveRequestError calls the underlying ExecuteSaveRequestError.
+func (x *ContactStore) ExecuteSaveRequestError(saveRequest *raw.CNSaveRequest) (bool, error) {
+	return x.inner.ExecuteSaveRequestError(saveRequest)
+}
+
+// DefaultContainerIdentifier calls the underlying DefaultContainerIdentifier.
+func (x *ContactStore) DefaultContainerIdentifier() string {
+	_r := x.inner.DefaultContainerIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CurrentHistoryToken calls the underlying CurrentHistoryToken.
+func (x *ContactStore) CurrentHistoryToken() *foundation.NSData {
+	return x.inner.CurrentHistoryToken()
+}
+
+// ContactStoreable is the interface implemented by [ContactStore], for mocking and DI.
+type ContactStoreable interface {
+	Unwrap() *raw.CNContactStore
+	RequestAccessForEntityTypeCompletionHandler(entityType raw.CNEntityType, completionHandler func(bool, unsafe.Pointer))
+	UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*foundation.NSArray[*raw.CNContact], error)
+	UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error)
+	UnifiedMeContactWithKeysToFetchError(keys *foundation.NSArray[raw.CNKeyDescriptor]) (*Contact, error)
+	EnumeratorForContactFetchRequestError(request *raw.CNContactFetchRequest) (*raw.CNFetchResult[objc.ID], error)
+	EnumeratorForChangeHistoryFetchRequestError(request *raw.CNChangeHistoryFetchRequest) (*raw.CNFetchResult[objc.ID], error)
+	EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *raw.CNContactFetchRequest, error_ unsafe.Pointer, block func(*raw.CNContact, *bool)) bool
+	GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNGroup], error)
+	ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNContainer], error)
+	ExecuteSaveRequestError(saveRequest *raw.CNSaveRequest) (bool, error)
+	DefaultContainerIdentifier() string
+	CurrentHistoryToken() *foundation.NSData
+}
+
+var _ ContactStoreable = (*ContactStore)(nil)
 

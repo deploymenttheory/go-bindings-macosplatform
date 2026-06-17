@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,29 @@ func NewNumericConstraint() *NumericConstraint {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLNumericConstraint")), objc.RegisterName("new"))
 	return &NumericConstraint{inner: raw.MLNumericConstraintFromID(_id)}
 }
+
+// MinNumber calls the underlying MinNumber.
+func (x *NumericConstraint) MinNumber() *foundation.NSNumber {
+	return x.inner.MinNumber()
+}
+
+// MaxNumber calls the underlying MaxNumber.
+func (x *NumericConstraint) MaxNumber() *foundation.NSNumber {
+	return x.inner.MaxNumber()
+}
+
+// EnumeratedNumbers calls the underlying EnumeratedNumbers.
+func (x *NumericConstraint) EnumeratedNumbers() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.EnumeratedNumbers()
+}
+
+// NumericConstraintable is the interface implemented by [NumericConstraint], for mocking and DI.
+type NumericConstraintable interface {
+	Unwrap() *raw.MLNumericConstraint
+	MinNumber() *foundation.NSNumber
+	MaxNumber() *foundation.NSNumber
+	EnumeratedNumbers() *foundation.NSSet[*foundation.NSNumber]
+}
+
+var _ NumericConstraintable = (*NumericConstraint)(nil)
 

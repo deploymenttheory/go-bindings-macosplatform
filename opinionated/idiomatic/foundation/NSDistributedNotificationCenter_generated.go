@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,7 +30,45 @@ func (x *DistributedNotificationCenter) WithSuspended(suspended bool) *Distribut
 	return x
 }
 
+// AddObserverSelectorNameObjectSuspensionBehavior calls the underlying AddObserverSelectorNameObjectSuspensionBehavior.
+func (x *DistributedNotificationCenter) AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior) {
+	x.inner.AddObserverSelectorNameObjectSuspensionBehavior(observer, selector, name, foundation.NSStringStringWithUTF8String(object), suspensionBehavior)
+}
+
+// PostNotificationNameObjectUserInfoDeliverImmediately calls the underlying PostNotificationNameObjectUserInfoDeliverImmediately.
+func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool) {
+	x.inner.PostNotificationNameObjectUserInfoDeliverImmediately(name, foundation.NSStringStringWithUTF8String(object), userInfo, deliverImmediately)
+}
+
+// PostNotificationNameObjectUserInfoOptions calls the underlying PostNotificationNameObjectUserInfoOptions.
+func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options raw.NSDistributedNotificationOptions) {
+	x.inner.PostNotificationNameObjectUserInfoOptions(name, foundation.NSStringStringWithUTF8String(object), userInfo, options)
+}
+
+// Suspended calls the underlying Suspended.
+func (x *DistributedNotificationCenter) Suspended() bool {
+	return x.inner.Suspended()
+}
+
+// SetSuspended calls the underlying SetSuspended.
+func (x *DistributedNotificationCenter) SetSuspended(suspended bool) {
+	x.inner.SetSuspended(suspended)
+}
+
 func (x *DistributedNotificationCenter) asNotificationCenter() *raw.NSNotificationCenter { return &x.inner.NSNotificationCenter }
 
 func (x *DistributedNotificationCenter) asObject() *raw.NSObject { return &x.inner.NSNotificationCenter.NSObject }
+
+// DistributedNotificationCenterable is the interface implemented by [DistributedNotificationCenter], for mocking and DI.
+type DistributedNotificationCenterable interface {
+	Unwrap() *raw.NSDistributedNotificationCenter
+	WithSuspended(suspended bool) *DistributedNotificationCenter
+	AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior raw.NSNotificationSuspensionBehavior)
+	PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool)
+	PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options raw.NSDistributedNotificationOptions)
+	Suspended() bool
+	SetSuspended(suspended bool)
+}
+
+var _ DistributedNotificationCenterable = (*DistributedNotificationCenter)(nil)
 

@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewAppRunTimeMetric() *AppRunTimeMetric {
 	return &AppRunTimeMetric{inner: raw.MXAppRunTimeMetricFromID(_id)}
 }
 
+// CumulativeForegroundTime calls the underlying CumulativeForegroundTime.
+func (x *AppRunTimeMetric) CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeForegroundTime()
+}
+
+// CumulativeBackgroundTime calls the underlying CumulativeBackgroundTime.
+func (x *AppRunTimeMetric) CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeBackgroundTime()
+}
+
+// CumulativeBackgroundAudioTime calls the underlying CumulativeBackgroundAudioTime.
+func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeBackgroundAudioTime()
+}
+
+// CumulativeBackgroundLocationTime calls the underlying CumulativeBackgroundLocationTime.
+func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeBackgroundLocationTime()
+}
+
 func (x *AppRunTimeMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// AppRunTimeMetricable is the interface implemented by [AppRunTimeMetric], for mocking and DI.
+type AppRunTimeMetricable interface {
+	Unwrap() *raw.MXAppRunTimeMetric
+	CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+}
+
+var _ AppRunTimeMetricable = (*AppRunTimeMetric)(nil)
 

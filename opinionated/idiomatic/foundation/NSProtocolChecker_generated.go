@@ -25,5 +25,28 @@ func NewProtocolCheckerWithTargetProtocol(anObject *raw.NSObject, aProtocol unsa
 	return &ProtocolChecker{inner: raw.NSProtocolCheckerFromID(_id)}
 }
 
+// Protocol calls the underlying Protocol.
+func (x *ProtocolChecker) Protocol() unsafe.Pointer {
+	return x.inner.Protocol()
+}
+
+// Target calls the underlying Target.
+func (x *ProtocolChecker) Target() *Object {
+	_r := x.inner.Target()
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
 func (x *ProtocolChecker) asProxy() *raw.NSProxy { return &x.inner.NSProxy }
+
+// ProtocolCheckerable is the interface implemented by [ProtocolChecker], for mocking and DI.
+type ProtocolCheckerable interface {
+	Unwrap() *raw.NSProtocolChecker
+	Protocol() unsafe.Pointer
+	Target() *Object
+}
+
+var _ ProtocolCheckerable = (*ProtocolChecker)(nil)
 

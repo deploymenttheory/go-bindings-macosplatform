@@ -6,8 +6,11 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Player wraps [raw.AVPlayer] with a fluent Go API.
@@ -134,5 +137,442 @@ func (x *Player) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled boo
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *Player) Status() raw.AVPlayerStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *Player) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Play calls the underlying Play.
+func (x *Player) Play() {
+	x.inner.Play()
+}
+
+// Pause calls the underlying Pause.
+func (x *Player) Pause() {
+	x.inner.Pause()
+}
+
+// PlayImmediatelyAtRate calls the underlying PlayImmediatelyAtRate.
+func (x *Player) PlayImmediatelyAtRate(rate float32) {
+	x.inner.PlayImmediatelyAtRate(rate)
+}
+
+// Rate calls the underlying Rate.
+func (x *Player) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *Player) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// DefaultRate calls the underlying DefaultRate.
+func (x *Player) DefaultRate() float32 {
+	return x.inner.DefaultRate()
+}
+
+// SetDefaultRate calls the underlying SetDefaultRate.
+func (x *Player) SetDefaultRate(defaultRate float32) {
+	x.inner.SetDefaultRate(defaultRate)
+}
+
+// TimeControlStatus calls the underlying TimeControlStatus.
+func (x *Player) TimeControlStatus() raw.AVPlayerTimeControlStatus {
+	return x.inner.TimeControlStatus()
+}
+
+// ReasonForWaitingToPlay calls the underlying ReasonForWaitingToPlay.
+func (x *Player) ReasonForWaitingToPlay() string {
+	_r := x.inner.ReasonForWaitingToPlay()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ReplaceCurrentItemWithPlayerItem calls the underlying ReplaceCurrentItemWithPlayerItem.
+func (x *Player) ReplaceCurrentItemWithPlayerItem(item *raw.AVPlayerItem) {
+	x.inner.ReplaceCurrentItemWithPlayerItem(item)
+}
+
+// CurrentItem calls the underlying CurrentItem.
+func (x *Player) CurrentItem() *PlayerItem {
+	_r := x.inner.CurrentItem()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerItem{inner: _r}
+}
+
+// ActionAtItemEnd calls the underlying ActionAtItemEnd.
+func (x *Player) ActionAtItemEnd() raw.AVPlayerActionAtItemEnd {
+	return x.inner.ActionAtItemEnd()
+}
+
+// SetActionAtItemEnd calls the underlying SetActionAtItemEnd.
+func (x *Player) SetActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) {
+	x.inner.SetActionAtItemEnd(actionAtItemEnd)
+}
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *Player) CurrentTime() coremedia.CMTime {
+	return x.inner.CurrentTime()
+}
+
+// SeekToDate calls the underlying SeekToDate.
+func (x *Player) SeekToDate(date *foundation.NSDate) {
+	x.inner.SeekToDate(date)
+}
+
+// SeekToDateCompletionHandler calls the underlying SeekToDateCompletionHandler.
+func (x *Player) SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool)) {
+	x.inner.SeekToDateCompletionHandler(date, completionHandler)
+}
+
+// SeekToTime calls the underlying SeekToTime.
+func (x *Player) SeekToTime(time_ coremedia.CMTime) {
+	x.inner.SeekToTime(time_)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfter calls the underlying SeekToTimeToleranceBeforeToleranceAfter.
+func (x *Player) SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime) {
+	x.inner.SeekToTimeToleranceBeforeToleranceAfter(time_, toleranceBefore, toleranceAfter)
+}
+
+// SeekToTimeCompletionHandler calls the underlying SeekToTimeCompletionHandler.
+func (x *Player) SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.SeekToTimeCompletionHandler(time_, completionHandler)
+}
+
+// SeekToTimeToleranceBeforeToleranceAfterCompletionHandler calls the underlying SeekToTimeToleranceBeforeToleranceAfterCompletionHandler.
+func (x *Player) SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_, toleranceBefore, toleranceAfter, completionHandler)
+}
+
+// SetRateTimeAtHostTime calls the underlying SetRateTimeAtHostTime.
+func (x *Player) SetRateTimeAtHostTime(rate float32, itemTime coremedia.CMTime, hostClockTime coremedia.CMTime) {
+	x.inner.SetRateTimeAtHostTime(rate, itemTime, hostClockTime)
+}
+
+// PrerollAtRateCompletionHandler calls the underlying PrerollAtRateCompletionHandler.
+func (x *Player) PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool)) {
+	x.inner.PrerollAtRateCompletionHandler(rate, completionHandler)
+}
+
+// CancelPendingPrerolls calls the underlying CancelPendingPrerolls.
+func (x *Player) CancelPendingPrerolls() {
+	x.inner.CancelPendingPrerolls()
+}
+
+// AutomaticallyWaitsToMinimizeStalling calls the underlying AutomaticallyWaitsToMinimizeStalling.
+func (x *Player) AutomaticallyWaitsToMinimizeStalling() bool {
+	return x.inner.AutomaticallyWaitsToMinimizeStalling()
+}
+
+// SetAutomaticallyWaitsToMinimizeStalling calls the underlying SetAutomaticallyWaitsToMinimizeStalling.
+func (x *Player) SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) {
+	x.inner.SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling)
+}
+
+// SourceClock calls the underlying SourceClock.
+func (x *Player) SourceClock() unsafe.Pointer {
+	return x.inner.SourceClock()
+}
+
+// SetSourceClock calls the underlying SetSourceClock.
+func (x *Player) SetSourceClock(sourceClock unsafe.Pointer) {
+	x.inner.SetSourceClock(sourceClock)
+}
+
+// AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
+func (x *Player) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID {
+	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
+}
+
+// AddBoundaryTimeObserverForTimesQueueUsing calls the underlying AddBoundaryTimeObserverForTimesQueueUsing.
+func (x *Player) AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID {
+	return x.inner.AddBoundaryTimeObserverForTimesQueueUsing(times, queue, block)
+}
+
+// RemoveTimeObserver calls the underlying RemoveTimeObserver.
+func (x *Player) RemoveTimeObserver(observer objc.ID) {
+	x.inner.RemoveTimeObserver(observer)
+}
+
+// Volume calls the underlying Volume.
+func (x *Player) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *Player) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// IsMuted calls the underlying IsMuted.
+func (x *Player) IsMuted() bool {
+	return x.inner.IsMuted()
+}
+
+// SetMuted calls the underlying SetMuted.
+func (x *Player) SetMuted(muted bool) {
+	x.inner.SetMuted(muted)
+}
+
+// SetMediaSelectionCriteriaForMediaCharacteristic calls the underlying SetMediaSelectionCriteriaForMediaCharacteristic.
+func (x *Player) SetMediaSelectionCriteriaForMediaCharacteristic(criteria *raw.AVPlayerMediaSelectionCriteria, mediaCharacteristic *foundation.NSString) {
+	x.inner.SetMediaSelectionCriteriaForMediaCharacteristic(criteria, mediaCharacteristic)
+}
+
+// MediaSelectionCriteriaForMediaCharacteristic calls the underlying MediaSelectionCriteriaForMediaCharacteristic.
+func (x *Player) MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *PlayerMediaSelectionCriteria {
+	_r := x.inner.MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic)
+	if _r == nil {
+		return nil
+	}
+	return &PlayerMediaSelectionCriteria{inner: _r}
+}
+
+// AppliesMediaSelectionCriteriaAutomatically calls the underlying AppliesMediaSelectionCriteriaAutomatically.
+func (x *Player) AppliesMediaSelectionCriteriaAutomatically() bool {
+	return x.inner.AppliesMediaSelectionCriteriaAutomatically()
+}
+
+// SetAppliesMediaSelectionCriteriaAutomatically calls the underlying SetAppliesMediaSelectionCriteriaAutomatically.
+func (x *Player) SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) {
+	x.inner.SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically)
+}
+
+// AudioOutputDeviceUniqueID calls the underlying AudioOutputDeviceUniqueID.
+func (x *Player) AudioOutputDeviceUniqueID() string {
+	_r := x.inner.AudioOutputDeviceUniqueID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioOutputDeviceUniqueID calls the underlying SetAudioOutputDeviceUniqueID.
+func (x *Player) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) {
+	x.inner.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+}
+
+// AllowsExternalPlayback calls the underlying AllowsExternalPlayback.
+func (x *Player) AllowsExternalPlayback() bool {
+	return x.inner.AllowsExternalPlayback()
+}
+
+// SetAllowsExternalPlayback calls the underlying SetAllowsExternalPlayback.
+func (x *Player) SetAllowsExternalPlayback(allowsExternalPlayback bool) {
+	x.inner.SetAllowsExternalPlayback(allowsExternalPlayback)
+}
+
+// IsExternalPlaybackActive calls the underlying IsExternalPlaybackActive.
+func (x *Player) IsExternalPlaybackActive() bool {
+	return x.inner.IsExternalPlaybackActive()
+}
+
+// OutputObscuredDueToInsufficientExternalProtection calls the underlying OutputObscuredDueToInsufficientExternalProtection.
+func (x *Player) OutputObscuredDueToInsufficientExternalProtection() bool {
+	return x.inner.OutputObscuredDueToInsufficientExternalProtection()
+}
+
+// PreferredVideoDecoderGPURegistryID calls the underlying PreferredVideoDecoderGPURegistryID.
+func (x *Player) PreferredVideoDecoderGPURegistryID() uint64 {
+	return x.inner.PreferredVideoDecoderGPURegistryID()
+}
+
+// SetPreferredVideoDecoderGPURegistryID calls the underlying SetPreferredVideoDecoderGPURegistryID.
+func (x *Player) SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) {
+	x.inner.SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID)
+}
+
+// PreventsDisplaySleepDuringVideoPlayback calls the underlying PreventsDisplaySleepDuringVideoPlayback.
+func (x *Player) PreventsDisplaySleepDuringVideoPlayback() bool {
+	return x.inner.PreventsDisplaySleepDuringVideoPlayback()
+}
+
+// SetPreventsDisplaySleepDuringVideoPlayback calls the underlying SetPreventsDisplaySleepDuringVideoPlayback.
+func (x *Player) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) {
+	x.inner.SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback)
+}
+
+// AudiovisualBackgroundPlaybackPolicy calls the underlying AudiovisualBackgroundPlaybackPolicy.
+func (x *Player) AudiovisualBackgroundPlaybackPolicy() raw.AVPlayerAudiovisualBackgroundPlaybackPolicy {
+	return x.inner.AudiovisualBackgroundPlaybackPolicy()
+}
+
+// SetAudiovisualBackgroundPlaybackPolicy calls the underlying SetAudiovisualBackgroundPlaybackPolicy.
+func (x *Player) SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) {
+	x.inner.SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy)
+}
+
+// PlaybackCoordinator calls the underlying PlaybackCoordinator.
+func (x *Player) PlaybackCoordinator() *PlayerPlaybackCoordinator {
+	_r := x.inner.PlaybackCoordinator()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerPlaybackCoordinator{inner: _r}
+}
+
+// VideoOutput calls the underlying VideoOutput.
+func (x *Player) VideoOutput() *PlayerVideoOutput {
+	_r := x.inner.VideoOutput()
+	if _r == nil {
+		return nil
+	}
+	return &PlayerVideoOutput{inner: _r}
+}
+
+// SetVideoOutput calls the underlying SetVideoOutput.
+func (x *Player) SetVideoOutput(videoOutput *raw.AVPlayerVideoOutput) {
+	x.inner.SetVideoOutput(videoOutput)
+}
+
+// NetworkResourcePriority calls the underlying NetworkResourcePriority.
+func (x *Player) NetworkResourcePriority() raw.AVPlayerNetworkResourcePriority {
+	return x.inner.NetworkResourcePriority()
+}
+
+// SetNetworkResourcePriority calls the underlying SetNetworkResourcePriority.
+func (x *Player) SetNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) {
+	x.inner.SetNetworkResourcePriority(networkResourcePriority)
+}
+
+// IntendedSpatialAudioExperience calls the underlying IntendedSpatialAudioExperience.
+func (x *Player) IntendedSpatialAudioExperience() unsafe.Pointer {
+	return x.inner.IntendedSpatialAudioExperience()
+}
+
+// SetIntendedSpatialAudioExperience calls the underlying SetIntendedSpatialAudioExperience.
+func (x *Player) SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) {
+	x.inner.SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience)
+}
+
+// AllowsCaptureOfClearKeyVideo calls the underlying AllowsCaptureOfClearKeyVideo.
+func (x *Player) AllowsCaptureOfClearKeyVideo() bool {
+	return x.inner.AllowsCaptureOfClearKeyVideo()
+}
+
+// SetAllowsCaptureOfClearKeyVideo calls the underlying SetAllowsCaptureOfClearKeyVideo.
+func (x *Player) SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) {
+	x.inner.SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo)
+}
+
+// IsClosedCaptionDisplayEnabled calls the underlying IsClosedCaptionDisplayEnabled.
+func (x *Player) IsClosedCaptionDisplayEnabled() bool {
+	return x.inner.IsClosedCaptionDisplayEnabled()
+}
+
+// SetClosedCaptionDisplayEnabled calls the underlying SetClosedCaptionDisplayEnabled.
+func (x *Player) SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) {
+	x.inner.SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled)
+}
+
+// MasterClock calls the underlying MasterClock.
+func (x *Player) MasterClock() unsafe.Pointer {
+	return x.inner.MasterClock()
+}
+
+// SetMasterClock calls the underlying SetMasterClock.
+func (x *Player) SetMasterClock(masterClock unsafe.Pointer) {
+	x.inner.SetMasterClock(masterClock)
+}
+
 func (x *Player) asPlayer() *raw.AVPlayer { return x.inner }
+
+// Playerable is the interface implemented by [Player], for mocking and DI.
+type Playerable interface {
+	Unwrap() *raw.AVPlayer
+	WithRate(rate float32) *Player
+	WithDefaultRate(defaultRate float32) *Player
+	WithActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd) *Player
+	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player
+	WithVolume(volume float32) *Player
+	WithMuted(muted bool) *Player
+	WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *Player
+	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *Player
+	WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player
+	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player
+	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player
+	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy) *Player
+	WithVideoOutput(videoOutput *raw.AVPlayerVideoOutput) *Player
+	WithNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority) *Player
+	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player
+	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player
+	Status() raw.AVPlayerStatus
+	Error() unsafe.Pointer
+	Play()
+	Pause()
+	PlayImmediatelyAtRate(rate float32)
+	Rate() float32
+	SetRate(rate float32)
+	DefaultRate() float32
+	SetDefaultRate(defaultRate float32)
+	TimeControlStatus() raw.AVPlayerTimeControlStatus
+	ReasonForWaitingToPlay() string
+	ReplaceCurrentItemWithPlayerItem(item *raw.AVPlayerItem)
+	CurrentItem() *PlayerItem
+	ActionAtItemEnd() raw.AVPlayerActionAtItemEnd
+	SetActionAtItemEnd(actionAtItemEnd raw.AVPlayerActionAtItemEnd)
+	CurrentTime() coremedia.CMTime
+	SeekToDate(date *foundation.NSDate)
+	SeekToDateCompletionHandler(date *foundation.NSDate, completionHandler func(bool))
+	SeekToTime(time_ coremedia.CMTime)
+	SeekToTimeToleranceBeforeToleranceAfter(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime)
+	SeekToTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool))
+	SeekToTimeToleranceBeforeToleranceAfterCompletionHandler(time_ coremedia.CMTime, toleranceBefore coremedia.CMTime, toleranceAfter coremedia.CMTime, completionHandler func(bool))
+	SetRateTimeAtHostTime(rate float32, itemTime coremedia.CMTime, hostClockTime coremedia.CMTime)
+	PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool))
+	CancelPendingPrerolls()
+	AutomaticallyWaitsToMinimizeStalling() bool
+	SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool)
+	SourceClock() unsafe.Pointer
+	SetSourceClock(sourceClock unsafe.Pointer)
+	AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID
+	AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID
+	RemoveTimeObserver(observer objc.ID)
+	Volume() float32
+	SetVolume(volume float32)
+	IsMuted() bool
+	SetMuted(muted bool)
+	SetMediaSelectionCriteriaForMediaCharacteristic(criteria *raw.AVPlayerMediaSelectionCriteria, mediaCharacteristic *foundation.NSString)
+	MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *PlayerMediaSelectionCriteria
+	AppliesMediaSelectionCriteriaAutomatically() bool
+	SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool)
+	AudioOutputDeviceUniqueID() string
+	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
+	AllowsExternalPlayback() bool
+	SetAllowsExternalPlayback(allowsExternalPlayback bool)
+	IsExternalPlaybackActive() bool
+	OutputObscuredDueToInsufficientExternalProtection() bool
+	PreferredVideoDecoderGPURegistryID() uint64
+	SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64)
+	PreventsDisplaySleepDuringVideoPlayback() bool
+	SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool)
+	AudiovisualBackgroundPlaybackPolicy() raw.AVPlayerAudiovisualBackgroundPlaybackPolicy
+	SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy raw.AVPlayerAudiovisualBackgroundPlaybackPolicy)
+	PlaybackCoordinator() *PlayerPlaybackCoordinator
+	VideoOutput() *PlayerVideoOutput
+	SetVideoOutput(videoOutput *raw.AVPlayerVideoOutput)
+	NetworkResourcePriority() raw.AVPlayerNetworkResourcePriority
+	SetNetworkResourcePriority(networkResourcePriority raw.AVPlayerNetworkResourcePriority)
+	IntendedSpatialAudioExperience() unsafe.Pointer
+	SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer)
+	AllowsCaptureOfClearKeyVideo() bool
+	SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool)
+	IsClosedCaptionDisplayEnabled() bool
+	SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool)
+	MasterClock() unsafe.Pointer
+	SetMasterClock(masterClock unsafe.Pointer)
+}
+
+var _ Playerable = (*Player)(nil)
 

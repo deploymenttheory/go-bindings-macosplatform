@@ -29,5 +29,25 @@ func (x *MagnificationGestureRecognizer) WithMagnification(magnification float64
 	return x
 }
 
+// Magnification calls the underlying Magnification.
+func (x *MagnificationGestureRecognizer) Magnification() float64 {
+	return x.inner.Magnification()
+}
+
+// SetMagnification calls the underlying SetMagnification.
+func (x *MagnificationGestureRecognizer) SetMagnification(magnification float64) {
+	x.inner.SetMagnification(magnification)
+}
+
 func (x *MagnificationGestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return &x.inner.NSGestureRecognizer }
+
+// MagnificationGestureRecognizerable is the interface implemented by [MagnificationGestureRecognizer], for mocking and DI.
+type MagnificationGestureRecognizerable interface {
+	Unwrap() *raw.NSMagnificationGestureRecognizer
+	WithMagnification(magnification float64) *MagnificationGestureRecognizer
+	Magnification() float64
+	SetMagnification(magnification float64)
+}
+
+var _ MagnificationGestureRecognizerable = (*MagnificationGestureRecognizer)(nil)
 

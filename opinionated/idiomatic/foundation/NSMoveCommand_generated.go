@@ -23,7 +23,24 @@ func NewMoveCommand() *MoveCommand {
 	return &MoveCommand{inner: raw.NSMoveCommandFromID(_id)}
 }
 
+// KeySpecifier calls the underlying KeySpecifier.
+func (x *MoveCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.KeySpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
 func (x *MoveCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
 
 func (x *MoveCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
+
+// MoveCommandable is the interface implemented by [MoveCommand], for mocking and DI.
+type MoveCommandable interface {
+	Unwrap() *raw.NSMoveCommand
+	KeySpecifier() *ScriptObjectSpecifier
+}
+
+var _ MoveCommandable = (*MoveCommand)(nil)
 

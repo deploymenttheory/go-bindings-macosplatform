@@ -29,3 +29,23 @@ func (x *ChallengeEventHandler) WithDelegate(delegate raw.GKChallengeEventHandle
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *ChallengeEventHandler) Delegate() raw.GKChallengeEventHandlerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *ChallengeEventHandler) SetDelegate(delegate raw.GKChallengeEventHandlerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ChallengeEventHandlerable is the interface implemented by [ChallengeEventHandler], for mocking and DI.
+type ChallengeEventHandlerable interface {
+	Unwrap() *raw.GKChallengeEventHandler
+	WithDelegate(delegate raw.GKChallengeEventHandlerDelegate) *ChallengeEventHandler
+	Delegate() raw.GKChallengeEventHandlerDelegate
+	SetDelegate(delegate raw.GKChallengeEventHandlerDelegate)
+}
+
+var _ ChallengeEventHandlerable = (*ChallengeEventHandler)(nil)
+

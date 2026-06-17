@@ -27,7 +27,20 @@ func NewMatrixSolveTriangularWithDeviceRightUpperTransposeUnitOrderNumberOfRight
 	return &MatrixSolveTriangular{inner: raw.MPSMatrixSolveTriangularFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
+func (x *MatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
+}
+
 func (x *MatrixSolveTriangular) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
 
 func (x *MatrixSolveTriangular) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+
+// MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
+type MatrixSolveTriangularable interface {
+	Unwrap() *raw.MPSMatrixSolveTriangular
+	EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
+}
+
+var _ MatrixSolveTriangularable = (*MatrixSolveTriangular)(nil)
 

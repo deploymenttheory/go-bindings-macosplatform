@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewNNDefaultPadding() *NNDefaultPadding {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNDefaultPadding")), objc.RegisterName("new"))
 	return &NNDefaultPadding{inner: raw.MPSNNDefaultPaddingFromID(_id)}
 }
+
+// Label calls the underlying Label.
+func (x *NNDefaultPadding) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NNDefaultPaddingable is the interface implemented by [NNDefaultPadding], for mocking and DI.
+type NNDefaultPaddingable interface {
+	Unwrap() *raw.MPSNNDefaultPadding
+	Label() string
+}
+
+var _ NNDefaultPaddingable = (*NNDefaultPadding)(nil)
 

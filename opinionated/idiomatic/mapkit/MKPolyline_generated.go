@@ -29,3 +29,10 @@ func (x *Polyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKMultiPoi
 
 func (x *Polyline) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape }
 
+// Polylineable is the interface implemented by [Polyline], for mocking and DI.
+type Polylineable interface {
+	Unwrap() *raw.MKPolyline
+}
+
+var _ Polylineable = (*Polyline)(nil)
+

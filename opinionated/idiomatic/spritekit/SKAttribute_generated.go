@@ -7,6 +7,7 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewAttributeWithNameType(name string, type_ raw.SKAttributeType) *Attribute
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), foundation.NSStringStringWithUTF8String(name).Ptr(), type_)
 	return &Attribute{inner: raw.SKAttributeFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Attribute) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *Attribute) Type() raw.SKAttributeType {
+	return x.inner.Type()
+}
+
+// Attributeable is the interface implemented by [Attribute], for mocking and DI.
+type Attributeable interface {
+	Unwrap() *raw.SKAttribute
+	Name() string
+	Type() raw.SKAttributeType
+}
+
+var _ Attributeable = (*Attribute)(nil)
 

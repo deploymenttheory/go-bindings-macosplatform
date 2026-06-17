@@ -28,3 +28,10 @@ func NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler(predicate *
 
 func (x *UserAnnotatedMedicationQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// UserAnnotatedMedicationQueryable is the interface implemented by [UserAnnotatedMedicationQuery], for mocking and DI.
+type UserAnnotatedMedicationQueryable interface {
+	Unwrap() *raw.HKUserAnnotatedMedicationQuery
+}
+
+var _ UserAnnotatedMedicationQueryable = (*UserAnnotatedMedicationQuery)(nil)
+

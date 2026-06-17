@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -65,14 +66,78 @@ func (x *AuthorizationOpenIDRequest) RequestedScopes() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetRequestedScopes calls the underlying SetRequestedScopes.
+func (x *AuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRequestedScopes(requestedScopes)
+}
+
+// State calls the underlying State.
+func (x *AuthorizationOpenIDRequest) State() string {
+	_r := x.inner.State()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetState calls the underlying SetState.
+func (x *AuthorizationOpenIDRequest) SetState(state string) {
+	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
+}
+
+// Nonce calls the underlying Nonce.
+func (x *AuthorizationOpenIDRequest) Nonce() string {
+	_r := x.inner.Nonce()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetNonce calls the underlying SetNonce.
+func (x *AuthorizationOpenIDRequest) SetNonce(nonce string) {
+	x.inner.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+}
+
+// RequestedOperation calls the underlying RequestedOperation.
+func (x *AuthorizationOpenIDRequest) RequestedOperation() string {
+	_r := x.inner.RequestedOperation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRequestedOperation calls the underlying SetRequestedOperation.
+func (x *AuthorizationOpenIDRequest) SetRequestedOperation(requestedOperation *foundation.NSString) {
+	x.inner.SetRequestedOperation(requestedOperation)
 }
 
 func (x *AuthorizationOpenIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest { return x.inner }
 
 func (x *AuthorizationOpenIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+
+// AuthorizationOpenIDRequestable is the interface implemented by [AuthorizationOpenIDRequest], for mocking and DI.
+type AuthorizationOpenIDRequestable interface {
+	Unwrap() *raw.ASAuthorizationOpenIDRequest
+	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest
+	WithState(state string) *AuthorizationOpenIDRequest
+	WithNonce(nonce string) *AuthorizationOpenIDRequest
+	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationOpenIDRequest
+	RequestedScopes() []*foundation.NSString
+	SetRequestedScopes(requestedScopes *foundation.NSArray[*foundation.NSString])
+	State() string
+	SetState(state string)
+	Nonce() string
+	SetNonce(nonce string)
+	RequestedOperation() string
+	SetRequestedOperation(requestedOperation *foundation.NSString)
+}
+
+var _ AuthorizationOpenIDRequestable = (*AuthorizationOpenIDRequest)(nil)
 

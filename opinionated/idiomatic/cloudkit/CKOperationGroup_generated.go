@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,4 +61,94 @@ func (x *OperationGroup) WithExpectedReceiveSize(expectedReceiveSize raw.CKOpera
 	x.inner.SetExpectedReceiveSize(expectedReceiveSize)
 	return x
 }
+
+// OperationGroupID calls the underlying OperationGroupID.
+func (x *OperationGroup) OperationGroupID() string {
+	_r := x.inner.OperationGroupID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DefaultConfiguration calls the underlying DefaultConfiguration.
+func (x *OperationGroup) DefaultConfiguration() *OperationConfiguration {
+	_r := x.inner.DefaultConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &OperationConfiguration{inner: _r}
+}
+
+// SetDefaultConfiguration calls the underlying SetDefaultConfiguration.
+func (x *OperationGroup) SetDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration) {
+	x.inner.SetDefaultConfiguration(defaultConfiguration)
+}
+
+// Name calls the underlying Name.
+func (x *OperationGroup) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *OperationGroup) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Quantity calls the underlying Quantity.
+func (x *OperationGroup) Quantity() uint {
+	return x.inner.Quantity()
+}
+
+// SetQuantity calls the underlying SetQuantity.
+func (x *OperationGroup) SetQuantity(quantity uint) {
+	x.inner.SetQuantity(quantity)
+}
+
+// ExpectedSendSize calls the underlying ExpectedSendSize.
+func (x *OperationGroup) ExpectedSendSize() raw.CKOperationGroupTransferSize {
+	return x.inner.ExpectedSendSize()
+}
+
+// SetExpectedSendSize calls the underlying SetExpectedSendSize.
+func (x *OperationGroup) SetExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) {
+	x.inner.SetExpectedSendSize(expectedSendSize)
+}
+
+// ExpectedReceiveSize calls the underlying ExpectedReceiveSize.
+func (x *OperationGroup) ExpectedReceiveSize() raw.CKOperationGroupTransferSize {
+	return x.inner.ExpectedReceiveSize()
+}
+
+// SetExpectedReceiveSize calls the underlying SetExpectedReceiveSize.
+func (x *OperationGroup) SetExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize) {
+	x.inner.SetExpectedReceiveSize(expectedReceiveSize)
+}
+
+// OperationGroupable is the interface implemented by [OperationGroup], for mocking and DI.
+type OperationGroupable interface {
+	Unwrap() *raw.CKOperationGroup
+	WithDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration) *OperationGroup
+	WithName(name string) *OperationGroup
+	WithQuantity(quantity uint) *OperationGroup
+	WithExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize) *OperationGroup
+	WithExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize) *OperationGroup
+	OperationGroupID() string
+	DefaultConfiguration() *OperationConfiguration
+	SetDefaultConfiguration(defaultConfiguration *raw.CKOperationConfiguration)
+	Name() string
+	SetName(name string)
+	Quantity() uint
+	SetQuantity(quantity uint)
+	ExpectedSendSize() raw.CKOperationGroupTransferSize
+	SetExpectedSendSize(expectedSendSize raw.CKOperationGroupTransferSize)
+	ExpectedReceiveSize() raw.CKOperationGroupTransferSize
+	SetExpectedReceiveSize(expectedReceiveSize raw.CKOperationGroupTransferSize)
+}
+
+var _ OperationGroupable = (*OperationGroup)(nil)
 

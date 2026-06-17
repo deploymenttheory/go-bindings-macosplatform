@@ -23,3 +23,22 @@ func NewCalNthWeekDay() *CalNthWeekDay {
 	return &CalNthWeekDay{inner: raw.CalNthWeekDayFromID(_id)}
 }
 
+// DayOfTheWeek calls the underlying DayOfTheWeek.
+func (x *CalNthWeekDay) DayOfTheWeek() uint {
+	return x.inner.DayOfTheWeek()
+}
+
+// WeekNumber calls the underlying WeekNumber.
+func (x *CalNthWeekDay) WeekNumber() int {
+	return x.inner.WeekNumber()
+}
+
+// CalNthWeekDayable is the interface implemented by [CalNthWeekDay], for mocking and DI.
+type CalNthWeekDayable interface {
+	Unwrap() *raw.CalNthWeekDay
+	DayOfTheWeek() uint
+	WeekNumber() int
+}
+
+var _ CalNthWeekDayable = (*CalNthWeekDay)(nil)
+

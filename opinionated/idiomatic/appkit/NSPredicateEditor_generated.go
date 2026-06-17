@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,11 +48,14 @@ func (x *PredicateEditor) RowTemplates() []*raw.NSPredicateEditorRowTemplate {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPredicateEditorRowTemplate, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPredicateEditorRowTemplate {
+		return raw.NSPredicateEditorRowTemplateFromID(purego.Retain(_id))
+	})
+}
+
+// SetRowTemplates calls the underlying SetRowTemplates.
+func (x *PredicateEditor) SetRowTemplates(rowTemplates *foundation.NSArray[*raw.NSPredicateEditorRowTemplate]) {
+	x.inner.SetRowTemplates(rowTemplates)
 }
 
 func (x *PredicateEditor) asRuleEditor() *raw.NSRuleEditor { return &x.inner.NSRuleEditor }
@@ -61,4 +65,14 @@ func (x *PredicateEditor) asControl() *raw.NSControl { return &x.inner.NSRuleEdi
 func (x *PredicateEditor) asView() *raw.NSView { return &x.inner.NSRuleEditor.NSControl.NSView }
 
 func (x *PredicateEditor) asResponder() *raw.NSResponder { return &x.inner.NSRuleEditor.NSControl.NSView.NSResponder }
+
+// PredicateEditorable is the interface implemented by [PredicateEditor], for mocking and DI.
+type PredicateEditorable interface {
+	Unwrap() *raw.NSPredicateEditor
+	WithRowTemplates(items ...*raw.NSPredicateEditorRowTemplate) *PredicateEditor
+	RowTemplates() []*raw.NSPredicateEditorRowTemplate
+	SetRowTemplates(rowTemplates *foundation.NSArray[*raw.NSPredicateEditorRowTemplate])
+}
+
+var _ PredicateEditorable = (*PredicateEditor)(nil)
 

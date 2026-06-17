@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,43 @@ func NewUserAnnotatedMedication() *UserAnnotatedMedication {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUserAnnotatedMedication")), objc.RegisterName("new"))
 	return &UserAnnotatedMedication{inner: raw.HKUserAnnotatedMedicationFromID(_id)}
 }
+
+// Nickname calls the underlying Nickname.
+func (x *UserAnnotatedMedication) Nickname() string {
+	_r := x.inner.Nickname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsArchived calls the underlying IsArchived.
+func (x *UserAnnotatedMedication) IsArchived() bool {
+	return x.inner.IsArchived()
+}
+
+// HasSchedule calls the underlying HasSchedule.
+func (x *UserAnnotatedMedication) HasSchedule() bool {
+	return x.inner.HasSchedule()
+}
+
+// Medication calls the underlying Medication.
+func (x *UserAnnotatedMedication) Medication() *MedicationConcept {
+	_r := x.inner.Medication()
+	if _r == nil {
+		return nil
+	}
+	return &MedicationConcept{inner: _r}
+}
+
+// UserAnnotatedMedicationable is the interface implemented by [UserAnnotatedMedication], for mocking and DI.
+type UserAnnotatedMedicationable interface {
+	Unwrap() *raw.HKUserAnnotatedMedication
+	Nickname() string
+	IsArchived() bool
+	HasSchedule() bool
+	Medication() *MedicationConcept
+}
+
+var _ UserAnnotatedMedicationable = (*UserAnnotatedMedication)(nil)
 

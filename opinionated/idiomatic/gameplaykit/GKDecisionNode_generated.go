@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,41 @@ func NewDecisionNode() *DecisionNode {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionNode")), objc.RegisterName("new"))
 	return &DecisionNode{inner: raw.GKDecisionNodeFromID(_id)}
 }
+
+// CreateBranchWithValueAttribute calls the underlying CreateBranchWithValueAttribute.
+func (x *DecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *DecisionNode {
+	_r := x.inner.CreateBranchWithValueAttribute(value, attribute)
+	if _r == nil {
+		return nil
+	}
+	return &DecisionNode{inner: _r}
+}
+
+// CreateBranchWithPredicateAttribute calls the underlying CreateBranchWithPredicateAttribute.
+func (x *DecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *DecisionNode {
+	_r := x.inner.CreateBranchWithPredicateAttribute(predicate, attribute)
+	if _r == nil {
+		return nil
+	}
+	return &DecisionNode{inner: _r}
+}
+
+// CreateBranchWithWeightAttribute calls the underlying CreateBranchWithWeightAttribute.
+func (x *DecisionNode) CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *DecisionNode {
+	_r := x.inner.CreateBranchWithWeightAttribute(weight, attribute)
+	if _r == nil {
+		return nil
+	}
+	return &DecisionNode{inner: _r}
+}
+
+// DecisionNodeable is the interface implemented by [DecisionNode], for mocking and DI.
+type DecisionNodeable interface {
+	Unwrap() *raw.GKDecisionNode
+	CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *DecisionNode
+	CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *DecisionNode
+	CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *DecisionNode
+}
+
+var _ DecisionNodeable = (*DecisionNode)(nil)
 

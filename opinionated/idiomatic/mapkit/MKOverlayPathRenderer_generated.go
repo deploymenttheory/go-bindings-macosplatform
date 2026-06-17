@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -91,20 +92,185 @@ func (x *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *Overlay
 	return x
 }
 
+// CreatePath calls the underlying CreatePath.
+func (x *OverlayPathRenderer) CreatePath() {
+	x.inner.CreatePath()
+}
+
+// InvalidatePath calls the underlying InvalidatePath.
+func (x *OverlayPathRenderer) InvalidatePath() {
+	x.inner.InvalidatePath()
+}
+
+// ApplyStrokePropertiesToContextAtZoomScale calls the underlying ApplyStrokePropertiesToContextAtZoomScale.
+func (x *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
+	x.inner.ApplyStrokePropertiesToContextAtZoomScale(context_, zoomScale)
+}
+
+// ApplyFillPropertiesToContextAtZoomScale calls the underlying ApplyFillPropertiesToContextAtZoomScale.
+func (x *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
+	x.inner.ApplyFillPropertiesToContextAtZoomScale(context_, zoomScale)
+}
+
+// StrokePathInContext calls the underlying StrokePathInContext.
+func (x *OverlayPathRenderer) StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
+	x.inner.StrokePathInContext(path, context_)
+}
+
+// FillPathInContext calls the underlying FillPathInContext.
+func (x *OverlayPathRenderer) FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
+	x.inner.FillPathInContext(path, context_)
+}
+
+// FillColor calls the underlying FillColor.
+func (x *OverlayPathRenderer) FillColor() *appkit.NSColor {
+	return x.inner.FillColor()
+}
+
+// SetFillColor calls the underlying SetFillColor.
+func (x *OverlayPathRenderer) SetFillColor(fillColor *appkit.NSColor) {
+	x.inner.SetFillColor(fillColor)
+}
+
+// StrokeColor calls the underlying StrokeColor.
+func (x *OverlayPathRenderer) StrokeColor() *appkit.NSColor {
+	return x.inner.StrokeColor()
+}
+
+// SetStrokeColor calls the underlying SetStrokeColor.
+func (x *OverlayPathRenderer) SetStrokeColor(strokeColor *appkit.NSColor) {
+	x.inner.SetStrokeColor(strokeColor)
+}
+
+// LineWidth calls the underlying LineWidth.
+func (x *OverlayPathRenderer) LineWidth() float64 {
+	return x.inner.LineWidth()
+}
+
+// SetLineWidth calls the underlying SetLineWidth.
+func (x *OverlayPathRenderer) SetLineWidth(lineWidth float64) {
+	x.inner.SetLineWidth(lineWidth)
+}
+
+// LineJoin calls the underlying LineJoin.
+func (x *OverlayPathRenderer) LineJoin() coregraphics.CGLineJoin {
+	return x.inner.LineJoin()
+}
+
+// SetLineJoin calls the underlying SetLineJoin.
+func (x *OverlayPathRenderer) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
+	x.inner.SetLineJoin(lineJoin)
+}
+
+// LineCap calls the underlying LineCap.
+func (x *OverlayPathRenderer) LineCap() coregraphics.CGLineCap {
+	return x.inner.LineCap()
+}
+
+// SetLineCap calls the underlying SetLineCap.
+func (x *OverlayPathRenderer) SetLineCap(lineCap coregraphics.CGLineCap) {
+	x.inner.SetLineCap(lineCap)
+}
+
+// MiterLimit calls the underlying MiterLimit.
+func (x *OverlayPathRenderer) MiterLimit() float64 {
+	return x.inner.MiterLimit()
+}
+
+// SetMiterLimit calls the underlying SetMiterLimit.
+func (x *OverlayPathRenderer) SetMiterLimit(miterLimit float64) {
+	x.inner.SetMiterLimit(miterLimit)
+}
+
+// LineDashPhase calls the underlying LineDashPhase.
+func (x *OverlayPathRenderer) LineDashPhase() float64 {
+	return x.inner.LineDashPhase()
+}
+
+// SetLineDashPhase calls the underlying SetLineDashPhase.
+func (x *OverlayPathRenderer) SetLineDashPhase(lineDashPhase float64) {
+	x.inner.SetLineDashPhase(lineDashPhase)
+}
+
 // LineDashPattern returns the collection as a Go slice.
 func (x *OverlayPathRenderer) LineDashPattern() []*foundation.NSNumber {
 	arr := x.inner.LineDashPattern()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetLineDashPattern calls the underlying SetLineDashPattern.
+func (x *OverlayPathRenderer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetLineDashPattern(lineDashPattern)
+}
+
+// ShouldRasterize calls the underlying ShouldRasterize.
+func (x *OverlayPathRenderer) ShouldRasterize() bool {
+	return x.inner.ShouldRasterize()
+}
+
+// SetShouldRasterize calls the underlying SetShouldRasterize.
+func (x *OverlayPathRenderer) SetShouldRasterize(shouldRasterize bool) {
+	x.inner.SetShouldRasterize(shouldRasterize)
+}
+
+// Path calls the underlying Path.
+func (x *OverlayPathRenderer) Path() unsafe.Pointer {
+	return x.inner.Path()
+}
+
+// SetPath calls the underlying SetPath.
+func (x *OverlayPathRenderer) SetPath(path unsafe.Pointer) {
+	x.inner.SetPath(path)
 }
 
 func (x *OverlayPathRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return x.inner }
 
 func (x *OverlayPathRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return &x.inner.MKOverlayRenderer }
+
+// OverlayPathRendererable is the interface implemented by [OverlayPathRenderer], for mocking and DI.
+type OverlayPathRendererable interface {
+	Unwrap() *raw.MKOverlayPathRenderer
+	WithFillColor(fillColor *appkit.NSColor) *OverlayPathRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *OverlayPathRenderer
+	WithLineWidth(lineWidth float64) *OverlayPathRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *OverlayPathRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *OverlayPathRenderer
+	WithMiterLimit(miterLimit float64) *OverlayPathRenderer
+	WithLineDashPhase(lineDashPhase float64) *OverlayPathRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *OverlayPathRenderer
+	WithShouldRasterize(shouldRasterize bool) *OverlayPathRenderer
+	CreatePath()
+	InvalidatePath()
+	ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64)
+	ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64)
+	StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer)
+	FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer)
+	FillColor() *appkit.NSColor
+	SetFillColor(fillColor *appkit.NSColor)
+	StrokeColor() *appkit.NSColor
+	SetStrokeColor(strokeColor *appkit.NSColor)
+	LineWidth() float64
+	SetLineWidth(lineWidth float64)
+	LineJoin() coregraphics.CGLineJoin
+	SetLineJoin(lineJoin coregraphics.CGLineJoin)
+	LineCap() coregraphics.CGLineCap
+	SetLineCap(lineCap coregraphics.CGLineCap)
+	MiterLimit() float64
+	SetMiterLimit(miterLimit float64)
+	LineDashPhase() float64
+	SetLineDashPhase(lineDashPhase float64)
+	LineDashPattern() []*foundation.NSNumber
+	SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber])
+	ShouldRasterize() bool
+	SetShouldRasterize(shouldRasterize bool)
+	Path() unsafe.Pointer
+	SetPath(path unsafe.Pointer)
+}
+
+var _ OverlayPathRendererable = (*OverlayPathRenderer)(nil)
 

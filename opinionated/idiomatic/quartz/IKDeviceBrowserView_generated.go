@@ -5,6 +5,7 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -58,4 +59,95 @@ func (x *IKDeviceBrowserView) WithMode(mode objc.ID) *IKDeviceBrowserView {
 	x.inner.SetMode(mode)
 	return x
 }
+
+// Delegate calls the underlying Delegate.
+func (x *IKDeviceBrowserView) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IKDeviceBrowserView) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// DisplaysLocalCameras calls the underlying DisplaysLocalCameras.
+func (x *IKDeviceBrowserView) DisplaysLocalCameras() bool {
+	return x.inner.DisplaysLocalCameras()
+}
+
+// SetDisplaysLocalCameras calls the underlying SetDisplaysLocalCameras.
+func (x *IKDeviceBrowserView) SetDisplaysLocalCameras(displaysLocalCameras bool) {
+	x.inner.SetDisplaysLocalCameras(displaysLocalCameras)
+}
+
+// DisplaysNetworkCameras calls the underlying DisplaysNetworkCameras.
+func (x *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
+	return x.inner.DisplaysNetworkCameras()
+}
+
+// SetDisplaysNetworkCameras calls the underlying SetDisplaysNetworkCameras.
+func (x *IKDeviceBrowserView) SetDisplaysNetworkCameras(displaysNetworkCameras bool) {
+	x.inner.SetDisplaysNetworkCameras(displaysNetworkCameras)
+}
+
+// DisplaysLocalScanners calls the underlying DisplaysLocalScanners.
+func (x *IKDeviceBrowserView) DisplaysLocalScanners() bool {
+	return x.inner.DisplaysLocalScanners()
+}
+
+// SetDisplaysLocalScanners calls the underlying SetDisplaysLocalScanners.
+func (x *IKDeviceBrowserView) SetDisplaysLocalScanners(displaysLocalScanners bool) {
+	x.inner.SetDisplaysLocalScanners(displaysLocalScanners)
+}
+
+// DisplaysNetworkScanners calls the underlying DisplaysNetworkScanners.
+func (x *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
+	return x.inner.DisplaysNetworkScanners()
+}
+
+// SetDisplaysNetworkScanners calls the underlying SetDisplaysNetworkScanners.
+func (x *IKDeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners bool) {
+	x.inner.SetDisplaysNetworkScanners(displaysNetworkScanners)
+}
+
+// Mode calls the underlying Mode.
+func (x *IKDeviceBrowserView) Mode() objc.ID {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *IKDeviceBrowserView) SetMode(mode objc.ID) {
+	x.inner.SetMode(mode)
+}
+
+// SelectedDevice calls the underlying SelectedDevice.
+func (x *IKDeviceBrowserView) SelectedDevice() *imagecapturecore.ICDevice {
+	return x.inner.SelectedDevice()
+}
+
+// IKDeviceBrowserViewable is the interface implemented by [IKDeviceBrowserView], for mocking and DI.
+type IKDeviceBrowserViewable interface {
+	Unwrap() *raw.IKDeviceBrowserView
+	WithDelegate(delegate objc.ID) *IKDeviceBrowserView
+	WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView
+	WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView
+	WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView
+	WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView
+	WithMode(mode objc.ID) *IKDeviceBrowserView
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+	DisplaysLocalCameras() bool
+	SetDisplaysLocalCameras(displaysLocalCameras bool)
+	DisplaysNetworkCameras() bool
+	SetDisplaysNetworkCameras(displaysNetworkCameras bool)
+	DisplaysLocalScanners() bool
+	SetDisplaysLocalScanners(displaysLocalScanners bool)
+	DisplaysNetworkScanners() bool
+	SetDisplaysNetworkScanners(displaysNetworkScanners bool)
+	Mode() objc.ID
+	SetMode(mode objc.ID)
+	SelectedDevice() *imagecapturecore.ICDevice
+}
+
+var _ IKDeviceBrowserViewable = (*IKDeviceBrowserView)(nil)
 

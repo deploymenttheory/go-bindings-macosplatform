@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,39 @@ func NewStoryboardSegueWithIdentifierSourceDestination(identifier *foundation.NS
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:source:destination:"), identifier.Ptr(), sourceController, destinationController)
 	return &StoryboardSegue{inner: raw.NSStoryboardSegueFromID(_id)}
 }
+
+// Perform calls the underlying Perform.
+func (x *StoryboardSegue) Perform() {
+	x.inner.Perform()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *StoryboardSegue) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceController calls the underlying SourceController.
+func (x *StoryboardSegue) SourceController() objc.ID {
+	return x.inner.SourceController()
+}
+
+// DestinationController calls the underlying DestinationController.
+func (x *StoryboardSegue) DestinationController() objc.ID {
+	return x.inner.DestinationController()
+}
+
+// StoryboardSegueable is the interface implemented by [StoryboardSegue], for mocking and DI.
+type StoryboardSegueable interface {
+	Unwrap() *raw.NSStoryboardSegue
+	Perform()
+	Identifier() string
+	SourceController() objc.ID
+	DestinationController() objc.ID
+}
+
+var _ StoryboardSegueable = (*StoryboardSegue)(nil)
 

@@ -5,8 +5,12 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Scene wraps [raw.SCNScene] with a fluent Go API.
@@ -77,16 +81,215 @@ func (x *Scene) WithPaused(paused bool) *Scene {
 	return x
 }
 
+// AttributeForKey calls the underlying AttributeForKey.
+func (x *Scene) AttributeForKey(key string) objc.ID {
+	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// SetAttributeForKey calls the underlying SetAttributeForKey.
+func (x *Scene) SetAttributeForKey(attribute objc.ID, key string) {
+	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
+}
+
+// WriteToURLOptionsDelegateProgressHandler calls the underlying WriteToURLOptionsDelegateProgressHandler.
+func (x *Scene) WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool {
+	return x.inner.WriteToURLOptionsDelegateProgressHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, delegate, progressHandler)
+}
+
+// RootNode calls the underlying RootNode.
+func (x *Scene) RootNode() *Node {
+	_r := x.inner.RootNode()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// PhysicsWorld calls the underlying PhysicsWorld.
+func (x *Scene) PhysicsWorld() *PhysicsWorld {
+	_r := x.inner.PhysicsWorld()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsWorld{inner: _r}
+}
+
+// Background calls the underlying Background.
+func (x *Scene) Background() *MaterialProperty {
+	_r := x.inner.Background()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// LightingEnvironment calls the underlying LightingEnvironment.
+func (x *Scene) LightingEnvironment() *MaterialProperty {
+	_r := x.inner.LightingEnvironment()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// FogStartDistance calls the underlying FogStartDistance.
+func (x *Scene) FogStartDistance() float64 {
+	return x.inner.FogStartDistance()
+}
+
+// SetFogStartDistance calls the underlying SetFogStartDistance.
+func (x *Scene) SetFogStartDistance(fogStartDistance float64) {
+	x.inner.SetFogStartDistance(fogStartDistance)
+}
+
+// FogEndDistance calls the underlying FogEndDistance.
+func (x *Scene) FogEndDistance() float64 {
+	return x.inner.FogEndDistance()
+}
+
+// SetFogEndDistance calls the underlying SetFogEndDistance.
+func (x *Scene) SetFogEndDistance(fogEndDistance float64) {
+	x.inner.SetFogEndDistance(fogEndDistance)
+}
+
+// FogDensityExponent calls the underlying FogDensityExponent.
+func (x *Scene) FogDensityExponent() float64 {
+	return x.inner.FogDensityExponent()
+}
+
+// SetFogDensityExponent calls the underlying SetFogDensityExponent.
+func (x *Scene) SetFogDensityExponent(fogDensityExponent float64) {
+	x.inner.SetFogDensityExponent(fogDensityExponent)
+}
+
+// FogColor calls the underlying FogColor.
+func (x *Scene) FogColor() objc.ID {
+	return x.inner.FogColor()
+}
+
+// SetFogColor calls the underlying SetFogColor.
+func (x *Scene) SetFogColor(fogColor objc.ID) {
+	x.inner.SetFogColor(fogColor)
+}
+
+// WantsScreenSpaceReflection calls the underlying WantsScreenSpaceReflection.
+func (x *Scene) WantsScreenSpaceReflection() bool {
+	return x.inner.WantsScreenSpaceReflection()
+}
+
+// SetWantsScreenSpaceReflection calls the underlying SetWantsScreenSpaceReflection.
+func (x *Scene) SetWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) {
+	x.inner.SetWantsScreenSpaceReflection(wantsScreenSpaceReflection)
+}
+
+// ScreenSpaceReflectionSampleCount calls the underlying ScreenSpaceReflectionSampleCount.
+func (x *Scene) ScreenSpaceReflectionSampleCount() int {
+	return x.inner.ScreenSpaceReflectionSampleCount()
+}
+
+// SetScreenSpaceReflectionSampleCount calls the underlying SetScreenSpaceReflectionSampleCount.
+func (x *Scene) SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) {
+	x.inner.SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount)
+}
+
+// ScreenSpaceReflectionMaximumDistance calls the underlying ScreenSpaceReflectionMaximumDistance.
+func (x *Scene) ScreenSpaceReflectionMaximumDistance() float64 {
+	return x.inner.ScreenSpaceReflectionMaximumDistance()
+}
+
+// SetScreenSpaceReflectionMaximumDistance calls the underlying SetScreenSpaceReflectionMaximumDistance.
+func (x *Scene) SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) {
+	x.inner.SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance)
+}
+
+// ScreenSpaceReflectionStride calls the underlying ScreenSpaceReflectionStride.
+func (x *Scene) ScreenSpaceReflectionStride() float64 {
+	return x.inner.ScreenSpaceReflectionStride()
+}
+
+// SetScreenSpaceReflectionStride calls the underlying SetScreenSpaceReflectionStride.
+func (x *Scene) SetScreenSpaceReflectionStride(screenSpaceReflectionStride float64) {
+	x.inner.SetScreenSpaceReflectionStride(screenSpaceReflectionStride)
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *Scene) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *Scene) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// AddParticleSystemWithTransform calls the underlying AddParticleSystemWithTransform.
+func (x *Scene) AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D) {
+	x.inner.AddParticleSystemWithTransform(system, transform)
+}
+
+// RemoveAllParticleSystems calls the underlying RemoveAllParticleSystems.
+func (x *Scene) RemoveAllParticleSystems() {
+	x.inner.RemoveAllParticleSystems()
+}
+
+// RemoveParticleSystem calls the underlying RemoveParticleSystem.
+func (x *Scene) RemoveParticleSystem(system *raw.SCNParticleSystem) {
+	x.inner.RemoveParticleSystem(system)
+}
+
 // ParticleSystems returns the collection as a Go slice.
 func (x *Scene) ParticleSystems() []*raw.SCNParticleSystem {
 	arr := x.inner.ParticleSystems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNParticleSystem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNParticleSystem {
+		return raw.SCNParticleSystemFromID(purego.Retain(_id))
+	})
 }
+
+// Sceneable is the interface implemented by [Scene], for mocking and DI.
+type Sceneable interface {
+	Unwrap() *raw.SCNScene
+	WithFogStartDistance(fogStartDistance float64) *Scene
+	WithFogEndDistance(fogEndDistance float64) *Scene
+	WithFogDensityExponent(fogDensityExponent float64) *Scene
+	WithFogColor(fogColor objc.ID) *Scene
+	WithWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) *Scene
+	WithScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) *Scene
+	WithScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) *Scene
+	WithScreenSpaceReflectionStride(screenSpaceReflectionStride float64) *Scene
+	WithPaused(paused bool) *Scene
+	AttributeForKey(key string) objc.ID
+	SetAttributeForKey(attribute objc.ID, key string)
+	WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool
+	RootNode() *Node
+	PhysicsWorld() *PhysicsWorld
+	Background() *MaterialProperty
+	LightingEnvironment() *MaterialProperty
+	FogStartDistance() float64
+	SetFogStartDistance(fogStartDistance float64)
+	FogEndDistance() float64
+	SetFogEndDistance(fogEndDistance float64)
+	FogDensityExponent() float64
+	SetFogDensityExponent(fogDensityExponent float64)
+	FogColor() objc.ID
+	SetFogColor(fogColor objc.ID)
+	WantsScreenSpaceReflection() bool
+	SetWantsScreenSpaceReflection(wantsScreenSpaceReflection bool)
+	ScreenSpaceReflectionSampleCount() int
+	SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int)
+	ScreenSpaceReflectionMaximumDistance() float64
+	SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64)
+	ScreenSpaceReflectionStride() float64
+	SetScreenSpaceReflectionStride(screenSpaceReflectionStride float64)
+	IsPaused() bool
+	SetPaused(paused bool)
+	AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D)
+	RemoveAllParticleSystems()
+	RemoveParticleSystem(system *raw.SCNParticleSystem)
+	ParticleSystems() []*raw.SCNParticleSystem
+}
+
+var _ Sceneable = (*Scene)(nil)
 

@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -116,5 +118,380 @@ func (x *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchT
 	return x
 }
 
+// LocationInView calls the underlying LocationInView.
+func (x *GestureRecognizer) LocationInView(view *raw.NSView) corefoundation.CGPoint {
+	return x.inner.LocationInView(view)
+}
+
+// Target calls the underlying Target.
+func (x *GestureRecognizer) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *GestureRecognizer) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *GestureRecognizer) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *GestureRecognizer) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// State calls the underlying State.
+func (x *GestureRecognizer) State() raw.NSGestureRecognizerState {
+	return x.inner.State()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *GestureRecognizer) Delegate() raw.NSGestureRecognizerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *GestureRecognizer) SetDelegate(delegate raw.NSGestureRecognizerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *GestureRecognizer) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *GestureRecognizer) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// View calls the underlying View.
+func (x *GestureRecognizer) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// PressureConfiguration calls the underlying PressureConfiguration.
+func (x *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
+	_r := x.inner.PressureConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &PressureConfiguration{inner: _r}
+}
+
+// SetPressureConfiguration calls the underlying SetPressureConfiguration.
+func (x *GestureRecognizer) SetPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) {
+	x.inner.SetPressureConfiguration(pressureConfiguration)
+}
+
+// DelaysPrimaryMouseButtonEvents calls the underlying DelaysPrimaryMouseButtonEvents.
+func (x *GestureRecognizer) DelaysPrimaryMouseButtonEvents() bool {
+	return x.inner.DelaysPrimaryMouseButtonEvents()
+}
+
+// SetDelaysPrimaryMouseButtonEvents calls the underlying SetDelaysPrimaryMouseButtonEvents.
+func (x *GestureRecognizer) SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) {
+	x.inner.SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents)
+}
+
+// DelaysSecondaryMouseButtonEvents calls the underlying DelaysSecondaryMouseButtonEvents.
+func (x *GestureRecognizer) DelaysSecondaryMouseButtonEvents() bool {
+	return x.inner.DelaysSecondaryMouseButtonEvents()
+}
+
+// SetDelaysSecondaryMouseButtonEvents calls the underlying SetDelaysSecondaryMouseButtonEvents.
+func (x *GestureRecognizer) SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) {
+	x.inner.SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents)
+}
+
+// DelaysOtherMouseButtonEvents calls the underlying DelaysOtherMouseButtonEvents.
+func (x *GestureRecognizer) DelaysOtherMouseButtonEvents() bool {
+	return x.inner.DelaysOtherMouseButtonEvents()
+}
+
+// SetDelaysOtherMouseButtonEvents calls the underlying SetDelaysOtherMouseButtonEvents.
+func (x *GestureRecognizer) SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) {
+	x.inner.SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents)
+}
+
+// DelaysKeyEvents calls the underlying DelaysKeyEvents.
+func (x *GestureRecognizer) DelaysKeyEvents() bool {
+	return x.inner.DelaysKeyEvents()
+}
+
+// SetDelaysKeyEvents calls the underlying SetDelaysKeyEvents.
+func (x *GestureRecognizer) SetDelaysKeyEvents(delaysKeyEvents bool) {
+	x.inner.SetDelaysKeyEvents(delaysKeyEvents)
+}
+
+// DelaysMagnificationEvents calls the underlying DelaysMagnificationEvents.
+func (x *GestureRecognizer) DelaysMagnificationEvents() bool {
+	return x.inner.DelaysMagnificationEvents()
+}
+
+// SetDelaysMagnificationEvents calls the underlying SetDelaysMagnificationEvents.
+func (x *GestureRecognizer) SetDelaysMagnificationEvents(delaysMagnificationEvents bool) {
+	x.inner.SetDelaysMagnificationEvents(delaysMagnificationEvents)
+}
+
+// DelaysRotationEvents calls the underlying DelaysRotationEvents.
+func (x *GestureRecognizer) DelaysRotationEvents() bool {
+	return x.inner.DelaysRotationEvents()
+}
+
+// SetDelaysRotationEvents calls the underlying SetDelaysRotationEvents.
+func (x *GestureRecognizer) SetDelaysRotationEvents(delaysRotationEvents bool) {
+	x.inner.SetDelaysRotationEvents(delaysRotationEvents)
+}
+
+// Name calls the underlying Name.
+func (x *GestureRecognizer) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *GestureRecognizer) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ModifierFlags calls the underlying ModifierFlags.
+func (x *GestureRecognizer) ModifierFlags() raw.NSEventModifierFlags {
+	return x.inner.ModifierFlags()
+}
+
+// AllowedTouchTypes calls the underlying AllowedTouchTypes.
+func (x *GestureRecognizer) AllowedTouchTypes() raw.NSTouchTypeMask {
+	return x.inner.AllowedTouchTypes()
+}
+
+// SetAllowedTouchTypes calls the underlying SetAllowedTouchTypes.
+func (x *GestureRecognizer) SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) {
+	x.inner.SetAllowedTouchTypes(allowedTouchTypes)
+}
+
+// Reset calls the underlying Reset.
+func (x *GestureRecognizer) Reset() {
+	x.inner.Reset()
+}
+
+// CanPreventGestureRecognizer calls the underlying CanPreventGestureRecognizer.
+func (x *GestureRecognizer) CanPreventGestureRecognizer(preventedGestureRecognizer *raw.NSGestureRecognizer) bool {
+	return x.inner.CanPreventGestureRecognizer(preventedGestureRecognizer)
+}
+
+// CanBePreventedByGestureRecognizer calls the underlying CanBePreventedByGestureRecognizer.
+func (x *GestureRecognizer) CanBePreventedByGestureRecognizer(preventingGestureRecognizer *raw.NSGestureRecognizer) bool {
+	return x.inner.CanBePreventedByGestureRecognizer(preventingGestureRecognizer)
+}
+
+// ShouldRequireFailureOfGestureRecognizer calls the underlying ShouldRequireFailureOfGestureRecognizer.
+func (x *GestureRecognizer) ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool {
+	return x.inner.ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer)
+}
+
+// ShouldBeRequiredToFailByGestureRecognizer calls the underlying ShouldBeRequiredToFailByGestureRecognizer.
+func (x *GestureRecognizer) ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool {
+	return x.inner.ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer)
+}
+
+// MouseDown calls the underlying MouseDown.
+func (x *GestureRecognizer) MouseDown(event *raw.NSEvent) {
+	x.inner.MouseDown(event)
+}
+
+// RightMouseDown calls the underlying RightMouseDown.
+func (x *GestureRecognizer) RightMouseDown(event *raw.NSEvent) {
+	x.inner.RightMouseDown(event)
+}
+
+// OtherMouseDown calls the underlying OtherMouseDown.
+func (x *GestureRecognizer) OtherMouseDown(event *raw.NSEvent) {
+	x.inner.OtherMouseDown(event)
+}
+
+// MouseUp calls the underlying MouseUp.
+func (x *GestureRecognizer) MouseUp(event *raw.NSEvent) {
+	x.inner.MouseUp(event)
+}
+
+// RightMouseUp calls the underlying RightMouseUp.
+func (x *GestureRecognizer) RightMouseUp(event *raw.NSEvent) {
+	x.inner.RightMouseUp(event)
+}
+
+// OtherMouseUp calls the underlying OtherMouseUp.
+func (x *GestureRecognizer) OtherMouseUp(event *raw.NSEvent) {
+	x.inner.OtherMouseUp(event)
+}
+
+// MouseDragged calls the underlying MouseDragged.
+func (x *GestureRecognizer) MouseDragged(event *raw.NSEvent) {
+	x.inner.MouseDragged(event)
+}
+
+// RightMouseDragged calls the underlying RightMouseDragged.
+func (x *GestureRecognizer) RightMouseDragged(event *raw.NSEvent) {
+	x.inner.RightMouseDragged(event)
+}
+
+// OtherMouseDragged calls the underlying OtherMouseDragged.
+func (x *GestureRecognizer) OtherMouseDragged(event *raw.NSEvent) {
+	x.inner.OtherMouseDragged(event)
+}
+
+// MouseCancelled calls the underlying MouseCancelled.
+func (x *GestureRecognizer) MouseCancelled(event *raw.NSEvent) {
+	x.inner.MouseCancelled(event)
+}
+
+// KeyDown calls the underlying KeyDown.
+func (x *GestureRecognizer) KeyDown(event *raw.NSEvent) {
+	x.inner.KeyDown(event)
+}
+
+// KeyUp calls the underlying KeyUp.
+func (x *GestureRecognizer) KeyUp(event *raw.NSEvent) {
+	x.inner.KeyUp(event)
+}
+
+// FlagsChanged calls the underlying FlagsChanged.
+func (x *GestureRecognizer) FlagsChanged(event *raw.NSEvent) {
+	x.inner.FlagsChanged(event)
+}
+
+// TabletPoint calls the underlying TabletPoint.
+func (x *GestureRecognizer) TabletPoint(event *raw.NSEvent) {
+	x.inner.TabletPoint(event)
+}
+
+// MagnifyWithEvent calls the underlying MagnifyWithEvent.
+func (x *GestureRecognizer) MagnifyWithEvent(event *raw.NSEvent) {
+	x.inner.MagnifyWithEvent(event)
+}
+
+// RotateWithEvent calls the underlying RotateWithEvent.
+func (x *GestureRecognizer) RotateWithEvent(event *raw.NSEvent) {
+	x.inner.RotateWithEvent(event)
+}
+
+// PressureChangeWithEvent calls the underlying PressureChangeWithEvent.
+func (x *GestureRecognizer) PressureChangeWithEvent(event *raw.NSEvent) {
+	x.inner.PressureChangeWithEvent(event)
+}
+
+// TouchesBeganWithEvent calls the underlying TouchesBeganWithEvent.
+func (x *GestureRecognizer) TouchesBeganWithEvent(event *raw.NSEvent) {
+	x.inner.TouchesBeganWithEvent(event)
+}
+
+// TouchesMovedWithEvent calls the underlying TouchesMovedWithEvent.
+func (x *GestureRecognizer) TouchesMovedWithEvent(event *raw.NSEvent) {
+	x.inner.TouchesMovedWithEvent(event)
+}
+
+// TouchesEndedWithEvent calls the underlying TouchesEndedWithEvent.
+func (x *GestureRecognizer) TouchesEndedWithEvent(event *raw.NSEvent) {
+	x.inner.TouchesEndedWithEvent(event)
+}
+
+// TouchesCancelledWithEvent calls the underlying TouchesCancelledWithEvent.
+func (x *GestureRecognizer) TouchesCancelledWithEvent(event *raw.NSEvent) {
+	x.inner.TouchesCancelledWithEvent(event)
+}
+
+// SetState calls the underlying SetState.
+func (x *GestureRecognizer) SetState(state raw.NSGestureRecognizerState) {
+	x.inner.SetState(state)
+}
+
 func (x *GestureRecognizer) asGestureRecognizer() *raw.NSGestureRecognizer { return x.inner }
+
+// GestureRecognizerable is the interface implemented by [GestureRecognizer], for mocking and DI.
+type GestureRecognizerable interface {
+	Unwrap() *raw.NSGestureRecognizer
+	WithTarget(target objc.ID) *GestureRecognizer
+	WithAction(action objc.SEL) *GestureRecognizer
+	WithState(state raw.NSGestureRecognizerState) *GestureRecognizer
+	WithDelegate(delegate raw.NSGestureRecognizerDelegate) *GestureRecognizer
+	WithEnabled(enabled bool) *GestureRecognizer
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GestureRecognizer
+	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *GestureRecognizer
+	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *GestureRecognizer
+	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *GestureRecognizer
+	WithDelaysKeyEvents(delaysKeyEvents bool) *GestureRecognizer
+	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *GestureRecognizer
+	WithDelaysRotationEvents(delaysRotationEvents bool) *GestureRecognizer
+	WithName(name string) *GestureRecognizer
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GestureRecognizer
+	LocationInView(view *raw.NSView) corefoundation.CGPoint
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	State() raw.NSGestureRecognizerState
+	Delegate() raw.NSGestureRecognizerDelegate
+	SetDelegate(delegate raw.NSGestureRecognizerDelegate)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	View() *View
+	PressureConfiguration() *PressureConfiguration
+	SetPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration)
+	DelaysPrimaryMouseButtonEvents() bool
+	SetDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool)
+	DelaysSecondaryMouseButtonEvents() bool
+	SetDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool)
+	DelaysOtherMouseButtonEvents() bool
+	SetDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool)
+	DelaysKeyEvents() bool
+	SetDelaysKeyEvents(delaysKeyEvents bool)
+	DelaysMagnificationEvents() bool
+	SetDelaysMagnificationEvents(delaysMagnificationEvents bool)
+	DelaysRotationEvents() bool
+	SetDelaysRotationEvents(delaysRotationEvents bool)
+	Name() string
+	SetName(name string)
+	ModifierFlags() raw.NSEventModifierFlags
+	AllowedTouchTypes() raw.NSTouchTypeMask
+	SetAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask)
+	Reset()
+	CanPreventGestureRecognizer(preventedGestureRecognizer *raw.NSGestureRecognizer) bool
+	CanBePreventedByGestureRecognizer(preventingGestureRecognizer *raw.NSGestureRecognizer) bool
+	ShouldRequireFailureOfGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool
+	ShouldBeRequiredToFailByGestureRecognizer(otherGestureRecognizer *raw.NSGestureRecognizer) bool
+	MouseDown(event *raw.NSEvent)
+	RightMouseDown(event *raw.NSEvent)
+	OtherMouseDown(event *raw.NSEvent)
+	MouseUp(event *raw.NSEvent)
+	RightMouseUp(event *raw.NSEvent)
+	OtherMouseUp(event *raw.NSEvent)
+	MouseDragged(event *raw.NSEvent)
+	RightMouseDragged(event *raw.NSEvent)
+	OtherMouseDragged(event *raw.NSEvent)
+	MouseCancelled(event *raw.NSEvent)
+	KeyDown(event *raw.NSEvent)
+	KeyUp(event *raw.NSEvent)
+	FlagsChanged(event *raw.NSEvent)
+	TabletPoint(event *raw.NSEvent)
+	MagnifyWithEvent(event *raw.NSEvent)
+	RotateWithEvent(event *raw.NSEvent)
+	PressureChangeWithEvent(event *raw.NSEvent)
+	TouchesBeganWithEvent(event *raw.NSEvent)
+	TouchesMovedWithEvent(event *raw.NSEvent)
+	TouchesEndedWithEvent(event *raw.NSEvent)
+	TouchesCancelledWithEvent(event *raw.NSEvent)
+	SetState(state raw.NSGestureRecognizerState)
+}
+
+var _ GestureRecognizerable = (*GestureRecognizer)(nil)
 

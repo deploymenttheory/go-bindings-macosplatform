@@ -7,6 +7,7 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -123,29 +124,211 @@ func (x *MatchRequest) WithRecipientProperties(recipientProperties *foundation.N
 	return x
 }
 
+// MinPlayers calls the underlying MinPlayers.
+func (x *MatchRequest) MinPlayers() uint {
+	return x.inner.MinPlayers()
+}
+
+// SetMinPlayers calls the underlying SetMinPlayers.
+func (x *MatchRequest) SetMinPlayers(minPlayers uint) {
+	x.inner.SetMinPlayers(minPlayers)
+}
+
+// MaxPlayers calls the underlying MaxPlayers.
+func (x *MatchRequest) MaxPlayers() uint {
+	return x.inner.MaxPlayers()
+}
+
+// SetMaxPlayers calls the underlying SetMaxPlayers.
+func (x *MatchRequest) SetMaxPlayers(maxPlayers uint) {
+	x.inner.SetMaxPlayers(maxPlayers)
+}
+
+// PlayerGroup calls the underlying PlayerGroup.
+func (x *MatchRequest) PlayerGroup() uint {
+	return x.inner.PlayerGroup()
+}
+
+// SetPlayerGroup calls the underlying SetPlayerGroup.
+func (x *MatchRequest) SetPlayerGroup(playerGroup uint) {
+	x.inner.SetPlayerGroup(playerGroup)
+}
+
+// PlayerAttributes calls the underlying PlayerAttributes.
+func (x *MatchRequest) PlayerAttributes() uint32 {
+	return x.inner.PlayerAttributes()
+}
+
+// SetPlayerAttributes calls the underlying SetPlayerAttributes.
+func (x *MatchRequest) SetPlayerAttributes(playerAttributes uint32) {
+	x.inner.SetPlayerAttributes(playerAttributes)
+}
+
 // Recipients returns the collection as a Go slice.
 func (x *MatchRequest) Recipients() []*raw.GKPlayer {
 	arr := x.inner.Recipients()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKPlayer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKPlayer {
+		return raw.GKPlayerFromID(purego.Retain(_id))
+	})
+}
+
+// SetRecipients calls the underlying SetRecipients.
+func (x *MatchRequest) SetRecipients(recipients *foundation.NSArray[*raw.GKPlayer]) {
+	x.inner.SetRecipients(recipients)
+}
+
+// InviteMessage calls the underlying InviteMessage.
+func (x *MatchRequest) InviteMessage() string {
+	_r := x.inner.InviteMessage()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInviteMessage calls the underlying SetInviteMessage.
+func (x *MatchRequest) SetInviteMessage(inviteMessage string) {
+	x.inner.SetInviteMessage(foundation.NSStringStringWithUTF8String(inviteMessage))
+}
+
+// DefaultNumberOfPlayers calls the underlying DefaultNumberOfPlayers.
+func (x *MatchRequest) DefaultNumberOfPlayers() uint {
+	return x.inner.DefaultNumberOfPlayers()
+}
+
+// SetDefaultNumberOfPlayers calls the underlying SetDefaultNumberOfPlayers.
+func (x *MatchRequest) SetDefaultNumberOfPlayers(defaultNumberOfPlayers uint) {
+	x.inner.SetDefaultNumberOfPlayers(defaultNumberOfPlayers)
+}
+
+// RestrictToAutomatch calls the underlying RestrictToAutomatch.
+func (x *MatchRequest) RestrictToAutomatch() bool {
+	return x.inner.RestrictToAutomatch()
+}
+
+// SetRestrictToAutomatch calls the underlying SetRestrictToAutomatch.
+func (x *MatchRequest) SetRestrictToAutomatch(restrictToAutomatch bool) {
+	x.inner.SetRestrictToAutomatch(restrictToAutomatch)
+}
+
+// RecipientResponseHandler calls the underlying RecipientResponseHandler.
+func (x *MatchRequest) RecipientResponseHandler() objc.Block {
+	return x.inner.RecipientResponseHandler()
+}
+
+// SetRecipientResponseHandler calls the underlying SetRecipientResponseHandler.
+func (x *MatchRequest) SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse)) {
+	x.inner.SetRecipientResponseHandler(recipientResponseHandler)
+}
+
+// InviteeResponseHandler calls the underlying InviteeResponseHandler.
+func (x *MatchRequest) InviteeResponseHandler() objc.Block {
+	return x.inner.InviteeResponseHandler()
+}
+
+// SetInviteeResponseHandler calls the underlying SetInviteeResponseHandler.
+func (x *MatchRequest) SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse)) {
+	x.inner.SetInviteeResponseHandler(inviteeResponseHandler)
 }
 
 // PlayersToInvite returns the collection as a Go slice.
-func (x *MatchRequest) PlayersToInvite() []*foundation.NSString {
+func (x *MatchRequest) PlayersToInvite() []string {
 	arr := x.inner.PlayersToInvite()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetPlayersToInvite calls the underlying SetPlayersToInvite.
+func (x *MatchRequest) SetPlayersToInvite(playersToInvite *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetPlayersToInvite(playersToInvite)
+}
+
+// QueueName calls the underlying QueueName.
+func (x *MatchRequest) QueueName() string {
+	_r := x.inner.QueueName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetQueueName calls the underlying SetQueueName.
+func (x *MatchRequest) SetQueueName(queueName string) {
+	x.inner.SetQueueName(foundation.NSStringStringWithUTF8String(queueName))
+}
+
+// Properties calls the underlying Properties.
+func (x *MatchRequest) Properties() unsafe.Pointer {
+	return x.inner.Properties()
+}
+
+// SetProperties calls the underlying SetProperties.
+func (x *MatchRequest) SetProperties(properties unsafe.Pointer) {
+	x.inner.SetProperties(properties)
+}
+
+// RecipientProperties calls the underlying RecipientProperties.
+func (x *MatchRequest) RecipientProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID] {
+	return x.inner.RecipientProperties()
+}
+
+// SetRecipientProperties calls the underlying SetRecipientProperties.
+func (x *MatchRequest) SetRecipientProperties(recipientProperties *foundation.NSDictionary[*raw.GKPlayer, objc.ID]) {
+	x.inner.SetRecipientProperties(recipientProperties)
+}
+
+// MatchRequestable is the interface implemented by [MatchRequest], for mocking and DI.
+type MatchRequestable interface {
+	Unwrap() *raw.GKMatchRequest
+	WithMinPlayers(minPlayers uint) *MatchRequest
+	WithMaxPlayers(maxPlayers uint) *MatchRequest
+	WithPlayerGroup(playerGroup uint) *MatchRequest
+	WithPlayerAttributes(playerAttributes uint32) *MatchRequest
+	WithRecipients(items ...PlayerProvider) *MatchRequest
+	WithInviteMessage(inviteMessage string) *MatchRequest
+	WithDefaultNumberOfPlayers(defaultNumberOfPlayers uint) *MatchRequest
+	WithRestrictToAutomatch(restrictToAutomatch bool) *MatchRequest
+	WithRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse)) *MatchRequest
+	WithInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse)) *MatchRequest
+	WithPlayersToInvite(items ...*foundation.NSString) *MatchRequest
+	WithQueueName(queueName string) *MatchRequest
+	WithRecipientProperties(recipientProperties *foundation.NSDictionary[*raw.GKPlayer, objc.ID]) *MatchRequest
+	MinPlayers() uint
+	SetMinPlayers(minPlayers uint)
+	MaxPlayers() uint
+	SetMaxPlayers(maxPlayers uint)
+	PlayerGroup() uint
+	SetPlayerGroup(playerGroup uint)
+	PlayerAttributes() uint32
+	SetPlayerAttributes(playerAttributes uint32)
+	Recipients() []*raw.GKPlayer
+	SetRecipients(recipients *foundation.NSArray[*raw.GKPlayer])
+	InviteMessage() string
+	SetInviteMessage(inviteMessage string)
+	DefaultNumberOfPlayers() uint
+	SetDefaultNumberOfPlayers(defaultNumberOfPlayers uint)
+	RestrictToAutomatch() bool
+	SetRestrictToAutomatch(restrictToAutomatch bool)
+	RecipientResponseHandler() objc.Block
+	SetRecipientResponseHandler(recipientResponseHandler func(*raw.GKPlayer, raw.GKInviteRecipientResponse))
+	InviteeResponseHandler() objc.Block
+	SetInviteeResponseHandler(inviteeResponseHandler func(*foundation.NSString, raw.GKInviteRecipientResponse))
+	PlayersToInvite() []string
+	SetPlayersToInvite(playersToInvite *foundation.NSArray[*foundation.NSString])
+	QueueName() string
+	SetQueueName(queueName string)
+	Properties() unsafe.Pointer
+	SetProperties(properties unsafe.Pointer)
+	RecipientProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
+	SetRecipientProperties(recipientProperties *foundation.NSDictionary[*raw.GKPlayer, objc.ID])
+}
+
+var _ MatchRequestable = (*MatchRequest)(nil)
 

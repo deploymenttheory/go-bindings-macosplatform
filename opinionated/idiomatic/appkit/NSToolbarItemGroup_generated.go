@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,18 +60,82 @@ func (x *ToolbarItemGroup) WithSelectedIndex(selectedIndex int) *ToolbarItemGrou
 	return x
 }
 
+// SetSelectedAtIndex calls the underlying SetSelectedAtIndex.
+func (x *ToolbarItemGroup) SetSelectedAtIndex(selected bool, index int) {
+	x.inner.SetSelectedAtIndex(selected, index)
+}
+
+// IsSelectedAtIndex calls the underlying IsSelectedAtIndex.
+func (x *ToolbarItemGroup) IsSelectedAtIndex(index int) bool {
+	return x.inner.IsSelectedAtIndex(index)
+}
+
 // Subitems returns the collection as a Go slice.
 func (x *ToolbarItemGroup) Subitems() []*raw.NSToolbarItem {
 	arr := x.inner.Subitems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSToolbarItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSToolbarItem {
+		return raw.NSToolbarItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubitems calls the underlying SetSubitems.
+func (x *ToolbarItemGroup) SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem]) {
+	x.inner.SetSubitems(subitems)
+}
+
+// ControlRepresentation calls the underlying ControlRepresentation.
+func (x *ToolbarItemGroup) ControlRepresentation() raw.NSToolbarItemGroupControlRepresentation {
+	return x.inner.ControlRepresentation()
+}
+
+// SetControlRepresentation calls the underlying SetControlRepresentation.
+func (x *ToolbarItemGroup) SetControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) {
+	x.inner.SetControlRepresentation(controlRepresentation)
+}
+
+// SelectionMode calls the underlying SelectionMode.
+func (x *ToolbarItemGroup) SelectionMode() raw.NSToolbarItemGroupSelectionMode {
+	return x.inner.SelectionMode()
+}
+
+// SetSelectionMode calls the underlying SetSelectionMode.
+func (x *ToolbarItemGroup) SetSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) {
+	x.inner.SetSelectionMode(selectionMode)
+}
+
+// SelectedIndex calls the underlying SelectedIndex.
+func (x *ToolbarItemGroup) SelectedIndex() int {
+	return x.inner.SelectedIndex()
+}
+
+// SetSelectedIndex calls the underlying SetSelectedIndex.
+func (x *ToolbarItemGroup) SetSelectedIndex(selectedIndex int) {
+	x.inner.SetSelectedIndex(selectedIndex)
 }
 
 func (x *ToolbarItemGroup) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+
+// ToolbarItemGroupable is the interface implemented by [ToolbarItemGroup], for mocking and DI.
+type ToolbarItemGroupable interface {
+	Unwrap() *raw.NSToolbarItemGroup
+	WithSubitems(items ...ToolbarItemProvider) *ToolbarItemGroup
+	WithControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation) *ToolbarItemGroup
+	WithSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode) *ToolbarItemGroup
+	WithSelectedIndex(selectedIndex int) *ToolbarItemGroup
+	SetSelectedAtIndex(selected bool, index int)
+	IsSelectedAtIndex(index int) bool
+	Subitems() []*raw.NSToolbarItem
+	SetSubitems(subitems *foundation.NSArray[*raw.NSToolbarItem])
+	ControlRepresentation() raw.NSToolbarItemGroupControlRepresentation
+	SetControlRepresentation(controlRepresentation raw.NSToolbarItemGroupControlRepresentation)
+	SelectionMode() raw.NSToolbarItemGroupSelectionMode
+	SetSelectionMode(selectionMode raw.NSToolbarItemGroupSelectionMode)
+	SelectedIndex() int
+	SetSelectedIndex(selectedIndex int)
+}
+
+var _ ToolbarItemGroupable = (*ToolbarItemGroup)(nil)
 

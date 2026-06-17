@@ -42,3 +42,49 @@ func (x *MTRMediaPlaybackClusterRewindParams) WithServerSideProcessingTimeout(se
 	return x
 }
 
+// AudioAdvanceUnmuted calls the underlying AudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterRewindParams) AudioAdvanceUnmuted() *foundation.NSNumber {
+	return x.inner.AudioAdvanceUnmuted()
+}
+
+// SetAudioAdvanceUnmuted calls the underlying SetAudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterRewindParams) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
+	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterRewindParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterRewindParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterRewindParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterRewindParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterRewindParamsable is the interface implemented by [MTRMediaPlaybackClusterRewindParams], for mocking and DI.
+type MTRMediaPlaybackClusterRewindParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterRewindParams
+	WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterRewindParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterRewindParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterRewindParams
+	AudioAdvanceUnmuted() *foundation.NSNumber
+	SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterRewindParamsable = (*MTRMediaPlaybackClusterRewindParams)(nil)
+

@@ -7,6 +7,7 @@ package coremidi
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,27 @@ func NewCIProfileWithDataName(data *foundation.NSData, inName string) *CIProfile
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), data.Ptr(), foundation.NSStringStringWithUTF8String(inName).Ptr())
 	return &CIProfile{inner: raw.MIDICIProfileFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *CIProfile) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProfileID calls the underlying ProfileID.
+func (x *CIProfile) ProfileID() *foundation.NSData {
+	return x.inner.ProfileID()
+}
+
+// CIProfileable is the interface implemented by [CIProfile], for mocking and DI.
+type CIProfileable interface {
+	Unwrap() *raw.MIDICIProfile
+	Name() string
+	ProfileID() *foundation.NSData
+}
+
+var _ CIProfileable = (*CIProfile)(nil)
 

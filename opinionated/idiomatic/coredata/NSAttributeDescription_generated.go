@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,7 +67,113 @@ func (x *AttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption b
 	return x
 }
 
+// AttributeType calls the underlying AttributeType.
+func (x *AttributeDescription) AttributeType() raw.NSAttributeType {
+	return x.inner.AttributeType()
+}
+
+// SetAttributeType calls the underlying SetAttributeType.
+func (x *AttributeDescription) SetAttributeType(attributeType raw.NSAttributeType) {
+	x.inner.SetAttributeType(attributeType)
+}
+
+// AttributeValueClassName calls the underlying AttributeValueClassName.
+func (x *AttributeDescription) AttributeValueClassName() string {
+	_r := x.inner.AttributeValueClassName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAttributeValueClassName calls the underlying SetAttributeValueClassName.
+func (x *AttributeDescription) SetAttributeValueClassName(attributeValueClassName string) {
+	x.inner.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
+}
+
+// DefaultValue calls the underlying DefaultValue.
+func (x *AttributeDescription) DefaultValue() objc.ID {
+	return x.inner.DefaultValue()
+}
+
+// SetDefaultValue calls the underlying SetDefaultValue.
+func (x *AttributeDescription) SetDefaultValue(defaultValue objc.ID) {
+	x.inner.SetDefaultValue(defaultValue)
+}
+
+// ValueTransformerName calls the underlying ValueTransformerName.
+func (x *AttributeDescription) ValueTransformerName() string {
+	_r := x.inner.ValueTransformerName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValueTransformerName calls the underlying SetValueTransformerName.
+func (x *AttributeDescription) SetValueTransformerName(valueTransformerName string) {
+	x.inner.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
+}
+
+// AllowsExternalBinaryDataStorage calls the underlying AllowsExternalBinaryDataStorage.
+func (x *AttributeDescription) AllowsExternalBinaryDataStorage() bool {
+	return x.inner.AllowsExternalBinaryDataStorage()
+}
+
+// SetAllowsExternalBinaryDataStorage calls the underlying SetAllowsExternalBinaryDataStorage.
+func (x *AttributeDescription) SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) {
+	x.inner.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
+}
+
+// PreservesValueInHistoryOnDeletion calls the underlying PreservesValueInHistoryOnDeletion.
+func (x *AttributeDescription) PreservesValueInHistoryOnDeletion() bool {
+	return x.inner.PreservesValueInHistoryOnDeletion()
+}
+
+// SetPreservesValueInHistoryOnDeletion calls the underlying SetPreservesValueInHistoryOnDeletion.
+func (x *AttributeDescription) SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) {
+	x.inner.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
+}
+
+// AllowsCloudEncryption calls the underlying AllowsCloudEncryption.
+func (x *AttributeDescription) AllowsCloudEncryption() bool {
+	return x.inner.AllowsCloudEncryption()
+}
+
+// SetAllowsCloudEncryption calls the underlying SetAllowsCloudEncryption.
+func (x *AttributeDescription) SetAllowsCloudEncryption(allowsCloudEncryption bool) {
+	x.inner.SetAllowsCloudEncryption(allowsCloudEncryption)
+}
+
 func (x *AttributeDescription) asAttributeDescription() *raw.NSAttributeDescription { return x.inner }
 
 func (x *AttributeDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+
+// AttributeDescriptionable is the interface implemented by [AttributeDescription], for mocking and DI.
+type AttributeDescriptionable interface {
+	Unwrap() *raw.NSAttributeDescription
+	WithAttributeType(attributeType raw.NSAttributeType) *AttributeDescription
+	WithAttributeValueClassName(attributeValueClassName string) *AttributeDescription
+	WithDefaultValue(defaultValue objc.ID) *AttributeDescription
+	WithValueTransformerName(valueTransformerName string) *AttributeDescription
+	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription
+	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription
+	WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription
+	AttributeType() raw.NSAttributeType
+	SetAttributeType(attributeType raw.NSAttributeType)
+	AttributeValueClassName() string
+	SetAttributeValueClassName(attributeValueClassName string)
+	DefaultValue() objc.ID
+	SetDefaultValue(defaultValue objc.ID)
+	ValueTransformerName() string
+	SetValueTransformerName(valueTransformerName string)
+	AllowsExternalBinaryDataStorage() bool
+	SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool)
+	PreservesValueInHistoryOnDeletion() bool
+	SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool)
+	AllowsCloudEncryption() bool
+	SetAllowsCloudEncryption(allowsCloudEncryption bool)
+}
+
+var _ AttributeDescriptionable = (*AttributeDescription)(nil)
 

@@ -5,6 +5,7 @@
 package screencapturekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewShareableContentInfo() *ShareableContentInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCShareableContentInfo")), objc.RegisterName("new"))
 	return &ShareableContentInfo{inner: raw.SCShareableContentInfoFromID(_id)}
 }
+
+// Style calls the underlying Style.
+func (x *ShareableContentInfo) Style() raw.SCShareableContentStyle {
+	return x.inner.Style()
+}
+
+// PointPixelScale calls the underlying PointPixelScale.
+func (x *ShareableContentInfo) PointPixelScale() float32 {
+	return x.inner.PointPixelScale()
+}
+
+// ContentRect calls the underlying ContentRect.
+func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
+	return x.inner.ContentRect()
+}
+
+// ShareableContentInfoable is the interface implemented by [ShareableContentInfo], for mocking and DI.
+type ShareableContentInfoable interface {
+	Unwrap() *raw.SCShareableContentInfo
+	Style() raw.SCShareableContentStyle
+	PointPixelScale() float32
+	ContentRect() corefoundation.CGRect
+}
+
+var _ ShareableContentInfoable = (*ShareableContentInfo)(nil)
 

@@ -7,6 +7,7 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,9 +45,52 @@ func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode raw.PHASEPlaybackM
 	return x
 }
 
+// AssetIdentifier calls the underlying AssetIdentifier.
+func (x *SamplerNodeDefinition) AssetIdentifier() string {
+	_r := x.inner.AssetIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CullOption calls the underlying CullOption.
+func (x *SamplerNodeDefinition) CullOption() raw.PHASECullOption {
+	return x.inner.CullOption()
+}
+
+// SetCullOption calls the underlying SetCullOption.
+func (x *SamplerNodeDefinition) SetCullOption(cullOption raw.PHASECullOption) {
+	x.inner.SetCullOption(cullOption)
+}
+
+// PlaybackMode calls the underlying PlaybackMode.
+func (x *SamplerNodeDefinition) PlaybackMode() raw.PHASEPlaybackMode {
+	return x.inner.PlaybackMode()
+}
+
+// SetPlaybackMode calls the underlying SetPlaybackMode.
+func (x *SamplerNodeDefinition) SetPlaybackMode(playbackMode raw.PHASEPlaybackMode) {
+	x.inner.SetPlaybackMode(playbackMode)
+}
+
 func (x *SamplerNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition }
 
 func (x *SamplerNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition }
 
 func (x *SamplerNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// SamplerNodeDefinitionable is the interface implemented by [SamplerNodeDefinition], for mocking and DI.
+type SamplerNodeDefinitionable interface {
+	Unwrap() *raw.PHASESamplerNodeDefinition
+	WithCullOption(cullOption raw.PHASECullOption) *SamplerNodeDefinition
+	WithPlaybackMode(playbackMode raw.PHASEPlaybackMode) *SamplerNodeDefinition
+	AssetIdentifier() string
+	CullOption() raw.PHASECullOption
+	SetCullOption(cullOption raw.PHASECullOption)
+	PlaybackMode() raw.PHASEPlaybackMode
+	SetPlaybackMode(playbackMode raw.PHASEPlaybackMode)
+}
+
+var _ SamplerNodeDefinitionable = (*SamplerNodeDefinition)(nil)
 

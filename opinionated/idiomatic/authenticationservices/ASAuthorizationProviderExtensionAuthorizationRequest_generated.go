@@ -6,7 +6,10 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AuthorizationProviderExtensionAuthorizationRequest wraps [raw.ASAuthorizationProviderExtensionAuthorizationRequest] with a fluent Go API.
@@ -22,4 +25,167 @@ func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProvi
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationProviderExtensionAuthorizationRequest")), objc.RegisterName("new"))
 	return &AuthorizationProviderExtensionAuthorizationRequest{inner: raw.ASAuthorizationProviderExtensionAuthorizationRequestFromID(_id)}
 }
+
+// DoNotHandle calls the underlying DoNotHandle.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
+	x.inner.DoNotHandle()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
+	x.inner.Cancel()
+}
+
+// Complete calls the underlying Complete.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
+	x.inner.Complete()
+}
+
+// CompleteWithHTTPAuthorizationHeaders calls the underlying CompleteWithHTTPAuthorizationHeaders.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders)
+}
+
+// CompleteWithHTTPResponseHttpBody calls the underlying CompleteWithHTTPResponseHttpBody.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData) {
+	x.inner.CompleteWithHTTPResponseHttpBody(httpResponse, httpBody)
+}
+
+// CompleteWithAuthorizationResult calls the underlying CompleteWithAuthorizationResult.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *raw.ASAuthorizationProviderExtensionAuthorizationResult) {
+	x.inner.CompleteWithAuthorizationResult(authorizationResult)
+}
+
+// CompleteWithError calls the underlying CompleteWithError.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithError(error_ unsafe.Pointer) {
+	x.inner.CompleteWithError(error_)
+}
+
+// PresentAuthorizationViewControllerWithCompletion calls the underlying PresentAuthorizationViewControllerWithCompletion.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer)) {
+	x.inner.PresentAuthorizationViewControllerWithCompletion(completion)
+}
+
+// Url calls the underlying Url.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// RequestedOperation calls the underlying RequestedOperation.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() string {
+	_r := x.inner.RequestedOperation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HttpHeaders calls the underlying HttpHeaders.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.HttpHeaders()
+}
+
+// HttpBody calls the underlying HttpBody.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpBody() *foundation.NSData {
+	return x.inner.HttpBody()
+}
+
+// Realm calls the underlying Realm.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
+	_r := x.inner.Realm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExtensionData calls the underlying ExtensionData.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.ExtensionData()
+}
+
+// CallerBundleIdentifier calls the underlying CallerBundleIdentifier.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
+	_r := x.inner.CallerBundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AuthorizationOptions calls the underlying AuthorizationOptions.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.AuthorizationOptions()
+}
+
+// IsCallerManaged calls the underlying IsCallerManaged.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
+	return x.inner.IsCallerManaged()
+}
+
+// CallerTeamIdentifier calls the underlying CallerTeamIdentifier.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
+	_r := x.inner.CallerTeamIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedCallerDisplayName calls the underlying LocalizedCallerDisplayName.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
+	_r := x.inner.LocalizedCallerDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CallerAuditToken calls the underlying CallerAuditToken.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() *foundation.NSData {
+	return x.inner.CallerAuditToken()
+}
+
+// IsUserInterfaceEnabled calls the underlying IsUserInterfaceEnabled.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
+	return x.inner.IsUserInterfaceEnabled()
+}
+
+// LoginManager calls the underlying LoginManager.
+func (x *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
+	_r := x.inner.LoginManager()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationProviderExtensionLoginManager{inner: _r}
+}
+
+// AuthorizationProviderExtensionAuthorizationRequestable is the interface implemented by [AuthorizationProviderExtensionAuthorizationRequest], for mocking and DI.
+type AuthorizationProviderExtensionAuthorizationRequestable interface {
+	Unwrap() *raw.ASAuthorizationProviderExtensionAuthorizationRequest
+	DoNotHandle()
+	Cancel()
+	Complete()
+	CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	CompleteWithHTTPResponseHttpBody(httpResponse *foundation.NSHTTPURLResponse, httpBody *foundation.NSData)
+	CompleteWithAuthorizationResult(authorizationResult *raw.ASAuthorizationProviderExtensionAuthorizationResult)
+	CompleteWithError(error_ unsafe.Pointer)
+	PresentAuthorizationViewControllerWithCompletion(completion func(bool, unsafe.Pointer))
+	Url() *foundation.NSURL
+	RequestedOperation() string
+	HttpHeaders() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	HttpBody() *foundation.NSData
+	Realm() string
+	ExtensionData() *foundation.NSDictionary[objc.ID, objc.ID]
+	CallerBundleIdentifier() string
+	AuthorizationOptions() *foundation.NSDictionary[objc.ID, objc.ID]
+	IsCallerManaged() bool
+	CallerTeamIdentifier() string
+	LocalizedCallerDisplayName() string
+	CallerAuditToken() *foundation.NSData
+	IsUserInterfaceEnabled() bool
+	LoginManager() *AuthorizationProviderExtensionLoginManager
+}
+
+var _ AuthorizationProviderExtensionAuthorizationRequestable = (*AuthorizationProviderExtensionAuthorizationRequest)(nil)
 

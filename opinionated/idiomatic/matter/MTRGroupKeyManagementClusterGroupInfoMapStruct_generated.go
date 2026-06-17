@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,66 @@ func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricI
 	x.inner.SetFabricIndex(fabricIndex)
 	return x
 }
+
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// Endpoints calls the underlying Endpoints.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() *foundation.NSArray[objc.ID] {
+	return x.inner.Endpoints()
+}
+
+// SetEndpoints calls the underlying SetEndpoints.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
+	x.inner.SetEndpoints(endpoints)
+}
+
+// GroupName calls the underlying GroupName.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
+	_r := x.inner.GroupName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupName calls the underlying SetGroupName.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupName(groupName string) {
+	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRGroupKeyManagementClusterGroupInfoMapStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupInfoMapStruct], for mocking and DI.
+type MTRGroupKeyManagementClusterGroupInfoMapStructable interface {
+	Unwrap() *raw.MTRGroupKeyManagementClusterGroupInfoMapStruct
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct
+	WithGroupName(groupName string) *MTRGroupKeyManagementClusterGroupInfoMapStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+	Endpoints() *foundation.NSArray[objc.ID]
+	SetEndpoints(endpoints *foundation.NSArray[objc.ID])
+	GroupName() string
+	SetGroupName(groupName string)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRGroupKeyManagementClusterGroupInfoMapStructable = (*MTRGroupKeyManagementClusterGroupInfoMapStruct)(nil)
 

@@ -29,3 +29,10 @@ func (x *ImageDivide) asImageArithmetic() *raw.MPSImageArithmetic { return &x.in
 
 func (x *ImageDivide) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
 
+// ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
+type ImageDivideable interface {
+	Unwrap() *raw.MPSImageDivide
+}
+
+var _ ImageDivideable = (*ImageDivide)(nil)
+

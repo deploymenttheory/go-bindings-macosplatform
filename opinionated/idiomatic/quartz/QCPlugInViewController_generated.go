@@ -25,3 +25,20 @@ func NewQCPlugInViewControllerWithPlugInViewNibName(plugIn *raw.QCPlugIn, name s
 	return &QCPlugInViewController{inner: raw.QCPlugInViewControllerFromID(_id)}
 }
 
+// PlugIn calls the underlying PlugIn.
+func (x *QCPlugInViewController) PlugIn() *QCPlugIn {
+	_r := x.inner.PlugIn()
+	if _r == nil {
+		return nil
+	}
+	return &QCPlugIn{inner: _r}
+}
+
+// QCPlugInViewControllerable is the interface implemented by [QCPlugInViewController], for mocking and DI.
+type QCPlugInViewControllerable interface {
+	Unwrap() *raw.QCPlugInViewController
+	PlugIn() *QCPlugIn
+}
+
+var _ QCPlugInViewControllerable = (*QCPlugInViewController)(nil)
+

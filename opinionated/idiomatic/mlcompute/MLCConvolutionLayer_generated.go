@@ -23,5 +23,62 @@ func NewConvolutionLayer() *ConvolutionLayer {
 	return &ConvolutionLayer{inner: raw.MLCConvolutionLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *ConvolutionLayer) Descriptor() *ConvolutionDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &ConvolutionDescriptor{inner: _r}
+}
+
+// Weights calls the underlying Weights.
+func (x *ConvolutionLayer) Weights() *Tensor {
+	_r := x.inner.Weights()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Biases calls the underlying Biases.
+func (x *ConvolutionLayer) Biases() *Tensor {
+	_r := x.inner.Biases()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// WeightsParameter calls the underlying WeightsParameter.
+func (x *ConvolutionLayer) WeightsParameter() *TensorParameter {
+	_r := x.inner.WeightsParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// BiasesParameter calls the underlying BiasesParameter.
+func (x *ConvolutionLayer) BiasesParameter() *TensorParameter {
+	_r := x.inner.BiasesParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
 func (x *ConvolutionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ConvolutionLayerable is the interface implemented by [ConvolutionLayer], for mocking and DI.
+type ConvolutionLayerable interface {
+	Unwrap() *raw.MLCConvolutionLayer
+	Descriptor() *ConvolutionDescriptor
+	Weights() *Tensor
+	Biases() *Tensor
+	WeightsParameter() *TensorParameter
+	BiasesParameter() *TensorParameter
+}
+
+var _ ConvolutionLayerable = (*ConvolutionLayer)(nil)
 

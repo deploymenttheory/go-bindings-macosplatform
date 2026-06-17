@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,34 @@ func NewMetadataMachineReadableCodeObject() *MetadataMachineReadableCodeObject {
 	return &MetadataMachineReadableCodeObject{inner: raw.AVMetadataMachineReadableCodeObjectFromID(_id)}
 }
 
-// Corners returns the collection as a Go slice.
-func (x *MetadataMachineReadableCodeObject) Corners() []*foundation.NSDictionary[objc.ID, objc.ID] {
-	arr := x.inner.Corners()
-	if arr == nil {
-		return nil
+// Corners calls the underlying Corners.
+func (x *MetadataMachineReadableCodeObject) Corners() *foundation.NSArray[objc.ID] {
+	return x.inner.Corners()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *MetadataMachineReadableCodeObject) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
 	}
-	out := make([]*foundation.NSDictionary[objc.ID, objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSDictionaryFromID[objc.ID, objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Descriptor calls the underlying Descriptor.
+func (x *MetadataMachineReadableCodeObject) Descriptor() objc.ID {
+	return x.inner.Descriptor()
 }
 
 func (x *MetadataMachineReadableCodeObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
+
+// MetadataMachineReadableCodeObjectable is the interface implemented by [MetadataMachineReadableCodeObject], for mocking and DI.
+type MetadataMachineReadableCodeObjectable interface {
+	Unwrap() *raw.AVMetadataMachineReadableCodeObject
+	Corners() *foundation.NSArray[objc.ID]
+	StringValue() string
+	Descriptor() objc.ID
+}
+
+var _ MetadataMachineReadableCodeObjectable = (*MetadataMachineReadableCodeObject)(nil)
 

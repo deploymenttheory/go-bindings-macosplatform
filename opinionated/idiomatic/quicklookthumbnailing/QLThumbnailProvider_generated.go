@@ -5,8 +5,11 @@
 package quicklookthumbnailing
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ThumbnailProvider wraps [raw.QLThumbnailProvider] with a fluent Go API.
@@ -22,4 +25,38 @@ func NewThumbnailProvider() *ThumbnailProvider {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailProvider")), objc.RegisterName("new"))
 	return &ThumbnailProvider{inner: raw.QLThumbnailProviderFromID(_id)}
 }
+
+// ProvideThumbnailForFileRequest blocks until the operation completes or ctx is cancelled.
+func (x *ThumbnailProvider) ProvideThumbnailForFileRequest(ctx context.Context, request *raw.QLFileThumbnailRequest) (*ThumbnailReply, error) {
+	type _result struct {
+		val *ThumbnailReply
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ProvideThumbnailForFileRequestCompletionHandler(request, func(_p0 *raw.QLThumbnailReply, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &ThumbnailReply{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ThumbnailReply
+		return _zero, ctx.Err()
+	}
+}
+
+// ThumbnailProviderable is the interface implemented by [ThumbnailProvider], for mocking and DI.
+type ThumbnailProviderable interface {
+	Unwrap() *raw.QLThumbnailProvider
+	ProvideThumbnailForFileRequest(ctx context.Context, request *raw.QLFileThumbnailRequest) (*ThumbnailReply, error)
+}
+
+var _ ThumbnailProviderable = (*ThumbnailProvider)(nil)
 

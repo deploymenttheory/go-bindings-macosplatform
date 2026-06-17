@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,5 +79,133 @@ func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) WithFabricIndex
 	return x
 }
 
+// RootPublicKey calls the underlying RootPublicKey.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) RootPublicKey() *foundation.NSData {
+	return x.inner.RootPublicKey()
+}
+
+// SetRootPublicKey calls the underlying SetRootPublicKey.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetRootPublicKey(rootPublicKey *foundation.NSData) {
+	x.inner.SetRootPublicKey(rootPublicKey)
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// SetVendorID calls the underlying SetVendorID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorID(vendorID *foundation.NSNumber) {
+	x.inner.SetVendorID(vendorID)
+}
+
+// VendorId calls the underlying VendorId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) VendorId() *foundation.NSNumber {
+	return x.inner.VendorId()
+}
+
+// SetVendorId calls the underlying SetVendorId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetVendorId(vendorId *foundation.NSNumber) {
+	x.inner.SetVendorId(vendorId)
+}
+
+// FabricID calls the underlying FabricID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricID() *foundation.NSNumber {
+	return x.inner.FabricID()
+}
+
+// SetFabricID calls the underlying SetFabricID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricID(fabricID *foundation.NSNumber) {
+	x.inner.SetFabricID(fabricID)
+}
+
+// FabricId calls the underlying FabricId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricId() *foundation.NSNumber {
+	return x.inner.FabricId()
+}
+
+// SetFabricId calls the underlying SetFabricId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricId(fabricId *foundation.NSNumber) {
+	x.inner.SetFabricId(fabricId)
+}
+
+// NodeID calls the underlying NodeID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// SetNodeID calls the underlying SetNodeID.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeID(nodeID *foundation.NSNumber) {
+	x.inner.SetNodeID(nodeID)
+}
+
+// NodeId calls the underlying NodeId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) NodeId() *foundation.NSNumber {
+	return x.inner.NodeId()
+}
+
+// SetNodeId calls the underlying SetNodeId.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetNodeId(nodeId *foundation.NSNumber) {
+	x.inner.SetNodeId(nodeId)
+}
+
+// Label calls the underlying Label.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTROperationalCredentialsClusterFabricDescriptorStruct) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return x.inner }
+
+// MTROperationalCredentialsClusterFabricDescriptorStructable is the interface implemented by [MTROperationalCredentialsClusterFabricDescriptorStruct], for mocking and DI.
+type MTROperationalCredentialsClusterFabricDescriptorStructable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithRootPublicKey(rootPublicKey *foundation.NSData) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithVendorID(vendorID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithVendorId(vendorId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithFabricID(fabricID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithFabricId(fabricId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithNodeID(nodeID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithNodeId(nodeId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptorStruct
+	RootPublicKey() *foundation.NSData
+	SetRootPublicKey(rootPublicKey *foundation.NSData)
+	VendorID() *foundation.NSNumber
+	SetVendorID(vendorID *foundation.NSNumber)
+	VendorId() *foundation.NSNumber
+	SetVendorId(vendorId *foundation.NSNumber)
+	FabricID() *foundation.NSNumber
+	SetFabricID(fabricID *foundation.NSNumber)
+	FabricId() *foundation.NSNumber
+	SetFabricId(fabricId *foundation.NSNumber)
+	NodeID() *foundation.NSNumber
+	SetNodeID(nodeID *foundation.NSNumber)
+	NodeId() *foundation.NSNumber
+	SetNodeId(nodeId *foundation.NSNumber)
+	Label() string
+	SetLabel(label string)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterFabricDescriptorStructable = (*MTROperationalCredentialsClusterFabricDescriptorStruct)(nil)
 

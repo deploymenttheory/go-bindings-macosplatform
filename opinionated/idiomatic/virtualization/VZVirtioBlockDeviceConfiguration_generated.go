@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,5 +32,29 @@ func (x *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceId
 	return x
 }
 
+// BlockDeviceIdentifier calls the underlying BlockDeviceIdentifier.
+func (x *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
+	_r := x.inner.BlockDeviceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBlockDeviceIdentifier calls the underlying SetBlockDeviceIdentifier.
+func (x *VirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIdentifier string) {
+	x.inner.SetBlockDeviceIdentifier(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))
+}
+
 func (x *VirtioBlockDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
+
+// VirtioBlockDeviceConfigurationable is the interface implemented by [VirtioBlockDeviceConfiguration], for mocking and DI.
+type VirtioBlockDeviceConfigurationable interface {
+	Unwrap() *raw.VZVirtioBlockDeviceConfiguration
+	WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration
+	BlockDeviceIdentifier() string
+	SetBlockDeviceIdentifier(blockDeviceIdentifier string)
+}
+
+var _ VirtioBlockDeviceConfigurationable = (*VirtioBlockDeviceConfiguration)(nil)
 

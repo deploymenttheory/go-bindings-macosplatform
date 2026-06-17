@@ -7,6 +7,7 @@ package multipeerconnectivity
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewPeerIDWithDisplayName(myDisplayName string) *PeerID {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:"), foundation.NSStringStringWithUTF8String(myDisplayName).Ptr())
 	return &PeerID{inner: raw.MCPeerIDFromID(_id)}
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *PeerID) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PeerIDable is the interface implemented by [PeerID], for mocking and DI.
+type PeerIDable interface {
+	Unwrap() *raw.MCPeerID
+	DisplayName() string
+}
+
+var _ PeerIDable = (*PeerID)(nil)
 

@@ -36,5 +36,26 @@ func (x *MutableNetworkProfile) WithSecurity(security raw.CWSecurity) *MutableNe
 	return x
 }
 
+// SetSsidData calls the underlying SetSsidData.
+func (x *MutableNetworkProfile) SetSsidData(ssidData *foundation.NSData) {
+	x.inner.SetSsidData(ssidData)
+}
+
+// SetSecurity calls the underlying SetSecurity.
+func (x *MutableNetworkProfile) SetSecurity(security raw.CWSecurity) {
+	x.inner.SetSecurity(security)
+}
+
 func (x *MutableNetworkProfile) asNetworkProfile() *raw.CWNetworkProfile { return &x.inner.CWNetworkProfile }
+
+// MutableNetworkProfileable is the interface implemented by [MutableNetworkProfile], for mocking and DI.
+type MutableNetworkProfileable interface {
+	Unwrap() *raw.CWMutableNetworkProfile
+	WithSsidData(ssidData *foundation.NSData) *MutableNetworkProfile
+	WithSecurity(security raw.CWSecurity) *MutableNetworkProfile
+	SetSsidData(ssidData *foundation.NSData)
+	SetSecurity(security raw.CWSecurity)
+}
+
+var _ MutableNetworkProfileable = (*MutableNetworkProfile)(nil)
 

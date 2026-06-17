@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,40 @@ func NewRectangleObservation() *RectangleObservation {
 	return &RectangleObservation{inner: raw.VNRectangleObservationFromID(_id)}
 }
 
+// TopLeft calls the underlying TopLeft.
+func (x *RectangleObservation) TopLeft() corefoundation.CGPoint {
+	return x.inner.TopLeft()
+}
+
+// TopRight calls the underlying TopRight.
+func (x *RectangleObservation) TopRight() corefoundation.CGPoint {
+	return x.inner.TopRight()
+}
+
+// BottomLeft calls the underlying BottomLeft.
+func (x *RectangleObservation) BottomLeft() corefoundation.CGPoint {
+	return x.inner.BottomLeft()
+}
+
+// BottomRight calls the underlying BottomRight.
+func (x *RectangleObservation) BottomRight() corefoundation.CGPoint {
+	return x.inner.BottomRight()
+}
+
 func (x *RectangleObservation) asRectangleObservation() *raw.VNRectangleObservation { return x.inner }
 
 func (x *RectangleObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
 
 func (x *RectangleObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+
+// RectangleObservationable is the interface implemented by [RectangleObservation], for mocking and DI.
+type RectangleObservationable interface {
+	Unwrap() *raw.VNRectangleObservation
+	TopLeft() corefoundation.CGPoint
+	TopRight() corefoundation.CGPoint
+	BottomLeft() corefoundation.CGPoint
+	BottomRight() corefoundation.CGPoint
+}
+
+var _ RectangleObservationable = (*RectangleObservation)(nil)
 

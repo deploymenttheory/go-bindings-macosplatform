@@ -41,3 +41,57 @@ func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocati
 	return x
 }
 
+// ShouldCreateBinaryCompatibilitySymlink calls the underlying ShouldCreateBinaryCompatibilitySymlink.
+func (x *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
+	return x.inner.ShouldCreateBinaryCompatibilitySymlink()
+}
+
+// SetShouldCreateBinaryCompatibilitySymlink calls the underlying SetShouldCreateBinaryCompatibilitySymlink.
+func (x *FileProviderKnownFolderLocations) SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) {
+	x.inner.SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink)
+}
+
+// DesktopLocation calls the underlying DesktopLocation.
+func (x *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
+	_r := x.inner.DesktopLocation()
+	if _r == nil {
+		return nil
+	}
+	return &FileProviderKnownFolderLocation{inner: _r}
+}
+
+// SetDesktopLocation calls the underlying SetDesktopLocation.
+func (x *FileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation) {
+	x.inner.SetDesktopLocation(desktopLocation)
+}
+
+// DocumentsLocation calls the underlying DocumentsLocation.
+func (x *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
+	_r := x.inner.DocumentsLocation()
+	if _r == nil {
+		return nil
+	}
+	return &FileProviderKnownFolderLocation{inner: _r}
+}
+
+// SetDocumentsLocation calls the underlying SetDocumentsLocation.
+func (x *FileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation) {
+	x.inner.SetDocumentsLocation(documentsLocation)
+}
+
+// FileProviderKnownFolderLocationsable is the interface implemented by [FileProviderKnownFolderLocations], for mocking and DI.
+type FileProviderKnownFolderLocationsable interface {
+	Unwrap() *raw.NSFileProviderKnownFolderLocations
+	WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations
+	WithDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
+	WithDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
+	ShouldCreateBinaryCompatibilitySymlink() bool
+	SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool)
+	DesktopLocation() *FileProviderKnownFolderLocation
+	SetDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation)
+	DocumentsLocation() *FileProviderKnownFolderLocation
+	SetDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation)
+}
+
+var _ FileProviderKnownFolderLocationsable = (*FileProviderKnownFolderLocations)(nil)
+

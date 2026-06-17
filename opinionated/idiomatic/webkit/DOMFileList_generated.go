@@ -23,7 +23,30 @@ func NewDOMFileList() *DOMFileList {
 	return &DOMFileList{inner: raw.DOMFileListFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMFileList) Item(index uint) *DOMFile {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMFile{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMFileList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMFileList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMFileList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMFileListable is the interface implemented by [DOMFileList], for mocking and DI.
+type DOMFileListable interface {
+	Unwrap() *raw.DOMFileList
+	Item(index uint) *DOMFile
+	Length() uint
+}
+
+var _ DOMFileListable = (*DOMFileList)(nil)
 

@@ -23,5 +23,22 @@ func NewSyncEngineDidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
 	return &SyncEngineDidFetchChangesEvent{inner: raw.CKSyncEngineDidFetchChangesEventFromID(_id)}
 }
 
+// Context calls the underlying Context.
+func (x *SyncEngineDidFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
+	_r := x.inner.Context()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineFetchChangesContext{inner: _r}
+}
+
 func (x *SyncEngineDidFetchChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return &x.inner.CKSyncEngineEvent }
+
+// SyncEngineDidFetchChangesEventable is the interface implemented by [SyncEngineDidFetchChangesEvent], for mocking and DI.
+type SyncEngineDidFetchChangesEventable interface {
+	Unwrap() *raw.CKSyncEngineDidFetchChangesEvent
+	Context() *SyncEngineFetchChangesContext
+}
+
+var _ SyncEngineDidFetchChangesEventable = (*SyncEngineDidFetchChangesEvent)(nil)
 

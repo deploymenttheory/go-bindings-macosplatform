@@ -39,5 +39,24 @@ func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
 	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
 }
 
+// DidLoadReferenceNode calls the underlying DidLoadReferenceNode.
+func (x *ReferenceNode) DidLoadReferenceNode(node *raw.SKNode) {
+	x.inner.DidLoadReferenceNode(node)
+}
+
+// ResolveReferenceNode calls the underlying ResolveReferenceNode.
+func (x *ReferenceNode) ResolveReferenceNode() {
+	x.inner.ResolveReferenceNode()
+}
+
 func (x *ReferenceNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// ReferenceNodeable is the interface implemented by [ReferenceNode], for mocking and DI.
+type ReferenceNodeable interface {
+	Unwrap() *raw.SKReferenceNode
+	DidLoadReferenceNode(node *raw.SKNode)
+	ResolveReferenceNode()
+}
+
+var _ ReferenceNodeable = (*ReferenceNode)(nil)
 

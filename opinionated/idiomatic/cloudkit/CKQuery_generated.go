@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -49,16 +50,45 @@ func (x *Query) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Quer
 	return x
 }
 
+// RecordType calls the underlying RecordType.
+func (x *Query) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Predicate calls the underlying Predicate.
+func (x *Query) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
 // SortDescriptors returns the collection as a Go slice.
 func (x *Query) SortDescriptors() []*foundation.NSSortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
+		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// SetSortDescriptors calls the underlying SetSortDescriptors.
+func (x *Query) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
+	x.inner.SetSortDescriptors(sortDescriptors)
+}
+
+// Queryable is the interface implemented by [Query], for mocking and DI.
+type Queryable interface {
+	Unwrap() *raw.CKQuery
+	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Query
+	RecordType() string
+	Predicate() *foundation.NSPredicate
+	SortDescriptors() []*foundation.NSSortDescriptor
+	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+}
+
+var _ Queryable = (*Query)(nil)
 

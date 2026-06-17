@@ -30,3 +30,23 @@ func (x *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID *foundati
 	return x
 }
 
+// SessionID calls the underlying SessionID.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) SessionID() *foundation.NSNumber {
+	return x.inner.SessionID()
+}
+
+// SetSessionID calls the underlying SetSessionID.
+func (x *MTREnergyEVSEClusterEVConnectedEvent) SetSessionID(sessionID *foundation.NSNumber) {
+	x.inner.SetSessionID(sessionID)
+}
+
+// MTREnergyEVSEClusterEVConnectedEventable is the interface implemented by [MTREnergyEVSEClusterEVConnectedEvent], for mocking and DI.
+type MTREnergyEVSEClusterEVConnectedEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterEVConnectedEvent
+	WithSessionID(sessionID *foundation.NSNumber) *MTREnergyEVSEClusterEVConnectedEvent
+	SessionID() *foundation.NSNumber
+	SetSessionID(sessionID *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterEVConnectedEventable = (*MTREnergyEVSEClusterEVConnectedEvent)(nil)
+

@@ -27,3 +27,10 @@ func (x *MessagePortNameServer) asPortNameServer() *raw.NSPortNameServer { retur
 
 func (x *MessagePortNameServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
 
+// MessagePortNameServerable is the interface implemented by [MessagePortNameServer], for mocking and DI.
+type MessagePortNameServerable interface {
+	Unwrap() *raw.NSMessagePortNameServer
+}
+
+var _ MessagePortNameServerable = (*MessagePortNameServer)(nil)
+

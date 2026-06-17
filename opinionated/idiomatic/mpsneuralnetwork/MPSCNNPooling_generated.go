@@ -44,3 +44,10 @@ func (x *CNNPooling) asCNNPooling() *raw.MPSCNNPooling { return x.inner }
 
 func (x *CNNPooling) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
 
+// CNNPoolingable is the interface implemented by [CNNPooling], for mocking and DI.
+type CNNPoolingable interface {
+	Unwrap() *raw.MPSCNNPooling
+}
+
+var _ CNNPoolingable = (*CNNPooling)(nil)
+

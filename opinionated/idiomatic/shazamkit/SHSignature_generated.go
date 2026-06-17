@@ -31,3 +31,22 @@ func NewSignatureWithDataRepresentationError(dataRepresentation *foundation.NSDa
 	return &Signature{inner: raw.SHSignatureFromID(_id)}, nil
 }
 
+// Duration calls the underlying Duration.
+func (x *Signature) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *Signature) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// Signatureable is the interface implemented by [Signature], for mocking and DI.
+type Signatureable interface {
+	Unwrap() *raw.SHSignature
+	Duration() float64
+	DataRepresentation() *foundation.NSData
+}
+
+var _ Signatureable = (*Signature)(nil)
+

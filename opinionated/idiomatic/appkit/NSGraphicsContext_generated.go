@@ -7,7 +7,10 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // GraphicsContext wraps [raw.NSGraphicsContext] with a fluent Go API.
@@ -53,4 +56,142 @@ func (x *GraphicsContext) WithColorRenderingIntent(colorRenderingIntent raw.NSCo
 	x.inner.SetColorRenderingIntent(colorRenderingIntent)
 	return x
 }
+
+// SaveGraphicsState calls the underlying SaveGraphicsState.
+func (x *GraphicsContext) SaveGraphicsState() {
+	x.inner.SaveGraphicsState()
+}
+
+// RestoreGraphicsState calls the underlying RestoreGraphicsState.
+func (x *GraphicsContext) RestoreGraphicsState() {
+	x.inner.RestoreGraphicsState()
+}
+
+// FlushGraphics calls the underlying FlushGraphics.
+func (x *GraphicsContext) FlushGraphics() {
+	x.inner.FlushGraphics()
+}
+
+// Attributes calls the underlying Attributes.
+func (x *GraphicsContext) Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Attributes()
+}
+
+// IsDrawingToScreen calls the underlying IsDrawingToScreen.
+func (x *GraphicsContext) IsDrawingToScreen() bool {
+	return x.inner.IsDrawingToScreen()
+}
+
+// CGContext calls the underlying CGContext.
+func (x *GraphicsContext) CGContext() unsafe.Pointer {
+	return x.inner.CGContext()
+}
+
+// IsFlipped calls the underlying IsFlipped.
+func (x *GraphicsContext) IsFlipped() bool {
+	return x.inner.IsFlipped()
+}
+
+// ShouldAntialias calls the underlying ShouldAntialias.
+func (x *GraphicsContext) ShouldAntialias() bool {
+	return x.inner.ShouldAntialias()
+}
+
+// SetShouldAntialias calls the underlying SetShouldAntialias.
+func (x *GraphicsContext) SetShouldAntialias(shouldAntialias bool) {
+	x.inner.SetShouldAntialias(shouldAntialias)
+}
+
+// ImageInterpolation calls the underlying ImageInterpolation.
+func (x *GraphicsContext) ImageInterpolation() raw.NSImageInterpolation {
+	return x.inner.ImageInterpolation()
+}
+
+// SetImageInterpolation calls the underlying SetImageInterpolation.
+func (x *GraphicsContext) SetImageInterpolation(imageInterpolation raw.NSImageInterpolation) {
+	x.inner.SetImageInterpolation(imageInterpolation)
+}
+
+// PatternPhase calls the underlying PatternPhase.
+func (x *GraphicsContext) PatternPhase() corefoundation.CGPoint {
+	return x.inner.PatternPhase()
+}
+
+// SetPatternPhase calls the underlying SetPatternPhase.
+func (x *GraphicsContext) SetPatternPhase(patternPhase corefoundation.CGPoint) {
+	x.inner.SetPatternPhase(patternPhase)
+}
+
+// CompositingOperation calls the underlying CompositingOperation.
+func (x *GraphicsContext) CompositingOperation() raw.NSCompositingOperation {
+	return x.inner.CompositingOperation()
+}
+
+// SetCompositingOperation calls the underlying SetCompositingOperation.
+func (x *GraphicsContext) SetCompositingOperation(compositingOperation raw.NSCompositingOperation) {
+	x.inner.SetCompositingOperation(compositingOperation)
+}
+
+// ColorRenderingIntent calls the underlying ColorRenderingIntent.
+func (x *GraphicsContext) ColorRenderingIntent() raw.NSColorRenderingIntent {
+	return x.inner.ColorRenderingIntent()
+}
+
+// SetColorRenderingIntent calls the underlying SetColorRenderingIntent.
+func (x *GraphicsContext) SetColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent) {
+	x.inner.SetColorRenderingIntent(colorRenderingIntent)
+}
+
+// CIContext calls the underlying CIContext.
+func (x *GraphicsContext) CIContext() *coreimage.CIContext {
+	return x.inner.CIContext()
+}
+
+// FocusStack calls the underlying FocusStack.
+func (x *GraphicsContext) FocusStack() objc.ID {
+	return x.inner.FocusStack()
+}
+
+// SetFocusStack calls the underlying SetFocusStack.
+func (x *GraphicsContext) SetFocusStack(stack objc.ID) {
+	x.inner.SetFocusStack(stack)
+}
+
+// GraphicsPort calls the underlying GraphicsPort.
+func (x *GraphicsContext) GraphicsPort() unsafe.Pointer {
+	return x.inner.GraphicsPort()
+}
+
+// GraphicsContextable is the interface implemented by [GraphicsContext], for mocking and DI.
+type GraphicsContextable interface {
+	Unwrap() *raw.NSGraphicsContext
+	WithShouldAntialias(shouldAntialias bool) *GraphicsContext
+	WithImageInterpolation(imageInterpolation raw.NSImageInterpolation) *GraphicsContext
+	WithPatternPhase(patternPhase corefoundation.CGPoint) *GraphicsContext
+	WithCompositingOperation(compositingOperation raw.NSCompositingOperation) *GraphicsContext
+	WithColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent) *GraphicsContext
+	SaveGraphicsState()
+	RestoreGraphicsState()
+	FlushGraphics()
+	Attributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	IsDrawingToScreen() bool
+	CGContext() unsafe.Pointer
+	IsFlipped() bool
+	ShouldAntialias() bool
+	SetShouldAntialias(shouldAntialias bool)
+	ImageInterpolation() raw.NSImageInterpolation
+	SetImageInterpolation(imageInterpolation raw.NSImageInterpolation)
+	PatternPhase() corefoundation.CGPoint
+	SetPatternPhase(patternPhase corefoundation.CGPoint)
+	CompositingOperation() raw.NSCompositingOperation
+	SetCompositingOperation(compositingOperation raw.NSCompositingOperation)
+	ColorRenderingIntent() raw.NSColorRenderingIntent
+	SetColorRenderingIntent(colorRenderingIntent raw.NSColorRenderingIntent)
+	CIContext() *coreimage.CIContext
+	FocusStack() objc.ID
+	SetFocusStack(stack objc.ID)
+	GraphicsPort() unsafe.Pointer
+}
+
+var _ GraphicsContextable = (*GraphicsContext)(nil)
 

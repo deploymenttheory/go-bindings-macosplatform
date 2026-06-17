@@ -25,5 +25,18 @@ func NewMusicUserEventWithData(data *foundation.NSData) *MusicUserEvent {
 	return &MusicUserEvent{inner: raw.AVMusicUserEventFromID(_id)}
 }
 
+// SizeInBytes calls the underlying SizeInBytes.
+func (x *MusicUserEvent) SizeInBytes() uint {
+	return x.inner.SizeInBytes()
+}
+
 func (x *MusicUserEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// MusicUserEventable is the interface implemented by [MusicUserEvent], for mocking and DI.
+type MusicUserEventable interface {
+	Unwrap() *raw.AVMusicUserEvent
+	SizeInBytes() uint
+}
+
+var _ MusicUserEventable = (*MusicUserEvent)(nil)
 

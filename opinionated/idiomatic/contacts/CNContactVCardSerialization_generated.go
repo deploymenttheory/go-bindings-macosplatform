@@ -23,3 +23,10 @@ func NewContactVCardSerialization() *ContactVCardSerialization {
 	return &ContactVCardSerialization{inner: raw.CNContactVCardSerializationFromID(_id)}
 }
 
+// ContactVCardSerializationable is the interface implemented by [ContactVCardSerialization], for mocking and DI.
+type ContactVCardSerializationable interface {
+	Unwrap() *raw.CNContactVCardSerialization
+}
+
+var _ ContactVCardSerializationable = (*ContactVCardSerialization)(nil)
+

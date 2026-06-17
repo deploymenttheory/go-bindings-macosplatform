@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,66 @@ func (x *MTRActionsClusterEndpointListStruct) WithType(type_ *foundation.NSNumbe
 	x.inner.SetType(type_)
 	return x
 }
+
+// EndpointListID calls the underlying EndpointListID.
+func (x *MTRActionsClusterEndpointListStruct) EndpointListID() *foundation.NSNumber {
+	return x.inner.EndpointListID()
+}
+
+// SetEndpointListID calls the underlying SetEndpointListID.
+func (x *MTRActionsClusterEndpointListStruct) SetEndpointListID(endpointListID *foundation.NSNumber) {
+	x.inner.SetEndpointListID(endpointListID)
+}
+
+// Name calls the underlying Name.
+func (x *MTRActionsClusterEndpointListStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRActionsClusterEndpointListStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Type calls the underlying Type.
+func (x *MTRActionsClusterEndpointListStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRActionsClusterEndpointListStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
+// Endpoints calls the underlying Endpoints.
+func (x *MTRActionsClusterEndpointListStruct) Endpoints() *foundation.NSArray[objc.ID] {
+	return x.inner.Endpoints()
+}
+
+// SetEndpoints calls the underlying SetEndpoints.
+func (x *MTRActionsClusterEndpointListStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
+	x.inner.SetEndpoints(endpoints)
+}
+
+// MTRActionsClusterEndpointListStructable is the interface implemented by [MTRActionsClusterEndpointListStruct], for mocking and DI.
+type MTRActionsClusterEndpointListStructable interface {
+	Unwrap() *raw.MTRActionsClusterEndpointListStruct
+	WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterEndpointListStruct
+	WithName(name string) *MTRActionsClusterEndpointListStruct
+	WithType(type_ *foundation.NSNumber) *MTRActionsClusterEndpointListStruct
+	EndpointListID() *foundation.NSNumber
+	SetEndpointListID(endpointListID *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+	Endpoints() *foundation.NSArray[objc.ID]
+	SetEndpoints(endpoints *foundation.NSArray[objc.ID])
+}
+
+var _ MTRActionsClusterEndpointListStructable = (*MTRActionsClusterEndpointListStruct)(nil)
 

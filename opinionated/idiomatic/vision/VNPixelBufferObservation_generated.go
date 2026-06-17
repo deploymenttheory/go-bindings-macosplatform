@@ -6,7 +6,9 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PixelBufferObservation wraps [raw.VNPixelBufferObservation] with a fluent Go API.
@@ -23,7 +25,30 @@ func NewPixelBufferObservation() *PixelBufferObservation {
 	return &PixelBufferObservation{inner: raw.VNPixelBufferObservationFromID(_id)}
 }
 
+// PixelBuffer calls the underlying PixelBuffer.
+func (x *PixelBufferObservation) PixelBuffer() unsafe.Pointer {
+	return x.inner.PixelBuffer()
+}
+
+// FeatureName calls the underlying FeatureName.
+func (x *PixelBufferObservation) FeatureName() string {
+	_r := x.inner.FeatureName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *PixelBufferObservation) asPixelBufferObservation() *raw.VNPixelBufferObservation { return x.inner }
 
 func (x *PixelBufferObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// PixelBufferObservationable is the interface implemented by [PixelBufferObservation], for mocking and DI.
+type PixelBufferObservationable interface {
+	Unwrap() *raw.VNPixelBufferObservation
+	PixelBuffer() unsafe.Pointer
+	FeatureName() string
+}
+
+var _ PixelBufferObservationable = (*PixelBufferObservation)(nil)
 

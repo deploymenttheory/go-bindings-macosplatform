@@ -5,7 +5,9 @@
 package iobluetooth
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,4 +31,130 @@ func (x *OBEXFileTransferServices) WithDelegate(delegate objc.ID) *OBEXFileTrans
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// CurrentPath calls the underlying CurrentPath.
+func (x *OBEXFileTransferServices) CurrentPath() string {
+	_r := x.inner.CurrentPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsBusy calls the underlying IsBusy.
+func (x *OBEXFileTransferServices) IsBusy() bool {
+	return x.inner.IsBusy()
+}
+
+// IsConnected calls the underlying IsConnected.
+func (x *OBEXFileTransferServices) IsConnected() bool {
+	return x.inner.IsConnected()
+}
+
+// ConnectToFTPService calls the underlying ConnectToFTPService.
+func (x *OBEXFileTransferServices) ConnectToFTPService() int32 {
+	return x.inner.ConnectToFTPService()
+}
+
+// ConnectToObjectPushService calls the underlying ConnectToObjectPushService.
+func (x *OBEXFileTransferServices) ConnectToObjectPushService() int32 {
+	return x.inner.ConnectToObjectPushService()
+}
+
+// Disconnect calls the underlying Disconnect.
+func (x *OBEXFileTransferServices) Disconnect() int32 {
+	return x.inner.Disconnect()
+}
+
+// ChangeCurrentFolderToRoot calls the underlying ChangeCurrentFolderToRoot.
+func (x *OBEXFileTransferServices) ChangeCurrentFolderToRoot() int32 {
+	return x.inner.ChangeCurrentFolderToRoot()
+}
+
+// ChangeCurrentFolderBackward calls the underlying ChangeCurrentFolderBackward.
+func (x *OBEXFileTransferServices) ChangeCurrentFolderBackward() int32 {
+	return x.inner.ChangeCurrentFolderBackward()
+}
+
+// ChangeCurrentFolderForwardToPath calls the underlying ChangeCurrentFolderForwardToPath.
+func (x *OBEXFileTransferServices) ChangeCurrentFolderForwardToPath(inDirName string) int32 {
+	return x.inner.ChangeCurrentFolderForwardToPath(foundation.NSStringStringWithUTF8String(inDirName))
+}
+
+// CreateFolder calls the underlying CreateFolder.
+func (x *OBEXFileTransferServices) CreateFolder(inDirName string) int32 {
+	return x.inner.CreateFolder(foundation.NSStringStringWithUTF8String(inDirName))
+}
+
+// RemoveItem calls the underlying RemoveItem.
+func (x *OBEXFileTransferServices) RemoveItem(inItemName string) int32 {
+	return x.inner.RemoveItem(foundation.NSStringStringWithUTF8String(inItemName))
+}
+
+// RetrieveFolderListing calls the underlying RetrieveFolderListing.
+func (x *OBEXFileTransferServices) RetrieveFolderListing() int32 {
+	return x.inner.RetrieveFolderListing()
+}
+
+// SendFile calls the underlying SendFile.
+func (x *OBEXFileTransferServices) SendFile(inLocalPathAndName string) int32 {
+	return x.inner.SendFile(foundation.NSStringStringWithUTF8String(inLocalPathAndName))
+}
+
+// CopyRemoteFileToLocalPath calls the underlying CopyRemoteFileToLocalPath.
+func (x *OBEXFileTransferServices) CopyRemoteFileToLocalPath(inRemoteFileName string, inLocalPathAndName string) int32 {
+	return x.inner.CopyRemoteFileToLocalPath(foundation.NSStringStringWithUTF8String(inRemoteFileName), foundation.NSStringStringWithUTF8String(inLocalPathAndName))
+}
+
+// SendDataTypeName calls the underlying SendDataTypeName.
+func (x *OBEXFileTransferServices) SendDataTypeName(inData *foundation.NSData, inType string, inName string) int32 {
+	return x.inner.SendDataTypeName(inData, foundation.NSStringStringWithUTF8String(inType), foundation.NSStringStringWithUTF8String(inName))
+}
+
+// GetDefaultVCard calls the underlying GetDefaultVCard.
+func (x *OBEXFileTransferServices) GetDefaultVCard(inLocalPathAndName string) int32 {
+	return x.inner.GetDefaultVCard(foundation.NSStringStringWithUTF8String(inLocalPathAndName))
+}
+
+// Abort calls the underlying Abort.
+func (x *OBEXFileTransferServices) Abort() int32 {
+	return x.inner.Abort()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *OBEXFileTransferServices) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *OBEXFileTransferServices) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// OBEXFileTransferServicesable is the interface implemented by [OBEXFileTransferServices], for mocking and DI.
+type OBEXFileTransferServicesable interface {
+	Unwrap() *raw.OBEXFileTransferServices
+	WithDelegate(delegate objc.ID) *OBEXFileTransferServices
+	CurrentPath() string
+	IsBusy() bool
+	IsConnected() bool
+	ConnectToFTPService() int32
+	ConnectToObjectPushService() int32
+	Disconnect() int32
+	ChangeCurrentFolderToRoot() int32
+	ChangeCurrentFolderBackward() int32
+	ChangeCurrentFolderForwardToPath(inDirName string) int32
+	CreateFolder(inDirName string) int32
+	RemoveItem(inItemName string) int32
+	RetrieveFolderListing() int32
+	SendFile(inLocalPathAndName string) int32
+	CopyRemoteFileToLocalPath(inRemoteFileName string, inLocalPathAndName string) int32
+	SendDataTypeName(inData *foundation.NSData, inType string, inName string) int32
+	GetDefaultVCard(inLocalPathAndName string) int32
+	Abort() int32
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+}
+
+var _ OBEXFileTransferServicesable = (*OBEXFileTransferServices)(nil)
 

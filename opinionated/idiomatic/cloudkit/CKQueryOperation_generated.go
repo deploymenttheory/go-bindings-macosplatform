@@ -5,8 +5,10 @@
 package cloudkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -97,20 +99,175 @@ func (x *QueryOperation) WithQueryCompletionBlock(queryCompletionBlock func(*raw
 	return x
 }
 
+// Query calls the underlying Query.
+func (x *QueryOperation) Query() *Query {
+	_r := x.inner.Query()
+	if _r == nil {
+		return nil
+	}
+	return &Query{inner: _r}
+}
+
+// SetQuery calls the underlying SetQuery.
+func (x *QueryOperation) SetQuery(query *raw.CKQuery) {
+	x.inner.SetQuery(query)
+}
+
+// Cursor calls the underlying Cursor.
+func (x *QueryOperation) Cursor() *QueryCursor {
+	_r := x.inner.Cursor()
+	if _r == nil {
+		return nil
+	}
+	return &QueryCursor{inner: _r}
+}
+
+// SetCursor calls the underlying SetCursor.
+func (x *QueryOperation) SetCursor(cursor *raw.CKQueryCursor) {
+	x.inner.SetCursor(cursor)
+}
+
+// ZoneID calls the underlying ZoneID.
+func (x *QueryOperation) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// SetZoneID calls the underlying SetZoneID.
+func (x *QueryOperation) SetZoneID(zoneID *raw.CKRecordZoneID) {
+	x.inner.SetZoneID(zoneID)
+}
+
+// ResultsLimit calls the underlying ResultsLimit.
+func (x *QueryOperation) ResultsLimit() uint {
+	return x.inner.ResultsLimit()
+}
+
+// SetResultsLimit calls the underlying SetResultsLimit.
+func (x *QueryOperation) SetResultsLimit(resultsLimit uint) {
+	x.inner.SetResultsLimit(resultsLimit)
+}
+
 // DesiredKeys returns the collection as a Go slice.
 func (x *QueryOperation) DesiredKeys() []*foundation.NSString {
 	arr := x.inner.DesiredKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetDesiredKeys calls the underlying SetDesiredKeys.
+func (x *QueryOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDesiredKeys(desiredKeys)
+}
+
+// RecordFetchedBlock calls the underlying RecordFetchedBlock.
+func (x *QueryOperation) RecordFetchedBlock() objc.Block {
+	return x.inner.RecordFetchedBlock()
+}
+
+// SetRecordFetchedBlock blocks until the operation completes or ctx is cancelled.
+func (x *QueryOperation) SetRecordFetchedBlock(ctx context.Context) (*Record, error) {
+	type _result struct {
+		val *Record
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.SetRecordFetchedBlock(func(_p0 *raw.CKRecord) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &Record{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *Record
+		return _zero, ctx.Err()
+	}
+}
+
+// RecordMatchedBlock calls the underlying RecordMatchedBlock.
+func (x *QueryOperation) RecordMatchedBlock() objc.Block {
+	return x.inner.RecordMatchedBlock()
+}
+
+// SetRecordMatchedBlock calls the underlying SetRecordMatchedBlock.
+func (x *QueryOperation) SetRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) {
+	x.inner.SetRecordMatchedBlock(recordMatchedBlock)
+}
+
+// QueryCompletionBlock calls the underlying QueryCompletionBlock.
+func (x *QueryOperation) QueryCompletionBlock() objc.Block {
+	return x.inner.QueryCompletionBlock()
+}
+
+// SetQueryCompletionBlock blocks until the operation completes or ctx is cancelled.
+func (x *QueryOperation) SetQueryCompletionBlock(ctx context.Context) (*QueryCursor, error) {
+	type _result struct {
+		val *QueryCursor
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetQueryCompletionBlock(func(_p0 *raw.CKQueryCursor, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &QueryCursor{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *QueryCursor
+		return _zero, ctx.Err()
+	}
 }
 
 func (x *QueryOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *QueryOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// QueryOperationable is the interface implemented by [QueryOperation], for mocking and DI.
+type QueryOperationable interface {
+	Unwrap() *raw.CKQueryOperation
+	WithQuery(query *raw.CKQuery) *QueryOperation
+	WithCursor(cursor *raw.CKQueryCursor) *QueryOperation
+	WithZoneID(zoneID *raw.CKRecordZoneID) *QueryOperation
+	WithResultsLimit(resultsLimit uint) *QueryOperation
+	WithDesiredKeys(items ...*foundation.NSString) *QueryOperation
+	WithRecordFetchedBlock(recordFetchedBlock func(*raw.CKRecord)) *QueryOperation
+	WithRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *QueryOperation
+	WithQueryCompletionBlock(queryCompletionBlock func(*raw.CKQueryCursor, unsafe.Pointer)) *QueryOperation
+	Query() *Query
+	SetQuery(query *raw.CKQuery)
+	Cursor() *QueryCursor
+	SetCursor(cursor *raw.CKQueryCursor)
+	ZoneID() *RecordZoneID
+	SetZoneID(zoneID *raw.CKRecordZoneID)
+	ResultsLimit() uint
+	SetResultsLimit(resultsLimit uint)
+	DesiredKeys() []*foundation.NSString
+	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
+	RecordFetchedBlock() objc.Block
+	SetRecordFetchedBlock(ctx context.Context) (*Record, error)
+	RecordMatchedBlock() objc.Block
+	SetRecordMatchedBlock(recordMatchedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer))
+	QueryCompletionBlock() objc.Block
+	SetQueryCompletionBlock(ctx context.Context) (*QueryCursor, error)
+}
+
+var _ QueryOperationable = (*QueryOperation)(nil)
 

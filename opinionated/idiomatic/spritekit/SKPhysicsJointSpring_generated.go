@@ -35,5 +35,38 @@ func (x *PhysicsJointSpring) WithFrequency(frequency float64) *PhysicsJointSprin
 	return x
 }
 
+// Damping calls the underlying Damping.
+func (x *PhysicsJointSpring) Damping() float64 {
+	return x.inner.Damping()
+}
+
+// SetDamping calls the underlying SetDamping.
+func (x *PhysicsJointSpring) SetDamping(damping float64) {
+	x.inner.SetDamping(damping)
+}
+
+// Frequency calls the underlying Frequency.
+func (x *PhysicsJointSpring) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *PhysicsJointSpring) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
 func (x *PhysicsJointSpring) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
+
+// PhysicsJointSpringable is the interface implemented by [PhysicsJointSpring], for mocking and DI.
+type PhysicsJointSpringable interface {
+	Unwrap() *raw.SKPhysicsJointSpring
+	WithDamping(damping float64) *PhysicsJointSpring
+	WithFrequency(frequency float64) *PhysicsJointSpring
+	Damping() float64
+	SetDamping(damping float64)
+	Frequency() float64
+	SetFrequency(frequency float64)
+}
+
+var _ PhysicsJointSpringable = (*PhysicsJointSpring)(nil)
 

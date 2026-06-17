@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,9 +31,59 @@ func (x *DOMCSSRule) WithCssText(cssText string) *DOMCSSRule {
 	return x
 }
 
+// Type calls the underlying Type.
+func (x *DOMCSSRule) Type() uint16 {
+	return x.inner.Type()
+}
+
+// CssText calls the underlying CssText.
+func (x *DOMCSSRule) CssText() string {
+	_r := x.inner.CssText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCssText calls the underlying SetCssText.
+func (x *DOMCSSRule) SetCssText(cssText string) {
+	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+}
+
+// ParentStyleSheet calls the underlying ParentStyleSheet.
+func (x *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
+	_r := x.inner.ParentStyleSheet()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleSheet{inner: _r}
+}
+
+// ParentRule calls the underlying ParentRule.
+func (x *DOMCSSRule) ParentRule() *DOMCSSRule {
+	_r := x.inner.ParentRule()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRule{inner: _r}
+}
+
 func (x *DOMCSSRule) asDOMCSSRule() *raw.DOMCSSRule { return x.inner }
 
 func (x *DOMCSSRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMCSSRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMCSSRuleable is the interface implemented by [DOMCSSRule], for mocking and DI.
+type DOMCSSRuleable interface {
+	Unwrap() *raw.DOMCSSRule
+	WithCssText(cssText string) *DOMCSSRule
+	Type() uint16
+	CssText() string
+	SetCssText(cssText string)
+	ParentStyleSheet() *DOMCSSStyleSheet
+	ParentRule() *DOMCSSRule
+}
+
+var _ DOMCSSRuleable = (*DOMCSSRule)(nil)
 

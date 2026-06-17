@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,16 +34,14 @@ func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLa
 }
 
 // PreferredLanguages returns the collection as a Go slice.
-func (x *PlayerMediaSelectionCriteria) PreferredLanguages() []*foundation.NSString {
+func (x *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
 	arr := x.inner.PreferredLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // PreferredMediaCharacteristics returns the collection as a Go slice.
@@ -51,11 +50,9 @@ func (x *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []*founda
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // PrincipalMediaCharacteristics returns the collection as a Go slice.
@@ -64,10 +61,18 @@ func (x *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []*founda
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// PlayerMediaSelectionCriteriaable is the interface implemented by [PlayerMediaSelectionCriteria], for mocking and DI.
+type PlayerMediaSelectionCriteriaable interface {
+	Unwrap() *raw.AVPlayerMediaSelectionCriteria
+	PreferredLanguages() []string
+	PreferredMediaCharacteristics() []*foundation.NSString
+	PrincipalMediaCharacteristics() []*foundation.NSString
+}
+
+var _ PlayerMediaSelectionCriteriaable = (*PlayerMediaSelectionCriteria)(nil)
 

@@ -6,6 +6,7 @@ package fileprovider
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderStringSearchRequest")), objc.RegisterName("new"))
 	return &FileProviderStringSearchRequest{inner: raw.NSFileProviderStringSearchRequestFromID(_id)}
 }
+
+// Query calls the underlying Query.
+func (x *FileProviderStringSearchRequest) Query() string {
+	_r := x.inner.Query()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DesiredNumberOfResults calls the underlying DesiredNumberOfResults.
+func (x *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
+	return x.inner.DesiredNumberOfResults()
+}
+
+// FileProviderStringSearchRequestable is the interface implemented by [FileProviderStringSearchRequest], for mocking and DI.
+type FileProviderStringSearchRequestable interface {
+	Unwrap() *raw.NSFileProviderStringSearchRequest
+	Query() string
+	DesiredNumberOfResults() int
+}
+
+var _ FileProviderStringSearchRequestable = (*FileProviderStringSearchRequest)(nil)
 

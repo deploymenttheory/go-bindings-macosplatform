@@ -42,3 +42,49 @@ func (x *MTREnergyEVSEClusterChargingTargetStruct) WithAddedEnergy(addedEnergy *
 	return x
 }
 
+// TargetTimeMinutesPastMidnight calls the underlying TargetTimeMinutesPastMidnight.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() *foundation.NSNumber {
+	return x.inner.TargetTimeMinutesPastMidnight()
+}
+
+// SetTargetTimeMinutesPastMidnight calls the underlying SetTargetTimeMinutesPastMidnight.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) SetTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight *foundation.NSNumber) {
+	x.inner.SetTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight)
+}
+
+// TargetSoC calls the underlying TargetSoC.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() *foundation.NSNumber {
+	return x.inner.TargetSoC()
+}
+
+// SetTargetSoC calls the underlying SetTargetSoC.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) SetTargetSoC(targetSoC *foundation.NSNumber) {
+	x.inner.SetTargetSoC(targetSoC)
+}
+
+// AddedEnergy calls the underlying AddedEnergy.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() *foundation.NSNumber {
+	return x.inner.AddedEnergy()
+}
+
+// SetAddedEnergy calls the underlying SetAddedEnergy.
+func (x *MTREnergyEVSEClusterChargingTargetStruct) SetAddedEnergy(addedEnergy *foundation.NSNumber) {
+	x.inner.SetAddedEnergy(addedEnergy)
+}
+
+// MTREnergyEVSEClusterChargingTargetStructable is the interface implemented by [MTREnergyEVSEClusterChargingTargetStruct], for mocking and DI.
+type MTREnergyEVSEClusterChargingTargetStructable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterChargingTargetStruct
+	WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetStruct
+	WithTargetSoC(targetSoC *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetStruct
+	WithAddedEnergy(addedEnergy *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetStruct
+	TargetTimeMinutesPastMidnight() *foundation.NSNumber
+	SetTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight *foundation.NSNumber)
+	TargetSoC() *foundation.NSNumber
+	SetTargetSoC(targetSoC *foundation.NSNumber)
+	AddedEnergy() *foundation.NSNumber
+	SetAddedEnergy(addedEnergy *foundation.NSNumber)
+}
+
+var _ MTREnergyEVSEClusterChargingTargetStructable = (*MTREnergyEVSEClusterChargingTargetStruct)(nil)
+

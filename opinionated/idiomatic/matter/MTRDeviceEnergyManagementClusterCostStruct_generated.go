@@ -48,3 +48,62 @@ func (x *MTRDeviceEnergyManagementClusterCostStruct) WithCurrency(currency *foun
 	return x
 }
 
+// CostType calls the underlying CostType.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) CostType() *foundation.NSNumber {
+	return x.inner.CostType()
+}
+
+// SetCostType calls the underlying SetCostType.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCostType(costType *foundation.NSNumber) {
+	x.inner.SetCostType(costType)
+}
+
+// Value calls the underlying Value.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// DecimalPoints calls the underlying DecimalPoints.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) DecimalPoints() *foundation.NSNumber {
+	return x.inner.DecimalPoints()
+}
+
+// SetDecimalPoints calls the underlying SetDecimalPoints.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetDecimalPoints(decimalPoints *foundation.NSNumber) {
+	x.inner.SetDecimalPoints(decimalPoints)
+}
+
+// Currency calls the underlying Currency.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) Currency() *foundation.NSNumber {
+	return x.inner.Currency()
+}
+
+// SetCurrency calls the underlying SetCurrency.
+func (x *MTRDeviceEnergyManagementClusterCostStruct) SetCurrency(currency *foundation.NSNumber) {
+	x.inner.SetCurrency(currency)
+}
+
+// MTRDeviceEnergyManagementClusterCostStructable is the interface implemented by [MTRDeviceEnergyManagementClusterCostStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterCostStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterCostStruct
+	WithCostType(costType *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
+	WithValue(value *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
+	WithDecimalPoints(decimalPoints *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
+	WithCurrency(currency *foundation.NSNumber) *MTRDeviceEnergyManagementClusterCostStruct
+	CostType() *foundation.NSNumber
+	SetCostType(costType *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	DecimalPoints() *foundation.NSNumber
+	SetDecimalPoints(decimalPoints *foundation.NSNumber)
+	Currency() *foundation.NSNumber
+	SetCurrency(currency *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterCostStructable = (*MTRDeviceEnergyManagementClusterCostStruct)(nil)
+

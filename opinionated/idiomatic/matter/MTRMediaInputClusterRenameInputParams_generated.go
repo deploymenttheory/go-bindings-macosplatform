@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRMediaInputClusterRenameInputParams) WithServerSideProcessingTimeout(
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// Index calls the underlying Index.
+func (x *MTRMediaInputClusterRenameInputParams) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRMediaInputClusterRenameInputParams) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// Name calls the underlying Name.
+func (x *MTRMediaInputClusterRenameInputParams) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRMediaInputClusterRenameInputParams) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaInputClusterRenameInputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaInputClusterRenameInputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaInputClusterRenameInputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaInputClusterRenameInputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaInputClusterRenameInputParamsable is the interface implemented by [MTRMediaInputClusterRenameInputParams], for mocking and DI.
+type MTRMediaInputClusterRenameInputParamsable interface {
+	Unwrap() *raw.MTRMediaInputClusterRenameInputParams
+	WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterRenameInputParams
+	WithName(name string) *MTRMediaInputClusterRenameInputParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaInputClusterRenameInputParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaInputClusterRenameInputParams
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaInputClusterRenameInputParamsable = (*MTRMediaInputClusterRenameInputParams)(nil)
 

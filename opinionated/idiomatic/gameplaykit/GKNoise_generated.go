@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Noise wraps [raw.GKNoise] with a fluent Go API.
@@ -44,4 +45,126 @@ func (x *Noise) WithGradientColors(gradientColors *foundation.NSDictionary[*foun
 	x.inner.SetGradientColors(gradientColors)
 	return x
 }
+
+// ValueAtPosition calls the underlying ValueAtPosition.
+func (x *Noise) ValueAtPosition(position unsafe.Pointer) float32 {
+	return x.inner.ValueAtPosition(position)
+}
+
+// ApplyAbsoluteValue calls the underlying ApplyAbsoluteValue.
+func (x *Noise) ApplyAbsoluteValue() {
+	x.inner.ApplyAbsoluteValue()
+}
+
+// ClampWithLowerBoundUpperBound calls the underlying ClampWithLowerBoundUpperBound.
+func (x *Noise) ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64) {
+	x.inner.ClampWithLowerBoundUpperBound(lowerBound, upperBound)
+}
+
+// RaiseToPower calls the underlying RaiseToPower.
+func (x *Noise) RaiseToPower(power float64) {
+	x.inner.RaiseToPower(power)
+}
+
+// Invert calls the underlying Invert.
+func (x *Noise) Invert() {
+	x.inner.Invert()
+}
+
+// ApplyTurbulenceWithFrequencyPowerRoughnessSeed calls the underlying ApplyTurbulenceWithFrequencyPowerRoughnessSeed.
+func (x *Noise) ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32) {
+	x.inner.ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency, power, roughness, seed)
+}
+
+// RemapValuesToCurveWithControlPoints calls the underlying RemapValuesToCurveWithControlPoints.
+func (x *Noise) RemapValuesToCurveWithControlPoints(controlPoints *foundation.NSDictionary[*foundation.NSNumber, *foundation.NSNumber]) {
+	x.inner.RemapValuesToCurveWithControlPoints(controlPoints)
+}
+
+// RemapValuesToTerracesWithPeaksTerracesInverted calls the underlying RemapValuesToTerracesWithPeaksTerracesInverted.
+func (x *Noise) RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues *foundation.NSArray[*foundation.NSNumber], inverted bool) {
+	x.inner.RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues, inverted)
+}
+
+// MoveBy calls the underlying MoveBy.
+func (x *Noise) MoveBy(delta unsafe.Pointer) {
+	x.inner.MoveBy(delta)
+}
+
+// ScaleBy calls the underlying ScaleBy.
+func (x *Noise) ScaleBy(factor unsafe.Pointer) {
+	x.inner.ScaleBy(factor)
+}
+
+// RotateBy calls the underlying RotateBy.
+func (x *Noise) RotateBy(radians unsafe.Pointer) {
+	x.inner.RotateBy(radians)
+}
+
+// AddWithNoise calls the underlying AddWithNoise.
+func (x *Noise) AddWithNoise(noise *raw.GKNoise) {
+	x.inner.AddWithNoise(noise)
+}
+
+// MultiplyWithNoise calls the underlying MultiplyWithNoise.
+func (x *Noise) MultiplyWithNoise(noise *raw.GKNoise) {
+	x.inner.MultiplyWithNoise(noise)
+}
+
+// MinimumWithNoise calls the underlying MinimumWithNoise.
+func (x *Noise) MinimumWithNoise(noise *raw.GKNoise) {
+	x.inner.MinimumWithNoise(noise)
+}
+
+// MaximumWithNoise calls the underlying MaximumWithNoise.
+func (x *Noise) MaximumWithNoise(noise *raw.GKNoise) {
+	x.inner.MaximumWithNoise(noise)
+}
+
+// RaiseToPowerWithNoise calls the underlying RaiseToPowerWithNoise.
+func (x *Noise) RaiseToPowerWithNoise(noise *raw.GKNoise) {
+	x.inner.RaiseToPowerWithNoise(noise)
+}
+
+// DisplaceXWithNoiseYWithNoiseZWithNoise calls the underlying DisplaceXWithNoiseYWithNoiseZWithNoise.
+func (x *Noise) DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *raw.GKNoise, yDisplacementNoise *raw.GKNoise, zDisplacementNoise *raw.GKNoise) {
+	x.inner.DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise, yDisplacementNoise, zDisplacementNoise)
+}
+
+// GradientColors calls the underlying GradientColors.
+func (x *Noise) GradientColors() *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor] {
+	return x.inner.GradientColors()
+}
+
+// SetGradientColors calls the underlying SetGradientColors.
+func (x *Noise) SetGradientColors(gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) {
+	x.inner.SetGradientColors(gradientColors)
+}
+
+// Noiseable is the interface implemented by [Noise], for mocking and DI.
+type Noiseable interface {
+	Unwrap() *raw.GKNoise
+	WithGradientColors(gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]) *Noise
+	ValueAtPosition(position unsafe.Pointer) float32
+	ApplyAbsoluteValue()
+	ClampWithLowerBoundUpperBound(lowerBound float64, upperBound float64)
+	RaiseToPower(power float64)
+	Invert()
+	ApplyTurbulenceWithFrequencyPowerRoughnessSeed(frequency float64, power float64, roughness int, seed int32)
+	RemapValuesToCurveWithControlPoints(controlPoints *foundation.NSDictionary[*foundation.NSNumber, *foundation.NSNumber])
+	RemapValuesToTerracesWithPeaksTerracesInverted(peakInputValues *foundation.NSArray[*foundation.NSNumber], inverted bool)
+	MoveBy(delta unsafe.Pointer)
+	ScaleBy(factor unsafe.Pointer)
+	RotateBy(radians unsafe.Pointer)
+	AddWithNoise(noise *raw.GKNoise)
+	MultiplyWithNoise(noise *raw.GKNoise)
+	MinimumWithNoise(noise *raw.GKNoise)
+	MaximumWithNoise(noise *raw.GKNoise)
+	RaiseToPowerWithNoise(noise *raw.GKNoise)
+	DisplaceXWithNoiseYWithNoiseZWithNoise(xDisplacementNoise *raw.GKNoise, yDisplacementNoise *raw.GKNoise, zDisplacementNoise *raw.GKNoise)
+	GradientColors() *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor]
+	SetGradientColors(gradientColors *foundation.NSDictionary[*foundation.NSNumber, *appkit.NSColor])
+}
+
+var _ Noiseable = (*Noise)(nil)
 

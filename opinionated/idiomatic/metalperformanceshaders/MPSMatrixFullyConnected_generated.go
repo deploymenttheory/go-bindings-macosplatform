@@ -10,7 +10,9 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatrixFullyConnected wraps [raw.MPSMatrixFullyConnected] with a fluent Go API.
@@ -59,7 +61,112 @@ func (x *MatrixFullyConnected) WithAlpha(alpha float64) *MatrixFullyConnected {
 	return x
 }
 
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixFullyConnected) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixFullyConnected) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixFullyConnected) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixFullyConnected) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixFullyConnected) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
+// EncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix calls the underlying EncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix.
+func (x *MatrixFullyConnected) EncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix(commandBuffer, inputMatrix, weightMatrix, biasVector, resultMatrix)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *MatrixFullyConnected) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixFullyConnected {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &MatrixFullyConnected{inner: _r}
+}
+
+// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
+func (x *MatrixFullyConnected) SourceNumberOfFeatureVectors() uint {
+	return x.inner.SourceNumberOfFeatureVectors()
+}
+
+// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
+func (x *MatrixFullyConnected) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
+	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+}
+
+// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
+func (x *MatrixFullyConnected) SourceInputFeatureChannels() uint {
+	return x.inner.SourceInputFeatureChannels()
+}
+
+// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
+func (x *MatrixFullyConnected) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
+	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+}
+
+// SourceOutputFeatureChannels calls the underlying SourceOutputFeatureChannels.
+func (x *MatrixFullyConnected) SourceOutputFeatureChannels() uint {
+	return x.inner.SourceOutputFeatureChannels()
+}
+
+// SetSourceOutputFeatureChannels calls the underlying SetSourceOutputFeatureChannels.
+func (x *MatrixFullyConnected) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) {
+	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *MatrixFullyConnected) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *MatrixFullyConnected) SetAlpha(alpha float64) {
+	x.inner.SetAlpha(alpha)
+}
+
 func (x *MatrixFullyConnected) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixBinaryKernel }
 
 func (x *MatrixFullyConnected) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixBinaryKernel.MPSKernel }
+
+// MatrixFullyConnectedable is the interface implemented by [MatrixFullyConnected], for mocking and DI.
+type MatrixFullyConnectedable interface {
+	Unwrap() *raw.MPSMatrixFullyConnected
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixFullyConnected
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnected
+	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnected
+	WithAlpha(alpha float64) *MatrixFullyConnected
+	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+	EncodeToCommandBufferInputMatrixWeightMatrixBiasVectorResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultMatrix *mpscore.MPSMatrix)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixFullyConnected
+	SourceNumberOfFeatureVectors() uint
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
+	SourceInputFeatureChannels() uint
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	SourceOutputFeatureChannels() uint
+	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint)
+	Alpha() float64
+	SetAlpha(alpha float64)
+}
+
+var _ MatrixFullyConnectedable = (*MatrixFullyConnected)(nil)
 

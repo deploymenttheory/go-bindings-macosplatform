@@ -23,5 +23,28 @@ func NewChangeLanguageOptionCommandEvent() *ChangeLanguageOptionCommandEvent {
 	return &ChangeLanguageOptionCommandEvent{inner: raw.MPChangeLanguageOptionCommandEventFromID(_id)}
 }
 
+// LanguageOption calls the underlying LanguageOption.
+func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
+	_r := x.inner.LanguageOption()
+	if _r == nil {
+		return nil
+	}
+	return &NowPlayingInfoLanguageOption{inner: _r}
+}
+
+// Setting calls the underlying Setting.
+func (x *ChangeLanguageOptionCommandEvent) Setting() raw.MPChangeLanguageOptionSetting {
+	return x.inner.Setting()
+}
+
 func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return &x.inner.MPRemoteCommandEvent }
+
+// ChangeLanguageOptionCommandEventable is the interface implemented by [ChangeLanguageOptionCommandEvent], for mocking and DI.
+type ChangeLanguageOptionCommandEventable interface {
+	Unwrap() *raw.MPChangeLanguageOptionCommandEvent
+	LanguageOption() *NowPlayingInfoLanguageOption
+	Setting() raw.MPChangeLanguageOptionSetting
+}
+
+var _ ChangeLanguageOptionCommandEventable = (*ChangeLanguageOptionCommandEvent)(nil)
 

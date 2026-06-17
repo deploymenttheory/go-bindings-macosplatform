@@ -25,3 +25,10 @@ func NewMacHardwareModelWithDataRepresentation(dataRepresentation *foundation.NS
 	return &MacHardwareModel{inner: raw.VZMacHardwareModelFromID(_id)}
 }
 
+// MacHardwareModelable is the interface implemented by [MacHardwareModel], for mocking and DI.
+type MacHardwareModelable interface {
+	Unwrap() *raw.VZMacHardwareModel
+}
+
+var _ MacHardwareModelable = (*MacHardwareModel)(nil)
+

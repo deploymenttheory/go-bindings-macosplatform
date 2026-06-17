@@ -5,10 +5,13 @@
 package iobluetoothui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BluetoothObjectPushUIController wraps [raw.IOBluetoothObjectPushUIController] with a fluent Go API.
@@ -25,4 +28,69 @@ func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDel
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:"), inDevice.Ptr(), inFiles.Ptr(), inDelegate)
 	return &BluetoothObjectPushUIController{inner: raw.IOBluetoothObjectPushUIControllerFromID(_id)}
 }
+
+// RunModal calls the underlying RunModal.
+func (x *BluetoothObjectPushUIController) RunModal() {
+	x.inner.RunModal()
+}
+
+// RunPanel calls the underlying RunPanel.
+func (x *BluetoothObjectPushUIController) RunPanel() {
+	x.inner.RunPanel()
+}
+
+// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *BluetoothObjectPushUIController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
+	return x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow, modalDelegate, didEndSelector, contextInfo)
+}
+
+// Stop calls the underlying Stop.
+func (x *BluetoothObjectPushUIController) Stop() {
+	x.inner.Stop()
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
+}
+
+// GetTitle calls the underlying GetTitle.
+func (x *BluetoothObjectPushUIController) GetTitle() string {
+	_r := x.inner.GetTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIconImage calls the underlying SetIconImage.
+func (x *BluetoothObjectPushUIController) SetIconImage(image *appkit.NSImage) {
+	x.inner.SetIconImage(image)
+}
+
+// GetDevice calls the underlying GetDevice.
+func (x *BluetoothObjectPushUIController) GetDevice() *iobluetooth.IOBluetoothDevice {
+	return x.inner.GetDevice()
+}
+
+// IsTransferInProgress calls the underlying IsTransferInProgress.
+func (x *BluetoothObjectPushUIController) IsTransferInProgress() bool {
+	return x.inner.IsTransferInProgress()
+}
+
+// BluetoothObjectPushUIControllerable is the interface implemented by [BluetoothObjectPushUIController], for mocking and DI.
+type BluetoothObjectPushUIControllerable interface {
+	Unwrap() *raw.IOBluetoothObjectPushUIController
+	RunModal()
+	RunPanel()
+	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int
+	Stop()
+	SetTitle(windowTitle string)
+	GetTitle() string
+	SetIconImage(image *appkit.NSImage)
+	GetDevice() *iobluetooth.IOBluetoothDevice
+	IsTransferInProgress() bool
+}
+
+var _ BluetoothObjectPushUIControllerable = (*BluetoothObjectPushUIController)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,67 @@ func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) WithServerSideProcessi
 	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
 	return x
 }
+
+// TrackID calls the underlying TrackID.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) TrackID() string {
+	_r := x.inner.TrackID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTrackID calls the underlying SetTrackID.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) SetTrackID(trackID string) {
+	x.inner.SetTrackID(foundation.NSStringStringWithUTF8String(trackID))
+}
+
+// AudioOutputIndex calls the underlying AudioOutputIndex.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) AudioOutputIndex() *foundation.NSNumber {
+	return x.inner.AudioOutputIndex()
+}
+
+// SetAudioOutputIndex calls the underlying SetAudioOutputIndex.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) SetAudioOutputIndex(audioOutputIndex *foundation.NSNumber) {
+	x.inner.SetAudioOutputIndex(audioOutputIndex)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterActivateAudioTrackParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterActivateAudioTrackParamsable is the interface implemented by [MTRMediaPlaybackClusterActivateAudioTrackParams], for mocking and DI.
+type MTRMediaPlaybackClusterActivateAudioTrackParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterActivateAudioTrackParams
+	WithTrackID(trackID string) *MTRMediaPlaybackClusterActivateAudioTrackParams
+	WithAudioOutputIndex(audioOutputIndex *foundation.NSNumber) *MTRMediaPlaybackClusterActivateAudioTrackParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterActivateAudioTrackParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterActivateAudioTrackParams
+	TrackID() string
+	SetTrackID(trackID string)
+	AudioOutputIndex() *foundation.NSNumber
+	SetAudioOutputIndex(audioOutputIndex *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterActivateAudioTrackParamsable = (*MTRMediaPlaybackClusterActivateAudioTrackParams)(nil)
 

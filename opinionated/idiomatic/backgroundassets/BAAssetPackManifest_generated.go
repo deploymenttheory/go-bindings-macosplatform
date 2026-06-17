@@ -42,3 +42,28 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundatio
 	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
 }
 
+// AllDownloads calls the underlying AllDownloads.
+func (x *AssetPackManifest) AllDownloads() *foundation.NSSet[*raw.BADownload] {
+	return x.inner.AllDownloads()
+}
+
+// AllDownloadsForContentRequest calls the underlying AllDownloadsForContentRequest.
+func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest raw.BAContentRequest) *foundation.NSSet[*raw.BADownload] {
+	return x.inner.AllDownloadsForContentRequest(contentRequest)
+}
+
+// AssetPacks calls the underlying AssetPacks.
+func (x *AssetPackManifest) AssetPacks() *foundation.NSSet[*raw.BAAssetPack] {
+	return x.inner.AssetPacks()
+}
+
+// AssetPackManifestable is the interface implemented by [AssetPackManifest], for mocking and DI.
+type AssetPackManifestable interface {
+	Unwrap() *raw.BAAssetPackManifest
+	AllDownloads() *foundation.NSSet[*raw.BADownload]
+	AllDownloadsForContentRequest(contentRequest raw.BAContentRequest) *foundation.NSSet[*raw.BADownload]
+	AssetPacks() *foundation.NSSet[*raw.BAAssetPack]
+}
+
+var _ AssetPackManifestable = (*AssetPackManifest)(nil)
+

@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,28 @@ func NewProject() *Project {
 	return &Project{inner: raw.PHProjectFromID(_id)}
 }
 
+// ProjectExtensionData calls the underlying ProjectExtensionData.
+func (x *Project) ProjectExtensionData() *foundation.NSData {
+	return x.inner.ProjectExtensionData()
+}
+
+// HasProjectPreview calls the underlying HasProjectPreview.
+func (x *Project) HasProjectPreview() bool {
+	return x.inner.HasProjectPreview()
+}
+
 func (x *Project) asAssetCollection() *raw.PHAssetCollection { return &x.inner.PHAssetCollection }
 
 func (x *Project) asCollection() *raw.PHCollection { return &x.inner.PHAssetCollection.PHCollection }
 
 func (x *Project) asObject() *raw.PHObject { return &x.inner.PHAssetCollection.PHCollection.PHObject }
+
+// Projectable is the interface implemented by [Project], for mocking and DI.
+type Projectable interface {
+	Unwrap() *raw.PHProject
+	ProjectExtensionData() *foundation.NSData
+	HasProjectPreview() bool
+}
+
+var _ Projectable = (*Project)(nil)
 

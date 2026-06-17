@@ -25,3 +25,10 @@ func NewCondition() *Condition {
 
 func (x *Condition) asCondition() *raw.CLCondition { return x.inner }
 
+// Conditionable is the interface implemented by [Condition], for mocking and DI.
+type Conditionable interface {
+	Unwrap() *raw.CLCondition
+}
+
+var _ Conditionable = (*Condition)(nil)
+

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,10 +32,26 @@ func (x *StagedMigrationManager) Stages() []*raw.NSMigrationStage {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSMigrationStage, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMigrationStage {
+		return raw.NSMigrationStageFromID(purego.Retain(_id))
+	})
 }
+
+// Container calls the underlying Container.
+func (x *StagedMigrationManager) Container() *PersistentContainer {
+	_r := x.inner.Container()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentContainer{inner: _r}
+}
+
+// StagedMigrationManagerable is the interface implemented by [StagedMigrationManager], for mocking and DI.
+type StagedMigrationManagerable interface {
+	Unwrap() *raw.NSStagedMigrationManager
+	Stages() []*raw.NSMigrationStage
+	Container() *PersistentContainer
+}
+
+var _ StagedMigrationManagerable = (*StagedMigrationManager)(nil)
 

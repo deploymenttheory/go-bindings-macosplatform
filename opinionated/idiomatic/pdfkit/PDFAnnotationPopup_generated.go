@@ -23,5 +23,18 @@ func NewAnnotationPopup() *AnnotationPopup {
 	return &AnnotationPopup{inner: raw.PDFAnnotationPopupFromID(_id)}
 }
 
+// SetIsOpen calls the underlying SetIsOpen.
+func (x *AnnotationPopup) SetIsOpen(isOpen bool) {
+	x.inner.SetIsOpen(isOpen)
+}
+
 func (x *AnnotationPopup) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
+
+// AnnotationPopupable is the interface implemented by [AnnotationPopup], for mocking and DI.
+type AnnotationPopupable interface {
+	Unwrap() *raw.PDFAnnotationPopup
+	SetIsOpen(isOpen bool)
+}
+
+var _ AnnotationPopupable = (*AnnotationPopup)(nil)
 

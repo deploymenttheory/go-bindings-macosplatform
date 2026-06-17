@@ -31,3 +31,26 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary *foundation.NSDi
 	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(_id)}, nil
 }
 
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
+	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(featureName))
+	if _r == nil {
+		return nil
+	}
+	return &FeatureValue{inner: _r}
+}
+
+// Dictionary calls the underlying Dictionary.
+func (x *DictionaryFeatureProvider) Dictionary() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureValue] {
+	return x.inner.Dictionary()
+}
+
+// DictionaryFeatureProviderable is the interface implemented by [DictionaryFeatureProvider], for mocking and DI.
+type DictionaryFeatureProviderable interface {
+	Unwrap() *raw.MLDictionaryFeatureProvider
+	ObjectForKeyedSubscript(featureName string) *FeatureValue
+	Dictionary() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureValue]
+}
+
+var _ DictionaryFeatureProviderable = (*DictionaryFeatureProvider)(nil)
+

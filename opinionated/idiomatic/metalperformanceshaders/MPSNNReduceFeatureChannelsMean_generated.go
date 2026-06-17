@@ -41,3 +41,10 @@ func (x *NNReduceFeatureChannelsMean) asCNNKernel() *mpsneuralnetwork.MPSCNNKern
 
 func (x *NNReduceFeatureChannelsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel }
 
+// NNReduceFeatureChannelsMeanable is the interface implemented by [NNReduceFeatureChannelsMean], for mocking and DI.
+type NNReduceFeatureChannelsMeanable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsMean
+}
+
+var _ NNReduceFeatureChannelsMeanable = (*NNReduceFeatureChannelsMean)(nil)
+

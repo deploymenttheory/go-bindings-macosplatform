@@ -106,3 +106,170 @@ func (x *MTRDeviceControllerStartupParams) WithNodeId(nodeId *foundation.NSNumbe
 	return x
 }
 
+// NocSigner calls the underlying NocSigner.
+func (x *MTRDeviceControllerStartupParams) NocSigner() raw.MTRKeypair {
+	return x.inner.NocSigner()
+}
+
+// FabricID calls the underlying FabricID.
+func (x *MTRDeviceControllerStartupParams) FabricID() *foundation.NSNumber {
+	return x.inner.FabricID()
+}
+
+// Ipk calls the underlying Ipk.
+func (x *MTRDeviceControllerStartupParams) Ipk() *foundation.NSData {
+	return x.inner.Ipk()
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRDeviceControllerStartupParams) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// SetVendorID calls the underlying SetVendorID.
+func (x *MTRDeviceControllerStartupParams) SetVendorID(vendorID *foundation.NSNumber) {
+	x.inner.SetVendorID(vendorID)
+}
+
+// NodeID calls the underlying NodeID.
+func (x *MTRDeviceControllerStartupParams) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// SetNodeID calls the underlying SetNodeID.
+func (x *MTRDeviceControllerStartupParams) SetNodeID(nodeID *foundation.NSNumber) {
+	x.inner.SetNodeID(nodeID)
+}
+
+// CaseAuthenticatedTags calls the underlying CaseAuthenticatedTags.
+func (x *MTRDeviceControllerStartupParams) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.CaseAuthenticatedTags()
+}
+
+// SetCaseAuthenticatedTags calls the underlying SetCaseAuthenticatedTags.
+func (x *MTRDeviceControllerStartupParams) SetCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) {
+	x.inner.SetCaseAuthenticatedTags(caseAuthenticatedTags)
+}
+
+// RootCertificate calls the underlying RootCertificate.
+func (x *MTRDeviceControllerStartupParams) RootCertificate() *foundation.NSData {
+	return x.inner.RootCertificate()
+}
+
+// SetRootCertificate calls the underlying SetRootCertificate.
+func (x *MTRDeviceControllerStartupParams) SetRootCertificate(rootCertificate *foundation.NSData) {
+	x.inner.SetRootCertificate(rootCertificate)
+}
+
+// IntermediateCertificate calls the underlying IntermediateCertificate.
+func (x *MTRDeviceControllerStartupParams) IntermediateCertificate() *foundation.NSData {
+	return x.inner.IntermediateCertificate()
+}
+
+// SetIntermediateCertificate calls the underlying SetIntermediateCertificate.
+func (x *MTRDeviceControllerStartupParams) SetIntermediateCertificate(intermediateCertificate *foundation.NSData) {
+	x.inner.SetIntermediateCertificate(intermediateCertificate)
+}
+
+// OperationalCertificate calls the underlying OperationalCertificate.
+func (x *MTRDeviceControllerStartupParams) OperationalCertificate() *foundation.NSData {
+	return x.inner.OperationalCertificate()
+}
+
+// OperationalKeypair calls the underlying OperationalKeypair.
+func (x *MTRDeviceControllerStartupParams) OperationalKeypair() raw.MTRKeypair {
+	return x.inner.OperationalKeypair()
+}
+
+// SetOperationalKeypair calls the underlying SetOperationalKeypair.
+func (x *MTRDeviceControllerStartupParams) SetOperationalKeypair(operationalKeypair raw.MTRKeypair) {
+	x.inner.SetOperationalKeypair(operationalKeypair)
+}
+
+// OperationalCertificateIssuer calls the underlying OperationalCertificateIssuer.
+func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuer() raw.MTROperationalCertificateIssuer {
+	return x.inner.OperationalCertificateIssuer()
+}
+
+// SetOperationalCertificateIssuer calls the underlying SetOperationalCertificateIssuer.
+func (x *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) {
+	x.inner.SetOperationalCertificateIssuer(operationalCertificateIssuer)
+}
+
+// OperationalCertificateIssuerQueue calls the underlying OperationalCertificateIssuerQueue.
+func (x *MTRDeviceControllerStartupParams) OperationalCertificateIssuerQueue() *foundation.NSObject {
+	return x.inner.OperationalCertificateIssuerQueue()
+}
+
+// SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
+func (x *MTRDeviceControllerStartupParams) SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject) {
+	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue)
+}
+
+// FabricId calls the underlying FabricId.
+func (x *MTRDeviceControllerStartupParams) FabricId() uint64 {
+	return x.inner.FabricId()
+}
+
+// VendorId calls the underlying VendorId.
+func (x *MTRDeviceControllerStartupParams) VendorId() *foundation.NSNumber {
+	return x.inner.VendorId()
+}
+
+// SetVendorId calls the underlying SetVendorId.
+func (x *MTRDeviceControllerStartupParams) SetVendorId(vendorId *foundation.NSNumber) {
+	x.inner.SetVendorId(vendorId)
+}
+
+// NodeId calls the underlying NodeId.
+func (x *MTRDeviceControllerStartupParams) NodeId() *foundation.NSNumber {
+	return x.inner.NodeId()
+}
+
+// SetNodeId calls the underlying SetNodeId.
+func (x *MTRDeviceControllerStartupParams) SetNodeId(nodeId *foundation.NSNumber) {
+	x.inner.SetNodeId(nodeId)
+}
+
+// MTRDeviceControllerStartupParamsable is the interface implemented by [MTRDeviceControllerStartupParams], for mocking and DI.
+type MTRDeviceControllerStartupParamsable interface {
+	Unwrap() *raw.MTRDeviceControllerStartupParams
+	WithVendorID(vendorID *foundation.NSNumber) *MTRDeviceControllerStartupParams
+	WithNodeID(nodeID *foundation.NSNumber) *MTRDeviceControllerStartupParams
+	WithCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber]) *MTRDeviceControllerStartupParams
+	WithRootCertificate(rootCertificate *foundation.NSData) *MTRDeviceControllerStartupParams
+	WithIntermediateCertificate(intermediateCertificate *foundation.NSData) *MTRDeviceControllerStartupParams
+	WithOperationalKeypair(operationalKeypair raw.MTRKeypair) *MTRDeviceControllerStartupParams
+	WithOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer) *MTRDeviceControllerStartupParams
+	WithOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject) *MTRDeviceControllerStartupParams
+	WithVendorId(vendorId *foundation.NSNumber) *MTRDeviceControllerStartupParams
+	WithNodeId(nodeId *foundation.NSNumber) *MTRDeviceControllerStartupParams
+	NocSigner() raw.MTRKeypair
+	FabricID() *foundation.NSNumber
+	Ipk() *foundation.NSData
+	VendorID() *foundation.NSNumber
+	SetVendorID(vendorID *foundation.NSNumber)
+	NodeID() *foundation.NSNumber
+	SetNodeID(nodeID *foundation.NSNumber)
+	CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber]
+	SetCaseAuthenticatedTags(caseAuthenticatedTags *foundation.NSSet[*foundation.NSNumber])
+	RootCertificate() *foundation.NSData
+	SetRootCertificate(rootCertificate *foundation.NSData)
+	IntermediateCertificate() *foundation.NSData
+	SetIntermediateCertificate(intermediateCertificate *foundation.NSData)
+	OperationalCertificate() *foundation.NSData
+	OperationalKeypair() raw.MTRKeypair
+	SetOperationalKeypair(operationalKeypair raw.MTRKeypair)
+	OperationalCertificateIssuer() raw.MTROperationalCertificateIssuer
+	SetOperationalCertificateIssuer(operationalCertificateIssuer raw.MTROperationalCertificateIssuer)
+	OperationalCertificateIssuerQueue() *foundation.NSObject
+	SetOperationalCertificateIssuerQueue(operationalCertificateIssuerQueue *foundation.NSObject)
+	FabricId() uint64
+	VendorId() *foundation.NSNumber
+	SetVendorId(vendorId *foundation.NSNumber)
+	NodeId() *foundation.NSNumber
+	SetNodeId(nodeId *foundation.NSNumber)
+}
+
+var _ MTRDeviceControllerStartupParamsable = (*MTRDeviceControllerStartupParams)(nil)
+

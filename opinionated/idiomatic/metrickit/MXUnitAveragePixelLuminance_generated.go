@@ -23,3 +23,10 @@ func NewUnitAveragePixelLuminance() *UnitAveragePixelLuminance {
 	return &UnitAveragePixelLuminance{inner: raw.MXUnitAveragePixelLuminanceFromID(_id)}
 }
 
+// UnitAveragePixelLuminanceable is the interface implemented by [UnitAveragePixelLuminance], for mocking and DI.
+type UnitAveragePixelLuminanceable interface {
+	Unwrap() *raw.MXUnitAveragePixelLuminance
+}
+
+var _ UnitAveragePixelLuminanceable = (*UnitAveragePixelLuminance)(nil)
+

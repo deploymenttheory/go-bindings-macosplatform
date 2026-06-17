@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CaptureDeviceFormat wraps [raw.AVCaptureDeviceFormat] with a fluent Go API.
@@ -24,17 +26,57 @@ func NewCaptureDeviceFormat() *CaptureDeviceFormat {
 	return &CaptureDeviceFormat{inner: raw.AVCaptureDeviceFormatFromID(_id)}
 }
 
+// MediaType calls the underlying MediaType.
+func (x *CaptureDeviceFormat) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FormatDescription calls the underlying FormatDescription.
+func (x *CaptureDeviceFormat) FormatDescription() unsafe.Pointer {
+	return x.inner.FormatDescription()
+}
+
 // VideoSupportedFrameRateRanges returns the collection as a Go slice.
 func (x *CaptureDeviceFormat) VideoSupportedFrameRateRanges() []*raw.AVFrameRateRange {
 	arr := x.inner.VideoSupportedFrameRateRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVFrameRateRange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVFrameRateRange {
+		return raw.AVFrameRateRangeFromID(purego.Retain(_id))
+	})
+}
+
+// SystemRecommendedVideoZoomRange calls the underlying SystemRecommendedVideoZoomRange.
+func (x *CaptureDeviceFormat) SystemRecommendedVideoZoomRange() *ZoomRange {
+	_r := x.inner.SystemRecommendedVideoZoomRange()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ZoomRange{inner: _r}
+}
+
+// SystemRecommendedExposureBiasRange calls the underlying SystemRecommendedExposureBiasRange.
+func (x *CaptureDeviceFormat) SystemRecommendedExposureBiasRange() *ExposureBiasRange {
+	_r := x.inner.SystemRecommendedExposureBiasRange()
+	if _r == nil {
+		return nil
+	}
+	return &ExposureBiasRange{inner: _r}
+}
+
+// IsHighPhotoQualitySupported calls the underlying IsHighPhotoQualitySupported.
+func (x *CaptureDeviceFormat) IsHighPhotoQualitySupported() bool {
+	return x.inner.IsHighPhotoQualitySupported()
+}
+
+// AutoFocusSystem calls the underlying AutoFocusSystem.
+func (x *CaptureDeviceFormat) AutoFocusSystem() raw.AVCaptureAutoFocusSystem {
+	return x.inner.AutoFocusSystem()
 }
 
 // SupportedColorSpaces returns the collection as a Go slice.
@@ -43,11 +85,9 @@ func (x *CaptureDeviceFormat) SupportedColorSpaces() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // SupportedVideoZoomRangesForDepthDataDelivery returns the collection as a Go slice.
@@ -56,11 +96,14 @@ func (x *CaptureDeviceFormat) SupportedVideoZoomRangesForDepthDataDelivery() []*
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVZoomRange, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVZoomRange {
+		return raw.AVZoomRangeFromID(purego.Retain(_id))
+	})
+}
+
+// ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported calls the underlying ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported.
+func (x *CaptureDeviceFormat) ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool {
+	return x.inner.ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported()
 }
 
 // SupportedMaxPhotoDimensions returns the collection as a Go slice.
@@ -69,11 +112,9 @@ func (x *CaptureDeviceFormat) SupportedMaxPhotoDimensions() []*foundation.NSValu
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
 // SecondaryNativeResolutionZoomFactors returns the collection as a Go slice.
@@ -82,11 +123,148 @@ func (x *CaptureDeviceFormat) SecondaryNativeResolutionZoomFactors() []*foundati
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// IsAutoVideoFrameRateSupported calls the underlying IsAutoVideoFrameRateSupported.
+func (x *CaptureDeviceFormat) IsAutoVideoFrameRateSupported() bool {
+	return x.inner.IsAutoVideoFrameRateSupported()
+}
+
+// IsSpatialVideoCaptureSupported calls the underlying IsSpatialVideoCaptureSupported.
+func (x *CaptureDeviceFormat) IsSpatialVideoCaptureSupported() bool {
+	return x.inner.IsSpatialVideoCaptureSupported()
+}
+
+// IsCenterStageSupported calls the underlying IsCenterStageSupported.
+func (x *CaptureDeviceFormat) IsCenterStageSupported() bool {
+	return x.inner.IsCenterStageSupported()
+}
+
+// VideoMinZoomFactorForCenterStage calls the underlying VideoMinZoomFactorForCenterStage.
+func (x *CaptureDeviceFormat) VideoMinZoomFactorForCenterStage() float64 {
+	return x.inner.VideoMinZoomFactorForCenterStage()
+}
+
+// VideoMaxZoomFactorForCenterStage calls the underlying VideoMaxZoomFactorForCenterStage.
+func (x *CaptureDeviceFormat) VideoMaxZoomFactorForCenterStage() float64 {
+	return x.inner.VideoMaxZoomFactorForCenterStage()
+}
+
+// VideoFrameRateRangeForCenterStage calls the underlying VideoFrameRateRangeForCenterStage.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForCenterStage() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForCenterStage()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &FrameRateRange{inner: _r}
+}
+
+// IsPortraitEffectSupported calls the underlying IsPortraitEffectSupported.
+func (x *CaptureDeviceFormat) IsPortraitEffectSupported() bool {
+	return x.inner.IsPortraitEffectSupported()
+}
+
+// VideoFrameRateRangeForPortraitEffect calls the underlying VideoFrameRateRangeForPortraitEffect.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForPortraitEffect() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForPortraitEffect()
+	if _r == nil {
+		return nil
+	}
+	return &FrameRateRange{inner: _r}
+}
+
+// IsStudioLightSupported calls the underlying IsStudioLightSupported.
+func (x *CaptureDeviceFormat) IsStudioLightSupported() bool {
+	return x.inner.IsStudioLightSupported()
+}
+
+// VideoFrameRateRangeForStudioLight calls the underlying VideoFrameRateRangeForStudioLight.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForStudioLight() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForStudioLight()
+	if _r == nil {
+		return nil
+	}
+	return &FrameRateRange{inner: _r}
+}
+
+// ReactionEffectsSupported calls the underlying ReactionEffectsSupported.
+func (x *CaptureDeviceFormat) ReactionEffectsSupported() bool {
+	return x.inner.ReactionEffectsSupported()
+}
+
+// VideoFrameRateRangeForReactionEffectsInProgress calls the underlying VideoFrameRateRangeForReactionEffectsInProgress.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForReactionEffectsInProgress() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForReactionEffectsInProgress()
+	if _r == nil {
+		return nil
+	}
+	return &FrameRateRange{inner: _r}
+}
+
+// IsBackgroundReplacementSupported calls the underlying IsBackgroundReplacementSupported.
+func (x *CaptureDeviceFormat) IsBackgroundReplacementSupported() bool {
+	return x.inner.IsBackgroundReplacementSupported()
+}
+
+// VideoFrameRateRangeForBackgroundReplacement calls the underlying VideoFrameRateRangeForBackgroundReplacement.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForBackgroundReplacement() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForBackgroundReplacement()
+	if _r == nil {
+		return nil
+	}
+	return &FrameRateRange{inner: _r}
+}
+
+// IsEdgeLightSupported calls the underlying IsEdgeLightSupported.
+func (x *CaptureDeviceFormat) IsEdgeLightSupported() bool {
+	return x.inner.IsEdgeLightSupported()
+}
+
+// IsCinematicVideoCaptureSupported calls the underlying IsCinematicVideoCaptureSupported.
+func (x *CaptureDeviceFormat) IsCinematicVideoCaptureSupported() bool {
+	return x.inner.IsCinematicVideoCaptureSupported()
+}
+
+// DefaultSimulatedAperture calls the underlying DefaultSimulatedAperture.
+func (x *CaptureDeviceFormat) DefaultSimulatedAperture() float32 {
+	return x.inner.DefaultSimulatedAperture()
+}
+
+// MinSimulatedAperture calls the underlying MinSimulatedAperture.
+func (x *CaptureDeviceFormat) MinSimulatedAperture() float32 {
+	return x.inner.MinSimulatedAperture()
+}
+
+// MaxSimulatedAperture calls the underlying MaxSimulatedAperture.
+func (x *CaptureDeviceFormat) MaxSimulatedAperture() float32 {
+	return x.inner.MaxSimulatedAperture()
+}
+
+// VideoMinZoomFactorForCinematicVideo calls the underlying VideoMinZoomFactorForCinematicVideo.
+func (x *CaptureDeviceFormat) VideoMinZoomFactorForCinematicVideo() float64 {
+	return x.inner.VideoMinZoomFactorForCinematicVideo()
+}
+
+// VideoMaxZoomFactorForCinematicVideo calls the underlying VideoMaxZoomFactorForCinematicVideo.
+func (x *CaptureDeviceFormat) VideoMaxZoomFactorForCinematicVideo() float64 {
+	return x.inner.VideoMaxZoomFactorForCinematicVideo()
+}
+
+// VideoFrameRateRangeForCinematicVideo calls the underlying VideoFrameRateRangeForCinematicVideo.
+func (x *CaptureDeviceFormat) VideoFrameRateRangeForCinematicVideo() *FrameRateRange {
+	_r := x.inner.VideoFrameRateRangeForCinematicVideo()
+	if _r == nil {
+		return nil
+	}
+	return &FrameRateRange{inner: _r}
+}
+
+// VideoFieldOfViewForAspectRatioGeometricDistortionCorrected calls the underlying VideoFieldOfViewForAspectRatioGeometricDistortionCorrected.
+func (x *CaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32 {
+	return x.inner.VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio, geometricDistortionCorrected)
 }
 
 // SupportedDynamicAspectRatios returns the collection as a Go slice.
@@ -95,10 +273,63 @@ func (x *CaptureDeviceFormat) SupportedDynamicAspectRatios() []*foundation.NSStr
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// IsSmartFramingSupported calls the underlying IsSmartFramingSupported.
+func (x *CaptureDeviceFormat) IsSmartFramingSupported() bool {
+	return x.inner.IsSmartFramingSupported()
+}
+
+// IsCameraLensSmudgeDetectionSupported calls the underlying IsCameraLensSmudgeDetectionSupported.
+func (x *CaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
+	return x.inner.IsCameraLensSmudgeDetectionSupported()
+}
+
+// CaptureDeviceFormatable is the interface implemented by [CaptureDeviceFormat], for mocking and DI.
+type CaptureDeviceFormatable interface {
+	Unwrap() *raw.AVCaptureDeviceFormat
+	MediaType() string
+	FormatDescription() unsafe.Pointer
+	VideoSupportedFrameRateRanges() []*raw.AVFrameRateRange
+	SystemRecommendedVideoZoomRange() *ZoomRange
+	SystemRecommendedExposureBiasRange() *ExposureBiasRange
+	IsHighPhotoQualitySupported() bool
+	AutoFocusSystem() raw.AVCaptureAutoFocusSystem
+	SupportedColorSpaces() []*foundation.NSNumber
+	SupportedVideoZoomRangesForDepthDataDelivery() []*raw.AVZoomRange
+	ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool
+	SupportedMaxPhotoDimensions() []*foundation.NSValue
+	SecondaryNativeResolutionZoomFactors() []*foundation.NSNumber
+	IsAutoVideoFrameRateSupported() bool
+	IsSpatialVideoCaptureSupported() bool
+	IsCenterStageSupported() bool
+	VideoMinZoomFactorForCenterStage() float64
+	VideoMaxZoomFactorForCenterStage() float64
+	VideoFrameRateRangeForCenterStage() *FrameRateRange
+	IsPortraitEffectSupported() bool
+	VideoFrameRateRangeForPortraitEffect() *FrameRateRange
+	IsStudioLightSupported() bool
+	VideoFrameRateRangeForStudioLight() *FrameRateRange
+	ReactionEffectsSupported() bool
+	VideoFrameRateRangeForReactionEffectsInProgress() *FrameRateRange
+	IsBackgroundReplacementSupported() bool
+	VideoFrameRateRangeForBackgroundReplacement() *FrameRateRange
+	IsEdgeLightSupported() bool
+	IsCinematicVideoCaptureSupported() bool
+	DefaultSimulatedAperture() float32
+	MinSimulatedAperture() float32
+	MaxSimulatedAperture() float32
+	VideoMinZoomFactorForCinematicVideo() float64
+	VideoMaxZoomFactorForCinematicVideo() float64
+	VideoFrameRateRangeForCinematicVideo() *FrameRateRange
+	VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32
+	SupportedDynamicAspectRatios() []*foundation.NSString
+	IsSmartFramingSupported() bool
+	IsCameraLensSmudgeDetectionSupported() bool
+}
+
+var _ CaptureDeviceFormatable = (*CaptureDeviceFormat)(nil)
 

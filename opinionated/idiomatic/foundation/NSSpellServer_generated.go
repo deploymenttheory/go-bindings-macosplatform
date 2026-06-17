@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,5 +30,43 @@ func (x *SpellServer) WithDelegate(delegate raw.NSSpellServerDelegate) *SpellSer
 	return x
 }
 
+// RegisterLanguageByVendor calls the underlying RegisterLanguageByVendor.
+func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
+	return x.inner.RegisterLanguageByVendor(foundation.NSStringStringWithUTF8String(language), foundation.NSStringStringWithUTF8String(vendor))
+}
+
+// IsWordInUserDictionariesCaseSensitive calls the underlying IsWordInUserDictionariesCaseSensitive.
+func (x *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
+	return x.inner.IsWordInUserDictionariesCaseSensitive(foundation.NSStringStringWithUTF8String(word), flag)
+}
+
+// Run calls the underlying Run.
+func (x *SpellServer) Run() {
+	x.inner.Run()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SpellServer) Delegate() raw.NSSpellServerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SpellServer) SetDelegate(delegate raw.NSSpellServerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *SpellServer) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// SpellServerable is the interface implemented by [SpellServer], for mocking and DI.
+type SpellServerable interface {
+	Unwrap() *raw.NSSpellServer
+	WithDelegate(delegate raw.NSSpellServerDelegate) *SpellServer
+	RegisterLanguageByVendor(language string, vendor string) bool
+	IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool
+	Run()
+	Delegate() raw.NSSpellServerDelegate
+	SetDelegate(delegate raw.NSSpellServerDelegate)
+}
+
+var _ SpellServerable = (*SpellServer)(nil)
 

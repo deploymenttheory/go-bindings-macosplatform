@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -25,7 +26,62 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 	return &CNNBatchNormalizationState{inner: raw.MPSCNNBatchNormalizationStateFromID(_id)}
 }
 
+// Reset calls the underlying Reset.
+func (x *CNNBatchNormalizationState) Reset() {
+	x.inner.Reset()
+}
+
+// Gamma calls the underlying Gamma.
+func (x *CNNBatchNormalizationState) Gamma() metal.MTLBuffer {
+	return x.inner.Gamma()
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNBatchNormalizationState) Beta() metal.MTLBuffer {
+	return x.inner.Beta()
+}
+
+// Mean calls the underlying Mean.
+func (x *CNNBatchNormalizationState) Mean() metal.MTLBuffer {
+	return x.inner.Mean()
+}
+
+// Variance calls the underlying Variance.
+func (x *CNNBatchNormalizationState) Variance() metal.MTLBuffer {
+	return x.inner.Variance()
+}
+
+// GradientForGamma calls the underlying GradientForGamma.
+func (x *CNNBatchNormalizationState) GradientForGamma() metal.MTLBuffer {
+	return x.inner.GradientForGamma()
+}
+
+// GradientForBeta calls the underlying GradientForBeta.
+func (x *CNNBatchNormalizationState) GradientForBeta() metal.MTLBuffer {
+	return x.inner.GradientForBeta()
+}
+
+// BatchNormalization calls the underlying BatchNormalization.
+func (x *CNNBatchNormalizationState) BatchNormalization() *mpsneuralnetwork.MPSCNNBatchNormalization {
+	return x.inner.BatchNormalization()
+}
+
 func (x *CNNBatchNormalizationState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
 
 func (x *CNNBatchNormalizationState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+
+// CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
+type CNNBatchNormalizationStateable interface {
+	Unwrap() *raw.MPSCNNBatchNormalizationState
+	Reset()
+	Gamma() metal.MTLBuffer
+	Beta() metal.MTLBuffer
+	Mean() metal.MTLBuffer
+	Variance() metal.MTLBuffer
+	GradientForGamma() metal.MTLBuffer
+	GradientForBeta() metal.MTLBuffer
+	BatchNormalization() *mpsneuralnetwork.MPSCNNBatchNormalization
+}
+
+var _ CNNBatchNormalizationStateable = (*CNNBatchNormalizationState)(nil)
 

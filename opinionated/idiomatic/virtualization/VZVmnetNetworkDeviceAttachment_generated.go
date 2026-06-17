@@ -25,5 +25,18 @@ func NewVmnetNetworkDeviceAttachmentWithNetwork(network unsafe.Pointer) *VmnetNe
 	return &VmnetNetworkDeviceAttachment{inner: raw.VZVmnetNetworkDeviceAttachmentFromID(_id)}
 }
 
+// Network calls the underlying Network.
+func (x *VmnetNetworkDeviceAttachment) Network() unsafe.Pointer {
+	return x.inner.Network()
+}
+
 func (x *VmnetNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+
+// VmnetNetworkDeviceAttachmentable is the interface implemented by [VmnetNetworkDeviceAttachment], for mocking and DI.
+type VmnetNetworkDeviceAttachmentable interface {
+	Unwrap() *raw.VZVmnetNetworkDeviceAttachment
+	Network() unsafe.Pointer
+}
+
+var _ VmnetNetworkDeviceAttachmentable = (*VmnetNetworkDeviceAttachment)(nil)
 

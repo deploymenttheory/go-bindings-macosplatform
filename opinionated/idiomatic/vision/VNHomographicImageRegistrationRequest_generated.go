@@ -31,3 +31,10 @@ func (x *HomographicImageRegistrationRequest) asImageBasedRequest() *raw.VNImage
 
 func (x *HomographicImageRegistrationRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest }
 
+// HomographicImageRegistrationRequestable is the interface implemented by [HomographicImageRegistrationRequest], for mocking and DI.
+type HomographicImageRegistrationRequestable interface {
+	Unwrap() *raw.VNHomographicImageRegistrationRequest
+}
+
+var _ HomographicImageRegistrationRequestable = (*HomographicImageRegistrationRequest)(nil)
+

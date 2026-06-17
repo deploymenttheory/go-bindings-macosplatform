@@ -42,3 +42,10 @@ func (x *LogicalTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.inn
 
 func (x *LogicalTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
 
+// LogicalTestable is the interface implemented by [LogicalTest], for mocking and DI.
+type LogicalTestable interface {
+	Unwrap() *raw.NSLogicalTest
+}
+
+var _ LogicalTestable = (*LogicalTest)(nil)
+

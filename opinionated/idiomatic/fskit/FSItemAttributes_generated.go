@@ -7,6 +7,7 @@ package fskit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ItemAttributes wraps [raw.FSItemAttributes] with a fluent Go API.
@@ -95,5 +96,252 @@ func (x *ItemAttributes) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO b
 	return x
 }
 
+// InvalidateAllProperties calls the underlying InvalidateAllProperties.
+func (x *ItemAttributes) InvalidateAllProperties() {
+	x.inner.InvalidateAllProperties()
+}
+
+// IsValid calls the underlying IsValid.
+func (x *ItemAttributes) IsValid(attribute raw.FSItemAttribute) bool {
+	return x.inner.IsValid(attribute)
+}
+
+// Uid calls the underlying Uid.
+func (x *ItemAttributes) Uid() uint32 {
+	return x.inner.Uid()
+}
+
+// SetUid calls the underlying SetUid.
+func (x *ItemAttributes) SetUid(uid uint32) {
+	x.inner.SetUid(uid)
+}
+
+// Gid calls the underlying Gid.
+func (x *ItemAttributes) Gid() uint32 {
+	return x.inner.Gid()
+}
+
+// SetGid calls the underlying SetGid.
+func (x *ItemAttributes) SetGid(gid uint32) {
+	x.inner.SetGid(gid)
+}
+
+// Mode calls the underlying Mode.
+func (x *ItemAttributes) Mode() uint32 {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *ItemAttributes) SetMode(mode uint32) {
+	x.inner.SetMode(mode)
+}
+
+// Type calls the underlying Type.
+func (x *ItemAttributes) Type() raw.FSItemType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *ItemAttributes) SetType(type_ raw.FSItemType) {
+	x.inner.SetType(type_)
+}
+
+// LinkCount calls the underlying LinkCount.
+func (x *ItemAttributes) LinkCount() uint32 {
+	return x.inner.LinkCount()
+}
+
+// SetLinkCount calls the underlying SetLinkCount.
+func (x *ItemAttributes) SetLinkCount(linkCount uint32) {
+	x.inner.SetLinkCount(linkCount)
+}
+
+// Flags calls the underlying Flags.
+func (x *ItemAttributes) Flags() uint32 {
+	return x.inner.Flags()
+}
+
+// SetFlags calls the underlying SetFlags.
+func (x *ItemAttributes) SetFlags(flags uint32) {
+	x.inner.SetFlags(flags)
+}
+
+// Size calls the underlying Size.
+func (x *ItemAttributes) Size() uint64 {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *ItemAttributes) SetSize(size uint64) {
+	x.inner.SetSize(size)
+}
+
+// AllocSize calls the underlying AllocSize.
+func (x *ItemAttributes) AllocSize() uint64 {
+	return x.inner.AllocSize()
+}
+
+// SetAllocSize calls the underlying SetAllocSize.
+func (x *ItemAttributes) SetAllocSize(allocSize uint64) {
+	x.inner.SetAllocSize(allocSize)
+}
+
+// FileID calls the underlying FileID.
+func (x *ItemAttributes) FileID() raw.FSItemID {
+	return x.inner.FileID()
+}
+
+// SetFileID calls the underlying SetFileID.
+func (x *ItemAttributes) SetFileID(fileID raw.FSItemID) {
+	x.inner.SetFileID(fileID)
+}
+
+// ParentID calls the underlying ParentID.
+func (x *ItemAttributes) ParentID() raw.FSItemID {
+	return x.inner.ParentID()
+}
+
+// SetParentID calls the underlying SetParentID.
+func (x *ItemAttributes) SetParentID(parentID raw.FSItemID) {
+	x.inner.SetParentID(parentID)
+}
+
+// SupportsLimitedXAttrs calls the underlying SupportsLimitedXAttrs.
+func (x *ItemAttributes) SupportsLimitedXAttrs() bool {
+	return x.inner.SupportsLimitedXAttrs()
+}
+
+// SetSupportsLimitedXAttrs calls the underlying SetSupportsLimitedXAttrs.
+func (x *ItemAttributes) SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool) {
+	x.inner.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
+}
+
+// InhibitKernelOffloadedIO calls the underlying InhibitKernelOffloadedIO.
+func (x *ItemAttributes) InhibitKernelOffloadedIO() bool {
+	return x.inner.InhibitKernelOffloadedIO()
+}
+
+// SetInhibitKernelOffloadedIO calls the underlying SetInhibitKernelOffloadedIO.
+func (x *ItemAttributes) SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) {
+	x.inner.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
+}
+
+// ModifyTime calls the underlying ModifyTime.
+func (x *ItemAttributes) ModifyTime() unsafe.Pointer {
+	return x.inner.ModifyTime()
+}
+
+// SetModifyTime calls the underlying SetModifyTime.
+func (x *ItemAttributes) SetModifyTime(modifyTime unsafe.Pointer) {
+	x.inner.SetModifyTime(modifyTime)
+}
+
+// AddedTime calls the underlying AddedTime.
+func (x *ItemAttributes) AddedTime() unsafe.Pointer {
+	return x.inner.AddedTime()
+}
+
+// SetAddedTime calls the underlying SetAddedTime.
+func (x *ItemAttributes) SetAddedTime(addedTime unsafe.Pointer) {
+	x.inner.SetAddedTime(addedTime)
+}
+
+// ChangeTime calls the underlying ChangeTime.
+func (x *ItemAttributes) ChangeTime() unsafe.Pointer {
+	return x.inner.ChangeTime()
+}
+
+// SetChangeTime calls the underlying SetChangeTime.
+func (x *ItemAttributes) SetChangeTime(changeTime unsafe.Pointer) {
+	x.inner.SetChangeTime(changeTime)
+}
+
+// AccessTime calls the underlying AccessTime.
+func (x *ItemAttributes) AccessTime() unsafe.Pointer {
+	return x.inner.AccessTime()
+}
+
+// SetAccessTime calls the underlying SetAccessTime.
+func (x *ItemAttributes) SetAccessTime(accessTime unsafe.Pointer) {
+	x.inner.SetAccessTime(accessTime)
+}
+
+// BirthTime calls the underlying BirthTime.
+func (x *ItemAttributes) BirthTime() unsafe.Pointer {
+	return x.inner.BirthTime()
+}
+
+// SetBirthTime calls the underlying SetBirthTime.
+func (x *ItemAttributes) SetBirthTime(birthTime unsafe.Pointer) {
+	x.inner.SetBirthTime(birthTime)
+}
+
+// BackupTime calls the underlying BackupTime.
+func (x *ItemAttributes) BackupTime() unsafe.Pointer {
+	return x.inner.BackupTime()
+}
+
+// SetBackupTime calls the underlying SetBackupTime.
+func (x *ItemAttributes) SetBackupTime(backupTime unsafe.Pointer) {
+	x.inner.SetBackupTime(backupTime)
+}
+
 func (x *ItemAttributes) asItemAttributes() *raw.FSItemAttributes { return x.inner }
+
+// ItemAttributesable is the interface implemented by [ItemAttributes], for mocking and DI.
+type ItemAttributesable interface {
+	Unwrap() *raw.FSItemAttributes
+	WithUid(uid uint32) *ItemAttributes
+	WithGid(gid uint32) *ItemAttributes
+	WithMode(mode uint32) *ItemAttributes
+	WithType(type_ raw.FSItemType) *ItemAttributes
+	WithLinkCount(linkCount uint32) *ItemAttributes
+	WithFlags(flags uint32) *ItemAttributes
+	WithSize(size uint64) *ItemAttributes
+	WithAllocSize(allocSize uint64) *ItemAttributes
+	WithFileID(fileID raw.FSItemID) *ItemAttributes
+	WithParentID(parentID raw.FSItemID) *ItemAttributes
+	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemAttributes
+	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemAttributes
+	InvalidateAllProperties()
+	IsValid(attribute raw.FSItemAttribute) bool
+	Uid() uint32
+	SetUid(uid uint32)
+	Gid() uint32
+	SetGid(gid uint32)
+	Mode() uint32
+	SetMode(mode uint32)
+	Type() raw.FSItemType
+	SetType(type_ raw.FSItemType)
+	LinkCount() uint32
+	SetLinkCount(linkCount uint32)
+	Flags() uint32
+	SetFlags(flags uint32)
+	Size() uint64
+	SetSize(size uint64)
+	AllocSize() uint64
+	SetAllocSize(allocSize uint64)
+	FileID() raw.FSItemID
+	SetFileID(fileID raw.FSItemID)
+	ParentID() raw.FSItemID
+	SetParentID(parentID raw.FSItemID)
+	SupportsLimitedXAttrs() bool
+	SetSupportsLimitedXAttrs(supportsLimitedXAttrs bool)
+	InhibitKernelOffloadedIO() bool
+	SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool)
+	ModifyTime() unsafe.Pointer
+	SetModifyTime(modifyTime unsafe.Pointer)
+	AddedTime() unsafe.Pointer
+	SetAddedTime(addedTime unsafe.Pointer)
+	ChangeTime() unsafe.Pointer
+	SetChangeTime(changeTime unsafe.Pointer)
+	AccessTime() unsafe.Pointer
+	SetAccessTime(accessTime unsafe.Pointer)
+	BirthTime() unsafe.Pointer
+	SetBirthTime(birthTime unsafe.Pointer)
+	BackupTime() unsafe.Pointer
+	SetBackupTime(backupTime unsafe.Pointer)
+}
+
+var _ ItemAttributesable = (*ItemAttributes)(nil)
 

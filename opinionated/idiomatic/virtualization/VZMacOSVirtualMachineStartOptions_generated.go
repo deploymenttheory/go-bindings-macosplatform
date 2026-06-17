@@ -29,5 +29,25 @@ func (x *MacOSVirtualMachineStartOptions) WithStartUpFromMacOSRecovery(startUpFr
 	return x
 }
 
+// StartUpFromMacOSRecovery calls the underlying StartUpFromMacOSRecovery.
+func (x *MacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
+	return x.inner.StartUpFromMacOSRecovery()
+}
+
+// SetStartUpFromMacOSRecovery calls the underlying SetStartUpFromMacOSRecovery.
+func (x *MacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
+	x.inner.SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery)
+}
+
 func (x *MacOSVirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions { return &x.inner.VZVirtualMachineStartOptions }
+
+// MacOSVirtualMachineStartOptionsable is the interface implemented by [MacOSVirtualMachineStartOptions], for mocking and DI.
+type MacOSVirtualMachineStartOptionsable interface {
+	Unwrap() *raw.VZMacOSVirtualMachineStartOptions
+	WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions
+	StartUpFromMacOSRecovery() bool
+	SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool)
+}
+
+var _ MacOSVirtualMachineStartOptionsable = (*MacOSVirtualMachineStartOptions)(nil)
 

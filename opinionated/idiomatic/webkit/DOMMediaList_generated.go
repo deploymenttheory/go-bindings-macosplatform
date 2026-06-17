@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,7 +31,59 @@ func (x *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
 	return x
 }
 
+// Item calls the underlying Item.
+func (x *DOMMediaList) Item(index uint) string {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DeleteMedium calls the underlying DeleteMedium.
+func (x *DOMMediaList) DeleteMedium(oldMedium string) {
+	x.inner.DeleteMedium(foundation.NSStringStringWithUTF8String(oldMedium))
+}
+
+// AppendMedium calls the underlying AppendMedium.
+func (x *DOMMediaList) AppendMedium(newMedium string) {
+	x.inner.AppendMedium(foundation.NSStringStringWithUTF8String(newMedium))
+}
+
+// MediaText calls the underlying MediaText.
+func (x *DOMMediaList) MediaText() string {
+	_r := x.inner.MediaText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMediaText calls the underlying SetMediaText.
+func (x *DOMMediaList) SetMediaText(mediaText string) {
+	x.inner.SetMediaText(foundation.NSStringStringWithUTF8String(mediaText))
+}
+
+// Length calls the underlying Length.
+func (x *DOMMediaList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMMediaList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMMediaList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMMediaListable is the interface implemented by [DOMMediaList], for mocking and DI.
+type DOMMediaListable interface {
+	Unwrap() *raw.DOMMediaList
+	WithMediaText(mediaText string) *DOMMediaList
+	Item(index uint) string
+	DeleteMedium(oldMedium string)
+	AppendMedium(newMedium string)
+	MediaText() string
+	SetMediaText(mediaText string)
+	Length() uint
+}
+
+var _ DOMMediaListable = (*DOMMediaList)(nil)
 

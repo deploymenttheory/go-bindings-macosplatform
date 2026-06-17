@@ -23,7 +23,24 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 	return &CNNConvolutionTransposeGradientState{inner: raw.MPSCNNConvolutionTransposeGradientStateFromID(_id)}
 }
 
+// ConvolutionTranspose calls the underlying ConvolutionTranspose.
+func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
+	_r := x.inner.ConvolutionTranspose()
+	if _r == nil {
+		return nil
+	}
+	return &CNNConvolutionTranspose{inner: _r}
+}
+
 func (x *CNNConvolutionTransposeGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState { return &x.inner.MPSCNNConvolutionGradientState }
 
 func (x *CNNConvolutionTransposeGradientState) asNNGradientState() *raw.MPSNNGradientState { return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState }
+
+// CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
+type CNNConvolutionTransposeGradientStateable interface {
+	Unwrap() *raw.MPSCNNConvolutionTransposeGradientState
+	ConvolutionTranspose() *CNNConvolutionTranspose
+}
+
+var _ CNNConvolutionTransposeGradientStateable = (*CNNConvolutionTransposeGradientState)(nil)
 

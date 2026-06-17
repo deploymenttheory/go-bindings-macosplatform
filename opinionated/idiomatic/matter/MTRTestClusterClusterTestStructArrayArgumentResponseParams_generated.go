@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestStructArrayArgumentResponseParams() *MTRTestClu
 
 func (x *MTRTestClusterClusterTestStructArrayArgumentResponseParams) asMTRUnitTestingClusterTestStructArrayArgumentResponseParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams { return &x.inner.MTRUnitTestingClusterTestStructArrayArgumentResponseParams }
 
+// MTRTestClusterClusterTestStructArrayArgumentResponseParamsable is the interface implemented by [MTRTestClusterClusterTestStructArrayArgumentResponseParams], for mocking and DI.
+type MTRTestClusterClusterTestStructArrayArgumentResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestStructArrayArgumentResponseParams
+}
+
+var _ MTRTestClusterClusterTestStructArrayArgumentResponseParamsable = (*MTRTestClusterClusterTestStructArrayArgumentResponseParams)(nil)
+

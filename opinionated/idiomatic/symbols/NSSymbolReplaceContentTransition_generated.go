@@ -23,5 +23,32 @@ func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
 	return &SymbolReplaceContentTransition{inner: raw.NSSymbolReplaceContentTransitionFromID(_id)}
 }
 
+// TransitionWithByLayer calls the underlying TransitionWithByLayer.
+func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
+	_r := x.inner.TransitionWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolReplaceContentTransition{inner: _r}
+}
+
+// TransitionWithWholeSymbol calls the underlying TransitionWithWholeSymbol.
+func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
+	_r := x.inner.TransitionWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolReplaceContentTransition{inner: _r}
+}
+
 func (x *SymbolReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
+
+// SymbolReplaceContentTransitionable is the interface implemented by [SymbolReplaceContentTransition], for mocking and DI.
+type SymbolReplaceContentTransitionable interface {
+	Unwrap() *raw.NSSymbolReplaceContentTransition
+	TransitionWithByLayer() *SymbolReplaceContentTransition
+	TransitionWithWholeSymbol() *SymbolReplaceContentTransition
+}
+
+var _ SymbolReplaceContentTransitionable = (*SymbolReplaceContentTransition)(nil)
 

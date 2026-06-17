@@ -37,3 +37,23 @@ func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRe
 	return x
 }
 
+// DstOffsetRequired calls the underlying DstOffsetRequired.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() *foundation.NSNumber {
+	return x.inner.DstOffsetRequired()
+}
+
+// SetDstOffsetRequired calls the underlying SetDstOffsetRequired.
+func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) SetDstOffsetRequired(dstOffsetRequired *foundation.NSNumber) {
+	x.inner.SetDstOffsetRequired(dstOffsetRequired)
+}
+
+// MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTimeZoneResponseParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetTimeZoneResponseParams
+	WithDstOffsetRequired(dstOffsetRequired *foundation.NSNumber) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
+	DstOffsetRequired() *foundation.NSNumber
+	SetDstOffsetRequired(dstOffsetRequired *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable = (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams)(nil)
+

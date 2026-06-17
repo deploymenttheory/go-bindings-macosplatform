@@ -37,3 +37,10 @@ func (x *NNPadGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return
 
 func (x *NNPadGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// NNPadGradientable is the interface implemented by [NNPadGradient], for mocking and DI.
+type NNPadGradientable interface {
+	Unwrap() *raw.MPSNNPadGradient
+}
+
+var _ NNPadGradientable = (*NNPadGradient)(nil)
+

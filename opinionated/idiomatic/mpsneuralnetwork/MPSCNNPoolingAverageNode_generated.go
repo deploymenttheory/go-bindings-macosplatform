@@ -27,3 +27,10 @@ func (x *CNNPoolingAverageNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode { retu
 
 func (x *CNNPoolingAverageNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
 
+// CNNPoolingAverageNodeable is the interface implemented by [CNNPoolingAverageNode], for mocking and DI.
+type CNNPoolingAverageNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingAverageNode
+}
+
+var _ CNNPoolingAverageNodeable = (*CNNPoolingAverageNode)(nil)
+

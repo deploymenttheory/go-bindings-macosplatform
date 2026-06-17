@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RenderingSession wraps [raw.CNRenderingSession] with a fluent Go API.
@@ -25,4 +26,57 @@ func NewRenderingSessionWithCommandQueueSessionAttributesPreferredTransformQuali
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCommandQueue:sessionAttributes:preferredTransform:quality:"), commandQueue, sessionAttributes.Ptr(), preferredTransform, quality)
 	return &RenderingSession{inner: raw.CNRenderingSessionFromID(_id)}
 }
+
+// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage.
+func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationImage unsafe.Pointer) bool {
+	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationImage)
+}
+
+// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA.
+func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationRGBA metal.MTLTexture) bool {
+	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationRGBA)
+}
+
+// EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma calls the underlying EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma.
+func (x *RenderingSession) EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationLuma metal.MTLTexture, destinationChroma metal.MTLTexture) bool {
+	return x.inner.EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer, frameAttributes, sourceImage, sourceDisparity, destinationLuma, destinationChroma)
+}
+
+// CommandQueue calls the underlying CommandQueue.
+func (x *RenderingSession) CommandQueue() metal.MTLCommandQueue {
+	return x.inner.CommandQueue()
+}
+
+// SessionAttributes calls the underlying SessionAttributes.
+func (x *RenderingSession) SessionAttributes() *RenderingSessionAttributes {
+	_r := x.inner.SessionAttributes()
+	if _r == nil {
+		return nil
+	}
+	return &RenderingSessionAttributes{inner: _r}
+}
+
+// PreferredTransform calls the underlying PreferredTransform.
+func (x *RenderingSession) PreferredTransform() corefoundation.CGAffineTransform {
+	return x.inner.PreferredTransform()
+}
+
+// Quality calls the underlying Quality.
+func (x *RenderingSession) Quality() raw.CNRenderingQuality {
+	return x.inner.Quality()
+}
+
+// RenderingSessionable is the interface implemented by [RenderingSession], for mocking and DI.
+type RenderingSessionable interface {
+	Unwrap() *raw.CNRenderingSession
+	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationImage(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationImage unsafe.Pointer) bool
+	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationRGBA(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationRGBA metal.MTLTexture) bool
+	EncodeRenderToCommandBufferFrameAttributesSourceImageSourceDisparityDestinationLumaDestinationChroma(commandBuffer metal.MTLCommandBuffer, frameAttributes *raw.CNRenderingSessionFrameAttributes, sourceImage unsafe.Pointer, sourceDisparity unsafe.Pointer, destinationLuma metal.MTLTexture, destinationChroma metal.MTLTexture) bool
+	CommandQueue() metal.MTLCommandQueue
+	SessionAttributes() *RenderingSessionAttributes
+	PreferredTransform() corefoundation.CGAffineTransform
+	Quality() raw.CNRenderingQuality
+}
+
+var _ RenderingSessionable = (*RenderingSession)(nil)
 

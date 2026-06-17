@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,5 +55,89 @@ func (x *TokenSmartCardPINAuthOperation) WithPIN(pIN string) *TokenSmartCardPINA
 	return x
 }
 
+// PINFormat calls the underlying PINFormat.
+func (x *TokenSmartCardPINAuthOperation) PINFormat() *SmartCardPINFormat {
+	_r := x.inner.PINFormat()
+	if _r == nil {
+		return nil
+	}
+	return &SmartCardPINFormat{inner: _r}
+}
+
+// SetPINFormat calls the underlying SetPINFormat.
+func (x *TokenSmartCardPINAuthOperation) SetPINFormat(pINFormat *raw.TKSmartCardPINFormat) {
+	x.inner.SetPINFormat(pINFormat)
+}
+
+// APDUTemplate calls the underlying APDUTemplate.
+func (x *TokenSmartCardPINAuthOperation) APDUTemplate() *foundation.NSData {
+	return x.inner.APDUTemplate()
+}
+
+// SetAPDUTemplate calls the underlying SetAPDUTemplate.
+func (x *TokenSmartCardPINAuthOperation) SetAPDUTemplate(aPDUTemplate *foundation.NSData) {
+	x.inner.SetAPDUTemplate(aPDUTemplate)
+}
+
+// PINByteOffset calls the underlying PINByteOffset.
+func (x *TokenSmartCardPINAuthOperation) PINByteOffset() int {
+	return x.inner.PINByteOffset()
+}
+
+// SetPINByteOffset calls the underlying SetPINByteOffset.
+func (x *TokenSmartCardPINAuthOperation) SetPINByteOffset(pINByteOffset int) {
+	x.inner.SetPINByteOffset(pINByteOffset)
+}
+
+// SmartCard calls the underlying SmartCard.
+func (x *TokenSmartCardPINAuthOperation) SmartCard() *SmartCard {
+	_r := x.inner.SmartCard()
+	if _r == nil {
+		return nil
+	}
+	return &SmartCard{inner: _r}
+}
+
+// SetSmartCard calls the underlying SetSmartCard.
+func (x *TokenSmartCardPINAuthOperation) SetSmartCard(smartCard *raw.TKSmartCard) {
+	x.inner.SetSmartCard(smartCard)
+}
+
+// PIN calls the underlying PIN.
+func (x *TokenSmartCardPINAuthOperation) PIN() string {
+	_r := x.inner.PIN()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPIN calls the underlying SetPIN.
+func (x *TokenSmartCardPINAuthOperation) SetPIN(pIN string) {
+	x.inner.SetPIN(foundation.NSStringStringWithUTF8String(pIN))
+}
+
 func (x *TokenSmartCardPINAuthOperation) asTokenAuthOperation() *raw.TKTokenAuthOperation { return &x.inner.TKTokenAuthOperation }
+
+// TokenSmartCardPINAuthOperationable is the interface implemented by [TokenSmartCardPINAuthOperation], for mocking and DI.
+type TokenSmartCardPINAuthOperationable interface {
+	Unwrap() *raw.TKTokenSmartCardPINAuthOperation
+	WithPINFormat(pINFormat *raw.TKSmartCardPINFormat) *TokenSmartCardPINAuthOperation
+	WithAPDUTemplate(aPDUTemplate *foundation.NSData) *TokenSmartCardPINAuthOperation
+	WithPINByteOffset(pINByteOffset int) *TokenSmartCardPINAuthOperation
+	WithSmartCard(smartCard *raw.TKSmartCard) *TokenSmartCardPINAuthOperation
+	WithPIN(pIN string) *TokenSmartCardPINAuthOperation
+	PINFormat() *SmartCardPINFormat
+	SetPINFormat(pINFormat *raw.TKSmartCardPINFormat)
+	APDUTemplate() *foundation.NSData
+	SetAPDUTemplate(aPDUTemplate *foundation.NSData)
+	PINByteOffset() int
+	SetPINByteOffset(pINByteOffset int)
+	SmartCard() *SmartCard
+	SetSmartCard(smartCard *raw.TKSmartCard)
+	PIN() string
+	SetPIN(pIN string)
+}
+
+var _ TokenSmartCardPINAuthOperationable = (*TokenSmartCardPINAuthOperation)(nil)
 

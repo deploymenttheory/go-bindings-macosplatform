@@ -23,3 +23,10 @@ func New_cp_layer_renderer_capabilities() *_cp_layer_renderer_capabilities {
 	return &_cp_layer_renderer_capabilities{inner: raw.CP_OBJECT_cp_layer_renderer_capabilitiesFromID(_id)}
 }
 
+// _cp_layer_renderer_capabilitiesable is the interface implemented by [_cp_layer_renderer_capabilities], for mocking and DI.
+type _cp_layer_renderer_capabilitiesable interface {
+	Unwrap() *raw.CP_OBJECT_cp_layer_renderer_capabilities
+}
+
+var _ _cp_layer_renderer_capabilitiesable = (*_cp_layer_renderer_capabilities)(nil)
+

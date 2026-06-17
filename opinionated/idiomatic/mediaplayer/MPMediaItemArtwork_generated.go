@@ -5,6 +5,7 @@
 package mediaplayer
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/ebitengine/purego/objc"
@@ -24,4 +25,29 @@ func NewMediaItemArtworkWithBoundsSizeRequestHandler(boundsSize corefoundation.C
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBoundsSize:requestHandler:"), boundsSize, requestHandler)
 	return &MediaItemArtwork{inner: raw.MPMediaItemArtworkFromID(_id)}
 }
+
+// ImageWithSize calls the underlying ImageWithSize.
+func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) *appkit.NSImage {
+	return x.inner.ImageWithSize(size)
+}
+
+// Bounds calls the underlying Bounds.
+func (x *MediaItemArtwork) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// ImageCropRect calls the underlying ImageCropRect.
+func (x *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
+	return x.inner.ImageCropRect()
+}
+
+// MediaItemArtworkable is the interface implemented by [MediaItemArtwork], for mocking and DI.
+type MediaItemArtworkable interface {
+	Unwrap() *raw.MPMediaItemArtwork
+	ImageWithSize(size corefoundation.CGSize) *appkit.NSImage
+	Bounds() corefoundation.CGRect
+	ImageCropRect() corefoundation.CGRect
+}
+
+var _ MediaItemArtworkable = (*MediaItemArtwork)(nil)
 

@@ -49,5 +49,51 @@ func (x *MTRUnitTestingClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) Arg2() *foundation.NSNumber {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) SetArg2(arg2 *foundation.NSNumber) {
+	x.inner.SetArg2(arg2)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEnumsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestEnumsResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestEnumsResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestEnumsResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEnumsResponseParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsResponseParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEnumsResponseParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	Arg2() *foundation.NSNumber
+	SetArg2(arg2 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEnumsResponseParamsable = (*MTRUnitTestingClusterTestEnumsResponseParams)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 
 func (x *MTRContentLauncherClusterParameter) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct { return &x.inner.MTRContentLauncherClusterParameterStruct }
 
+// MTRContentLauncherClusterParameterable is the interface implemented by [MTRContentLauncherClusterParameter], for mocking and DI.
+type MTRContentLauncherClusterParameterable interface {
+	Unwrap() *raw.MTRContentLauncherClusterParameter
+}
+
+var _ MTRContentLauncherClusterParameterable = (*MTRContentLauncherClusterParameter)(nil)
+

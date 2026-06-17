@@ -68,22 +68,40 @@ func (x *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*raw.CKUse
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKUserIdentityLookupInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKUserIdentityLookupInfo {
+		return raw.CKUserIdentityLookupInfoFromID(purego.Retain(_id))
+	})
+}
+
+// SetUserIdentityLookupInfos calls the underlying SetUserIdentityLookupInfos.
+func (x *DiscoverUserIdentitiesOperation) SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo]) {
+	x.inner.SetUserIdentityLookupInfos(userIdentityLookupInfos)
+}
+
+// UserIdentityDiscoveredBlock calls the underlying UserIdentityDiscoveredBlock.
+func (x *DiscoverUserIdentitiesOperation) UserIdentityDiscoveredBlock() objc.Block {
+	return x.inner.UserIdentityDiscoveredBlock()
+}
+
+// SetUserIdentityDiscoveredBlock calls the underlying SetUserIdentityDiscoveredBlock.
+func (x *DiscoverUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo)) {
+	x.inner.SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock)
+}
+
+// DiscoverUserIdentitiesCompletionBlock calls the underlying DiscoverUserIdentitiesCompletionBlock.
+func (x *DiscoverUserIdentitiesOperation) DiscoverUserIdentitiesCompletionBlock() objc.Block {
+	return x.inner.DiscoverUserIdentitiesCompletionBlock()
 }
 
 // SetDiscoverUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SetDiscoverUserIdentitiesCompletionBlock(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -94,4 +112,20 @@ func (x *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlo
 }
 
 func (x *DiscoverUserIdentitiesOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// DiscoverUserIdentitiesOperationable is the interface implemented by [DiscoverUserIdentitiesOperation], for mocking and DI.
+type DiscoverUserIdentitiesOperationable interface {
+	Unwrap() *raw.CKDiscoverUserIdentitiesOperation
+	WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *DiscoverUserIdentitiesOperation
+	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo)) *DiscoverUserIdentitiesOperation
+	WithDiscoverUserIdentitiesCompletionBlock(discoverUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverUserIdentitiesOperation
+	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
+	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
+	UserIdentityDiscoveredBlock() objc.Block
+	SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo))
+	DiscoverUserIdentitiesCompletionBlock() objc.Block
+	SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error
+}
+
+var _ DiscoverUserIdentitiesOperationable = (*DiscoverUserIdentitiesOperation)(nil)
 

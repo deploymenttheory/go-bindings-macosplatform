@@ -56,11 +56,11 @@ func (x *Interaction) WithGroupIdentifier(groupIdentifier string) *Interaction {
 func (x *Interaction) DonateInteractionWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DonateInteractionWithCompletion(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -69,4 +69,98 @@ func (x *Interaction) DonateInteractionWithCompletion(ctx context.Context) error
 		return ctx.Err()
 	}
 }
+
+// Intent calls the underlying Intent.
+func (x *Interaction) Intent() *Intent {
+	_r := x.inner.Intent()
+	if _r == nil {
+		return nil
+	}
+	return &Intent{inner: _r}
+}
+
+// IntentResponse calls the underlying IntentResponse.
+func (x *Interaction) IntentResponse() *IntentResponse {
+	_r := x.inner.IntentResponse()
+	if _r == nil {
+		return nil
+	}
+	return &IntentResponse{inner: _r}
+}
+
+// IntentHandlingStatus calls the underlying IntentHandlingStatus.
+func (x *Interaction) IntentHandlingStatus() raw.INIntentHandlingStatus {
+	return x.inner.IntentHandlingStatus()
+}
+
+// Direction calls the underlying Direction.
+func (x *Interaction) Direction() raw.INInteractionDirection {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *Interaction) SetDirection(direction raw.INInteractionDirection) {
+	x.inner.SetDirection(direction)
+}
+
+// DateInterval calls the underlying DateInterval.
+func (x *Interaction) DateInterval() *foundation.NSDateInterval {
+	return x.inner.DateInterval()
+}
+
+// SetDateInterval calls the underlying SetDateInterval.
+func (x *Interaction) SetDateInterval(dateInterval *foundation.NSDateInterval) {
+	x.inner.SetDateInterval(dateInterval)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Interaction) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *Interaction) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// GroupIdentifier calls the underlying GroupIdentifier.
+func (x *Interaction) GroupIdentifier() string {
+	_r := x.inner.GroupIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupIdentifier calls the underlying SetGroupIdentifier.
+func (x *Interaction) SetGroupIdentifier(groupIdentifier string) {
+	x.inner.SetGroupIdentifier(foundation.NSStringStringWithUTF8String(groupIdentifier))
+}
+
+// Interactionable is the interface implemented by [Interaction], for mocking and DI.
+type Interactionable interface {
+	Unwrap() *raw.INInteraction
+	WithDirection(direction raw.INInteractionDirection) *Interaction
+	WithDateInterval(dateInterval *foundation.NSDateInterval) *Interaction
+	WithIdentifier(identifier string) *Interaction
+	WithGroupIdentifier(groupIdentifier string) *Interaction
+	DonateInteractionWithCompletion(ctx context.Context) error
+	Intent() *Intent
+	IntentResponse() *IntentResponse
+	IntentHandlingStatus() raw.INIntentHandlingStatus
+	Direction() raw.INInteractionDirection
+	SetDirection(direction raw.INInteractionDirection)
+	DateInterval() *foundation.NSDateInterval
+	SetDateInterval(dateInterval *foundation.NSDateInterval)
+	Identifier() string
+	SetIdentifier(identifier string)
+	GroupIdentifier() string
+	SetGroupIdentifier(groupIdentifier string)
+}
+
+var _ Interactionable = (*Interaction)(nil)
 

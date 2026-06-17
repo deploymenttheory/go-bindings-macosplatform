@@ -36,3 +36,36 @@ func (x *MTRWriteParams) WithDataVersion(dataVersion *foundation.NSNumber) *MTRW
 	return x
 }
 
+// TimedWriteTimeout calls the underlying TimedWriteTimeout.
+func (x *MTRWriteParams) TimedWriteTimeout() *foundation.NSNumber {
+	return x.inner.TimedWriteTimeout()
+}
+
+// SetTimedWriteTimeout calls the underlying SetTimedWriteTimeout.
+func (x *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) {
+	x.inner.SetTimedWriteTimeout(timedWriteTimeout)
+}
+
+// DataVersion calls the underlying DataVersion.
+func (x *MTRWriteParams) DataVersion() *foundation.NSNumber {
+	return x.inner.DataVersion()
+}
+
+// SetDataVersion calls the underlying SetDataVersion.
+func (x *MTRWriteParams) SetDataVersion(dataVersion *foundation.NSNumber) {
+	x.inner.SetDataVersion(dataVersion)
+}
+
+// MTRWriteParamsable is the interface implemented by [MTRWriteParams], for mocking and DI.
+type MTRWriteParamsable interface {
+	Unwrap() *raw.MTRWriteParams
+	WithTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) *MTRWriteParams
+	WithDataVersion(dataVersion *foundation.NSNumber) *MTRWriteParams
+	TimedWriteTimeout() *foundation.NSNumber
+	SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber)
+	DataVersion() *foundation.NSNumber
+	SetDataVersion(dataVersion *foundation.NSNumber)
+}
+
+var _ MTRWriteParamsable = (*MTRWriteParams)(nil)
+

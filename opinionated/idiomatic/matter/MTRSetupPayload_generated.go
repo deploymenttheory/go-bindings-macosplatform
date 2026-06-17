@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -115,17 +116,146 @@ func (x *MTRSetupPayload) WithSetUpPINCode(setUpPINCode *foundation.NSNumber) *M
 	return x
 }
 
+// VendorElementWithTag calls the underlying VendorElementWithTag.
+func (x *MTRSetupPayload) VendorElementWithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo {
+	_r := x.inner.VendorElementWithTag(tag)
+	if _r == nil {
+		return nil
+	}
+	return &MTROptionalQRCodeInfo{inner: _r}
+}
+
+// RemoveVendorElementWithTag calls the underlying RemoveVendorElementWithTag.
+func (x *MTRSetupPayload) RemoveVendorElementWithTag(tag *foundation.NSNumber) {
+	x.inner.RemoveVendorElementWithTag(tag)
+}
+
+// AddOrReplaceVendorElement calls the underlying AddOrReplaceVendorElement.
+func (x *MTRSetupPayload) AddOrReplaceVendorElement(element *raw.MTROptionalQRCodeInfo) {
+	x.inner.AddOrReplaceVendorElement(element)
+}
+
+// ManualEntryCode calls the underlying ManualEntryCode.
+func (x *MTRSetupPayload) ManualEntryCode() string {
+	_r := x.inner.ManualEntryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// QrCodeString calls the underlying QrCodeString.
+func (x *MTRSetupPayload) QrCodeString() string {
+	_r := x.inner.QrCodeString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsConcatenated calls the underlying IsConcatenated.
+func (x *MTRSetupPayload) IsConcatenated() bool {
+	return x.inner.IsConcatenated()
+}
+
 // SubPayloads returns the collection as a Go slice.
 func (x *MTRSetupPayload) SubPayloads() []*raw.MTRSetupPayload {
 	arr := x.inner.SubPayloads()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRSetupPayload, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRSetupPayload {
+		return raw.MTRSetupPayloadFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubPayloads calls the underlying SetSubPayloads.
+func (x *MTRSetupPayload) SetSubPayloads(subPayloads *foundation.NSArray[*raw.MTRSetupPayload]) {
+	x.inner.SetSubPayloads(subPayloads)
+}
+
+// VendorID calls the underlying VendorID.
+func (x *MTRSetupPayload) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// SetVendorID calls the underlying SetVendorID.
+func (x *MTRSetupPayload) SetVendorID(vendorID *foundation.NSNumber) {
+	x.inner.SetVendorID(vendorID)
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRSetupPayload) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// SetProductID calls the underlying SetProductID.
+func (x *MTRSetupPayload) SetProductID(productID *foundation.NSNumber) {
+	x.inner.SetProductID(productID)
+}
+
+// CommissioningFlow calls the underlying CommissioningFlow.
+func (x *MTRSetupPayload) CommissioningFlow() raw.MTRCommissioningFlow {
+	return x.inner.CommissioningFlow()
+}
+
+// SetCommissioningFlow calls the underlying SetCommissioningFlow.
+func (x *MTRSetupPayload) SetCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow) {
+	x.inner.SetCommissioningFlow(commissioningFlow)
+}
+
+// DiscoveryCapabilities calls the underlying DiscoveryCapabilities.
+func (x *MTRSetupPayload) DiscoveryCapabilities() raw.MTRDiscoveryCapabilities {
+	return x.inner.DiscoveryCapabilities()
+}
+
+// SetDiscoveryCapabilities calls the underlying SetDiscoveryCapabilities.
+func (x *MTRSetupPayload) SetDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities) {
+	x.inner.SetDiscoveryCapabilities(discoveryCapabilities)
+}
+
+// Discriminator calls the underlying Discriminator.
+func (x *MTRSetupPayload) Discriminator() *foundation.NSNumber {
+	return x.inner.Discriminator()
+}
+
+// SetDiscriminator calls the underlying SetDiscriminator.
+func (x *MTRSetupPayload) SetDiscriminator(discriminator *foundation.NSNumber) {
+	x.inner.SetDiscriminator(discriminator)
+}
+
+// HasShortDiscriminator calls the underlying HasShortDiscriminator.
+func (x *MTRSetupPayload) HasShortDiscriminator() bool {
+	return x.inner.HasShortDiscriminator()
+}
+
+// SetHasShortDiscriminator calls the underlying SetHasShortDiscriminator.
+func (x *MTRSetupPayload) SetHasShortDiscriminator(hasShortDiscriminator bool) {
+	x.inner.SetHasShortDiscriminator(hasShortDiscriminator)
+}
+
+// SetupPasscode calls the underlying SetupPasscode.
+func (x *MTRSetupPayload) SetupPasscode() *foundation.NSNumber {
+	return x.inner.SetupPasscode()
+}
+
+// SetSetupPasscode calls the underlying SetSetupPasscode.
+func (x *MTRSetupPayload) SetSetupPasscode(setupPasscode *foundation.NSNumber) {
+	x.inner.SetSetupPasscode(setupPasscode)
+}
+
+// SerialNumber calls the underlying SerialNumber.
+func (x *MTRSetupPayload) SerialNumber() string {
+	_r := x.inner.SerialNumber()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSerialNumber calls the underlying SetSerialNumber.
+func (x *MTRSetupPayload) SetSerialNumber(serialNumber string) {
+	x.inner.SetSerialNumber(foundation.NSStringStringWithUTF8String(serialNumber))
 }
 
 // VendorElements returns the collection as a Go slice.
@@ -134,11 +264,21 @@ func (x *MTRSetupPayload) VendorElements() []*raw.MTROptionalQRCodeInfo {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTROptionalQRCodeInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTROptionalQRCodeInfo {
+		return raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))
+	})
+}
+
+// QrCodeString2 calls the underlying QrCodeString2.
+func (x *MTRSetupPayload) QrCodeString2() (string, error) {
+	_r, _err := x.inner.QrCodeString2()
+	if _err != nil {
+		return "", _err
 	}
-	return out
+	if _r == nil {
+		return "", nil
+	}
+	return purego.GoString(_r.Ptr()), nil
 }
 
 // GetAllOptionalVendorData returns the collection as a Go slice.
@@ -150,10 +290,77 @@ func (x *MTRSetupPayload) GetAllOptionalVendorData() ([]*raw.MTROptionalQRCodeIn
 	if arr == nil {
 		return nil, nil
 	}
-	out := make([]*raw.MTROptionalQRCodeInfo, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out, nil
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTROptionalQRCodeInfo {
+		return raw.MTROptionalQRCodeInfoFromID(purego.Retain(_id))
+	}), nil
 }
+
+// RendezvousInformation calls the underlying RendezvousInformation.
+func (x *MTRSetupPayload) RendezvousInformation() *foundation.NSNumber {
+	return x.inner.RendezvousInformation()
+}
+
+// SetRendezvousInformation calls the underlying SetRendezvousInformation.
+func (x *MTRSetupPayload) SetRendezvousInformation(rendezvousInformation *foundation.NSNumber) {
+	x.inner.SetRendezvousInformation(rendezvousInformation)
+}
+
+// SetUpPINCode calls the underlying SetUpPINCode.
+func (x *MTRSetupPayload) SetUpPINCode() *foundation.NSNumber {
+	return x.inner.SetUpPINCode()
+}
+
+// SetSetUpPINCode calls the underlying SetSetUpPINCode.
+func (x *MTRSetupPayload) SetSetUpPINCode(setUpPINCode *foundation.NSNumber) {
+	x.inner.SetSetUpPINCode(setUpPINCode)
+}
+
+// MTRSetupPayloadable is the interface implemented by [MTRSetupPayload], for mocking and DI.
+type MTRSetupPayloadable interface {
+	Unwrap() *raw.MTRSetupPayload
+	WithSubPayloads(items ...*raw.MTRSetupPayload) *MTRSetupPayload
+	WithVendorID(vendorID *foundation.NSNumber) *MTRSetupPayload
+	WithProductID(productID *foundation.NSNumber) *MTRSetupPayload
+	WithCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow) *MTRSetupPayload
+	WithDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities) *MTRSetupPayload
+	WithDiscriminator(discriminator *foundation.NSNumber) *MTRSetupPayload
+	WithHasShortDiscriminator(hasShortDiscriminator bool) *MTRSetupPayload
+	WithSetupPasscode(setupPasscode *foundation.NSNumber) *MTRSetupPayload
+	WithSerialNumber(serialNumber string) *MTRSetupPayload
+	WithRendezvousInformation(rendezvousInformation *foundation.NSNumber) *MTRSetupPayload
+	WithSetUpPINCode(setUpPINCode *foundation.NSNumber) *MTRSetupPayload
+	VendorElementWithTag(tag *foundation.NSNumber) *MTROptionalQRCodeInfo
+	RemoveVendorElementWithTag(tag *foundation.NSNumber)
+	AddOrReplaceVendorElement(element *raw.MTROptionalQRCodeInfo)
+	ManualEntryCode() string
+	QrCodeString() string
+	IsConcatenated() bool
+	SubPayloads() []*raw.MTRSetupPayload
+	SetSubPayloads(subPayloads *foundation.NSArray[*raw.MTRSetupPayload])
+	VendorID() *foundation.NSNumber
+	SetVendorID(vendorID *foundation.NSNumber)
+	ProductID() *foundation.NSNumber
+	SetProductID(productID *foundation.NSNumber)
+	CommissioningFlow() raw.MTRCommissioningFlow
+	SetCommissioningFlow(commissioningFlow raw.MTRCommissioningFlow)
+	DiscoveryCapabilities() raw.MTRDiscoveryCapabilities
+	SetDiscoveryCapabilities(discoveryCapabilities raw.MTRDiscoveryCapabilities)
+	Discriminator() *foundation.NSNumber
+	SetDiscriminator(discriminator *foundation.NSNumber)
+	HasShortDiscriminator() bool
+	SetHasShortDiscriminator(hasShortDiscriminator bool)
+	SetupPasscode() *foundation.NSNumber
+	SetSetupPasscode(setupPasscode *foundation.NSNumber)
+	SerialNumber() string
+	SetSerialNumber(serialNumber string)
+	VendorElements() []*raw.MTROptionalQRCodeInfo
+	QrCodeString2() (string, error)
+	GetAllOptionalVendorData() ([]*raw.MTROptionalQRCodeInfo, error)
+	RendezvousInformation() *foundation.NSNumber
+	SetRendezvousInformation(rendezvousInformation *foundation.NSNumber)
+	SetUpPINCode() *foundation.NSNumber
+	SetSetUpPINCode(setUpPINCode *foundation.NSNumber)
+}
+
+var _ MTRSetupPayloadable = (*MTRSetupPayload)(nil)
 

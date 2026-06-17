@@ -6,7 +6,9 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // HumanBodyRecognizedPoint3D wraps [raw.VNHumanBodyRecognizedPoint3D] with a fluent Go API.
@@ -23,7 +25,30 @@ func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 	return &HumanBodyRecognizedPoint3D{inner: raw.VNHumanBodyRecognizedPoint3DFromID(_id)}
 }
 
+// LocalPosition calls the underlying LocalPosition.
+func (x *HumanBodyRecognizedPoint3D) LocalPosition() unsafe.Pointer {
+	return x.inner.LocalPosition()
+}
+
+// ParentJoint calls the underlying ParentJoint.
+func (x *HumanBodyRecognizedPoint3D) ParentJoint() string {
+	_r := x.inner.ParentJoint()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *HumanBodyRecognizedPoint3D) asRecognizedPoint3D() *raw.VNRecognizedPoint3D { return &x.inner.VNRecognizedPoint3D }
 
 func (x *HumanBodyRecognizedPoint3D) asPoint3D() *raw.VNPoint3D { return &x.inner.VNRecognizedPoint3D.VNPoint3D }
+
+// HumanBodyRecognizedPoint3Dable is the interface implemented by [HumanBodyRecognizedPoint3D], for mocking and DI.
+type HumanBodyRecognizedPoint3Dable interface {
+	Unwrap() *raw.VNHumanBodyRecognizedPoint3D
+	LocalPosition() unsafe.Pointer
+	ParentJoint() string
+}
+
+var _ HumanBodyRecognizedPoint3Dable = (*HumanBodyRecognizedPoint3D)(nil)
 

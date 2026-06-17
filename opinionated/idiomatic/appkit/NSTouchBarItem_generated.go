@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,5 +39,71 @@ func (x *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *Touch
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *TouchBarItem) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VisibilityPriority calls the underlying VisibilityPriority.
+func (x *TouchBarItem) VisibilityPriority() float32 {
+	return x.inner.VisibilityPriority()
+}
+
+// SetVisibilityPriority calls the underlying SetVisibilityPriority.
+func (x *TouchBarItem) SetVisibilityPriority(visibilityPriority float32) {
+	x.inner.SetVisibilityPriority(visibilityPriority)
+}
+
+// View calls the underlying View.
+func (x *TouchBarItem) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// ViewController calls the underlying ViewController.
+func (x *TouchBarItem) ViewController() *ViewController {
+	_r := x.inner.ViewController()
+	if _r == nil {
+		return nil
+	}
+	return &ViewController{inner: _r}
+}
+
+// CustomizationLabel calls the underlying CustomizationLabel.
+func (x *TouchBarItem) CustomizationLabel() string {
+	_r := x.inner.CustomizationLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsVisible calls the underlying IsVisible.
+func (x *TouchBarItem) IsVisible() bool {
+	return x.inner.IsVisible()
+}
+
 func (x *TouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return x.inner }
+
+// TouchBarItemable is the interface implemented by [TouchBarItem], for mocking and DI.
+type TouchBarItemable interface {
+	Unwrap() *raw.NSTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *TouchBarItem
+	Identifier() string
+	VisibilityPriority() float32
+	SetVisibilityPriority(visibilityPriority float32)
+	View() *View
+	ViewController() *ViewController
+	CustomizationLabel() string
+	IsVisible() bool
+}
+
+var _ TouchBarItemable = (*TouchBarItem)(nil)
 

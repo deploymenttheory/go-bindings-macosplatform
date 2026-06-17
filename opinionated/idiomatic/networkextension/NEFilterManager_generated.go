@@ -61,11 +61,11 @@ func (x *NEFilterManager) WithDisableEncryptedDNSSettings(disableEncryptedDNSSet
 func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.LoadFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -79,11 +79,11 @@ func (x *NEFilterManager) LoadFromPreferences(ctx context.Context) error {
 func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.RemoveFromPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -97,11 +97,11 @@ func (x *NEFilterManager) RemoveFromPreferences(ctx context.Context) error {
 func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveToPreferencesWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -110,4 +110,87 @@ func (x *NEFilterManager) SaveToPreferences(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *NEFilterManager) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *NEFilterManager) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
+// ProviderConfiguration calls the underlying ProviderConfiguration.
+func (x *NEFilterManager) ProviderConfiguration() *NEFilterProviderConfiguration {
+	_r := x.inner.ProviderConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &NEFilterProviderConfiguration{inner: _r}
+}
+
+// SetProviderConfiguration calls the underlying SetProviderConfiguration.
+func (x *NEFilterManager) SetProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration) {
+	x.inner.SetProviderConfiguration(providerConfiguration)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *NEFilterManager) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *NEFilterManager) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// Grade calls the underlying Grade.
+func (x *NEFilterManager) Grade() raw.NEFilterManagerGrade {
+	return x.inner.Grade()
+}
+
+// SetGrade calls the underlying SetGrade.
+func (x *NEFilterManager) SetGrade(grade raw.NEFilterManagerGrade) {
+	x.inner.SetGrade(grade)
+}
+
+// DisableEncryptedDNSSettings calls the underlying DisableEncryptedDNSSettings.
+func (x *NEFilterManager) DisableEncryptedDNSSettings() bool {
+	return x.inner.DisableEncryptedDNSSettings()
+}
+
+// SetDisableEncryptedDNSSettings calls the underlying SetDisableEncryptedDNSSettings.
+func (x *NEFilterManager) SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) {
+	x.inner.SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings)
+}
+
+// NEFilterManagerable is the interface implemented by [NEFilterManager], for mocking and DI.
+type NEFilterManagerable interface {
+	Unwrap() *raw.NEFilterManager
+	WithLocalizedDescription(localizedDescription string) *NEFilterManager
+	WithProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration) *NEFilterManager
+	WithEnabled(enabled bool) *NEFilterManager
+	WithGrade(grade raw.NEFilterManagerGrade) *NEFilterManager
+	WithDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool) *NEFilterManager
+	LoadFromPreferences(ctx context.Context) error
+	RemoveFromPreferences(ctx context.Context) error
+	SaveToPreferences(ctx context.Context) error
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+	ProviderConfiguration() *NEFilterProviderConfiguration
+	SetProviderConfiguration(providerConfiguration *raw.NEFilterProviderConfiguration)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	Grade() raw.NEFilterManagerGrade
+	SetGrade(grade raw.NEFilterManagerGrade)
+	DisableEncryptedDNSSettings() bool
+	SetDisableEncryptedDNSSettings(disableEncryptedDNSSettings bool)
+}
+
+var _ NEFilterManagerable = (*NEFilterManager)(nil)
 

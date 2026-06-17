@@ -249,7 +249,556 @@ func (x *ScrollView) WithFindBarPosition(findBarPosition raw.NSScrollViewFindBar
 	return x
 }
 
+// Tile calls the underlying Tile.
+func (x *ScrollView) Tile() {
+	x.inner.Tile()
+}
+
+// FlashScrollers calls the underlying FlashScrollers.
+func (x *ScrollView) FlashScrollers() {
+	x.inner.FlashScrollers()
+}
+
+// MagnifyToFitRect calls the underlying MagnifyToFitRect.
+func (x *ScrollView) MagnifyToFitRect(rect corefoundation.CGRect) {
+	x.inner.MagnifyToFitRect(rect)
+}
+
+// SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
+func (x *ScrollView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
+	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
+}
+
+// AddFloatingSubviewForAxis calls the underlying AddFloatingSubviewForAxis.
+func (x *ScrollView) AddFloatingSubviewForAxis(view *raw.NSView, axis raw.NSEventGestureAxis) {
+	x.inner.AddFloatingSubviewForAxis(view, axis)
+}
+
+// DocumentVisibleRect calls the underlying DocumentVisibleRect.
+func (x *ScrollView) DocumentVisibleRect() corefoundation.CGRect {
+	return x.inner.DocumentVisibleRect()
+}
+
+// ContentSize calls the underlying ContentSize.
+func (x *ScrollView) ContentSize() corefoundation.CGSize {
+	return x.inner.ContentSize()
+}
+
+// DocumentView calls the underlying DocumentView.
+func (x *ScrollView) DocumentView() *View {
+	_r := x.inner.DocumentView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetDocumentView calls the underlying SetDocumentView.
+func (x *ScrollView) SetDocumentView(documentView *raw.NSView) {
+	x.inner.SetDocumentView(documentView)
+}
+
+// ContentView calls the underlying ContentView.
+func (x *ScrollView) ContentView() *ClipView {
+	_r := x.inner.ContentView()
+	if _r == nil {
+		return nil
+	}
+	return &ClipView{inner: _r}
+}
+
+// SetContentView calls the underlying SetContentView.
+func (x *ScrollView) SetContentView(contentView *raw.NSClipView) {
+	x.inner.SetContentView(contentView)
+}
+
+// DocumentCursor calls the underlying DocumentCursor.
+func (x *ScrollView) DocumentCursor() *Cursor {
+	_r := x.inner.DocumentCursor()
+	if _r == nil {
+		return nil
+	}
+	return &Cursor{inner: _r}
+}
+
+// SetDocumentCursor calls the underlying SetDocumentCursor.
+func (x *ScrollView) SetDocumentCursor(documentCursor *raw.NSCursor) {
+	x.inner.SetDocumentCursor(documentCursor)
+}
+
+// BorderType calls the underlying BorderType.
+func (x *ScrollView) BorderType() raw.NSBorderType {
+	return x.inner.BorderType()
+}
+
+// SetBorderType calls the underlying SetBorderType.
+func (x *ScrollView) SetBorderType(borderType raw.NSBorderType) {
+	x.inner.SetBorderType(borderType)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *ScrollView) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *ScrollView) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *ScrollView) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *ScrollView) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// HasVerticalScroller calls the underlying HasVerticalScroller.
+func (x *ScrollView) HasVerticalScroller() bool {
+	return x.inner.HasVerticalScroller()
+}
+
+// SetHasVerticalScroller calls the underlying SetHasVerticalScroller.
+func (x *ScrollView) SetHasVerticalScroller(hasVerticalScroller bool) {
+	x.inner.SetHasVerticalScroller(hasVerticalScroller)
+}
+
+// HasHorizontalScroller calls the underlying HasHorizontalScroller.
+func (x *ScrollView) HasHorizontalScroller() bool {
+	return x.inner.HasHorizontalScroller()
+}
+
+// SetHasHorizontalScroller calls the underlying SetHasHorizontalScroller.
+func (x *ScrollView) SetHasHorizontalScroller(hasHorizontalScroller bool) {
+	x.inner.SetHasHorizontalScroller(hasHorizontalScroller)
+}
+
+// VerticalScroller calls the underlying VerticalScroller.
+func (x *ScrollView) VerticalScroller() *Scroller {
+	_r := x.inner.VerticalScroller()
+	if _r == nil {
+		return nil
+	}
+	return &Scroller{inner: _r}
+}
+
+// SetVerticalScroller calls the underlying SetVerticalScroller.
+func (x *ScrollView) SetVerticalScroller(verticalScroller *raw.NSScroller) {
+	x.inner.SetVerticalScroller(verticalScroller)
+}
+
+// HorizontalScroller calls the underlying HorizontalScroller.
+func (x *ScrollView) HorizontalScroller() *Scroller {
+	_r := x.inner.HorizontalScroller()
+	if _r == nil {
+		return nil
+	}
+	return &Scroller{inner: _r}
+}
+
+// SetHorizontalScroller calls the underlying SetHorizontalScroller.
+func (x *ScrollView) SetHorizontalScroller(horizontalScroller *raw.NSScroller) {
+	x.inner.SetHorizontalScroller(horizontalScroller)
+}
+
+// AutohidesScrollers calls the underlying AutohidesScrollers.
+func (x *ScrollView) AutohidesScrollers() bool {
+	return x.inner.AutohidesScrollers()
+}
+
+// SetAutohidesScrollers calls the underlying SetAutohidesScrollers.
+func (x *ScrollView) SetAutohidesScrollers(autohidesScrollers bool) {
+	x.inner.SetAutohidesScrollers(autohidesScrollers)
+}
+
+// HorizontalLineScroll calls the underlying HorizontalLineScroll.
+func (x *ScrollView) HorizontalLineScroll() float64 {
+	return x.inner.HorizontalLineScroll()
+}
+
+// SetHorizontalLineScroll calls the underlying SetHorizontalLineScroll.
+func (x *ScrollView) SetHorizontalLineScroll(horizontalLineScroll float64) {
+	x.inner.SetHorizontalLineScroll(horizontalLineScroll)
+}
+
+// VerticalLineScroll calls the underlying VerticalLineScroll.
+func (x *ScrollView) VerticalLineScroll() float64 {
+	return x.inner.VerticalLineScroll()
+}
+
+// SetVerticalLineScroll calls the underlying SetVerticalLineScroll.
+func (x *ScrollView) SetVerticalLineScroll(verticalLineScroll float64) {
+	x.inner.SetVerticalLineScroll(verticalLineScroll)
+}
+
+// LineScroll calls the underlying LineScroll.
+func (x *ScrollView) LineScroll() float64 {
+	return x.inner.LineScroll()
+}
+
+// SetLineScroll calls the underlying SetLineScroll.
+func (x *ScrollView) SetLineScroll(lineScroll float64) {
+	x.inner.SetLineScroll(lineScroll)
+}
+
+// HorizontalPageScroll calls the underlying HorizontalPageScroll.
+func (x *ScrollView) HorizontalPageScroll() float64 {
+	return x.inner.HorizontalPageScroll()
+}
+
+// SetHorizontalPageScroll calls the underlying SetHorizontalPageScroll.
+func (x *ScrollView) SetHorizontalPageScroll(horizontalPageScroll float64) {
+	x.inner.SetHorizontalPageScroll(horizontalPageScroll)
+}
+
+// VerticalPageScroll calls the underlying VerticalPageScroll.
+func (x *ScrollView) VerticalPageScroll() float64 {
+	return x.inner.VerticalPageScroll()
+}
+
+// SetVerticalPageScroll calls the underlying SetVerticalPageScroll.
+func (x *ScrollView) SetVerticalPageScroll(verticalPageScroll float64) {
+	x.inner.SetVerticalPageScroll(verticalPageScroll)
+}
+
+// PageScroll calls the underlying PageScroll.
+func (x *ScrollView) PageScroll() float64 {
+	return x.inner.PageScroll()
+}
+
+// SetPageScroll calls the underlying SetPageScroll.
+func (x *ScrollView) SetPageScroll(pageScroll float64) {
+	x.inner.SetPageScroll(pageScroll)
+}
+
+// ScrollsDynamically calls the underlying ScrollsDynamically.
+func (x *ScrollView) ScrollsDynamically() bool {
+	return x.inner.ScrollsDynamically()
+}
+
+// SetScrollsDynamically calls the underlying SetScrollsDynamically.
+func (x *ScrollView) SetScrollsDynamically(scrollsDynamically bool) {
+	x.inner.SetScrollsDynamically(scrollsDynamically)
+}
+
+// ScrollerStyle calls the underlying ScrollerStyle.
+func (x *ScrollView) ScrollerStyle() raw.NSScrollerStyle {
+	return x.inner.ScrollerStyle()
+}
+
+// SetScrollerStyle calls the underlying SetScrollerStyle.
+func (x *ScrollView) SetScrollerStyle(scrollerStyle raw.NSScrollerStyle) {
+	x.inner.SetScrollerStyle(scrollerStyle)
+}
+
+// ScrollerKnobStyle calls the underlying ScrollerKnobStyle.
+func (x *ScrollView) ScrollerKnobStyle() raw.NSScrollerKnobStyle {
+	return x.inner.ScrollerKnobStyle()
+}
+
+// SetScrollerKnobStyle calls the underlying SetScrollerKnobStyle.
+func (x *ScrollView) SetScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle) {
+	x.inner.SetScrollerKnobStyle(scrollerKnobStyle)
+}
+
+// HorizontalScrollElasticity calls the underlying HorizontalScrollElasticity.
+func (x *ScrollView) HorizontalScrollElasticity() raw.NSScrollElasticity {
+	return x.inner.HorizontalScrollElasticity()
+}
+
+// SetHorizontalScrollElasticity calls the underlying SetHorizontalScrollElasticity.
+func (x *ScrollView) SetHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity) {
+	x.inner.SetHorizontalScrollElasticity(horizontalScrollElasticity)
+}
+
+// VerticalScrollElasticity calls the underlying VerticalScrollElasticity.
+func (x *ScrollView) VerticalScrollElasticity() raw.NSScrollElasticity {
+	return x.inner.VerticalScrollElasticity()
+}
+
+// SetVerticalScrollElasticity calls the underlying SetVerticalScrollElasticity.
+func (x *ScrollView) SetVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity) {
+	x.inner.SetVerticalScrollElasticity(verticalScrollElasticity)
+}
+
+// UsesPredominantAxisScrolling calls the underlying UsesPredominantAxisScrolling.
+func (x *ScrollView) UsesPredominantAxisScrolling() bool {
+	return x.inner.UsesPredominantAxisScrolling()
+}
+
+// SetUsesPredominantAxisScrolling calls the underlying SetUsesPredominantAxisScrolling.
+func (x *ScrollView) SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) {
+	x.inner.SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling)
+}
+
+// AllowsMagnification calls the underlying AllowsMagnification.
+func (x *ScrollView) AllowsMagnification() bool {
+	return x.inner.AllowsMagnification()
+}
+
+// SetAllowsMagnification calls the underlying SetAllowsMagnification.
+func (x *ScrollView) SetAllowsMagnification(allowsMagnification bool) {
+	x.inner.SetAllowsMagnification(allowsMagnification)
+}
+
+// Magnification calls the underlying Magnification.
+func (x *ScrollView) Magnification() float64 {
+	return x.inner.Magnification()
+}
+
+// SetMagnification calls the underlying SetMagnification.
+func (x *ScrollView) SetMagnification(magnification float64) {
+	x.inner.SetMagnification(magnification)
+}
+
+// MaxMagnification calls the underlying MaxMagnification.
+func (x *ScrollView) MaxMagnification() float64 {
+	return x.inner.MaxMagnification()
+}
+
+// SetMaxMagnification calls the underlying SetMaxMagnification.
+func (x *ScrollView) SetMaxMagnification(maxMagnification float64) {
+	x.inner.SetMaxMagnification(maxMagnification)
+}
+
+// MinMagnification calls the underlying MinMagnification.
+func (x *ScrollView) MinMagnification() float64 {
+	return x.inner.MinMagnification()
+}
+
+// SetMinMagnification calls the underlying SetMinMagnification.
+func (x *ScrollView) SetMinMagnification(minMagnification float64) {
+	x.inner.SetMinMagnification(minMagnification)
+}
+
+// AutomaticallyAdjustsContentInsets calls the underlying AutomaticallyAdjustsContentInsets.
+func (x *ScrollView) AutomaticallyAdjustsContentInsets() bool {
+	return x.inner.AutomaticallyAdjustsContentInsets()
+}
+
+// SetAutomaticallyAdjustsContentInsets calls the underlying SetAutomaticallyAdjustsContentInsets.
+func (x *ScrollView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
+	x.inner.SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets)
+}
+
+// ContentInsets calls the underlying ContentInsets.
+func (x *ScrollView) ContentInsets() foundation.NSEdgeInsets {
+	return x.inner.ContentInsets()
+}
+
+// SetContentInsets calls the underlying SetContentInsets.
+func (x *ScrollView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
+	x.inner.SetContentInsets(contentInsets)
+}
+
+// ScrollerInsets calls the underlying ScrollerInsets.
+func (x *ScrollView) ScrollerInsets() foundation.NSEdgeInsets {
+	return x.inner.ScrollerInsets()
+}
+
+// SetScrollerInsets calls the underlying SetScrollerInsets.
+func (x *ScrollView) SetScrollerInsets(scrollerInsets foundation.NSEdgeInsets) {
+	x.inner.SetScrollerInsets(scrollerInsets)
+}
+
+// RulersVisible calls the underlying RulersVisible.
+func (x *ScrollView) RulersVisible() bool {
+	return x.inner.RulersVisible()
+}
+
+// SetRulersVisible calls the underlying SetRulersVisible.
+func (x *ScrollView) SetRulersVisible(rulersVisible bool) {
+	x.inner.SetRulersVisible(rulersVisible)
+}
+
+// HasHorizontalRuler calls the underlying HasHorizontalRuler.
+func (x *ScrollView) HasHorizontalRuler() bool {
+	return x.inner.HasHorizontalRuler()
+}
+
+// SetHasHorizontalRuler calls the underlying SetHasHorizontalRuler.
+func (x *ScrollView) SetHasHorizontalRuler(hasHorizontalRuler bool) {
+	x.inner.SetHasHorizontalRuler(hasHorizontalRuler)
+}
+
+// HasVerticalRuler calls the underlying HasVerticalRuler.
+func (x *ScrollView) HasVerticalRuler() bool {
+	return x.inner.HasVerticalRuler()
+}
+
+// SetHasVerticalRuler calls the underlying SetHasVerticalRuler.
+func (x *ScrollView) SetHasVerticalRuler(hasVerticalRuler bool) {
+	x.inner.SetHasVerticalRuler(hasVerticalRuler)
+}
+
+// HorizontalRulerView calls the underlying HorizontalRulerView.
+func (x *ScrollView) HorizontalRulerView() *RulerView {
+	_r := x.inner.HorizontalRulerView()
+	if _r == nil {
+		return nil
+	}
+	return &RulerView{inner: _r}
+}
+
+// SetHorizontalRulerView calls the underlying SetHorizontalRulerView.
+func (x *ScrollView) SetHorizontalRulerView(horizontalRulerView *raw.NSRulerView) {
+	x.inner.SetHorizontalRulerView(horizontalRulerView)
+}
+
+// VerticalRulerView calls the underlying VerticalRulerView.
+func (x *ScrollView) VerticalRulerView() *RulerView {
+	_r := x.inner.VerticalRulerView()
+	if _r == nil {
+		return nil
+	}
+	return &RulerView{inner: _r}
+}
+
+// SetVerticalRulerView calls the underlying SetVerticalRulerView.
+func (x *ScrollView) SetVerticalRulerView(verticalRulerView *raw.NSRulerView) {
+	x.inner.SetVerticalRulerView(verticalRulerView)
+}
+
+// FindBarPosition calls the underlying FindBarPosition.
+func (x *ScrollView) FindBarPosition() raw.NSScrollViewFindBarPosition {
+	return x.inner.FindBarPosition()
+}
+
+// SetFindBarPosition calls the underlying SetFindBarPosition.
+func (x *ScrollView) SetFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) {
+	x.inner.SetFindBarPosition(findBarPosition)
+}
+
 func (x *ScrollView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *ScrollView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// ScrollViewable is the interface implemented by [ScrollView], for mocking and DI.
+type ScrollViewable interface {
+	Unwrap() *raw.NSScrollView
+	WithDocumentView(documentView ViewProvider) *ScrollView
+	WithContentView(contentView *raw.NSClipView) *ScrollView
+	WithDocumentCursor(documentCursor *raw.NSCursor) *ScrollView
+	WithBorderType(borderType raw.NSBorderType) *ScrollView
+	WithBackgroundColor(backgroundColor *raw.NSColor) *ScrollView
+	WithDrawsBackground(drawsBackground bool) *ScrollView
+	WithHasVerticalScroller(hasVerticalScroller bool) *ScrollView
+	WithHasHorizontalScroller(hasHorizontalScroller bool) *ScrollView
+	WithVerticalScroller(verticalScroller *raw.NSScroller) *ScrollView
+	WithHorizontalScroller(horizontalScroller *raw.NSScroller) *ScrollView
+	WithAutohidesScrollers(autohidesScrollers bool) *ScrollView
+	WithHorizontalLineScroll(horizontalLineScroll float64) *ScrollView
+	WithVerticalLineScroll(verticalLineScroll float64) *ScrollView
+	WithLineScroll(lineScroll float64) *ScrollView
+	WithHorizontalPageScroll(horizontalPageScroll float64) *ScrollView
+	WithVerticalPageScroll(verticalPageScroll float64) *ScrollView
+	WithPageScroll(pageScroll float64) *ScrollView
+	WithScrollsDynamically(scrollsDynamically bool) *ScrollView
+	WithScrollerStyle(scrollerStyle raw.NSScrollerStyle) *ScrollView
+	WithScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle) *ScrollView
+	WithHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity) *ScrollView
+	WithVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity) *ScrollView
+	WithUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool) *ScrollView
+	WithAllowsMagnification(allowsMagnification bool) *ScrollView
+	WithMagnification(magnification float64) *ScrollView
+	WithMaxMagnification(maxMagnification float64) *ScrollView
+	WithMinMagnification(minMagnification float64) *ScrollView
+	WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ScrollView
+	WithContentInsets(contentInsets foundation.NSEdgeInsets) *ScrollView
+	WithScrollerInsets(scrollerInsets foundation.NSEdgeInsets) *ScrollView
+	WithRulersVisible(rulersVisible bool) *ScrollView
+	WithHasHorizontalRuler(hasHorizontalRuler bool) *ScrollView
+	WithHasVerticalRuler(hasVerticalRuler bool) *ScrollView
+	WithHorizontalRulerView(horizontalRulerView *raw.NSRulerView) *ScrollView
+	WithVerticalRulerView(verticalRulerView *raw.NSRulerView) *ScrollView
+	WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView
+	Tile()
+	FlashScrollers()
+	MagnifyToFitRect(rect corefoundation.CGRect)
+	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
+	AddFloatingSubviewForAxis(view *raw.NSView, axis raw.NSEventGestureAxis)
+	DocumentVisibleRect() corefoundation.CGRect
+	ContentSize() corefoundation.CGSize
+	DocumentView() *View
+	SetDocumentView(documentView *raw.NSView)
+	ContentView() *ClipView
+	SetContentView(contentView *raw.NSClipView)
+	DocumentCursor() *Cursor
+	SetDocumentCursor(documentCursor *raw.NSCursor)
+	BorderType() raw.NSBorderType
+	SetBorderType(borderType raw.NSBorderType)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	HasVerticalScroller() bool
+	SetHasVerticalScroller(hasVerticalScroller bool)
+	HasHorizontalScroller() bool
+	SetHasHorizontalScroller(hasHorizontalScroller bool)
+	VerticalScroller() *Scroller
+	SetVerticalScroller(verticalScroller *raw.NSScroller)
+	HorizontalScroller() *Scroller
+	SetHorizontalScroller(horizontalScroller *raw.NSScroller)
+	AutohidesScrollers() bool
+	SetAutohidesScrollers(autohidesScrollers bool)
+	HorizontalLineScroll() float64
+	SetHorizontalLineScroll(horizontalLineScroll float64)
+	VerticalLineScroll() float64
+	SetVerticalLineScroll(verticalLineScroll float64)
+	LineScroll() float64
+	SetLineScroll(lineScroll float64)
+	HorizontalPageScroll() float64
+	SetHorizontalPageScroll(horizontalPageScroll float64)
+	VerticalPageScroll() float64
+	SetVerticalPageScroll(verticalPageScroll float64)
+	PageScroll() float64
+	SetPageScroll(pageScroll float64)
+	ScrollsDynamically() bool
+	SetScrollsDynamically(scrollsDynamically bool)
+	ScrollerStyle() raw.NSScrollerStyle
+	SetScrollerStyle(scrollerStyle raw.NSScrollerStyle)
+	ScrollerKnobStyle() raw.NSScrollerKnobStyle
+	SetScrollerKnobStyle(scrollerKnobStyle raw.NSScrollerKnobStyle)
+	HorizontalScrollElasticity() raw.NSScrollElasticity
+	SetHorizontalScrollElasticity(horizontalScrollElasticity raw.NSScrollElasticity)
+	VerticalScrollElasticity() raw.NSScrollElasticity
+	SetVerticalScrollElasticity(verticalScrollElasticity raw.NSScrollElasticity)
+	UsesPredominantAxisScrolling() bool
+	SetUsesPredominantAxisScrolling(usesPredominantAxisScrolling bool)
+	AllowsMagnification() bool
+	SetAllowsMagnification(allowsMagnification bool)
+	Magnification() float64
+	SetMagnification(magnification float64)
+	MaxMagnification() float64
+	SetMaxMagnification(maxMagnification float64)
+	MinMagnification() float64
+	SetMinMagnification(minMagnification float64)
+	AutomaticallyAdjustsContentInsets() bool
+	SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool)
+	ContentInsets() foundation.NSEdgeInsets
+	SetContentInsets(contentInsets foundation.NSEdgeInsets)
+	ScrollerInsets() foundation.NSEdgeInsets
+	SetScrollerInsets(scrollerInsets foundation.NSEdgeInsets)
+	RulersVisible() bool
+	SetRulersVisible(rulersVisible bool)
+	HasHorizontalRuler() bool
+	SetHasHorizontalRuler(hasHorizontalRuler bool)
+	HasVerticalRuler() bool
+	SetHasVerticalRuler(hasVerticalRuler bool)
+	HorizontalRulerView() *RulerView
+	SetHorizontalRulerView(horizontalRulerView *raw.NSRulerView)
+	VerticalRulerView() *RulerView
+	SetVerticalRulerView(verticalRulerView *raw.NSRulerView)
+	FindBarPosition() raw.NSScrollViewFindBarPosition
+	SetFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition)
+}
+
+var _ ScrollViewable = (*ScrollView)(nil)
 

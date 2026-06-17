@@ -5,7 +5,9 @@
 package discrecordingui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,72 @@ func NewBurnSetupPanel() *BurnSetupPanel {
 	return &BurnSetupPanel{inner: raw.DRBurnSetupPanelFromID(_id)}
 }
 
+// SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
+func (x *BurnSetupPanel) SetDefaultButtonTitle(title string) {
+	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// SetCanSelectTestBurn calls the underlying SetCanSelectTestBurn.
+func (x *BurnSetupPanel) SetCanSelectTestBurn(flag bool) {
+	x.inner.SetCanSelectTestBurn(flag)
+}
+
+// SetCanSelectAppendableMedia calls the underlying SetCanSelectAppendableMedia.
+func (x *BurnSetupPanel) SetCanSelectAppendableMedia(flag bool) {
+	x.inner.SetCanSelectAppendableMedia(flag)
+}
+
+// BurnObject calls the underlying BurnObject.
+func (x *BurnSetupPanel) BurnObject() *discrecording.DRBurn {
+	return x.inner.BurnObject()
+}
+
+// Expand calls the underlying Expand.
+func (x *BurnSetupPanel) Expand(sender objc.ID) {
+	x.inner.Expand(sender)
+}
+
+// BurnSpeed calls the underlying BurnSpeed.
+func (x *BurnSetupPanel) BurnSpeed(sender objc.ID) {
+	x.inner.BurnSpeed(sender)
+}
+
+// Appendable calls the underlying Appendable.
+func (x *BurnSetupPanel) Appendable(sender objc.ID) {
+	x.inner.Appendable(sender)
+}
+
+// CompletionAction calls the underlying CompletionAction.
+func (x *BurnSetupPanel) CompletionAction(sender objc.ID) {
+	x.inner.CompletionAction(sender)
+}
+
+// TestBurn calls the underlying TestBurn.
+func (x *BurnSetupPanel) TestBurn(sender objc.ID) {
+	x.inner.TestBurn(sender)
+}
+
+// VerifyBurn calls the underlying VerifyBurn.
+func (x *BurnSetupPanel) VerifyBurn(sender objc.ID) {
+	x.inner.VerifyBurn(sender)
+}
+
 func (x *BurnSetupPanel) asSetupPanel() *raw.DRSetupPanel { return &x.inner.DRSetupPanel }
+
+// BurnSetupPanelable is the interface implemented by [BurnSetupPanel], for mocking and DI.
+type BurnSetupPanelable interface {
+	Unwrap() *raw.DRBurnSetupPanel
+	SetDefaultButtonTitle(title string)
+	SetCanSelectTestBurn(flag bool)
+	SetCanSelectAppendableMedia(flag bool)
+	BurnObject() *discrecording.DRBurn
+	Expand(sender objc.ID)
+	BurnSpeed(sender objc.ID)
+	Appendable(sender objc.ID)
+	CompletionAction(sender objc.ID)
+	TestBurn(sender objc.ID)
+	VerifyBurn(sender objc.ID)
+}
+
+var _ BurnSetupPanelable = (*BurnSetupPanel)(nil)
 

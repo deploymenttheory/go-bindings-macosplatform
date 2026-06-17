@@ -27,3 +27,10 @@ func (x *DocumentType) asSampleType() *raw.HKSampleType { return &x.inner.HKSamp
 
 func (x *DocumentType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// DocumentTypeable is the interface implemented by [DocumentType], for mocking and DI.
+type DocumentTypeable interface {
+	Unwrap() *raw.HKDocumentType
+}
+
+var _ DocumentTypeable = (*DocumentType)(nil)
+

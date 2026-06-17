@@ -195,3 +195,10 @@ func (x *TargetedImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { 
 
 func (x *TargetedImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// TargetedImageRequestable is the interface implemented by [TargetedImageRequest], for mocking and DI.
+type TargetedImageRequestable interface {
+	Unwrap() *raw.VNTargetedImageRequest
+}
+
+var _ TargetedImageRequestable = (*TargetedImageRequest)(nil)
+

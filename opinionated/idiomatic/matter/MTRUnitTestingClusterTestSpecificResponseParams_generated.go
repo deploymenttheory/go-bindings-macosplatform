@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterTestSpecificResponseParams) WithTimedInvokeTimeout
 	return x
 }
 
+// ReturnValue calls the underlying ReturnValue.
+func (x *MTRUnitTestingClusterTestSpecificResponseParams) ReturnValue() *foundation.NSNumber {
+	return x.inner.ReturnValue()
+}
+
+// SetReturnValue calls the underlying SetReturnValue.
+func (x *MTRUnitTestingClusterTestSpecificResponseParams) SetReturnValue(returnValue *foundation.NSNumber) {
+	x.inner.SetReturnValue(returnValue)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestSpecificResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestSpecificResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestSpecificResponseParams) asMTRUnitTestingClusterTestSpecificResponseParams() *raw.MTRUnitTestingClusterTestSpecificResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestSpecificResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestSpecificResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestSpecificResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestSpecificResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRUnitTestingClusterTestSpecificResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestSpecificResponseParams
+	ReturnValue() *foundation.NSNumber
+	SetReturnValue(returnValue *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestSpecificResponseParamsable = (*MTRUnitTestingClusterTestSpecificResponseParams)(nil)
 

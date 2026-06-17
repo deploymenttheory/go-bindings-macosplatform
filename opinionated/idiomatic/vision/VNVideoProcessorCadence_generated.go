@@ -25,3 +25,10 @@ func NewVideoProcessorCadence() *VideoProcessorCadence {
 
 func (x *VideoProcessorCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence { return x.inner }
 
+// VideoProcessorCadenceable is the interface implemented by [VideoProcessorCadence], for mocking and DI.
+type VideoProcessorCadenceable interface {
+	Unwrap() *raw.VNVideoProcessorCadence
+}
+
+var _ VideoProcessorCadenceable = (*VideoProcessorCadence)(nil)
+

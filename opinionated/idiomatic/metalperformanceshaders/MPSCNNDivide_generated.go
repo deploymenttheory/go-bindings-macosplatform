@@ -33,3 +33,10 @@ func (x *CNNDivide) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { r
 
 func (x *CNNDivide) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNDivideable is the interface implemented by [CNNDivide], for mocking and DI.
+type CNNDivideable interface {
+	Unwrap() *raw.MPSCNNDivide
+}
+
+var _ CNNDivideable = (*CNNDivide)(nil)
+

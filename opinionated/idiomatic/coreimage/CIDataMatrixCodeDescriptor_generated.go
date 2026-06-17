@@ -25,5 +25,36 @@ func NewDataMatrixCodeDescriptorWithPayloadRowCountColumnCountEccVersion(errorCo
 	return &DataMatrixCodeDescriptor{inner: raw.CIDataMatrixCodeDescriptorFromID(_id)}
 }
 
+// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
+func (x *DataMatrixCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
+	return x.inner.ErrorCorrectedPayload()
+}
+
+// RowCount calls the underlying RowCount.
+func (x *DataMatrixCodeDescriptor) RowCount() int {
+	return x.inner.RowCount()
+}
+
+// ColumnCount calls the underlying ColumnCount.
+func (x *DataMatrixCodeDescriptor) ColumnCount() int {
+	return x.inner.ColumnCount()
+}
+
+// EccVersion calls the underlying EccVersion.
+func (x *DataMatrixCodeDescriptor) EccVersion() raw.CIDataMatrixCodeECCVersion {
+	return x.inner.EccVersion()
+}
+
 func (x *DataMatrixCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+
+// DataMatrixCodeDescriptorable is the interface implemented by [DataMatrixCodeDescriptor], for mocking and DI.
+type DataMatrixCodeDescriptorable interface {
+	Unwrap() *raw.CIDataMatrixCodeDescriptor
+	ErrorCorrectedPayload() *foundation.NSData
+	RowCount() int
+	ColumnCount() int
+	EccVersion() raw.CIDataMatrixCodeECCVersion
+}
+
+var _ DataMatrixCodeDescriptorable = (*DataMatrixCodeDescriptor)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRBasicClusterStartUpEvent() *MTRBasicClusterStartUpEvent {
 
 func (x *MTRBasicClusterStartUpEvent) asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent { return &x.inner.MTRBasicInformationClusterStartUpEvent }
 
+// MTRBasicClusterStartUpEventable is the interface implemented by [MTRBasicClusterStartUpEvent], for mocking and DI.
+type MTRBasicClusterStartUpEventable interface {
+	Unwrap() *raw.MTRBasicClusterStartUpEvent
+}
+
+var _ MTRBasicClusterStartUpEventable = (*MTRBasicClusterStartUpEvent)(nil)
+

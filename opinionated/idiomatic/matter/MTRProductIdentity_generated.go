@@ -25,3 +25,22 @@ func NewMTRProductIdentityWithVendorIDProductID(vendorID *foundation.NSNumber, p
 	return &MTRProductIdentity{inner: raw.MTRProductIdentityFromID(_id)}
 }
 
+// VendorID calls the underlying VendorID.
+func (x *MTRProductIdentity) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRProductIdentity) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// MTRProductIdentityable is the interface implemented by [MTRProductIdentity], for mocking and DI.
+type MTRProductIdentityable interface {
+	Unwrap() *raw.MTRProductIdentity
+	VendorID() *foundation.NSNumber
+	ProductID() *foundation.NSNumber
+}
+
+var _ MTRProductIdentityable = (*MTRProductIdentity)(nil)
+

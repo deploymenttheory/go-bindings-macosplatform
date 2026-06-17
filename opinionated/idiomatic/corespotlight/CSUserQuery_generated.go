@@ -5,6 +5,7 @@
 package corespotlight
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
@@ -31,5 +32,59 @@ func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(*fo
 	return x
 }
 
+// UserEngagedWithItemVisibleItemsUserInteractionType calls the underlying UserEngagedWithItemVisibleItemsUserInteractionType.
+func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType raw.CSUserInteraction) {
+	x.inner.UserEngagedWithItemVisibleItemsUserInteractionType(item, visibleItems, userInteractionType)
+}
+
+// UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType calls the underlying UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType.
+func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType raw.CSUserInteraction) {
+	x.inner.UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion, visibleSuggestions, userInteractionType)
+}
+
+// FoundSuggestionCount calls the underlying FoundSuggestionCount.
+func (x *UserQuery) FoundSuggestionCount() int {
+	return x.inner.FoundSuggestionCount()
+}
+
+// FoundSuggestionsHandler calls the underlying FoundSuggestionsHandler.
+func (x *UserQuery) FoundSuggestionsHandler() objc.Block {
+	return x.inner.FoundSuggestionsHandler()
+}
+
+// SetFoundSuggestionsHandler blocks until the operation completes or ctx is cancelled.
+func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSuggestion], error) {
+	type _result struct {
+		val *foundation.NSArray[*raw.CSSuggestion]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetFoundSuggestionsHandler(func(_p0 *foundation.NSArray[*raw.CSSuggestion]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[*raw.CSSuggestion]
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *UserQuery) asSearchQuery() *raw.CSSearchQuery { return &x.inner.CSSearchQuery }
+
+// UserQueryable is the interface implemented by [UserQuery], for mocking and DI.
+type UserQueryable interface {
+	Unwrap() *raw.CSUserQuery
+	WithFoundSuggestionsHandler(foundSuggestionsHandler func(*foundation.NSArray[*raw.CSSuggestion])) *UserQuery
+	UserEngagedWithItemVisibleItemsUserInteractionType(item *raw.CSSearchableItem, visibleItems *foundation.NSArray[*raw.CSSearchableItem], userInteractionType raw.CSUserInteraction)
+	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *raw.CSSuggestion, visibleSuggestions *foundation.NSArray[*raw.CSSuggestion], userInteractionType raw.CSUserInteraction)
+	FoundSuggestionCount() int
+	FoundSuggestionsHandler() objc.Block
+	SetFoundSuggestionsHandler(ctx context.Context) (*foundation.NSArray[*raw.CSSuggestion], error)
+}
+
+var _ UserQueryable = (*UserQuery)(nil)
 

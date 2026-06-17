@@ -39,5 +39,43 @@ func (x *CNNGroupNormalization) WithEpsilon(epsilon float32) *CNNGroupNormalizat
 	return x
 }
 
+// ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
+func (x *CNNGroupNormalization) ReloadGammaAndBetaFromDataSource() {
+	x.inner.ReloadGammaAndBetaFromDataSource()
+}
+
+// ReloadGammaAndBetaWithCommandBufferGammaAndBetaState calls the underlying ReloadGammaAndBetaWithCommandBufferGammaAndBetaState.
+func (x *CNNGroupNormalization) ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer, gammaAndBetaState)
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *CNNGroupNormalization) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *CNNGroupNormalization) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNGroupNormalization) DataSource() raw.MPSCNNGroupNormalizationDataSource {
+	return x.inner.DataSource()
+}
+
 func (x *CNNGroupNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNGroupNormalizationable is the interface implemented by [CNNGroupNormalization], for mocking and DI.
+type CNNGroupNormalizationable interface {
+	Unwrap() *raw.MPSCNNGroupNormalization
+	WithEpsilon(epsilon float32) *CNNGroupNormalization
+	ReloadGammaAndBetaFromDataSource()
+	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *raw.MPSCNNNormalizationGammaAndBetaState)
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	DataSource() raw.MPSCNNGroupNormalizationDataSource
+}
+
+var _ CNNGroupNormalizationable = (*CNNGroupNormalization)(nil)
 

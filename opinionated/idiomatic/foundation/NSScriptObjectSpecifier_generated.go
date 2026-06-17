@@ -81,7 +81,169 @@ func (x *ScriptObjectSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber 
 	return x
 }
 
+// IndicesOfObjectsByEvaluatingWithContainerCount calls the underlying IndicesOfObjectsByEvaluatingWithContainerCount.
+func (x *ScriptObjectSpecifier) IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64 {
+	return x.inner.IndicesOfObjectsByEvaluatingWithContainerCount(container, count)
+}
+
+// ObjectsByEvaluatingWithContainers calls the underlying ObjectsByEvaluatingWithContainers.
+func (x *ScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers objc.ID) objc.ID {
+	return x.inner.ObjectsByEvaluatingWithContainers(containers)
+}
+
+// ChildSpecifier calls the underlying ChildSpecifier.
+func (x *ScriptObjectSpecifier) ChildSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.ChildSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// SetChildSpecifier calls the underlying SetChildSpecifier.
+func (x *ScriptObjectSpecifier) SetChildSpecifier(childSpecifier *raw.NSScriptObjectSpecifier) {
+	x.inner.SetChildSpecifier(childSpecifier)
+}
+
+// ContainerSpecifier calls the underlying ContainerSpecifier.
+func (x *ScriptObjectSpecifier) ContainerSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.ContainerSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// SetContainerSpecifier calls the underlying SetContainerSpecifier.
+func (x *ScriptObjectSpecifier) SetContainerSpecifier(containerSpecifier *raw.NSScriptObjectSpecifier) {
+	x.inner.SetContainerSpecifier(containerSpecifier)
+}
+
+// ContainerIsObjectBeingTested calls the underlying ContainerIsObjectBeingTested.
+func (x *ScriptObjectSpecifier) ContainerIsObjectBeingTested() bool {
+	return x.inner.ContainerIsObjectBeingTested()
+}
+
+// SetContainerIsObjectBeingTested calls the underlying SetContainerIsObjectBeingTested.
+func (x *ScriptObjectSpecifier) SetContainerIsObjectBeingTested(containerIsObjectBeingTested bool) {
+	x.inner.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+}
+
+// ContainerIsRangeContainerObject calls the underlying ContainerIsRangeContainerObject.
+func (x *ScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
+	return x.inner.ContainerIsRangeContainerObject()
+}
+
+// SetContainerIsRangeContainerObject calls the underlying SetContainerIsRangeContainerObject.
+func (x *ScriptObjectSpecifier) SetContainerIsRangeContainerObject(containerIsRangeContainerObject bool) {
+	x.inner.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+}
+
+// Key calls the underlying Key.
+func (x *ScriptObjectSpecifier) Key() *String {
+	_r := x.inner.Key()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetKey calls the underlying SetKey.
+func (x *ScriptObjectSpecifier) SetKey(key string) {
+	x.inner.SetKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// ContainerClassDescription calls the underlying ContainerClassDescription.
+func (x *ScriptObjectSpecifier) ContainerClassDescription() *ScriptClassDescription {
+	_r := x.inner.ContainerClassDescription()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// SetContainerClassDescription calls the underlying SetContainerClassDescription.
+func (x *ScriptObjectSpecifier) SetContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) {
+	x.inner.SetContainerClassDescription(containerClassDescription)
+}
+
+// KeyClassDescription calls the underlying KeyClassDescription.
+func (x *ScriptObjectSpecifier) KeyClassDescription() *ScriptClassDescription {
+	_r := x.inner.KeyClassDescription()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// ObjectsByEvaluatingSpecifier calls the underlying ObjectsByEvaluatingSpecifier.
+func (x *ScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() objc.ID {
+	return x.inner.ObjectsByEvaluatingSpecifier()
+}
+
+// EvaluationErrorNumber calls the underlying EvaluationErrorNumber.
+func (x *ScriptObjectSpecifier) EvaluationErrorNumber() int {
+	return x.inner.EvaluationErrorNumber()
+}
+
+// SetEvaluationErrorNumber calls the underlying SetEvaluationErrorNumber.
+func (x *ScriptObjectSpecifier) SetEvaluationErrorNumber(evaluationErrorNumber int) {
+	x.inner.SetEvaluationErrorNumber(evaluationErrorNumber)
+}
+
+// EvaluationErrorSpecifier calls the underlying EvaluationErrorSpecifier.
+func (x *ScriptObjectSpecifier) EvaluationErrorSpecifier() *ScriptObjectSpecifier {
+	_r := x.inner.EvaluationErrorSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptObjectSpecifier{inner: _r}
+}
+
+// Descriptor calls the underlying Descriptor.
+func (x *ScriptObjectSpecifier) Descriptor() *AppleEventDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &AppleEventDescriptor{inner: _r}
+}
+
 func (x *ScriptObjectSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier { return x.inner }
 
 func (x *ScriptObjectSpecifier) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ScriptObjectSpecifierable is the interface implemented by [ScriptObjectSpecifier], for mocking and DI.
+type ScriptObjectSpecifierable interface {
+	Unwrap() *raw.NSScriptObjectSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *ScriptObjectSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *ScriptObjectSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *ScriptObjectSpecifier
+	WithKey(key string) *ScriptObjectSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *ScriptObjectSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *ScriptObjectSpecifier
+	IndicesOfObjectsByEvaluatingWithContainerCount(container objc.ID, count *int64) *int64
+	ObjectsByEvaluatingWithContainers(containers objc.ID) objc.ID
+	ChildSpecifier() *ScriptObjectSpecifier
+	SetChildSpecifier(childSpecifier *raw.NSScriptObjectSpecifier)
+	ContainerSpecifier() *ScriptObjectSpecifier
+	SetContainerSpecifier(containerSpecifier *raw.NSScriptObjectSpecifier)
+	ContainerIsObjectBeingTested() bool
+	SetContainerIsObjectBeingTested(containerIsObjectBeingTested bool)
+	ContainerIsRangeContainerObject() bool
+	SetContainerIsRangeContainerObject(containerIsRangeContainerObject bool)
+	Key() *String
+	SetKey(key string)
+	ContainerClassDescription() *ScriptClassDescription
+	SetContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription)
+	KeyClassDescription() *ScriptClassDescription
+	ObjectsByEvaluatingSpecifier() objc.ID
+	EvaluationErrorNumber() int
+	SetEvaluationErrorNumber(evaluationErrorNumber int)
+	EvaluationErrorSpecifier() *ScriptObjectSpecifier
+	Descriptor() *AppleEventDescriptor
+}
+
+var _ ScriptObjectSpecifierable = (*ScriptObjectSpecifier)(nil)
 

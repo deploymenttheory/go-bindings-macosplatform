@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // OpenPanel wraps [raw.NSOpenPanel] with a fluent Go API.
@@ -72,11 +74,104 @@ func (x *OpenPanel) URLs() []*foundation.NSURL {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
+}
+
+// ResolvesAliases calls the underlying ResolvesAliases.
+func (x *OpenPanel) ResolvesAliases() bool {
+	return x.inner.ResolvesAliases()
+}
+
+// SetResolvesAliases calls the underlying SetResolvesAliases.
+func (x *OpenPanel) SetResolvesAliases(resolvesAliases bool) {
+	x.inner.SetResolvesAliases(resolvesAliases)
+}
+
+// CanChooseDirectories calls the underlying CanChooseDirectories.
+func (x *OpenPanel) CanChooseDirectories() bool {
+	return x.inner.CanChooseDirectories()
+}
+
+// SetCanChooseDirectories calls the underlying SetCanChooseDirectories.
+func (x *OpenPanel) SetCanChooseDirectories(canChooseDirectories bool) {
+	x.inner.SetCanChooseDirectories(canChooseDirectories)
+}
+
+// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
+func (x *OpenPanel) AllowsMultipleSelection() bool {
+	return x.inner.AllowsMultipleSelection()
+}
+
+// SetAllowsMultipleSelection calls the underlying SetAllowsMultipleSelection.
+func (x *OpenPanel) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
+	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
+}
+
+// CanChooseFiles calls the underlying CanChooseFiles.
+func (x *OpenPanel) CanChooseFiles() bool {
+	return x.inner.CanChooseFiles()
+}
+
+// SetCanChooseFiles calls the underlying SetCanChooseFiles.
+func (x *OpenPanel) SetCanChooseFiles(canChooseFiles bool) {
+	x.inner.SetCanChooseFiles(canChooseFiles)
+}
+
+// CanResolveUbiquitousConflicts calls the underlying CanResolveUbiquitousConflicts.
+func (x *OpenPanel) CanResolveUbiquitousConflicts() bool {
+	return x.inner.CanResolveUbiquitousConflicts()
+}
+
+// SetCanResolveUbiquitousConflicts calls the underlying SetCanResolveUbiquitousConflicts.
+func (x *OpenPanel) SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) {
+	x.inner.SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts)
+}
+
+// CanDownloadUbiquitousContents calls the underlying CanDownloadUbiquitousContents.
+func (x *OpenPanel) CanDownloadUbiquitousContents() bool {
+	return x.inner.CanDownloadUbiquitousContents()
+}
+
+// SetCanDownloadUbiquitousContents calls the underlying SetCanDownloadUbiquitousContents.
+func (x *OpenPanel) SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) {
+	x.inner.SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents)
+}
+
+// IsAccessoryViewDisclosed calls the underlying IsAccessoryViewDisclosed.
+func (x *OpenPanel) IsAccessoryViewDisclosed() bool {
+	return x.inner.IsAccessoryViewDisclosed()
+}
+
+// SetAccessoryViewDisclosed calls the underlying SetAccessoryViewDisclosed.
+func (x *OpenPanel) SetAccessoryViewDisclosed(accessoryViewDisclosed bool) {
+	x.inner.SetAccessoryViewDisclosed(accessoryViewDisclosed)
+}
+
+// Filenames calls the underlying Filenames.
+func (x *OpenPanel) Filenames() *foundation.NSArray[objc.ID] {
+	return x.inner.Filenames()
+}
+
+// BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *OpenPanel) BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo(path string, name string, fileTypes *foundation.NSArray[objc.ID], docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(name), fileTypes, docWindow, delegate, didEndSelector, contextInfo)
+}
+
+// BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo calls the underlying BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo.
+func (x *OpenPanel) BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo(path string, name string, fileTypes *foundation.NSArray[objc.ID], delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(name), fileTypes, delegate, didEndSelector, contextInfo)
+}
+
+// RunModalForDirectoryFileTypes calls the underlying RunModalForDirectoryFileTypes.
+func (x *OpenPanel) RunModalForDirectoryFileTypes(path string, name string, fileTypes *foundation.NSArray[objc.ID]) int {
+	return x.inner.RunModalForDirectoryFileTypes(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(name), fileTypes)
+}
+
+// RunModalForTypes calls the underlying RunModalForTypes.
+func (x *OpenPanel) RunModalForTypes(fileTypes *foundation.NSArray[objc.ID]) int {
+	return x.inner.RunModalForTypes(fileTypes)
 }
 
 func (x *OpenPanel) asSavePanel() *raw.NSSavePanel { return &x.inner.NSSavePanel }
@@ -86,4 +181,38 @@ func (x *OpenPanel) asPanel() *raw.NSPanel { return &x.inner.NSSavePanel.NSPanel
 func (x *OpenPanel) asWindow() *raw.NSWindow { return &x.inner.NSSavePanel.NSPanel.NSWindow }
 
 func (x *OpenPanel) asResponder() *raw.NSResponder { return &x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder }
+
+// OpenPanelable is the interface implemented by [OpenPanel], for mocking and DI.
+type OpenPanelable interface {
+	Unwrap() *raw.NSOpenPanel
+	WithResolvesAliases(resolvesAliases bool) *OpenPanel
+	WithCanChooseDirectories(canChooseDirectories bool) *OpenPanel
+	WithAllowsMultipleSelection(allowsMultipleSelection bool) *OpenPanel
+	WithCanChooseFiles(canChooseFiles bool) *OpenPanel
+	WithCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) *OpenPanel
+	WithCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) *OpenPanel
+	WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *OpenPanel
+	URLs() []*foundation.NSURL
+	ResolvesAliases() bool
+	SetResolvesAliases(resolvesAliases bool)
+	CanChooseDirectories() bool
+	SetCanChooseDirectories(canChooseDirectories bool)
+	AllowsMultipleSelection() bool
+	SetAllowsMultipleSelection(allowsMultipleSelection bool)
+	CanChooseFiles() bool
+	SetCanChooseFiles(canChooseFiles bool)
+	CanResolveUbiquitousConflicts() bool
+	SetCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool)
+	CanDownloadUbiquitousContents() bool
+	SetCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool)
+	IsAccessoryViewDisclosed() bool
+	SetAccessoryViewDisclosed(accessoryViewDisclosed bool)
+	Filenames() *foundation.NSArray[objc.ID]
+	BeginSheetForDirectoryFileTypesModalForWindowModalDelegateDidEndSelectorContextInfo(path string, name string, fileTypes *foundation.NSArray[objc.ID], docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+	BeginForDirectoryFileTypesModelessDelegateDidEndSelectorContextInfo(path string, name string, fileTypes *foundation.NSArray[objc.ID], delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+	RunModalForDirectoryFileTypes(path string, name string, fileTypes *foundation.NSArray[objc.ID]) int
+	RunModalForTypes(fileTypes *foundation.NSArray[objc.ID]) int
+}
+
+var _ OpenPanelable = (*OpenPanel)(nil)
 

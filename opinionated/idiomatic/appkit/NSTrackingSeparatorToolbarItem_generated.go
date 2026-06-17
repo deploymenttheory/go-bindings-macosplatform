@@ -35,5 +35,42 @@ func (x *TrackingSeparatorToolbarItem) WithDividerIndex(dividerIndex int) *Track
 	return x
 }
 
+// SplitView calls the underlying SplitView.
+func (x *TrackingSeparatorToolbarItem) SplitView() *SplitView {
+	_r := x.inner.SplitView()
+	if _r == nil {
+		return nil
+	}
+	return &SplitView{inner: _r}
+}
+
+// SetSplitView calls the underlying SetSplitView.
+func (x *TrackingSeparatorToolbarItem) SetSplitView(splitView *raw.NSSplitView) {
+	x.inner.SetSplitView(splitView)
+}
+
+// DividerIndex calls the underlying DividerIndex.
+func (x *TrackingSeparatorToolbarItem) DividerIndex() int {
+	return x.inner.DividerIndex()
+}
+
+// SetDividerIndex calls the underlying SetDividerIndex.
+func (x *TrackingSeparatorToolbarItem) SetDividerIndex(dividerIndex int) {
+	x.inner.SetDividerIndex(dividerIndex)
+}
+
 func (x *TrackingSeparatorToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+
+// TrackingSeparatorToolbarItemable is the interface implemented by [TrackingSeparatorToolbarItem], for mocking and DI.
+type TrackingSeparatorToolbarItemable interface {
+	Unwrap() *raw.NSTrackingSeparatorToolbarItem
+	WithSplitView(splitView *raw.NSSplitView) *TrackingSeparatorToolbarItem
+	WithDividerIndex(dividerIndex int) *TrackingSeparatorToolbarItem
+	SplitView() *SplitView
+	SetSplitView(splitView *raw.NSSplitView)
+	DividerIndex() int
+	SetDividerIndex(dividerIndex int)
+}
+
+var _ TrackingSeparatorToolbarItemable = (*TrackingSeparatorToolbarItem)(nil)
 

@@ -48,3 +48,62 @@ func (x *NWTLSParameters) WithMaximumSSLProtocolVersion(maximumSSLProtocolVersio
 	return x
 }
 
+// TLSSessionID calls the underlying TLSSessionID.
+func (x *NWTLSParameters) TLSSessionID() *foundation.NSData {
+	return x.inner.TLSSessionID()
+}
+
+// SetTLSSessionID calls the underlying SetTLSSessionID.
+func (x *NWTLSParameters) SetTLSSessionID(tLSSessionID *foundation.NSData) {
+	x.inner.SetTLSSessionID(tLSSessionID)
+}
+
+// SSLCipherSuites calls the underlying SSLCipherSuites.
+func (x *NWTLSParameters) SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber] {
+	return x.inner.SSLCipherSuites()
+}
+
+// SetSSLCipherSuites calls the underlying SetSSLCipherSuites.
+func (x *NWTLSParameters) SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) {
+	x.inner.SetSSLCipherSuites(sSLCipherSuites)
+}
+
+// MinimumSSLProtocolVersion calls the underlying MinimumSSLProtocolVersion.
+func (x *NWTLSParameters) MinimumSSLProtocolVersion() uint {
+	return x.inner.MinimumSSLProtocolVersion()
+}
+
+// SetMinimumSSLProtocolVersion calls the underlying SetMinimumSSLProtocolVersion.
+func (x *NWTLSParameters) SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) {
+	x.inner.SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion)
+}
+
+// MaximumSSLProtocolVersion calls the underlying MaximumSSLProtocolVersion.
+func (x *NWTLSParameters) MaximumSSLProtocolVersion() uint {
+	return x.inner.MaximumSSLProtocolVersion()
+}
+
+// SetMaximumSSLProtocolVersion calls the underlying SetMaximumSSLProtocolVersion.
+func (x *NWTLSParameters) SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) {
+	x.inner.SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion)
+}
+
+// NWTLSParametersable is the interface implemented by [NWTLSParameters], for mocking and DI.
+type NWTLSParametersable interface {
+	Unwrap() *raw.NWTLSParameters
+	WithTLSSessionID(tLSSessionID *foundation.NSData) *NWTLSParameters
+	WithSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber]) *NWTLSParameters
+	WithMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint) *NWTLSParameters
+	WithMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint) *NWTLSParameters
+	TLSSessionID() *foundation.NSData
+	SetTLSSessionID(tLSSessionID *foundation.NSData)
+	SSLCipherSuites() *foundation.NSSet[*foundation.NSNumber]
+	SetSSLCipherSuites(sSLCipherSuites *foundation.NSSet[*foundation.NSNumber])
+	MinimumSSLProtocolVersion() uint
+	SetMinimumSSLProtocolVersion(minimumSSLProtocolVersion uint)
+	MaximumSSLProtocolVersion() uint
+	SetMaximumSSLProtocolVersion(maximumSSLProtocolVersion uint)
+}
+
+var _ NWTLSParametersable = (*NWTLSParameters)(nil)
+

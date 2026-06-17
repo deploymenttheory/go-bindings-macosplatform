@@ -23,5 +23,28 @@ func NewRemoteCommandEvent() *RemoteCommandEvent {
 	return &RemoteCommandEvent{inner: raw.MPRemoteCommandEventFromID(_id)}
 }
 
+// Command calls the underlying Command.
+func (x *RemoteCommandEvent) Command() *RemoteCommand {
+	_r := x.inner.Command()
+	if _r == nil {
+		return nil
+	}
+	return &RemoteCommand{inner: _r}
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *RemoteCommandEvent) Timestamp() float64 {
+	return x.inner.Timestamp()
+}
+
 func (x *RemoteCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return x.inner }
+
+// RemoteCommandEventable is the interface implemented by [RemoteCommandEvent], for mocking and DI.
+type RemoteCommandEventable interface {
+	Unwrap() *raw.MPRemoteCommandEvent
+	Command() *RemoteCommand
+	Timestamp() float64
+}
+
+var _ RemoteCommandEventable = (*RemoteCommandEvent)(nil)
 

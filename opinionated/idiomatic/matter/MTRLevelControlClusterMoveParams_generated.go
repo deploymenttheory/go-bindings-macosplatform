@@ -60,3 +60,88 @@ func (x *MTRLevelControlClusterMoveParams) WithServerSideProcessingTimeout(serve
 	return x
 }
 
+// MoveMode calls the underlying MoveMode.
+func (x *MTRLevelControlClusterMoveParams) MoveMode() *foundation.NSNumber {
+	return x.inner.MoveMode()
+}
+
+// SetMoveMode calls the underlying SetMoveMode.
+func (x *MTRLevelControlClusterMoveParams) SetMoveMode(moveMode *foundation.NSNumber) {
+	x.inner.SetMoveMode(moveMode)
+}
+
+// Rate calls the underlying Rate.
+func (x *MTRLevelControlClusterMoveParams) Rate() *foundation.NSNumber {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *MTRLevelControlClusterMoveParams) SetRate(rate *foundation.NSNumber) {
+	x.inner.SetRate(rate)
+}
+
+// OptionsMask calls the underlying OptionsMask.
+func (x *MTRLevelControlClusterMoveParams) OptionsMask() *foundation.NSNumber {
+	return x.inner.OptionsMask()
+}
+
+// SetOptionsMask calls the underlying SetOptionsMask.
+func (x *MTRLevelControlClusterMoveParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
+	x.inner.SetOptionsMask(optionsMask)
+}
+
+// OptionsOverride calls the underlying OptionsOverride.
+func (x *MTRLevelControlClusterMoveParams) OptionsOverride() *foundation.NSNumber {
+	return x.inner.OptionsOverride()
+}
+
+// SetOptionsOverride calls the underlying SetOptionsOverride.
+func (x *MTRLevelControlClusterMoveParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
+	x.inner.SetOptionsOverride(optionsOverride)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRLevelControlClusterMoveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRLevelControlClusterMoveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRLevelControlClusterMoveParamsable is the interface implemented by [MTRLevelControlClusterMoveParams], for mocking and DI.
+type MTRLevelControlClusterMoveParamsable interface {
+	Unwrap() *raw.MTRLevelControlClusterMoveParams
+	WithMoveMode(moveMode *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	WithRate(rate *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveParams
+	MoveMode() *foundation.NSNumber
+	SetMoveMode(moveMode *foundation.NSNumber)
+	Rate() *foundation.NSNumber
+	SetRate(rate *foundation.NSNumber)
+	OptionsMask() *foundation.NSNumber
+	SetOptionsMask(optionsMask *foundation.NSNumber)
+	OptionsOverride() *foundation.NSNumber
+	SetOptionsOverride(optionsOverride *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRLevelControlClusterMoveParamsable = (*MTRLevelControlClusterMoveParams)(nil)
+

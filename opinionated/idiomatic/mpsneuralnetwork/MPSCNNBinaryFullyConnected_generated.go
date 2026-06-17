@@ -44,3 +44,10 @@ func (x *CNNBinaryFullyConnected) asCNNBinaryConvolution() *raw.MPSCNNBinaryConv
 
 func (x *CNNBinaryFullyConnected) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNBinaryConvolution.MPSCNNKernel }
 
+// CNNBinaryFullyConnectedable is the interface implemented by [CNNBinaryFullyConnected], for mocking and DI.
+type CNNBinaryFullyConnectedable interface {
+	Unwrap() *raw.MPSCNNBinaryFullyConnected
+}
+
+var _ CNNBinaryFullyConnectedable = (*CNNBinaryFullyConnected)(nil)
+

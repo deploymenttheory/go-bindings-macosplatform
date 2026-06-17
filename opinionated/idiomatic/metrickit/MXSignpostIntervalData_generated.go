@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,41 @@ func NewSignpostIntervalData() *SignpostIntervalData {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXSignpostIntervalData")), objc.RegisterName("new"))
 	return &SignpostIntervalData{inner: raw.MXSignpostIntervalDataFromID(_id)}
 }
+
+// HistogrammedSignpostDuration calls the underlying HistogrammedSignpostDuration.
+func (x *SignpostIntervalData) HistogrammedSignpostDuration() *raw.MXHistogram[*foundation.NSUnitDuration] {
+	return x.inner.HistogrammedSignpostDuration()
+}
+
+// CumulativeCPUTime calls the underlying CumulativeCPUTime.
+func (x *SignpostIntervalData) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeCPUTime()
+}
+
+// AverageMemory calls the underlying AverageMemory.
+func (x *SignpostIntervalData) AverageMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage] {
+	return x.inner.AverageMemory()
+}
+
+// CumulativeLogicalWrites calls the underlying CumulativeLogicalWrites.
+func (x *SignpostIntervalData) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeLogicalWrites()
+}
+
+// CumulativeHitchTimeRatio calls the underlying CumulativeHitchTimeRatio.
+func (x *SignpostIntervalData) CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
+	return x.inner.CumulativeHitchTimeRatio()
+}
+
+// SignpostIntervalDataable is the interface implemented by [SignpostIntervalData], for mocking and DI.
+type SignpostIntervalDataable interface {
+	Unwrap() *raw.MXSignpostIntervalData
+	HistogrammedSignpostDuration() *raw.MXHistogram[*foundation.NSUnitDuration]
+	CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	AverageMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage]
+	CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
+}
+
+var _ SignpostIntervalDataable = (*SignpostIntervalData)(nil)
 

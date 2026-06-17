@@ -78,17 +78,88 @@ func (x *AudioUnitBus) WithMaximumChannelCount(maximumChannelCount uint32) *Audi
 	return x
 }
 
+// SetFormatError calls the underlying SetFormatError.
+func (x *AudioUnitBus) SetFormatError(format *avfaudio.AVAudioFormat) (bool, error) {
+	return x.inner.SetFormatError(format)
+}
+
+// Format calls the underlying Format.
+func (x *AudioUnitBus) Format() *avfaudio.AVAudioFormat {
+	return x.inner.Format()
+}
+
+// ShouldAllocateBuffer calls the underlying ShouldAllocateBuffer.
+func (x *AudioUnitBus) ShouldAllocateBuffer() bool {
+	return x.inner.ShouldAllocateBuffer()
+}
+
+// SetShouldAllocateBuffer calls the underlying SetShouldAllocateBuffer.
+func (x *AudioUnitBus) SetShouldAllocateBuffer(shouldAllocateBuffer bool) {
+	x.inner.SetShouldAllocateBuffer(shouldAllocateBuffer)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *AudioUnitBus) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *AudioUnitBus) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// Name calls the underlying Name.
+func (x *AudioUnitBus) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *AudioUnitBus) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Index calls the underlying Index.
+func (x *AudioUnitBus) Index() uint {
+	return x.inner.Index()
+}
+
+// BusType calls the underlying BusType.
+func (x *AudioUnitBus) BusType() raw.AUAudioUnitBusType {
+	return x.inner.BusType()
+}
+
+// OwnerAudioUnit calls the underlying OwnerAudioUnit.
+func (x *AudioUnitBus) OwnerAudioUnit() *AudioUnit {
+	_r := x.inner.OwnerAudioUnit()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnit{inner: _r}
+}
+
 // SupportedChannelLayoutTags returns the collection as a Go slice.
 func (x *AudioUnitBus) SupportedChannelLayoutTags() []*foundation.NSNumber {
 	arr := x.inner.SupportedChannelLayoutTags()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// ContextPresentationLatency calls the underlying ContextPresentationLatency.
+func (x *AudioUnitBus) ContextPresentationLatency() float64 {
+	return x.inner.ContextPresentationLatency()
+}
+
+// SetContextPresentationLatency calls the underlying SetContextPresentationLatency.
+func (x *AudioUnitBus) SetContextPresentationLatency(contextPresentationLatency float64) {
+	x.inner.SetContextPresentationLatency(contextPresentationLatency)
 }
 
 // SupportedChannelCounts returns the collection as a Go slice.
@@ -97,10 +168,54 @@ func (x *AudioUnitBus) SupportedChannelCounts() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SetSupportedChannelCounts calls the underlying SetSupportedChannelCounts.
+func (x *AudioUnitBus) SetSupportedChannelCounts(supportedChannelCounts *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetSupportedChannelCounts(supportedChannelCounts)
+}
+
+// MaximumChannelCount calls the underlying MaximumChannelCount.
+func (x *AudioUnitBus) MaximumChannelCount() uint32 {
+	return x.inner.MaximumChannelCount()
+}
+
+// SetMaximumChannelCount calls the underlying SetMaximumChannelCount.
+func (x *AudioUnitBus) SetMaximumChannelCount(maximumChannelCount uint32) {
+	x.inner.SetMaximumChannelCount(maximumChannelCount)
+}
+
+// AudioUnitBusable is the interface implemented by [AudioUnitBus], for mocking and DI.
+type AudioUnitBusable interface {
+	Unwrap() *raw.AUAudioUnitBus
+	WithShouldAllocateBuffer(shouldAllocateBuffer bool) *AudioUnitBus
+	WithEnabled(enabled bool) *AudioUnitBus
+	WithName(name string) *AudioUnitBus
+	WithContextPresentationLatency(contextPresentationLatency float64) *AudioUnitBus
+	WithSupportedChannelCounts(items ...*foundation.NSNumber) *AudioUnitBus
+	WithMaximumChannelCount(maximumChannelCount uint32) *AudioUnitBus
+	SetFormatError(format *avfaudio.AVAudioFormat) (bool, error)
+	Format() *avfaudio.AVAudioFormat
+	ShouldAllocateBuffer() bool
+	SetShouldAllocateBuffer(shouldAllocateBuffer bool)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	Name() string
+	SetName(name string)
+	Index() uint
+	BusType() raw.AUAudioUnitBusType
+	OwnerAudioUnit() *AudioUnit
+	SupportedChannelLayoutTags() []*foundation.NSNumber
+	ContextPresentationLatency() float64
+	SetContextPresentationLatency(contextPresentationLatency float64)
+	SupportedChannelCounts() []*foundation.NSNumber
+	SetSupportedChannelCounts(supportedChannelCounts *foundation.NSArray[*foundation.NSNumber])
+	MaximumChannelCount() uint32
+	SetMaximumChannelCount(maximumChannelCount uint32)
+}
+
+var _ AudioUnitBusable = (*AudioUnitBus)(nil)
 

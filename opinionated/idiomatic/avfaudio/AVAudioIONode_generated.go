@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,38 @@ func NewAudioIONode() *AudioIONode {
 	return &AudioIONode{inner: raw.AVAudioIONodeFromID(_id)}
 }
 
+// SetVoiceProcessingEnabledError calls the underlying SetVoiceProcessingEnabledError.
+func (x *AudioIONode) SetVoiceProcessingEnabledError(enabled bool) (bool, error) {
+	return x.inner.SetVoiceProcessingEnabledError(enabled)
+}
+
+// PresentationLatency calls the underlying PresentationLatency.
+func (x *AudioIONode) PresentationLatency() float64 {
+	return x.inner.PresentationLatency()
+}
+
+// AudioUnit calls the underlying AudioUnit.
+func (x *AudioIONode) AudioUnit() *carboncore.ComponentInstanceRecord {
+	return x.inner.AudioUnit()
+}
+
+// IsVoiceProcessingEnabled calls the underlying IsVoiceProcessingEnabled.
+func (x *AudioIONode) IsVoiceProcessingEnabled() bool {
+	return x.inner.IsVoiceProcessingEnabled()
+}
+
 func (x *AudioIONode) asAudioIONode() *raw.AVAudioIONode { return x.inner }
 
 func (x *AudioIONode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
+
+// AudioIONodeable is the interface implemented by [AudioIONode], for mocking and DI.
+type AudioIONodeable interface {
+	Unwrap() *raw.AVAudioIONode
+	SetVoiceProcessingEnabledError(enabled bool) (bool, error)
+	PresentationLatency() float64
+	AudioUnit() *carboncore.ComponentInstanceRecord
+	IsVoiceProcessingEnabled() bool
+}
+
+var _ AudioIONodeable = (*AudioIONode)(nil)
 

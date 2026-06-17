@@ -33,3 +33,10 @@ func (x *ImageReduceColumnMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKern
 
 func (x *ImageReduceColumnMean) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
 
+// ImageReduceColumnMeanable is the interface implemented by [ImageReduceColumnMean], for mocking and DI.
+type ImageReduceColumnMeanable interface {
+	Unwrap() *raw.MPSImageReduceColumnMean
+}
+
+var _ ImageReduceColumnMeanable = (*ImageReduceColumnMean)(nil)
+

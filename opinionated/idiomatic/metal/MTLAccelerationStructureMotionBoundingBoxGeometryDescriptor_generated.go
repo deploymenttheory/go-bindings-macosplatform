@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,12 +60,51 @@ func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBu
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLMotionKeyframeData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLMotionKeyframeData {
+		return raw.MTLMotionKeyframeDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetBoundingBoxBuffers calls the underlying SetBoundingBoxBuffers.
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBoxBuffers(boundingBoxBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData]) {
+	x.inner.SetBoundingBoxBuffers(boundingBoxBuffers)
+}
+
+// BoundingBoxStride calls the underlying BoundingBoxStride.
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxStride() uint {
+	return x.inner.BoundingBoxStride()
+}
+
+// SetBoundingBoxStride calls the underlying SetBoundingBoxStride.
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBoxStride(boundingBoxStride uint) {
+	x.inner.SetBoundingBoxStride(boundingBoxStride)
+}
+
+// BoundingBoxCount calls the underlying BoundingBoxCount.
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxCount() uint {
+	return x.inner.BoundingBoxCount()
+}
+
+// SetBoundingBoxCount calls the underlying SetBoundingBoxCount.
+func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
+	x.inner.SetBoundingBoxCount(boundingBoxCount)
 }
 
 func (x *AccelerationStructureMotionBoundingBoxGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+
+// AccelerationStructureMotionBoundingBoxGeometryDescriptorable is the interface implemented by [AccelerationStructureMotionBoundingBoxGeometryDescriptor], for mocking and DI.
+type AccelerationStructureMotionBoundingBoxGeometryDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithBoundingBoxBuffers(items ...*raw.MTLMotionKeyframeData) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	BoundingBoxBuffers() []*raw.MTLMotionKeyframeData
+	SetBoundingBoxBuffers(boundingBoxBuffers *foundation.NSArray[*raw.MTLMotionKeyframeData])
+	BoundingBoxStride() uint
+	SetBoundingBoxStride(boundingBoxStride uint)
+	BoundingBoxCount() uint
+	SetBoundingBoxCount(boundingBoxCount uint)
+}
+
+var _ AccelerationStructureMotionBoundingBoxGeometryDescriptorable = (*AccelerationStructureMotionBoundingBoxGeometryDescriptor)(nil)
 

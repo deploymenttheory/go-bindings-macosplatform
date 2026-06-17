@@ -56,9 +56,87 @@ func (x *DetectTrajectoriesRequest) WithTargetFrameTime(targetFrameTime coremedi
 	return x
 }
 
+// TrajectoryLength calls the underlying TrajectoryLength.
+func (x *DetectTrajectoriesRequest) TrajectoryLength() int {
+	return x.inner.TrajectoryLength()
+}
+
+// ObjectMinimumNormalizedRadius calls the underlying ObjectMinimumNormalizedRadius.
+func (x *DetectTrajectoriesRequest) ObjectMinimumNormalizedRadius() float32 {
+	return x.inner.ObjectMinimumNormalizedRadius()
+}
+
+// SetObjectMinimumNormalizedRadius calls the underlying SetObjectMinimumNormalizedRadius.
+func (x *DetectTrajectoriesRequest) SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) {
+	x.inner.SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius)
+}
+
+// MinimumObjectSize calls the underlying MinimumObjectSize.
+func (x *DetectTrajectoriesRequest) MinimumObjectSize() float32 {
+	return x.inner.MinimumObjectSize()
+}
+
+// SetMinimumObjectSize calls the underlying SetMinimumObjectSize.
+func (x *DetectTrajectoriesRequest) SetMinimumObjectSize(minimumObjectSize float32) {
+	x.inner.SetMinimumObjectSize(minimumObjectSize)
+}
+
+// ObjectMaximumNormalizedRadius calls the underlying ObjectMaximumNormalizedRadius.
+func (x *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
+	return x.inner.ObjectMaximumNormalizedRadius()
+}
+
+// SetObjectMaximumNormalizedRadius calls the underlying SetObjectMaximumNormalizedRadius.
+func (x *DetectTrajectoriesRequest) SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) {
+	x.inner.SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius)
+}
+
+// MaximumObjectSize calls the underlying MaximumObjectSize.
+func (x *DetectTrajectoriesRequest) MaximumObjectSize() float32 {
+	return x.inner.MaximumObjectSize()
+}
+
+// SetMaximumObjectSize calls the underlying SetMaximumObjectSize.
+func (x *DetectTrajectoriesRequest) SetMaximumObjectSize(maximumObjectSize float32) {
+	x.inner.SetMaximumObjectSize(maximumObjectSize)
+}
+
+// TargetFrameTime calls the underlying TargetFrameTime.
+func (x *DetectTrajectoriesRequest) TargetFrameTime() coremedia.CMTime {
+	return x.inner.TargetFrameTime()
+}
+
+// SetTargetFrameTime calls the underlying SetTargetFrameTime.
+func (x *DetectTrajectoriesRequest) SetTargetFrameTime(targetFrameTime coremedia.CMTime) {
+	x.inner.SetTargetFrameTime(targetFrameTime)
+}
+
 func (x *DetectTrajectoriesRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
 
 func (x *DetectTrajectoriesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
 
 func (x *DetectTrajectoriesRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+
+// DetectTrajectoriesRequestable is the interface implemented by [DetectTrajectoriesRequest], for mocking and DI.
+type DetectTrajectoriesRequestable interface {
+	Unwrap() *raw.VNDetectTrajectoriesRequest
+	WithObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32) *DetectTrajectoriesRequest
+	WithMinimumObjectSize(minimumObjectSize float32) *DetectTrajectoriesRequest
+	WithObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32) *DetectTrajectoriesRequest
+	WithMaximumObjectSize(maximumObjectSize float32) *DetectTrajectoriesRequest
+	WithTargetFrameTime(targetFrameTime coremedia.CMTime) *DetectTrajectoriesRequest
+	TrajectoryLength() int
+	ObjectMinimumNormalizedRadius() float32
+	SetObjectMinimumNormalizedRadius(objectMinimumNormalizedRadius float32)
+	MinimumObjectSize() float32
+	SetMinimumObjectSize(minimumObjectSize float32)
+	ObjectMaximumNormalizedRadius() float32
+	SetObjectMaximumNormalizedRadius(objectMaximumNormalizedRadius float32)
+	MaximumObjectSize() float32
+	SetMaximumObjectSize(maximumObjectSize float32)
+	TargetFrameTime() coremedia.CMTime
+	SetTargetFrameTime(targetFrameTime coremedia.CMTime)
+}
+
+var _ DetectTrajectoriesRequestable = (*DetectTrajectoriesRequest)(nil)
 

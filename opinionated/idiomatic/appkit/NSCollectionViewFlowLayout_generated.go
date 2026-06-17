@@ -85,5 +85,160 @@ func (x *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(sectionF
 	return x
 }
 
+// SectionAtIndexIsCollapsed calls the underlying SectionAtIndexIsCollapsed.
+func (x *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex uint) bool {
+	return x.inner.SectionAtIndexIsCollapsed(sectionIndex)
+}
+
+// CollapseSectionAtIndex calls the underlying CollapseSectionAtIndex.
+func (x *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex uint) {
+	x.inner.CollapseSectionAtIndex(sectionIndex)
+}
+
+// ExpandSectionAtIndex calls the underlying ExpandSectionAtIndex.
+func (x *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex uint) {
+	x.inner.ExpandSectionAtIndex(sectionIndex)
+}
+
+// MinimumLineSpacing calls the underlying MinimumLineSpacing.
+func (x *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
+	return x.inner.MinimumLineSpacing()
+}
+
+// SetMinimumLineSpacing calls the underlying SetMinimumLineSpacing.
+func (x *CollectionViewFlowLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
+	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
+}
+
+// MinimumInteritemSpacing calls the underlying MinimumInteritemSpacing.
+func (x *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
+	return x.inner.MinimumInteritemSpacing()
+}
+
+// SetMinimumInteritemSpacing calls the underlying SetMinimumInteritemSpacing.
+func (x *CollectionViewFlowLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
+	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
+}
+
+// ItemSize calls the underlying ItemSize.
+func (x *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
+	return x.inner.ItemSize()
+}
+
+// SetItemSize calls the underlying SetItemSize.
+func (x *CollectionViewFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
+	x.inner.SetItemSize(itemSize)
+}
+
+// EstimatedItemSize calls the underlying EstimatedItemSize.
+func (x *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
+	return x.inner.EstimatedItemSize()
+}
+
+// SetEstimatedItemSize calls the underlying SetEstimatedItemSize.
+func (x *CollectionViewFlowLayout) SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize) {
+	x.inner.SetEstimatedItemSize(estimatedItemSize)
+}
+
+// ScrollDirection calls the underlying ScrollDirection.
+func (x *CollectionViewFlowLayout) ScrollDirection() raw.NSCollectionViewScrollDirection {
+	return x.inner.ScrollDirection()
+}
+
+// SetScrollDirection calls the underlying SetScrollDirection.
+func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) {
+	x.inner.SetScrollDirection(scrollDirection)
+}
+
+// HeaderReferenceSize calls the underlying HeaderReferenceSize.
+func (x *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
+	return x.inner.HeaderReferenceSize()
+}
+
+// SetHeaderReferenceSize calls the underlying SetHeaderReferenceSize.
+func (x *CollectionViewFlowLayout) SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) {
+	x.inner.SetHeaderReferenceSize(headerReferenceSize)
+}
+
+// FooterReferenceSize calls the underlying FooterReferenceSize.
+func (x *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
+	return x.inner.FooterReferenceSize()
+}
+
+// SetFooterReferenceSize calls the underlying SetFooterReferenceSize.
+func (x *CollectionViewFlowLayout) SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize) {
+	x.inner.SetFooterReferenceSize(footerReferenceSize)
+}
+
+// SectionInset calls the underlying SectionInset.
+func (x *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
+	return x.inner.SectionInset()
+}
+
+// SetSectionInset calls the underlying SetSectionInset.
+func (x *CollectionViewFlowLayout) SetSectionInset(sectionInset foundation.NSEdgeInsets) {
+	x.inner.SetSectionInset(sectionInset)
+}
+
+// SectionHeadersPinToVisibleBounds calls the underlying SectionHeadersPinToVisibleBounds.
+func (x *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
+	return x.inner.SectionHeadersPinToVisibleBounds()
+}
+
+// SetSectionHeadersPinToVisibleBounds calls the underlying SetSectionHeadersPinToVisibleBounds.
+func (x *CollectionViewFlowLayout) SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) {
+	x.inner.SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds)
+}
+
+// SectionFootersPinToVisibleBounds calls the underlying SectionFootersPinToVisibleBounds.
+func (x *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
+	return x.inner.SectionFootersPinToVisibleBounds()
+}
+
+// SetSectionFootersPinToVisibleBounds calls the underlying SetSectionFootersPinToVisibleBounds.
+func (x *CollectionViewFlowLayout) SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) {
+	x.inner.SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds)
+}
+
 func (x *CollectionViewFlowLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+
+// CollectionViewFlowLayoutable is the interface implemented by [CollectionViewFlowLayout], for mocking and DI.
+type CollectionViewFlowLayoutable interface {
+	Unwrap() *raw.NSCollectionViewFlowLayout
+	WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout
+	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout
+	WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout
+	WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout
+	WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewFlowLayout
+	WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
+	WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
+	WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout
+	WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout
+	WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout
+	SectionAtIndexIsCollapsed(sectionIndex uint) bool
+	CollapseSectionAtIndex(sectionIndex uint)
+	ExpandSectionAtIndex(sectionIndex uint)
+	MinimumLineSpacing() float64
+	SetMinimumLineSpacing(minimumLineSpacing float64)
+	MinimumInteritemSpacing() float64
+	SetMinimumInteritemSpacing(minimumInteritemSpacing float64)
+	ItemSize() corefoundation.CGSize
+	SetItemSize(itemSize corefoundation.CGSize)
+	EstimatedItemSize() corefoundation.CGSize
+	SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize)
+	ScrollDirection() raw.NSCollectionViewScrollDirection
+	SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection)
+	HeaderReferenceSize() corefoundation.CGSize
+	SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize)
+	FooterReferenceSize() corefoundation.CGSize
+	SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize)
+	SectionInset() foundation.NSEdgeInsets
+	SetSectionInset(sectionInset foundation.NSEdgeInsets)
+	SectionHeadersPinToVisibleBounds() bool
+	SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool)
+	SectionFootersPinToVisibleBounds() bool
+	SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool)
+}
+
+var _ CollectionViewFlowLayoutable = (*CollectionViewFlowLayout)(nil)
 

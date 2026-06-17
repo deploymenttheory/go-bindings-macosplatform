@@ -25,3 +25,10 @@ func NewMTRMediaPlaybackClusterStopPlaybackParams() *MTRMediaPlaybackClusterStop
 
 func (x *MTRMediaPlaybackClusterStopPlaybackParams) asMTRMediaPlaybackClusterStopParams() *raw.MTRMediaPlaybackClusterStopParams { return &x.inner.MTRMediaPlaybackClusterStopParams }
 
+// MTRMediaPlaybackClusterStopPlaybackParamsable is the interface implemented by [MTRMediaPlaybackClusterStopPlaybackParams], for mocking and DI.
+type MTRMediaPlaybackClusterStopPlaybackParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterStopPlaybackParams
+}
+
+var _ MTRMediaPlaybackClusterStopPlaybackParamsable = (*MTRMediaPlaybackClusterStopPlaybackParams)(nil)
+

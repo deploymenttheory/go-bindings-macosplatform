@@ -5,6 +5,7 @@
 package ituneslibrary
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,36 @@ func NewLibMediaEntity() *LibMediaEntity {
 	return &LibMediaEntity{inner: raw.ITLibMediaEntityFromID(_id)}
 }
 
+// ValueForProperty calls the underlying ValueForProperty.
+func (x *LibMediaEntity) ValueForProperty(property string) objc.ID {
+	return x.inner.ValueForProperty(foundation.NSStringStringWithUTF8String(property))
+}
+
+// EnumerateValuesForPropertiesUsing calls the underlying EnumerateValuesForPropertiesUsing.
+func (x *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
+	x.inner.EnumerateValuesForPropertiesUsing(properties, block)
+}
+
+// EnumerateValuesExceptForPropertiesUsing calls the underlying EnumerateValuesExceptForPropertiesUsing.
+func (x *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
+	x.inner.EnumerateValuesExceptForPropertiesUsing(properties, block)
+}
+
+// PersistentID calls the underlying PersistentID.
+func (x *LibMediaEntity) PersistentID() *foundation.NSNumber {
+	return x.inner.PersistentID()
+}
+
 func (x *LibMediaEntity) asLibMediaEntity() *raw.ITLibMediaEntity { return x.inner }
+
+// LibMediaEntityable is the interface implemented by [LibMediaEntity], for mocking and DI.
+type LibMediaEntityable interface {
+	Unwrap() *raw.ITLibMediaEntity
+	ValueForProperty(property string) objc.ID
+	EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool))
+	EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool))
+	PersistentID() *foundation.NSNumber
+}
+
+var _ LibMediaEntityable = (*LibMediaEntity)(nil)
 

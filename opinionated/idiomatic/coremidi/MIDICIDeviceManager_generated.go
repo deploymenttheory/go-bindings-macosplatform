@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *CIDeviceManager) DiscoveredCIDevices() []*raw.MIDICIDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDICIDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDICIDevice {
+		return raw.MIDICIDeviceFromID(purego.Retain(_id))
+	})
 }
+
+// CIDeviceManagerable is the interface implemented by [CIDeviceManager], for mocking and DI.
+type CIDeviceManagerable interface {
+	Unwrap() *raw.MIDICIDeviceManager
+	DiscoveredCIDevices() []*raw.MIDICIDevice
+}
+
+var _ CIDeviceManagerable = (*CIDeviceManager)(nil)
 

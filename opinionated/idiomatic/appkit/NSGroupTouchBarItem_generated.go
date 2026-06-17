@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -71,18 +72,104 @@ func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUs
 	return x
 }
 
+// GroupTouchBar calls the underlying GroupTouchBar.
+func (x *GroupTouchBarItem) GroupTouchBar() *TouchBar {
+	_r := x.inner.GroupTouchBar()
+	if _r == nil {
+		return nil
+	}
+	return &TouchBar{inner: _r}
+}
+
+// SetGroupTouchBar calls the underlying SetGroupTouchBar.
+func (x *GroupTouchBarItem) SetGroupTouchBar(groupTouchBar *raw.NSTouchBar) {
+	x.inner.SetGroupTouchBar(groupTouchBar)
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *GroupTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
+// GroupUserInterfaceLayoutDirection calls the underlying GroupUserInterfaceLayoutDirection.
+func (x *GroupTouchBarItem) GroupUserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
+	return x.inner.GroupUserInterfaceLayoutDirection()
+}
+
+// SetGroupUserInterfaceLayoutDirection calls the underlying SetGroupUserInterfaceLayoutDirection.
+func (x *GroupTouchBarItem) SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) {
+	x.inner.SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection)
+}
+
+// PrefersEqualWidths calls the underlying PrefersEqualWidths.
+func (x *GroupTouchBarItem) PrefersEqualWidths() bool {
+	return x.inner.PrefersEqualWidths()
+}
+
+// SetPrefersEqualWidths calls the underlying SetPrefersEqualWidths.
+func (x *GroupTouchBarItem) SetPrefersEqualWidths(prefersEqualWidths bool) {
+	x.inner.SetPrefersEqualWidths(prefersEqualWidths)
+}
+
+// PreferredItemWidth calls the underlying PreferredItemWidth.
+func (x *GroupTouchBarItem) PreferredItemWidth() float64 {
+	return x.inner.PreferredItemWidth()
+}
+
+// SetPreferredItemWidth calls the underlying SetPreferredItemWidth.
+func (x *GroupTouchBarItem) SetPreferredItemWidth(preferredItemWidth float64) {
+	x.inner.SetPreferredItemWidth(preferredItemWidth)
+}
+
+// EffectiveCompressionOptions calls the underlying EffectiveCompressionOptions.
+func (x *GroupTouchBarItem) EffectiveCompressionOptions() *UserInterfaceCompressionOptions {
+	_r := x.inner.EffectiveCompressionOptions()
+	if _r == nil {
+		return nil
+	}
+	return &UserInterfaceCompressionOptions{inner: _r}
+}
+
 // PrioritizedCompressionOptions returns the collection as a Go slice.
 func (x *GroupTouchBarItem) PrioritizedCompressionOptions() []*raw.NSUserInterfaceCompressionOptions {
 	arr := x.inner.PrioritizedCompressionOptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSUserInterfaceCompressionOptions, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSUserInterfaceCompressionOptions {
+		return raw.NSUserInterfaceCompressionOptionsFromID(purego.Retain(_id))
+	})
+}
+
+// SetPrioritizedCompressionOptions calls the underlying SetPrioritizedCompressionOptions.
+func (x *GroupTouchBarItem) SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) {
+	x.inner.SetPrioritizedCompressionOptions(prioritizedCompressionOptions)
 }
 
 func (x *GroupTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// GroupTouchBarItemable is the interface implemented by [GroupTouchBarItem], for mocking and DI.
+type GroupTouchBarItemable interface {
+	Unwrap() *raw.NSGroupTouchBarItem
+	WithGroupTouchBar(groupTouchBar *raw.NSTouchBar) *GroupTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *GroupTouchBarItem
+	WithGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GroupTouchBarItem
+	WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem
+	WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem
+	WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem
+	GroupTouchBar() *TouchBar
+	SetGroupTouchBar(groupTouchBar *raw.NSTouchBar)
+	SetCustomizationLabel(customizationLabel string)
+	GroupUserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
+	SetGroupUserInterfaceLayoutDirection(groupUserInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection)
+	PrefersEqualWidths() bool
+	SetPrefersEqualWidths(prefersEqualWidths bool)
+	PreferredItemWidth() float64
+	SetPreferredItemWidth(preferredItemWidth float64)
+	EffectiveCompressionOptions() *UserInterfaceCompressionOptions
+	PrioritizedCompressionOptions() []*raw.NSUserInterfaceCompressionOptions
+	SetPrioritizedCompressionOptions(prioritizedCompressionOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions])
+}
+
+var _ GroupTouchBarItemable = (*GroupTouchBarItem)(nil)
 

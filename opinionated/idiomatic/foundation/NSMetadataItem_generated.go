@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,18 +26,36 @@ func NewMetadataItemWithURL(url string) *MetadataItem {
 	return &MetadataItem{inner: raw.NSMetadataItemFromID(_id)}
 }
 
+// ValueForAttribute calls the underlying ValueForAttribute.
+func (x *MetadataItem) ValueForAttribute(key string) objc.ID {
+	return x.inner.ValueForAttribute(foundation.NSStringStringWithUTF8String(key))
+}
+
+// ValuesForAttributes calls the underlying ValuesForAttributes.
+func (x *MetadataItem) ValuesForAttributes(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.ValuesForAttributes(keys)
+}
+
 // Attributes returns the collection as a Go slice.
-func (x *MetadataItem) Attributes() []*raw.NSString {
+func (x *MetadataItem) Attributes() []string {
 	arr := x.inner.Attributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *MetadataItem) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
+type MetadataItemable interface {
+	Unwrap() *raw.NSMetadataItem
+	ValueForAttribute(key string) objc.ID
+	ValuesForAttributes(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID]
+	Attributes() []string
+}
+
+var _ MetadataItemable = (*MetadataItem)(nil)
 

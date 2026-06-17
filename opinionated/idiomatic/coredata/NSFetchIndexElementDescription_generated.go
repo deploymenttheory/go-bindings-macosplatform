@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,67 @@ func (x *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndex
 	x.inner.SetAscending(ascending)
 	return x
 }
+
+// Property calls the underlying Property.
+func (x *FetchIndexElementDescription) Property() *PropertyDescription {
+	_r := x.inner.Property()
+	if _r == nil {
+		return nil
+	}
+	return &PropertyDescription{inner: _r}
+}
+
+// PropertyName calls the underlying PropertyName.
+func (x *FetchIndexElementDescription) PropertyName() string {
+	_r := x.inner.PropertyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CollationType calls the underlying CollationType.
+func (x *FetchIndexElementDescription) CollationType() raw.NSFetchIndexElementType {
+	return x.inner.CollationType()
+}
+
+// SetCollationType calls the underlying SetCollationType.
+func (x *FetchIndexElementDescription) SetCollationType(collationType raw.NSFetchIndexElementType) {
+	x.inner.SetCollationType(collationType)
+}
+
+// IsAscending calls the underlying IsAscending.
+func (x *FetchIndexElementDescription) IsAscending() bool {
+	return x.inner.IsAscending()
+}
+
+// SetAscending calls the underlying SetAscending.
+func (x *FetchIndexElementDescription) SetAscending(ascending bool) {
+	x.inner.SetAscending(ascending)
+}
+
+// IndexDescription calls the underlying IndexDescription.
+func (x *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
+	_r := x.inner.IndexDescription()
+	if _r == nil {
+		return nil
+	}
+	return &FetchIndexDescription{inner: _r}
+}
+
+// FetchIndexElementDescriptionable is the interface implemented by [FetchIndexElementDescription], for mocking and DI.
+type FetchIndexElementDescriptionable interface {
+	Unwrap() *raw.NSFetchIndexElementDescription
+	WithCollationType(collationType raw.NSFetchIndexElementType) *FetchIndexElementDescription
+	WithAscending(ascending bool) *FetchIndexElementDescription
+	Property() *PropertyDescription
+	PropertyName() string
+	CollationType() raw.NSFetchIndexElementType
+	SetCollationType(collationType raw.NSFetchIndexElementType)
+	IsAscending() bool
+	SetAscending(ascending bool)
+	IndexDescription() *FetchIndexDescription
+}
+
+var _ FetchIndexElementDescriptionable = (*FetchIndexElementDescription)(nil)
 

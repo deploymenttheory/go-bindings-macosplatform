@@ -30,3 +30,23 @@ func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnection
 	return x
 }
 
+// ConnectionStatus calls the underlying ConnectionStatus.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
+	return x.inner.ConnectionStatus()
+}
+
+// SetConnectionStatus calls the underlying SetConnectionStatus.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
+	x.inner.SetConnectionStatus(connectionStatus)
+}
+
+// MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
+	WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
+	ConnectionStatus() *foundation.NSNumber
+	SetConnectionStatus(connectionStatus *foundation.NSNumber)
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent)(nil)
+

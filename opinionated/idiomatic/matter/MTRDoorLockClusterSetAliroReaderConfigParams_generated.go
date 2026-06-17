@@ -60,3 +60,88 @@ func (x *MTRDoorLockClusterSetAliroReaderConfigParams) WithServerSideProcessingT
 	return x
 }
 
+// SigningKey calls the underlying SigningKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SigningKey() *foundation.NSData {
+	return x.inner.SigningKey()
+}
+
+// SetSigningKey calls the underlying SetSigningKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetSigningKey(signingKey *foundation.NSData) {
+	x.inner.SetSigningKey(signingKey)
+}
+
+// VerificationKey calls the underlying VerificationKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) VerificationKey() *foundation.NSData {
+	return x.inner.VerificationKey()
+}
+
+// SetVerificationKey calls the underlying SetVerificationKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetVerificationKey(verificationKey *foundation.NSData) {
+	x.inner.SetVerificationKey(verificationKey)
+}
+
+// GroupIdentifier calls the underlying GroupIdentifier.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) GroupIdentifier() *foundation.NSData {
+	return x.inner.GroupIdentifier()
+}
+
+// SetGroupIdentifier calls the underlying SetGroupIdentifier.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetGroupIdentifier(groupIdentifier *foundation.NSData) {
+	x.inner.SetGroupIdentifier(groupIdentifier)
+}
+
+// GroupResolvingKey calls the underlying GroupResolvingKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) GroupResolvingKey() *foundation.NSData {
+	return x.inner.GroupResolvingKey()
+}
+
+// SetGroupResolvingKey calls the underlying SetGroupResolvingKey.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetGroupResolvingKey(groupResolvingKey *foundation.NSData) {
+	x.inner.SetGroupResolvingKey(groupResolvingKey)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDoorLockClusterSetAliroReaderConfigParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDoorLockClusterSetAliroReaderConfigParamsable is the interface implemented by [MTRDoorLockClusterSetAliroReaderConfigParams], for mocking and DI.
+type MTRDoorLockClusterSetAliroReaderConfigParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterSetAliroReaderConfigParams
+	WithSigningKey(signingKey *foundation.NSData) *MTRDoorLockClusterSetAliroReaderConfigParams
+	WithVerificationKey(verificationKey *foundation.NSData) *MTRDoorLockClusterSetAliroReaderConfigParams
+	WithGroupIdentifier(groupIdentifier *foundation.NSData) *MTRDoorLockClusterSetAliroReaderConfigParams
+	WithGroupResolvingKey(groupResolvingKey *foundation.NSData) *MTRDoorLockClusterSetAliroReaderConfigParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterSetAliroReaderConfigParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterSetAliroReaderConfigParams
+	SigningKey() *foundation.NSData
+	SetSigningKey(signingKey *foundation.NSData)
+	VerificationKey() *foundation.NSData
+	SetVerificationKey(verificationKey *foundation.NSData)
+	GroupIdentifier() *foundation.NSData
+	SetGroupIdentifier(groupIdentifier *foundation.NSData)
+	GroupResolvingKey() *foundation.NSData
+	SetGroupResolvingKey(groupResolvingKey *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterSetAliroReaderConfigParamsable = (*MTRDoorLockClusterSetAliroReaderConfigParams)(nil)
+

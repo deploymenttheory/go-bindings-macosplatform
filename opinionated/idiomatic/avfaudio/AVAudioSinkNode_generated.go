@@ -27,3 +27,10 @@ func NewAudioSinkNodeWithReceiverBlock(block func(*coreaudiotypes.AudioTimeStamp
 
 func (x *AudioSinkNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
+// AudioSinkNodeable is the interface implemented by [AudioSinkNode], for mocking and DI.
+type AudioSinkNodeable interface {
+	Unwrap() *raw.AVAudioSinkNode
+}
+
+var _ AudioSinkNodeable = (*AudioSinkNode)(nil)
+

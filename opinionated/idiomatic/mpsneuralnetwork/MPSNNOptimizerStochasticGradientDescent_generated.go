@@ -5,7 +5,9 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -39,5 +41,60 @@ func NewNNOptimizerStochasticGradientDescentWithDeviceMomentumScaleUseNestrovMom
 	return &NNOptimizerStochasticGradientDescent{inner: raw.MPSNNOptimizerStochasticGradientDescentFromID(_id)}
 }
 
+// EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector.
+func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, resultValuesVector)
+}
+
+// EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix calls the underlying EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix.
+func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputMomentumMatrix, resultValuesMatrix)
+}
+
+// EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState.
+func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *raw.MPSCNNConvolutionGradientState, convolutionSourceState *raw.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNConvolutionWeightsAndBiasesState) {
+	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputMomentumVectors, resultState)
+}
+
+// EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState.
+func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState(commandBuffer, batchNormalizationState, inputMomentumVectors, resultState)
+}
+
+// EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState.
+func (x *NNOptimizerStochasticGradientDescent) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *raw.MPSCNNBatchNormalizationState, batchNormalizationSourceState *raw.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputMomentumVectors, resultState)
+}
+
+// MomentumScale calls the underlying MomentumScale.
+func (x *NNOptimizerStochasticGradientDescent) MomentumScale() float32 {
+	return x.inner.MomentumScale()
+}
+
+// UseNesterovMomentum calls the underlying UseNesterovMomentum.
+func (x *NNOptimizerStochasticGradientDescent) UseNesterovMomentum() bool {
+	return x.inner.UseNesterovMomentum()
+}
+
+// UseNestrovMomentum calls the underlying UseNestrovMomentum.
+func (x *NNOptimizerStochasticGradientDescent) UseNestrovMomentum() bool {
+	return x.inner.UseNestrovMomentum()
+}
+
 func (x *NNOptimizerStochasticGradientDescent) asNNOptimizer() *raw.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
+
+// NNOptimizerStochasticGradientDescentable is the interface implemented by [NNOptimizerStochasticGradientDescent], for mocking and DI.
+type NNOptimizerStochasticGradientDescentable interface {
+	Unwrap() *raw.MPSNNOptimizerStochasticGradientDescent
+	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
+	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
+	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *raw.MPSCNNConvolutionGradientState, convolutionSourceState *raw.MPSCNNConvolutionWeightsAndBiasesState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNConvolutionWeightsAndBiasesState)
+	EncodeToCommandBufferBatchNormalizationStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *raw.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState)
+	EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputMomentumVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *raw.MPSCNNBatchNormalizationState, batchNormalizationSourceState *raw.MPSCNNBatchNormalizationState, inputMomentumVectors *foundation.NSArray[*mpscore.MPSVector], resultState *raw.MPSCNNNormalizationGammaAndBetaState)
+	MomentumScale() float32
+	UseNesterovMomentum() bool
+	UseNestrovMomentum() bool
+}
+
+var _ NNOptimizerStochasticGradientDescentable = (*NNOptimizerStochasticGradientDescent)(nil)
 

@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -149,16 +150,267 @@ func (x *AVB17221Entity) WithEntityDiscovery(entityDiscovery *raw.AVB17221Entity
 	return x
 }
 
+// IsLocalEntity calls the underlying IsLocalEntity.
+func (x *AVB17221Entity) IsLocalEntity() bool {
+	return x.inner.IsLocalEntity()
+}
+
+// SetLocalEntity calls the underlying SetLocalEntity.
+func (x *AVB17221Entity) SetLocalEntity(localEntity bool) {
+	x.inner.SetLocalEntity(localEntity)
+}
+
+// TimeToLive calls the underlying TimeToLive.
+func (x *AVB17221Entity) TimeToLive() uint8 {
+	return x.inner.TimeToLive()
+}
+
+// SetTimeToLive calls the underlying SetTimeToLive.
+func (x *AVB17221Entity) SetTimeToLive(timeToLive uint8) {
+	x.inner.SetTimeToLive(timeToLive)
+}
+
+// EntityID calls the underlying EntityID.
+func (x *AVB17221Entity) EntityID() uint64 {
+	return x.inner.EntityID()
+}
+
+// SetEntityID calls the underlying SetEntityID.
+func (x *AVB17221Entity) SetEntityID(entityID uint64) {
+	x.inner.SetEntityID(entityID)
+}
+
+// EntityModelID calls the underlying EntityModelID.
+func (x *AVB17221Entity) EntityModelID() uint64 {
+	return x.inner.EntityModelID()
+}
+
+// SetEntityModelID calls the underlying SetEntityModelID.
+func (x *AVB17221Entity) SetEntityModelID(entityModelID uint64) {
+	x.inner.SetEntityModelID(entityModelID)
+}
+
+// EntityCapabilities calls the underlying EntityCapabilities.
+func (x *AVB17221Entity) EntityCapabilities() raw.AVB17221ADPEntityCapabilities {
+	return x.inner.EntityCapabilities()
+}
+
+// SetEntityCapabilities calls the underlying SetEntityCapabilities.
+func (x *AVB17221Entity) SetEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities) {
+	x.inner.SetEntityCapabilities(entityCapabilities)
+}
+
+// TalkerStreamSources calls the underlying TalkerStreamSources.
+func (x *AVB17221Entity) TalkerStreamSources() uint16 {
+	return x.inner.TalkerStreamSources()
+}
+
+// SetTalkerStreamSources calls the underlying SetTalkerStreamSources.
+func (x *AVB17221Entity) SetTalkerStreamSources(talkerStreamSources uint16) {
+	x.inner.SetTalkerStreamSources(talkerStreamSources)
+}
+
+// TalkerCapabilities calls the underlying TalkerCapabilities.
+func (x *AVB17221Entity) TalkerCapabilities() raw.AVB17221ADPTalkerCapabilities {
+	return x.inner.TalkerCapabilities()
+}
+
+// SetTalkerCapabilities calls the underlying SetTalkerCapabilities.
+func (x *AVB17221Entity) SetTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities) {
+	x.inner.SetTalkerCapabilities(talkerCapabilities)
+}
+
+// ListenerStreamSinks calls the underlying ListenerStreamSinks.
+func (x *AVB17221Entity) ListenerStreamSinks() uint16 {
+	return x.inner.ListenerStreamSinks()
+}
+
+// SetListenerStreamSinks calls the underlying SetListenerStreamSinks.
+func (x *AVB17221Entity) SetListenerStreamSinks(listenerStreamSinks uint16) {
+	x.inner.SetListenerStreamSinks(listenerStreamSinks)
+}
+
+// ListenerCapabilities calls the underlying ListenerCapabilities.
+func (x *AVB17221Entity) ListenerCapabilities() raw.AVB17221ADPListenerCapabilities {
+	return x.inner.ListenerCapabilities()
+}
+
+// SetListenerCapabilities calls the underlying SetListenerCapabilities.
+func (x *AVB17221Entity) SetListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities) {
+	x.inner.SetListenerCapabilities(listenerCapabilities)
+}
+
+// ControllerCapabilities calls the underlying ControllerCapabilities.
+func (x *AVB17221Entity) ControllerCapabilities() raw.AVB17221ADPControllerCapabilities {
+	return x.inner.ControllerCapabilities()
+}
+
+// SetControllerCapabilities calls the underlying SetControllerCapabilities.
+func (x *AVB17221Entity) SetControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities) {
+	x.inner.SetControllerCapabilities(controllerCapabilities)
+}
+
+// AvailableIndex calls the underlying AvailableIndex.
+func (x *AVB17221Entity) AvailableIndex() uint32 {
+	return x.inner.AvailableIndex()
+}
+
+// SetAvailableIndex calls the underlying SetAvailableIndex.
+func (x *AVB17221Entity) SetAvailableIndex(availableIndex uint32) {
+	x.inner.SetAvailableIndex(availableIndex)
+}
+
+// GPTPGrandmasterID calls the underlying GPTPGrandmasterID.
+func (x *AVB17221Entity) GPTPGrandmasterID() uint64 {
+	return x.inner.GPTPGrandmasterID()
+}
+
+// SetGPTPGrandmasterID calls the underlying SetGPTPGrandmasterID.
+func (x *AVB17221Entity) SetGPTPGrandmasterID(gPTPGrandmasterID uint64) {
+	x.inner.SetGPTPGrandmasterID(gPTPGrandmasterID)
+}
+
+// GPTPDomainNumber calls the underlying GPTPDomainNumber.
+func (x *AVB17221Entity) GPTPDomainNumber() uint8 {
+	return x.inner.GPTPDomainNumber()
+}
+
+// SetGPTPDomainNumber calls the underlying SetGPTPDomainNumber.
+func (x *AVB17221Entity) SetGPTPDomainNumber(gPTPDomainNumber uint8) {
+	x.inner.SetGPTPDomainNumber(gPTPDomainNumber)
+}
+
+// IdentifyControlIndex calls the underlying IdentifyControlIndex.
+func (x *AVB17221Entity) IdentifyControlIndex() uint16 {
+	return x.inner.IdentifyControlIndex()
+}
+
+// SetIdentifyControlIndex calls the underlying SetIdentifyControlIndex.
+func (x *AVB17221Entity) SetIdentifyControlIndex(identifyControlIndex uint16) {
+	x.inner.SetIdentifyControlIndex(identifyControlIndex)
+}
+
+// InterfaceIndex calls the underlying InterfaceIndex.
+func (x *AVB17221Entity) InterfaceIndex() uint16 {
+	return x.inner.InterfaceIndex()
+}
+
+// SetInterfaceIndex calls the underlying SetInterfaceIndex.
+func (x *AVB17221Entity) SetInterfaceIndex(interfaceIndex uint16) {
+	x.inner.SetInterfaceIndex(interfaceIndex)
+}
+
+// AssociationID calls the underlying AssociationID.
+func (x *AVB17221Entity) AssociationID() uint64 {
+	return x.inner.AssociationID()
+}
+
+// SetAssociationID calls the underlying SetAssociationID.
+func (x *AVB17221Entity) SetAssociationID(associationID uint64) {
+	x.inner.SetAssociationID(associationID)
+}
+
+// CurrentConfigurationIndex calls the underlying CurrentConfigurationIndex.
+func (x *AVB17221Entity) CurrentConfigurationIndex() uint16 {
+	return x.inner.CurrentConfigurationIndex()
+}
+
+// SetCurrentConfigurationIndex calls the underlying SetCurrentConfigurationIndex.
+func (x *AVB17221Entity) SetCurrentConfigurationIndex(currentConfigurationIndex uint16) {
+	x.inner.SetCurrentConfigurationIndex(currentConfigurationIndex)
+}
+
 // MacAddresses returns the collection as a Go slice.
 func (x *AVB17221Entity) MacAddresses() []*raw.AVBMACAddress {
 	arr := x.inner.MacAddresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVBMACAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVBMACAddress {
+		return raw.AVBMACAddressFromID(purego.Retain(_id))
+	})
 }
+
+// SetMacAddresses calls the underlying SetMacAddresses.
+func (x *AVB17221Entity) SetMacAddresses(macAddresses *foundation.NSArray[*raw.AVBMACAddress]) {
+	x.inner.SetMacAddresses(macAddresses)
+}
+
+// EntityDiscovery calls the underlying EntityDiscovery.
+func (x *AVB17221Entity) EntityDiscovery() *AVB17221EntityDiscovery {
+	_r := x.inner.EntityDiscovery()
+	if _r == nil {
+		return nil
+	}
+	return &AVB17221EntityDiscovery{inner: _r}
+}
+
+// SetEntityDiscovery calls the underlying SetEntityDiscovery.
+func (x *AVB17221Entity) SetEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery) {
+	x.inner.SetEntityDiscovery(entityDiscovery)
+}
+
+// AVB17221Entityable is the interface implemented by [AVB17221Entity], for mocking and DI.
+type AVB17221Entityable interface {
+	Unwrap() *raw.AVB17221Entity
+	WithLocalEntity(localEntity bool) *AVB17221Entity
+	WithTimeToLive(timeToLive uint8) *AVB17221Entity
+	WithEntityID(entityID uint64) *AVB17221Entity
+	WithEntityModelID(entityModelID uint64) *AVB17221Entity
+	WithEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities) *AVB17221Entity
+	WithTalkerStreamSources(talkerStreamSources uint16) *AVB17221Entity
+	WithTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities) *AVB17221Entity
+	WithListenerStreamSinks(listenerStreamSinks uint16) *AVB17221Entity
+	WithListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities) *AVB17221Entity
+	WithControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities) *AVB17221Entity
+	WithAvailableIndex(availableIndex uint32) *AVB17221Entity
+	WithGPTPGrandmasterID(gPTPGrandmasterID uint64) *AVB17221Entity
+	WithGPTPDomainNumber(gPTPDomainNumber uint8) *AVB17221Entity
+	WithIdentifyControlIndex(identifyControlIndex uint16) *AVB17221Entity
+	WithInterfaceIndex(interfaceIndex uint16) *AVB17221Entity
+	WithAssociationID(associationID uint64) *AVB17221Entity
+	WithCurrentConfigurationIndex(currentConfigurationIndex uint16) *AVB17221Entity
+	WithMacAddresses(items ...*raw.AVBMACAddress) *AVB17221Entity
+	WithEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery) *AVB17221Entity
+	IsLocalEntity() bool
+	SetLocalEntity(localEntity bool)
+	TimeToLive() uint8
+	SetTimeToLive(timeToLive uint8)
+	EntityID() uint64
+	SetEntityID(entityID uint64)
+	EntityModelID() uint64
+	SetEntityModelID(entityModelID uint64)
+	EntityCapabilities() raw.AVB17221ADPEntityCapabilities
+	SetEntityCapabilities(entityCapabilities raw.AVB17221ADPEntityCapabilities)
+	TalkerStreamSources() uint16
+	SetTalkerStreamSources(talkerStreamSources uint16)
+	TalkerCapabilities() raw.AVB17221ADPTalkerCapabilities
+	SetTalkerCapabilities(talkerCapabilities raw.AVB17221ADPTalkerCapabilities)
+	ListenerStreamSinks() uint16
+	SetListenerStreamSinks(listenerStreamSinks uint16)
+	ListenerCapabilities() raw.AVB17221ADPListenerCapabilities
+	SetListenerCapabilities(listenerCapabilities raw.AVB17221ADPListenerCapabilities)
+	ControllerCapabilities() raw.AVB17221ADPControllerCapabilities
+	SetControllerCapabilities(controllerCapabilities raw.AVB17221ADPControllerCapabilities)
+	AvailableIndex() uint32
+	SetAvailableIndex(availableIndex uint32)
+	GPTPGrandmasterID() uint64
+	SetGPTPGrandmasterID(gPTPGrandmasterID uint64)
+	GPTPDomainNumber() uint8
+	SetGPTPDomainNumber(gPTPDomainNumber uint8)
+	IdentifyControlIndex() uint16
+	SetIdentifyControlIndex(identifyControlIndex uint16)
+	InterfaceIndex() uint16
+	SetInterfaceIndex(interfaceIndex uint16)
+	AssociationID() uint64
+	SetAssociationID(associationID uint64)
+	CurrentConfigurationIndex() uint16
+	SetCurrentConfigurationIndex(currentConfigurationIndex uint16)
+	MacAddresses() []*raw.AVBMACAddress
+	SetMacAddresses(macAddresses *foundation.NSArray[*raw.AVBMACAddress])
+	EntityDiscovery() *AVB17221EntityDiscovery
+	SetEntityDiscovery(entityDiscovery *raw.AVB17221EntityDiscovery)
+}
+
+var _ AVB17221Entityable = (*AVB17221Entity)(nil)
 

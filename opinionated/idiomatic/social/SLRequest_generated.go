@@ -6,8 +6,10 @@ package social
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Request wraps [raw.SLRequest] with a fluent Go API.
@@ -29,4 +31,66 @@ func (x *Request) WithAccount(account *accounts.ACAccount) *Request {
 	x.inner.SetAccount(account)
 	return x
 }
+
+// AddMultipartDataWithNameTypeFilename calls the underlying AddMultipartDataWithNameTypeFilename.
+func (x *Request) AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name string, type_ string, filename string) {
+	x.inner.AddMultipartDataWithNameTypeFilename(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(filename))
+}
+
+// AddMultipartDataWithNameType calls the underlying AddMultipartDataWithNameType.
+func (x *Request) AddMultipartDataWithNameType(data *foundation.NSData, name string, type_ string) {
+	x.inner.AddMultipartDataWithNameType(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_))
+}
+
+// PreparedURLRequest calls the underlying PreparedURLRequest.
+func (x *Request) PreparedURLRequest() *foundation.NSURLRequest {
+	return x.inner.PreparedURLRequest()
+}
+
+// PerformRequestWithHandler calls the underlying PerformRequestWithHandler.
+func (x *Request) PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer)) {
+	x.inner.PerformRequestWithHandler(handler)
+}
+
+// Account calls the underlying Account.
+func (x *Request) Account() *accounts.ACAccount {
+	return x.inner.Account()
+}
+
+// SetAccount calls the underlying SetAccount.
+func (x *Request) SetAccount(account *accounts.ACAccount) {
+	x.inner.SetAccount(account)
+}
+
+// RequestMethod calls the underlying RequestMethod.
+func (x *Request) RequestMethod() raw.SLRequestMethod {
+	return x.inner.RequestMethod()
+}
+
+// URL calls the underlying URL.
+func (x *Request) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Parameters calls the underlying Parameters.
+func (x *Request) Parameters() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Parameters()
+}
+
+// Requestable is the interface implemented by [Request], for mocking and DI.
+type Requestable interface {
+	Unwrap() *raw.SLRequest
+	WithAccount(account *accounts.ACAccount) *Request
+	AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name string, type_ string, filename string)
+	AddMultipartDataWithNameType(data *foundation.NSData, name string, type_ string)
+	PreparedURLRequest() *foundation.NSURLRequest
+	PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer))
+	Account() *accounts.ACAccount
+	SetAccount(account *accounts.ACAccount)
+	RequestMethod() raw.SLRequestMethod
+	URL() *foundation.NSURL
+	Parameters() *foundation.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ Requestable = (*Request)(nil)
 

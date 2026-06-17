@@ -25,3 +25,10 @@ func NewAnnotationMarkup() *AnnotationMarkup {
 
 func (x *AnnotationMarkup) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationMarkupable is the interface implemented by [AnnotationMarkup], for mocking and DI.
+type AnnotationMarkupable interface {
+	Unwrap() *raw.PDFAnnotationMarkup
+}
+
+var _ AnnotationMarkupable = (*AnnotationMarkup)(nil)
+

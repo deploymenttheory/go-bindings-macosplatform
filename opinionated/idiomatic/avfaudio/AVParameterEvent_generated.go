@@ -48,5 +48,64 @@ func (x *ParameterEvent) WithValue(value float32) *ParameterEvent {
 	return x
 }
 
+// ParameterID calls the underlying ParameterID.
+func (x *ParameterEvent) ParameterID() uint {
+	return x.inner.ParameterID()
+}
+
+// SetParameterID calls the underlying SetParameterID.
+func (x *ParameterEvent) SetParameterID(parameterID uint) {
+	x.inner.SetParameterID(parameterID)
+}
+
+// Scope calls the underlying Scope.
+func (x *ParameterEvent) Scope() uint {
+	return x.inner.Scope()
+}
+
+// SetScope calls the underlying SetScope.
+func (x *ParameterEvent) SetScope(scope uint) {
+	x.inner.SetScope(scope)
+}
+
+// Element calls the underlying Element.
+func (x *ParameterEvent) Element() uint {
+	return x.inner.Element()
+}
+
+// SetElement calls the underlying SetElement.
+func (x *ParameterEvent) SetElement(element uint) {
+	x.inner.SetElement(element)
+}
+
+// Value calls the underlying Value.
+func (x *ParameterEvent) Value() float32 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *ParameterEvent) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
 func (x *ParameterEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// ParameterEventable is the interface implemented by [ParameterEvent], for mocking and DI.
+type ParameterEventable interface {
+	Unwrap() *raw.AVParameterEvent
+	WithParameterID(parameterID uint) *ParameterEvent
+	WithScope(scope uint) *ParameterEvent
+	WithElement(element uint) *ParameterEvent
+	WithValue(value float32) *ParameterEvent
+	ParameterID() uint
+	SetParameterID(parameterID uint)
+	Scope() uint
+	SetScope(scope uint)
+	Element() uint
+	SetElement(element uint)
+	Value() float32
+	SetValue(value float32)
+}
+
+var _ ParameterEventable = (*ParameterEvent)(nil)
 

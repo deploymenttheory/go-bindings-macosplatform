@@ -23,3 +23,10 @@ func NewUtility() *Utility {
 	return &Utility{inner: raw.MDLUtilityFromID(_id)}
 }
 
+// Utilityable is the interface implemented by [Utility], for mocking and DI.
+type Utilityable interface {
+	Unwrap() *raw.MDLUtility
+}
+
+var _ Utilityable = (*Utility)(nil)
+

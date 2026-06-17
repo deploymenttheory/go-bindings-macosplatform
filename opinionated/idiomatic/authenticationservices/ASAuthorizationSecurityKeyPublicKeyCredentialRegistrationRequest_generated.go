@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -75,11 +76,14 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Credent
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationPublicKeyCredentialParameters, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationPublicKeyCredentialParameters {
+		return raw.ASAuthorizationPublicKeyCredentialParametersFromID(purego.Retain(_id))
+	})
+}
+
+// SetCredentialParameters calls the underlying SetCredentialParameters.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetCredentialParameters(credentialParameters *foundation.NSArray[*raw.ASAuthorizationPublicKeyCredentialParameters]) {
+	x.inner.SetCredentialParameters(credentialParameters)
 }
 
 // ExcludedCredentials returns the collection as a Go slice.
@@ -88,12 +92,62 @@ func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Exclude
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+		return raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetExcludedCredentials calls the underlying SetExcludedCredentials.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetExcludedCredentials(excludedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor]) {
+	x.inner.SetExcludedCredentials(excludedCredentials)
+}
+
+// ResidentKeyPreference calls the underlying ResidentKeyPreference.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) ResidentKeyPreference() string {
+	_r := x.inner.ResidentKeyPreference()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetResidentKeyPreference calls the underlying SetResidentKeyPreference.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetResidentKeyPreference(residentKeyPreference *foundation.NSString) {
+	x.inner.SetResidentKeyPreference(residentKeyPreference)
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: _r}
+}
+
+// SetPrf calls the underlying SetPrf.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) {
+	x.inner.SetPrf(prf)
 }
 
 func (x *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+
+// AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest], for mocking and DI.
+type AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable interface {
+	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	WithCredentialParameters(items ...*raw.ASAuthorizationPublicKeyCredentialParameters) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	WithExcludedCredentials(items ...*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	WithResidentKeyPreference(residentKeyPreference *foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest
+	CredentialParameters() []*raw.ASAuthorizationPublicKeyCredentialParameters
+	SetCredentialParameters(credentialParameters *foundation.NSArray[*raw.ASAuthorizationPublicKeyCredentialParameters])
+	ExcludedCredentials() []*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	SetExcludedCredentials(excludedCredentials *foundation.NSArray[*raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor])
+	ResidentKeyPreference() string
+	SetResidentKeyPreference(residentKeyPreference *foundation.NSString)
+	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput
+	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput)
+}
+
+var _ AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequestable = (*AuthorizationSecurityKeyPublicKeyCredentialRegistrationRequest)(nil)
 

@@ -30,5 +30,25 @@ func (x *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount 
 	return x
 }
 
+// ThresholdAmount calls the underlying ThresholdAmount.
+func (x *AutomaticReloadPaymentSummaryItem) ThresholdAmount() *foundation.NSDecimalNumber {
+	return x.inner.ThresholdAmount()
+}
+
+// SetThresholdAmount calls the underlying SetThresholdAmount.
+func (x *AutomaticReloadPaymentSummaryItem) SetThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) {
+	x.inner.SetThresholdAmount(thresholdAmount)
+}
+
 func (x *AutomaticReloadPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+
+// AutomaticReloadPaymentSummaryItemable is the interface implemented by [AutomaticReloadPaymentSummaryItem], for mocking and DI.
+type AutomaticReloadPaymentSummaryItemable interface {
+	Unwrap() *raw.PKAutomaticReloadPaymentSummaryItem
+	WithThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem
+	ThresholdAmount() *foundation.NSDecimalNumber
+	SetThresholdAmount(thresholdAmount *foundation.NSDecimalNumber)
+}
+
+var _ AutomaticReloadPaymentSummaryItemable = (*AutomaticReloadPaymentSummaryItem)(nil)
 

@@ -23,5 +23,35 @@ func NewSmartCardTokenSession() *SmartCardTokenSession {
 	return &SmartCardTokenSession{inner: raw.TKSmartCardTokenSessionFromID(_id)}
 }
 
+// GetSmartCardWithError calls the underlying GetSmartCardWithError.
+func (x *SmartCardTokenSession) GetSmartCardWithError() (*SmartCard, error) {
+	_r, _err := x.inner.GetSmartCardWithError()
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &SmartCard{inner: _r}, nil
+}
+
+// SmartCard calls the underlying SmartCard.
+func (x *SmartCardTokenSession) SmartCard() *SmartCard {
+	_r := x.inner.SmartCard()
+	if _r == nil {
+		return nil
+	}
+	return &SmartCard{inner: _r}
+}
+
 func (x *SmartCardTokenSession) asTokenSession() *raw.TKTokenSession { return &x.inner.TKTokenSession }
+
+// SmartCardTokenSessionable is the interface implemented by [SmartCardTokenSession], for mocking and DI.
+type SmartCardTokenSessionable interface {
+	Unwrap() *raw.TKSmartCardTokenSession
+	GetSmartCardWithError() (*SmartCard, error)
+	SmartCard() *SmartCard
+}
+
+var _ SmartCardTokenSessionable = (*SmartCardTokenSession)(nil)
 

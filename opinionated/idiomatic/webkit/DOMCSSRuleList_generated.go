@@ -23,7 +23,30 @@ func NewDOMCSSRuleList() *DOMCSSRuleList {
 	return &DOMCSSRuleList{inner: raw.DOMCSSRuleListFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMCSSRuleList) Item(index uint) *DOMCSSRule {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRule{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMCSSRuleList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMCSSRuleList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMCSSRuleList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMCSSRuleListable is the interface implemented by [DOMCSSRuleList], for mocking and DI.
+type DOMCSSRuleListable interface {
+	Unwrap() *raw.DOMCSSRuleList
+	Item(index uint) *DOMCSSRule
+	Length() uint
+}
+
+var _ DOMCSSRuleListable = (*DOMCSSRuleList)(nil)
 

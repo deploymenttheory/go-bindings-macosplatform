@@ -43,3 +43,40 @@ func (x *MTRLaundryWasherModeClusterChangeToModeResponseParams) WithStatusText(s
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRLaundryWasherModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRLaundryWasherModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRLaundryWasherModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRLaundryWasherModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRLaundryWasherModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRLaundryWasherModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTRLaundryWasherModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTRLaundryWasherModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRLaundryWasherModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTRLaundryWasherModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRLaundryWasherModeClusterChangeToModeResponseParamsable = (*MTRLaundryWasherModeClusterChangeToModeResponseParams)(nil)
+

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -53,16 +54,55 @@ func (x *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplementa
 	return x
 }
 
+// ScrollDirection calls the underlying ScrollDirection.
+func (x *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() raw.NSCollectionViewScrollDirection {
+	return x.inner.ScrollDirection()
+}
+
+// SetScrollDirection calls the underlying SetScrollDirection.
+func (x *CollectionViewCompositionalLayoutConfiguration) SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) {
+	x.inner.SetScrollDirection(scrollDirection)
+}
+
+// InterSectionSpacing calls the underlying InterSectionSpacing.
+func (x *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
+	return x.inner.InterSectionSpacing()
+}
+
+// SetInterSectionSpacing calls the underlying SetInterSectionSpacing.
+func (x *CollectionViewCompositionalLayoutConfiguration) SetInterSectionSpacing(interSectionSpacing float64) {
+	x.inner.SetInterSectionSpacing(interSectionSpacing)
+}
+
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (x *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem {
 	arr := x.inner.BoundarySupplementaryItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCollectionLayoutBoundarySupplementaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutBoundarySupplementaryItem {
+		return raw.NSCollectionLayoutBoundarySupplementaryItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetBoundarySupplementaryItems calls the underlying SetBoundarySupplementaryItems.
+func (x *CollectionViewCompositionalLayoutConfiguration) SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem]) {
+	x.inner.SetBoundarySupplementaryItems(boundarySupplementaryItems)
+}
+
+// CollectionViewCompositionalLayoutConfigurationable is the interface implemented by [CollectionViewCompositionalLayoutConfiguration], for mocking and DI.
+type CollectionViewCompositionalLayoutConfigurationable interface {
+	Unwrap() *raw.NSCollectionViewCompositionalLayoutConfiguration
+	WithScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection) *CollectionViewCompositionalLayoutConfiguration
+	WithInterSectionSpacing(interSectionSpacing float64) *CollectionViewCompositionalLayoutConfiguration
+	WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionViewCompositionalLayoutConfiguration
+	ScrollDirection() raw.NSCollectionViewScrollDirection
+	SetScrollDirection(scrollDirection raw.NSCollectionViewScrollDirection)
+	InterSectionSpacing() float64
+	SetInterSectionSpacing(interSectionSpacing float64)
+	BoundarySupplementaryItems() []*raw.NSCollectionLayoutBoundarySupplementaryItem
+	SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem])
+}
+
+var _ CollectionViewCompositionalLayoutConfigurationable = (*CollectionViewCompositionalLayoutConfiguration)(nil)
 

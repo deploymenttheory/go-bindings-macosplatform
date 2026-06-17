@@ -23,3 +23,28 @@ func NewSensitivityAnalysis() *SensitivityAnalysis {
 	return &SensitivityAnalysis{inner: raw.SCSensitivityAnalysisFromID(_id)}
 }
 
+// IsSensitive calls the underlying IsSensitive.
+func (x *SensitivityAnalysis) IsSensitive() bool {
+	return x.inner.IsSensitive()
+}
+
+// ShouldIndicateSensitivity calls the underlying ShouldIndicateSensitivity.
+func (x *SensitivityAnalysis) ShouldIndicateSensitivity() bool {
+	return x.inner.ShouldIndicateSensitivity()
+}
+
+// ShouldMuteAudio calls the underlying ShouldMuteAudio.
+func (x *SensitivityAnalysis) ShouldMuteAudio() bool {
+	return x.inner.ShouldMuteAudio()
+}
+
+// SensitivityAnalysisable is the interface implemented by [SensitivityAnalysis], for mocking and DI.
+type SensitivityAnalysisable interface {
+	Unwrap() *raw.SCSensitivityAnalysis
+	IsSensitive() bool
+	ShouldIndicateSensitivity() bool
+	ShouldMuteAudio() bool
+}
+
+var _ SensitivityAnalysisable = (*SensitivityAnalysis)(nil)
+

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -76,17 +77,35 @@ func (x *MTRDeviceControllerFactoryParams) WithShouldStartServer(shouldStartServ
 	return x
 }
 
+// Storage calls the underlying Storage.
+func (x *MTRDeviceControllerFactoryParams) Storage() raw.MTRStorage {
+	return x.inner.Storage()
+}
+
+// OtaProviderDelegate calls the underlying OtaProviderDelegate.
+func (x *MTRDeviceControllerFactoryParams) OtaProviderDelegate() raw.MTROTAProviderDelegate {
+	return x.inner.OtaProviderDelegate()
+}
+
+// SetOtaProviderDelegate calls the underlying SetOtaProviderDelegate.
+func (x *MTRDeviceControllerFactoryParams) SetOtaProviderDelegate(otaProviderDelegate raw.MTROTAProviderDelegate) {
+	x.inner.SetOtaProviderDelegate(otaProviderDelegate)
+}
+
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
 func (x *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() []*foundation.NSData {
 	arr := x.inner.ProductAttestationAuthorityCertificates()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetProductAttestationAuthorityCertificates calls the underlying SetProductAttestationAuthorityCertificates.
+func (x *MTRDeviceControllerFactoryParams) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates)
 }
 
 // CertificationDeclarationCertificates returns the collection as a Go slice.
@@ -95,12 +114,58 @@ func (x *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates(
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// SetCertificationDeclarationCertificates calls the underlying SetCertificationDeclarationCertificates.
+func (x *MTRDeviceControllerFactoryParams) SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData]) {
+	x.inner.SetCertificationDeclarationCertificates(certificationDeclarationCertificates)
+}
+
+// Port calls the underlying Port.
+func (x *MTRDeviceControllerFactoryParams) Port() *foundation.NSNumber {
+	return x.inner.Port()
+}
+
+// SetPort calls the underlying SetPort.
+func (x *MTRDeviceControllerFactoryParams) SetPort(port *foundation.NSNumber) {
+	x.inner.SetPort(port)
+}
+
+// ShouldStartServer calls the underlying ShouldStartServer.
+func (x *MTRDeviceControllerFactoryParams) ShouldStartServer() bool {
+	return x.inner.ShouldStartServer()
+}
+
+// SetShouldStartServer calls the underlying SetShouldStartServer.
+func (x *MTRDeviceControllerFactoryParams) SetShouldStartServer(shouldStartServer bool) {
+	x.inner.SetShouldStartServer(shouldStartServer)
 }
 
 func (x *MTRDeviceControllerFactoryParams) asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams { return x.inner }
+
+// MTRDeviceControllerFactoryParamsable is the interface implemented by [MTRDeviceControllerFactoryParams], for mocking and DI.
+type MTRDeviceControllerFactoryParamsable interface {
+	Unwrap() *raw.MTRDeviceControllerFactoryParams
+	WithOtaProviderDelegate(otaProviderDelegate raw.MTROTAProviderDelegate) *MTRDeviceControllerFactoryParams
+	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerFactoryParams
+	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerFactoryParams
+	WithPort(port *foundation.NSNumber) *MTRDeviceControllerFactoryParams
+	WithShouldStartServer(shouldStartServer bool) *MTRDeviceControllerFactoryParams
+	Storage() raw.MTRStorage
+	OtaProviderDelegate() raw.MTROTAProviderDelegate
+	SetOtaProviderDelegate(otaProviderDelegate raw.MTROTAProviderDelegate)
+	ProductAttestationAuthorityCertificates() []*foundation.NSData
+	SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData])
+	CertificationDeclarationCertificates() []*foundation.NSData
+	SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData])
+	Port() *foundation.NSNumber
+	SetPort(port *foundation.NSNumber)
+	ShouldStartServer() bool
+	SetShouldStartServer(shouldStartServer bool)
+}
+
+var _ MTRDeviceControllerFactoryParamsable = (*MTRDeviceControllerFactoryParams)(nil)
 

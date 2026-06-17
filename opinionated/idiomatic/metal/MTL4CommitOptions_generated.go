@@ -23,3 +23,16 @@ func NewMTL4CommitOptions() *MTL4CommitOptions {
 	return &MTL4CommitOptions{inner: raw.MTL4CommitOptionsFromID(_id)}
 }
 
+// AddFeedbackHandler calls the underlying AddFeedbackHandler.
+func (x *MTL4CommitOptions) AddFeedbackHandler(block func(objc.ID)) {
+	x.inner.AddFeedbackHandler(block)
+}
+
+// MTL4CommitOptionsable is the interface implemented by [MTL4CommitOptions], for mocking and DI.
+type MTL4CommitOptionsable interface {
+	Unwrap() *raw.MTL4CommitOptions
+	AddFeedbackHandler(block func(objc.ID))
+}
+
+var _ MTL4CommitOptionsable = (*MTL4CommitOptions)(nil)
+

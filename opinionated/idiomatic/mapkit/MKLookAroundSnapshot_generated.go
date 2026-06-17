@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewLookAroundSnapshot() *LookAroundSnapshot {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSnapshot")), objc.RegisterName("new"))
 	return &LookAroundSnapshot{inner: raw.MKLookAroundSnapshotFromID(_id)}
 }
+
+// Image calls the underlying Image.
+func (x *LookAroundSnapshot) Image() *appkit.NSImage {
+	return x.inner.Image()
+}
+
+// LookAroundSnapshotable is the interface implemented by [LookAroundSnapshot], for mocking and DI.
+type LookAroundSnapshotable interface {
+	Unwrap() *raw.MKLookAroundSnapshot
+	Image() *appkit.NSImage
+}
+
+var _ LookAroundSnapshotable = (*LookAroundSnapshot)(nil)
 

@@ -30,5 +30,25 @@ func (x *TemporaryNDArray) WithReadCount(readCount uint) *TemporaryNDArray {
 	return x
 }
 
+// ReadCount calls the underlying ReadCount.
+func (x *TemporaryNDArray) ReadCount() uint {
+	return x.inner.ReadCount()
+}
+
+// SetReadCount calls the underlying SetReadCount.
+func (x *TemporaryNDArray) SetReadCount(readCount uint) {
+	x.inner.SetReadCount(readCount)
+}
+
 func (x *TemporaryNDArray) asNDArray() *mpscore.MPSNDArray { return &x.inner.MPSNDArray }
+
+// TemporaryNDArrayable is the interface implemented by [TemporaryNDArray], for mocking and DI.
+type TemporaryNDArrayable interface {
+	Unwrap() *raw.MPSTemporaryNDArray
+	WithReadCount(readCount uint) *TemporaryNDArray
+	ReadCount() uint
+	SetReadCount(readCount uint)
+}
+
+var _ TemporaryNDArrayable = (*TemporaryNDArray)(nil)
 

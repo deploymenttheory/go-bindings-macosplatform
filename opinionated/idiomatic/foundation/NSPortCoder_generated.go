@@ -24,7 +24,58 @@ func NewPortCoderWithReceivePortSendPortComponents(rcvPort *raw.NSPort, sndPort 
 	return &PortCoder{inner: raw.NSPortCoderFromID(_id)}
 }
 
+// IsBycopy calls the underlying IsBycopy.
+func (x *PortCoder) IsBycopy() bool {
+	return x.inner.IsBycopy()
+}
+
+// IsByref calls the underlying IsByref.
+func (x *PortCoder) IsByref() bool {
+	return x.inner.IsByref()
+}
+
+// EncodePortObject calls the underlying EncodePortObject.
+func (x *PortCoder) EncodePortObject(aport *raw.NSPort) {
+	x.inner.EncodePortObject(aport)
+}
+
+// DecodePortObject calls the underlying DecodePortObject.
+func (x *PortCoder) DecodePortObject() *Port {
+	_r := x.inner.DecodePortObject()
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
+// Connection calls the underlying Connection.
+func (x *PortCoder) Connection() *Connection {
+	_r := x.inner.Connection()
+	if _r == nil {
+		return nil
+	}
+	return &Connection{inner: _r}
+}
+
+// Dispatch calls the underlying Dispatch.
+func (x *PortCoder) Dispatch() {
+	x.inner.Dispatch()
+}
+
 func (x *PortCoder) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *PortCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// PortCoderable is the interface implemented by [PortCoder], for mocking and DI.
+type PortCoderable interface {
+	Unwrap() *raw.NSPortCoder
+	IsBycopy() bool
+	IsByref() bool
+	EncodePortObject(aport *raw.NSPort)
+	DecodePortObject() *Port
+	Connection() *Connection
+	Dispatch()
+}
+
+var _ PortCoderable = (*PortCoder)(nil)
 

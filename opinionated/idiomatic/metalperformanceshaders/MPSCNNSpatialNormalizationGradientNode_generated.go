@@ -55,7 +55,79 @@ func (x *CNNSpatialNormalizationGradientNode) WithDelta(delta float32) *CNNSpati
 	return x
 }
 
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNSpatialNormalizationGradientNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// SetKernelWidth calls the underlying SetKernelWidth.
+func (x *CNNSpatialNormalizationGradientNode) SetKernelWidth(kernelWidth uint) {
+	x.inner.SetKernelWidth(kernelWidth)
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNSpatialNormalizationGradientNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// SetKernelHeight calls the underlying SetKernelHeight.
+func (x *CNNSpatialNormalizationGradientNode) SetKernelHeight(kernelHeight uint) {
+	x.inner.SetKernelHeight(kernelHeight)
+}
+
+// Alpha calls the underlying Alpha.
+func (x *CNNSpatialNormalizationGradientNode) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNSpatialNormalizationGradientNode) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNSpatialNormalizationGradientNode) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNSpatialNormalizationGradientNode) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNSpatialNormalizationGradientNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNSpatialNormalizationGradientNode) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
 func (x *CNNSpatialNormalizationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNSpatialNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNSpatialNormalizationGradientNodeable is the interface implemented by [CNNSpatialNormalizationGradientNode], for mocking and DI.
+type CNNSpatialNormalizationGradientNodeable interface {
+	Unwrap() *raw.MPSCNNSpatialNormalizationGradientNode
+	WithKernelWidth(kernelWidth uint) *CNNSpatialNormalizationGradientNode
+	WithKernelHeight(kernelHeight uint) *CNNSpatialNormalizationGradientNode
+	WithAlpha(alpha float32) *CNNSpatialNormalizationGradientNode
+	WithBeta(beta float32) *CNNSpatialNormalizationGradientNode
+	WithDelta(delta float32) *CNNSpatialNormalizationGradientNode
+	KernelWidth() uint
+	SetKernelWidth(kernelWidth uint)
+	KernelHeight() uint
+	SetKernelHeight(kernelHeight uint)
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+}
+
+var _ CNNSpatialNormalizationGradientNodeable = (*CNNSpatialNormalizationGradientNode)(nil)
 

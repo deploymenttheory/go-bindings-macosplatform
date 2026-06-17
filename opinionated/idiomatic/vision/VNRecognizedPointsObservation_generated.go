@@ -5,8 +5,10 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +26,37 @@ func NewRecognizedPointsObservation() *RecognizedPointsObservation {
 	return &RecognizedPointsObservation{inner: raw.VNRecognizedPointsObservationFromID(_id)}
 }
 
+// RecognizedPointForKeyError calls the underlying RecognizedPointForKeyError.
+func (x *RecognizedPointsObservation) RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint, error) {
+	_r, _err := x.inner.RecognizedPointForKeyError(pointKey)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &RecognizedPoint{inner: _r}, nil
+}
+
+// RecognizedPointsForGroupKeyError calls the underlying RecognizedPointsForGroupKeyError.
+func (x *RecognizedPointsObservation) RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error) {
+	return x.inner.RecognizedPointsForGroupKeyError(groupKey)
+}
+
+// KeypointsMultiArrayAndReturnError calls the underlying KeypointsMultiArrayAndReturnError.
+func (x *RecognizedPointsObservation) KeypointsMultiArrayAndReturnError() (*coreml.MLMultiArray, error) {
+	return x.inner.KeypointsMultiArrayAndReturnError()
+}
+
 // AvailableKeys returns the collection as a Go slice.
 func (x *RecognizedPointsObservation) AvailableKeys() []*foundation.NSString {
 	arr := x.inner.AvailableKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableGroupKeys returns the collection as a Go slice.
@@ -43,14 +65,24 @@ func (x *RecognizedPointsObservation) AvailableGroupKeys() []*foundation.NSStrin
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
 
 func (x *RecognizedPointsObservation) asRecognizedPointsObservation() *raw.VNRecognizedPointsObservation { return x.inner }
 
 func (x *RecognizedPointsObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// RecognizedPointsObservationable is the interface implemented by [RecognizedPointsObservation], for mocking and DI.
+type RecognizedPointsObservationable interface {
+	Unwrap() *raw.VNRecognizedPointsObservation
+	RecognizedPointForKeyError(pointKey *foundation.NSString) (*RecognizedPoint, error)
+	RecognizedPointsForGroupKeyError(groupKey *foundation.NSString) (*foundation.NSDictionary[*foundation.NSString, *raw.VNRecognizedPoint], error)
+	KeypointsMultiArrayAndReturnError() (*coreml.MLMultiArray, error)
+	AvailableKeys() []*foundation.NSString
+	AvailableGroupKeys() []*foundation.NSString
+}
+
+var _ RecognizedPointsObservationable = (*RecognizedPointsObservation)(nil)
 

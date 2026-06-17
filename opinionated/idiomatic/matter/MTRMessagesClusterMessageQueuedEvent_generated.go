@@ -30,3 +30,23 @@ func (x *MTRMessagesClusterMessageQueuedEvent) WithMessageID(messageID *foundati
 	return x
 }
 
+// MessageID calls the underlying MessageID.
+func (x *MTRMessagesClusterMessageQueuedEvent) MessageID() *foundation.NSData {
+	return x.inner.MessageID()
+}
+
+// SetMessageID calls the underlying SetMessageID.
+func (x *MTRMessagesClusterMessageQueuedEvent) SetMessageID(messageID *foundation.NSData) {
+	x.inner.SetMessageID(messageID)
+}
+
+// MTRMessagesClusterMessageQueuedEventable is the interface implemented by [MTRMessagesClusterMessageQueuedEvent], for mocking and DI.
+type MTRMessagesClusterMessageQueuedEventable interface {
+	Unwrap() *raw.MTRMessagesClusterMessageQueuedEvent
+	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageQueuedEvent
+	MessageID() *foundation.NSData
+	SetMessageID(messageID *foundation.NSData)
+}
+
+var _ MTRMessagesClusterMessageQueuedEventable = (*MTRMessagesClusterMessageQueuedEvent)(nil)
+

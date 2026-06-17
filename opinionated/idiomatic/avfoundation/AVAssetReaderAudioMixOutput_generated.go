@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -43,12 +44,58 @@ func (x *AssetReaderAudioMixOutput) AudioTracks() []*raw.AVAssetTrack {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetTrack {
+		return raw.AVAssetTrackFromID(purego.Retain(_id))
+	})
+}
+
+// AudioSettings calls the underlying AudioSettings.
+func (x *AssetReaderAudioMixOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AudioSettings()
+}
+
+// AudioMix calls the underlying AudioMix.
+func (x *AssetReaderAudioMixOutput) AudioMix() *AudioMix {
+	_r := x.inner.AudioMix()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &AudioMix{inner: _r}
+}
+
+// SetAudioMix calls the underlying SetAudioMix.
+func (x *AssetReaderAudioMixOutput) SetAudioMix(audioMix *raw.AVAudioMix) {
+	x.inner.SetAudioMix(audioMix)
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *AssetReaderAudioMixOutput) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *AssetReaderAudioMixOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
 }
 
 func (x *AssetReaderAudioMixOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput { return &x.inner.AVAssetReaderOutput }
+
+// AssetReaderAudioMixOutputable is the interface implemented by [AssetReaderAudioMixOutput], for mocking and DI.
+type AssetReaderAudioMixOutputable interface {
+	Unwrap() *raw.AVAssetReaderAudioMixOutput
+	WithAudioMix(audioMix AudioMixProvider) *AssetReaderAudioMixOutput
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderAudioMixOutput
+	AudioTracks() []*raw.AVAssetTrack
+	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	AudioMix() *AudioMix
+	SetAudioMix(audioMix *raw.AVAudioMix)
+	AudioTimePitchAlgorithm() string
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+}
+
+var _ AssetReaderAudioMixOutputable = (*AssetReaderAudioMixOutput)(nil)
 

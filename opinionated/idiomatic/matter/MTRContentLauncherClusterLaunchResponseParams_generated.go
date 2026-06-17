@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterLaunchResponseParams() *MTRContentLauncherClust
 
 func (x *MTRContentLauncherClusterLaunchResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams { return &x.inner.MTRContentLauncherClusterLauncherResponseParams }
 
+// MTRContentLauncherClusterLaunchResponseParamsable is the interface implemented by [MTRContentLauncherClusterLaunchResponseParams], for mocking and DI.
+type MTRContentLauncherClusterLaunchResponseParamsable interface {
+	Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams
+}
+
+var _ MTRContentLauncherClusterLaunchResponseParamsable = (*MTRContentLauncherClusterLaunchResponseParams)(nil)
+

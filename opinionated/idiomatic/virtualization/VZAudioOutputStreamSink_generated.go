@@ -25,3 +25,10 @@ func NewAudioOutputStreamSink() *AudioOutputStreamSink {
 
 func (x *AudioOutputStreamSink) asAudioOutputStreamSink() *raw.VZAudioOutputStreamSink { return x.inner }
 
+// AudioOutputStreamSinkable is the interface implemented by [AudioOutputStreamSink], for mocking and DI.
+type AudioOutputStreamSinkable interface {
+	Unwrap() *raw.VZAudioOutputStreamSink
+}
+
+var _ AudioOutputStreamSinkable = (*AudioOutputStreamSink)(nil)
+

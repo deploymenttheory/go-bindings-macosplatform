@@ -61,7 +61,79 @@ func (x *CNNLocalContrastNormalizationNode) WithKernelHeight(kernelHeight uint) 
 	return x
 }
 
+// Pm calls the underlying Pm.
+func (x *CNNLocalContrastNormalizationNode) Pm() float32 {
+	return x.inner.Pm()
+}
+
+// SetPm calls the underlying SetPm.
+func (x *CNNLocalContrastNormalizationNode) SetPm(pm float32) {
+	x.inner.SetPm(pm)
+}
+
+// Ps calls the underlying Ps.
+func (x *CNNLocalContrastNormalizationNode) Ps() float32 {
+	return x.inner.Ps()
+}
+
+// SetPs calls the underlying SetPs.
+func (x *CNNLocalContrastNormalizationNode) SetPs(ps float32) {
+	x.inner.SetPs(ps)
+}
+
+// P0 calls the underlying P0.
+func (x *CNNLocalContrastNormalizationNode) P0() float32 {
+	return x.inner.P0()
+}
+
+// SetP0 calls the underlying SetP0.
+func (x *CNNLocalContrastNormalizationNode) SetP0(p0 float32) {
+	x.inner.SetP0(p0)
+}
+
+// KernelWidth calls the underlying KernelWidth.
+func (x *CNNLocalContrastNormalizationNode) KernelWidth() uint {
+	return x.inner.KernelWidth()
+}
+
+// SetKernelWidth calls the underlying SetKernelWidth.
+func (x *CNNLocalContrastNormalizationNode) SetKernelWidth(kernelWidth uint) {
+	x.inner.SetKernelWidth(kernelWidth)
+}
+
+// KernelHeight calls the underlying KernelHeight.
+func (x *CNNLocalContrastNormalizationNode) KernelHeight() uint {
+	return x.inner.KernelHeight()
+}
+
+// SetKernelHeight calls the underlying SetKernelHeight.
+func (x *CNNLocalContrastNormalizationNode) SetKernelHeight(kernelHeight uint) {
+	x.inner.SetKernelHeight(kernelHeight)
+}
+
 func (x *CNNLocalContrastNormalizationNode) asCNNNormalizationNode() *raw.MPSCNNNormalizationNode { return &x.inner.MPSCNNNormalizationNode }
 
 func (x *CNNLocalContrastNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode }
+
+// CNNLocalContrastNormalizationNodeable is the interface implemented by [CNNLocalContrastNormalizationNode], for mocking and DI.
+type CNNLocalContrastNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNLocalContrastNormalizationNode
+	WithPm(pm float32) *CNNLocalContrastNormalizationNode
+	WithPs(ps float32) *CNNLocalContrastNormalizationNode
+	WithP0(p0 float32) *CNNLocalContrastNormalizationNode
+	WithKernelWidth(kernelWidth uint) *CNNLocalContrastNormalizationNode
+	WithKernelHeight(kernelHeight uint) *CNNLocalContrastNormalizationNode
+	Pm() float32
+	SetPm(pm float32)
+	Ps() float32
+	SetPs(ps float32)
+	P0() float32
+	SetP0(p0 float32)
+	KernelWidth() uint
+	SetKernelWidth(kernelWidth uint)
+	KernelHeight() uint
+	SetKernelHeight(kernelHeight uint)
+}
+
+var _ CNNLocalContrastNormalizationNodeable = (*CNNLocalContrastNormalizationNode)(nil)
 

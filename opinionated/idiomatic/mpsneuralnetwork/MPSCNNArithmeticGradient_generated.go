@@ -59,9 +59,100 @@ func (x *CNNArithmeticGradient) WithMaximumValue(maximumValue float32) *CNNArith
 	return x
 }
 
+// PrimaryScale calls the underlying PrimaryScale.
+func (x *CNNArithmeticGradient) PrimaryScale() float32 {
+	return x.inner.PrimaryScale()
+}
+
+// SetPrimaryScale calls the underlying SetPrimaryScale.
+func (x *CNNArithmeticGradient) SetPrimaryScale(primaryScale float32) {
+	x.inner.SetPrimaryScale(primaryScale)
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *CNNArithmeticGradient) SecondaryScale() float32 {
+	return x.inner.SecondaryScale()
+}
+
+// SetSecondaryScale calls the underlying SetSecondaryScale.
+func (x *CNNArithmeticGradient) SetSecondaryScale(secondaryScale float32) {
+	x.inner.SetSecondaryScale(secondaryScale)
+}
+
+// Bias calls the underlying Bias.
+func (x *CNNArithmeticGradient) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *CNNArithmeticGradient) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
+// SecondaryStrideInFeatureChannels calls the underlying SecondaryStrideInFeatureChannels.
+func (x *CNNArithmeticGradient) SecondaryStrideInFeatureChannels() uint {
+	return x.inner.SecondaryStrideInFeatureChannels()
+}
+
+// SetSecondaryStrideInFeatureChannels calls the underlying SetSecondaryStrideInFeatureChannels.
+func (x *CNNArithmeticGradient) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) {
+	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *CNNArithmeticGradient) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// SetMinimumValue calls the underlying SetMinimumValue.
+func (x *CNNArithmeticGradient) SetMinimumValue(minimumValue float32) {
+	x.inner.SetMinimumValue(minimumValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *CNNArithmeticGradient) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// SetMaximumValue calls the underlying SetMaximumValue.
+func (x *CNNArithmeticGradient) SetMaximumValue(maximumValue float32) {
+	x.inner.SetMaximumValue(maximumValue)
+}
+
+// IsSecondarySourceFilter calls the underlying IsSecondarySourceFilter.
+func (x *CNNArithmeticGradient) IsSecondarySourceFilter() bool {
+	return x.inner.IsSecondarySourceFilter()
+}
+
 func (x *CNNArithmeticGradient) asCNNArithmeticGradient() *raw.MPSCNNArithmeticGradient { return x.inner }
 
 func (x *CNNArithmeticGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNArithmeticGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// CNNArithmeticGradientable is the interface implemented by [CNNArithmeticGradient], for mocking and DI.
+type CNNArithmeticGradientable interface {
+	Unwrap() *raw.MPSCNNArithmeticGradient
+	WithPrimaryScale(primaryScale float32) *CNNArithmeticGradient
+	WithSecondaryScale(secondaryScale float32) *CNNArithmeticGradient
+	WithBias(bias float32) *CNNArithmeticGradient
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNArithmeticGradient
+	WithMinimumValue(minimumValue float32) *CNNArithmeticGradient
+	WithMaximumValue(maximumValue float32) *CNNArithmeticGradient
+	PrimaryScale() float32
+	SetPrimaryScale(primaryScale float32)
+	SecondaryScale() float32
+	SetSecondaryScale(secondaryScale float32)
+	Bias() float32
+	SetBias(bias float32)
+	SecondaryStrideInFeatureChannels() uint
+	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint)
+	MinimumValue() float32
+	SetMinimumValue(minimumValue float32)
+	MaximumValue() float32
+	SetMaximumValue(maximumValue float32)
+	IsSecondarySourceFilter() bool
+}
+
+var _ CNNArithmeticGradientable = (*CNNArithmeticGradient)(nil)
 

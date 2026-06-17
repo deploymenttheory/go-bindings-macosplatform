@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,50 @@ func NewDOMHTMLCollection() *DOMHTMLCollection {
 	return &DOMHTMLCollection{inner: raw.DOMHTMLCollectionFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMHTMLCollection) Item(index uint) *DOMNode {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// NamedItem calls the underlying NamedItem.
+func (x *DOMHTMLCollection) NamedItem(name string) *DOMNode {
+	_r := x.inner.NamedItem(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Tags calls the underlying Tags.
+func (x *DOMHTMLCollection) Tags(name string) *DOMNodeList {
+	_r := x.inner.Tags(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &DOMNodeList{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMHTMLCollection) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMHTMLCollection) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMHTMLCollection) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMHTMLCollectionable is the interface implemented by [DOMHTMLCollection], for mocking and DI.
+type DOMHTMLCollectionable interface {
+	Unwrap() *raw.DOMHTMLCollection
+	Item(index uint) *DOMNode
+	NamedItem(name string) *DOMNode
+	Tags(name string) *DOMNodeList
+	Length() uint
+}
+
+var _ DOMHTMLCollectionable = (*DOMHTMLCollection)(nil)
 

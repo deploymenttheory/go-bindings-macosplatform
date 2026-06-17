@@ -25,3 +25,48 @@ func NewMTRCertificateInfoWithTLVBytes(bytes_ *foundation.NSData) *MTRCertificat
 	return &MTRCertificateInfo{inner: raw.MTRCertificateInfoFromID(_id)}
 }
 
+// Issuer calls the underlying Issuer.
+func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
+	_r := x.inner.Issuer()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDistinguishedNameInfo{inner: _r}
+}
+
+// Subject calls the underlying Subject.
+func (x *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
+	_r := x.inner.Subject()
+	if _r == nil {
+		return nil
+	}
+	return &MTRDistinguishedNameInfo{inner: _r}
+}
+
+// NotBefore calls the underlying NotBefore.
+func (x *MTRCertificateInfo) NotBefore() *foundation.NSDate {
+	return x.inner.NotBefore()
+}
+
+// NotAfter calls the underlying NotAfter.
+func (x *MTRCertificateInfo) NotAfter() *foundation.NSDate {
+	return x.inner.NotAfter()
+}
+
+// PublicKeyData calls the underlying PublicKeyData.
+func (x *MTRCertificateInfo) PublicKeyData() *foundation.NSData {
+	return x.inner.PublicKeyData()
+}
+
+// MTRCertificateInfoable is the interface implemented by [MTRCertificateInfo], for mocking and DI.
+type MTRCertificateInfoable interface {
+	Unwrap() *raw.MTRCertificateInfo
+	Issuer() *MTRDistinguishedNameInfo
+	Subject() *MTRDistinguishedNameInfo
+	NotBefore() *foundation.NSDate
+	NotAfter() *foundation.NSDate
+	PublicKeyData() *foundation.NSData
+}
+
+var _ MTRCertificateInfoable = (*MTRCertificateInfo)(nil)
+

@@ -6,6 +6,7 @@ package vision
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *RecognizedObjectObservation) Labels() []*raw.VNClassificationObservatio
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNClassificationObservation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNClassificationObservation {
+		return raw.VNClassificationObservationFromID(purego.Retain(_id))
+	})
 }
 
 func (x *RecognizedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNDetectedObjectObservation }
 
 func (x *RecognizedObjectObservation) asObservation() *raw.VNObservation { return &x.inner.VNDetectedObjectObservation.VNObservation }
+
+// RecognizedObjectObservationable is the interface implemented by [RecognizedObjectObservation], for mocking and DI.
+type RecognizedObjectObservationable interface {
+	Unwrap() *raw.VNRecognizedObjectObservation
+	Labels() []*raw.VNClassificationObservation
+}
+
+var _ RecognizedObjectObservationable = (*RecognizedObjectObservation)(nil)
 

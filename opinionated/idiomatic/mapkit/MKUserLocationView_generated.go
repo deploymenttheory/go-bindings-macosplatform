@@ -25,3 +25,10 @@ func NewUserLocationView() *UserLocationView {
 
 func (x *UserLocationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
 
+// UserLocationViewable is the interface implemented by [UserLocationView], for mocking and DI.
+type UserLocationViewable interface {
+	Unwrap() *raw.MKUserLocationView
+}
+
+var _ UserLocationViewable = (*UserLocationView)(nil)
+

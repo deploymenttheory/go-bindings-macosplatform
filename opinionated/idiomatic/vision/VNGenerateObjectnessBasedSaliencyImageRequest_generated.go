@@ -27,3 +27,10 @@ func (x *GenerateObjectnessBasedSaliencyImageRequest) asImageBasedRequest() *raw
 
 func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
+type GenerateObjectnessBasedSaliencyImageRequestable interface {
+	Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest
+}
+
+var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)
+

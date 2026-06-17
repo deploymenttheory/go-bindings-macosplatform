@@ -23,3 +23,16 @@ func NewGlyphGenerator() *GlyphGenerator {
 	return &GlyphGenerator{inner: raw.NSGlyphGeneratorFromID(_id)}
 }
 
+// GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex calls the underlying GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex.
+func (x *GlyphGenerator) GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage raw.NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint) {
+	x.inner.GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage, nChars, glyphIndex, charIndex)
+}
+
+// GlyphGeneratorable is the interface implemented by [GlyphGenerator], for mocking and DI.
+type GlyphGeneratorable interface {
+	Unwrap() *raw.NSGlyphGenerator
+	GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage raw.NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint)
+}
+
+var _ GlyphGeneratorable = (*GlyphGenerator)(nil)
+

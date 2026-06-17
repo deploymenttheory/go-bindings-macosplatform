@@ -38,3 +38,29 @@ func (x *AUGenericView) WithShowsExpertParameters(showsExpertParameters bool) *A
 	return x
 }
 
+// AudioUnit calls the underlying AudioUnit.
+func (x *AUGenericView) AudioUnit() *carboncore.ComponentInstanceRecord {
+	return x.inner.AudioUnit()
+}
+
+// ShowsExpertParameters calls the underlying ShowsExpertParameters.
+func (x *AUGenericView) ShowsExpertParameters() bool {
+	return x.inner.ShowsExpertParameters()
+}
+
+// SetShowsExpertParameters calls the underlying SetShowsExpertParameters.
+func (x *AUGenericView) SetShowsExpertParameters(showsExpertParameters bool) {
+	x.inner.SetShowsExpertParameters(showsExpertParameters)
+}
+
+// AUGenericViewable is the interface implemented by [AUGenericView], for mocking and DI.
+type AUGenericViewable interface {
+	Unwrap() *raw.AUGenericView
+	WithShowsExpertParameters(showsExpertParameters bool) *AUGenericView
+	AudioUnit() *carboncore.ComponentInstanceRecord
+	ShowsExpertParameters() bool
+	SetShowsExpertParameters(showsExpertParameters bool)
+}
+
+var _ AUGenericViewable = (*AUGenericView)(nil)
+

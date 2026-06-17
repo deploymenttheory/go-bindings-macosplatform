@@ -24,5 +24,52 @@ func NewGlassesLensSpecificationWithSphereCylinderAxisAddPowerVertexDistancePris
 	return &GlassesLensSpecification{inner: raw.HKGlassesLensSpecificationFromID(_id)}
 }
 
+// VertexDistance calls the underlying VertexDistance.
+func (x *GlassesLensSpecification) VertexDistance() *Quantity {
+	_r := x.inner.VertexDistance()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Prism calls the underlying Prism.
+func (x *GlassesLensSpecification) Prism() *VisionPrism {
+	_r := x.inner.Prism()
+	if _r == nil {
+		return nil
+	}
+	return &VisionPrism{inner: _r}
+}
+
+// FarPupillaryDistance calls the underlying FarPupillaryDistance.
+func (x *GlassesLensSpecification) FarPupillaryDistance() *Quantity {
+	_r := x.inner.FarPupillaryDistance()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// NearPupillaryDistance calls the underlying NearPupillaryDistance.
+func (x *GlassesLensSpecification) NearPupillaryDistance() *Quantity {
+	_r := x.inner.NearPupillaryDistance()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
 func (x *GlassesLensSpecification) asLensSpecification() *raw.HKLensSpecification { return &x.inner.HKLensSpecification }
+
+// GlassesLensSpecificationable is the interface implemented by [GlassesLensSpecification], for mocking and DI.
+type GlassesLensSpecificationable interface {
+	Unwrap() *raw.HKGlassesLensSpecification
+	VertexDistance() *Quantity
+	Prism() *VisionPrism
+	FarPupillaryDistance() *Quantity
+	NearPupillaryDistance() *Quantity
+}
+
+var _ GlassesLensSpecificationable = (*GlassesLensSpecification)(nil)
 

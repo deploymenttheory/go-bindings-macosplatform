@@ -23,3 +23,10 @@ func NewMessageAction() *MessageAction {
 	return &MessageAction{inner: raw.MEMessageActionFromID(_id)}
 }
 
+// MessageActionable is the interface implemented by [MessageAction], for mocking and DI.
+type MessageActionable interface {
+	Unwrap() *raw.MEMessageAction
+}
+
+var _ MessageActionable = (*MessageAction)(nil)
+

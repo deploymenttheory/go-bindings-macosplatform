@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,41 @@ func NewMetricEventStream() *MetricEventStream {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricEventStream")), objc.RegisterName("new"))
 	return &MetricEventStream{inner: raw.AVMetricEventStreamFromID(_id)}
 }
+
+// AddPublisher calls the underlying AddPublisher.
+func (x *MetricEventStream) AddPublisher(publisher raw.AVMetricEventStreamPublisher) bool {
+	return x.inner.AddPublisher(publisher)
+}
+
+// SetSubscriberQueue calls the underlying SetSubscriberQueue.
+func (x *MetricEventStream) SetSubscriberQueue(subscriber raw.AVMetricEventStreamSubscriber, queue *foundation.NSObject) bool {
+	return x.inner.SetSubscriberQueue(subscriber, queue)
+}
+
+// SubscribeToMetricEvent calls the underlying SubscribeToMetricEvent.
+func (x *MetricEventStream) SubscribeToMetricEvent(metricEventClass objc.Class) {
+	x.inner.SubscribeToMetricEvent(metricEventClass)
+}
+
+// SubscribeToMetricEvents calls the underlying SubscribeToMetricEvents.
+func (x *MetricEventStream) SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class]) {
+	x.inner.SubscribeToMetricEvents(metricEventClasses)
+}
+
+// SubscribeToAllMetricEvents calls the underlying SubscribeToAllMetricEvents.
+func (x *MetricEventStream) SubscribeToAllMetricEvents() {
+	x.inner.SubscribeToAllMetricEvents()
+}
+
+// MetricEventStreamable is the interface implemented by [MetricEventStream], for mocking and DI.
+type MetricEventStreamable interface {
+	Unwrap() *raw.AVMetricEventStream
+	AddPublisher(publisher raw.AVMetricEventStreamPublisher) bool
+	SetSubscriberQueue(subscriber raw.AVMetricEventStreamSubscriber, queue *foundation.NSObject) bool
+	SubscribeToMetricEvent(metricEventClass objc.Class)
+	SubscribeToMetricEvents(metricEventClasses *foundation.NSArray[objc.Class])
+	SubscribeToAllMetricEvents()
+}
+
+var _ MetricEventStreamable = (*MetricEventStream)(nil)
 

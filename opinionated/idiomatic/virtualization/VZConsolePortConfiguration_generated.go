@@ -29,5 +29,29 @@ func (x *ConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmen
 	return x
 }
 
+// Attachment calls the underlying Attachment.
+func (x *ConsolePortConfiguration) Attachment() *SerialPortAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &SerialPortAttachment{inner: _r}
+}
+
+// SetAttachment calls the underlying SetAttachment.
+func (x *ConsolePortConfiguration) SetAttachment(attachment *raw.VZSerialPortAttachment) {
+	x.inner.SetAttachment(attachment)
+}
+
 func (x *ConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration { return x.inner }
+
+// ConsolePortConfigurationable is the interface implemented by [ConsolePortConfiguration], for mocking and DI.
+type ConsolePortConfigurationable interface {
+	Unwrap() *raw.VZConsolePortConfiguration
+	WithAttachment(attachment SerialPortAttachmentProvider) *ConsolePortConfiguration
+	Attachment() *SerialPortAttachment
+	SetAttachment(attachment *raw.VZSerialPortAttachment)
+}
+
+var _ ConsolePortConfigurationable = (*ConsolePortConfiguration)(nil)
 

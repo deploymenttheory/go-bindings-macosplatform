@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,7 +30,57 @@ func (x *CollectionLayoutSupplementaryItem) WithZIndex(zIndex int) *CollectionLa
 	return x
 }
 
+// ZIndex calls the underlying ZIndex.
+func (x *CollectionLayoutSupplementaryItem) ZIndex() int {
+	return x.inner.ZIndex()
+}
+
+// SetZIndex calls the underlying SetZIndex.
+func (x *CollectionLayoutSupplementaryItem) SetZIndex(zIndex int) {
+	x.inner.SetZIndex(zIndex)
+}
+
+// ElementKind calls the underlying ElementKind.
+func (x *CollectionLayoutSupplementaryItem) ElementKind() string {
+	_r := x.inner.ElementKind()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContainerAnchor calls the underlying ContainerAnchor.
+func (x *CollectionLayoutSupplementaryItem) ContainerAnchor() *CollectionLayoutAnchor {
+	_r := x.inner.ContainerAnchor()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutAnchor{inner: _r}
+}
+
+// ItemAnchor calls the underlying ItemAnchor.
+func (x *CollectionLayoutSupplementaryItem) ItemAnchor() *CollectionLayoutAnchor {
+	_r := x.inner.ItemAnchor()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutAnchor{inner: _r}
+}
+
 func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem { return x.inner }
 
 func (x *CollectionLayoutSupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutItem }
+
+// CollectionLayoutSupplementaryItemable is the interface implemented by [CollectionLayoutSupplementaryItem], for mocking and DI.
+type CollectionLayoutSupplementaryItemable interface {
+	Unwrap() *raw.NSCollectionLayoutSupplementaryItem
+	WithZIndex(zIndex int) *CollectionLayoutSupplementaryItem
+	ZIndex() int
+	SetZIndex(zIndex int)
+	ElementKind() string
+	ContainerAnchor() *CollectionLayoutAnchor
+	ItemAnchor() *CollectionLayoutAnchor
+}
+
+var _ CollectionLayoutSupplementaryItemable = (*CollectionLayoutSupplementaryItem)(nil)
 

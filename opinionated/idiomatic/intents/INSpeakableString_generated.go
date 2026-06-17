@@ -25,3 +25,10 @@ func NewSpeakableStringWithVocabularyIdentifierSpokenPhrasePronunciationHint(voc
 	return &SpeakableString{inner: raw.INSpeakableStringFromID(_id)}
 }
 
+// SpeakableStringable is the interface implemented by [SpeakableString], for mocking and DI.
+type SpeakableStringable interface {
+	Unwrap() *raw.INSpeakableString
+}
+
+var _ SpeakableStringable = (*SpeakableString)(nil)
+

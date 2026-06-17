@@ -23,5 +23,24 @@ func NewBatchDeleteResult() *BatchDeleteResult {
 	return &BatchDeleteResult{inner: raw.NSBatchDeleteResultFromID(_id)}
 }
 
+// Result calls the underlying Result.
+func (x *BatchDeleteResult) Result() objc.ID {
+	return x.inner.Result()
+}
+
+// ResultType calls the underlying ResultType.
+func (x *BatchDeleteResult) ResultType() raw.NSBatchDeleteRequestResultType {
+	return x.inner.ResultType()
+}
+
 func (x *BatchDeleteResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreResult }
+
+// BatchDeleteResultable is the interface implemented by [BatchDeleteResult], for mocking and DI.
+type BatchDeleteResultable interface {
+	Unwrap() *raw.NSBatchDeleteResult
+	Result() objc.ID
+	ResultType() raw.NSBatchDeleteRequestResultType
+}
+
+var _ BatchDeleteResultable = (*BatchDeleteResult)(nil)
 

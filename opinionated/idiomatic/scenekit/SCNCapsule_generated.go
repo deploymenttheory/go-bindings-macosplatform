@@ -53,5 +53,77 @@ func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
 	return x
 }
 
+// CapRadius calls the underlying CapRadius.
+func (x *Capsule) CapRadius() float64 {
+	return x.inner.CapRadius()
+}
+
+// SetCapRadius calls the underlying SetCapRadius.
+func (x *Capsule) SetCapRadius(capRadius float64) {
+	x.inner.SetCapRadius(capRadius)
+}
+
+// Height calls the underlying Height.
+func (x *Capsule) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Capsule) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// RadialSegmentCount calls the underlying RadialSegmentCount.
+func (x *Capsule) RadialSegmentCount() int {
+	return x.inner.RadialSegmentCount()
+}
+
+// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+func (x *Capsule) SetRadialSegmentCount(radialSegmentCount int) {
+	x.inner.SetRadialSegmentCount(radialSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Capsule) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Capsule) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
+// CapSegmentCount calls the underlying CapSegmentCount.
+func (x *Capsule) CapSegmentCount() int {
+	return x.inner.CapSegmentCount()
+}
+
+// SetCapSegmentCount calls the underlying SetCapSegmentCount.
+func (x *Capsule) SetCapSegmentCount(capSegmentCount int) {
+	x.inner.SetCapSegmentCount(capSegmentCount)
+}
+
 func (x *Capsule) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Capsuleable is the interface implemented by [Capsule], for mocking and DI.
+type Capsuleable interface {
+	Unwrap() *raw.SCNCapsule
+	WithCapRadius(capRadius float64) *Capsule
+	WithHeight(height float64) *Capsule
+	WithRadialSegmentCount(radialSegmentCount int) *Capsule
+	WithHeightSegmentCount(heightSegmentCount int) *Capsule
+	WithCapSegmentCount(capSegmentCount int) *Capsule
+	CapRadius() float64
+	SetCapRadius(capRadius float64)
+	Height() float64
+	SetHeight(height float64)
+	RadialSegmentCount() int
+	SetRadialSegmentCount(radialSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+	CapSegmentCount() int
+	SetCapSegmentCount(capSegmentCount int)
+}
+
+var _ Capsuleable = (*Capsule)(nil)
 

@@ -25,9 +25,26 @@ func NewDimensionWithSymbolConverter(symbol string, converter *raw.NSUnitConvert
 	return &Dimension{inner: raw.NSDimensionFromID(_id)}
 }
 
+// Converter calls the underlying Converter.
+func (x *Dimension) Converter() *UnitConverter {
+	_r := x.inner.Converter()
+	if _r == nil {
+		return nil
+	}
+	return &UnitConverter{inner: _r}
+}
+
 func (x *Dimension) asDimension() *raw.NSDimension { return x.inner }
 
 func (x *Dimension) asUnit() *raw.NSUnit { return &x.inner.NSUnit }
 
 func (x *Dimension) asObject() *raw.NSObject { return &x.inner.NSUnit.NSObject }
+
+// Dimensionable is the interface implemented by [Dimension], for mocking and DI.
+type Dimensionable interface {
+	Unwrap() *raw.NSDimension
+	Converter() *UnitConverter
+}
+
+var _ Dimensionable = (*Dimension)(nil)
 

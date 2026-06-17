@@ -5,8 +5,13 @@
 package gamekit
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AchievementDescription wraps [raw.GKAchievementDescription] with a fluent Go API.
@@ -22,4 +27,138 @@ func NewAchievementDescription() *AchievementDescription {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievementDescription")), objc.RegisterName("new"))
 	return &AchievementDescription{inner: raw.GKAchievementDescriptionFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *AchievementDescription) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// GroupIdentifier calls the underlying GroupIdentifier.
+func (x *AchievementDescription) GroupIdentifier() string {
+	_r := x.inner.GroupIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *AchievementDescription) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AchievedDescription calls the underlying AchievedDescription.
+func (x *AchievementDescription) AchievedDescription() string {
+	_r := x.inner.AchievedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UnachievedDescription calls the underlying UnachievedDescription.
+func (x *AchievementDescription) UnachievedDescription() string {
+	_r := x.inner.UnachievedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MaximumPoints calls the underlying MaximumPoints.
+func (x *AchievementDescription) MaximumPoints() int {
+	return x.inner.MaximumPoints()
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *AchievementDescription) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// IsReplayable calls the underlying IsReplayable.
+func (x *AchievementDescription) IsReplayable() bool {
+	return x.inner.IsReplayable()
+}
+
+// RarityPercent calls the underlying RarityPercent.
+func (x *AchievementDescription) RarityPercent() *foundation.NSNumber {
+	return x.inner.RarityPercent()
+}
+
+// ReleaseState calls the underlying ReleaseState.
+func (x *AchievementDescription) ReleaseState() raw.GKReleaseState {
+	return x.inner.ReleaseState()
+}
+
+// ActivityIdentifier calls the underlying ActivityIdentifier.
+func (x *AchievementDescription) ActivityIdentifier() string {
+	_r := x.inner.ActivityIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ActivityProperties calls the underlying ActivityProperties.
+func (x *AchievementDescription) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.ActivityProperties()
+}
+
+// LoadImage blocks until the operation completes or ctx is cancelled.
+func (x *AchievementDescription) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
+	type _result struct {
+		val *appkit.NSImage
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadImageWithCompletionHandler(func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *appkit.NSImage
+		return _zero, ctx.Err()
+	}
+}
+
+// Image calls the underlying Image.
+func (x *AchievementDescription) Image() unsafe.Pointer {
+	return x.inner.Image()
+}
+
+// AchievementDescriptionable is the interface implemented by [AchievementDescription], for mocking and DI.
+type AchievementDescriptionable interface {
+	Unwrap() *raw.GKAchievementDescription
+	Identifier() string
+	GroupIdentifier() string
+	Title() string
+	AchievedDescription() string
+	UnachievedDescription() string
+	MaximumPoints() int
+	IsHidden() bool
+	IsReplayable() bool
+	RarityPercent() *foundation.NSNumber
+	ReleaseState() raw.GKReleaseState
+	ActivityIdentifier() string
+	ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	LoadImage(ctx context.Context) (*appkit.NSImage, error)
+	Image() unsafe.Pointer
+}
+
+var _ AchievementDescriptionable = (*AchievementDescription)(nil)
 

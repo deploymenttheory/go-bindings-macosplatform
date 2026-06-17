@@ -38,16 +38,35 @@ func (x *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *
 	return x
 }
 
-// Sections returns the collection as a Go slice.
-func (x *ObjectCollection) Sections() []*raw.INObjectSection[objc.ID] {
-	arr := x.inner.Sections()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*raw.INObjectSection[objc.ID], arr.Count())
-	for i := range out {
-		out[i] = raw.INObjectSectionFromID[objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// Sections calls the underlying Sections.
+func (x *ObjectCollection) Sections() *foundation.NSArray[objc.ID] {
+	return x.inner.Sections()
 }
+
+// AllItems calls the underlying AllItems.
+func (x *ObjectCollection) AllItems() *foundation.NSArray[objc.ID] {
+	return x.inner.AllItems()
+}
+
+// UsesIndexedCollation calls the underlying UsesIndexedCollation.
+func (x *ObjectCollection) UsesIndexedCollation() bool {
+	return x.inner.UsesIndexedCollation()
+}
+
+// SetUsesIndexedCollation calls the underlying SetUsesIndexedCollation.
+func (x *ObjectCollection) SetUsesIndexedCollation(usesIndexedCollation bool) {
+	x.inner.SetUsesIndexedCollation(usesIndexedCollation)
+}
+
+// ObjectCollectionable is the interface implemented by [ObjectCollection], for mocking and DI.
+type ObjectCollectionable interface {
+	Unwrap() *raw.INObjectCollection[objc.ID]
+	WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection
+	Sections() *foundation.NSArray[objc.ID]
+	AllItems() *foundation.NSArray[objc.ID]
+	UsesIndexedCollation() bool
+	SetUsesIndexedCollation(usesIndexedCollation bool)
+}
+
+var _ ObjectCollectionable = (*ObjectCollection)(nil)
 

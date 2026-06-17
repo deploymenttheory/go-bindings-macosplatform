@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,58 @@ func NewOpticalFlowConfigurationWithFrameWidthFrameHeightQualityPrioritizationRe
 	return &OpticalFlowConfiguration{inner: raw.VTOpticalFlowConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *OpticalFlowConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *OpticalFlowConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
+// QualityPrioritization calls the underlying QualityPrioritization.
+func (x *OpticalFlowConfiguration) QualityPrioritization() raw.VTOpticalFlowConfigurationQualityPrioritization {
+	return x.inner.QualityPrioritization()
+}
+
+// Revision calls the underlying Revision.
+func (x *OpticalFlowConfiguration) Revision() raw.VTOpticalFlowConfigurationRevision {
+	return x.inner.Revision()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *OpticalFlowConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *OpticalFlowConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *OpticalFlowConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// OpticalFlowConfigurationable is the interface implemented by [OpticalFlowConfiguration], for mocking and DI.
+type OpticalFlowConfigurationable interface {
+	Unwrap() *raw.VTOpticalFlowConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	QualityPrioritization() raw.VTOpticalFlowConfigurationQualityPrioritization
+	Revision() raw.VTOpticalFlowConfigurationRevision
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ OpticalFlowConfigurationable = (*OpticalFlowConfiguration)(nil)
 

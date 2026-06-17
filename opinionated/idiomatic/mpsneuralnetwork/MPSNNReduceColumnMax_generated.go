@@ -37,3 +37,10 @@ func (x *NNReduceColumnMax) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.
 
 func (x *NNReduceColumnMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceColumnMaxable is the interface implemented by [NNReduceColumnMax], for mocking and DI.
+type NNReduceColumnMaxable interface {
+	Unwrap() *raw.MPSNNReduceColumnMax
+}
+
+var _ NNReduceColumnMaxable = (*NNReduceColumnMax)(nil)
+

@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,4 +61,105 @@ func (x *RecurringPaymentRequest) WithTokenNotificationURL(tokenNotificationURL 
 	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
 	return x
 }
+
+// PaymentDescription calls the underlying PaymentDescription.
+func (x *RecurringPaymentRequest) PaymentDescription() string {
+	_r := x.inner.PaymentDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPaymentDescription calls the underlying SetPaymentDescription.
+func (x *RecurringPaymentRequest) SetPaymentDescription(paymentDescription string) {
+	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+}
+
+// RegularBilling calls the underlying RegularBilling.
+func (x *RecurringPaymentRequest) RegularBilling() *RecurringPaymentSummaryItem {
+	_r := x.inner.RegularBilling()
+	if _r == nil {
+		return nil
+	}
+	return &RecurringPaymentSummaryItem{inner: _r}
+}
+
+// SetRegularBilling calls the underlying SetRegularBilling.
+func (x *RecurringPaymentRequest) SetRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem) {
+	x.inner.SetRegularBilling(regularBilling)
+}
+
+// TrialBilling calls the underlying TrialBilling.
+func (x *RecurringPaymentRequest) TrialBilling() *RecurringPaymentSummaryItem {
+	_r := x.inner.TrialBilling()
+	if _r == nil {
+		return nil
+	}
+	return &RecurringPaymentSummaryItem{inner: _r}
+}
+
+// SetTrialBilling calls the underlying SetTrialBilling.
+func (x *RecurringPaymentRequest) SetTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem) {
+	x.inner.SetTrialBilling(trialBilling)
+}
+
+// BillingAgreement calls the underlying BillingAgreement.
+func (x *RecurringPaymentRequest) BillingAgreement() string {
+	_r := x.inner.BillingAgreement()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBillingAgreement calls the underlying SetBillingAgreement.
+func (x *RecurringPaymentRequest) SetBillingAgreement(billingAgreement string) {
+	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+}
+
+// ManagementURL calls the underlying ManagementURL.
+func (x *RecurringPaymentRequest) ManagementURL() *foundation.NSURL {
+	return x.inner.ManagementURL()
+}
+
+// SetManagementURL calls the underlying SetManagementURL.
+func (x *RecurringPaymentRequest) SetManagementURL(managementURL string) {
+	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+}
+
+// TokenNotificationURL calls the underlying TokenNotificationURL.
+func (x *RecurringPaymentRequest) TokenNotificationURL() *foundation.NSURL {
+	return x.inner.TokenNotificationURL()
+}
+
+// SetTokenNotificationURL calls the underlying SetTokenNotificationURL.
+func (x *RecurringPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
+	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+}
+
+// RecurringPaymentRequestable is the interface implemented by [RecurringPaymentRequest], for mocking and DI.
+type RecurringPaymentRequestable interface {
+	Unwrap() *raw.PKRecurringPaymentRequest
+	WithPaymentDescription(paymentDescription string) *RecurringPaymentRequest
+	WithRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest
+	WithTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem) *RecurringPaymentRequest
+	WithBillingAgreement(billingAgreement string) *RecurringPaymentRequest
+	WithManagementURL(managementURL string) *RecurringPaymentRequest
+	WithTokenNotificationURL(tokenNotificationURL string) *RecurringPaymentRequest
+	PaymentDescription() string
+	SetPaymentDescription(paymentDescription string)
+	RegularBilling() *RecurringPaymentSummaryItem
+	SetRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem)
+	TrialBilling() *RecurringPaymentSummaryItem
+	SetTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem)
+	BillingAgreement() string
+	SetBillingAgreement(billingAgreement string)
+	ManagementURL() *foundation.NSURL
+	SetManagementURL(managementURL string)
+	TokenNotificationURL() *foundation.NSURL
+	SetTokenNotificationURL(tokenNotificationURL string)
+}
+
+var _ RecurringPaymentRequestable = (*RecurringPaymentRequest)(nil)
 

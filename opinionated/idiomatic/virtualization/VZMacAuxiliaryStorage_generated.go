@@ -45,3 +45,16 @@ func NewMacAuxiliaryStorageWithContentsOfURL(uRL string) *MacAuxiliaryStorage {
 	return &MacAuxiliaryStorage{inner: raw.VZMacAuxiliaryStorageFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *MacAuxiliaryStorage) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// MacAuxiliaryStorageable is the interface implemented by [MacAuxiliaryStorage], for mocking and DI.
+type MacAuxiliaryStorageable interface {
+	Unwrap() *raw.VZMacAuxiliaryStorage
+	URL() *foundation.NSURL
+}
+
+var _ MacAuxiliaryStorageable = (*MacAuxiliaryStorage)(nil)
+

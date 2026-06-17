@@ -42,5 +42,51 @@ func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithCoolSetpoint(co
 	return x
 }
 
+// TransitionTime calls the underlying TransitionTime.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() *foundation.NSNumber {
+	return x.inner.TransitionTime()
+}
+
+// SetTransitionTime calls the underlying SetTransitionTime.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetTransitionTime(transitionTime *foundation.NSNumber) {
+	x.inner.SetTransitionTime(transitionTime)
+}
+
+// HeatSetpoint calls the underlying HeatSetpoint.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() *foundation.NSNumber {
+	return x.inner.HeatSetpoint()
+}
+
+// SetHeatSetpoint calls the underlying SetHeatSetpoint.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetHeatSetpoint(heatSetpoint *foundation.NSNumber) {
+	x.inner.SetHeatSetpoint(heatSetpoint)
+}
+
+// CoolSetpoint calls the underlying CoolSetpoint.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() *foundation.NSNumber {
+	return x.inner.CoolSetpoint()
+}
+
+// SetCoolSetpoint calls the underlying SetCoolSetpoint.
+func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetCoolSetpoint(coolSetpoint *foundation.NSNumber) {
+	x.inner.SetCoolSetpoint(coolSetpoint)
+}
+
 func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct { return x.inner }
+
+// MTRThermostatClusterWeeklyScheduleTransitionStructable is the interface implemented by [MTRThermostatClusterWeeklyScheduleTransitionStruct], for mocking and DI.
+type MTRThermostatClusterWeeklyScheduleTransitionStructable interface {
+	Unwrap() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRThermostatClusterWeeklyScheduleTransitionStruct
+	WithHeatSetpoint(heatSetpoint *foundation.NSNumber) *MTRThermostatClusterWeeklyScheduleTransitionStruct
+	WithCoolSetpoint(coolSetpoint *foundation.NSNumber) *MTRThermostatClusterWeeklyScheduleTransitionStruct
+	TransitionTime() *foundation.NSNumber
+	SetTransitionTime(transitionTime *foundation.NSNumber)
+	HeatSetpoint() *foundation.NSNumber
+	SetHeatSetpoint(heatSetpoint *foundation.NSNumber)
+	CoolSetpoint() *foundation.NSNumber
+	SetCoolSetpoint(coolSetpoint *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterWeeklyScheduleTransitionStructable = (*MTRThermostatClusterWeeklyScheduleTransitionStruct)(nil)
 

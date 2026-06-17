@@ -11,6 +11,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MatrixSoftMax wraps [raw.MPSMatrixSoftMax] with a fluent Go API.
@@ -47,7 +48,56 @@ func (x *MatrixSoftMax) WithSourceColumns(sourceColumns uint) *MatrixSoftMax {
 	return x
 }
 
+// EncodeToCommandBufferInputMatrixResultMatrix calls the underlying EncodeToCommandBufferInputMatrixResultMatrix.
+func (x *MatrixSoftMax) EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer, inputMatrix, resultMatrix)
+}
+
+// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
+func (x *MatrixSoftMax) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixSoftMax {
+	_r := x.inner.CopyWithZoneDevice(zone, device)
+	if _r == nil {
+		return nil
+	}
+	return &MatrixSoftMax{inner: _r}
+}
+
+// SourceRows calls the underlying SourceRows.
+func (x *MatrixSoftMax) SourceRows() uint {
+	return x.inner.SourceRows()
+}
+
+// SetSourceRows calls the underlying SetSourceRows.
+func (x *MatrixSoftMax) SetSourceRows(sourceRows uint) {
+	x.inner.SetSourceRows(sourceRows)
+}
+
+// SourceColumns calls the underlying SourceColumns.
+func (x *MatrixSoftMax) SourceColumns() uint {
+	return x.inner.SourceColumns()
+}
+
+// SetSourceColumns calls the underlying SetSourceColumns.
+func (x *MatrixSoftMax) SetSourceColumns(sourceColumns uint) {
+	x.inner.SetSourceColumns(sourceColumns)
+}
+
 func (x *MatrixSoftMax) asMatrixUnaryKernel() *mpsmatrix.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixUnaryKernel }
 
 func (x *MatrixSoftMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixUnaryKernel.MPSKernel }
+
+// MatrixSoftMaxable is the interface implemented by [MatrixSoftMax], for mocking and DI.
+type MatrixSoftMaxable interface {
+	Unwrap() *raw.MPSMatrixSoftMax
+	WithSourceRows(sourceRows uint) *MatrixSoftMax
+	WithSourceColumns(sourceColumns uint) *MatrixSoftMax
+	EncodeToCommandBufferInputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
+	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixSoftMax
+	SourceRows() uint
+	SetSourceRows(sourceRows uint)
+	SourceColumns() uint
+	SetSourceColumns(sourceColumns uint)
+}
+
+var _ MatrixSoftMaxable = (*MatrixSoftMax)(nil)
 

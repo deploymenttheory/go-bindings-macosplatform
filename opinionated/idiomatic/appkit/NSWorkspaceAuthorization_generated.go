@@ -23,3 +23,10 @@ func NewWorkspaceAuthorization() *WorkspaceAuthorization {
 	return &WorkspaceAuthorization{inner: raw.NSWorkspaceAuthorizationFromID(_id)}
 }
 
+// WorkspaceAuthorizationable is the interface implemented by [WorkspaceAuthorization], for mocking and DI.
+type WorkspaceAuthorizationable interface {
+	Unwrap() *raw.NSWorkspaceAuthorization
+}
+
+var _ WorkspaceAuthorizationable = (*WorkspaceAuthorization)(nil)
+

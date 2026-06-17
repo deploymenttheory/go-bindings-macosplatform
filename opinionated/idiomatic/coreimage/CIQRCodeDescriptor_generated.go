@@ -25,5 +25,36 @@ func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(
 	return &QRCodeDescriptor{inner: raw.CIQRCodeDescriptorFromID(_id)}
 }
 
+// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
+func (x *QRCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
+	return x.inner.ErrorCorrectedPayload()
+}
+
+// SymbolVersion calls the underlying SymbolVersion.
+func (x *QRCodeDescriptor) SymbolVersion() int {
+	return x.inner.SymbolVersion()
+}
+
+// MaskPattern calls the underlying MaskPattern.
+func (x *QRCodeDescriptor) MaskPattern() uint8 {
+	return x.inner.MaskPattern()
+}
+
+// ErrorCorrectionLevel calls the underlying ErrorCorrectionLevel.
+func (x *QRCodeDescriptor) ErrorCorrectionLevel() raw.CIQRCodeErrorCorrectionLevel {
+	return x.inner.ErrorCorrectionLevel()
+}
+
 func (x *QRCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+
+// QRCodeDescriptorable is the interface implemented by [QRCodeDescriptor], for mocking and DI.
+type QRCodeDescriptorable interface {
+	Unwrap() *raw.CIQRCodeDescriptor
+	ErrorCorrectedPayload() *foundation.NSData
+	SymbolVersion() int
+	MaskPattern() uint8
+	ErrorCorrectionLevel() raw.CIQRCodeErrorCorrectionLevel
+}
+
+var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)
 

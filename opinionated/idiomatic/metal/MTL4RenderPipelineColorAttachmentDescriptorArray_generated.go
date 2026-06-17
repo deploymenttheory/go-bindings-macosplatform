@@ -23,3 +23,32 @@ func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineCo
 	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &MTL4RenderPipelineColorAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// Reset calls the underlying Reset.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
+	x.inner.Reset()
+}
+
+// MTL4RenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [MTL4RenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
+type MTL4RenderPipelineColorAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTL4RenderPipelineColorAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint)
+	Reset()
+}
+
+var _ MTL4RenderPipelineColorAttachmentDescriptorArrayable = (*MTL4RenderPipelineColorAttachmentDescriptorArray)(nil)
+

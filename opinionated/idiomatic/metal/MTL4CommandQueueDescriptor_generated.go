@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTL4CommandQueueDescriptor) WithFeedbackQueue(feedbackQueue *foundation
 	x.inner.SetFeedbackQueue(feedbackQueue)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTL4CommandQueueDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTL4CommandQueueDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// FeedbackQueue calls the underlying FeedbackQueue.
+func (x *MTL4CommandQueueDescriptor) FeedbackQueue() *foundation.NSObject {
+	return x.inner.FeedbackQueue()
+}
+
+// SetFeedbackQueue calls the underlying SetFeedbackQueue.
+func (x *MTL4CommandQueueDescriptor) SetFeedbackQueue(feedbackQueue *foundation.NSObject) {
+	x.inner.SetFeedbackQueue(feedbackQueue)
+}
+
+// MTL4CommandQueueDescriptorable is the interface implemented by [MTL4CommandQueueDescriptor], for mocking and DI.
+type MTL4CommandQueueDescriptorable interface {
+	Unwrap() *raw.MTL4CommandQueueDescriptor
+	WithLabel(label string) *MTL4CommandQueueDescriptor
+	WithFeedbackQueue(feedbackQueue *foundation.NSObject) *MTL4CommandQueueDescriptor
+	Label() string
+	SetLabel(label string)
+	FeedbackQueue() *foundation.NSObject
+	SetFeedbackQueue(feedbackQueue *foundation.NSObject)
+}
+
+var _ MTL4CommandQueueDescriptorable = (*MTL4CommandQueueDescriptor)(nil)
 

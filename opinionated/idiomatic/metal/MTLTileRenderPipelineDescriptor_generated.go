@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -83,4 +84,199 @@ func (x *TileRenderPipelineDescriptor) WithRequiredThreadsPerThreadgroup(require
 	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
 	return x
 }
+
+// Reset calls the underlying Reset.
+func (x *TileRenderPipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// Label calls the underlying Label.
+func (x *TileRenderPipelineDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *TileRenderPipelineDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// TileFunction calls the underlying TileFunction.
+func (x *TileRenderPipelineDescriptor) TileFunction() raw.MTLFunction {
+	return x.inner.TileFunction()
+}
+
+// SetTileFunction calls the underlying SetTileFunction.
+func (x *TileRenderPipelineDescriptor) SetTileFunction(tileFunction raw.MTLFunction) {
+	x.inner.SetTileFunction(tileFunction)
+}
+
+// RasterSampleCount calls the underlying RasterSampleCount.
+func (x *TileRenderPipelineDescriptor) RasterSampleCount() uint {
+	return x.inner.RasterSampleCount()
+}
+
+// SetRasterSampleCount calls the underlying SetRasterSampleCount.
+func (x *TileRenderPipelineDescriptor) SetRasterSampleCount(rasterSampleCount uint) {
+	x.inner.SetRasterSampleCount(rasterSampleCount)
+}
+
+// ColorAttachments calls the underlying ColorAttachments.
+func (x *TileRenderPipelineDescriptor) ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray {
+	_r := x.inner.ColorAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: _r}
+}
+
+// ThreadgroupSizeMatchesTileSize calls the underlying ThreadgroupSizeMatchesTileSize.
+func (x *TileRenderPipelineDescriptor) ThreadgroupSizeMatchesTileSize() bool {
+	return x.inner.ThreadgroupSizeMatchesTileSize()
+}
+
+// SetThreadgroupSizeMatchesTileSize calls the underlying SetThreadgroupSizeMatchesTileSize.
+func (x *TileRenderPipelineDescriptor) SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) {
+	x.inner.SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize)
+}
+
+// TileBuffers calls the underlying TileBuffers.
+func (x *TileRenderPipelineDescriptor) TileBuffers() *PipelineBufferDescriptorArray {
+	_r := x.inner.TileBuffers()
+	if _r == nil {
+		return nil
+	}
+	return &PipelineBufferDescriptorArray{inner: _r}
+}
+
+// MaxTotalThreadsPerThreadgroup calls the underlying MaxTotalThreadsPerThreadgroup.
+func (x *TileRenderPipelineDescriptor) MaxTotalThreadsPerThreadgroup() uint {
+	return x.inner.MaxTotalThreadsPerThreadgroup()
+}
+
+// SetMaxTotalThreadsPerThreadgroup calls the underlying SetMaxTotalThreadsPerThreadgroup.
+func (x *TileRenderPipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) {
+	x.inner.SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup)
+}
+
+// BinaryArchives calls the underlying BinaryArchives.
+func (x *TileRenderPipelineDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
+	return x.inner.BinaryArchives()
+}
+
+// SetBinaryArchives calls the underlying SetBinaryArchives.
+func (x *TileRenderPipelineDescriptor) SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive]) {
+	x.inner.SetBinaryArchives(binaryArchives)
+}
+
+// PreloadedLibraries calls the underlying PreloadedLibraries.
+func (x *TileRenderPipelineDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
+	return x.inner.PreloadedLibraries()
+}
+
+// SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
+func (x *TileRenderPipelineDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
+	x.inner.SetPreloadedLibraries(preloadedLibraries)
+}
+
+// LinkedFunctions calls the underlying LinkedFunctions.
+func (x *TileRenderPipelineDescriptor) LinkedFunctions() *LinkedFunctions {
+	_r := x.inner.LinkedFunctions()
+	if _r == nil {
+		return nil
+	}
+	return &LinkedFunctions{inner: _r}
+}
+
+// SetLinkedFunctions calls the underlying SetLinkedFunctions.
+func (x *TileRenderPipelineDescriptor) SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) {
+	x.inner.SetLinkedFunctions(linkedFunctions)
+}
+
+// SupportAddingBinaryFunctions calls the underlying SupportAddingBinaryFunctions.
+func (x *TileRenderPipelineDescriptor) SupportAddingBinaryFunctions() bool {
+	return x.inner.SupportAddingBinaryFunctions()
+}
+
+// SetSupportAddingBinaryFunctions calls the underlying SetSupportAddingBinaryFunctions.
+func (x *TileRenderPipelineDescriptor) SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) {
+	x.inner.SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions)
+}
+
+// MaxCallStackDepth calls the underlying MaxCallStackDepth.
+func (x *TileRenderPipelineDescriptor) MaxCallStackDepth() uint {
+	return x.inner.MaxCallStackDepth()
+}
+
+// SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
+func (x *TileRenderPipelineDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
+	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+}
+
+// ShaderValidation calls the underlying ShaderValidation.
+func (x *TileRenderPipelineDescriptor) ShaderValidation() raw.MTLShaderValidation {
+	return x.inner.ShaderValidation()
+}
+
+// SetShaderValidation calls the underlying SetShaderValidation.
+func (x *TileRenderPipelineDescriptor) SetShaderValidation(shaderValidation raw.MTLShaderValidation) {
+	x.inner.SetShaderValidation(shaderValidation)
+}
+
+// RequiredThreadsPerThreadgroup calls the underlying RequiredThreadsPerThreadgroup.
+func (x *TileRenderPipelineDescriptor) RequiredThreadsPerThreadgroup() raw.MTLSize {
+	return x.inner.RequiredThreadsPerThreadgroup()
+}
+
+// SetRequiredThreadsPerThreadgroup calls the underlying SetRequiredThreadsPerThreadgroup.
+func (x *TileRenderPipelineDescriptor) SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) {
+	x.inner.SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup)
+}
+
+// TileRenderPipelineDescriptorable is the interface implemented by [TileRenderPipelineDescriptor], for mocking and DI.
+type TileRenderPipelineDescriptorable interface {
+	Unwrap() *raw.MTLTileRenderPipelineDescriptor
+	WithLabel(label string) *TileRenderPipelineDescriptor
+	WithTileFunction(tileFunction raw.MTLFunction) *TileRenderPipelineDescriptor
+	WithRasterSampleCount(rasterSampleCount uint) *TileRenderPipelineDescriptor
+	WithThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool) *TileRenderPipelineDescriptor
+	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint) *TileRenderPipelineDescriptor
+	WithLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions) *TileRenderPipelineDescriptor
+	WithSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool) *TileRenderPipelineDescriptor
+	WithMaxCallStackDepth(maxCallStackDepth uint) *TileRenderPipelineDescriptor
+	WithShaderValidation(shaderValidation raw.MTLShaderValidation) *TileRenderPipelineDescriptor
+	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *TileRenderPipelineDescriptor
+	Reset()
+	Label() string
+	SetLabel(label string)
+	TileFunction() raw.MTLFunction
+	SetTileFunction(tileFunction raw.MTLFunction)
+	RasterSampleCount() uint
+	SetRasterSampleCount(rasterSampleCount uint)
+	ColorAttachments() *TileRenderPipelineColorAttachmentDescriptorArray
+	ThreadgroupSizeMatchesTileSize() bool
+	SetThreadgroupSizeMatchesTileSize(threadgroupSizeMatchesTileSize bool)
+	TileBuffers() *PipelineBufferDescriptorArray
+	MaxTotalThreadsPerThreadgroup() uint
+	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup uint)
+	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
+	SetBinaryArchives(binaryArchives *foundation.NSArray[raw.MTLBinaryArchive])
+	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
+	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+	LinkedFunctions() *LinkedFunctions
+	SetLinkedFunctions(linkedFunctions *raw.MTLLinkedFunctions)
+	SupportAddingBinaryFunctions() bool
+	SetSupportAddingBinaryFunctions(supportAddingBinaryFunctions bool)
+	MaxCallStackDepth() uint
+	SetMaxCallStackDepth(maxCallStackDepth uint)
+	ShaderValidation() raw.MTLShaderValidation
+	SetShaderValidation(shaderValidation raw.MTLShaderValidation)
+	RequiredThreadsPerThreadgroup() raw.MTLSize
+	SetRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize)
+}
+
+var _ TileRenderPipelineDescriptorable = (*TileRenderPipelineDescriptor)(nil)
 

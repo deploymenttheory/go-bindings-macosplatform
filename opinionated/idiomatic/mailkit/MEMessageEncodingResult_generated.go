@@ -25,3 +25,32 @@ func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encod
 	return &MessageEncodingResult{inner: raw.MEMessageEncodingResultFromID(_id)}
 }
 
+// EncodedMessage calls the underlying EncodedMessage.
+func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
+	_r := x.inner.EncodedMessage()
+	if _r == nil {
+		return nil
+	}
+	return &EncodedOutgoingMessage{inner: _r}
+}
+
+// SigningError calls the underlying SigningError.
+func (x *MessageEncodingResult) SigningError() unsafe.Pointer {
+	return x.inner.SigningError()
+}
+
+// EncryptionError calls the underlying EncryptionError.
+func (x *MessageEncodingResult) EncryptionError() unsafe.Pointer {
+	return x.inner.EncryptionError()
+}
+
+// MessageEncodingResultable is the interface implemented by [MessageEncodingResult], for mocking and DI.
+type MessageEncodingResultable interface {
+	Unwrap() *raw.MEMessageEncodingResult
+	EncodedMessage() *EncodedOutgoingMessage
+	SigningError() unsafe.Pointer
+	EncryptionError() unsafe.Pointer
+}
+
+var _ MessageEncodingResultable = (*MessageEncodingResult)(nil)
+

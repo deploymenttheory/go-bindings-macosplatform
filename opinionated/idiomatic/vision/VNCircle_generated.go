@@ -31,3 +31,44 @@ func NewCircleWithCenterDiameter(center *raw.VNPoint, diameter float64) *Circle 
 	return &Circle{inner: raw.VNCircleFromID(_id)}
 }
 
+// ContainsPoint calls the underlying ContainsPoint.
+func (x *Circle) ContainsPoint(point *raw.VNPoint) bool {
+	return x.inner.ContainsPoint(point)
+}
+
+// ContainsPointInCircumferentialRingOfWidth calls the underlying ContainsPointInCircumferentialRingOfWidth.
+func (x *Circle) ContainsPointInCircumferentialRingOfWidth(point *raw.VNPoint, ringWidth float64) bool {
+	return x.inner.ContainsPointInCircumferentialRingOfWidth(point, ringWidth)
+}
+
+// Center calls the underlying Center.
+func (x *Circle) Center() *Point {
+	_r := x.inner.Center()
+	if _r == nil {
+		return nil
+	}
+	return &Point{inner: _r}
+}
+
+// Radius calls the underlying Radius.
+func (x *Circle) Radius() float64 {
+	return x.inner.Radius()
+}
+
+// Diameter calls the underlying Diameter.
+func (x *Circle) Diameter() float64 {
+	return x.inner.Diameter()
+}
+
+// Circleable is the interface implemented by [Circle], for mocking and DI.
+type Circleable interface {
+	Unwrap() *raw.VNCircle
+	ContainsPoint(point *raw.VNPoint) bool
+	ContainsPointInCircumferentialRingOfWidth(point *raw.VNPoint, ringWidth float64) bool
+	Center() *Point
+	Radius() float64
+	Diameter() float64
+}
+
+var _ Circleable = (*Circle)(nil)
+

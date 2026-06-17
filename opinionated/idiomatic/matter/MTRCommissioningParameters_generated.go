@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -125,16 +126,215 @@ func (x *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpir
 	return x
 }
 
+// CsrNonce calls the underlying CsrNonce.
+func (x *MTRCommissioningParameters) CsrNonce() *foundation.NSData {
+	return x.inner.CsrNonce()
+}
+
+// SetCsrNonce calls the underlying SetCsrNonce.
+func (x *MTRCommissioningParameters) SetCsrNonce(csrNonce *foundation.NSData) {
+	x.inner.SetCsrNonce(csrNonce)
+}
+
+// AttestationNonce calls the underlying AttestationNonce.
+func (x *MTRCommissioningParameters) AttestationNonce() *foundation.NSData {
+	return x.inner.AttestationNonce()
+}
+
+// SetAttestationNonce calls the underlying SetAttestationNonce.
+func (x *MTRCommissioningParameters) SetAttestationNonce(attestationNonce *foundation.NSData) {
+	x.inner.SetAttestationNonce(attestationNonce)
+}
+
+// WifiSSID calls the underlying WifiSSID.
+func (x *MTRCommissioningParameters) WifiSSID() *foundation.NSData {
+	return x.inner.WifiSSID()
+}
+
+// SetWifiSSID calls the underlying SetWifiSSID.
+func (x *MTRCommissioningParameters) SetWifiSSID(wifiSSID *foundation.NSData) {
+	x.inner.SetWifiSSID(wifiSSID)
+}
+
+// WifiCredentials calls the underlying WifiCredentials.
+func (x *MTRCommissioningParameters) WifiCredentials() *foundation.NSData {
+	return x.inner.WifiCredentials()
+}
+
+// SetWifiCredentials calls the underlying SetWifiCredentials.
+func (x *MTRCommissioningParameters) SetWifiCredentials(wifiCredentials *foundation.NSData) {
+	x.inner.SetWifiCredentials(wifiCredentials)
+}
+
+// ThreadOperationalDataset calls the underlying ThreadOperationalDataset.
+func (x *MTRCommissioningParameters) ThreadOperationalDataset() *foundation.NSData {
+	return x.inner.ThreadOperationalDataset()
+}
+
+// SetThreadOperationalDataset calls the underlying SetThreadOperationalDataset.
+func (x *MTRCommissioningParameters) SetThreadOperationalDataset(threadOperationalDataset *foundation.NSData) {
+	x.inner.SetThreadOperationalDataset(threadOperationalDataset)
+}
+
+// DeviceAttestationDelegate calls the underlying DeviceAttestationDelegate.
+func (x *MTRCommissioningParameters) DeviceAttestationDelegate() raw.MTRDeviceAttestationDelegate {
+	return x.inner.DeviceAttestationDelegate()
+}
+
+// SetDeviceAttestationDelegate calls the underlying SetDeviceAttestationDelegate.
+func (x *MTRCommissioningParameters) SetDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) {
+	x.inner.SetDeviceAttestationDelegate(deviceAttestationDelegate)
+}
+
+// FailSafeTimeout calls the underlying FailSafeTimeout.
+func (x *MTRCommissioningParameters) FailSafeTimeout() *foundation.NSNumber {
+	return x.inner.FailSafeTimeout()
+}
+
+// SetFailSafeTimeout calls the underlying SetFailSafeTimeout.
+func (x *MTRCommissioningParameters) SetFailSafeTimeout(failSafeTimeout *foundation.NSNumber) {
+	x.inner.SetFailSafeTimeout(failSafeTimeout)
+}
+
+// SkipCommissioningComplete calls the underlying SkipCommissioningComplete.
+func (x *MTRCommissioningParameters) SkipCommissioningComplete() bool {
+	return x.inner.SkipCommissioningComplete()
+}
+
+// SetSkipCommissioningComplete calls the underlying SetSkipCommissioningComplete.
+func (x *MTRCommissioningParameters) SetSkipCommissioningComplete(skipCommissioningComplete bool) {
+	x.inner.SetSkipCommissioningComplete(skipCommissioningComplete)
+}
+
+// CountryCode calls the underlying CountryCode.
+func (x *MTRCommissioningParameters) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCountryCode calls the underlying SetCountryCode.
+func (x *MTRCommissioningParameters) SetCountryCode(countryCode string) {
+	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
+}
+
+// ReadEndpointInformation calls the underlying ReadEndpointInformation.
+func (x *MTRCommissioningParameters) ReadEndpointInformation() bool {
+	return x.inner.ReadEndpointInformation()
+}
+
+// SetReadEndpointInformation calls the underlying SetReadEndpointInformation.
+func (x *MTRCommissioningParameters) SetReadEndpointInformation(readEndpointInformation bool) {
+	x.inner.SetReadEndpointInformation(readEndpointInformation)
+}
+
 // ExtraAttributesToRead returns the collection as a Go slice.
 func (x *MTRCommissioningParameters) ExtraAttributesToRead() []*raw.MTRAttributeRequestPath {
 	arr := x.inner.ExtraAttributesToRead()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTRAttributeRequestPath, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTRAttributeRequestPath {
+		return raw.MTRAttributeRequestPathFromID(purego.Retain(_id))
+	})
 }
+
+// SetExtraAttributesToRead calls the underlying SetExtraAttributesToRead.
+func (x *MTRCommissioningParameters) SetExtraAttributesToRead(extraAttributesToRead *foundation.NSArray[*raw.MTRAttributeRequestPath]) {
+	x.inner.SetExtraAttributesToRead(extraAttributesToRead)
+}
+
+// ForceWiFiScan calls the underlying ForceWiFiScan.
+func (x *MTRCommissioningParameters) ForceWiFiScan() bool {
+	return x.inner.ForceWiFiScan()
+}
+
+// SetForceWiFiScan calls the underlying SetForceWiFiScan.
+func (x *MTRCommissioningParameters) SetForceWiFiScan(forceWiFiScan bool) {
+	x.inner.SetForceWiFiScan(forceWiFiScan)
+}
+
+// ForceThreadScan calls the underlying ForceThreadScan.
+func (x *MTRCommissioningParameters) ForceThreadScan() bool {
+	return x.inner.ForceThreadScan()
+}
+
+// SetForceThreadScan calls the underlying SetForceThreadScan.
+func (x *MTRCommissioningParameters) SetForceThreadScan(forceThreadScan bool) {
+	x.inner.SetForceThreadScan(forceThreadScan)
+}
+
+// CSRNonce calls the underlying CSRNonce.
+func (x *MTRCommissioningParameters) CSRNonce() *foundation.NSData {
+	return x.inner.CSRNonce()
+}
+
+// SetCSRNonce calls the underlying SetCSRNonce.
+func (x *MTRCommissioningParameters) SetCSRNonce(cSRNonce *foundation.NSData) {
+	x.inner.SetCSRNonce(cSRNonce)
+}
+
+// FailSafeExpiryTimeoutSecs calls the underlying FailSafeExpiryTimeoutSecs.
+func (x *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() *foundation.NSNumber {
+	return x.inner.FailSafeExpiryTimeoutSecs()
+}
+
+// SetFailSafeExpiryTimeoutSecs calls the underlying SetFailSafeExpiryTimeoutSecs.
+func (x *MTRCommissioningParameters) SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) {
+	x.inner.SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs)
+}
+
+// MTRCommissioningParametersable is the interface implemented by [MTRCommissioningParameters], for mocking and DI.
+type MTRCommissioningParametersable interface {
+	Unwrap() *raw.MTRCommissioningParameters
+	WithCsrNonce(csrNonce *foundation.NSData) *MTRCommissioningParameters
+	WithAttestationNonce(attestationNonce *foundation.NSData) *MTRCommissioningParameters
+	WithWifiSSID(wifiSSID *foundation.NSData) *MTRCommissioningParameters
+	WithWifiCredentials(wifiCredentials *foundation.NSData) *MTRCommissioningParameters
+	WithThreadOperationalDataset(threadOperationalDataset *foundation.NSData) *MTRCommissioningParameters
+	WithDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) *MTRCommissioningParameters
+	WithFailSafeTimeout(failSafeTimeout *foundation.NSNumber) *MTRCommissioningParameters
+	WithSkipCommissioningComplete(skipCommissioningComplete bool) *MTRCommissioningParameters
+	WithCountryCode(countryCode string) *MTRCommissioningParameters
+	WithReadEndpointInformation(readEndpointInformation bool) *MTRCommissioningParameters
+	WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters
+	WithForceWiFiScan(forceWiFiScan bool) *MTRCommissioningParameters
+	WithForceThreadScan(forceThreadScan bool) *MTRCommissioningParameters
+	WithCSRNonce(cSRNonce *foundation.NSData) *MTRCommissioningParameters
+	WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) *MTRCommissioningParameters
+	CsrNonce() *foundation.NSData
+	SetCsrNonce(csrNonce *foundation.NSData)
+	AttestationNonce() *foundation.NSData
+	SetAttestationNonce(attestationNonce *foundation.NSData)
+	WifiSSID() *foundation.NSData
+	SetWifiSSID(wifiSSID *foundation.NSData)
+	WifiCredentials() *foundation.NSData
+	SetWifiCredentials(wifiCredentials *foundation.NSData)
+	ThreadOperationalDataset() *foundation.NSData
+	SetThreadOperationalDataset(threadOperationalDataset *foundation.NSData)
+	DeviceAttestationDelegate() raw.MTRDeviceAttestationDelegate
+	SetDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate)
+	FailSafeTimeout() *foundation.NSNumber
+	SetFailSafeTimeout(failSafeTimeout *foundation.NSNumber)
+	SkipCommissioningComplete() bool
+	SetSkipCommissioningComplete(skipCommissioningComplete bool)
+	CountryCode() string
+	SetCountryCode(countryCode string)
+	ReadEndpointInformation() bool
+	SetReadEndpointInformation(readEndpointInformation bool)
+	ExtraAttributesToRead() []*raw.MTRAttributeRequestPath
+	SetExtraAttributesToRead(extraAttributesToRead *foundation.NSArray[*raw.MTRAttributeRequestPath])
+	ForceWiFiScan() bool
+	SetForceWiFiScan(forceWiFiScan bool)
+	ForceThreadScan() bool
+	SetForceThreadScan(forceThreadScan bool)
+	CSRNonce() *foundation.NSData
+	SetCSRNonce(cSRNonce *foundation.NSData)
+	FailSafeExpiryTimeoutSecs() *foundation.NSNumber
+	SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber)
+}
+
+var _ MTRCommissioningParametersable = (*MTRCommissioningParameters)(nil)
 

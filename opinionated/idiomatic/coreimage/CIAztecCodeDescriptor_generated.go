@@ -25,5 +25,36 @@ func NewAztecCodeDescriptorWithPayloadIsCompactLayerCountDataCodewordCount(error
 	return &AztecCodeDescriptor{inner: raw.CIAztecCodeDescriptorFromID(_id)}
 }
 
+// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
+func (x *AztecCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
+	return x.inner.ErrorCorrectedPayload()
+}
+
+// IsCompact calls the underlying IsCompact.
+func (x *AztecCodeDescriptor) IsCompact() bool {
+	return x.inner.IsCompact()
+}
+
+// LayerCount calls the underlying LayerCount.
+func (x *AztecCodeDescriptor) LayerCount() int {
+	return x.inner.LayerCount()
+}
+
+// DataCodewordCount calls the underlying DataCodewordCount.
+func (x *AztecCodeDescriptor) DataCodewordCount() int {
+	return x.inner.DataCodewordCount()
+}
+
 func (x *AztecCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return &x.inner.CIBarcodeDescriptor }
+
+// AztecCodeDescriptorable is the interface implemented by [AztecCodeDescriptor], for mocking and DI.
+type AztecCodeDescriptorable interface {
+	Unwrap() *raw.CIAztecCodeDescriptor
+	ErrorCorrectedPayload() *foundation.NSData
+	IsCompact() bool
+	LayerCount() int
+	DataCodewordCount() int
+}
+
+var _ AztecCodeDescriptorable = (*AztecCodeDescriptor)(nil)
 

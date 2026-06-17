@@ -64,7 +64,66 @@ func (x *NNLocalCorrelation) WithStrideInY(strideInY uint) *NNLocalCorrelation {
 	return x
 }
 
+// WindowInX calls the underlying WindowInX.
+func (x *NNLocalCorrelation) WindowInX() uint {
+	return x.inner.WindowInX()
+}
+
+// SetWindowInX calls the underlying SetWindowInX.
+func (x *NNLocalCorrelation) SetWindowInX(windowInX uint) {
+	x.inner.SetWindowInX(windowInX)
+}
+
+// WindowInY calls the underlying WindowInY.
+func (x *NNLocalCorrelation) WindowInY() uint {
+	return x.inner.WindowInY()
+}
+
+// SetWindowInY calls the underlying SetWindowInY.
+func (x *NNLocalCorrelation) SetWindowInY(windowInY uint) {
+	x.inner.SetWindowInY(windowInY)
+}
+
+// StrideInX calls the underlying StrideInX.
+func (x *NNLocalCorrelation) StrideInX() uint {
+	return x.inner.StrideInX()
+}
+
+// SetStrideInX calls the underlying SetStrideInX.
+func (x *NNLocalCorrelation) SetStrideInX(strideInX uint) {
+	x.inner.SetStrideInX(strideInX)
+}
+
+// StrideInY calls the underlying StrideInY.
+func (x *NNLocalCorrelation) StrideInY() uint {
+	return x.inner.StrideInY()
+}
+
+// SetStrideInY calls the underlying SetStrideInY.
+func (x *NNLocalCorrelation) SetStrideInY(strideInY uint) {
+	x.inner.SetStrideInY(strideInY)
+}
+
 func (x *NNLocalCorrelation) asNNReduceBinary() *raw.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
 
 func (x *NNLocalCorrelation) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
+
+// NNLocalCorrelationable is the interface implemented by [NNLocalCorrelation], for mocking and DI.
+type NNLocalCorrelationable interface {
+	Unwrap() *raw.MPSNNLocalCorrelation
+	WithWindowInX(windowInX uint) *NNLocalCorrelation
+	WithWindowInY(windowInY uint) *NNLocalCorrelation
+	WithStrideInX(strideInX uint) *NNLocalCorrelation
+	WithStrideInY(strideInY uint) *NNLocalCorrelation
+	WindowInX() uint
+	SetWindowInX(windowInX uint)
+	WindowInY() uint
+	SetWindowInY(windowInY uint)
+	StrideInX() uint
+	SetStrideInX(strideInX uint)
+	StrideInY() uint
+	SetStrideInY(strideInY uint)
+}
+
+var _ NNLocalCorrelationable = (*NNLocalCorrelation)(nil)
 

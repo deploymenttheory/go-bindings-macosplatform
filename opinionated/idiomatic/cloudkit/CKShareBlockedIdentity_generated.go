@@ -23,3 +23,26 @@ func NewShareBlockedIdentity() *ShareBlockedIdentity {
 	return &ShareBlockedIdentity{inner: raw.CKShareBlockedIdentityFromID(_id)}
 }
 
+// UserIdentity calls the underlying UserIdentity.
+func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
+	_r := x.inner.UserIdentity()
+	if _r == nil {
+		return nil
+	}
+	return &UserIdentity{inner: _r}
+}
+
+// Contact calls the underlying Contact.
+func (x *ShareBlockedIdentity) Contact() objc.ID {
+	return x.inner.Contact()
+}
+
+// ShareBlockedIdentityable is the interface implemented by [ShareBlockedIdentity], for mocking and DI.
+type ShareBlockedIdentityable interface {
+	Unwrap() *raw.CKShareBlockedIdentity
+	UserIdentity() *UserIdentity
+	Contact() objc.ID
+}
+
+var _ ShareBlockedIdentityable = (*ShareBlockedIdentity)(nil)
+

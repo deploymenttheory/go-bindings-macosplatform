@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,34 @@ func NewVisionPrescription() *VisionPrescription {
 	return &VisionPrescription{inner: raw.HKVisionPrescriptionFromID(_id)}
 }
 
+// PrescriptionType calls the underlying PrescriptionType.
+func (x *VisionPrescription) PrescriptionType() raw.HKVisionPrescriptionType {
+	return x.inner.PrescriptionType()
+}
+
+// DateIssued calls the underlying DateIssued.
+func (x *VisionPrescription) DateIssued() *foundation.NSDate {
+	return x.inner.DateIssued()
+}
+
+// ExpirationDate calls the underlying ExpirationDate.
+func (x *VisionPrescription) ExpirationDate() *foundation.NSDate {
+	return x.inner.ExpirationDate()
+}
+
 func (x *VisionPrescription) asVisionPrescription() *raw.HKVisionPrescription { return x.inner }
 
 func (x *VisionPrescription) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *VisionPrescription) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// VisionPrescriptionable is the interface implemented by [VisionPrescription], for mocking and DI.
+type VisionPrescriptionable interface {
+	Unwrap() *raw.HKVisionPrescription
+	PrescriptionType() raw.HKVisionPrescriptionType
+	DateIssued() *foundation.NSDate
+	ExpirationDate() *foundation.NSDate
+}
+
+var _ VisionPrescriptionable = (*VisionPrescription)(nil)
 

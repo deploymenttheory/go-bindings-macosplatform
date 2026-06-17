@@ -25,5 +25,18 @@ func NewCIImageRepWithCIImage(image *coreimage.CIImage) *CIImageRep {
 	return &CIImageRep{inner: raw.NSCIImageRepFromID(_id)}
 }
 
+// CIImage calls the underlying CIImage.
+func (x *CIImageRep) CIImage() *coreimage.CIImage {
+	return x.inner.CIImage()
+}
+
 func (x *CIImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// CIImageRepable is the interface implemented by [CIImageRep], for mocking and DI.
+type CIImageRepable interface {
+	Unwrap() *raw.NSCIImageRep
+	CIImage() *coreimage.CIImage
+}
+
+var _ CIImageRepable = (*CIImageRep)(nil)
 

@@ -33,5 +33,44 @@ func NewRentalCarReservationWithItemReferenceReservationNumberBookingTimeReserva
 	return &RentalCarReservation{inner: raw.INRentalCarReservationFromID(_id)}
 }
 
+// RentalCar calls the underlying RentalCar.
+func (x *RentalCarReservation) RentalCar() *RentalCar {
+	_r := x.inner.RentalCar()
+	if _r == nil {
+		return nil
+	}
+	return &RentalCar{inner: _r}
+}
+
+// RentalDuration calls the underlying RentalDuration.
+func (x *RentalCarReservation) RentalDuration() *DateComponentsRange {
+	_r := x.inner.RentalDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// PickupLocation calls the underlying PickupLocation.
+func (x *RentalCarReservation) PickupLocation() *corelocation.CLPlacemark {
+	return x.inner.PickupLocation()
+}
+
+// DropOffLocation calls the underlying DropOffLocation.
+func (x *RentalCarReservation) DropOffLocation() *corelocation.CLPlacemark {
+	return x.inner.DropOffLocation()
+}
+
 func (x *RentalCarReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// RentalCarReservationable is the interface implemented by [RentalCarReservation], for mocking and DI.
+type RentalCarReservationable interface {
+	Unwrap() *raw.INRentalCarReservation
+	RentalCar() *RentalCar
+	RentalDuration() *DateComponentsRange
+	PickupLocation() *corelocation.CLPlacemark
+	DropOffLocation() *corelocation.CLPlacemark
+}
+
+var _ RentalCarReservationable = (*RentalCarReservation)(nil)
 

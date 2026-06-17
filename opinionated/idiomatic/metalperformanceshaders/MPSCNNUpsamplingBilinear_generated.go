@@ -40,3 +40,10 @@ func (x *CNNUpsamplingBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { r
 
 func (x *CNNUpsamplingBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel }
 
+// CNNUpsamplingBilinearable is the interface implemented by [CNNUpsamplingBilinear], for mocking and DI.
+type CNNUpsamplingBilinearable interface {
+	Unwrap() *raw.MPSCNNUpsamplingBilinear
+}
+
+var _ CNNUpsamplingBilinearable = (*CNNUpsamplingBilinear)(nil)
+

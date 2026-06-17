@@ -5,7 +5,9 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +25,268 @@ func NewDOMRange() *DOMRange {
 	return &DOMRange{inner: raw.DOMRangeFromID(_id)}
 }
 
+// SetStartOffset calls the underlying SetStartOffset.
+func (x *DOMRange) SetStartOffset(refNode *raw.DOMNode, offset int) {
+	x.inner.SetStartOffset(refNode, offset)
+}
+
+// SetEndOffset calls the underlying SetEndOffset.
+func (x *DOMRange) SetEndOffset(refNode *raw.DOMNode, offset int) {
+	x.inner.SetEndOffset(refNode, offset)
+}
+
+// SetStartBefore calls the underlying SetStartBefore.
+func (x *DOMRange) SetStartBefore(refNode *raw.DOMNode) {
+	x.inner.SetStartBefore(refNode)
+}
+
+// SetStartAfter calls the underlying SetStartAfter.
+func (x *DOMRange) SetStartAfter(refNode *raw.DOMNode) {
+	x.inner.SetStartAfter(refNode)
+}
+
+// SetEndBefore calls the underlying SetEndBefore.
+func (x *DOMRange) SetEndBefore(refNode *raw.DOMNode) {
+	x.inner.SetEndBefore(refNode)
+}
+
+// SetEndAfter calls the underlying SetEndAfter.
+func (x *DOMRange) SetEndAfter(refNode *raw.DOMNode) {
+	x.inner.SetEndAfter(refNode)
+}
+
+// Collapse calls the underlying Collapse.
+func (x *DOMRange) Collapse(toStart bool) {
+	x.inner.Collapse(toStart)
+}
+
+// SelectNode calls the underlying SelectNode.
+func (x *DOMRange) SelectNode(refNode *raw.DOMNode) {
+	x.inner.SelectNode(refNode)
+}
+
+// SelectNodeContents calls the underlying SelectNodeContents.
+func (x *DOMRange) SelectNodeContents(refNode *raw.DOMNode) {
+	x.inner.SelectNodeContents(refNode)
+}
+
+// CompareBoundaryPointsSourceRange calls the underlying CompareBoundaryPointsSourceRange.
+func (x *DOMRange) CompareBoundaryPointsSourceRange(how uint16, sourceRange *raw.DOMRange) int16 {
+	return x.inner.CompareBoundaryPointsSourceRange(how, sourceRange)
+}
+
+// DeleteContents calls the underlying DeleteContents.
+func (x *DOMRange) DeleteContents() {
+	x.inner.DeleteContents()
+}
+
+// ExtractContents calls the underlying ExtractContents.
+func (x *DOMRange) ExtractContents() *DOMDocumentFragment {
+	_r := x.inner.ExtractContents()
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocumentFragment{inner: _r}
+}
+
+// CloneContents calls the underlying CloneContents.
+func (x *DOMRange) CloneContents() *DOMDocumentFragment {
+	_r := x.inner.CloneContents()
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocumentFragment{inner: _r}
+}
+
+// InsertNode calls the underlying InsertNode.
+func (x *DOMRange) InsertNode(newNode *raw.DOMNode) {
+	x.inner.InsertNode(newNode)
+}
+
+// SurroundContents calls the underlying SurroundContents.
+func (x *DOMRange) SurroundContents(newParent *raw.DOMNode) {
+	x.inner.SurroundContents(newParent)
+}
+
+// CloneRange calls the underlying CloneRange.
+func (x *DOMRange) CloneRange() *DOMRange {
+	_r := x.inner.CloneRange()
+	if _r == nil {
+		return nil
+	}
+	return &DOMRange{inner: _r}
+}
+
+// ToString calls the underlying ToString.
+func (x *DOMRange) ToString() string {
+	_r := x.inner.ToString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Detach calls the underlying Detach.
+func (x *DOMRange) Detach() {
+	x.inner.Detach()
+}
+
+// CreateContextualFragment calls the underlying CreateContextualFragment.
+func (x *DOMRange) CreateContextualFragment(html string) *DOMDocumentFragment {
+	_r := x.inner.CreateContextualFragment(foundation.NSStringStringWithUTF8String(html))
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocumentFragment{inner: _r}
+}
+
+// CompareNode calls the underlying CompareNode.
+func (x *DOMRange) CompareNode(refNode *raw.DOMNode) int16 {
+	return x.inner.CompareNode(refNode)
+}
+
+// IntersectsNode calls the underlying IntersectsNode.
+func (x *DOMRange) IntersectsNode(refNode *raw.DOMNode) bool {
+	return x.inner.IntersectsNode(refNode)
+}
+
+// ComparePointOffset calls the underlying ComparePointOffset.
+func (x *DOMRange) ComparePointOffset(refNode *raw.DOMNode, offset int) int16 {
+	return x.inner.ComparePointOffset(refNode, offset)
+}
+
+// IsPointInRangeOffset calls the underlying IsPointInRangeOffset.
+func (x *DOMRange) IsPointInRangeOffset(refNode *raw.DOMNode, offset int) bool {
+	return x.inner.IsPointInRangeOffset(refNode, offset)
+}
+
+// StartContainer calls the underlying StartContainer.
+func (x *DOMRange) StartContainer() *DOMNode {
+	_r := x.inner.StartContainer()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// StartOffset calls the underlying StartOffset.
+func (x *DOMRange) StartOffset() int {
+	return x.inner.StartOffset()
+}
+
+// EndContainer calls the underlying EndContainer.
+func (x *DOMRange) EndContainer() *DOMNode {
+	_r := x.inner.EndContainer()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// EndOffset calls the underlying EndOffset.
+func (x *DOMRange) EndOffset() int {
+	return x.inner.EndOffset()
+}
+
+// Collapsed calls the underlying Collapsed.
+func (x *DOMRange) Collapsed() bool {
+	return x.inner.Collapsed()
+}
+
+// CommonAncestorContainer calls the underlying CommonAncestorContainer.
+func (x *DOMRange) CommonAncestorContainer() *DOMNode {
+	_r := x.inner.CommonAncestorContainer()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Text calls the underlying Text.
+func (x *DOMRange) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStart calls the underlying SetStart.
+func (x *DOMRange) SetStart(refNode *raw.DOMNode, offset int) {
+	x.inner.SetStart(refNode, offset)
+}
+
+// SetEnd calls the underlying SetEnd.
+func (x *DOMRange) SetEnd(refNode *raw.DOMNode, offset int) {
+	x.inner.SetEnd(refNode, offset)
+}
+
+// CompareBoundaryPoints calls the underlying CompareBoundaryPoints.
+func (x *DOMRange) CompareBoundaryPoints(how uint16, sourceRange *raw.DOMRange) int16 {
+	return x.inner.CompareBoundaryPoints(how, sourceRange)
+}
+
+// WebArchive calls the underlying WebArchive.
+func (x *DOMRange) WebArchive() *WebArchive {
+	_r := x.inner.WebArchive()
+	if _r == nil {
+		return nil
+	}
+	return &WebArchive{inner: _r}
+}
+
+// MarkupString calls the underlying MarkupString.
+func (x *DOMRange) MarkupString() string {
+	_r := x.inner.MarkupString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMRange) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMRange) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMRangeable is the interface implemented by [DOMRange], for mocking and DI.
+type DOMRangeable interface {
+	Unwrap() *raw.DOMRange
+	SetStartOffset(refNode *raw.DOMNode, offset int)
+	SetEndOffset(refNode *raw.DOMNode, offset int)
+	SetStartBefore(refNode *raw.DOMNode)
+	SetStartAfter(refNode *raw.DOMNode)
+	SetEndBefore(refNode *raw.DOMNode)
+	SetEndAfter(refNode *raw.DOMNode)
+	Collapse(toStart bool)
+	SelectNode(refNode *raw.DOMNode)
+	SelectNodeContents(refNode *raw.DOMNode)
+	CompareBoundaryPointsSourceRange(how uint16, sourceRange *raw.DOMRange) int16
+	DeleteContents()
+	ExtractContents() *DOMDocumentFragment
+	CloneContents() *DOMDocumentFragment
+	InsertNode(newNode *raw.DOMNode)
+	SurroundContents(newParent *raw.DOMNode)
+	CloneRange() *DOMRange
+	ToString() string
+	Detach()
+	CreateContextualFragment(html string) *DOMDocumentFragment
+	CompareNode(refNode *raw.DOMNode) int16
+	IntersectsNode(refNode *raw.DOMNode) bool
+	ComparePointOffset(refNode *raw.DOMNode, offset int) int16
+	IsPointInRangeOffset(refNode *raw.DOMNode, offset int) bool
+	StartContainer() *DOMNode
+	StartOffset() int
+	EndContainer() *DOMNode
+	EndOffset() int
+	Collapsed() bool
+	CommonAncestorContainer() *DOMNode
+	Text() string
+	SetStart(refNode *raw.DOMNode, offset int)
+	SetEnd(refNode *raw.DOMNode, offset int)
+	CompareBoundaryPoints(how uint16, sourceRange *raw.DOMRange) int16
+	WebArchive() *WebArchive
+	MarkupString() string
+}
+
+var _ DOMRangeable = (*DOMRange)(nil)
 

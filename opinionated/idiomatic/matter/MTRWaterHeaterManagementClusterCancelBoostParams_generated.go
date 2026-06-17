@@ -36,3 +36,36 @@ func (x *MTRWaterHeaterManagementClusterCancelBoostParams) WithServerSideProcess
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWaterHeaterManagementClusterCancelBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWaterHeaterManagementClusterCancelBoostParamsable is the interface implemented by [MTRWaterHeaterManagementClusterCancelBoostParams], for mocking and DI.
+type MTRWaterHeaterManagementClusterCancelBoostParamsable interface {
+	Unwrap() *raw.MTRWaterHeaterManagementClusterCancelBoostParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterManagementClusterCancelBoostParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWaterHeaterManagementClusterCancelBoostParamsable = (*MTRWaterHeaterManagementClusterCancelBoostParams)(nil)
+

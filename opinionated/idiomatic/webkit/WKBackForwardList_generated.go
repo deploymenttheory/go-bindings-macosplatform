@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,51 @@ func NewWKBackForwardList() *WKBackForwardList {
 	return &WKBackForwardList{inner: raw.WKBackForwardListFromID(_id)}
 }
 
+// ItemAtIndex calls the underlying ItemAtIndex.
+func (x *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
+	_r := x.inner.ItemAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &WKBackForwardListItem{inner: _r}
+}
+
+// CurrentItem calls the underlying CurrentItem.
+func (x *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
+	_r := x.inner.CurrentItem()
+	if _r == nil {
+		return nil
+	}
+	return &WKBackForwardListItem{inner: _r}
+}
+
+// BackItem calls the underlying BackItem.
+func (x *WKBackForwardList) BackItem() *WKBackForwardListItem {
+	_r := x.inner.BackItem()
+	if _r == nil {
+		return nil
+	}
+	return &WKBackForwardListItem{inner: _r}
+}
+
+// ForwardItem calls the underlying ForwardItem.
+func (x *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
+	_r := x.inner.ForwardItem()
+	if _r == nil {
+		return nil
+	}
+	return &WKBackForwardListItem{inner: _r}
+}
+
 // BackList returns the collection as a Go slice.
 func (x *WKBackForwardList) BackList() []*raw.WKBackForwardListItem {
 	arr := x.inner.BackList()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.WKBackForwardListItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKBackForwardListItem {
+		return raw.WKBackForwardListItemFromID(purego.Retain(_id))
+	})
 }
 
 // ForwardList returns the collection as a Go slice.
@@ -42,10 +77,21 @@ func (x *WKBackForwardList) ForwardList() []*raw.WKBackForwardListItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.WKBackForwardListItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.WKBackForwardListItem {
+		return raw.WKBackForwardListItemFromID(purego.Retain(_id))
+	})
 }
+
+// WKBackForwardListable is the interface implemented by [WKBackForwardList], for mocking and DI.
+type WKBackForwardListable interface {
+	Unwrap() *raw.WKBackForwardList
+	ItemAtIndex(index int) *WKBackForwardListItem
+	CurrentItem() *WKBackForwardListItem
+	BackItem() *WKBackForwardListItem
+	ForwardItem() *WKBackForwardListItem
+	BackList() []*raw.WKBackForwardListItem
+	ForwardList() []*raw.WKBackForwardListItem
+}
+
+var _ WKBackForwardListable = (*WKBackForwardList)(nil)
 

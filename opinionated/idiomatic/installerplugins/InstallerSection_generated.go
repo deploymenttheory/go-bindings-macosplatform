@@ -5,7 +5,9 @@
 package installerplugins
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/installerplugins"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,87 @@ func NewInstallerSection() *InstallerSection {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("InstallerSection")), objc.RegisterName("new"))
 	return &InstallerSection{inner: raw.InstallerSectionFromID(_id)}
 }
+
+// WillLoadMainNib calls the underlying WillLoadMainNib.
+func (x *InstallerSection) WillLoadMainNib() {
+	x.inner.WillLoadMainNib()
+}
+
+// DidLoadMainNib calls the underlying DidLoadMainNib.
+func (x *InstallerSection) DidLoadMainNib() {
+	x.inner.DidLoadMainNib()
+}
+
+// SharedDictionary calls the underlying SharedDictionary.
+func (x *InstallerSection) SharedDictionary() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
+	return x.inner.SharedDictionary()
+}
+
+// GotoPane calls the underlying GotoPane.
+func (x *InstallerSection) GotoPane(pane *raw.InstallerPane) bool {
+	return x.inner.GotoPane(pane)
+}
+
+// Bundle calls the underlying Bundle.
+func (x *InstallerSection) Bundle() *foundation.NSBundle {
+	return x.inner.Bundle()
+}
+
+// Title calls the underlying Title.
+func (x *InstallerSection) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FirstPane calls the underlying FirstPane.
+func (x *InstallerSection) FirstPane() *InstallerPane {
+	_r := x.inner.FirstPane()
+	if _r == nil {
+		return nil
+	}
+	return &InstallerPane{inner: _r}
+}
+
+// ShouldLoad calls the underlying ShouldLoad.
+func (x *InstallerSection) ShouldLoad() bool {
+	return x.inner.ShouldLoad()
+}
+
+// InstallerState calls the underlying InstallerState.
+func (x *InstallerSection) InstallerState() *InstallerState {
+	_r := x.inner.InstallerState()
+	if _r == nil {
+		return nil
+	}
+	return &InstallerState{inner: _r}
+}
+
+// ActivePane calls the underlying ActivePane.
+func (x *InstallerSection) ActivePane() *InstallerPane {
+	_r := x.inner.ActivePane()
+	if _r == nil {
+		return nil
+	}
+	return &InstallerPane{inner: _r}
+}
+
+// InstallerSectionable is the interface implemented by [InstallerSection], for mocking and DI.
+type InstallerSectionable interface {
+	Unwrap() *raw.InstallerSection
+	WillLoadMainNib()
+	DidLoadMainNib()
+	SharedDictionary() *foundation.NSMutableDictionary[objc.ID, objc.ID]
+	GotoPane(pane *raw.InstallerPane) bool
+	Bundle() *foundation.NSBundle
+	Title() string
+	FirstPane() *InstallerPane
+	ShouldLoad() bool
+	InstallerState() *InstallerState
+	ActivePane() *InstallerPane
+}
+
+var _ InstallerSectionable = (*InstallerSection)(nil)
 

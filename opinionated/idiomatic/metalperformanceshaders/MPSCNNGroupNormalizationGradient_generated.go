@@ -31,3 +31,10 @@ func (x *CNNGroupNormalizationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MP
 
 func (x *CNNGroupNormalizationGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
 
+// CNNGroupNormalizationGradientable is the interface implemented by [CNNGroupNormalizationGradient], for mocking and DI.
+type CNNGroupNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNGroupNormalizationGradient
+}
+
+var _ CNNGroupNormalizationGradientable = (*CNNGroupNormalizationGradient)(nil)
+

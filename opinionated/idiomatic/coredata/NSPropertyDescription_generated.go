@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,18 +79,181 @@ func (x *PropertyDescription) WithRenamingIdentifier(renamingIdentifier string) 
 	return x
 }
 
+// SetValidationPredicatesWithValidationWarnings calls the underlying SetValidationPredicatesWithValidationWarnings.
+func (x *PropertyDescription) SetValidationPredicatesWithValidationWarnings(validationPredicates *foundation.NSArray[*foundation.NSPredicate], validationWarnings *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetValidationPredicatesWithValidationWarnings(validationPredicates, validationWarnings)
+}
+
+// Entity calls the underlying Entity.
+func (x *PropertyDescription) Entity() *EntityDescription {
+	_r := x.inner.Entity()
+	if _r == nil {
+		return nil
+	}
+	return &EntityDescription{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *PropertyDescription) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *PropertyDescription) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// IsOptional calls the underlying IsOptional.
+func (x *PropertyDescription) IsOptional() bool {
+	return x.inner.IsOptional()
+}
+
+// SetOptional calls the underlying SetOptional.
+func (x *PropertyDescription) SetOptional(optional bool) {
+	x.inner.SetOptional(optional)
+}
+
+// IsTransient calls the underlying IsTransient.
+func (x *PropertyDescription) IsTransient() bool {
+	return x.inner.IsTransient()
+}
+
+// SetTransient calls the underlying SetTransient.
+func (x *PropertyDescription) SetTransient(transient bool) {
+	x.inner.SetTransient(transient)
+}
+
 // ValidationPredicates returns the collection as a Go slice.
 func (x *PropertyDescription) ValidationPredicates() []*foundation.NSPredicate {
 	arr := x.inner.ValidationPredicates()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSPredicate, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSPredicate {
+		return foundation.NSPredicateFromID(purego.Retain(_id))
+	})
+}
+
+// ValidationWarnings calls the underlying ValidationWarnings.
+func (x *PropertyDescription) ValidationWarnings() *foundation.NSArray[objc.ID] {
+	return x.inner.ValidationWarnings()
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *PropertyDescription) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *PropertyDescription) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// IsIndexed calls the underlying IsIndexed.
+func (x *PropertyDescription) IsIndexed() bool {
+	return x.inner.IsIndexed()
+}
+
+// SetIndexed calls the underlying SetIndexed.
+func (x *PropertyDescription) SetIndexed(indexed bool) {
+	x.inner.SetIndexed(indexed)
+}
+
+// VersionHash calls the underlying VersionHash.
+func (x *PropertyDescription) VersionHash() *foundation.NSData {
+	return x.inner.VersionHash()
+}
+
+// VersionHashModifier calls the underlying VersionHashModifier.
+func (x *PropertyDescription) VersionHashModifier() string {
+	_r := x.inner.VersionHashModifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVersionHashModifier calls the underlying SetVersionHashModifier.
+func (x *PropertyDescription) SetVersionHashModifier(versionHashModifier string) {
+	x.inner.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+}
+
+// IsIndexedBySpotlight calls the underlying IsIndexedBySpotlight.
+func (x *PropertyDescription) IsIndexedBySpotlight() bool {
+	return x.inner.IsIndexedBySpotlight()
+}
+
+// SetIndexedBySpotlight calls the underlying SetIndexedBySpotlight.
+func (x *PropertyDescription) SetIndexedBySpotlight(indexedBySpotlight bool) {
+	x.inner.SetIndexedBySpotlight(indexedBySpotlight)
+}
+
+// IsStoredInExternalRecord calls the underlying IsStoredInExternalRecord.
+func (x *PropertyDescription) IsStoredInExternalRecord() bool {
+	return x.inner.IsStoredInExternalRecord()
+}
+
+// SetStoredInExternalRecord calls the underlying SetStoredInExternalRecord.
+func (x *PropertyDescription) SetStoredInExternalRecord(storedInExternalRecord bool) {
+	x.inner.SetStoredInExternalRecord(storedInExternalRecord)
+}
+
+// RenamingIdentifier calls the underlying RenamingIdentifier.
+func (x *PropertyDescription) RenamingIdentifier() string {
+	_r := x.inner.RenamingIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRenamingIdentifier calls the underlying SetRenamingIdentifier.
+func (x *PropertyDescription) SetRenamingIdentifier(renamingIdentifier string) {
+	x.inner.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
 }
 
 func (x *PropertyDescription) asPropertyDescription() *raw.NSPropertyDescription { return x.inner }
+
+// PropertyDescriptionable is the interface implemented by [PropertyDescription], for mocking and DI.
+type PropertyDescriptionable interface {
+	Unwrap() *raw.NSPropertyDescription
+	WithName(name string) *PropertyDescription
+	WithOptional(optional bool) *PropertyDescription
+	WithTransient(transient bool) *PropertyDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyDescription
+	WithIndexed(indexed bool) *PropertyDescription
+	WithVersionHashModifier(versionHashModifier string) *PropertyDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *PropertyDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *PropertyDescription
+	WithRenamingIdentifier(renamingIdentifier string) *PropertyDescription
+	SetValidationPredicatesWithValidationWarnings(validationPredicates *foundation.NSArray[*foundation.NSPredicate], validationWarnings *foundation.NSArray[*foundation.NSString])
+	Entity() *EntityDescription
+	Name() string
+	SetName(name string)
+	IsOptional() bool
+	SetOptional(optional bool)
+	IsTransient() bool
+	SetTransient(transient bool)
+	ValidationPredicates() []*foundation.NSPredicate
+	ValidationWarnings() *foundation.NSArray[objc.ID]
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	IsIndexed() bool
+	SetIndexed(indexed bool)
+	VersionHash() *foundation.NSData
+	VersionHashModifier() string
+	SetVersionHashModifier(versionHashModifier string)
+	IsIndexedBySpotlight() bool
+	SetIndexedBySpotlight(indexedBySpotlight bool)
+	IsStoredInExternalRecord() bool
+	SetStoredInExternalRecord(storedInExternalRecord bool)
+	RenamingIdentifier() string
+	SetRenamingIdentifier(renamingIdentifier string)
+}
+
+var _ PropertyDescriptionable = (*PropertyDescription)(nil)
 

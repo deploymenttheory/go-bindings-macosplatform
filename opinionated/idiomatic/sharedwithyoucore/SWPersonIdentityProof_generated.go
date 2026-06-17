@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,12 +31,30 @@ func (x *PersonIdentityProof) InclusionHashes() []*foundation.NSData {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSData, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
+		return foundation.NSDataFromID(purego.Retain(_id))
+	})
+}
+
+// PublicKey calls the underlying PublicKey.
+func (x *PersonIdentityProof) PublicKey() *foundation.NSData {
+	return x.inner.PublicKey()
+}
+
+// PublicKeyIndex calls the underlying PublicKeyIndex.
+func (x *PersonIdentityProof) PublicKeyIndex() uint {
+	return x.inner.PublicKeyIndex()
 }
 
 func (x *PersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof { return x.inner }
+
+// PersonIdentityProofable is the interface implemented by [PersonIdentityProof], for mocking and DI.
+type PersonIdentityProofable interface {
+	Unwrap() *raw.SWPersonIdentityProof
+	InclusionHashes() []*foundation.NSData
+	PublicKey() *foundation.NSData
+	PublicKeyIndex() uint
+}
+
+var _ PersonIdentityProofable = (*PersonIdentityProof)(nil)
 

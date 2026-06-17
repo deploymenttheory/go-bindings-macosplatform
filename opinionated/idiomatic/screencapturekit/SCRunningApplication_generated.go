@@ -6,6 +6,7 @@ package screencapturekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewRunningApplication() *RunningApplication {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCRunningApplication")), objc.RegisterName("new"))
 	return &RunningApplication{inner: raw.SCRunningApplicationFromID(_id)}
 }
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *RunningApplication) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ApplicationName calls the underlying ApplicationName.
+func (x *RunningApplication) ApplicationName() string {
+	_r := x.inner.ApplicationName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProcessID calls the underlying ProcessID.
+func (x *RunningApplication) ProcessID() int {
+	return x.inner.ProcessID()
+}
+
+// RunningApplicationable is the interface implemented by [RunningApplication], for mocking and DI.
+type RunningApplicationable interface {
+	Unwrap() *raw.SCRunningApplication
+	BundleIdentifier() string
+	ApplicationName() string
+	ProcessID() int
+}
+
+var _ RunningApplicationable = (*RunningApplication)(nil)
 

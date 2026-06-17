@@ -47,5 +47,64 @@ func (x *AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCoun
 	return x
 }
 
+// BoundingBoxBuffer calls the underlying BoundingBoxBuffer.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBuffer() raw.MTLBuffer {
+	return x.inner.BoundingBoxBuffer()
+}
+
+// SetBoundingBoxBuffer calls the underlying SetBoundingBoxBuffer.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer) {
+	x.inner.SetBoundingBoxBuffer(boundingBoxBuffer)
+}
+
+// BoundingBoxBufferOffset calls the underlying BoundingBoxBufferOffset.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxBufferOffset() uint {
+	return x.inner.BoundingBoxBufferOffset()
+}
+
+// SetBoundingBoxBufferOffset calls the underlying SetBoundingBoxBufferOffset.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxBufferOffset(boundingBoxBufferOffset uint) {
+	x.inner.SetBoundingBoxBufferOffset(boundingBoxBufferOffset)
+}
+
+// BoundingBoxStride calls the underlying BoundingBoxStride.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() uint {
+	return x.inner.BoundingBoxStride()
+}
+
+// SetBoundingBoxStride calls the underlying SetBoundingBoxStride.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxStride(boundingBoxStride uint) {
+	x.inner.SetBoundingBoxStride(boundingBoxStride)
+}
+
+// BoundingBoxCount calls the underlying BoundingBoxCount.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() uint {
+	return x.inner.BoundingBoxCount()
+}
+
+// SetBoundingBoxCount calls the underlying SetBoundingBoxCount.
+func (x *AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount uint) {
+	x.inner.SetBoundingBoxCount(boundingBoxCount)
+}
+
 func (x *AccelerationStructureBoundingBoxGeometryDescriptor) asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor { return &x.inner.MTLAccelerationStructureGeometryDescriptor }
+
+// AccelerationStructureBoundingBoxGeometryDescriptorable is the interface implemented by [AccelerationStructureBoundingBoxGeometryDescriptor], for mocking and DI.
+type AccelerationStructureBoundingBoxGeometryDescriptorable interface {
+	Unwrap() *raw.MTLAccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxBufferOffset(boundingBoxBufferOffset uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxStride(boundingBoxStride uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	WithBoundingBoxCount(boundingBoxCount uint) *AccelerationStructureBoundingBoxGeometryDescriptor
+	BoundingBoxBuffer() raw.MTLBuffer
+	SetBoundingBoxBuffer(boundingBoxBuffer raw.MTLBuffer)
+	BoundingBoxBufferOffset() uint
+	SetBoundingBoxBufferOffset(boundingBoxBufferOffset uint)
+	BoundingBoxStride() uint
+	SetBoundingBoxStride(boundingBoxStride uint)
+	BoundingBoxCount() uint
+	SetBoundingBoxCount(boundingBoxCount uint)
+}
+
+var _ AccelerationStructureBoundingBoxGeometryDescriptorable = (*AccelerationStructureBoundingBoxGeometryDescriptor)(nil)
 

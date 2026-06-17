@@ -27,15 +27,63 @@ func NewTHClient() *THClient {
 	return &THClient{inner: raw.THClientFromID(_id)}
 }
 
+// RetrieveAllCredentials blocks until the operation completes or ctx is cancelled.
+func (x *THClient) RetrieveAllCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error) {
+	type _result struct {
+		val *foundation.NSSet[*raw.THCredentials]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveAllCredentials(func(_p0 *foundation.NSSet[*raw.THCredentials], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSSet[*raw.THCredentials]
+		return _zero, ctx.Err()
+	}
+}
+
+// RetrieveAllActiveCredentials blocks until the operation completes or ctx is cancelled.
+func (x *THClient) RetrieveAllActiveCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error) {
+	type _result struct {
+		val *foundation.NSSet[*raw.THCredentials]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveAllActiveCredentials(func(_p0 *foundation.NSSet[*raw.THCredentials], _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSSet[*raw.THCredentials]
+		return _zero, ctx.Err()
+	}
+}
+
 // DeleteCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
 func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteCredentialsForBorderAgentCompletion(borderAgentID, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -45,15 +93,41 @@ func (x *THClient) DeleteCredentialsForBorderAgentCompletion(ctx context.Context
 	}
 }
 
+// RetrieveCredentialsForBorderAgentCompletion blocks until the operation completes or ctx is cancelled.
+func (x *THClient) RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) (*THCredentials, error) {
+	type _result struct {
+		val *THCredentials
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveCredentialsForBorderAgentCompletion(borderAgentID, func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &THCredentials{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *THCredentials
+		return _zero, ctx.Err()
+	}
+}
+
 // StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion blocks until the operation completes or ctx is cancelled.
 func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID *foundation.NSData, activeOperationalDataSet *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(borderAgentID, activeOperationalDataSet, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -62,4 +136,82 @@ func (x *THClient) StoreCredentialsForBorderAgentActiveOperationalDataSetComplet
 		return ctx.Err()
 	}
 }
+
+// RetrievePreferredCredentials blocks until the operation completes or ctx is cancelled.
+func (x *THClient) RetrievePreferredCredentials(ctx context.Context) (*THCredentials, error) {
+	type _result struct {
+		val *THCredentials
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrievePreferredCredentials(func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &THCredentials{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *THCredentials
+		return _zero, ctx.Err()
+	}
+}
+
+// RetrieveCredentialsForExtendedPANIDCompletion blocks until the operation completes or ctx is cancelled.
+func (x *THClient) RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID *foundation.NSData) (*THCredentials, error) {
+	type _result struct {
+		val *THCredentials
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveCredentialsForExtendedPANIDCompletion(extendedPANID, func(_p0 *raw.THCredentials, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &THCredentials{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *THCredentials
+		return _zero, ctx.Err()
+	}
+}
+
+// CheckPreferredNetworkForActiveOperationalDatasetCompletion calls the underlying CheckPreferredNetworkForActiveOperationalDatasetCompletion.
+func (x *THClient) CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet *foundation.NSData, completion func(bool)) {
+	x.inner.CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet, completion)
+}
+
+// IsPreferredNetworkAvailableWithCompletion calls the underlying IsPreferredNetworkAvailableWithCompletion.
+func (x *THClient) IsPreferredNetworkAvailableWithCompletion(completion func(bool)) {
+	x.inner.IsPreferredNetworkAvailableWithCompletion(completion)
+}
+
+// THClientable is the interface implemented by [THClient], for mocking and DI.
+type THClientable interface {
+	Unwrap() *raw.THClient
+	RetrieveAllCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error)
+	RetrieveAllActiveCredentials(ctx context.Context) (*foundation.NSSet[*raw.THCredentials], error)
+	DeleteCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) error
+	RetrieveCredentialsForBorderAgentCompletion(ctx context.Context, borderAgentID *foundation.NSData) (*THCredentials, error)
+	StoreCredentialsForBorderAgentActiveOperationalDataSetCompletion(ctx context.Context, borderAgentID *foundation.NSData, activeOperationalDataSet *foundation.NSData) error
+	RetrievePreferredCredentials(ctx context.Context) (*THCredentials, error)
+	RetrieveCredentialsForExtendedPANIDCompletion(ctx context.Context, extendedPANID *foundation.NSData) (*THCredentials, error)
+	CheckPreferredNetworkForActiveOperationalDatasetCompletion(activeOperationalDataSet *foundation.NSData, completion func(bool))
+	IsPreferredNetworkAvailableWithCompletion(completion func(bool))
+}
+
+var _ THClientable = (*THClient)(nil)
 

@@ -25,3 +25,32 @@ func NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue(paramet
 	return &MTRCommissioningOperation{inner: raw.MTRCommissioningOperationFromID(_id)}
 }
 
+// StartWithController calls the underlying StartWithController.
+func (x *MTRCommissioningOperation) StartWithController(controller *raw.MTRDeviceController) {
+	x.inner.StartWithController(controller)
+}
+
+// Stop calls the underlying Stop.
+func (x *MTRCommissioningOperation) Stop() bool {
+	return x.inner.Stop()
+}
+
+// MatchedPayload calls the underlying MatchedPayload.
+func (x *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
+	_r := x.inner.MatchedPayload()
+	if _r == nil {
+		return nil
+	}
+	return &MTRSetupPayload{inner: _r}
+}
+
+// MTRCommissioningOperationable is the interface implemented by [MTRCommissioningOperation], for mocking and DI.
+type MTRCommissioningOperationable interface {
+	Unwrap() *raw.MTRCommissioningOperation
+	StartWithController(controller *raw.MTRDeviceController)
+	Stop() bool
+	MatchedPayload() *MTRSetupPayload
+}
+
+var _ MTRCommissioningOperationable = (*MTRCommissioningOperation)(nil)
+

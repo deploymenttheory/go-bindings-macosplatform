@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,18 +26,48 @@ func NewGraphWithNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) *Graph {
 	return &Graph{inner: raw.GKGraphFromID(_id)}
 }
 
+// ConnectNodeToLowestCostNodeBidirectional calls the underlying ConnectNodeToLowestCostNodeBidirectional.
+func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool) {
+	x.inner.ConnectNodeToLowestCostNodeBidirectional(node, bidirectional)
+}
+
+// RemoveNodes calls the underlying RemoveNodes.
+func (x *Graph) RemoveNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) {
+	x.inner.RemoveNodes(nodes)
+}
+
+// AddNodes calls the underlying AddNodes.
+func (x *Graph) AddNodes(nodes *foundation.NSArray[*raw.GKGraphNode]) {
+	x.inner.AddNodes(nodes)
+}
+
+// FindPathFromNodeToNode calls the underlying FindPathFromNodeToNode.
+func (x *Graph) FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
+	return x.inner.FindPathFromNodeToNode(startNode, endNode)
+}
+
 // Nodes returns the collection as a Go slice.
 func (x *Graph) Nodes() []*raw.GKGraphNode {
 	arr := x.inner.Nodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GKGraphNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GKGraphNode {
+		return raw.GKGraphNodeFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Graph) asGraph() *raw.GKGraph { return x.inner }
+
+// Graphable is the interface implemented by [Graph], for mocking and DI.
+type Graphable interface {
+	Unwrap() *raw.GKGraph
+	ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool)
+	RemoveNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
+	AddNodes(nodes *foundation.NSArray[*raw.GKGraphNode])
+	FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
+	Nodes() []*raw.GKGraphNode
+}
+
+var _ Graphable = (*Graph)(nil)
 

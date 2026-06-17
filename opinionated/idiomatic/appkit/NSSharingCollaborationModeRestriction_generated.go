@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,4 +46,63 @@ func NewSharingCollaborationModeRestrictionWithDisabledModeAlertTitleAlertMessag
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisabledMode:alertTitle:alertMessage:alertDismissButtonTitle:alertRecoverySuggestionButtonTitle:alertRecoverySuggestionButtonLaunchURL:"), disabledMode, foundation.NSStringStringWithUTF8String(alertTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertMessage).Ptr(), foundation.NSStringStringWithUTF8String(alertDismissButtonTitle).Ptr(), foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonTitle).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(alertRecoverySuggestionButtonLaunchURL)).Ptr())
 	return &SharingCollaborationModeRestriction{inner: raw.NSSharingCollaborationModeRestrictionFromID(_id)}
 }
+
+// DisabledMode calls the underlying DisabledMode.
+func (x *SharingCollaborationModeRestriction) DisabledMode() raw.NSSharingCollaborationMode {
+	return x.inner.DisabledMode()
+}
+
+// AlertTitle calls the underlying AlertTitle.
+func (x *SharingCollaborationModeRestriction) AlertTitle() string {
+	_r := x.inner.AlertTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AlertMessage calls the underlying AlertMessage.
+func (x *SharingCollaborationModeRestriction) AlertMessage() string {
+	_r := x.inner.AlertMessage()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AlertDismissButtonTitle calls the underlying AlertDismissButtonTitle.
+func (x *SharingCollaborationModeRestriction) AlertDismissButtonTitle() string {
+	_r := x.inner.AlertDismissButtonTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AlertRecoverySuggestionButtonTitle calls the underlying AlertRecoverySuggestionButtonTitle.
+func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonTitle() string {
+	_r := x.inner.AlertRecoverySuggestionButtonTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AlertRecoverySuggestionButtonLaunchURL calls the underlying AlertRecoverySuggestionButtonLaunchURL.
+func (x *SharingCollaborationModeRestriction) AlertRecoverySuggestionButtonLaunchURL() *foundation.NSURL {
+	return x.inner.AlertRecoverySuggestionButtonLaunchURL()
+}
+
+// SharingCollaborationModeRestrictionable is the interface implemented by [SharingCollaborationModeRestriction], for mocking and DI.
+type SharingCollaborationModeRestrictionable interface {
+	Unwrap() *raw.NSSharingCollaborationModeRestriction
+	DisabledMode() raw.NSSharingCollaborationMode
+	AlertTitle() string
+	AlertMessage() string
+	AlertDismissButtonTitle() string
+	AlertRecoverySuggestionButtonTitle() string
+	AlertRecoverySuggestionButtonLaunchURL() *foundation.NSURL
+}
+
+var _ SharingCollaborationModeRestrictionable = (*SharingCollaborationModeRestriction)(nil)
 

@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,33 @@ func NewLocalSearchCompletion() *LocalSearchCompletion {
 	return &LocalSearchCompletion{inner: raw.MKLocalSearchCompletionFromID(_id)}
 }
 
+// Title calls the underlying Title.
+func (x *LocalSearchCompletion) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // TitleHighlightRanges returns the collection as a Go slice.
 func (x *LocalSearchCompletion) TitleHighlightRanges() []*foundation.NSValue {
 	arr := x.inner.TitleHighlightRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *LocalSearchCompletion) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
 }
 
 // SubtitleHighlightRanges returns the collection as a Go slice.
@@ -43,10 +60,19 @@ func (x *LocalSearchCompletion) SubtitleHighlightRanges() []*foundation.NSValue 
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// LocalSearchCompletionable is the interface implemented by [LocalSearchCompletion], for mocking and DI.
+type LocalSearchCompletionable interface {
+	Unwrap() *raw.MKLocalSearchCompletion
+	Title() string
+	TitleHighlightRanges() []*foundation.NSValue
+	Subtitle() string
+	SubtitleHighlightRanges() []*foundation.NSValue
+}
+
+var _ LocalSearchCompletionable = (*LocalSearchCompletion)(nil)
 

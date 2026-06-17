@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Alert wraps [raw.NSAlert] with a fluent Go API.
@@ -78,16 +80,213 @@ func (x *Alert) WithShowsSuppressionButton(showsSuppressionButton bool) *Alert {
 	return x
 }
 
+// AddButtonWithTitle calls the underlying AddButtonWithTitle.
+func (x *Alert) AddButtonWithTitle(title string) *Button {
+	_r := x.inner.AddButtonWithTitle(foundation.NSStringStringWithUTF8String(title))
+	if _r == nil {
+		return nil
+	}
+	return &Button{inner: _r}
+}
+
+// Layout calls the underlying Layout.
+func (x *Alert) Layout() {
+	x.inner.Layout()
+}
+
+// RunModal calls the underlying RunModal.
+func (x *Alert) RunModal() int {
+	return x.inner.RunModal()
+}
+
+// BeginSheetModalForWindowCompletionHandler calls the underlying BeginSheetModalForWindowCompletionHandler.
+func (x *Alert) BeginSheetModalForWindowCompletionHandler(sheetWindow *raw.NSWindow, handler func(int)) {
+	x.inner.BeginSheetModalForWindowCompletionHandler(sheetWindow, handler)
+}
+
+// MessageText calls the underlying MessageText.
+func (x *Alert) MessageText() string {
+	_r := x.inner.MessageText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessageText calls the underlying SetMessageText.
+func (x *Alert) SetMessageText(messageText string) {
+	x.inner.SetMessageText(foundation.NSStringStringWithUTF8String(messageText))
+}
+
+// InformativeText calls the underlying InformativeText.
+func (x *Alert) InformativeText() string {
+	_r := x.inner.InformativeText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInformativeText calls the underlying SetInformativeText.
+func (x *Alert) SetInformativeText(informativeText string) {
+	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+}
+
+// Icon calls the underlying Icon.
+func (x *Alert) Icon() *Image {
+	_r := x.inner.Icon()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetIcon calls the underlying SetIcon.
+func (x *Alert) SetIcon(icon *raw.NSImage) {
+	x.inner.SetIcon(icon)
+}
+
 // Buttons returns the collection as a Go slice.
 func (x *Alert) Buttons() []*raw.NSButton {
 	arr := x.inner.Buttons()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSButton, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSButton {
+		return raw.NSButtonFromID(purego.Retain(_id))
+	})
 }
+
+// AlertStyle calls the underlying AlertStyle.
+func (x *Alert) AlertStyle() raw.NSAlertStyle {
+	return x.inner.AlertStyle()
+}
+
+// SetAlertStyle calls the underlying SetAlertStyle.
+func (x *Alert) SetAlertStyle(alertStyle raw.NSAlertStyle) {
+	x.inner.SetAlertStyle(alertStyle)
+}
+
+// ShowsHelp calls the underlying ShowsHelp.
+func (x *Alert) ShowsHelp() bool {
+	return x.inner.ShowsHelp()
+}
+
+// SetShowsHelp calls the underlying SetShowsHelp.
+func (x *Alert) SetShowsHelp(showsHelp bool) {
+	x.inner.SetShowsHelp(showsHelp)
+}
+
+// HelpAnchor calls the underlying HelpAnchor.
+func (x *Alert) HelpAnchor() string {
+	_r := x.inner.HelpAnchor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHelpAnchor calls the underlying SetHelpAnchor.
+func (x *Alert) SetHelpAnchor(helpAnchor *foundation.NSString) {
+	x.inner.SetHelpAnchor(helpAnchor)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Alert) Delegate() raw.NSAlertDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Alert) SetDelegate(delegate raw.NSAlertDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// AccessoryView calls the underlying AccessoryView.
+func (x *Alert) AccessoryView() *View {
+	_r := x.inner.AccessoryView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetAccessoryView calls the underlying SetAccessoryView.
+func (x *Alert) SetAccessoryView(accessoryView *raw.NSView) {
+	x.inner.SetAccessoryView(accessoryView)
+}
+
+// ShowsSuppressionButton calls the underlying ShowsSuppressionButton.
+func (x *Alert) ShowsSuppressionButton() bool {
+	return x.inner.ShowsSuppressionButton()
+}
+
+// SetShowsSuppressionButton calls the underlying SetShowsSuppressionButton.
+func (x *Alert) SetShowsSuppressionButton(showsSuppressionButton bool) {
+	x.inner.SetShowsSuppressionButton(showsSuppressionButton)
+}
+
+// SuppressionButton calls the underlying SuppressionButton.
+func (x *Alert) SuppressionButton() *Button {
+	_r := x.inner.SuppressionButton()
+	if _r == nil {
+		return nil
+	}
+	return &Button{inner: _r}
+}
+
+// Window calls the underlying Window.
+func (x *Alert) Window() *Window {
+	_r := x.inner.Window()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *Alert) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
+}
+
+// Alertable is the interface implemented by [Alert], for mocking and DI.
+type Alertable interface {
+	Unwrap() *raw.NSAlert
+	WithMessageText(messageText string) *Alert
+	WithInformativeText(informativeText string) *Alert
+	WithIcon(icon *raw.NSImage) *Alert
+	WithAlertStyle(alertStyle raw.NSAlertStyle) *Alert
+	WithShowsHelp(showsHelp bool) *Alert
+	WithHelpAnchor(helpAnchor *foundation.NSString) *Alert
+	WithDelegate(delegate raw.NSAlertDelegate) *Alert
+	WithAccessoryView(accessoryView ViewProvider) *Alert
+	WithShowsSuppressionButton(showsSuppressionButton bool) *Alert
+	AddButtonWithTitle(title string) *Button
+	Layout()
+	RunModal() int
+	BeginSheetModalForWindowCompletionHandler(sheetWindow *raw.NSWindow, handler func(int))
+	MessageText() string
+	SetMessageText(messageText string)
+	InformativeText() string
+	SetInformativeText(informativeText string)
+	Icon() *Image
+	SetIcon(icon *raw.NSImage)
+	Buttons() []*raw.NSButton
+	AlertStyle() raw.NSAlertStyle
+	SetAlertStyle(alertStyle raw.NSAlertStyle)
+	ShowsHelp() bool
+	SetShowsHelp(showsHelp bool)
+	HelpAnchor() string
+	SetHelpAnchor(helpAnchor *foundation.NSString)
+	Delegate() raw.NSAlertDelegate
+	SetDelegate(delegate raw.NSAlertDelegate)
+	AccessoryView() *View
+	SetAccessoryView(accessoryView *raw.NSView)
+	ShowsSuppressionButton() bool
+	SetShowsSuppressionButton(showsSuppressionButton bool)
+	SuppressionButton() *Button
+	Window() *Window
+	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(window *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+}
+
+var _ Alertable = (*Alert)(nil)
 

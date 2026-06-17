@@ -25,3 +25,10 @@ func NewOutgoingMessageTypeResolutionResult() *OutgoingMessageTypeResolutionResu
 
 func (x *OutgoingMessageTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// OutgoingMessageTypeResolutionResultable is the interface implemented by [OutgoingMessageTypeResolutionResult], for mocking and DI.
+type OutgoingMessageTypeResolutionResultable interface {
+	Unwrap() *raw.INOutgoingMessageTypeResolutionResult
+}
+
+var _ OutgoingMessageTypeResolutionResultable = (*OutgoingMessageTypeResolutionResult)(nil)
+

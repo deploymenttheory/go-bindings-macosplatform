@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,14 +48,27 @@ func (x *CompositeAttributeDescription) Elements() []*raw.NSAttributeDescription
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSAttributeDescription, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSAttributeDescription {
+		return raw.NSAttributeDescriptionFromID(purego.Retain(_id))
+	})
+}
+
+// SetElements calls the underlying SetElements.
+func (x *CompositeAttributeDescription) SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription]) {
+	x.inner.SetElements(elements)
 }
 
 func (x *CompositeAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription { return &x.inner.NSAttributeDescription }
 
 func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSAttributeDescription.NSPropertyDescription }
+
+// CompositeAttributeDescriptionable is the interface implemented by [CompositeAttributeDescription], for mocking and DI.
+type CompositeAttributeDescriptionable interface {
+	Unwrap() *raw.NSCompositeAttributeDescription
+	WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription
+	Elements() []*raw.NSAttributeDescription
+	SetElements(elements *foundation.NSArray[*raw.NSAttributeDescription])
+}
+
+var _ CompositeAttributeDescriptionable = (*CompositeAttributeDescription)(nil)
 

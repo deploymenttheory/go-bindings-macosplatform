@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,28 @@ func (x *MathExpressionRoot) RadicandExpressions() []*raw.AXMathExpression {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
+}
+
+// RootIndexExpression calls the underlying RootIndexExpression.
+func (x *MathExpressionRoot) RootIndexExpression() *MathExpression {
+	_r := x.inner.RootIndexExpression()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MathExpression{inner: _r}
 }
 
 func (x *MathExpressionRoot) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionRootable is the interface implemented by [MathExpressionRoot], for mocking and DI.
+type MathExpressionRootable interface {
+	Unwrap() *raw.AXMathExpressionRoot
+	RadicandExpressions() []*raw.AXMathExpression
+	RootIndexExpression() *MathExpression
+}
+
+var _ MathExpressionRootable = (*MathExpressionRoot)(nil)
 

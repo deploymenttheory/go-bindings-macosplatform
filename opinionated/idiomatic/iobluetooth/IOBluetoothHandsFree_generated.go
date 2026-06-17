@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/ebitengine/purego/objc"
 )
@@ -60,5 +61,178 @@ func (x *IOBluetoothHandsFree) WithDelegate(delegate raw.IOBluetoothHandsFreeDel
 	return x
 }
 
+// Indicator calls the underlying Indicator.
+func (x *IOBluetoothHandsFree) Indicator(indicatorName string) int {
+	return x.inner.Indicator(foundation.NSStringStringWithUTF8String(indicatorName))
+}
+
+// SetIndicatorValue calls the underlying SetIndicatorValue.
+func (x *IOBluetoothHandsFree) SetIndicatorValue(indicatorName string, indicatorValue int) {
+	x.inner.SetIndicatorValue(foundation.NSStringStringWithUTF8String(indicatorName), indicatorValue)
+}
+
+// Connect calls the underlying Connect.
+func (x *IOBluetoothHandsFree) Connect() {
+	x.inner.Connect()
+}
+
+// Disconnect calls the underlying Disconnect.
+func (x *IOBluetoothHandsFree) Disconnect() {
+	x.inner.Disconnect()
+}
+
+// ConnectSCO calls the underlying ConnectSCO.
+func (x *IOBluetoothHandsFree) ConnectSCO() {
+	x.inner.ConnectSCO()
+}
+
+// DisconnectSCO calls the underlying DisconnectSCO.
+func (x *IOBluetoothHandsFree) DisconnectSCO() {
+	x.inner.DisconnectSCO()
+}
+
+// IsSCOConnected calls the underlying IsSCOConnected.
+func (x *IOBluetoothHandsFree) IsSCOConnected() bool {
+	return x.inner.IsSCOConnected()
+}
+
+// SupportedFeatures calls the underlying SupportedFeatures.
+func (x *IOBluetoothHandsFree) SupportedFeatures() uint32 {
+	return x.inner.SupportedFeatures()
+}
+
+// SetSupportedFeatures calls the underlying SetSupportedFeatures.
+func (x *IOBluetoothHandsFree) SetSupportedFeatures(supportedFeatures uint32) {
+	x.inner.SetSupportedFeatures(supportedFeatures)
+}
+
+// InputVolume calls the underlying InputVolume.
+func (x *IOBluetoothHandsFree) InputVolume() float32 {
+	return x.inner.InputVolume()
+}
+
+// SetInputVolume calls the underlying SetInputVolume.
+func (x *IOBluetoothHandsFree) SetInputVolume(inputVolume float32) {
+	x.inner.SetInputVolume(inputVolume)
+}
+
+// IsInputMuted calls the underlying IsInputMuted.
+func (x *IOBluetoothHandsFree) IsInputMuted() bool {
+	return x.inner.IsInputMuted()
+}
+
+// SetInputMuted calls the underlying SetInputMuted.
+func (x *IOBluetoothHandsFree) SetInputMuted(inputMuted bool) {
+	x.inner.SetInputMuted(inputMuted)
+}
+
+// OutputVolume calls the underlying OutputVolume.
+func (x *IOBluetoothHandsFree) OutputVolume() float32 {
+	return x.inner.OutputVolume()
+}
+
+// SetOutputVolume calls the underlying SetOutputVolume.
+func (x *IOBluetoothHandsFree) SetOutputVolume(outputVolume float32) {
+	x.inner.SetOutputVolume(outputVolume)
+}
+
+// IsOutputMuted calls the underlying IsOutputMuted.
+func (x *IOBluetoothHandsFree) IsOutputMuted() bool {
+	return x.inner.IsOutputMuted()
+}
+
+// SetOutputMuted calls the underlying SetOutputMuted.
+func (x *IOBluetoothHandsFree) SetOutputMuted(outputMuted bool) {
+	x.inner.SetOutputMuted(outputMuted)
+}
+
+// Device calls the underlying Device.
+func (x *IOBluetoothHandsFree) Device() *IOBluetoothDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothDevice{inner: _r}
+}
+
+// DeviceSupportedFeatures calls the underlying DeviceSupportedFeatures.
+func (x *IOBluetoothHandsFree) DeviceSupportedFeatures() uint32 {
+	return x.inner.DeviceSupportedFeatures()
+}
+
+// DeviceSupportedSMSServices calls the underlying DeviceSupportedSMSServices.
+func (x *IOBluetoothHandsFree) DeviceSupportedSMSServices() uint32 {
+	return x.inner.DeviceSupportedSMSServices()
+}
+
+// DeviceCallHoldModes calls the underlying DeviceCallHoldModes.
+func (x *IOBluetoothHandsFree) DeviceCallHoldModes() uint32 {
+	return x.inner.DeviceCallHoldModes()
+}
+
+// SMSMode calls the underlying SMSMode.
+func (x *IOBluetoothHandsFree) SMSMode() raw.IOBluetoothSMSMode {
+	return x.inner.SMSMode()
+}
+
+// IsSMSEnabled calls the underlying IsSMSEnabled.
+func (x *IOBluetoothHandsFree) IsSMSEnabled() bool {
+	return x.inner.IsSMSEnabled()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *IOBluetoothHandsFree) Delegate() raw.IOBluetoothHandsFreeDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *IOBluetoothHandsFree) SetDelegate(delegate raw.IOBluetoothHandsFreeDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsConnected calls the underlying IsConnected.
+func (x *IOBluetoothHandsFree) IsConnected() bool {
+	return x.inner.IsConnected()
+}
+
 func (x *IOBluetoothHandsFree) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree { return x.inner }
+
+// IOBluetoothHandsFreeable is the interface implemented by [IOBluetoothHandsFree], for mocking and DI.
+type IOBluetoothHandsFreeable interface {
+	Unwrap() *raw.IOBluetoothHandsFree
+	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFree
+	WithInputVolume(inputVolume float32) *IOBluetoothHandsFree
+	WithInputMuted(inputMuted bool) *IOBluetoothHandsFree
+	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFree
+	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFree
+	WithDelegate(delegate raw.IOBluetoothHandsFreeDelegate) *IOBluetoothHandsFree
+	Indicator(indicatorName string) int
+	SetIndicatorValue(indicatorName string, indicatorValue int)
+	Connect()
+	Disconnect()
+	ConnectSCO()
+	DisconnectSCO()
+	IsSCOConnected() bool
+	SupportedFeatures() uint32
+	SetSupportedFeatures(supportedFeatures uint32)
+	InputVolume() float32
+	SetInputVolume(inputVolume float32)
+	IsInputMuted() bool
+	SetInputMuted(inputMuted bool)
+	OutputVolume() float32
+	SetOutputVolume(outputVolume float32)
+	IsOutputMuted() bool
+	SetOutputMuted(outputMuted bool)
+	Device() *IOBluetoothDevice
+	DeviceSupportedFeatures() uint32
+	DeviceSupportedSMSServices() uint32
+	DeviceCallHoldModes() uint32
+	SMSMode() raw.IOBluetoothSMSMode
+	IsSMSEnabled() bool
+	Delegate() raw.IOBluetoothHandsFreeDelegate
+	SetDelegate(delegate raw.IOBluetoothHandsFreeDelegate)
+	IsConnected() bool
+}
+
+var _ IOBluetoothHandsFreeable = (*IOBluetoothHandsFree)(nil)
 

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -177,9 +178,522 @@ func (x *Control) WithCell(cell CellProvider) *Control {
 	return x
 }
 
+// SizeThatFits calls the underlying SizeThatFits.
+func (x *Control) SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize {
+	return x.inner.SizeThatFits(size)
+}
+
+// SizeToFit calls the underlying SizeToFit.
+func (x *Control) SizeToFit() {
+	x.inner.SizeToFit()
+}
+
+// SendActionOn calls the underlying SendActionOn.
+func (x *Control) SendActionOn(mask raw.NSEventMask) int {
+	return x.inner.SendActionOn(mask)
+}
+
+// SendActionTo calls the underlying SendActionTo.
+func (x *Control) SendActionTo(action objc.SEL, target objc.ID) bool {
+	return x.inner.SendActionTo(action, target)
+}
+
+// TakeIntValueFrom calls the underlying TakeIntValueFrom.
+func (x *Control) TakeIntValueFrom(sender objc.ID) {
+	x.inner.TakeIntValueFrom(sender)
+}
+
+// TakeFloatValueFrom calls the underlying TakeFloatValueFrom.
+func (x *Control) TakeFloatValueFrom(sender objc.ID) {
+	x.inner.TakeFloatValueFrom(sender)
+}
+
+// TakeDoubleValueFrom calls the underlying TakeDoubleValueFrom.
+func (x *Control) TakeDoubleValueFrom(sender objc.ID) {
+	x.inner.TakeDoubleValueFrom(sender)
+}
+
+// TakeStringValueFrom calls the underlying TakeStringValueFrom.
+func (x *Control) TakeStringValueFrom(sender objc.ID) {
+	x.inner.TakeStringValueFrom(sender)
+}
+
+// TakeObjectValueFrom calls the underlying TakeObjectValueFrom.
+func (x *Control) TakeObjectValueFrom(sender objc.ID) {
+	x.inner.TakeObjectValueFrom(sender)
+}
+
+// TakeIntegerValueFrom calls the underlying TakeIntegerValueFrom.
+func (x *Control) TakeIntegerValueFrom(sender objc.ID) {
+	x.inner.TakeIntegerValueFrom(sender)
+}
+
+// PerformClick calls the underlying PerformClick.
+func (x *Control) PerformClick(sender objc.ID) {
+	x.inner.PerformClick(sender)
+}
+
+// ExpansionFrameWithFrame calls the underlying ExpansionFrameWithFrame.
+func (x *Control) ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.ExpansionFrameWithFrame(contentFrame)
+}
+
+// DrawWithExpansionFrameInView calls the underlying DrawWithExpansionFrameInView.
+func (x *Control) DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *raw.NSView) {
+	x.inner.DrawWithExpansionFrameInView(contentFrame, view)
+}
+
+// Target calls the underlying Target.
+func (x *Control) Target() objc.ID {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *Control) SetTarget(target objc.ID) {
+	x.inner.SetTarget(target)
+}
+
+// Action calls the underlying Action.
+func (x *Control) Action() objc.SEL {
+	return x.inner.Action()
+}
+
+// SetAction calls the underlying SetAction.
+func (x *Control) SetAction(action objc.SEL) {
+	x.inner.SetAction(action)
+}
+
+// SetTag calls the underlying SetTag.
+func (x *Control) SetTag(tag int) {
+	x.inner.SetTag(tag)
+}
+
+// IgnoresMultiClick calls the underlying IgnoresMultiClick.
+func (x *Control) IgnoresMultiClick() bool {
+	return x.inner.IgnoresMultiClick()
+}
+
+// SetIgnoresMultiClick calls the underlying SetIgnoresMultiClick.
+func (x *Control) SetIgnoresMultiClick(ignoresMultiClick bool) {
+	x.inner.SetIgnoresMultiClick(ignoresMultiClick)
+}
+
+// IsContinuous calls the underlying IsContinuous.
+func (x *Control) IsContinuous() bool {
+	return x.inner.IsContinuous()
+}
+
+// SetContinuous calls the underlying SetContinuous.
+func (x *Control) SetContinuous(continuous bool) {
+	x.inner.SetContinuous(continuous)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *Control) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *Control) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// RefusesFirstResponder calls the underlying RefusesFirstResponder.
+func (x *Control) RefusesFirstResponder() bool {
+	return x.inner.RefusesFirstResponder()
+}
+
+// SetRefusesFirstResponder calls the underlying SetRefusesFirstResponder.
+func (x *Control) SetRefusesFirstResponder(refusesFirstResponder bool) {
+	x.inner.SetRefusesFirstResponder(refusesFirstResponder)
+}
+
+// IsHighlighted calls the underlying IsHighlighted.
+func (x *Control) IsHighlighted() bool {
+	return x.inner.IsHighlighted()
+}
+
+// SetHighlighted calls the underlying SetHighlighted.
+func (x *Control) SetHighlighted(highlighted bool) {
+	x.inner.SetHighlighted(highlighted)
+}
+
+// ControlSize calls the underlying ControlSize.
+func (x *Control) ControlSize() raw.NSControlSize {
+	return x.inner.ControlSize()
+}
+
+// SetControlSize calls the underlying SetControlSize.
+func (x *Control) SetControlSize(controlSize raw.NSControlSize) {
+	x.inner.SetControlSize(controlSize)
+}
+
+// Formatter calls the underlying Formatter.
+func (x *Control) Formatter() *foundation.NSFormatter {
+	return x.inner.Formatter()
+}
+
+// SetFormatter calls the underlying SetFormatter.
+func (x *Control) SetFormatter(formatter *foundation.NSFormatter) {
+	x.inner.SetFormatter(formatter)
+}
+
+// ObjectValue calls the underlying ObjectValue.
+func (x *Control) ObjectValue() objc.ID {
+	return x.inner.ObjectValue()
+}
+
+// SetObjectValue calls the underlying SetObjectValue.
+func (x *Control) SetObjectValue(objectValue objc.ID) {
+	x.inner.SetObjectValue(objectValue)
+}
+
+// StringValue calls the underlying StringValue.
+func (x *Control) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStringValue calls the underlying SetStringValue.
+func (x *Control) SetStringValue(stringValue string) {
+	x.inner.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+}
+
+// AttributedStringValue calls the underlying AttributedStringValue.
+func (x *Control) AttributedStringValue() *foundation.NSAttributedString {
+	return x.inner.AttributedStringValue()
+}
+
+// SetAttributedStringValue calls the underlying SetAttributedStringValue.
+func (x *Control) SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString) {
+	x.inner.SetAttributedStringValue(attributedStringValue)
+}
+
+// IntValue calls the underlying IntValue.
+func (x *Control) IntValue() int {
+	return x.inner.IntValue()
+}
+
+// SetIntValue calls the underlying SetIntValue.
+func (x *Control) SetIntValue(intValue int) {
+	x.inner.SetIntValue(intValue)
+}
+
+// IntegerValue calls the underlying IntegerValue.
+func (x *Control) IntegerValue() int {
+	return x.inner.IntegerValue()
+}
+
+// SetIntegerValue calls the underlying SetIntegerValue.
+func (x *Control) SetIntegerValue(integerValue int) {
+	x.inner.SetIntegerValue(integerValue)
+}
+
+// FloatValue calls the underlying FloatValue.
+func (x *Control) FloatValue() float32 {
+	return x.inner.FloatValue()
+}
+
+// SetFloatValue calls the underlying SetFloatValue.
+func (x *Control) SetFloatValue(floatValue float32) {
+	x.inner.SetFloatValue(floatValue)
+}
+
+// DoubleValue calls the underlying DoubleValue.
+func (x *Control) DoubleValue() float64 {
+	return x.inner.DoubleValue()
+}
+
+// SetDoubleValue calls the underlying SetDoubleValue.
+func (x *Control) SetDoubleValue(doubleValue float64) {
+	x.inner.SetDoubleValue(doubleValue)
+}
+
+// Font calls the underlying Font.
+func (x *Control) Font() *Font {
+	_r := x.inner.Font()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetFont calls the underlying SetFont.
+func (x *Control) SetFont(font *raw.NSFont) {
+	x.inner.SetFont(font)
+}
+
+// UsesSingleLineMode calls the underlying UsesSingleLineMode.
+func (x *Control) UsesSingleLineMode() bool {
+	return x.inner.UsesSingleLineMode()
+}
+
+// SetUsesSingleLineMode calls the underlying SetUsesSingleLineMode.
+func (x *Control) SetUsesSingleLineMode(usesSingleLineMode bool) {
+	x.inner.SetUsesSingleLineMode(usesSingleLineMode)
+}
+
+// LineBreakMode calls the underlying LineBreakMode.
+func (x *Control) LineBreakMode() raw.NSLineBreakMode {
+	return x.inner.LineBreakMode()
+}
+
+// SetLineBreakMode calls the underlying SetLineBreakMode.
+func (x *Control) SetLineBreakMode(lineBreakMode raw.NSLineBreakMode) {
+	x.inner.SetLineBreakMode(lineBreakMode)
+}
+
+// Alignment calls the underlying Alignment.
+func (x *Control) Alignment() raw.NSTextAlignment {
+	return x.inner.Alignment()
+}
+
+// SetAlignment calls the underlying SetAlignment.
+func (x *Control) SetAlignment(alignment raw.NSTextAlignment) {
+	x.inner.SetAlignment(alignment)
+}
+
+// BaseWritingDirection calls the underlying BaseWritingDirection.
+func (x *Control) BaseWritingDirection() raw.NSWritingDirection {
+	return x.inner.BaseWritingDirection()
+}
+
+// SetBaseWritingDirection calls the underlying SetBaseWritingDirection.
+func (x *Control) SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) {
+	x.inner.SetBaseWritingDirection(baseWritingDirection)
+}
+
+// AllowsExpansionToolTips calls the underlying AllowsExpansionToolTips.
+func (x *Control) AllowsExpansionToolTips() bool {
+	return x.inner.AllowsExpansionToolTips()
+}
+
+// SetAllowsExpansionToolTips calls the underlying SetAllowsExpansionToolTips.
+func (x *Control) SetAllowsExpansionToolTips(allowsExpansionToolTips bool) {
+	x.inner.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+}
+
+// CurrentEditor calls the underlying CurrentEditor.
+func (x *Control) CurrentEditor() *Text {
+	_r := x.inner.CurrentEditor()
+	if _r == nil {
+		return nil
+	}
+	return &Text{inner: _r}
+}
+
+// AbortEditing calls the underlying AbortEditing.
+func (x *Control) AbortEditing() bool {
+	return x.inner.AbortEditing()
+}
+
+// ValidateEditing calls the underlying ValidateEditing.
+func (x *Control) ValidateEditing() {
+	x.inner.ValidateEditing()
+}
+
+// EditWithFrameEditorDelegateEvent calls the underlying EditWithFrameEditorDelegateEvent.
+func (x *Control) EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent) {
+	x.inner.EditWithFrameEditorDelegateEvent(rect, textObj, delegate, event)
+}
+
+// SelectWithFrameEditorDelegateStartLength calls the underlying SelectWithFrameEditorDelegateStartLength.
+func (x *Control) SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int) {
+	x.inner.SelectWithFrameEditorDelegateStartLength(rect, textObj, delegate, selStart, selLength)
+}
+
+// EndEditing calls the underlying EndEditing.
+func (x *Control) EndEditing(textObj *raw.NSText) {
+	x.inner.EndEditing(textObj)
+}
+
+// SetFloatingPointFormatLeftRight calls the underlying SetFloatingPointFormatLeftRight.
+func (x *Control) SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint) {
+	x.inner.SetFloatingPointFormatLeftRight(autoRange, leftDigits, rightDigits)
+}
+
+// SelectedCell calls the underlying SelectedCell.
+func (x *Control) SelectedCell() *Cell {
+	_r := x.inner.SelectedCell()
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SelectedTag calls the underlying SelectedTag.
+func (x *Control) SelectedTag() int {
+	return x.inner.SelectedTag()
+}
+
+// SetNeedsDisplay calls the underlying SetNeedsDisplay.
+func (x *Control) SetNeedsDisplay() {
+	x.inner.SetNeedsDisplay()
+}
+
+// CalcSize calls the underlying CalcSize.
+func (x *Control) CalcSize() {
+	x.inner.CalcSize()
+}
+
+// UpdateCell calls the underlying UpdateCell.
+func (x *Control) UpdateCell(cell *raw.NSCell) {
+	x.inner.UpdateCell(cell)
+}
+
+// UpdateCellInside calls the underlying UpdateCellInside.
+func (x *Control) UpdateCellInside(cell *raw.NSCell) {
+	x.inner.UpdateCellInside(cell)
+}
+
+// DrawCellInside calls the underlying DrawCellInside.
+func (x *Control) DrawCellInside(cell *raw.NSCell) {
+	x.inner.DrawCellInside(cell)
+}
+
+// DrawCell calls the underlying DrawCell.
+func (x *Control) DrawCell(cell *raw.NSCell) {
+	x.inner.DrawCell(cell)
+}
+
+// SelectCell calls the underlying SelectCell.
+func (x *Control) SelectCell(cell *raw.NSCell) {
+	x.inner.SelectCell(cell)
+}
+
+// Cell calls the underlying Cell.
+func (x *Control) Cell() *Cell {
+	_r := x.inner.Cell()
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SetCell calls the underlying SetCell.
+func (x *Control) SetCell(cell *raw.NSCell) {
+	x.inner.SetCell(cell)
+}
+
+// InvalidateIntrinsicContentSizeForCell calls the underlying InvalidateIntrinsicContentSizeForCell.
+func (x *Control) InvalidateIntrinsicContentSizeForCell(cell *raw.NSCell) {
+	x.inner.InvalidateIntrinsicContentSizeForCell(cell)
+}
+
 func (x *Control) asControl() *raw.NSControl { return x.inner }
 
 func (x *Control) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *Control) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// Controlable is the interface implemented by [Control], for mocking and DI.
+type Controlable interface {
+	Unwrap() *raw.NSControl
+	WithTarget(target objc.ID) *Control
+	WithAction(action objc.SEL) *Control
+	WithTag(tag int) *Control
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Control
+	WithContinuous(continuous bool) *Control
+	WithEnabled(enabled bool) *Control
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Control
+	WithHighlighted(highlighted bool) *Control
+	WithControlSize(controlSize raw.NSControlSize) *Control
+	WithFormatter(formatter *foundation.NSFormatter) *Control
+	WithObjectValue(objectValue objc.ID) *Control
+	WithStringValue(stringValue string) *Control
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Control
+	WithIntValue(intValue int) *Control
+	WithIntegerValue(integerValue int) *Control
+	WithFloatValue(floatValue float32) *Control
+	WithDoubleValue(doubleValue float64) *Control
+	WithFont(font *raw.NSFont) *Control
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Control
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Control
+	WithAlignment(alignment raw.NSTextAlignment) *Control
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Control
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Control
+	WithCell(cell CellProvider) *Control
+	SizeThatFits(size corefoundation.CGSize) corefoundation.CGSize
+	SizeToFit()
+	SendActionOn(mask raw.NSEventMask) int
+	SendActionTo(action objc.SEL, target objc.ID) bool
+	TakeIntValueFrom(sender objc.ID)
+	TakeFloatValueFrom(sender objc.ID)
+	TakeDoubleValueFrom(sender objc.ID)
+	TakeStringValueFrom(sender objc.ID)
+	TakeObjectValueFrom(sender objc.ID)
+	TakeIntegerValueFrom(sender objc.ID)
+	PerformClick(sender objc.ID)
+	ExpansionFrameWithFrame(contentFrame corefoundation.CGRect) corefoundation.CGRect
+	DrawWithExpansionFrameInView(contentFrame corefoundation.CGRect, view *raw.NSView)
+	Target() objc.ID
+	SetTarget(target objc.ID)
+	Action() objc.SEL
+	SetAction(action objc.SEL)
+	SetTag(tag int)
+	IgnoresMultiClick() bool
+	SetIgnoresMultiClick(ignoresMultiClick bool)
+	IsContinuous() bool
+	SetContinuous(continuous bool)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	RefusesFirstResponder() bool
+	SetRefusesFirstResponder(refusesFirstResponder bool)
+	IsHighlighted() bool
+	SetHighlighted(highlighted bool)
+	ControlSize() raw.NSControlSize
+	SetControlSize(controlSize raw.NSControlSize)
+	Formatter() *foundation.NSFormatter
+	SetFormatter(formatter *foundation.NSFormatter)
+	ObjectValue() objc.ID
+	SetObjectValue(objectValue objc.ID)
+	StringValue() string
+	SetStringValue(stringValue string)
+	AttributedStringValue() *foundation.NSAttributedString
+	SetAttributedStringValue(attributedStringValue *foundation.NSAttributedString)
+	IntValue() int
+	SetIntValue(intValue int)
+	IntegerValue() int
+	SetIntegerValue(integerValue int)
+	FloatValue() float32
+	SetFloatValue(floatValue float32)
+	DoubleValue() float64
+	SetDoubleValue(doubleValue float64)
+	Font() *Font
+	SetFont(font *raw.NSFont)
+	UsesSingleLineMode() bool
+	SetUsesSingleLineMode(usesSingleLineMode bool)
+	LineBreakMode() raw.NSLineBreakMode
+	SetLineBreakMode(lineBreakMode raw.NSLineBreakMode)
+	Alignment() raw.NSTextAlignment
+	SetAlignment(alignment raw.NSTextAlignment)
+	BaseWritingDirection() raw.NSWritingDirection
+	SetBaseWritingDirection(baseWritingDirection raw.NSWritingDirection)
+	AllowsExpansionToolTips() bool
+	SetAllowsExpansionToolTips(allowsExpansionToolTips bool)
+	CurrentEditor() *Text
+	AbortEditing() bool
+	ValidateEditing()
+	EditWithFrameEditorDelegateEvent(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, event *raw.NSEvent)
+	SelectWithFrameEditorDelegateStartLength(rect corefoundation.CGRect, textObj *raw.NSText, delegate objc.ID, selStart int, selLength int)
+	EndEditing(textObj *raw.NSText)
+	SetFloatingPointFormatLeftRight(autoRange bool, leftDigits uint, rightDigits uint)
+	SelectedCell() *Cell
+	SelectedTag() int
+	SetNeedsDisplay()
+	CalcSize()
+	UpdateCell(cell *raw.NSCell)
+	UpdateCellInside(cell *raw.NSCell)
+	DrawCellInside(cell *raw.NSCell)
+	DrawCell(cell *raw.NSCell)
+	SelectCell(cell *raw.NSCell)
+	Cell() *Cell
+	SetCell(cell *raw.NSCell)
+	InvalidateIntrinsicContentSizeForCell(cell *raw.NSCell)
+}
+
+var _ Controlable = (*Control)(nil)
 

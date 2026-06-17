@@ -23,5 +23,34 @@ func NewHostIOSource() *HostIOSource {
 	return &HostIOSource{inner: raw.IOUSBHostIOSourceFromID(_id)}
 }
 
+// HostInterface calls the underlying HostInterface.
+func (x *HostIOSource) HostInterface() *HostInterface {
+	_r := x.inner.HostInterface()
+	if _r == nil {
+		return nil
+	}
+	return &HostInterface{inner: _r}
+}
+
+// DeviceAddress calls the underlying DeviceAddress.
+func (x *HostIOSource) DeviceAddress() uint {
+	return x.inner.DeviceAddress()
+}
+
+// EndpointAddress calls the underlying EndpointAddress.
+func (x *HostIOSource) EndpointAddress() uint {
+	return x.inner.EndpointAddress()
+}
+
 func (x *HostIOSource) asHostIOSource() *raw.IOUSBHostIOSource { return x.inner }
+
+// HostIOSourceable is the interface implemented by [HostIOSource], for mocking and DI.
+type HostIOSourceable interface {
+	Unwrap() *raw.IOUSBHostIOSource
+	HostInterface() *HostInterface
+	DeviceAddress() uint
+	EndpointAddress() uint
+}
+
+var _ HostIOSourceable = (*HostIOSource)(nil)
 

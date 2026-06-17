@@ -48,5 +48,64 @@ func (x *MTRReadParams) WithFabricFiltered(fabricFiltered *foundation.NSNumber) 
 	return x
 }
 
+// ShouldFilterByFabric calls the underlying ShouldFilterByFabric.
+func (x *MTRReadParams) ShouldFilterByFabric() bool {
+	return x.inner.ShouldFilterByFabric()
+}
+
+// SetFilterByFabric calls the underlying SetFilterByFabric.
+func (x *MTRReadParams) SetFilterByFabric(filterByFabric bool) {
+	x.inner.SetFilterByFabric(filterByFabric)
+}
+
+// MinEventNumber calls the underlying MinEventNumber.
+func (x *MTRReadParams) MinEventNumber() *foundation.NSNumber {
+	return x.inner.MinEventNumber()
+}
+
+// SetMinEventNumber calls the underlying SetMinEventNumber.
+func (x *MTRReadParams) SetMinEventNumber(minEventNumber *foundation.NSNumber) {
+	x.inner.SetMinEventNumber(minEventNumber)
+}
+
+// ShouldAssumeUnknownAttributesReportable calls the underlying ShouldAssumeUnknownAttributesReportable.
+func (x *MTRReadParams) ShouldAssumeUnknownAttributesReportable() bool {
+	return x.inner.ShouldAssumeUnknownAttributesReportable()
+}
+
+// SetAssumeUnknownAttributesReportable calls the underlying SetAssumeUnknownAttributesReportable.
+func (x *MTRReadParams) SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) {
+	x.inner.SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable)
+}
+
+// FabricFiltered calls the underlying FabricFiltered.
+func (x *MTRReadParams) FabricFiltered() *foundation.NSNumber {
+	return x.inner.FabricFiltered()
+}
+
+// SetFabricFiltered calls the underlying SetFabricFiltered.
+func (x *MTRReadParams) SetFabricFiltered(fabricFiltered *foundation.NSNumber) {
+	x.inner.SetFabricFiltered(fabricFiltered)
+}
+
 func (x *MTRReadParams) asMTRReadParams() *raw.MTRReadParams { return x.inner }
+
+// MTRReadParamsable is the interface implemented by [MTRReadParams], for mocking and DI.
+type MTRReadParamsable interface {
+	Unwrap() *raw.MTRReadParams
+	WithFilterByFabric(filterByFabric bool) *MTRReadParams
+	WithMinEventNumber(minEventNumber *foundation.NSNumber) *MTRReadParams
+	WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRReadParams
+	WithFabricFiltered(fabricFiltered *foundation.NSNumber) *MTRReadParams
+	ShouldFilterByFabric() bool
+	SetFilterByFabric(filterByFabric bool)
+	MinEventNumber() *foundation.NSNumber
+	SetMinEventNumber(minEventNumber *foundation.NSNumber)
+	ShouldAssumeUnknownAttributesReportable() bool
+	SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool)
+	FabricFiltered() *foundation.NSNumber
+	SetFabricFiltered(fabricFiltered *foundation.NSNumber)
+}
+
+var _ MTRReadParamsable = (*MTRReadParams)(nil)
 

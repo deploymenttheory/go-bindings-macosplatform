@@ -23,3 +23,10 @@ func NewAttribution() *Attribution {
 	return &Attribution{inner: raw.AAAttributionFromID(_id)}
 }
 
+// Attributionable is the interface implemented by [Attribution], for mocking and DI.
+type Attributionable interface {
+	Unwrap() *raw.AAAttribution
+}
+
+var _ Attributionable = (*Attribution)(nil)
+

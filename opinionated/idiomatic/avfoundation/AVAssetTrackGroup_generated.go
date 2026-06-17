@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,10 +31,16 @@ func (x *AssetTrackGroup) TrackIDs() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// AssetTrackGroupable is the interface implemented by [AssetTrackGroup], for mocking and DI.
+type AssetTrackGroupable interface {
+	Unwrap() *raw.AVAssetTrackGroup
+	TrackIDs() []*foundation.NSNumber
+}
+
+var _ AssetTrackGroupable = (*AssetTrackGroup)(nil)
 

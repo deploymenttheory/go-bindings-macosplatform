@@ -23,5 +23,62 @@ func NewFullyConnectedLayer() *FullyConnectedLayer {
 	return &FullyConnectedLayer{inner: raw.MLCFullyConnectedLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *FullyConnectedLayer) Descriptor() *ConvolutionDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &ConvolutionDescriptor{inner: _r}
+}
+
+// Weights calls the underlying Weights.
+func (x *FullyConnectedLayer) Weights() *Tensor {
+	_r := x.inner.Weights()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Biases calls the underlying Biases.
+func (x *FullyConnectedLayer) Biases() *Tensor {
+	_r := x.inner.Biases()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// WeightsParameter calls the underlying WeightsParameter.
+func (x *FullyConnectedLayer) WeightsParameter() *TensorParameter {
+	_r := x.inner.WeightsParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// BiasesParameter calls the underlying BiasesParameter.
+func (x *FullyConnectedLayer) BiasesParameter() *TensorParameter {
+	_r := x.inner.BiasesParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
 func (x *FullyConnectedLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// FullyConnectedLayerable is the interface implemented by [FullyConnectedLayer], for mocking and DI.
+type FullyConnectedLayerable interface {
+	Unwrap() *raw.MLCFullyConnectedLayer
+	Descriptor() *ConvolutionDescriptor
+	Weights() *Tensor
+	Biases() *Tensor
+	WeightsParameter() *TensorParameter
+	BiasesParameter() *TensorParameter
+}
+
+var _ FullyConnectedLayerable = (*FullyConnectedLayer)(nil)
 

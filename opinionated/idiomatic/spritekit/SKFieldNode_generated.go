@@ -7,6 +7,7 @@ package spritekit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FieldNode wraps [raw.SKFieldNode] with a fluent Go API.
@@ -83,5 +84,162 @@ func (x *FieldNode) WithTexture(texture TextureProvider) *FieldNode {
 	return x
 }
 
+// Region calls the underlying Region.
+func (x *FieldNode) Region() *Region {
+	_r := x.inner.Region()
+	if _r == nil {
+		return nil
+	}
+	return &Region{inner: _r}
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *FieldNode) SetRegion(region *raw.SKRegion) {
+	x.inner.SetRegion(region)
+}
+
+// Strength calls the underlying Strength.
+func (x *FieldNode) Strength() float32 {
+	return x.inner.Strength()
+}
+
+// SetStrength calls the underlying SetStrength.
+func (x *FieldNode) SetStrength(strength float32) {
+	x.inner.SetStrength(strength)
+}
+
+// Falloff calls the underlying Falloff.
+func (x *FieldNode) Falloff() float32 {
+	return x.inner.Falloff()
+}
+
+// SetFalloff calls the underlying SetFalloff.
+func (x *FieldNode) SetFalloff(falloff float32) {
+	x.inner.SetFalloff(falloff)
+}
+
+// MinimumRadius calls the underlying MinimumRadius.
+func (x *FieldNode) MinimumRadius() float32 {
+	return x.inner.MinimumRadius()
+}
+
+// SetMinimumRadius calls the underlying SetMinimumRadius.
+func (x *FieldNode) SetMinimumRadius(minimumRadius float32) {
+	x.inner.SetMinimumRadius(minimumRadius)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *FieldNode) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *FieldNode) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// IsExclusive calls the underlying IsExclusive.
+func (x *FieldNode) IsExclusive() bool {
+	return x.inner.IsExclusive()
+}
+
+// SetExclusive calls the underlying SetExclusive.
+func (x *FieldNode) SetExclusive(exclusive bool) {
+	x.inner.SetExclusive(exclusive)
+}
+
+// CategoryBitMask calls the underlying CategoryBitMask.
+func (x *FieldNode) CategoryBitMask() uint32 {
+	return x.inner.CategoryBitMask()
+}
+
+// SetCategoryBitMask calls the underlying SetCategoryBitMask.
+func (x *FieldNode) SetCategoryBitMask(categoryBitMask uint32) {
+	x.inner.SetCategoryBitMask(categoryBitMask)
+}
+
+// Direction calls the underlying Direction.
+func (x *FieldNode) Direction() unsafe.Pointer {
+	return x.inner.Direction()
+}
+
+// SetDirection calls the underlying SetDirection.
+func (x *FieldNode) SetDirection(direction unsafe.Pointer) {
+	x.inner.SetDirection(direction)
+}
+
+// Smoothness calls the underlying Smoothness.
+func (x *FieldNode) Smoothness() float32 {
+	return x.inner.Smoothness()
+}
+
+// SetSmoothness calls the underlying SetSmoothness.
+func (x *FieldNode) SetSmoothness(smoothness float32) {
+	x.inner.SetSmoothness(smoothness)
+}
+
+// AnimationSpeed calls the underlying AnimationSpeed.
+func (x *FieldNode) AnimationSpeed() float32 {
+	return x.inner.AnimationSpeed()
+}
+
+// SetAnimationSpeed calls the underlying SetAnimationSpeed.
+func (x *FieldNode) SetAnimationSpeed(animationSpeed float32) {
+	x.inner.SetAnimationSpeed(animationSpeed)
+}
+
+// Texture calls the underlying Texture.
+func (x *FieldNode) Texture() *Texture {
+	_r := x.inner.Texture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetTexture calls the underlying SetTexture.
+func (x *FieldNode) SetTexture(texture *raw.SKTexture) {
+	x.inner.SetTexture(texture)
+}
+
 func (x *FieldNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// FieldNodeable is the interface implemented by [FieldNode], for mocking and DI.
+type FieldNodeable interface {
+	Unwrap() *raw.SKFieldNode
+	WithRegion(region *raw.SKRegion) *FieldNode
+	WithStrength(strength float32) *FieldNode
+	WithFalloff(falloff float32) *FieldNode
+	WithMinimumRadius(minimumRadius float32) *FieldNode
+	WithEnabled(enabled bool) *FieldNode
+	WithExclusive(exclusive bool) *FieldNode
+	WithCategoryBitMask(categoryBitMask uint32) *FieldNode
+	WithSmoothness(smoothness float32) *FieldNode
+	WithAnimationSpeed(animationSpeed float32) *FieldNode
+	WithTexture(texture TextureProvider) *FieldNode
+	Region() *Region
+	SetRegion(region *raw.SKRegion)
+	Strength() float32
+	SetStrength(strength float32)
+	Falloff() float32
+	SetFalloff(falloff float32)
+	MinimumRadius() float32
+	SetMinimumRadius(minimumRadius float32)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	IsExclusive() bool
+	SetExclusive(exclusive bool)
+	CategoryBitMask() uint32
+	SetCategoryBitMask(categoryBitMask uint32)
+	Direction() unsafe.Pointer
+	SetDirection(direction unsafe.Pointer)
+	Smoothness() float32
+	SetSmoothness(smoothness float32)
+	AnimationSpeed() float32
+	SetAnimationSpeed(animationSpeed float32)
+	Texture() *Texture
+	SetTexture(texture *raw.SKTexture)
+}
+
+var _ FieldNodeable = (*FieldNode)(nil)
 

@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -84,4 +85,149 @@ func (x *MTROTAHeader) WithMaxApplicableVersion(maxApplicableVersion *foundation
 	x.inner.SetMaxApplicableVersion(maxApplicableVersion)
 	return x
 }
+
+// VendorID calls the underlying VendorID.
+func (x *MTROTAHeader) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// SetVendorID calls the underlying SetVendorID.
+func (x *MTROTAHeader) SetVendorID(vendorID *foundation.NSNumber) {
+	x.inner.SetVendorID(vendorID)
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTROTAHeader) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// SetProductID calls the underlying SetProductID.
+func (x *MTROTAHeader) SetProductID(productID *foundation.NSNumber) {
+	x.inner.SetProductID(productID)
+}
+
+// PayloadSize calls the underlying PayloadSize.
+func (x *MTROTAHeader) PayloadSize() *foundation.NSNumber {
+	return x.inner.PayloadSize()
+}
+
+// SetPayloadSize calls the underlying SetPayloadSize.
+func (x *MTROTAHeader) SetPayloadSize(payloadSize *foundation.NSNumber) {
+	x.inner.SetPayloadSize(payloadSize)
+}
+
+// SoftwareVersion calls the underlying SoftwareVersion.
+func (x *MTROTAHeader) SoftwareVersion() *foundation.NSNumber {
+	return x.inner.SoftwareVersion()
+}
+
+// SetSoftwareVersion calls the underlying SetSoftwareVersion.
+func (x *MTROTAHeader) SetSoftwareVersion(softwareVersion *foundation.NSNumber) {
+	x.inner.SetSoftwareVersion(softwareVersion)
+}
+
+// SoftwareVersionString calls the underlying SoftwareVersionString.
+func (x *MTROTAHeader) SoftwareVersionString() string {
+	_r := x.inner.SoftwareVersionString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSoftwareVersionString calls the underlying SetSoftwareVersionString.
+func (x *MTROTAHeader) SetSoftwareVersionString(softwareVersionString string) {
+	x.inner.SetSoftwareVersionString(foundation.NSStringStringWithUTF8String(softwareVersionString))
+}
+
+// ReleaseNotesURL calls the underlying ReleaseNotesURL.
+func (x *MTROTAHeader) ReleaseNotesURL() string {
+	_r := x.inner.ReleaseNotesURL()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetReleaseNotesURL calls the underlying SetReleaseNotesURL.
+func (x *MTROTAHeader) SetReleaseNotesURL(releaseNotesURL string) {
+	x.inner.SetReleaseNotesURL(foundation.NSStringStringWithUTF8String(releaseNotesURL))
+}
+
+// ImageDigest calls the underlying ImageDigest.
+func (x *MTROTAHeader) ImageDigest() *foundation.NSData {
+	return x.inner.ImageDigest()
+}
+
+// SetImageDigest calls the underlying SetImageDigest.
+func (x *MTROTAHeader) SetImageDigest(imageDigest *foundation.NSData) {
+	x.inner.SetImageDigest(imageDigest)
+}
+
+// ImageDigestType calls the underlying ImageDigestType.
+func (x *MTROTAHeader) ImageDigestType() raw.MTROTAImageDigestType {
+	return x.inner.ImageDigestType()
+}
+
+// SetImageDigestType calls the underlying SetImageDigestType.
+func (x *MTROTAHeader) SetImageDigestType(imageDigestType raw.MTROTAImageDigestType) {
+	x.inner.SetImageDigestType(imageDigestType)
+}
+
+// MinApplicableVersion calls the underlying MinApplicableVersion.
+func (x *MTROTAHeader) MinApplicableVersion() *foundation.NSNumber {
+	return x.inner.MinApplicableVersion()
+}
+
+// SetMinApplicableVersion calls the underlying SetMinApplicableVersion.
+func (x *MTROTAHeader) SetMinApplicableVersion(minApplicableVersion *foundation.NSNumber) {
+	x.inner.SetMinApplicableVersion(minApplicableVersion)
+}
+
+// MaxApplicableVersion calls the underlying MaxApplicableVersion.
+func (x *MTROTAHeader) MaxApplicableVersion() *foundation.NSNumber {
+	return x.inner.MaxApplicableVersion()
+}
+
+// SetMaxApplicableVersion calls the underlying SetMaxApplicableVersion.
+func (x *MTROTAHeader) SetMaxApplicableVersion(maxApplicableVersion *foundation.NSNumber) {
+	x.inner.SetMaxApplicableVersion(maxApplicableVersion)
+}
+
+// MTROTAHeaderable is the interface implemented by [MTROTAHeader], for mocking and DI.
+type MTROTAHeaderable interface {
+	Unwrap() *raw.MTROTAHeader
+	WithVendorID(vendorID *foundation.NSNumber) *MTROTAHeader
+	WithProductID(productID *foundation.NSNumber) *MTROTAHeader
+	WithPayloadSize(payloadSize *foundation.NSNumber) *MTROTAHeader
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROTAHeader
+	WithSoftwareVersionString(softwareVersionString string) *MTROTAHeader
+	WithReleaseNotesURL(releaseNotesURL string) *MTROTAHeader
+	WithImageDigest(imageDigest *foundation.NSData) *MTROTAHeader
+	WithImageDigestType(imageDigestType raw.MTROTAImageDigestType) *MTROTAHeader
+	WithMinApplicableVersion(minApplicableVersion *foundation.NSNumber) *MTROTAHeader
+	WithMaxApplicableVersion(maxApplicableVersion *foundation.NSNumber) *MTROTAHeader
+	VendorID() *foundation.NSNumber
+	SetVendorID(vendorID *foundation.NSNumber)
+	ProductID() *foundation.NSNumber
+	SetProductID(productID *foundation.NSNumber)
+	PayloadSize() *foundation.NSNumber
+	SetPayloadSize(payloadSize *foundation.NSNumber)
+	SoftwareVersion() *foundation.NSNumber
+	SetSoftwareVersion(softwareVersion *foundation.NSNumber)
+	SoftwareVersionString() string
+	SetSoftwareVersionString(softwareVersionString string)
+	ReleaseNotesURL() string
+	SetReleaseNotesURL(releaseNotesURL string)
+	ImageDigest() *foundation.NSData
+	SetImageDigest(imageDigest *foundation.NSData)
+	ImageDigestType() raw.MTROTAImageDigestType
+	SetImageDigestType(imageDigestType raw.MTROTAImageDigestType)
+	MinApplicableVersion() *foundation.NSNumber
+	SetMinApplicableVersion(minApplicableVersion *foundation.NSNumber)
+	MaxApplicableVersion() *foundation.NSNumber
+	SetMaxApplicableVersion(maxApplicableVersion *foundation.NSNumber)
+}
+
+var _ MTROTAHeaderable = (*MTROTAHeader)(nil)
 

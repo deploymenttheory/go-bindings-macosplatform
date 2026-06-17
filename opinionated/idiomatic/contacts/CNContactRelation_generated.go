@@ -7,6 +7,7 @@ package contacts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewContactRelationWithName(name string) *ContactRelation {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), foundation.NSStringStringWithUTF8String(name).Ptr())
 	return &ContactRelation{inner: raw.CNContactRelationFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *ContactRelation) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContactRelationable is the interface implemented by [ContactRelation], for mocking and DI.
+type ContactRelationable interface {
+	Unwrap() *raw.CNContactRelation
+	Name() string
+}
+
+var _ ContactRelationable = (*ContactRelation)(nil)
 

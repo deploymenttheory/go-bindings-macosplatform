@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -126,4 +127,272 @@ func (x *WKWebViewConfiguration) WithWritingToolsBehavior(writingToolsBehavior a
 	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
 	return x
 }
+
+// SetURLSchemeHandlerForURLScheme calls the underlying SetURLSchemeHandlerForURLScheme.
+func (x *WKWebViewConfiguration) SetURLSchemeHandlerForURLScheme(urlSchemeHandler raw.WKURLSchemeHandler, urlScheme string) {
+	x.inner.SetURLSchemeHandlerForURLScheme(urlSchemeHandler, foundation.NSStringStringWithUTF8String(urlScheme))
+}
+
+// UrlSchemeHandlerForURLScheme calls the underlying UrlSchemeHandlerForURLScheme.
+func (x *WKWebViewConfiguration) UrlSchemeHandlerForURLScheme(urlScheme string) raw.WKURLSchemeHandler {
+	return x.inner.UrlSchemeHandlerForURLScheme(foundation.NSStringStringWithUTF8String(urlScheme))
+}
+
+// ProcessPool calls the underlying ProcessPool.
+func (x *WKWebViewConfiguration) ProcessPool() *WKProcessPool {
+	_r := x.inner.ProcessPool()
+	if _r == nil {
+		return nil
+	}
+	return &WKProcessPool{inner: _r}
+}
+
+// SetProcessPool calls the underlying SetProcessPool.
+func (x *WKWebViewConfiguration) SetProcessPool(processPool *raw.WKProcessPool) {
+	x.inner.SetProcessPool(processPool)
+}
+
+// Preferences calls the underlying Preferences.
+func (x *WKWebViewConfiguration) Preferences() *WKPreferences {
+	_r := x.inner.Preferences()
+	if _r == nil {
+		return nil
+	}
+	return &WKPreferences{inner: _r}
+}
+
+// SetPreferences calls the underlying SetPreferences.
+func (x *WKWebViewConfiguration) SetPreferences(preferences *raw.WKPreferences) {
+	x.inner.SetPreferences(preferences)
+}
+
+// UserContentController calls the underlying UserContentController.
+func (x *WKWebViewConfiguration) UserContentController() *WKUserContentController {
+	_r := x.inner.UserContentController()
+	if _r == nil {
+		return nil
+	}
+	return &WKUserContentController{inner: _r}
+}
+
+// SetUserContentController calls the underlying SetUserContentController.
+func (x *WKWebViewConfiguration) SetUserContentController(userContentController *raw.WKUserContentController) {
+	x.inner.SetUserContentController(userContentController)
+}
+
+// WebExtensionController calls the underlying WebExtensionController.
+func (x *WKWebViewConfiguration) WebExtensionController() *WKWebExtensionController {
+	_r := x.inner.WebExtensionController()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionController{inner: _r}
+}
+
+// SetWebExtensionController calls the underlying SetWebExtensionController.
+func (x *WKWebViewConfiguration) SetWebExtensionController(webExtensionController *raw.WKWebExtensionController) {
+	x.inner.SetWebExtensionController(webExtensionController)
+}
+
+// WebsiteDataStore calls the underlying WebsiteDataStore.
+func (x *WKWebViewConfiguration) WebsiteDataStore() *WKWebsiteDataStore {
+	_r := x.inner.WebsiteDataStore()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebsiteDataStore{inner: _r}
+}
+
+// SetWebsiteDataStore calls the underlying SetWebsiteDataStore.
+func (x *WKWebViewConfiguration) SetWebsiteDataStore(websiteDataStore *raw.WKWebsiteDataStore) {
+	x.inner.SetWebsiteDataStore(websiteDataStore)
+}
+
+// SuppressesIncrementalRendering calls the underlying SuppressesIncrementalRendering.
+func (x *WKWebViewConfiguration) SuppressesIncrementalRendering() bool {
+	return x.inner.SuppressesIncrementalRendering()
+}
+
+// SetSuppressesIncrementalRendering calls the underlying SetSuppressesIncrementalRendering.
+func (x *WKWebViewConfiguration) SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool) {
+	x.inner.SetSuppressesIncrementalRendering(suppressesIncrementalRendering)
+}
+
+// ApplicationNameForUserAgent calls the underlying ApplicationNameForUserAgent.
+func (x *WKWebViewConfiguration) ApplicationNameForUserAgent() string {
+	_r := x.inner.ApplicationNameForUserAgent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetApplicationNameForUserAgent calls the underlying SetApplicationNameForUserAgent.
+func (x *WKWebViewConfiguration) SetApplicationNameForUserAgent(applicationNameForUserAgent string) {
+	x.inner.SetApplicationNameForUserAgent(foundation.NSStringStringWithUTF8String(applicationNameForUserAgent))
+}
+
+// AllowsAirPlayForMediaPlayback calls the underlying AllowsAirPlayForMediaPlayback.
+func (x *WKWebViewConfiguration) AllowsAirPlayForMediaPlayback() bool {
+	return x.inner.AllowsAirPlayForMediaPlayback()
+}
+
+// SetAllowsAirPlayForMediaPlayback calls the underlying SetAllowsAirPlayForMediaPlayback.
+func (x *WKWebViewConfiguration) SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) {
+	x.inner.SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback)
+}
+
+// ShowsSystemScreenTimeBlockingView calls the underlying ShowsSystemScreenTimeBlockingView.
+func (x *WKWebViewConfiguration) ShowsSystemScreenTimeBlockingView() bool {
+	return x.inner.ShowsSystemScreenTimeBlockingView()
+}
+
+// SetShowsSystemScreenTimeBlockingView calls the underlying SetShowsSystemScreenTimeBlockingView.
+func (x *WKWebViewConfiguration) SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) {
+	x.inner.SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView)
+}
+
+// UpgradeKnownHostsToHTTPS calls the underlying UpgradeKnownHostsToHTTPS.
+func (x *WKWebViewConfiguration) UpgradeKnownHostsToHTTPS() bool {
+	return x.inner.UpgradeKnownHostsToHTTPS()
+}
+
+// SetUpgradeKnownHostsToHTTPS calls the underlying SetUpgradeKnownHostsToHTTPS.
+func (x *WKWebViewConfiguration) SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) {
+	x.inner.SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS)
+}
+
+// MediaTypesRequiringUserActionForPlayback calls the underlying MediaTypesRequiringUserActionForPlayback.
+func (x *WKWebViewConfiguration) MediaTypesRequiringUserActionForPlayback() raw.WKAudiovisualMediaTypes {
+	return x.inner.MediaTypesRequiringUserActionForPlayback()
+}
+
+// SetMediaTypesRequiringUserActionForPlayback calls the underlying SetMediaTypesRequiringUserActionForPlayback.
+func (x *WKWebViewConfiguration) SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) {
+	x.inner.SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback)
+}
+
+// DefaultWebpagePreferences calls the underlying DefaultWebpagePreferences.
+func (x *WKWebViewConfiguration) DefaultWebpagePreferences() *WKWebpagePreferences {
+	_r := x.inner.DefaultWebpagePreferences()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebpagePreferences{inner: _r}
+}
+
+// SetDefaultWebpagePreferences calls the underlying SetDefaultWebpagePreferences.
+func (x *WKWebViewConfiguration) SetDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences) {
+	x.inner.SetDefaultWebpagePreferences(defaultWebpagePreferences)
+}
+
+// LimitsNavigationsToAppBoundDomains calls the underlying LimitsNavigationsToAppBoundDomains.
+func (x *WKWebViewConfiguration) LimitsNavigationsToAppBoundDomains() bool {
+	return x.inner.LimitsNavigationsToAppBoundDomains()
+}
+
+// SetLimitsNavigationsToAppBoundDomains calls the underlying SetLimitsNavigationsToAppBoundDomains.
+func (x *WKWebViewConfiguration) SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) {
+	x.inner.SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains)
+}
+
+// AllowsInlinePredictions calls the underlying AllowsInlinePredictions.
+func (x *WKWebViewConfiguration) AllowsInlinePredictions() bool {
+	return x.inner.AllowsInlinePredictions()
+}
+
+// SetAllowsInlinePredictions calls the underlying SetAllowsInlinePredictions.
+func (x *WKWebViewConfiguration) SetAllowsInlinePredictions(allowsInlinePredictions bool) {
+	x.inner.SetAllowsInlinePredictions(allowsInlinePredictions)
+}
+
+// UserInterfaceDirectionPolicy calls the underlying UserInterfaceDirectionPolicy.
+func (x *WKWebViewConfiguration) UserInterfaceDirectionPolicy() raw.WKUserInterfaceDirectionPolicy {
+	return x.inner.UserInterfaceDirectionPolicy()
+}
+
+// SetUserInterfaceDirectionPolicy calls the underlying SetUserInterfaceDirectionPolicy.
+func (x *WKWebViewConfiguration) SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) {
+	x.inner.SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy)
+}
+
+// SupportsAdaptiveImageGlyph calls the underlying SupportsAdaptiveImageGlyph.
+func (x *WKWebViewConfiguration) SupportsAdaptiveImageGlyph() bool {
+	return x.inner.SupportsAdaptiveImageGlyph()
+}
+
+// SetSupportsAdaptiveImageGlyph calls the underlying SetSupportsAdaptiveImageGlyph.
+func (x *WKWebViewConfiguration) SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) {
+	x.inner.SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph)
+}
+
+// WritingToolsBehavior calls the underlying WritingToolsBehavior.
+func (x *WKWebViewConfiguration) WritingToolsBehavior() appkit.NSWritingToolsBehavior {
+	return x.inner.WritingToolsBehavior()
+}
+
+// SetWritingToolsBehavior calls the underlying SetWritingToolsBehavior.
+func (x *WKWebViewConfiguration) SetWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) {
+	x.inner.SetWritingToolsBehavior(writingToolsBehavior)
+}
+
+// WKWebViewConfigurationable is the interface implemented by [WKWebViewConfiguration], for mocking and DI.
+type WKWebViewConfigurationable interface {
+	Unwrap() *raw.WKWebViewConfiguration
+	WithProcessPool(processPool *raw.WKProcessPool) *WKWebViewConfiguration
+	WithPreferences(preferences *raw.WKPreferences) *WKWebViewConfiguration
+	WithUserContentController(userContentController *raw.WKUserContentController) *WKWebViewConfiguration
+	WithWebExtensionController(webExtensionController *raw.WKWebExtensionController) *WKWebViewConfiguration
+	WithWebsiteDataStore(websiteDataStore *raw.WKWebsiteDataStore) *WKWebViewConfiguration
+	WithSuppressesIncrementalRendering(suppressesIncrementalRendering bool) *WKWebViewConfiguration
+	WithApplicationNameForUserAgent(applicationNameForUserAgent string) *WKWebViewConfiguration
+	WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WKWebViewConfiguration
+	WithShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool) *WKWebViewConfiguration
+	WithUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool) *WKWebViewConfiguration
+	WithMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes) *WKWebViewConfiguration
+	WithDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences) *WKWebViewConfiguration
+	WithLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool) *WKWebViewConfiguration
+	WithAllowsInlinePredictions(allowsInlinePredictions bool) *WKWebViewConfiguration
+	WithUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy) *WKWebViewConfiguration
+	WithSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool) *WKWebViewConfiguration
+	WithWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior) *WKWebViewConfiguration
+	SetURLSchemeHandlerForURLScheme(urlSchemeHandler raw.WKURLSchemeHandler, urlScheme string)
+	UrlSchemeHandlerForURLScheme(urlScheme string) raw.WKURLSchemeHandler
+	ProcessPool() *WKProcessPool
+	SetProcessPool(processPool *raw.WKProcessPool)
+	Preferences() *WKPreferences
+	SetPreferences(preferences *raw.WKPreferences)
+	UserContentController() *WKUserContentController
+	SetUserContentController(userContentController *raw.WKUserContentController)
+	WebExtensionController() *WKWebExtensionController
+	SetWebExtensionController(webExtensionController *raw.WKWebExtensionController)
+	WebsiteDataStore() *WKWebsiteDataStore
+	SetWebsiteDataStore(websiteDataStore *raw.WKWebsiteDataStore)
+	SuppressesIncrementalRendering() bool
+	SetSuppressesIncrementalRendering(suppressesIncrementalRendering bool)
+	ApplicationNameForUserAgent() string
+	SetApplicationNameForUserAgent(applicationNameForUserAgent string)
+	AllowsAirPlayForMediaPlayback() bool
+	SetAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool)
+	ShowsSystemScreenTimeBlockingView() bool
+	SetShowsSystemScreenTimeBlockingView(showsSystemScreenTimeBlockingView bool)
+	UpgradeKnownHostsToHTTPS() bool
+	SetUpgradeKnownHostsToHTTPS(upgradeKnownHostsToHTTPS bool)
+	MediaTypesRequiringUserActionForPlayback() raw.WKAudiovisualMediaTypes
+	SetMediaTypesRequiringUserActionForPlayback(mediaTypesRequiringUserActionForPlayback raw.WKAudiovisualMediaTypes)
+	DefaultWebpagePreferences() *WKWebpagePreferences
+	SetDefaultWebpagePreferences(defaultWebpagePreferences *raw.WKWebpagePreferences)
+	LimitsNavigationsToAppBoundDomains() bool
+	SetLimitsNavigationsToAppBoundDomains(limitsNavigationsToAppBoundDomains bool)
+	AllowsInlinePredictions() bool
+	SetAllowsInlinePredictions(allowsInlinePredictions bool)
+	UserInterfaceDirectionPolicy() raw.WKUserInterfaceDirectionPolicy
+	SetUserInterfaceDirectionPolicy(userInterfaceDirectionPolicy raw.WKUserInterfaceDirectionPolicy)
+	SupportsAdaptiveImageGlyph() bool
+	SetSupportsAdaptiveImageGlyph(supportsAdaptiveImageGlyph bool)
+	WritingToolsBehavior() appkit.NSWritingToolsBehavior
+	SetWritingToolsBehavior(writingToolsBehavior appkit.NSWritingToolsBehavior)
+}
+
+var _ WKWebViewConfigurationable = (*WKWebViewConfiguration)(nil)
 

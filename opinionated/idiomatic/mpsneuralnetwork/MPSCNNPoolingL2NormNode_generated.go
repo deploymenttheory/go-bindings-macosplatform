@@ -27,3 +27,10 @@ func (x *CNNPoolingL2NormNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode { retur
 
 func (x *CNNPoolingL2NormNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
 
+// CNNPoolingL2NormNodeable is the interface implemented by [CNNPoolingL2NormNode], for mocking and DI.
+type CNNPoolingL2NormNodeable interface {
+	Unwrap() *raw.MPSCNNPoolingL2NormNode
+}
+
+var _ CNNPoolingL2NormNodeable = (*CNNPoolingL2NormNode)(nil)
+

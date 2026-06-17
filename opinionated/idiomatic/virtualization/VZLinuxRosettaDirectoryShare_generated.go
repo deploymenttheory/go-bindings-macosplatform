@@ -29,5 +29,29 @@ func (x *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOpti
 	return x
 }
 
+// Options calls the underlying Options.
+func (x *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &LinuxRosettaCachingOptions{inner: _r}
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *LinuxRosettaDirectoryShare) SetOptions(options *raw.VZLinuxRosettaCachingOptions) {
+	x.inner.SetOptions(options)
+}
+
 func (x *LinuxRosettaDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return &x.inner.VZDirectoryShare }
+
+// LinuxRosettaDirectoryShareable is the interface implemented by [LinuxRosettaDirectoryShare], for mocking and DI.
+type LinuxRosettaDirectoryShareable interface {
+	Unwrap() *raw.VZLinuxRosettaDirectoryShare
+	WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare
+	Options() *LinuxRosettaCachingOptions
+	SetOptions(options *raw.VZLinuxRosettaCachingOptions)
+}
+
+var _ LinuxRosettaDirectoryShareable = (*LinuxRosettaDirectoryShare)(nil)
 

@@ -23,3 +23,46 @@ func NewExceptionHandler() *ExceptionHandler {
 	return &ExceptionHandler{inner: raw.NSExceptionHandlerFromID(_id)}
 }
 
+// SetExceptionHandlingMask calls the underlying SetExceptionHandlingMask.
+func (x *ExceptionHandler) SetExceptionHandlingMask(aMask uint) {
+	x.inner.SetExceptionHandlingMask(aMask)
+}
+
+// ExceptionHandlingMask calls the underlying ExceptionHandlingMask.
+func (x *ExceptionHandler) ExceptionHandlingMask() uint {
+	return x.inner.ExceptionHandlingMask()
+}
+
+// SetExceptionHangingMask calls the underlying SetExceptionHangingMask.
+func (x *ExceptionHandler) SetExceptionHangingMask(aMask uint) {
+	x.inner.SetExceptionHangingMask(aMask)
+}
+
+// ExceptionHangingMask calls the underlying ExceptionHangingMask.
+func (x *ExceptionHandler) ExceptionHangingMask() uint {
+	return x.inner.ExceptionHangingMask()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *ExceptionHandler) SetDelegate(anObject objc.ID) {
+	x.inner.SetDelegate(anObject)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *ExceptionHandler) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// ExceptionHandlerable is the interface implemented by [ExceptionHandler], for mocking and DI.
+type ExceptionHandlerable interface {
+	Unwrap() *raw.NSExceptionHandler
+	SetExceptionHandlingMask(aMask uint)
+	ExceptionHandlingMask() uint
+	SetExceptionHangingMask(aMask uint)
+	ExceptionHangingMask() uint
+	SetDelegate(anObject objc.ID)
+	Delegate() objc.ID
+}
+
+var _ ExceptionHandlerable = (*ExceptionHandler)(nil)
+

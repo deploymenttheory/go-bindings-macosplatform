@@ -27,3 +27,10 @@ func (x *FragmentedMovie) asMovie() *raw.AVMovie { return &x.inner.AVMovie }
 
 func (x *FragmentedMovie) asAsset() *raw.AVAsset { return &x.inner.AVMovie.AVAsset }
 
+// FragmentedMovieable is the interface implemented by [FragmentedMovie], for mocking and DI.
+type FragmentedMovieable interface {
+	Unwrap() *raw.AVFragmentedMovie
+}
+
+var _ FragmentedMovieable = (*FragmentedMovie)(nil)
+

@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,9 +24,26 @@ func NewDOMFile() *DOMFile {
 	return &DOMFile{inner: raw.DOMFileFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *DOMFile) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMFile) asDOMBlob() *raw.DOMBlob { return &x.inner.DOMBlob }
 
 func (x *DOMFile) asDOMObject() *raw.DOMObject { return &x.inner.DOMBlob.DOMObject }
 
 func (x *DOMFile) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMBlob.DOMObject.WebScriptObject }
+
+// DOMFileable is the interface implemented by [DOMFile], for mocking and DI.
+type DOMFileable interface {
+	Unwrap() *raw.DOMFile
+	Name() string
+}
+
+var _ DOMFileable = (*DOMFile)(nil)
 

@@ -29,3 +29,10 @@ func (x *CNNInstanceNormalizationGradientNode) asNNGradientFilterNode() *mpsneur
 
 func (x *CNNInstanceNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNInstanceNormalizationGradientNodeable is the interface implemented by [CNNInstanceNormalizationGradientNode], for mocking and DI.
+type CNNInstanceNormalizationGradientNodeable interface {
+	Unwrap() *raw.MPSCNNInstanceNormalizationGradientNode
+}
+
+var _ CNNInstanceNormalizationGradientNodeable = (*CNNInstanceNormalizationGradientNode)(nil)
+

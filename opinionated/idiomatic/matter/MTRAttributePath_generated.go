@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewMTRAttributePath() *MTRAttributePath {
 	return &MTRAttributePath{inner: raw.MTRAttributePathFromID(_id)}
 }
 
+// Attribute calls the underlying Attribute.
+func (x *MTRAttributePath) Attribute() *foundation.NSNumber {
+	return x.inner.Attribute()
+}
+
 func (x *MTRAttributePath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
+
+// MTRAttributePathable is the interface implemented by [MTRAttributePath], for mocking and DI.
+type MTRAttributePathable interface {
+	Unwrap() *raw.MTRAttributePath
+	Attribute() *foundation.NSNumber
+}
+
+var _ MTRAttributePathable = (*MTRAttributePath)(nil)
 

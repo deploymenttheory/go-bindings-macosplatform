@@ -61,3 +61,79 @@ func (x *MTRGroupsClusterViewGroupResponseParams) WithGroupId(groupId *foundatio
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRGroupsClusterViewGroupResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// GroupID calls the underlying GroupID.
+func (x *MTRGroupsClusterViewGroupResponseParams) GroupID() *foundation.NSNumber {
+	return x.inner.GroupID()
+}
+
+// SetGroupID calls the underlying SetGroupID.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupID(groupID *foundation.NSNumber) {
+	x.inner.SetGroupID(groupID)
+}
+
+// GroupName calls the underlying GroupName.
+func (x *MTRGroupsClusterViewGroupResponseParams) GroupName() string {
+	_r := x.inner.GroupName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetGroupName calls the underlying SetGroupName.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupName(groupName string) {
+	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterViewGroupResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// GroupId calls the underlying GroupId.
+func (x *MTRGroupsClusterViewGroupResponseParams) GroupId() *foundation.NSNumber {
+	return x.inner.GroupId()
+}
+
+// SetGroupId calls the underlying SetGroupId.
+func (x *MTRGroupsClusterViewGroupResponseParams) SetGroupId(groupId *foundation.NSNumber) {
+	x.inner.SetGroupId(groupId)
+}
+
+// MTRGroupsClusterViewGroupResponseParamsable is the interface implemented by [MTRGroupsClusterViewGroupResponseParams], for mocking and DI.
+type MTRGroupsClusterViewGroupResponseParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterViewGroupResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
+	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
+	WithGroupName(groupName string) *MTRGroupsClusterViewGroupResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
+	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterViewGroupResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	GroupID() *foundation.NSNumber
+	SetGroupID(groupID *foundation.NSNumber)
+	GroupName() string
+	SetGroupName(groupName string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	GroupId() *foundation.NSNumber
+	SetGroupId(groupId *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterViewGroupResponseParamsable = (*MTRGroupsClusterViewGroupResponseParams)(nil)
+

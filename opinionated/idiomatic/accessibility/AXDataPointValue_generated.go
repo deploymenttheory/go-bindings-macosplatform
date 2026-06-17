@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *DataPointValue) WithCategory(category string) *DataPointValue {
 	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
 	return x
 }
+
+// Number calls the underlying Number.
+func (x *DataPointValue) Number() float64 {
+	return x.inner.Number()
+}
+
+// SetNumber calls the underlying SetNumber.
+func (x *DataPointValue) SetNumber(number float64) {
+	x.inner.SetNumber(number)
+}
+
+// Category calls the underlying Category.
+func (x *DataPointValue) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCategory calls the underlying SetCategory.
+func (x *DataPointValue) SetCategory(category string) {
+	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+}
+
+// DataPointValueable is the interface implemented by [DataPointValue], for mocking and DI.
+type DataPointValueable interface {
+	Unwrap() *raw.AXDataPointValue
+	WithNumber(number float64) *DataPointValue
+	WithCategory(category string) *DataPointValue
+	Number() float64
+	SetNumber(number float64)
+	Category() string
+	SetCategory(category string)
+}
+
+var _ DataPointValueable = (*DataPointValue)(nil)
 

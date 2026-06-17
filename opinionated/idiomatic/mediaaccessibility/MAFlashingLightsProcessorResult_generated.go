@@ -23,3 +23,28 @@ func NewFlashingLightsProcessorResult() *FlashingLightsProcessorResult {
 	return &FlashingLightsProcessorResult{inner: raw.MAFlashingLightsProcessorResultFromID(_id)}
 }
 
+// SurfaceProcessed calls the underlying SurfaceProcessed.
+func (x *FlashingLightsProcessorResult) SurfaceProcessed() bool {
+	return x.inner.SurfaceProcessed()
+}
+
+// MitigationLevel calls the underlying MitigationLevel.
+func (x *FlashingLightsProcessorResult) MitigationLevel() float32 {
+	return x.inner.MitigationLevel()
+}
+
+// IntensityLevel calls the underlying IntensityLevel.
+func (x *FlashingLightsProcessorResult) IntensityLevel() float32 {
+	return x.inner.IntensityLevel()
+}
+
+// FlashingLightsProcessorResultable is the interface implemented by [FlashingLightsProcessorResult], for mocking and DI.
+type FlashingLightsProcessorResultable interface {
+	Unwrap() *raw.MAFlashingLightsProcessorResult
+	SurfaceProcessed() bool
+	MitigationLevel() float32
+	IntensityLevel() float32
+}
+
+var _ FlashingLightsProcessorResultable = (*FlashingLightsProcessorResult)(nil)
+

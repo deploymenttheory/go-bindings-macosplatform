@@ -7,6 +7,7 @@ package corehaptics
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,16 +32,45 @@ func (x *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticPar
 	return x
 }
 
+// ParameterID calls the underlying ParameterID.
+func (x *HapticParameterCurve) ParameterID() string {
+	_r := x.inner.ParameterID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RelativeTime calls the underlying RelativeTime.
+func (x *HapticParameterCurve) RelativeTime() float64 {
+	return x.inner.RelativeTime()
+}
+
+// SetRelativeTime calls the underlying SetRelativeTime.
+func (x *HapticParameterCurve) SetRelativeTime(relativeTime float64) {
+	x.inner.SetRelativeTime(relativeTime)
+}
+
 // ControlPoints returns the collection as a Go slice.
 func (x *HapticParameterCurve) ControlPoints() []*raw.CHHapticParameterCurveControlPoint {
 	arr := x.inner.ControlPoints()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CHHapticParameterCurveControlPoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CHHapticParameterCurveControlPoint {
+		return raw.CHHapticParameterCurveControlPointFromID(purego.Retain(_id))
+	})
 }
+
+// HapticParameterCurveable is the interface implemented by [HapticParameterCurve], for mocking and DI.
+type HapticParameterCurveable interface {
+	Unwrap() *raw.CHHapticParameterCurve
+	WithRelativeTime(relativeTime float64) *HapticParameterCurve
+	ParameterID() string
+	RelativeTime() float64
+	SetRelativeTime(relativeTime float64)
+	ControlPoints() []*raw.CHHapticParameterCurveControlPoint
+}
+
+var _ HapticParameterCurveable = (*HapticParameterCurve)(nil)
 

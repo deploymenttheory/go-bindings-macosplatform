@@ -32,5 +32,28 @@ func NewCachedImageRepWithSizeDepthSeparateAlpha(size corefoundation.CGSize, dep
 	return &CachedImageRep{inner: raw.NSCachedImageRepFromID(_id)}
 }
 
+// Window calls the underlying Window.
+func (x *CachedImageRep) Window() *Window {
+	_r := x.inner.Window()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// Rect calls the underlying Rect.
+func (x *CachedImageRep) Rect() corefoundation.CGRect {
+	return x.inner.Rect()
+}
+
 func (x *CachedImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// CachedImageRepable is the interface implemented by [CachedImageRep], for mocking and DI.
+type CachedImageRepable interface {
+	Unwrap() *raw.NSCachedImageRep
+	Window() *Window
+	Rect() corefoundation.CGRect
+}
+
+var _ CachedImageRepable = (*CachedImageRep)(nil)
 

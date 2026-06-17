@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,22 @@ func NewParameterKey() *ParameterKey {
 	return &ParameterKey{inner: raw.MLParameterKeyFromID(_id)}
 }
 
+// ScopedTo calls the underlying ScopedTo.
+func (x *ParameterKey) ScopedTo(scope string) *ParameterKey {
+	_r := x.inner.ScopedTo(foundation.NSStringStringWithUTF8String(scope))
+	if _r == nil {
+		return nil
+	}
+	return &ParameterKey{inner: _r}
+}
+
 func (x *ParameterKey) asKey() *raw.MLKey { return &x.inner.MLKey }
+
+// ParameterKeyable is the interface implemented by [ParameterKey], for mocking and DI.
+type ParameterKeyable interface {
+	Unwrap() *raw.MLParameterKey
+	ScopedTo(scope string) *ParameterKey
+}
+
+var _ ParameterKeyable = (*ParameterKey)(nil)
 

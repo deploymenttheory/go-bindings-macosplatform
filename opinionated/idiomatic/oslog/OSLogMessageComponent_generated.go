@@ -5,7 +5,9 @@
 package oslog
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,77 @@ func NewLogMessageComponent() *LogMessageComponent {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogMessageComponent")), objc.RegisterName("new"))
 	return &LogMessageComponent{inner: raw.OSLogMessageComponentFromID(_id)}
 }
+
+// FormatSubstring calls the underlying FormatSubstring.
+func (x *LogMessageComponent) FormatSubstring() string {
+	_r := x.inner.FormatSubstring()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Placeholder calls the underlying Placeholder.
+func (x *LogMessageComponent) Placeholder() string {
+	_r := x.inner.Placeholder()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ArgumentCategory calls the underlying ArgumentCategory.
+func (x *LogMessageComponent) ArgumentCategory() raw.OSLogMessageComponentArgumentCategory {
+	return x.inner.ArgumentCategory()
+}
+
+// ArgumentDataValue calls the underlying ArgumentDataValue.
+func (x *LogMessageComponent) ArgumentDataValue() *foundation.NSData {
+	return x.inner.ArgumentDataValue()
+}
+
+// ArgumentDoubleValue calls the underlying ArgumentDoubleValue.
+func (x *LogMessageComponent) ArgumentDoubleValue() float64 {
+	return x.inner.ArgumentDoubleValue()
+}
+
+// ArgumentInt64Value calls the underlying ArgumentInt64Value.
+func (x *LogMessageComponent) ArgumentInt64Value() int64 {
+	return x.inner.ArgumentInt64Value()
+}
+
+// ArgumentNumberValue calls the underlying ArgumentNumberValue.
+func (x *LogMessageComponent) ArgumentNumberValue() *foundation.NSNumber {
+	return x.inner.ArgumentNumberValue()
+}
+
+// ArgumentStringValue calls the underlying ArgumentStringValue.
+func (x *LogMessageComponent) ArgumentStringValue() string {
+	_r := x.inner.ArgumentStringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ArgumentUInt64Value calls the underlying ArgumentUInt64Value.
+func (x *LogMessageComponent) ArgumentUInt64Value() uint64 {
+	return x.inner.ArgumentUInt64Value()
+}
+
+// LogMessageComponentable is the interface implemented by [LogMessageComponent], for mocking and DI.
+type LogMessageComponentable interface {
+	Unwrap() *raw.OSLogMessageComponent
+	FormatSubstring() string
+	Placeholder() string
+	ArgumentCategory() raw.OSLogMessageComponentArgumentCategory
+	ArgumentDataValue() *foundation.NSData
+	ArgumentDoubleValue() float64
+	ArgumentInt64Value() int64
+	ArgumentNumberValue() *foundation.NSNumber
+	ArgumentStringValue() string
+	ArgumentUInt64Value() uint64
+}
+
+var _ LogMessageComponentable = (*LogMessageComponent)(nil)
 

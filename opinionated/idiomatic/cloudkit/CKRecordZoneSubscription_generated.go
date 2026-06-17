@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,5 +46,39 @@ func (x *RecordZoneSubscription) WithRecordType(recordType *foundation.NSString)
 	return x
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *RecordZoneSubscription) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// RecordType calls the underlying RecordType.
+func (x *RecordZoneSubscription) RecordType() string {
+	_r := x.inner.RecordType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRecordType calls the underlying SetRecordType.
+func (x *RecordZoneSubscription) SetRecordType(recordType *foundation.NSString) {
+	x.inner.SetRecordType(recordType)
+}
+
 func (x *RecordZoneSubscription) asSubscription() *raw.CKSubscription { return &x.inner.CKSubscription }
+
+// RecordZoneSubscriptionable is the interface implemented by [RecordZoneSubscription], for mocking and DI.
+type RecordZoneSubscriptionable interface {
+	Unwrap() *raw.CKRecordZoneSubscription
+	WithRecordType(recordType *foundation.NSString) *RecordZoneSubscription
+	ZoneID() *RecordZoneID
+	RecordType() string
+	SetRecordType(recordType *foundation.NSString)
+}
+
+var _ RecordZoneSubscriptionable = (*RecordZoneSubscription)(nil)
 

@@ -7,6 +7,7 @@ package imagecapturecore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,44 +31,67 @@ func (x *ScannerFeatureEnumeration) WithCurrentValue(currentValue objc.ID) *Scan
 	return x
 }
 
+// CurrentValue calls the underlying CurrentValue.
+func (x *ScannerFeatureEnumeration) CurrentValue() objc.ID {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *ScannerFeatureEnumeration) SetCurrentValue(currentValue objc.ID) {
+	x.inner.SetCurrentValue(currentValue)
+}
+
+// DefaultValue calls the underlying DefaultValue.
+func (x *ScannerFeatureEnumeration) DefaultValue() objc.ID {
+	return x.inner.DefaultValue()
+}
+
 // Values returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) Values() []*foundation.NSNumber {
 	arr := x.inner.Values()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // MenuItemLabels returns the collection as a Go slice.
-func (x *ScannerFeatureEnumeration) MenuItemLabels() []*foundation.NSString {
+func (x *ScannerFeatureEnumeration) MenuItemLabels() []string {
 	arr := x.inner.MenuItemLabels()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // MenuItemLabelsTooltips returns the collection as a Go slice.
-func (x *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []*foundation.NSString {
+func (x *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []string {
 	arr := x.inner.MenuItemLabelsTooltips()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *ScannerFeatureEnumeration) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+
+// ScannerFeatureEnumerationable is the interface implemented by [ScannerFeatureEnumeration], for mocking and DI.
+type ScannerFeatureEnumerationable interface {
+	Unwrap() *raw.ICScannerFeatureEnumeration
+	WithCurrentValue(currentValue objc.ID) *ScannerFeatureEnumeration
+	CurrentValue() objc.ID
+	SetCurrentValue(currentValue objc.ID)
+	DefaultValue() objc.ID
+	Values() []*foundation.NSNumber
+	MenuItemLabels() []string
+	MenuItemLabelsTooltips() []string
+}
+
+var _ ScannerFeatureEnumerationable = (*ScannerFeatureEnumeration)(nil)
 

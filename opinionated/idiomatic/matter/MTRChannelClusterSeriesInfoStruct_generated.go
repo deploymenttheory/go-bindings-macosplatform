@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,45 @@ func (x *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChan
 	x.inner.SetEpisode(foundation.NSStringStringWithUTF8String(episode))
 	return x
 }
+
+// Season calls the underlying Season.
+func (x *MTRChannelClusterSeriesInfoStruct) Season() string {
+	_r := x.inner.Season()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSeason calls the underlying SetSeason.
+func (x *MTRChannelClusterSeriesInfoStruct) SetSeason(season string) {
+	x.inner.SetSeason(foundation.NSStringStringWithUTF8String(season))
+}
+
+// Episode calls the underlying Episode.
+func (x *MTRChannelClusterSeriesInfoStruct) Episode() string {
+	_r := x.inner.Episode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEpisode calls the underlying SetEpisode.
+func (x *MTRChannelClusterSeriesInfoStruct) SetEpisode(episode string) {
+	x.inner.SetEpisode(foundation.NSStringStringWithUTF8String(episode))
+}
+
+// MTRChannelClusterSeriesInfoStructable is the interface implemented by [MTRChannelClusterSeriesInfoStruct], for mocking and DI.
+type MTRChannelClusterSeriesInfoStructable interface {
+	Unwrap() *raw.MTRChannelClusterSeriesInfoStruct
+	WithSeason(season string) *MTRChannelClusterSeriesInfoStruct
+	WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct
+	Season() string
+	SetSeason(season string)
+	Episode() string
+	SetEpisode(episode string)
+}
+
+var _ MTRChannelClusterSeriesInfoStructable = (*MTRChannelClusterSeriesInfoStruct)(nil)
 

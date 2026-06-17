@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
@@ -24,4 +25,47 @@ func NewVideoProcessorWithURL(videoURL string) *VideoProcessor {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(videoURL)).Ptr())
 	return &VideoProcessor{inner: raw.VNVideoProcessorFromID(_id)}
 }
+
+// AddRequestProcessingOptionsError calls the underlying AddRequestProcessingOptionsError.
+func (x *VideoProcessor) AddRequestProcessingOptionsError(request *raw.VNRequest, processingOptions *raw.VNVideoProcessorRequestProcessingOptions) (bool, error) {
+	return x.inner.AddRequestProcessingOptionsError(request, processingOptions)
+}
+
+// AddRequestWithProcessingOptionsError calls the underlying AddRequestWithProcessingOptionsError.
+func (x *VideoProcessor) AddRequestWithProcessingOptionsError(request *raw.VNRequest, processingOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.AddRequestWithProcessingOptionsError(request, processingOptions)
+}
+
+// RemoveRequestError calls the underlying RemoveRequestError.
+func (x *VideoProcessor) RemoveRequestError(request *raw.VNRequest) (bool, error) {
+	return x.inner.RemoveRequestError(request)
+}
+
+// AnalyzeTimeRangeError calls the underlying AnalyzeTimeRangeError.
+func (x *VideoProcessor) AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
+	return x.inner.AnalyzeTimeRangeError(timeRange)
+}
+
+// AnalyzeWithTimeRangeError calls the underlying AnalyzeWithTimeRangeError.
+func (x *VideoProcessor) AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error) {
+	return x.inner.AnalyzeWithTimeRangeError(timeRange)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *VideoProcessor) Cancel() {
+	x.inner.Cancel()
+}
+
+// VideoProcessorable is the interface implemented by [VideoProcessor], for mocking and DI.
+type VideoProcessorable interface {
+	Unwrap() *raw.VNVideoProcessor
+	AddRequestProcessingOptionsError(request *raw.VNRequest, processingOptions *raw.VNVideoProcessorRequestProcessingOptions) (bool, error)
+	AddRequestWithProcessingOptionsError(request *raw.VNRequest, processingOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	RemoveRequestError(request *raw.VNRequest) (bool, error)
+	AnalyzeTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error)
+	AnalyzeWithTimeRangeError(timeRange coremedia.CMTimeRange) (bool, error)
+	Cancel()
+}
+
+var _ VideoProcessorable = (*VideoProcessor)(nil)
 

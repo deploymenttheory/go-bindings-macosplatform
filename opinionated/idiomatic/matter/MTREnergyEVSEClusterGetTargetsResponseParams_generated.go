@@ -31,3 +31,22 @@ func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(respo
 	return &MTREnergyEVSEClusterGetTargetsResponseParams{inner: raw.MTREnergyEVSEClusterGetTargetsResponseParamsFromID(_id)}, nil
 }
 
+// ChargingTargetSchedules calls the underlying ChargingTargetSchedules.
+func (x *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() *foundation.NSArray[objc.ID] {
+	return x.inner.ChargingTargetSchedules()
+}
+
+// SetChargingTargetSchedules calls the underlying SetChargingTargetSchedules.
+func (x *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID]) {
+	x.inner.SetChargingTargetSchedules(chargingTargetSchedules)
+}
+
+// MTREnergyEVSEClusterGetTargetsResponseParamsable is the interface implemented by [MTREnergyEVSEClusterGetTargetsResponseParams], for mocking and DI.
+type MTREnergyEVSEClusterGetTargetsResponseParamsable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterGetTargetsResponseParams
+	ChargingTargetSchedules() *foundation.NSArray[objc.ID]
+	SetChargingTargetSchedules(chargingTargetSchedules *foundation.NSArray[objc.ID])
+}
+
+var _ MTREnergyEVSEClusterGetTargetsResponseParamsable = (*MTREnergyEVSEClusterGetTargetsResponseParams)(nil)
+

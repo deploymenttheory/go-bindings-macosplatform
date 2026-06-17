@@ -25,3 +25,10 @@ func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAddi
 
 func (x *MTRContentLauncherClusterAdditionalInfo) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return &x.inner.MTRContentLauncherClusterAdditionalInfoStruct }
 
+// MTRContentLauncherClusterAdditionalInfoable is the interface implemented by [MTRContentLauncherClusterAdditionalInfo], for mocking and DI.
+type MTRContentLauncherClusterAdditionalInfoable interface {
+	Unwrap() *raw.MTRContentLauncherClusterAdditionalInfo
+}
+
+var _ MTRContentLauncherClusterAdditionalInfoable = (*MTRContentLauncherClusterAdditionalInfo)(nil)
+

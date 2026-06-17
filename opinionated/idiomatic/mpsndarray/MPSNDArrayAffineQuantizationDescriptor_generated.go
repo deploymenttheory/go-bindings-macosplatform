@@ -49,5 +49,51 @@ func (x *ArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPo
 	return x
 }
 
+// HasZeroPoint calls the underlying HasZeroPoint.
+func (x *ArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
+	return x.inner.HasZeroPoint()
+}
+
+// SetHasZeroPoint calls the underlying SetHasZeroPoint.
+func (x *ArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool) {
+	x.inner.SetHasZeroPoint(hasZeroPoint)
+}
+
+// HasMinValue calls the underlying HasMinValue.
+func (x *ArrayAffineQuantizationDescriptor) HasMinValue() bool {
+	return x.inner.HasMinValue()
+}
+
+// SetHasMinValue calls the underlying SetHasMinValue.
+func (x *ArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
+	x.inner.SetHasMinValue(hasMinValue)
+}
+
+// ImplicitZeroPoint calls the underlying ImplicitZeroPoint.
+func (x *ArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
+	return x.inner.ImplicitZeroPoint()
+}
+
+// SetImplicitZeroPoint calls the underlying SetImplicitZeroPoint.
+func (x *ArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
+	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
+}
+
 func (x *ArrayAffineQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor { return &x.inner.MPSNDArrayQuantizationDescriptor }
+
+// ArrayAffineQuantizationDescriptorable is the interface implemented by [ArrayAffineQuantizationDescriptor], for mocking and DI.
+type ArrayAffineQuantizationDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor
+	WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor
+	WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor
+	WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor
+	HasZeroPoint() bool
+	SetHasZeroPoint(hasZeroPoint bool)
+	HasMinValue() bool
+	SetHasMinValue(hasMinValue bool)
+	ImplicitZeroPoint() bool
+	SetImplicitZeroPoint(implicitZeroPoint bool)
+}
+
+var _ ArrayAffineQuantizationDescriptorable = (*ArrayAffineQuantizationDescriptor)(nil)
 

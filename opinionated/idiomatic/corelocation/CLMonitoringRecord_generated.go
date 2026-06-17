@@ -23,3 +23,30 @@ func NewMonitoringRecord() *MonitoringRecord {
 	return &MonitoringRecord{inner: raw.CLMonitoringRecordFromID(_id)}
 }
 
+// Condition calls the underlying Condition.
+func (x *MonitoringRecord) Condition() *Condition {
+	_r := x.inner.Condition()
+	if _r == nil {
+		return nil
+	}
+	return &Condition{inner: _r}
+}
+
+// LastEvent calls the underlying LastEvent.
+func (x *MonitoringRecord) LastEvent() *MonitoringEvent {
+	_r := x.inner.LastEvent()
+	if _r == nil {
+		return nil
+	}
+	return &MonitoringEvent{inner: _r}
+}
+
+// MonitoringRecordable is the interface implemented by [MonitoringRecord], for mocking and DI.
+type MonitoringRecordable interface {
+	Unwrap() *raw.CLMonitoringRecord
+	Condition() *Condition
+	LastEvent() *MonitoringEvent
+}
+
+var _ MonitoringRecordable = (*MonitoringRecord)(nil)
+

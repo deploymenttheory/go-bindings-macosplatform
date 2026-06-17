@@ -23,3 +23,10 @@ func NewMTRTimeSynchronizationClusterDSTTableEmptyEvent() *MTRTimeSynchronizatio
 	return &MTRTimeSynchronizationClusterDSTTableEmptyEvent{inner: raw.MTRTimeSynchronizationClusterDSTTableEmptyEventFromID(_id)}
 }
 
+// MTRTimeSynchronizationClusterDSTTableEmptyEventable is the interface implemented by [MTRTimeSynchronizationClusterDSTTableEmptyEvent], for mocking and DI.
+type MTRTimeSynchronizationClusterDSTTableEmptyEventable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterDSTTableEmptyEvent
+}
+
+var _ MTRTimeSynchronizationClusterDSTTableEmptyEventable = (*MTRTimeSynchronizationClusterDSTTableEmptyEvent)(nil)
+

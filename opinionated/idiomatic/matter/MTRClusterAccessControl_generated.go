@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterAccessControl wraps [raw.MTRClusterAccessControl] with a fluent Go API.
@@ -32,7 +35,155 @@ func NewMTRClusterAccessControlWithDeviceEndpointQueue(device *raw.MTRDevice, en
 	return &MTRClusterAccessControl{inner: raw.MTRClusterAccessControlFromID(_id)}
 }
 
+// ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterAccessControl) ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRAccessControlClusterReviewFabricRestrictionsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
+	type _result struct {
+		val *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeACLWithParams calls the underlying ReadAttributeACLWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeACLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeACLWithParams(params)
+}
+
+// WriteAttributeACLWithValueExpectedValueInterval calls the underlying WriteAttributeACLWithValueExpectedValueInterval.
+func (x *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeACLWithValueExpectedValueIntervalParams calls the underlying WriteAttributeACLWithValueExpectedValueIntervalParams.
+func (x *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeExtensionWithParams calls the underlying ReadAttributeExtensionWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeExtensionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeExtensionWithParams(params)
+}
+
+// WriteAttributeExtensionWithValueExpectedValueInterval calls the underlying WriteAttributeExtensionWithValueExpectedValueInterval.
+func (x *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeExtensionWithValueExpectedValueIntervalParams calls the underlying WriteAttributeExtensionWithValueExpectedValueIntervalParams.
+func (x *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeSubjectsPerAccessControlEntryWithParams calls the underlying ReadAttributeSubjectsPerAccessControlEntryWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSubjectsPerAccessControlEntryWithParams(params)
+}
+
+// ReadAttributeTargetsPerAccessControlEntryWithParams calls the underlying ReadAttributeTargetsPerAccessControlEntryWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeTargetsPerAccessControlEntryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTargetsPerAccessControlEntryWithParams(params)
+}
+
+// ReadAttributeAccessControlEntriesPerFabricWithParams calls the underlying ReadAttributeAccessControlEntriesPerFabricWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeAccessControlEntriesPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAccessControlEntriesPerFabricWithParams(params)
+}
+
+// ReadAttributeCommissioningARLWithParams calls the underlying ReadAttributeCommissioningARLWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeCommissioningARLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCommissioningARLWithParams(params)
+}
+
+// ReadAttributeARLWithParams calls the underlying ReadAttributeARLWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeARLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeARLWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// ReadAttributeAclWithParams calls the underlying ReadAttributeAclWithParams.
+func (x *MTRClusterAccessControl) ReadAttributeAclWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAclWithParams(params)
+}
+
+// WriteAttributeAclWithValueExpectedValueInterval calls the underlying WriteAttributeAclWithValueExpectedValueInterval.
+func (x *MTRClusterAccessControl) WriteAttributeAclWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeAclWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeAclWithValueExpectedValueIntervalParams calls the underlying WriteAttributeAclWithValueExpectedValueIntervalParams.
+func (x *MTRClusterAccessControl) WriteAttributeAclWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeAclWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
 func (x *MTRClusterAccessControl) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterAccessControl) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterAccessControlable is the interface implemented by [MTRClusterAccessControl], for mocking and DI.
+type MTRClusterAccessControlable interface {
+	Unwrap() *raw.MTRClusterAccessControl
+	ReviewFabricRestrictionsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRAccessControlClusterReviewFabricRestrictionsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error)
+	ReadAttributeACLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeExtensionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeSubjectsPerAccessControlEntryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTargetsPerAccessControlEntryWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAccessControlEntriesPerFabricWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCommissioningARLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeARLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAclWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeAclWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeAclWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+}
+
+var _ MTRClusterAccessControlable = (*MTRClusterAccessControl)(nil)
 

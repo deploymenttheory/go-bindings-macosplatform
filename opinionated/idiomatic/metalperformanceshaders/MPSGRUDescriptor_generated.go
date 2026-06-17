@@ -78,5 +78,129 @@ func (x *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor
 	return x
 }
 
+// InputGateInputWeights calls the underlying InputGateInputWeights.
+func (x *GRUDescriptor) InputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.InputGateInputWeights()
+}
+
+// SetInputGateInputWeights calls the underlying SetInputGateInputWeights.
+func (x *GRUDescriptor) SetInputGateInputWeights(inputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputGateInputWeights(inputGateInputWeights)
+}
+
+// InputGateRecurrentWeights calls the underlying InputGateRecurrentWeights.
+func (x *GRUDescriptor) InputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.InputGateRecurrentWeights()
+}
+
+// SetInputGateRecurrentWeights calls the underlying SetInputGateRecurrentWeights.
+func (x *GRUDescriptor) SetInputGateRecurrentWeights(inputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetInputGateRecurrentWeights(inputGateRecurrentWeights)
+}
+
+// RecurrentGateInputWeights calls the underlying RecurrentGateInputWeights.
+func (x *GRUDescriptor) RecurrentGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.RecurrentGateInputWeights()
+}
+
+// SetRecurrentGateInputWeights calls the underlying SetRecurrentGateInputWeights.
+func (x *GRUDescriptor) SetRecurrentGateInputWeights(recurrentGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetRecurrentGateInputWeights(recurrentGateInputWeights)
+}
+
+// RecurrentGateRecurrentWeights calls the underlying RecurrentGateRecurrentWeights.
+func (x *GRUDescriptor) RecurrentGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.RecurrentGateRecurrentWeights()
+}
+
+// SetRecurrentGateRecurrentWeights calls the underlying SetRecurrentGateRecurrentWeights.
+func (x *GRUDescriptor) SetRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights)
+}
+
+// OutputGateInputWeights calls the underlying OutputGateInputWeights.
+func (x *GRUDescriptor) OutputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateInputWeights()
+}
+
+// SetOutputGateInputWeights calls the underlying SetOutputGateInputWeights.
+func (x *GRUDescriptor) SetOutputGateInputWeights(outputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateInputWeights(outputGateInputWeights)
+}
+
+// OutputGateRecurrentWeights calls the underlying OutputGateRecurrentWeights.
+func (x *GRUDescriptor) OutputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateRecurrentWeights()
+}
+
+// SetOutputGateRecurrentWeights calls the underlying SetOutputGateRecurrentWeights.
+func (x *GRUDescriptor) SetOutputGateRecurrentWeights(outputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateRecurrentWeights(outputGateRecurrentWeights)
+}
+
+// OutputGateInputGateWeights calls the underlying OutputGateInputGateWeights.
+func (x *GRUDescriptor) OutputGateInputGateWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.OutputGateInputGateWeights()
+}
+
+// SetOutputGateInputGateWeights calls the underlying SetOutputGateInputGateWeights.
+func (x *GRUDescriptor) SetOutputGateInputGateWeights(outputGateInputGateWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) {
+	x.inner.SetOutputGateInputGateWeights(outputGateInputGateWeights)
+}
+
+// GatePnormValue calls the underlying GatePnormValue.
+func (x *GRUDescriptor) GatePnormValue() float32 {
+	return x.inner.GatePnormValue()
+}
+
+// SetGatePnormValue calls the underlying SetGatePnormValue.
+func (x *GRUDescriptor) SetGatePnormValue(gatePnormValue float32) {
+	x.inner.SetGatePnormValue(gatePnormValue)
+}
+
+// FlipOutputGates calls the underlying FlipOutputGates.
+func (x *GRUDescriptor) FlipOutputGates() bool {
+	return x.inner.FlipOutputGates()
+}
+
+// SetFlipOutputGates calls the underlying SetFlipOutputGates.
+func (x *GRUDescriptor) SetFlipOutputGates(flipOutputGates bool) {
+	x.inner.SetFlipOutputGates(flipOutputGates)
+}
+
 func (x *GRUDescriptor) asRNNDescriptor() *mpsneuralnetwork.MPSRNNDescriptor { return &x.inner.MPSRNNDescriptor }
+
+// GRUDescriptorable is the interface implemented by [GRUDescriptor], for mocking and DI.
+type GRUDescriptorable interface {
+	Unwrap() *raw.MPSGRUDescriptor
+	WithInputGateInputWeights(inputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithInputGateRecurrentWeights(inputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithRecurrentGateInputWeights(recurrentGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithOutputGateInputWeights(outputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithOutputGateRecurrentWeights(outputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithOutputGateInputGateWeights(outputGateInputGateWeights mpsneuralnetwork.MPSCNNConvolutionDataSource) *GRUDescriptor
+	WithGatePnormValue(gatePnormValue float32) *GRUDescriptor
+	WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor
+	InputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetInputGateInputWeights(inputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	InputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetInputGateRecurrentWeights(inputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	RecurrentGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetRecurrentGateInputWeights(recurrentGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	RecurrentGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetRecurrentGateRecurrentWeights(recurrentGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	OutputGateInputWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetOutputGateInputWeights(outputGateInputWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	OutputGateRecurrentWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetOutputGateRecurrentWeights(outputGateRecurrentWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	OutputGateInputGateWeights() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	SetOutputGateInputGateWeights(outputGateInputGateWeights mpsneuralnetwork.MPSCNNConvolutionDataSource)
+	GatePnormValue() float32
+	SetGatePnormValue(gatePnormValue float32)
+	FlipOutputGates() bool
+	SetFlipOutputGates(flipOutputGates bool)
+}
+
+var _ GRUDescriptorable = (*GRUDescriptor)(nil)
 

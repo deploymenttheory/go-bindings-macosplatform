@@ -6,7 +6,9 @@ package authenticationservices
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AuthorizationAppleIDProvider wraps [raw.ASAuthorizationAppleIDProvider] with a fluent Go API.
@@ -22,4 +24,27 @@ func NewAuthorizationAppleIDProvider() *AuthorizationAppleIDProvider {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDProvider")), objc.RegisterName("new"))
 	return &AuthorizationAppleIDProvider{inner: raw.ASAuthorizationAppleIDProviderFromID(_id)}
 }
+
+// CreateRequest calls the underlying CreateRequest.
+func (x *AuthorizationAppleIDProvider) CreateRequest() *AuthorizationAppleIDRequest {
+	_r := x.inner.CreateRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationAppleIDRequest{inner: _r}
+}
+
+// GetCredentialStateForUserIDCompletion calls the underlying GetCredentialStateForUserIDCompletion.
+func (x *AuthorizationAppleIDProvider) GetCredentialStateForUserIDCompletion(userID string, completion func(raw.ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer)) {
+	x.inner.GetCredentialStateForUserIDCompletion(foundation.NSStringStringWithUTF8String(userID), completion)
+}
+
+// AuthorizationAppleIDProviderable is the interface implemented by [AuthorizationAppleIDProvider], for mocking and DI.
+type AuthorizationAppleIDProviderable interface {
+	Unwrap() *raw.ASAuthorizationAppleIDProvider
+	CreateRequest() *AuthorizationAppleIDRequest
+	GetCredentialStateForUserIDCompletion(userID string, completion func(raw.ASAuthorizationAppleIDProviderCredentialState, unsafe.Pointer))
+}
+
+var _ AuthorizationAppleIDProviderable = (*AuthorizationAppleIDProvider)(nil)
 

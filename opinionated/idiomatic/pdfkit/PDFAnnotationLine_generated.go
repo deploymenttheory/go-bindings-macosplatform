@@ -25,3 +25,10 @@ func NewAnnotationLine() *AnnotationLine {
 
 func (x *AnnotationLine) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationLineable is the interface implemented by [AnnotationLine], for mocking and DI.
+type AnnotationLineable interface {
+	Unwrap() *raw.PDFAnnotationLine
+}
+
+var _ AnnotationLineable = (*AnnotationLine)(nil)
+

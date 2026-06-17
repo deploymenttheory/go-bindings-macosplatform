@@ -49,7 +49,20 @@ func NewMatrixRandomMTGP32WithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
 }
 
+// SynchronizeStateOnCommandBuffer calls the underlying SynchronizeStateOnCommandBuffer.
+func (x *MatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeStateOnCommandBuffer(commandBuffer)
+}
+
 func (x *MatrixRandomMTGP32) asMatrixRandom() *mpsmatrix.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
 
 func (x *MatrixRandomMTGP32) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
+
+// MatrixRandomMTGP32able is the interface implemented by [MatrixRandomMTGP32], for mocking and DI.
+type MatrixRandomMTGP32able interface {
+	Unwrap() *raw.MPSMatrixRandomMTGP32
+	SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+}
+
+var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)
 

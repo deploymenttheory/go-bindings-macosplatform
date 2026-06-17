@@ -6,6 +6,7 @@ package accessibility
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewRequest() *Request {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXRequest")), objc.RegisterName("new"))
 	return &Request{inner: raw.AXRequestFromID(_id)}
 }
+
+// Technology calls the underlying Technology.
+func (x *Request) Technology() string {
+	_r := x.inner.Technology()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Requestable is the interface implemented by [Request], for mocking and DI.
+type Requestable interface {
+	Unwrap() *raw.AXRequest
+	Technology() string
+}
+
+var _ Requestable = (*Request)(nil)
 

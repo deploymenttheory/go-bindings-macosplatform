@@ -6,6 +6,7 @@ package accessibility
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,4 +24,31 @@ func NewBrailleTranslatorWithBrailleTable(brailleTable *raw.AXBrailleTable) *Bra
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBrailleTable:"), brailleTable.Ptr())
 	return &BrailleTranslator{inner: raw.AXBrailleTranslatorFromID(_id)}
 }
+
+// TranslatePrintText calls the underlying TranslatePrintText.
+func (x *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
+	_r := x.inner.TranslatePrintText(foundation.NSStringStringWithUTF8String(printText))
+	if _r == nil {
+		return nil
+	}
+	return &BrailleTranslationResult{inner: _r}
+}
+
+// BackTranslateBraille calls the underlying BackTranslateBraille.
+func (x *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
+	_r := x.inner.BackTranslateBraille(foundation.NSStringStringWithUTF8String(braille))
+	if _r == nil {
+		return nil
+	}
+	return &BrailleTranslationResult{inner: _r}
+}
+
+// BrailleTranslatorable is the interface implemented by [BrailleTranslator], for mocking and DI.
+type BrailleTranslatorable interface {
+	Unwrap() *raw.AXBrailleTranslator
+	TranslatePrintText(printText string) *BrailleTranslationResult
+	BackTranslateBraille(braille string) *BrailleTranslationResult
+}
+
+var _ BrailleTranslatorable = (*BrailleTranslator)(nil)
 

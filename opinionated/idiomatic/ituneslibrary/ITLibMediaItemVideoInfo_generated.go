@@ -6,6 +6,7 @@ package ituneslibrary
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,71 @@ func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibMediaItemVideoInfo")), objc.RegisterName("new"))
 	return &LibMediaItemVideoInfo{inner: raw.ITLibMediaItemVideoInfoFromID(_id)}
 }
+
+// Series calls the underlying Series.
+func (x *LibMediaItemVideoInfo) Series() string {
+	_r := x.inner.Series()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SortSeries calls the underlying SortSeries.
+func (x *LibMediaItemVideoInfo) SortSeries() string {
+	_r := x.inner.SortSeries()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Season calls the underlying Season.
+func (x *LibMediaItemVideoInfo) Season() uint {
+	return x.inner.Season()
+}
+
+// Episode calls the underlying Episode.
+func (x *LibMediaItemVideoInfo) Episode() string {
+	_r := x.inner.Episode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EpisodeOrder calls the underlying EpisodeOrder.
+func (x *LibMediaItemVideoInfo) EpisodeOrder() int {
+	return x.inner.EpisodeOrder()
+}
+
+// IsHD calls the underlying IsHD.
+func (x *LibMediaItemVideoInfo) IsHD() bool {
+	return x.inner.IsHD()
+}
+
+// VideoWidth calls the underlying VideoWidth.
+func (x *LibMediaItemVideoInfo) VideoWidth() uint {
+	return x.inner.VideoWidth()
+}
+
+// VideoHeight calls the underlying VideoHeight.
+func (x *LibMediaItemVideoInfo) VideoHeight() uint {
+	return x.inner.VideoHeight()
+}
+
+// LibMediaItemVideoInfoable is the interface implemented by [LibMediaItemVideoInfo], for mocking and DI.
+type LibMediaItemVideoInfoable interface {
+	Unwrap() *raw.ITLibMediaItemVideoInfo
+	Series() string
+	SortSeries() string
+	Season() uint
+	Episode() string
+	EpisodeOrder() int
+	IsHD() bool
+	VideoWidth() uint
+	VideoHeight() uint
+}
+
+var _ LibMediaItemVideoInfoable = (*LibMediaItemVideoInfo)(nil)
 

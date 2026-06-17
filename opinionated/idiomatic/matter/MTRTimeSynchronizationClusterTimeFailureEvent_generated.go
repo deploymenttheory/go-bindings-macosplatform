@@ -23,3 +23,10 @@ func NewMTRTimeSynchronizationClusterTimeFailureEvent() *MTRTimeSynchronizationC
 	return &MTRTimeSynchronizationClusterTimeFailureEvent{inner: raw.MTRTimeSynchronizationClusterTimeFailureEventFromID(_id)}
 }
 
+// MTRTimeSynchronizationClusterTimeFailureEventable is the interface implemented by [MTRTimeSynchronizationClusterTimeFailureEvent], for mocking and DI.
+type MTRTimeSynchronizationClusterTimeFailureEventable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterTimeFailureEvent
+}
+
+var _ MTRTimeSynchronizationClusterTimeFailureEventable = (*MTRTimeSynchronizationClusterTimeFailureEvent)(nil)
+

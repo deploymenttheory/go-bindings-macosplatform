@@ -42,5 +42,42 @@ func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapC
 	return x
 }
 
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *HybridMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// ShowsTraffic calls the underlying ShowsTraffic.
+func (x *HybridMapConfiguration) ShowsTraffic() bool {
+	return x.inner.ShowsTraffic()
+}
+
+// SetShowsTraffic calls the underlying SetShowsTraffic.
+func (x *HybridMapConfiguration) SetShowsTraffic(showsTraffic bool) {
+	x.inner.SetShowsTraffic(showsTraffic)
+}
+
 func (x *HybridMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return &x.inner.MKMapConfiguration }
+
+// HybridMapConfigurationable is the interface implemented by [HybridMapConfiguration], for mocking and DI.
+type HybridMapConfigurationable interface {
+	Unwrap() *raw.MKHybridMapConfiguration
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *HybridMapConfiguration
+	WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	ShowsTraffic() bool
+	SetShowsTraffic(showsTraffic bool)
+}
+
+var _ HybridMapConfigurationable = (*HybridMapConfiguration)(nil)
 

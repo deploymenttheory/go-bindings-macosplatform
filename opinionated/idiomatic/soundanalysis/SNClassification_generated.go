@@ -6,6 +6,7 @@ package soundanalysis
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewClassification() *Classification {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SNClassification")), objc.RegisterName("new"))
 	return &Classification{inner: raw.SNClassificationFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *Classification) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Confidence calls the underlying Confidence.
+func (x *Classification) Confidence() float64 {
+	return x.inner.Confidence()
+}
+
+// Classificationable is the interface implemented by [Classification], for mocking and DI.
+type Classificationable interface {
+	Unwrap() *raw.SNClassification
+	Identifier() string
+	Confidence() float64
+}
+
+var _ Classificationable = (*Classification)(nil)
 

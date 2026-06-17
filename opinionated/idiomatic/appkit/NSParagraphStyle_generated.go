@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,85 @@ func NewParagraphStyle() *ParagraphStyle {
 	return &ParagraphStyle{inner: raw.NSParagraphStyleFromID(_id)}
 }
 
+// LineSpacing calls the underlying LineSpacing.
+func (x *ParagraphStyle) LineSpacing() float64 {
+	return x.inner.LineSpacing()
+}
+
+// ParagraphSpacing calls the underlying ParagraphSpacing.
+func (x *ParagraphStyle) ParagraphSpacing() float64 {
+	return x.inner.ParagraphSpacing()
+}
+
+// HeadIndent calls the underlying HeadIndent.
+func (x *ParagraphStyle) HeadIndent() float64 {
+	return x.inner.HeadIndent()
+}
+
+// TailIndent calls the underlying TailIndent.
+func (x *ParagraphStyle) TailIndent() float64 {
+	return x.inner.TailIndent()
+}
+
+// FirstLineHeadIndent calls the underlying FirstLineHeadIndent.
+func (x *ParagraphStyle) FirstLineHeadIndent() float64 {
+	return x.inner.FirstLineHeadIndent()
+}
+
+// MinimumLineHeight calls the underlying MinimumLineHeight.
+func (x *ParagraphStyle) MinimumLineHeight() float64 {
+	return x.inner.MinimumLineHeight()
+}
+
+// MaximumLineHeight calls the underlying MaximumLineHeight.
+func (x *ParagraphStyle) MaximumLineHeight() float64 {
+	return x.inner.MaximumLineHeight()
+}
+
+// LineBreakMode calls the underlying LineBreakMode.
+func (x *ParagraphStyle) LineBreakMode() raw.NSLineBreakMode {
+	return x.inner.LineBreakMode()
+}
+
+// BaseWritingDirection calls the underlying BaseWritingDirection.
+func (x *ParagraphStyle) BaseWritingDirection() raw.NSWritingDirection {
+	return x.inner.BaseWritingDirection()
+}
+
+// LineHeightMultiple calls the underlying LineHeightMultiple.
+func (x *ParagraphStyle) LineHeightMultiple() float64 {
+	return x.inner.LineHeightMultiple()
+}
+
+// ParagraphSpacingBefore calls the underlying ParagraphSpacingBefore.
+func (x *ParagraphStyle) ParagraphSpacingBefore() float64 {
+	return x.inner.ParagraphSpacingBefore()
+}
+
+// HyphenationFactor calls the underlying HyphenationFactor.
+func (x *ParagraphStyle) HyphenationFactor() float32 {
+	return x.inner.HyphenationFactor()
+}
+
+// UsesDefaultHyphenation calls the underlying UsesDefaultHyphenation.
+func (x *ParagraphStyle) UsesDefaultHyphenation() bool {
+	return x.inner.UsesDefaultHyphenation()
+}
+
 // TabStops returns the collection as a Go slice.
 func (x *ParagraphStyle) TabStops() []*raw.NSTextTab {
 	arr := x.inner.TabStops()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextTab, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextTab {
+		return raw.NSTextTabFromID(purego.Retain(_id))
+	})
+}
+
+// DefaultTabInterval calls the underlying DefaultTabInterval.
+func (x *ParagraphStyle) DefaultTabInterval() float64 {
+	return x.inner.DefaultTabInterval()
 }
 
 // TextLists returns the collection as a Go slice.
@@ -42,11 +111,29 @@ func (x *ParagraphStyle) TextLists() []*raw.NSTextList {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextList, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextList {
+		return raw.NSTextListFromID(purego.Retain(_id))
+	})
+}
+
+// AllowsDefaultTighteningForTruncation calls the underlying AllowsDefaultTighteningForTruncation.
+func (x *ParagraphStyle) AllowsDefaultTighteningForTruncation() bool {
+	return x.inner.AllowsDefaultTighteningForTruncation()
+}
+
+// LineBreakStrategy calls the underlying LineBreakStrategy.
+func (x *ParagraphStyle) LineBreakStrategy() raw.NSLineBreakStrategy {
+	return x.inner.LineBreakStrategy()
+}
+
+// Alignment calls the underlying Alignment.
+func (x *ParagraphStyle) Alignment() raw.NSTextAlignment {
+	return x.inner.Alignment()
+}
+
+// TighteningFactorForTruncation calls the underlying TighteningFactorForTruncation.
+func (x *ParagraphStyle) TighteningFactorForTruncation() float32 {
+	return x.inner.TighteningFactorForTruncation()
 }
 
 // TextBlocks returns the collection as a Go slice.
@@ -55,12 +142,44 @@ func (x *ParagraphStyle) TextBlocks() []*raw.NSTextBlock {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextBlock, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextBlock {
+		return raw.NSTextBlockFromID(purego.Retain(_id))
+	})
+}
+
+// HeaderLevel calls the underlying HeaderLevel.
+func (x *ParagraphStyle) HeaderLevel() int {
+	return x.inner.HeaderLevel()
 }
 
 func (x *ParagraphStyle) asParagraphStyle() *raw.NSParagraphStyle { return x.inner }
+
+// ParagraphStyleable is the interface implemented by [ParagraphStyle], for mocking and DI.
+type ParagraphStyleable interface {
+	Unwrap() *raw.NSParagraphStyle
+	LineSpacing() float64
+	ParagraphSpacing() float64
+	HeadIndent() float64
+	TailIndent() float64
+	FirstLineHeadIndent() float64
+	MinimumLineHeight() float64
+	MaximumLineHeight() float64
+	LineBreakMode() raw.NSLineBreakMode
+	BaseWritingDirection() raw.NSWritingDirection
+	LineHeightMultiple() float64
+	ParagraphSpacingBefore() float64
+	HyphenationFactor() float32
+	UsesDefaultHyphenation() bool
+	TabStops() []*raw.NSTextTab
+	DefaultTabInterval() float64
+	TextLists() []*raw.NSTextList
+	AllowsDefaultTighteningForTruncation() bool
+	LineBreakStrategy() raw.NSLineBreakStrategy
+	Alignment() raw.NSTextAlignment
+	TighteningFactorForTruncation() float32
+	TextBlocks() []*raw.NSTextBlock
+	HeaderLevel() int
+}
+
+var _ ParagraphStyleable = (*ParagraphStyle)(nil)
 

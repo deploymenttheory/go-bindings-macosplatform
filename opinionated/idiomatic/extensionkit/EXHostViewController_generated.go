@@ -7,6 +7,7 @@ package extensionkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/extensionkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,43 @@ func (x *HostViewController) WithPlaceholderView(placeholderView *appkit.NSView)
 	x.inner.SetPlaceholderView(placeholderView)
 	return x
 }
+
+// MakeXPCConnectionWithError calls the underlying MakeXPCConnectionWithError.
+func (x *HostViewController) MakeXPCConnectionWithError() (*foundation.NSXPCConnection, error) {
+	return x.inner.MakeXPCConnectionWithError()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *HostViewController) Delegate() raw.EXHostViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *HostViewController) SetDelegate(delegate raw.EXHostViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// PlaceholderView calls the underlying PlaceholderView.
+func (x *HostViewController) PlaceholderView() *appkit.NSView {
+	return x.inner.PlaceholderView()
+}
+
+// SetPlaceholderView calls the underlying SetPlaceholderView.
+func (x *HostViewController) SetPlaceholderView(placeholderView *appkit.NSView) {
+	x.inner.SetPlaceholderView(placeholderView)
+}
+
+// HostViewControllerable is the interface implemented by [HostViewController], for mocking and DI.
+type HostViewControllerable interface {
+	Unwrap() *raw.EXHostViewController
+	WithDelegate(delegate raw.EXHostViewControllerDelegate) *HostViewController
+	WithPlaceholderView(placeholderView *appkit.NSView) *HostViewController
+	MakeXPCConnectionWithError() (*foundation.NSXPCConnection, error)
+	Delegate() raw.EXHostViewControllerDelegate
+	SetDelegate(delegate raw.EXHostViewControllerDelegate)
+	PlaceholderView() *appkit.NSView
+	SetPlaceholderView(placeholderView *appkit.NSView)
+}
+
+var _ HostViewControllerable = (*HostViewController)(nil)
 

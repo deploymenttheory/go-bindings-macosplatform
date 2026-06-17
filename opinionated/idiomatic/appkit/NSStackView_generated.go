@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -72,17 +73,140 @@ func (x *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
 	return x
 }
 
+// SetCustomSpacingAfterView calls the underlying SetCustomSpacingAfterView.
+func (x *StackView) SetCustomSpacingAfterView(spacing float64, view *raw.NSView) {
+	x.inner.SetCustomSpacingAfterView(spacing, view)
+}
+
+// CustomSpacingAfterView calls the underlying CustomSpacingAfterView.
+func (x *StackView) CustomSpacingAfterView(view *raw.NSView) float64 {
+	return x.inner.CustomSpacingAfterView(view)
+}
+
+// AddArrangedSubview calls the underlying AddArrangedSubview.
+func (x *StackView) AddArrangedSubview(view *raw.NSView) {
+	x.inner.AddArrangedSubview(view)
+}
+
+// InsertArrangedSubviewAtIndex calls the underlying InsertArrangedSubviewAtIndex.
+func (x *StackView) InsertArrangedSubviewAtIndex(view *raw.NSView, index int) {
+	x.inner.InsertArrangedSubviewAtIndex(view, index)
+}
+
+// RemoveArrangedSubview calls the underlying RemoveArrangedSubview.
+func (x *StackView) RemoveArrangedSubview(view *raw.NSView) {
+	x.inner.RemoveArrangedSubview(view)
+}
+
+// SetVisibilityPriorityForView calls the underlying SetVisibilityPriorityForView.
+func (x *StackView) SetVisibilityPriorityForView(priority float32, view *raw.NSView) {
+	x.inner.SetVisibilityPriorityForView(priority, view)
+}
+
+// VisibilityPriorityForView calls the underlying VisibilityPriorityForView.
+func (x *StackView) VisibilityPriorityForView(view *raw.NSView) float32 {
+	return x.inner.VisibilityPriorityForView(view)
+}
+
+// ClippingResistancePriorityForOrientation calls the underlying ClippingResistancePriorityForOrientation.
+func (x *StackView) ClippingResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
+	return x.inner.ClippingResistancePriorityForOrientation(orientation)
+}
+
+// SetClippingResistancePriorityForOrientation calls the underlying SetClippingResistancePriorityForOrientation.
+func (x *StackView) SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation raw.NSLayoutConstraintOrientation) {
+	x.inner.SetClippingResistancePriorityForOrientation(clippingResistancePriority, orientation)
+}
+
+// HuggingPriorityForOrientation calls the underlying HuggingPriorityForOrientation.
+func (x *StackView) HuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32 {
+	return x.inner.HuggingPriorityForOrientation(orientation)
+}
+
+// SetHuggingPriorityForOrientation calls the underlying SetHuggingPriorityForOrientation.
+func (x *StackView) SetHuggingPriorityForOrientation(huggingPriority float32, orientation raw.NSLayoutConstraintOrientation) {
+	x.inner.SetHuggingPriorityForOrientation(huggingPriority, orientation)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *StackView) Delegate() raw.NSStackViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *StackView) SetDelegate(delegate raw.NSStackViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Orientation calls the underlying Orientation.
+func (x *StackView) Orientation() raw.NSUserInterfaceLayoutOrientation {
+	return x.inner.Orientation()
+}
+
+// SetOrientation calls the underlying SetOrientation.
+func (x *StackView) SetOrientation(orientation raw.NSUserInterfaceLayoutOrientation) {
+	x.inner.SetOrientation(orientation)
+}
+
+// Alignment calls the underlying Alignment.
+func (x *StackView) Alignment() raw.NSLayoutAttribute {
+	return x.inner.Alignment()
+}
+
+// SetAlignment calls the underlying SetAlignment.
+func (x *StackView) SetAlignment(alignment raw.NSLayoutAttribute) {
+	x.inner.SetAlignment(alignment)
+}
+
+// EdgeInsets calls the underlying EdgeInsets.
+func (x *StackView) EdgeInsets() foundation.NSEdgeInsets {
+	return x.inner.EdgeInsets()
+}
+
+// SetEdgeInsets calls the underlying SetEdgeInsets.
+func (x *StackView) SetEdgeInsets(edgeInsets foundation.NSEdgeInsets) {
+	x.inner.SetEdgeInsets(edgeInsets)
+}
+
+// Distribution calls the underlying Distribution.
+func (x *StackView) Distribution() raw.NSStackViewDistribution {
+	return x.inner.Distribution()
+}
+
+// SetDistribution calls the underlying SetDistribution.
+func (x *StackView) SetDistribution(distribution raw.NSStackViewDistribution) {
+	x.inner.SetDistribution(distribution)
+}
+
+// Spacing calls the underlying Spacing.
+func (x *StackView) Spacing() float64 {
+	return x.inner.Spacing()
+}
+
+// SetSpacing calls the underlying SetSpacing.
+func (x *StackView) SetSpacing(spacing float64) {
+	x.inner.SetSpacing(spacing)
+}
+
+// DetachesHiddenViews calls the underlying DetachesHiddenViews.
+func (x *StackView) DetachesHiddenViews() bool {
+	return x.inner.DetachesHiddenViews()
+}
+
+// SetDetachesHiddenViews calls the underlying SetDetachesHiddenViews.
+func (x *StackView) SetDetachesHiddenViews(detachesHiddenViews bool) {
+	x.inner.SetDetachesHiddenViews(detachesHiddenViews)
+}
+
 // ArrangedSubviews returns the collection as a Go slice.
 func (x *StackView) ArrangedSubviews() []*raw.NSView {
 	arr := x.inner.ArrangedSubviews()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSView, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
+		return raw.NSViewFromID(purego.Retain(_id))
+	})
 }
 
 // DetachedViews returns the collection as a Go slice.
@@ -91,11 +215,34 @@ func (x *StackView) DetachedViews() []*raw.NSView {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSView, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
+		return raw.NSViewFromID(purego.Retain(_id))
+	})
+}
+
+// AddViewInGravity calls the underlying AddViewInGravity.
+func (x *StackView) AddViewInGravity(view *raw.NSView, gravity raw.NSStackViewGravity) {
+	x.inner.AddViewInGravity(view, gravity)
+}
+
+// InsertViewAtIndexInGravity calls the underlying InsertViewAtIndexInGravity.
+func (x *StackView) InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity raw.NSStackViewGravity) {
+	x.inner.InsertViewAtIndexInGravity(view, index, gravity)
+}
+
+// RemoveView calls the underlying RemoveView.
+func (x *StackView) RemoveView(view *raw.NSView) {
+	x.inner.RemoveView(view)
+}
+
+// ViewsInGravity calls the underlying ViewsInGravity.
+func (x *StackView) ViewsInGravity(gravity raw.NSStackViewGravity) *foundation.NSArray[*raw.NSView] {
+	return x.inner.ViewsInGravity(gravity)
+}
+
+// SetViewsInGravity calls the underlying SetViewsInGravity.
+func (x *StackView) SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity raw.NSStackViewGravity) {
+	x.inner.SetViewsInGravity(views, gravity)
 }
 
 // Views returns the collection as a Go slice.
@@ -104,14 +251,72 @@ func (x *StackView) Views() []*raw.NSView {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSView, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSView {
+		return raw.NSViewFromID(purego.Retain(_id))
+	})
+}
+
+// HasEqualSpacing calls the underlying HasEqualSpacing.
+func (x *StackView) HasEqualSpacing() bool {
+	return x.inner.HasEqualSpacing()
+}
+
+// SetHasEqualSpacing calls the underlying SetHasEqualSpacing.
+func (x *StackView) SetHasEqualSpacing(hasEqualSpacing bool) {
+	x.inner.SetHasEqualSpacing(hasEqualSpacing)
 }
 
 func (x *StackView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *StackView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// StackViewable is the interface implemented by [StackView], for mocking and DI.
+type StackViewable interface {
+	Unwrap() *raw.NSStackView
+	WithDelegate(delegate raw.NSStackViewDelegate) *StackView
+	WithOrientation(orientation raw.NSUserInterfaceLayoutOrientation) *StackView
+	WithAlignment(alignment raw.NSLayoutAttribute) *StackView
+	WithEdgeInsets(edgeInsets foundation.NSEdgeInsets) *StackView
+	WithDistribution(distribution raw.NSStackViewDistribution) *StackView
+	WithSpacing(spacing float64) *StackView
+	WithDetachesHiddenViews(detachesHiddenViews bool) *StackView
+	WithHasEqualSpacing(hasEqualSpacing bool) *StackView
+	SetCustomSpacingAfterView(spacing float64, view *raw.NSView)
+	CustomSpacingAfterView(view *raw.NSView) float64
+	AddArrangedSubview(view *raw.NSView)
+	InsertArrangedSubviewAtIndex(view *raw.NSView, index int)
+	RemoveArrangedSubview(view *raw.NSView)
+	SetVisibilityPriorityForView(priority float32, view *raw.NSView)
+	VisibilityPriorityForView(view *raw.NSView) float32
+	ClippingResistancePriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
+	SetClippingResistancePriorityForOrientation(clippingResistancePriority float32, orientation raw.NSLayoutConstraintOrientation)
+	HuggingPriorityForOrientation(orientation raw.NSLayoutConstraintOrientation) float32
+	SetHuggingPriorityForOrientation(huggingPriority float32, orientation raw.NSLayoutConstraintOrientation)
+	Delegate() raw.NSStackViewDelegate
+	SetDelegate(delegate raw.NSStackViewDelegate)
+	Orientation() raw.NSUserInterfaceLayoutOrientation
+	SetOrientation(orientation raw.NSUserInterfaceLayoutOrientation)
+	Alignment() raw.NSLayoutAttribute
+	SetAlignment(alignment raw.NSLayoutAttribute)
+	EdgeInsets() foundation.NSEdgeInsets
+	SetEdgeInsets(edgeInsets foundation.NSEdgeInsets)
+	Distribution() raw.NSStackViewDistribution
+	SetDistribution(distribution raw.NSStackViewDistribution)
+	Spacing() float64
+	SetSpacing(spacing float64)
+	DetachesHiddenViews() bool
+	SetDetachesHiddenViews(detachesHiddenViews bool)
+	ArrangedSubviews() []*raw.NSView
+	DetachedViews() []*raw.NSView
+	AddViewInGravity(view *raw.NSView, gravity raw.NSStackViewGravity)
+	InsertViewAtIndexInGravity(view *raw.NSView, index uint, gravity raw.NSStackViewGravity)
+	RemoveView(view *raw.NSView)
+	ViewsInGravity(gravity raw.NSStackViewGravity) *foundation.NSArray[*raw.NSView]
+	SetViewsInGravity(views *foundation.NSArray[*raw.NSView], gravity raw.NSStackViewGravity)
+	Views() []*raw.NSView
+	HasEqualSpacing() bool
+	SetHasEqualSpacing(hasEqualSpacing bool)
+}
+
+var _ StackViewable = (*StackView)(nil)
 

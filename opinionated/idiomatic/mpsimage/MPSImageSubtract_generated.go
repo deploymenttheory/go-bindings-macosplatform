@@ -29,3 +29,10 @@ func (x *ImageSubtract) asImageArithmetic() *raw.MPSImageArithmetic { return &x.
 
 func (x *ImageSubtract) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
 
+// ImageSubtractable is the interface implemented by [ImageSubtract], for mocking and DI.
+type ImageSubtractable interface {
+	Unwrap() *raw.MPSImageSubtract
+}
+
+var _ ImageSubtractable = (*ImageSubtract)(nil)
+

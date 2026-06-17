@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,6 +79,133 @@ func (x *DOMHTMLLinkElement) WithType(type_ string) *DOMHTMLLinkElement {
 	return x
 }
 
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLLinkElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLLinkElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Charset calls the underlying Charset.
+func (x *DOMHTMLLinkElement) Charset() string {
+	_r := x.inner.Charset()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCharset calls the underlying SetCharset.
+func (x *DOMHTMLLinkElement) SetCharset(charset string) {
+	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+}
+
+// Href calls the underlying Href.
+func (x *DOMHTMLLinkElement) Href() string {
+	_r := x.inner.Href()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHref calls the underlying SetHref.
+func (x *DOMHTMLLinkElement) SetHref(href string) {
+	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+}
+
+// Hreflang calls the underlying Hreflang.
+func (x *DOMHTMLLinkElement) Hreflang() string {
+	_r := x.inner.Hreflang()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHreflang calls the underlying SetHreflang.
+func (x *DOMHTMLLinkElement) SetHreflang(hreflang string) {
+	x.inner.SetHreflang(foundation.NSStringStringWithUTF8String(hreflang))
+}
+
+// Media calls the underlying Media.
+func (x *DOMHTMLLinkElement) Media() string {
+	_r := x.inner.Media()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMedia calls the underlying SetMedia.
+func (x *DOMHTMLLinkElement) SetMedia(media string) {
+	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+}
+
+// Rel calls the underlying Rel.
+func (x *DOMHTMLLinkElement) Rel() string {
+	_r := x.inner.Rel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRel calls the underlying SetRel.
+func (x *DOMHTMLLinkElement) SetRel(rel string) {
+	x.inner.SetRel(foundation.NSStringStringWithUTF8String(rel))
+}
+
+// Rev calls the underlying Rev.
+func (x *DOMHTMLLinkElement) Rev() string {
+	_r := x.inner.Rev()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRev calls the underlying SetRev.
+func (x *DOMHTMLLinkElement) SetRev(rev string) {
+	x.inner.SetRev(foundation.NSStringStringWithUTF8String(rev))
+}
+
+// Target calls the underlying Target.
+func (x *DOMHTMLLinkElement) Target() string {
+	_r := x.inner.Target()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *DOMHTMLLinkElement) SetTarget(target string) {
+	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLLinkElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLLinkElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// AbsoluteLinkURL calls the underlying AbsoluteLinkURL.
+func (x *DOMHTMLLinkElement) AbsoluteLinkURL() *foundation.NSURL {
+	return x.inner.AbsoluteLinkURL()
+}
+
 func (x *DOMHTMLLinkElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLLinkElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -87,4 +215,39 @@ func (x *DOMHTMLLinkElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLLinkElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLLinkElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLLinkElementable is the interface implemented by [DOMHTMLLinkElement], for mocking and DI.
+type DOMHTMLLinkElementable interface {
+	Unwrap() *raw.DOMHTMLLinkElement
+	WithDisabled(disabled bool) *DOMHTMLLinkElement
+	WithCharset(charset string) *DOMHTMLLinkElement
+	WithHref(href string) *DOMHTMLLinkElement
+	WithHreflang(hreflang string) *DOMHTMLLinkElement
+	WithMedia(media string) *DOMHTMLLinkElement
+	WithRel(rel string) *DOMHTMLLinkElement
+	WithRev(rev string) *DOMHTMLLinkElement
+	WithTarget(target string) *DOMHTMLLinkElement
+	WithType(type_ string) *DOMHTMLLinkElement
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Charset() string
+	SetCharset(charset string)
+	Href() string
+	SetHref(href string)
+	Hreflang() string
+	SetHreflang(hreflang string)
+	Media() string
+	SetMedia(media string)
+	Rel() string
+	SetRel(rel string)
+	Rev() string
+	SetRev(rev string)
+	Target() string
+	SetTarget(target string)
+	Type() string
+	SetType(type_ string)
+	AbsoluteLinkURL() *foundation.NSURL
+}
+
+var _ DOMHTMLLinkElementable = (*DOMHTMLLinkElement)(nil)
 

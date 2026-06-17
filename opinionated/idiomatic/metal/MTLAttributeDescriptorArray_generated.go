@@ -23,3 +23,26 @@ func NewAttributeDescriptorArray() *AttributeDescriptorArray {
 	return &AttributeDescriptorArray{inner: raw.MTLAttributeDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *AttributeDescriptorArray) ObjectAtIndexedSubscript(index uint) *AttributeDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(index)
+	if _r == nil {
+		return nil
+	}
+	return &AttributeDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *AttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *raw.MTLAttributeDescriptor, index uint) {
+	x.inner.SetObjectAtIndexedSubscript(attributeDesc, index)
+}
+
+// AttributeDescriptorArrayable is the interface implemented by [AttributeDescriptorArray], for mocking and DI.
+type AttributeDescriptorArrayable interface {
+	Unwrap() *raw.MTLAttributeDescriptorArray
+	ObjectAtIndexedSubscript(index uint) *AttributeDescriptor
+	SetObjectAtIndexedSubscript(attributeDesc *raw.MTLAttributeDescriptor, index uint)
+}
+
+var _ AttributeDescriptorArrayable = (*AttributeDescriptorArray)(nil)
+

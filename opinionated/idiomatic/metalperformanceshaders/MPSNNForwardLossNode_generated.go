@@ -46,5 +46,97 @@ func (x *NNForwardLossNode) WithPropertyCallBack(propertyCallBack mpsneuralnetwo
 	return x
 }
 
+// GradientFilterWithSources calls the underlying GradientFilterWithSources.
+func (x *NNForwardLossNode) GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode {
+	return x.inner.GradientFilterWithSources(sourceGradient)
+}
+
+// GradientFiltersWithSources calls the underlying GradientFiltersWithSources.
+func (x *NNForwardLossNode) GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
+	return x.inner.GradientFiltersWithSources(sourceGradient)
+}
+
+// GradientFilterWithSource calls the underlying GradientFilterWithSource.
+func (x *NNForwardLossNode) GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode {
+	return x.inner.GradientFilterWithSource(sourceGradient)
+}
+
+// GradientFiltersWithSource calls the underlying GradientFiltersWithSource.
+func (x *NNForwardLossNode) GradientFiltersWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode] {
+	return x.inner.GradientFiltersWithSource(sourceGradient)
+}
+
+// LossType calls the underlying LossType.
+func (x *NNForwardLossNode) LossType() mpsneuralnetwork.MPSCNNLossType {
+	return x.inner.LossType()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *NNForwardLossNode) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
+	return x.inner.ReductionType()
+}
+
+// NumberOfClasses calls the underlying NumberOfClasses.
+func (x *NNForwardLossNode) NumberOfClasses() uint {
+	return x.inner.NumberOfClasses()
+}
+
+// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
+func (x *NNForwardLossNode) ReduceAcrossBatch() bool {
+	return x.inner.ReduceAcrossBatch()
+}
+
+// Weight calls the underlying Weight.
+func (x *NNForwardLossNode) Weight() float32 {
+	return x.inner.Weight()
+}
+
+// LabelSmoothing calls the underlying LabelSmoothing.
+func (x *NNForwardLossNode) LabelSmoothing() float32 {
+	return x.inner.LabelSmoothing()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *NNForwardLossNode) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// Delta calls the underlying Delta.
+func (x *NNForwardLossNode) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// PropertyCallBack calls the underlying PropertyCallBack.
+func (x *NNForwardLossNode) PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback {
+	return x.inner.PropertyCallBack()
+}
+
+// SetPropertyCallBack calls the underlying SetPropertyCallBack.
+func (x *NNForwardLossNode) SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) {
+	x.inner.SetPropertyCallBack(propertyCallBack)
+}
+
 func (x *NNForwardLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// NNForwardLossNodeable is the interface implemented by [NNForwardLossNode], for mocking and DI.
+type NNForwardLossNodeable interface {
+	Unwrap() *raw.MPSNNForwardLossNode
+	WithPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback) *NNForwardLossNode
+	GradientFilterWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *mpsneuralnetwork.MPSNNLossGradientNode
+	GradientFiltersWithSources(sourceGradient *foundation.NSArray[*mpsneuralnetwork.MPSNNImageNode]) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]
+	GradientFilterWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *mpsneuralnetwork.MPSNNLossGradientNode
+	GradientFiltersWithSource(sourceGradient *mpsneuralnetwork.MPSNNImageNode) *foundation.NSArray[*mpsneuralnetwork.MPSNNLossGradientNode]
+	LossType() mpsneuralnetwork.MPSCNNLossType
+	ReductionType() mpsneuralnetwork.MPSCNNReductionType
+	NumberOfClasses() uint
+	ReduceAcrossBatch() bool
+	Weight() float32
+	LabelSmoothing() float32
+	Epsilon() float32
+	Delta() float32
+	PropertyCallBack() mpsneuralnetwork.MPSNNLossCallback
+	SetPropertyCallBack(propertyCallBack mpsneuralnetwork.MPSNNLossCallback)
+}
+
+var _ NNForwardLossNodeable = (*NNForwardLossNode)(nil)
 

@@ -7,6 +7,7 @@ package contacts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,21 @@ func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &PhoneNumber{inner: raw.CNPhoneNumberFromID(_id)}
 }
+
+// StringValue calls the underlying StringValue.
+func (x *PhoneNumber) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PhoneNumberable is the interface implemented by [PhoneNumber], for mocking and DI.
+type PhoneNumberable interface {
+	Unwrap() *raw.CNPhoneNumber
+	StringValue() string
+}
+
+var _ PhoneNumberable = (*PhoneNumber)(nil)
 

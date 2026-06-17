@@ -24,5 +24,22 @@ func NewShareFocusStatusIntentWithFocusStatus(focusStatus *raw.INFocusStatus) *S
 	return &ShareFocusStatusIntent{inner: raw.INShareFocusStatusIntentFromID(_id)}
 }
 
+// FocusStatus calls the underlying FocusStatus.
+func (x *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
+	_r := x.inner.FocusStatus()
+	if _r == nil {
+		return nil
+	}
+	return &FocusStatus{inner: _r}
+}
+
 func (x *ShareFocusStatusIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// ShareFocusStatusIntentable is the interface implemented by [ShareFocusStatusIntent], for mocking and DI.
+type ShareFocusStatusIntentable interface {
+	Unwrap() *raw.INShareFocusStatusIntent
+	FocusStatus() *FocusStatus
+}
+
+var _ ShareFocusStatusIntentable = (*ShareFocusStatusIntent)(nil)
 

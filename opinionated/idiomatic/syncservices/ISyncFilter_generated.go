@@ -23,3 +23,10 @@ func NewISyncFilter() *ISyncFilter {
 	return &ISyncFilter{inner: raw.ISyncFilterFromID(_id)}
 }
 
+// ISyncFilterable is the interface implemented by [ISyncFilter], for mocking and DI.
+type ISyncFilterable interface {
+	Unwrap() *raw.ISyncFilter
+}
+
+var _ ISyncFilterable = (*ISyncFilter)(nil)
+

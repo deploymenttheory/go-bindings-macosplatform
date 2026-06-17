@@ -30,7 +30,27 @@ func (x *NNReduceUnary) WithClipRectSource(clipRectSource metal.MTLRegion) *NNRe
 	return x
 }
 
+// ClipRectSource calls the underlying ClipRectSource.
+func (x *NNReduceUnary) ClipRectSource() metal.MTLRegion {
+	return x.inner.ClipRectSource()
+}
+
+// SetClipRectSource calls the underlying SetClipRectSource.
+func (x *NNReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
+	x.inner.SetClipRectSource(clipRectSource)
+}
+
 func (x *NNReduceUnary) asNNReduceUnary() *raw.MPSNNReduceUnary { return x.inner }
 
 func (x *NNReduceUnary) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// NNReduceUnaryable is the interface implemented by [NNReduceUnary], for mocking and DI.
+type NNReduceUnaryable interface {
+	Unwrap() *raw.MPSNNReduceUnary
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceUnary
+	ClipRectSource() metal.MTLRegion
+	SetClipRectSource(clipRectSource metal.MTLRegion)
+}
+
+var _ NNReduceUnaryable = (*NNReduceUnary)(nil)
 

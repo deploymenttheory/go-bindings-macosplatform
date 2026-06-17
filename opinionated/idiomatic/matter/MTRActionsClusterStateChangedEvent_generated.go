@@ -42,3 +42,49 @@ func (x *MTRActionsClusterStateChangedEvent) WithNewState(newState *foundation.N
 	return x
 }
 
+// ActionID calls the underlying ActionID.
+func (x *MTRActionsClusterStateChangedEvent) ActionID() *foundation.NSNumber {
+	return x.inner.ActionID()
+}
+
+// SetActionID calls the underlying SetActionID.
+func (x *MTRActionsClusterStateChangedEvent) SetActionID(actionID *foundation.NSNumber) {
+	x.inner.SetActionID(actionID)
+}
+
+// InvokeID calls the underlying InvokeID.
+func (x *MTRActionsClusterStateChangedEvent) InvokeID() *foundation.NSNumber {
+	return x.inner.InvokeID()
+}
+
+// SetInvokeID calls the underlying SetInvokeID.
+func (x *MTRActionsClusterStateChangedEvent) SetInvokeID(invokeID *foundation.NSNumber) {
+	x.inner.SetInvokeID(invokeID)
+}
+
+// GetNewState calls the underlying GetNewState.
+func (x *MTRActionsClusterStateChangedEvent) GetNewState() *foundation.NSNumber {
+	return x.inner.GetNewState()
+}
+
+// SetNewState calls the underlying SetNewState.
+func (x *MTRActionsClusterStateChangedEvent) SetNewState(newState *foundation.NSNumber) {
+	x.inner.SetNewState(newState)
+}
+
+// MTRActionsClusterStateChangedEventable is the interface implemented by [MTRActionsClusterStateChangedEvent], for mocking and DI.
+type MTRActionsClusterStateChangedEventable interface {
+	Unwrap() *raw.MTRActionsClusterStateChangedEvent
+	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
+	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
+	WithNewState(newState *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
+	ActionID() *foundation.NSNumber
+	SetActionID(actionID *foundation.NSNumber)
+	InvokeID() *foundation.NSNumber
+	SetInvokeID(invokeID *foundation.NSNumber)
+	GetNewState() *foundation.NSNumber
+	SetNewState(newState *foundation.NSNumber)
+}
+
+var _ MTRActionsClusterStateChangedEventable = (*MTRActionsClusterStateChangedEvent)(nil)
+

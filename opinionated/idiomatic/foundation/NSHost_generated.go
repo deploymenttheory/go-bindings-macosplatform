@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,31 +24,72 @@ func NewHost() *Host {
 	return &Host{inner: raw.NSHostFromID(_id)}
 }
 
+// IsEqualToHost calls the underlying IsEqualToHost.
+func (x *Host) IsEqualToHost(aHost *raw.NSHost) bool {
+	return x.inner.IsEqualToHost(aHost)
+}
+
+// Name calls the underlying Name.
+func (x *Host) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 // Names returns the collection as a Go slice.
-func (x *Host) Names() []*raw.NSString {
+func (x *Host) Names() []string {
 	arr := x.inner.Names()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// Address calls the underlying Address.
+func (x *Host) Address() *String {
+	_r := x.inner.Address()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
 }
 
 // Addresses returns the collection as a Go slice.
-func (x *Host) Addresses() []*raw.NSString {
+func (x *Host) Addresses() []string {
 	arr := x.inner.Addresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *Host) LocalizedName() *String {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
 }
 
 func (x *Host) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Hostable is the interface implemented by [Host], for mocking and DI.
+type Hostable interface {
+	Unwrap() *raw.NSHost
+	IsEqualToHost(aHost *raw.NSHost) bool
+	Name() *String
+	Names() []string
+	Address() *String
+	Addresses() []string
+	LocalizedName() *String
+}
+
+var _ Hostable = (*Host)(nil)
 

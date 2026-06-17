@@ -82,3 +82,87 @@ func (x *AudioFormat) WithMagicCookie(magicCookie *foundation.NSData) *AudioForm
 	return x
 }
 
+// IsEqual calls the underlying IsEqual.
+func (x *AudioFormat) IsEqual(object objc.ID) bool {
+	return x.inner.IsEqual(object)
+}
+
+// IsStandard calls the underlying IsStandard.
+func (x *AudioFormat) IsStandard() bool {
+	return x.inner.IsStandard()
+}
+
+// CommonFormat calls the underlying CommonFormat.
+func (x *AudioFormat) CommonFormat() raw.AVAudioCommonFormat {
+	return x.inner.CommonFormat()
+}
+
+// ChannelCount calls the underlying ChannelCount.
+func (x *AudioFormat) ChannelCount() uint32 {
+	return x.inner.ChannelCount()
+}
+
+// SampleRate calls the underlying SampleRate.
+func (x *AudioFormat) SampleRate() float64 {
+	return x.inner.SampleRate()
+}
+
+// IsInterleaved calls the underlying IsInterleaved.
+func (x *AudioFormat) IsInterleaved() bool {
+	return x.inner.IsInterleaved()
+}
+
+// StreamDescription calls the underlying StreamDescription.
+func (x *AudioFormat) StreamDescription() *coreaudiotypes.AudioStreamBasicDescription {
+	return x.inner.StreamDescription()
+}
+
+// ChannelLayout calls the underlying ChannelLayout.
+func (x *AudioFormat) ChannelLayout() *AudioChannelLayout {
+	_r := x.inner.ChannelLayout()
+	if _r == nil {
+		return nil
+	}
+	return &AudioChannelLayout{inner: _r}
+}
+
+// MagicCookie calls the underlying MagicCookie.
+func (x *AudioFormat) MagicCookie() *foundation.NSData {
+	return x.inner.MagicCookie()
+}
+
+// SetMagicCookie calls the underlying SetMagicCookie.
+func (x *AudioFormat) SetMagicCookie(magicCookie *foundation.NSData) {
+	x.inner.SetMagicCookie(magicCookie)
+}
+
+// Settings calls the underlying Settings.
+func (x *AudioFormat) Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Settings()
+}
+
+// FormatDescription calls the underlying FormatDescription.
+func (x *AudioFormat) FormatDescription() unsafe.Pointer {
+	return x.inner.FormatDescription()
+}
+
+// AudioFormatable is the interface implemented by [AudioFormat], for mocking and DI.
+type AudioFormatable interface {
+	Unwrap() *raw.AVAudioFormat
+	WithMagicCookie(magicCookie *foundation.NSData) *AudioFormat
+	IsEqual(object objc.ID) bool
+	IsStandard() bool
+	CommonFormat() raw.AVAudioCommonFormat
+	ChannelCount() uint32
+	SampleRate() float64
+	IsInterleaved() bool
+	StreamDescription() *coreaudiotypes.AudioStreamBasicDescription
+	ChannelLayout() *AudioChannelLayout
+	MagicCookie() *foundation.NSData
+	SetMagicCookie(magicCookie *foundation.NSData)
+	Settings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	FormatDescription() unsafe.Pointer
+}
+
+var _ AudioFormatable = (*AudioFormat)(nil)
+

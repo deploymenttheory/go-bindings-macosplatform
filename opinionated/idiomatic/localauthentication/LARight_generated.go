@@ -44,11 +44,11 @@ func (x *Right) WithTag(tag int) *Right {
 func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error {
 	_ch := make(chan error, 1)
 	x.inner.AuthorizeWithLocalizedReasonCompletion(foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -62,11 +62,11 @@ func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, loca
 func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.CheckCanAuthorizeWithCompletion(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -90,5 +90,34 @@ func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
+// State calls the underlying State.
+func (x *Right) State() raw.LARightState {
+	return x.inner.State()
+}
+
+// Tag calls the underlying Tag.
+func (x *Right) Tag() int {
+	return x.inner.Tag()
+}
+
+// SetTag calls the underlying SetTag.
+func (x *Right) SetTag(tag int) {
+	x.inner.SetTag(tag)
+}
+
 func (x *Right) asRight() *raw.LARight { return x.inner }
+
+// Rightable is the interface implemented by [Right], for mocking and DI.
+type Rightable interface {
+	Unwrap() *raw.LARight
+	WithTag(tag int) *Right
+	AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error
+	CheckCanAuthorizeWithCompletion(ctx context.Context) error
+	DeauthorizeWithCompletion(ctx context.Context) error
+	State() raw.LARightState
+	Tag() int
+	SetTag(tag int)
+}
+
+var _ Rightable = (*Right)(nil)
 

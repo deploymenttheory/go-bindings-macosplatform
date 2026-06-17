@@ -37,5 +37,44 @@ func (x *AUPresetEvent) WithElement(element uint) *AUPresetEvent {
 	return x
 }
 
+// Scope calls the underlying Scope.
+func (x *AUPresetEvent) Scope() uint {
+	return x.inner.Scope()
+}
+
+// SetScope calls the underlying SetScope.
+func (x *AUPresetEvent) SetScope(scope uint) {
+	x.inner.SetScope(scope)
+}
+
+// Element calls the underlying Element.
+func (x *AUPresetEvent) Element() uint {
+	return x.inner.Element()
+}
+
+// SetElement calls the underlying SetElement.
+func (x *AUPresetEvent) SetElement(element uint) {
+	x.inner.SetElement(element)
+}
+
+// PresetDictionary calls the underlying PresetDictionary.
+func (x *AUPresetEvent) PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.PresetDictionary()
+}
+
 func (x *AUPresetEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// AUPresetEventable is the interface implemented by [AUPresetEvent], for mocking and DI.
+type AUPresetEventable interface {
+	Unwrap() *raw.AVAUPresetEvent
+	WithScope(scope uint) *AUPresetEvent
+	WithElement(element uint) *AUPresetEvent
+	Scope() uint
+	SetScope(scope uint)
+	Element() uint
+	SetElement(element uint)
+	PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ AUPresetEventable = (*AUPresetEvent)(nil)
 

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -25,7 +26,38 @@ func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
 	return &CNNConvolutionGradientState{inner: raw.MPSCNNConvolutionGradientStateFromID(_id)}
 }
 
+// GradientForWeights calls the underlying GradientForWeights.
+func (x *CNNConvolutionGradientState) GradientForWeights() metal.MTLBuffer {
+	return x.inner.GradientForWeights()
+}
+
+// GradientForBiases calls the underlying GradientForBiases.
+func (x *CNNConvolutionGradientState) GradientForBiases() metal.MTLBuffer {
+	return x.inner.GradientForBiases()
+}
+
+// Convolution calls the underlying Convolution.
+func (x *CNNConvolutionGradientState) Convolution() *mpsneuralnetwork.MPSCNNConvolution {
+	return x.inner.Convolution()
+}
+
+// GradientForWeightsLayout calls the underlying GradientForWeightsLayout.
+func (x *CNNConvolutionGradientState) GradientForWeightsLayout() mpsneuralnetwork.MPSCNNConvolutionWeightsLayout {
+	return x.inner.GradientForWeightsLayout()
+}
+
 func (x *CNNConvolutionGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState { return &x.inner.MPSNNGradientState }
 
 func (x *CNNConvolutionGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNGradientState.MPSState }
+
+// CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
+type CNNConvolutionGradientStateable interface {
+	Unwrap() *raw.MPSCNNConvolutionGradientState
+	GradientForWeights() metal.MTLBuffer
+	GradientForBiases() metal.MTLBuffer
+	Convolution() *mpsneuralnetwork.MPSCNNConvolution
+	GradientForWeightsLayout() mpsneuralnetwork.MPSCNNConvolutionWeightsLayout
+}
+
+var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
 

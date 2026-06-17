@@ -36,5 +36,38 @@ func (x *MTRDoorLockClusterCredentialStruct) WithCredentialIndex(credentialIndex
 	return x
 }
 
+// CredentialType calls the underlying CredentialType.
+func (x *MTRDoorLockClusterCredentialStruct) CredentialType() *foundation.NSNumber {
+	return x.inner.CredentialType()
+}
+
+// SetCredentialType calls the underlying SetCredentialType.
+func (x *MTRDoorLockClusterCredentialStruct) SetCredentialType(credentialType *foundation.NSNumber) {
+	x.inner.SetCredentialType(credentialType)
+}
+
+// CredentialIndex calls the underlying CredentialIndex.
+func (x *MTRDoorLockClusterCredentialStruct) CredentialIndex() *foundation.NSNumber {
+	return x.inner.CredentialIndex()
+}
+
+// SetCredentialIndex calls the underlying SetCredentialIndex.
+func (x *MTRDoorLockClusterCredentialStruct) SetCredentialIndex(credentialIndex *foundation.NSNumber) {
+	x.inner.SetCredentialIndex(credentialIndex)
+}
+
 func (x *MTRDoorLockClusterCredentialStruct) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct { return x.inner }
+
+// MTRDoorLockClusterCredentialStructable is the interface implemented by [MTRDoorLockClusterCredentialStruct], for mocking and DI.
+type MTRDoorLockClusterCredentialStructable interface {
+	Unwrap() *raw.MTRDoorLockClusterCredentialStruct
+	WithCredentialType(credentialType *foundation.NSNumber) *MTRDoorLockClusterCredentialStruct
+	WithCredentialIndex(credentialIndex *foundation.NSNumber) *MTRDoorLockClusterCredentialStruct
+	CredentialType() *foundation.NSNumber
+	SetCredentialType(credentialType *foundation.NSNumber)
+	CredentialIndex() *foundation.NSNumber
+	SetCredentialIndex(credentialIndex *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterCredentialStructable = (*MTRDoorLockClusterCredentialStruct)(nil)
 

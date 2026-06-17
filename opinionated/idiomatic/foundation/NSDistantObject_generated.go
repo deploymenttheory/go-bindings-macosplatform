@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // DistantObject wraps [raw.NSDistantObject] with a fluent Go API.
@@ -38,5 +39,28 @@ func NewDistantObjectWithCoder(inCoder *raw.NSCoder) *DistantObject {
 	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
 }
 
+// SetProtocolForProxy calls the underlying SetProtocolForProxy.
+func (x *DistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
+	x.inner.SetProtocolForProxy(proto)
+}
+
+// ConnectionForProxy calls the underlying ConnectionForProxy.
+func (x *DistantObject) ConnectionForProxy() *Connection {
+	_r := x.inner.ConnectionForProxy()
+	if _r == nil {
+		return nil
+	}
+	return &Connection{inner: _r}
+}
+
 func (x *DistantObject) asProxy() *raw.NSProxy { return &x.inner.NSProxy }
+
+// DistantObjectable is the interface implemented by [DistantObject], for mocking and DI.
+type DistantObjectable interface {
+	Unwrap() *raw.NSDistantObject
+	SetProtocolForProxy(proto unsafe.Pointer)
+	ConnectionForProxy() *Connection
+}
+
+var _ DistantObjectable = (*DistantObject)(nil)
 

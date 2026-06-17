@@ -7,6 +7,7 @@ package glkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EffectPropertyLight wraps [raw.GLKEffectPropertyLight] with a fluent Go API.
@@ -65,5 +66,167 @@ func (x *EffectPropertyLight) WithTransform(transform *raw.GLKEffectPropertyTran
 	return x
 }
 
+// Enabled calls the underlying Enabled.
+func (x *EffectPropertyLight) Enabled() uint8 {
+	return x.inner.Enabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *EffectPropertyLight) SetEnabled(enabled uint8) {
+	x.inner.SetEnabled(enabled)
+}
+
+// Position calls the underlying Position.
+func (x *EffectPropertyLight) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *EffectPropertyLight) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
+// AmbientColor calls the underlying AmbientColor.
+func (x *EffectPropertyLight) AmbientColor() unsafe.Pointer {
+	return x.inner.AmbientColor()
+}
+
+// SetAmbientColor calls the underlying SetAmbientColor.
+func (x *EffectPropertyLight) SetAmbientColor(ambientColor unsafe.Pointer) {
+	x.inner.SetAmbientColor(ambientColor)
+}
+
+// DiffuseColor calls the underlying DiffuseColor.
+func (x *EffectPropertyLight) DiffuseColor() unsafe.Pointer {
+	return x.inner.DiffuseColor()
+}
+
+// SetDiffuseColor calls the underlying SetDiffuseColor.
+func (x *EffectPropertyLight) SetDiffuseColor(diffuseColor unsafe.Pointer) {
+	x.inner.SetDiffuseColor(diffuseColor)
+}
+
+// SpecularColor calls the underlying SpecularColor.
+func (x *EffectPropertyLight) SpecularColor() unsafe.Pointer {
+	return x.inner.SpecularColor()
+}
+
+// SetSpecularColor calls the underlying SetSpecularColor.
+func (x *EffectPropertyLight) SetSpecularColor(specularColor unsafe.Pointer) {
+	x.inner.SetSpecularColor(specularColor)
+}
+
+// SpotDirection calls the underlying SpotDirection.
+func (x *EffectPropertyLight) SpotDirection() unsafe.Pointer {
+	return x.inner.SpotDirection()
+}
+
+// SetSpotDirection calls the underlying SetSpotDirection.
+func (x *EffectPropertyLight) SetSpotDirection(spotDirection unsafe.Pointer) {
+	x.inner.SetSpotDirection(spotDirection)
+}
+
+// SpotExponent calls the underlying SpotExponent.
+func (x *EffectPropertyLight) SpotExponent() float32 {
+	return x.inner.SpotExponent()
+}
+
+// SetSpotExponent calls the underlying SetSpotExponent.
+func (x *EffectPropertyLight) SetSpotExponent(spotExponent float32) {
+	x.inner.SetSpotExponent(spotExponent)
+}
+
+// SpotCutoff calls the underlying SpotCutoff.
+func (x *EffectPropertyLight) SpotCutoff() float32 {
+	return x.inner.SpotCutoff()
+}
+
+// SetSpotCutoff calls the underlying SetSpotCutoff.
+func (x *EffectPropertyLight) SetSpotCutoff(spotCutoff float32) {
+	x.inner.SetSpotCutoff(spotCutoff)
+}
+
+// ConstantAttenuation calls the underlying ConstantAttenuation.
+func (x *EffectPropertyLight) ConstantAttenuation() float32 {
+	return x.inner.ConstantAttenuation()
+}
+
+// SetConstantAttenuation calls the underlying SetConstantAttenuation.
+func (x *EffectPropertyLight) SetConstantAttenuation(constantAttenuation float32) {
+	x.inner.SetConstantAttenuation(constantAttenuation)
+}
+
+// LinearAttenuation calls the underlying LinearAttenuation.
+func (x *EffectPropertyLight) LinearAttenuation() float32 {
+	return x.inner.LinearAttenuation()
+}
+
+// SetLinearAttenuation calls the underlying SetLinearAttenuation.
+func (x *EffectPropertyLight) SetLinearAttenuation(linearAttenuation float32) {
+	x.inner.SetLinearAttenuation(linearAttenuation)
+}
+
+// QuadraticAttenuation calls the underlying QuadraticAttenuation.
+func (x *EffectPropertyLight) QuadraticAttenuation() float32 {
+	return x.inner.QuadraticAttenuation()
+}
+
+// SetQuadraticAttenuation calls the underlying SetQuadraticAttenuation.
+func (x *EffectPropertyLight) SetQuadraticAttenuation(quadraticAttenuation float32) {
+	x.inner.SetQuadraticAttenuation(quadraticAttenuation)
+}
+
+// Transform calls the underlying Transform.
+func (x *EffectPropertyLight) Transform() *EffectPropertyTransform {
+	_r := x.inner.Transform()
+	if _r == nil {
+		return nil
+	}
+	return &EffectPropertyTransform{inner: _r}
+}
+
+// SetTransform calls the underlying SetTransform.
+func (x *EffectPropertyLight) SetTransform(transform *raw.GLKEffectPropertyTransform) {
+	x.inner.SetTransform(transform)
+}
+
 func (x *EffectPropertyLight) asEffectProperty() *raw.GLKEffectProperty { return &x.inner.GLKEffectProperty }
+
+// EffectPropertyLightable is the interface implemented by [EffectPropertyLight], for mocking and DI.
+type EffectPropertyLightable interface {
+	Unwrap() *raw.GLKEffectPropertyLight
+	WithEnabled(enabled uint8) *EffectPropertyLight
+	WithSpotExponent(spotExponent float32) *EffectPropertyLight
+	WithSpotCutoff(spotCutoff float32) *EffectPropertyLight
+	WithConstantAttenuation(constantAttenuation float32) *EffectPropertyLight
+	WithLinearAttenuation(linearAttenuation float32) *EffectPropertyLight
+	WithQuadraticAttenuation(quadraticAttenuation float32) *EffectPropertyLight
+	WithTransform(transform *raw.GLKEffectPropertyTransform) *EffectPropertyLight
+	Enabled() uint8
+	SetEnabled(enabled uint8)
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+	AmbientColor() unsafe.Pointer
+	SetAmbientColor(ambientColor unsafe.Pointer)
+	DiffuseColor() unsafe.Pointer
+	SetDiffuseColor(diffuseColor unsafe.Pointer)
+	SpecularColor() unsafe.Pointer
+	SetSpecularColor(specularColor unsafe.Pointer)
+	SpotDirection() unsafe.Pointer
+	SetSpotDirection(spotDirection unsafe.Pointer)
+	SpotExponent() float32
+	SetSpotExponent(spotExponent float32)
+	SpotCutoff() float32
+	SetSpotCutoff(spotCutoff float32)
+	ConstantAttenuation() float32
+	SetConstantAttenuation(constantAttenuation float32)
+	LinearAttenuation() float32
+	SetLinearAttenuation(linearAttenuation float32)
+	QuadraticAttenuation() float32
+	SetQuadraticAttenuation(quadraticAttenuation float32)
+	Transform() *EffectPropertyTransform
+	SetTransform(transform *raw.GLKEffectPropertyTransform)
+}
+
+var _ EffectPropertyLightable = (*EffectPropertyLight)(nil)
 

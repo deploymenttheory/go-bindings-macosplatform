@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,149 @@ func (x *SpeechSynthesizer) WithUsesFeedbackWindow(usesFeedbackWindow bool) *Spe
 	x.inner.SetUsesFeedbackWindow(usesFeedbackWindow)
 	return x
 }
+
+// StartSpeakingString calls the underlying StartSpeakingString.
+func (x *SpeechSynthesizer) StartSpeakingString(string_ string) bool {
+	return x.inner.StartSpeakingString(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// StartSpeakingStringToURL calls the underlying StartSpeakingStringToURL.
+func (x *SpeechSynthesizer) StartSpeakingStringToURL(string_ string, url string) bool {
+	return x.inner.StartSpeakingStringToURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// StopSpeaking calls the underlying StopSpeaking.
+func (x *SpeechSynthesizer) StopSpeaking() {
+	x.inner.StopSpeaking()
+}
+
+// StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary raw.NSSpeechBoundary) {
+	x.inner.StopSpeakingAtBoundary(boundary)
+}
+
+// PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary raw.NSSpeechBoundary) {
+	x.inner.PauseSpeakingAtBoundary(boundary)
+}
+
+// ContinueSpeaking calls the underlying ContinueSpeaking.
+func (x *SpeechSynthesizer) ContinueSpeaking() {
+	x.inner.ContinueSpeaking()
+}
+
+// Voice calls the underlying Voice.
+func (x *SpeechSynthesizer) Voice() string {
+	_r := x.inner.Voice()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVoice calls the underlying SetVoice.
+func (x *SpeechSynthesizer) SetVoice(voice *foundation.NSString) bool {
+	return x.inner.SetVoice(voice)
+}
+
+// AddSpeechDictionary calls the underlying AddSpeechDictionary.
+func (x *SpeechSynthesizer) AddSpeechDictionary(speechDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.AddSpeechDictionary(speechDictionary)
+}
+
+// PhonemesFromText calls the underlying PhonemesFromText.
+func (x *SpeechSynthesizer) PhonemesFromText(text string) string {
+	_r := x.inner.PhonemesFromText(foundation.NSStringStringWithUTF8String(text))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ObjectForPropertyError calls the underlying ObjectForPropertyError.
+func (x *SpeechSynthesizer) ObjectForPropertyError(property *foundation.NSString) (objc.ID, error) {
+	return x.inner.ObjectForPropertyError(property)
+}
+
+// SetObjectForPropertyError calls the underlying SetObjectForPropertyError.
+func (x *SpeechSynthesizer) SetObjectForPropertyError(object objc.ID, property *foundation.NSString) (bool, error) {
+	return x.inner.SetObjectForPropertyError(object, property)
+}
+
+// IsSpeaking calls the underlying IsSpeaking.
+func (x *SpeechSynthesizer) IsSpeaking() bool {
+	return x.inner.IsSpeaking()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SpeechSynthesizer) Delegate() raw.NSSpeechSynthesizerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SpeechSynthesizer) SetDelegate(delegate raw.NSSpeechSynthesizerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Rate calls the underlying Rate.
+func (x *SpeechSynthesizer) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *SpeechSynthesizer) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// Volume calls the underlying Volume.
+func (x *SpeechSynthesizer) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *SpeechSynthesizer) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// UsesFeedbackWindow calls the underlying UsesFeedbackWindow.
+func (x *SpeechSynthesizer) UsesFeedbackWindow() bool {
+	return x.inner.UsesFeedbackWindow()
+}
+
+// SetUsesFeedbackWindow calls the underlying SetUsesFeedbackWindow.
+func (x *SpeechSynthesizer) SetUsesFeedbackWindow(usesFeedbackWindow bool) {
+	x.inner.SetUsesFeedbackWindow(usesFeedbackWindow)
+}
+
+// SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
+type SpeechSynthesizerable interface {
+	Unwrap() *raw.NSSpeechSynthesizer
+	WithDelegate(delegate raw.NSSpeechSynthesizerDelegate) *SpeechSynthesizer
+	WithRate(rate float32) *SpeechSynthesizer
+	WithVolume(volume float32) *SpeechSynthesizer
+	WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer
+	StartSpeakingString(string_ string) bool
+	StartSpeakingStringToURL(string_ string, url string) bool
+	StopSpeaking()
+	StopSpeakingAtBoundary(boundary raw.NSSpeechBoundary)
+	PauseSpeakingAtBoundary(boundary raw.NSSpeechBoundary)
+	ContinueSpeaking()
+	Voice() string
+	SetVoice(voice *foundation.NSString) bool
+	AddSpeechDictionary(speechDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PhonemesFromText(text string) string
+	ObjectForPropertyError(property *foundation.NSString) (objc.ID, error)
+	SetObjectForPropertyError(object objc.ID, property *foundation.NSString) (bool, error)
+	IsSpeaking() bool
+	Delegate() raw.NSSpeechSynthesizerDelegate
+	SetDelegate(delegate raw.NSSpeechSynthesizerDelegate)
+	Rate() float32
+	SetRate(rate float32)
+	Volume() float32
+	SetVolume(volume float32)
+	UsesFeedbackWindow() bool
+	SetUsesFeedbackWindow(usesFeedbackWindow bool)
+}
+
+var _ SpeechSynthesizerable = (*SpeechSynthesizer)(nil)
 

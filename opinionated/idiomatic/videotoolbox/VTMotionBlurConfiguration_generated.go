@@ -7,6 +7,7 @@ package videotoolbox
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,64 @@ func NewMotionBlurConfigurationWithFrameWidthFrameHeightUsePrecomputedFlowQualit
 	return &MotionBlurConfiguration{inner: raw.VTMotionBlurConfigurationFromID(_id)}
 }
 
+// FrameWidth calls the underlying FrameWidth.
+func (x *MotionBlurConfiguration) FrameWidth() int {
+	return x.inner.FrameWidth()
+}
+
+// FrameHeight calls the underlying FrameHeight.
+func (x *MotionBlurConfiguration) FrameHeight() int {
+	return x.inner.FrameHeight()
+}
+
+// UsePrecomputedFlow calls the underlying UsePrecomputedFlow.
+func (x *MotionBlurConfiguration) UsePrecomputedFlow() bool {
+	return x.inner.UsePrecomputedFlow()
+}
+
+// QualityPrioritization calls the underlying QualityPrioritization.
+func (x *MotionBlurConfiguration) QualityPrioritization() raw.VTMotionBlurConfigurationQualityPrioritization {
+	return x.inner.QualityPrioritization()
+}
+
+// Revision calls the underlying Revision.
+func (x *MotionBlurConfiguration) Revision() raw.VTMotionBlurConfigurationRevision {
+	return x.inner.Revision()
+}
+
 // FrameSupportedPixelFormats returns the collection as a Go slice.
 func (x *MotionBlurConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
 	arr := x.inner.FrameSupportedPixelFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
+func (x *MotionBlurConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.SourcePixelBufferAttributes()
+}
+
+// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
+func (x *MotionBlurConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.DestinationPixelBufferAttributes()
+}
+
+// MotionBlurConfigurationable is the interface implemented by [MotionBlurConfiguration], for mocking and DI.
+type MotionBlurConfigurationable interface {
+	Unwrap() *raw.VTMotionBlurConfiguration
+	FrameWidth() int
+	FrameHeight() int
+	UsePrecomputedFlow() bool
+	QualityPrioritization() raw.VTMotionBlurConfigurationQualityPrioritization
+	Revision() raw.VTMotionBlurConfigurationRevision
+	FrameSupportedPixelFormats() []*foundation.NSNumber
+	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MotionBlurConfigurationable = (*MotionBlurConfiguration)(nil)
 

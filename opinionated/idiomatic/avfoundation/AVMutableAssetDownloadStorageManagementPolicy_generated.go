@@ -36,5 +36,26 @@ func (x *MutableAssetDownloadStorageManagementPolicy) WithExpirationDate(expirat
 	return x
 }
 
+// SetPriority calls the underlying SetPriority.
+func (x *MutableAssetDownloadStorageManagementPolicy) SetPriority(priority *foundation.NSString) {
+	x.inner.SetPriority(priority)
+}
+
+// SetExpirationDate calls the underlying SetExpirationDate.
+func (x *MutableAssetDownloadStorageManagementPolicy) SetExpirationDate(expirationDate *foundation.NSDate) {
+	x.inner.SetExpirationDate(expirationDate)
+}
+
 func (x *MutableAssetDownloadStorageManagementPolicy) asAssetDownloadStorageManagementPolicy() *raw.AVAssetDownloadStorageManagementPolicy { return &x.inner.AVAssetDownloadStorageManagementPolicy }
+
+// MutableAssetDownloadStorageManagementPolicyable is the interface implemented by [MutableAssetDownloadStorageManagementPolicy], for mocking and DI.
+type MutableAssetDownloadStorageManagementPolicyable interface {
+	Unwrap() *raw.AVMutableAssetDownloadStorageManagementPolicy
+	WithPriority(priority *foundation.NSString) *MutableAssetDownloadStorageManagementPolicy
+	WithExpirationDate(expirationDate *foundation.NSDate) *MutableAssetDownloadStorageManagementPolicy
+	SetPriority(priority *foundation.NSString)
+	SetExpirationDate(expirationDate *foundation.NSDate)
+}
+
+var _ MutableAssetDownloadStorageManagementPolicyable = (*MutableAssetDownloadStorageManagementPolicy)(nil)
 

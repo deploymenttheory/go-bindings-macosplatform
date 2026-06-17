@@ -23,3 +23,10 @@ func NewChatAction() *ChatAction {
 	return &ChatAction{inner: raw.BCChatActionFromID(_id)}
 }
 
+// ChatActionable is the interface implemented by [ChatAction], for mocking and DI.
+type ChatActionable interface {
+	Unwrap() *raw.BCChatAction
+}
+
+var _ ChatActionable = (*ChatAction)(nil)
+

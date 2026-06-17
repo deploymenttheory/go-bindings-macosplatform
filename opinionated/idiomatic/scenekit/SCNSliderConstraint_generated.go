@@ -41,5 +41,51 @@ func (x *SliderConstraint) WithOffset(offset raw.SCNVector3) *SliderConstraint {
 	return x
 }
 
+// CollisionCategoryBitMask calls the underlying CollisionCategoryBitMask.
+func (x *SliderConstraint) CollisionCategoryBitMask() uint {
+	return x.inner.CollisionCategoryBitMask()
+}
+
+// SetCollisionCategoryBitMask calls the underlying SetCollisionCategoryBitMask.
+func (x *SliderConstraint) SetCollisionCategoryBitMask(collisionCategoryBitMask uint) {
+	x.inner.SetCollisionCategoryBitMask(collisionCategoryBitMask)
+}
+
+// Radius calls the underlying Radius.
+func (x *SliderConstraint) Radius() float64 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *SliderConstraint) SetRadius(radius float64) {
+	x.inner.SetRadius(radius)
+}
+
+// Offset calls the underlying Offset.
+func (x *SliderConstraint) Offset() raw.SCNVector3 {
+	return x.inner.Offset()
+}
+
+// SetOffset calls the underlying SetOffset.
+func (x *SliderConstraint) SetOffset(offset raw.SCNVector3) {
+	x.inner.SetOffset(offset)
+}
+
 func (x *SliderConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
+
+// SliderConstraintable is the interface implemented by [SliderConstraint], for mocking and DI.
+type SliderConstraintable interface {
+	Unwrap() *raw.SCNSliderConstraint
+	WithCollisionCategoryBitMask(collisionCategoryBitMask uint) *SliderConstraint
+	WithRadius(radius float64) *SliderConstraint
+	WithOffset(offset raw.SCNVector3) *SliderConstraint
+	CollisionCategoryBitMask() uint
+	SetCollisionCategoryBitMask(collisionCategoryBitMask uint)
+	Radius() float64
+	SetRadius(radius float64)
+	Offset() raw.SCNVector3
+	SetOffset(offset raw.SCNVector3)
+}
+
+var _ SliderConstraintable = (*SliderConstraint)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRBridgedDeviceBasicClusterReachableChangedEvent() *MTRBridgedDeviceBas
 
 func (x *MTRBridgedDeviceBasicClusterReachableChangedEvent) asMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent }
 
+// MTRBridgedDeviceBasicClusterReachableChangedEventable is the interface implemented by [MTRBridgedDeviceBasicClusterReachableChangedEvent], for mocking and DI.
+type MTRBridgedDeviceBasicClusterReachableChangedEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicClusterReachableChangedEvent
+}
+
+var _ MTRBridgedDeviceBasicClusterReachableChangedEventable = (*MTRBridgedDeviceBasicClusterReachableChangedEvent)(nil)
+

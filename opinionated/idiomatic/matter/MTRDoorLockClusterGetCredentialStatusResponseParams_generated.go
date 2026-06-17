@@ -73,3 +73,101 @@ func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) WithTimedInvokeTim
 	return x
 }
 
+// CredentialExists calls the underlying CredentialExists.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialExists() *foundation.NSNumber {
+	return x.inner.CredentialExists()
+}
+
+// SetCredentialExists calls the underlying SetCredentialExists.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetCredentialExists(credentialExists *foundation.NSNumber) {
+	x.inner.SetCredentialExists(credentialExists)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// CreatorFabricIndex calls the underlying CreatorFabricIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) CreatorFabricIndex() *foundation.NSNumber {
+	return x.inner.CreatorFabricIndex()
+}
+
+// SetCreatorFabricIndex calls the underlying SetCreatorFabricIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) {
+	x.inner.SetCreatorFabricIndex(creatorFabricIndex)
+}
+
+// LastModifiedFabricIndex calls the underlying LastModifiedFabricIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) LastModifiedFabricIndex() *foundation.NSNumber {
+	return x.inner.LastModifiedFabricIndex()
+}
+
+// SetLastModifiedFabricIndex calls the underlying SetLastModifiedFabricIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) {
+	x.inner.SetLastModifiedFabricIndex(lastModifiedFabricIndex)
+}
+
+// NextCredentialIndex calls the underlying NextCredentialIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) NextCredentialIndex() *foundation.NSNumber {
+	return x.inner.NextCredentialIndex()
+}
+
+// SetNextCredentialIndex calls the underlying SetNextCredentialIndex.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetNextCredentialIndex(nextCredentialIndex *foundation.NSNumber) {
+	x.inner.SetNextCredentialIndex(nextCredentialIndex)
+}
+
+// CredentialData calls the underlying CredentialData.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) CredentialData() *foundation.NSData {
+	return x.inner.CredentialData()
+}
+
+// SetCredentialData calls the underlying SetCredentialData.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetCredentialData(credentialData *foundation.NSData) {
+	x.inner.SetCredentialData(credentialData)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetCredentialStatusResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRDoorLockClusterGetCredentialStatusResponseParamsable is the interface implemented by [MTRDoorLockClusterGetCredentialStatusResponseParams], for mocking and DI.
+type MTRDoorLockClusterGetCredentialStatusResponseParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithCredentialExists(credentialExists *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithNextCredentialIndex(nextCredentialIndex *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithCredentialData(credentialData *foundation.NSData) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusResponseParams
+	CredentialExists() *foundation.NSNumber
+	SetCredentialExists(credentialExists *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	CreatorFabricIndex() *foundation.NSNumber
+	SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber)
+	LastModifiedFabricIndex() *foundation.NSNumber
+	SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber)
+	NextCredentialIndex() *foundation.NSNumber
+	SetNextCredentialIndex(nextCredentialIndex *foundation.NSNumber)
+	CredentialData() *foundation.NSData
+	SetCredentialData(credentialData *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterGetCredentialStatusResponseParamsable = (*MTRDoorLockClusterGetCredentialStatusResponseParams)(nil)
+

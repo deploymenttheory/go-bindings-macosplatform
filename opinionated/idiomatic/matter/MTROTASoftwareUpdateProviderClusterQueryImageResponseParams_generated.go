@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateProviderClusterQueryImageResponseParams() *MTROtaSof
 
 func (x *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams) asMTROTASoftwareUpdateProviderClusterQueryImageResponseParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams { return &x.inner.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams }
 
+// MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams], for mocking and DI.
+type MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
+}
+
+var _ MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsable = (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams)(nil)
+

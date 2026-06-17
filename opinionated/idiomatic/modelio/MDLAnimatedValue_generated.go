@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,18 +31,79 @@ func (x *AnimatedValue) WithInterpolation(interpolation raw.MDLAnimatedValueInte
 	return x
 }
 
+// IsAnimated calls the underlying IsAnimated.
+func (x *AnimatedValue) IsAnimated() bool {
+	return x.inner.IsAnimated()
+}
+
+// Clear calls the underlying Clear.
+func (x *AnimatedValue) Clear() {
+	x.inner.Clear()
+}
+
+// GetTimesMaxCount calls the underlying GetTimesMaxCount.
+func (x *AnimatedValue) GetTimesMaxCount(timesArray *float64, maxCount uint) uint {
+	return x.inner.GetTimesMaxCount(timesArray, maxCount)
+}
+
+// Precision calls the underlying Precision.
+func (x *AnimatedValue) Precision() raw.MDLDataPrecision {
+	return x.inner.Precision()
+}
+
+// TimeSampleCount calls the underlying TimeSampleCount.
+func (x *AnimatedValue) TimeSampleCount() uint {
+	return x.inner.TimeSampleCount()
+}
+
+// MinimumTime calls the underlying MinimumTime.
+func (x *AnimatedValue) MinimumTime() float64 {
+	return x.inner.MinimumTime()
+}
+
+// MaximumTime calls the underlying MaximumTime.
+func (x *AnimatedValue) MaximumTime() float64 {
+	return x.inner.MaximumTime()
+}
+
+// Interpolation calls the underlying Interpolation.
+func (x *AnimatedValue) Interpolation() raw.MDLAnimatedValueInterpolation {
+	return x.inner.Interpolation()
+}
+
+// SetInterpolation calls the underlying SetInterpolation.
+func (x *AnimatedValue) SetInterpolation(interpolation raw.MDLAnimatedValueInterpolation) {
+	x.inner.SetInterpolation(interpolation)
+}
+
 // KeyTimes returns the collection as a Go slice.
 func (x *AnimatedValue) KeyTimes() []*foundation.NSNumber {
 	arr := x.inner.KeyTimes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *AnimatedValue) asAnimatedValue() *raw.MDLAnimatedValue { return x.inner }
+
+// AnimatedValueable is the interface implemented by [AnimatedValue], for mocking and DI.
+type AnimatedValueable interface {
+	Unwrap() *raw.MDLAnimatedValue
+	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedValue
+	IsAnimated() bool
+	Clear()
+	GetTimesMaxCount(timesArray *float64, maxCount uint) uint
+	Precision() raw.MDLDataPrecision
+	TimeSampleCount() uint
+	MinimumTime() float64
+	MaximumTime() float64
+	Interpolation() raw.MDLAnimatedValueInterpolation
+	SetInterpolation(interpolation raw.MDLAnimatedValueInterpolation)
+	KeyTimes() []*foundation.NSNumber
+}
+
+var _ AnimatedValueable = (*AnimatedValue)(nil)
 

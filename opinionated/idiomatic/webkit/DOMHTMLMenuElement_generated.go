@@ -29,6 +29,16 @@ func (x *DOMHTMLMenuElement) WithCompact(compact bool) *DOMHTMLMenuElement {
 	return x
 }
 
+// Compact calls the underlying Compact.
+func (x *DOMHTMLMenuElement) Compact() bool {
+	return x.inner.Compact()
+}
+
+// SetCompact calls the underlying SetCompact.
+func (x *DOMHTMLMenuElement) SetCompact(compact bool) {
+	x.inner.SetCompact(compact)
+}
+
 func (x *DOMHTMLMenuElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLMenuElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -38,4 +48,14 @@ func (x *DOMHTMLMenuElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTMLE
 func (x *DOMHTMLMenuElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLMenuElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLMenuElementable is the interface implemented by [DOMHTMLMenuElement], for mocking and DI.
+type DOMHTMLMenuElementable interface {
+	Unwrap() *raw.DOMHTMLMenuElement
+	WithCompact(compact bool) *DOMHTMLMenuElement
+	Compact() bool
+	SetCompact(compact bool)
+}
+
+var _ DOMHTMLMenuElementable = (*DOMHTMLMenuElement)(nil)
 

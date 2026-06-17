@@ -5,9 +5,12 @@
 package collaboration
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // IdentityPicker wraps [raw.CBIdentityPicker] with a fluent Go API.
@@ -36,16 +39,70 @@ func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection boo
 	return x
 }
 
+// RunModal calls the underlying RunModal.
+func (x *IdentityPicker) RunModal() int {
+	return x.inner.RunModal()
+}
+
+// RunModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying RunModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *IdentityPicker) RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.RunModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
+}
+
+// RunModalForWindowCompletionHandler calls the underlying RunModalForWindowCompletionHandler.
+func (x *IdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int)) {
+	x.inner.RunModalForWindowCompletionHandler(window, completionHandler)
+}
+
+// Title calls the underlying Title.
+func (x *IdentityPicker) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *IdentityPicker) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
+func (x *IdentityPicker) AllowsMultipleSelection() bool {
+	return x.inner.AllowsMultipleSelection()
+}
+
+// SetAllowsMultipleSelection calls the underlying SetAllowsMultipleSelection.
+func (x *IdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
+	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
+}
+
 // Identities returns the collection as a Go slice.
 func (x *IdentityPicker) Identities() []*raw.CBIdentity {
 	arr := x.inner.Identities()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CBIdentity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CBIdentity {
+		return raw.CBIdentityFromID(purego.Retain(_id))
+	})
 }
+
+// IdentityPickerable is the interface implemented by [IdentityPicker], for mocking and DI.
+type IdentityPickerable interface {
+	Unwrap() *raw.CBIdentityPicker
+	WithTitle(title string) *IdentityPicker
+	WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker
+	RunModal() int
+	RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+	RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int))
+	Title() string
+	SetTitle(title string)
+	AllowsMultipleSelection() bool
+	SetAllowsMultipleSelection(allowsMultipleSelection bool)
+	Identities() []*raw.CBIdentity
+}
+
+var _ IdentityPickerable = (*IdentityPicker)(nil)
 

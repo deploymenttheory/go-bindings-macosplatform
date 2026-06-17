@@ -33,3 +33,10 @@ func (x *ImageReduceRowMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
 
 func (x *ImageReduceRowMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
 
+// ImageReduceRowMinable is the interface implemented by [ImageReduceRowMin], for mocking and DI.
+type ImageReduceRowMinable interface {
+	Unwrap() *raw.MPSImageReduceRowMin
+}
+
+var _ ImageReduceRowMinable = (*ImageReduceRowMin)(nil)
+

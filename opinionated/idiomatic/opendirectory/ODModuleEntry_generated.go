@@ -7,6 +7,7 @@ package opendirectory
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,97 @@ func (x *ModuleEntry) WithUuidString(uuidString string) *ModuleEntry {
 	x.inner.SetUuidString(foundation.NSStringStringWithUTF8String(uuidString))
 	return x
 }
+
+// SetOptionValue calls the underlying SetOptionValue.
+func (x *ModuleEntry) SetOptionValue(optionName string, value objc.ID) {
+	x.inner.SetOptionValue(foundation.NSStringStringWithUTF8String(optionName), value)
+}
+
+// Option calls the underlying Option.
+func (x *ModuleEntry) Option(optionName string) objc.ID {
+	return x.inner.Option(foundation.NSStringStringWithUTF8String(optionName))
+}
+
+// Mappings calls the underlying Mappings.
+func (x *ModuleEntry) Mappings() *Mappings {
+	_r := x.inner.Mappings()
+	if _r == nil {
+		return nil
+	}
+	return &Mappings{inner: _r}
+}
+
+// SetMappings calls the underlying SetMappings.
+func (x *ModuleEntry) SetMappings(mappings *raw.ODMappings) {
+	x.inner.SetMappings(mappings)
+}
+
+// SupportedOptions calls the underlying SupportedOptions.
+func (x *ModuleEntry) SupportedOptions() *foundation.NSArray[objc.ID] {
+	return x.inner.SupportedOptions()
+}
+
+// Name calls the underlying Name.
+func (x *ModuleEntry) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *ModuleEntry) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// XpcServiceName calls the underlying XpcServiceName.
+func (x *ModuleEntry) XpcServiceName() string {
+	_r := x.inner.XpcServiceName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetXpcServiceName calls the underlying SetXpcServiceName.
+func (x *ModuleEntry) SetXpcServiceName(xpcServiceName string) {
+	x.inner.SetXpcServiceName(foundation.NSStringStringWithUTF8String(xpcServiceName))
+}
+
+// UuidString calls the underlying UuidString.
+func (x *ModuleEntry) UuidString() string {
+	_r := x.inner.UuidString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUuidString calls the underlying SetUuidString.
+func (x *ModuleEntry) SetUuidString(uuidString string) {
+	x.inner.SetUuidString(foundation.NSStringStringWithUTF8String(uuidString))
+}
+
+// ModuleEntryable is the interface implemented by [ModuleEntry], for mocking and DI.
+type ModuleEntryable interface {
+	Unwrap() *raw.ODModuleEntry
+	WithMappings(mappings *raw.ODMappings) *ModuleEntry
+	WithName(name string) *ModuleEntry
+	WithXpcServiceName(xpcServiceName string) *ModuleEntry
+	WithUuidString(uuidString string) *ModuleEntry
+	SetOptionValue(optionName string, value objc.ID)
+	Option(optionName string) objc.ID
+	Mappings() *Mappings
+	SetMappings(mappings *raw.ODMappings)
+	SupportedOptions() *foundation.NSArray[objc.ID]
+	Name() string
+	SetName(name string)
+	XpcServiceName() string
+	SetXpcServiceName(xpcServiceName string)
+	UuidString() string
+	SetUuidString(uuidString string)
+}
+
+var _ ModuleEntryable = (*ModuleEntry)(nil)
 

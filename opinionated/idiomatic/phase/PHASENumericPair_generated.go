@@ -36,3 +36,36 @@ func (x *NumericPair) WithSecond(second float64) *NumericPair {
 	return x
 }
 
+// First calls the underlying First.
+func (x *NumericPair) First() float64 {
+	return x.inner.First()
+}
+
+// SetFirst calls the underlying SetFirst.
+func (x *NumericPair) SetFirst(first float64) {
+	x.inner.SetFirst(first)
+}
+
+// Second calls the underlying Second.
+func (x *NumericPair) Second() float64 {
+	return x.inner.Second()
+}
+
+// SetSecond calls the underlying SetSecond.
+func (x *NumericPair) SetSecond(second float64) {
+	x.inner.SetSecond(second)
+}
+
+// NumericPairable is the interface implemented by [NumericPair], for mocking and DI.
+type NumericPairable interface {
+	Unwrap() *raw.PHASENumericPair
+	WithFirst(first float64) *NumericPair
+	WithSecond(second float64) *NumericPair
+	First() float64
+	SetFirst(first float64)
+	Second() float64
+	SetSecond(second float64)
+}
+
+var _ NumericPairable = (*NumericPair)(nil)
+

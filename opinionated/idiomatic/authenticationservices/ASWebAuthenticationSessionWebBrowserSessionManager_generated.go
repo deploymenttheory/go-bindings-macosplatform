@@ -29,3 +29,29 @@ func (x *WebAuthenticationSessionWebBrowserSessionManager) WithSessionHandler(se
 	return x
 }
 
+// SessionHandler calls the underlying SessionHandler.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) SessionHandler() raw.ASWebAuthenticationSessionWebBrowserSessionHandling {
+	return x.inner.SessionHandler()
+}
+
+// SetSessionHandler calls the underlying SetSessionHandler.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) SetSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) {
+	x.inner.SetSessionHandler(sessionHandler)
+}
+
+// WasLaunchedByAuthenticationServices calls the underlying WasLaunchedByAuthenticationServices.
+func (x *WebAuthenticationSessionWebBrowserSessionManager) WasLaunchedByAuthenticationServices() bool {
+	return x.inner.WasLaunchedByAuthenticationServices()
+}
+
+// WebAuthenticationSessionWebBrowserSessionManagerable is the interface implemented by [WebAuthenticationSessionWebBrowserSessionManager], for mocking and DI.
+type WebAuthenticationSessionWebBrowserSessionManagerable interface {
+	Unwrap() *raw.ASWebAuthenticationSessionWebBrowserSessionManager
+	WithSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling) *WebAuthenticationSessionWebBrowserSessionManager
+	SessionHandler() raw.ASWebAuthenticationSessionWebBrowserSessionHandling
+	SetSessionHandler(sessionHandler raw.ASWebAuthenticationSessionWebBrowserSessionHandling)
+	WasLaunchedByAuthenticationServices() bool
+}
+
+var _ WebAuthenticationSessionWebBrowserSessionManagerable = (*WebAuthenticationSessionWebBrowserSessionManager)(nil)
+

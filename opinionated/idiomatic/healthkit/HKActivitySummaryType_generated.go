@@ -25,3 +25,10 @@ func NewActivitySummaryType() *ActivitySummaryType {
 
 func (x *ActivitySummaryType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
+// ActivitySummaryTypeable is the interface implemented by [ActivitySummaryType], for mocking and DI.
+type ActivitySummaryTypeable interface {
+	Unwrap() *raw.HKActivitySummaryType
+}
+
+var _ ActivitySummaryTypeable = (*ActivitySummaryType)(nil)
+

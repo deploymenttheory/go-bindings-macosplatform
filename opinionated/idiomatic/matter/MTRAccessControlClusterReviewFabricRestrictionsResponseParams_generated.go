@@ -37,3 +37,23 @@ func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToke
 	return x
 }
 
+// Token calls the underlying Token.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() *foundation.NSNumber {
+	return x.inner.Token()
+}
+
+// SetToken calls the underlying SetToken.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) SetToken(token *foundation.NSNumber) {
+	x.inner.SetToken(token)
+}
+
+// MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable is the interface implemented by [MTRAccessControlClusterReviewFabricRestrictionsResponseParams], for mocking and DI.
+type MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable interface {
+	Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+	WithToken(token *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+	Token() *foundation.NSNumber
+	SetToken(token *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable = (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams)(nil)
+

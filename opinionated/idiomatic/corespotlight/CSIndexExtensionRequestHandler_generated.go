@@ -23,3 +23,10 @@ func NewIndexExtensionRequestHandler() *IndexExtensionRequestHandler {
 	return &IndexExtensionRequestHandler{inner: raw.CSIndexExtensionRequestHandlerFromID(_id)}
 }
 
+// IndexExtensionRequestHandlerable is the interface implemented by [IndexExtensionRequestHandler], for mocking and DI.
+type IndexExtensionRequestHandlerable interface {
+	Unwrap() *raw.CSIndexExtensionRequestHandler
+}
+
+var _ IndexExtensionRequestHandlerable = (*IndexExtensionRequestHandler)(nil)
+

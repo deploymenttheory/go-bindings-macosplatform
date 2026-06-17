@@ -23,5 +23,32 @@ func NewScoreChallenge() *ScoreChallenge {
 	return &ScoreChallenge{inner: raw.GKScoreChallengeFromID(_id)}
 }
 
+// Score calls the underlying Score.
+func (x *ScoreChallenge) Score() *Score {
+	_r := x.inner.Score()
+	if _r == nil {
+		return nil
+	}
+	return &Score{inner: _r}
+}
+
+// LeaderboardEntry calls the underlying LeaderboardEntry.
+func (x *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
+	_r := x.inner.LeaderboardEntry()
+	if _r == nil {
+		return nil
+	}
+	return &LeaderboardEntry{inner: _r}
+}
+
 func (x *ScoreChallenge) asChallenge() *raw.GKChallenge { return &x.inner.GKChallenge }
+
+// ScoreChallengeable is the interface implemented by [ScoreChallenge], for mocking and DI.
+type ScoreChallengeable interface {
+	Unwrap() *raw.GKScoreChallenge
+	Score() *Score
+	LeaderboardEntry() *LeaderboardEntry
+}
+
+var _ ScoreChallengeable = (*ScoreChallenge)(nil)
 

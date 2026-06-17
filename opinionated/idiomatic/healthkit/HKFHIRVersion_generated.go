@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,49 @@ func NewFHIRVersion() *FHIRVersion {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKFHIRVersion")), objc.RegisterName("new"))
 	return &FHIRVersion{inner: raw.HKFHIRVersionFromID(_id)}
 }
+
+// MajorVersion calls the underlying MajorVersion.
+func (x *FHIRVersion) MajorVersion() int {
+	return x.inner.MajorVersion()
+}
+
+// MinorVersion calls the underlying MinorVersion.
+func (x *FHIRVersion) MinorVersion() int {
+	return x.inner.MinorVersion()
+}
+
+// PatchVersion calls the underlying PatchVersion.
+func (x *FHIRVersion) PatchVersion() int {
+	return x.inner.PatchVersion()
+}
+
+// FHIRRelease calls the underlying FHIRRelease.
+func (x *FHIRVersion) FHIRRelease() string {
+	_r := x.inner.FHIRRelease()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// StringRepresentation calls the underlying StringRepresentation.
+func (x *FHIRVersion) StringRepresentation() string {
+	_r := x.inner.StringRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FHIRVersionable is the interface implemented by [FHIRVersion], for mocking and DI.
+type FHIRVersionable interface {
+	Unwrap() *raw.HKFHIRVersion
+	MajorVersion() int
+	MinorVersion() int
+	PatchVersion() int
+	FHIRRelease() string
+	StringRepresentation() string
+}
+
+var _ FHIRVersionable = (*FHIRVersion)(nil)
 

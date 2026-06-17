@@ -40,3 +40,76 @@ func NewMatrixWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.M
 	return &Matrix{inner: raw.MPSMatrixFromID(_id)}
 }
 
+// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
+func (x *Matrix) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+}
+
+// ResourceSize calls the underlying ResourceSize.
+func (x *Matrix) ResourceSize() uint {
+	return x.inner.ResourceSize()
+}
+
+// Device calls the underlying Device.
+func (x *Matrix) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// Rows calls the underlying Rows.
+func (x *Matrix) Rows() uint {
+	return x.inner.Rows()
+}
+
+// Columns calls the underlying Columns.
+func (x *Matrix) Columns() uint {
+	return x.inner.Columns()
+}
+
+// Matrices calls the underlying Matrices.
+func (x *Matrix) Matrices() uint {
+	return x.inner.Matrices()
+}
+
+// DataType calls the underlying DataType.
+func (x *Matrix) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// RowBytes calls the underlying RowBytes.
+func (x *Matrix) RowBytes() uint {
+	return x.inner.RowBytes()
+}
+
+// MatrixBytes calls the underlying MatrixBytes.
+func (x *Matrix) MatrixBytes() uint {
+	return x.inner.MatrixBytes()
+}
+
+// Offset calls the underlying Offset.
+func (x *Matrix) Offset() uint {
+	return x.inner.Offset()
+}
+
+// Data calls the underlying Data.
+func (x *Matrix) Data() metal.MTLBuffer {
+	return x.inner.Data()
+}
+
+// Matrixable is the interface implemented by [Matrix], for mocking and DI.
+type Matrixable interface {
+	Unwrap() *raw.MPSMatrix
+	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	ResourceSize() uint
+	Device() metal.MTLDevice
+	Rows() uint
+	Columns() uint
+	Matrices() uint
+	DataType() mpscore.MPSDataType
+	RowBytes() uint
+	MatrixBytes() uint
+	Offset() uint
+	Data() metal.MTLBuffer
+}
+
+var _ Matrixable = (*Matrix)(nil)
+

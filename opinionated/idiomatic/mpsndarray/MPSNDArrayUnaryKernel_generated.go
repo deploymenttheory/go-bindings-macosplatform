@@ -6,6 +6,7 @@ package mpsndarray
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,9 +26,70 @@ func NewArrayUnaryKernelWithDevice(device metal.MTLDevice) *ArrayUnaryKernel {
 	return &ArrayUnaryKernel{inner: raw.MPSNDArrayUnaryKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArray calls the underlying EncodeToCommandBufferSourceArray.
+func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArray(cmdBuf, sourceArray)
+}
+
+// EncodeToCommandBufferSourceArrayDestinationArray calls the underlying EncodeToCommandBufferSourceArrayDestinationArray.
+func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf, sourceArray, destination)
+}
+
+// EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary.
+func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf, sourceArray, outGradientState, outputStateIsTemporary)
+}
+
+// EncodeToCommandBufferSourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArrayResultStateDestinationArray.
+func (x *ArrayUnaryKernel) EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf, sourceArray, outGradientState, destination)
+}
+
+// Offsets calls the underlying Offsets.
+func (x *ArrayUnaryKernel) Offsets() raw.MPSNDArrayOffsets {
+	return x.inner.Offsets()
+}
+
+// EdgeMode calls the underlying EdgeMode.
+func (x *ArrayUnaryKernel) EdgeMode() mpscore.MPSImageEdgeMode {
+	return x.inner.EdgeMode()
+}
+
+// KernelSizes calls the underlying KernelSizes.
+func (x *ArrayUnaryKernel) KernelSizes() raw.MPSNDArraySizes {
+	return x.inner.KernelSizes()
+}
+
+// Strides calls the underlying Strides.
+func (x *ArrayUnaryKernel) Strides() raw.MPSNDArrayOffsets {
+	return x.inner.Strides()
+}
+
+// DilationRates calls the underlying DilationRates.
+func (x *ArrayUnaryKernel) DilationRates() raw.MPSNDArraySizes {
+	return x.inner.DilationRates()
+}
+
 func (x *ArrayUnaryKernel) asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel { return x.inner }
 
 func (x *ArrayUnaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *ArrayUnaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
+
+// ArrayUnaryKernelable is the interface implemented by [ArrayUnaryKernel], for mocking and DI.
+type ArrayUnaryKernelable interface {
+	Unwrap() *raw.MPSNDArrayUnaryKernel
+	EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
+	EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	Offsets() raw.MPSNDArrayOffsets
+	EdgeMode() mpscore.MPSImageEdgeMode
+	KernelSizes() raw.MPSNDArraySizes
+	Strides() raw.MPSNDArrayOffsets
+	DilationRates() raw.MPSNDArraySizes
+}
+
+var _ ArrayUnaryKernelable = (*ArrayUnaryKernel)(nil)
 

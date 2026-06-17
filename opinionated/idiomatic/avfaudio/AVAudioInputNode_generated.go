@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,7 +48,78 @@ func (x *AudioInputNode) WithVoiceProcessingOtherAudioDuckingConfiguration(voice
 	return x
 }
 
+// SetManualRenderingInputPCMFormatInputBlock calls the underlying SetManualRenderingInputPCMFormatInputBlock.
+func (x *AudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool {
+	return x.inner.SetManualRenderingInputPCMFormatInputBlock(format, block)
+}
+
+// SetMutedSpeechActivityEventListener calls the underlying SetMutedSpeechActivityEventListener.
+func (x *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(raw.AVAudioVoiceProcessingSpeechActivityEvent)) bool {
+	return x.inner.SetMutedSpeechActivityEventListener(listenerBlock)
+}
+
+// IsVoiceProcessingBypassed calls the underlying IsVoiceProcessingBypassed.
+func (x *AudioInputNode) IsVoiceProcessingBypassed() bool {
+	return x.inner.IsVoiceProcessingBypassed()
+}
+
+// SetVoiceProcessingBypassed calls the underlying SetVoiceProcessingBypassed.
+func (x *AudioInputNode) SetVoiceProcessingBypassed(voiceProcessingBypassed bool) {
+	x.inner.SetVoiceProcessingBypassed(voiceProcessingBypassed)
+}
+
+// IsVoiceProcessingAGCEnabled calls the underlying IsVoiceProcessingAGCEnabled.
+func (x *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
+	return x.inner.IsVoiceProcessingAGCEnabled()
+}
+
+// SetVoiceProcessingAGCEnabled calls the underlying SetVoiceProcessingAGCEnabled.
+func (x *AudioInputNode) SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) {
+	x.inner.SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled)
+}
+
+// IsVoiceProcessingInputMuted calls the underlying IsVoiceProcessingInputMuted.
+func (x *AudioInputNode) IsVoiceProcessingInputMuted() bool {
+	return x.inner.IsVoiceProcessingInputMuted()
+}
+
+// SetVoiceProcessingInputMuted calls the underlying SetVoiceProcessingInputMuted.
+func (x *AudioInputNode) SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool) {
+	x.inner.SetVoiceProcessingInputMuted(voiceProcessingInputMuted)
+}
+
+// VoiceProcessingOtherAudioDuckingConfiguration calls the underlying VoiceProcessingOtherAudioDuckingConfiguration.
+func (x *AudioInputNode) VoiceProcessingOtherAudioDuckingConfiguration() raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration {
+	return x.inner.VoiceProcessingOtherAudioDuckingConfiguration()
+}
+
+// SetVoiceProcessingOtherAudioDuckingConfiguration calls the underlying SetVoiceProcessingOtherAudioDuckingConfiguration.
+func (x *AudioInputNode) SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) {
+	x.inner.SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration)
+}
+
 func (x *AudioInputNode) asAudioIONode() *raw.AVAudioIONode { return &x.inner.AVAudioIONode }
 
 func (x *AudioInputNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioIONode.AVAudioNode }
+
+// AudioInputNodeable is the interface implemented by [AudioInputNode], for mocking and DI.
+type AudioInputNodeable interface {
+	Unwrap() *raw.AVAudioInputNode
+	WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode
+	WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode
+	WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode
+	WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode
+	SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool
+	SetMutedSpeechActivityEventListener(listenerBlock func(raw.AVAudioVoiceProcessingSpeechActivityEvent)) bool
+	IsVoiceProcessingBypassed() bool
+	SetVoiceProcessingBypassed(voiceProcessingBypassed bool)
+	IsVoiceProcessingAGCEnabled() bool
+	SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool)
+	IsVoiceProcessingInputMuted() bool
+	SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool)
+	VoiceProcessingOtherAudioDuckingConfiguration() raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration
+	SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration)
+}
+
+var _ AudioInputNodeable = (*AudioInputNode)(nil)
 

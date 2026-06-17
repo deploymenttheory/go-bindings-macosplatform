@@ -25,3 +25,10 @@ func NewMetadataSalientObject() *MetadataSalientObject {
 
 func (x *MetadataSalientObject) asMetadataObject() *raw.AVMetadataObject { return &x.inner.AVMetadataObject }
 
+// MetadataSalientObjectable is the interface implemented by [MetadataSalientObject], for mocking and DI.
+type MetadataSalientObjectable interface {
+	Unwrap() *raw.AVMetadataSalientObject
+}
+
+var _ MetadataSalientObjectable = (*MetadataSalientObject)(nil)
+

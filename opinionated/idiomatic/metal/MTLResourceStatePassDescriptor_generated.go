@@ -23,3 +23,20 @@ func NewResourceStatePassDescriptor() *ResourceStatePassDescriptor {
 	return &ResourceStatePassDescriptor{inner: raw.MTLResourceStatePassDescriptorFromID(_id)}
 }
 
+// SampleBufferAttachments calls the underlying SampleBufferAttachments.
+func (x *ResourceStatePassDescriptor) SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
+	_r := x.inner.SampleBufferAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: _r}
+}
+
+// ResourceStatePassDescriptorable is the interface implemented by [ResourceStatePassDescriptor], for mocking and DI.
+type ResourceStatePassDescriptorable interface {
+	Unwrap() *raw.MTLResourceStatePassDescriptor
+	SampleBufferAttachments() *ResourceStatePassSampleBufferAttachmentDescriptorArray
+}
+
+var _ ResourceStatePassDescriptorable = (*ResourceStatePassDescriptor)(nil)
+

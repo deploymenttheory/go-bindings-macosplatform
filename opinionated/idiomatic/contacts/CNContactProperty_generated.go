@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,57 @@ func NewContactProperty() *ContactProperty {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactProperty")), objc.RegisterName("new"))
 	return &ContactProperty{inner: raw.CNContactPropertyFromID(_id)}
 }
+
+// Contact calls the underlying Contact.
+func (x *ContactProperty) Contact() *Contact {
+	_r := x.inner.Contact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// Key calls the underlying Key.
+func (x *ContactProperty) Key() string {
+	_r := x.inner.Key()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *ContactProperty) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *ContactProperty) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Label calls the underlying Label.
+func (x *ContactProperty) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContactPropertyable is the interface implemented by [ContactProperty], for mocking and DI.
+type ContactPropertyable interface {
+	Unwrap() *raw.CNContactProperty
+	Contact() *Contact
+	Key() string
+	Value() objc.ID
+	Identifier() string
+	Label() string
+}
+
+var _ ContactPropertyable = (*ContactProperty)(nil)
 

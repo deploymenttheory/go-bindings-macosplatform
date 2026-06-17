@@ -23,5 +23,60 @@ func NewProxy() *Proxy {
 	return &Proxy{inner: raw.NSProxyFromID(_id)}
 }
 
+// ForwardInvocation calls the underlying ForwardInvocation.
+func (x *Proxy) ForwardInvocation(invocation *raw.NSInvocation) {
+	x.inner.ForwardInvocation(invocation)
+}
+
+// MethodSignatureForSelector calls the underlying MethodSignatureForSelector.
+func (x *Proxy) MethodSignatureForSelector(sel objc.SEL) *MethodSignature {
+	_r := x.inner.MethodSignatureForSelector(sel)
+	if _r == nil {
+		return nil
+	}
+	return &MethodSignature{inner: _r}
+}
+
+// Dealloc calls the underlying Dealloc.
+func (x *Proxy) Dealloc() {
+	x.inner.Dealloc()
+}
+
+// Finalize calls the underlying Finalize.
+func (x *Proxy) Finalize() {
+	x.inner.Finalize()
+}
+
+// Description calls the underlying Description.
+func (x *Proxy) Description() *String {
+	_r := x.inner.Description()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DebugDescription calls the underlying DebugDescription.
+func (x *Proxy) DebugDescription() *String {
+	_r := x.inner.DebugDescription()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *Proxy) asProxy() *raw.NSProxy { return x.inner }
+
+// Proxyable is the interface implemented by [Proxy], for mocking and DI.
+type Proxyable interface {
+	Unwrap() *raw.NSProxy
+	ForwardInvocation(invocation *raw.NSInvocation)
+	MethodSignatureForSelector(sel objc.SEL) *MethodSignature
+	Dealloc()
+	Finalize()
+	Description() *String
+	DebugDescription() *String
+}
+
+var _ Proxyable = (*Proxy)(nil)
 

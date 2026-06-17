@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,24 @@ func NewMachBootstrapServer() *MachBootstrapServer {
 	return &MachBootstrapServer{inner: raw.NSMachBootstrapServerFromID(_id)}
 }
 
+// ServicePortWithName calls the underlying ServicePortWithName.
+func (x *MachBootstrapServer) ServicePortWithName(name string) *Port {
+	_r := x.inner.ServicePortWithName(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &Port{inner: _r}
+}
+
 func (x *MachBootstrapServer) asPortNameServer() *raw.NSPortNameServer { return &x.inner.NSPortNameServer }
 
 func (x *MachBootstrapServer) asObject() *raw.NSObject { return &x.inner.NSPortNameServer.NSObject }
+
+// MachBootstrapServerable is the interface implemented by [MachBootstrapServer], for mocking and DI.
+type MachBootstrapServerable interface {
+	Unwrap() *raw.NSMachBootstrapServer
+	ServicePortWithName(name string) *Port
+}
+
+var _ MachBootstrapServerable = (*MachBootstrapServer)(nil)
 

@@ -35,5 +35,38 @@ func (x *RenderPassDepthAttachmentDescriptor) WithDepthResolveFilter(depthResolv
 	return x
 }
 
+// ClearDepth calls the underlying ClearDepth.
+func (x *RenderPassDepthAttachmentDescriptor) ClearDepth() float64 {
+	return x.inner.ClearDepth()
+}
+
+// SetClearDepth calls the underlying SetClearDepth.
+func (x *RenderPassDepthAttachmentDescriptor) SetClearDepth(clearDepth float64) {
+	x.inner.SetClearDepth(clearDepth)
+}
+
+// DepthResolveFilter calls the underlying DepthResolveFilter.
+func (x *RenderPassDepthAttachmentDescriptor) DepthResolveFilter() raw.MTLMultisampleDepthResolveFilter {
+	return x.inner.DepthResolveFilter()
+}
+
+// SetDepthResolveFilter calls the underlying SetDepthResolveFilter.
+func (x *RenderPassDepthAttachmentDescriptor) SetDepthResolveFilter(depthResolveFilter raw.MTLMultisampleDepthResolveFilter) {
+	x.inner.SetDepthResolveFilter(depthResolveFilter)
+}
+
 func (x *RenderPassDepthAttachmentDescriptor) asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor { return &x.inner.MTLRenderPassAttachmentDescriptor }
+
+// RenderPassDepthAttachmentDescriptorable is the interface implemented by [RenderPassDepthAttachmentDescriptor], for mocking and DI.
+type RenderPassDepthAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLRenderPassDepthAttachmentDescriptor
+	WithClearDepth(clearDepth float64) *RenderPassDepthAttachmentDescriptor
+	WithDepthResolveFilter(depthResolveFilter raw.MTLMultisampleDepthResolveFilter) *RenderPassDepthAttachmentDescriptor
+	ClearDepth() float64
+	SetClearDepth(clearDepth float64)
+	DepthResolveFilter() raw.MTLMultisampleDepthResolveFilter
+	SetDepthResolveFilter(depthResolveFilter raw.MTLMultisampleDepthResolveFilter)
+}
+
+var _ RenderPassDepthAttachmentDescriptorable = (*RenderPassDepthAttachmentDescriptor)(nil)
 

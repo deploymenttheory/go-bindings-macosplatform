@@ -37,3 +37,61 @@ func (x *RasterizationRateLayerDescriptor) WithSampleCount(sampleCount raw.MTLSi
 	return x
 }
 
+// SampleCount calls the underlying SampleCount.
+func (x *RasterizationRateLayerDescriptor) SampleCount() raw.MTLSize {
+	return x.inner.SampleCount()
+}
+
+// MaxSampleCount calls the underlying MaxSampleCount.
+func (x *RasterizationRateLayerDescriptor) MaxSampleCount() raw.MTLSize {
+	return x.inner.MaxSampleCount()
+}
+
+// HorizontalSampleStorage calls the underlying HorizontalSampleStorage.
+func (x *RasterizationRateLayerDescriptor) HorizontalSampleStorage() *float32 {
+	return x.inner.HorizontalSampleStorage()
+}
+
+// VerticalSampleStorage calls the underlying VerticalSampleStorage.
+func (x *RasterizationRateLayerDescriptor) VerticalSampleStorage() *float32 {
+	return x.inner.VerticalSampleStorage()
+}
+
+// Horizontal calls the underlying Horizontal.
+func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
+	_r := x.inner.Horizontal()
+	if _r == nil {
+		return nil
+	}
+	return &RasterizationRateSampleArray{inner: _r}
+}
+
+// Vertical calls the underlying Vertical.
+func (x *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
+	_r := x.inner.Vertical()
+	if _r == nil {
+		return nil
+	}
+	return &RasterizationRateSampleArray{inner: _r}
+}
+
+// SetSampleCount calls the underlying SetSampleCount.
+func (x *RasterizationRateLayerDescriptor) SetSampleCount(sampleCount raw.MTLSize) {
+	x.inner.SetSampleCount(sampleCount)
+}
+
+// RasterizationRateLayerDescriptorable is the interface implemented by [RasterizationRateLayerDescriptor], for mocking and DI.
+type RasterizationRateLayerDescriptorable interface {
+	Unwrap() *raw.MTLRasterizationRateLayerDescriptor
+	WithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor
+	SampleCount() raw.MTLSize
+	MaxSampleCount() raw.MTLSize
+	HorizontalSampleStorage() *float32
+	VerticalSampleStorage() *float32
+	Horizontal() *RasterizationRateSampleArray
+	Vertical() *RasterizationRateSampleArray
+	SetSampleCount(sampleCount raw.MTLSize)
+}
+
+var _ RasterizationRateLayerDescriptorable = (*RasterizationRateLayerDescriptor)(nil)
+

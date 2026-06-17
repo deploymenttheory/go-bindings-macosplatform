@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MetricErrorEvent wraps [raw.AVMetricErrorEvent] with a fluent Go API.
@@ -23,5 +24,24 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 	return &MetricErrorEvent{inner: raw.AVMetricErrorEventFromID(_id)}
 }
 
+// DidRecover calls the underlying DidRecover.
+func (x *MetricErrorEvent) DidRecover() bool {
+	return x.inner.DidRecover()
+}
+
+// Error calls the underlying Error.
+func (x *MetricErrorEvent) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
 func (x *MetricErrorEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricErrorEventable is the interface implemented by [MetricErrorEvent], for mocking and DI.
+type MetricErrorEventable interface {
+	Unwrap() *raw.AVMetricErrorEvent
+	DidRecover() bool
+	Error() unsafe.Pointer
+}
+
+var _ MetricErrorEventable = (*MetricErrorEvent)(nil)
 

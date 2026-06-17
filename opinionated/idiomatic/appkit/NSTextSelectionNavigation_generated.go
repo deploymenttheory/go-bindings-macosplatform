@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +37,97 @@ func (x *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientatio
 	x.inner.SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation)
 	return x
 }
+
+// FlushLayoutCache calls the underlying FlushLayoutCache.
+func (x *TextSelectionNavigation) FlushLayoutCache() {
+	x.inner.FlushLayoutCache()
+}
+
+// DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined calls the underlying DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined.
+func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *raw.NSTextSelection, direction raw.NSTextSelectionNavigationDirection, destination raw.NSTextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
+	_r := x.inner.DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection, direction, destination, extending, confined)
+	if _r == nil {
+		return nil
+	}
+	return &TextSelection{inner: _r}
+}
+
+// TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds calls the underlying TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds.
+func (x *TextSelectionNavigation) TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation raw.NSTextLocation, anchors *foundation.NSArray[*raw.NSTextSelection], modifiers raw.NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*raw.NSTextSelection] {
+	return x.inner.TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point, containerLocation, anchors, modifiers, selecting, bounds)
+}
+
+// TextSelectionForSelectionGranularityEnclosingTextSelection calls the underlying TextSelectionForSelectionGranularityEnclosingTextSelection.
+func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity raw.NSTextSelectionGranularity, textSelection *raw.NSTextSelection) *TextSelection {
+	_r := x.inner.TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity, textSelection)
+	if _r == nil {
+		return nil
+	}
+	return &TextSelection{inner: _r}
+}
+
+// TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation calls the underlying TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation.
+func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity raw.NSTextSelectionGranularity, point corefoundation.CGPoint, location raw.NSTextLocation) *TextSelection {
+	_r := x.inner.TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity, point, location)
+	if _r == nil {
+		return nil
+	}
+	return &TextSelection{inner: _r}
+}
+
+// ResolvedInsertionLocationForTextSelectionWritingDirection calls the underlying ResolvedInsertionLocationForTextSelectionWritingDirection.
+func (x *TextSelectionNavigation) ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *raw.NSTextSelection, writingDirection raw.NSTextSelectionNavigationWritingDirection) raw.NSTextLocation {
+	return x.inner.ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection, writingDirection)
+}
+
+// DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition calls the underlying DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition.
+func (x *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *raw.NSTextSelection, direction raw.NSTextSelectionNavigationDirection, destination raw.NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*raw.NSTextRange] {
+	return x.inner.DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection, direction, destination, allowsDecomposition)
+}
+
+// TextSelectionDataSource calls the underlying TextSelectionDataSource.
+func (x *TextSelectionNavigation) TextSelectionDataSource() raw.NSTextSelectionDataSource {
+	return x.inner.TextSelectionDataSource()
+}
+
+// AllowsNonContiguousRanges calls the underlying AllowsNonContiguousRanges.
+func (x *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
+	return x.inner.AllowsNonContiguousRanges()
+}
+
+// SetAllowsNonContiguousRanges calls the underlying SetAllowsNonContiguousRanges.
+func (x *TextSelectionNavigation) SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool) {
+	x.inner.SetAllowsNonContiguousRanges(allowsNonContiguousRanges)
+}
+
+// RotatesCoordinateSystemForLayoutOrientation calls the underlying RotatesCoordinateSystemForLayoutOrientation.
+func (x *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
+	return x.inner.RotatesCoordinateSystemForLayoutOrientation()
+}
+
+// SetRotatesCoordinateSystemForLayoutOrientation calls the underlying SetRotatesCoordinateSystemForLayoutOrientation.
+func (x *TextSelectionNavigation) SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) {
+	x.inner.SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation)
+}
+
+// TextSelectionNavigationable is the interface implemented by [TextSelectionNavigation], for mocking and DI.
+type TextSelectionNavigationable interface {
+	Unwrap() *raw.NSTextSelectionNavigation
+	WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation
+	WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation
+	FlushLayoutCache()
+	DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *raw.NSTextSelection, direction raw.NSTextSelectionNavigationDirection, destination raw.NSTextSelectionNavigationDestination, extending bool, confined bool) *TextSelection
+	TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation raw.NSTextLocation, anchors *foundation.NSArray[*raw.NSTextSelection], modifiers raw.NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*raw.NSTextSelection]
+	TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity raw.NSTextSelectionGranularity, textSelection *raw.NSTextSelection) *TextSelection
+	TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity raw.NSTextSelectionGranularity, point corefoundation.CGPoint, location raw.NSTextLocation) *TextSelection
+	ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *raw.NSTextSelection, writingDirection raw.NSTextSelectionNavigationWritingDirection) raw.NSTextLocation
+	DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *raw.NSTextSelection, direction raw.NSTextSelectionNavigationDirection, destination raw.NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*raw.NSTextRange]
+	TextSelectionDataSource() raw.NSTextSelectionDataSource
+	AllowsNonContiguousRanges() bool
+	SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool)
+	RotatesCoordinateSystemForLayoutOrientation() bool
+	SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool)
+}
+
+var _ TextSelectionNavigationable = (*TextSelectionNavigation)(nil)
 

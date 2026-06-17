@@ -51,7 +51,59 @@ func (x *CNNCrossChannelNormalizationGradient) WithDelta(delta float32) *CNNCros
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNCrossChannelNormalizationGradient) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNCrossChannelNormalizationGradient) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNCrossChannelNormalizationGradient) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNCrossChannelNormalizationGradient) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNCrossChannelNormalizationGradient) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNCrossChannelNormalizationGradient) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// KernelSize calls the underlying KernelSize.
+func (x *CNNCrossChannelNormalizationGradient) KernelSize() uint {
+	return x.inner.KernelSize()
+}
+
 func (x *CNNCrossChannelNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNCrossChannelNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// CNNCrossChannelNormalizationGradientable is the interface implemented by [CNNCrossChannelNormalizationGradient], for mocking and DI.
+type CNNCrossChannelNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNCrossChannelNormalizationGradient
+	WithAlpha(alpha float32) *CNNCrossChannelNormalizationGradient
+	WithBeta(beta float32) *CNNCrossChannelNormalizationGradient
+	WithDelta(delta float32) *CNNCrossChannelNormalizationGradient
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+	KernelSize() uint
+}
+
+var _ CNNCrossChannelNormalizationGradientable = (*CNNCrossChannelNormalizationGradient)(nil)
 

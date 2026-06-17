@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewCaptureReactionEffectState() *CaptureReactionEffectState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureReactionEffectState")), objc.RegisterName("new"))
 	return &CaptureReactionEffectState{inner: raw.AVCaptureReactionEffectStateFromID(_id)}
 }
+
+// ReactionType calls the underlying ReactionType.
+func (x *CaptureReactionEffectState) ReactionType() string {
+	_r := x.inner.ReactionType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// StartTime calls the underlying StartTime.
+func (x *CaptureReactionEffectState) StartTime() coremedia.CMTime {
+	return x.inner.StartTime()
+}
+
+// EndTime calls the underlying EndTime.
+func (x *CaptureReactionEffectState) EndTime() coremedia.CMTime {
+	return x.inner.EndTime()
+}
+
+// CaptureReactionEffectStateable is the interface implemented by [CaptureReactionEffectState], for mocking and DI.
+type CaptureReactionEffectStateable interface {
+	Unwrap() *raw.AVCaptureReactionEffectState
+	ReactionType() string
+	StartTime() coremedia.CMTime
+	EndTime() coremedia.CMTime
+}
+
+var _ CaptureReactionEffectStateable = (*CaptureReactionEffectState)(nil)
 

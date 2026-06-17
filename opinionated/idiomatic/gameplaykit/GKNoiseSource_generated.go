@@ -25,3 +25,10 @@ func NewNoiseSource() *NoiseSource {
 
 func (x *NoiseSource) asNoiseSource() *raw.GKNoiseSource { return x.inner }
 
+// NoiseSourceable is the interface implemented by [NoiseSource], for mocking and DI.
+type NoiseSourceable interface {
+	Unwrap() *raw.GKNoiseSource
+}
+
+var _ NoiseSourceable = (*NoiseSource)(nil)
+

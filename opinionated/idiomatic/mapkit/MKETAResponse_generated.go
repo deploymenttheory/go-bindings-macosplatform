@@ -5,8 +5,10 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ETAResponse wraps [raw.MKETAResponse] with a fluent Go API.
@@ -22,4 +24,61 @@ func NewETAResponse() *ETAResponse {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKETAResponse")), objc.RegisterName("new"))
 	return &ETAResponse{inner: raw.MKETAResponseFromID(_id)}
 }
+
+// Source calls the underlying Source.
+func (x *ETAResponse) Source() *MapItem {
+	_r := x.inner.Source()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// Destination calls the underlying Destination.
+func (x *ETAResponse) Destination() *MapItem {
+	_r := x.inner.Destination()
+	if _r == nil {
+		return nil
+	}
+	return &MapItem{inner: _r}
+}
+
+// ExpectedTravelTime calls the underlying ExpectedTravelTime.
+func (x *ETAResponse) ExpectedTravelTime() float64 {
+	return x.inner.ExpectedTravelTime()
+}
+
+// Distance calls the underlying Distance.
+func (x *ETAResponse) Distance() unsafe.Pointer {
+	return x.inner.Distance()
+}
+
+// ExpectedArrivalDate calls the underlying ExpectedArrivalDate.
+func (x *ETAResponse) ExpectedArrivalDate() *foundation.NSDate {
+	return x.inner.ExpectedArrivalDate()
+}
+
+// ExpectedDepartureDate calls the underlying ExpectedDepartureDate.
+func (x *ETAResponse) ExpectedDepartureDate() *foundation.NSDate {
+	return x.inner.ExpectedDepartureDate()
+}
+
+// TransportType calls the underlying TransportType.
+func (x *ETAResponse) TransportType() raw.MKDirectionsTransportType {
+	return x.inner.TransportType()
+}
+
+// ETAResponseable is the interface implemented by [ETAResponse], for mocking and DI.
+type ETAResponseable interface {
+	Unwrap() *raw.MKETAResponse
+	Source() *MapItem
+	Destination() *MapItem
+	ExpectedTravelTime() float64
+	Distance() unsafe.Pointer
+	ExpectedArrivalDate() *foundation.NSDate
+	ExpectedDepartureDate() *foundation.NSDate
+	TransportType() raw.MKDirectionsTransportType
+}
+
+var _ ETAResponseable = (*ETAResponse)(nil)
 

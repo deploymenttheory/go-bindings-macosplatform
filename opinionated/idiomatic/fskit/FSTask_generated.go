@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -29,4 +30,36 @@ func (x *Task) WithCancellationHandler(cancellationHandler func() unsafe.Pointer
 	x.inner.SetCancellationHandler(cancellationHandler)
 	return x
 }
+
+// LogMessage calls the underlying LogMessage.
+func (x *Task) LogMessage(str string) {
+	x.inner.LogMessage(foundation.NSStringStringWithUTF8String(str))
+}
+
+// DidCompleteWithError calls the underlying DidCompleteWithError.
+func (x *Task) DidCompleteWithError(error_ unsafe.Pointer) {
+	x.inner.DidCompleteWithError(error_)
+}
+
+// CancellationHandler calls the underlying CancellationHandler.
+func (x *Task) CancellationHandler() objc.Block {
+	return x.inner.CancellationHandler()
+}
+
+// SetCancellationHandler calls the underlying SetCancellationHandler.
+func (x *Task) SetCancellationHandler(cancellationHandler func() unsafe.Pointer) {
+	x.inner.SetCancellationHandler(cancellationHandler)
+}
+
+// Taskable is the interface implemented by [Task], for mocking and DI.
+type Taskable interface {
+	Unwrap() *raw.FSTask
+	WithCancellationHandler(cancellationHandler func() unsafe.Pointer) *Task
+	LogMessage(str string)
+	DidCompleteWithError(error_ unsafe.Pointer)
+	CancellationHandler() objc.Block
+	SetCancellationHandler(cancellationHandler func() unsafe.Pointer)
+}
+
+var _ Taskable = (*Task)(nil)
 

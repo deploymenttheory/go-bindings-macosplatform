@@ -23,5 +23,42 @@ func NewEmbeddingLayer() *EmbeddingLayer {
 	return &EmbeddingLayer{inner: raw.MLCEmbeddingLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &EmbeddingDescriptor{inner: _r}
+}
+
+// Weights calls the underlying Weights.
+func (x *EmbeddingLayer) Weights() *Tensor {
+	_r := x.inner.Weights()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// WeightsParameter calls the underlying WeightsParameter.
+func (x *EmbeddingLayer) WeightsParameter() *TensorParameter {
+	_r := x.inner.WeightsParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
 func (x *EmbeddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// EmbeddingLayerable is the interface implemented by [EmbeddingLayer], for mocking and DI.
+type EmbeddingLayerable interface {
+	Unwrap() *raw.MLCEmbeddingLayer
+	Descriptor() *EmbeddingDescriptor
+	Weights() *Tensor
+	WeightsParameter() *TensorParameter
+}
+
+var _ EmbeddingLayerable = (*EmbeddingLayer)(nil)
 

@@ -32,5 +32,32 @@ func NewTicketedEventReservationWithItemReferenceReservationNumberBookingTimeRes
 	return &TicketedEventReservation{inner: raw.INTicketedEventReservationFromID(_id)}
 }
 
+// Event calls the underlying Event.
+func (x *TicketedEventReservation) Event() *TicketedEvent {
+	_r := x.inner.Event()
+	if _r == nil {
+		return nil
+	}
+	return &TicketedEvent{inner: _r}
+}
+
+// ReservedSeat calls the underlying ReservedSeat.
+func (x *TicketedEventReservation) ReservedSeat() *Seat {
+	_r := x.inner.ReservedSeat()
+	if _r == nil {
+		return nil
+	}
+	return &Seat{inner: _r}
+}
+
 func (x *TicketedEventReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// TicketedEventReservationable is the interface implemented by [TicketedEventReservation], for mocking and DI.
+type TicketedEventReservationable interface {
+	Unwrap() *raw.INTicketedEventReservation
+	Event() *TicketedEvent
+	ReservedSeat() *Seat
+}
+
+var _ TicketedEventReservationable = (*TicketedEventReservation)(nil)
 

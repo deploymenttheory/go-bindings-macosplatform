@@ -25,3 +25,10 @@ func NewPaymentMerchantSessionWithDictionary(dictionary *foundation.NSDictionary
 	return &PaymentMerchantSession{inner: raw.PKPaymentMerchantSessionFromID(_id)}
 }
 
+// PaymentMerchantSessionable is the interface implemented by [PaymentMerchantSession], for mocking and DI.
+type PaymentMerchantSessionable interface {
+	Unwrap() *raw.PKPaymentMerchantSession
+}
+
+var _ PaymentMerchantSessionable = (*PaymentMerchantSession)(nil)
+

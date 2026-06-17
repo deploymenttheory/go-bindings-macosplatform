@@ -6,6 +6,7 @@ package virtualization
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewBridgedNetworkInterface() *BridgedNetworkInterface {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZBridgedNetworkInterface")), objc.RegisterName("new"))
 	return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *BridgedNetworkInterface) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalizedDisplayName calls the underlying LocalizedDisplayName.
+func (x *BridgedNetworkInterface) LocalizedDisplayName() string {
+	_r := x.inner.LocalizedDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BridgedNetworkInterfaceable is the interface implemented by [BridgedNetworkInterface], for mocking and DI.
+type BridgedNetworkInterfaceable interface {
+	Unwrap() *raw.VZBridgedNetworkInterface
+	Identifier() string
+	LocalizedDisplayName() string
+}
+
+var _ BridgedNetworkInterfaceable = (*BridgedNetworkInterface)(nil)
 

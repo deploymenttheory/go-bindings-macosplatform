@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterActivatedCarbonFilterMonitoring wraps [raw.MTRClusterActivatedCarbonFilterMonitoring] with a fluent Go API.
@@ -25,7 +26,104 @@ func NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(devic
 	return &MTRClusterActivatedCarbonFilterMonitoring{inner: raw.MTRClusterActivatedCarbonFilterMonitoringFromID(_id)}
 }
 
+// ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ResetConditionWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeConditionWithParams calls the underlying ReadAttributeConditionWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeConditionWithParams(params)
+}
+
+// ReadAttributeDegradationDirectionWithParams calls the underlying ReadAttributeDegradationDirectionWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeDegradationDirectionWithParams(params)
+}
+
+// ReadAttributeChangeIndicationWithParams calls the underlying ReadAttributeChangeIndicationWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeChangeIndicationWithParams(params)
+}
+
+// ReadAttributeInPlaceIndicatorWithParams calls the underlying ReadAttributeInPlaceIndicatorWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeInPlaceIndicatorWithParams(params)
+}
+
+// ReadAttributeLastChangedTimeWithParams calls the underlying ReadAttributeLastChangedTimeWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeLastChangedTimeWithParams(params)
+}
+
+// WriteAttributeLastChangedTimeWithValueExpectedValueInterval calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueInterval.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeReplacementProductListWithParams calls the underlying ReadAttributeReplacementProductListWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeReplacementProductListWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterActivatedCarbonFilterMonitoring) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterActivatedCarbonFilterMonitoringable is the interface implemented by [MTRClusterActivatedCarbonFilterMonitoring], for mocking and DI.
+type MTRClusterActivatedCarbonFilterMonitoringable interface {
+	Unwrap() *raw.MTRClusterActivatedCarbonFilterMonitoring
+	ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRActivatedCarbonFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterActivatedCarbonFilterMonitoringable = (*MTRClusterActivatedCarbonFilterMonitoring)(nil)
 

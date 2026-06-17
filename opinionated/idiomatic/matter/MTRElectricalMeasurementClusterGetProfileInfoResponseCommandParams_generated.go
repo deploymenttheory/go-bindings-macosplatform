@@ -55,3 +55,74 @@ func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) Wit
 	return x
 }
 
+// ProfileCount calls the underlying ProfileCount.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileCount() *foundation.NSNumber {
+	return x.inner.ProfileCount()
+}
+
+// SetProfileCount calls the underlying SetProfileCount.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetProfileCount(profileCount *foundation.NSNumber) {
+	x.inner.SetProfileCount(profileCount)
+}
+
+// ProfileIntervalPeriod calls the underlying ProfileIntervalPeriod.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ProfileIntervalPeriod() *foundation.NSNumber {
+	return x.inner.ProfileIntervalPeriod()
+}
+
+// SetProfileIntervalPeriod calls the underlying SetProfileIntervalPeriod.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetProfileIntervalPeriod(profileIntervalPeriod *foundation.NSNumber) {
+	x.inner.SetProfileIntervalPeriod(profileIntervalPeriod)
+}
+
+// MaxNumberOfIntervals calls the underlying MaxNumberOfIntervals.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) MaxNumberOfIntervals() *foundation.NSNumber {
+	return x.inner.MaxNumberOfIntervals()
+}
+
+// SetMaxNumberOfIntervals calls the underlying SetMaxNumberOfIntervals.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetMaxNumberOfIntervals(maxNumberOfIntervals *foundation.NSNumber) {
+	x.inner.SetMaxNumberOfIntervals(maxNumberOfIntervals)
+}
+
+// ListOfAttributes calls the underlying ListOfAttributes.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) ListOfAttributes() *foundation.NSArray[objc.ID] {
+	return x.inner.ListOfAttributes()
+}
+
+// SetListOfAttributes calls the underlying SetListOfAttributes.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetListOfAttributes(listOfAttributes *foundation.NSArray[objc.ID]) {
+	x.inner.SetListOfAttributes(listOfAttributes)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsable is the interface implemented by [MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams], for mocking and DI.
+type MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsable interface {
+	Unwrap() *raw.MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
+	WithProfileCount(profileCount *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
+	WithProfileIntervalPeriod(profileIntervalPeriod *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
+	WithMaxNumberOfIntervals(maxNumberOfIntervals *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams
+	ProfileCount() *foundation.NSNumber
+	SetProfileCount(profileCount *foundation.NSNumber)
+	ProfileIntervalPeriod() *foundation.NSNumber
+	SetProfileIntervalPeriod(profileIntervalPeriod *foundation.NSNumber)
+	MaxNumberOfIntervals() *foundation.NSNumber
+	SetMaxNumberOfIntervals(maxNumberOfIntervals *foundation.NSNumber)
+	ListOfAttributes() *foundation.NSArray[objc.ID]
+	SetListOfAttributes(listOfAttributes *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParamsable = (*MTRElectricalMeasurementClusterGetProfileInfoResponseCommandParams)(nil)
+

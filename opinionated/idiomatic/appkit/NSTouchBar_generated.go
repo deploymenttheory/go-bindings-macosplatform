@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -110,17 +111,43 @@ func (x *TouchBar) WithDelegate(delegate raw.NSTouchBarDelegate) *TouchBar {
 	return x
 }
 
+// ItemForIdentifier calls the underlying ItemForIdentifier.
+func (x *TouchBar) ItemForIdentifier(identifier *foundation.NSString) *TouchBarItem {
+	_r := x.inner.ItemForIdentifier(identifier)
+	if _r == nil {
+		return nil
+	}
+	return &TouchBarItem{inner: _r}
+}
+
+// CustomizationIdentifier calls the underlying CustomizationIdentifier.
+func (x *TouchBar) CustomizationIdentifier() string {
+	_r := x.inner.CustomizationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCustomizationIdentifier calls the underlying SetCustomizationIdentifier.
+func (x *TouchBar) SetCustomizationIdentifier(customizationIdentifier *foundation.NSString) {
+	x.inner.SetCustomizationIdentifier(customizationIdentifier)
+}
+
 // CustomizationAllowedItemIdentifiers returns the collection as a Go slice.
 func (x *TouchBar) CustomizationAllowedItemIdentifiers() []*foundation.NSString {
 	arr := x.inner.CustomizationAllowedItemIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomizationAllowedItemIdentifiers calls the underlying SetCustomizationAllowedItemIdentifiers.
+func (x *TouchBar) SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers)
 }
 
 // CustomizationRequiredItemIdentifiers returns the collection as a Go slice.
@@ -129,11 +156,14 @@ func (x *TouchBar) CustomizationRequiredItemIdentifiers() []*foundation.NSString
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetCustomizationRequiredItemIdentifiers calls the underlying SetCustomizationRequiredItemIdentifiers.
+func (x *TouchBar) SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers)
 }
 
 // DefaultItemIdentifiers returns the collection as a Go slice.
@@ -142,11 +172,14 @@ func (x *TouchBar) DefaultItemIdentifiers() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetDefaultItemIdentifiers calls the underlying SetDefaultItemIdentifiers.
+func (x *TouchBar) SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetDefaultItemIdentifiers(defaultItemIdentifiers)
 }
 
 // ItemIdentifiers returns the collection as a Go slice.
@@ -155,10 +188,95 @@ func (x *TouchBar) ItemIdentifiers() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
 }
+
+// PrincipalItemIdentifier calls the underlying PrincipalItemIdentifier.
+func (x *TouchBar) PrincipalItemIdentifier() string {
+	_r := x.inner.PrincipalItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPrincipalItemIdentifier calls the underlying SetPrincipalItemIdentifier.
+func (x *TouchBar) SetPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) {
+	x.inner.SetPrincipalItemIdentifier(principalItemIdentifier)
+}
+
+// EscapeKeyReplacementItemIdentifier calls the underlying EscapeKeyReplacementItemIdentifier.
+func (x *TouchBar) EscapeKeyReplacementItemIdentifier() string {
+	_r := x.inner.EscapeKeyReplacementItemIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEscapeKeyReplacementItemIdentifier calls the underlying SetEscapeKeyReplacementItemIdentifier.
+func (x *TouchBar) SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) {
+	x.inner.SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier)
+}
+
+// TemplateItems calls the underlying TemplateItems.
+func (x *TouchBar) TemplateItems() *foundation.NSSet[*raw.NSTouchBarItem] {
+	return x.inner.TemplateItems()
+}
+
+// SetTemplateItems calls the underlying SetTemplateItems.
+func (x *TouchBar) SetTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) {
+	x.inner.SetTemplateItems(templateItems)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TouchBar) Delegate() raw.NSTouchBarDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TouchBar) SetDelegate(delegate raw.NSTouchBarDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsVisible calls the underlying IsVisible.
+func (x *TouchBar) IsVisible() bool {
+	return x.inner.IsVisible()
+}
+
+// TouchBarable is the interface implemented by [TouchBar], for mocking and DI.
+type TouchBarable interface {
+	Unwrap() *raw.NSTouchBar
+	WithCustomizationIdentifier(customizationIdentifier *foundation.NSString) *TouchBar
+	WithCustomizationAllowedItemIdentifiers(items ...*foundation.NSString) *TouchBar
+	WithCustomizationRequiredItemIdentifiers(items ...*foundation.NSString) *TouchBar
+	WithDefaultItemIdentifiers(items ...*foundation.NSString) *TouchBar
+	WithPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString) *TouchBar
+	WithEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString) *TouchBar
+	WithTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem]) *TouchBar
+	WithDelegate(delegate raw.NSTouchBarDelegate) *TouchBar
+	ItemForIdentifier(identifier *foundation.NSString) *TouchBarItem
+	CustomizationIdentifier() string
+	SetCustomizationIdentifier(customizationIdentifier *foundation.NSString)
+	CustomizationAllowedItemIdentifiers() []*foundation.NSString
+	SetCustomizationAllowedItemIdentifiers(customizationAllowedItemIdentifiers *foundation.NSArray[*foundation.NSString])
+	CustomizationRequiredItemIdentifiers() []*foundation.NSString
+	SetCustomizationRequiredItemIdentifiers(customizationRequiredItemIdentifiers *foundation.NSArray[*foundation.NSString])
+	DefaultItemIdentifiers() []*foundation.NSString
+	SetDefaultItemIdentifiers(defaultItemIdentifiers *foundation.NSArray[*foundation.NSString])
+	ItemIdentifiers() []*foundation.NSString
+	PrincipalItemIdentifier() string
+	SetPrincipalItemIdentifier(principalItemIdentifier *foundation.NSString)
+	EscapeKeyReplacementItemIdentifier() string
+	SetEscapeKeyReplacementItemIdentifier(escapeKeyReplacementItemIdentifier *foundation.NSString)
+	TemplateItems() *foundation.NSSet[*raw.NSTouchBarItem]
+	SetTemplateItems(templateItems *foundation.NSSet[*raw.NSTouchBarItem])
+	Delegate() raw.NSTouchBarDelegate
+	SetDelegate(delegate raw.NSTouchBarDelegate)
+	IsVisible() bool
+}
+
+var _ TouchBarable = (*TouchBar)(nil)
 

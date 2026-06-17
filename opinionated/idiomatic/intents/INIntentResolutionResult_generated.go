@@ -25,3 +25,10 @@ func NewIntentResolutionResult() *IntentResolutionResult {
 
 func (x *IntentResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return x.inner }
 
+// IntentResolutionResultable is the interface implemented by [IntentResolutionResult], for mocking and DI.
+type IntentResolutionResultable interface {
+	Unwrap() *raw.INIntentResolutionResult
+}
+
+var _ IntentResolutionResultable = (*IntentResolutionResult)(nil)
+

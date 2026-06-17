@@ -23,5 +23,28 @@ func NewSyncEnginePendingDatabaseChange() *SyncEnginePendingDatabaseChange {
 	return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(_id)}
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *SyncEnginePendingDatabaseChange) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// Type calls the underlying Type.
+func (x *SyncEnginePendingDatabaseChange) Type() raw.CKSyncEnginePendingDatabaseChangeType {
+	return x.inner.Type()
+}
+
 func (x *SyncEnginePendingDatabaseChange) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange { return x.inner }
+
+// SyncEnginePendingDatabaseChangeable is the interface implemented by [SyncEnginePendingDatabaseChange], for mocking and DI.
+type SyncEnginePendingDatabaseChangeable interface {
+	Unwrap() *raw.CKSyncEnginePendingDatabaseChange
+	ZoneID() *RecordZoneID
+	Type() raw.CKSyncEnginePendingDatabaseChangeType
+}
+
+var _ SyncEnginePendingDatabaseChangeable = (*SyncEnginePendingDatabaseChange)(nil)
 

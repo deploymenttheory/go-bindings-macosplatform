@@ -6,6 +6,7 @@ package findersync
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/findersync"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -33,28 +34,46 @@ func (x *FinderSyncController) WithDirectoryURLs(directoryURLs *foundation.NSSet
 	return x
 }
 
+// SetBadgeImageLabelForBadgeIdentifier calls the underlying SetBadgeImageLabelForBadgeIdentifier.
+func (x *FinderSyncController) SetBadgeImageLabelForBadgeIdentifier(image *appkit.NSImage, label string, badgeID string) {
+	x.inner.SetBadgeImageLabelForBadgeIdentifier(image, foundation.NSStringStringWithUTF8String(label), foundation.NSStringStringWithUTF8String(badgeID))
+}
+
+// SetBadgeIdentifierForURL calls the underlying SetBadgeIdentifierForURL.
+func (x *FinderSyncController) SetBadgeIdentifierForURL(badgeID string, url string) {
+	x.inner.SetBadgeIdentifierForURL(foundation.NSStringStringWithUTF8String(badgeID), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// TargetedURL calls the underlying TargetedURL.
+func (x *FinderSyncController) TargetedURL() *foundation.NSURL {
+	return x.inner.TargetedURL()
+}
+
 // SelectedItemURLs returns the collection as a Go slice.
 func (x *FinderSyncController) SelectedItemURLs() []*foundation.NSURL {
 	arr := x.inner.SelectedItemURLs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSURL, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
+		return foundation.NSURLFromID(purego.Retain(_id))
+	})
+}
+
+// LastUsedDateForItemWithURL calls the underlying LastUsedDateForItemWithURL.
+func (x *FinderSyncController) LastUsedDateForItemWithURL(itemURL string) *foundation.NSDate {
+	return x.inner.LastUsedDateForItemWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)))
 }
 
 // SetLastUsedDateForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate *foundation.NSDate, itemURL string) error {
 	_ch := make(chan error, 1)
 	x.inner.SetLastUsedDateForItemWithURLCompletion(lastUsedDate, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -64,15 +83,20 @@ func (x *FinderSyncController) SetLastUsedDateForItemWithURLCompletion(ctx conte
 	}
 }
 
+// TagDataForItemWithURL calls the underlying TagDataForItemWithURL.
+func (x *FinderSyncController) TagDataForItemWithURL(itemURL string) *foundation.NSData {
+	return x.inner.TagDataForItemWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)))
+}
+
 // SetTagDataForItemWithURLCompletion blocks until the operation completes or ctx is cancelled.
 func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Context, tagData *foundation.NSData, itemURL string) error {
 	_ch := make(chan error, 1)
 	x.inner.SetTagDataForItemWithURLCompletion(tagData, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(itemURL)), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -81,4 +105,32 @@ func (x *FinderSyncController) SetTagDataForItemWithURLCompletion(ctx context.Co
 		return ctx.Err()
 	}
 }
+
+// DirectoryURLs calls the underlying DirectoryURLs.
+func (x *FinderSyncController) DirectoryURLs() *foundation.NSSet[*foundation.NSURL] {
+	return x.inner.DirectoryURLs()
+}
+
+// SetDirectoryURLs calls the underlying SetDirectoryURLs.
+func (x *FinderSyncController) SetDirectoryURLs(directoryURLs *foundation.NSSet[*foundation.NSURL]) {
+	x.inner.SetDirectoryURLs(directoryURLs)
+}
+
+// FinderSyncControllerable is the interface implemented by [FinderSyncController], for mocking and DI.
+type FinderSyncControllerable interface {
+	Unwrap() *raw.FIFinderSyncController
+	WithDirectoryURLs(directoryURLs *foundation.NSSet[*foundation.NSURL]) *FinderSyncController
+	SetBadgeImageLabelForBadgeIdentifier(image *appkit.NSImage, label string, badgeID string)
+	SetBadgeIdentifierForURL(badgeID string, url string)
+	TargetedURL() *foundation.NSURL
+	SelectedItemURLs() []*foundation.NSURL
+	LastUsedDateForItemWithURL(itemURL string) *foundation.NSDate
+	SetLastUsedDateForItemWithURLCompletion(ctx context.Context, lastUsedDate *foundation.NSDate, itemURL string) error
+	TagDataForItemWithURL(itemURL string) *foundation.NSData
+	SetTagDataForItemWithURLCompletion(ctx context.Context, tagData *foundation.NSData, itemURL string) error
+	DirectoryURLs() *foundation.NSSet[*foundation.NSURL]
+	SetDirectoryURLs(directoryURLs *foundation.NSSet[*foundation.NSURL])
+}
+
+var _ FinderSyncControllerable = (*FinderSyncController)(nil)
 

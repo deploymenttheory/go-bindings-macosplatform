@@ -5,8 +5,8 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,23 +30,28 @@ func (x *ProductsResponse) Products() []*raw.SKProduct {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SKProduct, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SKProduct {
+		return raw.SKProductFromID(purego.Retain(_id))
+	})
 }
 
 // InvalidProductIdentifiers returns the collection as a Go slice.
-func (x *ProductsResponse) InvalidProductIdentifiers() []*foundation.NSString {
+func (x *ProductsResponse) InvalidProductIdentifiers() []string {
 	arr := x.inner.InvalidProductIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// ProductsResponseable is the interface implemented by [ProductsResponse], for mocking and DI.
+type ProductsResponseable interface {
+	Unwrap() *raw.SKProductsResponse
+	Products() []*raw.SKProduct
+	InvalidProductIdentifiers() []string
+}
+
+var _ ProductsResponseable = (*ProductsResponse)(nil)
 

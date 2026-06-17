@@ -29,5 +29,25 @@ func (x *SharingServicePickerToolbarItem) WithDelegate(delegate raw.NSSharingSer
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *SharingServicePickerToolbarItem) Delegate() raw.NSSharingServicePickerToolbarItemDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SharingServicePickerToolbarItem) SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *SharingServicePickerToolbarItem) asToolbarItem() *raw.NSToolbarItem { return &x.inner.NSToolbarItem }
+
+// SharingServicePickerToolbarItemable is the interface implemented by [SharingServicePickerToolbarItem], for mocking and DI.
+type SharingServicePickerToolbarItemable interface {
+	Unwrap() *raw.NSSharingServicePickerToolbarItem
+	WithDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) *SharingServicePickerToolbarItem
+	Delegate() raw.NSSharingServicePickerToolbarItemDelegate
+	SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate)
+}
+
+var _ SharingServicePickerToolbarItemable = (*SharingServicePickerToolbarItem)(nil)
 

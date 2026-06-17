@@ -95,5 +95,188 @@ func (x *PhysicsSliderJoint) WithMotorMaximumTorque(motorMaximumTorque float64) 
 	return x
 }
 
+// BodyA calls the underlying BodyA.
+func (x *PhysicsSliderJoint) BodyA() *PhysicsBody {
+	_r := x.inner.BodyA()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AxisA calls the underlying AxisA.
+func (x *PhysicsSliderJoint) AxisA() raw.SCNVector3 {
+	return x.inner.AxisA()
+}
+
+// SetAxisA calls the underlying SetAxisA.
+func (x *PhysicsSliderJoint) SetAxisA(axisA raw.SCNVector3) {
+	x.inner.SetAxisA(axisA)
+}
+
+// AnchorA calls the underlying AnchorA.
+func (x *PhysicsSliderJoint) AnchorA() raw.SCNVector3 {
+	return x.inner.AnchorA()
+}
+
+// SetAnchorA calls the underlying SetAnchorA.
+func (x *PhysicsSliderJoint) SetAnchorA(anchorA raw.SCNVector3) {
+	x.inner.SetAnchorA(anchorA)
+}
+
+// BodyB calls the underlying BodyB.
+func (x *PhysicsSliderJoint) BodyB() *PhysicsBody {
+	_r := x.inner.BodyB()
+	if _r == nil {
+		return nil
+	}
+	return &PhysicsBody{inner: _r}
+}
+
+// AxisB calls the underlying AxisB.
+func (x *PhysicsSliderJoint) AxisB() raw.SCNVector3 {
+	return x.inner.AxisB()
+}
+
+// SetAxisB calls the underlying SetAxisB.
+func (x *PhysicsSliderJoint) SetAxisB(axisB raw.SCNVector3) {
+	x.inner.SetAxisB(axisB)
+}
+
+// AnchorB calls the underlying AnchorB.
+func (x *PhysicsSliderJoint) AnchorB() raw.SCNVector3 {
+	return x.inner.AnchorB()
+}
+
+// SetAnchorB calls the underlying SetAnchorB.
+func (x *PhysicsSliderJoint) SetAnchorB(anchorB raw.SCNVector3) {
+	x.inner.SetAnchorB(anchorB)
+}
+
+// MinimumLinearLimit calls the underlying MinimumLinearLimit.
+func (x *PhysicsSliderJoint) MinimumLinearLimit() float64 {
+	return x.inner.MinimumLinearLimit()
+}
+
+// SetMinimumLinearLimit calls the underlying SetMinimumLinearLimit.
+func (x *PhysicsSliderJoint) SetMinimumLinearLimit(minimumLinearLimit float64) {
+	x.inner.SetMinimumLinearLimit(minimumLinearLimit)
+}
+
+// MaximumLinearLimit calls the underlying MaximumLinearLimit.
+func (x *PhysicsSliderJoint) MaximumLinearLimit() float64 {
+	return x.inner.MaximumLinearLimit()
+}
+
+// SetMaximumLinearLimit calls the underlying SetMaximumLinearLimit.
+func (x *PhysicsSliderJoint) SetMaximumLinearLimit(maximumLinearLimit float64) {
+	x.inner.SetMaximumLinearLimit(maximumLinearLimit)
+}
+
+// MinimumAngularLimit calls the underlying MinimumAngularLimit.
+func (x *PhysicsSliderJoint) MinimumAngularLimit() float64 {
+	return x.inner.MinimumAngularLimit()
+}
+
+// SetMinimumAngularLimit calls the underlying SetMinimumAngularLimit.
+func (x *PhysicsSliderJoint) SetMinimumAngularLimit(minimumAngularLimit float64) {
+	x.inner.SetMinimumAngularLimit(minimumAngularLimit)
+}
+
+// MaximumAngularLimit calls the underlying MaximumAngularLimit.
+func (x *PhysicsSliderJoint) MaximumAngularLimit() float64 {
+	return x.inner.MaximumAngularLimit()
+}
+
+// SetMaximumAngularLimit calls the underlying SetMaximumAngularLimit.
+func (x *PhysicsSliderJoint) SetMaximumAngularLimit(maximumAngularLimit float64) {
+	x.inner.SetMaximumAngularLimit(maximumAngularLimit)
+}
+
+// MotorTargetLinearVelocity calls the underlying MotorTargetLinearVelocity.
+func (x *PhysicsSliderJoint) MotorTargetLinearVelocity() float64 {
+	return x.inner.MotorTargetLinearVelocity()
+}
+
+// SetMotorTargetLinearVelocity calls the underlying SetMotorTargetLinearVelocity.
+func (x *PhysicsSliderJoint) SetMotorTargetLinearVelocity(motorTargetLinearVelocity float64) {
+	x.inner.SetMotorTargetLinearVelocity(motorTargetLinearVelocity)
+}
+
+// MotorMaximumForce calls the underlying MotorMaximumForce.
+func (x *PhysicsSliderJoint) MotorMaximumForce() float64 {
+	return x.inner.MotorMaximumForce()
+}
+
+// SetMotorMaximumForce calls the underlying SetMotorMaximumForce.
+func (x *PhysicsSliderJoint) SetMotorMaximumForce(motorMaximumForce float64) {
+	x.inner.SetMotorMaximumForce(motorMaximumForce)
+}
+
+// MotorTargetAngularVelocity calls the underlying MotorTargetAngularVelocity.
+func (x *PhysicsSliderJoint) MotorTargetAngularVelocity() float64 {
+	return x.inner.MotorTargetAngularVelocity()
+}
+
+// SetMotorTargetAngularVelocity calls the underlying SetMotorTargetAngularVelocity.
+func (x *PhysicsSliderJoint) SetMotorTargetAngularVelocity(motorTargetAngularVelocity float64) {
+	x.inner.SetMotorTargetAngularVelocity(motorTargetAngularVelocity)
+}
+
+// MotorMaximumTorque calls the underlying MotorMaximumTorque.
+func (x *PhysicsSliderJoint) MotorMaximumTorque() float64 {
+	return x.inner.MotorMaximumTorque()
+}
+
+// SetMotorMaximumTorque calls the underlying SetMotorMaximumTorque.
+func (x *PhysicsSliderJoint) SetMotorMaximumTorque(motorMaximumTorque float64) {
+	x.inner.SetMotorMaximumTorque(motorMaximumTorque)
+}
+
 func (x *PhysicsSliderJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+
+// PhysicsSliderJointable is the interface implemented by [PhysicsSliderJoint], for mocking and DI.
+type PhysicsSliderJointable interface {
+	Unwrap() *raw.SCNPhysicsSliderJoint
+	WithAxisA(axisA raw.SCNVector3) *PhysicsSliderJoint
+	WithAnchorA(anchorA raw.SCNVector3) *PhysicsSliderJoint
+	WithAxisB(axisB raw.SCNVector3) *PhysicsSliderJoint
+	WithAnchorB(anchorB raw.SCNVector3) *PhysicsSliderJoint
+	WithMinimumLinearLimit(minimumLinearLimit float64) *PhysicsSliderJoint
+	WithMaximumLinearLimit(maximumLinearLimit float64) *PhysicsSliderJoint
+	WithMinimumAngularLimit(minimumAngularLimit float64) *PhysicsSliderJoint
+	WithMaximumAngularLimit(maximumAngularLimit float64) *PhysicsSliderJoint
+	WithMotorTargetLinearVelocity(motorTargetLinearVelocity float64) *PhysicsSliderJoint
+	WithMotorMaximumForce(motorMaximumForce float64) *PhysicsSliderJoint
+	WithMotorTargetAngularVelocity(motorTargetAngularVelocity float64) *PhysicsSliderJoint
+	WithMotorMaximumTorque(motorMaximumTorque float64) *PhysicsSliderJoint
+	BodyA() *PhysicsBody
+	AxisA() raw.SCNVector3
+	SetAxisA(axisA raw.SCNVector3)
+	AnchorA() raw.SCNVector3
+	SetAnchorA(anchorA raw.SCNVector3)
+	BodyB() *PhysicsBody
+	AxisB() raw.SCNVector3
+	SetAxisB(axisB raw.SCNVector3)
+	AnchorB() raw.SCNVector3
+	SetAnchorB(anchorB raw.SCNVector3)
+	MinimumLinearLimit() float64
+	SetMinimumLinearLimit(minimumLinearLimit float64)
+	MaximumLinearLimit() float64
+	SetMaximumLinearLimit(maximumLinearLimit float64)
+	MinimumAngularLimit() float64
+	SetMinimumAngularLimit(minimumAngularLimit float64)
+	MaximumAngularLimit() float64
+	SetMaximumAngularLimit(maximumAngularLimit float64)
+	MotorTargetLinearVelocity() float64
+	SetMotorTargetLinearVelocity(motorTargetLinearVelocity float64)
+	MotorMaximumForce() float64
+	SetMotorMaximumForce(motorMaximumForce float64)
+	MotorTargetAngularVelocity() float64
+	SetMotorTargetAngularVelocity(motorTargetAngularVelocity float64)
+	MotorMaximumTorque() float64
+	SetMotorMaximumTorque(motorMaximumTorque float64)
+}
+
+var _ PhysicsSliderJointable = (*PhysicsSliderJoint)(nil)
 

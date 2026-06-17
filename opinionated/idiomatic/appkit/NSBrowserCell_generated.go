@@ -57,5 +57,77 @@ func (x *BrowserCell) WithAlternateImage(alternateImage *raw.NSImage) *BrowserCe
 	return x
 }
 
+// HighlightColorInView calls the underlying HighlightColorInView.
+func (x *BrowserCell) HighlightColorInView(controlView *raw.NSView) *Color {
+	_r := x.inner.HighlightColorInView(controlView)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// Reset calls the underlying Reset.
+func (x *BrowserCell) Reset() {
+	x.inner.Reset()
+}
+
+// Set calls the underlying Set.
+func (x *BrowserCell) Set() {
+	x.inner.Set()
+}
+
+// IsLeaf calls the underlying IsLeaf.
+func (x *BrowserCell) IsLeaf() bool {
+	return x.inner.IsLeaf()
+}
+
+// SetLeaf calls the underlying SetLeaf.
+func (x *BrowserCell) SetLeaf(leaf bool) {
+	x.inner.SetLeaf(leaf)
+}
+
+// IsLoaded calls the underlying IsLoaded.
+func (x *BrowserCell) IsLoaded() bool {
+	return x.inner.IsLoaded()
+}
+
+// SetLoaded calls the underlying SetLoaded.
+func (x *BrowserCell) SetLoaded(loaded bool) {
+	x.inner.SetLoaded(loaded)
+}
+
+// AlternateImage calls the underlying AlternateImage.
+func (x *BrowserCell) AlternateImage() *Image {
+	_r := x.inner.AlternateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetAlternateImage calls the underlying SetAlternateImage.
+func (x *BrowserCell) SetAlternateImage(alternateImage *raw.NSImage) {
+	x.inner.SetAlternateImage(alternateImage)
+}
+
 func (x *BrowserCell) asCell() *raw.NSCell { return &x.inner.NSCell }
+
+// BrowserCellable is the interface implemented by [BrowserCell], for mocking and DI.
+type BrowserCellable interface {
+	Unwrap() *raw.NSBrowserCell
+	WithLeaf(leaf bool) *BrowserCell
+	WithLoaded(loaded bool) *BrowserCell
+	WithAlternateImage(alternateImage *raw.NSImage) *BrowserCell
+	HighlightColorInView(controlView *raw.NSView) *Color
+	Reset()
+	Set()
+	IsLeaf() bool
+	SetLeaf(leaf bool)
+	IsLoaded() bool
+	SetLoaded(loaded bool)
+	AlternateImage() *Image
+	SetAlternateImage(alternateImage *raw.NSImage)
+}
+
+var _ BrowserCellable = (*BrowserCell)(nil)
 

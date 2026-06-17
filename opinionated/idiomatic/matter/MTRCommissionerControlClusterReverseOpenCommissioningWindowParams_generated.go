@@ -61,3 +61,75 @@ func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) With
 	return x
 }
 
+// CommissioningTimeout calls the underlying CommissioningTimeout.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
+	return x.inner.CommissioningTimeout()
+}
+
+// SetCommissioningTimeout calls the underlying SetCommissioningTimeout.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber) {
+	x.inner.SetCommissioningTimeout(commissioningTimeout)
+}
+
+// PakePasscodeVerifier calls the underlying PakePasscodeVerifier.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) PakePasscodeVerifier() *foundation.NSData {
+	return x.inner.PakePasscodeVerifier()
+}
+
+// SetPakePasscodeVerifier calls the underlying SetPakePasscodeVerifier.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) {
+	x.inner.SetPakePasscodeVerifier(pakePasscodeVerifier)
+}
+
+// Discriminator calls the underlying Discriminator.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Discriminator() *foundation.NSNumber {
+	return x.inner.Discriminator()
+}
+
+// SetDiscriminator calls the underlying SetDiscriminator.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetDiscriminator(discriminator *foundation.NSNumber) {
+	x.inner.SetDiscriminator(discriminator)
+}
+
+// Iterations calls the underlying Iterations.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Iterations() *foundation.NSNumber {
+	return x.inner.Iterations()
+}
+
+// SetIterations calls the underlying SetIterations.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetIterations(iterations *foundation.NSNumber) {
+	x.inner.SetIterations(iterations)
+}
+
+// Salt calls the underlying Salt.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) Salt() *foundation.NSData {
+	return x.inner.Salt()
+}
+
+// SetSalt calls the underlying SetSalt.
+func (x *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams) SetSalt(salt *foundation.NSData) {
+	x.inner.SetSalt(salt)
+}
+
+// MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsable is the interface implemented by [MTRCommissionerControlClusterReverseOpenCommissioningWindowParams], for mocking and DI.
+type MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsable interface {
+	Unwrap() *raw.MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	WithCommissioningTimeout(commissioningTimeout *foundation.NSNumber) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	WithPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	WithDiscriminator(discriminator *foundation.NSNumber) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	WithIterations(iterations *foundation.NSNumber) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	WithSalt(salt *foundation.NSData) *MTRCommissionerControlClusterReverseOpenCommissioningWindowParams
+	CommissioningTimeout() *foundation.NSNumber
+	SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber)
+	PakePasscodeVerifier() *foundation.NSData
+	SetPakePasscodeVerifier(pakePasscodeVerifier *foundation.NSData)
+	Discriminator() *foundation.NSNumber
+	SetDiscriminator(discriminator *foundation.NSNumber)
+	Iterations() *foundation.NSNumber
+	SetIterations(iterations *foundation.NSNumber)
+	Salt() *foundation.NSData
+	SetSalt(salt *foundation.NSData)
+}
+
+var _ MTRCommissionerControlClusterReverseOpenCommissioningWindowParamsable = (*MTRCommissionerControlClusterReverseOpenCommissioningWindowParams)(nil)
+

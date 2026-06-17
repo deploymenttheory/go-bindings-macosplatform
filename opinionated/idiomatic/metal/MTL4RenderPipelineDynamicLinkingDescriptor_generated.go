@@ -23,3 +23,60 @@ func NewMTL4RenderPipelineDynamicLinkingDescriptor() *MTL4RenderPipelineDynamicL
 	return &MTL4RenderPipelineDynamicLinkingDescriptor{inner: raw.MTL4RenderPipelineDynamicLinkingDescriptorFromID(_id)}
 }
 
+// VertexLinkingDescriptor calls the underlying VertexLinkingDescriptor.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	_r := x.inner.VertexLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
+}
+
+// FragmentLinkingDescriptor calls the underlying FragmentLinkingDescriptor.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	_r := x.inner.FragmentLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
+}
+
+// TileLinkingDescriptor calls the underlying TileLinkingDescriptor.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	_r := x.inner.TileLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
+}
+
+// ObjectLinkingDescriptor calls the underlying ObjectLinkingDescriptor.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	_r := x.inner.ObjectLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
+}
+
+// MeshLinkingDescriptor calls the underlying MeshLinkingDescriptor.
+func (x *MTL4RenderPipelineDynamicLinkingDescriptor) MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
+	_r := x.inner.MeshLinkingDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: _r}
+}
+
+// MTL4RenderPipelineDynamicLinkingDescriptorable is the interface implemented by [MTL4RenderPipelineDynamicLinkingDescriptor], for mocking and DI.
+type MTL4RenderPipelineDynamicLinkingDescriptorable interface {
+	Unwrap() *raw.MTL4RenderPipelineDynamicLinkingDescriptor
+	VertexLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor
+	FragmentLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor
+	TileLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor
+	ObjectLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor
+	MeshLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor
+}
+
+var _ MTL4RenderPipelineDynamicLinkingDescriptorable = (*MTL4RenderPipelineDynamicLinkingDescriptor)(nil)
+

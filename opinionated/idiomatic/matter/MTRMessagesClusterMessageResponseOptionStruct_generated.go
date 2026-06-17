@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) 
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// MessageResponseID calls the underlying MessageResponseID.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() *foundation.NSNumber {
+	return x.inner.MessageResponseID()
+}
+
+// SetMessageResponseID calls the underlying SetMessageResponseID.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) SetMessageResponseID(messageResponseID *foundation.NSNumber) {
+	x.inner.SetMessageResponseID(messageResponseID)
+}
+
+// Label calls the underlying Label.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTRMessagesClusterMessageResponseOptionStruct) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// MTRMessagesClusterMessageResponseOptionStructable is the interface implemented by [MTRMessagesClusterMessageResponseOptionStruct], for mocking and DI.
+type MTRMessagesClusterMessageResponseOptionStructable interface {
+	Unwrap() *raw.MTRMessagesClusterMessageResponseOptionStruct
+	WithMessageResponseID(messageResponseID *foundation.NSNumber) *MTRMessagesClusterMessageResponseOptionStruct
+	WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct
+	MessageResponseID() *foundation.NSNumber
+	SetMessageResponseID(messageResponseID *foundation.NSNumber)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ MTRMessagesClusterMessageResponseOptionStructable = (*MTRMessagesClusterMessageResponseOptionStruct)(nil)
 

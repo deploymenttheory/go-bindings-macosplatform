@@ -25,3 +25,32 @@ func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue *foundation.N
 	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(_id)}
 }
 
+// StartObserving calls the underlying StartObserving.
+func (x *ScreenTimeConfigurationObserver) StartObserving() {
+	x.inner.StartObserving()
+}
+
+// StopObserving calls the underlying StopObserving.
+func (x *ScreenTimeConfigurationObserver) StopObserving() {
+	x.inner.StopObserving()
+}
+
+// Configuration calls the underlying Configuration.
+func (x *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &ScreenTimeConfiguration{inner: _r}
+}
+
+// ScreenTimeConfigurationObserverable is the interface implemented by [ScreenTimeConfigurationObserver], for mocking and DI.
+type ScreenTimeConfigurationObserverable interface {
+	Unwrap() *raw.STScreenTimeConfigurationObserver
+	StartObserving()
+	StopObserving()
+	Configuration() *ScreenTimeConfiguration
+}
+
+var _ ScreenTimeConfigurationObserverable = (*ScreenTimeConfigurationObserver)(nil)
+

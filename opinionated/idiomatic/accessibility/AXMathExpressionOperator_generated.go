@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,22 @@ func NewMathExpressionOperatorWithContent(content string) *MathExpressionOperato
 	return &MathExpressionOperator{inner: raw.AXMathExpressionOperatorFromID(_id)}
 }
 
+// Content calls the underlying Content.
+func (x *MathExpressionOperator) Content() string {
+	_r := x.inner.Content()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MathExpressionOperator) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionOperatorable is the interface implemented by [MathExpressionOperator], for mocking and DI.
+type MathExpressionOperatorable interface {
+	Unwrap() *raw.AXMathExpressionOperator
+	Content() string
+}
+
+var _ MathExpressionOperatorable = (*MathExpressionOperator)(nil)
 

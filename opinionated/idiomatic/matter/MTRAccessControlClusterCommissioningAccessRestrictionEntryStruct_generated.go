@@ -36,3 +36,48 @@ func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithC
 	return x
 }
 
+// Endpoint calls the underlying Endpoint.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// Cluster calls the underlying Cluster.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() *foundation.NSNumber {
+	return x.inner.Cluster()
+}
+
+// SetCluster calls the underlying SetCluster.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetCluster(cluster *foundation.NSNumber) {
+	x.inner.SetCluster(cluster)
+}
+
+// Restrictions calls the underlying Restrictions.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() *foundation.NSArray[objc.ID] {
+	return x.inner.Restrictions()
+}
+
+// SetRestrictions calls the underlying SetRestrictions.
+func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions *foundation.NSArray[objc.ID]) {
+	x.inner.SetRestrictions(restrictions)
+}
+
+// MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable is the interface implemented by [MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct], for mocking and DI.
+type MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct
+	WithCluster(cluster *foundation.NSNumber) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+	Cluster() *foundation.NSNumber
+	SetCluster(cluster *foundation.NSNumber)
+	Restrictions() *foundation.NSArray[objc.ID]
+	SetRestrictions(restrictions *foundation.NSArray[objc.ID])
+}
+
+var _ MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable = (*MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct)(nil)
+

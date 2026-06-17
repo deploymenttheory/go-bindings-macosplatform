@@ -5,8 +5,11 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Coder wraps [raw.NSCoder] with a fluent Go API.
@@ -23,7 +26,462 @@ func NewCoder() *Coder {
 	return &Coder{inner: raw.NSCoderFromID(_id)}
 }
 
+// EncodeValueOfObjCTypeAt calls the underlying EncodeValueOfObjCTypeAt.
+func (x *Coder) EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer) {
+	x.inner.EncodeValueOfObjCTypeAt(type_, addr)
+}
+
+// EncodeDataObject calls the underlying EncodeDataObject.
+func (x *Coder) EncodeDataObject(data *raw.NSData) {
+	x.inner.EncodeDataObject(data)
+}
+
+// DecodeDataObject calls the underlying DecodeDataObject.
+func (x *Coder) DecodeDataObject() *Data {
+	_r := x.inner.DecodeDataObject()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// DecodeValueOfObjCTypeAtSize calls the underlying DecodeValueOfObjCTypeAtSize.
+func (x *Coder) DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint) {
+	x.inner.DecodeValueOfObjCTypeAtSize(type_, data, size)
+}
+
+// VersionForClassName calls the underlying VersionForClassName.
+func (x *Coder) VersionForClassName(className string) int {
+	return x.inner.VersionForClassName(foundation.NSStringStringWithUTF8String(className))
+}
+
+// EncodeObject calls the underlying EncodeObject.
+func (x *Coder) EncodeObject(object objc.ID) {
+	x.inner.EncodeObject(object)
+}
+
+// EncodeRootObject calls the underlying EncodeRootObject.
+func (x *Coder) EncodeRootObject(rootObject objc.ID) {
+	x.inner.EncodeRootObject(rootObject)
+}
+
+// EncodeBycopyObject calls the underlying EncodeBycopyObject.
+func (x *Coder) EncodeBycopyObject(anObject objc.ID) {
+	x.inner.EncodeBycopyObject(anObject)
+}
+
+// EncodeByrefObject calls the underlying EncodeByrefObject.
+func (x *Coder) EncodeByrefObject(anObject objc.ID) {
+	x.inner.EncodeByrefObject(anObject)
+}
+
+// EncodeConditionalObject calls the underlying EncodeConditionalObject.
+func (x *Coder) EncodeConditionalObject(object objc.ID) {
+	x.inner.EncodeConditionalObject(object)
+}
+
+// EncodeArrayOfObjCTypeCountAt calls the underlying EncodeArrayOfObjCTypeCountAt.
+func (x *Coder) EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer) {
+	x.inner.EncodeArrayOfObjCTypeCountAt(type_, count, array)
+}
+
+// EncodeBytesLength calls the underlying EncodeBytesLength.
+func (x *Coder) EncodeBytesLength(byteaddr unsafe.Pointer, length uint) {
+	x.inner.EncodeBytesLength(byteaddr, length)
+}
+
+// DecodeObject calls the underlying DecodeObject.
+func (x *Coder) DecodeObject() objc.ID {
+	return x.inner.DecodeObject()
+}
+
+// DecodeTopLevelObjectAndReturnError calls the underlying DecodeTopLevelObjectAndReturnError.
+func (x *Coder) DecodeTopLevelObjectAndReturnError() (objc.ID, error) {
+	return x.inner.DecodeTopLevelObjectAndReturnError()
+}
+
+// DecodeArrayOfObjCTypeCountAt calls the underlying DecodeArrayOfObjCTypeCountAt.
+func (x *Coder) DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer) {
+	x.inner.DecodeArrayOfObjCTypeCountAt(itemType, count, array)
+}
+
+// DecodeBytesWithReturnedLength calls the underlying DecodeBytesWithReturnedLength.
+func (x *Coder) DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer {
+	return x.inner.DecodeBytesWithReturnedLength(lengthp)
+}
+
+// EncodePropertyList calls the underlying EncodePropertyList.
+func (x *Coder) EncodePropertyList(aPropertyList objc.ID) {
+	x.inner.EncodePropertyList(aPropertyList)
+}
+
+// DecodePropertyList calls the underlying DecodePropertyList.
+func (x *Coder) DecodePropertyList() objc.ID {
+	return x.inner.DecodePropertyList()
+}
+
+// SetObjectZone calls the underlying SetObjectZone.
+func (x *Coder) SetObjectZone(zone unsafe.Pointer) {
+	x.inner.SetObjectZone(zone)
+}
+
+// ObjectZone calls the underlying ObjectZone.
+func (x *Coder) ObjectZone() unsafe.Pointer {
+	return x.inner.ObjectZone()
+}
+
+// EncodeObjectForKey calls the underlying EncodeObjectForKey.
+func (x *Coder) EncodeObjectForKey(object objc.ID, key string) {
+	x.inner.EncodeObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeConditionalObjectForKey calls the underlying EncodeConditionalObjectForKey.
+func (x *Coder) EncodeConditionalObjectForKey(object objc.ID, key string) {
+	x.inner.EncodeConditionalObjectForKey(object, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeBoolForKey calls the underlying EncodeBoolForKey.
+func (x *Coder) EncodeBoolForKey(value bool, key string) {
+	x.inner.EncodeBoolForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeIntForKey calls the underlying EncodeIntForKey.
+func (x *Coder) EncodeIntForKey(value int, key string) {
+	x.inner.EncodeIntForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeInt32ForKey calls the underlying EncodeInt32ForKey.
+func (x *Coder) EncodeInt32ForKey(value int32, key string) {
+	x.inner.EncodeInt32ForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeInt64ForKey calls the underlying EncodeInt64ForKey.
+func (x *Coder) EncodeInt64ForKey(value int64, key string) {
+	x.inner.EncodeInt64ForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeFloatForKey calls the underlying EncodeFloatForKey.
+func (x *Coder) EncodeFloatForKey(value float32, key string) {
+	x.inner.EncodeFloatForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeDoubleForKey calls the underlying EncodeDoubleForKey.
+func (x *Coder) EncodeDoubleForKey(value float64, key string) {
+	x.inner.EncodeDoubleForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeBytesLengthForKey calls the underlying EncodeBytesLengthForKey.
+func (x *Coder) EncodeBytesLengthForKey(bytes_ *uint8, length uint, key string) {
+	x.inner.EncodeBytesLengthForKey(bytes_, length, foundation.NSStringStringWithUTF8String(key))
+}
+
+// ContainsValueForKey calls the underlying ContainsValueForKey.
+func (x *Coder) ContainsValueForKey(key string) bool {
+	return x.inner.ContainsValueForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeObjectForKey calls the underlying DecodeObjectForKey.
+func (x *Coder) DecodeObjectForKey(key string) objc.ID {
+	return x.inner.DecodeObjectForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeTopLevelObjectForKeyError calls the underlying DecodeTopLevelObjectForKeyError.
+func (x *Coder) DecodeTopLevelObjectForKeyError(key string) (objc.ID, error) {
+	return x.inner.DecodeTopLevelObjectForKeyError(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeBoolForKey calls the underlying DecodeBoolForKey.
+func (x *Coder) DecodeBoolForKey(key string) bool {
+	return x.inner.DecodeBoolForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeIntForKey calls the underlying DecodeIntForKey.
+func (x *Coder) DecodeIntForKey(key string) int {
+	return x.inner.DecodeIntForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeInt32ForKey calls the underlying DecodeInt32ForKey.
+func (x *Coder) DecodeInt32ForKey(key string) int32 {
+	return x.inner.DecodeInt32ForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeInt64ForKey calls the underlying DecodeInt64ForKey.
+func (x *Coder) DecodeInt64ForKey(key string) int64 {
+	return x.inner.DecodeInt64ForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeFloatForKey calls the underlying DecodeFloatForKey.
+func (x *Coder) DecodeFloatForKey(key string) float32 {
+	return x.inner.DecodeFloatForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeDoubleForKey calls the underlying DecodeDoubleForKey.
+func (x *Coder) DecodeDoubleForKey(key string) float64 {
+	return x.inner.DecodeDoubleForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeBytesForKeyReturnedLength calls the underlying DecodeBytesForKeyReturnedLength.
+func (x *Coder) DecodeBytesForKeyReturnedLength(key string, lengthp *uint) unsafe.Pointer {
+	return x.inner.DecodeBytesForKeyReturnedLength(foundation.NSStringStringWithUTF8String(key), lengthp)
+}
+
+// DecodeBytesWithMinimumLength calls the underlying DecodeBytesWithMinimumLength.
+func (x *Coder) DecodeBytesWithMinimumLength(length uint) unsafe.Pointer {
+	return x.inner.DecodeBytesWithMinimumLength(length)
+}
+
+// DecodeBytesForKeyMinimumLength calls the underlying DecodeBytesForKeyMinimumLength.
+func (x *Coder) DecodeBytesForKeyMinimumLength(key string, length uint) unsafe.Pointer {
+	return x.inner.DecodeBytesForKeyMinimumLength(foundation.NSStringStringWithUTF8String(key), length)
+}
+
+// EncodeIntegerForKey calls the underlying EncodeIntegerForKey.
+func (x *Coder) EncodeIntegerForKey(value int, key string) {
+	x.inner.EncodeIntegerForKey(value, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeIntegerForKey calls the underlying DecodeIntegerForKey.
+func (x *Coder) DecodeIntegerForKey(key string) int {
+	return x.inner.DecodeIntegerForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeObjectOfClassForKey calls the underlying DecodeObjectOfClassForKey.
+func (x *Coder) DecodeObjectOfClassForKey(aClass objc.Class, key string) objc.ID {
+	return x.inner.DecodeObjectOfClassForKey(aClass, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeTopLevelObjectOfClassForKeyError calls the underlying DecodeTopLevelObjectOfClassForKeyError.
+func (x *Coder) DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key string) (objc.ID, error) {
+	return x.inner.DecodeTopLevelObjectOfClassForKeyError(aClass, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeArrayOfObjectsOfClassForKey calls the underlying DecodeArrayOfObjectsOfClassForKey.
+func (x *Coder) DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key string) *raw.NSArray[objc.ID] {
+	return x.inner.DecodeArrayOfObjectsOfClassForKey(cls, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeDictionaryWithKeysOfClassObjectsOfClassForKey calls the underlying DecodeDictionaryWithKeysOfClassObjectsOfClassForKey.
+func (x *Coder) DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key string) *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls, objectCls, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeObjectOfClassesForKey calls the underlying DecodeObjectOfClassesForKey.
+func (x *Coder) DecodeObjectOfClassesForKey(classes *raw.NSSet[objc.Class], key string) objc.ID {
+	return x.inner.DecodeObjectOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeTopLevelObjectOfClassesForKeyError calls the underlying DecodeTopLevelObjectOfClassesForKeyError.
+func (x *Coder) DecodeTopLevelObjectOfClassesForKeyError(classes *raw.NSSet[objc.Class], key string) (objc.ID, error) {
+	return x.inner.DecodeTopLevelObjectOfClassesForKeyError(classes, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeArrayOfObjectsOfClassesForKey calls the underlying DecodeArrayOfObjectsOfClassesForKey.
+func (x *Coder) DecodeArrayOfObjectsOfClassesForKey(classes *raw.NSSet[objc.Class], key string) *raw.NSArray[objc.ID] {
+	return x.inner.DecodeArrayOfObjectsOfClassesForKey(classes, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey calls the underlying DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey.
+func (x *Coder) DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *raw.NSSet[objc.Class], objectClasses *raw.NSSet[objc.Class], key string) *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses, objectClasses, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodePropertyListForKey calls the underlying DecodePropertyListForKey.
+func (x *Coder) DecodePropertyListForKey(key string) objc.ID {
+	return x.inner.DecodePropertyListForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// FailWithError calls the underlying FailWithError.
+func (x *Coder) FailWithError(error_ unsafe.Pointer) {
+	x.inner.FailWithError(error_)
+}
+
+// SystemVersion calls the underlying SystemVersion.
+func (x *Coder) SystemVersion() uint {
+	return x.inner.SystemVersion()
+}
+
+// AllowsKeyedCoding calls the underlying AllowsKeyedCoding.
+func (x *Coder) AllowsKeyedCoding() bool {
+	return x.inner.AllowsKeyedCoding()
+}
+
+// RequiresSecureCoding calls the underlying RequiresSecureCoding.
+func (x *Coder) RequiresSecureCoding() bool {
+	return x.inner.RequiresSecureCoding()
+}
+
+// AllowedClasses calls the underlying AllowedClasses.
+func (x *Coder) AllowedClasses() *raw.NSSet[objc.Class] {
+	return x.inner.AllowedClasses()
+}
+
+// DecodingFailurePolicy calls the underlying DecodingFailurePolicy.
+func (x *Coder) DecodingFailurePolicy() raw.NSDecodingFailurePolicy {
+	return x.inner.DecodingFailurePolicy()
+}
+
+// Error calls the underlying Error.
+func (x *Coder) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// EncodeNXObject calls the underlying EncodeNXObject.
+func (x *Coder) EncodeNXObject(object objc.ID) {
+	x.inner.EncodeNXObject(object)
+}
+
+// DecodeNXObject calls the underlying DecodeNXObject.
+func (x *Coder) DecodeNXObject() objc.ID {
+	return x.inner.DecodeNXObject()
+}
+
+// DecodeValueOfObjCTypeAt calls the underlying DecodeValueOfObjCTypeAt.
+func (x *Coder) DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer) {
+	x.inner.DecodeValueOfObjCTypeAt(type_, data)
+}
+
+// EncodePoint calls the underlying EncodePoint.
+func (x *Coder) EncodePoint(point corefoundation.CGPoint) {
+	x.inner.EncodePoint(point)
+}
+
+// DecodePoint calls the underlying DecodePoint.
+func (x *Coder) DecodePoint() corefoundation.CGPoint {
+	return x.inner.DecodePoint()
+}
+
+// EncodeSize calls the underlying EncodeSize.
+func (x *Coder) EncodeSize(size corefoundation.CGSize) {
+	x.inner.EncodeSize(size)
+}
+
+// DecodeSize calls the underlying DecodeSize.
+func (x *Coder) DecodeSize() corefoundation.CGSize {
+	return x.inner.DecodeSize()
+}
+
+// EncodeRect calls the underlying EncodeRect.
+func (x *Coder) EncodeRect(rect corefoundation.CGRect) {
+	x.inner.EncodeRect(rect)
+}
+
+// DecodeRect calls the underlying DecodeRect.
+func (x *Coder) DecodeRect() corefoundation.CGRect {
+	return x.inner.DecodeRect()
+}
+
+// EncodePointForKey calls the underlying EncodePointForKey.
+func (x *Coder) EncodePointForKey(point corefoundation.CGPoint, key string) {
+	x.inner.EncodePointForKey(point, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeSizeForKey calls the underlying EncodeSizeForKey.
+func (x *Coder) EncodeSizeForKey(size corefoundation.CGSize, key string) {
+	x.inner.EncodeSizeForKey(size, foundation.NSStringStringWithUTF8String(key))
+}
+
+// EncodeRectForKey calls the underlying EncodeRectForKey.
+func (x *Coder) EncodeRectForKey(rect corefoundation.CGRect, key string) {
+	x.inner.EncodeRectForKey(rect, foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodePointForKey calls the underlying DecodePointForKey.
+func (x *Coder) DecodePointForKey(key string) corefoundation.CGPoint {
+	return x.inner.DecodePointForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeSizeForKey calls the underlying DecodeSizeForKey.
+func (x *Coder) DecodeSizeForKey(key string) corefoundation.CGSize {
+	return x.inner.DecodeSizeForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// DecodeRectForKey calls the underlying DecodeRectForKey.
+func (x *Coder) DecodeRectForKey(key string) corefoundation.CGRect {
+	return x.inner.DecodeRectForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
 func (x *Coder) asCoder() *raw.NSCoder { return x.inner }
 
 func (x *Coder) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Coderable is the interface implemented by [Coder], for mocking and DI.
+type Coderable interface {
+	Unwrap() *raw.NSCoder
+	EncodeValueOfObjCTypeAt(type_ string, addr unsafe.Pointer)
+	EncodeDataObject(data *raw.NSData)
+	DecodeDataObject() *Data
+	DecodeValueOfObjCTypeAtSize(type_ string, data unsafe.Pointer, size uint)
+	VersionForClassName(className string) int
+	EncodeObject(object objc.ID)
+	EncodeRootObject(rootObject objc.ID)
+	EncodeBycopyObject(anObject objc.ID)
+	EncodeByrefObject(anObject objc.ID)
+	EncodeConditionalObject(object objc.ID)
+	EncodeArrayOfObjCTypeCountAt(type_ string, count uint, array unsafe.Pointer)
+	EncodeBytesLength(byteaddr unsafe.Pointer, length uint)
+	DecodeObject() objc.ID
+	DecodeTopLevelObjectAndReturnError() (objc.ID, error)
+	DecodeArrayOfObjCTypeCountAt(itemType string, count uint, array unsafe.Pointer)
+	DecodeBytesWithReturnedLength(lengthp *uint) unsafe.Pointer
+	EncodePropertyList(aPropertyList objc.ID)
+	DecodePropertyList() objc.ID
+	SetObjectZone(zone unsafe.Pointer)
+	ObjectZone() unsafe.Pointer
+	EncodeObjectForKey(object objc.ID, key string)
+	EncodeConditionalObjectForKey(object objc.ID, key string)
+	EncodeBoolForKey(value bool, key string)
+	EncodeIntForKey(value int, key string)
+	EncodeInt32ForKey(value int32, key string)
+	EncodeInt64ForKey(value int64, key string)
+	EncodeFloatForKey(value float32, key string)
+	EncodeDoubleForKey(value float64, key string)
+	EncodeBytesLengthForKey(bytes_ *uint8, length uint, key string)
+	ContainsValueForKey(key string) bool
+	DecodeObjectForKey(key string) objc.ID
+	DecodeTopLevelObjectForKeyError(key string) (objc.ID, error)
+	DecodeBoolForKey(key string) bool
+	DecodeIntForKey(key string) int
+	DecodeInt32ForKey(key string) int32
+	DecodeInt64ForKey(key string) int64
+	DecodeFloatForKey(key string) float32
+	DecodeDoubleForKey(key string) float64
+	DecodeBytesForKeyReturnedLength(key string, lengthp *uint) unsafe.Pointer
+	DecodeBytesWithMinimumLength(length uint) unsafe.Pointer
+	DecodeBytesForKeyMinimumLength(key string, length uint) unsafe.Pointer
+	EncodeIntegerForKey(value int, key string)
+	DecodeIntegerForKey(key string) int
+	DecodeObjectOfClassForKey(aClass objc.Class, key string) objc.ID
+	DecodeTopLevelObjectOfClassForKeyError(aClass objc.Class, key string) (objc.ID, error)
+	DecodeArrayOfObjectsOfClassForKey(cls objc.Class, key string) *raw.NSArray[objc.ID]
+	DecodeDictionaryWithKeysOfClassObjectsOfClassForKey(keyCls objc.Class, objectCls objc.Class, key string) *raw.NSDictionary[objc.ID, objc.ID]
+	DecodeObjectOfClassesForKey(classes *raw.NSSet[objc.Class], key string) objc.ID
+	DecodeTopLevelObjectOfClassesForKeyError(classes *raw.NSSet[objc.Class], key string) (objc.ID, error)
+	DecodeArrayOfObjectsOfClassesForKey(classes *raw.NSSet[objc.Class], key string) *raw.NSArray[objc.ID]
+	DecodeDictionaryWithKeysOfClassesObjectsOfClassesForKey(keyClasses *raw.NSSet[objc.Class], objectClasses *raw.NSSet[objc.Class], key string) *raw.NSDictionary[objc.ID, objc.ID]
+	DecodePropertyListForKey(key string) objc.ID
+	FailWithError(error_ unsafe.Pointer)
+	SystemVersion() uint
+	AllowsKeyedCoding() bool
+	RequiresSecureCoding() bool
+	AllowedClasses() *raw.NSSet[objc.Class]
+	DecodingFailurePolicy() raw.NSDecodingFailurePolicy
+	Error() unsafe.Pointer
+	EncodeNXObject(object objc.ID)
+	DecodeNXObject() objc.ID
+	DecodeValueOfObjCTypeAt(type_ string, data unsafe.Pointer)
+	EncodePoint(point corefoundation.CGPoint)
+	DecodePoint() corefoundation.CGPoint
+	EncodeSize(size corefoundation.CGSize)
+	DecodeSize() corefoundation.CGSize
+	EncodeRect(rect corefoundation.CGRect)
+	DecodeRect() corefoundation.CGRect
+	EncodePointForKey(point corefoundation.CGPoint, key string)
+	EncodeSizeForKey(size corefoundation.CGSize, key string)
+	EncodeRectForKey(rect corefoundation.CGRect, key string)
+	DecodePointForKey(key string) corefoundation.CGPoint
+	DecodeSizeForKey(key string) corefoundation.CGSize
+	DecodeRectForKey(key string) corefoundation.CGRect
+}
+
+var _ Coderable = (*Coder)(nil)
 

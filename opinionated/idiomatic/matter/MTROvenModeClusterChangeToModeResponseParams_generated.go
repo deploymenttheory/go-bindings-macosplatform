@@ -43,3 +43,40 @@ func (x *MTROvenModeClusterChangeToModeResponseParams) WithStatusText(statusText
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTROvenModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTROvenModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTROvenModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTROvenModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTROvenModeClusterChangeToModeResponseParamsable is the interface implemented by [MTROvenModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTROvenModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTROvenModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTROvenModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTROvenModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTROvenModeClusterChangeToModeResponseParamsable = (*MTROvenModeClusterChangeToModeResponseParams)(nil)
+

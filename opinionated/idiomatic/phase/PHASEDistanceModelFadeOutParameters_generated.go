@@ -24,3 +24,16 @@ func NewDistanceModelFadeOutParametersWithCullDistance(cullDistance float64) *Di
 	return &DistanceModelFadeOutParameters{inner: raw.PHASEDistanceModelFadeOutParametersFromID(_id)}
 }
 
+// CullDistance calls the underlying CullDistance.
+func (x *DistanceModelFadeOutParameters) CullDistance() float64 {
+	return x.inner.CullDistance()
+}
+
+// DistanceModelFadeOutParametersable is the interface implemented by [DistanceModelFadeOutParameters], for mocking and DI.
+type DistanceModelFadeOutParametersable interface {
+	Unwrap() *raw.PHASEDistanceModelFadeOutParameters
+	CullDistance() float64
+}
+
+var _ DistanceModelFadeOutParametersable = (*DistanceModelFadeOutParameters)(nil)
+

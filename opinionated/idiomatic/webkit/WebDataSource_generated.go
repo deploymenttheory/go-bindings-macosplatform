@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,119 @@ func NewWebDataSourceWithRequest(request *foundation.NSURLRequest) *WebDataSourc
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), request.Ptr())
 	return &WebDataSource{inner: raw.WebDataSourceFromID(_id)}
 }
+
+// SubresourceForURL calls the underlying SubresourceForURL.
+func (x *WebDataSource) SubresourceForURL(uRL string) *WebResource {
+	_r := x.inner.SubresourceForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	if _r == nil {
+		return nil
+	}
+	return &WebResource{inner: _r}
+}
+
+// AddSubresource calls the underlying AddSubresource.
+func (x *WebDataSource) AddSubresource(subresource *raw.WebResource) {
+	x.inner.AddSubresource(subresource)
+}
+
+// Data calls the underlying Data.
+func (x *WebDataSource) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// Representation calls the underlying Representation.
+func (x *WebDataSource) Representation() raw.WebDocumentRepresentation {
+	return x.inner.Representation()
+}
+
+// WebFrame calls the underlying WebFrame.
+func (x *WebDataSource) WebFrame() *WebFrame {
+	_r := x.inner.WebFrame()
+	if _r == nil {
+		return nil
+	}
+	return &WebFrame{inner: _r}
+}
+
+// Request calls the underlying Request.
+func (x *WebDataSource) Request() *foundation.NSMutableURLRequest {
+	return x.inner.Request()
+}
+
+// Response calls the underlying Response.
+func (x *WebDataSource) Response() *foundation.NSURLResponse {
+	return x.inner.Response()
+}
+
+// TextEncodingName calls the underlying TextEncodingName.
+func (x *WebDataSource) TextEncodingName() string {
+	_r := x.inner.TextEncodingName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsLoading calls the underlying IsLoading.
+func (x *WebDataSource) IsLoading() bool {
+	return x.inner.IsLoading()
+}
+
+// PageTitle calls the underlying PageTitle.
+func (x *WebDataSource) PageTitle() string {
+	_r := x.inner.PageTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UnreachableURL calls the underlying UnreachableURL.
+func (x *WebDataSource) UnreachableURL() *foundation.NSURL {
+	return x.inner.UnreachableURL()
+}
+
+// WebArchive calls the underlying WebArchive.
+func (x *WebDataSource) WebArchive() *WebArchive {
+	_r := x.inner.WebArchive()
+	if _r == nil {
+		return nil
+	}
+	return &WebArchive{inner: _r}
+}
+
+// MainResource calls the underlying MainResource.
+func (x *WebDataSource) MainResource() *WebResource {
+	_r := x.inner.MainResource()
+	if _r == nil {
+		return nil
+	}
+	return &WebResource{inner: _r}
+}
+
+// Subresources calls the underlying Subresources.
+func (x *WebDataSource) Subresources() *foundation.NSArray[objc.ID] {
+	return x.inner.Subresources()
+}
+
+// WebDataSourceable is the interface implemented by [WebDataSource], for mocking and DI.
+type WebDataSourceable interface {
+	Unwrap() *raw.WebDataSource
+	SubresourceForURL(uRL string) *WebResource
+	AddSubresource(subresource *raw.WebResource)
+	Data() *foundation.NSData
+	Representation() raw.WebDocumentRepresentation
+	WebFrame() *WebFrame
+	Request() *foundation.NSMutableURLRequest
+	Response() *foundation.NSURLResponse
+	TextEncodingName() string
+	IsLoading() bool
+	PageTitle() string
+	UnreachableURL() *foundation.NSURL
+	WebArchive() *WebArchive
+	MainResource() *WebResource
+	Subresources() *foundation.NSArray[objc.ID]
+}
+
+var _ WebDataSourceable = (*WebDataSource)(nil)
 

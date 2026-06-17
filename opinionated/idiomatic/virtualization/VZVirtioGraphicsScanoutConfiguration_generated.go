@@ -36,5 +36,38 @@ func (x *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixels i
 	return x
 }
 
+// WidthInPixels calls the underlying WidthInPixels.
+func (x *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
+	return x.inner.WidthInPixels()
+}
+
+// SetWidthInPixels calls the underlying SetWidthInPixels.
+func (x *VirtioGraphicsScanoutConfiguration) SetWidthInPixels(widthInPixels int) {
+	x.inner.SetWidthInPixels(widthInPixels)
+}
+
+// HeightInPixels calls the underlying HeightInPixels.
+func (x *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
+	return x.inner.HeightInPixels()
+}
+
+// SetHeightInPixels calls the underlying SetHeightInPixels.
+func (x *VirtioGraphicsScanoutConfiguration) SetHeightInPixels(heightInPixels int) {
+	x.inner.SetHeightInPixels(heightInPixels)
+}
+
 func (x *VirtioGraphicsScanoutConfiguration) asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration { return &x.inner.VZGraphicsDisplayConfiguration }
+
+// VirtioGraphicsScanoutConfigurationable is the interface implemented by [VirtioGraphicsScanoutConfiguration], for mocking and DI.
+type VirtioGraphicsScanoutConfigurationable interface {
+	Unwrap() *raw.VZVirtioGraphicsScanoutConfiguration
+	WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration
+	WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration
+	WidthInPixels() int
+	SetWidthInPixels(widthInPixels int)
+	HeightInPixels() int
+	SetHeightInPixels(heightInPixels int)
+}
+
+var _ VirtioGraphicsScanoutConfigurationable = (*VirtioGraphicsScanoutConfiguration)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEnumsResponseParams() *MTRTestClusterClusterTes
 
 func (x *MTRTestClusterClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams { return &x.inner.MTRUnitTestingClusterTestEnumsResponseParams }
 
+// MTRTestClusterClusterTestEnumsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsResponseParams], for mocking and DI.
+type MTRTestClusterClusterTestEnumsResponseParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams
+}
+
+var _ MTRTestClusterClusterTestEnumsResponseParamsable = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)
+

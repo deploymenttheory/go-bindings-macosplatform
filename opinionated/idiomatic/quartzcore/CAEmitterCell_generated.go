@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -240,16 +241,488 @@ func (x *EmitterCell) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]
 	return x
 }
 
+// ShouldArchiveValueForKey calls the underlying ShouldArchiveValueForKey.
+func (x *EmitterCell) ShouldArchiveValueForKey(key string) bool {
+	return x.inner.ShouldArchiveValueForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// Name calls the underlying Name.
+func (x *EmitterCell) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *EmitterCell) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *EmitterCell) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *EmitterCell) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// BirthRate calls the underlying BirthRate.
+func (x *EmitterCell) BirthRate() float32 {
+	return x.inner.BirthRate()
+}
+
+// SetBirthRate calls the underlying SetBirthRate.
+func (x *EmitterCell) SetBirthRate(birthRate float32) {
+	x.inner.SetBirthRate(birthRate)
+}
+
+// Lifetime calls the underlying Lifetime.
+func (x *EmitterCell) Lifetime() float32 {
+	return x.inner.Lifetime()
+}
+
+// SetLifetime calls the underlying SetLifetime.
+func (x *EmitterCell) SetLifetime(lifetime float32) {
+	x.inner.SetLifetime(lifetime)
+}
+
+// LifetimeRange calls the underlying LifetimeRange.
+func (x *EmitterCell) LifetimeRange() float32 {
+	return x.inner.LifetimeRange()
+}
+
+// SetLifetimeRange calls the underlying SetLifetimeRange.
+func (x *EmitterCell) SetLifetimeRange(lifetimeRange float32) {
+	x.inner.SetLifetimeRange(lifetimeRange)
+}
+
+// EmissionLatitude calls the underlying EmissionLatitude.
+func (x *EmitterCell) EmissionLatitude() float64 {
+	return x.inner.EmissionLatitude()
+}
+
+// SetEmissionLatitude calls the underlying SetEmissionLatitude.
+func (x *EmitterCell) SetEmissionLatitude(emissionLatitude float64) {
+	x.inner.SetEmissionLatitude(emissionLatitude)
+}
+
+// EmissionLongitude calls the underlying EmissionLongitude.
+func (x *EmitterCell) EmissionLongitude() float64 {
+	return x.inner.EmissionLongitude()
+}
+
+// SetEmissionLongitude calls the underlying SetEmissionLongitude.
+func (x *EmitterCell) SetEmissionLongitude(emissionLongitude float64) {
+	x.inner.SetEmissionLongitude(emissionLongitude)
+}
+
+// EmissionRange calls the underlying EmissionRange.
+func (x *EmitterCell) EmissionRange() float64 {
+	return x.inner.EmissionRange()
+}
+
+// SetEmissionRange calls the underlying SetEmissionRange.
+func (x *EmitterCell) SetEmissionRange(emissionRange float64) {
+	x.inner.SetEmissionRange(emissionRange)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *EmitterCell) Velocity() float64 {
+	return x.inner.Velocity()
+}
+
+// SetVelocity calls the underlying SetVelocity.
+func (x *EmitterCell) SetVelocity(velocity float64) {
+	x.inner.SetVelocity(velocity)
+}
+
+// VelocityRange calls the underlying VelocityRange.
+func (x *EmitterCell) VelocityRange() float64 {
+	return x.inner.VelocityRange()
+}
+
+// SetVelocityRange calls the underlying SetVelocityRange.
+func (x *EmitterCell) SetVelocityRange(velocityRange float64) {
+	x.inner.SetVelocityRange(velocityRange)
+}
+
+// XAcceleration calls the underlying XAcceleration.
+func (x *EmitterCell) XAcceleration() float64 {
+	return x.inner.XAcceleration()
+}
+
+// SetXAcceleration calls the underlying SetXAcceleration.
+func (x *EmitterCell) SetXAcceleration(xAcceleration float64) {
+	x.inner.SetXAcceleration(xAcceleration)
+}
+
+// YAcceleration calls the underlying YAcceleration.
+func (x *EmitterCell) YAcceleration() float64 {
+	return x.inner.YAcceleration()
+}
+
+// SetYAcceleration calls the underlying SetYAcceleration.
+func (x *EmitterCell) SetYAcceleration(yAcceleration float64) {
+	x.inner.SetYAcceleration(yAcceleration)
+}
+
+// ZAcceleration calls the underlying ZAcceleration.
+func (x *EmitterCell) ZAcceleration() float64 {
+	return x.inner.ZAcceleration()
+}
+
+// SetZAcceleration calls the underlying SetZAcceleration.
+func (x *EmitterCell) SetZAcceleration(zAcceleration float64) {
+	x.inner.SetZAcceleration(zAcceleration)
+}
+
+// Scale calls the underlying Scale.
+func (x *EmitterCell) Scale() float64 {
+	return x.inner.Scale()
+}
+
+// SetScale calls the underlying SetScale.
+func (x *EmitterCell) SetScale(scale float64) {
+	x.inner.SetScale(scale)
+}
+
+// ScaleRange calls the underlying ScaleRange.
+func (x *EmitterCell) ScaleRange() float64 {
+	return x.inner.ScaleRange()
+}
+
+// SetScaleRange calls the underlying SetScaleRange.
+func (x *EmitterCell) SetScaleRange(scaleRange float64) {
+	x.inner.SetScaleRange(scaleRange)
+}
+
+// ScaleSpeed calls the underlying ScaleSpeed.
+func (x *EmitterCell) ScaleSpeed() float64 {
+	return x.inner.ScaleSpeed()
+}
+
+// SetScaleSpeed calls the underlying SetScaleSpeed.
+func (x *EmitterCell) SetScaleSpeed(scaleSpeed float64) {
+	x.inner.SetScaleSpeed(scaleSpeed)
+}
+
+// Spin calls the underlying Spin.
+func (x *EmitterCell) Spin() float64 {
+	return x.inner.Spin()
+}
+
+// SetSpin calls the underlying SetSpin.
+func (x *EmitterCell) SetSpin(spin float64) {
+	x.inner.SetSpin(spin)
+}
+
+// SpinRange calls the underlying SpinRange.
+func (x *EmitterCell) SpinRange() float64 {
+	return x.inner.SpinRange()
+}
+
+// SetSpinRange calls the underlying SetSpinRange.
+func (x *EmitterCell) SetSpinRange(spinRange float64) {
+	x.inner.SetSpinRange(spinRange)
+}
+
+// Color calls the underlying Color.
+func (x *EmitterCell) Color() unsafe.Pointer {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *EmitterCell) SetColor(color unsafe.Pointer) {
+	x.inner.SetColor(color)
+}
+
+// RedRange calls the underlying RedRange.
+func (x *EmitterCell) RedRange() float32 {
+	return x.inner.RedRange()
+}
+
+// SetRedRange calls the underlying SetRedRange.
+func (x *EmitterCell) SetRedRange(redRange float32) {
+	x.inner.SetRedRange(redRange)
+}
+
+// GreenRange calls the underlying GreenRange.
+func (x *EmitterCell) GreenRange() float32 {
+	return x.inner.GreenRange()
+}
+
+// SetGreenRange calls the underlying SetGreenRange.
+func (x *EmitterCell) SetGreenRange(greenRange float32) {
+	x.inner.SetGreenRange(greenRange)
+}
+
+// BlueRange calls the underlying BlueRange.
+func (x *EmitterCell) BlueRange() float32 {
+	return x.inner.BlueRange()
+}
+
+// SetBlueRange calls the underlying SetBlueRange.
+func (x *EmitterCell) SetBlueRange(blueRange float32) {
+	x.inner.SetBlueRange(blueRange)
+}
+
+// AlphaRange calls the underlying AlphaRange.
+func (x *EmitterCell) AlphaRange() float32 {
+	return x.inner.AlphaRange()
+}
+
+// SetAlphaRange calls the underlying SetAlphaRange.
+func (x *EmitterCell) SetAlphaRange(alphaRange float32) {
+	x.inner.SetAlphaRange(alphaRange)
+}
+
+// RedSpeed calls the underlying RedSpeed.
+func (x *EmitterCell) RedSpeed() float32 {
+	return x.inner.RedSpeed()
+}
+
+// SetRedSpeed calls the underlying SetRedSpeed.
+func (x *EmitterCell) SetRedSpeed(redSpeed float32) {
+	x.inner.SetRedSpeed(redSpeed)
+}
+
+// GreenSpeed calls the underlying GreenSpeed.
+func (x *EmitterCell) GreenSpeed() float32 {
+	return x.inner.GreenSpeed()
+}
+
+// SetGreenSpeed calls the underlying SetGreenSpeed.
+func (x *EmitterCell) SetGreenSpeed(greenSpeed float32) {
+	x.inner.SetGreenSpeed(greenSpeed)
+}
+
+// BlueSpeed calls the underlying BlueSpeed.
+func (x *EmitterCell) BlueSpeed() float32 {
+	return x.inner.BlueSpeed()
+}
+
+// SetBlueSpeed calls the underlying SetBlueSpeed.
+func (x *EmitterCell) SetBlueSpeed(blueSpeed float32) {
+	x.inner.SetBlueSpeed(blueSpeed)
+}
+
+// AlphaSpeed calls the underlying AlphaSpeed.
+func (x *EmitterCell) AlphaSpeed() float32 {
+	return x.inner.AlphaSpeed()
+}
+
+// SetAlphaSpeed calls the underlying SetAlphaSpeed.
+func (x *EmitterCell) SetAlphaSpeed(alphaSpeed float32) {
+	x.inner.SetAlphaSpeed(alphaSpeed)
+}
+
+// Contents calls the underlying Contents.
+func (x *EmitterCell) Contents() objc.ID {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *EmitterCell) SetContents(contents objc.ID) {
+	x.inner.SetContents(contents)
+}
+
+// ContentsRect calls the underlying ContentsRect.
+func (x *EmitterCell) ContentsRect() corefoundation.CGRect {
+	return x.inner.ContentsRect()
+}
+
+// SetContentsRect calls the underlying SetContentsRect.
+func (x *EmitterCell) SetContentsRect(contentsRect corefoundation.CGRect) {
+	x.inner.SetContentsRect(contentsRect)
+}
+
+// ContentsScale calls the underlying ContentsScale.
+func (x *EmitterCell) ContentsScale() float64 {
+	return x.inner.ContentsScale()
+}
+
+// SetContentsScale calls the underlying SetContentsScale.
+func (x *EmitterCell) SetContentsScale(contentsScale float64) {
+	x.inner.SetContentsScale(contentsScale)
+}
+
+// MinificationFilter calls the underlying MinificationFilter.
+func (x *EmitterCell) MinificationFilter() string {
+	_r := x.inner.MinificationFilter()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMinificationFilter calls the underlying SetMinificationFilter.
+func (x *EmitterCell) SetMinificationFilter(minificationFilter string) {
+	x.inner.SetMinificationFilter(foundation.NSStringStringWithUTF8String(minificationFilter))
+}
+
+// MagnificationFilter calls the underlying MagnificationFilter.
+func (x *EmitterCell) MagnificationFilter() string {
+	_r := x.inner.MagnificationFilter()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMagnificationFilter calls the underlying SetMagnificationFilter.
+func (x *EmitterCell) SetMagnificationFilter(magnificationFilter string) {
+	x.inner.SetMagnificationFilter(foundation.NSStringStringWithUTF8String(magnificationFilter))
+}
+
+// MinificationFilterBias calls the underlying MinificationFilterBias.
+func (x *EmitterCell) MinificationFilterBias() float32 {
+	return x.inner.MinificationFilterBias()
+}
+
+// SetMinificationFilterBias calls the underlying SetMinificationFilterBias.
+func (x *EmitterCell) SetMinificationFilterBias(minificationFilterBias float32) {
+	x.inner.SetMinificationFilterBias(minificationFilterBias)
+}
+
 // EmitterCells returns the collection as a Go slice.
 func (x *EmitterCell) EmitterCells() []*raw.CAEmitterCell {
 	arr := x.inner.EmitterCells()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CAEmitterCell, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CAEmitterCell {
+		return raw.CAEmitterCellFromID(purego.Retain(_id))
+	})
 }
+
+// SetEmitterCells calls the underlying SetEmitterCells.
+func (x *EmitterCell) SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell]) {
+	x.inner.SetEmitterCells(emitterCells)
+}
+
+// Style calls the underlying Style.
+func (x *EmitterCell) Style() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *EmitterCell) SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetStyle(style)
+}
+
+// EmitterCellable is the interface implemented by [EmitterCell], for mocking and DI.
+type EmitterCellable interface {
+	Unwrap() *raw.CAEmitterCell
+	WithName(name string) *EmitterCell
+	WithEnabled(enabled bool) *EmitterCell
+	WithBirthRate(birthRate float32) *EmitterCell
+	WithLifetime(lifetime float32) *EmitterCell
+	WithLifetimeRange(lifetimeRange float32) *EmitterCell
+	WithEmissionLatitude(emissionLatitude float64) *EmitterCell
+	WithEmissionLongitude(emissionLongitude float64) *EmitterCell
+	WithEmissionRange(emissionRange float64) *EmitterCell
+	WithVelocity(velocity float64) *EmitterCell
+	WithVelocityRange(velocityRange float64) *EmitterCell
+	WithXAcceleration(xAcceleration float64) *EmitterCell
+	WithYAcceleration(yAcceleration float64) *EmitterCell
+	WithZAcceleration(zAcceleration float64) *EmitterCell
+	WithScale(scale float64) *EmitterCell
+	WithScaleRange(scaleRange float64) *EmitterCell
+	WithScaleSpeed(scaleSpeed float64) *EmitterCell
+	WithSpin(spin float64) *EmitterCell
+	WithSpinRange(spinRange float64) *EmitterCell
+	WithRedRange(redRange float32) *EmitterCell
+	WithGreenRange(greenRange float32) *EmitterCell
+	WithBlueRange(blueRange float32) *EmitterCell
+	WithAlphaRange(alphaRange float32) *EmitterCell
+	WithRedSpeed(redSpeed float32) *EmitterCell
+	WithGreenSpeed(greenSpeed float32) *EmitterCell
+	WithBlueSpeed(blueSpeed float32) *EmitterCell
+	WithAlphaSpeed(alphaSpeed float32) *EmitterCell
+	WithContents(contents objc.ID) *EmitterCell
+	WithContentsRect(contentsRect corefoundation.CGRect) *EmitterCell
+	WithContentsScale(contentsScale float64) *EmitterCell
+	WithMinificationFilter(minificationFilter string) *EmitterCell
+	WithMagnificationFilter(magnificationFilter string) *EmitterCell
+	WithMinificationFilterBias(minificationFilterBias float32) *EmitterCell
+	WithEmitterCells(items ...*raw.CAEmitterCell) *EmitterCell
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *EmitterCell
+	ShouldArchiveValueForKey(key string) bool
+	Name() string
+	SetName(name string)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	BirthRate() float32
+	SetBirthRate(birthRate float32)
+	Lifetime() float32
+	SetLifetime(lifetime float32)
+	LifetimeRange() float32
+	SetLifetimeRange(lifetimeRange float32)
+	EmissionLatitude() float64
+	SetEmissionLatitude(emissionLatitude float64)
+	EmissionLongitude() float64
+	SetEmissionLongitude(emissionLongitude float64)
+	EmissionRange() float64
+	SetEmissionRange(emissionRange float64)
+	Velocity() float64
+	SetVelocity(velocity float64)
+	VelocityRange() float64
+	SetVelocityRange(velocityRange float64)
+	XAcceleration() float64
+	SetXAcceleration(xAcceleration float64)
+	YAcceleration() float64
+	SetYAcceleration(yAcceleration float64)
+	ZAcceleration() float64
+	SetZAcceleration(zAcceleration float64)
+	Scale() float64
+	SetScale(scale float64)
+	ScaleRange() float64
+	SetScaleRange(scaleRange float64)
+	ScaleSpeed() float64
+	SetScaleSpeed(scaleSpeed float64)
+	Spin() float64
+	SetSpin(spin float64)
+	SpinRange() float64
+	SetSpinRange(spinRange float64)
+	Color() unsafe.Pointer
+	SetColor(color unsafe.Pointer)
+	RedRange() float32
+	SetRedRange(redRange float32)
+	GreenRange() float32
+	SetGreenRange(greenRange float32)
+	BlueRange() float32
+	SetBlueRange(blueRange float32)
+	AlphaRange() float32
+	SetAlphaRange(alphaRange float32)
+	RedSpeed() float32
+	SetRedSpeed(redSpeed float32)
+	GreenSpeed() float32
+	SetGreenSpeed(greenSpeed float32)
+	BlueSpeed() float32
+	SetBlueSpeed(blueSpeed float32)
+	AlphaSpeed() float32
+	SetAlphaSpeed(alphaSpeed float32)
+	Contents() objc.ID
+	SetContents(contents objc.ID)
+	ContentsRect() corefoundation.CGRect
+	SetContentsRect(contentsRect corefoundation.CGRect)
+	ContentsScale() float64
+	SetContentsScale(contentsScale float64)
+	MinificationFilter() string
+	SetMinificationFilter(minificationFilter string)
+	MagnificationFilter() string
+	SetMagnificationFilter(magnificationFilter string)
+	MinificationFilterBias() float32
+	SetMinificationFilterBias(minificationFilterBias float32)
+	EmitterCells() []*raw.CAEmitterCell
+	SetEmitterCells(emitterCells *foundation.NSArray[*raw.CAEmitterCell])
+	Style() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetStyle(style *foundation.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ EmitterCellable = (*EmitterCell)(nil)
 

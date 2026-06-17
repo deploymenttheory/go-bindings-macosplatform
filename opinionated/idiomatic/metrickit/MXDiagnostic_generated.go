@@ -5,7 +5,9 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,56 @@ func NewDiagnostic() *Diagnostic {
 	return &Diagnostic{inner: raw.MXDiagnosticFromID(_id)}
 }
 
+// JSONRepresentation calls the underlying JSONRepresentation.
+func (x *Diagnostic) JSONRepresentation() *foundation.NSData {
+	return x.inner.JSONRepresentation()
+}
+
+// DictionaryRepresentation calls the underlying DictionaryRepresentation.
+func (x *Diagnostic) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.DictionaryRepresentation()
+}
+
+// MetaData calls the underlying MetaData.
+func (x *Diagnostic) MetaData() *MetaData {
+	_r := x.inner.MetaData()
+	if _r == nil {
+		return nil
+	}
+	return &MetaData{inner: _r}
+}
+
+// ApplicationVersion calls the underlying ApplicationVersion.
+func (x *Diagnostic) ApplicationVersion() string {
+	_r := x.inner.ApplicationVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // SignpostData returns the collection as a Go slice.
 func (x *Diagnostic) SignpostData() []*raw.MXSignpostRecord {
 	arr := x.inner.SignpostData()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MXSignpostRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MXSignpostRecord {
+		return raw.MXSignpostRecordFromID(purego.Retain(_id))
+	})
 }
 
 func (x *Diagnostic) asDiagnostic() *raw.MXDiagnostic { return x.inner }
+
+// Diagnosticable is the interface implemented by [Diagnostic], for mocking and DI.
+type Diagnosticable interface {
+	Unwrap() *raw.MXDiagnostic
+	JSONRepresentation() *foundation.NSData
+	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	MetaData() *MetaData
+	ApplicationVersion() string
+	SignpostData() []*raw.MXSignpostRecord
+}
+
+var _ Diagnosticable = (*Diagnostic)(nil)
 

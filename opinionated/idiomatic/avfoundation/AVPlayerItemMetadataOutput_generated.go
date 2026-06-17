@@ -31,5 +31,43 @@ func (x *PlayerItemMetadataOutput) WithAdvanceIntervalForDelegateInvocation(adva
 	return x
 }
 
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *PlayerItemMetadataOutput) SetDelegateQueue(delegate raw.AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerItemMetadataOutput) Delegate() raw.AVPlayerItemMetadataOutputPushDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *PlayerItemMetadataOutput) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
+// AdvanceIntervalForDelegateInvocation calls the underlying AdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemMetadataOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	return x.inner.AdvanceIntervalForDelegateInvocation()
+}
+
+// SetAdvanceIntervalForDelegateInvocation calls the underlying SetAdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemMetadataOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
+	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
+}
+
 func (x *PlayerItemMetadataOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+
+// PlayerItemMetadataOutputable is the interface implemented by [PlayerItemMetadataOutput], for mocking and DI.
+type PlayerItemMetadataOutputable interface {
+	Unwrap() *raw.AVPlayerItemMetadataOutput
+	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemMetadataOutput
+	SetDelegateQueue(delegate raw.AVPlayerItemMetadataOutputPushDelegate, delegateQueue *foundation.NSObject)
+	Delegate() raw.AVPlayerItemMetadataOutputPushDelegate
+	DelegateQueue() *foundation.NSObject
+	AdvanceIntervalForDelegateInvocation() float64
+	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
+}
+
+var _ PlayerItemMetadataOutputable = (*PlayerItemMetadataOutput)(nil)
 

@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,5 +56,127 @@ func (x *PersistentStore) LoadMetadata() error {
 	return err
 }
 
+// DidAddToPersistentStoreCoordinator calls the underlying DidAddToPersistentStoreCoordinator.
+func (x *PersistentStore) DidAddToPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator) {
+	x.inner.DidAddToPersistentStoreCoordinator(coordinator)
+}
+
+// WillRemoveFromPersistentStoreCoordinator calls the underlying WillRemoveFromPersistentStoreCoordinator.
+func (x *PersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator) {
+	x.inner.WillRemoveFromPersistentStoreCoordinator(coordinator)
+}
+
+// PersistentStoreCoordinator calls the underlying PersistentStoreCoordinator.
+func (x *PersistentStore) PersistentStoreCoordinator() *PersistentStoreCoordinator {
+	_r := x.inner.PersistentStoreCoordinator()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentStoreCoordinator{inner: _r}
+}
+
+// ConfigurationName calls the underlying ConfigurationName.
+func (x *PersistentStore) ConfigurationName() string {
+	_r := x.inner.ConfigurationName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Options calls the underlying Options.
+func (x *PersistentStore) Options() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.Options()
+}
+
+// URL calls the underlying URL.
+func (x *PersistentStore) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PersistentStore) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *PersistentStore) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *PersistentStore) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// Type calls the underlying Type.
+func (x *PersistentStore) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *PersistentStore) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// SetReadOnly calls the underlying SetReadOnly.
+func (x *PersistentStore) SetReadOnly(readOnly bool) {
+	x.inner.SetReadOnly(readOnly)
+}
+
+// Metadata calls the underlying Metadata.
+func (x *PersistentStore) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Metadata()
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *PersistentStore) SetMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// CoreSpotlightExporter calls the underlying CoreSpotlightExporter.
+func (x *PersistentStore) CoreSpotlightExporter() *CoreDataCoreSpotlightDelegate {
+	_r := x.inner.CoreSpotlightExporter()
+	if _r == nil {
+		return nil
+	}
+	return &CoreDataCoreSpotlightDelegate{inner: _r}
+}
+
 func (x *PersistentStore) asPersistentStore() *raw.NSPersistentStore { return x.inner }
+
+// PersistentStoreable is the interface implemented by [PersistentStore], for mocking and DI.
+type PersistentStoreable interface {
+	Unwrap() *raw.NSPersistentStore
+	WithURL(uRL string) *PersistentStore
+	WithIdentifier(identifier string) *PersistentStore
+	WithReadOnly(readOnly bool) *PersistentStore
+	WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PersistentStore
+	LoadMetadata() error
+	DidAddToPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator)
+	WillRemoveFromPersistentStoreCoordinator(coordinator *raw.NSPersistentStoreCoordinator)
+	PersistentStoreCoordinator() *PersistentStoreCoordinator
+	ConfigurationName() string
+	Options() *foundation.NSDictionary[objc.ID, objc.ID]
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	Identifier() string
+	SetIdentifier(identifier string)
+	Type() string
+	IsReadOnly() bool
+	SetReadOnly(readOnly bool)
+	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	CoreSpotlightExporter() *CoreDataCoreSpotlightDelegate
+}
+
+var _ PersistentStoreable = (*PersistentStore)(nil)
 

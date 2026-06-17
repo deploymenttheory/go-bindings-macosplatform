@@ -23,3 +23,10 @@ func NewVideoCompositionCoreAnimationTool() *VideoCompositionCoreAnimationTool {
 	return &VideoCompositionCoreAnimationTool{inner: raw.AVVideoCompositionCoreAnimationToolFromID(_id)}
 }
 
+// VideoCompositionCoreAnimationToolable is the interface implemented by [VideoCompositionCoreAnimationTool], for mocking and DI.
+type VideoCompositionCoreAnimationToolable interface {
+	Unwrap() *raw.AVVideoCompositionCoreAnimationTool
+}
+
+var _ VideoCompositionCoreAnimationToolable = (*VideoCompositionCoreAnimationTool)(nil)
+

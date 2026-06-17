@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,22 @@ func NewMathExpressionNumberWithContent(content string) *MathExpressionNumber {
 	return &MathExpressionNumber{inner: raw.AXMathExpressionNumberFromID(_id)}
 }
 
+// Content calls the underlying Content.
+func (x *MathExpressionNumber) Content() string {
+	_r := x.inner.Content()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MathExpressionNumber) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionNumberable is the interface implemented by [MathExpressionNumber], for mocking and DI.
+type MathExpressionNumberable interface {
+	Unwrap() *raw.AXMathExpressionNumber
+	Content() string
+}
+
+var _ MathExpressionNumberable = (*MathExpressionNumber)(nil)
 

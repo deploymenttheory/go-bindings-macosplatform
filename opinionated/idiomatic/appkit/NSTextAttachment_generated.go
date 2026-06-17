@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -80,4 +81,129 @@ func (x *TextAttachment) WithAllowsTextAttachmentView(allowsTextAttachmentView b
 	x.inner.SetAllowsTextAttachmentView(allowsTextAttachmentView)
 	return x
 }
+
+// Contents calls the underlying Contents.
+func (x *TextAttachment) Contents() *foundation.NSData {
+	return x.inner.Contents()
+}
+
+// SetContents calls the underlying SetContents.
+func (x *TextAttachment) SetContents(contents *foundation.NSData) {
+	x.inner.SetContents(contents)
+}
+
+// FileType calls the underlying FileType.
+func (x *TextAttachment) FileType() string {
+	_r := x.inner.FileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFileType calls the underlying SetFileType.
+func (x *TextAttachment) SetFileType(fileType string) {
+	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
+}
+
+// Image calls the underlying Image.
+func (x *TextAttachment) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *TextAttachment) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// Bounds calls the underlying Bounds.
+func (x *TextAttachment) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// SetBounds calls the underlying SetBounds.
+func (x *TextAttachment) SetBounds(bounds corefoundation.CGRect) {
+	x.inner.SetBounds(bounds)
+}
+
+// FileWrapper calls the underlying FileWrapper.
+func (x *TextAttachment) FileWrapper() *foundation.NSFileWrapper {
+	return x.inner.FileWrapper()
+}
+
+// SetFileWrapper calls the underlying SetFileWrapper.
+func (x *TextAttachment) SetFileWrapper(fileWrapper *foundation.NSFileWrapper) {
+	x.inner.SetFileWrapper(fileWrapper)
+}
+
+// AttachmentCell calls the underlying AttachmentCell.
+func (x *TextAttachment) AttachmentCell() raw.NSTextAttachmentCellProtocol {
+	return x.inner.AttachmentCell()
+}
+
+// SetAttachmentCell calls the underlying SetAttachmentCell.
+func (x *TextAttachment) SetAttachmentCell(attachmentCell raw.NSTextAttachmentCellProtocol) {
+	x.inner.SetAttachmentCell(attachmentCell)
+}
+
+// LineLayoutPadding calls the underlying LineLayoutPadding.
+func (x *TextAttachment) LineLayoutPadding() float64 {
+	return x.inner.LineLayoutPadding()
+}
+
+// SetLineLayoutPadding calls the underlying SetLineLayoutPadding.
+func (x *TextAttachment) SetLineLayoutPadding(lineLayoutPadding float64) {
+	x.inner.SetLineLayoutPadding(lineLayoutPadding)
+}
+
+// AllowsTextAttachmentView calls the underlying AllowsTextAttachmentView.
+func (x *TextAttachment) AllowsTextAttachmentView() bool {
+	return x.inner.AllowsTextAttachmentView()
+}
+
+// SetAllowsTextAttachmentView calls the underlying SetAllowsTextAttachmentView.
+func (x *TextAttachment) SetAllowsTextAttachmentView(allowsTextAttachmentView bool) {
+	x.inner.SetAllowsTextAttachmentView(allowsTextAttachmentView)
+}
+
+// UsesTextAttachmentView calls the underlying UsesTextAttachmentView.
+func (x *TextAttachment) UsesTextAttachmentView() bool {
+	return x.inner.UsesTextAttachmentView()
+}
+
+// TextAttachmentable is the interface implemented by [TextAttachment], for mocking and DI.
+type TextAttachmentable interface {
+	Unwrap() *raw.NSTextAttachment
+	WithContents(contents *foundation.NSData) *TextAttachment
+	WithFileType(fileType string) *TextAttachment
+	WithImage(image *raw.NSImage) *TextAttachment
+	WithBounds(bounds corefoundation.CGRect) *TextAttachment
+	WithFileWrapper(fileWrapper *foundation.NSFileWrapper) *TextAttachment
+	WithAttachmentCell(attachmentCell raw.NSTextAttachmentCellProtocol) *TextAttachment
+	WithLineLayoutPadding(lineLayoutPadding float64) *TextAttachment
+	WithAllowsTextAttachmentView(allowsTextAttachmentView bool) *TextAttachment
+	Contents() *foundation.NSData
+	SetContents(contents *foundation.NSData)
+	FileType() string
+	SetFileType(fileType string)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
+	FileWrapper() *foundation.NSFileWrapper
+	SetFileWrapper(fileWrapper *foundation.NSFileWrapper)
+	AttachmentCell() raw.NSTextAttachmentCellProtocol
+	SetAttachmentCell(attachmentCell raw.NSTextAttachmentCellProtocol)
+	LineLayoutPadding() float64
+	SetLineLayoutPadding(lineLayoutPadding float64)
+	AllowsTextAttachmentView() bool
+	SetAllowsTextAttachmentView(allowsTextAttachmentView bool)
+	UsesTextAttachmentView() bool
+}
+
+var _ TextAttachmentable = (*TextAttachment)(nil)
 

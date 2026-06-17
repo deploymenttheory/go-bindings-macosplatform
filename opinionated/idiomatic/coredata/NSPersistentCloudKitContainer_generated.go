@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -30,5 +31,54 @@ func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options 
 	return &PersistentCloudKitContainer{inner: raw.NSPersistentCloudKitContainerFromID(_id)}, nil
 }
 
+// RecordForManagedObjectID calls the underlying RecordForManagedObjectID.
+func (x *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID {
+	return x.inner.RecordForManagedObjectID(managedObjectID)
+}
+
+// RecordsForManagedObjectIDs calls the underlying RecordsForManagedObjectIDs.
+func (x *PersistentCloudKitContainer) RecordsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID] {
+	return x.inner.RecordsForManagedObjectIDs(managedObjectIDs)
+}
+
+// RecordIDForManagedObjectID calls the underlying RecordIDForManagedObjectID.
+func (x *PersistentCloudKitContainer) RecordIDForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID {
+	return x.inner.RecordIDForManagedObjectID(managedObjectID)
+}
+
+// RecordIDsForManagedObjectIDs calls the underlying RecordIDsForManagedObjectIDs.
+func (x *PersistentCloudKitContainer) RecordIDsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID] {
+	return x.inner.RecordIDsForManagedObjectIDs(managedObjectIDs)
+}
+
+// CanUpdateRecordForManagedObjectWithID calls the underlying CanUpdateRecordForManagedObjectWithID.
+func (x *PersistentCloudKitContainer) CanUpdateRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool {
+	return x.inner.CanUpdateRecordForManagedObjectWithID(objectID)
+}
+
+// CanDeleteRecordForManagedObjectWithID calls the underlying CanDeleteRecordForManagedObjectWithID.
+func (x *PersistentCloudKitContainer) CanDeleteRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool {
+	return x.inner.CanDeleteRecordForManagedObjectWithID(objectID)
+}
+
+// CanModifyManagedObjectsInStore calls the underlying CanModifyManagedObjectsInStore.
+func (x *PersistentCloudKitContainer) CanModifyManagedObjectsInStore(store *raw.NSPersistentStore) bool {
+	return x.inner.CanModifyManagedObjectsInStore(store)
+}
+
 func (x *PersistentCloudKitContainer) asPersistentContainer() *raw.NSPersistentContainer { return &x.inner.NSPersistentContainer }
+
+// PersistentCloudKitContainerable is the interface implemented by [PersistentCloudKitContainer], for mocking and DI.
+type PersistentCloudKitContainerable interface {
+	Unwrap() *raw.NSPersistentCloudKitContainer
+	RecordForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID
+	RecordsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID]
+	RecordIDForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID
+	RecordIDsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID]
+	CanUpdateRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool
+	CanDeleteRecordForManagedObjectWithID(objectID *raw.NSManagedObjectID) bool
+	CanModifyManagedObjectsInStore(store *raw.NSPersistentStore) bool
+}
+
+var _ PersistentCloudKitContainerable = (*PersistentCloudKitContainer)(nil)
 

@@ -23,3 +23,16 @@ func NewSafariExtensionViewController() *SafariExtensionViewController {
 	return &SafariExtensionViewController{inner: raw.SFSafariExtensionViewControllerFromID(_id)}
 }
 
+// DismissPopover calls the underlying DismissPopover.
+func (x *SafariExtensionViewController) DismissPopover() {
+	x.inner.DismissPopover()
+}
+
+// SafariExtensionViewControllerable is the interface implemented by [SafariExtensionViewController], for mocking and DI.
+type SafariExtensionViewControllerable interface {
+	Unwrap() *raw.SFSafariExtensionViewController
+	DismissPopover()
+}
+
+var _ SafariExtensionViewControllerable = (*SafariExtensionViewController)(nil)
+

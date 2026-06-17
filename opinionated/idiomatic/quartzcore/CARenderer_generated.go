@@ -6,6 +6,8 @@ package quartzcore
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,4 +37,83 @@ func (x *Renderer) WithBounds(bounds corefoundation.CGRect) *Renderer {
 	x.inner.SetBounds(bounds)
 	return x
 }
+
+// BeginFrameAtTimeTimeStamp calls the underlying BeginFrameAtTimeTimeStamp.
+func (x *Renderer) BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp) {
+	x.inner.BeginFrameAtTimeTimeStamp(t, ts)
+}
+
+// UpdateBounds calls the underlying UpdateBounds.
+func (x *Renderer) UpdateBounds() corefoundation.CGRect {
+	return x.inner.UpdateBounds()
+}
+
+// AddUpdateRect calls the underlying AddUpdateRect.
+func (x *Renderer) AddUpdateRect(r corefoundation.CGRect) {
+	x.inner.AddUpdateRect(r)
+}
+
+// Render calls the underlying Render.
+func (x *Renderer) Render() {
+	x.inner.Render()
+}
+
+// NextFrameTime calls the underlying NextFrameTime.
+func (x *Renderer) NextFrameTime() float64 {
+	return x.inner.NextFrameTime()
+}
+
+// EndFrame calls the underlying EndFrame.
+func (x *Renderer) EndFrame() {
+	x.inner.EndFrame()
+}
+
+// SetDestination calls the underlying SetDestination.
+func (x *Renderer) SetDestination(tex metal.MTLTexture) {
+	x.inner.SetDestination(tex)
+}
+
+// Layer calls the underlying Layer.
+func (x *Renderer) Layer() *Layer {
+	_r := x.inner.Layer()
+	if _r == nil {
+		return nil
+	}
+	return &Layer{inner: _r}
+}
+
+// SetLayer calls the underlying SetLayer.
+func (x *Renderer) SetLayer(layer *raw.CALayer) {
+	x.inner.SetLayer(layer)
+}
+
+// Bounds calls the underlying Bounds.
+func (x *Renderer) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// SetBounds calls the underlying SetBounds.
+func (x *Renderer) SetBounds(bounds corefoundation.CGRect) {
+	x.inner.SetBounds(bounds)
+}
+
+// Rendererable is the interface implemented by [Renderer], for mocking and DI.
+type Rendererable interface {
+	Unwrap() *raw.CARenderer
+	WithLayer(layer LayerProvider) *Renderer
+	WithBounds(bounds corefoundation.CGRect) *Renderer
+	BeginFrameAtTimeTimeStamp(t float64, ts *corevideo.CVTimeStamp)
+	UpdateBounds() corefoundation.CGRect
+	AddUpdateRect(r corefoundation.CGRect)
+	Render()
+	NextFrameTime() float64
+	EndFrame()
+	SetDestination(tex metal.MTLTexture)
+	Layer() *Layer
+	SetLayer(layer *raw.CALayer)
+	Bounds() corefoundation.CGRect
+	SetBounds(bounds corefoundation.CGRect)
+}
+
+var _ Rendererable = (*Renderer)(nil)
 

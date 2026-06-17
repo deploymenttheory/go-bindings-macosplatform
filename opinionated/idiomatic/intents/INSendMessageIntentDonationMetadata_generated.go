@@ -47,5 +47,64 @@ func (x *SendMessageIntentDonationMetadata) WithRecipientCount(recipientCount ui
 	return x
 }
 
+// MentionsCurrentUser calls the underlying MentionsCurrentUser.
+func (x *SendMessageIntentDonationMetadata) MentionsCurrentUser() bool {
+	return x.inner.MentionsCurrentUser()
+}
+
+// SetMentionsCurrentUser calls the underlying SetMentionsCurrentUser.
+func (x *SendMessageIntentDonationMetadata) SetMentionsCurrentUser(mentionsCurrentUser bool) {
+	x.inner.SetMentionsCurrentUser(mentionsCurrentUser)
+}
+
+// IsReplyToCurrentUser calls the underlying IsReplyToCurrentUser.
+func (x *SendMessageIntentDonationMetadata) IsReplyToCurrentUser() bool {
+	return x.inner.IsReplyToCurrentUser()
+}
+
+// SetReplyToCurrentUser calls the underlying SetReplyToCurrentUser.
+func (x *SendMessageIntentDonationMetadata) SetReplyToCurrentUser(replyToCurrentUser bool) {
+	x.inner.SetReplyToCurrentUser(replyToCurrentUser)
+}
+
+// NotifyRecipientAnyway calls the underlying NotifyRecipientAnyway.
+func (x *SendMessageIntentDonationMetadata) NotifyRecipientAnyway() bool {
+	return x.inner.NotifyRecipientAnyway()
+}
+
+// SetNotifyRecipientAnyway calls the underlying SetNotifyRecipientAnyway.
+func (x *SendMessageIntentDonationMetadata) SetNotifyRecipientAnyway(notifyRecipientAnyway bool) {
+	x.inner.SetNotifyRecipientAnyway(notifyRecipientAnyway)
+}
+
+// RecipientCount calls the underlying RecipientCount.
+func (x *SendMessageIntentDonationMetadata) RecipientCount() uint {
+	return x.inner.RecipientCount()
+}
+
+// SetRecipientCount calls the underlying SetRecipientCount.
+func (x *SendMessageIntentDonationMetadata) SetRecipientCount(recipientCount uint) {
+	x.inner.SetRecipientCount(recipientCount)
+}
+
 func (x *SendMessageIntentDonationMetadata) asIntentDonationMetadata() *raw.INIntentDonationMetadata { return &x.inner.INIntentDonationMetadata }
+
+// SendMessageIntentDonationMetadataable is the interface implemented by [SendMessageIntentDonationMetadata], for mocking and DI.
+type SendMessageIntentDonationMetadataable interface {
+	Unwrap() *raw.INSendMessageIntentDonationMetadata
+	WithMentionsCurrentUser(mentionsCurrentUser bool) *SendMessageIntentDonationMetadata
+	WithReplyToCurrentUser(replyToCurrentUser bool) *SendMessageIntentDonationMetadata
+	WithNotifyRecipientAnyway(notifyRecipientAnyway bool) *SendMessageIntentDonationMetadata
+	WithRecipientCount(recipientCount uint) *SendMessageIntentDonationMetadata
+	MentionsCurrentUser() bool
+	SetMentionsCurrentUser(mentionsCurrentUser bool)
+	IsReplyToCurrentUser() bool
+	SetReplyToCurrentUser(replyToCurrentUser bool)
+	NotifyRecipientAnyway() bool
+	SetNotifyRecipientAnyway(notifyRecipientAnyway bool)
+	RecipientCount() uint
+	SetRecipientCount(recipientCount uint)
+}
+
+var _ SendMessageIntentDonationMetadataable = (*SendMessageIntentDonationMetadata)(nil)
 

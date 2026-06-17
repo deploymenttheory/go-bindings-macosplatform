@@ -53,5 +53,77 @@ func (x *PhysicsJointPin) WithRotationSpeed(rotationSpeed float64) *PhysicsJoint
 	return x
 }
 
+// ShouldEnableLimits calls the underlying ShouldEnableLimits.
+func (x *PhysicsJointPin) ShouldEnableLimits() bool {
+	return x.inner.ShouldEnableLimits()
+}
+
+// SetShouldEnableLimits calls the underlying SetShouldEnableLimits.
+func (x *PhysicsJointPin) SetShouldEnableLimits(shouldEnableLimits bool) {
+	x.inner.SetShouldEnableLimits(shouldEnableLimits)
+}
+
+// LowerAngleLimit calls the underlying LowerAngleLimit.
+func (x *PhysicsJointPin) LowerAngleLimit() float64 {
+	return x.inner.LowerAngleLimit()
+}
+
+// SetLowerAngleLimit calls the underlying SetLowerAngleLimit.
+func (x *PhysicsJointPin) SetLowerAngleLimit(lowerAngleLimit float64) {
+	x.inner.SetLowerAngleLimit(lowerAngleLimit)
+}
+
+// UpperAngleLimit calls the underlying UpperAngleLimit.
+func (x *PhysicsJointPin) UpperAngleLimit() float64 {
+	return x.inner.UpperAngleLimit()
+}
+
+// SetUpperAngleLimit calls the underlying SetUpperAngleLimit.
+func (x *PhysicsJointPin) SetUpperAngleLimit(upperAngleLimit float64) {
+	x.inner.SetUpperAngleLimit(upperAngleLimit)
+}
+
+// FrictionTorque calls the underlying FrictionTorque.
+func (x *PhysicsJointPin) FrictionTorque() float64 {
+	return x.inner.FrictionTorque()
+}
+
+// SetFrictionTorque calls the underlying SetFrictionTorque.
+func (x *PhysicsJointPin) SetFrictionTorque(frictionTorque float64) {
+	x.inner.SetFrictionTorque(frictionTorque)
+}
+
+// RotationSpeed calls the underlying RotationSpeed.
+func (x *PhysicsJointPin) RotationSpeed() float64 {
+	return x.inner.RotationSpeed()
+}
+
+// SetRotationSpeed calls the underlying SetRotationSpeed.
+func (x *PhysicsJointPin) SetRotationSpeed(rotationSpeed float64) {
+	x.inner.SetRotationSpeed(rotationSpeed)
+}
+
 func (x *PhysicsJointPin) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
+
+// PhysicsJointPinable is the interface implemented by [PhysicsJointPin], for mocking and DI.
+type PhysicsJointPinable interface {
+	Unwrap() *raw.SKPhysicsJointPin
+	WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointPin
+	WithLowerAngleLimit(lowerAngleLimit float64) *PhysicsJointPin
+	WithUpperAngleLimit(upperAngleLimit float64) *PhysicsJointPin
+	WithFrictionTorque(frictionTorque float64) *PhysicsJointPin
+	WithRotationSpeed(rotationSpeed float64) *PhysicsJointPin
+	ShouldEnableLimits() bool
+	SetShouldEnableLimits(shouldEnableLimits bool)
+	LowerAngleLimit() float64
+	SetLowerAngleLimit(lowerAngleLimit float64)
+	UpperAngleLimit() float64
+	SetUpperAngleLimit(upperAngleLimit float64)
+	FrictionTorque() float64
+	SetFrictionTorque(frictionTorque float64)
+	RotationSpeed() float64
+	SetRotationSpeed(rotationSpeed float64)
+}
+
+var _ PhysicsJointPinable = (*PhysicsJointPin)(nil)
 

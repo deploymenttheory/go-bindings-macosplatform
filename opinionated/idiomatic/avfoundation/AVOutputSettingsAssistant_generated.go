@@ -7,7 +7,10 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // OutputSettingsAssistant wraps [raw.AVOutputSettingsAssistant] with a fluent Go API.
@@ -35,4 +38,83 @@ func (x *OutputSettingsAssistant) WithSourceVideoMinFrameDuration(sourceVideoMin
 	x.inner.SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration)
 	return x
 }
+
+// AudioSettings calls the underlying AudioSettings.
+func (x *OutputSettingsAssistant) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AudioSettings()
+}
+
+// VideoSettings calls the underlying VideoSettings.
+func (x *OutputSettingsAssistant) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.VideoSettings()
+}
+
+// OutputFileType calls the underlying OutputFileType.
+func (x *OutputSettingsAssistant) OutputFileType() string {
+	_r := x.inner.OutputFileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SourceAudioFormat calls the underlying SourceAudioFormat.
+func (x *OutputSettingsAssistant) SourceAudioFormat() unsafe.Pointer {
+	return x.inner.SourceAudioFormat()
+}
+
+// SetSourceAudioFormat calls the underlying SetSourceAudioFormat.
+func (x *OutputSettingsAssistant) SetSourceAudioFormat(sourceAudioFormat unsafe.Pointer) {
+	x.inner.SetSourceAudioFormat(sourceAudioFormat)
+}
+
+// SourceVideoFormat calls the underlying SourceVideoFormat.
+func (x *OutputSettingsAssistant) SourceVideoFormat() unsafe.Pointer {
+	return x.inner.SourceVideoFormat()
+}
+
+// SetSourceVideoFormat calls the underlying SetSourceVideoFormat.
+func (x *OutputSettingsAssistant) SetSourceVideoFormat(sourceVideoFormat unsafe.Pointer) {
+	x.inner.SetSourceVideoFormat(sourceVideoFormat)
+}
+
+// SourceVideoAverageFrameDuration calls the underlying SourceVideoAverageFrameDuration.
+func (x *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
+	return x.inner.SourceVideoAverageFrameDuration()
+}
+
+// SetSourceVideoAverageFrameDuration calls the underlying SetSourceVideoAverageFrameDuration.
+func (x *OutputSettingsAssistant) SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) {
+	x.inner.SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration)
+}
+
+// SourceVideoMinFrameDuration calls the underlying SourceVideoMinFrameDuration.
+func (x *OutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTime {
+	return x.inner.SourceVideoMinFrameDuration()
+}
+
+// SetSourceVideoMinFrameDuration calls the underlying SetSourceVideoMinFrameDuration.
+func (x *OutputSettingsAssistant) SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) {
+	x.inner.SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration)
+}
+
+// OutputSettingsAssistantable is the interface implemented by [OutputSettingsAssistant], for mocking and DI.
+type OutputSettingsAssistantable interface {
+	Unwrap() *raw.AVOutputSettingsAssistant
+	WithSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) *OutputSettingsAssistant
+	WithSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) *OutputSettingsAssistant
+	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	OutputFileType() string
+	SourceAudioFormat() unsafe.Pointer
+	SetSourceAudioFormat(sourceAudioFormat unsafe.Pointer)
+	SourceVideoFormat() unsafe.Pointer
+	SetSourceVideoFormat(sourceVideoFormat unsafe.Pointer)
+	SourceVideoAverageFrameDuration() coremedia.CMTime
+	SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime)
+	SourceVideoMinFrameDuration() coremedia.CMTime
+	SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime)
+}
+
+var _ OutputSettingsAssistantable = (*OutputSettingsAssistant)(nil)
 

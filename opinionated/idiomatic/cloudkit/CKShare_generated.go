@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,17 +59,78 @@ func (x *Share) WithAllowsAccessRequests(allowsAccessRequests bool) *Share {
 	return x
 }
 
+// AddParticipant calls the underlying AddParticipant.
+func (x *Share) AddParticipant(participant *raw.CKShareParticipant) {
+	x.inner.AddParticipant(participant)
+}
+
+// RemoveParticipant calls the underlying RemoveParticipant.
+func (x *Share) RemoveParticipant(participant *raw.CKShareParticipant) {
+	x.inner.RemoveParticipant(participant)
+}
+
+// OneTimeURLForParticipantID calls the underlying OneTimeURLForParticipantID.
+func (x *Share) OneTimeURLForParticipantID(participantID string) *foundation.NSURL {
+	return x.inner.OneTimeURLForParticipantID(foundation.NSStringStringWithUTF8String(participantID))
+}
+
+// DenyRequesters calls the underlying DenyRequesters.
+func (x *Share) DenyRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester]) {
+	x.inner.DenyRequesters(requesters)
+}
+
+// BlockRequesters calls the underlying BlockRequesters.
+func (x *Share) BlockRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester]) {
+	x.inner.BlockRequesters(requesters)
+}
+
+// UnblockIdentities calls the underlying UnblockIdentities.
+func (x *Share) UnblockIdentities(blockedIdentities *foundation.NSArray[*raw.CKShareBlockedIdentity]) {
+	x.inner.UnblockIdentities(blockedIdentities)
+}
+
+// PublicPermission calls the underlying PublicPermission.
+func (x *Share) PublicPermission() raw.CKShareParticipantPermission {
+	return x.inner.PublicPermission()
+}
+
+// SetPublicPermission calls the underlying SetPublicPermission.
+func (x *Share) SetPublicPermission(publicPermission raw.CKShareParticipantPermission) {
+	x.inner.SetPublicPermission(publicPermission)
+}
+
+// URL calls the underlying URL.
+func (x *Share) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
 // Participants returns the collection as a Go slice.
 func (x *Share) Participants() []*raw.CKShareParticipant {
 	arr := x.inner.Participants()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKShareParticipant, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareParticipant {
+		return raw.CKShareParticipantFromID(purego.Retain(_id))
+	})
+}
+
+// Owner calls the underlying Owner.
+func (x *Share) Owner() *ShareParticipant {
+	_r := x.inner.Owner()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &ShareParticipant{inner: _r}
+}
+
+// CurrentUserParticipant calls the underlying CurrentUserParticipant.
+func (x *Share) CurrentUserParticipant() *ShareParticipant {
+	_r := x.inner.CurrentUserParticipant()
+	if _r == nil {
+		return nil
+	}
+	return &ShareParticipant{inner: _r}
 }
 
 // Requesters returns the collection as a Go slice.
@@ -77,11 +139,9 @@ func (x *Share) Requesters() []*raw.CKShareAccessRequester {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKShareAccessRequester, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareAccessRequester {
+		return raw.CKShareAccessRequesterFromID(purego.Retain(_id))
+	})
 }
 
 // BlockedIdentities returns the collection as a Go slice.
@@ -90,12 +150,45 @@ func (x *Share) BlockedIdentities() []*raw.CKShareBlockedIdentity {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKShareBlockedIdentity, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKShareBlockedIdentity {
+		return raw.CKShareBlockedIdentityFromID(purego.Retain(_id))
+	})
+}
+
+// AllowsAccessRequests calls the underlying AllowsAccessRequests.
+func (x *Share) AllowsAccessRequests() bool {
+	return x.inner.AllowsAccessRequests()
+}
+
+// SetAllowsAccessRequests calls the underlying SetAllowsAccessRequests.
+func (x *Share) SetAllowsAccessRequests(allowsAccessRequests bool) {
+	x.inner.SetAllowsAccessRequests(allowsAccessRequests)
 }
 
 func (x *Share) asRecord() *raw.CKRecord { return &x.inner.CKRecord }
+
+// Shareable is the interface implemented by [Share], for mocking and DI.
+type Shareable interface {
+	Unwrap() *raw.CKShare
+	WithPublicPermission(publicPermission raw.CKShareParticipantPermission) *Share
+	WithAllowsAccessRequests(allowsAccessRequests bool) *Share
+	AddParticipant(participant *raw.CKShareParticipant)
+	RemoveParticipant(participant *raw.CKShareParticipant)
+	OneTimeURLForParticipantID(participantID string) *foundation.NSURL
+	DenyRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester])
+	BlockRequesters(requesters *foundation.NSArray[*raw.CKShareAccessRequester])
+	UnblockIdentities(blockedIdentities *foundation.NSArray[*raw.CKShareBlockedIdentity])
+	PublicPermission() raw.CKShareParticipantPermission
+	SetPublicPermission(publicPermission raw.CKShareParticipantPermission)
+	URL() *foundation.NSURL
+	Participants() []*raw.CKShareParticipant
+	Owner() *ShareParticipant
+	CurrentUserParticipant() *ShareParticipant
+	Requesters() []*raw.CKShareAccessRequester
+	BlockedIdentities() []*raw.CKShareBlockedIdentity
+	AllowsAccessRequests() bool
+	SetAllowsAccessRequests(allowsAccessRequests bool)
+}
+
+var _ Shareable = (*Share)(nil)
 

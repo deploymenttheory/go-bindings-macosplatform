@@ -7,6 +7,7 @@ package fskit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,28 @@ func NewTaskOptions() *TaskOptions {
 	return &TaskOptions{inner: raw.FSTaskOptionsFromID(_id)}
 }
 
+// UrlForOption calls the underlying UrlForOption.
+func (x *TaskOptions) UrlForOption(option string) *foundation.NSURL {
+	return x.inner.UrlForOption(foundation.NSStringStringWithUTF8String(option))
+}
+
 // TaskOptions returns the collection as a Go slice.
-func (x *TaskOptions) TaskOptions() []*foundation.NSString {
+func (x *TaskOptions) TaskOptions() []string {
 	arr := x.inner.TaskOptions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// TaskOptionsable is the interface implemented by [TaskOptions], for mocking and DI.
+type TaskOptionsable interface {
+	Unwrap() *raw.FSTaskOptions
+	UrlForOption(option string) *foundation.NSURL
+	TaskOptions() []string
+}
+
+var _ TaskOptionsable = (*TaskOptions)(nil)
 

@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *MultiPolygon) Polygons() []*raw.MKPolygon {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MKPolygon, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MKPolygon {
+		return raw.MKPolygonFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MultiPolygon) asShape() *raw.MKShape { return &x.inner.MKShape }
+
+// MultiPolygonable is the interface implemented by [MultiPolygon], for mocking and DI.
+type MultiPolygonable interface {
+	Unwrap() *raw.MKMultiPolygon
+	Polygons() []*raw.MKPolygon
+}
+
+var _ MultiPolygonable = (*MultiPolygon)(nil)
 

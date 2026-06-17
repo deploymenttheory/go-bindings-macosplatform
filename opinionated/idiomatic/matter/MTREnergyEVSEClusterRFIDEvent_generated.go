@@ -30,3 +30,23 @@ func (x *MTREnergyEVSEClusterRFIDEvent) WithUid(uid *foundation.NSData) *MTREner
 	return x
 }
 
+// Uid calls the underlying Uid.
+func (x *MTREnergyEVSEClusterRFIDEvent) Uid() *foundation.NSData {
+	return x.inner.Uid()
+}
+
+// SetUid calls the underlying SetUid.
+func (x *MTREnergyEVSEClusterRFIDEvent) SetUid(uid *foundation.NSData) {
+	x.inner.SetUid(uid)
+}
+
+// MTREnergyEVSEClusterRFIDEventable is the interface implemented by [MTREnergyEVSEClusterRFIDEvent], for mocking and DI.
+type MTREnergyEVSEClusterRFIDEventable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterRFIDEvent
+	WithUid(uid *foundation.NSData) *MTREnergyEVSEClusterRFIDEvent
+	Uid() *foundation.NSData
+	SetUid(uid *foundation.NSData)
+}
+
+var _ MTREnergyEVSEClusterRFIDEventable = (*MTREnergyEVSEClusterRFIDEvent)(nil)
+

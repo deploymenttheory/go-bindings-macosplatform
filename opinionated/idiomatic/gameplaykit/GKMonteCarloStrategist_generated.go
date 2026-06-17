@@ -35,3 +35,36 @@ func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter uin
 	return x
 }
 
+// Budget calls the underlying Budget.
+func (x *MonteCarloStrategist) Budget() uint {
+	return x.inner.Budget()
+}
+
+// SetBudget calls the underlying SetBudget.
+func (x *MonteCarloStrategist) SetBudget(budget uint) {
+	x.inner.SetBudget(budget)
+}
+
+// ExplorationParameter calls the underlying ExplorationParameter.
+func (x *MonteCarloStrategist) ExplorationParameter() uint {
+	return x.inner.ExplorationParameter()
+}
+
+// SetExplorationParameter calls the underlying SetExplorationParameter.
+func (x *MonteCarloStrategist) SetExplorationParameter(explorationParameter uint) {
+	x.inner.SetExplorationParameter(explorationParameter)
+}
+
+// MonteCarloStrategistable is the interface implemented by [MonteCarloStrategist], for mocking and DI.
+type MonteCarloStrategistable interface {
+	Unwrap() *raw.GKMonteCarloStrategist
+	WithBudget(budget uint) *MonteCarloStrategist
+	WithExplorationParameter(explorationParameter uint) *MonteCarloStrategist
+	Budget() uint
+	SetBudget(budget uint)
+	ExplorationParameter() uint
+	SetExplorationParameter(explorationParameter uint)
+}
+
+var _ MonteCarloStrategistable = (*MonteCarloStrategist)(nil)
+

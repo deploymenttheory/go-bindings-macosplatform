@@ -45,3 +45,48 @@ func NewUserInterfaceCompressionOptionsWithCompressionOptions(options *foundatio
 	return &UserInterfaceCompressionOptions{inner: raw.NSUserInterfaceCompressionOptionsFromID(_id)}
 }
 
+// ContainsOptions calls the underlying ContainsOptions.
+func (x *UserInterfaceCompressionOptions) ContainsOptions(options *raw.NSUserInterfaceCompressionOptions) bool {
+	return x.inner.ContainsOptions(options)
+}
+
+// IntersectsOptions calls the underlying IntersectsOptions.
+func (x *UserInterfaceCompressionOptions) IntersectsOptions(options *raw.NSUserInterfaceCompressionOptions) bool {
+	return x.inner.IntersectsOptions(options)
+}
+
+// OptionsByAddingOptions calls the underlying OptionsByAddingOptions.
+func (x *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	_r := x.inner.OptionsByAddingOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &UserInterfaceCompressionOptions{inner: _r}
+}
+
+// OptionsByRemovingOptions calls the underlying OptionsByRemovingOptions.
+func (x *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	_r := x.inner.OptionsByRemovingOptions(options)
+	if _r == nil {
+		return nil
+	}
+	return &UserInterfaceCompressionOptions{inner: _r}
+}
+
+// IsEmpty calls the underlying IsEmpty.
+func (x *UserInterfaceCompressionOptions) IsEmpty() bool {
+	return x.inner.IsEmpty()
+}
+
+// UserInterfaceCompressionOptionsable is the interface implemented by [UserInterfaceCompressionOptions], for mocking and DI.
+type UserInterfaceCompressionOptionsable interface {
+	Unwrap() *raw.NSUserInterfaceCompressionOptions
+	ContainsOptions(options *raw.NSUserInterfaceCompressionOptions) bool
+	IntersectsOptions(options *raw.NSUserInterfaceCompressionOptions) bool
+	OptionsByAddingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions
+	OptionsByRemovingOptions(options *raw.NSUserInterfaceCompressionOptions) *UserInterfaceCompressionOptions
+	IsEmpty() bool
+}
+
+var _ UserInterfaceCompressionOptionsable = (*UserInterfaceCompressionOptions)(nil)
+

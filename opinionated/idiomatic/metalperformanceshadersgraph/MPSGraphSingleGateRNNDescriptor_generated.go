@@ -47,5 +47,64 @@ func (x *GraphSingleGateRNNDescriptor) WithActivation(activation raw.MPSGraphRNN
 	return x
 }
 
+// Reverse calls the underlying Reverse.
+func (x *GraphSingleGateRNNDescriptor) Reverse() bool {
+	return x.inner.Reverse()
+}
+
+// SetReverse calls the underlying SetReverse.
+func (x *GraphSingleGateRNNDescriptor) SetReverse(reverse bool) {
+	x.inner.SetReverse(reverse)
+}
+
+// Bidirectional calls the underlying Bidirectional.
+func (x *GraphSingleGateRNNDescriptor) Bidirectional() bool {
+	return x.inner.Bidirectional()
+}
+
+// SetBidirectional calls the underlying SetBidirectional.
+func (x *GraphSingleGateRNNDescriptor) SetBidirectional(bidirectional bool) {
+	x.inner.SetBidirectional(bidirectional)
+}
+
+// Training calls the underlying Training.
+func (x *GraphSingleGateRNNDescriptor) Training() bool {
+	return x.inner.Training()
+}
+
+// SetTraining calls the underlying SetTraining.
+func (x *GraphSingleGateRNNDescriptor) SetTraining(training bool) {
+	x.inner.SetTraining(training)
+}
+
+// Activation calls the underlying Activation.
+func (x *GraphSingleGateRNNDescriptor) Activation() raw.MPSGraphRNNActivation {
+	return x.inner.Activation()
+}
+
+// SetActivation calls the underlying SetActivation.
+func (x *GraphSingleGateRNNDescriptor) SetActivation(activation raw.MPSGraphRNNActivation) {
+	x.inner.SetActivation(activation)
+}
+
 func (x *GraphSingleGateRNNDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphSingleGateRNNDescriptorable is the interface implemented by [GraphSingleGateRNNDescriptor], for mocking and DI.
+type GraphSingleGateRNNDescriptorable interface {
+	Unwrap() *raw.MPSGraphSingleGateRNNDescriptor
+	WithReverse(reverse bool) *GraphSingleGateRNNDescriptor
+	WithBidirectional(bidirectional bool) *GraphSingleGateRNNDescriptor
+	WithTraining(training bool) *GraphSingleGateRNNDescriptor
+	WithActivation(activation raw.MPSGraphRNNActivation) *GraphSingleGateRNNDescriptor
+	Reverse() bool
+	SetReverse(reverse bool)
+	Bidirectional() bool
+	SetBidirectional(bidirectional bool)
+	Training() bool
+	SetTraining(training bool)
+	Activation() raw.MPSGraphRNNActivation
+	SetActivation(activation raw.MPSGraphRNNActivation)
+}
+
+var _ GraphSingleGateRNNDescriptorable = (*GraphSingleGateRNNDescriptor)(nil)
 

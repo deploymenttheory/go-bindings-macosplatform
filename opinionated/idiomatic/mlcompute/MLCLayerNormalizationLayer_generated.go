@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,12 +31,64 @@ func (x *LayerNormalizationLayer) NormalizedShape() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// Beta calls the underlying Beta.
+func (x *LayerNormalizationLayer) Beta() *Tensor {
+	_r := x.inner.Beta()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Tensor{inner: _r}
+}
+
+// Gamma calls the underlying Gamma.
+func (x *LayerNormalizationLayer) Gamma() *Tensor {
+	_r := x.inner.Gamma()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// BetaParameter calls the underlying BetaParameter.
+func (x *LayerNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := x.inner.BetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// GammaParameter calls the underlying GammaParameter.
+func (x *LayerNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := x.inner.GammaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// VarianceEpsilon calls the underlying VarianceEpsilon.
+func (x *LayerNormalizationLayer) VarianceEpsilon() float32 {
+	return x.inner.VarianceEpsilon()
 }
 
 func (x *LayerNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// LayerNormalizationLayerable is the interface implemented by [LayerNormalizationLayer], for mocking and DI.
+type LayerNormalizationLayerable interface {
+	Unwrap() *raw.MLCLayerNormalizationLayer
+	NormalizedShape() []*foundation.NSNumber
+	Beta() *Tensor
+	Gamma() *Tensor
+	BetaParameter() *TensorParameter
+	GammaParameter() *TensorParameter
+	VarianceEpsilon() float32
+}
+
+var _ LayerNormalizationLayerable = (*LayerNormalizationLayer)(nil)
 

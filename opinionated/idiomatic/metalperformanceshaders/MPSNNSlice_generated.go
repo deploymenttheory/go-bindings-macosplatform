@@ -39,3 +39,10 @@ func (x *NNSlice) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner
 
 func (x *NNSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
+// NNSliceable is the interface implemented by [NNSlice], for mocking and DI.
+type NNSliceable interface {
+	Unwrap() *raw.MPSNNSlice
+}
+
+var _ NNSliceable = (*NNSlice)(nil)
+

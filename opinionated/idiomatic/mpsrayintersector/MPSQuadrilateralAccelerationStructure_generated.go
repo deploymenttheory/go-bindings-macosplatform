@@ -29,7 +29,27 @@ func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilatera
 	return x
 }
 
+// QuadrilateralCount calls the underlying QuadrilateralCount.
+func (x *QuadrilateralAccelerationStructure) QuadrilateralCount() uint {
+	return x.inner.QuadrilateralCount()
+}
+
+// SetQuadrilateralCount calls the underlying SetQuadrilateralCount.
+func (x *QuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateralCount uint) {
+	x.inner.SetQuadrilateralCount(quadrilateralCount)
+}
+
 func (x *QuadrilateralAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure }
 
 func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure { return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure }
+
+// QuadrilateralAccelerationStructureable is the interface implemented by [QuadrilateralAccelerationStructure], for mocking and DI.
+type QuadrilateralAccelerationStructureable interface {
+	Unwrap() *raw.MPSQuadrilateralAccelerationStructure
+	WithQuadrilateralCount(quadrilateralCount uint) *QuadrilateralAccelerationStructure
+	QuadrilateralCount() uint
+	SetQuadrilateralCount(quadrilateralCount uint)
+}
+
+var _ QuadrilateralAccelerationStructureable = (*QuadrilateralAccelerationStructure)(nil)
 

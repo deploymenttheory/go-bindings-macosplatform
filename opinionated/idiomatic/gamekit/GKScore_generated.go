@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -79,15 +80,87 @@ func (x *Score) WithCategory(category string) *Score {
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *Score) Value() int64 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *Score) SetValue(value int64) {
+	x.inner.SetValue(value)
+}
+
+// FormattedValue calls the underlying FormattedValue.
+func (x *Score) FormattedValue() string {
+	_r := x.inner.FormattedValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LeaderboardIdentifier calls the underlying LeaderboardIdentifier.
+func (x *Score) LeaderboardIdentifier() string {
+	_r := x.inner.LeaderboardIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLeaderboardIdentifier calls the underlying SetLeaderboardIdentifier.
+func (x *Score) SetLeaderboardIdentifier(leaderboardIdentifier string) {
+	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+}
+
+// Context calls the underlying Context.
+func (x *Score) Context() uint64 {
+	return x.inner.Context()
+}
+
+// SetContext calls the underlying SetContext.
+func (x *Score) SetContext(context_ uint64) {
+	x.inner.SetContext(context_)
+}
+
+// Date calls the underlying Date.
+func (x *Score) Date() *foundation.NSDate {
+	return x.inner.Date()
+}
+
+// Player calls the underlying Player.
+func (x *Score) Player() *Player {
+	_r := x.inner.Player()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// Rank calls the underlying Rank.
+func (x *Score) Rank() int {
+	return x.inner.Rank()
+}
+
+// ShouldSetDefaultLeaderboard calls the underlying ShouldSetDefaultLeaderboard.
+func (x *Score) ShouldSetDefaultLeaderboard() bool {
+	return x.inner.ShouldSetDefaultLeaderboard()
+}
+
+// SetShouldSetDefaultLeaderboard calls the underlying SetShouldSetDefaultLeaderboard.
+func (x *Score) SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) {
+	x.inner.SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard)
+}
+
 // ReportScore blocks until the operation completes or ctx is cancelled.
 func (x *Score) ReportScore(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.ReportScoreWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -96,4 +169,73 @@ func (x *Score) ReportScore(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// Category calls the underlying Category.
+func (x *Score) Category() string {
+	_r := x.inner.Category()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCategory calls the underlying SetCategory.
+func (x *Score) SetCategory(category string) {
+	x.inner.SetCategory(foundation.NSStringStringWithUTF8String(category))
+}
+
+// PlayerID calls the underlying PlayerID.
+func (x *Score) PlayerID() string {
+	_r := x.inner.PlayerID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// IssueChallengeToPlayersMessage calls the underlying IssueChallengeToPlayersMessage.
+func (x *Score) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string) {
+	x.inner.IssueChallengeToPlayersMessage(playerIDs, foundation.NSStringStringWithUTF8String(message))
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
+func (x *Score) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController {
+	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
+}
+
+// ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
+func (x *Score) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
+	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
+}
+
+// Scoreable is the interface implemented by [Score], for mocking and DI.
+type Scoreable interface {
+	Unwrap() *raw.GKScore
+	WithValue(value int64) *Score
+	WithLeaderboardIdentifier(leaderboardIdentifier string) *Score
+	WithContext(context_ uint64) *Score
+	WithShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool) *Score
+	WithCategory(category string) *Score
+	Value() int64
+	SetValue(value int64)
+	FormattedValue() string
+	LeaderboardIdentifier() string
+	SetLeaderboardIdentifier(leaderboardIdentifier string)
+	Context() uint64
+	SetContext(context_ uint64)
+	Date() *foundation.NSDate
+	Player() *Player
+	Rank() int
+	ShouldSetDefaultLeaderboard() bool
+	SetShouldSetDefaultLeaderboard(shouldSetDefaultLeaderboard bool)
+	ReportScore(ctx context.Context) error
+	Category() string
+	SetCategory(category string)
+	PlayerID() string
+	IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string)
+	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler objc.Block) *appkit.NSViewController
+	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
+}
+
+var _ Scoreable = (*Score)(nil)
 

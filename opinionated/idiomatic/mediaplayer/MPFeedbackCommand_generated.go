@@ -7,6 +7,7 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,59 @@ func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *F
 	return x
 }
 
+// IsActive calls the underlying IsActive.
+func (x *FeedbackCommand) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// SetActive calls the underlying SetActive.
+func (x *FeedbackCommand) SetActive(active bool) {
+	x.inner.SetActive(active)
+}
+
+// LocalizedTitle calls the underlying LocalizedTitle.
+func (x *FeedbackCommand) LocalizedTitle() string {
+	_r := x.inner.LocalizedTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedTitle calls the underlying SetLocalizedTitle.
+func (x *FeedbackCommand) SetLocalizedTitle(localizedTitle string) {
+	x.inner.SetLocalizedTitle(foundation.NSStringStringWithUTF8String(localizedTitle))
+}
+
+// LocalizedShortTitle calls the underlying LocalizedShortTitle.
+func (x *FeedbackCommand) LocalizedShortTitle() string {
+	_r := x.inner.LocalizedShortTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedShortTitle calls the underlying SetLocalizedShortTitle.
+func (x *FeedbackCommand) SetLocalizedShortTitle(localizedShortTitle string) {
+	x.inner.SetLocalizedShortTitle(foundation.NSStringStringWithUTF8String(localizedShortTitle))
+}
+
 func (x *FeedbackCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
+
+// FeedbackCommandable is the interface implemented by [FeedbackCommand], for mocking and DI.
+type FeedbackCommandable interface {
+	Unwrap() *raw.MPFeedbackCommand
+	WithActive(active bool) *FeedbackCommand
+	WithLocalizedTitle(localizedTitle string) *FeedbackCommand
+	WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand
+	IsActive() bool
+	SetActive(active bool)
+	LocalizedTitle() string
+	SetLocalizedTitle(localizedTitle string)
+	LocalizedShortTitle() string
+	SetLocalizedShortTitle(localizedShortTitle string)
+}
+
+var _ FeedbackCommandable = (*FeedbackCommand)(nil)
 

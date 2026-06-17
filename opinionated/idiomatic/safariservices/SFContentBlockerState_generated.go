@@ -23,3 +23,16 @@ func NewContentBlockerState() *ContentBlockerState {
 	return &ContentBlockerState{inner: raw.SFContentBlockerStateFromID(_id)}
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *ContentBlockerState) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// ContentBlockerStateable is the interface implemented by [ContentBlockerState], for mocking and DI.
+type ContentBlockerStateable interface {
+	Unwrap() *raw.SFContentBlockerState
+	IsEnabled() bool
+}
+
+var _ ContentBlockerStateable = (*ContentBlockerState)(nil)
+

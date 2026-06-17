@@ -5,6 +5,7 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,33 @@ func NewQCCompositionRepository() *QCCompositionRepository {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionRepository")), objc.RegisterName("new"))
 	return &QCCompositionRepository{inner: raw.QCCompositionRepositoryFromID(_id)}
 }
+
+// CompositionWithIdentifier calls the underlying CompositionWithIdentifier.
+func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
+	_r := x.inner.CompositionWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	if _r == nil {
+		return nil
+	}
+	return &QCComposition{inner: _r}
+}
+
+// CompositionsWithProtocolsAndAttributes calls the underlying CompositionsWithProtocolsAndAttributes.
+func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID] {
+	return x.inner.CompositionsWithProtocolsAndAttributes(protocols, attributes)
+}
+
+// AllCompositions calls the underlying AllCompositions.
+func (x *QCCompositionRepository) AllCompositions() *foundation.NSArray[objc.ID] {
+	return x.inner.AllCompositions()
+}
+
+// QCCompositionRepositoryable is the interface implemented by [QCCompositionRepository], for mocking and DI.
+type QCCompositionRepositoryable interface {
+	Unwrap() *raw.QCCompositionRepository
+	CompositionWithIdentifier(identifier string) *QCComposition
+	CompositionsWithProtocolsAndAttributes(protocols *foundation.NSArray[objc.ID], attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSArray[objc.ID]
+	AllCompositions() *foundation.NSArray[objc.ID]
+}
+
+var _ QCCompositionRepositoryable = (*QCCompositionRepository)(nil)
 

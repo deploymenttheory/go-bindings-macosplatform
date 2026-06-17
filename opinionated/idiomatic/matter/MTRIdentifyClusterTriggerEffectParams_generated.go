@@ -48,3 +48,62 @@ func (x *MTRIdentifyClusterTriggerEffectParams) WithServerSideProcessingTimeout(
 	return x
 }
 
+// EffectIdentifier calls the underlying EffectIdentifier.
+func (x *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() *foundation.NSNumber {
+	return x.inner.EffectIdentifier()
+}
+
+// SetEffectIdentifier calls the underlying SetEffectIdentifier.
+func (x *MTRIdentifyClusterTriggerEffectParams) SetEffectIdentifier(effectIdentifier *foundation.NSNumber) {
+	x.inner.SetEffectIdentifier(effectIdentifier)
+}
+
+// EffectVariant calls the underlying EffectVariant.
+func (x *MTRIdentifyClusterTriggerEffectParams) EffectVariant() *foundation.NSNumber {
+	return x.inner.EffectVariant()
+}
+
+// SetEffectVariant calls the underlying SetEffectVariant.
+func (x *MTRIdentifyClusterTriggerEffectParams) SetEffectVariant(effectVariant *foundation.NSNumber) {
+	x.inner.SetEffectVariant(effectVariant)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRIdentifyClusterTriggerEffectParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRIdentifyClusterTriggerEffectParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRIdentifyClusterTriggerEffectParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRIdentifyClusterTriggerEffectParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRIdentifyClusterTriggerEffectParamsable is the interface implemented by [MTRIdentifyClusterTriggerEffectParams], for mocking and DI.
+type MTRIdentifyClusterTriggerEffectParamsable interface {
+	Unwrap() *raw.MTRIdentifyClusterTriggerEffectParams
+	WithEffectIdentifier(effectIdentifier *foundation.NSNumber) *MTRIdentifyClusterTriggerEffectParams
+	WithEffectVariant(effectVariant *foundation.NSNumber) *MTRIdentifyClusterTriggerEffectParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRIdentifyClusterTriggerEffectParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRIdentifyClusterTriggerEffectParams
+	EffectIdentifier() *foundation.NSNumber
+	SetEffectIdentifier(effectIdentifier *foundation.NSNumber)
+	EffectVariant() *foundation.NSNumber
+	SetEffectVariant(effectVariant *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRIdentifyClusterTriggerEffectParamsable = (*MTRIdentifyClusterTriggerEffectParams)(nil)
+

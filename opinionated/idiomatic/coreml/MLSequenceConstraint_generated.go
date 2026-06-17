@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewSequenceConstraint() *SequenceConstraint {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLSequenceConstraint")), objc.RegisterName("new"))
 	return &SequenceConstraint{inner: raw.MLSequenceConstraintFromID(_id)}
 }
+
+// ValueDescription calls the underlying ValueDescription.
+func (x *SequenceConstraint) ValueDescription() *FeatureDescription {
+	_r := x.inner.ValueDescription()
+	if _r == nil {
+		return nil
+	}
+	return &FeatureDescription{inner: _r}
+}
+
+// CountRange calls the underlying CountRange.
+func (x *SequenceConstraint) CountRange() foundation.NSRange {
+	return x.inner.CountRange()
+}
+
+// SequenceConstraintable is the interface implemented by [SequenceConstraint], for mocking and DI.
+type SequenceConstraintable interface {
+	Unwrap() *raw.MLSequenceConstraint
+	ValueDescription() *FeatureDescription
+	CountRange() foundation.NSRange
+}
+
+var _ SequenceConstraintable = (*SequenceConstraint)(nil)
 

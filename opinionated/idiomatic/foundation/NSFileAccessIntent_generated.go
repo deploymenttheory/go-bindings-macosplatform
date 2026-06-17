@@ -23,5 +23,22 @@ func NewFileAccessIntent() *FileAccessIntent {
 	return &FileAccessIntent{inner: raw.NSFileAccessIntentFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *FileAccessIntent) URL() *URL {
+	_r := x.inner.URL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
 func (x *FileAccessIntent) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// FileAccessIntentable is the interface implemented by [FileAccessIntent], for mocking and DI.
+type FileAccessIntentable interface {
+	Unwrap() *raw.NSFileAccessIntent
+	URL() *URL
+}
+
+var _ FileAccessIntentable = (*FileAccessIntent)(nil)
 

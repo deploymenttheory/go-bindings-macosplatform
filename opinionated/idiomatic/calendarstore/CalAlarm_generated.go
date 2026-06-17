@@ -7,6 +7,7 @@ package calendarstore
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,135 @@ func (x *CalAlarm) WithAbsoluteTrigger(absoluteTrigger *foundation.NSDate) *CalA
 	x.inner.SetAbsoluteTrigger(absoluteTrigger)
 	return x
 }
+
+// SetAcknowledged calls the underlying SetAcknowledged.
+func (x *CalAlarm) SetAcknowledged(date *foundation.NSDate) {
+	x.inner.SetAcknowledged(date)
+}
+
+// Acknowledged calls the underlying Acknowledged.
+func (x *CalAlarm) Acknowledged() *foundation.NSDate {
+	return x.inner.Acknowledged()
+}
+
+// SetRelatedTo calls the underlying SetRelatedTo.
+func (x *CalAlarm) SetRelatedTo(relatedTo string) {
+	x.inner.SetRelatedTo(foundation.NSStringStringWithUTF8String(relatedTo))
+}
+
+// RelatedTo calls the underlying RelatedTo.
+func (x *CalAlarm) RelatedTo() string {
+	_r := x.inner.RelatedTo()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TriggerDateRelativeTo calls the underlying TriggerDateRelativeTo.
+func (x *CalAlarm) TriggerDateRelativeTo(date *foundation.NSDate) *foundation.NSDate {
+	return x.inner.TriggerDateRelativeTo(date)
+}
+
+// Action calls the underlying Action.
+func (x *CalAlarm) Action() string {
+	_r := x.inner.Action()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAction calls the underlying SetAction.
+func (x *CalAlarm) SetAction(action string) {
+	x.inner.SetAction(foundation.NSStringStringWithUTF8String(action))
+}
+
+// Sound calls the underlying Sound.
+func (x *CalAlarm) Sound() string {
+	_r := x.inner.Sound()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSound calls the underlying SetSound.
+func (x *CalAlarm) SetSound(sound string) {
+	x.inner.SetSound(foundation.NSStringStringWithUTF8String(sound))
+}
+
+// EmailAddress calls the underlying EmailAddress.
+func (x *CalAlarm) EmailAddress() string {
+	_r := x.inner.EmailAddress()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEmailAddress calls the underlying SetEmailAddress.
+func (x *CalAlarm) SetEmailAddress(emailAddress string) {
+	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
+}
+
+// Url calls the underlying Url.
+func (x *CalAlarm) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *CalAlarm) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// RelativeTrigger calls the underlying RelativeTrigger.
+func (x *CalAlarm) RelativeTrigger() float64 {
+	return x.inner.RelativeTrigger()
+}
+
+// SetRelativeTrigger calls the underlying SetRelativeTrigger.
+func (x *CalAlarm) SetRelativeTrigger(relativeTrigger float64) {
+	x.inner.SetRelativeTrigger(relativeTrigger)
+}
+
+// AbsoluteTrigger calls the underlying AbsoluteTrigger.
+func (x *CalAlarm) AbsoluteTrigger() *foundation.NSDate {
+	return x.inner.AbsoluteTrigger()
+}
+
+// SetAbsoluteTrigger calls the underlying SetAbsoluteTrigger.
+func (x *CalAlarm) SetAbsoluteTrigger(absoluteTrigger *foundation.NSDate) {
+	x.inner.SetAbsoluteTrigger(absoluteTrigger)
+}
+
+// CalAlarmable is the interface implemented by [CalAlarm], for mocking and DI.
+type CalAlarmable interface {
+	Unwrap() *raw.CalAlarm
+	WithAction(action string) *CalAlarm
+	WithSound(sound string) *CalAlarm
+	WithEmailAddress(emailAddress string) *CalAlarm
+	WithUrl(url string) *CalAlarm
+	WithRelativeTrigger(relativeTrigger float64) *CalAlarm
+	WithAbsoluteTrigger(absoluteTrigger *foundation.NSDate) *CalAlarm
+	SetAcknowledged(date *foundation.NSDate)
+	Acknowledged() *foundation.NSDate
+	SetRelatedTo(relatedTo string)
+	RelatedTo() string
+	TriggerDateRelativeTo(date *foundation.NSDate) *foundation.NSDate
+	Action() string
+	SetAction(action string)
+	Sound() string
+	SetSound(sound string)
+	EmailAddress() string
+	SetEmailAddress(emailAddress string)
+	Url() *foundation.NSURL
+	SetUrl(url string)
+	RelativeTrigger() float64
+	SetRelativeTrigger(relativeTrigger float64)
+	AbsoluteTrigger() *foundation.NSDate
+	SetAbsoluteTrigger(absoluteTrigger *foundation.NSDate)
+}
+
+var _ CalAlarmable = (*CalAlarm)(nil)
 

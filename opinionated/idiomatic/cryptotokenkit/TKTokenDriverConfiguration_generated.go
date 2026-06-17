@@ -6,6 +6,8 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,43 @@ func NewTokenDriverConfiguration() *TokenDriverConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenDriverConfiguration")), objc.RegisterName("new"))
 	return &TokenDriverConfiguration{inner: raw.TKTokenDriverConfigurationFromID(_id)}
 }
+
+// AddTokenConfigurationForTokenInstanceID calls the underlying AddTokenConfigurationForTokenInstanceID.
+func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TokenConfiguration {
+	_r := x.inner.AddTokenConfigurationForTokenInstanceID(instanceID)
+	if _r == nil {
+		return nil
+	}
+	return &TokenConfiguration{inner: _r}
+}
+
+// RemoveTokenConfigurationForTokenInstanceID calls the underlying RemoveTokenConfigurationForTokenInstanceID.
+func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) {
+	x.inner.RemoveTokenConfigurationForTokenInstanceID(instanceID)
+}
+
+// ClassID calls the underlying ClassID.
+func (x *TokenDriverConfiguration) ClassID() string {
+	_r := x.inner.ClassID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TokenConfigurations calls the underlying TokenConfigurations.
+func (x *TokenDriverConfiguration) TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenConfiguration] {
+	return x.inner.TokenConfigurations()
+}
+
+// TokenDriverConfigurationable is the interface implemented by [TokenDriverConfiguration], for mocking and DI.
+type TokenDriverConfigurationable interface {
+	Unwrap() *raw.TKTokenDriverConfiguration
+	AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TokenConfiguration
+	RemoveTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString)
+	ClassID() string
+	TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenConfiguration]
+}
+
+var _ TokenDriverConfigurationable = (*TokenDriverConfiguration)(nil)
 

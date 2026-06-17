@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -150,6 +151,298 @@ func (x *DOMHTMLInputElement) WithUseMap(useMap string) *DOMHTMLInputElement {
 	return x
 }
 
+// Select calls the underlying Select.
+func (x *DOMHTMLInputElement) Select() {
+	x.inner.Select()
+}
+
+// SetSelectionRangeEnd calls the underlying SetSelectionRangeEnd.
+func (x *DOMHTMLInputElement) SetSelectionRangeEnd(start int, end int) {
+	x.inner.SetSelectionRangeEnd(start, end)
+}
+
+// Accept calls the underlying Accept.
+func (x *DOMHTMLInputElement) Accept() string {
+	_r := x.inner.Accept()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccept calls the underlying SetAccept.
+func (x *DOMHTMLInputElement) SetAccept(accept string) {
+	x.inner.SetAccept(foundation.NSStringStringWithUTF8String(accept))
+}
+
+// Alt calls the underlying Alt.
+func (x *DOMHTMLInputElement) Alt() string {
+	_r := x.inner.Alt()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlt calls the underlying SetAlt.
+func (x *DOMHTMLInputElement) SetAlt(alt string) {
+	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+}
+
+// Autofocus calls the underlying Autofocus.
+func (x *DOMHTMLInputElement) Autofocus() bool {
+	return x.inner.Autofocus()
+}
+
+// SetAutofocus calls the underlying SetAutofocus.
+func (x *DOMHTMLInputElement) SetAutofocus(autofocus bool) {
+	x.inner.SetAutofocus(autofocus)
+}
+
+// DefaultChecked calls the underlying DefaultChecked.
+func (x *DOMHTMLInputElement) DefaultChecked() bool {
+	return x.inner.DefaultChecked()
+}
+
+// SetDefaultChecked calls the underlying SetDefaultChecked.
+func (x *DOMHTMLInputElement) SetDefaultChecked(defaultChecked bool) {
+	x.inner.SetDefaultChecked(defaultChecked)
+}
+
+// Checked calls the underlying Checked.
+func (x *DOMHTMLInputElement) Checked() bool {
+	return x.inner.Checked()
+}
+
+// SetChecked calls the underlying SetChecked.
+func (x *DOMHTMLInputElement) SetChecked(checked bool) {
+	x.inner.SetChecked(checked)
+}
+
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLInputElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLInputElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Form calls the underlying Form.
+func (x *DOMHTMLInputElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// Files calls the underlying Files.
+func (x *DOMHTMLInputElement) Files() *DOMFileList {
+	_r := x.inner.Files()
+	if _r == nil {
+		return nil
+	}
+	return &DOMFileList{inner: _r}
+}
+
+// SetFiles calls the underlying SetFiles.
+func (x *DOMHTMLInputElement) SetFiles(files *raw.DOMFileList) {
+	x.inner.SetFiles(files)
+}
+
+// Indeterminate calls the underlying Indeterminate.
+func (x *DOMHTMLInputElement) Indeterminate() bool {
+	return x.inner.Indeterminate()
+}
+
+// SetIndeterminate calls the underlying SetIndeterminate.
+func (x *DOMHTMLInputElement) SetIndeterminate(indeterminate bool) {
+	x.inner.SetIndeterminate(indeterminate)
+}
+
+// MaxLength calls the underlying MaxLength.
+func (x *DOMHTMLInputElement) MaxLength() int {
+	return x.inner.MaxLength()
+}
+
+// SetMaxLength calls the underlying SetMaxLength.
+func (x *DOMHTMLInputElement) SetMaxLength(maxLength int) {
+	x.inner.SetMaxLength(maxLength)
+}
+
+// Multiple calls the underlying Multiple.
+func (x *DOMHTMLInputElement) Multiple() bool {
+	return x.inner.Multiple()
+}
+
+// SetMultiple calls the underlying SetMultiple.
+func (x *DOMHTMLInputElement) SetMultiple(multiple bool) {
+	x.inner.SetMultiple(multiple)
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLInputElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLInputElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ReadOnly calls the underlying ReadOnly.
+func (x *DOMHTMLInputElement) ReadOnly() bool {
+	return x.inner.ReadOnly()
+}
+
+// SetReadOnly calls the underlying SetReadOnly.
+func (x *DOMHTMLInputElement) SetReadOnly(readOnly bool) {
+	x.inner.SetReadOnly(readOnly)
+}
+
+// Size calls the underlying Size.
+func (x *DOMHTMLInputElement) Size() string {
+	_r := x.inner.Size()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSize calls the underlying SetSize.
+func (x *DOMHTMLInputElement) SetSize(size string) {
+	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+}
+
+// Src calls the underlying Src.
+func (x *DOMHTMLInputElement) Src() string {
+	_r := x.inner.Src()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSrc calls the underlying SetSrc.
+func (x *DOMHTMLInputElement) SetSrc(src string) {
+	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLInputElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLInputElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// DefaultValue calls the underlying DefaultValue.
+func (x *DOMHTMLInputElement) DefaultValue() string {
+	_r := x.inner.DefaultValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDefaultValue calls the underlying SetDefaultValue.
+func (x *DOMHTMLInputElement) SetDefaultValue(defaultValue string) {
+	x.inner.SetDefaultValue(foundation.NSStringStringWithUTF8String(defaultValue))
+}
+
+// Value calls the underlying Value.
+func (x *DOMHTMLInputElement) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMHTMLInputElement) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// WillValidate calls the underlying WillValidate.
+func (x *DOMHTMLInputElement) WillValidate() bool {
+	return x.inner.WillValidate()
+}
+
+// SelectionStart calls the underlying SelectionStart.
+func (x *DOMHTMLInputElement) SelectionStart() int {
+	return x.inner.SelectionStart()
+}
+
+// SetSelectionStart calls the underlying SetSelectionStart.
+func (x *DOMHTMLInputElement) SetSelectionStart(selectionStart int) {
+	x.inner.SetSelectionStart(selectionStart)
+}
+
+// SelectionEnd calls the underlying SelectionEnd.
+func (x *DOMHTMLInputElement) SelectionEnd() int {
+	return x.inner.SelectionEnd()
+}
+
+// SetSelectionEnd calls the underlying SetSelectionEnd.
+func (x *DOMHTMLInputElement) SetSelectionEnd(selectionEnd int) {
+	x.inner.SetSelectionEnd(selectionEnd)
+}
+
+// Align calls the underlying Align.
+func (x *DOMHTMLInputElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLInputElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// UseMap calls the underlying UseMap.
+func (x *DOMHTMLInputElement) UseMap() string {
+	_r := x.inner.UseMap()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUseMap calls the underlying SetUseMap.
+func (x *DOMHTMLInputElement) SetUseMap(useMap string) {
+	x.inner.SetUseMap(foundation.NSStringStringWithUTF8String(useMap))
+}
+
+// AltDisplayString calls the underlying AltDisplayString.
+func (x *DOMHTMLInputElement) AltDisplayString() string {
+	_r := x.inner.AltDisplayString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AbsoluteImageURL calls the underlying AbsoluteImageURL.
+func (x *DOMHTMLInputElement) AbsoluteImageURL() *foundation.NSURL {
+	return x.inner.AbsoluteImageURL()
+}
+
 func (x *DOMHTMLInputElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLInputElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -159,4 +452,80 @@ func (x *DOMHTMLInputElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLInputElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLInputElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLInputElementable is the interface implemented by [DOMHTMLInputElement], for mocking and DI.
+type DOMHTMLInputElementable interface {
+	Unwrap() *raw.DOMHTMLInputElement
+	WithAccept(accept string) *DOMHTMLInputElement
+	WithAlt(alt string) *DOMHTMLInputElement
+	WithAutofocus(autofocus bool) *DOMHTMLInputElement
+	WithDefaultChecked(defaultChecked bool) *DOMHTMLInputElement
+	WithChecked(checked bool) *DOMHTMLInputElement
+	WithDisabled(disabled bool) *DOMHTMLInputElement
+	WithFiles(files *raw.DOMFileList) *DOMHTMLInputElement
+	WithIndeterminate(indeterminate bool) *DOMHTMLInputElement
+	WithMaxLength(maxLength int) *DOMHTMLInputElement
+	WithMultiple(multiple bool) *DOMHTMLInputElement
+	WithName(name string) *DOMHTMLInputElement
+	WithReadOnly(readOnly bool) *DOMHTMLInputElement
+	WithSize(size string) *DOMHTMLInputElement
+	WithSrc(src string) *DOMHTMLInputElement
+	WithType(type_ string) *DOMHTMLInputElement
+	WithDefaultValue(defaultValue string) *DOMHTMLInputElement
+	WithValue(value string) *DOMHTMLInputElement
+	WithSelectionStart(selectionStart int) *DOMHTMLInputElement
+	WithSelectionEnd(selectionEnd int) *DOMHTMLInputElement
+	WithAlign(align string) *DOMHTMLInputElement
+	WithUseMap(useMap string) *DOMHTMLInputElement
+	Select()
+	SetSelectionRangeEnd(start int, end int)
+	Accept() string
+	SetAccept(accept string)
+	Alt() string
+	SetAlt(alt string)
+	Autofocus() bool
+	SetAutofocus(autofocus bool)
+	DefaultChecked() bool
+	SetDefaultChecked(defaultChecked bool)
+	Checked() bool
+	SetChecked(checked bool)
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Form() *DOMHTMLFormElement
+	Files() *DOMFileList
+	SetFiles(files *raw.DOMFileList)
+	Indeterminate() bool
+	SetIndeterminate(indeterminate bool)
+	MaxLength() int
+	SetMaxLength(maxLength int)
+	Multiple() bool
+	SetMultiple(multiple bool)
+	Name() string
+	SetName(name string)
+	ReadOnly() bool
+	SetReadOnly(readOnly bool)
+	Size() string
+	SetSize(size string)
+	Src() string
+	SetSrc(src string)
+	Type() string
+	SetType(type_ string)
+	DefaultValue() string
+	SetDefaultValue(defaultValue string)
+	Value() string
+	SetValue(value string)
+	WillValidate() bool
+	SelectionStart() int
+	SetSelectionStart(selectionStart int)
+	SelectionEnd() int
+	SetSelectionEnd(selectionEnd int)
+	Align() string
+	SetAlign(align string)
+	UseMap() string
+	SetUseMap(useMap string)
+	AltDisplayString() string
+	AbsoluteImageURL() *foundation.NSURL
+}
+
+var _ DOMHTMLInputElementable = (*DOMHTMLInputElement)(nil)
 

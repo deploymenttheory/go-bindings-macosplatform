@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,5 +49,82 @@ func (x *TextTable) WithHidesEmptyCells(hidesEmptyCells bool) *TextTable {
 	return x
 }
 
+// RectForBlockLayoutAtPointInRectTextContainerCharacterRange calls the underlying RectForBlockLayoutAtPointInRectTextContainerCharacterRange.
+func (x *TextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	return x.inner.RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block, startingPoint, rect, textContainer, charRange)
+}
+
+// BoundsRectForBlockContentRectInRectTextContainerCharacterRange calls the underlying BoundsRectForBlockContentRectInRectTextContainerCharacterRange.
+func (x *TextTable) BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	return x.inner.BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block, contentRect, rect, textContainer, charRange)
+}
+
+// DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager calls the underlying DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager.
+func (x *TextTable) DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *raw.NSTextTableBlock, frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager) {
+	x.inner.DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block, frameRect, controlView, charRange, layoutManager)
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *TextTable) NumberOfColumns() uint {
+	return x.inner.NumberOfColumns()
+}
+
+// SetNumberOfColumns calls the underlying SetNumberOfColumns.
+func (x *TextTable) SetNumberOfColumns(numberOfColumns uint) {
+	x.inner.SetNumberOfColumns(numberOfColumns)
+}
+
+// LayoutAlgorithm calls the underlying LayoutAlgorithm.
+func (x *TextTable) LayoutAlgorithm() raw.NSTextTableLayoutAlgorithm {
+	return x.inner.LayoutAlgorithm()
+}
+
+// SetLayoutAlgorithm calls the underlying SetLayoutAlgorithm.
+func (x *TextTable) SetLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) {
+	x.inner.SetLayoutAlgorithm(layoutAlgorithm)
+}
+
+// CollapsesBorders calls the underlying CollapsesBorders.
+func (x *TextTable) CollapsesBorders() bool {
+	return x.inner.CollapsesBorders()
+}
+
+// SetCollapsesBorders calls the underlying SetCollapsesBorders.
+func (x *TextTable) SetCollapsesBorders(collapsesBorders bool) {
+	x.inner.SetCollapsesBorders(collapsesBorders)
+}
+
+// HidesEmptyCells calls the underlying HidesEmptyCells.
+func (x *TextTable) HidesEmptyCells() bool {
+	return x.inner.HidesEmptyCells()
+}
+
+// SetHidesEmptyCells calls the underlying SetHidesEmptyCells.
+func (x *TextTable) SetHidesEmptyCells(hidesEmptyCells bool) {
+	x.inner.SetHidesEmptyCells(hidesEmptyCells)
+}
+
 func (x *TextTable) asTextBlock() *raw.NSTextBlock { return &x.inner.NSTextBlock }
+
+// TextTableable is the interface implemented by [TextTable], for mocking and DI.
+type TextTableable interface {
+	Unwrap() *raw.NSTextTable
+	WithNumberOfColumns(numberOfColumns uint) *TextTable
+	WithLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) *TextTable
+	WithCollapsesBorders(collapsesBorders bool) *TextTable
+	WithHidesEmptyCells(hidesEmptyCells bool) *TextTable
+	RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
+	BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
+	DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *raw.NSTextTableBlock, frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager)
+	NumberOfColumns() uint
+	SetNumberOfColumns(numberOfColumns uint)
+	LayoutAlgorithm() raw.NSTextTableLayoutAlgorithm
+	SetLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm)
+	CollapsesBorders() bool
+	SetCollapsesBorders(collapsesBorders bool)
+	HidesEmptyCells() bool
+	SetHidesEmptyCells(hidesEmptyCells bool)
+}
+
+var _ TextTableable = (*TextTable)(nil)
 

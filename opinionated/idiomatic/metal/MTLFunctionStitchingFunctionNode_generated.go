@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,16 +49,58 @@ func (x *FunctionStitchingFunctionNode) WithControlDependencies(items ...*raw.MT
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *FunctionStitchingFunctionNode) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *FunctionStitchingFunctionNode) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Arguments calls the underlying Arguments.
+func (x *FunctionStitchingFunctionNode) Arguments() *foundation.NSArray[raw.MTLFunctionStitchingNode] {
+	return x.inner.Arguments()
+}
+
+// SetArguments calls the underlying SetArguments.
+func (x *FunctionStitchingFunctionNode) SetArguments(arguments *foundation.NSArray[raw.MTLFunctionStitchingNode]) {
+	x.inner.SetArguments(arguments)
+}
+
 // ControlDependencies returns the collection as a Go slice.
 func (x *FunctionStitchingFunctionNode) ControlDependencies() []*raw.MTLFunctionStitchingFunctionNode {
 	arr := x.inner.ControlDependencies()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MTLFunctionStitchingFunctionNode, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MTLFunctionStitchingFunctionNode {
+		return raw.MTLFunctionStitchingFunctionNodeFromID(purego.Retain(_id))
+	})
 }
+
+// SetControlDependencies calls the underlying SetControlDependencies.
+func (x *FunctionStitchingFunctionNode) SetControlDependencies(controlDependencies *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode]) {
+	x.inner.SetControlDependencies(controlDependencies)
+}
+
+// FunctionStitchingFunctionNodeable is the interface implemented by [FunctionStitchingFunctionNode], for mocking and DI.
+type FunctionStitchingFunctionNodeable interface {
+	Unwrap() *raw.MTLFunctionStitchingFunctionNode
+	WithName(name string) *FunctionStitchingFunctionNode
+	WithControlDependencies(items ...*raw.MTLFunctionStitchingFunctionNode) *FunctionStitchingFunctionNode
+	Name() string
+	SetName(name string)
+	Arguments() *foundation.NSArray[raw.MTLFunctionStitchingNode]
+	SetArguments(arguments *foundation.NSArray[raw.MTLFunctionStitchingNode])
+	ControlDependencies() []*raw.MTLFunctionStitchingFunctionNode
+	SetControlDependencies(controlDependencies *foundation.NSArray[*raw.MTLFunctionStitchingFunctionNode])
+}
+
+var _ FunctionStitchingFunctionNodeable = (*FunctionStitchingFunctionNode)(nil)
 

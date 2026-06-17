@@ -36,5 +36,62 @@ func (x *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioCh
 	return x
 }
 
+// SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
+func (x *CaptureAudioDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
+	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
+}
+
+// RecommendedAudioSettingsForAssetWriterWithOutputFileType calls the underlying RecommendedAudioSettingsForAssetWriterWithOutputFileType.
+func (x *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType)
+}
+
+// SampleBufferDelegate calls the underlying SampleBufferDelegate.
+func (x *CaptureAudioDataOutput) SampleBufferDelegate() raw.AVCaptureAudioDataOutputSampleBufferDelegate {
+	return x.inner.SampleBufferDelegate()
+}
+
+// SampleBufferCallbackQueue calls the underlying SampleBufferCallbackQueue.
+func (x *CaptureAudioDataOutput) SampleBufferCallbackQueue() *foundation.NSObject {
+	return x.inner.SampleBufferCallbackQueue()
+}
+
+// AudioSettings calls the underlying AudioSettings.
+func (x *CaptureAudioDataOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.AudioSettings()
+}
+
+// SetAudioSettings calls the underlying SetAudioSettings.
+func (x *CaptureAudioDataOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetAudioSettings(audioSettings)
+}
+
+// SpatialAudioChannelLayoutTag calls the underlying SpatialAudioChannelLayoutTag.
+func (x *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() uint {
+	return x.inner.SpatialAudioChannelLayoutTag()
+}
+
+// SetSpatialAudioChannelLayoutTag calls the underlying SetSpatialAudioChannelLayoutTag.
+func (x *CaptureAudioDataOutput) SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) {
+	x.inner.SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag)
+}
+
 func (x *CaptureAudioDataOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureAudioDataOutputable is the interface implemented by [CaptureAudioDataOutput], for mocking and DI.
+type CaptureAudioDataOutputable interface {
+	Unwrap() *raw.AVCaptureAudioDataOutput
+	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioDataOutput
+	WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) *CaptureAudioDataOutput
+	SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject)
+	RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SampleBufferDelegate() raw.AVCaptureAudioDataOutputSampleBufferDelegate
+	SampleBufferCallbackQueue() *foundation.NSObject
+	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SpatialAudioChannelLayoutTag() uint
+	SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint)
+}
+
+var _ CaptureAudioDataOutputable = (*CaptureAudioDataOutput)(nil)
 

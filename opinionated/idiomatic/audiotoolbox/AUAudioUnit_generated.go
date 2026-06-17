@@ -6,6 +6,7 @@ package audiotoolbox
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -185,17 +186,268 @@ func (x *AudioUnit) AllocateRenderResourcesAndReturnError() error {
 	return err
 }
 
+// DeallocateRenderResources calls the underlying DeallocateRenderResources.
+func (x *AudioUnit) DeallocateRenderResources() {
+	x.inner.DeallocateRenderResources()
+}
+
+// Reset calls the underlying Reset.
+func (x *AudioUnit) Reset() {
+	x.inner.Reset()
+}
+
+// TokenByAddingRenderObserver calls the underlying TokenByAddingRenderObserver.
+func (x *AudioUnit) TokenByAddingRenderObserver(observer func(raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int {
+	return x.inner.TokenByAddingRenderObserver(observer)
+}
+
+// RemoveRenderObserver calls the underlying RemoveRenderObserver.
+func (x *AudioUnit) RemoveRenderObserver(token int) {
+	x.inner.RemoveRenderObserver(token)
+}
+
+// ParametersForOverviewWithCount calls the underlying ParametersForOverviewWithCount.
+func (x *AudioUnit) ParametersForOverviewWithCount(count int) *foundation.NSArray[*foundation.NSNumber] {
+	return x.inner.ParametersForOverviewWithCount(count)
+}
+
+// SaveUserPresetError calls the underlying SaveUserPresetError.
+func (x *AudioUnit) SaveUserPresetError(userPreset *raw.AUAudioUnitPreset) (bool, error) {
+	return x.inner.SaveUserPresetError(userPreset)
+}
+
+// DeleteUserPresetError calls the underlying DeleteUserPresetError.
+func (x *AudioUnit) DeleteUserPresetError(userPreset *raw.AUAudioUnitPreset) (bool, error) {
+	return x.inner.DeleteUserPresetError(userPreset)
+}
+
+// PresetStateForError calls the underlying PresetStateForError.
+func (x *AudioUnit) PresetStateForError(userPreset *raw.AUAudioUnitPreset) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
+	return x.inner.PresetStateForError(userPreset)
+}
+
+// ProfileStateForCableChannel calls the underlying ProfileStateForCableChannel.
+func (x *AudioUnit) ProfileStateForCableChannel(cable uint8, channel uint8) objc.ID {
+	return x.inner.ProfileStateForCableChannel(cable, channel)
+}
+
+// EnableProfileCableOnChannelError calls the underlying EnableProfileCableOnChannelError.
+func (x *AudioUnit) EnableProfileCableOnChannelError(profile objc.ID, cable uint8, channel uint8) (bool, error) {
+	return x.inner.EnableProfileCableOnChannelError(profile, cable, channel)
+}
+
+// DisableProfileCableOnChannelError calls the underlying DisableProfileCableOnChannelError.
+func (x *AudioUnit) DisableProfileCableOnChannelError(profile objc.ID, cable uint8, channel uint8) (bool, error) {
+	return x.inner.DisableProfileCableOnChannelError(profile, cable, channel)
+}
+
+// MessageChannelFor calls the underlying MessageChannelFor.
+func (x *AudioUnit) MessageChannelFor(channelName string) raw.AUMessageChannel {
+	return x.inner.MessageChannelFor(foundation.NSStringStringWithUTF8String(channelName))
+}
+
+// ComponentDescription calls the underlying ComponentDescription.
+func (x *AudioUnit) ComponentDescription() raw.AudioComponentDescription {
+	return x.inner.ComponentDescription()
+}
+
+// Component calls the underlying Component.
+func (x *AudioUnit) Component() unsafe.Pointer {
+	return x.inner.Component()
+}
+
+// ComponentName calls the underlying ComponentName.
+func (x *AudioUnit) ComponentName() string {
+	_r := x.inner.ComponentName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AudioUnitName calls the underlying AudioUnitName.
+func (x *AudioUnit) AudioUnitName() string {
+	_r := x.inner.AudioUnitName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ManufacturerName calls the underlying ManufacturerName.
+func (x *AudioUnit) ManufacturerName() string {
+	_r := x.inner.ManufacturerName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AudioUnitShortName calls the underlying AudioUnitShortName.
+func (x *AudioUnit) AudioUnitShortName() string {
+	_r := x.inner.AudioUnitShortName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ComponentVersion calls the underlying ComponentVersion.
+func (x *AudioUnit) ComponentVersion() uint32 {
+	return x.inner.ComponentVersion()
+}
+
+// RenderResourcesAllocated calls the underlying RenderResourcesAllocated.
+func (x *AudioUnit) RenderResourcesAllocated() bool {
+	return x.inner.RenderResourcesAllocated()
+}
+
+// InputBusses calls the underlying InputBusses.
+func (x *AudioUnit) InputBusses() *AudioUnitBusArray {
+	_r := x.inner.InputBusses()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnitBusArray{inner: _r}
+}
+
+// OutputBusses calls the underlying OutputBusses.
+func (x *AudioUnit) OutputBusses() *AudioUnitBusArray {
+	_r := x.inner.OutputBusses()
+	if _r == nil {
+		return nil
+	}
+	return &AudioUnitBusArray{inner: _r}
+}
+
+// RenderBlock calls the underlying RenderBlock.
+func (x *AudioUnit) RenderBlock() objc.Block {
+	return x.inner.RenderBlock()
+}
+
+// ScheduleParameterBlock calls the underlying ScheduleParameterBlock.
+func (x *AudioUnit) ScheduleParameterBlock() objc.Block {
+	return x.inner.ScheduleParameterBlock()
+}
+
+// MaximumFramesToRender calls the underlying MaximumFramesToRender.
+func (x *AudioUnit) MaximumFramesToRender() uint32 {
+	return x.inner.MaximumFramesToRender()
+}
+
+// SetMaximumFramesToRender calls the underlying SetMaximumFramesToRender.
+func (x *AudioUnit) SetMaximumFramesToRender(maximumFramesToRender uint32) {
+	x.inner.SetMaximumFramesToRender(maximumFramesToRender)
+}
+
+// ParameterTree calls the underlying ParameterTree.
+func (x *AudioUnit) ParameterTree() *ParameterTree {
+	_r := x.inner.ParameterTree()
+	if _r == nil {
+		return nil
+	}
+	return &ParameterTree{inner: _r}
+}
+
+// SetParameterTree calls the underlying SetParameterTree.
+func (x *AudioUnit) SetParameterTree(parameterTree *raw.AUParameterTree) {
+	x.inner.SetParameterTree(parameterTree)
+}
+
+// AllParameterValues calls the underlying AllParameterValues.
+func (x *AudioUnit) AllParameterValues() bool {
+	return x.inner.AllParameterValues()
+}
+
+// IsMusicDeviceOrEffect calls the underlying IsMusicDeviceOrEffect.
+func (x *AudioUnit) IsMusicDeviceOrEffect() bool {
+	return x.inner.IsMusicDeviceOrEffect()
+}
+
+// VirtualMIDICableCount calls the underlying VirtualMIDICableCount.
+func (x *AudioUnit) VirtualMIDICableCount() int {
+	return x.inner.VirtualMIDICableCount()
+}
+
+// ScheduleMIDIEventBlock calls the underlying ScheduleMIDIEventBlock.
+func (x *AudioUnit) ScheduleMIDIEventBlock() objc.Block {
+	return x.inner.ScheduleMIDIEventBlock()
+}
+
+// ScheduleMIDIEventListBlock calls the underlying ScheduleMIDIEventListBlock.
+func (x *AudioUnit) ScheduleMIDIEventListBlock() objc.Block {
+	return x.inner.ScheduleMIDIEventListBlock()
+}
+
 // MIDIOutputNames returns the collection as a Go slice.
-func (x *AudioUnit) MIDIOutputNames() []*foundation.NSString {
+func (x *AudioUnit) MIDIOutputNames() []string {
 	arr := x.inner.MIDIOutputNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// ProvidesUserInterface calls the underlying ProvidesUserInterface.
+func (x *AudioUnit) ProvidesUserInterface() bool {
+	return x.inner.ProvidesUserInterface()
+}
+
+// MIDIOutputEventBlock calls the underlying MIDIOutputEventBlock.
+func (x *AudioUnit) MIDIOutputEventBlock() objc.Block {
+	return x.inner.MIDIOutputEventBlock()
+}
+
+// SetMIDIOutputEventBlock calls the underlying SetMIDIOutputEventBlock.
+func (x *AudioUnit) SetMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) {
+	x.inner.SetMIDIOutputEventBlock(mIDIOutputEventBlock)
+}
+
+// MIDIOutputEventListBlock calls the underlying MIDIOutputEventListBlock.
+func (x *AudioUnit) MIDIOutputEventListBlock() objc.Block {
+	return x.inner.MIDIOutputEventListBlock()
+}
+
+// SetMIDIOutputEventListBlock calls the underlying SetMIDIOutputEventListBlock.
+func (x *AudioUnit) SetMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) {
+	x.inner.SetMIDIOutputEventListBlock(mIDIOutputEventListBlock)
+}
+
+// AudioUnitMIDIProtocol calls the underlying AudioUnitMIDIProtocol.
+func (x *AudioUnit) AudioUnitMIDIProtocol() objc.ID {
+	return x.inner.AudioUnitMIDIProtocol()
+}
+
+// HostMIDIProtocol calls the underlying HostMIDIProtocol.
+func (x *AudioUnit) HostMIDIProtocol() objc.ID {
+	return x.inner.HostMIDIProtocol()
+}
+
+// SetHostMIDIProtocol calls the underlying SetHostMIDIProtocol.
+func (x *AudioUnit) SetHostMIDIProtocol(hostMIDIProtocol objc.ID) {
+	x.inner.SetHostMIDIProtocol(hostMIDIProtocol)
+}
+
+// FullState calls the underlying FullState.
+func (x *AudioUnit) FullState() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.FullState()
+}
+
+// SetFullState calls the underlying SetFullState.
+func (x *AudioUnit) SetFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetFullState(fullState)
+}
+
+// FullStateForDocument calls the underlying FullStateForDocument.
+func (x *AudioUnit) FullStateForDocument() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.FullStateForDocument()
+}
+
+// SetFullStateForDocument calls the underlying SetFullStateForDocument.
+func (x *AudioUnit) SetFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetFullStateForDocument(fullStateForDocument)
 }
 
 // FactoryPresets returns the collection as a Go slice.
@@ -204,11 +456,9 @@ func (x *AudioUnit) FactoryPresets() []*raw.AUAudioUnitPreset {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AUAudioUnitPreset, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUAudioUnitPreset {
+		return raw.AUAudioUnitPresetFromID(purego.Retain(_id))
+	})
 }
 
 // UserPresets returns the collection as a Go slice.
@@ -217,11 +467,78 @@ func (x *AudioUnit) UserPresets() []*raw.AUAudioUnitPreset {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AUAudioUnitPreset, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AUAudioUnitPreset {
+		return raw.AUAudioUnitPresetFromID(purego.Retain(_id))
+	})
+}
+
+// SupportsUserPresets calls the underlying SupportsUserPresets.
+func (x *AudioUnit) SupportsUserPresets() bool {
+	return x.inner.SupportsUserPresets()
+}
+
+// IsLoadedInProcess calls the underlying IsLoadedInProcess.
+func (x *AudioUnit) IsLoadedInProcess() bool {
+	return x.inner.IsLoadedInProcess()
+}
+
+// CurrentPreset calls the underlying CurrentPreset.
+func (x *AudioUnit) CurrentPreset() *AudioUnitPreset {
+	_r := x.inner.CurrentPreset()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &AudioUnitPreset{inner: _r}
+}
+
+// SetCurrentPreset calls the underlying SetCurrentPreset.
+func (x *AudioUnit) SetCurrentPreset(currentPreset *raw.AUAudioUnitPreset) {
+	x.inner.SetCurrentPreset(currentPreset)
+}
+
+// Latency calls the underlying Latency.
+func (x *AudioUnit) Latency() float64 {
+	return x.inner.Latency()
+}
+
+// TailTime calls the underlying TailTime.
+func (x *AudioUnit) TailTime() float64 {
+	return x.inner.TailTime()
+}
+
+// RenderQuality calls the underlying RenderQuality.
+func (x *AudioUnit) RenderQuality() int {
+	return x.inner.RenderQuality()
+}
+
+// SetRenderQuality calls the underlying SetRenderQuality.
+func (x *AudioUnit) SetRenderQuality(renderQuality int) {
+	x.inner.SetRenderQuality(renderQuality)
+}
+
+// ShouldBypassEffect calls the underlying ShouldBypassEffect.
+func (x *AudioUnit) ShouldBypassEffect() bool {
+	return x.inner.ShouldBypassEffect()
+}
+
+// SetShouldBypassEffect calls the underlying SetShouldBypassEffect.
+func (x *AudioUnit) SetShouldBypassEffect(shouldBypassEffect bool) {
+	x.inner.SetShouldBypassEffect(shouldBypassEffect)
+}
+
+// CanProcessInPlace calls the underlying CanProcessInPlace.
+func (x *AudioUnit) CanProcessInPlace() bool {
+	return x.inner.CanProcessInPlace()
+}
+
+// IsRenderingOffline calls the underlying IsRenderingOffline.
+func (x *AudioUnit) IsRenderingOffline() bool {
+	return x.inner.IsRenderingOffline()
+}
+
+// SetRenderingOffline calls the underlying SetRenderingOffline.
+func (x *AudioUnit) SetRenderingOffline(renderingOffline bool) {
+	x.inner.SetRenderingOffline(renderingOffline)
 }
 
 // ChannelCapabilities returns the collection as a Go slice.
@@ -230,11 +547,53 @@ func (x *AudioUnit) ChannelCapabilities() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// MusicalContextBlock calls the underlying MusicalContextBlock.
+func (x *AudioUnit) MusicalContextBlock() objc.Block {
+	return x.inner.MusicalContextBlock()
+}
+
+// SetMusicalContextBlock calls the underlying SetMusicalContextBlock.
+func (x *AudioUnit) SetMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) {
+	x.inner.SetMusicalContextBlock(musicalContextBlock)
+}
+
+// TransportStateBlock calls the underlying TransportStateBlock.
+func (x *AudioUnit) TransportStateBlock() objc.Block {
+	return x.inner.TransportStateBlock()
+}
+
+// SetTransportStateBlock calls the underlying SetTransportStateBlock.
+func (x *AudioUnit) SetTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) {
+	x.inner.SetTransportStateBlock(transportStateBlock)
+}
+
+// ContextName calls the underlying ContextName.
+func (x *AudioUnit) ContextName() string {
+	_r := x.inner.ContextName()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetContextName calls the underlying SetContextName.
+func (x *AudioUnit) SetContextName(contextName string) {
+	x.inner.SetContextName(foundation.NSStringStringWithUTF8String(contextName))
+}
+
+// MigrateFromPlugin calls the underlying MigrateFromPlugin.
+func (x *AudioUnit) MigrateFromPlugin() *foundation.NSArray[objc.ID] {
+	return x.inner.MigrateFromPlugin()
+}
+
+// SupportsMPE calls the underlying SupportsMPE.
+func (x *AudioUnit) SupportsMPE() bool {
+	return x.inner.SupportsMPE()
 }
 
 // ChannelMap returns the collection as a Go slice.
@@ -243,11 +602,29 @@ func (x *AudioUnit) ChannelMap() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SetChannelMap calls the underlying SetChannelMap.
+func (x *AudioUnit) SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetChannelMap(channelMap)
+}
+
+// ProfileChangedBlock calls the underlying ProfileChangedBlock.
+func (x *AudioUnit) ProfileChangedBlock() unsafe.Pointer {
+	return x.inner.ProfileChangedBlock()
+}
+
+// SetProfileChangedBlock calls the underlying SetProfileChangedBlock.
+func (x *AudioUnit) SetProfileChangedBlock(profileChangedBlock unsafe.Pointer) {
+	x.inner.SetProfileChangedBlock(profileChangedBlock)
+}
+
+// SetDeviceIDError calls the underlying SetDeviceIDError.
+func (x *AudioUnit) SetDeviceIDError(deviceID uint) (bool, error) {
+	return x.inner.SetDeviceIDError(deviceID)
 }
 
 // StartHardwareAndReturnError returns any validation error.
@@ -256,5 +633,254 @@ func (x *AudioUnit) StartHardwareAndReturnError() error {
 	return err
 }
 
+// StopHardware calls the underlying StopHardware.
+func (x *AudioUnit) StopHardware() {
+	x.inner.StopHardware()
+}
+
+// CanPerformInput calls the underlying CanPerformInput.
+func (x *AudioUnit) CanPerformInput() bool {
+	return x.inner.CanPerformInput()
+}
+
+// CanPerformOutput calls the underlying CanPerformOutput.
+func (x *AudioUnit) CanPerformOutput() bool {
+	return x.inner.CanPerformOutput()
+}
+
+// IsInputEnabled calls the underlying IsInputEnabled.
+func (x *AudioUnit) IsInputEnabled() bool {
+	return x.inner.IsInputEnabled()
+}
+
+// SetInputEnabled calls the underlying SetInputEnabled.
+func (x *AudioUnit) SetInputEnabled(inputEnabled bool) {
+	x.inner.SetInputEnabled(inputEnabled)
+}
+
+// IsOutputEnabled calls the underlying IsOutputEnabled.
+func (x *AudioUnit) IsOutputEnabled() bool {
+	return x.inner.IsOutputEnabled()
+}
+
+// SetOutputEnabled calls the underlying SetOutputEnabled.
+func (x *AudioUnit) SetOutputEnabled(outputEnabled bool) {
+	x.inner.SetOutputEnabled(outputEnabled)
+}
+
+// OutputProvider calls the underlying OutputProvider.
+func (x *AudioUnit) OutputProvider() objc.Block {
+	return x.inner.OutputProvider()
+}
+
+// SetOutputProvider calls the underlying SetOutputProvider.
+func (x *AudioUnit) SetOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) {
+	x.inner.SetOutputProvider(outputProvider)
+}
+
+// InputHandler calls the underlying InputHandler.
+func (x *AudioUnit) InputHandler() objc.Block {
+	return x.inner.InputHandler()
+}
+
+// SetInputHandler calls the underlying SetInputHandler.
+func (x *AudioUnit) SetInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) {
+	x.inner.SetInputHandler(inputHandler)
+}
+
+// DeviceID calls the underlying DeviceID.
+func (x *AudioUnit) DeviceID() uint {
+	return x.inner.DeviceID()
+}
+
+// DeviceInputLatency calls the underlying DeviceInputLatency.
+func (x *AudioUnit) DeviceInputLatency() float64 {
+	return x.inner.DeviceInputLatency()
+}
+
+// DeviceOutputLatency calls the underlying DeviceOutputLatency.
+func (x *AudioUnit) DeviceOutputLatency() float64 {
+	return x.inner.DeviceOutputLatency()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *AudioUnit) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// OsWorkgroup calls the underlying OsWorkgroup.
+func (x *AudioUnit) OsWorkgroup() unsafe.Pointer {
+	return x.inner.OsWorkgroup()
+}
+
+// IntendedSpatialExperience calls the underlying IntendedSpatialExperience.
+func (x *AudioUnit) IntendedSpatialExperience() unsafe.Pointer {
+	return x.inner.IntendedSpatialExperience()
+}
+
+// SetIntendedSpatialExperience calls the underlying SetIntendedSpatialExperience.
+func (x *AudioUnit) SetIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer) {
+	x.inner.SetIntendedSpatialExperience(intendedSpatialExperience)
+}
+
+// ShouldChangeToFormatForBus calls the underlying ShouldChangeToFormatForBus.
+func (x *AudioUnit) ShouldChangeToFormatForBus(format *avfaudio.AVAudioFormat, bus *raw.AUAudioUnitBus) bool {
+	return x.inner.ShouldChangeToFormatForBus(format, bus)
+}
+
+// SetRenderResourcesAllocated calls the underlying SetRenderResourcesAllocated.
+func (x *AudioUnit) SetRenderResourcesAllocated(flag bool) {
+	x.inner.SetRenderResourcesAllocated(flag)
+}
+
+// InternalRenderBlock calls the underlying InternalRenderBlock.
+func (x *AudioUnit) InternalRenderBlock() objc.Block {
+	return x.inner.InternalRenderBlock()
+}
+
+// RenderContextObserver calls the underlying RenderContextObserver.
+func (x *AudioUnit) RenderContextObserver() unsafe.Pointer {
+	return x.inner.RenderContextObserver()
+}
+
+// MIDIOutputBufferSizeHint calls the underlying MIDIOutputBufferSizeHint.
+func (x *AudioUnit) MIDIOutputBufferSizeHint() int {
+	return x.inner.MIDIOutputBufferSizeHint()
+}
+
+// SetMIDIOutputBufferSizeHint calls the underlying SetMIDIOutputBufferSizeHint.
+func (x *AudioUnit) SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) {
+	x.inner.SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint)
+}
+
 func (x *AudioUnit) asAudioUnit() *raw.AUAudioUnit { return x.inner }
+
+// AudioUnitable is the interface implemented by [AudioUnit], for mocking and DI.
+type AudioUnitable interface {
+	Unwrap() *raw.AUAudioUnit
+	WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnit
+	WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnit
+	WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnit
+	WithMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) *AudioUnit
+	WithMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) *AudioUnit
+	WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnit
+	WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit
+	WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnit
+	WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnit
+	WithRenderQuality(renderQuality int) *AudioUnit
+	WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnit
+	WithRenderingOffline(renderingOffline bool) *AudioUnit
+	WithMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) *AudioUnit
+	WithTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) *AudioUnit
+	WithContextName(contextName string) *AudioUnit
+	WithChannelMap(items ...*foundation.NSNumber) *AudioUnit
+	WithInputEnabled(inputEnabled bool) *AudioUnit
+	WithOutputEnabled(outputEnabled bool) *AudioUnit
+	WithOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) *AudioUnit
+	WithInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) *AudioUnit
+	WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnit
+	AllocateRenderResourcesAndReturnError() error
+	DeallocateRenderResources()
+	Reset()
+	TokenByAddingRenderObserver(observer func(raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) int
+	RemoveRenderObserver(token int)
+	ParametersForOverviewWithCount(count int) *foundation.NSArray[*foundation.NSNumber]
+	SaveUserPresetError(userPreset *raw.AUAudioUnitPreset) (bool, error)
+	DeleteUserPresetError(userPreset *raw.AUAudioUnitPreset) (bool, error)
+	PresetStateForError(userPreset *raw.AUAudioUnitPreset) (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
+	ProfileStateForCableChannel(cable uint8, channel uint8) objc.ID
+	EnableProfileCableOnChannelError(profile objc.ID, cable uint8, channel uint8) (bool, error)
+	DisableProfileCableOnChannelError(profile objc.ID, cable uint8, channel uint8) (bool, error)
+	MessageChannelFor(channelName string) raw.AUMessageChannel
+	ComponentDescription() raw.AudioComponentDescription
+	Component() unsafe.Pointer
+	ComponentName() string
+	AudioUnitName() string
+	ManufacturerName() string
+	AudioUnitShortName() string
+	ComponentVersion() uint32
+	RenderResourcesAllocated() bool
+	InputBusses() *AudioUnitBusArray
+	OutputBusses() *AudioUnitBusArray
+	RenderBlock() objc.Block
+	ScheduleParameterBlock() objc.Block
+	MaximumFramesToRender() uint32
+	SetMaximumFramesToRender(maximumFramesToRender uint32)
+	ParameterTree() *ParameterTree
+	SetParameterTree(parameterTree *raw.AUParameterTree)
+	AllParameterValues() bool
+	IsMusicDeviceOrEffect() bool
+	VirtualMIDICableCount() int
+	ScheduleMIDIEventBlock() objc.Block
+	ScheduleMIDIEventListBlock() objc.Block
+	MIDIOutputNames() []string
+	ProvidesUserInterface() bool
+	MIDIOutputEventBlock() objc.Block
+	SetMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int)
+	MIDIOutputEventListBlock() objc.Block
+	SetMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int)
+	AudioUnitMIDIProtocol() objc.ID
+	HostMIDIProtocol() objc.ID
+	SetHostMIDIProtocol(hostMIDIProtocol objc.ID)
+	FullState() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	FullStateForDocument() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	FactoryPresets() []*raw.AUAudioUnitPreset
+	UserPresets() []*raw.AUAudioUnitPreset
+	SupportsUserPresets() bool
+	IsLoadedInProcess() bool
+	CurrentPreset() *AudioUnitPreset
+	SetCurrentPreset(currentPreset *raw.AUAudioUnitPreset)
+	Latency() float64
+	TailTime() float64
+	RenderQuality() int
+	SetRenderQuality(renderQuality int)
+	ShouldBypassEffect() bool
+	SetShouldBypassEffect(shouldBypassEffect bool)
+	CanProcessInPlace() bool
+	IsRenderingOffline() bool
+	SetRenderingOffline(renderingOffline bool)
+	ChannelCapabilities() []*foundation.NSNumber
+	MusicalContextBlock() objc.Block
+	SetMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool)
+	TransportStateBlock() objc.Block
+	SetTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool)
+	ContextName() string
+	SetContextName(contextName string)
+	MigrateFromPlugin() *foundation.NSArray[objc.ID]
+	SupportsMPE() bool
+	ChannelMap() []*foundation.NSNumber
+	SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber])
+	ProfileChangedBlock() unsafe.Pointer
+	SetProfileChangedBlock(profileChangedBlock unsafe.Pointer)
+	SetDeviceIDError(deviceID uint) (bool, error)
+	StartHardwareAndReturnError() error
+	StopHardware()
+	CanPerformInput() bool
+	CanPerformOutput() bool
+	IsInputEnabled() bool
+	SetInputEnabled(inputEnabled bool)
+	IsOutputEnabled() bool
+	SetOutputEnabled(outputEnabled bool)
+	OutputProvider() objc.Block
+	SetOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int)
+	InputHandler() objc.Block
+	SetInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer))
+	DeviceID() uint
+	DeviceInputLatency() float64
+	DeviceOutputLatency() float64
+	IsRunning() bool
+	OsWorkgroup() unsafe.Pointer
+	IntendedSpatialExperience() unsafe.Pointer
+	SetIntendedSpatialExperience(intendedSpatialExperience unsafe.Pointer)
+	ShouldChangeToFormatForBus(format *avfaudio.AVAudioFormat, bus *raw.AUAudioUnitBus) bool
+	SetRenderResourcesAllocated(flag bool)
+	InternalRenderBlock() objc.Block
+	RenderContextObserver() unsafe.Pointer
+	MIDIOutputBufferSizeHint() int
+	SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int)
+}
+
+var _ AudioUnitable = (*AudioUnit)(nil)
 

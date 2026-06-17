@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +25,44 @@ func NewStatisticsCollection() *StatisticsCollection {
 	return &StatisticsCollection{inner: raw.HKStatisticsCollectionFromID(_id)}
 }
 
+// StatisticsForDate calls the underlying StatisticsForDate.
+func (x *StatisticsCollection) StatisticsForDate(date *foundation.NSDate) *Statistics {
+	_r := x.inner.StatisticsForDate(date)
+	if _r == nil {
+		return nil
+	}
+	return &Statistics{inner: _r}
+}
+
+// EnumerateStatisticsFromDateToDateWith calls the underlying EnumerateStatisticsFromDateToDateWith.
+func (x *StatisticsCollection) EnumerateStatisticsFromDateToDateWith(startDate *foundation.NSDate, endDate *foundation.NSDate, block func(*raw.HKStatistics, *bool)) {
+	x.inner.EnumerateStatisticsFromDateToDateWith(startDate, endDate, block)
+}
+
 // Statistics returns the collection as a Go slice.
 func (x *StatisticsCollection) Statistics() []*raw.HKStatistics {
 	arr := x.inner.Statistics()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKStatistics, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKStatistics {
+		return raw.HKStatisticsFromID(purego.Retain(_id))
+	})
 }
+
+// Sources calls the underlying Sources.
+func (x *StatisticsCollection) Sources() *foundation.NSSet[*raw.HKSource] {
+	return x.inner.Sources()
+}
+
+// StatisticsCollectionable is the interface implemented by [StatisticsCollection], for mocking and DI.
+type StatisticsCollectionable interface {
+	Unwrap() *raw.HKStatisticsCollection
+	StatisticsForDate(date *foundation.NSDate) *Statistics
+	EnumerateStatisticsFromDateToDateWith(startDate *foundation.NSDate, endDate *foundation.NSDate, block func(*raw.HKStatistics, *bool))
+	Statistics() []*raw.HKStatistics
+	Sources() *foundation.NSSet[*raw.HKSource]
+}
+
+var _ StatisticsCollectionable = (*StatisticsCollection)(nil)
 

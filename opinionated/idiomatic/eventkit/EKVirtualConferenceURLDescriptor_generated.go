@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *Vi
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URL:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
 	return &VirtualConferenceURLDescriptor{inner: raw.EKVirtualConferenceURLDescriptorFromID(_id)}
 }
+
+// Title calls the underlying Title.
+func (x *VirtualConferenceURLDescriptor) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// URL calls the underlying URL.
+func (x *VirtualConferenceURLDescriptor) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// VirtualConferenceURLDescriptorable is the interface implemented by [VirtualConferenceURLDescriptor], for mocking and DI.
+type VirtualConferenceURLDescriptorable interface {
+	Unwrap() *raw.EKVirtualConferenceURLDescriptor
+	Title() string
+	URL() *foundation.NSURL
+}
+
+var _ VirtualConferenceURLDescriptorable = (*VirtualConferenceURLDescriptor)(nil)
 

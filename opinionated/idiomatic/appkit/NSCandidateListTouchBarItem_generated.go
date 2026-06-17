@@ -66,5 +66,125 @@ func (x *CandidateListTouchBarItem) WithCustomizationLabel(customizationLabel st
 	return x
 }
 
+// UpdateWithInsertionPointVisibility calls the underlying UpdateWithInsertionPointVisibility.
+func (x *CandidateListTouchBarItem) UpdateWithInsertionPointVisibility(isVisible bool) {
+	x.inner.UpdateWithInsertionPointVisibility(isVisible)
+}
+
+// SetCandidatesForSelectedRangeInString calls the underlying SetCandidatesForSelectedRangeInString.
+func (x *CandidateListTouchBarItem) SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string) {
+	x.inner.SetCandidatesForSelectedRangeInString(candidates, selectedRange, foundation.NSStringStringWithUTF8String(originalString))
+}
+
+// Client calls the underlying Client.
+func (x *CandidateListTouchBarItem) Client() *View {
+	_r := x.inner.Client()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetClient calls the underlying SetClient.
+func (x *CandidateListTouchBarItem) SetClient(client *raw.NSView) {
+	x.inner.SetClient(client)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CandidateListTouchBarItem) Delegate() raw.NSCandidateListTouchBarItemDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CandidateListTouchBarItem) SetDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsCollapsed calls the underlying IsCollapsed.
+func (x *CandidateListTouchBarItem) IsCollapsed() bool {
+	return x.inner.IsCollapsed()
+}
+
+// SetCollapsed calls the underlying SetCollapsed.
+func (x *CandidateListTouchBarItem) SetCollapsed(collapsed bool) {
+	x.inner.SetCollapsed(collapsed)
+}
+
+// AllowsCollapsing calls the underlying AllowsCollapsing.
+func (x *CandidateListTouchBarItem) AllowsCollapsing() bool {
+	return x.inner.AllowsCollapsing()
+}
+
+// SetAllowsCollapsing calls the underlying SetAllowsCollapsing.
+func (x *CandidateListTouchBarItem) SetAllowsCollapsing(allowsCollapsing bool) {
+	x.inner.SetAllowsCollapsing(allowsCollapsing)
+}
+
+// IsCandidateListVisible calls the underlying IsCandidateListVisible.
+func (x *CandidateListTouchBarItem) IsCandidateListVisible() bool {
+	return x.inner.IsCandidateListVisible()
+}
+
+// AllowsTextInputContextCandidates calls the underlying AllowsTextInputContextCandidates.
+func (x *CandidateListTouchBarItem) AllowsTextInputContextCandidates() bool {
+	return x.inner.AllowsTextInputContextCandidates()
+}
+
+// SetAllowsTextInputContextCandidates calls the underlying SetAllowsTextInputContextCandidates.
+func (x *CandidateListTouchBarItem) SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) {
+	x.inner.SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates)
+}
+
+// AttributedStringForCandidate calls the underlying AttributedStringForCandidate.
+func (x *CandidateListTouchBarItem) AttributedStringForCandidate() objc.Block {
+	return x.inner.AttributedStringForCandidate()
+}
+
+// SetAttributedStringForCandidate calls the underlying SetAttributedStringForCandidate.
+func (x *CandidateListTouchBarItem) SetAttributedStringForCandidate(attributedStringForCandidate objc.Block) {
+	x.inner.SetAttributedStringForCandidate(attributedStringForCandidate)
+}
+
+// Candidates calls the underlying Candidates.
+func (x *CandidateListTouchBarItem) Candidates() *foundation.NSArray[objc.ID] {
+	return x.inner.Candidates()
+}
+
+// SetCustomizationLabel calls the underlying SetCustomizationLabel.
+func (x *CandidateListTouchBarItem) SetCustomizationLabel(customizationLabel string) {
+	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+}
+
 func (x *CandidateListTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
+
+// CandidateListTouchBarItemable is the interface implemented by [CandidateListTouchBarItem], for mocking and DI.
+type CandidateListTouchBarItemable interface {
+	Unwrap() *raw.NSCandidateListTouchBarItem[objc.ID]
+	WithClient(client ViewProvider) *CandidateListTouchBarItem
+	WithDelegate(delegate raw.NSCandidateListTouchBarItemDelegate) *CandidateListTouchBarItem
+	WithCollapsed(collapsed bool) *CandidateListTouchBarItem
+	WithAllowsCollapsing(allowsCollapsing bool) *CandidateListTouchBarItem
+	WithAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool) *CandidateListTouchBarItem
+	WithAttributedStringForCandidate(attributedStringForCandidate objc.Block) *CandidateListTouchBarItem
+	WithCustomizationLabel(customizationLabel string) *CandidateListTouchBarItem
+	UpdateWithInsertionPointVisibility(isVisible bool)
+	SetCandidatesForSelectedRangeInString(candidates *foundation.NSArray[objc.ID], selectedRange foundation.NSRange, originalString string)
+	Client() *View
+	SetClient(client *raw.NSView)
+	Delegate() raw.NSCandidateListTouchBarItemDelegate
+	SetDelegate(delegate raw.NSCandidateListTouchBarItemDelegate)
+	IsCollapsed() bool
+	SetCollapsed(collapsed bool)
+	AllowsCollapsing() bool
+	SetAllowsCollapsing(allowsCollapsing bool)
+	IsCandidateListVisible() bool
+	AllowsTextInputContextCandidates() bool
+	SetAllowsTextInputContextCandidates(allowsTextInputContextCandidates bool)
+	AttributedStringForCandidate() objc.Block
+	SetAttributedStringForCandidate(attributedStringForCandidate objc.Block)
+	Candidates() *foundation.NSArray[objc.ID]
+	SetCustomizationLabel(customizationLabel string)
+}
+
+var _ CandidateListTouchBarItemable = (*CandidateListTouchBarItem)(nil)
 

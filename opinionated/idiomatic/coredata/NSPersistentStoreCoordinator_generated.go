@@ -8,7 +8,9 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PersistentStoreCoordinator wraps [raw.NSPersistentStoreCoordinator] with a fluent Go API.
@@ -30,6 +32,126 @@ func NewPersistentStoreCoordinatorWithManagedObjectModel(model *raw.NSManagedObj
 func (x *PersistentStoreCoordinator) WithName(name string) *PersistentStoreCoordinator {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
+}
+
+// PersistentStoreForURL calls the underlying PersistentStoreForURL.
+func (x *PersistentStoreCoordinator) PersistentStoreForURL(uRL string) *PersistentStore {
+	_r := x.inner.PersistentStoreForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	if _r == nil {
+		return nil
+	}
+	return &PersistentStore{inner: _r}
+}
+
+// URLForPersistentStore calls the underlying URLForPersistentStore.
+func (x *PersistentStoreCoordinator) URLForPersistentStore(store *raw.NSPersistentStore) *foundation.NSURL {
+	return x.inner.URLForPersistentStore(store)
+}
+
+// SetURLForPersistentStore calls the underlying SetURLForPersistentStore.
+func (x *PersistentStoreCoordinator) SetURLForPersistentStore(url string, store *raw.NSPersistentStore) bool {
+	return x.inner.SetURLForPersistentStore(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), store)
+}
+
+// AddPersistentStoreWithTypeConfigurationURLOptionsError calls the underlying AddPersistentStoreWithTypeConfigurationURLOptionsError.
+func (x *PersistentStoreCoordinator) AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (*PersistentStore, error) {
+	_r, _err := x.inner.AddPersistentStoreWithTypeConfigurationURLOptionsError(foundation.NSStringStringWithUTF8String(storeType), foundation.NSStringStringWithUTF8String(configuration), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(storeURL)), options)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &PersistentStore{inner: _r}, nil
+}
+
+// AddPersistentStoreWithDescription blocks until the operation completes or ctx is cancelled.
+func (x *PersistentStoreCoordinator) AddPersistentStoreWithDescription(ctx context.Context, storeDescription *raw.NSPersistentStoreDescription) (*PersistentStoreDescription, error) {
+	type _result struct {
+		val *PersistentStoreDescription
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AddPersistentStoreWithDescriptionCompletionHandler(storeDescription, func(_p0 *raw.NSPersistentStoreDescription, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &PersistentStoreDescription{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *PersistentStoreDescription
+		return _zero, ctx.Err()
+	}
+}
+
+// RemovePersistentStoreError calls the underlying RemovePersistentStoreError.
+func (x *PersistentStoreCoordinator) RemovePersistentStoreError(store *raw.NSPersistentStore) (bool, error) {
+	return x.inner.RemovePersistentStoreError(store)
+}
+
+// SetMetadataForPersistentStore calls the underlying SetMetadataForPersistentStore.
+func (x *PersistentStoreCoordinator) SetMetadataForPersistentStore(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], store *raw.NSPersistentStore) {
+	x.inner.SetMetadataForPersistentStore(metadata, store)
+}
+
+// MetadataForPersistentStore calls the underlying MetadataForPersistentStore.
+func (x *PersistentStoreCoordinator) MetadataForPersistentStore(store *raw.NSPersistentStore) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.MetadataForPersistentStore(store)
+}
+
+// ManagedObjectIDForURIRepresentation calls the underlying ManagedObjectIDForURIRepresentation.
+func (x *PersistentStoreCoordinator) ManagedObjectIDForURIRepresentation(url string) *ManagedObjectID {
+	_r := x.inner.ManagedObjectIDForURIRepresentation(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// ExecuteRequestWithContextError calls the underlying ExecuteRequestWithContextError.
+func (x *PersistentStoreCoordinator) ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
+	return x.inner.ExecuteRequestWithContextError(request, context_)
+}
+
+// ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError calls the underlying ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError.
+func (x *PersistentStoreCoordinator) ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (*PersistentStore, error) {
+	_r, _err := x.inner.ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(foundation.NSStringStringWithUTF8String(storeIdentifier), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(externalRecordsURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)), options, foundation.NSStringStringWithUTF8String(storeType))
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &PersistentStore{inner: _r}, nil
+}
+
+// MigratePersistentStoreToURLOptionsWithTypeError calls the underlying MigratePersistentStoreToURLOptionsWithTypeError.
+func (x *PersistentStoreCoordinator) MigratePersistentStoreToURLOptionsWithTypeError(store *raw.NSPersistentStore, uRL string, options *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (*PersistentStore, error) {
+	_r, _err := x.inner.MigratePersistentStoreToURLOptionsWithTypeError(store, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), options, foundation.NSStringStringWithUTF8String(storeType))
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &PersistentStore{inner: _r}, nil
+}
+
+// DestroyPersistentStoreAtURLWithTypeOptionsError calls the underlying DestroyPersistentStoreAtURLWithTypeOptionsError.
+func (x *PersistentStoreCoordinator) DestroyPersistentStoreAtURLWithTypeOptionsError(url string, storeType string, options *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
+	return x.inner.DestroyPersistentStoreAtURLWithTypeOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(storeType), options)
+}
+
+// ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError calls the underlying ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError.
+func (x *PersistentStoreCoordinator) ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError(destinationURL string, destinationOptions *foundation.NSDictionary[objc.ID, objc.ID], sourceURL string, sourceOptions *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (bool, error) {
+	return x.inner.ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)), destinationOptions, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(sourceURL)), sourceOptions, foundation.NSStringStringWithUTF8String(storeType))
 }
 
 // PerformBlock blocks until the operation completes or ctx is cancelled.
@@ -60,6 +182,15 @@ func (x *PersistentStoreCoordinator) PerformBlockAndWait(ctx context.Context) er
 	}
 }
 
+// CurrentPersistentHistoryTokenFromStores calls the underlying CurrentPersistentHistoryTokenFromStores.
+func (x *PersistentStoreCoordinator) CurrentPersistentHistoryTokenFromStores(stores *foundation.NSArray[objc.ID]) *PersistentHistoryToken {
+	_r := x.inner.CurrentPersistentHistoryTokenFromStores(stores)
+	if _r == nil {
+		return nil
+	}
+	return &PersistentHistoryToken{inner: _r}
+}
+
 // FinishDeferredLightweightMigration returns any validation error.
 func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigration() error {
 	_, err := x.inner.FinishDeferredLightweightMigration()
@@ -72,16 +203,96 @@ func (x *PersistentStoreCoordinator) FinishDeferredLightweightMigrationTask() er
 	return err
 }
 
+// ManagedObjectIDFromUTF8StringLength calls the underlying ManagedObjectIDFromUTF8StringLength.
+func (x *PersistentStoreCoordinator) ManagedObjectIDFromUTF8StringLength(utf8string string, len_ uint) *ManagedObjectID {
+	_r := x.inner.ManagedObjectIDFromUTF8StringLength(utf8string, len_)
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectID{inner: _r}
+}
+
+// Lock calls the underlying Lock.
+func (x *PersistentStoreCoordinator) Lock() {
+	x.inner.Lock()
+}
+
+// Unlock calls the underlying Unlock.
+func (x *PersistentStoreCoordinator) Unlock() {
+	x.inner.Unlock()
+}
+
+// TryLock calls the underlying TryLock.
+func (x *PersistentStoreCoordinator) TryLock() bool {
+	return x.inner.TryLock()
+}
+
+// ManagedObjectModel calls the underlying ManagedObjectModel.
+func (x *PersistentStoreCoordinator) ManagedObjectModel() *ManagedObjectModel {
+	_r := x.inner.ManagedObjectModel()
+	if _r == nil {
+		return nil
+	}
+	return &ManagedObjectModel{inner: _r}
+}
+
 // PersistentStores returns the collection as a Go slice.
 func (x *PersistentStoreCoordinator) PersistentStores() []*raw.NSPersistentStore {
 	arr := x.inner.PersistentStores()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSPersistentStore, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSPersistentStore {
+		return raw.NSPersistentStoreFromID(purego.Retain(_id))
+	})
 }
+
+// Name calls the underlying Name.
+func (x *PersistentStoreCoordinator) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *PersistentStoreCoordinator) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// PersistentStoreCoordinatorable is the interface implemented by [PersistentStoreCoordinator], for mocking and DI.
+type PersistentStoreCoordinatorable interface {
+	Unwrap() *raw.NSPersistentStoreCoordinator
+	WithName(name string) *PersistentStoreCoordinator
+	PersistentStoreForURL(uRL string) *PersistentStore
+	URLForPersistentStore(store *raw.NSPersistentStore) *foundation.NSURL
+	SetURLForPersistentStore(url string, store *raw.NSPersistentStore) bool
+	AddPersistentStoreWithTypeConfigurationURLOptionsError(storeType string, configuration string, storeURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (*PersistentStore, error)
+	AddPersistentStoreWithDescription(ctx context.Context, storeDescription *raw.NSPersistentStoreDescription) (*PersistentStoreDescription, error)
+	RemovePersistentStoreError(store *raw.NSPersistentStore) (bool, error)
+	SetMetadataForPersistentStore(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], store *raw.NSPersistentStore)
+	MetadataForPersistentStore(store *raw.NSPersistentStore) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ManagedObjectIDForURIRepresentation(url string) *ManagedObjectID
+	ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error)
+	ImportStoreWithIdentifierFromExternalRecordsDirectoryToURLOptionsWithTypeError(storeIdentifier string, externalRecordsURL string, destinationURL string, options *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (*PersistentStore, error)
+	MigratePersistentStoreToURLOptionsWithTypeError(store *raw.NSPersistentStore, uRL string, options *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (*PersistentStore, error)
+	DestroyPersistentStoreAtURLWithTypeOptionsError(url string, storeType string, options *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error)
+	ReplacePersistentStoreAtURLDestinationOptionsWithPersistentStoreFromURLSourceOptionsStoreTypeError(destinationURL string, destinationOptions *foundation.NSDictionary[objc.ID, objc.ID], sourceURL string, sourceOptions *foundation.NSDictionary[objc.ID, objc.ID], storeType string) (bool, error)
+	PerformBlock(ctx context.Context) error
+	PerformBlockAndWait(ctx context.Context) error
+	CurrentPersistentHistoryTokenFromStores(stores *foundation.NSArray[objc.ID]) *PersistentHistoryToken
+	FinishDeferredLightweightMigration() error
+	FinishDeferredLightweightMigrationTask() error
+	ManagedObjectIDFromUTF8StringLength(utf8string string, len_ uint) *ManagedObjectID
+	Lock()
+	Unlock()
+	TryLock() bool
+	ManagedObjectModel() *ManagedObjectModel
+	PersistentStores() []*raw.NSPersistentStore
+	Name() string
+	SetName(name string)
+}
+
+var _ PersistentStoreCoordinatorable = (*PersistentStoreCoordinator)(nil)
 

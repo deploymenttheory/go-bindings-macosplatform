@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,5 +50,49 @@ func (x *LinuxBootLoader) WithInitialRamdiskURL(initialRamdiskURL string) *Linux
 	return x
 }
 
+// KernelURL calls the underlying KernelURL.
+func (x *LinuxBootLoader) KernelURL() *foundation.NSURL {
+	return x.inner.KernelURL()
+}
+
+// SetKernelURL calls the underlying SetKernelURL.
+func (x *LinuxBootLoader) SetKernelURL(kernelURL string) {
+	x.inner.SetKernelURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(kernelURL)))
+}
+
+// CommandLine calls the underlying CommandLine.
+func (x *LinuxBootLoader) CommandLine() string {
+	_r := x.inner.CommandLine()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCommandLine calls the underlying SetCommandLine.
+func (x *LinuxBootLoader) SetCommandLine(commandLine string) {
+	x.inner.SetCommandLine(foundation.NSStringStringWithUTF8String(commandLine))
+}
+
+// SetInitialRamdiskURL calls the underlying SetInitialRamdiskURL.
+func (x *LinuxBootLoader) SetInitialRamdiskURL(initialRamdiskURL string) {
+	x.inner.SetInitialRamdiskURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(initialRamdiskURL)))
+}
+
 func (x *LinuxBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
+
+// LinuxBootLoaderable is the interface implemented by [LinuxBootLoader], for mocking and DI.
+type LinuxBootLoaderable interface {
+	Unwrap() *raw.VZLinuxBootLoader
+	WithKernelURL(kernelURL string) *LinuxBootLoader
+	WithCommandLine(commandLine string) *LinuxBootLoader
+	WithInitialRamdiskURL(initialRamdiskURL string) *LinuxBootLoader
+	KernelURL() *foundation.NSURL
+	SetKernelURL(kernelURL string)
+	CommandLine() string
+	SetCommandLine(commandLine string)
+	SetInitialRamdiskURL(initialRamdiskURL string)
+}
+
+var _ LinuxBootLoaderable = (*LinuxBootLoader)(nil)
 

@@ -5,6 +5,7 @@
 package quicklookui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewFilePreviewRequest() *FilePreviewRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLFilePreviewRequest")), objc.RegisterName("new"))
 	return &FilePreviewRequest{inner: raw.QLFilePreviewRequestFromID(_id)}
 }
+
+// FileURL calls the underlying FileURL.
+func (x *FilePreviewRequest) FileURL() *foundation.NSURL {
+	return x.inner.FileURL()
+}
+
+// FilePreviewRequestable is the interface implemented by [FilePreviewRequest], for mocking and DI.
+type FilePreviewRequestable interface {
+	Unwrap() *raw.QLFilePreviewRequest
+	FileURL() *foundation.NSURL
+}
+
+var _ FilePreviewRequestable = (*FilePreviewRequest)(nil)
 

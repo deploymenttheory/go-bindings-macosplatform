@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewGPUMetric() *GPUMetric {
 	return &GPUMetric{inner: raw.MXGPUMetricFromID(_id)}
 }
 
+// CumulativeGPUTime calls the underlying CumulativeGPUTime.
+func (x *GPUMetric) CumulativeGPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
+	return x.inner.CumulativeGPUTime()
+}
+
 func (x *GPUMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// GPUMetricable is the interface implemented by [GPUMetric], for mocking and DI.
+type GPUMetricable interface {
+	Unwrap() *raw.MXGPUMetric
+	CumulativeGPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+}
+
+var _ GPUMetricable = (*GPUMetric)(nil)
 

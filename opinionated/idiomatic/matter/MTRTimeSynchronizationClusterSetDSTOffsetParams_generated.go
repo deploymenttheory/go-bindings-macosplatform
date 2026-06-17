@@ -36,3 +36,48 @@ func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithServerSideProcessi
 	return x
 }
 
+// DstOffset calls the underlying DstOffset.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) DstOffset() *foundation.NSArray[objc.ID] {
+	return x.inner.DstOffset()
+}
+
+// SetDstOffset calls the underlying SetDstOffset.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetDstOffset(dstOffset *foundation.NSArray[objc.ID]) {
+	x.inner.SetDstOffset(dstOffset)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRTimeSynchronizationClusterSetDSTOffsetParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetDSTOffsetParams], for mocking and DI.
+type MTRTimeSynchronizationClusterSetDSTOffsetParamsable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterSetDSTOffsetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetDSTOffsetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetDSTOffsetParams
+	DstOffset() *foundation.NSArray[objc.ID]
+	SetDstOffset(dstOffset *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterSetDSTOffsetParamsable = (*MTRTimeSynchronizationClusterSetDSTOffsetParams)(nil)
+

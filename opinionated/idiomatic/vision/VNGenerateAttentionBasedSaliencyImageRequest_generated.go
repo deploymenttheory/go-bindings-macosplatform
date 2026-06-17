@@ -27,3 +27,10 @@ func (x *GenerateAttentionBasedSaliencyImageRequest) asImageBasedRequest() *raw.
 
 func (x *GenerateAttentionBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// GenerateAttentionBasedSaliencyImageRequestable is the interface implemented by [GenerateAttentionBasedSaliencyImageRequest], for mocking and DI.
+type GenerateAttentionBasedSaliencyImageRequestable interface {
+	Unwrap() *raw.VNGenerateAttentionBasedSaliencyImageRequest
+}
+
+var _ GenerateAttentionBasedSaliencyImageRequestable = (*GenerateAttentionBasedSaliencyImageRequest)(nil)
+

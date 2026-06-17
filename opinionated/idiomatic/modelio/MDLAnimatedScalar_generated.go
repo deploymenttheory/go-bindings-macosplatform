@@ -23,5 +23,60 @@ func NewAnimatedScalar() *AnimatedScalar {
 	return &AnimatedScalar{inner: raw.MDLAnimatedScalarFromID(_id)}
 }
 
+// SetFloatAtTime calls the underlying SetFloatAtTime.
+func (x *AnimatedScalar) SetFloatAtTime(value float32, time_ float64) {
+	x.inner.SetFloatAtTime(value, time_)
+}
+
+// SetDoubleAtTime calls the underlying SetDoubleAtTime.
+func (x *AnimatedScalar) SetDoubleAtTime(value float64, time_ float64) {
+	x.inner.SetDoubleAtTime(value, time_)
+}
+
+// FloatAtTime calls the underlying FloatAtTime.
+func (x *AnimatedScalar) FloatAtTime(time_ float64) float32 {
+	return x.inner.FloatAtTime(time_)
+}
+
+// DoubleAtTime calls the underlying DoubleAtTime.
+func (x *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
+	return x.inner.DoubleAtTime(time_)
+}
+
+// ResetWithFloatArrayAtTimesCount calls the underlying ResetWithFloatArrayAtTimesCount.
+func (x *AnimatedScalar) ResetWithFloatArrayAtTimesCount(valuesArray *float32, timesArray *float64, count uint) {
+	x.inner.ResetWithFloatArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// ResetWithDoubleArrayAtTimesCount calls the underlying ResetWithDoubleArrayAtTimesCount.
+func (x *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(valuesArray *float64, timesArray *float64, count uint) {
+	x.inner.ResetWithDoubleArrayAtTimesCount(valuesArray, timesArray, count)
+}
+
+// GetFloatArrayMaxCount calls the underlying GetFloatArrayMaxCount.
+func (x *AnimatedScalar) GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint {
+	return x.inner.GetFloatArrayMaxCount(valuesArray, maxCount)
+}
+
+// GetDoubleArrayMaxCount calls the underlying GetDoubleArrayMaxCount.
+func (x *AnimatedScalar) GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint {
+	return x.inner.GetDoubleArrayMaxCount(valuesArray, maxCount)
+}
+
 func (x *AnimatedScalar) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+
+// AnimatedScalarable is the interface implemented by [AnimatedScalar], for mocking and DI.
+type AnimatedScalarable interface {
+	Unwrap() *raw.MDLAnimatedScalar
+	SetFloatAtTime(value float32, time_ float64)
+	SetDoubleAtTime(value float64, time_ float64)
+	FloatAtTime(time_ float64) float32
+	DoubleAtTime(time_ float64) float64
+	ResetWithFloatArrayAtTimesCount(valuesArray *float32, timesArray *float64, count uint)
+	ResetWithDoubleArrayAtTimesCount(valuesArray *float64, timesArray *float64, count uint)
+	GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint
+	GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint
+}
+
+var _ AnimatedScalarable = (*AnimatedScalar)(nil)
 

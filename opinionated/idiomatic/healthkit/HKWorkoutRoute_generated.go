@@ -29,3 +29,10 @@ func (x *WorkoutRoute) asSample() *raw.HKSample { return &x.inner.HKSeriesSample
 
 func (x *WorkoutRoute) asObject() *raw.HKObject { return &x.inner.HKSeriesSample.HKSample.HKObject }
 
+// WorkoutRouteable is the interface implemented by [WorkoutRoute], for mocking and DI.
+type WorkoutRouteable interface {
+	Unwrap() *raw.HKWorkoutRoute
+}
+
+var _ WorkoutRouteable = (*WorkoutRoute)(nil)
+

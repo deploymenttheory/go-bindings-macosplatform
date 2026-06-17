@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent() *MTRPu
 	return &MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterPumpMotorFatalFailureEvent)(nil)
+

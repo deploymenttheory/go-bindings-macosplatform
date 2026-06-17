@@ -7,6 +7,7 @@ package iobluetooth
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // IOBluetoothSDPUUID wraps [raw.IOBluetoothSDPUUID] with a fluent Go API.
@@ -30,4 +31,33 @@ func NewIOBluetoothSDPUUIDWithUUID32(uuid32 uint32) *IOBluetoothSDPUUID {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID32:"), uuid32)
 	return &IOBluetoothSDPUUID{inner: raw.IOBluetoothSDPUUIDFromID(_id)}
 }
+
+// GetSDPUUIDRef calls the underlying GetSDPUUIDRef.
+func (x *IOBluetoothSDPUUID) GetSDPUUIDRef() unsafe.Pointer {
+	return x.inner.GetSDPUUIDRef()
+}
+
+// GetUUIDWithLength calls the underlying GetUUIDWithLength.
+func (x *IOBluetoothSDPUUID) GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID {
+	_r := x.inner.GetUUIDWithLength(newLength)
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothSDPUUID{inner: _r}
+}
+
+// IsEqualToUUID calls the underlying IsEqualToUUID.
+func (x *IOBluetoothSDPUUID) IsEqualToUUID(otherUUID *raw.IOBluetoothSDPUUID) bool {
+	return x.inner.IsEqualToUUID(otherUUID)
+}
+
+// IOBluetoothSDPUUIDable is the interface implemented by [IOBluetoothSDPUUID], for mocking and DI.
+type IOBluetoothSDPUUIDable interface {
+	Unwrap() *raw.IOBluetoothSDPUUID
+	GetSDPUUIDRef() unsafe.Pointer
+	GetUUIDWithLength(newLength uint) *IOBluetoothSDPUUID
+	IsEqualToUUID(otherUUID *raw.IOBluetoothSDPUUID) bool
+}
+
+var _ IOBluetoothSDPUUIDable = (*IOBluetoothSDPUUID)(nil)
 

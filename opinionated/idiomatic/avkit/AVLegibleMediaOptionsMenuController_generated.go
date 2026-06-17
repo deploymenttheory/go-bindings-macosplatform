@@ -5,6 +5,7 @@
 package avkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
 	"github.com/ebitengine/purego/objc"
@@ -36,4 +37,49 @@ func (x *LegibleMediaOptionsMenuController) WithDelegate(delegate raw.AVLegibleM
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// MenuWithContents calls the underlying MenuWithContents.
+func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents raw.AVLegibleMediaOptionsMenuContents) *appkit.NSMenu {
+	return x.inner.MenuWithContents(contents)
+}
+
+// Player calls the underlying Player.
+func (x *LegibleMediaOptionsMenuController) Player() *avfoundation.AVPlayer {
+	return x.inner.Player()
+}
+
+// SetPlayer calls the underlying SetPlayer.
+func (x *LegibleMediaOptionsMenuController) SetPlayer(player *avfoundation.AVPlayer) {
+	x.inner.SetPlayer(player)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *LegibleMediaOptionsMenuController) Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *LegibleMediaOptionsMenuController) SetDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MenuState calls the underlying MenuState.
+func (x *LegibleMediaOptionsMenuController) MenuState() raw.AVLegibleMediaOptionsMenuState {
+	return x.inner.MenuState()
+}
+
+// LegibleMediaOptionsMenuControllerable is the interface implemented by [LegibleMediaOptionsMenuController], for mocking and DI.
+type LegibleMediaOptionsMenuControllerable interface {
+	Unwrap() *raw.AVLegibleMediaOptionsMenuController
+	WithPlayer(player *avfoundation.AVPlayer) *LegibleMediaOptionsMenuController
+	WithDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate) *LegibleMediaOptionsMenuController
+	MenuWithContents(contents raw.AVLegibleMediaOptionsMenuContents) *appkit.NSMenu
+	Player() *avfoundation.AVPlayer
+	SetPlayer(player *avfoundation.AVPlayer)
+	Delegate() raw.AVLegibleMediaOptionsMenuControllerDelegate
+	SetDelegate(delegate raw.AVLegibleMediaOptionsMenuControllerDelegate)
+	MenuState() raw.AVLegibleMediaOptionsMenuState
+}
+
+var _ LegibleMediaOptionsMenuControllerable = (*LegibleMediaOptionsMenuController)(nil)
 

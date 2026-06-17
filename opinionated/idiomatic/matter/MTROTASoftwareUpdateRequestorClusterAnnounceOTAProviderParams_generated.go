@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams() *MTROtaS
 
 func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams { return &x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams }
 
+// MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams], for mocking and DI.
+type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+}
+
+var _ MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable = (*MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams)(nil)
+

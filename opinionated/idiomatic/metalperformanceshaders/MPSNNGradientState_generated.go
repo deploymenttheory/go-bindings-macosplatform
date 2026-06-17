@@ -26,3 +26,10 @@ func NewNNGradientState() *NNGradientState {
 
 func (x *NNGradientState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
+// NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
+type NNGradientStateable interface {
+	Unwrap() *raw.MPSNNGradientState
+}
+
+var _ NNGradientStateable = (*NNGradientState)(nil)
+

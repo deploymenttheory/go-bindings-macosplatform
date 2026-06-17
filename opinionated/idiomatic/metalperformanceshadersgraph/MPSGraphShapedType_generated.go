@@ -32,7 +32,39 @@ func (x *GraphShapedType) WithDataType(dataType mpscore.MPSDataType) *GraphShape
 	return x
 }
 
+// Shape calls the underlying Shape.
+func (x *GraphShapedType) Shape() unsafe.Pointer {
+	return x.inner.Shape()
+}
+
+// SetShape calls the underlying SetShape.
+func (x *GraphShapedType) SetShape(shape unsafe.Pointer) {
+	x.inner.SetShape(shape)
+}
+
+// DataType calls the underlying DataType.
+func (x *GraphShapedType) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *GraphShapedType) SetDataType(dataType mpscore.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
 func (x *GraphShapedType) asGraphType() *raw.MPSGraphType { return &x.inner.MPSGraphType }
 
 func (x *GraphShapedType) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphType.MPSGraphObject }
+
+// GraphShapedTypeable is the interface implemented by [GraphShapedType], for mocking and DI.
+type GraphShapedTypeable interface {
+	Unwrap() *raw.MPSGraphShapedType
+	WithDataType(dataType mpscore.MPSDataType) *GraphShapedType
+	Shape() unsafe.Pointer
+	SetShape(shape unsafe.Pointer)
+	DataType() mpscore.MPSDataType
+	SetDataType(dataType mpscore.MPSDataType)
+}
+
+var _ GraphShapedTypeable = (*GraphShapedType)(nil)
 

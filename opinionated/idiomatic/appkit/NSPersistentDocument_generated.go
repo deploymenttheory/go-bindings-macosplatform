@@ -7,6 +7,8 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +32,53 @@ func (x *PersistentDocument) WithManagedObjectContext(managedObjectContext *core
 	return x
 }
 
+// ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError calls the underlying ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError.
+func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url string, fileType string, configuration string, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
+	return x.inner.ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(fileType), foundation.NSStringStringWithUTF8String(configuration), storeOptions)
+}
+
+// PersistentStoreTypeForFileType calls the underlying PersistentStoreTypeForFileType.
+func (x *PersistentDocument) PersistentStoreTypeForFileType(fileType string) string {
+	_r := x.inner.PersistentStoreTypeForFileType(foundation.NSStringStringWithUTF8String(fileType))
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ManagedObjectContext calls the underlying ManagedObjectContext.
+func (x *PersistentDocument) ManagedObjectContext() *coredata.NSManagedObjectContext {
+	return x.inner.ManagedObjectContext()
+}
+
+// SetManagedObjectContext calls the underlying SetManagedObjectContext.
+func (x *PersistentDocument) SetManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) {
+	x.inner.SetManagedObjectContext(managedObjectContext)
+}
+
+// ManagedObjectModel calls the underlying ManagedObjectModel.
+func (x *PersistentDocument) ManagedObjectModel() *coredata.NSManagedObjectModel {
+	return x.inner.ManagedObjectModel()
+}
+
+// ConfigurePersistentStoreCoordinatorForURLOfTypeError calls the underlying ConfigurePersistentStoreCoordinatorForURLOfTypeError.
+func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeError(url string, fileType string) (bool, error) {
+	return x.inner.ConfigurePersistentStoreCoordinatorForURLOfTypeError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(fileType))
+}
+
 func (x *PersistentDocument) asDocument() *raw.NSDocument { return &x.inner.NSDocument }
+
+// PersistentDocumentable is the interface implemented by [PersistentDocument], for mocking and DI.
+type PersistentDocumentable interface {
+	Unwrap() *raw.NSPersistentDocument
+	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *PersistentDocument
+	ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url string, fileType string, configuration string, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	PersistentStoreTypeForFileType(fileType string) string
+	ManagedObjectContext() *coredata.NSManagedObjectContext
+	SetManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext)
+	ManagedObjectModel() *coredata.NSManagedObjectModel
+	ConfigurePersistentStoreCoordinatorForURLOfTypeError(url string, fileType string) (bool, error)
+}
+
+var _ PersistentDocumentable = (*PersistentDocument)(nil)
 

@@ -23,5 +23,18 @@ func NewConcatenationLayer() *ConcatenationLayer {
 	return &ConcatenationLayer{inner: raw.MLCConcatenationLayerFromID(_id)}
 }
 
+// Dimension calls the underlying Dimension.
+func (x *ConcatenationLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
 func (x *ConcatenationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ConcatenationLayerable is the interface implemented by [ConcatenationLayer], for mocking and DI.
+type ConcatenationLayerable interface {
+	Unwrap() *raw.MLCConcatenationLayer
+	Dimension() uint
+}
+
+var _ ConcatenationLayerable = (*ConcatenationLayer)(nil)
 

@@ -29,5 +29,31 @@ func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes raw
 	return x
 }
 
+// WasAttributeConsumed calls the underlying WasAttributeConsumed.
+func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute raw.FSItemAttribute) bool {
+	return x.inner.WasAttributeConsumed(attribute)
+}
+
+// ConsumedAttributes calls the underlying ConsumedAttributes.
+func (x *ItemSetAttributesRequest) ConsumedAttributes() raw.FSItemAttribute {
+	return x.inner.ConsumedAttributes()
+}
+
+// SetConsumedAttributes calls the underlying SetConsumedAttributes.
+func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes raw.FSItemAttribute) {
+	x.inner.SetConsumedAttributes(consumedAttributes)
+}
+
 func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes { return &x.inner.FSItemAttributes }
+
+// ItemSetAttributesRequestable is the interface implemented by [ItemSetAttributesRequest], for mocking and DI.
+type ItemSetAttributesRequestable interface {
+	Unwrap() *raw.FSItemSetAttributesRequest
+	WithConsumedAttributes(consumedAttributes raw.FSItemAttribute) *ItemSetAttributesRequest
+	WasAttributeConsumed(attribute raw.FSItemAttribute) bool
+	ConsumedAttributes() raw.FSItemAttribute
+	SetConsumedAttributes(consumedAttributes raw.FSItemAttribute)
+}
+
+var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)
 

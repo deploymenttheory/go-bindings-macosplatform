@@ -48,5 +48,64 @@ func (x *MTRUnitTestingClusterTestAddArgumentsParams) WithServerSideProcessingTi
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) Arg1() *foundation.NSNumber {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetArg1(arg1 *foundation.NSNumber) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) Arg2() *foundation.NSNumber {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetArg2(arg2 *foundation.NSNumber) {
+	x.inner.SetArg2(arg2)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestAddArgumentsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestAddArgumentsParams) asMTRUnitTestingClusterTestAddArgumentsParams() *raw.MTRUnitTestingClusterTestAddArgumentsParams { return x.inner }
+
+// MTRUnitTestingClusterTestAddArgumentsParamsable is the interface implemented by [MTRUnitTestingClusterTestAddArgumentsParams], for mocking and DI.
+type MTRUnitTestingClusterTestAddArgumentsParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestAddArgumentsParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestAddArgumentsParams
+	Arg1() *foundation.NSNumber
+	SetArg1(arg1 *foundation.NSNumber)
+	Arg2() *foundation.NSNumber
+	SetArg2(arg2 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestAddArgumentsParamsable = (*MTRUnitTestingClusterTestAddArgumentsParams)(nil)
 

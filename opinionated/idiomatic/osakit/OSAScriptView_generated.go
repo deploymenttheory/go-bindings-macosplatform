@@ -7,6 +7,7 @@ package osakit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,4 +66,106 @@ func (x *ScriptView) WithIndentWidth(indentWidth uint) *ScriptView {
 	x.inner.SetIndentWidth(indentWidth)
 	return x
 }
+
+// Source calls the underlying Source.
+func (x *ScriptView) Source() string {
+	_r := x.inner.Source()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSource calls the underlying SetSource.
+func (x *ScriptView) SetSource(source string) {
+	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+}
+
+// UsesScriptAssistant calls the underlying UsesScriptAssistant.
+func (x *ScriptView) UsesScriptAssistant() bool {
+	return x.inner.UsesScriptAssistant()
+}
+
+// SetUsesScriptAssistant calls the underlying SetUsesScriptAssistant.
+func (x *ScriptView) SetUsesScriptAssistant(usesScriptAssistant bool) {
+	x.inner.SetUsesScriptAssistant(usesScriptAssistant)
+}
+
+// UsesTabs calls the underlying UsesTabs.
+func (x *ScriptView) UsesTabs() bool {
+	return x.inner.UsesTabs()
+}
+
+// SetUsesTabs calls the underlying SetUsesTabs.
+func (x *ScriptView) SetUsesTabs(usesTabs bool) {
+	x.inner.SetUsesTabs(usesTabs)
+}
+
+// TabWidth calls the underlying TabWidth.
+func (x *ScriptView) TabWidth() uint {
+	return x.inner.TabWidth()
+}
+
+// SetTabWidth calls the underlying SetTabWidth.
+func (x *ScriptView) SetTabWidth(tabWidth uint) {
+	x.inner.SetTabWidth(tabWidth)
+}
+
+// WrapsLines calls the underlying WrapsLines.
+func (x *ScriptView) WrapsLines() bool {
+	return x.inner.WrapsLines()
+}
+
+// SetWrapsLines calls the underlying SetWrapsLines.
+func (x *ScriptView) SetWrapsLines(wrapsLines bool) {
+	x.inner.SetWrapsLines(wrapsLines)
+}
+
+// IndentsWrappedLines calls the underlying IndentsWrappedLines.
+func (x *ScriptView) IndentsWrappedLines() bool {
+	return x.inner.IndentsWrappedLines()
+}
+
+// SetIndentsWrappedLines calls the underlying SetIndentsWrappedLines.
+func (x *ScriptView) SetIndentsWrappedLines(indentsWrappedLines bool) {
+	x.inner.SetIndentsWrappedLines(indentsWrappedLines)
+}
+
+// IndentWidth calls the underlying IndentWidth.
+func (x *ScriptView) IndentWidth() uint {
+	return x.inner.IndentWidth()
+}
+
+// SetIndentWidth calls the underlying SetIndentWidth.
+func (x *ScriptView) SetIndentWidth(indentWidth uint) {
+	x.inner.SetIndentWidth(indentWidth)
+}
+
+// ScriptViewable is the interface implemented by [ScriptView], for mocking and DI.
+type ScriptViewable interface {
+	Unwrap() *raw.OSAScriptView
+	WithSource(source string) *ScriptView
+	WithUsesScriptAssistant(usesScriptAssistant bool) *ScriptView
+	WithUsesTabs(usesTabs bool) *ScriptView
+	WithTabWidth(tabWidth uint) *ScriptView
+	WithWrapsLines(wrapsLines bool) *ScriptView
+	WithIndentsWrappedLines(indentsWrappedLines bool) *ScriptView
+	WithIndentWidth(indentWidth uint) *ScriptView
+	Source() string
+	SetSource(source string)
+	UsesScriptAssistant() bool
+	SetUsesScriptAssistant(usesScriptAssistant bool)
+	UsesTabs() bool
+	SetUsesTabs(usesTabs bool)
+	TabWidth() uint
+	SetTabWidth(tabWidth uint)
+	WrapsLines() bool
+	SetWrapsLines(wrapsLines bool)
+	IndentsWrappedLines() bool
+	SetIndentsWrappedLines(indentsWrappedLines bool)
+	IndentWidth() uint
+	SetIndentWidth(indentWidth uint)
+}
+
+var _ ScriptViewable = (*ScriptView)(nil)
 

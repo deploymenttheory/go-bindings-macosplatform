@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,88 @@ func (x *DepthStencilDescriptor) WithLabel(label string) *DepthStencilDescriptor
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// DepthCompareFunction calls the underlying DepthCompareFunction.
+func (x *DepthStencilDescriptor) DepthCompareFunction() raw.MTLCompareFunction {
+	return x.inner.DepthCompareFunction()
+}
+
+// SetDepthCompareFunction calls the underlying SetDepthCompareFunction.
+func (x *DepthStencilDescriptor) SetDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) {
+	x.inner.SetDepthCompareFunction(depthCompareFunction)
+}
+
+// IsDepthWriteEnabled calls the underlying IsDepthWriteEnabled.
+func (x *DepthStencilDescriptor) IsDepthWriteEnabled() bool {
+	return x.inner.IsDepthWriteEnabled()
+}
+
+// SetDepthWriteEnabled calls the underlying SetDepthWriteEnabled.
+func (x *DepthStencilDescriptor) SetDepthWriteEnabled(depthWriteEnabled bool) {
+	x.inner.SetDepthWriteEnabled(depthWriteEnabled)
+}
+
+// FrontFaceStencil calls the underlying FrontFaceStencil.
+func (x *DepthStencilDescriptor) FrontFaceStencil() *StencilDescriptor {
+	_r := x.inner.FrontFaceStencil()
+	if _r == nil {
+		return nil
+	}
+	return &StencilDescriptor{inner: _r}
+}
+
+// SetFrontFaceStencil calls the underlying SetFrontFaceStencil.
+func (x *DepthStencilDescriptor) SetFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor) {
+	x.inner.SetFrontFaceStencil(frontFaceStencil)
+}
+
+// BackFaceStencil calls the underlying BackFaceStencil.
+func (x *DepthStencilDescriptor) BackFaceStencil() *StencilDescriptor {
+	_r := x.inner.BackFaceStencil()
+	if _r == nil {
+		return nil
+	}
+	return &StencilDescriptor{inner: _r}
+}
+
+// SetBackFaceStencil calls the underlying SetBackFaceStencil.
+func (x *DepthStencilDescriptor) SetBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor) {
+	x.inner.SetBackFaceStencil(backFaceStencil)
+}
+
+// Label calls the underlying Label.
+func (x *DepthStencilDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *DepthStencilDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// DepthStencilDescriptorable is the interface implemented by [DepthStencilDescriptor], for mocking and DI.
+type DepthStencilDescriptorable interface {
+	Unwrap() *raw.MTLDepthStencilDescriptor
+	WithDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction) *DepthStencilDescriptor
+	WithDepthWriteEnabled(depthWriteEnabled bool) *DepthStencilDescriptor
+	WithFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor
+	WithBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor) *DepthStencilDescriptor
+	WithLabel(label string) *DepthStencilDescriptor
+	DepthCompareFunction() raw.MTLCompareFunction
+	SetDepthCompareFunction(depthCompareFunction raw.MTLCompareFunction)
+	IsDepthWriteEnabled() bool
+	SetDepthWriteEnabled(depthWriteEnabled bool)
+	FrontFaceStencil() *StencilDescriptor
+	SetFrontFaceStencil(frontFaceStencil *raw.MTLStencilDescriptor)
+	BackFaceStencil() *StencilDescriptor
+	SetBackFaceStencil(backFaceStencil *raw.MTLStencilDescriptor)
+	Label() string
+	SetLabel(label string)
+}
+
+var _ DepthStencilDescriptorable = (*DepthStencilDescriptor)(nil)
 

@@ -46,5 +46,25 @@ func (x *NNGramMatrixCalculation) WithAlpha(alpha float32) *NNGramMatrixCalculat
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *NNGramMatrixCalculation) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *NNGramMatrixCalculation) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
 func (x *NNGramMatrixCalculation) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// NNGramMatrixCalculationable is the interface implemented by [NNGramMatrixCalculation], for mocking and DI.
+type NNGramMatrixCalculationable interface {
+	Unwrap() *raw.MPSNNGramMatrixCalculation
+	WithAlpha(alpha float32) *NNGramMatrixCalculation
+	Alpha() float32
+	SetAlpha(alpha float32)
+}
+
+var _ NNGramMatrixCalculationable = (*NNGramMatrixCalculation)(nil)
 

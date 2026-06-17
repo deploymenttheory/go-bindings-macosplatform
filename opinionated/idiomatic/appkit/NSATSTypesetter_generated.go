@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,24 @@ func NewATSTypesetter() *ATSTypesetter {
 	return &ATSTypesetter{inner: raw.NSATSTypesetterFromID(_id)}
 }
 
+// LineFragmentRectForProposedRectRemainingRect calls the underlying LineFragmentRectForProposedRectRemainingRect.
+func (x *ATSTypesetter) LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.LineFragmentRectForProposedRectRemainingRect(proposedRect, remainingRect)
+}
+
+// GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits calls the underlying GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits.
+func (x *ATSTypesetter) GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint {
+	return x.inner.GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange, glyphBuffer, charIndexBuffer, inscribeBuffer, elasticBuffer)
+}
+
 func (x *ATSTypesetter) asTypesetter() *raw.NSTypesetter { return &x.inner.NSTypesetter }
+
+// ATSTypesetterable is the interface implemented by [ATSTypesetter], for mocking and DI.
+type ATSTypesetterable interface {
+	Unwrap() *raw.NSATSTypesetter
+	LineFragmentRectForProposedRectRemainingRect(proposedRect corefoundation.CGRect, remainingRect *corefoundation.CGRect) corefoundation.CGRect
+	GetGlyphsInRangeGlyphsCharacterIndexesGlyphInscriptionsElasticBits(glyphsRange foundation.NSRange, glyphBuffer *uint, charIndexBuffer *uint, inscribeBuffer *raw.NSGlyphInscription, elasticBuffer *bool) uint
+}
+
+var _ ATSTypesetterable = (*ATSTypesetter)(nil)
 

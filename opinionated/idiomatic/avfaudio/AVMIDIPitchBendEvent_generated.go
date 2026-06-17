@@ -30,7 +30,27 @@ func (x *MIDIPitchBendEvent) WithValue(value uint) *MIDIPitchBendEvent {
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *MIDIPitchBendEvent) Value() uint {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MIDIPitchBendEvent) SetValue(value uint) {
+	x.inner.SetValue(value)
+}
+
 func (x *MIDIPitchBendEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent { return &x.inner.AVMIDIChannelEvent }
 
 func (x *MIDIPitchBendEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMIDIChannelEvent.AVMusicEvent }
+
+// MIDIPitchBendEventable is the interface implemented by [MIDIPitchBendEvent], for mocking and DI.
+type MIDIPitchBendEventable interface {
+	Unwrap() *raw.AVMIDIPitchBendEvent
+	WithValue(value uint) *MIDIPitchBendEvent
+	Value() uint
+	SetValue(value uint)
+}
+
+var _ MIDIPitchBendEventable = (*MIDIPitchBendEvent)(nil)
 

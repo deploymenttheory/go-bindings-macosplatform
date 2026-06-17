@@ -36,3 +36,36 @@ func (x *PickerUpdateConfiguration) WithEdgesWithoutContentMargins(edgesWithoutC
 	return x
 }
 
+// SelectionLimit calls the underlying SelectionLimit.
+func (x *PickerUpdateConfiguration) SelectionLimit() int {
+	return x.inner.SelectionLimit()
+}
+
+// SetSelectionLimit calls the underlying SetSelectionLimit.
+func (x *PickerUpdateConfiguration) SetSelectionLimit(selectionLimit int) {
+	x.inner.SetSelectionLimit(selectionLimit)
+}
+
+// EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
+func (x *PickerUpdateConfiguration) EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge {
+	return x.inner.EdgesWithoutContentMargins()
+}
+
+// SetEdgesWithoutContentMargins calls the underlying SetEdgesWithoutContentMargins.
+func (x *PickerUpdateConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
+	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
+}
+
+// PickerUpdateConfigurationable is the interface implemented by [PickerUpdateConfiguration], for mocking and DI.
+type PickerUpdateConfigurationable interface {
+	Unwrap() *raw.PHPickerUpdateConfiguration
+	WithSelectionLimit(selectionLimit int) *PickerUpdateConfiguration
+	WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerUpdateConfiguration
+	SelectionLimit() int
+	SetSelectionLimit(selectionLimit int)
+	EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge
+	SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge)
+}
+
+var _ PickerUpdateConfigurationable = (*PickerUpdateConfiguration)(nil)
+

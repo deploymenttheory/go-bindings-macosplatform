@@ -6,6 +6,7 @@ package automator
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,40 @@ func NewShellScriptAction() *ShellScriptAction {
 	return &ShellScriptAction{inner: raw.AMShellScriptActionFromID(_id)}
 }
 
+// RemapLineEndings calls the underlying RemapLineEndings.
+func (x *ShellScriptAction) RemapLineEndings() bool {
+	return x.inner.RemapLineEndings()
+}
+
+// InputFieldSeparator calls the underlying InputFieldSeparator.
+func (x *ShellScriptAction) InputFieldSeparator() string {
+	_r := x.inner.InputFieldSeparator()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OutputFieldSeparator calls the underlying OutputFieldSeparator.
+func (x *ShellScriptAction) OutputFieldSeparator() string {
+	_r := x.inner.OutputFieldSeparator()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ShellScriptAction) asBundleAction() *raw.AMBundleAction { return &x.inner.AMBundleAction }
 
 func (x *ShellScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleAction.AMAction }
+
+// ShellScriptActionable is the interface implemented by [ShellScriptAction], for mocking and DI.
+type ShellScriptActionable interface {
+	Unwrap() *raw.AMShellScriptAction
+	RemapLineEndings() bool
+	InputFieldSeparator() string
+	OutputFieldSeparator() string
+}
+
+var _ ShellScriptActionable = (*ShellScriptAction)(nil)
 

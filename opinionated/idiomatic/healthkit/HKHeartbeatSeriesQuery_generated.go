@@ -27,3 +27,10 @@ func NewHeartbeatSeriesQueryWithHeartbeatSeriesDataHandler(heartbeatSeries *raw.
 
 func (x *HeartbeatSeriesQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// HeartbeatSeriesQueryable is the interface implemented by [HeartbeatSeriesQuery], for mocking and DI.
+type HeartbeatSeriesQueryable interface {
+	Unwrap() *raw.HKHeartbeatSeriesQuery
+}
+
+var _ HeartbeatSeriesQueryable = (*HeartbeatSeriesQuery)(nil)
+

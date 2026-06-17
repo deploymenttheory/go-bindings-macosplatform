@@ -31,3 +31,23 @@ func (x *AddVoiceShortcutViewController) WithDelegate(delegate raw.INUIAddVoiceS
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *AddVoiceShortcutViewController) Delegate() raw.INUIAddVoiceShortcutViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AddVoiceShortcutViewController) SetDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// AddVoiceShortcutViewControllerable is the interface implemented by [AddVoiceShortcutViewController], for mocking and DI.
+type AddVoiceShortcutViewControllerable interface {
+	Unwrap() *raw.INUIAddVoiceShortcutViewController
+	WithDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate) *AddVoiceShortcutViewController
+	Delegate() raw.INUIAddVoiceShortcutViewControllerDelegate
+	SetDelegate(delegate raw.INUIAddVoiceShortcutViewControllerDelegate)
+}
+
+var _ AddVoiceShortcutViewControllerable = (*AddVoiceShortcutViewController)(nil)
+

@@ -5,6 +5,7 @@
 package virtualization
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,42 @@ func NewGraphicsDisplay() *GraphicsDisplay {
 	return &GraphicsDisplay{inner: raw.VZGraphicsDisplayFromID(_id)}
 }
 
+// ReconfigureWithSizeInPixelsError calls the underlying ReconfigureWithSizeInPixelsError.
+func (x *GraphicsDisplay) ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error) {
+	return x.inner.ReconfigureWithSizeInPixelsError(sizeInPixels)
+}
+
+// ReconfigureWithConfigurationError calls the underlying ReconfigureWithConfigurationError.
+func (x *GraphicsDisplay) ReconfigureWithConfigurationError(configuration *raw.VZGraphicsDisplayConfiguration) (bool, error) {
+	return x.inner.ReconfigureWithConfigurationError(configuration)
+}
+
+// AddObserver calls the underlying AddObserver.
+func (x *GraphicsDisplay) AddObserver(observer raw.VZGraphicsDisplayObserver) {
+	x.inner.AddObserver(observer)
+}
+
+// RemoveObserver calls the underlying RemoveObserver.
+func (x *GraphicsDisplay) RemoveObserver(observer raw.VZGraphicsDisplayObserver) {
+	x.inner.RemoveObserver(observer)
+}
+
+// SizeInPixels calls the underlying SizeInPixels.
+func (x *GraphicsDisplay) SizeInPixels() corefoundation.CGSize {
+	return x.inner.SizeInPixels()
+}
+
 func (x *GraphicsDisplay) asGraphicsDisplay() *raw.VZGraphicsDisplay { return x.inner }
+
+// GraphicsDisplayable is the interface implemented by [GraphicsDisplay], for mocking and DI.
+type GraphicsDisplayable interface {
+	Unwrap() *raw.VZGraphicsDisplay
+	ReconfigureWithSizeInPixelsError(sizeInPixels corefoundation.CGSize) (bool, error)
+	ReconfigureWithConfigurationError(configuration *raw.VZGraphicsDisplayConfiguration) (bool, error)
+	AddObserver(observer raw.VZGraphicsDisplayObserver)
+	RemoveObserver(observer raw.VZGraphicsDisplayObserver)
+	SizeInPixels() corefoundation.CGSize
+}
+
+var _ GraphicsDisplayable = (*GraphicsDisplay)(nil)
 

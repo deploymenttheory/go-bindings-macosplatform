@@ -47,7 +47,66 @@ func (x *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
 	return x
 }
 
+// Frequency calls the underlying Frequency.
+func (x *CoherentNoiseSource) Frequency() float64 {
+	return x.inner.Frequency()
+}
+
+// SetFrequency calls the underlying SetFrequency.
+func (x *CoherentNoiseSource) SetFrequency(frequency float64) {
+	x.inner.SetFrequency(frequency)
+}
+
+// OctaveCount calls the underlying OctaveCount.
+func (x *CoherentNoiseSource) OctaveCount() int {
+	return x.inner.OctaveCount()
+}
+
+// SetOctaveCount calls the underlying SetOctaveCount.
+func (x *CoherentNoiseSource) SetOctaveCount(octaveCount int) {
+	x.inner.SetOctaveCount(octaveCount)
+}
+
+// Lacunarity calls the underlying Lacunarity.
+func (x *CoherentNoiseSource) Lacunarity() float64 {
+	return x.inner.Lacunarity()
+}
+
+// SetLacunarity calls the underlying SetLacunarity.
+func (x *CoherentNoiseSource) SetLacunarity(lacunarity float64) {
+	x.inner.SetLacunarity(lacunarity)
+}
+
+// Seed calls the underlying Seed.
+func (x *CoherentNoiseSource) Seed() int32 {
+	return x.inner.Seed()
+}
+
+// SetSeed calls the underlying SetSeed.
+func (x *CoherentNoiseSource) SetSeed(seed int32) {
+	x.inner.SetSeed(seed)
+}
+
 func (x *CoherentNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return x.inner }
 
 func (x *CoherentNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// CoherentNoiseSourceable is the interface implemented by [CoherentNoiseSource], for mocking and DI.
+type CoherentNoiseSourceable interface {
+	Unwrap() *raw.GKCoherentNoiseSource
+	WithFrequency(frequency float64) *CoherentNoiseSource
+	WithOctaveCount(octaveCount int) *CoherentNoiseSource
+	WithLacunarity(lacunarity float64) *CoherentNoiseSource
+	WithSeed(seed int32) *CoherentNoiseSource
+	Frequency() float64
+	SetFrequency(frequency float64)
+	OctaveCount() int
+	SetOctaveCount(octaveCount int)
+	Lacunarity() float64
+	SetLacunarity(lacunarity float64)
+	Seed() int32
+	SetSeed(seed int32)
+}
+
+var _ CoherentNoiseSourceable = (*CoherentNoiseSource)(nil)
 

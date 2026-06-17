@@ -6,6 +6,8 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +30,40 @@ func (x *PostalAddressFormatter) WithStyle(style raw.CNPostalAddressFormatterSty
 	x.inner.SetStyle(style)
 	return x
 }
+
+// StringFromPostalAddress calls the underlying StringFromPostalAddress.
+func (x *PostalAddressFormatter) StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string {
+	_r := x.inner.StringFromPostalAddress(postalAddress)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributedStringFromPostalAddressWithDefaultAttributes calls the underlying AttributedStringFromPostalAddressWithDefaultAttributes.
+func (x *PostalAddressFormatter) AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
+	return x.inner.AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress, attributes)
+}
+
+// Style calls the underlying Style.
+func (x *PostalAddressFormatter) Style() raw.CNPostalAddressFormatterStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *PostalAddressFormatter) SetStyle(style raw.CNPostalAddressFormatterStyle) {
+	x.inner.SetStyle(style)
+}
+
+// PostalAddressFormatterable is the interface implemented by [PostalAddressFormatter], for mocking and DI.
+type PostalAddressFormatterable interface {
+	Unwrap() *raw.CNPostalAddressFormatter
+	WithStyle(style raw.CNPostalAddressFormatterStyle) *PostalAddressFormatter
+	StringFromPostalAddress(postalAddress *raw.CNPostalAddress) string
+	AttributedStringFromPostalAddressWithDefaultAttributes(postalAddress *raw.CNPostalAddress, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
+	Style() raw.CNPostalAddressFormatterStyle
+	SetStyle(style raw.CNPostalAddressFormatterStyle)
+}
+
+var _ PostalAddressFormatterable = (*PostalAddressFormatter)(nil)
 

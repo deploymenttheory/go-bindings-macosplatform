@@ -5,8 +5,10 @@
 package social
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +37,93 @@ func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaini
 	x.inner.SetCharactersRemaining(charactersRemaining)
 	return x
 }
+
+// PresentationAnimationDidFinish calls the underlying PresentationAnimationDidFinish.
+func (x *ComposeServiceViewController) PresentationAnimationDidFinish() {
+	x.inner.PresentationAnimationDidFinish()
+}
+
+// DidSelectPost calls the underlying DidSelectPost.
+func (x *ComposeServiceViewController) DidSelectPost() {
+	x.inner.DidSelectPost()
+}
+
+// DidSelectCancel calls the underlying DidSelectCancel.
+func (x *ComposeServiceViewController) DidSelectCancel() {
+	x.inner.DidSelectCancel()
+}
+
+// Cancel calls the underlying Cancel.
+func (x *ComposeServiceViewController) Cancel() {
+	x.inner.Cancel()
+}
+
+// IsContentValid calls the underlying IsContentValid.
+func (x *ComposeServiceViewController) IsContentValid() bool {
+	return x.inner.IsContentValid()
+}
+
+// ValidateContent calls the underlying ValidateContent.
+func (x *ComposeServiceViewController) ValidateContent() {
+	x.inner.ValidateContent()
+}
+
+// TextView calls the underlying TextView.
+func (x *ComposeServiceViewController) TextView() *appkit.NSTextView {
+	return x.inner.TextView()
+}
+
+// ContentText calls the underlying ContentText.
+func (x *ComposeServiceViewController) ContentText() string {
+	_r := x.inner.ContentText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Placeholder calls the underlying Placeholder.
+func (x *ComposeServiceViewController) Placeholder() string {
+	_r := x.inner.Placeholder()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPlaceholder calls the underlying SetPlaceholder.
+func (x *ComposeServiceViewController) SetPlaceholder(placeholder string) {
+	x.inner.SetPlaceholder(foundation.NSStringStringWithUTF8String(placeholder))
+}
+
+// CharactersRemaining calls the underlying CharactersRemaining.
+func (x *ComposeServiceViewController) CharactersRemaining() *foundation.NSNumber {
+	return x.inner.CharactersRemaining()
+}
+
+// SetCharactersRemaining calls the underlying SetCharactersRemaining.
+func (x *ComposeServiceViewController) SetCharactersRemaining(charactersRemaining *foundation.NSNumber) {
+	x.inner.SetCharactersRemaining(charactersRemaining)
+}
+
+// ComposeServiceViewControllerable is the interface implemented by [ComposeServiceViewController], for mocking and DI.
+type ComposeServiceViewControllerable interface {
+	Unwrap() *raw.SLComposeServiceViewController
+	WithPlaceholder(placeholder string) *ComposeServiceViewController
+	WithCharactersRemaining(charactersRemaining *foundation.NSNumber) *ComposeServiceViewController
+	PresentationAnimationDidFinish()
+	DidSelectPost()
+	DidSelectCancel()
+	Cancel()
+	IsContentValid() bool
+	ValidateContent()
+	TextView() *appkit.NSTextView
+	ContentText() string
+	Placeholder() string
+	SetPlaceholder(placeholder string)
+	CharactersRemaining() *foundation.NSNumber
+	SetCharactersRemaining(charactersRemaining *foundation.NSNumber)
+}
+
+var _ ComposeServiceViewControllerable = (*ComposeServiceViewController)(nil)
 

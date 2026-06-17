@@ -46,3 +46,16 @@ func NewKeyedUnarchiverForReadingWithDataDevice(data *foundation.NSData, device 
 	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(_id)}
 }
 
+// MpsMTLDevice calls the underlying MpsMTLDevice.
+func (x *KeyedUnarchiver) MpsMTLDevice() metal.MTLDevice {
+	return x.inner.MpsMTLDevice()
+}
+
+// KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
+type KeyedUnarchiverable interface {
+	Unwrap() *raw.MPSKeyedUnarchiver
+	MpsMTLDevice() metal.MTLDevice
+}
+
+var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)
+

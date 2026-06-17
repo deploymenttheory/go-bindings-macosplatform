@@ -25,3 +25,16 @@ func NewAccelerationStructureGroupWithDevice(device metal.MTLDevice) *Accelerati
 	return &AccelerationStructureGroup{inner: raw.MPSAccelerationStructureGroupFromID(_id)}
 }
 
+// Device calls the underlying Device.
+func (x *AccelerationStructureGroup) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// AccelerationStructureGroupable is the interface implemented by [AccelerationStructureGroup], for mocking and DI.
+type AccelerationStructureGroupable interface {
+	Unwrap() *raw.MPSAccelerationStructureGroup
+	Device() metal.MTLDevice
+}
+
+var _ AccelerationStructureGroupable = (*AccelerationStructureGroup)(nil)
+

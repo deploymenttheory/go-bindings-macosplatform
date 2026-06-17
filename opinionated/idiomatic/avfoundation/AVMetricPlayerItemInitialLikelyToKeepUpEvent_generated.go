@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,11 +30,9 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) PlaylistRequestEvents() []*
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetricHLSPlaylistRequestEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricHLSPlaylistRequestEvent {
+		return raw.AVMetricHLSPlaylistRequestEventFromID(purego.Retain(_id))
+	})
 }
 
 // MediaSegmentRequestEvents returns the collection as a Go slice.
@@ -42,11 +41,9 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) MediaSegmentRequestEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetricHLSMediaSegmentRequestEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricHLSMediaSegmentRequestEvent {
+		return raw.AVMetricHLSMediaSegmentRequestEventFromID(purego.Retain(_id))
+	})
 }
 
 // ContentKeyRequestEvents returns the collection as a Go slice.
@@ -55,14 +52,22 @@ func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) ContentKeyRequestEvents() [
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetricContentKeyRequestEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetricContentKeyRequestEvent {
+		return raw.AVMetricContentKeyRequestEventFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent { return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent }
 
 func (x *MetricPlayerItemInitialLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricPlayerItemLikelyToKeepUpEvent.AVMetricEvent }
+
+// MetricPlayerItemInitialLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemInitialLikelyToKeepUpEvent], for mocking and DI.
+type MetricPlayerItemInitialLikelyToKeepUpEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemInitialLikelyToKeepUpEvent
+	PlaylistRequestEvents() []*raw.AVMetricHLSPlaylistRequestEvent
+	MediaSegmentRequestEvents() []*raw.AVMetricHLSMediaSegmentRequestEvent
+	ContentKeyRequestEvents() []*raw.AVMetricContentKeyRequestEvent
+}
+
+var _ MetricPlayerItemInitialLikelyToKeepUpEventable = (*MetricPlayerItemInitialLikelyToKeepUpEvent)(nil)
 

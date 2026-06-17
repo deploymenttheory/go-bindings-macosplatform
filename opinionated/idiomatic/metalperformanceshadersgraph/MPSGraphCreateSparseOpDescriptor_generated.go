@@ -36,5 +36,38 @@ func (x *GraphCreateSparseOpDescriptor) WithDataType(dataType mpscore.MPSDataTyp
 	return x
 }
 
+// SparseStorageType calls the underlying SparseStorageType.
+func (x *GraphCreateSparseOpDescriptor) SparseStorageType() raw.MPSGraphSparseStorageType {
+	return x.inner.SparseStorageType()
+}
+
+// SetSparseStorageType calls the underlying SetSparseStorageType.
+func (x *GraphCreateSparseOpDescriptor) SetSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType) {
+	x.inner.SetSparseStorageType(sparseStorageType)
+}
+
+// DataType calls the underlying DataType.
+func (x *GraphCreateSparseOpDescriptor) DataType() mpscore.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *GraphCreateSparseOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
 func (x *GraphCreateSparseOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
+
+// GraphCreateSparseOpDescriptorable is the interface implemented by [GraphCreateSparseOpDescriptor], for mocking and DI.
+type GraphCreateSparseOpDescriptorable interface {
+	Unwrap() *raw.MPSGraphCreateSparseOpDescriptor
+	WithSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType) *GraphCreateSparseOpDescriptor
+	WithDataType(dataType mpscore.MPSDataType) *GraphCreateSparseOpDescriptor
+	SparseStorageType() raw.MPSGraphSparseStorageType
+	SetSparseStorageType(sparseStorageType raw.MPSGraphSparseStorageType)
+	DataType() mpscore.MPSDataType
+	SetDataType(dataType mpscore.MPSDataType)
+}
+
+var _ GraphCreateSparseOpDescriptorable = (*GraphCreateSparseOpDescriptor)(nil)
 

@@ -5,7 +5,9 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,28 @@ func NewCoreMLFeatureValueObservation() *CoreMLFeatureValueObservation {
 	return &CoreMLFeatureValueObservation{inner: raw.VNCoreMLFeatureValueObservationFromID(_id)}
 }
 
+// FeatureValue calls the underlying FeatureValue.
+func (x *CoreMLFeatureValueObservation) FeatureValue() *coreml.MLFeatureValue {
+	return x.inner.FeatureValue()
+}
+
+// FeatureName calls the underlying FeatureName.
+func (x *CoreMLFeatureValueObservation) FeatureName() string {
+	_r := x.inner.FeatureName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *CoreMLFeatureValueObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// CoreMLFeatureValueObservationable is the interface implemented by [CoreMLFeatureValueObservation], for mocking and DI.
+type CoreMLFeatureValueObservationable interface {
+	Unwrap() *raw.VNCoreMLFeatureValueObservation
+	FeatureValue() *coreml.MLFeatureValue
+	FeatureName() string
+}
+
+var _ CoreMLFeatureValueObservationable = (*CoreMLFeatureValueObservation)(nil)
 

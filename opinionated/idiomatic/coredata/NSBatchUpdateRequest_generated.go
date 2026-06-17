@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,5 +57,84 @@ func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate *foundati
 	return x
 }
 
+// EntityName calls the underlying EntityName.
+func (x *BatchUpdateRequest) EntityName() string {
+	_r := x.inner.EntityName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Entity calls the underlying Entity.
+func (x *BatchUpdateRequest) Entity() *EntityDescription {
+	_r := x.inner.Entity()
+	if _r == nil {
+		return nil
+	}
+	return &EntityDescription{inner: _r}
+}
+
+// Predicate calls the underlying Predicate.
+func (x *BatchUpdateRequest) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *BatchUpdateRequest) SetPredicate(predicate *foundation.NSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
+// IncludesSubentities calls the underlying IncludesSubentities.
+func (x *BatchUpdateRequest) IncludesSubentities() bool {
+	return x.inner.IncludesSubentities()
+}
+
+// SetIncludesSubentities calls the underlying SetIncludesSubentities.
+func (x *BatchUpdateRequest) SetIncludesSubentities(includesSubentities bool) {
+	x.inner.SetIncludesSubentities(includesSubentities)
+}
+
+// ResultType calls the underlying ResultType.
+func (x *BatchUpdateRequest) ResultType() raw.NSBatchUpdateRequestResultType {
+	return x.inner.ResultType()
+}
+
+// SetResultType calls the underlying SetResultType.
+func (x *BatchUpdateRequest) SetResultType(resultType raw.NSBatchUpdateRequestResultType) {
+	x.inner.SetResultType(resultType)
+}
+
+// PropertiesToUpdate calls the underlying PropertiesToUpdate.
+func (x *BatchUpdateRequest) PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.PropertiesToUpdate()
+}
+
+// SetPropertiesToUpdate calls the underlying SetPropertiesToUpdate.
+func (x *BatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
+}
+
 func (x *BatchUpdateRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest { return &x.inner.NSPersistentStoreRequest }
+
+// BatchUpdateRequestable is the interface implemented by [BatchUpdateRequest], for mocking and DI.
+type BatchUpdateRequestable interface {
+	Unwrap() *raw.NSBatchUpdateRequest
+	WithPredicate(predicate *foundation.NSPredicate) *BatchUpdateRequest
+	WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest
+	WithResultType(resultType raw.NSBatchUpdateRequestResultType) *BatchUpdateRequest
+	WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest
+	EntityName() string
+	Entity() *EntityDescription
+	Predicate() *foundation.NSPredicate
+	SetPredicate(predicate *foundation.NSPredicate)
+	IncludesSubentities() bool
+	SetIncludesSubentities(includesSubentities bool)
+	ResultType() raw.NSBatchUpdateRequestResultType
+	SetResultType(resultType raw.NSBatchUpdateRequestResultType)
+	PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ BatchUpdateRequestable = (*BatchUpdateRequest)(nil)
 

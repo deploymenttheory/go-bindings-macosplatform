@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,29 @@ func NewQuantity() *Quantity {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantity")), objc.RegisterName("new"))
 	return &Quantity{inner: raw.HKQuantityFromID(_id)}
 }
+
+// IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
+func (x *Quantity) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
+	return x.inner.IsCompatibleWithUnit(unit)
+}
+
+// DoubleValueForUnit calls the underlying DoubleValueForUnit.
+func (x *Quantity) DoubleValueForUnit(unit *raw.HKUnit) float64 {
+	return x.inner.DoubleValueForUnit(unit)
+}
+
+// Compare calls the underlying Compare.
+func (x *Quantity) Compare(quantity *raw.HKQuantity) foundation.NSComparisonResult {
+	return x.inner.Compare(quantity)
+}
+
+// Quantityable is the interface implemented by [Quantity], for mocking and DI.
+type Quantityable interface {
+	Unwrap() *raw.HKQuantity
+	IsCompatibleWithUnit(unit *raw.HKUnit) bool
+	DoubleValueForUnit(unit *raw.HKUnit) float64
+	Compare(quantity *raw.HKQuantity) foundation.NSComparisonResult
+}
+
+var _ Quantityable = (*Quantity)(nil)
 

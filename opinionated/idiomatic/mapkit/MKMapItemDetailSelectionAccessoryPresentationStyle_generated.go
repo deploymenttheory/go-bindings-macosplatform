@@ -23,3 +23,10 @@ func NewMapItemDetailSelectionAccessoryPresentationStyle() *MapItemDetailSelecti
 	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: raw.MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_id)}
 }
 
+// MapItemDetailSelectionAccessoryPresentationStyleable is the interface implemented by [MapItemDetailSelectionAccessoryPresentationStyle], for mocking and DI.
+type MapItemDetailSelectionAccessoryPresentationStyleable interface {
+	Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle
+}
+
+var _ MapItemDetailSelectionAccessoryPresentationStyleable = (*MapItemDetailSelectionAccessoryPresentationStyle)(nil)
+

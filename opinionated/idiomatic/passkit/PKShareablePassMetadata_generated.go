@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -70,4 +71,157 @@ func (x *ShareablePassMetadata) WithRelyingPartyIdentifier(relyingPartyIdentifie
 	x.inner.SetRelyingPartyIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier))
 	return x
 }
+
+// CredentialIdentifier calls the underlying CredentialIdentifier.
+func (x *ShareablePassMetadata) CredentialIdentifier() string {
+	_r := x.inner.CredentialIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SharingInstanceIdentifier calls the underlying SharingInstanceIdentifier.
+func (x *ShareablePassMetadata) SharingInstanceIdentifier() string {
+	_r := x.inner.SharingInstanceIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TemplateIdentifier calls the underlying TemplateIdentifier.
+func (x *ShareablePassMetadata) TemplateIdentifier() unsafe.Pointer {
+	return x.inner.TemplateIdentifier()
+}
+
+// CardTemplateIdentifier calls the underlying CardTemplateIdentifier.
+func (x *ShareablePassMetadata) CardTemplateIdentifier() string {
+	_r := x.inner.CardTemplateIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CardConfigurationIdentifier calls the underlying CardConfigurationIdentifier.
+func (x *ShareablePassMetadata) CardConfigurationIdentifier() string {
+	_r := x.inner.CardConfigurationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RequiresUnifiedAccessCapableDevice calls the underlying RequiresUnifiedAccessCapableDevice.
+func (x *ShareablePassMetadata) RequiresUnifiedAccessCapableDevice() bool {
+	return x.inner.RequiresUnifiedAccessCapableDevice()
+}
+
+// SetRequiresUnifiedAccessCapableDevice calls the underlying SetRequiresUnifiedAccessCapableDevice.
+func (x *ShareablePassMetadata) SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) {
+	x.inner.SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice)
+}
+
+// ServerEnvironmentIdentifier calls the underlying ServerEnvironmentIdentifier.
+func (x *ShareablePassMetadata) ServerEnvironmentIdentifier() string {
+	_r := x.inner.ServerEnvironmentIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServerEnvironmentIdentifier calls the underlying SetServerEnvironmentIdentifier.
+func (x *ShareablePassMetadata) SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string) {
+	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+}
+
+// Preview calls the underlying Preview.
+func (x *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
+	_r := x.inner.Preview()
+	if _r == nil {
+		return nil
+	}
+	return &ShareablePassMetadataPreview{inner: _r}
+}
+
+// PassThumbnailImage calls the underlying PassThumbnailImage.
+func (x *ShareablePassMetadata) PassThumbnailImage() unsafe.Pointer {
+	return x.inner.PassThumbnailImage()
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *ShareablePassMetadata) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OwnerDisplayName calls the underlying OwnerDisplayName.
+func (x *ShareablePassMetadata) OwnerDisplayName() string {
+	_r := x.inner.OwnerDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AccountHash calls the underlying AccountHash.
+func (x *ShareablePassMetadata) AccountHash() string {
+	_r := x.inner.AccountHash()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccountHash calls the underlying SetAccountHash.
+func (x *ShareablePassMetadata) SetAccountHash(accountHash string) {
+	x.inner.SetAccountHash(foundation.NSStringStringWithUTF8String(accountHash))
+}
+
+// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+func (x *ShareablePassMetadata) RelyingPartyIdentifier() string {
+	_r := x.inner.RelyingPartyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRelyingPartyIdentifier calls the underlying SetRelyingPartyIdentifier.
+func (x *ShareablePassMetadata) SetRelyingPartyIdentifier(relyingPartyIdentifier string) {
+	x.inner.SetRelyingPartyIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier))
+}
+
+// ShareablePassMetadataable is the interface implemented by [ShareablePassMetadata], for mocking and DI.
+type ShareablePassMetadataable interface {
+	Unwrap() *raw.PKShareablePassMetadata
+	WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata
+	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata
+	WithAccountHash(accountHash string) *ShareablePassMetadata
+	WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata
+	CredentialIdentifier() string
+	SharingInstanceIdentifier() string
+	TemplateIdentifier() unsafe.Pointer
+	CardTemplateIdentifier() string
+	CardConfigurationIdentifier() string
+	RequiresUnifiedAccessCapableDevice() bool
+	SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool)
+	ServerEnvironmentIdentifier() string
+	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
+	Preview() *ShareablePassMetadataPreview
+	PassThumbnailImage() unsafe.Pointer
+	LocalizedDescription() string
+	OwnerDisplayName() string
+	AccountHash() string
+	SetAccountHash(accountHash string)
+	RelyingPartyIdentifier() string
+	SetRelyingPartyIdentifier(relyingPartyIdentifier string)
+}
+
+var _ ShareablePassMetadataable = (*ShareablePassMetadata)(nil)
 

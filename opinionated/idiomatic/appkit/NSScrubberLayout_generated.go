@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -31,5 +32,86 @@ func NewScrubberLayoutWithCoder(coder *foundation.NSCoder) *ScrubberLayout {
 	return &ScrubberLayout{inner: raw.NSScrubberLayoutFromID(_id)}
 }
 
+// InvalidateLayout calls the underlying InvalidateLayout.
+func (x *ScrubberLayout) InvalidateLayout() {
+	x.inner.InvalidateLayout()
+}
+
+// PrepareLayout calls the underlying PrepareLayout.
+func (x *ScrubberLayout) PrepareLayout() {
+	x.inner.PrepareLayout()
+}
+
+// LayoutAttributesForItemAtIndex calls the underlying LayoutAttributesForItemAtIndex.
+func (x *ScrubberLayout) LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes {
+	_r := x.inner.LayoutAttributesForItemAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &ScrubberLayoutAttributes{inner: _r}
+}
+
+// LayoutAttributesForItemsInRect calls the underlying LayoutAttributesForItemsInRect.
+func (x *ScrubberLayout) LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*raw.NSScrubberLayoutAttributes] {
+	return x.inner.LayoutAttributesForItemsInRect(rect)
+}
+
+// ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect calls the underlying ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect.
+func (x *ScrubberLayout) ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool {
+	return x.inner.ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect, toVisibleRect)
+}
+
+// Scrubber calls the underlying Scrubber.
+func (x *ScrubberLayout) Scrubber() *Scrubber {
+	_r := x.inner.Scrubber()
+	if _r == nil {
+		return nil
+	}
+	return &Scrubber{inner: _r}
+}
+
+// VisibleRect calls the underlying VisibleRect.
+func (x *ScrubberLayout) VisibleRect() corefoundation.CGRect {
+	return x.inner.VisibleRect()
+}
+
+// ScrubberContentSize calls the underlying ScrubberContentSize.
+func (x *ScrubberLayout) ScrubberContentSize() corefoundation.CGSize {
+	return x.inner.ScrubberContentSize()
+}
+
+// ShouldInvalidateLayoutForSelectionChange calls the underlying ShouldInvalidateLayoutForSelectionChange.
+func (x *ScrubberLayout) ShouldInvalidateLayoutForSelectionChange() bool {
+	return x.inner.ShouldInvalidateLayoutForSelectionChange()
+}
+
+// ShouldInvalidateLayoutForHighlightChange calls the underlying ShouldInvalidateLayoutForHighlightChange.
+func (x *ScrubberLayout) ShouldInvalidateLayoutForHighlightChange() bool {
+	return x.inner.ShouldInvalidateLayoutForHighlightChange()
+}
+
+// AutomaticallyMirrorsInRightToLeftLayout calls the underlying AutomaticallyMirrorsInRightToLeftLayout.
+func (x *ScrubberLayout) AutomaticallyMirrorsInRightToLeftLayout() bool {
+	return x.inner.AutomaticallyMirrorsInRightToLeftLayout()
+}
+
 func (x *ScrubberLayout) asScrubberLayout() *raw.NSScrubberLayout { return x.inner }
+
+// ScrubberLayoutable is the interface implemented by [ScrubberLayout], for mocking and DI.
+type ScrubberLayoutable interface {
+	Unwrap() *raw.NSScrubberLayout
+	InvalidateLayout()
+	PrepareLayout()
+	LayoutAttributesForItemAtIndex(index int) *ScrubberLayoutAttributes
+	LayoutAttributesForItemsInRect(rect corefoundation.CGRect) *foundation.NSSet[*raw.NSScrubberLayoutAttributes]
+	ShouldInvalidateLayoutForChangeFromVisibleRectToVisibleRect(fromVisibleRect corefoundation.CGRect, toVisibleRect corefoundation.CGRect) bool
+	Scrubber() *Scrubber
+	VisibleRect() corefoundation.CGRect
+	ScrubberContentSize() corefoundation.CGSize
+	ShouldInvalidateLayoutForSelectionChange() bool
+	ShouldInvalidateLayoutForHighlightChange() bool
+	AutomaticallyMirrorsInRightToLeftLayout() bool
+}
+
+var _ ScrubberLayoutable = (*ScrubberLayout)(nil)
 

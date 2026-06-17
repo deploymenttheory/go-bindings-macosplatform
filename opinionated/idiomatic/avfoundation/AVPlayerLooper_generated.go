@@ -7,7 +7,9 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PlayerLooper wraps [raw.AVPlayerLooper] with a fluent Go API.
@@ -32,16 +34,46 @@ func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player 
 	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
 }
 
+// DisableLooping calls the underlying DisableLooping.
+func (x *PlayerLooper) DisableLooping() {
+	x.inner.DisableLooping()
+}
+
+// Status calls the underlying Status.
+func (x *PlayerLooper) Status() raw.AVPlayerLooperStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *PlayerLooper) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// LoopCount calls the underlying LoopCount.
+func (x *PlayerLooper) LoopCount() int {
+	return x.inner.LoopCount()
+}
+
 // LoopingPlayerItems returns the collection as a Go slice.
 func (x *PlayerLooper) LoopingPlayerItems() []*raw.AVPlayerItem {
 	arr := x.inner.LoopingPlayerItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
+		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	})
 }
+
+// PlayerLooperable is the interface implemented by [PlayerLooper], for mocking and DI.
+type PlayerLooperable interface {
+	Unwrap() *raw.AVPlayerLooper
+	DisableLooping()
+	Status() raw.AVPlayerLooperStatus
+	Error() unsafe.Pointer
+	LoopCount() int
+	LoopingPlayerItems() []*raw.AVPlayerItem
+}
+
+var _ PlayerLooperable = (*PlayerLooper)(nil)
 

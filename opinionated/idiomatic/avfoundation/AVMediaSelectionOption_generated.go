@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,76 @@ func NewMediaSelectionOption() *MediaSelectionOption {
 	return &MediaSelectionOption{inner: raw.AVMediaSelectionOptionFromID(_id)}
 }
 
+// HasMediaCharacteristic calls the underlying HasMediaCharacteristic.
+func (x *MediaSelectionOption) HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool {
+	return x.inner.HasMediaCharacteristic(mediaCharacteristic)
+}
+
+// MetadataForFormat calls the underlying MetadataForFormat.
+func (x *MediaSelectionOption) MetadataForFormat(format string) *foundation.NSArray[*raw.AVMetadataItem] {
+	return x.inner.MetadataForFormat(foundation.NSStringStringWithUTF8String(format))
+}
+
+// AssociatedMediaSelectionOptionInMediaSelectionGroup calls the underlying AssociatedMediaSelectionOptionInMediaSelectionGroup.
+func (x *MediaSelectionOption) AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
+	_r := x.inner.AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup)
+	if _r == nil {
+		return nil
+	}
+	return &MediaSelectionOption{inner: _r}
+}
+
+// PropertyList calls the underlying PropertyList.
+func (x *MediaSelectionOption) PropertyList() objc.ID {
+	return x.inner.PropertyList()
+}
+
+// DisplayNameWithLocale calls the underlying DisplayNameWithLocale.
+func (x *MediaSelectionOption) DisplayNameWithLocale(locale *foundation.NSLocale) string {
+	_r := x.inner.DisplayNameWithLocale(locale)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaType calls the underlying MediaType.
+func (x *MediaSelectionOption) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // MediaSubTypes returns the collection as a Go slice.
 func (x *MediaSelectionOption) MediaSubTypes() []*foundation.NSNumber {
 	arr := x.inner.MediaSubTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// IsPlayable calls the underlying IsPlayable.
+func (x *MediaSelectionOption) IsPlayable() bool {
+	return x.inner.IsPlayable()
+}
+
+// ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
+func (x *MediaSelectionOption) ExtendedLanguageTag() string {
+	_r := x.inner.ExtendedLanguageTag()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// Locale calls the underlying Locale.
+func (x *MediaSelectionOption) Locale() *foundation.NSLocale {
+	return x.inner.Locale()
 }
 
 // CommonMetadata returns the collection as a Go slice.
@@ -43,23 +103,48 @@ func (x *MediaSelectionOption) CommonMetadata() []*raw.AVMetadataItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
 }
 
 // AvailableMetadataFormats returns the collection as a Go slice.
-func (x *MediaSelectionOption) AvailableMetadataFormats() []*foundation.NSString {
+func (x *MediaSelectionOption) AvailableMetadataFormats() []string {
 	arr := x.inner.AvailableMetadataFormats()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *MediaSelectionOption) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MediaSelectionOptionable is the interface implemented by [MediaSelectionOption], for mocking and DI.
+type MediaSelectionOptionable interface {
+	Unwrap() *raw.AVMediaSelectionOption
+	HasMediaCharacteristic(mediaCharacteristic *foundation.NSString) bool
+	MetadataForFormat(format string) *foundation.NSArray[*raw.AVMetadataItem]
+	AssociatedMediaSelectionOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption
+	PropertyList() objc.ID
+	DisplayNameWithLocale(locale *foundation.NSLocale) string
+	MediaType() string
+	MediaSubTypes() []*foundation.NSNumber
+	IsPlayable() bool
+	ExtendedLanguageTag() string
+	Locale() *foundation.NSLocale
+	CommonMetadata() []*raw.AVMetadataItem
+	AvailableMetadataFormats() []string
+	DisplayName() string
+}
+
+var _ MediaSelectionOptionable = (*MediaSelectionOption)(nil)
 

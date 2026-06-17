@@ -36,3 +36,36 @@ func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithMaxCumulative
 	return x
 }
 
+// FailSafeExpiryLengthSeconds calls the underlying FailSafeExpiryLengthSeconds.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() *foundation.NSNumber {
+	return x.inner.FailSafeExpiryLengthSeconds()
+}
+
+// SetFailSafeExpiryLengthSeconds calls the underlying SetFailSafeExpiryLengthSeconds.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber) {
+	x.inner.SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds)
+}
+
+// MaxCumulativeFailsafeSeconds calls the underlying MaxCumulativeFailsafeSeconds.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() *foundation.NSNumber {
+	return x.inner.MaxCumulativeFailsafeSeconds()
+}
+
+// SetMaxCumulativeFailsafeSeconds calls the underlying SetMaxCumulativeFailsafeSeconds.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) {
+	x.inner.SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds)
+}
+
+// MTRGeneralCommissioningClusterBasicCommissioningInfoable is the interface implemented by [MTRGeneralCommissioningClusterBasicCommissioningInfo], for mocking and DI.
+type MTRGeneralCommissioningClusterBasicCommissioningInfoable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo
+	WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo
+	WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo
+	FailSafeExpiryLengthSeconds() *foundation.NSNumber
+	SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber)
+	MaxCumulativeFailsafeSeconds() *foundation.NSNumber
+	SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterBasicCommissioningInfoable = (*MTRGeneralCommissioningClusterBasicCommissioningInfo)(nil)
+

@@ -46,5 +46,25 @@ func (x *AnchoredObjectQuery) WithUpdateHandler(updateHandler func(*raw.HKAnchor
 	return x
 }
 
+// UpdateHandler calls the underlying UpdateHandler.
+func (x *AnchoredObjectQuery) UpdateHandler() objc.Block {
+	return x.inner.UpdateHandler()
+}
+
+// SetUpdateHandler calls the underlying SetUpdateHandler.
+func (x *AnchoredObjectQuery) SetUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) {
+	x.inner.SetUpdateHandler(updateHandler)
+}
+
 func (x *AnchoredObjectQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+
+// AnchoredObjectQueryable is the interface implemented by [AnchoredObjectQuery], for mocking and DI.
+type AnchoredObjectQueryable interface {
+	Unwrap() *raw.HKAnchoredObjectQuery
+	WithUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery
+	UpdateHandler() objc.Block
+	SetUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer))
+}
+
+var _ AnchoredObjectQueryable = (*AnchoredObjectQuery)(nil)
 

@@ -31,7 +31,27 @@ func (x *QuantityItem) WithQuantity(quantity float64) *QuantityItem {
 	return x
 }
 
+// Quantity calls the underlying Quantity.
+func (x *QuantityItem) Quantity() float64 {
+	return x.inner.Quantity()
+}
+
+// SetQuantity calls the underlying SetQuantity.
+func (x *QuantityItem) SetQuantity(quantity float64) {
+	x.inner.SetQuantity(quantity)
+}
+
 func (x *QuantityItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
 
 func (x *QuantityItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
+
+// QuantityItemable is the interface implemented by [QuantityItem], for mocking and DI.
+type QuantityItemable interface {
+	Unwrap() *raw.CLSQuantityItem
+	WithQuantity(quantity float64) *QuantityItem
+	Quantity() float64
+	SetQuantity(quantity float64)
+}
+
+var _ QuantityItemable = (*QuantityItem)(nil)
 

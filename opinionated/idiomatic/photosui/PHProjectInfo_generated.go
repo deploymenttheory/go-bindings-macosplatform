@@ -6,6 +6,7 @@ package photosui
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,70 @@ func NewProjectInfo() *ProjectInfo {
 	return &ProjectInfo{inner: raw.PHProjectInfoFromID(_id)}
 }
 
+// CreationSource calls the underlying CreationSource.
+func (x *ProjectInfo) CreationSource() raw.PHProjectCreationSource {
+	return x.inner.CreationSource()
+}
+
+// ProjectType calls the underlying ProjectType.
+func (x *ProjectInfo) ProjectType() string {
+	_r := x.inner.ProjectType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Sections returns the collection as a Go slice.
 func (x *ProjectInfo) Sections() []*raw.PHProjectSection {
 	arr := x.inner.Sections()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHProjectSection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHProjectSection {
+		return raw.PHProjectSectionFromID(purego.Retain(_id))
+	})
 }
+
+// BrandingEnabled calls the underlying BrandingEnabled.
+func (x *ProjectInfo) BrandingEnabled() bool {
+	return x.inner.BrandingEnabled()
+}
+
+// PageNumbersEnabled calls the underlying PageNumbersEnabled.
+func (x *ProjectInfo) PageNumbersEnabled() bool {
+	return x.inner.PageNumbersEnabled()
+}
+
+// ProductIdentifier calls the underlying ProductIdentifier.
+func (x *ProjectInfo) ProductIdentifier() string {
+	_r := x.inner.ProductIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ThemeIdentifier calls the underlying ThemeIdentifier.
+func (x *ProjectInfo) ThemeIdentifier() string {
+	_r := x.inner.ThemeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ProjectInfoable is the interface implemented by [ProjectInfo], for mocking and DI.
+type ProjectInfoable interface {
+	Unwrap() *raw.PHProjectInfo
+	CreationSource() raw.PHProjectCreationSource
+	ProjectType() string
+	Sections() []*raw.PHProjectSection
+	BrandingEnabled() bool
+	PageNumbersEnabled() bool
+	ProductIdentifier() string
+	ThemeIdentifier() string
+}
+
+var _ ProjectInfoable = (*ProjectInfo)(nil)
 

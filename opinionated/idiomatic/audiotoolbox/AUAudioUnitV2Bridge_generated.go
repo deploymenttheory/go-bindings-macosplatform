@@ -6,6 +6,7 @@ package audiotoolbox
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewAudioUnitV2Bridge() *AudioUnitV2Bridge {
 	return &AudioUnitV2Bridge{inner: raw.AUAudioUnitV2BridgeFromID(_id)}
 }
 
+// AudioUnit calls the underlying AudioUnit.
+func (x *AudioUnitV2Bridge) AudioUnit() *carboncore.ComponentInstanceRecord {
+	return x.inner.AudioUnit()
+}
+
 func (x *AudioUnitV2Bridge) asAudioUnit() *raw.AUAudioUnit { return &x.inner.AUAudioUnit }
+
+// AudioUnitV2Bridgeable is the interface implemented by [AudioUnitV2Bridge], for mocking and DI.
+type AudioUnitV2Bridgeable interface {
+	Unwrap() *raw.AUAudioUnitV2Bridge
+	AudioUnit() *carboncore.ComponentInstanceRecord
+}
+
+var _ AudioUnitV2Bridgeable = (*AudioUnitV2Bridge)(nil)
 

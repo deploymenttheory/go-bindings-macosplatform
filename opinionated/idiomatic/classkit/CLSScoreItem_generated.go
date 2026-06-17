@@ -37,7 +37,40 @@ func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
 	return x
 }
 
+// Score calls the underlying Score.
+func (x *ScoreItem) Score() float64 {
+	return x.inner.Score()
+}
+
+// SetScore calls the underlying SetScore.
+func (x *ScoreItem) SetScore(score float64) {
+	x.inner.SetScore(score)
+}
+
+// MaxScore calls the underlying MaxScore.
+func (x *ScoreItem) MaxScore() float64 {
+	return x.inner.MaxScore()
+}
+
+// SetMaxScore calls the underlying SetMaxScore.
+func (x *ScoreItem) SetMaxScore(maxScore float64) {
+	x.inner.SetMaxScore(maxScore)
+}
+
 func (x *ScoreItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
 
 func (x *ScoreItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
+
+// ScoreItemable is the interface implemented by [ScoreItem], for mocking and DI.
+type ScoreItemable interface {
+	Unwrap() *raw.CLSScoreItem
+	WithScore(score float64) *ScoreItem
+	WithMaxScore(maxScore float64) *ScoreItem
+	Score() float64
+	SetScore(score float64)
+	MaxScore() float64
+	SetMaxScore(maxScore float64)
+}
+
+var _ ScoreItemable = (*ScoreItem)(nil)
 

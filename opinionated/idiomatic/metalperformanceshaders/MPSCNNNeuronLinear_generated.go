@@ -33,3 +33,10 @@ func (x *CNNNeuronLinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return 
 
 func (x *CNNNeuronLinear) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronLinearable is the interface implemented by [CNNNeuronLinear], for mocking and DI.
+type CNNNeuronLinearable interface {
+	Unwrap() *raw.MPSCNNNeuronLinear
+}
+
+var _ CNNNeuronLinearable = (*CNNNeuronLinear)(nil)
+

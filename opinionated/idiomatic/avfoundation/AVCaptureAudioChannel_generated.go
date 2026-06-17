@@ -35,3 +35,48 @@ func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
 	return x
 }
 
+// AveragePowerLevel calls the underlying AveragePowerLevel.
+func (x *CaptureAudioChannel) AveragePowerLevel() float32 {
+	return x.inner.AveragePowerLevel()
+}
+
+// PeakHoldLevel calls the underlying PeakHoldLevel.
+func (x *CaptureAudioChannel) PeakHoldLevel() float32 {
+	return x.inner.PeakHoldLevel()
+}
+
+// Volume calls the underlying Volume.
+func (x *CaptureAudioChannel) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *CaptureAudioChannel) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *CaptureAudioChannel) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *CaptureAudioChannel) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// CaptureAudioChannelable is the interface implemented by [CaptureAudioChannel], for mocking and DI.
+type CaptureAudioChannelable interface {
+	Unwrap() *raw.AVCaptureAudioChannel
+	WithVolume(volume float32) *CaptureAudioChannel
+	WithEnabled(enabled bool) *CaptureAudioChannel
+	AveragePowerLevel() float32
+	PeakHoldLevel() float32
+	Volume() float32
+	SetVolume(volume float32)
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ CaptureAudioChannelable = (*CaptureAudioChannel)(nil)
+

@@ -33,3 +33,50 @@ func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect,
 	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(_id)}
 }
 
+// Image calls the underlying Image.
+func (x *ImageAccumulator) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *ImageAccumulator) SetImage(image *raw.CIImage) {
+	x.inner.SetImage(image)
+}
+
+// SetImageDirtyRect calls the underlying SetImageDirtyRect.
+func (x *ImageAccumulator) SetImageDirtyRect(image *raw.CIImage, dirtyRect corefoundation.CGRect) {
+	x.inner.SetImageDirtyRect(image, dirtyRect)
+}
+
+// Clear calls the underlying Clear.
+func (x *ImageAccumulator) Clear() {
+	x.inner.Clear()
+}
+
+// Extent calls the underlying Extent.
+func (x *ImageAccumulator) Extent() corefoundation.CGRect {
+	return x.inner.Extent()
+}
+
+// Format calls the underlying Format.
+func (x *ImageAccumulator) Format() int {
+	return x.inner.Format()
+}
+
+// ImageAccumulatorable is the interface implemented by [ImageAccumulator], for mocking and DI.
+type ImageAccumulatorable interface {
+	Unwrap() *raw.CIImageAccumulator
+	Image() *Image
+	SetImage(image *raw.CIImage)
+	SetImageDirtyRect(image *raw.CIImage, dirtyRect corefoundation.CGRect)
+	Clear()
+	Extent() corefoundation.CGRect
+	Format() int
+}
+
+var _ ImageAccumulatorable = (*ImageAccumulator)(nil)
+

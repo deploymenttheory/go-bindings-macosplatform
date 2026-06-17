@@ -42,3 +42,49 @@ func (x *MTRThermostatClusterSetActivePresetRequestParams) WithServerSideProcess
 	return x
 }
 
+// PresetHandle calls the underlying PresetHandle.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) PresetHandle() *foundation.NSData {
+	return x.inner.PresetHandle()
+}
+
+// SetPresetHandle calls the underlying SetPresetHandle.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) SetPresetHandle(presetHandle *foundation.NSData) {
+	x.inner.SetPresetHandle(presetHandle)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetActivePresetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterSetActivePresetRequestParamsable is the interface implemented by [MTRThermostatClusterSetActivePresetRequestParams], for mocking and DI.
+type MTRThermostatClusterSetActivePresetRequestParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterSetActivePresetRequestParams
+	WithPresetHandle(presetHandle *foundation.NSData) *MTRThermostatClusterSetActivePresetRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetActivePresetRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetActivePresetRequestParams
+	PresetHandle() *foundation.NSData
+	SetPresetHandle(presetHandle *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterSetActivePresetRequestParamsable = (*MTRThermostatClusterSetActivePresetRequestParams)(nil)
+

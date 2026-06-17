@@ -23,7 +23,20 @@ func NewPaymentPass() *PaymentPass {
 	return &PaymentPass{inner: raw.PKPaymentPassFromID(_id)}
 }
 
+// ActivationState calls the underlying ActivationState.
+func (x *PaymentPass) ActivationState() raw.PKPaymentPassActivationState {
+	return x.inner.ActivationState()
+}
+
 func (x *PaymentPass) asSecureElementPass() *raw.PKSecureElementPass { return &x.inner.PKSecureElementPass }
 
 func (x *PaymentPass) asPass() *raw.PKPass { return &x.inner.PKSecureElementPass.PKPass }
+
+// PaymentPassable is the interface implemented by [PaymentPass], for mocking and DI.
+type PaymentPassable interface {
+	Unwrap() *raw.PKPaymentPass
+	ActivationState() raw.PKPaymentPassActivationState
+}
+
+var _ PaymentPassable = (*PaymentPass)(nil)
 

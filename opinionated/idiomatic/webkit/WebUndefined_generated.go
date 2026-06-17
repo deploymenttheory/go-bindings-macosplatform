@@ -23,3 +23,10 @@ func NewWebUndefined() *WebUndefined {
 	return &WebUndefined{inner: raw.WebUndefinedFromID(_id)}
 }
 
+// WebUndefinedable is the interface implemented by [WebUndefined], for mocking and DI.
+type WebUndefinedable interface {
+	Unwrap() *raw.WebUndefined
+}
+
+var _ WebUndefinedable = (*WebUndefined)(nil)
+

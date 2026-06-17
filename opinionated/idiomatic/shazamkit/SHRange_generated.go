@@ -24,3 +24,22 @@ func NewRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *R
 	return &Range{inner: raw.SHRangeFromID(_id)}
 }
 
+// LowerBound calls the underlying LowerBound.
+func (x *Range) LowerBound() float64 {
+	return x.inner.LowerBound()
+}
+
+// UpperBound calls the underlying UpperBound.
+func (x *Range) UpperBound() float64 {
+	return x.inner.UpperBound()
+}
+
+// Rangeable is the interface implemented by [Range], for mocking and DI.
+type Rangeable interface {
+	Unwrap() *raw.SHRange
+	LowerBound() float64
+	UpperBound() float64
+}
+
+var _ Rangeable = (*Range)(nil)
+

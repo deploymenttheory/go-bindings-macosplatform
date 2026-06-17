@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,49 @@ func NewAssetVariant() *AssetVariant {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariant")), objc.RegisterName("new"))
 	return &AssetVariant{inner: raw.AVAssetVariantFromID(_id)}
 }
+
+// PeakBitRate calls the underlying PeakBitRate.
+func (x *AssetVariant) PeakBitRate() float64 {
+	return x.inner.PeakBitRate()
+}
+
+// AverageBitRate calls the underlying AverageBitRate.
+func (x *AssetVariant) AverageBitRate() float64 {
+	return x.inner.AverageBitRate()
+}
+
+// VideoAttributes calls the underlying VideoAttributes.
+func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
+	_r := x.inner.VideoAttributes()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariantVideoAttributes{inner: _r}
+}
+
+// AudioAttributes calls the underlying AudioAttributes.
+func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
+	_r := x.inner.AudioAttributes()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariantAudioAttributes{inner: _r}
+}
+
+// URL calls the underlying URL.
+func (x *AssetVariant) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// AssetVariantable is the interface implemented by [AssetVariant], for mocking and DI.
+type AssetVariantable interface {
+	Unwrap() *raw.AVAssetVariant
+	PeakBitRate() float64
+	AverageBitRate() float64
+	VideoAttributes() *AssetVariantVideoAttributes
+	AudioAttributes() *AssetVariantAudioAttributes
+	URL() *foundation.NSURL
+}
+
+var _ AssetVariantable = (*AssetVariant)(nil)
 

@@ -23,3 +23,26 @@ func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
 	return &SyncEngineFetchedZoneDeletion{inner: raw.CKSyncEngineFetchedZoneDeletionFromID(_id)}
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// Reason calls the underlying Reason.
+func (x *SyncEngineFetchedZoneDeletion) Reason() raw.CKSyncEngineZoneDeletionReason {
+	return x.inner.Reason()
+}
+
+// SyncEngineFetchedZoneDeletionable is the interface implemented by [SyncEngineFetchedZoneDeletion], for mocking and DI.
+type SyncEngineFetchedZoneDeletionable interface {
+	Unwrap() *raw.CKSyncEngineFetchedZoneDeletion
+	ZoneID() *RecordZoneID
+	Reason() raw.CKSyncEngineZoneDeletionReason
+}
+
+var _ SyncEngineFetchedZoneDeletionable = (*SyncEngineFetchedZoneDeletion)(nil)
+

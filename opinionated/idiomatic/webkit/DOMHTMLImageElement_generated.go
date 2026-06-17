@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -102,6 +103,207 @@ func (x *DOMHTMLImageElement) WithLowsrc(lowsrc string) *DOMHTMLImageElement {
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *DOMHTMLImageElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLImageElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Align calls the underlying Align.
+func (x *DOMHTMLImageElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLImageElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// Alt calls the underlying Alt.
+func (x *DOMHTMLImageElement) Alt() string {
+	_r := x.inner.Alt()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlt calls the underlying SetAlt.
+func (x *DOMHTMLImageElement) SetAlt(alt string) {
+	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+}
+
+// Border calls the underlying Border.
+func (x *DOMHTMLImageElement) Border() string {
+	_r := x.inner.Border()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBorder calls the underlying SetBorder.
+func (x *DOMHTMLImageElement) SetBorder(border string) {
+	x.inner.SetBorder(foundation.NSStringStringWithUTF8String(border))
+}
+
+// Height calls the underlying Height.
+func (x *DOMHTMLImageElement) Height() int {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *DOMHTMLImageElement) SetHeight(height int) {
+	x.inner.SetHeight(height)
+}
+
+// Hspace calls the underlying Hspace.
+func (x *DOMHTMLImageElement) Hspace() int {
+	return x.inner.Hspace()
+}
+
+// SetHspace calls the underlying SetHspace.
+func (x *DOMHTMLImageElement) SetHspace(hspace int) {
+	x.inner.SetHspace(hspace)
+}
+
+// IsMap calls the underlying IsMap.
+func (x *DOMHTMLImageElement) IsMap() bool {
+	return x.inner.IsMap()
+}
+
+// SetIsMap calls the underlying SetIsMap.
+func (x *DOMHTMLImageElement) SetIsMap(isMap bool) {
+	x.inner.SetIsMap(isMap)
+}
+
+// LongDesc calls the underlying LongDesc.
+func (x *DOMHTMLImageElement) LongDesc() string {
+	_r := x.inner.LongDesc()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLongDesc calls the underlying SetLongDesc.
+func (x *DOMHTMLImageElement) SetLongDesc(longDesc string) {
+	x.inner.SetLongDesc(foundation.NSStringStringWithUTF8String(longDesc))
+}
+
+// Src calls the underlying Src.
+func (x *DOMHTMLImageElement) Src() string {
+	_r := x.inner.Src()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSrc calls the underlying SetSrc.
+func (x *DOMHTMLImageElement) SetSrc(src string) {
+	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+}
+
+// UseMap calls the underlying UseMap.
+func (x *DOMHTMLImageElement) UseMap() string {
+	_r := x.inner.UseMap()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetUseMap calls the underlying SetUseMap.
+func (x *DOMHTMLImageElement) SetUseMap(useMap string) {
+	x.inner.SetUseMap(foundation.NSStringStringWithUTF8String(useMap))
+}
+
+// Vspace calls the underlying Vspace.
+func (x *DOMHTMLImageElement) Vspace() int {
+	return x.inner.Vspace()
+}
+
+// SetVspace calls the underlying SetVspace.
+func (x *DOMHTMLImageElement) SetVspace(vspace int) {
+	x.inner.SetVspace(vspace)
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLImageElement) Width() int {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *DOMHTMLImageElement) SetWidth(width int) {
+	x.inner.SetWidth(width)
+}
+
+// Complete calls the underlying Complete.
+func (x *DOMHTMLImageElement) Complete() bool {
+	return x.inner.Complete()
+}
+
+// Lowsrc calls the underlying Lowsrc.
+func (x *DOMHTMLImageElement) Lowsrc() string {
+	_r := x.inner.Lowsrc()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLowsrc calls the underlying SetLowsrc.
+func (x *DOMHTMLImageElement) SetLowsrc(lowsrc string) {
+	x.inner.SetLowsrc(foundation.NSStringStringWithUTF8String(lowsrc))
+}
+
+// NaturalHeight calls the underlying NaturalHeight.
+func (x *DOMHTMLImageElement) NaturalHeight() int {
+	return x.inner.NaturalHeight()
+}
+
+// NaturalWidth calls the underlying NaturalWidth.
+func (x *DOMHTMLImageElement) NaturalWidth() int {
+	return x.inner.NaturalWidth()
+}
+
+// X calls the underlying X.
+func (x *DOMHTMLImageElement) X() int {
+	return x.inner.X()
+}
+
+// Y calls the underlying Y.
+func (x *DOMHTMLImageElement) Y() int {
+	return x.inner.Y()
+}
+
+// AltDisplayString calls the underlying AltDisplayString.
+func (x *DOMHTMLImageElement) AltDisplayString() string {
+	_r := x.inner.AltDisplayString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AbsoluteImageURL calls the underlying AbsoluteImageURL.
+func (x *DOMHTMLImageElement) AbsoluteImageURL() *foundation.NSURL {
+	return x.inner.AbsoluteImageURL()
+}
+
 func (x *DOMHTMLImageElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLImageElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -111,4 +313,57 @@ func (x *DOMHTMLImageElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLImageElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLImageElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLImageElementable is the interface implemented by [DOMHTMLImageElement], for mocking and DI.
+type DOMHTMLImageElementable interface {
+	Unwrap() *raw.DOMHTMLImageElement
+	WithName(name string) *DOMHTMLImageElement
+	WithAlign(align string) *DOMHTMLImageElement
+	WithAlt(alt string) *DOMHTMLImageElement
+	WithBorder(border string) *DOMHTMLImageElement
+	WithHeight(height int) *DOMHTMLImageElement
+	WithHspace(hspace int) *DOMHTMLImageElement
+	WithIsMap(isMap bool) *DOMHTMLImageElement
+	WithLongDesc(longDesc string) *DOMHTMLImageElement
+	WithSrc(src string) *DOMHTMLImageElement
+	WithUseMap(useMap string) *DOMHTMLImageElement
+	WithVspace(vspace int) *DOMHTMLImageElement
+	WithWidth(width int) *DOMHTMLImageElement
+	WithLowsrc(lowsrc string) *DOMHTMLImageElement
+	Name() string
+	SetName(name string)
+	Align() string
+	SetAlign(align string)
+	Alt() string
+	SetAlt(alt string)
+	Border() string
+	SetBorder(border string)
+	Height() int
+	SetHeight(height int)
+	Hspace() int
+	SetHspace(hspace int)
+	IsMap() bool
+	SetIsMap(isMap bool)
+	LongDesc() string
+	SetLongDesc(longDesc string)
+	Src() string
+	SetSrc(src string)
+	UseMap() string
+	SetUseMap(useMap string)
+	Vspace() int
+	SetVspace(vspace int)
+	Width() int
+	SetWidth(width int)
+	Complete() bool
+	Lowsrc() string
+	SetLowsrc(lowsrc string)
+	NaturalHeight() int
+	NaturalWidth() int
+	X() int
+	Y() int
+	AltDisplayString() string
+	AbsoluteImageURL() *foundation.NSURL
+}
+
+var _ DOMHTMLImageElementable = (*DOMHTMLImageElement)(nil)
 

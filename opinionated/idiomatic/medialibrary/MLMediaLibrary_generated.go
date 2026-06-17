@@ -25,3 +25,16 @@ func NewMediaLibraryWithOptions(options *foundation.NSDictionary[*foundation.NSS
 	return &MediaLibrary{inner: raw.MLMediaLibraryFromID(_id)}
 }
 
+// MediaSources calls the underlying MediaSources.
+func (x *MediaLibrary) MediaSources() *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaSource] {
+	return x.inner.MediaSources()
+}
+
+// MediaLibraryable is the interface implemented by [MediaLibrary], for mocking and DI.
+type MediaLibraryable interface {
+	Unwrap() *raw.MLMediaLibrary
+	MediaSources() *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaSource]
+}
+
+var _ MediaLibraryable = (*MediaLibrary)(nil)
+

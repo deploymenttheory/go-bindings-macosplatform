@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -95,20 +97,280 @@ func (x *TabView) WithControlTint(controlTint raw.NSControlTint) *TabView {
 	return x
 }
 
+// SelectTabViewItem calls the underlying SelectTabViewItem.
+func (x *TabView) SelectTabViewItem(tabViewItem *raw.NSTabViewItem) {
+	x.inner.SelectTabViewItem(tabViewItem)
+}
+
+// SelectTabViewItemAtIndex calls the underlying SelectTabViewItemAtIndex.
+func (x *TabView) SelectTabViewItemAtIndex(index int) {
+	x.inner.SelectTabViewItemAtIndex(index)
+}
+
+// SelectTabViewItemWithIdentifier calls the underlying SelectTabViewItemWithIdentifier.
+func (x *TabView) SelectTabViewItemWithIdentifier(identifier objc.ID) {
+	x.inner.SelectTabViewItemWithIdentifier(identifier)
+}
+
+// TakeSelectedTabViewItemFromSender calls the underlying TakeSelectedTabViewItemFromSender.
+func (x *TabView) TakeSelectedTabViewItemFromSender(sender objc.ID) {
+	x.inner.TakeSelectedTabViewItemFromSender(sender)
+}
+
+// SelectFirstTabViewItem calls the underlying SelectFirstTabViewItem.
+func (x *TabView) SelectFirstTabViewItem(sender objc.ID) {
+	x.inner.SelectFirstTabViewItem(sender)
+}
+
+// SelectLastTabViewItem calls the underlying SelectLastTabViewItem.
+func (x *TabView) SelectLastTabViewItem(sender objc.ID) {
+	x.inner.SelectLastTabViewItem(sender)
+}
+
+// SelectNextTabViewItem calls the underlying SelectNextTabViewItem.
+func (x *TabView) SelectNextTabViewItem(sender objc.ID) {
+	x.inner.SelectNextTabViewItem(sender)
+}
+
+// SelectPreviousTabViewItem calls the underlying SelectPreviousTabViewItem.
+func (x *TabView) SelectPreviousTabViewItem(sender objc.ID) {
+	x.inner.SelectPreviousTabViewItem(sender)
+}
+
+// AddTabViewItem calls the underlying AddTabViewItem.
+func (x *TabView) AddTabViewItem(tabViewItem *raw.NSTabViewItem) {
+	x.inner.AddTabViewItem(tabViewItem)
+}
+
+// InsertTabViewItemAtIndex calls the underlying InsertTabViewItemAtIndex.
+func (x *TabView) InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int) {
+	x.inner.InsertTabViewItemAtIndex(tabViewItem, index)
+}
+
+// RemoveTabViewItem calls the underlying RemoveTabViewItem.
+func (x *TabView) RemoveTabViewItem(tabViewItem *raw.NSTabViewItem) {
+	x.inner.RemoveTabViewItem(tabViewItem)
+}
+
+// TabViewItemAtPoint calls the underlying TabViewItemAtPoint.
+func (x *TabView) TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem {
+	_r := x.inner.TabViewItemAtPoint(point)
+	if _r == nil {
+		return nil
+	}
+	return &TabViewItem{inner: _r}
+}
+
+// IndexOfTabViewItem calls the underlying IndexOfTabViewItem.
+func (x *TabView) IndexOfTabViewItem(tabViewItem *raw.NSTabViewItem) int {
+	return x.inner.IndexOfTabViewItem(tabViewItem)
+}
+
+// TabViewItemAtIndex calls the underlying TabViewItemAtIndex.
+func (x *TabView) TabViewItemAtIndex(index int) *TabViewItem {
+	_r := x.inner.TabViewItemAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &TabViewItem{inner: _r}
+}
+
+// IndexOfTabViewItemWithIdentifier calls the underlying IndexOfTabViewItemWithIdentifier.
+func (x *TabView) IndexOfTabViewItemWithIdentifier(identifier objc.ID) int {
+	return x.inner.IndexOfTabViewItemWithIdentifier(identifier)
+}
+
+// SelectedTabViewItem calls the underlying SelectedTabViewItem.
+func (x *TabView) SelectedTabViewItem() *TabViewItem {
+	_r := x.inner.SelectedTabViewItem()
+	if _r == nil {
+		return nil
+	}
+	return &TabViewItem{inner: _r}
+}
+
+// Font calls the underlying Font.
+func (x *TabView) Font() *Font {
+	_r := x.inner.Font()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetFont calls the underlying SetFont.
+func (x *TabView) SetFont(font *raw.NSFont) {
+	x.inner.SetFont(font)
+}
+
+// TabViewType calls the underlying TabViewType.
+func (x *TabView) TabViewType() raw.NSTabViewType {
+	return x.inner.TabViewType()
+}
+
+// SetTabViewType calls the underlying SetTabViewType.
+func (x *TabView) SetTabViewType(tabViewType raw.NSTabViewType) {
+	x.inner.SetTabViewType(tabViewType)
+}
+
+// TabPosition calls the underlying TabPosition.
+func (x *TabView) TabPosition() raw.NSTabPosition {
+	return x.inner.TabPosition()
+}
+
+// SetTabPosition calls the underlying SetTabPosition.
+func (x *TabView) SetTabPosition(tabPosition raw.NSTabPosition) {
+	x.inner.SetTabPosition(tabPosition)
+}
+
+// TabViewBorderType calls the underlying TabViewBorderType.
+func (x *TabView) TabViewBorderType() raw.NSTabViewBorderType {
+	return x.inner.TabViewBorderType()
+}
+
+// SetTabViewBorderType calls the underlying SetTabViewBorderType.
+func (x *TabView) SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) {
+	x.inner.SetTabViewBorderType(tabViewBorderType)
+}
+
 // TabViewItems returns the collection as a Go slice.
 func (x *TabView) TabViewItems() []*raw.NSTabViewItem {
 	arr := x.inner.TabViewItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTabViewItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTabViewItem {
+		return raw.NSTabViewItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetTabViewItems calls the underlying SetTabViewItems.
+func (x *TabView) SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem]) {
+	x.inner.SetTabViewItems(tabViewItems)
+}
+
+// AllowsTruncatedLabels calls the underlying AllowsTruncatedLabels.
+func (x *TabView) AllowsTruncatedLabels() bool {
+	return x.inner.AllowsTruncatedLabels()
+}
+
+// SetAllowsTruncatedLabels calls the underlying SetAllowsTruncatedLabels.
+func (x *TabView) SetAllowsTruncatedLabels(allowsTruncatedLabels bool) {
+	x.inner.SetAllowsTruncatedLabels(allowsTruncatedLabels)
+}
+
+// MinimumSize calls the underlying MinimumSize.
+func (x *TabView) MinimumSize() corefoundation.CGSize {
+	return x.inner.MinimumSize()
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *TabView) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *TabView) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// ControlSize calls the underlying ControlSize.
+func (x *TabView) ControlSize() raw.NSControlSize {
+	return x.inner.ControlSize()
+}
+
+// SetControlSize calls the underlying SetControlSize.
+func (x *TabView) SetControlSize(controlSize raw.NSControlSize) {
+	x.inner.SetControlSize(controlSize)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TabView) Delegate() raw.NSTabViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TabView) SetDelegate(delegate raw.NSTabViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// ContentRect calls the underlying ContentRect.
+func (x *TabView) ContentRect() corefoundation.CGRect {
+	return x.inner.ContentRect()
+}
+
+// NumberOfTabViewItems calls the underlying NumberOfTabViewItems.
+func (x *TabView) NumberOfTabViewItems() int {
+	return x.inner.NumberOfTabViewItems()
+}
+
+// ControlTint calls the underlying ControlTint.
+func (x *TabView) ControlTint() raw.NSControlTint {
+	return x.inner.ControlTint()
+}
+
+// SetControlTint calls the underlying SetControlTint.
+func (x *TabView) SetControlTint(controlTint raw.NSControlTint) {
+	x.inner.SetControlTint(controlTint)
 }
 
 func (x *TabView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *TabView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// TabViewable is the interface implemented by [TabView], for mocking and DI.
+type TabViewable interface {
+	Unwrap() *raw.NSTabView
+	WithFont(font *raw.NSFont) *TabView
+	WithTabViewType(tabViewType raw.NSTabViewType) *TabView
+	WithTabPosition(tabPosition raw.NSTabPosition) *TabView
+	WithTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType) *TabView
+	WithTabViewItems(items ...*raw.NSTabViewItem) *TabView
+	WithAllowsTruncatedLabels(allowsTruncatedLabels bool) *TabView
+	WithDrawsBackground(drawsBackground bool) *TabView
+	WithControlSize(controlSize raw.NSControlSize) *TabView
+	WithDelegate(delegate raw.NSTabViewDelegate) *TabView
+	WithControlTint(controlTint raw.NSControlTint) *TabView
+	SelectTabViewItem(tabViewItem *raw.NSTabViewItem)
+	SelectTabViewItemAtIndex(index int)
+	SelectTabViewItemWithIdentifier(identifier objc.ID)
+	TakeSelectedTabViewItemFromSender(sender objc.ID)
+	SelectFirstTabViewItem(sender objc.ID)
+	SelectLastTabViewItem(sender objc.ID)
+	SelectNextTabViewItem(sender objc.ID)
+	SelectPreviousTabViewItem(sender objc.ID)
+	AddTabViewItem(tabViewItem *raw.NSTabViewItem)
+	InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int)
+	RemoveTabViewItem(tabViewItem *raw.NSTabViewItem)
+	TabViewItemAtPoint(point corefoundation.CGPoint) *TabViewItem
+	IndexOfTabViewItem(tabViewItem *raw.NSTabViewItem) int
+	TabViewItemAtIndex(index int) *TabViewItem
+	IndexOfTabViewItemWithIdentifier(identifier objc.ID) int
+	SelectedTabViewItem() *TabViewItem
+	Font() *Font
+	SetFont(font *raw.NSFont)
+	TabViewType() raw.NSTabViewType
+	SetTabViewType(tabViewType raw.NSTabViewType)
+	TabPosition() raw.NSTabPosition
+	SetTabPosition(tabPosition raw.NSTabPosition)
+	TabViewBorderType() raw.NSTabViewBorderType
+	SetTabViewBorderType(tabViewBorderType raw.NSTabViewBorderType)
+	TabViewItems() []*raw.NSTabViewItem
+	SetTabViewItems(tabViewItems *foundation.NSArray[*raw.NSTabViewItem])
+	AllowsTruncatedLabels() bool
+	SetAllowsTruncatedLabels(allowsTruncatedLabels bool)
+	MinimumSize() corefoundation.CGSize
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	ControlSize() raw.NSControlSize
+	SetControlSize(controlSize raw.NSControlSize)
+	Delegate() raw.NSTabViewDelegate
+	SetDelegate(delegate raw.NSTabViewDelegate)
+	ContentRect() corefoundation.CGRect
+	NumberOfTabViewItems() int
+	ControlTint() raw.NSControlTint
+	SetControlTint(controlTint raw.NSControlTint)
+}
+
+var _ TabViewable = (*TabView)(nil)
 

@@ -41,5 +41,51 @@ func (x *Constraint) WithIncremental(incremental bool) *Constraint {
 	return x
 }
 
+// IsEnabled calls the underlying IsEnabled.
+func (x *Constraint) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *Constraint) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// InfluenceFactor calls the underlying InfluenceFactor.
+func (x *Constraint) InfluenceFactor() float64 {
+	return x.inner.InfluenceFactor()
+}
+
+// SetInfluenceFactor calls the underlying SetInfluenceFactor.
+func (x *Constraint) SetInfluenceFactor(influenceFactor float64) {
+	x.inner.SetInfluenceFactor(influenceFactor)
+}
+
+// IsIncremental calls the underlying IsIncremental.
+func (x *Constraint) IsIncremental() bool {
+	return x.inner.IsIncremental()
+}
+
+// SetIncremental calls the underlying SetIncremental.
+func (x *Constraint) SetIncremental(incremental bool) {
+	x.inner.SetIncremental(incremental)
+}
+
 func (x *Constraint) asConstraint() *raw.SCNConstraint { return x.inner }
+
+// Constraintable is the interface implemented by [Constraint], for mocking and DI.
+type Constraintable interface {
+	Unwrap() *raw.SCNConstraint
+	WithEnabled(enabled bool) *Constraint
+	WithInfluenceFactor(influenceFactor float64) *Constraint
+	WithIncremental(incremental bool) *Constraint
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+	InfluenceFactor() float64
+	SetInfluenceFactor(influenceFactor float64)
+	IsIncremental() bool
+	SetIncremental(incremental bool)
+}
+
+var _ Constraintable = (*Constraint)(nil)
 

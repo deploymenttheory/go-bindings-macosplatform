@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent() *M
 	return &MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterElectronicTemperatureHighEvent)(nil)
+

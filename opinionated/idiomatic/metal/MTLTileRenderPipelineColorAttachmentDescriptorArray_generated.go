@@ -23,3 +23,26 @@ func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineCo
 	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *TileRenderPipelineColorAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &TileRenderPipelineColorAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// TileRenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
+type TileRenderPipelineColorAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *TileRenderPipelineColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ TileRenderPipelineColorAttachmentDescriptorArrayable = (*TileRenderPipelineColorAttachmentDescriptorArray)(nil)
+

@@ -42,3 +42,49 @@ func (x *MTRMediaInputClusterSelectInputParams) WithServerSideProcessingTimeout(
 	return x
 }
 
+// Index calls the underlying Index.
+func (x *MTRMediaInputClusterSelectInputParams) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRMediaInputClusterSelectInputParams) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaInputClusterSelectInputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaInputClusterSelectInputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaInputClusterSelectInputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaInputClusterSelectInputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaInputClusterSelectInputParamsable is the interface implemented by [MTRMediaInputClusterSelectInputParams], for mocking and DI.
+type MTRMediaInputClusterSelectInputParamsable interface {
+	Unwrap() *raw.MTRMediaInputClusterSelectInputParams
+	WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterSelectInputParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaInputClusterSelectInputParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaInputClusterSelectInputParams
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaInputClusterSelectInputParamsable = (*MTRMediaInputClusterSelectInputParams)(nil)
+

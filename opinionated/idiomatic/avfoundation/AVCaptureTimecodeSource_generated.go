@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,33 @@ func NewCaptureTimecodeSource() *CaptureTimecodeSource {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureTimecodeSource")), objc.RegisterName("new"))
 	return &CaptureTimecodeSource{inner: raw.AVCaptureTimecodeSourceFromID(_id)}
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *CaptureTimecodeSource) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *CaptureTimecodeSource) Type() raw.AVCaptureTimecodeSourceType {
+	return x.inner.Type()
+}
+
+// Uuid calls the underlying Uuid.
+func (x *CaptureTimecodeSource) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// CaptureTimecodeSourceable is the interface implemented by [CaptureTimecodeSource], for mocking and DI.
+type CaptureTimecodeSourceable interface {
+	Unwrap() *raw.AVCaptureTimecodeSource
+	DisplayName() string
+	Type() raw.AVCaptureTimecodeSourceType
+	Uuid() *foundation.NSUUID
+}
+
+var _ CaptureTimecodeSourceable = (*CaptureTimecodeSource)(nil)
 

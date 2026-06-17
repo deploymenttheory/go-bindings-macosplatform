@@ -7,6 +7,7 @@ package calendarstore
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,5 +55,103 @@ func (x *CalEvent) WithEndDate(endDate *foundation.NSDate) *CalEvent {
 	return x
 }
 
+// IsAllDay calls the underlying IsAllDay.
+func (x *CalEvent) IsAllDay() bool {
+	return x.inner.IsAllDay()
+}
+
+// SetIsAllDay calls the underlying SetIsAllDay.
+func (x *CalEvent) SetIsAllDay(isAllDay bool) {
+	x.inner.SetIsAllDay(isAllDay)
+}
+
+// Location calls the underlying Location.
+func (x *CalEvent) Location() string {
+	_r := x.inner.Location()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocation calls the underlying SetLocation.
+func (x *CalEvent) SetLocation(location string) {
+	x.inner.SetLocation(foundation.NSStringStringWithUTF8String(location))
+}
+
+// RecurrenceRule calls the underlying RecurrenceRule.
+func (x *CalEvent) RecurrenceRule() *CalRecurrenceRule {
+	_r := x.inner.RecurrenceRule()
+	if _r == nil {
+		return nil
+	}
+	return &CalRecurrenceRule{inner: _r}
+}
+
+// SetRecurrenceRule calls the underlying SetRecurrenceRule.
+func (x *CalEvent) SetRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) {
+	x.inner.SetRecurrenceRule(recurrenceRule)
+}
+
+// StartDate calls the underlying StartDate.
+func (x *CalEvent) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// SetStartDate calls the underlying SetStartDate.
+func (x *CalEvent) SetStartDate(startDate *foundation.NSDate) {
+	x.inner.SetStartDate(startDate)
+}
+
+// EndDate calls the underlying EndDate.
+func (x *CalEvent) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// SetEndDate calls the underlying SetEndDate.
+func (x *CalEvent) SetEndDate(endDate *foundation.NSDate) {
+	x.inner.SetEndDate(endDate)
+}
+
+// Attendees calls the underlying Attendees.
+func (x *CalEvent) Attendees() *foundation.NSArray[objc.ID] {
+	return x.inner.Attendees()
+}
+
+// IsDetached calls the underlying IsDetached.
+func (x *CalEvent) IsDetached() bool {
+	return x.inner.IsDetached()
+}
+
+// Occurrence calls the underlying Occurrence.
+func (x *CalEvent) Occurrence() *foundation.NSDate {
+	return x.inner.Occurrence()
+}
+
 func (x *CalEvent) asCalCalendarItem() *raw.CalCalendarItem { return &x.inner.CalCalendarItem }
+
+// CalEventable is the interface implemented by [CalEvent], for mocking and DI.
+type CalEventable interface {
+	Unwrap() *raw.CalEvent
+	WithIsAllDay(isAllDay bool) *CalEvent
+	WithLocation(location string) *CalEvent
+	WithRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) *CalEvent
+	WithStartDate(startDate *foundation.NSDate) *CalEvent
+	WithEndDate(endDate *foundation.NSDate) *CalEvent
+	IsAllDay() bool
+	SetIsAllDay(isAllDay bool)
+	Location() string
+	SetLocation(location string)
+	RecurrenceRule() *CalRecurrenceRule
+	SetRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule)
+	StartDate() *foundation.NSDate
+	SetStartDate(startDate *foundation.NSDate)
+	EndDate() *foundation.NSDate
+	SetEndDate(endDate *foundation.NSDate)
+	Attendees() *foundation.NSArray[objc.ID]
+	IsDetached() bool
+	Occurrence() *foundation.NSDate
+}
+
+var _ CalEventable = (*CalEvent)(nil)
 

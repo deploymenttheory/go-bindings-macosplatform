@@ -30,3 +30,35 @@ func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) WithDayOfWeekForSeque
 	return x
 }
 
+// DayOfWeekForSequence calls the underlying DayOfWeekForSequence.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() *foundation.NSNumber {
+	return x.inner.DayOfWeekForSequence()
+}
+
+// SetDayOfWeekForSequence calls the underlying SetDayOfWeekForSequence.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) {
+	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+}
+
+// ChargingTargets calls the underlying ChargingTargets.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() *foundation.NSArray[objc.ID] {
+	return x.inner.ChargingTargets()
+}
+
+// SetChargingTargets calls the underlying SetChargingTargets.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID]) {
+	x.inner.SetChargingTargets(chargingTargets)
+}
+
+// MTREnergyEVSEClusterChargingTargetScheduleStructable is the interface implemented by [MTREnergyEVSEClusterChargingTargetScheduleStruct], for mocking and DI.
+type MTREnergyEVSEClusterChargingTargetScheduleStructable interface {
+	Unwrap() *raw.MTREnergyEVSEClusterChargingTargetScheduleStruct
+	WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetScheduleStruct
+	DayOfWeekForSequence() *foundation.NSNumber
+	SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber)
+	ChargingTargets() *foundation.NSArray[objc.ID]
+	SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID])
+}
+
+var _ MTREnergyEVSEClusterChargingTargetScheduleStructable = (*MTREnergyEVSEClusterChargingTargetScheduleStruct)(nil)
+

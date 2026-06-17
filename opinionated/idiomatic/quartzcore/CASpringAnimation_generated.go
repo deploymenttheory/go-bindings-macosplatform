@@ -60,9 +60,93 @@ func (x *SpringAnimation) WithAllowsOverdamping(allowsOverdamping bool) *SpringA
 	return x
 }
 
+// Mass calls the underlying Mass.
+func (x *SpringAnimation) Mass() float64 {
+	return x.inner.Mass()
+}
+
+// SetMass calls the underlying SetMass.
+func (x *SpringAnimation) SetMass(mass float64) {
+	x.inner.SetMass(mass)
+}
+
+// Stiffness calls the underlying Stiffness.
+func (x *SpringAnimation) Stiffness() float64 {
+	return x.inner.Stiffness()
+}
+
+// SetStiffness calls the underlying SetStiffness.
+func (x *SpringAnimation) SetStiffness(stiffness float64) {
+	x.inner.SetStiffness(stiffness)
+}
+
+// Damping calls the underlying Damping.
+func (x *SpringAnimation) Damping() float64 {
+	return x.inner.Damping()
+}
+
+// SetDamping calls the underlying SetDamping.
+func (x *SpringAnimation) SetDamping(damping float64) {
+	x.inner.SetDamping(damping)
+}
+
+// SetInitialVelocity calls the underlying SetInitialVelocity.
+func (x *SpringAnimation) SetInitialVelocity(initialVelocity float64) {
+	x.inner.SetInitialVelocity(initialVelocity)
+}
+
+// AllowsOverdamping calls the underlying AllowsOverdamping.
+func (x *SpringAnimation) AllowsOverdamping() bool {
+	return x.inner.AllowsOverdamping()
+}
+
+// SetAllowsOverdamping calls the underlying SetAllowsOverdamping.
+func (x *SpringAnimation) SetAllowsOverdamping(allowsOverdamping bool) {
+	x.inner.SetAllowsOverdamping(allowsOverdamping)
+}
+
+// SettlingDuration calls the underlying SettlingDuration.
+func (x *SpringAnimation) SettlingDuration() float64 {
+	return x.inner.SettlingDuration()
+}
+
+// PerceptualDuration calls the underlying PerceptualDuration.
+func (x *SpringAnimation) PerceptualDuration() float64 {
+	return x.inner.PerceptualDuration()
+}
+
+// Bounce calls the underlying Bounce.
+func (x *SpringAnimation) Bounce() float64 {
+	return x.inner.Bounce()
+}
+
 func (x *SpringAnimation) asBasicAnimation() *raw.CABasicAnimation { return &x.inner.CABasicAnimation }
 
 func (x *SpringAnimation) asPropertyAnimation() *raw.CAPropertyAnimation { return &x.inner.CABasicAnimation.CAPropertyAnimation }
 
 func (x *SpringAnimation) asAnimation() *raw.CAAnimation { return &x.inner.CABasicAnimation.CAPropertyAnimation.CAAnimation }
+
+// SpringAnimationable is the interface implemented by [SpringAnimation], for mocking and DI.
+type SpringAnimationable interface {
+	Unwrap() *raw.CASpringAnimation
+	WithMass(mass float64) *SpringAnimation
+	WithStiffness(stiffness float64) *SpringAnimation
+	WithDamping(damping float64) *SpringAnimation
+	WithInitialVelocity(initialVelocity float64) *SpringAnimation
+	WithAllowsOverdamping(allowsOverdamping bool) *SpringAnimation
+	Mass() float64
+	SetMass(mass float64)
+	Stiffness() float64
+	SetStiffness(stiffness float64)
+	Damping() float64
+	SetDamping(damping float64)
+	SetInitialVelocity(initialVelocity float64)
+	AllowsOverdamping() bool
+	SetAllowsOverdamping(allowsOverdamping bool)
+	SettlingDuration() float64
+	PerceptualDuration() float64
+	Bounce() float64
+}
+
+var _ SpringAnimationable = (*SpringAnimation)(nil)
 

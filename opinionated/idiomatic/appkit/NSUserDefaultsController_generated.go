@@ -50,5 +50,68 @@ func (x *UserDefaultsController) WithAppliesImmediately(appliesImmediately bool)
 	return x
 }
 
+// Revert calls the underlying Revert.
+func (x *UserDefaultsController) Revert(sender objc.ID) {
+	x.inner.Revert(sender)
+}
+
+// Save calls the underlying Save.
+func (x *UserDefaultsController) Save(sender objc.ID) {
+	x.inner.Save(sender)
+}
+
+// RevertToInitialValues calls the underlying RevertToInitialValues.
+func (x *UserDefaultsController) RevertToInitialValues(sender objc.ID) {
+	x.inner.RevertToInitialValues(sender)
+}
+
+// Defaults calls the underlying Defaults.
+func (x *UserDefaultsController) Defaults() *foundation.NSUserDefaults {
+	return x.inner.Defaults()
+}
+
+// SetInitialValues calls the underlying SetInitialValues.
+func (x *UserDefaultsController) SetInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetInitialValues(initialValues)
+}
+
+// AppliesImmediately calls the underlying AppliesImmediately.
+func (x *UserDefaultsController) AppliesImmediately() bool {
+	return x.inner.AppliesImmediately()
+}
+
+// SetAppliesImmediately calls the underlying SetAppliesImmediately.
+func (x *UserDefaultsController) SetAppliesImmediately(appliesImmediately bool) {
+	x.inner.SetAppliesImmediately(appliesImmediately)
+}
+
+// HasUnappliedChanges calls the underlying HasUnappliedChanges.
+func (x *UserDefaultsController) HasUnappliedChanges() bool {
+	return x.inner.HasUnappliedChanges()
+}
+
+// Values calls the underlying Values.
+func (x *UserDefaultsController) Values() objc.ID {
+	return x.inner.Values()
+}
+
 func (x *UserDefaultsController) asController() *raw.NSController { return &x.inner.NSController }
+
+// UserDefaultsControllerable is the interface implemented by [UserDefaultsController], for mocking and DI.
+type UserDefaultsControllerable interface {
+	Unwrap() *raw.NSUserDefaultsController
+	WithInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController
+	WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController
+	Revert(sender objc.ID)
+	Save(sender objc.ID)
+	RevertToInitialValues(sender objc.ID)
+	Defaults() *foundation.NSUserDefaults
+	SetInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	AppliesImmediately() bool
+	SetAppliesImmediately(appliesImmediately bool)
+	HasUnappliedChanges() bool
+	Values() objc.ID
+}
+
+var _ UserDefaultsControllerable = (*UserDefaultsController)(nil)
 

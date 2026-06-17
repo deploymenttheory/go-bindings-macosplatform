@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,17 +33,43 @@ func NewSmartCardATRWithSource(source func() int) *SmartCardATR {
 	return &SmartCardATR{inner: raw.TKSmartCardATRFromID(_id)}
 }
 
+// InterfaceGroupAtIndex calls the underlying InterfaceGroupAtIndex.
+func (x *SmartCardATR) InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup {
+	_r := x.inner.InterfaceGroupAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &SmartCardATRInterfaceGroup{inner: _r}
+}
+
+// InterfaceGroupForProtocol calls the underlying InterfaceGroupForProtocol.
+func (x *SmartCardATR) InterfaceGroupForProtocol(protocol raw.TKSmartCardProtocol) *SmartCardATRInterfaceGroup {
+	_r := x.inner.InterfaceGroupForProtocol(protocol)
+	if _r == nil {
+		return nil
+	}
+	return &SmartCardATRInterfaceGroup{inner: _r}
+}
+
+// Bytes calls the underlying Bytes.
+func (x *SmartCardATR) Bytes() *foundation.NSData {
+	return x.inner.Bytes()
+}
+
 // Protocols returns the collection as a Go slice.
 func (x *SmartCardATR) Protocols() []*foundation.NSNumber {
 	arr := x.inner.Protocols()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// HistoricalBytes calls the underlying HistoricalBytes.
+func (x *SmartCardATR) HistoricalBytes() *foundation.NSData {
+	return x.inner.HistoricalBytes()
 }
 
 // HistoricalRecords returns the collection as a Go slice.
@@ -51,10 +78,21 @@ func (x *SmartCardATR) HistoricalRecords() []*raw.TKCompactTLVRecord {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.TKCompactTLVRecord, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.TKCompactTLVRecord {
+		return raw.TKCompactTLVRecordFromID(purego.Retain(_id))
+	})
 }
+
+// SmartCardATRable is the interface implemented by [SmartCardATR], for mocking and DI.
+type SmartCardATRable interface {
+	Unwrap() *raw.TKSmartCardATR
+	InterfaceGroupAtIndex(index int) *SmartCardATRInterfaceGroup
+	InterfaceGroupForProtocol(protocol raw.TKSmartCardProtocol) *SmartCardATRInterfaceGroup
+	Bytes() *foundation.NSData
+	Protocols() []*foundation.NSNumber
+	HistoricalBytes() *foundation.NSData
+	HistoricalRecords() []*raw.TKCompactTLVRecord
+}
+
+var _ SmartCardATRable = (*SmartCardATR)(nil)
 

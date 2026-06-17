@@ -29,5 +29,29 @@ func (x *EFIBootLoader) WithVariableStore(variableStore *raw.VZEFIVariableStore)
 	return x
 }
 
+// VariableStore calls the underlying VariableStore.
+func (x *EFIBootLoader) VariableStore() *EFIVariableStore {
+	_r := x.inner.VariableStore()
+	if _r == nil {
+		return nil
+	}
+	return &EFIVariableStore{inner: _r}
+}
+
+// SetVariableStore calls the underlying SetVariableStore.
+func (x *EFIBootLoader) SetVariableStore(variableStore *raw.VZEFIVariableStore) {
+	x.inner.SetVariableStore(variableStore)
+}
+
 func (x *EFIBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
+
+// EFIBootLoaderable is the interface implemented by [EFIBootLoader], for mocking and DI.
+type EFIBootLoaderable interface {
+	Unwrap() *raw.VZEFIBootLoader
+	WithVariableStore(variableStore *raw.VZEFIVariableStore) *EFIBootLoader
+	VariableStore() *EFIVariableStore
+	SetVariableStore(variableStore *raw.VZEFIVariableStore)
+}
+
+var _ EFIBootLoaderable = (*EFIBootLoader)(nil)
 

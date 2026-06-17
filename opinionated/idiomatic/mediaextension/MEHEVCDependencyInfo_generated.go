@@ -84,3 +84,140 @@ func (x *HEVCDependencyInfo) WithLevelIndex(levelIndex int16) *HEVCDependencyInf
 	return x
 }
 
+// HasTemporalSubLayerAccess calls the underlying HasTemporalSubLayerAccess.
+func (x *HEVCDependencyInfo) HasTemporalSubLayerAccess() bool {
+	return x.inner.HasTemporalSubLayerAccess()
+}
+
+// SetTemporalSubLayerAccess calls the underlying SetTemporalSubLayerAccess.
+func (x *HEVCDependencyInfo) SetTemporalSubLayerAccess(temporalSubLayerAccess bool) {
+	x.inner.SetTemporalSubLayerAccess(temporalSubLayerAccess)
+}
+
+// HasStepwiseTemporalSubLayerAccess calls the underlying HasStepwiseTemporalSubLayerAccess.
+func (x *HEVCDependencyInfo) HasStepwiseTemporalSubLayerAccess() bool {
+	return x.inner.HasStepwiseTemporalSubLayerAccess()
+}
+
+// SetStepwiseTemporalSubLayerAccess calls the underlying SetStepwiseTemporalSubLayerAccess.
+func (x *HEVCDependencyInfo) SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) {
+	x.inner.SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess)
+}
+
+// SyncSampleNALUnitType calls the underlying SyncSampleNALUnitType.
+func (x *HEVCDependencyInfo) SyncSampleNALUnitType() int16 {
+	return x.inner.SyncSampleNALUnitType()
+}
+
+// SetSyncSampleNALUnitType calls the underlying SetSyncSampleNALUnitType.
+func (x *HEVCDependencyInfo) SetSyncSampleNALUnitType(syncSampleNALUnitType int16) {
+	x.inner.SetSyncSampleNALUnitType(syncSampleNALUnitType)
+}
+
+// TemporalLevel calls the underlying TemporalLevel.
+func (x *HEVCDependencyInfo) TemporalLevel() int16 {
+	return x.inner.TemporalLevel()
+}
+
+// SetTemporalLevel calls the underlying SetTemporalLevel.
+func (x *HEVCDependencyInfo) SetTemporalLevel(temporalLevel int16) {
+	x.inner.SetTemporalLevel(temporalLevel)
+}
+
+// ProfileSpace calls the underlying ProfileSpace.
+func (x *HEVCDependencyInfo) ProfileSpace() int16 {
+	return x.inner.ProfileSpace()
+}
+
+// SetProfileSpace calls the underlying SetProfileSpace.
+func (x *HEVCDependencyInfo) SetProfileSpace(profileSpace int16) {
+	x.inner.SetProfileSpace(profileSpace)
+}
+
+// TierFlag calls the underlying TierFlag.
+func (x *HEVCDependencyInfo) TierFlag() int16 {
+	return x.inner.TierFlag()
+}
+
+// SetTierFlag calls the underlying SetTierFlag.
+func (x *HEVCDependencyInfo) SetTierFlag(tierFlag int16) {
+	x.inner.SetTierFlag(tierFlag)
+}
+
+// ProfileIndex calls the underlying ProfileIndex.
+func (x *HEVCDependencyInfo) ProfileIndex() int16 {
+	return x.inner.ProfileIndex()
+}
+
+// SetProfileIndex calls the underlying SetProfileIndex.
+func (x *HEVCDependencyInfo) SetProfileIndex(profileIndex int16) {
+	x.inner.SetProfileIndex(profileIndex)
+}
+
+// ProfileCompatibilityFlags calls the underlying ProfileCompatibilityFlags.
+func (x *HEVCDependencyInfo) ProfileCompatibilityFlags() *foundation.NSData {
+	return x.inner.ProfileCompatibilityFlags()
+}
+
+// SetProfileCompatibilityFlags calls the underlying SetProfileCompatibilityFlags.
+func (x *HEVCDependencyInfo) SetProfileCompatibilityFlags(profileCompatibilityFlags *foundation.NSData) {
+	x.inner.SetProfileCompatibilityFlags(profileCompatibilityFlags)
+}
+
+// ConstraintIndicatorFlags calls the underlying ConstraintIndicatorFlags.
+func (x *HEVCDependencyInfo) ConstraintIndicatorFlags() *foundation.NSData {
+	return x.inner.ConstraintIndicatorFlags()
+}
+
+// SetConstraintIndicatorFlags calls the underlying SetConstraintIndicatorFlags.
+func (x *HEVCDependencyInfo) SetConstraintIndicatorFlags(constraintIndicatorFlags *foundation.NSData) {
+	x.inner.SetConstraintIndicatorFlags(constraintIndicatorFlags)
+}
+
+// LevelIndex calls the underlying LevelIndex.
+func (x *HEVCDependencyInfo) LevelIndex() int16 {
+	return x.inner.LevelIndex()
+}
+
+// SetLevelIndex calls the underlying SetLevelIndex.
+func (x *HEVCDependencyInfo) SetLevelIndex(levelIndex int16) {
+	x.inner.SetLevelIndex(levelIndex)
+}
+
+// HEVCDependencyInfoable is the interface implemented by [HEVCDependencyInfo], for mocking and DI.
+type HEVCDependencyInfoable interface {
+	Unwrap() *raw.MEHEVCDependencyInfo
+	WithTemporalSubLayerAccess(temporalSubLayerAccess bool) *HEVCDependencyInfo
+	WithStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool) *HEVCDependencyInfo
+	WithSyncSampleNALUnitType(syncSampleNALUnitType int16) *HEVCDependencyInfo
+	WithTemporalLevel(temporalLevel int16) *HEVCDependencyInfo
+	WithProfileSpace(profileSpace int16) *HEVCDependencyInfo
+	WithTierFlag(tierFlag int16) *HEVCDependencyInfo
+	WithProfileIndex(profileIndex int16) *HEVCDependencyInfo
+	WithProfileCompatibilityFlags(profileCompatibilityFlags *foundation.NSData) *HEVCDependencyInfo
+	WithConstraintIndicatorFlags(constraintIndicatorFlags *foundation.NSData) *HEVCDependencyInfo
+	WithLevelIndex(levelIndex int16) *HEVCDependencyInfo
+	HasTemporalSubLayerAccess() bool
+	SetTemporalSubLayerAccess(temporalSubLayerAccess bool)
+	HasStepwiseTemporalSubLayerAccess() bool
+	SetStepwiseTemporalSubLayerAccess(stepwiseTemporalSubLayerAccess bool)
+	SyncSampleNALUnitType() int16
+	SetSyncSampleNALUnitType(syncSampleNALUnitType int16)
+	TemporalLevel() int16
+	SetTemporalLevel(temporalLevel int16)
+	ProfileSpace() int16
+	SetProfileSpace(profileSpace int16)
+	TierFlag() int16
+	SetTierFlag(tierFlag int16)
+	ProfileIndex() int16
+	SetProfileIndex(profileIndex int16)
+	ProfileCompatibilityFlags() *foundation.NSData
+	SetProfileCompatibilityFlags(profileCompatibilityFlags *foundation.NSData)
+	ConstraintIndicatorFlags() *foundation.NSData
+	SetConstraintIndicatorFlags(constraintIndicatorFlags *foundation.NSData)
+	LevelIndex() int16
+	SetLevelIndex(levelIndex int16)
+}
+
+var _ HEVCDependencyInfoable = (*HEVCDependencyInfo)(nil)
+

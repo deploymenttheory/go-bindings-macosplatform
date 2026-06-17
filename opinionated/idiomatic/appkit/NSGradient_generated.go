@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,4 +53,79 @@ func NewGradientWithCoder(coder *foundation.NSCoder) *Gradient {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
 	return &Gradient{inner: raw.NSGradientFromID(_id)}
 }
+
+// DrawFromPointToPointOptions calls the underlying DrawFromPointToPointOptions.
+func (x *Gradient) DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options raw.NSGradientDrawingOptions) {
+	x.inner.DrawFromPointToPointOptions(startingPoint, endingPoint, options)
+}
+
+// DrawInRectAngle calls the underlying DrawInRectAngle.
+func (x *Gradient) DrawInRectAngle(rect corefoundation.CGRect, angle float64) {
+	x.inner.DrawInRectAngle(rect, angle)
+}
+
+// DrawInBezierPathAngle calls the underlying DrawInBezierPathAngle.
+func (x *Gradient) DrawInBezierPathAngle(path *raw.NSBezierPath, angle float64) {
+	x.inner.DrawInBezierPathAngle(path, angle)
+}
+
+// DrawFromCenterRadiusToCenterRadiusOptions calls the underlying DrawFromCenterRadiusToCenterRadiusOptions.
+func (x *Gradient) DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options raw.NSGradientDrawingOptions) {
+	x.inner.DrawFromCenterRadiusToCenterRadiusOptions(startCenter, startRadius, endCenter, endRadius, options)
+}
+
+// DrawInRectRelativeCenterPosition calls the underlying DrawInRectRelativeCenterPosition.
+func (x *Gradient) DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint) {
+	x.inner.DrawInRectRelativeCenterPosition(rect, relativeCenterPosition)
+}
+
+// DrawInBezierPathRelativeCenterPosition calls the underlying DrawInBezierPathRelativeCenterPosition.
+func (x *Gradient) DrawInBezierPathRelativeCenterPosition(path *raw.NSBezierPath, relativeCenterPosition corefoundation.CGPoint) {
+	x.inner.DrawInBezierPathRelativeCenterPosition(path, relativeCenterPosition)
+}
+
+// GetColorLocationAtIndex calls the underlying GetColorLocationAtIndex.
+func (x *Gradient) GetColorLocationAtIndex(color *raw.NSColor, location *float64, index int) {
+	x.inner.GetColorLocationAtIndex(color, location, index)
+}
+
+// InterpolatedColorAtLocation calls the underlying InterpolatedColorAtLocation.
+func (x *Gradient) InterpolatedColorAtLocation(location float64) *Color {
+	_r := x.inner.InterpolatedColorAtLocation(location)
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *Gradient) ColorSpace() *ColorSpace {
+	_r := x.inner.ColorSpace()
+	if _r == nil {
+		return nil
+	}
+	return &ColorSpace{inner: _r}
+}
+
+// NumberOfColorStops calls the underlying NumberOfColorStops.
+func (x *Gradient) NumberOfColorStops() int {
+	return x.inner.NumberOfColorStops()
+}
+
+// Gradientable is the interface implemented by [Gradient], for mocking and DI.
+type Gradientable interface {
+	Unwrap() *raw.NSGradient
+	DrawFromPointToPointOptions(startingPoint corefoundation.CGPoint, endingPoint corefoundation.CGPoint, options raw.NSGradientDrawingOptions)
+	DrawInRectAngle(rect corefoundation.CGRect, angle float64)
+	DrawInBezierPathAngle(path *raw.NSBezierPath, angle float64)
+	DrawFromCenterRadiusToCenterRadiusOptions(startCenter corefoundation.CGPoint, startRadius float64, endCenter corefoundation.CGPoint, endRadius float64, options raw.NSGradientDrawingOptions)
+	DrawInRectRelativeCenterPosition(rect corefoundation.CGRect, relativeCenterPosition corefoundation.CGPoint)
+	DrawInBezierPathRelativeCenterPosition(path *raw.NSBezierPath, relativeCenterPosition corefoundation.CGPoint)
+	GetColorLocationAtIndex(color *raw.NSColor, location *float64, index int)
+	InterpolatedColorAtLocation(location float64) *Color
+	ColorSpace() *ColorSpace
+	NumberOfColorStops() int
+}
+
+var _ Gradientable = (*Gradient)(nil)
 

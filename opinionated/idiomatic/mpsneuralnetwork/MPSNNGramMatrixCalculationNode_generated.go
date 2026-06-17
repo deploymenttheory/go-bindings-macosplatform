@@ -37,5 +37,31 @@ func (x *NNGramMatrixCalculationNode) WithPropertyCallBack(propertyCallBack raw.
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *NNGramMatrixCalculationNode) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// PropertyCallBack calls the underlying PropertyCallBack.
+func (x *NNGramMatrixCalculationNode) PropertyCallBack() raw.MPSNNGramMatrixCallback {
+	return x.inner.PropertyCallBack()
+}
+
+// SetPropertyCallBack calls the underlying SetPropertyCallBack.
+func (x *NNGramMatrixCalculationNode) SetPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) {
+	x.inner.SetPropertyCallBack(propertyCallBack)
+}
+
 func (x *NNGramMatrixCalculationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// NNGramMatrixCalculationNodeable is the interface implemented by [NNGramMatrixCalculationNode], for mocking and DI.
+type NNGramMatrixCalculationNodeable interface {
+	Unwrap() *raw.MPSNNGramMatrixCalculationNode
+	WithPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) *NNGramMatrixCalculationNode
+	Alpha() float32
+	PropertyCallBack() raw.MPSNNGramMatrixCallback
+	SetPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback)
+}
+
+var _ NNGramMatrixCalculationNodeable = (*NNGramMatrixCalculationNode)(nil)
 

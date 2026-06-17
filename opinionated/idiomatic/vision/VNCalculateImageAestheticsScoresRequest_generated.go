@@ -27,3 +27,10 @@ func (x *CalculateImageAestheticsScoresRequest) asImageBasedRequest() *raw.VNIma
 
 func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// CalculateImageAestheticsScoresRequestable is the interface implemented by [CalculateImageAestheticsScoresRequest], for mocking and DI.
+type CalculateImageAestheticsScoresRequestable interface {
+	Unwrap() *raw.VNCalculateImageAestheticsScoresRequest
+}
+
+var _ CalculateImageAestheticsScoresRequestable = (*CalculateImageAestheticsScoresRequest)(nil)
+

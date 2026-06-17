@@ -6,6 +6,7 @@ package storekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewStorefront() *Storefront {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKStorefront")), objc.RegisterName("new"))
 	return &Storefront{inner: raw.SKStorefrontFromID(_id)}
 }
+
+// CountryCode calls the underlying CountryCode.
+func (x *Storefront) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Storefront) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Storefrontable is the interface implemented by [Storefront], for mocking and DI.
+type Storefrontable interface {
+	Unwrap() *raw.SKStorefront
+	CountryCode() string
+	Identifier() string
+}
+
+var _ Storefrontable = (*Storefront)(nil)
 

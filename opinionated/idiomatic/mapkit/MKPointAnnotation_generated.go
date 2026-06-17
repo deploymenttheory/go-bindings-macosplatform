@@ -39,5 +39,24 @@ func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, ti
 	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
 }
 
+// Coordinate calls the underlying Coordinate.
+func (x *PointAnnotation) Coordinate() unsafe.Pointer {
+	return x.inner.Coordinate()
+}
+
+// SetCoordinate calls the underlying SetCoordinate.
+func (x *PointAnnotation) SetCoordinate(coordinate unsafe.Pointer) {
+	x.inner.SetCoordinate(coordinate)
+}
+
 func (x *PointAnnotation) asShape() *raw.MKShape { return &x.inner.MKShape }
+
+// PointAnnotationable is the interface implemented by [PointAnnotation], for mocking and DI.
+type PointAnnotationable interface {
+	Unwrap() *raw.MKPointAnnotation
+	Coordinate() unsafe.Pointer
+	SetCoordinate(coordinate unsafe.Pointer)
+}
+
+var _ PointAnnotationable = (*PointAnnotation)(nil)
 

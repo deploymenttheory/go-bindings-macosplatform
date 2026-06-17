@@ -28,15 +28,25 @@ func NewNWUDPSessionWithUpgradeForSession(session *raw.NWUDPSession) *NWUDPSessi
 	return &NWUDPSession{inner: raw.NWUDPSessionFromID(_id)}
 }
 
+// TryNextResolvedEndpoint calls the underlying TryNextResolvedEndpoint.
+func (x *NWUDPSession) TryNextResolvedEndpoint() {
+	x.inner.TryNextResolvedEndpoint()
+}
+
+// SetReadHandlerMaxDatagrams calls the underlying SetReadHandlerMaxDatagrams.
+func (x *NWUDPSession) SetReadHandlerMaxDatagrams(handler objc.Block, maxDatagrams uint) {
+	x.inner.SetReadHandlerMaxDatagrams(handler, maxDatagrams)
+}
+
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
 func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteMultipleDatagramsCompletionHandler(datagramArray, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -50,11 +60,11 @@ func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray
 func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.WriteDatagramCompletionHandler(datagram, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,4 +73,67 @@ func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.N
 		return ctx.Err()
 	}
 }
+
+// Cancel calls the underlying Cancel.
+func (x *NWUDPSession) Cancel() {
+	x.inner.Cancel()
+}
+
+// State calls the underlying State.
+func (x *NWUDPSession) State() raw.NWUDPSessionState {
+	return x.inner.State()
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *NWUDPSession) Endpoint() unsafe.Pointer {
+	return x.inner.Endpoint()
+}
+
+// ResolvedEndpoint calls the underlying ResolvedEndpoint.
+func (x *NWUDPSession) ResolvedEndpoint() unsafe.Pointer {
+	return x.inner.ResolvedEndpoint()
+}
+
+// IsViable calls the underlying IsViable.
+func (x *NWUDPSession) IsViable() bool {
+	return x.inner.IsViable()
+}
+
+// HasBetterPath calls the underlying HasBetterPath.
+func (x *NWUDPSession) HasBetterPath() bool {
+	return x.inner.HasBetterPath()
+}
+
+// CurrentPath calls the underlying CurrentPath.
+func (x *NWUDPSession) CurrentPath() *NWPath {
+	_r := x.inner.CurrentPath()
+	if _r == nil {
+		return nil
+	}
+	return &NWPath{inner: _r}
+}
+
+// MaximumDatagramLength calls the underlying MaximumDatagramLength.
+func (x *NWUDPSession) MaximumDatagramLength() uint {
+	return x.inner.MaximumDatagramLength()
+}
+
+// NWUDPSessionable is the interface implemented by [NWUDPSession], for mocking and DI.
+type NWUDPSessionable interface {
+	Unwrap() *raw.NWUDPSession
+	TryNextResolvedEndpoint()
+	SetReadHandlerMaxDatagrams(handler objc.Block, maxDatagrams uint)
+	WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error
+	WriteDatagram(ctx context.Context, datagram *foundation.NSData) error
+	Cancel()
+	State() raw.NWUDPSessionState
+	Endpoint() unsafe.Pointer
+	ResolvedEndpoint() unsafe.Pointer
+	IsViable() bool
+	HasBetterPath() bool
+	CurrentPath() *NWPath
+	MaximumDatagramLength() uint
+}
+
+var _ NWUDPSessionable = (*NWUDPSession)(nil)
 

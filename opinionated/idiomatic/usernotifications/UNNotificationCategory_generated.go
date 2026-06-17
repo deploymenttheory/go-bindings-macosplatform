@@ -5,8 +5,8 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,29 +24,70 @@ func NewNotificationCategory() *NotificationCategory {
 	return &NotificationCategory{inner: raw.UNNotificationCategoryFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *NotificationCategory) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // Actions returns the collection as a Go slice.
 func (x *NotificationCategory) Actions() []*raw.UNNotificationAction {
 	arr := x.inner.Actions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.UNNotificationAction, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.UNNotificationAction {
+		return raw.UNNotificationActionFromID(purego.Retain(_id))
+	})
 }
 
 // IntentIdentifiers returns the collection as a Go slice.
-func (x *NotificationCategory) IntentIdentifiers() []*foundation.NSString {
+func (x *NotificationCategory) IntentIdentifiers() []string {
 	arr := x.inner.IntentIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// Options calls the underlying Options.
+func (x *NotificationCategory) Options() raw.UNNotificationCategoryOptions {
+	return x.inner.Options()
+}
+
+// HiddenPreviewsBodyPlaceholder calls the underlying HiddenPreviewsBodyPlaceholder.
+func (x *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
+	_r := x.inner.HiddenPreviewsBodyPlaceholder()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CategorySummaryFormat calls the underlying CategorySummaryFormat.
+func (x *NotificationCategory) CategorySummaryFormat() string {
+	_r := x.inner.CategorySummaryFormat()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NotificationCategoryable is the interface implemented by [NotificationCategory], for mocking and DI.
+type NotificationCategoryable interface {
+	Unwrap() *raw.UNNotificationCategory
+	Identifier() string
+	Actions() []*raw.UNNotificationAction
+	IntentIdentifiers() []string
+	Options() raw.UNNotificationCategoryOptions
+	HiddenPreviewsBodyPlaceholder() string
+	CategorySummaryFormat() string
+}
+
+var _ NotificationCategoryable = (*NotificationCategory)(nil)
 

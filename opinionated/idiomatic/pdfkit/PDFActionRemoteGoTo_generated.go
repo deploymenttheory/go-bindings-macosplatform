@@ -44,5 +44,51 @@ func (x *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
 	return x
 }
 
+// PageIndex calls the underlying PageIndex.
+func (x *ActionRemoteGoTo) PageIndex() uint {
+	return x.inner.PageIndex()
+}
+
+// SetPageIndex calls the underlying SetPageIndex.
+func (x *ActionRemoteGoTo) SetPageIndex(pageIndex uint) {
+	x.inner.SetPageIndex(pageIndex)
+}
+
+// Point calls the underlying Point.
+func (x *ActionRemoteGoTo) Point() corefoundation.CGPoint {
+	return x.inner.Point()
+}
+
+// SetPoint calls the underlying SetPoint.
+func (x *ActionRemoteGoTo) SetPoint(point corefoundation.CGPoint) {
+	x.inner.SetPoint(point)
+}
+
+// URL calls the underlying URL.
+func (x *ActionRemoteGoTo) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *ActionRemoteGoTo) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
 func (x *ActionRemoteGoTo) asAction() *raw.PDFAction { return &x.inner.PDFAction }
+
+// ActionRemoteGoToable is the interface implemented by [ActionRemoteGoTo], for mocking and DI.
+type ActionRemoteGoToable interface {
+	Unwrap() *raw.PDFActionRemoteGoTo
+	WithPageIndex(pageIndex uint) *ActionRemoteGoTo
+	WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo
+	WithURL(uRL string) *ActionRemoteGoTo
+	PageIndex() uint
+	SetPageIndex(pageIndex uint)
+	Point() corefoundation.CGPoint
+	SetPoint(point corefoundation.CGPoint)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+}
+
+var _ ActionRemoteGoToable = (*ActionRemoteGoTo)(nil)
 

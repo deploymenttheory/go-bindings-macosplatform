@@ -42,3 +42,59 @@ func (x *Shadow) WithShadowColor(shadowColor *raw.NSColor) *Shadow {
 	return x
 }
 
+// Set calls the underlying Set.
+func (x *Shadow) Set() {
+	x.inner.Set()
+}
+
+// ShadowOffset calls the underlying ShadowOffset.
+func (x *Shadow) ShadowOffset() corefoundation.CGSize {
+	return x.inner.ShadowOffset()
+}
+
+// SetShadowOffset calls the underlying SetShadowOffset.
+func (x *Shadow) SetShadowOffset(shadowOffset corefoundation.CGSize) {
+	x.inner.SetShadowOffset(shadowOffset)
+}
+
+// ShadowBlurRadius calls the underlying ShadowBlurRadius.
+func (x *Shadow) ShadowBlurRadius() float64 {
+	return x.inner.ShadowBlurRadius()
+}
+
+// SetShadowBlurRadius calls the underlying SetShadowBlurRadius.
+func (x *Shadow) SetShadowBlurRadius(shadowBlurRadius float64) {
+	x.inner.SetShadowBlurRadius(shadowBlurRadius)
+}
+
+// ShadowColor calls the underlying ShadowColor.
+func (x *Shadow) ShadowColor() *Color {
+	_r := x.inner.ShadowColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetShadowColor calls the underlying SetShadowColor.
+func (x *Shadow) SetShadowColor(shadowColor *raw.NSColor) {
+	x.inner.SetShadowColor(shadowColor)
+}
+
+// Shadowable is the interface implemented by [Shadow], for mocking and DI.
+type Shadowable interface {
+	Unwrap() *raw.NSShadow
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *Shadow
+	WithShadowBlurRadius(shadowBlurRadius float64) *Shadow
+	WithShadowColor(shadowColor *raw.NSColor) *Shadow
+	Set()
+	ShadowOffset() corefoundation.CGSize
+	SetShadowOffset(shadowOffset corefoundation.CGSize)
+	ShadowBlurRadius() float64
+	SetShadowBlurRadius(shadowBlurRadius float64)
+	ShadowColor() *Color
+	SetShadowColor(shadowColor *raw.NSColor)
+}
+
+var _ Shadowable = (*Shadow)(nil)
+

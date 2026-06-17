@@ -31,5 +31,24 @@ func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool
 	return &FileSerialPortAttachment{inner: raw.VZFileSerialPortAttachmentFromID(_id)}, nil
 }
 
+// URL calls the underlying URL.
+func (x *FileSerialPortAttachment) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Append calls the underlying Append.
+func (x *FileSerialPortAttachment) Append() bool {
+	return x.inner.Append()
+}
+
 func (x *FileSerialPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment { return &x.inner.VZSerialPortAttachment }
+
+// FileSerialPortAttachmentable is the interface implemented by [FileSerialPortAttachment], for mocking and DI.
+type FileSerialPortAttachmentable interface {
+	Unwrap() *raw.VZFileSerialPortAttachment
+	URL() *foundation.NSURL
+	Append() bool
+}
+
+var _ FileSerialPortAttachmentable = (*FileSerialPortAttachment)(nil)
 

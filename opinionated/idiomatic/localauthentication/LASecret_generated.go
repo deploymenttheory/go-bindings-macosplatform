@@ -5,8 +5,12 @@
 package localauthentication
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Secret wraps [raw.LASecret] with a fluent Go API.
@@ -22,4 +26,36 @@ func NewSecret() *Secret {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LASecret")), objc.RegisterName("new"))
 	return &Secret{inner: raw.LASecretFromID(_id)}
 }
+
+// LoadDataWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *Secret) LoadDataWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.LoadDataWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// Secretable is the interface implemented by [Secret], for mocking and DI.
+type Secretable interface {
+	Unwrap() *raw.LASecret
+	LoadDataWithCompletion(ctx context.Context) (*foundation.NSData, error)
+}
+
+var _ Secretable = (*Secret)(nil)
 

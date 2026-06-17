@@ -25,7 +25,20 @@ func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStora
 	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(_id)}
 }
 
+// RootCertificate calls the underlying RootCertificate.
+func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *foundation.NSData {
+	return x.inner.RootCertificate()
+}
+
 func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters { return &x.inner.MTRDeviceControllerParameters }
 
 func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters { return &x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters }
+
+// MTRDeviceControllerExternalCertificateParametersable is the interface implemented by [MTRDeviceControllerExternalCertificateParameters], for mocking and DI.
+type MTRDeviceControllerExternalCertificateParametersable interface {
+	Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters
+	RootCertificate() *foundation.NSData
+}
+
+var _ MTRDeviceControllerExternalCertificateParametersable = (*MTRDeviceControllerExternalCertificateParameters)(nil)
 

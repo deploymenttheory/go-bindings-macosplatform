@@ -23,5 +23,18 @@ func NewSeriesBuilder() *SeriesBuilder {
 	return &SeriesBuilder{inner: raw.HKSeriesBuilderFromID(_id)}
 }
 
+// Discard calls the underlying Discard.
+func (x *SeriesBuilder) Discard() {
+	x.inner.Discard()
+}
+
 func (x *SeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return x.inner }
+
+// SeriesBuilderable is the interface implemented by [SeriesBuilder], for mocking and DI.
+type SeriesBuilderable interface {
+	Unwrap() *raw.HKSeriesBuilder
+	Discard()
+}
+
+var _ SeriesBuilderable = (*SeriesBuilder)(nil)
 

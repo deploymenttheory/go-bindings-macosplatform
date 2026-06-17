@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,6 +49,85 @@ func (x *DOMHTMLTableSectionElement) WithVAlign(vAlign string) *DOMHTMLTableSect
 	return x
 }
 
+// InsertRow calls the underlying InsertRow.
+func (x *DOMHTMLTableSectionElement) InsertRow(index int) *DOMHTMLElement {
+	_r := x.inner.InsertRow(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLElement{inner: _r}
+}
+
+// DeleteRow calls the underlying DeleteRow.
+func (x *DOMHTMLTableSectionElement) DeleteRow(index int) {
+	x.inner.DeleteRow(index)
+}
+
+// Align calls the underlying Align.
+func (x *DOMHTMLTableSectionElement) Align() string {
+	_r := x.inner.Align()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlign calls the underlying SetAlign.
+func (x *DOMHTMLTableSectionElement) SetAlign(align string) {
+	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+}
+
+// Ch calls the underlying Ch.
+func (x *DOMHTMLTableSectionElement) Ch() string {
+	_r := x.inner.Ch()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCh calls the underlying SetCh.
+func (x *DOMHTMLTableSectionElement) SetCh(ch string) {
+	x.inner.SetCh(foundation.NSStringStringWithUTF8String(ch))
+}
+
+// ChOff calls the underlying ChOff.
+func (x *DOMHTMLTableSectionElement) ChOff() string {
+	_r := x.inner.ChOff()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetChOff calls the underlying SetChOff.
+func (x *DOMHTMLTableSectionElement) SetChOff(chOff string) {
+	x.inner.SetChOff(foundation.NSStringStringWithUTF8String(chOff))
+}
+
+// VAlign calls the underlying VAlign.
+func (x *DOMHTMLTableSectionElement) VAlign() string {
+	_r := x.inner.VAlign()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVAlign calls the underlying SetVAlign.
+func (x *DOMHTMLTableSectionElement) SetVAlign(vAlign string) {
+	x.inner.SetVAlign(foundation.NSStringStringWithUTF8String(vAlign))
+}
+
+// Rows calls the underlying Rows.
+func (x *DOMHTMLTableSectionElement) Rows() *DOMHTMLCollection {
+	_r := x.inner.Rows()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
 func (x *DOMHTMLTableSectionElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLTableSectionElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -57,4 +137,26 @@ func (x *DOMHTMLTableSectionElement) asDOMNode() *raw.DOMNode { return &x.inner.
 func (x *DOMHTMLTableSectionElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLTableSectionElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLTableSectionElementable is the interface implemented by [DOMHTMLTableSectionElement], for mocking and DI.
+type DOMHTMLTableSectionElementable interface {
+	Unwrap() *raw.DOMHTMLTableSectionElement
+	WithAlign(align string) *DOMHTMLTableSectionElement
+	WithCh(ch string) *DOMHTMLTableSectionElement
+	WithChOff(chOff string) *DOMHTMLTableSectionElement
+	WithVAlign(vAlign string) *DOMHTMLTableSectionElement
+	InsertRow(index int) *DOMHTMLElement
+	DeleteRow(index int)
+	Align() string
+	SetAlign(align string)
+	Ch() string
+	SetCh(ch string)
+	ChOff() string
+	SetChOff(chOff string)
+	VAlign() string
+	SetVAlign(vAlign string)
+	Rows() *DOMHTMLCollection
+}
+
+var _ DOMHTMLTableSectionElementable = (*DOMHTMLTableSectionElement)(nil)
 

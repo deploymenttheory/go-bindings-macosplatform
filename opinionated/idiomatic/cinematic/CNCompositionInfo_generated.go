@@ -6,6 +6,7 @@ package cinematic
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewCompositionInfo() *CompositionInfo {
 	return &CompositionInfo{inner: raw.CNCompositionInfoFromID(_id)}
 }
 
+// InsertTimeRangeOfCinematicAssetInfoAtTimeError calls the underlying InsertTimeRangeOfCinematicAssetInfoAtTimeError.
+func (x *CompositionInfo) InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange coremedia.CMTimeRange, assetInfo *raw.CNAssetInfo, startTime coremedia.CMTime) (bool, error) {
+	return x.inner.InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange, assetInfo, startTime)
+}
+
 func (x *CompositionInfo) asAssetInfo() *raw.CNAssetInfo { return &x.inner.CNAssetInfo }
+
+// CompositionInfoable is the interface implemented by [CompositionInfo], for mocking and DI.
+type CompositionInfoable interface {
+	Unwrap() *raw.CNCompositionInfo
+	InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange coremedia.CMTimeRange, assetInfo *raw.CNAssetInfo, startTime coremedia.CMTime) (bool, error)
+}
+
+var _ CompositionInfoable = (*CompositionInfo)(nil)
 

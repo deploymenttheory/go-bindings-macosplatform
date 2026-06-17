@@ -25,3 +25,10 @@ func NewCallCapabilityResolutionResult() *CallCapabilityResolutionResult {
 
 func (x *CallCapabilityResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// CallCapabilityResolutionResultable is the interface implemented by [CallCapabilityResolutionResult], for mocking and DI.
+type CallCapabilityResolutionResultable interface {
+	Unwrap() *raw.INCallCapabilityResolutionResult
+}
+
+var _ CallCapabilityResolutionResultable = (*CallCapabilityResolutionResult)(nil)
+

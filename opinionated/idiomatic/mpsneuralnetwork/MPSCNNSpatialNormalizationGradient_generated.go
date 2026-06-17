@@ -51,7 +51,53 @@ func (x *CNNSpatialNormalizationGradient) WithDelta(delta float32) *CNNSpatialNo
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNSpatialNormalizationGradient) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNSpatialNormalizationGradient) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNSpatialNormalizationGradient) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNSpatialNormalizationGradient) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNSpatialNormalizationGradient) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNSpatialNormalizationGradient) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
 func (x *CNNSpatialNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNSpatialNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// CNNSpatialNormalizationGradientable is the interface implemented by [CNNSpatialNormalizationGradient], for mocking and DI.
+type CNNSpatialNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNSpatialNormalizationGradient
+	WithAlpha(alpha float32) *CNNSpatialNormalizationGradient
+	WithBeta(beta float32) *CNNSpatialNormalizationGradient
+	WithDelta(delta float32) *CNNSpatialNormalizationGradient
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+}
+
+var _ CNNSpatialNormalizationGradientable = (*CNNSpatialNormalizationGradient)(nil)
 

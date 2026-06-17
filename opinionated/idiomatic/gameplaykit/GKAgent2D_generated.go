@@ -7,6 +7,7 @@ package gameplaykit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Agent2D wraps [raw.GKAgent2D] with a fluent Go API.
@@ -29,7 +30,45 @@ func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
 	return x
 }
 
+// Position calls the underlying Position.
+func (x *Agent2D) Position() unsafe.Pointer {
+	return x.inner.Position()
+}
+
+// SetPosition calls the underlying SetPosition.
+func (x *Agent2D) SetPosition(position unsafe.Pointer) {
+	x.inner.SetPosition(position)
+}
+
+// Velocity calls the underlying Velocity.
+func (x *Agent2D) Velocity() unsafe.Pointer {
+	return x.inner.Velocity()
+}
+
+// Rotation calls the underlying Rotation.
+func (x *Agent2D) Rotation() float32 {
+	return x.inner.Rotation()
+}
+
+// SetRotation calls the underlying SetRotation.
+func (x *Agent2D) SetRotation(rotation float32) {
+	x.inner.SetRotation(rotation)
+}
+
 func (x *Agent2D) asAgent() *raw.GKAgent { return &x.inner.GKAgent }
 
 func (x *Agent2D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKComponent }
+
+// Agent2Dable is the interface implemented by [Agent2D], for mocking and DI.
+type Agent2Dable interface {
+	Unwrap() *raw.GKAgent2D
+	WithRotation(rotation float32) *Agent2D
+	Position() unsafe.Pointer
+	SetPosition(position unsafe.Pointer)
+	Velocity() unsafe.Pointer
+	Rotation() float32
+	SetRotation(rotation float32)
+}
+
+var _ Agent2Dable = (*Agent2D)(nil)
 

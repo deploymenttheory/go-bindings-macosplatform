@@ -5,7 +5,9 @@
 package usernotifications
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,37 @@ func NewNotificationAttachment() *NotificationAttachment {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationAttachment")), objc.RegisterName("new"))
 	return &NotificationAttachment{inner: raw.UNNotificationAttachmentFromID(_id)}
 }
+
+// Identifier calls the underlying Identifier.
+func (x *NotificationAttachment) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// URL calls the underlying URL.
+func (x *NotificationAttachment) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// Type calls the underlying Type.
+func (x *NotificationAttachment) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NotificationAttachmentable is the interface implemented by [NotificationAttachment], for mocking and DI.
+type NotificationAttachmentable interface {
+	Unwrap() *raw.UNNotificationAttachment
+	Identifier() string
+	URL() *foundation.NSURL
+	Type() string
+}
+
+var _ NotificationAttachmentable = (*NotificationAttachment)(nil)
 

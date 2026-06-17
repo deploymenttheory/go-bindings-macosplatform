@@ -25,3 +25,10 @@ func NewMathExpression() *MathExpression {
 
 func (x *MathExpression) asMathExpression() *raw.AXMathExpression { return x.inner }
 
+// MathExpressionable is the interface implemented by [MathExpression], for mocking and DI.
+type MathExpressionable interface {
+	Unwrap() *raw.AXMathExpression
+}
+
+var _ MathExpressionable = (*MathExpression)(nil)
+

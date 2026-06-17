@@ -8,7 +8,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -145,16 +147,312 @@ func (x *PlayerView) WithPictureInPictureDelegate(pictureInPictureDelegate raw.A
 	return x
 }
 
+// SelectSpeed calls the underlying SelectSpeed.
+func (x *PlayerView) SelectSpeed(speed *raw.AVPlaybackSpeed) {
+	x.inner.SelectSpeed(speed)
+}
+
+// SetMagnificationCenteredAtPoint calls the underlying SetMagnificationCenteredAtPoint.
+func (x *PlayerView) SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint) {
+	x.inner.SetMagnificationCenteredAtPoint(magnification, point)
+}
+
+// Player calls the underlying Player.
+func (x *PlayerView) Player() *avfoundation.AVPlayer {
+	return x.inner.Player()
+}
+
+// SetPlayer calls the underlying SetPlayer.
+func (x *PlayerView) SetPlayer(player *avfoundation.AVPlayer) {
+	x.inner.SetPlayer(player)
+}
+
+// ControlsStyle calls the underlying ControlsStyle.
+func (x *PlayerView) ControlsStyle() raw.AVPlayerViewControlsStyle {
+	return x.inner.ControlsStyle()
+}
+
+// SetControlsStyle calls the underlying SetControlsStyle.
+func (x *PlayerView) SetControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle) {
+	x.inner.SetControlsStyle(controlsStyle)
+}
+
+// VideoGravity calls the underlying VideoGravity.
+func (x *PlayerView) VideoGravity() string {
+	_r := x.inner.VideoGravity()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVideoGravity calls the underlying SetVideoGravity.
+func (x *PlayerView) SetVideoGravity(videoGravity *foundation.NSString) {
+	x.inner.SetVideoGravity(videoGravity)
+}
+
+// IsReadyForDisplay calls the underlying IsReadyForDisplay.
+func (x *PlayerView) IsReadyForDisplay() bool {
+	return x.inner.IsReadyForDisplay()
+}
+
+// VideoBounds calls the underlying VideoBounds.
+func (x *PlayerView) VideoBounds() corefoundation.CGRect {
+	return x.inner.VideoBounds()
+}
+
+// ContentOverlayView calls the underlying ContentOverlayView.
+func (x *PlayerView) ContentOverlayView() *appkit.NSView {
+	return x.inner.ContentOverlayView()
+}
+
+// UpdatesNowPlayingInfoCenter calls the underlying UpdatesNowPlayingInfoCenter.
+func (x *PlayerView) UpdatesNowPlayingInfoCenter() bool {
+	return x.inner.UpdatesNowPlayingInfoCenter()
+}
+
+// SetUpdatesNowPlayingInfoCenter calls the underlying SetUpdatesNowPlayingInfoCenter.
+func (x *PlayerView) SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) {
+	x.inner.SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerView) Delegate() raw.AVPlayerViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PlayerView) SetDelegate(delegate raw.AVPlayerViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // Speeds returns the collection as a Go slice.
 func (x *PlayerView) Speeds() []*raw.AVPlaybackSpeed {
 	arr := x.inner.Speeds()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlaybackSpeed, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlaybackSpeed {
+		return raw.AVPlaybackSpeedFromID(purego.Retain(_id))
+	})
 }
+
+// SetSpeeds calls the underlying SetSpeeds.
+func (x *PlayerView) SetSpeeds(speeds *foundation.NSArray[*raw.AVPlaybackSpeed]) {
+	x.inner.SetSpeeds(speeds)
+}
+
+// SelectedSpeed calls the underlying SelectedSpeed.
+func (x *PlayerView) SelectedSpeed() *PlaybackSpeed {
+	_r := x.inner.SelectedSpeed()
+	if _r == nil {
+		return nil
+	}
+	return &PlaybackSpeed{inner: _r}
+}
+
+// AllowsVideoFrameAnalysis calls the underlying AllowsVideoFrameAnalysis.
+func (x *PlayerView) AllowsVideoFrameAnalysis() bool {
+	return x.inner.AllowsVideoFrameAnalysis()
+}
+
+// SetAllowsVideoFrameAnalysis calls the underlying SetAllowsVideoFrameAnalysis.
+func (x *PlayerView) SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) {
+	x.inner.SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis)
+}
+
+// VideoFrameAnalysisTypes calls the underlying VideoFrameAnalysisTypes.
+func (x *PlayerView) VideoFrameAnalysisTypes() raw.AVVideoFrameAnalysisType {
+	return x.inner.VideoFrameAnalysisTypes()
+}
+
+// SetVideoFrameAnalysisTypes calls the underlying SetVideoFrameAnalysisTypes.
+func (x *PlayerView) SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType) {
+	x.inner.SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes)
+}
+
+// AllowsMagnification calls the underlying AllowsMagnification.
+func (x *PlayerView) AllowsMagnification() bool {
+	return x.inner.AllowsMagnification()
+}
+
+// SetAllowsMagnification calls the underlying SetAllowsMagnification.
+func (x *PlayerView) SetAllowsMagnification(allowsMagnification bool) {
+	x.inner.SetAllowsMagnification(allowsMagnification)
+}
+
+// Magnification calls the underlying Magnification.
+func (x *PlayerView) Magnification() float64 {
+	return x.inner.Magnification()
+}
+
+// SetMagnification calls the underlying SetMagnification.
+func (x *PlayerView) SetMagnification(magnification float64) {
+	x.inner.SetMagnification(magnification)
+}
+
+// PreferredDisplayDynamicRange calls the underlying PreferredDisplayDynamicRange.
+func (x *PlayerView) PreferredDisplayDynamicRange() raw.AVDisplayDynamicRange {
+	return x.inner.PreferredDisplayDynamicRange()
+}
+
+// SetPreferredDisplayDynamicRange calls the underlying SetPreferredDisplayDynamicRange.
+func (x *PlayerView) SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange) {
+	x.inner.SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange)
+}
+
+// ShowsFrameSteppingButtons calls the underlying ShowsFrameSteppingButtons.
+func (x *PlayerView) ShowsFrameSteppingButtons() bool {
+	return x.inner.ShowsFrameSteppingButtons()
+}
+
+// SetShowsFrameSteppingButtons calls the underlying SetShowsFrameSteppingButtons.
+func (x *PlayerView) SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool) {
+	x.inner.SetShowsFrameSteppingButtons(showsFrameSteppingButtons)
+}
+
+// ShowsSharingServiceButton calls the underlying ShowsSharingServiceButton.
+func (x *PlayerView) ShowsSharingServiceButton() bool {
+	return x.inner.ShowsSharingServiceButton()
+}
+
+// SetShowsSharingServiceButton calls the underlying SetShowsSharingServiceButton.
+func (x *PlayerView) SetShowsSharingServiceButton(showsSharingServiceButton bool) {
+	x.inner.SetShowsSharingServiceButton(showsSharingServiceButton)
+}
+
+// ActionPopUpButtonMenu calls the underlying ActionPopUpButtonMenu.
+func (x *PlayerView) ActionPopUpButtonMenu() *appkit.NSMenu {
+	return x.inner.ActionPopUpButtonMenu()
+}
+
+// SetActionPopUpButtonMenu calls the underlying SetActionPopUpButtonMenu.
+func (x *PlayerView) SetActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) {
+	x.inner.SetActionPopUpButtonMenu(actionPopUpButtonMenu)
+}
+
+// ShowsFullScreenToggleButton calls the underlying ShowsFullScreenToggleButton.
+func (x *PlayerView) ShowsFullScreenToggleButton() bool {
+	return x.inner.ShowsFullScreenToggleButton()
+}
+
+// SetShowsFullScreenToggleButton calls the underlying SetShowsFullScreenToggleButton.
+func (x *PlayerView) SetShowsFullScreenToggleButton(showsFullScreenToggleButton bool) {
+	x.inner.SetShowsFullScreenToggleButton(showsFullScreenToggleButton)
+}
+
+// ShowsTimecodes calls the underlying ShowsTimecodes.
+func (x *PlayerView) ShowsTimecodes() bool {
+	return x.inner.ShowsTimecodes()
+}
+
+// SetShowsTimecodes calls the underlying SetShowsTimecodes.
+func (x *PlayerView) SetShowsTimecodes(showsTimecodes bool) {
+	x.inner.SetShowsTimecodes(showsTimecodes)
+}
+
+// BeginTrimmingWithCompletionHandler calls the underlying BeginTrimmingWithCompletionHandler.
+func (x *PlayerView) BeginTrimmingWithCompletionHandler(handler func(raw.AVPlayerViewTrimResult)) {
+	x.inner.BeginTrimmingWithCompletionHandler(handler)
+}
+
+// CanBeginTrimming calls the underlying CanBeginTrimming.
+func (x *PlayerView) CanBeginTrimming() bool {
+	return x.inner.CanBeginTrimming()
+}
+
+// FlashChapterNumberChapterTitle calls the underlying FlashChapterNumberChapterTitle.
+func (x *PlayerView) FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle string) {
+	x.inner.FlashChapterNumberChapterTitle(chapterNumber, foundation.NSStringStringWithUTF8String(chapterTitle))
+}
+
+// AllowsPictureInPicturePlayback calls the underlying AllowsPictureInPicturePlayback.
+func (x *PlayerView) AllowsPictureInPicturePlayback() bool {
+	return x.inner.AllowsPictureInPicturePlayback()
+}
+
+// SetAllowsPictureInPicturePlayback calls the underlying SetAllowsPictureInPicturePlayback.
+func (x *PlayerView) SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) {
+	x.inner.SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback)
+}
+
+// PictureInPictureDelegate calls the underlying PictureInPictureDelegate.
+func (x *PlayerView) PictureInPictureDelegate() raw.AVPlayerViewPictureInPictureDelegate {
+	return x.inner.PictureInPictureDelegate()
+}
+
+// SetPictureInPictureDelegate calls the underlying SetPictureInPictureDelegate.
+func (x *PlayerView) SetPictureInPictureDelegate(pictureInPictureDelegate raw.AVPlayerViewPictureInPictureDelegate) {
+	x.inner.SetPictureInPictureDelegate(pictureInPictureDelegate)
+}
+
+// PlayerViewable is the interface implemented by [PlayerView], for mocking and DI.
+type PlayerViewable interface {
+	Unwrap() *raw.AVPlayerView
+	WithPlayer(player *avfoundation.AVPlayer) *PlayerView
+	WithControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle) *PlayerView
+	WithVideoGravity(videoGravity *foundation.NSString) *PlayerView
+	WithUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool) *PlayerView
+	WithDelegate(delegate raw.AVPlayerViewDelegate) *PlayerView
+	WithSpeeds(items ...*raw.AVPlaybackSpeed) *PlayerView
+	WithAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool) *PlayerView
+	WithVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType) *PlayerView
+	WithAllowsMagnification(allowsMagnification bool) *PlayerView
+	WithMagnification(magnification float64) *PlayerView
+	WithPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange) *PlayerView
+	WithShowsFrameSteppingButtons(showsFrameSteppingButtons bool) *PlayerView
+	WithShowsSharingServiceButton(showsSharingServiceButton bool) *PlayerView
+	WithActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu) *PlayerView
+	WithShowsFullScreenToggleButton(showsFullScreenToggleButton bool) *PlayerView
+	WithShowsTimecodes(showsTimecodes bool) *PlayerView
+	WithAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool) *PlayerView
+	WithPictureInPictureDelegate(pictureInPictureDelegate raw.AVPlayerViewPictureInPictureDelegate) *PlayerView
+	SelectSpeed(speed *raw.AVPlaybackSpeed)
+	SetMagnificationCenteredAtPoint(magnification float64, point corefoundation.CGPoint)
+	Player() *avfoundation.AVPlayer
+	SetPlayer(player *avfoundation.AVPlayer)
+	ControlsStyle() raw.AVPlayerViewControlsStyle
+	SetControlsStyle(controlsStyle raw.AVPlayerViewControlsStyle)
+	VideoGravity() string
+	SetVideoGravity(videoGravity *foundation.NSString)
+	IsReadyForDisplay() bool
+	VideoBounds() corefoundation.CGRect
+	ContentOverlayView() *appkit.NSView
+	UpdatesNowPlayingInfoCenter() bool
+	SetUpdatesNowPlayingInfoCenter(updatesNowPlayingInfoCenter bool)
+	Delegate() raw.AVPlayerViewDelegate
+	SetDelegate(delegate raw.AVPlayerViewDelegate)
+	Speeds() []*raw.AVPlaybackSpeed
+	SetSpeeds(speeds *foundation.NSArray[*raw.AVPlaybackSpeed])
+	SelectedSpeed() *PlaybackSpeed
+	AllowsVideoFrameAnalysis() bool
+	SetAllowsVideoFrameAnalysis(allowsVideoFrameAnalysis bool)
+	VideoFrameAnalysisTypes() raw.AVVideoFrameAnalysisType
+	SetVideoFrameAnalysisTypes(videoFrameAnalysisTypes raw.AVVideoFrameAnalysisType)
+	AllowsMagnification() bool
+	SetAllowsMagnification(allowsMagnification bool)
+	Magnification() float64
+	SetMagnification(magnification float64)
+	PreferredDisplayDynamicRange() raw.AVDisplayDynamicRange
+	SetPreferredDisplayDynamicRange(preferredDisplayDynamicRange raw.AVDisplayDynamicRange)
+	ShowsFrameSteppingButtons() bool
+	SetShowsFrameSteppingButtons(showsFrameSteppingButtons bool)
+	ShowsSharingServiceButton() bool
+	SetShowsSharingServiceButton(showsSharingServiceButton bool)
+	ActionPopUpButtonMenu() *appkit.NSMenu
+	SetActionPopUpButtonMenu(actionPopUpButtonMenu *appkit.NSMenu)
+	ShowsFullScreenToggleButton() bool
+	SetShowsFullScreenToggleButton(showsFullScreenToggleButton bool)
+	ShowsTimecodes() bool
+	SetShowsTimecodes(showsTimecodes bool)
+	BeginTrimmingWithCompletionHandler(handler func(raw.AVPlayerViewTrimResult))
+	CanBeginTrimming() bool
+	FlashChapterNumberChapterTitle(chapterNumber uint, chapterTitle string)
+	AllowsPictureInPicturePlayback() bool
+	SetAllowsPictureInPicturePlayback(allowsPictureInPicturePlayback bool)
+	PictureInPictureDelegate() raw.AVPlayerViewPictureInPictureDelegate
+	SetPictureInPictureDelegate(pictureInPictureDelegate raw.AVPlayerViewPictureInPictureDelegate)
+}
+
+var _ PlayerViewable = (*PlayerView)(nil)
 

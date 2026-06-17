@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,4 +80,161 @@ func (x *TabViewItem) WithToolTip(toolTip string) *TabViewItem {
 	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
 	return x
 }
+
+// DrawLabelInRect calls the underlying DrawLabelInRect.
+func (x *TabViewItem) DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect) {
+	x.inner.DrawLabelInRect(shouldTruncateLabel, labelRect)
+}
+
+// SizeOfLabel calls the underlying SizeOfLabel.
+func (x *TabViewItem) SizeOfLabel(computeMin bool) corefoundation.CGSize {
+	return x.inner.SizeOfLabel(computeMin)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *TabViewItem) Identifier() objc.ID {
+	return x.inner.Identifier()
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *TabViewItem) SetIdentifier(identifier objc.ID) {
+	x.inner.SetIdentifier(identifier)
+}
+
+// Color calls the underlying Color.
+func (x *TabViewItem) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *TabViewItem) SetColor(color *raw.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// Label calls the underlying Label.
+func (x *TabViewItem) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *TabViewItem) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Image calls the underlying Image.
+func (x *TabViewItem) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *TabViewItem) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// View calls the underlying View.
+func (x *TabViewItem) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetView calls the underlying SetView.
+func (x *TabViewItem) SetView(view *raw.NSView) {
+	x.inner.SetView(view)
+}
+
+// ViewController calls the underlying ViewController.
+func (x *TabViewItem) ViewController() *ViewController {
+	_r := x.inner.ViewController()
+	if _r == nil {
+		return nil
+	}
+	return &ViewController{inner: _r}
+}
+
+// SetViewController calls the underlying SetViewController.
+func (x *TabViewItem) SetViewController(viewController *raw.NSViewController) {
+	x.inner.SetViewController(viewController)
+}
+
+// TabState calls the underlying TabState.
+func (x *TabViewItem) TabState() raw.NSTabState {
+	return x.inner.TabState()
+}
+
+// TabView calls the underlying TabView.
+func (x *TabViewItem) TabView() *TabView {
+	_r := x.inner.TabView()
+	if _r == nil {
+		return nil
+	}
+	return &TabView{inner: _r}
+}
+
+// SetInitialFirstResponder calls the underlying SetInitialFirstResponder.
+func (x *TabViewItem) SetInitialFirstResponder(initialFirstResponder *raw.NSView) {
+	x.inner.SetInitialFirstResponder(initialFirstResponder)
+}
+
+// ToolTip calls the underlying ToolTip.
+func (x *TabViewItem) ToolTip() string {
+	_r := x.inner.ToolTip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetToolTip calls the underlying SetToolTip.
+func (x *TabViewItem) SetToolTip(toolTip string) {
+	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+}
+
+// TabViewItemable is the interface implemented by [TabViewItem], for mocking and DI.
+type TabViewItemable interface {
+	Unwrap() *raw.NSTabViewItem
+	WithIdentifier(identifier objc.ID) *TabViewItem
+	WithColor(color *raw.NSColor) *TabViewItem
+	WithLabel(label string) *TabViewItem
+	WithImage(image *raw.NSImage) *TabViewItem
+	WithView(view ViewProvider) *TabViewItem
+	WithViewController(viewController ViewControllerProvider) *TabViewItem
+	WithInitialFirstResponder(initialFirstResponder ViewProvider) *TabViewItem
+	WithToolTip(toolTip string) *TabViewItem
+	DrawLabelInRect(shouldTruncateLabel bool, labelRect corefoundation.CGRect)
+	SizeOfLabel(computeMin bool) corefoundation.CGSize
+	Identifier() objc.ID
+	SetIdentifier(identifier objc.ID)
+	Color() *Color
+	SetColor(color *raw.NSColor)
+	Label() string
+	SetLabel(label string)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	View() *View
+	SetView(view *raw.NSView)
+	ViewController() *ViewController
+	SetViewController(viewController *raw.NSViewController)
+	TabState() raw.NSTabState
+	TabView() *TabView
+	SetInitialFirstResponder(initialFirstResponder *raw.NSView)
+	ToolTip() string
+	SetToolTip(toolTip string)
+}
+
+var _ TabViewItemable = (*TabViewItem)(nil)
 

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,30 @@ func NewDetectedObjectObservation() *DetectedObjectObservation {
 	return &DetectedObjectObservation{inner: raw.VNDetectedObjectObservationFromID(_id)}
 }
 
+// BoundingBox calls the underlying BoundingBox.
+func (x *DetectedObjectObservation) BoundingBox() corefoundation.CGRect {
+	return x.inner.BoundingBox()
+}
+
+// GlobalSegmentationMask calls the underlying GlobalSegmentationMask.
+func (x *DetectedObjectObservation) GlobalSegmentationMask() *PixelBufferObservation {
+	_r := x.inner.GlobalSegmentationMask()
+	if _r == nil {
+		return nil
+	}
+	return &PixelBufferObservation{inner: _r}
+}
+
 func (x *DetectedObjectObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return x.inner }
 
 func (x *DetectedObjectObservation) asObservation() *raw.VNObservation { return &x.inner.VNObservation }
+
+// DetectedObjectObservationable is the interface implemented by [DetectedObjectObservation], for mocking and DI.
+type DetectedObjectObservationable interface {
+	Unwrap() *raw.VNDetectedObjectObservation
+	BoundingBox() corefoundation.CGRect
+	GlobalSegmentationMask() *PixelBufferObservation
+}
+
+var _ DetectedObjectObservationable = (*DetectedObjectObservation)(nil)
 

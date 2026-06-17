@@ -6,6 +6,7 @@ package systemextensions
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,41 @@ func NewSystemExtensionInfo() *SystemExtensionInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionInfo")), objc.RegisterName("new"))
 	return &SystemExtensionInfo{inner: raw.OSSystemExtensionInfoFromID(_id)}
 }
+
+// BundleIdentifier calls the underlying BundleIdentifier.
+func (x *SystemExtensionInfo) BundleIdentifier() string {
+	_r := x.inner.BundleIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleVersion calls the underlying BundleVersion.
+func (x *SystemExtensionInfo) BundleVersion() string {
+	_r := x.inner.BundleVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BundleShortVersion calls the underlying BundleShortVersion.
+func (x *SystemExtensionInfo) BundleShortVersion() string {
+	_r := x.inner.BundleShortVersion()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SystemExtensionInfoable is the interface implemented by [SystemExtensionInfo], for mocking and DI.
+type SystemExtensionInfoable interface {
+	Unwrap() *raw.OSSystemExtensionInfo
+	BundleIdentifier() string
+	BundleVersion() string
+	BundleShortVersion() string
+}
+
+var _ SystemExtensionInfoable = (*SystemExtensionInfo)(nil)
 

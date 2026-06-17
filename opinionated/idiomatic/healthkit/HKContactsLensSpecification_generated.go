@@ -24,5 +24,32 @@ func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter
 	return &ContactsLensSpecification{inner: raw.HKContactsLensSpecificationFromID(_id)}
 }
 
+// BaseCurve calls the underlying BaseCurve.
+func (x *ContactsLensSpecification) BaseCurve() *Quantity {
+	_r := x.inner.BaseCurve()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Diameter calls the underlying Diameter.
+func (x *ContactsLensSpecification) Diameter() *Quantity {
+	_r := x.inner.Diameter()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
 func (x *ContactsLensSpecification) asLensSpecification() *raw.HKLensSpecification { return &x.inner.HKLensSpecification }
+
+// ContactsLensSpecificationable is the interface implemented by [ContactsLensSpecification], for mocking and DI.
+type ContactsLensSpecificationable interface {
+	Unwrap() *raw.HKContactsLensSpecification
+	BaseCurve() *Quantity
+	Diameter() *Quantity
+}
+
+var _ ContactsLensSpecificationable = (*ContactsLensSpecification)(nil)
 

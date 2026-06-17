@@ -45,6 +45,11 @@ func (x *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPlay
 	return x
 }
 
+// WillStartPlayback calls the underlying WillStartPlayback.
+func (x *AudioPlayer) WillStartPlayback() objc.Block {
+	return x.inner.WillStartPlayback()
+}
+
 // SetWillStartPlayback blocks until the operation completes or ctx is cancelled.
 func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -57,6 +62,11 @@ func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// DidFinishPlayback calls the underlying DidFinishPlayback.
+func (x *AudioPlayer) DidFinishPlayback() objc.Block {
+	return x.inner.DidFinishPlayback()
 }
 
 // SetDidFinishPlayback blocks until the operation completes or ctx is cancelled.
@@ -72,4 +82,33 @@ func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 		return ctx.Err()
 	}
 }
+
+// AudioNode calls the underlying AudioNode.
+func (x *AudioPlayer) AudioNode() *avfaudio.AVAudioNode {
+	return x.inner.AudioNode()
+}
+
+// AudioSource calls the underlying AudioSource.
+func (x *AudioPlayer) AudioSource() *AudioSource {
+	_r := x.inner.AudioSource()
+	if _r == nil {
+		return nil
+	}
+	return &AudioSource{inner: _r}
+}
+
+// AudioPlayerable is the interface implemented by [AudioPlayer], for mocking and DI.
+type AudioPlayerable interface {
+	Unwrap() *raw.SCNAudioPlayer
+	WithWillStartPlayback(willStartPlayback func()) *AudioPlayer
+	WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer
+	WillStartPlayback() objc.Block
+	SetWillStartPlayback(ctx context.Context) error
+	DidFinishPlayback() objc.Block
+	SetDidFinishPlayback(ctx context.Context) error
+	AudioNode() *avfaudio.AVAudioNode
+	AudioSource() *AudioSource
+}
+
+var _ AudioPlayerable = (*AudioPlayer)(nil)
 

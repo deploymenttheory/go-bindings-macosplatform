@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -66,4 +67,54 @@ func (x *PreviewReply) WithTitle(title string) *PreviewReply {
 	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
 	return x
 }
+
+// StringEncoding calls the underlying StringEncoding.
+func (x *PreviewReply) StringEncoding() uint {
+	return x.inner.StringEncoding()
+}
+
+// SetStringEncoding calls the underlying SetStringEncoding.
+func (x *PreviewReply) SetStringEncoding(stringEncoding uint) {
+	x.inner.SetStringEncoding(stringEncoding)
+}
+
+// Attachments calls the underlying Attachments.
+func (x *PreviewReply) Attachments() *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment] {
+	return x.inner.Attachments()
+}
+
+// SetAttachments calls the underlying SetAttachments.
+func (x *PreviewReply) SetAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) {
+	x.inner.SetAttachments(attachments)
+}
+
+// Title calls the underlying Title.
+func (x *PreviewReply) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *PreviewReply) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// PreviewReplyable is the interface implemented by [PreviewReply], for mocking and DI.
+type PreviewReplyable interface {
+	Unwrap() *raw.QLPreviewReply
+	WithStringEncoding(stringEncoding uint) *PreviewReply
+	WithAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]) *PreviewReply
+	WithTitle(title string) *PreviewReply
+	StringEncoding() uint
+	SetStringEncoding(stringEncoding uint)
+	Attachments() *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment]
+	SetAttachments(attachments *foundation.NSDictionary[*foundation.NSString, *raw.QLPreviewReplyAttachment])
+	Title() string
+	SetTitle(title string)
+}
+
+var _ PreviewReplyable = (*PreviewReply)(nil)
 

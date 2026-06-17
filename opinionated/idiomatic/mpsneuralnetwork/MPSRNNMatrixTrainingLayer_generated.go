@@ -58,3 +58,122 @@ func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightG
 	return x
 }
 
+// CreateWeightGradientMatricesDataType calls the underlying CreateWeightGradientMatricesDataType.
+func (x *RNNMatrixTrainingLayer) CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType) {
+	x.inner.CreateWeightGradientMatricesDataType(matricesOut, dataType)
+}
+
+// CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer calls the underlying CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer.
+func (x *RNNMatrixTrainingLayer) CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer) {
+	x.inner.CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut, dataType, commandBuffer)
+}
+
+// CreateWeightMatrices calls the underlying CreateWeightMatrices.
+func (x *RNNMatrixTrainingLayer) CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix]) {
+	x.inner.CreateWeightMatrices(matricesOut)
+}
+
+// EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset calls the underlying EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset.
+func (x *RNNMatrixTrainingLayer) EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer metal.MTLCommandBuffer, weights *foundation.NSArray[*mpscore.MPSMatrix], matrixId raw.MPSRNNMatrixId, matrix *mpscore.MPSMatrix, copyFromWeightsToMatrix bool, matrixOffset metal.MTLOrigin) {
+	x.inner.EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer, weights, matrixId, matrix, copyFromWeightsToMatrix, matrixOffset)
+}
+
+// EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights calls the underlying EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights.
+func (x *RNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, trainingStates *foundation.NSMutableArray[*raw.MPSRNNMatrixTrainingState], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
+	x.inner.EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, trainingStates, recurrentInputState, recurrentOutputStates, weights)
+}
+
+// EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights calls the underlying EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights.
+func (x *RNNMatrixTrainingLayer) EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSMutableArray[*raw.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
+	x.inner.EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer, sourceMatrices, destinationMatrices, trainingStates, weights)
+}
+
+// EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights calls the underlying EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights.
+func (x *RNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], forwardSourceOffsets *uint, sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], sourceGradientOffsets *uint, destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*raw.MPSRNNMatrixTrainingState], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
+	x.inner.EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer, forwardSources, forwardSourceOffsets, sourceGradients, sourceGradientOffsets, destinationGradients, destinationOffsets, weightGradients, trainingStates, recurrentInputState, recurrentOutputStates, weights)
+}
+
+// EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights calls the underlying EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights.
+func (x *RNNMatrixTrainingLayer) EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*raw.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix]) {
+	x.inner.EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer, forwardSources, sourceGradients, destinationGradients, weightGradients, trainingStates, weights)
+}
+
+// InputFeatureChannels calls the underlying InputFeatureChannels.
+func (x *RNNMatrixTrainingLayer) InputFeatureChannels() uint {
+	return x.inner.InputFeatureChannels()
+}
+
+// OutputFeatureChannels calls the underlying OutputFeatureChannels.
+func (x *RNNMatrixTrainingLayer) OutputFeatureChannels() uint {
+	return x.inner.OutputFeatureChannels()
+}
+
+// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+func (x *RNNMatrixTrainingLayer) StoreAllIntermediateStates() bool {
+	return x.inner.StoreAllIntermediateStates()
+}
+
+// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
+func (x *RNNMatrixTrainingLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
+	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+}
+
+// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+func (x *RNNMatrixTrainingLayer) RecurrentOutputIsTemporary() bool {
+	return x.inner.RecurrentOutputIsTemporary()
+}
+
+// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
+func (x *RNNMatrixTrainingLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
+	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+}
+
+// TrainingStateIsTemporary calls the underlying TrainingStateIsTemporary.
+func (x *RNNMatrixTrainingLayer) TrainingStateIsTemporary() bool {
+	return x.inner.TrainingStateIsTemporary()
+}
+
+// SetTrainingStateIsTemporary calls the underlying SetTrainingStateIsTemporary.
+func (x *RNNMatrixTrainingLayer) SetTrainingStateIsTemporary(trainingStateIsTemporary bool) {
+	x.inner.SetTrainingStateIsTemporary(trainingStateIsTemporary)
+}
+
+// AccumulateWeightGradients calls the underlying AccumulateWeightGradients.
+func (x *RNNMatrixTrainingLayer) AccumulateWeightGradients() bool {
+	return x.inner.AccumulateWeightGradients()
+}
+
+// SetAccumulateWeightGradients calls the underlying SetAccumulateWeightGradients.
+func (x *RNNMatrixTrainingLayer) SetAccumulateWeightGradients(accumulateWeightGradients bool) {
+	x.inner.SetAccumulateWeightGradients(accumulateWeightGradients)
+}
+
+// RNNMatrixTrainingLayerable is the interface implemented by [RNNMatrixTrainingLayer], for mocking and DI.
+type RNNMatrixTrainingLayerable interface {
+	Unwrap() *raw.MPSRNNMatrixTrainingLayer
+	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixTrainingLayer
+	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer
+	WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer
+	WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer
+	CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType)
+	CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer)
+	CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix])
+	EncodeCopyWeightsToCommandBufferWeightsMatrixIdMatrixCopyFromWeightsToMatrixMatrixOffset(commandBuffer metal.MTLCommandBuffer, weights *foundation.NSArray[*mpscore.MPSMatrix], matrixId raw.MPSRNNMatrixId, matrix *mpscore.MPSMatrix, copyFromWeightsToMatrix bool, matrixOffset metal.MTLOrigin)
+	EncodeForwardSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, trainingStates *foundation.NSMutableArray[*raw.MPSRNNMatrixTrainingState], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix])
+	EncodeForwardSequenceToCommandBufferSourceMatricesDestinationMatricesTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSMutableArray[*raw.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix])
+	EncodeGradientSequenceToCommandBufferForwardSourcesForwardSourceOffsetsSourceGradientsSourceGradientOffsetsDestinationGradientsDestinationOffsetsWeightGradientsTrainingStatesRecurrentInputStateRecurrentOutputStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], forwardSourceOffsets *uint, sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], sourceGradientOffsets *uint, destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*raw.MPSRNNMatrixTrainingState], recurrentInputState *raw.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentMatrixState], weights *foundation.NSArray[*mpscore.MPSMatrix])
+	EncodeGradientSequenceToCommandBufferForwardSourcesSourceGradientsDestinationGradientsWeightGradientsTrainingStatesWeights(commandBuffer metal.MTLCommandBuffer, forwardSources *foundation.NSArray[*mpscore.MPSMatrix], sourceGradients *foundation.NSArray[*mpscore.MPSMatrix], destinationGradients *foundation.NSArray[*mpscore.MPSMatrix], weightGradients *foundation.NSArray[*mpscore.MPSMatrix], trainingStates *foundation.NSArray[*raw.MPSRNNMatrixTrainingState], weights *foundation.NSArray[*mpscore.MPSMatrix])
+	InputFeatureChannels() uint
+	OutputFeatureChannels() uint
+	StoreAllIntermediateStates() bool
+	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
+	RecurrentOutputIsTemporary() bool
+	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
+	TrainingStateIsTemporary() bool
+	SetTrainingStateIsTemporary(trainingStateIsTemporary bool)
+	AccumulateWeightGradients() bool
+	SetAccumulateWeightGradients(accumulateWeightGradients bool)
+}
+
+var _ RNNMatrixTrainingLayerable = (*RNNMatrixTrainingLayer)(nil)
+

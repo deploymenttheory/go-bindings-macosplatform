@@ -23,7 +23,30 @@ func NewDOMStyleSheetList() *DOMStyleSheetList {
 	return &DOMStyleSheetList{inner: raw.DOMStyleSheetListFromID(_id)}
 }
 
+// Item calls the underlying Item.
+func (x *DOMStyleSheetList) Item(index uint) *DOMStyleSheet {
+	_r := x.inner.Item(index)
+	if _r == nil {
+		return nil
+	}
+	return &DOMStyleSheet{inner: _r}
+}
+
+// Length calls the underlying Length.
+func (x *DOMStyleSheetList) Length() uint {
+	return x.inner.Length()
+}
+
 func (x *DOMStyleSheetList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMStyleSheetList) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMStyleSheetListable is the interface implemented by [DOMStyleSheetList], for mocking and DI.
+type DOMStyleSheetListable interface {
+	Unwrap() *raw.DOMStyleSheetList
+	Item(index uint) *DOMStyleSheet
+	Length() uint
+}
+
+var _ DOMStyleSheetListable = (*DOMStyleSheetList)(nil)
 

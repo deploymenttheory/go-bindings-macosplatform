@@ -57,5 +57,38 @@ func (x *MutableFontCollection) WithExclusionDescriptors(items ...*raw.NSFontDes
 	return x
 }
 
+// AddQueryForDescriptors calls the underlying AddQueryForDescriptors.
+func (x *MutableFontCollection) AddQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
+	x.inner.AddQueryForDescriptors(descriptors)
+}
+
+// RemoveQueryForDescriptors calls the underlying RemoveQueryForDescriptors.
+func (x *MutableFontCollection) RemoveQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
+	x.inner.RemoveQueryForDescriptors(descriptors)
+}
+
+// SetQueryDescriptors calls the underlying SetQueryDescriptors.
+func (x *MutableFontCollection) SetQueryDescriptors(queryDescriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
+	x.inner.SetQueryDescriptors(queryDescriptors)
+}
+
+// SetExclusionDescriptors calls the underlying SetExclusionDescriptors.
+func (x *MutableFontCollection) SetExclusionDescriptors(exclusionDescriptors *foundation.NSArray[*raw.NSFontDescriptor]) {
+	x.inner.SetExclusionDescriptors(exclusionDescriptors)
+}
+
 func (x *MutableFontCollection) asFontCollection() *raw.NSFontCollection { return &x.inner.NSFontCollection }
+
+// MutableFontCollectionable is the interface implemented by [MutableFontCollection], for mocking and DI.
+type MutableFontCollectionable interface {
+	Unwrap() *raw.NSMutableFontCollection
+	WithQueryDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection
+	WithExclusionDescriptors(items ...*raw.NSFontDescriptor) *MutableFontCollection
+	AddQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor])
+	RemoveQueryForDescriptors(descriptors *foundation.NSArray[*raw.NSFontDescriptor])
+	SetQueryDescriptors(queryDescriptors *foundation.NSArray[*raw.NSFontDescriptor])
+	SetExclusionDescriptors(exclusionDescriptors *foundation.NSArray[*raw.NSFontDescriptor])
+}
+
+var _ MutableFontCollectionable = (*MutableFontCollection)(nil)
 

@@ -25,5 +25,32 @@ func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationS
 	return &BoatReservation{inner: raw.INBoatReservationFromID(_id)}
 }
 
+// ReservedSeat calls the underlying ReservedSeat.
+func (x *BoatReservation) ReservedSeat() *Seat {
+	_r := x.inner.ReservedSeat()
+	if _r == nil {
+		return nil
+	}
+	return &Seat{inner: _r}
+}
+
+// BoatTrip calls the underlying BoatTrip.
+func (x *BoatReservation) BoatTrip() *BoatTrip {
+	_r := x.inner.BoatTrip()
+	if _r == nil {
+		return nil
+	}
+	return &BoatTrip{inner: _r}
+}
+
 func (x *BoatReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// BoatReservationable is the interface implemented by [BoatReservation], for mocking and DI.
+type BoatReservationable interface {
+	Unwrap() *raw.INBoatReservation
+	ReservedSeat() *Seat
+	BoatTrip() *BoatTrip
+}
+
+var _ BoatReservationable = (*BoatReservation)(nil)
 

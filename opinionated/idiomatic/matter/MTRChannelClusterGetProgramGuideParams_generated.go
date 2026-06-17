@@ -66,3 +66,117 @@ func (x *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout
 	return x
 }
 
+// StartTime calls the underlying StartTime.
+func (x *MTRChannelClusterGetProgramGuideParams) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRChannelClusterGetProgramGuideParams) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// EndTime calls the underlying EndTime.
+func (x *MTRChannelClusterGetProgramGuideParams) EndTime() *foundation.NSNumber {
+	return x.inner.EndTime()
+}
+
+// SetEndTime calls the underlying SetEndTime.
+func (x *MTRChannelClusterGetProgramGuideParams) SetEndTime(endTime *foundation.NSNumber) {
+	x.inner.SetEndTime(endTime)
+}
+
+// ChannelList calls the underlying ChannelList.
+func (x *MTRChannelClusterGetProgramGuideParams) ChannelList() *foundation.NSArray[objc.ID] {
+	return x.inner.ChannelList()
+}
+
+// SetChannelList calls the underlying SetChannelList.
+func (x *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList *foundation.NSArray[objc.ID]) {
+	x.inner.SetChannelList(channelList)
+}
+
+// PageToken calls the underlying PageToken.
+func (x *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
+	_r := x.inner.PageToken()
+	if _r == nil {
+		return nil
+	}
+	return &MTRChannelClusterPageTokenStruct{inner: _r}
+}
+
+// SetPageToken calls the underlying SetPageToken.
+func (x *MTRChannelClusterGetProgramGuideParams) SetPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct) {
+	x.inner.SetPageToken(pageToken)
+}
+
+// RecordingFlag calls the underlying RecordingFlag.
+func (x *MTRChannelClusterGetProgramGuideParams) RecordingFlag() *foundation.NSNumber {
+	return x.inner.RecordingFlag()
+}
+
+// SetRecordingFlag calls the underlying SetRecordingFlag.
+func (x *MTRChannelClusterGetProgramGuideParams) SetRecordingFlag(recordingFlag *foundation.NSNumber) {
+	x.inner.SetRecordingFlag(recordingFlag)
+}
+
+// Data calls the underlying Data.
+func (x *MTRChannelClusterGetProgramGuideParams) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRChannelClusterGetProgramGuideParams) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRChannelClusterGetProgramGuideParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRChannelClusterGetProgramGuideParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRChannelClusterGetProgramGuideParamsable is the interface implemented by [MTRChannelClusterGetProgramGuideParams], for mocking and DI.
+type MTRChannelClusterGetProgramGuideParamsable interface {
+	Unwrap() *raw.MTRChannelClusterGetProgramGuideParams
+	WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	WithPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams
+	WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	WithData(data *foundation.NSData) *MTRChannelClusterGetProgramGuideParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	EndTime() *foundation.NSNumber
+	SetEndTime(endTime *foundation.NSNumber)
+	ChannelList() *foundation.NSArray[objc.ID]
+	SetChannelList(channelList *foundation.NSArray[objc.ID])
+	PageToken() *MTRChannelClusterPageTokenStruct
+	SetPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct)
+	RecordingFlag() *foundation.NSNumber
+	SetRecordingFlag(recordingFlag *foundation.NSNumber)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRChannelClusterGetProgramGuideParamsable = (*MTRChannelClusterGetProgramGuideParams)(nil)
+

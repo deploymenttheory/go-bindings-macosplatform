@@ -27,3 +27,10 @@ func (x *CorrelationType) asSampleType() *raw.HKSampleType { return &x.inner.HKS
 
 func (x *CorrelationType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
+// CorrelationTypeable is the interface implemented by [CorrelationType], for mocking and DI.
+type CorrelationTypeable interface {
+	Unwrap() *raw.HKCorrelationType
+}
+
+var _ CorrelationTypeable = (*CorrelationType)(nil)
+

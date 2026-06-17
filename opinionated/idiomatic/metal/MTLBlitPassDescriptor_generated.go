@@ -23,3 +23,20 @@ func NewBlitPassDescriptor() *BlitPassDescriptor {
 	return &BlitPassDescriptor{inner: raw.MTLBlitPassDescriptorFromID(_id)}
 }
 
+// SampleBufferAttachments calls the underlying SampleBufferAttachments.
+func (x *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
+	_r := x.inner.SampleBufferAttachments()
+	if _r == nil {
+		return nil
+	}
+	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: _r}
+}
+
+// BlitPassDescriptorable is the interface implemented by [BlitPassDescriptor], for mocking and DI.
+type BlitPassDescriptorable interface {
+	Unwrap() *raw.MTLBlitPassDescriptor
+	SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray
+}
+
+var _ BlitPassDescriptorable = (*BlitPassDescriptor)(nil)
+

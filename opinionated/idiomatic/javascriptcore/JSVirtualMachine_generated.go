@@ -23,3 +23,22 @@ func NewVirtualMachine() *VirtualMachine {
 	return &VirtualMachine{inner: raw.JSVirtualMachineFromID(_id)}
 }
 
+// AddManagedReferenceWithOwner calls the underlying AddManagedReferenceWithOwner.
+func (x *VirtualMachine) AddManagedReferenceWithOwner(object objc.ID, owner objc.ID) {
+	x.inner.AddManagedReferenceWithOwner(object, owner)
+}
+
+// RemoveManagedReferenceWithOwner calls the underlying RemoveManagedReferenceWithOwner.
+func (x *VirtualMachine) RemoveManagedReferenceWithOwner(object objc.ID, owner objc.ID) {
+	x.inner.RemoveManagedReferenceWithOwner(object, owner)
+}
+
+// VirtualMachineable is the interface implemented by [VirtualMachine], for mocking and DI.
+type VirtualMachineable interface {
+	Unwrap() *raw.JSVirtualMachine
+	AddManagedReferenceWithOwner(object objc.ID, owner objc.ID)
+	RemoveManagedReferenceWithOwner(object objc.ID, owner objc.ID)
+}
+
+var _ VirtualMachineable = (*VirtualMachine)(nil)
+

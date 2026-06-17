@@ -31,3 +31,10 @@ func (x *CNNSubtractGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { 
 
 func (x *CNNSubtractGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmeticGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNSubtractGradientable is the interface implemented by [CNNSubtractGradient], for mocking and DI.
+type CNNSubtractGradientable interface {
+	Unwrap() *raw.MPSCNNSubtractGradient
+}
+
+var _ CNNSubtractGradientable = (*CNNSubtractGradient)(nil)
+

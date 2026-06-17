@@ -23,5 +23,18 @@ func NewAccelerometerData() *AccelerometerData {
 	return &AccelerometerData{inner: raw.CMAccelerometerDataFromID(_id)}
 }
 
+// Acceleration calls the underlying Acceleration.
+func (x *AccelerometerData) Acceleration() raw.CMAcceleration {
+	return x.inner.Acceleration()
+}
+
 func (x *AccelerometerData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// AccelerometerDataable is the interface implemented by [AccelerometerData], for mocking and DI.
+type AccelerometerDataable interface {
+	Unwrap() *raw.CMAccelerometerData
+	Acceleration() raw.CMAcceleration
+}
+
+var _ AccelerometerDataable = (*AccelerometerData)(nil)
 

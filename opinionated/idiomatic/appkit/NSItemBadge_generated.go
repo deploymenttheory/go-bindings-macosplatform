@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,21 @@ func NewItemBadge() *ItemBadge {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSItemBadge")), objc.RegisterName("new"))
 	return &ItemBadge{inner: raw.NSItemBadgeFromID(_id)}
 }
+
+// Text calls the underlying Text.
+func (x *ItemBadge) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ItemBadgeable is the interface implemented by [ItemBadge], for mocking and DI.
+type ItemBadgeable interface {
+	Unwrap() *raw.NSItemBadge
+	Text() string
+}
+
+var _ ItemBadgeable = (*ItemBadge)(nil)
 

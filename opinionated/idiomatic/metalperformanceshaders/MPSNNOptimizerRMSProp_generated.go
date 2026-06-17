@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -34,7 +35,56 @@ func NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor(device metal
 	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
 }
 
+// EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector.
+func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
+	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputSumOfSquaresVector, resultValuesVector)
+}
+
+// EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix calls the underlying EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix.
+func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputSumOfSquaresMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix) {
+	x.inner.EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer, inputGradientMatrix, inputValuesMatrix, inputSumOfSquaresMatrix, resultValuesMatrix)
+}
+
+// EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState.
+func (x *NNOptimizerRMSProp) EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
+	x.inner.EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, convolutionGradientState, convolutionSourceState, inputSumOfSquaresVectors, resultState)
+}
+
+// EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState.
+func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationState, inputSumOfSquaresVectors, resultState)
+}
+
+// EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState calls the underlying EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState.
+func (x *NNOptimizerRMSProp) EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState) {
+	x.inner.EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer, batchNormalizationGradientState, batchNormalizationSourceState, inputSumOfSquaresVectors, resultState)
+}
+
+// Decay calls the underlying Decay.
+func (x *NNOptimizerRMSProp) Decay() float64 {
+	return x.inner.Decay()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *NNOptimizerRMSProp) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
 func (x *NNOptimizerRMSProp) asNNOptimizer() *mpsneuralnetwork.MPSNNOptimizer { return &x.inner.MPSNNOptimizer }
 
 func (x *NNOptimizerRMSProp) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNOptimizer.MPSKernel }
+
+// NNOptimizerRMSPropable is the interface implemented by [NNOptimizerRMSProp], for mocking and DI.
+type NNOptimizerRMSPropable interface {
+	Unwrap() *raw.MPSNNOptimizerRMSProp
+	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
+	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputSumOfSquaresMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
+	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
+	EncodeToCommandBufferBatchNormalizationStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
+	EncodeToCommandBufferBatchNormalizationGradientStateBatchNormalizationSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, batchNormalizationGradientState *mpsneuralnetwork.MPSCNNBatchNormalizationState, batchNormalizationSourceState *mpsneuralnetwork.MPSCNNBatchNormalizationState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
+	Decay() float64
+	Epsilon() float32
+}
+
+var _ NNOptimizerRMSPropable = (*NNOptimizerRMSProp)(nil)
 

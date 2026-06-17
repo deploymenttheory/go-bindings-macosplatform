@@ -54,3 +54,75 @@ func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithServerS
 	return x
 }
 
+// Ssid calls the underlying Ssid.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() *foundation.NSData {
+	return x.inner.Ssid()
+}
+
+// SetSsid calls the underlying SetSsid.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetSsid(ssid *foundation.NSData) {
+	x.inner.SetSsid(ssid)
+}
+
+// Credentials calls the underlying Credentials.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() *foundation.NSData {
+	return x.inner.Credentials()
+}
+
+// SetCredentials calls the underlying SetCredentials.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetCredentials(credentials *foundation.NSData) {
+	x.inner.SetCredentials(credentials)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams], for mocking and DI.
+type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithCredentials(credentials *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	Ssid() *foundation.NSData
+	SetSsid(ssid *foundation.NSData)
+	Credentials() *foundation.NSData
+	SetCredentials(credentials *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams)(nil)
+

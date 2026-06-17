@@ -23,3 +23,20 @@ func NewQCCompositionPickerPanel() *QCCompositionPickerPanel {
 	return &QCCompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(_id)}
 }
 
+// CompositionPickerView calls the underlying CompositionPickerView.
+func (x *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
+	_r := x.inner.CompositionPickerView()
+	if _r == nil {
+		return nil
+	}
+	return &QCCompositionPickerView{inner: _r}
+}
+
+// QCCompositionPickerPanelable is the interface implemented by [QCCompositionPickerPanel], for mocking and DI.
+type QCCompositionPickerPanelable interface {
+	Unwrap() *raw.QCCompositionPickerPanel
+	CompositionPickerView() *QCCompositionPickerView
+}
+
+var _ QCCompositionPickerPanelable = (*QCCompositionPickerPanel)(nil)
+

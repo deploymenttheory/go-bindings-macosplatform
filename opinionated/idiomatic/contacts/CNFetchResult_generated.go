@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,23 @@ func NewFetchResult() *FetchResult {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNFetchResult")), objc.RegisterName("new"))
 	return &FetchResult{inner: raw.CNFetchResultFromID[objc.ID](_id)}
 }
+
+// Value calls the underlying Value.
+func (x *FetchResult) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// CurrentHistoryToken calls the underlying CurrentHistoryToken.
+func (x *FetchResult) CurrentHistoryToken() *foundation.NSData {
+	return x.inner.CurrentHistoryToken()
+}
+
+// FetchResultable is the interface implemented by [FetchResult], for mocking and DI.
+type FetchResultable interface {
+	Unwrap() *raw.CNFetchResult[objc.ID]
+	Value() objc.ID
+	CurrentHistoryToken() *foundation.NSData
+}
+
+var _ FetchResultable = (*FetchResult)(nil)
 

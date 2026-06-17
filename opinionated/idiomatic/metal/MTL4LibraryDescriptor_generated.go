@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,62 @@ func (x *MTL4LibraryDescriptor) WithName(name string) *MTL4LibraryDescriptor {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
+
+// Source calls the underlying Source.
+func (x *MTL4LibraryDescriptor) Source() string {
+	_r := x.inner.Source()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSource calls the underlying SetSource.
+func (x *MTL4LibraryDescriptor) SetSource(source string) {
+	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+}
+
+// Options calls the underlying Options.
+func (x *MTL4LibraryDescriptor) Options() *CompileOptions {
+	_r := x.inner.Options()
+	if _r == nil {
+		return nil
+	}
+	return &CompileOptions{inner: _r}
+}
+
+// SetOptions calls the underlying SetOptions.
+func (x *MTL4LibraryDescriptor) SetOptions(options *raw.MTLCompileOptions) {
+	x.inner.SetOptions(options)
+}
+
+// Name calls the underlying Name.
+func (x *MTL4LibraryDescriptor) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTL4LibraryDescriptor) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// MTL4LibraryDescriptorable is the interface implemented by [MTL4LibraryDescriptor], for mocking and DI.
+type MTL4LibraryDescriptorable interface {
+	Unwrap() *raw.MTL4LibraryDescriptor
+	WithSource(source string) *MTL4LibraryDescriptor
+	WithOptions(options *raw.MTLCompileOptions) *MTL4LibraryDescriptor
+	WithName(name string) *MTL4LibraryDescriptor
+	Source() string
+	SetSource(source string)
+	Options() *CompileOptions
+	SetOptions(options *raw.MTLCompileOptions)
+	Name() string
+	SetName(name string)
+}
+
+var _ MTL4LibraryDescriptorable = (*MTL4LibraryDescriptor)(nil)
 

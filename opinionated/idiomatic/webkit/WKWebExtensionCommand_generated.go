@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +37,77 @@ func (x *WKWebExtensionCommand) WithModifierFlags(modifierFlags appkit.NSEventMo
 	x.inner.SetModifierFlags(modifierFlags)
 	return x
 }
+
+// WebExtensionContext calls the underlying WebExtensionContext.
+func (x *WKWebExtensionCommand) WebExtensionContext() *WKWebExtensionContext {
+	_r := x.inner.WebExtensionContext()
+	if _r == nil {
+		return nil
+	}
+	return &WKWebExtensionContext{inner: _r}
+}
+
+// Identifier calls the underlying Identifier.
+func (x *WKWebExtensionCommand) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *WKWebExtensionCommand) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ActivationKey calls the underlying ActivationKey.
+func (x *WKWebExtensionCommand) ActivationKey() string {
+	_r := x.inner.ActivationKey()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetActivationKey calls the underlying SetActivationKey.
+func (x *WKWebExtensionCommand) SetActivationKey(activationKey string) {
+	x.inner.SetActivationKey(foundation.NSStringStringWithUTF8String(activationKey))
+}
+
+// ModifierFlags calls the underlying ModifierFlags.
+func (x *WKWebExtensionCommand) ModifierFlags() appkit.NSEventModifierFlags {
+	return x.inner.ModifierFlags()
+}
+
+// SetModifierFlags calls the underlying SetModifierFlags.
+func (x *WKWebExtensionCommand) SetModifierFlags(modifierFlags appkit.NSEventModifierFlags) {
+	x.inner.SetModifierFlags(modifierFlags)
+}
+
+// MenuItem calls the underlying MenuItem.
+func (x *WKWebExtensionCommand) MenuItem() *appkit.NSMenuItem {
+	return x.inner.MenuItem()
+}
+
+// WKWebExtensionCommandable is the interface implemented by [WKWebExtensionCommand], for mocking and DI.
+type WKWebExtensionCommandable interface {
+	Unwrap() *raw.WKWebExtensionCommand
+	WithActivationKey(activationKey string) *WKWebExtensionCommand
+	WithModifierFlags(modifierFlags appkit.NSEventModifierFlags) *WKWebExtensionCommand
+	WebExtensionContext() *WKWebExtensionContext
+	Identifier() string
+	Title() string
+	ActivationKey() string
+	SetActivationKey(activationKey string)
+	ModifierFlags() appkit.NSEventModifierFlags
+	SetModifierFlags(modifierFlags appkit.NSEventModifierFlags)
+	MenuItem() *appkit.NSMenuItem
+}
+
+var _ WKWebExtensionCommandable = (*WKWebExtensionCommand)(nil)
 

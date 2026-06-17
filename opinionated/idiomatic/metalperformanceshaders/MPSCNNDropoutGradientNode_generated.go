@@ -26,7 +26,32 @@ func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProb
 	return &CNNDropoutGradientNode{inner: raw.MPSCNNDropoutGradientNodeFromID(_id)}
 }
 
+// KeepProbability calls the underlying KeepProbability.
+func (x *CNNDropoutGradientNode) KeepProbability() float32 {
+	return x.inner.KeepProbability()
+}
+
+// Seed calls the underlying Seed.
+func (x *CNNDropoutGradientNode) Seed() uint {
+	return x.inner.Seed()
+}
+
+// MaskStrideInPixels calls the underlying MaskStrideInPixels.
+func (x *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
+	return x.inner.MaskStrideInPixels()
+}
+
 func (x *CNNDropoutGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNDropoutGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNDropoutGradientNodeable is the interface implemented by [CNNDropoutGradientNode], for mocking and DI.
+type CNNDropoutGradientNodeable interface {
+	Unwrap() *raw.MPSCNNDropoutGradientNode
+	KeepProbability() float32
+	Seed() uint
+	MaskStrideInPixels() metal.MTLSize
+}
+
+var _ CNNDropoutGradientNodeable = (*CNNDropoutGradientNode)(nil)
 

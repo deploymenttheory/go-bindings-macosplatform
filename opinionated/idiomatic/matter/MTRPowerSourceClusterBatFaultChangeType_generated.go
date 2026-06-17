@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,35 @@ func NewMTRPowerSourceClusterBatFaultChangeType() *MTRPowerSourceClusterBatFault
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPowerSourceClusterBatFaultChangeType")), objc.RegisterName("new"))
 	return &MTRPowerSourceClusterBatFaultChangeType{inner: raw.MTRPowerSourceClusterBatFaultChangeTypeFromID(_id)}
 }
+
+// Current calls the underlying Current.
+func (x *MTRPowerSourceClusterBatFaultChangeType) Current() *foundation.NSArray[objc.ID] {
+	return x.inner.Current()
+}
+
+// SetCurrent calls the underlying SetCurrent.
+func (x *MTRPowerSourceClusterBatFaultChangeType) SetCurrent(current *foundation.NSArray[objc.ID]) {
+	x.inner.SetCurrent(current)
+}
+
+// Previous calls the underlying Previous.
+func (x *MTRPowerSourceClusterBatFaultChangeType) Previous() *foundation.NSArray[objc.ID] {
+	return x.inner.Previous()
+}
+
+// SetPrevious calls the underlying SetPrevious.
+func (x *MTRPowerSourceClusterBatFaultChangeType) SetPrevious(previous *foundation.NSArray[objc.ID]) {
+	x.inner.SetPrevious(previous)
+}
+
+// MTRPowerSourceClusterBatFaultChangeTypeable is the interface implemented by [MTRPowerSourceClusterBatFaultChangeType], for mocking and DI.
+type MTRPowerSourceClusterBatFaultChangeTypeable interface {
+	Unwrap() *raw.MTRPowerSourceClusterBatFaultChangeType
+	Current() *foundation.NSArray[objc.ID]
+	SetCurrent(current *foundation.NSArray[objc.ID])
+	Previous() *foundation.NSArray[objc.ID]
+	SetPrevious(previous *foundation.NSArray[objc.ID])
+}
+
+var _ MTRPowerSourceClusterBatFaultChangeTypeable = (*MTRPowerSourceClusterBatFaultChangeType)(nil)
 

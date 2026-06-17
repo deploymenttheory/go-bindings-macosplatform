@@ -59,5 +59,90 @@ func (x *Pyramid) WithLengthSegmentCount(lengthSegmentCount int) *Pyramid {
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *Pyramid) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *Pyramid) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *Pyramid) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Pyramid) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// Length calls the underlying Length.
+func (x *Pyramid) Length() float64 {
+	return x.inner.Length()
+}
+
+// SetLength calls the underlying SetLength.
+func (x *Pyramid) SetLength(length float64) {
+	x.inner.SetLength(length)
+}
+
+// WidthSegmentCount calls the underlying WidthSegmentCount.
+func (x *Pyramid) WidthSegmentCount() int {
+	return x.inner.WidthSegmentCount()
+}
+
+// SetWidthSegmentCount calls the underlying SetWidthSegmentCount.
+func (x *Pyramid) SetWidthSegmentCount(widthSegmentCount int) {
+	x.inner.SetWidthSegmentCount(widthSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Pyramid) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Pyramid) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
+// LengthSegmentCount calls the underlying LengthSegmentCount.
+func (x *Pyramid) LengthSegmentCount() int {
+	return x.inner.LengthSegmentCount()
+}
+
+// SetLengthSegmentCount calls the underlying SetLengthSegmentCount.
+func (x *Pyramid) SetLengthSegmentCount(lengthSegmentCount int) {
+	x.inner.SetLengthSegmentCount(lengthSegmentCount)
+}
+
 func (x *Pyramid) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Pyramidable is the interface implemented by [Pyramid], for mocking and DI.
+type Pyramidable interface {
+	Unwrap() *raw.SCNPyramid
+	WithWidth(width float64) *Pyramid
+	WithHeight(height float64) *Pyramid
+	WithLength(length float64) *Pyramid
+	WithWidthSegmentCount(widthSegmentCount int) *Pyramid
+	WithHeightSegmentCount(heightSegmentCount int) *Pyramid
+	WithLengthSegmentCount(lengthSegmentCount int) *Pyramid
+	Width() float64
+	SetWidth(width float64)
+	Height() float64
+	SetHeight(height float64)
+	Length() float64
+	SetLength(length float64)
+	WidthSegmentCount() int
+	SetWidthSegmentCount(widthSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+	LengthSegmentCount() int
+	SetLengthSegmentCount(lengthSegmentCount int)
+}
+
+var _ Pyramidable = (*Pyramid)(nil)
 

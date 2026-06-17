@@ -23,3 +23,52 @@ func NewEntityMigrationPolicy() *EntityMigrationPolicy {
 	return &EntityMigrationPolicy{inner: raw.NSEntityMigrationPolicyFromID(_id)}
 }
 
+// BeginEntityMappingManagerError calls the underlying BeginEntityMappingManagerError.
+func (x *EntityMigrationPolicy) BeginEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.BeginEntityMappingManagerError(mapping, manager)
+}
+
+// CreateDestinationInstancesForSourceInstanceEntityMappingManagerError calls the underlying CreateDestinationInstancesForSourceInstanceEntityMappingManagerError.
+func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance, mapping, manager)
+}
+
+// EndInstanceCreationForEntityMappingManagerError calls the underlying EndInstanceCreationForEntityMappingManagerError.
+func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.EndInstanceCreationForEntityMappingManagerError(mapping, manager)
+}
+
+// CreateRelationshipsForDestinationInstanceEntityMappingManagerError calls the underlying CreateRelationshipsForDestinationInstanceEntityMappingManagerError.
+func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance, mapping, manager)
+}
+
+// EndRelationshipCreationForEntityMappingManagerError calls the underlying EndRelationshipCreationForEntityMappingManagerError.
+func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.EndRelationshipCreationForEntityMappingManagerError(mapping, manager)
+}
+
+// PerformCustomValidationForEntityMappingManagerError calls the underlying PerformCustomValidationForEntityMappingManagerError.
+func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.PerformCustomValidationForEntityMappingManagerError(mapping, manager)
+}
+
+// EndEntityMappingManagerError calls the underlying EndEntityMappingManagerError.
+func (x *EntityMigrationPolicy) EndEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
+	return x.inner.EndEntityMappingManagerError(mapping, manager)
+}
+
+// EntityMigrationPolicyable is the interface implemented by [EntityMigrationPolicy], for mocking and DI.
+type EntityMigrationPolicyable interface {
+	Unwrap() *raw.NSEntityMigrationPolicy
+	BeginEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	EndInstanceCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	EndRelationshipCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	PerformCustomValidationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	EndEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+}
+
+var _ EntityMigrationPolicyable = (*EntityMigrationPolicy)(nil)
+

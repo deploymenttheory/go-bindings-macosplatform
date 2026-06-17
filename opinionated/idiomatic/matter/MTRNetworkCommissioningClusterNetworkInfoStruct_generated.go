@@ -36,5 +36,38 @@ func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connecte
 	return x
 }
 
+// NetworkID calls the underlying NetworkID.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() *foundation.NSData {
+	return x.inner.NetworkID()
+}
+
+// SetNetworkID calls the underlying SetNetworkID.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetNetworkID(networkID *foundation.NSData) {
+	x.inner.SetNetworkID(networkID)
+}
+
+// Connected calls the underlying Connected.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() *foundation.NSNumber {
+	return x.inner.Connected()
+}
+
+// SetConnected calls the underlying SetConnected.
+func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) SetConnected(connected *foundation.NSNumber) {
+	x.inner.SetConnected(connected)
+}
+
 func (x *MTRNetworkCommissioningClusterNetworkInfoStruct) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct { return x.inner }
+
+// MTRNetworkCommissioningClusterNetworkInfoStructable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfoStruct], for mocking and DI.
+type MTRNetworkCommissioningClusterNetworkInfoStructable interface {
+	Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct
+	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterNetworkInfoStruct
+	WithConnected(connected *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkInfoStruct
+	NetworkID() *foundation.NSData
+	SetNetworkID(networkID *foundation.NSData)
+	Connected() *foundation.NSNumber
+	SetConnected(connected *foundation.NSNumber)
+}
+
+var _ MTRNetworkCommissioningClusterNetworkInfoStructable = (*MTRNetworkCommissioningClusterNetworkInfoStruct)(nil)
 

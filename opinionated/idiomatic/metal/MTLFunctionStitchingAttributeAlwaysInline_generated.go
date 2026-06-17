@@ -23,3 +23,10 @@ func NewFunctionStitchingAttributeAlwaysInline() *FunctionStitchingAttributeAlwa
 	return &FunctionStitchingAttributeAlwaysInline{inner: raw.MTLFunctionStitchingAttributeAlwaysInlineFromID(_id)}
 }
 
+// FunctionStitchingAttributeAlwaysInlineable is the interface implemented by [FunctionStitchingAttributeAlwaysInline], for mocking and DI.
+type FunctionStitchingAttributeAlwaysInlineable interface {
+	Unwrap() *raw.MTLFunctionStitchingAttributeAlwaysInline
+}
+
+var _ FunctionStitchingAttributeAlwaysInlineable = (*FunctionStitchingAttributeAlwaysInline)(nil)
+

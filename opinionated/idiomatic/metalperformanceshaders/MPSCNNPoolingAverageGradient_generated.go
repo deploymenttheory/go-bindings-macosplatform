@@ -47,6 +47,26 @@ func (x *CNNPoolingAverageGradient) WithZeroPadSizeY(zeroPadSizeY uint) *CNNPool
 	return x
 }
 
+// ZeroPadSizeX calls the underlying ZeroPadSizeX.
+func (x *CNNPoolingAverageGradient) ZeroPadSizeX() uint {
+	return x.inner.ZeroPadSizeX()
+}
+
+// SetZeroPadSizeX calls the underlying SetZeroPadSizeX.
+func (x *CNNPoolingAverageGradient) SetZeroPadSizeX(zeroPadSizeX uint) {
+	x.inner.SetZeroPadSizeX(zeroPadSizeX)
+}
+
+// ZeroPadSizeY calls the underlying ZeroPadSizeY.
+func (x *CNNPoolingAverageGradient) ZeroPadSizeY() uint {
+	return x.inner.ZeroPadSizeY()
+}
+
+// SetZeroPadSizeY calls the underlying SetZeroPadSizeY.
+func (x *CNNPoolingAverageGradient) SetZeroPadSizeY(zeroPadSizeY uint) {
+	x.inner.SetZeroPadSizeY(zeroPadSizeY)
+}
+
 func (x *CNNPoolingAverageGradient) asCNNPoolingGradient() *mpsneuralnetwork.MPSCNNPoolingGradient { return &x.inner.MPSCNNPoolingGradient }
 
 func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel }
@@ -54,4 +74,17 @@ func (x *CNNPoolingAverageGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSC
 func (x *CNNPoolingAverageGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNPoolingAverageGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNPoolingAverageGradientable is the interface implemented by [CNNPoolingAverageGradient], for mocking and DI.
+type CNNPoolingAverageGradientable interface {
+	Unwrap() *raw.MPSCNNPoolingAverageGradient
+	WithZeroPadSizeX(zeroPadSizeX uint) *CNNPoolingAverageGradient
+	WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAverageGradient
+	ZeroPadSizeX() uint
+	SetZeroPadSizeX(zeroPadSizeX uint)
+	ZeroPadSizeY() uint
+	SetZeroPadSizeY(zeroPadSizeY uint)
+}
+
+var _ CNNPoolingAverageGradientable = (*CNNPoolingAverageGradient)(nil)
 

@@ -43,3 +43,36 @@ func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) WithTim
 	return x
 }
 
+// Certificate calls the underlying Certificate.
+func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) Certificate() *foundation.NSData {
+	return x.inner.Certificate()
+}
+
+// SetCertificate calls the underlying SetCertificate.
+func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) SetCertificate(certificate *foundation.NSData) {
+	x.inner.SetCertificate(certificate)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTROperationalCredentialsClusterCertificateChainResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterCertificateChainResponseParams], for mocking and DI.
+type MTROperationalCredentialsClusterCertificateChainResponseParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterCertificateChainResponseParams
+	WithCertificate(certificate *foundation.NSData) *MTROperationalCredentialsClusterCertificateChainResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterCertificateChainResponseParams
+	Certificate() *foundation.NSData
+	SetCertificate(certificate *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterCertificateChainResponseParamsable = (*MTROperationalCredentialsClusterCertificateChainResponseParams)(nil)
+

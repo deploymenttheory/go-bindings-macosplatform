@@ -27,3 +27,10 @@ func (x *FragmentedMovieTrack) asMovieTrack() *raw.AVMovieTrack { return &x.inne
 
 func (x *FragmentedMovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVMovieTrack.AVAssetTrack }
 
+// FragmentedMovieTrackable is the interface implemented by [FragmentedMovieTrack], for mocking and DI.
+type FragmentedMovieTrackable interface {
+	Unwrap() *raw.AVFragmentedMovieTrack
+}
+
+var _ FragmentedMovieTrackable = (*FragmentedMovieTrack)(nil)
+

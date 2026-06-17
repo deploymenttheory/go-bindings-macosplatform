@@ -29,7 +29,129 @@ func (x *DOMTreeWalker) WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWal
 	return x
 }
 
+// ParentNode calls the underlying ParentNode.
+func (x *DOMTreeWalker) ParentNode() *DOMNode {
+	_r := x.inner.ParentNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// FirstChild calls the underlying FirstChild.
+func (x *DOMTreeWalker) FirstChild() *DOMNode {
+	_r := x.inner.FirstChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// LastChild calls the underlying LastChild.
+func (x *DOMTreeWalker) LastChild() *DOMNode {
+	_r := x.inner.LastChild()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PreviousSibling calls the underlying PreviousSibling.
+func (x *DOMTreeWalker) PreviousSibling() *DOMNode {
+	_r := x.inner.PreviousSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// NextSibling calls the underlying NextSibling.
+func (x *DOMTreeWalker) NextSibling() *DOMNode {
+	_r := x.inner.NextSibling()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PreviousNode calls the underlying PreviousNode.
+func (x *DOMTreeWalker) PreviousNode() *DOMNode {
+	_r := x.inner.PreviousNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// NextNode calls the underlying NextNode.
+func (x *DOMTreeWalker) NextNode() *DOMNode {
+	_r := x.inner.NextNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Root calls the underlying Root.
+func (x *DOMTreeWalker) Root() *DOMNode {
+	_r := x.inner.Root()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// WhatToShow calls the underlying WhatToShow.
+func (x *DOMTreeWalker) WhatToShow() uint {
+	return x.inner.WhatToShow()
+}
+
+// Filter calls the underlying Filter.
+func (x *DOMTreeWalker) Filter() raw.DOMNodeFilter {
+	return x.inner.Filter()
+}
+
+// ExpandEntityReferences calls the underlying ExpandEntityReferences.
+func (x *DOMTreeWalker) ExpandEntityReferences() bool {
+	return x.inner.ExpandEntityReferences()
+}
+
+// CurrentNode calls the underlying CurrentNode.
+func (x *DOMTreeWalker) CurrentNode() *DOMNode {
+	_r := x.inner.CurrentNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// SetCurrentNode calls the underlying SetCurrentNode.
+func (x *DOMTreeWalker) SetCurrentNode(currentNode *raw.DOMNode) {
+	x.inner.SetCurrentNode(currentNode)
+}
+
 func (x *DOMTreeWalker) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMTreeWalker) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMTreeWalkerable is the interface implemented by [DOMTreeWalker], for mocking and DI.
+type DOMTreeWalkerable interface {
+	Unwrap() *raw.DOMTreeWalker
+	WithCurrentNode(currentNode DOMNodeProvider) *DOMTreeWalker
+	ParentNode() *DOMNode
+	FirstChild() *DOMNode
+	LastChild() *DOMNode
+	PreviousSibling() *DOMNode
+	NextSibling() *DOMNode
+	PreviousNode() *DOMNode
+	NextNode() *DOMNode
+	Root() *DOMNode
+	WhatToShow() uint
+	Filter() raw.DOMNodeFilter
+	ExpandEntityReferences() bool
+	CurrentNode() *DOMNode
+	SetCurrentNode(currentNode *raw.DOMNode)
+}
+
+var _ DOMTreeWalkerable = (*DOMTreeWalker)(nil)
 

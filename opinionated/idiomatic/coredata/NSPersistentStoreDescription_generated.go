@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -78,4 +79,164 @@ func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContai
 	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions)
 	return x
 }
+
+// SetOptionForKey calls the underlying SetOptionForKey.
+func (x *PersistentStoreDescription) SetOptionForKey(option *foundation.NSObject, key string) {
+	x.inner.SetOptionForKey(option, foundation.NSStringStringWithUTF8String(key))
+}
+
+// SetValueForPragmaNamed calls the underlying SetValueForPragmaNamed.
+func (x *PersistentStoreDescription) SetValueForPragmaNamed(value *foundation.NSObject, name string) {
+	x.inner.SetValueForPragmaNamed(value, foundation.NSStringStringWithUTF8String(name))
+}
+
+// Type calls the underlying Type.
+func (x *PersistentStoreDescription) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *PersistentStoreDescription) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Configuration calls the underlying Configuration.
+func (x *PersistentStoreDescription) Configuration() string {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetConfiguration calls the underlying SetConfiguration.
+func (x *PersistentStoreDescription) SetConfiguration(configuration string) {
+	x.inner.SetConfiguration(foundation.NSStringStringWithUTF8String(configuration))
+}
+
+// URL calls the underlying URL.
+func (x *PersistentStoreDescription) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// SetURL calls the underlying SetURL.
+func (x *PersistentStoreDescription) SetURL(uRL string) {
+	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+}
+
+// Options calls the underlying Options.
+func (x *PersistentStoreDescription) Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
+	return x.inner.Options()
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *PersistentStoreDescription) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// SetReadOnly calls the underlying SetReadOnly.
+func (x *PersistentStoreDescription) SetReadOnly(readOnly bool) {
+	x.inner.SetReadOnly(readOnly)
+}
+
+// Timeout calls the underlying Timeout.
+func (x *PersistentStoreDescription) Timeout() float64 {
+	return x.inner.Timeout()
+}
+
+// SetTimeout calls the underlying SetTimeout.
+func (x *PersistentStoreDescription) SetTimeout(timeout float64) {
+	x.inner.SetTimeout(timeout)
+}
+
+// SqlitePragmas calls the underlying SqlitePragmas.
+func (x *PersistentStoreDescription) SqlitePragmas() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
+	return x.inner.SqlitePragmas()
+}
+
+// ShouldAddStoreAsynchronously calls the underlying ShouldAddStoreAsynchronously.
+func (x *PersistentStoreDescription) ShouldAddStoreAsynchronously() bool {
+	return x.inner.ShouldAddStoreAsynchronously()
+}
+
+// SetShouldAddStoreAsynchronously calls the underlying SetShouldAddStoreAsynchronously.
+func (x *PersistentStoreDescription) SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) {
+	x.inner.SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously)
+}
+
+// ShouldMigrateStoreAutomatically calls the underlying ShouldMigrateStoreAutomatically.
+func (x *PersistentStoreDescription) ShouldMigrateStoreAutomatically() bool {
+	return x.inner.ShouldMigrateStoreAutomatically()
+}
+
+// SetShouldMigrateStoreAutomatically calls the underlying SetShouldMigrateStoreAutomatically.
+func (x *PersistentStoreDescription) SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) {
+	x.inner.SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically)
+}
+
+// ShouldInferMappingModelAutomatically calls the underlying ShouldInferMappingModelAutomatically.
+func (x *PersistentStoreDescription) ShouldInferMappingModelAutomatically() bool {
+	return x.inner.ShouldInferMappingModelAutomatically()
+}
+
+// SetShouldInferMappingModelAutomatically calls the underlying SetShouldInferMappingModelAutomatically.
+func (x *PersistentStoreDescription) SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) {
+	x.inner.SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically)
+}
+
+// CloudKitContainerOptions calls the underlying CloudKitContainerOptions.
+func (x *PersistentStoreDescription) CloudKitContainerOptions() *PersistentCloudKitContainerOptions {
+	_r := x.inner.CloudKitContainerOptions()
+	if _r == nil {
+		return nil
+	}
+	return &PersistentCloudKitContainerOptions{inner: _r}
+}
+
+// SetCloudKitContainerOptions calls the underlying SetCloudKitContainerOptions.
+func (x *PersistentStoreDescription) SetCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions) {
+	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions)
+}
+
+// PersistentStoreDescriptionable is the interface implemented by [PersistentStoreDescription], for mocking and DI.
+type PersistentStoreDescriptionable interface {
+	Unwrap() *raw.NSPersistentStoreDescription
+	WithType(type_ string) *PersistentStoreDescription
+	WithConfiguration(configuration string) *PersistentStoreDescription
+	WithURL(uRL string) *PersistentStoreDescription
+	WithReadOnly(readOnly bool) *PersistentStoreDescription
+	WithTimeout(timeout float64) *PersistentStoreDescription
+	WithShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) *PersistentStoreDescription
+	WithShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) *PersistentStoreDescription
+	WithShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) *PersistentStoreDescription
+	WithCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions) *PersistentStoreDescription
+	SetOptionForKey(option *foundation.NSObject, key string)
+	SetValueForPragmaNamed(value *foundation.NSObject, name string)
+	Type() string
+	SetType(type_ string)
+	Configuration() string
+	SetConfiguration(configuration string)
+	URL() *foundation.NSURL
+	SetURL(uRL string)
+	Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]
+	IsReadOnly() bool
+	SetReadOnly(readOnly bool)
+	Timeout() float64
+	SetTimeout(timeout float64)
+	SqlitePragmas() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]
+	ShouldAddStoreAsynchronously() bool
+	SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool)
+	ShouldMigrateStoreAutomatically() bool
+	SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool)
+	ShouldInferMappingModelAutomatically() bool
+	SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool)
+	CloudKitContainerOptions() *PersistentCloudKitContainerOptions
+	SetCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions)
+}
+
+var _ PersistentStoreDescriptionable = (*PersistentStoreDescription)(nil)
 

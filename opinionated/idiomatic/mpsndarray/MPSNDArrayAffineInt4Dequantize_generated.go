@@ -29,3 +29,10 @@ func (x *ArrayAffineInt4Dequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMulti
 
 func (x *ArrayAffineInt4Dequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
+// ArrayAffineInt4Dequantizeable is the interface implemented by [ArrayAffineInt4Dequantize], for mocking and DI.
+type ArrayAffineInt4Dequantizeable interface {
+	Unwrap() *raw.MPSNDArrayAffineInt4Dequantize
+}
+
+var _ ArrayAffineInt4Dequantizeable = (*ArrayAffineInt4Dequantize)(nil)
+

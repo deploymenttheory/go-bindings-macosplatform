@@ -36,3 +36,36 @@ func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) WithE
 	return x
 }
 
+// NodeID calls the underlying NodeID.
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) NodeID() *foundation.NSNumber {
+	return x.inner.NodeID()
+}
+
+// SetNodeID calls the underlying SetNodeID.
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetNodeID(nodeID *foundation.NSNumber) {
+	x.inner.SetNodeID(nodeID)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) Endpoint() *foundation.NSNumber {
+	return x.inner.Endpoint()
+}
+
+// SetEndpoint calls the underlying SetEndpoint.
+func (x *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct) SetEndpoint(endpoint *foundation.NSNumber) {
+	x.inner.SetEndpoint(endpoint)
+}
+
+// MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable is the interface implemented by [MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct], for mocking and DI.
+type MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
+	WithNodeID(nodeID *foundation.NSNumber) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct
+	NodeID() *foundation.NSNumber
+	SetNodeID(nodeID *foundation.NSNumber)
+	Endpoint() *foundation.NSNumber
+	SetEndpoint(endpoint *foundation.NSNumber)
+}
+
+var _ MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStructable = (*MTRTimeSynchronizationClusterFabricScopedTrustedTimeSourceStruct)(nil)
+

@@ -5,7 +5,9 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewFunctionReflection() *FunctionReflection {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionReflection")), objc.RegisterName("new"))
 	return &FunctionReflection{inner: raw.MTLFunctionReflectionFromID(_id)}
 }
+
+// Bindings calls the underlying Bindings.
+func (x *FunctionReflection) Bindings() *foundation.NSArray[raw.MTLBinding] {
+	return x.inner.Bindings()
+}
+
+// UserAnnotation calls the underlying UserAnnotation.
+func (x *FunctionReflection) UserAnnotation() string {
+	_r := x.inner.UserAnnotation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FunctionReflectionable is the interface implemented by [FunctionReflection], for mocking and DI.
+type FunctionReflectionable interface {
+	Unwrap() *raw.MTLFunctionReflection
+	Bindings() *foundation.NSArray[raw.MTLBinding]
+	UserAnnotation() string
+}
+
+var _ FunctionReflectionable = (*FunctionReflection)(nil)
 

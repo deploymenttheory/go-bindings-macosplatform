@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,58 @@ func (x *AccessibilityCustomRotorSearchParameters) WithFilterString(filterString
 	x.inner.SetFilterString(foundation.NSStringStringWithUTF8String(filterString))
 	return x
 }
+
+// CurrentItem calls the underlying CurrentItem.
+func (x *AccessibilityCustomRotorSearchParameters) CurrentItem() *AccessibilityCustomRotorItemResult {
+	_r := x.inner.CurrentItem()
+	if _r == nil {
+		return nil
+	}
+	return &AccessibilityCustomRotorItemResult{inner: _r}
+}
+
+// SetCurrentItem calls the underlying SetCurrentItem.
+func (x *AccessibilityCustomRotorSearchParameters) SetCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult) {
+	x.inner.SetCurrentItem(currentItem)
+}
+
+// SearchDirection calls the underlying SearchDirection.
+func (x *AccessibilityCustomRotorSearchParameters) SearchDirection() raw.NSAccessibilityCustomRotorSearchDirection {
+	return x.inner.SearchDirection()
+}
+
+// SetSearchDirection calls the underlying SetSearchDirection.
+func (x *AccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) {
+	x.inner.SetSearchDirection(searchDirection)
+}
+
+// FilterString calls the underlying FilterString.
+func (x *AccessibilityCustomRotorSearchParameters) FilterString() string {
+	_r := x.inner.FilterString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFilterString calls the underlying SetFilterString.
+func (x *AccessibilityCustomRotorSearchParameters) SetFilterString(filterString string) {
+	x.inner.SetFilterString(foundation.NSStringStringWithUTF8String(filterString))
+}
+
+// AccessibilityCustomRotorSearchParametersable is the interface implemented by [AccessibilityCustomRotorSearchParameters], for mocking and DI.
+type AccessibilityCustomRotorSearchParametersable interface {
+	Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters
+	WithCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters
+	WithSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
+	WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters
+	CurrentItem() *AccessibilityCustomRotorItemResult
+	SetCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult)
+	SearchDirection() raw.NSAccessibilityCustomRotorSearchDirection
+	SetSearchDirection(searchDirection raw.NSAccessibilityCustomRotorSearchDirection)
+	FilterString() string
+	SetFilterString(filterString string)
+}
+
+var _ AccessibilityCustomRotorSearchParametersable = (*AccessibilityCustomRotorSearchParameters)(nil)
 

@@ -41,5 +41,59 @@ func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithReques
 	return x
 }
 
+// LargeBlob calls the underlying LargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationInput{inner: _r}
+}
+
+// SetLargeBlob calls the underlying SetLargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) {
+	x.inner.SetLargeBlob(largeBlob)
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: _r}
+}
+
+// SetPrf calls the underlying SetPrf.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) {
+	x.inner.SetPrf(prf)
+}
+
+// RequestStyle calls the underlying RequestStyle.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
+	return x.inner.RequestStyle()
+}
+
+// SetRequestStyle calls the underlying SetRequestStyle.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) SetRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) {
+	x.inner.SetRequestStyle(requestStyle)
+}
+
 func (x *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest { return &x.inner.ASAuthorizationRequest }
+
+// AuthorizationPlatformPublicKeyCredentialRegistrationRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistrationRequest], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialRegistrationRequestable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	WithRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput
+	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput)
+	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput
+	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInput)
+	RequestStyle() raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle
+	SetRequestStyle(requestStyle raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle)
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialRegistrationRequestable = (*AuthorizationPlatformPublicKeyCredentialRegistrationRequest)(nil)
 

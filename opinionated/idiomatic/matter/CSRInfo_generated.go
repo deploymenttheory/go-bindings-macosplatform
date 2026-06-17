@@ -49,3 +49,62 @@ func (x *CSRInfo) WithCsr(csr *foundation.NSData) *CSRInfo {
 	return x
 }
 
+// Nonce calls the underlying Nonce.
+func (x *CSRInfo) Nonce() *foundation.NSData {
+	return x.inner.Nonce()
+}
+
+// SetNonce calls the underlying SetNonce.
+func (x *CSRInfo) SetNonce(nonce *foundation.NSData) {
+	x.inner.SetNonce(nonce)
+}
+
+// Elements calls the underlying Elements.
+func (x *CSRInfo) Elements() *foundation.NSData {
+	return x.inner.Elements()
+}
+
+// SetElements calls the underlying SetElements.
+func (x *CSRInfo) SetElements(elements *foundation.NSData) {
+	x.inner.SetElements(elements)
+}
+
+// ElementsSignature calls the underlying ElementsSignature.
+func (x *CSRInfo) ElementsSignature() *foundation.NSData {
+	return x.inner.ElementsSignature()
+}
+
+// SetElementsSignature calls the underlying SetElementsSignature.
+func (x *CSRInfo) SetElementsSignature(elementsSignature *foundation.NSData) {
+	x.inner.SetElementsSignature(elementsSignature)
+}
+
+// Csr calls the underlying Csr.
+func (x *CSRInfo) Csr() *foundation.NSData {
+	return x.inner.Csr()
+}
+
+// SetCsr calls the underlying SetCsr.
+func (x *CSRInfo) SetCsr(csr *foundation.NSData) {
+	x.inner.SetCsr(csr)
+}
+
+// CSRInfoable is the interface implemented by [CSRInfo], for mocking and DI.
+type CSRInfoable interface {
+	Unwrap() *raw.CSRInfo
+	WithNonce(nonce *foundation.NSData) *CSRInfo
+	WithElements(elements *foundation.NSData) *CSRInfo
+	WithElementsSignature(elementsSignature *foundation.NSData) *CSRInfo
+	WithCsr(csr *foundation.NSData) *CSRInfo
+	Nonce() *foundation.NSData
+	SetNonce(nonce *foundation.NSData)
+	Elements() *foundation.NSData
+	SetElements(elements *foundation.NSData)
+	ElementsSignature() *foundation.NSData
+	SetElementsSignature(elementsSignature *foundation.NSData)
+	Csr() *foundation.NSData
+	SetCsr(csr *foundation.NSData)
+}
+
+var _ CSRInfoable = (*CSRInfo)(nil)
+

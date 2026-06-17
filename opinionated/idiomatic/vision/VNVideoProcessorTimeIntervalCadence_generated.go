@@ -24,5 +24,18 @@ func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) 
 	return &VideoProcessorTimeIntervalCadence{inner: raw.VNVideoProcessorTimeIntervalCadenceFromID(_id)}
 }
 
+// TimeInterval calls the underlying TimeInterval.
+func (x *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
+	return x.inner.TimeInterval()
+}
+
 func (x *VideoProcessorTimeIntervalCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence { return &x.inner.VNVideoProcessorCadence }
+
+// VideoProcessorTimeIntervalCadenceable is the interface implemented by [VideoProcessorTimeIntervalCadence], for mocking and DI.
+type VideoProcessorTimeIntervalCadenceable interface {
+	Unwrap() *raw.VNVideoProcessorTimeIntervalCadence
+	TimeInterval() float64
+}
+
+var _ VideoProcessorTimeIntervalCadenceable = (*VideoProcessorTimeIntervalCadence)(nil)
 

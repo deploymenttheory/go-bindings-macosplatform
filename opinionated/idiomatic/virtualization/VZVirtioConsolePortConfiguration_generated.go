@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioCo
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *VirtioConsolePortConfiguration) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *VirtioConsolePortConfiguration) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// IsConsole calls the underlying IsConsole.
+func (x *VirtioConsolePortConfiguration) IsConsole() bool {
+	return x.inner.IsConsole()
+}
+
+// SetIsConsole calls the underlying SetIsConsole.
+func (x *VirtioConsolePortConfiguration) SetIsConsole(isConsole bool) {
+	x.inner.SetIsConsole(isConsole)
+}
+
 func (x *VirtioConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration { return &x.inner.VZConsolePortConfiguration }
+
+// VirtioConsolePortConfigurationable is the interface implemented by [VirtioConsolePortConfiguration], for mocking and DI.
+type VirtioConsolePortConfigurationable interface {
+	Unwrap() *raw.VZVirtioConsolePortConfiguration
+	WithName(name string) *VirtioConsolePortConfiguration
+	WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration
+	Name() string
+	SetName(name string)
+	IsConsole() bool
+	SetIsConsole(isConsole bool)
+}
+
+var _ VirtioConsolePortConfigurationable = (*VirtioConsolePortConfiguration)(nil)
 

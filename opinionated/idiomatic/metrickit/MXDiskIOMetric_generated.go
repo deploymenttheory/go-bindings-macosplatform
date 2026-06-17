@@ -5,6 +5,7 @@
 package metrickit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,18 @@ func NewDiskIOMetric() *DiskIOMetric {
 	return &DiskIOMetric{inner: raw.MXDiskIOMetricFromID(_id)}
 }
 
+// CumulativeLogicalWrites calls the underlying CumulativeLogicalWrites.
+func (x *DiskIOMetric) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
+	return x.inner.CumulativeLogicalWrites()
+}
+
 func (x *DiskIOMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
+
+// DiskIOMetricable is the interface implemented by [DiskIOMetric], for mocking and DI.
+type DiskIOMetricable interface {
+	Unwrap() *raw.MXDiskIOMetric
+	CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+}
+
+var _ DiskIOMetricable = (*DiskIOMetric)(nil)
 

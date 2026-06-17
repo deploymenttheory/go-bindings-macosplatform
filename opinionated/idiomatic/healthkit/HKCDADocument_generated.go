@@ -5,7 +5,9 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,57 @@ func NewCDADocument() *CDADocument {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCDADocument")), objc.RegisterName("new"))
 	return &CDADocument{inner: raw.HKCDADocumentFromID(_id)}
 }
+
+// DocumentData calls the underlying DocumentData.
+func (x *CDADocument) DocumentData() *foundation.NSData {
+	return x.inner.DocumentData()
+}
+
+// Title calls the underlying Title.
+func (x *CDADocument) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PatientName calls the underlying PatientName.
+func (x *CDADocument) PatientName() string {
+	_r := x.inner.PatientName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AuthorName calls the underlying AuthorName.
+func (x *CDADocument) AuthorName() string {
+	_r := x.inner.AuthorName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CustodianName calls the underlying CustodianName.
+func (x *CDADocument) CustodianName() string {
+	_r := x.inner.CustodianName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CDADocumentable is the interface implemented by [CDADocument], for mocking and DI.
+type CDADocumentable interface {
+	Unwrap() *raw.HKCDADocument
+	DocumentData() *foundation.NSData
+	Title() string
+	PatientName() string
+	AuthorName() string
+	CustodianName() string
+}
+
+var _ CDADocumentable = (*CDADocument)(nil)
 

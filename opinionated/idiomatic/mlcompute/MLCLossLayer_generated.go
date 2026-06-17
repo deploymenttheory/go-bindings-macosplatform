@@ -23,7 +23,34 @@ func NewLossLayer() *LossLayer {
 	return &LossLayer{inner: raw.MLCLossLayerFromID(_id)}
 }
 
+// Descriptor calls the underlying Descriptor.
+func (x *LossLayer) Descriptor() *LossDescriptor {
+	_r := x.inner.Descriptor()
+	if _r == nil {
+		return nil
+	}
+	return &LossDescriptor{inner: _r}
+}
+
+// Weights calls the underlying Weights.
+func (x *LossLayer) Weights() *Tensor {
+	_r := x.inner.Weights()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
 func (x *LossLayer) asLossLayer() *raw.MLCLossLayer { return x.inner }
 
 func (x *LossLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// LossLayerable is the interface implemented by [LossLayer], for mocking and DI.
+type LossLayerable interface {
+	Unwrap() *raw.MLCLossLayer
+	Descriptor() *LossDescriptor
+	Weights() *Tensor
+}
+
+var _ LossLayerable = (*LossLayer)(nil)
 

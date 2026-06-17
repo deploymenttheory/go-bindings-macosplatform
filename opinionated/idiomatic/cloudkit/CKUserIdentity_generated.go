@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,54 @@ func NewUserIdentity() *UserIdentity {
 	return &UserIdentity{inner: raw.CKUserIdentityFromID(_id)}
 }
 
+// UserRecordID calls the underlying UserRecordID.
+func (x *UserIdentity) UserRecordID() *RecordID {
+	_r := x.inner.UserRecordID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordID{inner: _r}
+}
+
+// LookupInfo calls the underlying LookupInfo.
+func (x *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
+	_r := x.inner.LookupInfo()
+	if _r == nil {
+		return nil
+	}
+	return &UserIdentityLookupInfo{inner: _r}
+}
+
+// NameComponents calls the underlying NameComponents.
+func (x *UserIdentity) NameComponents() *foundation.NSPersonNameComponents {
+	return x.inner.NameComponents()
+}
+
+// HasiCloudAccount calls the underlying HasiCloudAccount.
+func (x *UserIdentity) HasiCloudAccount() bool {
+	return x.inner.HasiCloudAccount()
+}
+
 // ContactIdentifiers returns the collection as a Go slice.
-func (x *UserIdentity) ContactIdentifiers() []*foundation.NSString {
+func (x *UserIdentity) ContactIdentifiers() []string {
 	arr := x.inner.ContactIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// UserIdentityable is the interface implemented by [UserIdentity], for mocking and DI.
+type UserIdentityable interface {
+	Unwrap() *raw.CKUserIdentity
+	UserRecordID() *RecordID
+	LookupInfo() *UserIdentityLookupInfo
+	NameComponents() *foundation.NSPersonNameComponents
+	HasiCloudAccount() bool
+	ContactIdentifiers() []string
+}
+
+var _ UserIdentityable = (*UserIdentity)(nil)
 

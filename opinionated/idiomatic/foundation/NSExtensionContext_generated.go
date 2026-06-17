@@ -5,8 +5,10 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ExtensionContext wraps [raw.NSExtensionContext] with a fluent Go API.
@@ -23,5 +25,36 @@ func NewExtensionContext() *ExtensionContext {
 	return &ExtensionContext{inner: raw.NSExtensionContextFromID(_id)}
 }
 
+// CompleteRequestReturningItemsCompletionHandler calls the underlying CompleteRequestReturningItemsCompletionHandler.
+func (x *ExtensionContext) CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool)) {
+	x.inner.CompleteRequestReturningItemsCompletionHandler(items, completionHandler)
+}
+
+// CancelRequestWithError calls the underlying CancelRequestWithError.
+func (x *ExtensionContext) CancelRequestWithError(error_ unsafe.Pointer) {
+	x.inner.CancelRequestWithError(error_)
+}
+
+// OpenURLCompletionHandler calls the underlying OpenURLCompletionHandler.
+func (x *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandler func(bool)) {
+	x.inner.OpenURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), completionHandler)
+}
+
+// InputItems calls the underlying InputItems.
+func (x *ExtensionContext) InputItems() *raw.NSArray[objc.ID] {
+	return x.inner.InputItems()
+}
+
 func (x *ExtensionContext) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ExtensionContextable is the interface implemented by [ExtensionContext], for mocking and DI.
+type ExtensionContextable interface {
+	Unwrap() *raw.NSExtensionContext
+	CompleteRequestReturningItemsCompletionHandler(items *raw.NSArray[objc.ID], completionHandler func(bool))
+	CancelRequestWithError(error_ unsafe.Pointer)
+	OpenURLCompletionHandler(uRL string, completionHandler func(bool))
+	InputItems() *raw.NSArray[objc.ID]
+}
+
+var _ ExtensionContextable = (*ExtensionContext)(nil)
 

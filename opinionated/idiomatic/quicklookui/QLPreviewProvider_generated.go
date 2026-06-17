@@ -23,3 +23,10 @@ func NewPreviewProvider() *PreviewProvider {
 	return &PreviewProvider{inner: raw.QLPreviewProviderFromID(_id)}
 }
 
+// PreviewProviderable is the interface implemented by [PreviewProvider], for mocking and DI.
+type PreviewProviderable interface {
+	Unwrap() *raw.QLPreviewProvider
+}
+
+var _ PreviewProviderable = (*PreviewProvider)(nil)
+

@@ -42,3 +42,49 @@ func (x *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex 
 	return x
 }
 
+// Noc calls the underlying Noc.
+func (x *MTROperationalCredentialsClusterNOCStruct) Noc() *foundation.NSData {
+	return x.inner.Noc()
+}
+
+// SetNoc calls the underlying SetNoc.
+func (x *MTROperationalCredentialsClusterNOCStruct) SetNoc(noc *foundation.NSData) {
+	x.inner.SetNoc(noc)
+}
+
+// Icac calls the underlying Icac.
+func (x *MTROperationalCredentialsClusterNOCStruct) Icac() *foundation.NSData {
+	return x.inner.Icac()
+}
+
+// SetIcac calls the underlying SetIcac.
+func (x *MTROperationalCredentialsClusterNOCStruct) SetIcac(icac *foundation.NSData) {
+	x.inner.SetIcac(icac)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTROperationalCredentialsClusterNOCStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTROperationalCredentialsClusterNOCStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTROperationalCredentialsClusterNOCStructable is the interface implemented by [MTROperationalCredentialsClusterNOCStruct], for mocking and DI.
+type MTROperationalCredentialsClusterNOCStructable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterNOCStruct
+	WithNoc(noc *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct
+	WithIcac(icac *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCStruct
+	Noc() *foundation.NSData
+	SetNoc(noc *foundation.NSData)
+	Icac() *foundation.NSData
+	SetIcac(icac *foundation.NSData)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTROperationalCredentialsClusterNOCStructable = (*MTROperationalCredentialsClusterNOCStruct)(nil)
+

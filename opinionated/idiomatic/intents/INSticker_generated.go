@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,27 @@ func NewStickerWithTypeEmoji(type_ raw.INStickerType, emoji string) *Sticker {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:emoji:"), type_, foundation.NSStringStringWithUTF8String(emoji).Ptr())
 	return &Sticker{inner: raw.INStickerFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *Sticker) Type() raw.INStickerType {
+	return x.inner.Type()
+}
+
+// Emoji calls the underlying Emoji.
+func (x *Sticker) Emoji() string {
+	_r := x.inner.Emoji()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Stickerable is the interface implemented by [Sticker], for mocking and DI.
+type Stickerable interface {
+	Unwrap() *raw.INSticker
+	Type() raw.INStickerType
+	Emoji() string
+}
+
+var _ Stickerable = (*Sticker)(nil)
 

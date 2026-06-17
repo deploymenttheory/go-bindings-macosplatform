@@ -29,3 +29,27 @@ func (x *ZoomControl) WithMapView(mapView *raw.MKMapView) *ZoomControl {
 	return x
 }
 
+// MapView calls the underlying MapView.
+func (x *ZoomControl) MapView() *MapView {
+	_r := x.inner.MapView()
+	if _r == nil {
+		return nil
+	}
+	return &MapView{inner: _r}
+}
+
+// SetMapView calls the underlying SetMapView.
+func (x *ZoomControl) SetMapView(mapView *raw.MKMapView) {
+	x.inner.SetMapView(mapView)
+}
+
+// ZoomControlable is the interface implemented by [ZoomControl], for mocking and DI.
+type ZoomControlable interface {
+	Unwrap() *raw.MKZoomControl
+	WithMapView(mapView *raw.MKMapView) *ZoomControl
+	MapView() *MapView
+	SetMapView(mapView *raw.MKMapView)
+}
+
+var _ ZoomControlable = (*ZoomControl)(nil)
+

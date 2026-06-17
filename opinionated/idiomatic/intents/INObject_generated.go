@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -75,16 +76,93 @@ func (x *Object) WithAlternativeSpeakableMatches(items ...*raw.INSpeakableString
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Object) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// DisplayString calls the underlying DisplayString.
+func (x *Object) DisplayString() string {
+	_r := x.inner.DisplayString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PronunciationHint calls the underlying PronunciationHint.
+func (x *Object) PronunciationHint() string {
+	_r := x.inner.PronunciationHint()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubtitleString calls the underlying SubtitleString.
+func (x *Object) SubtitleString() string {
+	_r := x.inner.SubtitleString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitleString calls the underlying SetSubtitleString.
+func (x *Object) SetSubtitleString(subtitleString string) {
+	x.inner.SetSubtitleString(foundation.NSStringStringWithUTF8String(subtitleString))
+}
+
+// DisplayImage calls the underlying DisplayImage.
+func (x *Object) DisplayImage() *Image {
+	_r := x.inner.DisplayImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetDisplayImage calls the underlying SetDisplayImage.
+func (x *Object) SetDisplayImage(displayImage *raw.INImage) {
+	x.inner.SetDisplayImage(displayImage)
+}
+
 // AlternativeSpeakableMatches returns the collection as a Go slice.
 func (x *Object) AlternativeSpeakableMatches() []*raw.INSpeakableString {
 	arr := x.inner.AlternativeSpeakableMatches()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INSpeakableString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INSpeakableString {
+		return raw.INSpeakableStringFromID(purego.Retain(_id))
+	})
 }
+
+// SetAlternativeSpeakableMatches calls the underlying SetAlternativeSpeakableMatches.
+func (x *Object) SetAlternativeSpeakableMatches(alternativeSpeakableMatches *foundation.NSArray[*raw.INSpeakableString]) {
+	x.inner.SetAlternativeSpeakableMatches(alternativeSpeakableMatches)
+}
+
+// Objectable is the interface implemented by [Object], for mocking and DI.
+type Objectable interface {
+	Unwrap() *raw.INObject
+	WithSubtitleString(subtitleString string) *Object
+	WithDisplayImage(displayImage *raw.INImage) *Object
+	WithAlternativeSpeakableMatches(items ...*raw.INSpeakableString) *Object
+	Identifier() string
+	DisplayString() string
+	PronunciationHint() string
+	SubtitleString() string
+	SetSubtitleString(subtitleString string)
+	DisplayImage() *Image
+	SetDisplayImage(displayImage *raw.INImage)
+	AlternativeSpeakableMatches() []*raw.INSpeakableString
+	SetAlternativeSpeakableMatches(alternativeSpeakableMatches *foundation.NSArray[*raw.INSpeakableString])
+}
+
+var _ Objectable = (*Object)(nil)
 

@@ -35,3 +35,10 @@ func (x *SpecifierTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.i
 
 func (x *SpecifierTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
 
+// SpecifierTestable is the interface implemented by [SpecifierTest], for mocking and DI.
+type SpecifierTestable interface {
+	Unwrap() *raw.NSSpecifierTest
+}
+
+var _ SpecifierTestable = (*SpecifierTest)(nil)
+

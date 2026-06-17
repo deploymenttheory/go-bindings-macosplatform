@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *UMPEndpointManager) UMPEndpoints() []*raw.MIDIUMPEndpoint {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MIDIUMPEndpoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MIDIUMPEndpoint {
+		return raw.MIDIUMPEndpointFromID(purego.Retain(_id))
+	})
 }
+
+// UMPEndpointManagerable is the interface implemented by [UMPEndpointManager], for mocking and DI.
+type UMPEndpointManagerable interface {
+	Unwrap() *raw.MIDIUMPEndpointManager
+	UMPEndpoints() []*raw.MIDIUMPEndpoint
+}
+
+var _ UMPEndpointManagerable = (*UMPEndpointManager)(nil)
 

@@ -24,6 +24,26 @@ func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKe
 	return &DOMWheelEvent{inner: raw.DOMWheelEventFromID(_id)}
 }
 
+// WheelDeltaX calls the underlying WheelDeltaX.
+func (x *DOMWheelEvent) WheelDeltaX() int {
+	return x.inner.WheelDeltaX()
+}
+
+// WheelDeltaY calls the underlying WheelDeltaY.
+func (x *DOMWheelEvent) WheelDeltaY() int {
+	return x.inner.WheelDeltaY()
+}
+
+// WheelDelta calls the underlying WheelDelta.
+func (x *DOMWheelEvent) WheelDelta() int {
+	return x.inner.WheelDelta()
+}
+
+// IsHorizontal calls the underlying IsHorizontal.
+func (x *DOMWheelEvent) IsHorizontal() bool {
+	return x.inner.IsHorizontal()
+}
+
 func (x *DOMWheelEvent) asDOMMouseEvent() *raw.DOMMouseEvent { return &x.inner.DOMMouseEvent }
 
 func (x *DOMWheelEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMMouseEvent.DOMUIEvent }
@@ -33,4 +53,15 @@ func (x *DOMWheelEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMMouseEve
 func (x *DOMWheelEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject }
 
 func (x *DOMWheelEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMWheelEventable is the interface implemented by [DOMWheelEvent], for mocking and DI.
+type DOMWheelEventable interface {
+	Unwrap() *raw.DOMWheelEvent
+	WheelDeltaX() int
+	WheelDeltaY() int
+	WheelDelta() int
+	IsHorizontal() bool
+}
+
+var _ DOMWheelEventable = (*DOMWheelEvent)(nil)
 

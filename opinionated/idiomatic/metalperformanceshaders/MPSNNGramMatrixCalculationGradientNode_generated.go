@@ -32,7 +32,20 @@ func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradient
 	return &NNGramMatrixCalculationGradientNode{inner: raw.MPSNNGramMatrixCalculationGradientNodeFromID(_id)}
 }
 
+// Alpha calls the underlying Alpha.
+func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
 func (x *NNGramMatrixCalculationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *NNGramMatrixCalculationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// NNGramMatrixCalculationGradientNodeable is the interface implemented by [NNGramMatrixCalculationGradientNode], for mocking and DI.
+type NNGramMatrixCalculationGradientNodeable interface {
+	Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode
+	Alpha() float32
+}
+
+var _ NNGramMatrixCalculationGradientNodeable = (*NNGramMatrixCalculationGradientNode)(nil)
 

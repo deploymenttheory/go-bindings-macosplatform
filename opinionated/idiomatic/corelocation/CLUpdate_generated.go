@@ -7,6 +7,7 @@ package corelocation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Update wraps [raw.CLUpdate] with a fluent Go API.
@@ -22,4 +23,77 @@ func NewUpdate() *Update {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLUpdate")), objc.RegisterName("new"))
 	return &Update{inner: raw.CLUpdateFromID(_id)}
 }
+
+// AuthorizationDenied calls the underlying AuthorizationDenied.
+func (x *Update) AuthorizationDenied() bool {
+	return x.inner.AuthorizationDenied()
+}
+
+// AuthorizationDeniedGlobally calls the underlying AuthorizationDeniedGlobally.
+func (x *Update) AuthorizationDeniedGlobally() bool {
+	return x.inner.AuthorizationDeniedGlobally()
+}
+
+// AuthorizationRestricted calls the underlying AuthorizationRestricted.
+func (x *Update) AuthorizationRestricted() bool {
+	return x.inner.AuthorizationRestricted()
+}
+
+// IsStationary calls the underlying IsStationary.
+func (x *Update) IsStationary() bool {
+	return x.inner.IsStationary()
+}
+
+// Stationary calls the underlying Stationary.
+func (x *Update) Stationary() bool {
+	return x.inner.Stationary()
+}
+
+// InsufficientlyInUse calls the underlying InsufficientlyInUse.
+func (x *Update) InsufficientlyInUse() bool {
+	return x.inner.InsufficientlyInUse()
+}
+
+// LocationUnavailable calls the underlying LocationUnavailable.
+func (x *Update) LocationUnavailable() bool {
+	return x.inner.LocationUnavailable()
+}
+
+// AccuracyLimited calls the underlying AccuracyLimited.
+func (x *Update) AccuracyLimited() bool {
+	return x.inner.AccuracyLimited()
+}
+
+// ServiceSessionRequired calls the underlying ServiceSessionRequired.
+func (x *Update) ServiceSessionRequired() bool {
+	return x.inner.ServiceSessionRequired()
+}
+
+// AuthorizationRequestInProgress calls the underlying AuthorizationRequestInProgress.
+func (x *Update) AuthorizationRequestInProgress() bool {
+	return x.inner.AuthorizationRequestInProgress()
+}
+
+// Location calls the underlying Location.
+func (x *Update) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// Updateable is the interface implemented by [Update], for mocking and DI.
+type Updateable interface {
+	Unwrap() *raw.CLUpdate
+	AuthorizationDenied() bool
+	AuthorizationDeniedGlobally() bool
+	AuthorizationRestricted() bool
+	IsStationary() bool
+	Stationary() bool
+	InsufficientlyInUse() bool
+	LocationUnavailable() bool
+	AccuracyLimited() bool
+	ServiceSessionRequired() bool
+	AuthorizationRequestInProgress() bool
+	Location() unsafe.Pointer
+}
+
+var _ Updateable = (*Update)(nil)
 

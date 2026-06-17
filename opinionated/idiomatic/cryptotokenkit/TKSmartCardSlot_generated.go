@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,59 @@ func NewSmartCardSlot() *SmartCardSlot {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardSlot")), objc.RegisterName("new"))
 	return &SmartCardSlot{inner: raw.TKSmartCardSlotFromID(_id)}
 }
+
+// MakeSmartCard calls the underlying MakeSmartCard.
+func (x *SmartCardSlot) MakeSmartCard() *SmartCard {
+	_r := x.inner.MakeSmartCard()
+	if _r == nil {
+		return nil
+	}
+	return &SmartCard{inner: _r}
+}
+
+// State calls the underlying State.
+func (x *SmartCardSlot) State() raw.TKSmartCardSlotState {
+	return x.inner.State()
+}
+
+// ATR calls the underlying ATR.
+func (x *SmartCardSlot) ATR() *SmartCardATR {
+	_r := x.inner.ATR()
+	if _r == nil {
+		return nil
+	}
+	return &SmartCardATR{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *SmartCardSlot) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MaxInputLength calls the underlying MaxInputLength.
+func (x *SmartCardSlot) MaxInputLength() int {
+	return x.inner.MaxInputLength()
+}
+
+// MaxOutputLength calls the underlying MaxOutputLength.
+func (x *SmartCardSlot) MaxOutputLength() int {
+	return x.inner.MaxOutputLength()
+}
+
+// SmartCardSlotable is the interface implemented by [SmartCardSlot], for mocking and DI.
+type SmartCardSlotable interface {
+	Unwrap() *raw.TKSmartCardSlot
+	MakeSmartCard() *SmartCard
+	State() raw.TKSmartCardSlotState
+	ATR() *SmartCardATR
+	Name() string
+	MaxInputLength() int
+	MaxOutputLength() int
+}
+
+var _ SmartCardSlotable = (*SmartCardSlot)(nil)
 

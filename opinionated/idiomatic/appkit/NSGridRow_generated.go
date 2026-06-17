@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -58,4 +59,121 @@ func (x *GridRow) WithHidden(hidden bool) *GridRow {
 	x.inner.SetHidden(hidden)
 	return x
 }
+
+// CellAtIndex calls the underlying CellAtIndex.
+func (x *GridRow) CellAtIndex(index int) *GridCell {
+	_r := x.inner.CellAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &GridCell{inner: _r}
+}
+
+// MergeCellsInRange calls the underlying MergeCellsInRange.
+func (x *GridRow) MergeCellsInRange(range_ foundation.NSRange) {
+	x.inner.MergeCellsInRange(range_)
+}
+
+// GridView calls the underlying GridView.
+func (x *GridRow) GridView() *GridView {
+	_r := x.inner.GridView()
+	if _r == nil {
+		return nil
+	}
+	return &GridView{inner: _r}
+}
+
+// NumberOfCells calls the underlying NumberOfCells.
+func (x *GridRow) NumberOfCells() int {
+	return x.inner.NumberOfCells()
+}
+
+// YPlacement calls the underlying YPlacement.
+func (x *GridRow) YPlacement() raw.NSGridCellPlacement {
+	return x.inner.YPlacement()
+}
+
+// SetYPlacement calls the underlying SetYPlacement.
+func (x *GridRow) SetYPlacement(yPlacement raw.NSGridCellPlacement) {
+	x.inner.SetYPlacement(yPlacement)
+}
+
+// RowAlignment calls the underlying RowAlignment.
+func (x *GridRow) RowAlignment() raw.NSGridRowAlignment {
+	return x.inner.RowAlignment()
+}
+
+// SetRowAlignment calls the underlying SetRowAlignment.
+func (x *GridRow) SetRowAlignment(rowAlignment raw.NSGridRowAlignment) {
+	x.inner.SetRowAlignment(rowAlignment)
+}
+
+// Height calls the underlying Height.
+func (x *GridRow) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *GridRow) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// TopPadding calls the underlying TopPadding.
+func (x *GridRow) TopPadding() float64 {
+	return x.inner.TopPadding()
+}
+
+// SetTopPadding calls the underlying SetTopPadding.
+func (x *GridRow) SetTopPadding(topPadding float64) {
+	x.inner.SetTopPadding(topPadding)
+}
+
+// BottomPadding calls the underlying BottomPadding.
+func (x *GridRow) BottomPadding() float64 {
+	return x.inner.BottomPadding()
+}
+
+// SetBottomPadding calls the underlying SetBottomPadding.
+func (x *GridRow) SetBottomPadding(bottomPadding float64) {
+	x.inner.SetBottomPadding(bottomPadding)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *GridRow) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *GridRow) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// GridRowable is the interface implemented by [GridRow], for mocking and DI.
+type GridRowable interface {
+	Unwrap() *raw.NSGridRow
+	WithYPlacement(yPlacement raw.NSGridCellPlacement) *GridRow
+	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridRow
+	WithHeight(height float64) *GridRow
+	WithTopPadding(topPadding float64) *GridRow
+	WithBottomPadding(bottomPadding float64) *GridRow
+	WithHidden(hidden bool) *GridRow
+	CellAtIndex(index int) *GridCell
+	MergeCellsInRange(range_ foundation.NSRange)
+	GridView() *GridView
+	NumberOfCells() int
+	YPlacement() raw.NSGridCellPlacement
+	SetYPlacement(yPlacement raw.NSGridCellPlacement)
+	RowAlignment() raw.NSGridRowAlignment
+	SetRowAlignment(rowAlignment raw.NSGridRowAlignment)
+	Height() float64
+	SetHeight(height float64)
+	TopPadding() float64
+	SetTopPadding(topPadding float64)
+	BottomPadding() float64
+	SetBottomPadding(bottomPadding float64)
+	IsHidden() bool
+	SetHidden(hidden bool)
+}
+
+var _ GridRowable = (*GridRow)(nil)
 

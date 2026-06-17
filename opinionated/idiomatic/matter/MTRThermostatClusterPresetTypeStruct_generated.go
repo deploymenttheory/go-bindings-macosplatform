@@ -42,3 +42,49 @@ func (x *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetType
 	return x
 }
 
+// PresetScenario calls the underlying PresetScenario.
+func (x *MTRThermostatClusterPresetTypeStruct) PresetScenario() *foundation.NSNumber {
+	return x.inner.PresetScenario()
+}
+
+// SetPresetScenario calls the underlying SetPresetScenario.
+func (x *MTRThermostatClusterPresetTypeStruct) SetPresetScenario(presetScenario *foundation.NSNumber) {
+	x.inner.SetPresetScenario(presetScenario)
+}
+
+// NumberOfPresets calls the underlying NumberOfPresets.
+func (x *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() *foundation.NSNumber {
+	return x.inner.NumberOfPresets()
+}
+
+// SetNumberOfPresets calls the underlying SetNumberOfPresets.
+func (x *MTRThermostatClusterPresetTypeStruct) SetNumberOfPresets(numberOfPresets *foundation.NSNumber) {
+	x.inner.SetNumberOfPresets(numberOfPresets)
+}
+
+// PresetTypeFeatures calls the underlying PresetTypeFeatures.
+func (x *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() *foundation.NSNumber {
+	return x.inner.PresetTypeFeatures()
+}
+
+// SetPresetTypeFeatures calls the underlying SetPresetTypeFeatures.
+func (x *MTRThermostatClusterPresetTypeStruct) SetPresetTypeFeatures(presetTypeFeatures *foundation.NSNumber) {
+	x.inner.SetPresetTypeFeatures(presetTypeFeatures)
+}
+
+// MTRThermostatClusterPresetTypeStructable is the interface implemented by [MTRThermostatClusterPresetTypeStruct], for mocking and DI.
+type MTRThermostatClusterPresetTypeStructable interface {
+	Unwrap() *raw.MTRThermostatClusterPresetTypeStruct
+	WithPresetScenario(presetScenario *foundation.NSNumber) *MTRThermostatClusterPresetTypeStruct
+	WithNumberOfPresets(numberOfPresets *foundation.NSNumber) *MTRThermostatClusterPresetTypeStruct
+	WithPresetTypeFeatures(presetTypeFeatures *foundation.NSNumber) *MTRThermostatClusterPresetTypeStruct
+	PresetScenario() *foundation.NSNumber
+	SetPresetScenario(presetScenario *foundation.NSNumber)
+	NumberOfPresets() *foundation.NSNumber
+	SetNumberOfPresets(numberOfPresets *foundation.NSNumber)
+	PresetTypeFeatures() *foundation.NSNumber
+	SetPresetTypeFeatures(presetTypeFeatures *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterPresetTypeStructable = (*MTRThermostatClusterPresetTypeStruct)(nil)
+

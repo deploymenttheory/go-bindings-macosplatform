@@ -33,3 +33,10 @@ func (x *CNNNeuronLogarithm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retu
 
 func (x *CNNNeuronLogarithm) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel.MPSKernel }
 
+// CNNNeuronLogarithmable is the interface implemented by [CNNNeuronLogarithm], for mocking and DI.
+type CNNNeuronLogarithmable interface {
+	Unwrap() *raw.MPSCNNNeuronLogarithm
+}
+
+var _ CNNNeuronLogarithmable = (*CNNNeuronLogarithm)(nil)
+

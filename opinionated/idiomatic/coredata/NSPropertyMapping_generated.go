@@ -7,6 +7,7 @@ package coredata
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *PropertyMapping) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *PropertyMapping) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *PropertyMapping) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// ValueExpression calls the underlying ValueExpression.
+func (x *PropertyMapping) ValueExpression() *foundation.NSExpression {
+	return x.inner.ValueExpression()
+}
+
+// SetValueExpression calls the underlying SetValueExpression.
+func (x *PropertyMapping) SetValueExpression(valueExpression *foundation.NSExpression) {
+	x.inner.SetValueExpression(valueExpression)
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *PropertyMapping) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *PropertyMapping) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// PropertyMappingable is the interface implemented by [PropertyMapping], for mocking and DI.
+type PropertyMappingable interface {
+	Unwrap() *raw.NSPropertyMapping
+	WithName(name string) *PropertyMapping
+	WithValueExpression(valueExpression *foundation.NSExpression) *PropertyMapping
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *PropertyMapping
+	Name() string
+	SetName(name string)
+	ValueExpression() *foundation.NSExpression
+	SetValueExpression(valueExpression *foundation.NSExpression)
+	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+}
+
+var _ PropertyMappingable = (*PropertyMapping)(nil)
 

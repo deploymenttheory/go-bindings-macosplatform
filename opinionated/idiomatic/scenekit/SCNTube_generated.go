@@ -53,5 +53,77 @@ func (x *Tube) WithHeightSegmentCount(heightSegmentCount int) *Tube {
 	return x
 }
 
+// InnerRadius calls the underlying InnerRadius.
+func (x *Tube) InnerRadius() float64 {
+	return x.inner.InnerRadius()
+}
+
+// SetInnerRadius calls the underlying SetInnerRadius.
+func (x *Tube) SetInnerRadius(innerRadius float64) {
+	x.inner.SetInnerRadius(innerRadius)
+}
+
+// OuterRadius calls the underlying OuterRadius.
+func (x *Tube) OuterRadius() float64 {
+	return x.inner.OuterRadius()
+}
+
+// SetOuterRadius calls the underlying SetOuterRadius.
+func (x *Tube) SetOuterRadius(outerRadius float64) {
+	x.inner.SetOuterRadius(outerRadius)
+}
+
+// Height calls the underlying Height.
+func (x *Tube) Height() float64 {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *Tube) SetHeight(height float64) {
+	x.inner.SetHeight(height)
+}
+
+// RadialSegmentCount calls the underlying RadialSegmentCount.
+func (x *Tube) RadialSegmentCount() int {
+	return x.inner.RadialSegmentCount()
+}
+
+// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
+func (x *Tube) SetRadialSegmentCount(radialSegmentCount int) {
+	x.inner.SetRadialSegmentCount(radialSegmentCount)
+}
+
+// HeightSegmentCount calls the underlying HeightSegmentCount.
+func (x *Tube) HeightSegmentCount() int {
+	return x.inner.HeightSegmentCount()
+}
+
+// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
+func (x *Tube) SetHeightSegmentCount(heightSegmentCount int) {
+	x.inner.SetHeightSegmentCount(heightSegmentCount)
+}
+
 func (x *Tube) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Tubeable is the interface implemented by [Tube], for mocking and DI.
+type Tubeable interface {
+	Unwrap() *raw.SCNTube
+	WithInnerRadius(innerRadius float64) *Tube
+	WithOuterRadius(outerRadius float64) *Tube
+	WithHeight(height float64) *Tube
+	WithRadialSegmentCount(radialSegmentCount int) *Tube
+	WithHeightSegmentCount(heightSegmentCount int) *Tube
+	InnerRadius() float64
+	SetInnerRadius(innerRadius float64)
+	OuterRadius() float64
+	SetOuterRadius(outerRadius float64)
+	Height() float64
+	SetHeight(height float64)
+	RadialSegmentCount() int
+	SetRadialSegmentCount(radialSegmentCount int)
+	HeightSegmentCount() int
+	SetHeightSegmentCount(heightSegmentCount int)
+}
+
+var _ Tubeable = (*Tube)(nil)
 

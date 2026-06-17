@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,20 +25,42 @@ func NewMetricPlayerItemLikelyToKeepUpEvent() *MetricPlayerItemLikelyToKeepUpEve
 	return &MetricPlayerItemLikelyToKeepUpEvent{inner: raw.AVMetricPlayerItemLikelyToKeepUpEventFromID(_id)}
 }
 
+// Variant calls the underlying Variant.
+func (x *MetricPlayerItemLikelyToKeepUpEvent) Variant() *AssetVariant {
+	_r := x.inner.Variant()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariant{inner: _r}
+}
+
+// TimeTaken calls the underlying TimeTaken.
+func (x *MetricPlayerItemLikelyToKeepUpEvent) TimeTaken() float64 {
+	return x.inner.TimeTaken()
+}
+
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemLikelyToKeepUpEvent) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MetricPlayerItemLikelyToKeepUpEvent) asMetricPlayerItemLikelyToKeepUpEvent() *raw.AVMetricPlayerItemLikelyToKeepUpEvent { return x.inner }
 
 func (x *MetricPlayerItemLikelyToKeepUpEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricPlayerItemLikelyToKeepUpEventable is the interface implemented by [MetricPlayerItemLikelyToKeepUpEvent], for mocking and DI.
+type MetricPlayerItemLikelyToKeepUpEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemLikelyToKeepUpEvent
+	Variant() *AssetVariant
+	TimeTaken() float64
+	LoadedTimeRanges() []*foundation.NSValue
+}
+
+var _ MetricPlayerItemLikelyToKeepUpEventable = (*MetricPlayerItemLikelyToKeepUpEvent)(nil)
 

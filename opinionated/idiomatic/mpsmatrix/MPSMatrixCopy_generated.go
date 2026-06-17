@@ -7,6 +7,7 @@ package mpsmatrix
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -32,4 +33,47 @@ func NewMatrixCopyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
 	return &MatrixCopy{inner: raw.MPSMatrixCopyFromID(_id)}
 }
+
+// EncodeToCommandBufferCopyDescriptor calls the underlying EncodeToCommandBufferCopyDescriptor.
+func (x *MatrixCopy) EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *raw.MPSMatrixCopyDescriptor) {
+	x.inner.EncodeToCommandBufferCopyDescriptor(commandBuffer, copyDescriptor)
+}
+
+// EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset calls the underlying EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset.
+func (x *MatrixCopy) EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer metal.MTLCommandBuffer, copyDescriptor *raw.MPSMatrixCopyDescriptor, rowPermuteIndices *mpscore.MPSVector, rowPermuteOffset uint, columnPermuteIndices *mpscore.MPSVector, columnPermuteOffset uint) {
+	x.inner.EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer, copyDescriptor, rowPermuteIndices, rowPermuteOffset, columnPermuteIndices, columnPermuteOffset)
+}
+
+// CopyRows calls the underlying CopyRows.
+func (x *MatrixCopy) CopyRows() uint {
+	return x.inner.CopyRows()
+}
+
+// CopyColumns calls the underlying CopyColumns.
+func (x *MatrixCopy) CopyColumns() uint {
+	return x.inner.CopyColumns()
+}
+
+// SourcesAreTransposed calls the underlying SourcesAreTransposed.
+func (x *MatrixCopy) SourcesAreTransposed() bool {
+	return x.inner.SourcesAreTransposed()
+}
+
+// DestinationsAreTransposed calls the underlying DestinationsAreTransposed.
+func (x *MatrixCopy) DestinationsAreTransposed() bool {
+	return x.inner.DestinationsAreTransposed()
+}
+
+// MatrixCopyable is the interface implemented by [MatrixCopy], for mocking and DI.
+type MatrixCopyable interface {
+	Unwrap() *raw.MPSMatrixCopy
+	EncodeToCommandBufferCopyDescriptor(commandBuffer metal.MTLCommandBuffer, copyDescriptor *raw.MPSMatrixCopyDescriptor)
+	EncodeToCommandBufferCopyDescriptorRowPermuteIndicesRowPermuteOffsetColumnPermuteIndicesColumnPermuteOffset(commandBuffer metal.MTLCommandBuffer, copyDescriptor *raw.MPSMatrixCopyDescriptor, rowPermuteIndices *mpscore.MPSVector, rowPermuteOffset uint, columnPermuteIndices *mpscore.MPSVector, columnPermuteOffset uint)
+	CopyRows() uint
+	CopyColumns() uint
+	SourcesAreTransposed() bool
+	DestinationsAreTransposed() bool
+}
+
+var _ MatrixCopyable = (*MatrixCopy)(nil)
 

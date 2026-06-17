@@ -5,7 +5,9 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +25,116 @@ func NewScriptSuiteRegistry() *ScriptSuiteRegistry {
 	return &ScriptSuiteRegistry{inner: raw.NSScriptSuiteRegistryFromID(_id)}
 }
 
+// LoadSuitesFromBundle calls the underlying LoadSuitesFromBundle.
+func (x *ScriptSuiteRegistry) LoadSuitesFromBundle(bundle *raw.NSBundle) {
+	x.inner.LoadSuitesFromBundle(bundle)
+}
+
+// LoadSuiteWithDictionaryFromBundle calls the underlying LoadSuiteWithDictionaryFromBundle.
+func (x *ScriptSuiteRegistry) LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle) {
+	x.inner.LoadSuiteWithDictionaryFromBundle(suiteDeclaration, bundle)
+}
+
+// RegisterClassDescription calls the underlying RegisterClassDescription.
+func (x *ScriptSuiteRegistry) RegisterClassDescription(classDescription *raw.NSScriptClassDescription) {
+	x.inner.RegisterClassDescription(classDescription)
+}
+
+// RegisterCommandDescription calls the underlying RegisterCommandDescription.
+func (x *ScriptSuiteRegistry) RegisterCommandDescription(commandDescription *raw.NSScriptCommandDescription) {
+	x.inner.RegisterCommandDescription(commandDescription)
+}
+
+// AppleEventCodeForSuite calls the underlying AppleEventCodeForSuite.
+func (x *ScriptSuiteRegistry) AppleEventCodeForSuite(suiteName string) uint {
+	return x.inner.AppleEventCodeForSuite(foundation.NSStringStringWithUTF8String(suiteName))
+}
+
+// BundleForSuite calls the underlying BundleForSuite.
+func (x *ScriptSuiteRegistry) BundleForSuite(suiteName string) *Bundle {
+	_r := x.inner.BundleForSuite(foundation.NSStringStringWithUTF8String(suiteName))
+	if _r == nil {
+		return nil
+	}
+	return &Bundle{inner: _r}
+}
+
+// ClassDescriptionsInSuite calls the underlying ClassDescriptionsInSuite.
+func (x *ScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptClassDescription] {
+	return x.inner.ClassDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
+}
+
+// CommandDescriptionsInSuite calls the underlying CommandDescriptionsInSuite.
+func (x *ScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptCommandDescription] {
+	return x.inner.CommandDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
+}
+
+// SuiteForAppleEventCode calls the underlying SuiteForAppleEventCode.
+func (x *ScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *String {
+	_r := x.inner.SuiteForAppleEventCode(appleEventCode)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ClassDescriptionWithAppleEventCode calls the underlying ClassDescriptionWithAppleEventCode.
+func (x *ScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode uint) *ScriptClassDescription {
+	_r := x.inner.ClassDescriptionWithAppleEventCode(appleEventCode)
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// CommandDescriptionWithAppleEventClassAndAppleEventCode calls the underlying CommandDescriptionWithAppleEventClassAndAppleEventCode.
+func (x *ScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *ScriptCommandDescription {
+	_r := x.inner.CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode, appleEventIDCode)
+	if _r == nil {
+		return nil
+	}
+	return &ScriptCommandDescription{inner: _r}
+}
+
+// AeteResource calls the underlying AeteResource.
+func (x *ScriptSuiteRegistry) AeteResource(languageName string) *Data {
+	_r := x.inner.AeteResource(foundation.NSStringStringWithUTF8String(languageName))
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
 // SuiteNames returns the collection as a Go slice.
-func (x *ScriptSuiteRegistry) SuiteNames() []*raw.NSString {
+func (x *ScriptSuiteRegistry) SuiteNames() []string {
 	arr := x.inner.SuiteNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *ScriptSuiteRegistry) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ScriptSuiteRegistryable is the interface implemented by [ScriptSuiteRegistry], for mocking and DI.
+type ScriptSuiteRegistryable interface {
+	Unwrap() *raw.NSScriptSuiteRegistry
+	LoadSuitesFromBundle(bundle *raw.NSBundle)
+	LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle)
+	RegisterClassDescription(classDescription *raw.NSScriptClassDescription)
+	RegisterCommandDescription(commandDescription *raw.NSScriptCommandDescription)
+	AppleEventCodeForSuite(suiteName string) uint
+	BundleForSuite(suiteName string) *Bundle
+	ClassDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptClassDescription]
+	CommandDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptCommandDescription]
+	SuiteForAppleEventCode(appleEventCode uint) *String
+	ClassDescriptionWithAppleEventCode(appleEventCode uint) *ScriptClassDescription
+	CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *ScriptCommandDescription
+	AeteResource(languageName string) *Data
+	SuiteNames() []string
+}
+
+var _ ScriptSuiteRegistryable = (*ScriptSuiteRegistry)(nil)
 

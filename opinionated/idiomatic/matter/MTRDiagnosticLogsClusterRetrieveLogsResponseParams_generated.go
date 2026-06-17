@@ -73,3 +73,101 @@ func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) WithTimeStamp(timeS
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// LogContent calls the underlying LogContent.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) LogContent() *foundation.NSData {
+	return x.inner.LogContent()
+}
+
+// SetLogContent calls the underlying SetLogContent.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetLogContent(logContent *foundation.NSData) {
+	x.inner.SetLogContent(logContent)
+}
+
+// UtcTimeStamp calls the underlying UtcTimeStamp.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) UtcTimeStamp() *foundation.NSNumber {
+	return x.inner.UtcTimeStamp()
+}
+
+// SetUtcTimeStamp calls the underlying SetUtcTimeStamp.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetUtcTimeStamp(utcTimeStamp *foundation.NSNumber) {
+	x.inner.SetUtcTimeStamp(utcTimeStamp)
+}
+
+// TimeSinceBoot calls the underlying TimeSinceBoot.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeSinceBoot() *foundation.NSNumber {
+	return x.inner.TimeSinceBoot()
+}
+
+// SetTimeSinceBoot calls the underlying SetTimeSinceBoot.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeSinceBoot(timeSinceBoot *foundation.NSNumber) {
+	x.inner.SetTimeSinceBoot(timeSinceBoot)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// Content calls the underlying Content.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) Content() *foundation.NSData {
+	return x.inner.Content()
+}
+
+// SetContent calls the underlying SetContent.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetContent(content *foundation.NSData) {
+	x.inner.SetContent(content)
+}
+
+// TimeStamp calls the underlying TimeStamp.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) TimeStamp() *foundation.NSNumber {
+	return x.inner.TimeStamp()
+}
+
+// SetTimeStamp calls the underlying SetTimeStamp.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsResponseParams) SetTimeStamp(timeStamp *foundation.NSNumber) {
+	x.inner.SetTimeStamp(timeStamp)
+}
+
+// MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable is the interface implemented by [MTRDiagnosticLogsClusterRetrieveLogsResponseParams], for mocking and DI.
+type MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable interface {
+	Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithLogContent(logContent *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithUtcTimeStamp(utcTimeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimeSinceBoot(timeSinceBoot *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithContent(content *foundation.NSData) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	WithTimeStamp(timeStamp *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	LogContent() *foundation.NSData
+	SetLogContent(logContent *foundation.NSData)
+	UtcTimeStamp() *foundation.NSNumber
+	SetUtcTimeStamp(utcTimeStamp *foundation.NSNumber)
+	TimeSinceBoot() *foundation.NSNumber
+	SetTimeSinceBoot(timeSinceBoot *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	Content() *foundation.NSData
+	SetContent(content *foundation.NSData)
+	TimeStamp() *foundation.NSNumber
+	SetTimeStamp(timeStamp *foundation.NSNumber)
+}
+
+var _ MTRDiagnosticLogsClusterRetrieveLogsResponseParamsable = (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams)(nil)
+

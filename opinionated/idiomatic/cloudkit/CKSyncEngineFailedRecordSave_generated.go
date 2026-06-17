@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SyncEngineFailedRecordSave wraps [raw.CKSyncEngineFailedRecordSave] with a fluent Go API.
@@ -22,4 +23,27 @@ func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFailedRecordSave")), objc.RegisterName("new"))
 	return &SyncEngineFailedRecordSave{inner: raw.CKSyncEngineFailedRecordSaveFromID(_id)}
 }
+
+// Record calls the underlying Record.
+func (x *SyncEngineFailedRecordSave) Record() *Record {
+	_r := x.inner.Record()
+	if _r == nil {
+		return nil
+	}
+	return &Record{inner: _r}
+}
+
+// Error calls the underlying Error.
+func (x *SyncEngineFailedRecordSave) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// SyncEngineFailedRecordSaveable is the interface implemented by [SyncEngineFailedRecordSave], for mocking and DI.
+type SyncEngineFailedRecordSaveable interface {
+	Unwrap() *raw.CKSyncEngineFailedRecordSave
+	Record() *Record
+	Error() unsafe.Pointer
+}
+
+var _ SyncEngineFailedRecordSaveable = (*SyncEngineFailedRecordSave)(nil)
 

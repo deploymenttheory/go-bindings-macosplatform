@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,75 @@ func (x *CollectionListChangeRequest) WithTitle(title string) *CollectionListCha
 	return x
 }
 
+// AddChildCollections calls the underlying AddChildCollections.
+func (x *CollectionListChangeRequest) AddChildCollections(collections foundation.NSFastEnumeration) {
+	x.inner.AddChildCollections(collections)
+}
+
+// InsertChildCollectionsAtIndexes calls the underlying InsertChildCollectionsAtIndexes.
+func (x *CollectionListChangeRequest) InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
+	x.inner.InsertChildCollectionsAtIndexes(collections, indexes)
+}
+
+// RemoveChildCollections calls the underlying RemoveChildCollections.
+func (x *CollectionListChangeRequest) RemoveChildCollections(collections foundation.NSFastEnumeration) {
+	x.inner.RemoveChildCollections(collections)
+}
+
+// RemoveChildCollectionsAtIndexes calls the underlying RemoveChildCollectionsAtIndexes.
+func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet) {
+	x.inner.RemoveChildCollectionsAtIndexes(indexes)
+}
+
+// ReplaceChildCollectionsAtIndexesWithChildCollections calls the underlying ReplaceChildCollectionsAtIndexesWithChildCollections.
+func (x *CollectionListChangeRequest) ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration) {
+	x.inner.ReplaceChildCollectionsAtIndexesWithChildCollections(indexes, collections)
+}
+
+// MoveChildCollectionsAtIndexesToIndex calls the underlying MoveChildCollectionsAtIndexesToIndex.
+func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint) {
+	x.inner.MoveChildCollectionsAtIndexesToIndex(indexes, toIndex)
+}
+
+// PlaceholderForCreatedCollectionList calls the underlying PlaceholderForCreatedCollectionList.
+func (x *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
+	_r := x.inner.PlaceholderForCreatedCollectionList()
+	if _r == nil {
+		return nil
+	}
+	return &ObjectPlaceholder{inner: _r}
+}
+
+// Title calls the underlying Title.
+func (x *CollectionListChangeRequest) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CollectionListChangeRequest) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
 func (x *CollectionListChangeRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHChangeRequest }
+
+// CollectionListChangeRequestable is the interface implemented by [CollectionListChangeRequest], for mocking and DI.
+type CollectionListChangeRequestable interface {
+	Unwrap() *raw.PHCollectionListChangeRequest
+	WithTitle(title string) *CollectionListChangeRequest
+	AddChildCollections(collections foundation.NSFastEnumeration)
+	InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet)
+	RemoveChildCollections(collections foundation.NSFastEnumeration)
+	RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet)
+	ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration)
+	MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint)
+	PlaceholderForCreatedCollectionList() *ObjectPlaceholder
+	Title() string
+	SetTitle(title string)
+}
+
+var _ CollectionListChangeRequestable = (*CollectionListChangeRequest)(nil)
 

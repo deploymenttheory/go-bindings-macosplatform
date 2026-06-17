@@ -31,3 +31,10 @@ func (x *NNInitialGradient) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { retur
 
 func (x *NNInitialGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
+// NNInitialGradientable is the interface implemented by [NNInitialGradient], for mocking and DI.
+type NNInitialGradientable interface {
+	Unwrap() *raw.MPSNNInitialGradient
+}
+
+var _ NNInitialGradientable = (*NNInitialGradient)(nil)
+

@@ -7,6 +7,7 @@ package videosubscriberaccount
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -48,16 +49,46 @@ func (x *VSAppleSubscription) WithProductCodes(items ...*foundation.NSString) *V
 	return x
 }
 
+// CustomerID calls the underlying CustomerID.
+func (x *VSAppleSubscription) CustomerID() string {
+	_r := x.inner.CustomerID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCustomerID calls the underlying SetCustomerID.
+func (x *VSAppleSubscription) SetCustomerID(customerID string) {
+	x.inner.SetCustomerID(foundation.NSStringStringWithUTF8String(customerID))
+}
+
 // ProductCodes returns the collection as a Go slice.
-func (x *VSAppleSubscription) ProductCodes() []*foundation.NSString {
+func (x *VSAppleSubscription) ProductCodes() []string {
 	arr := x.inner.ProductCodes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetProductCodes calls the underlying SetProductCodes.
+func (x *VSAppleSubscription) SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetProductCodes(productCodes)
+}
+
+// VSAppleSubscriptionable is the interface implemented by [VSAppleSubscription], for mocking and DI.
+type VSAppleSubscriptionable interface {
+	Unwrap() *raw.VSAppleSubscription
+	WithCustomerID(customerID string) *VSAppleSubscription
+	WithProductCodes(items ...*foundation.NSString) *VSAppleSubscription
+	CustomerID() string
+	SetCustomerID(customerID string)
+	ProductCodes() []string
+	SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString])
+}
+
+var _ VSAppleSubscriptionable = (*VSAppleSubscription)(nil)
 

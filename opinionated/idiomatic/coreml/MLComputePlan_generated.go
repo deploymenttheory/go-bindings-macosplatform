@@ -23,3 +23,50 @@ func NewComputePlan() *ComputePlan {
 	return &ComputePlan{inner: raw.MLComputePlanFromID(_id)}
 }
 
+// EstimatedCostOfMLProgramOperation calls the underlying EstimatedCostOfMLProgramOperation.
+func (x *ComputePlan) EstimatedCostOfMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanCost {
+	_r := x.inner.EstimatedCostOfMLProgramOperation(operation)
+	if _r == nil {
+		return nil
+	}
+	return &ComputePlanCost{inner: _r}
+}
+
+// ComputeDeviceUsageForNeuralNetworkLayer calls the underlying ComputeDeviceUsageForNeuralNetworkLayer.
+func (x *ComputePlan) ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage {
+	_r := x.inner.ComputeDeviceUsageForNeuralNetworkLayer(layer)
+	if _r == nil {
+		return nil
+	}
+	return &ComputePlanDeviceUsage{inner: _r}
+}
+
+// ComputeDeviceUsageForMLProgramOperation calls the underlying ComputeDeviceUsageForMLProgramOperation.
+func (x *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanDeviceUsage {
+	_r := x.inner.ComputeDeviceUsageForMLProgramOperation(operation)
+	if _r == nil {
+		return nil
+	}
+	return &ComputePlanDeviceUsage{inner: _r}
+}
+
+// ModelStructure calls the underlying ModelStructure.
+func (x *ComputePlan) ModelStructure() *ModelStructure {
+	_r := x.inner.ModelStructure()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructure{inner: _r}
+}
+
+// ComputePlanable is the interface implemented by [ComputePlan], for mocking and DI.
+type ComputePlanable interface {
+	Unwrap() *raw.MLComputePlan
+	EstimatedCostOfMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanCost
+	ComputeDeviceUsageForNeuralNetworkLayer(layer *raw.MLModelStructureNeuralNetworkLayer) *ComputePlanDeviceUsage
+	ComputeDeviceUsageForMLProgramOperation(operation *raw.MLModelStructureProgramOperation) *ComputePlanDeviceUsage
+	ModelStructure() *ModelStructure
+}
+
+var _ ComputePlanable = (*ComputePlan)(nil)
+

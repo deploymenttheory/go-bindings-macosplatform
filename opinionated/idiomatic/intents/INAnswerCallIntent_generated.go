@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,28 @@ func NewAnswerCallIntentWithAudioRouteCallIdentifier(audioRoute raw.INCallAudioR
 	return &AnswerCallIntent{inner: raw.INAnswerCallIntentFromID(_id)}
 }
 
+// AudioRoute calls the underlying AudioRoute.
+func (x *AnswerCallIntent) AudioRoute() raw.INCallAudioRoute {
+	return x.inner.AudioRoute()
+}
+
+// CallIdentifier calls the underlying CallIdentifier.
+func (x *AnswerCallIntent) CallIdentifier() string {
+	_r := x.inner.CallIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *AnswerCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// AnswerCallIntentable is the interface implemented by [AnswerCallIntent], for mocking and DI.
+type AnswerCallIntentable interface {
+	Unwrap() *raw.INAnswerCallIntent
+	AudioRoute() raw.INCallAudioRoute
+	CallIdentifier() string
+}
+
+var _ AnswerCallIntentable = (*AnswerCallIntent)(nil)
 

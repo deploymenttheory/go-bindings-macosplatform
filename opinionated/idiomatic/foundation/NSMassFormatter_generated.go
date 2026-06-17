@@ -41,7 +41,97 @@ func (x *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormatt
 	return x
 }
 
+// StringFromValueUnit calls the underlying StringFromValueUnit.
+func (x *MassFormatter) StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringFromKilograms calls the underlying StringFromKilograms.
+func (x *MassFormatter) StringFromKilograms(numberInKilograms float64) *String {
+	_r := x.inner.StringFromKilograms(numberInKilograms)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
+func (x *MassFormatter) UnitStringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromKilogramsUsedUnit calls the underlying UnitStringFromKilogramsUsedUnit.
+func (x *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float64, unitp *raw.NSMassFormatterUnit) *String {
+	_r := x.inner.UnitStringFromKilogramsUsedUnit(numberInKilograms, unitp)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// NumberFormatter calls the underlying NumberFormatter.
+func (x *MassFormatter) NumberFormatter() *NumberFormatter {
+	_r := x.inner.NumberFormatter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberFormatter{inner: _r}
+}
+
+// SetNumberFormatter calls the underlying SetNumberFormatter.
+func (x *MassFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
+	x.inner.SetNumberFormatter(numberFormatter)
+}
+
+// UnitStyle calls the underlying UnitStyle.
+func (x *MassFormatter) UnitStyle() raw.NSFormattingUnitStyle {
+	return x.inner.UnitStyle()
+}
+
+// SetUnitStyle calls the underlying SetUnitStyle.
+func (x *MassFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(unitStyle)
+}
+
+// IsForPersonMassUse calls the underlying IsForPersonMassUse.
+func (x *MassFormatter) IsForPersonMassUse() bool {
+	return x.inner.IsForPersonMassUse()
+}
+
+// SetForPersonMassUse calls the underlying SetForPersonMassUse.
+func (x *MassFormatter) SetForPersonMassUse(forPersonMassUse bool) {
+	x.inner.SetForPersonMassUse(forPersonMassUse)
+}
+
 func (x *MassFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *MassFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// MassFormatterable is the interface implemented by [MassFormatter], for mocking and DI.
+type MassFormatterable interface {
+	Unwrap() *raw.NSMassFormatter
+	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MassFormatter
+	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MassFormatter
+	WithForPersonMassUse(forPersonMassUse bool) *MassFormatter
+	StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String
+	StringFromKilograms(numberInKilograms float64) *String
+	UnitStringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String
+	UnitStringFromKilogramsUsedUnit(numberInKilograms float64, unitp *raw.NSMassFormatterUnit) *String
+	NumberFormatter() *NumberFormatter
+	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
+	UnitStyle() raw.NSFormattingUnitStyle
+	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	IsForPersonMassUse() bool
+	SetForPersonMassUse(forPersonMassUse bool)
+}
+
+var _ MassFormatterable = (*MassFormatter)(nil)
 

@@ -27,3 +27,10 @@ func (x *InflectionRule) asInflectionRule() *raw.NSInflectionRule { return x.inn
 
 func (x *InflectionRule) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// InflectionRuleable is the interface implemented by [InflectionRule], for mocking and DI.
+type InflectionRuleable interface {
+	Unwrap() *raw.NSInflectionRule
+}
+
+var _ InflectionRuleable = (*InflectionRule)(nil)
+

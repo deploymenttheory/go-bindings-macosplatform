@@ -25,3 +25,10 @@ func NewSymbolAutomaticContentTransition() *SymbolAutomaticContentTransition {
 
 func (x *SymbolAutomaticContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
 
+// SymbolAutomaticContentTransitionable is the interface implemented by [SymbolAutomaticContentTransition], for mocking and DI.
+type SymbolAutomaticContentTransitionable interface {
+	Unwrap() *raw.NSSymbolAutomaticContentTransition
+}
+
+var _ SymbolAutomaticContentTransitionable = (*SymbolAutomaticContentTransition)(nil)
+

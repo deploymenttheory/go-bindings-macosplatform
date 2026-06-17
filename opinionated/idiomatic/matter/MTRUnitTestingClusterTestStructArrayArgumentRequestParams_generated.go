@@ -48,5 +48,112 @@ func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) WithServerSi
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg1() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg1()
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg1(arg1)
+}
+
+// Arg2 calls the underlying Arg2.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg2() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg2()
+}
+
+// SetArg2 calls the underlying SetArg2.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg2(arg2 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg2(arg2)
+}
+
+// Arg3 calls the underlying Arg3.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg3() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg3()
+}
+
+// SetArg3 calls the underlying SetArg3.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg3(arg3 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg3(arg3)
+}
+
+// Arg4 calls the underlying Arg4.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg4() *foundation.NSArray[objc.ID] {
+	return x.inner.Arg4()
+}
+
+// SetArg4 calls the underlying SetArg4.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg4(arg4 *foundation.NSArray[objc.ID]) {
+	x.inner.SetArg4(arg4)
+}
+
+// Arg5 calls the underlying Arg5.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg5() *foundation.NSNumber {
+	return x.inner.Arg5()
+}
+
+// SetArg5 calls the underlying SetArg5.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg5(arg5 *foundation.NSNumber) {
+	x.inner.SetArg5(arg5)
+}
+
+// Arg6 calls the underlying Arg6.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) Arg6() *foundation.NSNumber {
+	return x.inner.Arg6()
+}
+
+// SetArg6 calls the underlying SetArg6.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetArg6(arg6 *foundation.NSNumber) {
+	x.inner.SetArg6(arg6)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterTestStructArrayArgumentRequestParams) asMTRUnitTestingClusterTestStructArrayArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams { return x.inner }
+
+// MTRUnitTestingClusterTestStructArrayArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestStructArrayArgumentRequestParams], for mocking and DI.
+type MTRUnitTestingClusterTestStructArrayArgumentRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	WithArg5(arg5 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	WithArg6(arg6 *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	Arg1() *foundation.NSArray[objc.ID]
+	SetArg1(arg1 *foundation.NSArray[objc.ID])
+	Arg2() *foundation.NSArray[objc.ID]
+	SetArg2(arg2 *foundation.NSArray[objc.ID])
+	Arg3() *foundation.NSArray[objc.ID]
+	SetArg3(arg3 *foundation.NSArray[objc.ID])
+	Arg4() *foundation.NSArray[objc.ID]
+	SetArg4(arg4 *foundation.NSArray[objc.ID])
+	Arg5() *foundation.NSNumber
+	SetArg5(arg5 *foundation.NSNumber)
+	Arg6() *foundation.NSNumber
+	SetArg6(arg6 *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestStructArrayArgumentRequestParamsable = (*MTRUnitTestingClusterTestStructArrayArgumentRequestParams)(nil)
 

@@ -23,3 +23,50 @@ func NewComposeContext() *ComposeContext {
 	return &ComposeContext{inner: raw.MEComposeContextFromID(_id)}
 }
 
+// OriginalMessage calls the underlying OriginalMessage.
+func (x *ComposeContext) OriginalMessage() *Message {
+	_r := x.inner.OriginalMessage()
+	if _r == nil {
+		return nil
+	}
+	return &Message{inner: _r}
+}
+
+// Action calls the underlying Action.
+func (x *ComposeContext) Action() raw.MEComposeUserAction {
+	return x.inner.Action()
+}
+
+// IsEncrypted calls the underlying IsEncrypted.
+func (x *ComposeContext) IsEncrypted() bool {
+	return x.inner.IsEncrypted()
+}
+
+// ShouldEncrypt calls the underlying ShouldEncrypt.
+func (x *ComposeContext) ShouldEncrypt() bool {
+	return x.inner.ShouldEncrypt()
+}
+
+// IsSigned calls the underlying IsSigned.
+func (x *ComposeContext) IsSigned() bool {
+	return x.inner.IsSigned()
+}
+
+// ShouldSign calls the underlying ShouldSign.
+func (x *ComposeContext) ShouldSign() bool {
+	return x.inner.ShouldSign()
+}
+
+// ComposeContextable is the interface implemented by [ComposeContext], for mocking and DI.
+type ComposeContextable interface {
+	Unwrap() *raw.MEComposeContext
+	OriginalMessage() *Message
+	Action() raw.MEComposeUserAction
+	IsEncrypted() bool
+	ShouldEncrypt() bool
+	IsSigned() bool
+	ShouldSign() bool
+}
+
+var _ ComposeContextable = (*ComposeContext)(nil)
+

@@ -25,5 +25,32 @@ func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationSt
 	return &BusReservation{inner: raw.INBusReservationFromID(_id)}
 }
 
+// ReservedSeat calls the underlying ReservedSeat.
+func (x *BusReservation) ReservedSeat() *Seat {
+	_r := x.inner.ReservedSeat()
+	if _r == nil {
+		return nil
+	}
+	return &Seat{inner: _r}
+}
+
+// BusTrip calls the underlying BusTrip.
+func (x *BusReservation) BusTrip() *BusTrip {
+	_r := x.inner.BusTrip()
+	if _r == nil {
+		return nil
+	}
+	return &BusTrip{inner: _r}
+}
+
 func (x *BusReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// BusReservationable is the interface implemented by [BusReservation], for mocking and DI.
+type BusReservationable interface {
+	Unwrap() *raw.INBusReservation
+	ReservedSeat() *Seat
+	BusTrip() *BusTrip
+}
+
+var _ BusReservationable = (*BusReservation)(nil)
 

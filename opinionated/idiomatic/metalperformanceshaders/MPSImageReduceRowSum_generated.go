@@ -33,3 +33,10 @@ func (x *ImageReduceRowSum) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
 
 func (x *ImageReduceRowSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
 
+// ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
+type ImageReduceRowSumable interface {
+	Unwrap() *raw.MPSImageReduceRowSum
+}
+
+var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)
+

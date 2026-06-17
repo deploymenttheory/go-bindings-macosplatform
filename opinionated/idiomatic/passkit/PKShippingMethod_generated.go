@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,5 +43,63 @@ func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *raw.PKDate
 	return x
 }
 
+// Identifier calls the underlying Identifier.
+func (x *ShippingMethod) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *ShippingMethod) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// Detail calls the underlying Detail.
+func (x *ShippingMethod) Detail() string {
+	_r := x.inner.Detail()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDetail calls the underlying SetDetail.
+func (x *ShippingMethod) SetDetail(detail string) {
+	x.inner.SetDetail(foundation.NSStringStringWithUTF8String(detail))
+}
+
+// DateComponentsRange calls the underlying DateComponentsRange.
+func (x *ShippingMethod) DateComponentsRange() *DateComponentsRange {
+	_r := x.inner.DateComponentsRange()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// SetDateComponentsRange calls the underlying SetDateComponentsRange.
+func (x *ShippingMethod) SetDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) {
+	x.inner.SetDateComponentsRange(dateComponentsRange)
+}
+
 func (x *ShippingMethod) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
+
+// ShippingMethodable is the interface implemented by [ShippingMethod], for mocking and DI.
+type ShippingMethodable interface {
+	Unwrap() *raw.PKShippingMethod
+	WithIdentifier(identifier string) *ShippingMethod
+	WithDetail(detail string) *ShippingMethod
+	WithDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) *ShippingMethod
+	Identifier() string
+	SetIdentifier(identifier string)
+	Detail() string
+	SetDetail(detail string)
+	DateComponentsRange() *DateComponentsRange
+	SetDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange)
+}
+
+var _ ShippingMethodable = (*ShippingMethod)(nil)
 

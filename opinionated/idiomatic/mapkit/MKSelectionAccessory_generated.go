@@ -23,3 +23,10 @@ func NewSelectionAccessory() *SelectionAccessory {
 	return &SelectionAccessory{inner: raw.MKSelectionAccessoryFromID(_id)}
 }
 
+// SelectionAccessoryable is the interface implemented by [SelectionAccessory], for mocking and DI.
+type SelectionAccessoryable interface {
+	Unwrap() *raw.MKSelectionAccessory
+}
+
+var _ SelectionAccessoryable = (*SelectionAccessory)(nil)
+

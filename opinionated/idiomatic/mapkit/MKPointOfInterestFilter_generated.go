@@ -32,3 +32,22 @@ func NewPointOfInterestFilterExcludingCategories(categories *foundation.NSArray[
 	return &PointOfInterestFilter{inner: raw.MKPointOfInterestFilterFromID(_id)}
 }
 
+// IncludesCategory calls the underlying IncludesCategory.
+func (x *PointOfInterestFilter) IncludesCategory(category *foundation.NSString) bool {
+	return x.inner.IncludesCategory(category)
+}
+
+// ExcludesCategory calls the underlying ExcludesCategory.
+func (x *PointOfInterestFilter) ExcludesCategory(category *foundation.NSString) bool {
+	return x.inner.ExcludesCategory(category)
+}
+
+// PointOfInterestFilterable is the interface implemented by [PointOfInterestFilter], for mocking and DI.
+type PointOfInterestFilterable interface {
+	Unwrap() *raw.MKPointOfInterestFilter
+	IncludesCategory(category *foundation.NSString) bool
+	ExcludesCategory(category *foundation.NSString) bool
+}
+
+var _ PointOfInterestFilterable = (*PointOfInterestFilter)(nil)
+

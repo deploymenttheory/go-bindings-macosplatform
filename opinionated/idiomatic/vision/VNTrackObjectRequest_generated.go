@@ -38,3 +38,10 @@ func (x *TrackObjectRequest) asImageBasedRequest() *raw.VNImageBasedRequest { re
 
 func (x *TrackObjectRequest) asRequest() *raw.VNRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest }
 
+// TrackObjectRequestable is the interface implemented by [TrackObjectRequest], for mocking and DI.
+type TrackObjectRequestable interface {
+	Unwrap() *raw.VNTrackObjectRequest
+}
+
+var _ TrackObjectRequestable = (*TrackObjectRequest)(nil)
+

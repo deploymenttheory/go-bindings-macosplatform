@@ -25,3 +25,10 @@ func NewNEOnDemandRuleIgnore() *NEOnDemandRuleIgnore {
 
 func (x *NEOnDemandRuleIgnore) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
 
+// NEOnDemandRuleIgnoreable is the interface implemented by [NEOnDemandRuleIgnore], for mocking and DI.
+type NEOnDemandRuleIgnoreable interface {
+	Unwrap() *raw.NEOnDemandRuleIgnore
+}
+
+var _ NEOnDemandRuleIgnoreable = (*NEOnDemandRuleIgnore)(nil)
+

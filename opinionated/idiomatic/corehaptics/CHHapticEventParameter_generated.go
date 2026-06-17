@@ -7,6 +7,7 @@ package corehaptics
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,34 @@ func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
 	x.inner.SetValue(value)
 	return x
 }
+
+// ParameterID calls the underlying ParameterID.
+func (x *HapticEventParameter) ParameterID() string {
+	_r := x.inner.ParameterID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *HapticEventParameter) Value() float32 {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *HapticEventParameter) SetValue(value float32) {
+	x.inner.SetValue(value)
+}
+
+// HapticEventParameterable is the interface implemented by [HapticEventParameter], for mocking and DI.
+type HapticEventParameterable interface {
+	Unwrap() *raw.CHHapticEventParameter
+	WithValue(value float32) *HapticEventParameter
+	ParameterID() string
+	Value() float32
+	SetValue(value float32)
+}
+
+var _ HapticEventParameterable = (*HapticEventParameter)(nil)
 

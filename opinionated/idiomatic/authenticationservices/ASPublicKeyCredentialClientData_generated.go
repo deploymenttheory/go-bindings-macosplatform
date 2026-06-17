@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,71 @@ func (x *PublicKeyCredentialClientData) WithCrossOrigin(crossOrigin raw.ASPublic
 	x.inner.SetCrossOrigin(crossOrigin)
 	return x
 }
+
+// Challenge calls the underlying Challenge.
+func (x *PublicKeyCredentialClientData) Challenge() *foundation.NSData {
+	return x.inner.Challenge()
+}
+
+// SetChallenge calls the underlying SetChallenge.
+func (x *PublicKeyCredentialClientData) SetChallenge(challenge *foundation.NSData) {
+	x.inner.SetChallenge(challenge)
+}
+
+// Origin calls the underlying Origin.
+func (x *PublicKeyCredentialClientData) Origin() string {
+	_r := x.inner.Origin()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOrigin calls the underlying SetOrigin.
+func (x *PublicKeyCredentialClientData) SetOrigin(origin string) {
+	x.inner.SetOrigin(foundation.NSStringStringWithUTF8String(origin))
+}
+
+// TopOrigin calls the underlying TopOrigin.
+func (x *PublicKeyCredentialClientData) TopOrigin() string {
+	_r := x.inner.TopOrigin()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTopOrigin calls the underlying SetTopOrigin.
+func (x *PublicKeyCredentialClientData) SetTopOrigin(topOrigin string) {
+	x.inner.SetTopOrigin(foundation.NSStringStringWithUTF8String(topOrigin))
+}
+
+// CrossOrigin calls the underlying CrossOrigin.
+func (x *PublicKeyCredentialClientData) CrossOrigin() raw.ASPublicKeyCredentialClientDataCrossOriginValue {
+	return x.inner.CrossOrigin()
+}
+
+// SetCrossOrigin calls the underlying SetCrossOrigin.
+func (x *PublicKeyCredentialClientData) SetCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue) {
+	x.inner.SetCrossOrigin(crossOrigin)
+}
+
+// PublicKeyCredentialClientDataable is the interface implemented by [PublicKeyCredentialClientData], for mocking and DI.
+type PublicKeyCredentialClientDataable interface {
+	Unwrap() *raw.ASPublicKeyCredentialClientData
+	WithChallenge(challenge *foundation.NSData) *PublicKeyCredentialClientData
+	WithOrigin(origin string) *PublicKeyCredentialClientData
+	WithTopOrigin(topOrigin string) *PublicKeyCredentialClientData
+	WithCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue) *PublicKeyCredentialClientData
+	Challenge() *foundation.NSData
+	SetChallenge(challenge *foundation.NSData)
+	Origin() string
+	SetOrigin(origin string)
+	TopOrigin() string
+	SetTopOrigin(topOrigin string)
+	CrossOrigin() raw.ASPublicKeyCredentialClientDataCrossOriginValue
+	SetCrossOrigin(crossOrigin raw.ASPublicKeyCredentialClientDataCrossOriginValue)
+}
+
+var _ PublicKeyCredentialClientDataable = (*PublicKeyCredentialClientData)(nil)
 

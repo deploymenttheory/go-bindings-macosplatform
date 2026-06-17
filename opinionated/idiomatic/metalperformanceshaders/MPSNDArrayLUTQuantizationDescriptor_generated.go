@@ -35,3 +35,10 @@ func NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis(quantizationDataT
 
 func (x *NDArrayLUTQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor { return &x.inner.MPSNDArrayQuantizationDescriptor }
 
+// NDArrayLUTQuantizationDescriptorable is the interface implemented by [NDArrayLUTQuantizationDescriptor], for mocking and DI.
+type NDArrayLUTQuantizationDescriptorable interface {
+	Unwrap() *raw.MPSNDArrayLUTQuantizationDescriptor
+}
+
+var _ NDArrayLUTQuantizationDescriptorable = (*NDArrayLUTQuantizationDescriptor)(nil)
+

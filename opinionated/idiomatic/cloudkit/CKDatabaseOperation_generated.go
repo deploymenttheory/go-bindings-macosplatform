@@ -29,7 +29,31 @@ func (x *DatabaseOperation) WithDatabase(database *raw.CKDatabase) *DatabaseOper
 	return x
 }
 
+// Database calls the underlying Database.
+func (x *DatabaseOperation) Database() *Database {
+	_r := x.inner.Database()
+	if _r == nil {
+		return nil
+	}
+	return &Database{inner: _r}
+}
+
+// SetDatabase calls the underlying SetDatabase.
+func (x *DatabaseOperation) SetDatabase(database *raw.CKDatabase) {
+	x.inner.SetDatabase(database)
+}
+
 func (x *DatabaseOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return x.inner }
 
 func (x *DatabaseOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
+
+// DatabaseOperationable is the interface implemented by [DatabaseOperation], for mocking and DI.
+type DatabaseOperationable interface {
+	Unwrap() *raw.CKDatabaseOperation
+	WithDatabase(database *raw.CKDatabase) *DatabaseOperation
+	Database() *Database
+	SetDatabase(database *raw.CKDatabase)
+}
+
+var _ DatabaseOperationable = (*DatabaseOperation)(nil)
 

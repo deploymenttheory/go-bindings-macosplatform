@@ -25,7 +25,158 @@ func NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device *ra
 	return &MTRClusterElectricalPowerMeasurement{inner: raw.MTRClusterElectricalPowerMeasurementFromID(_id)}
 }
 
+// ReadAttributePowerModeWithParams calls the underlying ReadAttributePowerModeWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePowerModeWithParams(params)
+}
+
+// ReadAttributeNumberOfMeasurementTypesWithParams calls the underlying ReadAttributeNumberOfMeasurementTypesWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNumberOfMeasurementTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeNumberOfMeasurementTypesWithParams(params)
+}
+
+// ReadAttributeAccuracyWithParams calls the underlying ReadAttributeAccuracyWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAccuracyWithParams(params)
+}
+
+// ReadAttributeRangesWithParams calls the underlying ReadAttributeRangesWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRangesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRangesWithParams(params)
+}
+
+// ReadAttributeVoltageWithParams calls the underlying ReadAttributeVoltageWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeVoltageWithParams(params)
+}
+
+// ReadAttributeActiveCurrentWithParams calls the underlying ReadAttributeActiveCurrentWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeActiveCurrentWithParams(params)
+}
+
+// ReadAttributeReactiveCurrentWithParams calls the underlying ReadAttributeReactiveCurrentWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeReactiveCurrentWithParams(params)
+}
+
+// ReadAttributeApparentCurrentWithParams calls the underlying ReadAttributeApparentCurrentWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeApparentCurrentWithParams(params)
+}
+
+// ReadAttributeActivePowerWithParams calls the underlying ReadAttributeActivePowerWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeActivePowerWithParams(params)
+}
+
+// ReadAttributeReactivePowerWithParams calls the underlying ReadAttributeReactivePowerWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeReactivePowerWithParams(params)
+}
+
+// ReadAttributeApparentPowerWithParams calls the underlying ReadAttributeApparentPowerWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeApparentPowerWithParams(params)
+}
+
+// ReadAttributeRMSVoltageWithParams calls the underlying ReadAttributeRMSVoltageWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRMSVoltageWithParams(params)
+}
+
+// ReadAttributeRMSCurrentWithParams calls the underlying ReadAttributeRMSCurrentWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRMSCurrentWithParams(params)
+}
+
+// ReadAttributeRMSPowerWithParams calls the underlying ReadAttributeRMSPowerWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeRMSPowerWithParams(params)
+}
+
+// ReadAttributeFrequencyWithParams calls the underlying ReadAttributeFrequencyWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFrequencyWithParams(params)
+}
+
+// ReadAttributeHarmonicCurrentsWithParams calls the underlying ReadAttributeHarmonicCurrentsWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicCurrentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeHarmonicCurrentsWithParams(params)
+}
+
+// ReadAttributeHarmonicPhasesWithParams calls the underlying ReadAttributeHarmonicPhasesWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicPhasesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeHarmonicPhasesWithParams(params)
+}
+
+// ReadAttributePowerFactorWithParams calls the underlying ReadAttributePowerFactorWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributePowerFactorWithParams(params)
+}
+
+// ReadAttributeNeutralCurrentWithParams calls the underlying ReadAttributeNeutralCurrentWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNeutralCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeNeutralCurrentWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterElectricalPowerMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterElectricalPowerMeasurement) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterElectricalPowerMeasurementable is the interface implemented by [MTRClusterElectricalPowerMeasurement], for mocking and DI.
+type MTRClusterElectricalPowerMeasurementable interface {
+	Unwrap() *raw.MTRClusterElectricalPowerMeasurement
+	ReadAttributePowerModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeNumberOfMeasurementTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRangesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeActiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeReactiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeApparentCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeActivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeReactivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeApparentPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRMSVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRMSCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeRMSPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeHarmonicCurrentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeHarmonicPhasesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributePowerFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeNeutralCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterElectricalPowerMeasurementable = (*MTRClusterElectricalPowerMeasurement)(nil)
 

@@ -23,5 +23,42 @@ func NewSymbolDrawOnEffect() *SymbolDrawOnEffect {
 	return &SymbolDrawOnEffect{inner: raw.NSSymbolDrawOnEffectFromID(_id)}
 }
 
+// EffectWithByLayer calls the underlying EffectWithByLayer.
+func (x *SymbolDrawOnEffect) EffectWithByLayer() *SymbolDrawOnEffect {
+	_r := x.inner.EffectWithByLayer()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOnEffect{inner: _r}
+}
+
+// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
+func (x *SymbolDrawOnEffect) EffectWithWholeSymbol() *SymbolDrawOnEffect {
+	_r := x.inner.EffectWithWholeSymbol()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOnEffect{inner: _r}
+}
+
+// EffectWithIndividually calls the underlying EffectWithIndividually.
+func (x *SymbolDrawOnEffect) EffectWithIndividually() *SymbolDrawOnEffect {
+	_r := x.inner.EffectWithIndividually()
+	if _r == nil {
+		return nil
+	}
+	return &SymbolDrawOnEffect{inner: _r}
+}
+
 func (x *SymbolDrawOnEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
+
+// SymbolDrawOnEffectable is the interface implemented by [SymbolDrawOnEffect], for mocking and DI.
+type SymbolDrawOnEffectable interface {
+	Unwrap() *raw.NSSymbolDrawOnEffect
+	EffectWithByLayer() *SymbolDrawOnEffect
+	EffectWithWholeSymbol() *SymbolDrawOnEffect
+	EffectWithIndividually() *SymbolDrawOnEffect
+}
+
+var _ SymbolDrawOnEffectable = (*SymbolDrawOnEffect)(nil)
 

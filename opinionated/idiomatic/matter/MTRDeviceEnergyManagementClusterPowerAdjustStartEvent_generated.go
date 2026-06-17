@@ -23,3 +23,10 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustStartEvent() *MTRDeviceEnergy
 	return &MTRDeviceEnergyManagementClusterPowerAdjustStartEvent{inner: raw.MTRDeviceEnergyManagementClusterPowerAdjustStartEventFromID(_id)}
 }
 
+// MTRDeviceEnergyManagementClusterPowerAdjustStartEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustStartEvent], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPowerAdjustStartEventable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustStartEvent
+}
+
+var _ MTRDeviceEnergyManagementClusterPowerAdjustStartEventable = (*MTRDeviceEnergyManagementClusterPowerAdjustStartEvent)(nil)
+

@@ -6,6 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,18 +32,75 @@ func (x *CaptureOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *Cap
 	return x
 }
 
+// ConnectionWithMediaType calls the underlying ConnectionWithMediaType.
+func (x *CaptureOutput) ConnectionWithMediaType(mediaType *foundation.NSString) *CaptureConnection {
+	_r := x.inner.ConnectionWithMediaType(mediaType)
+	if _r == nil {
+		return nil
+	}
+	return &CaptureConnection{inner: _r}
+}
+
+// TransformedMetadataObjectForMetadataObjectConnection calls the underlying TransformedMetadataObjectForMetadataObjectConnection.
+func (x *CaptureOutput) TransformedMetadataObjectForMetadataObjectConnection(metadataObject *raw.AVMetadataObject, connection *raw.AVCaptureConnection) *MetadataObject {
+	_r := x.inner.TransformedMetadataObjectForMetadataObjectConnection(metadataObject, connection)
+	if _r == nil {
+		return nil
+	}
+	return &MetadataObject{inner: _r}
+}
+
+// MetadataOutputRectOfInterestForRect calls the underlying MetadataOutputRectOfInterestForRect.
+func (x *CaptureOutput) MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.MetadataOutputRectOfInterestForRect(rectInOutputCoordinates)
+}
+
+// RectForMetadataOutputRectOfInterest calls the underlying RectForMetadataOutputRectOfInterest.
+func (x *CaptureOutput) RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect {
+	return x.inner.RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates)
+}
+
 // Connections returns the collection as a Go slice.
 func (x *CaptureOutput) Connections() []*raw.AVCaptureConnection {
 	arr := x.inner.Connections()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptureConnection, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureConnection {
+		return raw.AVCaptureConnectionFromID(purego.Retain(_id))
+	})
+}
+
+// IsDeferredStartSupported calls the underlying IsDeferredStartSupported.
+func (x *CaptureOutput) IsDeferredStartSupported() bool {
+	return x.inner.IsDeferredStartSupported()
+}
+
+// IsDeferredStartEnabled calls the underlying IsDeferredStartEnabled.
+func (x *CaptureOutput) IsDeferredStartEnabled() bool {
+	return x.inner.IsDeferredStartEnabled()
+}
+
+// SetDeferredStartEnabled calls the underlying SetDeferredStartEnabled.
+func (x *CaptureOutput) SetDeferredStartEnabled(deferredStartEnabled bool) {
+	x.inner.SetDeferredStartEnabled(deferredStartEnabled)
 }
 
 func (x *CaptureOutput) asCaptureOutput() *raw.AVCaptureOutput { return x.inner }
+
+// CaptureOutputable is the interface implemented by [CaptureOutput], for mocking and DI.
+type CaptureOutputable interface {
+	Unwrap() *raw.AVCaptureOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureOutput
+	ConnectionWithMediaType(mediaType *foundation.NSString) *CaptureConnection
+	TransformedMetadataObjectForMetadataObjectConnection(metadataObject *raw.AVMetadataObject, connection *raw.AVCaptureConnection) *MetadataObject
+	MetadataOutputRectOfInterestForRect(rectInOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
+	RectForMetadataOutputRectOfInterest(rectInMetadataOutputCoordinates corefoundation.CGRect) corefoundation.CGRect
+	Connections() []*raw.AVCaptureConnection
+	IsDeferredStartSupported() bool
+	IsDeferredStartEnabled() bool
+	SetDeferredStartEnabled(deferredStartEnabled bool)
+}
+
+var _ CaptureOutputable = (*CaptureOutput)(nil)
 

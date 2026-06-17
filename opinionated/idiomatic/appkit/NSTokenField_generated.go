@@ -42,6 +42,36 @@ func (x *TokenField) WithTokenizingCharacterSet(tokenizingCharacterSet *foundati
 	return x
 }
 
+// TokenStyle calls the underlying TokenStyle.
+func (x *TokenField) TokenStyle() raw.NSTokenStyle {
+	return x.inner.TokenStyle()
+}
+
+// SetTokenStyle calls the underlying SetTokenStyle.
+func (x *TokenField) SetTokenStyle(tokenStyle raw.NSTokenStyle) {
+	x.inner.SetTokenStyle(tokenStyle)
+}
+
+// CompletionDelay calls the underlying CompletionDelay.
+func (x *TokenField) CompletionDelay() float64 {
+	return x.inner.CompletionDelay()
+}
+
+// SetCompletionDelay calls the underlying SetCompletionDelay.
+func (x *TokenField) SetCompletionDelay(completionDelay float64) {
+	x.inner.SetCompletionDelay(completionDelay)
+}
+
+// TokenizingCharacterSet calls the underlying TokenizingCharacterSet.
+func (x *TokenField) TokenizingCharacterSet() *foundation.NSCharacterSet {
+	return x.inner.TokenizingCharacterSet()
+}
+
+// SetTokenizingCharacterSet calls the underlying SetTokenizingCharacterSet.
+func (x *TokenField) SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) {
+	x.inner.SetTokenizingCharacterSet(tokenizingCharacterSet)
+}
+
 func (x *TokenField) asTextField() *raw.NSTextField { return &x.inner.NSTextField }
 
 func (x *TokenField) asControl() *raw.NSControl { return &x.inner.NSTextField.NSControl }
@@ -49,4 +79,20 @@ func (x *TokenField) asControl() *raw.NSControl { return &x.inner.NSTextField.NS
 func (x *TokenField) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
 
 func (x *TokenField) asResponder() *raw.NSResponder { return &x.inner.NSTextField.NSControl.NSView.NSResponder }
+
+// TokenFieldable is the interface implemented by [TokenField], for mocking and DI.
+type TokenFieldable interface {
+	Unwrap() *raw.NSTokenField
+	WithTokenStyle(tokenStyle raw.NSTokenStyle) *TokenField
+	WithCompletionDelay(completionDelay float64) *TokenField
+	WithTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet) *TokenField
+	TokenStyle() raw.NSTokenStyle
+	SetTokenStyle(tokenStyle raw.NSTokenStyle)
+	CompletionDelay() float64
+	SetCompletionDelay(completionDelay float64)
+	TokenizingCharacterSet() *foundation.NSCharacterSet
+	SetTokenizingCharacterSet(tokenizingCharacterSet *foundation.NSCharacterSet)
+}
+
+var _ TokenFieldable = (*TokenField)(nil)
 

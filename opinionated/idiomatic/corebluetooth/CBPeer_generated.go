@@ -6,6 +6,7 @@ package corebluetooth
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewPeer() *Peer {
 	return &Peer{inner: raw.CBPeerFromID(_id)}
 }
 
+// Identifier calls the underlying Identifier.
+func (x *Peer) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
 func (x *Peer) asPeer() *raw.CBPeer { return x.inner }
+
+// Peerable is the interface implemented by [Peer], for mocking and DI.
+type Peerable interface {
+	Unwrap() *raw.CBPeer
+	Identifier() *foundation.NSUUID
+}
+
+var _ Peerable = (*Peer)(nil)
 

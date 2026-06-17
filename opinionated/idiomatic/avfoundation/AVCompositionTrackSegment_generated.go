@@ -33,5 +33,24 @@ func NewCompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *C
 	return &CompositionTrackSegment{inner: raw.AVCompositionTrackSegmentFromID(_id)}
 }
 
+// SourceURL calls the underlying SourceURL.
+func (x *CompositionTrackSegment) SourceURL() *foundation.NSURL {
+	return x.inner.SourceURL()
+}
+
+// SourceTrackID calls the underlying SourceTrackID.
+func (x *CompositionTrackSegment) SourceTrackID() int32 {
+	return x.inner.SourceTrackID()
+}
+
 func (x *CompositionTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment { return &x.inner.AVAssetTrackSegment }
+
+// CompositionTrackSegmentable is the interface implemented by [CompositionTrackSegment], for mocking and DI.
+type CompositionTrackSegmentable interface {
+	Unwrap() *raw.AVCompositionTrackSegment
+	SourceURL() *foundation.NSURL
+	SourceTrackID() int32
+}
+
+var _ CompositionTrackSegmentable = (*CompositionTrackSegment)(nil)
 

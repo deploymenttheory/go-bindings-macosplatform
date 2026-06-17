@@ -30,7 +30,20 @@ func NewScriptWhoseTestWithCoder(inCoder *raw.NSCoder) *ScriptWhoseTest {
 	return &ScriptWhoseTest{inner: raw.NSScriptWhoseTestFromID(_id)}
 }
 
+// IsTrue calls the underlying IsTrue.
+func (x *ScriptWhoseTest) IsTrue() bool {
+	return x.inner.IsTrue()
+}
+
 func (x *ScriptWhoseTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return x.inner }
 
 func (x *ScriptWhoseTest) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// ScriptWhoseTestable is the interface implemented by [ScriptWhoseTest], for mocking and DI.
+type ScriptWhoseTestable interface {
+	Unwrap() *raw.NSScriptWhoseTest
+	IsTrue() bool
+}
+
+var _ ScriptWhoseTestable = (*ScriptWhoseTest)(nil)
 

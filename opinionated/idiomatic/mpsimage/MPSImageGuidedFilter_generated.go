@@ -51,3 +51,79 @@ func (x *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *Im
 	return x
 }
 
+// EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture calls the underlying EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture.
+func (x *ImageGuidedFilter) EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTexture metal.MTLTexture) {
+	x.inner.EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer, sourceTexture, guidanceTexture, weightsTexture, destinationCoefficientsTexture)
+}
+
+// EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture calls the underlying EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture.
+func (x *ImageGuidedFilter) EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTexture metal.MTLTexture, destinationTexture metal.MTLTexture) {
+	x.inner.EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer, guidanceTexture, coefficientsTexture, destinationTexture)
+}
+
+// EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB calls the underlying EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB.
+func (x *ImageGuidedFilter) EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTextureA metal.MTLTexture, destinationCoefficientsTextureB metal.MTLTexture) {
+	x.inner.EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer, sourceTexture, guidanceTexture, weightsTexture, destinationCoefficientsTextureA, destinationCoefficientsTextureB)
+}
+
+// EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture calls the underlying EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture.
+func (x *ImageGuidedFilter) EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTextureA metal.MTLTexture, coefficientsTextureB metal.MTLTexture, destinationTexture metal.MTLTexture) {
+	x.inner.EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture(commandBuffer, guidanceTexture, coefficientsTextureA, coefficientsTextureB, destinationTexture)
+}
+
+// KernelDiameter calls the underlying KernelDiameter.
+func (x *ImageGuidedFilter) KernelDiameter() uint {
+	return x.inner.KernelDiameter()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *ImageGuidedFilter) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// SetEpsilon calls the underlying SetEpsilon.
+func (x *ImageGuidedFilter) SetEpsilon(epsilon float32) {
+	x.inner.SetEpsilon(epsilon)
+}
+
+// ReconstructScale calls the underlying ReconstructScale.
+func (x *ImageGuidedFilter) ReconstructScale() float32 {
+	return x.inner.ReconstructScale()
+}
+
+// SetReconstructScale calls the underlying SetReconstructScale.
+func (x *ImageGuidedFilter) SetReconstructScale(reconstructScale float32) {
+	x.inner.SetReconstructScale(reconstructScale)
+}
+
+// ReconstructOffset calls the underlying ReconstructOffset.
+func (x *ImageGuidedFilter) ReconstructOffset() float32 {
+	return x.inner.ReconstructOffset()
+}
+
+// SetReconstructOffset calls the underlying SetReconstructOffset.
+func (x *ImageGuidedFilter) SetReconstructOffset(reconstructOffset float32) {
+	x.inner.SetReconstructOffset(reconstructOffset)
+}
+
+// ImageGuidedFilterable is the interface implemented by [ImageGuidedFilter], for mocking and DI.
+type ImageGuidedFilterable interface {
+	Unwrap() *raw.MPSImageGuidedFilter
+	WithEpsilon(epsilon float32) *ImageGuidedFilter
+	WithReconstructScale(reconstructScale float32) *ImageGuidedFilter
+	WithReconstructOffset(reconstructOffset float32) *ImageGuidedFilter
+	EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTexture metal.MTLTexture)
+	EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
+	EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTextureA metal.MTLTexture, destinationCoefficientsTextureB metal.MTLTexture)
+	EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureACoefficientsTextureBDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTextureA metal.MTLTexture, coefficientsTextureB metal.MTLTexture, destinationTexture metal.MTLTexture)
+	KernelDiameter() uint
+	Epsilon() float32
+	SetEpsilon(epsilon float32)
+	ReconstructScale() float32
+	SetReconstructScale(reconstructScale float32)
+	ReconstructOffset() float32
+	SetReconstructOffset(reconstructOffset float32)
+}
+
+var _ ImageGuidedFilterable = (*ImageGuidedFilter)(nil)
+

@@ -24,5 +24,22 @@ func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope)
 	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(_id)}
 }
 
+// Envelope calls the underlying Envelope.
+func (x *EnvelopeDistanceModelParameters) Envelope() *Envelope {
+	_r := x.inner.Envelope()
+	if _r == nil {
+		return nil
+	}
+	return &Envelope{inner: _r}
+}
+
 func (x *EnvelopeDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters { return &x.inner.PHASEDistanceModelParameters }
+
+// EnvelopeDistanceModelParametersable is the interface implemented by [EnvelopeDistanceModelParameters], for mocking and DI.
+type EnvelopeDistanceModelParametersable interface {
+	Unwrap() *raw.PHASEEnvelopeDistanceModelParameters
+	Envelope() *Envelope
+}
+
+var _ EnvelopeDistanceModelParametersable = (*EnvelopeDistanceModelParameters)(nil)
 

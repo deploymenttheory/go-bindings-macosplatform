@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSof
 
 func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams { return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams }
 
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
+type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+}
+
+var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)
+

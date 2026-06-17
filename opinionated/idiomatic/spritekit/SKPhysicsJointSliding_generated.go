@@ -41,5 +41,51 @@ func (x *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64)
 	return x
 }
 
+// ShouldEnableLimits calls the underlying ShouldEnableLimits.
+func (x *PhysicsJointSliding) ShouldEnableLimits() bool {
+	return x.inner.ShouldEnableLimits()
+}
+
+// SetShouldEnableLimits calls the underlying SetShouldEnableLimits.
+func (x *PhysicsJointSliding) SetShouldEnableLimits(shouldEnableLimits bool) {
+	x.inner.SetShouldEnableLimits(shouldEnableLimits)
+}
+
+// LowerDistanceLimit calls the underlying LowerDistanceLimit.
+func (x *PhysicsJointSliding) LowerDistanceLimit() float64 {
+	return x.inner.LowerDistanceLimit()
+}
+
+// SetLowerDistanceLimit calls the underlying SetLowerDistanceLimit.
+func (x *PhysicsJointSliding) SetLowerDistanceLimit(lowerDistanceLimit float64) {
+	x.inner.SetLowerDistanceLimit(lowerDistanceLimit)
+}
+
+// UpperDistanceLimit calls the underlying UpperDistanceLimit.
+func (x *PhysicsJointSliding) UpperDistanceLimit() float64 {
+	return x.inner.UpperDistanceLimit()
+}
+
+// SetUpperDistanceLimit calls the underlying SetUpperDistanceLimit.
+func (x *PhysicsJointSliding) SetUpperDistanceLimit(upperDistanceLimit float64) {
+	x.inner.SetUpperDistanceLimit(upperDistanceLimit)
+}
+
 func (x *PhysicsJointSliding) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
+
+// PhysicsJointSlidingable is the interface implemented by [PhysicsJointSliding], for mocking and DI.
+type PhysicsJointSlidingable interface {
+	Unwrap() *raw.SKPhysicsJointSliding
+	WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding
+	WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding
+	WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding
+	ShouldEnableLimits() bool
+	SetShouldEnableLimits(shouldEnableLimits bool)
+	LowerDistanceLimit() float64
+	SetLowerDistanceLimit(lowerDistanceLimit float64)
+	UpperDistanceLimit() float64
+	SetUpperDistanceLimit(upperDistanceLimit float64)
+}
+
+var _ PhysicsJointSlidingable = (*PhysicsJointSliding)(nil)
 

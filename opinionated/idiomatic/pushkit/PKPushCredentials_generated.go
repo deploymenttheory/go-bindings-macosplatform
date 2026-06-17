@@ -5,7 +5,9 @@
 package pushkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,27 @@ func NewPushCredentials() *PushCredentials {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPushCredentials")), objc.RegisterName("new"))
 	return &PushCredentials{inner: raw.PKPushCredentialsFromID(_id)}
 }
+
+// Type calls the underlying Type.
+func (x *PushCredentials) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Token calls the underlying Token.
+func (x *PushCredentials) Token() *foundation.NSData {
+	return x.inner.Token()
+}
+
+// PushCredentialsable is the interface implemented by [PushCredentials], for mocking and DI.
+type PushCredentialsable interface {
+	Unwrap() *raw.PKPushCredentials
+	Type() string
+	Token() *foundation.NSData
+}
+
+var _ PushCredentialsable = (*PushCredentials)(nil)
 

@@ -46,7 +46,27 @@ func (x *NNGramMatrixCalculationGradient) WithAlpha(alpha float32) *NNGramMatrix
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *NNGramMatrixCalculationGradient) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *NNGramMatrixCalculationGradient) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
 func (x *NNGramMatrixCalculationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *NNGramMatrixCalculationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// NNGramMatrixCalculationGradientable is the interface implemented by [NNGramMatrixCalculationGradient], for mocking and DI.
+type NNGramMatrixCalculationGradientable interface {
+	Unwrap() *raw.MPSNNGramMatrixCalculationGradient
+	WithAlpha(alpha float32) *NNGramMatrixCalculationGradient
+	Alpha() float32
+	SetAlpha(alpha float32)
+}
+
+var _ NNGramMatrixCalculationGradientable = (*NNGramMatrixCalculationGradient)(nil)
 

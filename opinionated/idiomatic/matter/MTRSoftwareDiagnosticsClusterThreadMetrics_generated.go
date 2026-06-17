@@ -25,3 +25,10 @@ func NewMTRSoftwareDiagnosticsClusterThreadMetrics() *MTRSoftwareDiagnosticsClus
 
 func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return &x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct }
 
+// MTRSoftwareDiagnosticsClusterThreadMetricsable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetrics], for mocking and DI.
+type MTRSoftwareDiagnosticsClusterThreadMetricsable interface {
+	Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetrics
+}
+
+var _ MTRSoftwareDiagnosticsClusterThreadMetricsable = (*MTRSoftwareDiagnosticsClusterThreadMetrics)(nil)
+

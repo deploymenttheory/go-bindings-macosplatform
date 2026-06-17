@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,54 @@ func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdent
 	x.inner.SetRank(rank)
 	return x
 }
+
+// ServiceIdentifier calls the underlying ServiceIdentifier.
+func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
+	_r := x.inner.ServiceIdentifier()
+	if _r == nil {
+		return nil
+	}
+	return &CredentialServiceIdentifier{inner: _r}
+}
+
+// User calls the underlying User.
+func (x *PasswordCredentialIdentity) User() string {
+	_r := x.inner.User()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RecordIdentifier calls the underlying RecordIdentifier.
+func (x *PasswordCredentialIdentity) RecordIdentifier() string {
+	_r := x.inner.RecordIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Rank calls the underlying Rank.
+func (x *PasswordCredentialIdentity) Rank() int {
+	return x.inner.Rank()
+}
+
+// SetRank calls the underlying SetRank.
+func (x *PasswordCredentialIdentity) SetRank(rank int) {
+	x.inner.SetRank(rank)
+}
+
+// PasswordCredentialIdentityable is the interface implemented by [PasswordCredentialIdentity], for mocking and DI.
+type PasswordCredentialIdentityable interface {
+	Unwrap() *raw.ASPasswordCredentialIdentity
+	WithRank(rank int) *PasswordCredentialIdentity
+	ServiceIdentifier() *CredentialServiceIdentifier
+	User() string
+	RecordIdentifier() string
+	Rank() int
+	SetRank(rank int)
+}
+
+var _ PasswordCredentialIdentityable = (*PasswordCredentialIdentity)(nil)
 

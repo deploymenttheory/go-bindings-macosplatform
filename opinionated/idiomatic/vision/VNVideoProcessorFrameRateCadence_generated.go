@@ -24,5 +24,18 @@ func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcess
 	return &VideoProcessorFrameRateCadence{inner: raw.VNVideoProcessorFrameRateCadenceFromID(_id)}
 }
 
+// FrameRate calls the underlying FrameRate.
+func (x *VideoProcessorFrameRateCadence) FrameRate() int {
+	return x.inner.FrameRate()
+}
+
 func (x *VideoProcessorFrameRateCadence) asVideoProcessorCadence() *raw.VNVideoProcessorCadence { return &x.inner.VNVideoProcessorCadence }
+
+// VideoProcessorFrameRateCadenceable is the interface implemented by [VideoProcessorFrameRateCadence], for mocking and DI.
+type VideoProcessorFrameRateCadenceable interface {
+	Unwrap() *raw.VNVideoProcessorFrameRateCadence
+	FrameRate() int
+}
+
+var _ VideoProcessorFrameRateCadenceable = (*VideoProcessorFrameRateCadence)(nil)
 

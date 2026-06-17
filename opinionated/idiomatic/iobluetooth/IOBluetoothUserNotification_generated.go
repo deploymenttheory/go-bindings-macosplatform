@@ -23,3 +23,16 @@ func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
 	return &IOBluetoothUserNotification{inner: raw.IOBluetoothUserNotificationFromID(_id)}
 }
 
+// Unregister calls the underlying Unregister.
+func (x *IOBluetoothUserNotification) Unregister() {
+	x.inner.Unregister()
+}
+
+// IOBluetoothUserNotificationable is the interface implemented by [IOBluetoothUserNotification], for mocking and DI.
+type IOBluetoothUserNotificationable interface {
+	Unwrap() *raw.IOBluetoothUserNotification
+	Unregister()
+}
+
+var _ IOBluetoothUserNotificationable = (*IOBluetoothUserNotification)(nil)
+

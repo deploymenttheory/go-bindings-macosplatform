@@ -36,3 +36,36 @@ func (x *MTRWaterHeaterModeClusterModeTagStruct) WithValue(value *foundation.NSN
 	return x
 }
 
+// MfgCode calls the underlying MfgCode.
+func (x *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() *foundation.NSNumber {
+	return x.inner.MfgCode()
+}
+
+// SetMfgCode calls the underlying SetMfgCode.
+func (x *MTRWaterHeaterModeClusterModeTagStruct) SetMfgCode(mfgCode *foundation.NSNumber) {
+	x.inner.SetMfgCode(mfgCode)
+}
+
+// Value calls the underlying Value.
+func (x *MTRWaterHeaterModeClusterModeTagStruct) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRWaterHeaterModeClusterModeTagStruct) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// MTRWaterHeaterModeClusterModeTagStructable is the interface implemented by [MTRWaterHeaterModeClusterModeTagStruct], for mocking and DI.
+type MTRWaterHeaterModeClusterModeTagStructable interface {
+	Unwrap() *raw.MTRWaterHeaterModeClusterModeTagStruct
+	WithMfgCode(mfgCode *foundation.NSNumber) *MTRWaterHeaterModeClusterModeTagStruct
+	WithValue(value *foundation.NSNumber) *MTRWaterHeaterModeClusterModeTagStruct
+	MfgCode() *foundation.NSNumber
+	SetMfgCode(mfgCode *foundation.NSNumber)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+}
+
+var _ MTRWaterHeaterModeClusterModeTagStructable = (*MTRWaterHeaterModeClusterModeTagStruct)(nil)
+

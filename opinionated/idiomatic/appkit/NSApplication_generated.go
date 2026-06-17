@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Application wraps [raw.NSApplication] with a fluent Go API.
@@ -83,17 +86,545 @@ func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCus
 	return x
 }
 
+// Unhide calls the underlying Unhide.
+func (x *Application) Unhide(sender objc.ID) {
+	x.inner.Unhide(sender)
+}
+
+// UnhideWithoutActivation calls the underlying UnhideWithoutActivation.
+func (x *Application) UnhideWithoutActivation() {
+	x.inner.UnhideWithoutActivation()
+}
+
+// WindowWithWindowNumber calls the underlying WindowWithWindowNumber.
+func (x *Application) WindowWithWindowNumber(windowNum int) *Window {
+	_r := x.inner.WindowWithWindowNumber(windowNum)
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// Deactivate calls the underlying Deactivate.
+func (x *Application) Deactivate() {
+	x.inner.Deactivate()
+}
+
+// ActivateIgnoringOtherApps calls the underlying ActivateIgnoringOtherApps.
+func (x *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
+	x.inner.ActivateIgnoringOtherApps(ignoreOtherApps)
+}
+
+// YieldActivationToApplication calls the underlying YieldActivationToApplication.
+func (x *Application) YieldActivationToApplication(application *raw.NSRunningApplication) {
+	x.inner.YieldActivationToApplication(application)
+}
+
+// YieldActivationToApplicationWithBundleIdentifier calls the underlying YieldActivationToApplicationWithBundleIdentifier.
+func (x *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
+	x.inner.YieldActivationToApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+}
+
+// FinishLaunching calls the underlying FinishLaunching.
+func (x *Application) FinishLaunching() {
+	x.inner.FinishLaunching()
+}
+
+// RunModalForWindow calls the underlying RunModalForWindow.
+func (x *Application) RunModalForWindow(window *raw.NSWindow) int {
+	return x.inner.RunModalForWindow(window)
+}
+
+// Stop calls the underlying Stop.
+func (x *Application) Stop(sender objc.ID) {
+	x.inner.Stop(sender)
+}
+
+// StopModal calls the underlying StopModal.
+func (x *Application) StopModal() {
+	x.inner.StopModal()
+}
+
+// StopModalWithCode calls the underlying StopModalWithCode.
+func (x *Application) StopModalWithCode(returnCode int) {
+	x.inner.StopModalWithCode(returnCode)
+}
+
+// AbortModal calls the underlying AbortModal.
+func (x *Application) AbortModal() {
+	x.inner.AbortModal()
+}
+
+// BeginModalSessionForWindow calls the underlying BeginModalSessionForWindow.
+func (x *Application) BeginModalSessionForWindow(window *raw.NSWindow) unsafe.Pointer {
+	return x.inner.BeginModalSessionForWindow(window)
+}
+
+// RunModalSession calls the underlying RunModalSession.
+func (x *Application) RunModalSession(session unsafe.Pointer) int {
+	return x.inner.RunModalSession(session)
+}
+
+// EndModalSession calls the underlying EndModalSession.
+func (x *Application) EndModalSession(session unsafe.Pointer) {
+	x.inner.EndModalSession(session)
+}
+
+// RequestUserAttention calls the underlying RequestUserAttention.
+func (x *Application) RequestUserAttention(requestType raw.NSRequestUserAttentionType) int {
+	return x.inner.RequestUserAttention(requestType)
+}
+
+// CancelUserAttentionRequest calls the underlying CancelUserAttentionRequest.
+func (x *Application) CancelUserAttentionRequest(request int) {
+	x.inner.CancelUserAttentionRequest(request)
+}
+
+// EnumerateWindowsWithOptionsUsing calls the underlying EnumerateWindowsWithOptionsUsing.
+func (x *Application) EnumerateWindowsWithOptionsUsing(options raw.NSWindowListOptions, block func(*raw.NSWindow, *bool)) {
+	x.inner.EnumerateWindowsWithOptionsUsing(options, block)
+}
+
+// PreventWindowOrdering calls the underlying PreventWindowOrdering.
+func (x *Application) PreventWindowOrdering() {
+	x.inner.PreventWindowOrdering()
+}
+
+// SetWindowsNeedUpdate calls the underlying SetWindowsNeedUpdate.
+func (x *Application) SetWindowsNeedUpdate(needUpdate bool) {
+	x.inner.SetWindowsNeedUpdate(needUpdate)
+}
+
+// UpdateWindows calls the underlying UpdateWindows.
+func (x *Application) UpdateWindows() {
+	x.inner.UpdateWindows()
+}
+
+// ReportException calls the underlying ReportException.
+func (x *Application) ReportException(exception *foundation.NSException) {
+	x.inner.ReportException(exception)
+}
+
+// ReplyToApplicationShouldTerminate calls the underlying ReplyToApplicationShouldTerminate.
+func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
+	x.inner.ReplyToApplicationShouldTerminate(shouldTerminate)
+}
+
+// ReplyToOpenOrPrint calls the underlying ReplyToOpenOrPrint.
+func (x *Application) ReplyToOpenOrPrint(reply raw.NSApplicationDelegateReply) {
+	x.inner.ReplyToOpenOrPrint(reply)
+}
+
+// OrderFrontCharacterPalette calls the underlying OrderFrontCharacterPalette.
+func (x *Application) OrderFrontCharacterPalette(sender objc.ID) {
+	x.inner.OrderFrontCharacterPalette(sender)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Application) Delegate() raw.NSApplicationDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Application) SetDelegate(delegate raw.NSApplicationDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MainWindow calls the underlying MainWindow.
+func (x *Application) MainWindow() *Window {
+	_r := x.inner.MainWindow()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Application) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *Application) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *Application) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// ApplicationShouldSuppressHighDynamicRangeContent calls the underlying ApplicationShouldSuppressHighDynamicRangeContent.
+func (x *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
+	return x.inner.ApplicationShouldSuppressHighDynamicRangeContent()
+}
+
+// ModalWindow calls the underlying ModalWindow.
+func (x *Application) ModalWindow() *Window {
+	_r := x.inner.ModalWindow()
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
 // Windows returns the collection as a Go slice.
 func (x *Application) Windows() []*raw.NSWindow {
 	arr := x.inner.Windows()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSWindow, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
+		return raw.NSWindowFromID(purego.Retain(_id))
+	})
+}
+
+// MainMenu calls the underlying MainMenu.
+func (x *Application) MainMenu() *Menu {
+	_r := x.inner.MainMenu()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Menu{inner: _r}
+}
+
+// HelpMenu calls the underlying HelpMenu.
+func (x *Application) HelpMenu() *Menu {
+	_r := x.inner.HelpMenu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetHelpMenu calls the underlying SetHelpMenu.
+func (x *Application) SetHelpMenu(helpMenu *raw.NSMenu) {
+	x.inner.SetHelpMenu(helpMenu)
+}
+
+// ApplicationIconImage calls the underlying ApplicationIconImage.
+func (x *Application) ApplicationIconImage() *Image {
+	_r := x.inner.ApplicationIconImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetApplicationIconImage calls the underlying SetApplicationIconImage.
+func (x *Application) SetApplicationIconImage(applicationIconImage *raw.NSImage) {
+	x.inner.SetApplicationIconImage(applicationIconImage)
+}
+
+// DockTile calls the underlying DockTile.
+func (x *Application) DockTile() *DockTile {
+	_r := x.inner.DockTile()
+	if _r == nil {
+		return nil
+	}
+	return &DockTile{inner: _r}
+}
+
+// PresentationOptions calls the underlying PresentationOptions.
+func (x *Application) PresentationOptions() raw.NSApplicationPresentationOptions {
+	return x.inner.PresentationOptions()
+}
+
+// SetPresentationOptions calls the underlying SetPresentationOptions.
+func (x *Application) SetPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) {
+	x.inner.SetPresentationOptions(presentationOptions)
+}
+
+// CurrentSystemPresentationOptions calls the underlying CurrentSystemPresentationOptions.
+func (x *Application) CurrentSystemPresentationOptions() raw.NSApplicationPresentationOptions {
+	return x.inner.CurrentSystemPresentationOptions()
+}
+
+// OcclusionState calls the underlying OcclusionState.
+func (x *Application) OcclusionState() raw.NSApplicationOcclusionState {
+	return x.inner.OcclusionState()
+}
+
+// IsProtectedDataAvailable calls the underlying IsProtectedDataAvailable.
+func (x *Application) IsProtectedDataAvailable() bool {
+	return x.inner.IsProtectedDataAvailable()
+}
+
+// Appearance calls the underlying Appearance.
+func (x *Application) Appearance() *Appearance {
+	_r := x.inner.Appearance()
+	if _r == nil {
+		return nil
+	}
+	return &Appearance{inner: _r}
+}
+
+// SetAppearance calls the underlying SetAppearance.
+func (x *Application) SetAppearance(appearance *raw.NSAppearance) {
+	x.inner.SetAppearance(appearance)
+}
+
+// EffectiveAppearance calls the underlying EffectiveAppearance.
+func (x *Application) EffectiveAppearance() *Appearance {
+	_r := x.inner.EffectiveAppearance()
+	if _r == nil {
+		return nil
+	}
+	return &Appearance{inner: _r}
+}
+
+// SendEvent calls the underlying SendEvent.
+func (x *Application) SendEvent(event *raw.NSEvent) {
+	x.inner.SendEvent(event)
+}
+
+// PostEventAtStart calls the underlying PostEventAtStart.
+func (x *Application) PostEventAtStart(event *raw.NSEvent, atStart bool) {
+	x.inner.PostEventAtStart(event, atStart)
+}
+
+// NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
+func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
+	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(mask, expiration, mode, deqFlag)
+	if _r == nil {
+		return nil
+	}
+	return &Event{inner: _r}
+}
+
+// DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
+func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent) {
+	x.inner.DiscardEventsMatchingMaskBeforeEvent(mask, lastEvent)
+}
+
+// CurrentEvent calls the underlying CurrentEvent.
+func (x *Application) CurrentEvent() *Event {
+	_r := x.inner.CurrentEvent()
+	if _r == nil {
+		return nil
+	}
+	return &Event{inner: _r}
+}
+
+// SendActionToFrom calls the underlying SendActionToFrom.
+func (x *Application) SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool {
+	return x.inner.SendActionToFrom(action, target, sender)
+}
+
+// TargetForAction calls the underlying TargetForAction.
+func (x *Application) TargetForAction(action objc.SEL) objc.ID {
+	return x.inner.TargetForAction(action)
+}
+
+// TargetForActionToFrom calls the underlying TargetForActionToFrom.
+func (x *Application) TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID {
+	return x.inner.TargetForActionToFrom(action, target, sender)
+}
+
+// ArrangeInFront calls the underlying ArrangeInFront.
+func (x *Application) ArrangeInFront(sender objc.ID) {
+	x.inner.ArrangeInFront(sender)
+}
+
+// RemoveWindowsItem calls the underlying RemoveWindowsItem.
+func (x *Application) RemoveWindowsItem(win *raw.NSWindow) {
+	x.inner.RemoveWindowsItem(win)
+}
+
+// AddWindowsItemTitleFilename calls the underlying AddWindowsItemTitleFilename.
+func (x *Application) AddWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool) {
+	x.inner.AddWindowsItemTitleFilename(win, foundation.NSStringStringWithUTF8String(string_), isFilename)
+}
+
+// ChangeWindowsItemTitleFilename calls the underlying ChangeWindowsItemTitleFilename.
+func (x *Application) ChangeWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool) {
+	x.inner.ChangeWindowsItemTitleFilename(win, foundation.NSStringStringWithUTF8String(string_), isFilename)
+}
+
+// UpdateWindowsItem calls the underlying UpdateWindowsItem.
+func (x *Application) UpdateWindowsItem(win *raw.NSWindow) {
+	x.inner.UpdateWindowsItem(win)
+}
+
+// MiniaturizeAll calls the underlying MiniaturizeAll.
+func (x *Application) MiniaturizeAll(sender objc.ID) {
+	x.inner.MiniaturizeAll(sender)
+}
+
+// WindowsMenu calls the underlying WindowsMenu.
+func (x *Application) WindowsMenu() *Menu {
+	_r := x.inner.WindowsMenu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// IsFullKeyboardAccessEnabled calls the underlying IsFullKeyboardAccessEnabled.
+func (x *Application) IsFullKeyboardAccessEnabled() bool {
+	return x.inner.IsFullKeyboardAccessEnabled()
+}
+
+// RegisterServicesMenuSendTypesReturnTypes calls the underlying RegisterServicesMenuSendTypesReturnTypes.
+func (x *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString]) {
+	x.inner.RegisterServicesMenuSendTypesReturnTypes(sendTypes, returnTypes)
+}
+
+// ServicesMenu calls the underlying ServicesMenu.
+func (x *Application) ServicesMenu() *Menu {
+	_r := x.inner.ServicesMenu()
+	if _r == nil {
+		return nil
+	}
+	return &Menu{inner: _r}
+}
+
+// SetServicesMenu calls the underlying SetServicesMenu.
+func (x *Application) SetServicesMenu(servicesMenu *raw.NSMenu) {
+	x.inner.SetServicesMenu(servicesMenu)
+}
+
+// ServicesProvider calls the underlying ServicesProvider.
+func (x *Application) ServicesProvider() objc.ID {
+	return x.inner.ServicesProvider()
+}
+
+// SetServicesProvider calls the underlying SetServicesProvider.
+func (x *Application) SetServicesProvider(servicesProvider objc.ID) {
+	x.inner.SetServicesProvider(servicesProvider)
+}
+
+// OrderFrontStandardAboutPanel calls the underlying OrderFrontStandardAboutPanel.
+func (x *Application) OrderFrontStandardAboutPanel(sender objc.ID) {
+	x.inner.OrderFrontStandardAboutPanel(sender)
+}
+
+// OrderFrontStandardAboutPanelWithOptions calls the underlying OrderFrontStandardAboutPanelWithOptions.
+func (x *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.OrderFrontStandardAboutPanelWithOptions(optionsDictionary)
+}
+
+// UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
+func (x *Application) UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection {
+	return x.inner.UserInterfaceLayoutDirection()
+}
+
+// DisableRelaunchOnLogin calls the underlying DisableRelaunchOnLogin.
+func (x *Application) DisableRelaunchOnLogin() {
+	x.inner.DisableRelaunchOnLogin()
+}
+
+// EnableRelaunchOnLogin calls the underlying EnableRelaunchOnLogin.
+func (x *Application) EnableRelaunchOnLogin() {
+	x.inner.EnableRelaunchOnLogin()
+}
+
+// RegisterForRemoteNotifications calls the underlying RegisterForRemoteNotifications.
+func (x *Application) RegisterForRemoteNotifications() {
+	x.inner.RegisterForRemoteNotifications()
+}
+
+// UnregisterForRemoteNotifications calls the underlying UnregisterForRemoteNotifications.
+func (x *Application) UnregisterForRemoteNotifications() {
+	x.inner.UnregisterForRemoteNotifications()
+}
+
+// RegisterForRemoteNotificationTypes calls the underlying RegisterForRemoteNotificationTypes.
+func (x *Application) RegisterForRemoteNotificationTypes(types raw.NSRemoteNotificationType) {
+	x.inner.RegisterForRemoteNotificationTypes(types)
+}
+
+// IsRegisteredForRemoteNotifications calls the underlying IsRegisteredForRemoteNotifications.
+func (x *Application) IsRegisteredForRemoteNotifications() bool {
+	return x.inner.IsRegisteredForRemoteNotifications()
+}
+
+// EnabledRemoteNotificationTypes calls the underlying EnabledRemoteNotificationTypes.
+func (x *Application) EnabledRemoteNotificationTypes() raw.NSRemoteNotificationType {
+	return x.inner.EnabledRemoteNotificationTypes()
+}
+
+// RunModalForWindowRelativeToWindow calls the underlying RunModalForWindowRelativeToWindow.
+func (x *Application) RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int {
+	return x.inner.RunModalForWindowRelativeToWindow(window, docWindow)
+}
+
+// BeginModalSessionForWindowRelativeToWindow calls the underlying BeginModalSessionForWindowRelativeToWindow.
+func (x *Application) BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer {
+	return x.inner.BeginModalSessionForWindowRelativeToWindow(window, docWindow)
+}
+
+// ApplicationPrintFiles calls the underlying ApplicationPrintFiles.
+func (x *Application) ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString]) {
+	x.inner.ApplicationPrintFiles(sender, filenames)
+}
+
+// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
+func (x *Application) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *raw.NSWindow, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
+	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet, docWindow, modalDelegate, didEndSelector, contextInfo)
+}
+
+// EndSheet calls the underlying EndSheet.
+func (x *Application) EndSheet(sheet *raw.NSWindow) {
+	x.inner.EndSheet(sheet)
+}
+
+// EndSheetReturnCode calls the underlying EndSheetReturnCode.
+func (x *Application) EndSheetReturnCode(sheet *raw.NSWindow, returnCode int) {
+	x.inner.EndSheetReturnCode(sheet, returnCode)
+}
+
+// MakeWindowsPerformInOrder calls the underlying MakeWindowsPerformInOrder.
+func (x *Application) MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *Window {
+	_r := x.inner.MakeWindowsPerformInOrder(selector, inOrder)
+	if _r == nil {
+		return nil
+	}
+	return &Window{inner: _r}
+}
+
+// Context calls the underlying Context.
+func (x *Application) Context() *GraphicsContext {
+	_r := x.inner.Context()
+	if _r == nil {
+		return nil
+	}
+	return &GraphicsContext{inner: _r}
+}
+
+// ActivateContextHelpMode calls the underlying ActivateContextHelpMode.
+func (x *Application) ActivateContextHelpMode(sender objc.ID) {
+	x.inner.ActivateContextHelpMode(sender)
+}
+
+// ShowHelp calls the underlying ShowHelp.
+func (x *Application) ShowHelp(sender objc.ID) {
+	x.inner.ShowHelp(sender)
+}
+
+// ToggleTouchBarCustomizationPalette calls the underlying ToggleTouchBarCustomizationPalette.
+func (x *Application) ToggleTouchBarCustomizationPalette(sender objc.ID) {
+	x.inner.ToggleTouchBarCustomizationPalette(sender)
+}
+
+// IsAutomaticCustomizeTouchBarMenuItemEnabled calls the underlying IsAutomaticCustomizeTouchBarMenuItemEnabled.
+func (x *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
+	return x.inner.IsAutomaticCustomizeTouchBarMenuItemEnabled()
+}
+
+// SetAutomaticCustomizeTouchBarMenuItemEnabled calls the underlying SetAutomaticCustomizeTouchBarMenuItemEnabled.
+func (x *Application) SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
+	x.inner.SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled)
+}
+
+// OrderFrontColorPanel calls the underlying OrderFrontColorPanel.
+func (x *Application) OrderFrontColorPanel(sender objc.ID) {
+	x.inner.OrderFrontColorPanel(sender)
+}
+
+// RunPageLayout calls the underlying RunPageLayout.
+func (x *Application) RunPageLayout(sender objc.ID) {
+	x.inner.RunPageLayout(sender)
 }
 
 // OrderedDocuments returns the collection as a Go slice.
@@ -102,11 +633,9 @@ func (x *Application) OrderedDocuments() []*raw.NSDocument {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSDocument, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDocument {
+		return raw.NSDocumentFromID(purego.Retain(_id))
+	})
 }
 
 // OrderedWindows returns the collection as a Go slice.
@@ -115,12 +644,160 @@ func (x *Application) OrderedWindows() []*raw.NSWindow {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSWindow, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSWindow {
+		return raw.NSWindowFromID(purego.Retain(_id))
+	})
+}
+
+// RegisterUserInterfaceItemSearchHandler calls the underlying RegisterUserInterfaceItemSearchHandler.
+func (x *Application) RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
+	x.inner.RegisterUserInterfaceItemSearchHandler(handler)
+}
+
+// UnregisterUserInterfaceItemSearchHandler calls the underlying UnregisterUserInterfaceItemSearchHandler.
+func (x *Application) UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
+	x.inner.UnregisterUserInterfaceItemSearchHandler(handler)
+}
+
+// SearchStringInUserInterfaceItemStringSearchRangeFoundRange calls the underlying SearchStringInUserInterfaceItemStringSearchRangeFoundRange.
+func (x *Application) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
+	return x.inner.SearchStringInUserInterfaceItemStringSearchRangeFoundRange(foundation.NSStringStringWithUTF8String(searchString), foundation.NSStringStringWithUTF8String(stringToSearch), searchRange, foundRange)
+}
+
+// RestoreWindowWithIdentifierStateCompletionHandler calls the underlying RestoreWindowWithIdentifierStateCompletionHandler.
+func (x *Application) RestoreWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*raw.NSWindow, unsafe.Pointer)) bool {
+	return x.inner.RestoreWindowWithIdentifierStateCompletionHandler(identifier, state, completionHandler)
+}
+
+// ExtendStateRestoration calls the underlying ExtendStateRestoration.
+func (x *Application) ExtendStateRestoration() {
+	x.inner.ExtendStateRestoration()
+}
+
+// CompleteStateRestoration calls the underlying CompleteStateRestoration.
+func (x *Application) CompleteStateRestoration() {
+	x.inner.CompleteStateRestoration()
 }
 
 func (x *Application) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
+
+// Applicationable is the interface implemented by [Application], for mocking and DI.
+type Applicationable interface {
+	Unwrap() *raw.NSApplication
+	WithDelegate(delegate raw.NSApplicationDelegate) *Application
+	WithMainMenu(mainMenu *raw.NSMenu) *Application
+	WithHelpMenu(helpMenu *raw.NSMenu) *Application
+	WithApplicationIconImage(applicationIconImage *raw.NSImage) *Application
+	WithPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions) *Application
+	WithAppearance(appearance *raw.NSAppearance) *Application
+	WithWindowsMenu(windowsMenu *raw.NSMenu) *Application
+	WithServicesMenu(servicesMenu *raw.NSMenu) *Application
+	WithServicesProvider(servicesProvider objc.ID) *Application
+	WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application
+	Unhide(sender objc.ID)
+	UnhideWithoutActivation()
+	WindowWithWindowNumber(windowNum int) *Window
+	Deactivate()
+	ActivateIgnoringOtherApps(ignoreOtherApps bool)
+	YieldActivationToApplication(application *raw.NSRunningApplication)
+	YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string)
+	FinishLaunching()
+	RunModalForWindow(window *raw.NSWindow) int
+	Stop(sender objc.ID)
+	StopModal()
+	StopModalWithCode(returnCode int)
+	AbortModal()
+	BeginModalSessionForWindow(window *raw.NSWindow) unsafe.Pointer
+	RunModalSession(session unsafe.Pointer) int
+	EndModalSession(session unsafe.Pointer)
+	RequestUserAttention(requestType raw.NSRequestUserAttentionType) int
+	CancelUserAttentionRequest(request int)
+	EnumerateWindowsWithOptionsUsing(options raw.NSWindowListOptions, block func(*raw.NSWindow, *bool))
+	PreventWindowOrdering()
+	SetWindowsNeedUpdate(needUpdate bool)
+	UpdateWindows()
+	ReportException(exception *foundation.NSException)
+	ReplyToApplicationShouldTerminate(shouldTerminate bool)
+	ReplyToOpenOrPrint(reply raw.NSApplicationDelegateReply)
+	OrderFrontCharacterPalette(sender objc.ID)
+	Delegate() raw.NSApplicationDelegate
+	SetDelegate(delegate raw.NSApplicationDelegate)
+	MainWindow() *Window
+	IsActive() bool
+	IsHidden() bool
+	IsRunning() bool
+	ApplicationShouldSuppressHighDynamicRangeContent() bool
+	ModalWindow() *Window
+	Windows() []*raw.NSWindow
+	MainMenu() *Menu
+	HelpMenu() *Menu
+	SetHelpMenu(helpMenu *raw.NSMenu)
+	ApplicationIconImage() *Image
+	SetApplicationIconImage(applicationIconImage *raw.NSImage)
+	DockTile() *DockTile
+	PresentationOptions() raw.NSApplicationPresentationOptions
+	SetPresentationOptions(presentationOptions raw.NSApplicationPresentationOptions)
+	CurrentSystemPresentationOptions() raw.NSApplicationPresentationOptions
+	OcclusionState() raw.NSApplicationOcclusionState
+	IsProtectedDataAvailable() bool
+	Appearance() *Appearance
+	SetAppearance(appearance *raw.NSAppearance)
+	EffectiveAppearance() *Appearance
+	SendEvent(event *raw.NSEvent)
+	PostEventAtStart(event *raw.NSEvent, atStart bool)
+	NextEventMatchingMaskUntilDateInModeDequeue(mask raw.NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
+	DiscardEventsMatchingMaskBeforeEvent(mask raw.NSEventMask, lastEvent *raw.NSEvent)
+	CurrentEvent() *Event
+	SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool
+	TargetForAction(action objc.SEL) objc.ID
+	TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID
+	ArrangeInFront(sender objc.ID)
+	RemoveWindowsItem(win *raw.NSWindow)
+	AddWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool)
+	ChangeWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool)
+	UpdateWindowsItem(win *raw.NSWindow)
+	MiniaturizeAll(sender objc.ID)
+	WindowsMenu() *Menu
+	IsFullKeyboardAccessEnabled() bool
+	RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString])
+	ServicesMenu() *Menu
+	SetServicesMenu(servicesMenu *raw.NSMenu)
+	ServicesProvider() objc.ID
+	SetServicesProvider(servicesProvider objc.ID)
+	OrderFrontStandardAboutPanel(sender objc.ID)
+	OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	UserInterfaceLayoutDirection() raw.NSUserInterfaceLayoutDirection
+	DisableRelaunchOnLogin()
+	EnableRelaunchOnLogin()
+	RegisterForRemoteNotifications()
+	UnregisterForRemoteNotifications()
+	RegisterForRemoteNotificationTypes(types raw.NSRemoteNotificationType)
+	IsRegisteredForRemoteNotifications() bool
+	EnabledRemoteNotificationTypes() raw.NSRemoteNotificationType
+	RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int
+	BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer
+	ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString])
+	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *raw.NSWindow, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
+	EndSheet(sheet *raw.NSWindow)
+	EndSheetReturnCode(sheet *raw.NSWindow, returnCode int)
+	MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *Window
+	Context() *GraphicsContext
+	ActivateContextHelpMode(sender objc.ID)
+	ShowHelp(sender objc.ID)
+	ToggleTouchBarCustomizationPalette(sender objc.ID)
+	IsAutomaticCustomizeTouchBarMenuItemEnabled() bool
+	SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool)
+	OrderFrontColorPanel(sender objc.ID)
+	RunPageLayout(sender objc.ID)
+	OrderedDocuments() []*raw.NSDocument
+	OrderedWindows() []*raw.NSWindow
+	RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
+	UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
+	SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool
+	RestoreWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*raw.NSWindow, unsafe.Pointer)) bool
+	ExtendStateRestoration()
+	CompleteStateRestoration()
+}
+
+var _ Applicationable = (*Application)(nil)
 

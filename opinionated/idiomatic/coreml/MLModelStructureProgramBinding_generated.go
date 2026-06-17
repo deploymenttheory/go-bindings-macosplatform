@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewModelStructureProgramBinding() *ModelStructureProgramBinding {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgramBinding")), objc.RegisterName("new"))
 	return &ModelStructureProgramBinding{inner: raw.MLModelStructureProgramBindingFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *ModelStructureProgramBinding) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Value calls the underlying Value.
+func (x *ModelStructureProgramBinding) Value() *ModelStructureProgramValue {
+	_r := x.inner.Value()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructureProgramValue{inner: _r}
+}
+
+// ModelStructureProgramBindingable is the interface implemented by [ModelStructureProgramBinding], for mocking and DI.
+type ModelStructureProgramBindingable interface {
+	Unwrap() *raw.MLModelStructureProgramBinding
+	Name() string
+	Value() *ModelStructureProgramValue
+}
+
+var _ ModelStructureProgramBindingable = (*ModelStructureProgramBinding)(nil)
 

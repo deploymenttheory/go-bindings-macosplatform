@@ -35,7 +35,44 @@ func NewNDArrayMultiaryKernelWithCoderDevice(coder *foundation.NSCoder, device m
 	return &NDArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArrays calls the underlying EncodeToCommandBufferSourceArrays.
+func (x *NDArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArrays(cmdBuf, sourceArrays)
+}
+
+// EncodeToCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandBufferSourceArraysDestinationArray.
+func (x *NDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf, sourceArrays, destination)
+}
+
+// EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary.
+func (x *NDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf, sourceArrays, outGradientState, outputStateIsTemporary)
+}
+
+// EncodeToCommandBufferSourceArraysResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraysResultStateDestinationArray.
+func (x *NDArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf, sourceArrays, outGradientState, destination)
+}
+
+// EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray.
+func (x *NDArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder, commandBuffer, sourceArrays, destination)
+}
+
 func (x *NDArrayMultiaryKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayMultiaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayMultiaryKernelable is the interface implemented by [NDArrayMultiaryKernel], for mocking and DI.
+type NDArrayMultiaryKernelable interface {
+	Unwrap() *raw.MPSNDArrayMultiaryKernel
+	EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
+	EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
+}
+
+var _ NDArrayMultiaryKernelable = (*NDArrayMultiaryKernel)(nil)
 

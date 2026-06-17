@@ -23,3 +23,70 @@ func NewOptimizerDescriptor() *OptimizerDescriptor {
 	return &OptimizerDescriptor{inner: raw.MLCOptimizerDescriptorFromID(_id)}
 }
 
+// LearningRate calls the underlying LearningRate.
+func (x *OptimizerDescriptor) LearningRate() float32 {
+	return x.inner.LearningRate()
+}
+
+// GradientRescale calls the underlying GradientRescale.
+func (x *OptimizerDescriptor) GradientRescale() float32 {
+	return x.inner.GradientRescale()
+}
+
+// AppliesGradientClipping calls the underlying AppliesGradientClipping.
+func (x *OptimizerDescriptor) AppliesGradientClipping() bool {
+	return x.inner.AppliesGradientClipping()
+}
+
+// GradientClipMax calls the underlying GradientClipMax.
+func (x *OptimizerDescriptor) GradientClipMax() float32 {
+	return x.inner.GradientClipMax()
+}
+
+// GradientClipMin calls the underlying GradientClipMin.
+func (x *OptimizerDescriptor) GradientClipMin() float32 {
+	return x.inner.GradientClipMin()
+}
+
+// RegularizationScale calls the underlying RegularizationScale.
+func (x *OptimizerDescriptor) RegularizationScale() float32 {
+	return x.inner.RegularizationScale()
+}
+
+// RegularizationType calls the underlying RegularizationType.
+func (x *OptimizerDescriptor) RegularizationType() raw.MLCRegularizationType {
+	return x.inner.RegularizationType()
+}
+
+// GradientClippingType calls the underlying GradientClippingType.
+func (x *OptimizerDescriptor) GradientClippingType() raw.MLCGradientClippingType {
+	return x.inner.GradientClippingType()
+}
+
+// MaximumClippingNorm calls the underlying MaximumClippingNorm.
+func (x *OptimizerDescriptor) MaximumClippingNorm() float32 {
+	return x.inner.MaximumClippingNorm()
+}
+
+// CustomGlobalNorm calls the underlying CustomGlobalNorm.
+func (x *OptimizerDescriptor) CustomGlobalNorm() float32 {
+	return x.inner.CustomGlobalNorm()
+}
+
+// OptimizerDescriptorable is the interface implemented by [OptimizerDescriptor], for mocking and DI.
+type OptimizerDescriptorable interface {
+	Unwrap() *raw.MLCOptimizerDescriptor
+	LearningRate() float32
+	GradientRescale() float32
+	AppliesGradientClipping() bool
+	GradientClipMax() float32
+	GradientClipMin() float32
+	RegularizationScale() float32
+	RegularizationType() raw.MLCRegularizationType
+	GradientClippingType() raw.MLCGradientClippingType
+	MaximumClippingNorm() float32
+	CustomGlobalNorm() float32
+}
+
+var _ OptimizerDescriptorable = (*OptimizerDescriptor)(nil)
+

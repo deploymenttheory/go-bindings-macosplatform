@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,128 @@ func NewHTTPCookieWithProperties(properties *raw.NSDictionary[*raw.NSString, obj
 	return &HTTPCookie{inner: raw.NSHTTPCookieFromID(_id)}
 }
 
+// Properties calls the underlying Properties.
+func (x *HTTPCookie) Properties() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.Properties()
+}
+
+// Name calls the underlying Name.
+func (x *HTTPCookie) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *HTTPCookie) Value() *String {
+	_r := x.inner.Value()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ExpiresDate calls the underlying ExpiresDate.
+func (x *HTTPCookie) ExpiresDate() *Date {
+	_r := x.inner.ExpiresDate()
+	if _r == nil {
+		return nil
+	}
+	return &Date{inner: _r}
+}
+
+// IsSessionOnly calls the underlying IsSessionOnly.
+func (x *HTTPCookie) IsSessionOnly() bool {
+	return x.inner.IsSessionOnly()
+}
+
+// Domain calls the underlying Domain.
+func (x *HTTPCookie) Domain() *String {
+	_r := x.inner.Domain()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Path calls the underlying Path.
+func (x *HTTPCookie) Path() *String {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsSecure calls the underlying IsSecure.
+func (x *HTTPCookie) IsSecure() bool {
+	return x.inner.IsSecure()
+}
+
+// IsHTTPOnly calls the underlying IsHTTPOnly.
+func (x *HTTPCookie) IsHTTPOnly() bool {
+	return x.inner.IsHTTPOnly()
+}
+
+// Comment calls the underlying Comment.
+func (x *HTTPCookie) Comment() *String {
+	_r := x.inner.Comment()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// CommentURL calls the underlying CommentURL.
+func (x *HTTPCookie) CommentURL() *URL {
+	_r := x.inner.CommentURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
 // PortList returns the collection as a Go slice.
 func (x *HTTPCookie) PortList() []*raw.NSNumber {
 	arr := x.inner.PortList()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSNumber {
+		return raw.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SameSitePolicy calls the underlying SameSitePolicy.
+func (x *HTTPCookie) SameSitePolicy() *String {
+	_r := x.inner.SameSitePolicy()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
 }
 
 func (x *HTTPCookie) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// HTTPCookieable is the interface implemented by [HTTPCookie], for mocking and DI.
+type HTTPCookieable interface {
+	Unwrap() *raw.NSHTTPCookie
+	Properties() *raw.NSDictionary[*raw.NSString, objc.ID]
+	Name() *String
+	Value() *String
+	ExpiresDate() *Date
+	IsSessionOnly() bool
+	Domain() *String
+	Path() *String
+	IsSecure() bool
+	IsHTTPOnly() bool
+	Comment() *String
+	CommentURL() *URL
+	PortList() []*raw.NSNumber
+	SameSitePolicy() *String
+}
+
+var _ HTTPCookieable = (*HTTPCookie)(nil)
 

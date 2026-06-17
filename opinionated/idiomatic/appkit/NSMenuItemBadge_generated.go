@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -38,4 +39,33 @@ func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
 	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
 }
+
+// ItemCount calls the underlying ItemCount.
+func (x *MenuItemBadge) ItemCount() int {
+	return x.inner.ItemCount()
+}
+
+// Type calls the underlying Type.
+func (x *MenuItemBadge) Type() raw.NSMenuItemBadgeType {
+	return x.inner.Type()
+}
+
+// StringValue calls the underlying StringValue.
+func (x *MenuItemBadge) StringValue() string {
+	_r := x.inner.StringValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MenuItemBadgeable is the interface implemented by [MenuItemBadge], for mocking and DI.
+type MenuItemBadgeable interface {
+	Unwrap() *raw.NSMenuItemBadge
+	ItemCount() int
+	Type() raw.NSMenuItemBadgeType
+	StringValue() string
+}
+
+var _ MenuItemBadgeable = (*MenuItemBadge)(nil)
 

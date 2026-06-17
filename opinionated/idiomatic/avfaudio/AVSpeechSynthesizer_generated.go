@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +29,72 @@ func (x *SpeechSynthesizer) WithDelegate(delegate raw.AVSpeechSynthesizerDelegat
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// SpeakUtterance calls the underlying SpeakUtterance.
+func (x *SpeechSynthesizer) SpeakUtterance(utterance *raw.AVSpeechUtterance) {
+	x.inner.SpeakUtterance(utterance)
+}
+
+// WriteUtteranceToBufferCallback calls the underlying WriteUtteranceToBufferCallback.
+func (x *SpeechSynthesizer) WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer)) {
+	x.inner.WriteUtteranceToBufferCallback(utterance, bufferCallback)
+}
+
+// WriteUtteranceToBufferCallbackToMarkerCallback calls the underlying WriteUtteranceToBufferCallbackToMarkerCallback.
+func (x *SpeechSynthesizer) WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker])) {
+	x.inner.WriteUtteranceToBufferCallbackToMarkerCallback(utterance, bufferCallback, markerCallback)
+}
+
+// StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool {
+	return x.inner.StopSpeakingAtBoundary(boundary)
+}
+
+// PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool {
+	return x.inner.PauseSpeakingAtBoundary(boundary)
+}
+
+// ContinueSpeaking calls the underlying ContinueSpeaking.
+func (x *SpeechSynthesizer) ContinueSpeaking() bool {
+	return x.inner.ContinueSpeaking()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SpeechSynthesizer) Delegate() raw.AVSpeechSynthesizerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SpeechSynthesizer) SetDelegate(delegate raw.AVSpeechSynthesizerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsSpeaking calls the underlying IsSpeaking.
+func (x *SpeechSynthesizer) IsSpeaking() bool {
+	return x.inner.IsSpeaking()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *SpeechSynthesizer) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
+type SpeechSynthesizerable interface {
+	Unwrap() *raw.AVSpeechSynthesizer
+	WithDelegate(delegate raw.AVSpeechSynthesizerDelegate) *SpeechSynthesizer
+	SpeakUtterance(utterance *raw.AVSpeechUtterance)
+	WriteUtteranceToBufferCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer))
+	WriteUtteranceToBufferCallbackToMarkerCallback(utterance *raw.AVSpeechUtterance, bufferCallback func(*raw.AVAudioBuffer), markerCallback func(*foundation.NSArray[*raw.AVSpeechSynthesisMarker]))
+	StopSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool
+	PauseSpeakingAtBoundary(boundary raw.AVSpeechBoundary) bool
+	ContinueSpeaking() bool
+	Delegate() raw.AVSpeechSynthesizerDelegate
+	SetDelegate(delegate raw.AVSpeechSynthesizerDelegate)
+	IsSpeaking() bool
+	IsPaused() bool
+}
+
+var _ SpeechSynthesizerable = (*SpeechSynthesizer)(nil)
 

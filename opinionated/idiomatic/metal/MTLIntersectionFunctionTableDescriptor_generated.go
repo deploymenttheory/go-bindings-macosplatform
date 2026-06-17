@@ -29,3 +29,23 @@ func (x *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount ui
 	return x
 }
 
+// FunctionCount calls the underlying FunctionCount.
+func (x *IntersectionFunctionTableDescriptor) FunctionCount() uint {
+	return x.inner.FunctionCount()
+}
+
+// SetFunctionCount calls the underlying SetFunctionCount.
+func (x *IntersectionFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
+	x.inner.SetFunctionCount(functionCount)
+}
+
+// IntersectionFunctionTableDescriptorable is the interface implemented by [IntersectionFunctionTableDescriptor], for mocking and DI.
+type IntersectionFunctionTableDescriptorable interface {
+	Unwrap() *raw.MTLIntersectionFunctionTableDescriptor
+	WithFunctionCount(functionCount uint) *IntersectionFunctionTableDescriptor
+	FunctionCount() uint
+	SetFunctionCount(functionCount uint)
+}
+
+var _ IntersectionFunctionTableDescriptorable = (*IntersectionFunctionTableDescriptor)(nil)
+

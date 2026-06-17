@@ -28,3 +28,10 @@ func (x *NNReductionRowMaxNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNN
 
 func (x *NNReductionRowMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionRowMaxNodeable is the interface implemented by [NNReductionRowMaxNode], for mocking and DI.
+type NNReductionRowMaxNodeable interface {
+	Unwrap() *raw.MPSNNReductionRowMaxNode
+}
+
+var _ NNReductionRowMaxNodeable = (*NNReductionRowMaxNode)(nil)
+

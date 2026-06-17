@@ -5,9 +5,12 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FaceLandmarkRegion2D wraps [raw.VNFaceLandmarkRegion2D] with a fluent Go API.
@@ -24,18 +27,42 @@ func NewFaceLandmarkRegion2D() *FaceLandmarkRegion2D {
 	return &FaceLandmarkRegion2D{inner: raw.VNFaceLandmarkRegion2DFromID(_id)}
 }
 
+// PointsInImageOfSize calls the underlying PointsInImageOfSize.
+func (x *FaceLandmarkRegion2D) PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint {
+	return x.inner.PointsInImageOfSize(imageSize)
+}
+
+// NormalizedPoints calls the underlying NormalizedPoints.
+func (x *FaceLandmarkRegion2D) NormalizedPoints() unsafe.Pointer {
+	return x.inner.NormalizedPoints()
+}
+
 // PrecisionEstimatesPerPoint returns the collection as a Go slice.
 func (x *FaceLandmarkRegion2D) PrecisionEstimatesPerPoint() []*foundation.NSNumber {
 	arr := x.inner.PrecisionEstimatesPerPoint()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// PointsClassification calls the underlying PointsClassification.
+func (x *FaceLandmarkRegion2D) PointsClassification() raw.VNPointsClassification {
+	return x.inner.PointsClassification()
 }
 
 func (x *FaceLandmarkRegion2D) asFaceLandmarkRegion() *raw.VNFaceLandmarkRegion { return &x.inner.VNFaceLandmarkRegion }
+
+// FaceLandmarkRegion2Dable is the interface implemented by [FaceLandmarkRegion2D], for mocking and DI.
+type FaceLandmarkRegion2Dable interface {
+	Unwrap() *raw.VNFaceLandmarkRegion2D
+	PointsInImageOfSize(imageSize corefoundation.CGSize) *corefoundation.CGPoint
+	NormalizedPoints() unsafe.Pointer
+	PrecisionEstimatesPerPoint() []*foundation.NSNumber
+	PointsClassification() raw.VNPointsClassification
+}
+
+var _ FaceLandmarkRegion2Dable = (*FaceLandmarkRegion2D)(nil)
 

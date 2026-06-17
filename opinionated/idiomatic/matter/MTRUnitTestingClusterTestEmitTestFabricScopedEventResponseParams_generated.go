@@ -43,5 +43,38 @@ func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) WithT
 	return x
 }
 
+// Value calls the underlying Value.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams { return x.inner }
+
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams], for mocking and DI.
+type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsable = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams)(nil)
 

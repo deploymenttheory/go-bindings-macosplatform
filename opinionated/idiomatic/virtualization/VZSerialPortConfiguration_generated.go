@@ -29,5 +29,29 @@ func (x *SerialPortConfiguration) WithAttachment(attachment SerialPortAttachment
 	return x
 }
 
+// Attachment calls the underlying Attachment.
+func (x *SerialPortConfiguration) Attachment() *SerialPortAttachment {
+	_r := x.inner.Attachment()
+	if _r == nil {
+		return nil
+	}
+	return &SerialPortAttachment{inner: _r}
+}
+
+// SetAttachment calls the underlying SetAttachment.
+func (x *SerialPortConfiguration) SetAttachment(attachment *raw.VZSerialPortAttachment) {
+	x.inner.SetAttachment(attachment)
+}
+
 func (x *SerialPortConfiguration) asSerialPortConfiguration() *raw.VZSerialPortConfiguration { return x.inner }
+
+// SerialPortConfigurationable is the interface implemented by [SerialPortConfiguration], for mocking and DI.
+type SerialPortConfigurationable interface {
+	Unwrap() *raw.VZSerialPortConfiguration
+	WithAttachment(attachment SerialPortAttachmentProvider) *SerialPortConfiguration
+	Attachment() *SerialPortAttachment
+	SetAttachment(attachment *raw.VZSerialPortAttachment)
+}
+
+var _ SerialPortConfigurationable = (*SerialPortConfiguration)(nil)
 

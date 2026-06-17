@@ -40,7 +40,27 @@ func (x *ImageScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransfor
 	return x
 }
 
+// ScaleTransform calls the underlying ScaleTransform.
+func (x *ImageScale) ScaleTransform() *mpscore.MPSScaleTransform {
+	return x.inner.ScaleTransform()
+}
+
+// SetScaleTransform calls the underlying SetScaleTransform.
+func (x *ImageScale) SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform) {
+	x.inner.SetScaleTransform(scaleTransform)
+}
+
 func (x *ImageScale) asImageScale() *raw.MPSImageScale { return x.inner }
 
 func (x *ImageScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
+
+// ImageScaleable is the interface implemented by [ImageScale], for mocking and DI.
+type ImageScaleable interface {
+	Unwrap() *raw.MPSImageScale
+	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageScale
+	ScaleTransform() *mpscore.MPSScaleTransform
+	SetScaleTransform(scaleTransform *mpscore.MPSScaleTransform)
+}
+
+var _ ImageScaleable = (*ImageScale)(nil)
 

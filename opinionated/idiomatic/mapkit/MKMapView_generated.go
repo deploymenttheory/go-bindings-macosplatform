@@ -5,8 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MapView wraps [raw.MKMapView] with a fluent Go API.
@@ -166,4 +170,663 @@ func (x *MapView) WithUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) 
 	x.inner.SetUserTrackingMode(userTrackingMode)
 	return x
 }
+
+// SetRegionAnimated calls the underlying SetRegionAnimated.
+func (x *MapView) SetRegionAnimated(region raw.MKCoordinateRegion, animated bool) {
+	x.inner.SetRegionAnimated(region, animated)
+}
+
+// SetCenterCoordinateAnimated calls the underlying SetCenterCoordinateAnimated.
+func (x *MapView) SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool) {
+	x.inner.SetCenterCoordinateAnimated(coordinate, animated)
+}
+
+// RegionThatFits calls the underlying RegionThatFits.
+func (x *MapView) RegionThatFits(region raw.MKCoordinateRegion) raw.MKCoordinateRegion {
+	return x.inner.RegionThatFits(region)
+}
+
+// SetVisibleMapRectAnimated calls the underlying SetVisibleMapRectAnimated.
+func (x *MapView) SetVisibleMapRectAnimated(mapRect raw.MKMapRect, animate bool) {
+	x.inner.SetVisibleMapRectAnimated(mapRect, animate)
+}
+
+// MapRectThatFits calls the underlying MapRectThatFits.
+func (x *MapView) MapRectThatFits(mapRect raw.MKMapRect) raw.MKMapRect {
+	return x.inner.MapRectThatFits(mapRect)
+}
+
+// SetVisibleMapRectEdgePaddingAnimated calls the underlying SetVisibleMapRectEdgePaddingAnimated.
+func (x *MapView) SetVisibleMapRectEdgePaddingAnimated(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets, animate bool) {
+	x.inner.SetVisibleMapRectEdgePaddingAnimated(mapRect, insets, animate)
+}
+
+// MapRectThatFitsEdgePadding calls the underlying MapRectThatFitsEdgePadding.
+func (x *MapView) MapRectThatFitsEdgePadding(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets) raw.MKMapRect {
+	return x.inner.MapRectThatFitsEdgePadding(mapRect, insets)
+}
+
+// SetCameraAnimated calls the underlying SetCameraAnimated.
+func (x *MapView) SetCameraAnimated(camera *raw.MKMapCamera, animated bool) {
+	x.inner.SetCameraAnimated(camera, animated)
+}
+
+// SetCameraZoomRangeAnimated calls the underlying SetCameraZoomRangeAnimated.
+func (x *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *raw.MKMapCameraZoomRange, animated bool) {
+	x.inner.SetCameraZoomRangeAnimated(cameraZoomRange, animated)
+}
+
+// SetCameraBoundaryAnimated calls the underlying SetCameraBoundaryAnimated.
+func (x *MapView) SetCameraBoundaryAnimated(cameraBoundary *raw.MKMapCameraBoundary, animated bool) {
+	x.inner.SetCameraBoundaryAnimated(cameraBoundary, animated)
+}
+
+// ConvertCoordinateToPointToView calls the underlying ConvertCoordinateToPointToView.
+func (x *MapView) ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view *appkit.NSView) corefoundation.CGPoint {
+	return x.inner.ConvertCoordinateToPointToView(coordinate, view)
+}
+
+// ConvertPointToCoordinateFromView calls the underlying ConvertPointToCoordinateFromView.
+func (x *MapView) ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer {
+	return x.inner.ConvertPointToCoordinateFromView(point, view)
+}
+
+// ConvertRegionToRectToView calls the underlying ConvertRegionToRectToView.
+func (x *MapView) ConvertRegionToRectToView(region raw.MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect {
+	return x.inner.ConvertRegionToRectToView(region, view)
+}
+
+// ConvertRectToRegionFromView calls the underlying ConvertRectToRegionFromView.
+func (x *MapView) ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) raw.MKCoordinateRegion {
+	return x.inner.ConvertRectToRegionFromView(rect, view)
+}
+
+// SetUserTrackingModeAnimated calls the underlying SetUserTrackingModeAnimated.
+func (x *MapView) SetUserTrackingModeAnimated(mode raw.MKUserTrackingMode, animated bool) {
+	x.inner.SetUserTrackingModeAnimated(mode, animated)
+}
+
+// AddAnnotation calls the underlying AddAnnotation.
+func (x *MapView) AddAnnotation(annotation raw.MKAnnotation) {
+	x.inner.AddAnnotation(annotation)
+}
+
+// AddAnnotations calls the underlying AddAnnotations.
+func (x *MapView) AddAnnotations(annotations *foundation.NSArray[raw.MKAnnotation]) {
+	x.inner.AddAnnotations(annotations)
+}
+
+// RemoveAnnotation calls the underlying RemoveAnnotation.
+func (x *MapView) RemoveAnnotation(annotation raw.MKAnnotation) {
+	x.inner.RemoveAnnotation(annotation)
+}
+
+// RemoveAnnotations calls the underlying RemoveAnnotations.
+func (x *MapView) RemoveAnnotations(annotations *foundation.NSArray[raw.MKAnnotation]) {
+	x.inner.RemoveAnnotations(annotations)
+}
+
+// AnnotationsInMapRect calls the underlying AnnotationsInMapRect.
+func (x *MapView) AnnotationsInMapRect(mapRect raw.MKMapRect) *foundation.NSSet[raw.MKAnnotation] {
+	return x.inner.AnnotationsInMapRect(mapRect)
+}
+
+// ViewForAnnotation calls the underlying ViewForAnnotation.
+func (x *MapView) ViewForAnnotation(annotation raw.MKAnnotation) *AnnotationView {
+	_r := x.inner.ViewForAnnotation(annotation)
+	if _r == nil {
+		return nil
+	}
+	return &AnnotationView{inner: _r}
+}
+
+// DequeueReusableAnnotationViewWithIdentifier calls the underlying DequeueReusableAnnotationViewWithIdentifier.
+func (x *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
+	_r := x.inner.DequeueReusableAnnotationViewWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	if _r == nil {
+		return nil
+	}
+	return &AnnotationView{inner: _r}
+}
+
+// DequeueReusableAnnotationViewWithIdentifierForAnnotation calls the underlying DequeueReusableAnnotationViewWithIdentifierForAnnotation.
+func (x *MapView) DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier string, annotation raw.MKAnnotation) *AnnotationView {
+	_r := x.inner.DequeueReusableAnnotationViewWithIdentifierForAnnotation(foundation.NSStringStringWithUTF8String(identifier), annotation)
+	if _r == nil {
+		return nil
+	}
+	return &AnnotationView{inner: _r}
+}
+
+// RegisterClassForAnnotationViewWithReuseIdentifier calls the underlying RegisterClassForAnnotationViewWithReuseIdentifier.
+func (x *MapView) RegisterClassForAnnotationViewWithReuseIdentifier(viewClass objc.Class, identifier string) {
+	x.inner.RegisterClassForAnnotationViewWithReuseIdentifier(viewClass, foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// SelectAnnotationAnimated calls the underlying SelectAnnotationAnimated.
+func (x *MapView) SelectAnnotationAnimated(annotation raw.MKAnnotation, animated bool) {
+	x.inner.SelectAnnotationAnimated(annotation, animated)
+}
+
+// DeselectAnnotationAnimated calls the underlying DeselectAnnotationAnimated.
+func (x *MapView) DeselectAnnotationAnimated(annotation raw.MKAnnotation, animated bool) {
+	x.inner.DeselectAnnotationAnimated(annotation, animated)
+}
+
+// ShowAnnotationsAnimated calls the underlying ShowAnnotationsAnimated.
+func (x *MapView) ShowAnnotationsAnimated(annotations *foundation.NSArray[raw.MKAnnotation], animated bool) {
+	x.inner.ShowAnnotationsAnimated(annotations, animated)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *MapView) Delegate() raw.MKMapViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *MapView) SetDelegate(delegate raw.MKMapViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MapType calls the underlying MapType.
+func (x *MapView) MapType() raw.MKMapType {
+	return x.inner.MapType()
+}
+
+// SetMapType calls the underlying SetMapType.
+func (x *MapView) SetMapType(mapType raw.MKMapType) {
+	x.inner.SetMapType(mapType)
+}
+
+// PreferredConfiguration calls the underlying PreferredConfiguration.
+func (x *MapView) PreferredConfiguration() *MapConfiguration {
+	_r := x.inner.PreferredConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &MapConfiguration{inner: _r}
+}
+
+// SetPreferredConfiguration calls the underlying SetPreferredConfiguration.
+func (x *MapView) SetPreferredConfiguration(preferredConfiguration *raw.MKMapConfiguration) {
+	x.inner.SetPreferredConfiguration(preferredConfiguration)
+}
+
+// Region calls the underlying Region.
+func (x *MapView) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// SetRegion calls the underlying SetRegion.
+func (x *MapView) SetRegion(region raw.MKCoordinateRegion) {
+	x.inner.SetRegion(region)
+}
+
+// CenterCoordinate calls the underlying CenterCoordinate.
+func (x *MapView) CenterCoordinate() unsafe.Pointer {
+	return x.inner.CenterCoordinate()
+}
+
+// SetCenterCoordinate calls the underlying SetCenterCoordinate.
+func (x *MapView) SetCenterCoordinate(centerCoordinate unsafe.Pointer) {
+	x.inner.SetCenterCoordinate(centerCoordinate)
+}
+
+// VisibleMapRect calls the underlying VisibleMapRect.
+func (x *MapView) VisibleMapRect() raw.MKMapRect {
+	return x.inner.VisibleMapRect()
+}
+
+// SetVisibleMapRect calls the underlying SetVisibleMapRect.
+func (x *MapView) SetVisibleMapRect(visibleMapRect raw.MKMapRect) {
+	x.inner.SetVisibleMapRect(visibleMapRect)
+}
+
+// Camera calls the underlying Camera.
+func (x *MapView) Camera() *MapCamera {
+	_r := x.inner.Camera()
+	if _r == nil {
+		return nil
+	}
+	return &MapCamera{inner: _r}
+}
+
+// SetCamera calls the underlying SetCamera.
+func (x *MapView) SetCamera(camera *raw.MKMapCamera) {
+	x.inner.SetCamera(camera)
+}
+
+// CameraZoomRange calls the underlying CameraZoomRange.
+func (x *MapView) CameraZoomRange() *MapCameraZoomRange {
+	_r := x.inner.CameraZoomRange()
+	if _r == nil {
+		return nil
+	}
+	return &MapCameraZoomRange{inner: _r}
+}
+
+// SetCameraZoomRange calls the underlying SetCameraZoomRange.
+func (x *MapView) SetCameraZoomRange(cameraZoomRange *raw.MKMapCameraZoomRange) {
+	x.inner.SetCameraZoomRange(cameraZoomRange)
+}
+
+// CameraBoundary calls the underlying CameraBoundary.
+func (x *MapView) CameraBoundary() *MapCameraBoundary {
+	_r := x.inner.CameraBoundary()
+	if _r == nil {
+		return nil
+	}
+	return &MapCameraBoundary{inner: _r}
+}
+
+// SetCameraBoundary calls the underlying SetCameraBoundary.
+func (x *MapView) SetCameraBoundary(cameraBoundary *raw.MKMapCameraBoundary) {
+	x.inner.SetCameraBoundary(cameraBoundary)
+}
+
+// IsZoomEnabled calls the underlying IsZoomEnabled.
+func (x *MapView) IsZoomEnabled() bool {
+	return x.inner.IsZoomEnabled()
+}
+
+// SetZoomEnabled calls the underlying SetZoomEnabled.
+func (x *MapView) SetZoomEnabled(zoomEnabled bool) {
+	x.inner.SetZoomEnabled(zoomEnabled)
+}
+
+// IsScrollEnabled calls the underlying IsScrollEnabled.
+func (x *MapView) IsScrollEnabled() bool {
+	return x.inner.IsScrollEnabled()
+}
+
+// SetScrollEnabled calls the underlying SetScrollEnabled.
+func (x *MapView) SetScrollEnabled(scrollEnabled bool) {
+	x.inner.SetScrollEnabled(scrollEnabled)
+}
+
+// IsRotateEnabled calls the underlying IsRotateEnabled.
+func (x *MapView) IsRotateEnabled() bool {
+	return x.inner.IsRotateEnabled()
+}
+
+// SetRotateEnabled calls the underlying SetRotateEnabled.
+func (x *MapView) SetRotateEnabled(rotateEnabled bool) {
+	x.inner.SetRotateEnabled(rotateEnabled)
+}
+
+// IsPitchEnabled calls the underlying IsPitchEnabled.
+func (x *MapView) IsPitchEnabled() bool {
+	return x.inner.IsPitchEnabled()
+}
+
+// SetPitchEnabled calls the underlying SetPitchEnabled.
+func (x *MapView) SetPitchEnabled(pitchEnabled bool) {
+	x.inner.SetPitchEnabled(pitchEnabled)
+}
+
+// ShowsUserTrackingButton calls the underlying ShowsUserTrackingButton.
+func (x *MapView) ShowsUserTrackingButton() bool {
+	return x.inner.ShowsUserTrackingButton()
+}
+
+// SetShowsUserTrackingButton calls the underlying SetShowsUserTrackingButton.
+func (x *MapView) SetShowsUserTrackingButton(showsUserTrackingButton bool) {
+	x.inner.SetShowsUserTrackingButton(showsUserTrackingButton)
+}
+
+// PitchButtonVisibility calls the underlying PitchButtonVisibility.
+func (x *MapView) PitchButtonVisibility() raw.MKFeatureVisibility {
+	return x.inner.PitchButtonVisibility()
+}
+
+// SetPitchButtonVisibility calls the underlying SetPitchButtonVisibility.
+func (x *MapView) SetPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility) {
+	x.inner.SetPitchButtonVisibility(pitchButtonVisibility)
+}
+
+// ShowsPitchControl calls the underlying ShowsPitchControl.
+func (x *MapView) ShowsPitchControl() bool {
+	return x.inner.ShowsPitchControl()
+}
+
+// SetShowsPitchControl calls the underlying SetShowsPitchControl.
+func (x *MapView) SetShowsPitchControl(showsPitchControl bool) {
+	x.inner.SetShowsPitchControl(showsPitchControl)
+}
+
+// ShowsZoomControls calls the underlying ShowsZoomControls.
+func (x *MapView) ShowsZoomControls() bool {
+	return x.inner.ShowsZoomControls()
+}
+
+// SetShowsZoomControls calls the underlying SetShowsZoomControls.
+func (x *MapView) SetShowsZoomControls(showsZoomControls bool) {
+	x.inner.SetShowsZoomControls(showsZoomControls)
+}
+
+// ShowsCompass calls the underlying ShowsCompass.
+func (x *MapView) ShowsCompass() bool {
+	return x.inner.ShowsCompass()
+}
+
+// SetShowsCompass calls the underlying SetShowsCompass.
+func (x *MapView) SetShowsCompass(showsCompass bool) {
+	x.inner.SetShowsCompass(showsCompass)
+}
+
+// ShowsScale calls the underlying ShowsScale.
+func (x *MapView) ShowsScale() bool {
+	return x.inner.ShowsScale()
+}
+
+// SetShowsScale calls the underlying SetShowsScale.
+func (x *MapView) SetShowsScale(showsScale bool) {
+	x.inner.SetShowsScale(showsScale)
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *MapView) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *MapView) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// ShowsPointsOfInterest calls the underlying ShowsPointsOfInterest.
+func (x *MapView) ShowsPointsOfInterest() bool {
+	return x.inner.ShowsPointsOfInterest()
+}
+
+// SetShowsPointsOfInterest calls the underlying SetShowsPointsOfInterest.
+func (x *MapView) SetShowsPointsOfInterest(showsPointsOfInterest bool) {
+	x.inner.SetShowsPointsOfInterest(showsPointsOfInterest)
+}
+
+// ShowsBuildings calls the underlying ShowsBuildings.
+func (x *MapView) ShowsBuildings() bool {
+	return x.inner.ShowsBuildings()
+}
+
+// SetShowsBuildings calls the underlying SetShowsBuildings.
+func (x *MapView) SetShowsBuildings(showsBuildings bool) {
+	x.inner.SetShowsBuildings(showsBuildings)
+}
+
+// ShowsTraffic calls the underlying ShowsTraffic.
+func (x *MapView) ShowsTraffic() bool {
+	return x.inner.ShowsTraffic()
+}
+
+// SetShowsTraffic calls the underlying SetShowsTraffic.
+func (x *MapView) SetShowsTraffic(showsTraffic bool) {
+	x.inner.SetShowsTraffic(showsTraffic)
+}
+
+// ShowsUserLocation calls the underlying ShowsUserLocation.
+func (x *MapView) ShowsUserLocation() bool {
+	return x.inner.ShowsUserLocation()
+}
+
+// SetShowsUserLocation calls the underlying SetShowsUserLocation.
+func (x *MapView) SetShowsUserLocation(showsUserLocation bool) {
+	x.inner.SetShowsUserLocation(showsUserLocation)
+}
+
+// UserLocation calls the underlying UserLocation.
+func (x *MapView) UserLocation() *UserLocation {
+	_r := x.inner.UserLocation()
+	if _r == nil {
+		return nil
+	}
+	return &UserLocation{inner: _r}
+}
+
+// UserTrackingMode calls the underlying UserTrackingMode.
+func (x *MapView) UserTrackingMode() raw.MKUserTrackingMode {
+	return x.inner.UserTrackingMode()
+}
+
+// SetUserTrackingMode calls the underlying SetUserTrackingMode.
+func (x *MapView) SetUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) {
+	x.inner.SetUserTrackingMode(userTrackingMode)
+}
+
+// IsUserLocationVisible calls the underlying IsUserLocationVisible.
+func (x *MapView) IsUserLocationVisible() bool {
+	return x.inner.IsUserLocationVisible()
+}
+
+// Annotations calls the underlying Annotations.
+func (x *MapView) Annotations() *foundation.NSArray[raw.MKAnnotation] {
+	return x.inner.Annotations()
+}
+
+// SelectedAnnotations calls the underlying SelectedAnnotations.
+func (x *MapView) SelectedAnnotations() *foundation.NSArray[raw.MKAnnotation] {
+	return x.inner.SelectedAnnotations()
+}
+
+// SetSelectedAnnotations calls the underlying SetSelectedAnnotations.
+func (x *MapView) SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[raw.MKAnnotation]) {
+	x.inner.SetSelectedAnnotations(selectedAnnotations)
+}
+
+// AnnotationVisibleRect calls the underlying AnnotationVisibleRect.
+func (x *MapView) AnnotationVisibleRect() corefoundation.CGRect {
+	return x.inner.AnnotationVisibleRect()
+}
+
+// AddOverlayLevel calls the underlying AddOverlayLevel.
+func (x *MapView) AddOverlayLevel(overlay raw.MKOverlay, level raw.MKOverlayLevel) {
+	x.inner.AddOverlayLevel(overlay, level)
+}
+
+// AddOverlaysLevel calls the underlying AddOverlaysLevel.
+func (x *MapView) AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level raw.MKOverlayLevel) {
+	x.inner.AddOverlaysLevel(overlays, level)
+}
+
+// RemoveOverlay calls the underlying RemoveOverlay.
+func (x *MapView) RemoveOverlay(overlay raw.MKOverlay) {
+	x.inner.RemoveOverlay(overlay)
+}
+
+// RemoveOverlays calls the underlying RemoveOverlays.
+func (x *MapView) RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay]) {
+	x.inner.RemoveOverlays(overlays)
+}
+
+// InsertOverlayAtIndexLevel calls the underlying InsertOverlayAtIndexLevel.
+func (x *MapView) InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level raw.MKOverlayLevel) {
+	x.inner.InsertOverlayAtIndexLevel(overlay, index, level)
+}
+
+// InsertOverlayAboveOverlay calls the underlying InsertOverlayAboveOverlay.
+func (x *MapView) InsertOverlayAboveOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay) {
+	x.inner.InsertOverlayAboveOverlay(overlay, sibling)
+}
+
+// InsertOverlayBelowOverlay calls the underlying InsertOverlayBelowOverlay.
+func (x *MapView) InsertOverlayBelowOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay) {
+	x.inner.InsertOverlayBelowOverlay(overlay, sibling)
+}
+
+// ExchangeOverlayWithOverlay calls the underlying ExchangeOverlayWithOverlay.
+func (x *MapView) ExchangeOverlayWithOverlay(overlay1 raw.MKOverlay, overlay2 raw.MKOverlay) {
+	x.inner.ExchangeOverlayWithOverlay(overlay1, overlay2)
+}
+
+// OverlaysInLevel calls the underlying OverlaysInLevel.
+func (x *MapView) OverlaysInLevel(level raw.MKOverlayLevel) *foundation.NSArray[raw.MKOverlay] {
+	return x.inner.OverlaysInLevel(level)
+}
+
+// RendererForOverlay calls the underlying RendererForOverlay.
+func (x *MapView) RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer {
+	_r := x.inner.RendererForOverlay(overlay)
+	if _r == nil {
+		return nil
+	}
+	return &OverlayRenderer{inner: _r}
+}
+
+// AddOverlay calls the underlying AddOverlay.
+func (x *MapView) AddOverlay(overlay raw.MKOverlay) {
+	x.inner.AddOverlay(overlay)
+}
+
+// AddOverlays calls the underlying AddOverlays.
+func (x *MapView) AddOverlays(overlays *foundation.NSArray[raw.MKOverlay]) {
+	x.inner.AddOverlays(overlays)
+}
+
+// InsertOverlayAtIndex calls the underlying InsertOverlayAtIndex.
+func (x *MapView) InsertOverlayAtIndex(overlay raw.MKOverlay, index uint) {
+	x.inner.InsertOverlayAtIndex(overlay, index)
+}
+
+// ExchangeOverlayAtIndexWithOverlayAtIndex calls the underlying ExchangeOverlayAtIndexWithOverlayAtIndex.
+func (x *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint) {
+	x.inner.ExchangeOverlayAtIndexWithOverlayAtIndex(index1, index2)
+}
+
+// Overlays calls the underlying Overlays.
+func (x *MapView) Overlays() *foundation.NSArray[raw.MKOverlay] {
+	return x.inner.Overlays()
+}
+
+// MapViewable is the interface implemented by [MapView], for mocking and DI.
+type MapViewable interface {
+	Unwrap() *raw.MKMapView
+	WithDelegate(delegate raw.MKMapViewDelegate) *MapView
+	WithMapType(mapType raw.MKMapType) *MapView
+	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView
+	WithRegion(region raw.MKCoordinateRegion) *MapView
+	WithVisibleMapRect(visibleMapRect raw.MKMapRect) *MapView
+	WithCamera(camera *raw.MKMapCamera) *MapView
+	WithCameraZoomRange(cameraZoomRange *raw.MKMapCameraZoomRange) *MapView
+	WithCameraBoundary(cameraBoundary *raw.MKMapCameraBoundary) *MapView
+	WithZoomEnabled(zoomEnabled bool) *MapView
+	WithScrollEnabled(scrollEnabled bool) *MapView
+	WithRotateEnabled(rotateEnabled bool) *MapView
+	WithPitchEnabled(pitchEnabled bool) *MapView
+	WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView
+	WithPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility) *MapView
+	WithShowsPitchControl(showsPitchControl bool) *MapView
+	WithShowsZoomControls(showsZoomControls bool) *MapView
+	WithShowsCompass(showsCompass bool) *MapView
+	WithShowsScale(showsScale bool) *MapView
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *MapView
+	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView
+	WithShowsBuildings(showsBuildings bool) *MapView
+	WithShowsTraffic(showsTraffic bool) *MapView
+	WithShowsUserLocation(showsUserLocation bool) *MapView
+	WithUserTrackingMode(userTrackingMode raw.MKUserTrackingMode) *MapView
+	SetRegionAnimated(region raw.MKCoordinateRegion, animated bool)
+	SetCenterCoordinateAnimated(coordinate unsafe.Pointer, animated bool)
+	RegionThatFits(region raw.MKCoordinateRegion) raw.MKCoordinateRegion
+	SetVisibleMapRectAnimated(mapRect raw.MKMapRect, animate bool)
+	MapRectThatFits(mapRect raw.MKMapRect) raw.MKMapRect
+	SetVisibleMapRectEdgePaddingAnimated(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets, animate bool)
+	MapRectThatFitsEdgePadding(mapRect raw.MKMapRect, insets foundation.NSEdgeInsets) raw.MKMapRect
+	SetCameraAnimated(camera *raw.MKMapCamera, animated bool)
+	SetCameraZoomRangeAnimated(cameraZoomRange *raw.MKMapCameraZoomRange, animated bool)
+	SetCameraBoundaryAnimated(cameraBoundary *raw.MKMapCameraBoundary, animated bool)
+	ConvertCoordinateToPointToView(coordinate unsafe.Pointer, view *appkit.NSView) corefoundation.CGPoint
+	ConvertPointToCoordinateFromView(point corefoundation.CGPoint, view *appkit.NSView) unsafe.Pointer
+	ConvertRegionToRectToView(region raw.MKCoordinateRegion, view *appkit.NSView) corefoundation.CGRect
+	ConvertRectToRegionFromView(rect corefoundation.CGRect, view *appkit.NSView) raw.MKCoordinateRegion
+	SetUserTrackingModeAnimated(mode raw.MKUserTrackingMode, animated bool)
+	AddAnnotation(annotation raw.MKAnnotation)
+	AddAnnotations(annotations *foundation.NSArray[raw.MKAnnotation])
+	RemoveAnnotation(annotation raw.MKAnnotation)
+	RemoveAnnotations(annotations *foundation.NSArray[raw.MKAnnotation])
+	AnnotationsInMapRect(mapRect raw.MKMapRect) *foundation.NSSet[raw.MKAnnotation]
+	ViewForAnnotation(annotation raw.MKAnnotation) *AnnotationView
+	DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView
+	DequeueReusableAnnotationViewWithIdentifierForAnnotation(identifier string, annotation raw.MKAnnotation) *AnnotationView
+	RegisterClassForAnnotationViewWithReuseIdentifier(viewClass objc.Class, identifier string)
+	SelectAnnotationAnimated(annotation raw.MKAnnotation, animated bool)
+	DeselectAnnotationAnimated(annotation raw.MKAnnotation, animated bool)
+	ShowAnnotationsAnimated(annotations *foundation.NSArray[raw.MKAnnotation], animated bool)
+	Delegate() raw.MKMapViewDelegate
+	SetDelegate(delegate raw.MKMapViewDelegate)
+	MapType() raw.MKMapType
+	SetMapType(mapType raw.MKMapType)
+	PreferredConfiguration() *MapConfiguration
+	SetPreferredConfiguration(preferredConfiguration *raw.MKMapConfiguration)
+	Region() raw.MKCoordinateRegion
+	SetRegion(region raw.MKCoordinateRegion)
+	CenterCoordinate() unsafe.Pointer
+	SetCenterCoordinate(centerCoordinate unsafe.Pointer)
+	VisibleMapRect() raw.MKMapRect
+	SetVisibleMapRect(visibleMapRect raw.MKMapRect)
+	Camera() *MapCamera
+	SetCamera(camera *raw.MKMapCamera)
+	CameraZoomRange() *MapCameraZoomRange
+	SetCameraZoomRange(cameraZoomRange *raw.MKMapCameraZoomRange)
+	CameraBoundary() *MapCameraBoundary
+	SetCameraBoundary(cameraBoundary *raw.MKMapCameraBoundary)
+	IsZoomEnabled() bool
+	SetZoomEnabled(zoomEnabled bool)
+	IsScrollEnabled() bool
+	SetScrollEnabled(scrollEnabled bool)
+	IsRotateEnabled() bool
+	SetRotateEnabled(rotateEnabled bool)
+	IsPitchEnabled() bool
+	SetPitchEnabled(pitchEnabled bool)
+	ShowsUserTrackingButton() bool
+	SetShowsUserTrackingButton(showsUserTrackingButton bool)
+	PitchButtonVisibility() raw.MKFeatureVisibility
+	SetPitchButtonVisibility(pitchButtonVisibility raw.MKFeatureVisibility)
+	ShowsPitchControl() bool
+	SetShowsPitchControl(showsPitchControl bool)
+	ShowsZoomControls() bool
+	SetShowsZoomControls(showsZoomControls bool)
+	ShowsCompass() bool
+	SetShowsCompass(showsCompass bool)
+	ShowsScale() bool
+	SetShowsScale(showsScale bool)
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	ShowsPointsOfInterest() bool
+	SetShowsPointsOfInterest(showsPointsOfInterest bool)
+	ShowsBuildings() bool
+	SetShowsBuildings(showsBuildings bool)
+	ShowsTraffic() bool
+	SetShowsTraffic(showsTraffic bool)
+	ShowsUserLocation() bool
+	SetShowsUserLocation(showsUserLocation bool)
+	UserLocation() *UserLocation
+	UserTrackingMode() raw.MKUserTrackingMode
+	SetUserTrackingMode(userTrackingMode raw.MKUserTrackingMode)
+	IsUserLocationVisible() bool
+	Annotations() *foundation.NSArray[raw.MKAnnotation]
+	SelectedAnnotations() *foundation.NSArray[raw.MKAnnotation]
+	SetSelectedAnnotations(selectedAnnotations *foundation.NSArray[raw.MKAnnotation])
+	AnnotationVisibleRect() corefoundation.CGRect
+	AddOverlayLevel(overlay raw.MKOverlay, level raw.MKOverlayLevel)
+	AddOverlaysLevel(overlays *foundation.NSArray[raw.MKOverlay], level raw.MKOverlayLevel)
+	RemoveOverlay(overlay raw.MKOverlay)
+	RemoveOverlays(overlays *foundation.NSArray[raw.MKOverlay])
+	InsertOverlayAtIndexLevel(overlay raw.MKOverlay, index uint, level raw.MKOverlayLevel)
+	InsertOverlayAboveOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
+	InsertOverlayBelowOverlay(overlay raw.MKOverlay, sibling raw.MKOverlay)
+	ExchangeOverlayWithOverlay(overlay1 raw.MKOverlay, overlay2 raw.MKOverlay)
+	OverlaysInLevel(level raw.MKOverlayLevel) *foundation.NSArray[raw.MKOverlay]
+	RendererForOverlay(overlay raw.MKOverlay) *OverlayRenderer
+	AddOverlay(overlay raw.MKOverlay)
+	AddOverlays(overlays *foundation.NSArray[raw.MKOverlay])
+	InsertOverlayAtIndex(overlay raw.MKOverlay, index uint)
+	ExchangeOverlayAtIndexWithOverlayAtIndex(index1 uint, index2 uint)
+	Overlays() *foundation.NSArray[raw.MKOverlay]
+}
+
+var _ MapViewable = (*MapView)(nil)
 

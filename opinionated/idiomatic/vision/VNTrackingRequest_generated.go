@@ -41,9 +41,65 @@ func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
 	return x
 }
 
+// SupportedNumberOfTrackersAndReturnError calls the underlying SupportedNumberOfTrackersAndReturnError.
+func (x *TrackingRequest) SupportedNumberOfTrackersAndReturnError() (uint, error) {
+	return x.inner.SupportedNumberOfTrackersAndReturnError()
+}
+
+// InputObservation calls the underlying InputObservation.
+func (x *TrackingRequest) InputObservation() *DetectedObjectObservation {
+	_r := x.inner.InputObservation()
+	if _r == nil {
+		return nil
+	}
+	return &DetectedObjectObservation{inner: _r}
+}
+
+// SetInputObservation calls the underlying SetInputObservation.
+func (x *TrackingRequest) SetInputObservation(inputObservation *raw.VNDetectedObjectObservation) {
+	x.inner.SetInputObservation(inputObservation)
+}
+
+// TrackingLevel calls the underlying TrackingLevel.
+func (x *TrackingRequest) TrackingLevel() raw.VNRequestTrackingLevel {
+	return x.inner.TrackingLevel()
+}
+
+// SetTrackingLevel calls the underlying SetTrackingLevel.
+func (x *TrackingRequest) SetTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) {
+	x.inner.SetTrackingLevel(trackingLevel)
+}
+
+// IsLastFrame calls the underlying IsLastFrame.
+func (x *TrackingRequest) IsLastFrame() bool {
+	return x.inner.IsLastFrame()
+}
+
+// SetLastFrame calls the underlying SetLastFrame.
+func (x *TrackingRequest) SetLastFrame(lastFrame bool) {
+	x.inner.SetLastFrame(lastFrame)
+}
+
 func (x *TrackingRequest) asTrackingRequest() *raw.VNTrackingRequest { return x.inner }
 
 func (x *TrackingRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *TrackingRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// TrackingRequestable is the interface implemented by [TrackingRequest], for mocking and DI.
+type TrackingRequestable interface {
+	Unwrap() *raw.VNTrackingRequest
+	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest
+	WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackingRequest
+	WithLastFrame(lastFrame bool) *TrackingRequest
+	SupportedNumberOfTrackersAndReturnError() (uint, error)
+	InputObservation() *DetectedObjectObservation
+	SetInputObservation(inputObservation *raw.VNDetectedObjectObservation)
+	TrackingLevel() raw.VNRequestTrackingLevel
+	SetTrackingLevel(trackingLevel raw.VNRequestTrackingLevel)
+	IsLastFrame() bool
+	SetLastFrame(lastFrame bool)
+}
+
+var _ TrackingRequestable = (*TrackingRequest)(nil)
 

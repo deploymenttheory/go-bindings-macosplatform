@@ -23,3 +23,26 @@ func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStateP
 	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
 }
 
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
+	if _r == nil {
+		return nil
+	}
+	return &ResourceStatePassSampleBufferAttachmentDescriptor{inner: _r}
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
+	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+}
+
+// ResourceStatePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ResourceStatePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
+type ResourceStatePassSampleBufferAttachmentDescriptorArrayable interface {
+	Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray
+	ObjectAtIndexedSubscript(attachmentIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+}
+
+var _ ResourceStatePassSampleBufferAttachmentDescriptorArrayable = (*ResourceStatePassSampleBufferAttachmentDescriptorArray)(nil)
+

@@ -58,5 +58,49 @@ func (x *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RA
 	return x
 }
 
+// HasNeutralValue calls the underlying HasNeutralValue.
+func (x *RAWProcessingFloatParameter) HasNeutralValue(outNeutralValue *float32) bool {
+	return x.inner.HasNeutralValue(outNeutralValue)
+}
+
+// HasCameraValue calls the underlying HasCameraValue.
+func (x *RAWProcessingFloatParameter) HasCameraValue(outCameraValue *float32) bool {
+	return x.inner.HasCameraValue(outCameraValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *RAWProcessingFloatParameter) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *RAWProcessingFloatParameter) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// CurrentValue calls the underlying CurrentValue.
+func (x *RAWProcessingFloatParameter) CurrentValue() float32 {
+	return x.inner.CurrentValue()
+}
+
+// SetCurrentValue calls the underlying SetCurrentValue.
+func (x *RAWProcessingFloatParameter) SetCurrentValue(currentValue float32) {
+	x.inner.SetCurrentValue(currentValue)
+}
+
 func (x *RAWProcessingFloatParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter { return &x.inner.MERAWProcessingParameter }
+
+// RAWProcessingFloatParameterable is the interface implemented by [RAWProcessingFloatParameter], for mocking and DI.
+type RAWProcessingFloatParameterable interface {
+	Unwrap() *raw.MERAWProcessingFloatParameter
+	WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter
+	HasNeutralValue(outNeutralValue *float32) bool
+	HasCameraValue(outCameraValue *float32) bool
+	MaximumValue() float32
+	MinimumValue() float32
+	CurrentValue() float32
+	SetCurrentValue(currentValue float32)
+}
+
+var _ RAWProcessingFloatParameterable = (*RAWProcessingFloatParameter)(nil)
 

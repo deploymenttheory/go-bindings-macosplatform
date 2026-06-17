@@ -43,3 +43,36 @@ func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) WithPosixTimeMs
 	return x
 }
 
+// SystemTimeMs calls the underlying SystemTimeMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SystemTimeMs() *foundation.NSNumber {
+	return x.inner.SystemTimeMs()
+}
+
+// SetSystemTimeMs calls the underlying SetSystemTimeMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetSystemTimeMs(systemTimeMs *foundation.NSNumber) {
+	x.inner.SetSystemTimeMs(systemTimeMs)
+}
+
+// PosixTimeMs calls the underlying PosixTimeMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) PosixTimeMs() *foundation.NSNumber {
+	return x.inner.PosixTimeMs()
+}
+
+// SetPosixTimeMs calls the underlying SetPosixTimeMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams) SetPosixTimeMs(posixTimeMs *foundation.NSNumber) {
+	x.inner.SetPosixTimeMs(posixTimeMs)
+}
+
+// MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams], for mocking and DI.
+type MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	WithSystemTimeMs(systemTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	WithPosixTimeMs(posixTimeMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams
+	SystemTimeMs() *foundation.NSNumber
+	SetSystemTimeMs(systemTimeMs *foundation.NSNumber)
+	PosixTimeMs() *foundation.NSNumber
+	SetPosixTimeMs(posixTimeMs *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterTimeSnapshotResponseParamsable = (*MTRGeneralDiagnosticsClusterTimeSnapshotResponseParams)(nil)
+

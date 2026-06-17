@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,42 @@ func (x *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPrev
 	return x
 }
 
+// OutputDeviceUniqueID calls the underlying OutputDeviceUniqueID.
+func (x *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
+	_r := x.inner.OutputDeviceUniqueID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOutputDeviceUniqueID calls the underlying SetOutputDeviceUniqueID.
+func (x *CaptureAudioPreviewOutput) SetOutputDeviceUniqueID(outputDeviceUniqueID string) {
+	x.inner.SetOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(outputDeviceUniqueID))
+}
+
+// Volume calls the underlying Volume.
+func (x *CaptureAudioPreviewOutput) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *CaptureAudioPreviewOutput) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
 func (x *CaptureAudioPreviewOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
+
+// CaptureAudioPreviewOutputable is the interface implemented by [CaptureAudioPreviewOutput], for mocking and DI.
+type CaptureAudioPreviewOutputable interface {
+	Unwrap() *raw.AVCaptureAudioPreviewOutput
+	WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput
+	WithVolume(volume float32) *CaptureAudioPreviewOutput
+	OutputDeviceUniqueID() string
+	SetOutputDeviceUniqueID(outputDeviceUniqueID string)
+	Volume() float32
+	SetVolume(volume float32)
+}
+
+var _ CaptureAudioPreviewOutputable = (*CaptureAudioPreviewOutput)(nil)
 

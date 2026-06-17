@@ -25,3 +25,10 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 
 func (x *MTRBasicClusterCapabilityMinimaStruct) asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct { return &x.inner.MTRBasicInformationClusterCapabilityMinimaStruct }
 
+// MTRBasicClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicClusterCapabilityMinimaStruct], for mocking and DI.
+type MTRBasicClusterCapabilityMinimaStructable interface {
+	Unwrap() *raw.MTRBasicClusterCapabilityMinimaStruct
+}
+
+var _ MTRBasicClusterCapabilityMinimaStructable = (*MTRBasicClusterCapabilityMinimaStruct)(nil)
+

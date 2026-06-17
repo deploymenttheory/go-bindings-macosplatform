@@ -5,8 +5,12 @@
 package devicecheck
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicecheck"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Device wraps [raw.DCDevice] with a fluent Go API.
@@ -22,4 +26,42 @@ func NewDevice() *Device {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DCDevice")), objc.RegisterName("new"))
 	return &Device{inner: raw.DCDeviceFromID(_id)}
 }
+
+// GenerateToken blocks until the operation completes or ctx is cancelled.
+func (x *Device) GenerateToken(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GenerateTokenWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// IsSupported calls the underlying IsSupported.
+func (x *Device) IsSupported() bool {
+	return x.inner.IsSupported()
+}
+
+// Deviceable is the interface implemented by [Device], for mocking and DI.
+type Deviceable interface {
+	Unwrap() *raw.DCDevice
+	GenerateToken(ctx context.Context) (*foundation.NSData, error)
+	IsSupported() bool
+}
+
+var _ Deviceable = (*Device)(nil)
 

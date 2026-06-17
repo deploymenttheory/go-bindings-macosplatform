@@ -25,3 +25,10 @@ func NewMTRThreadNetworkDiagnosticsClusterNeighborTable() *MTRThreadNetworkDiagn
 
 func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct }
 
+// MTRThreadNetworkDiagnosticsClusterNeighborTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNeighborTable], for mocking and DI.
+type MTRThreadNetworkDiagnosticsClusterNeighborTableable interface {
+	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable
+}
+
+var _ MTRThreadNetworkDiagnosticsClusterNeighborTableable = (*MTRThreadNetworkDiagnosticsClusterNeighborTable)(nil)
+

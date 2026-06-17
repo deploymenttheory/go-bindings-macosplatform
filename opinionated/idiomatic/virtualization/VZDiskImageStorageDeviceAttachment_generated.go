@@ -42,5 +42,36 @@ func NewDiskImageStorageDeviceAttachmentWithURLReadOnlyCachingModeSynchronizatio
 	return &DiskImageStorageDeviceAttachment{inner: raw.VZDiskImageStorageDeviceAttachmentFromID(_id)}, nil
 }
 
+// URL calls the underlying URL.
+func (x *DiskImageStorageDeviceAttachment) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *DiskImageStorageDeviceAttachment) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// CachingMode calls the underlying CachingMode.
+func (x *DiskImageStorageDeviceAttachment) CachingMode() raw.VZDiskImageCachingMode {
+	return x.inner.CachingMode()
+}
+
+// SynchronizationMode calls the underlying SynchronizationMode.
+func (x *DiskImageStorageDeviceAttachment) SynchronizationMode() raw.VZDiskImageSynchronizationMode {
+	return x.inner.SynchronizationMode()
+}
+
 func (x *DiskImageStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment { return &x.inner.VZStorageDeviceAttachment }
+
+// DiskImageStorageDeviceAttachmentable is the interface implemented by [DiskImageStorageDeviceAttachment], for mocking and DI.
+type DiskImageStorageDeviceAttachmentable interface {
+	Unwrap() *raw.VZDiskImageStorageDeviceAttachment
+	URL() *foundation.NSURL
+	IsReadOnly() bool
+	CachingMode() raw.VZDiskImageCachingMode
+	SynchronizationMode() raw.VZDiskImageSynchronizationMode
+}
+
+var _ DiskImageStorageDeviceAttachmentable = (*DiskImageStorageDeviceAttachment)(nil)
 

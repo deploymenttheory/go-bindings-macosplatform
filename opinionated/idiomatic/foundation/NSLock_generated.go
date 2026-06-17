@@ -30,5 +30,41 @@ func (x *Lock) WithName(name string) *Lock {
 	return x
 }
 
+// TryLock calls the underlying TryLock.
+func (x *Lock) TryLock() bool {
+	return x.inner.TryLock()
+}
+
+// LockBeforeDate calls the underlying LockBeforeDate.
+func (x *Lock) LockBeforeDate(limit *raw.NSDate) bool {
+	return x.inner.LockBeforeDate(limit)
+}
+
+// Name calls the underlying Name.
+func (x *Lock) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *Lock) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *Lock) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Lockable is the interface implemented by [Lock], for mocking and DI.
+type Lockable interface {
+	Unwrap() *raw.NSLock
+	WithName(name string) *Lock
+	TryLock() bool
+	LockBeforeDate(limit *raw.NSDate) bool
+	Name() *String
+	SetName(name string)
+}
+
+var _ Lockable = (*Lock)(nil)
 

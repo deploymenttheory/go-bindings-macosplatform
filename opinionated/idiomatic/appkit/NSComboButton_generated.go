@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,9 +49,76 @@ func (x *ComboButton) WithStyle(style raw.NSComboButtonStyle) *ComboButton {
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *ComboButton) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ComboButton) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Image calls the underlying Image.
+func (x *ComboButton) Image() *Image {
+	_r := x.inner.Image()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetImage calls the underlying SetImage.
+func (x *ComboButton) SetImage(image *raw.NSImage) {
+	x.inner.SetImage(image)
+}
+
+// ImageScaling calls the underlying ImageScaling.
+func (x *ComboButton) ImageScaling() raw.NSImageScaling {
+	return x.inner.ImageScaling()
+}
+
+// SetImageScaling calls the underlying SetImageScaling.
+func (x *ComboButton) SetImageScaling(imageScaling raw.NSImageScaling) {
+	x.inner.SetImageScaling(imageScaling)
+}
+
+// Style calls the underlying Style.
+func (x *ComboButton) Style() raw.NSComboButtonStyle {
+	return x.inner.Style()
+}
+
+// SetStyle calls the underlying SetStyle.
+func (x *ComboButton) SetStyle(style raw.NSComboButtonStyle) {
+	x.inner.SetStyle(style)
+}
+
 func (x *ComboButton) asControl() *raw.NSControl { return &x.inner.NSControl }
 
 func (x *ComboButton) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *ComboButton) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// ComboButtonable is the interface implemented by [ComboButton], for mocking and DI.
+type ComboButtonable interface {
+	Unwrap() *raw.NSComboButton
+	WithTitle(title string) *ComboButton
+	WithImage(image *raw.NSImage) *ComboButton
+	WithImageScaling(imageScaling raw.NSImageScaling) *ComboButton
+	WithStyle(style raw.NSComboButtonStyle) *ComboButton
+	Title() string
+	SetTitle(title string)
+	Image() *Image
+	SetImage(image *raw.NSImage)
+	ImageScaling() raw.NSImageScaling
+	SetImageScaling(imageScaling raw.NSImageScaling)
+	Style() raw.NSComboButtonStyle
+	SetStyle(style raw.NSComboButtonStyle)
+}
+
+var _ ComboButtonable = (*ComboButton)(nil)
 

@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,80 @@ func NewMetricPlayerItemVariantSwitchEvent() *MetricPlayerItemVariantSwitchEvent
 	return &MetricPlayerItemVariantSwitchEvent{inner: raw.AVMetricPlayerItemVariantSwitchEventFromID(_id)}
 }
 
+// FromVariant calls the underlying FromVariant.
+func (x *MetricPlayerItemVariantSwitchEvent) FromVariant() *AssetVariant {
+	_r := x.inner.FromVariant()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariant{inner: _r}
+}
+
+// ToVariant calls the underlying ToVariant.
+func (x *MetricPlayerItemVariantSwitchEvent) ToVariant() *AssetVariant {
+	_r := x.inner.ToVariant()
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariant{inner: _r}
+}
+
 // LoadedTimeRanges returns the collection as a Go slice.
 func (x *MetricPlayerItemVariantSwitchEvent) LoadedTimeRanges() []*foundation.NSValue {
 	arr := x.inner.LoadedTimeRanges()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
+}
+
+// VideoRendition calls the underlying VideoRendition.
+func (x *MetricPlayerItemVariantSwitchEvent) VideoRendition() *MetricMediaRendition {
+	_r := x.inner.VideoRendition()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MetricMediaRendition{inner: _r}
+}
+
+// AudioRendition calls the underlying AudioRendition.
+func (x *MetricPlayerItemVariantSwitchEvent) AudioRendition() *MetricMediaRendition {
+	_r := x.inner.AudioRendition()
+	if _r == nil {
+		return nil
+	}
+	return &MetricMediaRendition{inner: _r}
+}
+
+// SubtitleRendition calls the underlying SubtitleRendition.
+func (x *MetricPlayerItemVariantSwitchEvent) SubtitleRendition() *MetricMediaRendition {
+	_r := x.inner.SubtitleRendition()
+	if _r == nil {
+		return nil
+	}
+	return &MetricMediaRendition{inner: _r}
+}
+
+// DidSucceed calls the underlying DidSucceed.
+func (x *MetricPlayerItemVariantSwitchEvent) DidSucceed() bool {
+	return x.inner.DidSucceed()
 }
 
 func (x *MetricPlayerItemVariantSwitchEvent) asMetricEvent() *raw.AVMetricEvent { return &x.inner.AVMetricEvent }
+
+// MetricPlayerItemVariantSwitchEventable is the interface implemented by [MetricPlayerItemVariantSwitchEvent], for mocking and DI.
+type MetricPlayerItemVariantSwitchEventable interface {
+	Unwrap() *raw.AVMetricPlayerItemVariantSwitchEvent
+	FromVariant() *AssetVariant
+	ToVariant() *AssetVariant
+	LoadedTimeRanges() []*foundation.NSValue
+	VideoRendition() *MetricMediaRendition
+	AudioRendition() *MetricMediaRendition
+	SubtitleRendition() *MetricMediaRendition
+	DidSucceed() bool
+}
+
+var _ MetricPlayerItemVariantSwitchEventable = (*MetricPlayerItemVariantSwitchEvent)(nil)
 

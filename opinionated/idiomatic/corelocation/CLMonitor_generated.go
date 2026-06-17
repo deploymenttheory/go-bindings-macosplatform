@@ -7,6 +7,7 @@ package corelocation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,60 @@ func NewMonitor() *Monitor {
 	return &Monitor{inner: raw.CLMonitorFromID(_id)}
 }
 
+// AddConditionForMonitoringIdentifier calls the underlying AddConditionForMonitoringIdentifier.
+func (x *Monitor) AddConditionForMonitoringIdentifier(condition *raw.CLCondition, identifier string) {
+	x.inner.AddConditionForMonitoringIdentifier(condition, foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// AddConditionForMonitoringIdentifierAssumedState calls the underlying AddConditionForMonitoringIdentifierAssumedState.
+func (x *Monitor) AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state raw.CLMonitoringState) {
+	x.inner.AddConditionForMonitoringIdentifierAssumedState(condition, foundation.NSStringStringWithUTF8String(identifier), state)
+}
+
+// RemoveConditionFromMonitoringWithIdentifier calls the underlying RemoveConditionFromMonitoringWithIdentifier.
+func (x *Monitor) RemoveConditionFromMonitoringWithIdentifier(identifier string) {
+	x.inner.RemoveConditionFromMonitoringWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// MonitoringRecordForIdentifier calls the underlying MonitoringRecordForIdentifier.
+func (x *Monitor) MonitoringRecordForIdentifier(identifier string) *MonitoringRecord {
+	_r := x.inner.MonitoringRecordForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	if _r == nil {
+		return nil
+	}
+	return &MonitoringRecord{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *Monitor) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // MonitoredIdentifiers returns the collection as a Go slice.
-func (x *Monitor) MonitoredIdentifiers() []*foundation.NSString {
+func (x *Monitor) MonitoredIdentifiers() []string {
 	arr := x.inner.MonitoredIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// Monitorable is the interface implemented by [Monitor], for mocking and DI.
+type Monitorable interface {
+	Unwrap() *raw.CLMonitor
+	AddConditionForMonitoringIdentifier(condition *raw.CLCondition, identifier string)
+	AddConditionForMonitoringIdentifierAssumedState(condition *raw.CLCondition, identifier string, state raw.CLMonitoringState)
+	RemoveConditionFromMonitoringWithIdentifier(identifier string)
+	MonitoringRecordForIdentifier(identifier string) *MonitoringRecord
+	Name() string
+	MonitoredIdentifiers() []string
+}
+
+var _ Monitorable = (*Monitor)(nil)
 

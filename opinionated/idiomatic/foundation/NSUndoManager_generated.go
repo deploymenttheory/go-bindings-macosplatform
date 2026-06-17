@@ -5,7 +5,9 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -52,18 +54,279 @@ func (x *UndoManager) WithRunLoopModes(items ...StringProvider) *UndoManager {
 	return x
 }
 
+// BeginUndoGrouping calls the underlying BeginUndoGrouping.
+func (x *UndoManager) BeginUndoGrouping() {
+	x.inner.BeginUndoGrouping()
+}
+
+// EndUndoGrouping calls the underlying EndUndoGrouping.
+func (x *UndoManager) EndUndoGrouping() {
+	x.inner.EndUndoGrouping()
+}
+
+// DisableUndoRegistration calls the underlying DisableUndoRegistration.
+func (x *UndoManager) DisableUndoRegistration() {
+	x.inner.DisableUndoRegistration()
+}
+
+// EnableUndoRegistration calls the underlying EnableUndoRegistration.
+func (x *UndoManager) EnableUndoRegistration() {
+	x.inner.EnableUndoRegistration()
+}
+
+// Undo calls the underlying Undo.
+func (x *UndoManager) Undo() {
+	x.inner.Undo()
+}
+
+// Redo calls the underlying Redo.
+func (x *UndoManager) Redo() {
+	x.inner.Redo()
+}
+
+// UndoNestedGroup calls the underlying UndoNestedGroup.
+func (x *UndoManager) UndoNestedGroup() {
+	x.inner.UndoNestedGroup()
+}
+
+// RemoveAllActions calls the underlying RemoveAllActions.
+func (x *UndoManager) RemoveAllActions() {
+	x.inner.RemoveAllActions()
+}
+
+// RemoveAllActionsWithTarget calls the underlying RemoveAllActionsWithTarget.
+func (x *UndoManager) RemoveAllActionsWithTarget(target objc.ID) {
+	x.inner.RemoveAllActionsWithTarget(target)
+}
+
+// RegisterUndoWithTargetSelectorObject calls the underlying RegisterUndoWithTargetSelectorObject.
+func (x *UndoManager) RegisterUndoWithTargetSelectorObject(target objc.ID, selector objc.SEL, object objc.ID) {
+	x.inner.RegisterUndoWithTargetSelectorObject(target, selector, object)
+}
+
+// PrepareWithInvocationTarget calls the underlying PrepareWithInvocationTarget.
+func (x *UndoManager) PrepareWithInvocationTarget(target objc.ID) objc.ID {
+	return x.inner.PrepareWithInvocationTarget(target)
+}
+
+// RegisterUndoWithTargetHandler calls the underlying RegisterUndoWithTargetHandler.
+func (x *UndoManager) RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID)) {
+	x.inner.RegisterUndoWithTargetHandler(target, undoHandler)
+}
+
+// SetActionIsDiscardable calls the underlying SetActionIsDiscardable.
+func (x *UndoManager) SetActionIsDiscardable(discardable bool) {
+	x.inner.SetActionIsDiscardable(discardable)
+}
+
+// SetActionName calls the underlying SetActionName.
+func (x *UndoManager) SetActionName(actionName string) {
+	x.inner.SetActionName(foundation.NSStringStringWithUTF8String(actionName))
+}
+
+// UndoActionUserInfoValueForKey calls the underlying UndoActionUserInfoValueForKey.
+func (x *UndoManager) UndoActionUserInfoValueForKey(key *raw.NSString) objc.ID {
+	return x.inner.UndoActionUserInfoValueForKey(key)
+}
+
+// RedoActionUserInfoValueForKey calls the underlying RedoActionUserInfoValueForKey.
+func (x *UndoManager) RedoActionUserInfoValueForKey(key *raw.NSString) objc.ID {
+	return x.inner.RedoActionUserInfoValueForKey(key)
+}
+
+// SetActionUserInfoValueForKey calls the underlying SetActionUserInfoValueForKey.
+func (x *UndoManager) SetActionUserInfoValueForKey(info objc.ID, key *raw.NSString) {
+	x.inner.SetActionUserInfoValueForKey(info, key)
+}
+
+// UndoMenuTitleForUndoActionName calls the underlying UndoMenuTitleForUndoActionName.
+func (x *UndoManager) UndoMenuTitleForUndoActionName(actionName string) *String {
+	_r := x.inner.UndoMenuTitleForUndoActionName(foundation.NSStringStringWithUTF8String(actionName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// RedoMenuTitleForUndoActionName calls the underlying RedoMenuTitleForUndoActionName.
+func (x *UndoManager) RedoMenuTitleForUndoActionName(actionName string) *String {
+	_r := x.inner.RedoMenuTitleForUndoActionName(foundation.NSStringStringWithUTF8String(actionName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// GroupingLevel calls the underlying GroupingLevel.
+func (x *UndoManager) GroupingLevel() int {
+	return x.inner.GroupingLevel()
+}
+
+// IsUndoRegistrationEnabled calls the underlying IsUndoRegistrationEnabled.
+func (x *UndoManager) IsUndoRegistrationEnabled() bool {
+	return x.inner.IsUndoRegistrationEnabled()
+}
+
+// GroupsByEvent calls the underlying GroupsByEvent.
+func (x *UndoManager) GroupsByEvent() bool {
+	return x.inner.GroupsByEvent()
+}
+
+// SetGroupsByEvent calls the underlying SetGroupsByEvent.
+func (x *UndoManager) SetGroupsByEvent(groupsByEvent bool) {
+	x.inner.SetGroupsByEvent(groupsByEvent)
+}
+
+// LevelsOfUndo calls the underlying LevelsOfUndo.
+func (x *UndoManager) LevelsOfUndo() uint {
+	return x.inner.LevelsOfUndo()
+}
+
+// SetLevelsOfUndo calls the underlying SetLevelsOfUndo.
+func (x *UndoManager) SetLevelsOfUndo(levelsOfUndo uint) {
+	x.inner.SetLevelsOfUndo(levelsOfUndo)
+}
+
 // RunLoopModes returns the collection as a Go slice.
 func (x *UndoManager) RunLoopModes() []*raw.NSString {
 	arr := x.inner.RunLoopModes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSString {
+		return raw.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetRunLoopModes calls the underlying SetRunLoopModes.
+func (x *UndoManager) SetRunLoopModes(runLoopModes *raw.NSArray[*raw.NSString]) {
+	x.inner.SetRunLoopModes(runLoopModes)
+}
+
+// CanUndo calls the underlying CanUndo.
+func (x *UndoManager) CanUndo() bool {
+	return x.inner.CanUndo()
+}
+
+// CanRedo calls the underlying CanRedo.
+func (x *UndoManager) CanRedo() bool {
+	return x.inner.CanRedo()
+}
+
+// UndoCount calls the underlying UndoCount.
+func (x *UndoManager) UndoCount() uint {
+	return x.inner.UndoCount()
+}
+
+// RedoCount calls the underlying RedoCount.
+func (x *UndoManager) RedoCount() uint {
+	return x.inner.RedoCount()
+}
+
+// IsUndoing calls the underlying IsUndoing.
+func (x *UndoManager) IsUndoing() bool {
+	return x.inner.IsUndoing()
+}
+
+// IsRedoing calls the underlying IsRedoing.
+func (x *UndoManager) IsRedoing() bool {
+	return x.inner.IsRedoing()
+}
+
+// UndoActionIsDiscardable calls the underlying UndoActionIsDiscardable.
+func (x *UndoManager) UndoActionIsDiscardable() bool {
+	return x.inner.UndoActionIsDiscardable()
+}
+
+// RedoActionIsDiscardable calls the underlying RedoActionIsDiscardable.
+func (x *UndoManager) RedoActionIsDiscardable() bool {
+	return x.inner.RedoActionIsDiscardable()
+}
+
+// UndoActionName calls the underlying UndoActionName.
+func (x *UndoManager) UndoActionName() *String {
+	_r := x.inner.UndoActionName()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// RedoActionName calls the underlying RedoActionName.
+func (x *UndoManager) RedoActionName() *String {
+	_r := x.inner.RedoActionName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UndoMenuItemTitle calls the underlying UndoMenuItemTitle.
+func (x *UndoManager) UndoMenuItemTitle() *String {
+	_r := x.inner.UndoMenuItemTitle()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// RedoMenuItemTitle calls the underlying RedoMenuItemTitle.
+func (x *UndoManager) RedoMenuItemTitle() *String {
+	_r := x.inner.RedoMenuItemTitle()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
 }
 
 func (x *UndoManager) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// UndoManagerable is the interface implemented by [UndoManager], for mocking and DI.
+type UndoManagerable interface {
+	Unwrap() *raw.NSUndoManager
+	WithGroupsByEvent(groupsByEvent bool) *UndoManager
+	WithLevelsOfUndo(levelsOfUndo uint) *UndoManager
+	WithRunLoopModes(items ...StringProvider) *UndoManager
+	BeginUndoGrouping()
+	EndUndoGrouping()
+	DisableUndoRegistration()
+	EnableUndoRegistration()
+	Undo()
+	Redo()
+	UndoNestedGroup()
+	RemoveAllActions()
+	RemoveAllActionsWithTarget(target objc.ID)
+	RegisterUndoWithTargetSelectorObject(target objc.ID, selector objc.SEL, object objc.ID)
+	PrepareWithInvocationTarget(target objc.ID) objc.ID
+	RegisterUndoWithTargetHandler(target objc.ID, undoHandler func(objc.ID))
+	SetActionIsDiscardable(discardable bool)
+	SetActionName(actionName string)
+	UndoActionUserInfoValueForKey(key *raw.NSString) objc.ID
+	RedoActionUserInfoValueForKey(key *raw.NSString) objc.ID
+	SetActionUserInfoValueForKey(info objc.ID, key *raw.NSString)
+	UndoMenuTitleForUndoActionName(actionName string) *String
+	RedoMenuTitleForUndoActionName(actionName string) *String
+	GroupingLevel() int
+	IsUndoRegistrationEnabled() bool
+	GroupsByEvent() bool
+	SetGroupsByEvent(groupsByEvent bool)
+	LevelsOfUndo() uint
+	SetLevelsOfUndo(levelsOfUndo uint)
+	RunLoopModes() []*raw.NSString
+	SetRunLoopModes(runLoopModes *raw.NSArray[*raw.NSString])
+	CanUndo() bool
+	CanRedo() bool
+	UndoCount() uint
+	RedoCount() uint
+	IsUndoing() bool
+	IsRedoing() bool
+	UndoActionIsDiscardable() bool
+	RedoActionIsDiscardable() bool
+	UndoActionName() *String
+	RedoActionName() *String
+	UndoMenuItemTitle() *String
+	RedoMenuItemTitle() *String
+}
+
+var _ UndoManagerable = (*UndoManager)(nil)
 

@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -26,17 +27,23 @@ func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers *foundatio
 }
 
 // MessageIdentifiers returns the collection as a Go slice.
-func (x *UnsendMessagesIntent) MessageIdentifiers() []*foundation.NSString {
+func (x *UnsendMessagesIntent) MessageIdentifiers() []string {
 	arr := x.inner.MessageIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *UnsendMessagesIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// UnsendMessagesIntentable is the interface implemented by [UnsendMessagesIntent], for mocking and DI.
+type UnsendMessagesIntentable interface {
+	Unwrap() *raw.INUnsendMessagesIntent
+	MessageIdentifiers() []string
+}
+
+var _ UnsendMessagesIntentable = (*UnsendMessagesIntent)(nil)
 

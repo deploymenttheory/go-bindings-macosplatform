@@ -5,8 +5,11 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Contour wraps [raw.VNContour] with a fluent Go API.
@@ -23,16 +26,84 @@ func NewContour() *Contour {
 	return &Contour{inner: raw.VNContourFromID(_id)}
 }
 
+// ChildContourAtIndexError calls the underlying ChildContourAtIndexError.
+func (x *Contour) ChildContourAtIndexError(childContourIndex uint) (*Contour, error) {
+	_r, _err := x.inner.ChildContourAtIndexError(childContourIndex)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Contour{inner: _r}, nil
+}
+
+// PolygonApproximationWithEpsilonError calls the underlying PolygonApproximationWithEpsilonError.
+func (x *Contour) PolygonApproximationWithEpsilonError(epsilon float32) (*Contour, error) {
+	_r, _err := x.inner.PolygonApproximationWithEpsilonError(epsilon)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Contour{inner: _r}, nil
+}
+
+// IndexPath calls the underlying IndexPath.
+func (x *Contour) IndexPath() *foundation.NSIndexPath {
+	return x.inner.IndexPath()
+}
+
+// ChildContourCount calls the underlying ChildContourCount.
+func (x *Contour) ChildContourCount() int {
+	return x.inner.ChildContourCount()
+}
+
 // ChildContours returns the collection as a Go slice.
 func (x *Contour) ChildContours() []*raw.VNContour {
 	arr := x.inner.ChildContours()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNContour, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNContour {
+		return raw.VNContourFromID(purego.Retain(_id))
+	})
 }
+
+// PointCount calls the underlying PointCount.
+func (x *Contour) PointCount() int {
+	return x.inner.PointCount()
+}
+
+// NormalizedPoints calls the underlying NormalizedPoints.
+func (x *Contour) NormalizedPoints() unsafe.Pointer {
+	return x.inner.NormalizedPoints()
+}
+
+// NormalizedPath calls the underlying NormalizedPath.
+func (x *Contour) NormalizedPath() unsafe.Pointer {
+	return x.inner.NormalizedPath()
+}
+
+// AspectRatio calls the underlying AspectRatio.
+func (x *Contour) AspectRatio() float32 {
+	return x.inner.AspectRatio()
+}
+
+// Contourable is the interface implemented by [Contour], for mocking and DI.
+type Contourable interface {
+	Unwrap() *raw.VNContour
+	ChildContourAtIndexError(childContourIndex uint) (*Contour, error)
+	PolygonApproximationWithEpsilonError(epsilon float32) (*Contour, error)
+	IndexPath() *foundation.NSIndexPath
+	ChildContourCount() int
+	ChildContours() []*raw.VNContour
+	PointCount() int
+	NormalizedPoints() unsafe.Pointer
+	NormalizedPath() unsafe.Pointer
+	AspectRatio() float32
+}
+
+var _ Contourable = (*Contour)(nil)
 

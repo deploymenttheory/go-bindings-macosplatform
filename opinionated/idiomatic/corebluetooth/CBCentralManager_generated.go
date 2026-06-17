@@ -38,5 +38,67 @@ func (x *CentralManager) WithDelegate(delegate raw.CBCentralManagerDelegate) *Ce
 	return x
 }
 
+// RetrievePeripheralsWithIdentifiers calls the underlying RetrievePeripheralsWithIdentifiers.
+func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*raw.CBPeripheral] {
+	return x.inner.RetrievePeripheralsWithIdentifiers(identifiers)
+}
+
+// RetrieveConnectedPeripheralsWithServices calls the underlying RetrieveConnectedPeripheralsWithServices.
+func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) *foundation.NSArray[*raw.CBPeripheral] {
+	return x.inner.RetrieveConnectedPeripheralsWithServices(serviceUUIDs)
+}
+
+// ScanForPeripheralsWithServicesOptions calls the underlying ScanForPeripheralsWithServicesOptions.
+func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs *foundation.NSArray[*raw.CBUUID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.ScanForPeripheralsWithServicesOptions(serviceUUIDs, options)
+}
+
+// StopScan calls the underlying StopScan.
+func (x *CentralManager) StopScan() {
+	x.inner.StopScan()
+}
+
+// ConnectPeripheralOptions calls the underlying ConnectPeripheralOptions.
+func (x *CentralManager) ConnectPeripheralOptions(peripheral *raw.CBPeripheral, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.ConnectPeripheralOptions(peripheral, options)
+}
+
+// CancelPeripheralConnection calls the underlying CancelPeripheralConnection.
+func (x *CentralManager) CancelPeripheralConnection(peripheral *raw.CBPeripheral) {
+	x.inner.CancelPeripheralConnection(peripheral)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CentralManager) Delegate() raw.CBCentralManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CentralManager) SetDelegate(delegate raw.CBCentralManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsScanning calls the underlying IsScanning.
+func (x *CentralManager) IsScanning() bool {
+	return x.inner.IsScanning()
+}
+
 func (x *CentralManager) asManager() *raw.CBManager { return &x.inner.CBManager }
+
+// CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
+type CentralManagerable interface {
+	Unwrap() *raw.CBCentralManager
+	WithDelegate(delegate raw.CBCentralManagerDelegate) *CentralManager
+	RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*raw.CBPeripheral]
+	RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) *foundation.NSArray[*raw.CBPeripheral]
+	ScanForPeripheralsWithServicesOptions(serviceUUIDs *foundation.NSArray[*raw.CBUUID], options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	StopScan()
+	ConnectPeripheralOptions(peripheral *raw.CBPeripheral, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	CancelPeripheralConnection(peripheral *raw.CBPeripheral)
+	Delegate() raw.CBCentralManagerDelegate
+	SetDelegate(delegate raw.CBCentralManagerDelegate)
+	IsScanning() bool
+}
+
+var _ CentralManagerable = (*CentralManager)(nil)
 

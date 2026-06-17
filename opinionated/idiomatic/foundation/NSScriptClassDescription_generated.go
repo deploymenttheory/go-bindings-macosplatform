@@ -25,7 +25,150 @@ func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string,
 	return &ScriptClassDescription{inner: raw.NSScriptClassDescriptionFromID(_id)}
 }
 
+// MatchesAppleEventCode calls the underlying MatchesAppleEventCode.
+func (x *ScriptClassDescription) MatchesAppleEventCode(appleEventCode uint) bool {
+	return x.inner.MatchesAppleEventCode(appleEventCode)
+}
+
+// SupportsCommand calls the underlying SupportsCommand.
+func (x *ScriptClassDescription) SupportsCommand(commandDescription *raw.NSScriptCommandDescription) bool {
+	return x.inner.SupportsCommand(commandDescription)
+}
+
+// SelectorForCommand calls the underlying SelectorForCommand.
+func (x *ScriptClassDescription) SelectorForCommand(commandDescription *raw.NSScriptCommandDescription) objc.SEL {
+	return x.inner.SelectorForCommand(commandDescription)
+}
+
+// TypeForKey calls the underlying TypeForKey.
+func (x *ScriptClassDescription) TypeForKey(key string) *String {
+	_r := x.inner.TypeForKey(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ClassDescriptionForKey calls the underlying ClassDescriptionForKey.
+func (x *ScriptClassDescription) ClassDescriptionForKey(key string) *ScriptClassDescription {
+	_r := x.inner.ClassDescriptionForKey(foundation.NSStringStringWithUTF8String(key))
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// AppleEventCodeForKey calls the underlying AppleEventCodeForKey.
+func (x *ScriptClassDescription) AppleEventCodeForKey(key string) uint {
+	return x.inner.AppleEventCodeForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// KeyWithAppleEventCode calls the underlying KeyWithAppleEventCode.
+func (x *ScriptClassDescription) KeyWithAppleEventCode(appleEventCode uint) *String {
+	_r := x.inner.KeyWithAppleEventCode(appleEventCode)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsLocationRequiredToCreateForKey calls the underlying IsLocationRequiredToCreateForKey.
+func (x *ScriptClassDescription) IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool {
+	return x.inner.IsLocationRequiredToCreateForKey(foundation.NSStringStringWithUTF8String(toManyRelationshipKey))
+}
+
+// HasPropertyForKey calls the underlying HasPropertyForKey.
+func (x *ScriptClassDescription) HasPropertyForKey(key string) bool {
+	return x.inner.HasPropertyForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// HasOrderedToManyRelationshipForKey calls the underlying HasOrderedToManyRelationshipForKey.
+func (x *ScriptClassDescription) HasOrderedToManyRelationshipForKey(key string) bool {
+	return x.inner.HasOrderedToManyRelationshipForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// HasReadablePropertyForKey calls the underlying HasReadablePropertyForKey.
+func (x *ScriptClassDescription) HasReadablePropertyForKey(key string) bool {
+	return x.inner.HasReadablePropertyForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// HasWritablePropertyForKey calls the underlying HasWritablePropertyForKey.
+func (x *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
+	return x.inner.HasWritablePropertyForKey(foundation.NSStringStringWithUTF8String(key))
+}
+
+// SuiteName calls the underlying SuiteName.
+func (x *ScriptClassDescription) SuiteName() *String {
+	_r := x.inner.SuiteName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ImplementationClassName calls the underlying ImplementationClassName.
+func (x *ScriptClassDescription) ImplementationClassName() *String {
+	_r := x.inner.ImplementationClassName()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SuperclassDescription calls the underlying SuperclassDescription.
+func (x *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
+	_r := x.inner.SuperclassDescription()
+	if _r == nil {
+		return nil
+	}
+	return &ScriptClassDescription{inner: _r}
+}
+
+// AppleEventCode calls the underlying AppleEventCode.
+func (x *ScriptClassDescription) AppleEventCode() uint {
+	return x.inner.AppleEventCode()
+}
+
+// DefaultSubcontainerAttributeKey calls the underlying DefaultSubcontainerAttributeKey.
+func (x *ScriptClassDescription) DefaultSubcontainerAttributeKey() *String {
+	_r := x.inner.DefaultSubcontainerAttributeKey()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// IsReadOnlyKey calls the underlying IsReadOnlyKey.
+func (x *ScriptClassDescription) IsReadOnlyKey(key string) bool {
+	return x.inner.IsReadOnlyKey(foundation.NSStringStringWithUTF8String(key))
+}
+
 func (x *ScriptClassDescription) asClassDescription() *raw.NSClassDescription { return &x.inner.NSClassDescription }
 
 func (x *ScriptClassDescription) asObject() *raw.NSObject { return &x.inner.NSClassDescription.NSObject }
+
+// ScriptClassDescriptionable is the interface implemented by [ScriptClassDescription], for mocking and DI.
+type ScriptClassDescriptionable interface {
+	Unwrap() *raw.NSScriptClassDescription
+	MatchesAppleEventCode(appleEventCode uint) bool
+	SupportsCommand(commandDescription *raw.NSScriptCommandDescription) bool
+	SelectorForCommand(commandDescription *raw.NSScriptCommandDescription) objc.SEL
+	TypeForKey(key string) *String
+	ClassDescriptionForKey(key string) *ScriptClassDescription
+	AppleEventCodeForKey(key string) uint
+	KeyWithAppleEventCode(appleEventCode uint) *String
+	IsLocationRequiredToCreateForKey(toManyRelationshipKey string) bool
+	HasPropertyForKey(key string) bool
+	HasOrderedToManyRelationshipForKey(key string) bool
+	HasReadablePropertyForKey(key string) bool
+	HasWritablePropertyForKey(key string) bool
+	SuiteName() *String
+	ImplementationClassName() *String
+	SuperclassDescription() *ScriptClassDescription
+	AppleEventCode() uint
+	DefaultSubcontainerAttributeKey() *String
+	IsReadOnlyKey(key string) bool
+}
+
+var _ ScriptClassDescriptionable = (*ScriptClassDescription)(nil)
 

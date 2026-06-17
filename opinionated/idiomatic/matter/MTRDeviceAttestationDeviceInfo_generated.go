@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,83 @@ func NewMTRDeviceAttestationDeviceInfo() *MTRDeviceAttestationDeviceInfo {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceAttestationDeviceInfo")), objc.RegisterName("new"))
 	return &MTRDeviceAttestationDeviceInfo{inner: raw.MTRDeviceAttestationDeviceInfoFromID(_id)}
 }
+
+// VendorID calls the underlying VendorID.
+func (x *MTRDeviceAttestationDeviceInfo) VendorID() *foundation.NSNumber {
+	return x.inner.VendorID()
+}
+
+// ProductID calls the underlying ProductID.
+func (x *MTRDeviceAttestationDeviceInfo) ProductID() *foundation.NSNumber {
+	return x.inner.ProductID()
+}
+
+// BasicInformationVendorID calls the underlying BasicInformationVendorID.
+func (x *MTRDeviceAttestationDeviceInfo) BasicInformationVendorID() *foundation.NSNumber {
+	return x.inner.BasicInformationVendorID()
+}
+
+// BasicInformationProductID calls the underlying BasicInformationProductID.
+func (x *MTRDeviceAttestationDeviceInfo) BasicInformationProductID() *foundation.NSNumber {
+	return x.inner.BasicInformationProductID()
+}
+
+// DacCertificate calls the underlying DacCertificate.
+func (x *MTRDeviceAttestationDeviceInfo) DacCertificate() *foundation.NSData {
+	return x.inner.DacCertificate()
+}
+
+// DacPAICertificate calls the underlying DacPAICertificate.
+func (x *MTRDeviceAttestationDeviceInfo) DacPAICertificate() *foundation.NSData {
+	return x.inner.DacPAICertificate()
+}
+
+// CertificateDeclaration calls the underlying CertificateDeclaration.
+func (x *MTRDeviceAttestationDeviceInfo) CertificateDeclaration() *foundation.NSData {
+	return x.inner.CertificateDeclaration()
+}
+
+// AttestationChallenge calls the underlying AttestationChallenge.
+func (x *MTRDeviceAttestationDeviceInfo) AttestationChallenge() *foundation.NSData {
+	return x.inner.AttestationChallenge()
+}
+
+// AttestationNonce calls the underlying AttestationNonce.
+func (x *MTRDeviceAttestationDeviceInfo) AttestationNonce() *foundation.NSData {
+	return x.inner.AttestationNonce()
+}
+
+// ElementsTLV calls the underlying ElementsTLV.
+func (x *MTRDeviceAttestationDeviceInfo) ElementsTLV() *foundation.NSData {
+	return x.inner.ElementsTLV()
+}
+
+// CertificationDeclaration calls the underlying CertificationDeclaration.
+func (x *MTRDeviceAttestationDeviceInfo) CertificationDeclaration() *foundation.NSData {
+	return x.inner.CertificationDeclaration()
+}
+
+// ElementsSignature calls the underlying ElementsSignature.
+func (x *MTRDeviceAttestationDeviceInfo) ElementsSignature() *foundation.NSData {
+	return x.inner.ElementsSignature()
+}
+
+// MTRDeviceAttestationDeviceInfoable is the interface implemented by [MTRDeviceAttestationDeviceInfo], for mocking and DI.
+type MTRDeviceAttestationDeviceInfoable interface {
+	Unwrap() *raw.MTRDeviceAttestationDeviceInfo
+	VendorID() *foundation.NSNumber
+	ProductID() *foundation.NSNumber
+	BasicInformationVendorID() *foundation.NSNumber
+	BasicInformationProductID() *foundation.NSNumber
+	DacCertificate() *foundation.NSData
+	DacPAICertificate() *foundation.NSData
+	CertificateDeclaration() *foundation.NSData
+	AttestationChallenge() *foundation.NSData
+	AttestationNonce() *foundation.NSData
+	ElementsTLV() *foundation.NSData
+	CertificationDeclaration() *foundation.NSData
+	ElementsSignature() *foundation.NSData
+}
+
+var _ MTRDeviceAttestationDeviceInfoable = (*MTRDeviceAttestationDeviceInfo)(nil)
 

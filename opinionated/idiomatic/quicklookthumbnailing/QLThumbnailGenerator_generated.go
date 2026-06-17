@@ -28,15 +28,51 @@ func NewThumbnailGenerator() *ThumbnailGenerator {
 	return &ThumbnailGenerator{inner: raw.QLThumbnailGeneratorFromID(_id)}
 }
 
+// GenerateBestRepresentationForRequest blocks until the operation completes or ctx is cancelled.
+func (x *ThumbnailGenerator) GenerateBestRepresentationForRequest(ctx context.Context, request *raw.QLThumbnailGenerationRequest) (*ThumbnailRepresentation, error) {
+	type _result struct {
+		val *ThumbnailRepresentation
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GenerateBestRepresentationForRequestCompletionHandler(request, func(_p0 *raw.QLThumbnailRepresentation, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &ThumbnailRepresentation{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *ThumbnailRepresentation
+		return _zero, ctx.Err()
+	}
+}
+
+// GenerateRepresentationsForRequestUpdateHandler calls the underlying GenerateRepresentationsForRequestUpdateHandler.
+func (x *ThumbnailGenerator) GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, raw.QLThumbnailRepresentationType, unsafe.Pointer)) {
+	x.inner.GenerateRepresentationsForRequestUpdateHandler(request, updateHandler)
+}
+
+// CancelRequest calls the underlying CancelRequest.
+func (x *ThumbnailGenerator) CancelRequest(request *raw.QLThumbnailGenerationRequest) {
+	x.inner.CancelRequest(request)
+}
+
 // SaveBestRepresentationForRequestToFileAtURLAsContentType blocks until the operation completes or ctx is cancelled.
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType *uniformtypeidentifiers.UTType) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveBestRepresentationForRequestToFileAtURLAsContentTypeCompletionHandler(request, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), contentType, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -50,11 +86,11 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLAsConten
 func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType string) error {
 	_ch := make(chan error, 1)
 	x.inner.SaveBestRepresentationForRequestToFileAtURLWithContentTypeCompletionHandler(request, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), foundation.NSStringStringWithUTF8String(contentType), func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,4 +99,16 @@ func (x *ThumbnailGenerator) SaveBestRepresentationForRequestToFileAtURLWithCont
 		return ctx.Err()
 	}
 }
+
+// ThumbnailGeneratorable is the interface implemented by [ThumbnailGenerator], for mocking and DI.
+type ThumbnailGeneratorable interface {
+	Unwrap() *raw.QLThumbnailGenerator
+	GenerateBestRepresentationForRequest(ctx context.Context, request *raw.QLThumbnailGenerationRequest) (*ThumbnailRepresentation, error)
+	GenerateRepresentationsForRequestUpdateHandler(request *raw.QLThumbnailGenerationRequest, updateHandler func(*raw.QLThumbnailRepresentation, raw.QLThumbnailRepresentationType, unsafe.Pointer))
+	CancelRequest(request *raw.QLThumbnailGenerationRequest)
+	SaveBestRepresentationForRequestToFileAtURLAsContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType *uniformtypeidentifiers.UTType) error
+	SaveBestRepresentationForRequestToFileAtURLWithContentType(ctx context.Context, request *raw.QLThumbnailGenerationRequest, fileURL string, contentType string) error
+}
+
+var _ ThumbnailGeneratorable = (*ThumbnailGenerator)(nil)
 

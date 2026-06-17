@@ -42,3 +42,49 @@ func (x *MTRMediaPlaybackClusterFastForwardParams) WithServerSideProcessingTimeo
 	return x
 }
 
+// AudioAdvanceUnmuted calls the underlying AudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterFastForwardParams) AudioAdvanceUnmuted() *foundation.NSNumber {
+	return x.inner.AudioAdvanceUnmuted()
+}
+
+// SetAudioAdvanceUnmuted calls the underlying SetAudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
+	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterFastForwardParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterFastForwardParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRMediaPlaybackClusterFastForwardParamsable is the interface implemented by [MTRMediaPlaybackClusterFastForwardParams], for mocking and DI.
+type MTRMediaPlaybackClusterFastForwardParamsable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterFastForwardParams
+	WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
+	AudioAdvanceUnmuted() *foundation.NSNumber
+	SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterFastForwardParamsable = (*MTRMediaPlaybackClusterFastForwardParams)(nil)
+

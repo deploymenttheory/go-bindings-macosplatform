@@ -24,3 +24,26 @@ func NewAudioConnectionPointWithNodeBus(node *raw.AVAudioNode, bus uint) *AudioC
 	return &AudioConnectionPoint{inner: raw.AVAudioConnectionPointFromID(_id)}
 }
 
+// Node calls the underlying Node.
+func (x *AudioConnectionPoint) Node() *AudioNode {
+	_r := x.inner.Node()
+	if _r == nil {
+		return nil
+	}
+	return &AudioNode{inner: _r}
+}
+
+// Bus calls the underlying Bus.
+func (x *AudioConnectionPoint) Bus() uint {
+	return x.inner.Bus()
+}
+
+// AudioConnectionPointable is the interface implemented by [AudioConnectionPoint], for mocking and DI.
+type AudioConnectionPointable interface {
+	Unwrap() *raw.AVAudioConnectionPoint
+	Node() *AudioNode
+	Bus() uint
+}
+
+var _ AudioConnectionPointable = (*AudioConnectionPoint)(nil)
+

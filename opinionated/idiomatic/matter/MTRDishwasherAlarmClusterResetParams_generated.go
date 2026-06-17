@@ -42,3 +42,49 @@ func (x *MTRDishwasherAlarmClusterResetParams) WithServerSideProcessingTimeout(s
 	return x
 }
 
+// Alarms calls the underlying Alarms.
+func (x *MTRDishwasherAlarmClusterResetParams) Alarms() *foundation.NSNumber {
+	return x.inner.Alarms()
+}
+
+// SetAlarms calls the underlying SetAlarms.
+func (x *MTRDishwasherAlarmClusterResetParams) SetAlarms(alarms *foundation.NSNumber) {
+	x.inner.SetAlarms(alarms)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDishwasherAlarmClusterResetParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDishwasherAlarmClusterResetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRDishwasherAlarmClusterResetParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRDishwasherAlarmClusterResetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRDishwasherAlarmClusterResetParamsable is the interface implemented by [MTRDishwasherAlarmClusterResetParams], for mocking and DI.
+type MTRDishwasherAlarmClusterResetParamsable interface {
+	Unwrap() *raw.MTRDishwasherAlarmClusterResetParams
+	WithAlarms(alarms *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDishwasherAlarmClusterResetParams
+	Alarms() *foundation.NSNumber
+	SetAlarms(alarms *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRDishwasherAlarmClusterResetParamsable = (*MTRDishwasherAlarmClusterResetParams)(nil)
+

@@ -35,3 +35,40 @@ func (x *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
 	return x
 }
 
+// Enabled calls the underlying Enabled.
+func (x *Constraint) Enabled() bool {
+	return x.inner.Enabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *Constraint) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
+// ReferenceNode calls the underlying ReferenceNode.
+func (x *Constraint) ReferenceNode() *Node {
+	_r := x.inner.ReferenceNode()
+	if _r == nil {
+		return nil
+	}
+	return &Node{inner: _r}
+}
+
+// SetReferenceNode calls the underlying SetReferenceNode.
+func (x *Constraint) SetReferenceNode(referenceNode *raw.SKNode) {
+	x.inner.SetReferenceNode(referenceNode)
+}
+
+// Constraintable is the interface implemented by [Constraint], for mocking and DI.
+type Constraintable interface {
+	Unwrap() *raw.SKConstraint
+	WithEnabled(enabled bool) *Constraint
+	WithReferenceNode(referenceNode NodeProvider) *Constraint
+	Enabled() bool
+	SetEnabled(enabled bool)
+	ReferenceNode() *Node
+	SetReferenceNode(referenceNode *raw.SKNode)
+}
+
+var _ Constraintable = (*Constraint)(nil)
+

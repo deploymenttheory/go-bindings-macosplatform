@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -92,16 +93,124 @@ func (x *PickerConfiguration) WithDisabledCapabilities(disabledCapabilities raw.
 	return x
 }
 
+// PreferredAssetRepresentationMode calls the underlying PreferredAssetRepresentationMode.
+func (x *PickerConfiguration) PreferredAssetRepresentationMode() raw.PHPickerConfigurationAssetRepresentationMode {
+	return x.inner.PreferredAssetRepresentationMode()
+}
+
+// SetPreferredAssetRepresentationMode calls the underlying SetPreferredAssetRepresentationMode.
+func (x *PickerConfiguration) SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) {
+	x.inner.SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode)
+}
+
+// Selection calls the underlying Selection.
+func (x *PickerConfiguration) Selection() raw.PHPickerConfigurationSelection {
+	return x.inner.Selection()
+}
+
+// SetSelection calls the underlying SetSelection.
+func (x *PickerConfiguration) SetSelection(selection raw.PHPickerConfigurationSelection) {
+	x.inner.SetSelection(selection)
+}
+
+// SelectionLimit calls the underlying SelectionLimit.
+func (x *PickerConfiguration) SelectionLimit() int {
+	return x.inner.SelectionLimit()
+}
+
+// SetSelectionLimit calls the underlying SetSelectionLimit.
+func (x *PickerConfiguration) SetSelectionLimit(selectionLimit int) {
+	x.inner.SetSelectionLimit(selectionLimit)
+}
+
+// Filter calls the underlying Filter.
+func (x *PickerConfiguration) Filter() *PickerFilter {
+	_r := x.inner.Filter()
+	if _r == nil {
+		return nil
+	}
+	return &PickerFilter{inner: _r}
+}
+
+// SetFilter calls the underlying SetFilter.
+func (x *PickerConfiguration) SetFilter(filter *raw.PHPickerFilter) {
+	x.inner.SetFilter(filter)
+}
+
 // PreselectedAssetIdentifiers returns the collection as a Go slice.
-func (x *PickerConfiguration) PreselectedAssetIdentifiers() []*foundation.NSString {
+func (x *PickerConfiguration) PreselectedAssetIdentifiers() []string {
 	arr := x.inner.PreselectedAssetIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetPreselectedAssetIdentifiers calls the underlying SetPreselectedAssetIdentifiers.
+func (x *PickerConfiguration) SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers)
+}
+
+// Mode calls the underlying Mode.
+func (x *PickerConfiguration) Mode() raw.PHPickerMode {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *PickerConfiguration) SetMode(mode raw.PHPickerMode) {
+	x.inner.SetMode(mode)
+}
+
+// EdgesWithoutContentMargins calls the underlying EdgesWithoutContentMargins.
+func (x *PickerConfiguration) EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge {
+	return x.inner.EdgesWithoutContentMargins()
+}
+
+// SetEdgesWithoutContentMargins calls the underlying SetEdgesWithoutContentMargins.
+func (x *PickerConfiguration) SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) {
+	x.inner.SetEdgesWithoutContentMargins(edgesWithoutContentMargins)
+}
+
+// DisabledCapabilities calls the underlying DisabledCapabilities.
+func (x *PickerConfiguration) DisabledCapabilities() raw.PHPickerCapabilities {
+	return x.inner.DisabledCapabilities()
+}
+
+// SetDisabledCapabilities calls the underlying SetDisabledCapabilities.
+func (x *PickerConfiguration) SetDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities) {
+	x.inner.SetDisabledCapabilities(disabledCapabilities)
+}
+
+// PickerConfigurationable is the interface implemented by [PickerConfiguration], for mocking and DI.
+type PickerConfigurationable interface {
+	Unwrap() *raw.PHPickerConfiguration
+	WithPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode) *PickerConfiguration
+	WithSelection(selection raw.PHPickerConfigurationSelection) *PickerConfiguration
+	WithSelectionLimit(selectionLimit int) *PickerConfiguration
+	WithFilter(filter *raw.PHPickerFilter) *PickerConfiguration
+	WithPreselectedAssetIdentifiers(items ...*foundation.NSString) *PickerConfiguration
+	WithMode(mode raw.PHPickerMode) *PickerConfiguration
+	WithEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge) *PickerConfiguration
+	WithDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities) *PickerConfiguration
+	PreferredAssetRepresentationMode() raw.PHPickerConfigurationAssetRepresentationMode
+	SetPreferredAssetRepresentationMode(preferredAssetRepresentationMode raw.PHPickerConfigurationAssetRepresentationMode)
+	Selection() raw.PHPickerConfigurationSelection
+	SetSelection(selection raw.PHPickerConfigurationSelection)
+	SelectionLimit() int
+	SetSelectionLimit(selectionLimit int)
+	Filter() *PickerFilter
+	SetFilter(filter *raw.PHPickerFilter)
+	PreselectedAssetIdentifiers() []string
+	SetPreselectedAssetIdentifiers(preselectedAssetIdentifiers *foundation.NSArray[*foundation.NSString])
+	Mode() raw.PHPickerMode
+	SetMode(mode raw.PHPickerMode)
+	EdgesWithoutContentMargins() appkit.NSDirectionalRectEdge
+	SetEdgesWithoutContentMargins(edgesWithoutContentMargins appkit.NSDirectionalRectEdge)
+	DisabledCapabilities() raw.PHPickerCapabilities
+	SetDisabledCapabilities(disabledCapabilities raw.PHPickerCapabilities)
+}
+
+var _ PickerConfigurationable = (*PickerConfiguration)(nil)
 

@@ -65,5 +65,103 @@ func (x *Floor) WithReflectionResolutionScaleFactor(reflectionResolutionScaleFac
 	return x
 }
 
+// Reflectivity calls the underlying Reflectivity.
+func (x *Floor) Reflectivity() float64 {
+	return x.inner.Reflectivity()
+}
+
+// SetReflectivity calls the underlying SetReflectivity.
+func (x *Floor) SetReflectivity(reflectivity float64) {
+	x.inner.SetReflectivity(reflectivity)
+}
+
+// ReflectionFalloffStart calls the underlying ReflectionFalloffStart.
+func (x *Floor) ReflectionFalloffStart() float64 {
+	return x.inner.ReflectionFalloffStart()
+}
+
+// SetReflectionFalloffStart calls the underlying SetReflectionFalloffStart.
+func (x *Floor) SetReflectionFalloffStart(reflectionFalloffStart float64) {
+	x.inner.SetReflectionFalloffStart(reflectionFalloffStart)
+}
+
+// ReflectionFalloffEnd calls the underlying ReflectionFalloffEnd.
+func (x *Floor) ReflectionFalloffEnd() float64 {
+	return x.inner.ReflectionFalloffEnd()
+}
+
+// SetReflectionFalloffEnd calls the underlying SetReflectionFalloffEnd.
+func (x *Floor) SetReflectionFalloffEnd(reflectionFalloffEnd float64) {
+	x.inner.SetReflectionFalloffEnd(reflectionFalloffEnd)
+}
+
+// ReflectionCategoryBitMask calls the underlying ReflectionCategoryBitMask.
+func (x *Floor) ReflectionCategoryBitMask() uint {
+	return x.inner.ReflectionCategoryBitMask()
+}
+
+// SetReflectionCategoryBitMask calls the underlying SetReflectionCategoryBitMask.
+func (x *Floor) SetReflectionCategoryBitMask(reflectionCategoryBitMask uint) {
+	x.inner.SetReflectionCategoryBitMask(reflectionCategoryBitMask)
+}
+
+// Width calls the underlying Width.
+func (x *Floor) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *Floor) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// Length calls the underlying Length.
+func (x *Floor) Length() float64 {
+	return x.inner.Length()
+}
+
+// SetLength calls the underlying SetLength.
+func (x *Floor) SetLength(length float64) {
+	x.inner.SetLength(length)
+}
+
+// ReflectionResolutionScaleFactor calls the underlying ReflectionResolutionScaleFactor.
+func (x *Floor) ReflectionResolutionScaleFactor() float64 {
+	return x.inner.ReflectionResolutionScaleFactor()
+}
+
+// SetReflectionResolutionScaleFactor calls the underlying SetReflectionResolutionScaleFactor.
+func (x *Floor) SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) {
+	x.inner.SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor)
+}
+
 func (x *Floor) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Floorable is the interface implemented by [Floor], for mocking and DI.
+type Floorable interface {
+	Unwrap() *raw.SCNFloor
+	WithReflectivity(reflectivity float64) *Floor
+	WithReflectionFalloffStart(reflectionFalloffStart float64) *Floor
+	WithReflectionFalloffEnd(reflectionFalloffEnd float64) *Floor
+	WithReflectionCategoryBitMask(reflectionCategoryBitMask uint) *Floor
+	WithWidth(width float64) *Floor
+	WithLength(length float64) *Floor
+	WithReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64) *Floor
+	Reflectivity() float64
+	SetReflectivity(reflectivity float64)
+	ReflectionFalloffStart() float64
+	SetReflectionFalloffStart(reflectionFalloffStart float64)
+	ReflectionFalloffEnd() float64
+	SetReflectionFalloffEnd(reflectionFalloffEnd float64)
+	ReflectionCategoryBitMask() uint
+	SetReflectionCategoryBitMask(reflectionCategoryBitMask uint)
+	Width() float64
+	SetWidth(width float64)
+	Length() float64
+	SetLength(length float64)
+	ReflectionResolutionScaleFactor() float64
+	SetReflectionResolutionScaleFactor(reflectionResolutionScaleFactor float64)
+}
+
+var _ Floorable = (*Floor)(nil)
 

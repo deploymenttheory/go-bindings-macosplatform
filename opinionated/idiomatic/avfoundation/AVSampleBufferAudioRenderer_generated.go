@@ -6,8 +6,11 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SampleBufferAudioRenderer wraps [raw.AVSampleBufferAudioRenderer] with a fluent Go API.
@@ -53,4 +56,102 @@ func (x *SampleBufferAudioRenderer) WithMuted(muted bool) *SampleBufferAudioRend
 	x.inner.SetMuted(muted)
 	return x
 }
+
+// Status calls the underlying Status.
+func (x *SampleBufferAudioRenderer) Status() raw.AVQueuedSampleBufferRenderingStatus {
+	return x.inner.Status()
+}
+
+// Error calls the underlying Error.
+func (x *SampleBufferAudioRenderer) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// AudioOutputDeviceUniqueID calls the underlying AudioOutputDeviceUniqueID.
+func (x *SampleBufferAudioRenderer) AudioOutputDeviceUniqueID() string {
+	_r := x.inner.AudioOutputDeviceUniqueID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioOutputDeviceUniqueID calls the underlying SetAudioOutputDeviceUniqueID.
+func (x *SampleBufferAudioRenderer) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) {
+	x.inner.SetAudioOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(audioOutputDeviceUniqueID))
+}
+
+// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
+func (x *SampleBufferAudioRenderer) AudioTimePitchAlgorithm() string {
+	_r := x.inner.AudioTimePitchAlgorithm()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
+func (x *SampleBufferAudioRenderer) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
+	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+}
+
+// AllowedAudioSpatializationFormats calls the underlying AllowedAudioSpatializationFormats.
+func (x *SampleBufferAudioRenderer) AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats {
+	return x.inner.AllowedAudioSpatializationFormats()
+}
+
+// SetAllowedAudioSpatializationFormats calls the underlying SetAllowedAudioSpatializationFormats.
+func (x *SampleBufferAudioRenderer) SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) {
+	x.inner.SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats)
+}
+
+// Volume calls the underlying Volume.
+func (x *SampleBufferAudioRenderer) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *SampleBufferAudioRenderer) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// IsMuted calls the underlying IsMuted.
+func (x *SampleBufferAudioRenderer) IsMuted() bool {
+	return x.inner.IsMuted()
+}
+
+// SetMuted calls the underlying SetMuted.
+func (x *SampleBufferAudioRenderer) SetMuted(muted bool) {
+	x.inner.SetMuted(muted)
+}
+
+// FlushFromSourceTimeCompletionHandler calls the underlying FlushFromSourceTimeCompletionHandler.
+func (x *SampleBufferAudioRenderer) FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.FlushFromSourceTimeCompletionHandler(time_, completionHandler)
+}
+
+// SampleBufferAudioRendererable is the interface implemented by [SampleBufferAudioRenderer], for mocking and DI.
+type SampleBufferAudioRendererable interface {
+	Unwrap() *raw.AVSampleBufferAudioRenderer
+	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *SampleBufferAudioRenderer
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *SampleBufferAudioRenderer
+	WithAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats) *SampleBufferAudioRenderer
+	WithVolume(volume float32) *SampleBufferAudioRenderer
+	WithMuted(muted bool) *SampleBufferAudioRenderer
+	Status() raw.AVQueuedSampleBufferRenderingStatus
+	Error() unsafe.Pointer
+	AudioOutputDeviceUniqueID() string
+	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
+	AudioTimePitchAlgorithm() string
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	AllowedAudioSpatializationFormats() raw.AVAudioSpatializationFormats
+	SetAllowedAudioSpatializationFormats(allowedAudioSpatializationFormats raw.AVAudioSpatializationFormats)
+	Volume() float32
+	SetVolume(volume float32)
+	IsMuted() bool
+	SetMuted(muted bool)
+	FlushFromSourceTimeCompletionHandler(time_ coremedia.CMTime, completionHandler func(bool))
+}
+
+var _ SampleBufferAudioRendererable = (*SampleBufferAudioRenderer)(nil)
 

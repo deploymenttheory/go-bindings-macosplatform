@@ -23,3 +23,22 @@ func NewMeshBufferZoneDefault() *MeshBufferZoneDefault {
 	return &MeshBufferZoneDefault{inner: raw.MDLMeshBufferZoneDefaultFromID(_id)}
 }
 
+// Capacity calls the underlying Capacity.
+func (x *MeshBufferZoneDefault) Capacity() uint {
+	return x.inner.Capacity()
+}
+
+// Allocator calls the underlying Allocator.
+func (x *MeshBufferZoneDefault) Allocator() raw.MDLMeshBufferAllocator {
+	return x.inner.Allocator()
+}
+
+// MeshBufferZoneDefaultable is the interface implemented by [MeshBufferZoneDefault], for mocking and DI.
+type MeshBufferZoneDefaultable interface {
+	Unwrap() *raw.MDLMeshBufferZoneDefault
+	Capacity() uint
+	Allocator() raw.MDLMeshBufferAllocator
+}
+
+var _ MeshBufferZoneDefaultable = (*MeshBufferZoneDefault)(nil)
+

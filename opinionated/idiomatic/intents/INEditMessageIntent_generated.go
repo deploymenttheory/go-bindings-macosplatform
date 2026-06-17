@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,32 @@ func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier st
 	return &EditMessageIntent{inner: raw.INEditMessageIntentFromID(_id)}
 }
 
+// MessageIdentifier calls the underlying MessageIdentifier.
+func (x *EditMessageIntent) MessageIdentifier() string {
+	_r := x.inner.MessageIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EditedContent calls the underlying EditedContent.
+func (x *EditMessageIntent) EditedContent() string {
+	_r := x.inner.EditedContent()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *EditMessageIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// EditMessageIntentable is the interface implemented by [EditMessageIntent], for mocking and DI.
+type EditMessageIntentable interface {
+	Unwrap() *raw.INEditMessageIntent
+	MessageIdentifier() string
+	EditedContent() string
+}
+
+var _ EditMessageIntentable = (*EditMessageIntent)(nil)
 

@@ -23,3 +23,10 @@ func NewPlatform() *Platform {
 	return &Platform{inner: raw.MLCPlatformFromID(_id)}
 }
 
+// Platformable is the interface implemented by [Platform], for mocking and DI.
+type Platformable interface {
+	Unwrap() *raw.MLCPlatform
+}
+
+var _ Platformable = (*Platform)(nil)
+

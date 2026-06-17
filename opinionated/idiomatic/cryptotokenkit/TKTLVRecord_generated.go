@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,30 @@ func NewTLVRecord() *TLVRecord {
 	return &TLVRecord{inner: raw.TKTLVRecordFromID(_id)}
 }
 
+// Tag calls the underlying Tag.
+func (x *TLVRecord) Tag() uint64 {
+	return x.inner.Tag()
+}
+
+// Value calls the underlying Value.
+func (x *TLVRecord) Value() *foundation.NSData {
+	return x.inner.Value()
+}
+
+// Data calls the underlying Data.
+func (x *TLVRecord) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
 func (x *TLVRecord) asTLVRecord() *raw.TKTLVRecord { return x.inner }
+
+// TLVRecordable is the interface implemented by [TLVRecord], for mocking and DI.
+type TLVRecordable interface {
+	Unwrap() *raw.TKTLVRecord
+	Tag() uint64
+	Value() *foundation.NSData
+	Data() *foundation.NSData
+}
+
+var _ TLVRecordable = (*TLVRecord)(nil)
 

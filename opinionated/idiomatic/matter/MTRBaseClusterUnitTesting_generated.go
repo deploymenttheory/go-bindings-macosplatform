@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRBaseClusterUnitTesting wraps [raw.MTRBaseClusterUnitTesting] with a fluent Go API.
@@ -25,9 +28,5601 @@ func NewMTRBaseClusterUnitTestingWithDeviceEndpointIDQueue(device *raw.MTRBaseDe
 	return &MTRBaseClusterUnitTesting{inner: raw.MTRBaseClusterUnitTestingFromID(_id)}
 }
 
+// TestWithParamsCompletion calls the underlying TestWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) TestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestParams, completion func(unsafe.Pointer)) {
+	x.inner.TestWithParamsCompletion(params, completion)
+}
+
+// TestWithCompletion calls the underlying TestWithCompletion.
+func (x *MTRBaseClusterUnitTesting) TestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.TestWithCompletion(completion)
+}
+
+// TestNotHandledWithParamsCompletion calls the underlying TestNotHandledWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) TestNotHandledWithParamsCompletion(params *raw.MTRUnitTestingClusterTestNotHandledParams, completion func(unsafe.Pointer)) {
+	x.inner.TestNotHandledWithParamsCompletion(params, completion)
+}
+
+// TestNotHandledWithCompletion calls the underlying TestNotHandledWithCompletion.
+func (x *MTRBaseClusterUnitTesting) TestNotHandledWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.TestNotHandledWithCompletion(completion)
+}
+
+// TestSpecificWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestSpecificWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSpecificParams) (*MTRUnitTestingClusterTestSpecificResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestSpecificResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestSpecificWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestSpecificResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestSpecificResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestSpecificResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestSpecificWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestSpecificWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestSpecificResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestSpecificResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestSpecificWithCompletion(func(_p0 *raw.MTRUnitTestingClusterTestSpecificResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestSpecificResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestSpecificResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestUnknownCommandWithParamsCompletion calls the underlying TestUnknownCommandWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) TestUnknownCommandWithParamsCompletion(params *raw.MTRUnitTestingClusterTestUnknownCommandParams, completion func(unsafe.Pointer)) {
+	x.inner.TestUnknownCommandWithParamsCompletion(params, completion)
+}
+
+// TestUnknownCommandWithCompletion calls the underlying TestUnknownCommandWithCompletion.
+func (x *MTRBaseClusterUnitTesting) TestUnknownCommandWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.TestUnknownCommandWithCompletion(completion)
+}
+
+// TestAddArgumentsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestAddArgumentsWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestAddArgumentsParams) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestAddArgumentsResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestAddArgumentsWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestAddArgumentsResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestAddArgumentsResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestSimpleArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams) (*MTRUnitTestingClusterTestSimpleArgumentResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestSimpleArgumentResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestSimpleArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestSimpleArgumentResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestSimpleArgumentResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestSimpleArgumentResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestStructArrayArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestStructArrayArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestStructArrayArgumentResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestStructArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestNestedStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestNestedStructArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestListStructArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestListStructArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestListInt8UArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestListInt8UArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestNestedStructListArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestListNestedStructListArgumentRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterBooleanResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestListNestedStructListArgumentRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterBooleanResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterBooleanResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterBooleanResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestListInt8UReverseRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestListInt8UReverseResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestListInt8UReverseRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestListInt8UReverseResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestListInt8UReverseResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestEnumsRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestEnumsRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEnumsRequestParams) (*MTRUnitTestingClusterTestEnumsResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestEnumsResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestEnumsRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestEnumsResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestEnumsResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestEnumsResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestNullableOptionalRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestNullableOptionalResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestNullableOptionalResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestNullableOptionalRequestWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestNullableOptionalRequestWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestNullableOptionalRequestWithCompletion(func(_p0 *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestNullableOptionalResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestNullableOptionalResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestComplexNullableOptionalRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestComplexNullableOptionalRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestComplexNullableOptionalResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// SimpleStructEchoRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams) (*MTRUnitTestingClusterSimpleStructResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterSimpleStructResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SimpleStructEchoRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterSimpleStructResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterSimpleStructResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterSimpleStructResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TimedInvokeRequestWithParamsCompletion calls the underlying TimedInvokeRequestWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) TimedInvokeRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTimedInvokeRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.TimedInvokeRequestWithParamsCompletion(params, completion)
+}
+
+// TimedInvokeRequestWithCompletion calls the underlying TimedInvokeRequestWithCompletion.
+func (x *MTRBaseClusterUnitTesting) TimedInvokeRequestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.TimedInvokeRequestWithCompletion(completion)
+}
+
+// TestSimpleOptionalArgumentRequestWithParamsCompletion calls the underlying TestSimpleOptionalArgumentRequestWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams, completion func(unsafe.Pointer)) {
+	x.inner.TestSimpleOptionalArgumentRequestWithParamsCompletion(params, completion)
+}
+
+// TestSimpleOptionalArgumentRequestWithCompletion calls the underlying TestSimpleOptionalArgumentRequestWithCompletion.
+func (x *MTRBaseClusterUnitTesting) TestSimpleOptionalArgumentRequestWithCompletion(completion func(unsafe.Pointer)) {
+	x.inner.TestSimpleOptionalArgumentRequestWithCompletion(completion)
+}
+
+// TestEmitTestEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams) (*MTRUnitTestingClusterTestEmitTestEventResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestEmitTestEventResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestEmitTestEventRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestEmitTestEventResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestEmitTestEventResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// TestEmitTestFabricScopedEventRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.TestEmitTestFabricScopedEventRequestWithParamsCompletion(params, func(_p0 *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeBooleanWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeBooleanWithValueCompletion calls the underlying WriteAttributeBooleanWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBooleanWithValueCompletion(value, completion)
+}
+
+// WriteAttributeBooleanWithValueParamsCompletion calls the underlying WriteAttributeBooleanWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBooleanWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeBitmap8WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeBitmap8WithValueCompletion calls the underlying WriteAttributeBitmap8WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap8WithValueCompletion(value, completion)
+}
+
+// WriteAttributeBitmap8WithValueParamsCompletion calls the underlying WriteAttributeBitmap8WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap8WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeBitmap16WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeBitmap16WithValueCompletion calls the underlying WriteAttributeBitmap16WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap16WithValueCompletion(value, completion)
+}
+
+// WriteAttributeBitmap16WithValueParamsCompletion calls the underlying WriteAttributeBitmap16WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap16WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeBitmap32WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeBitmap32WithValueCompletion calls the underlying WriteAttributeBitmap32WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap32WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap32WithValueCompletion(value, completion)
+}
+
+// WriteAttributeBitmap32WithValueParamsCompletion calls the underlying WriteAttributeBitmap32WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap32WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap32WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeBitmap64WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeBitmap64WithValueCompletion calls the underlying WriteAttributeBitmap64WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap64WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap64WithValueCompletion(value, completion)
+}
+
+// WriteAttributeBitmap64WithValueParamsCompletion calls the underlying WriteAttributeBitmap64WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeBitmap64WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeBitmap64WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt8uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt8uWithValueCompletion calls the underlying WriteAttributeInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt8uWithValueParamsCompletion calls the underlying WriteAttributeInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt16uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt16uWithValueCompletion calls the underlying WriteAttributeInt16uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt16uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt16uWithValueParamsCompletion calls the underlying WriteAttributeInt16uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt16uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt24uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt24uWithValueCompletion calls the underlying WriteAttributeInt24uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt24uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt24uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt24uWithValueParamsCompletion calls the underlying WriteAttributeInt24uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt24uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt24uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt32uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt32uWithValueCompletion calls the underlying WriteAttributeInt32uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt32uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt32uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt32uWithValueParamsCompletion calls the underlying WriteAttributeInt32uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt32uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt32uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt40uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt40uWithValueCompletion calls the underlying WriteAttributeInt40uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt40uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt40uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt40uWithValueParamsCompletion calls the underlying WriteAttributeInt40uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt40uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt40uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt48uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt48uWithValueCompletion calls the underlying WriteAttributeInt48uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt48uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt48uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt48uWithValueParamsCompletion calls the underlying WriteAttributeInt48uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt48uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt48uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt56uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt56uWithValueCompletion calls the underlying WriteAttributeInt56uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt56uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt56uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt56uWithValueParamsCompletion calls the underlying WriteAttributeInt56uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt56uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt56uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt64uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt64uWithValueCompletion calls the underlying WriteAttributeInt64uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt64uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt64uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt64uWithValueParamsCompletion calls the underlying WriteAttributeInt64uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt64uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt64uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt8sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt8sWithValueCompletion calls the underlying WriteAttributeInt8sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt8sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt8sWithValueParamsCompletion calls the underlying WriteAttributeInt8sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt8sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt16sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt16sWithValueCompletion calls the underlying WriteAttributeInt16sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt16sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt16sWithValueParamsCompletion calls the underlying WriteAttributeInt16sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt16sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt24sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt24sWithValueCompletion calls the underlying WriteAttributeInt24sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt24sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt24sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt24sWithValueParamsCompletion calls the underlying WriteAttributeInt24sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt24sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt24sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt32sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt32sWithValueCompletion calls the underlying WriteAttributeInt32sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt32sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt32sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt32sWithValueParamsCompletion calls the underlying WriteAttributeInt32sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt32sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt32sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt40sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt40sWithValueCompletion calls the underlying WriteAttributeInt40sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt40sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt40sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt40sWithValueParamsCompletion calls the underlying WriteAttributeInt40sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt40sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt40sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt48sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt48sWithValueCompletion calls the underlying WriteAttributeInt48sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt48sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt48sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt48sWithValueParamsCompletion calls the underlying WriteAttributeInt48sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt48sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt48sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt56sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt56sWithValueCompletion calls the underlying WriteAttributeInt56sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt56sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt56sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt56sWithValueParamsCompletion calls the underlying WriteAttributeInt56sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt56sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt56sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeInt64sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeInt64sWithValueCompletion calls the underlying WriteAttributeInt64sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt64sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt64sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeInt64sWithValueParamsCompletion calls the underlying WriteAttributeInt64sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeInt64sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeInt64sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeEnum8WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeEnum8WithValueCompletion calls the underlying WriteAttributeEnum8WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnum8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnum8WithValueCompletion(value, completion)
+}
+
+// WriteAttributeEnum8WithValueParamsCompletion calls the underlying WriteAttributeEnum8WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnum8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnum8WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeEnum16WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeEnum16WithValueCompletion calls the underlying WriteAttributeEnum16WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnum16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnum16WithValueCompletion(value, completion)
+}
+
+// WriteAttributeEnum16WithValueParamsCompletion calls the underlying WriteAttributeEnum16WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnum16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnum16WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFloatSingleWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeFloatSingleWithValueCompletion calls the underlying WriteAttributeFloatSingleWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeFloatSingleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeFloatSingleWithValueCompletion(value, completion)
+}
+
+// WriteAttributeFloatSingleWithValueParamsCompletion calls the underlying WriteAttributeFloatSingleWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeFloatSingleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeFloatSingleWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFloatDoubleWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeFloatDoubleWithValueCompletion calls the underlying WriteAttributeFloatDoubleWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeFloatDoubleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeFloatDoubleWithValueCompletion(value, completion)
+}
+
+// WriteAttributeFloatDoubleWithValueParamsCompletion calls the underlying WriteAttributeFloatDoubleWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeFloatDoubleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeFloatDoubleWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeOctetStringWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeOctetStringWithValueCompletion calls the underlying WriteAttributeOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeOctetStringWithValueParamsCompletion calls the underlying WriteAttributeOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeListInt8uWithCompletion calls the underlying ReadAttributeListInt8uWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeListInt8uWithCompletion(completion)
+}
+
+// WriteAttributeListInt8uWithValueCompletion calls the underlying WriteAttributeListInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListInt8uWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListInt8uWithValueParamsCompletion calls the underlying WriteAttributeListInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListInt8uWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeListOctetStringWithCompletion calls the underlying ReadAttributeListOctetStringWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeListOctetStringWithCompletion(completion)
+}
+
+// WriteAttributeListOctetStringWithValueCompletion calls the underlying WriteAttributeListOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListOctetStringWithValueParamsCompletion calls the underlying WriteAttributeListOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeListStructOctetStringWithCompletion calls the underlying ReadAttributeListStructOctetStringWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeListStructOctetStringWithCompletion(completion)
+}
+
+// WriteAttributeListStructOctetStringWithValueCompletion calls the underlying WriteAttributeListStructOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListStructOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListStructOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListStructOctetStringWithValueParamsCompletion calls the underlying WriteAttributeListStructOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListStructOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListStructOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeLongOctetStringWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeLongOctetStringWithValueCompletion calls the underlying WriteAttributeLongOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeLongOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeLongOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeLongOctetStringWithValueParamsCompletion calls the underlying WriteAttributeLongOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeLongOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeLongOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeCharStringWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeCharStringWithValueCompletion calls the underlying WriteAttributeCharStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeCharStringWithValueCompletion(foundation.NSStringStringWithUTF8String(value), completion)
+}
+
+// WriteAttributeCharStringWithValueParamsCompletion calls the underlying WriteAttributeCharStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeCharStringWithValueParamsCompletion(foundation.NSStringStringWithUTF8String(value), params, completion)
+}
+
+// SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeLongCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeLongCharStringWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeLongCharStringWithValueCompletion calls the underlying WriteAttributeLongCharStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeLongCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeLongCharStringWithValueCompletion(foundation.NSStringStringWithUTF8String(value), completion)
+}
+
+// WriteAttributeLongCharStringWithValueParamsCompletion calls the underlying WriteAttributeLongCharStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeLongCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeLongCharStringWithValueParamsCompletion(foundation.NSStringStringWithUTF8String(value), params, completion)
+}
+
+// SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeEpochUsWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeEpochUsWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeEpochUsWithValueCompletion calls the underlying WriteAttributeEpochUsWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEpochUsWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEpochUsWithValueCompletion(value, completion)
+}
+
+// WriteAttributeEpochUsWithValueParamsCompletion calls the underlying WriteAttributeEpochUsWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEpochUsWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEpochUsWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeEpochSWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeEpochSWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeEpochSWithValueCompletion calls the underlying WriteAttributeEpochSWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEpochSWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEpochSWithValueCompletion(value, completion)
+}
+
+// WriteAttributeEpochSWithValueParamsCompletion calls the underlying WriteAttributeEpochSWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEpochSWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEpochSWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeVendorIdWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeVendorIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeVendorIdWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeVendorIdWithValueCompletion calls the underlying WriteAttributeVendorIdWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeVendorIdWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeVendorIdWithValueCompletion(value, completion)
+}
+
+// WriteAttributeVendorIdWithValueParamsCompletion calls the underlying WriteAttributeVendorIdWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeVendorIdWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeVendorIdWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeListNullablesAndOptionalsStructWithCompletion calls the underlying ReadAttributeListNullablesAndOptionalsStructWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeListNullablesAndOptionalsStructWithCompletion(completion)
+}
+
+// WriteAttributeListNullablesAndOptionalsStructWithValueCompletion calls the underlying WriteAttributeListNullablesAndOptionalsStructWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListNullablesAndOptionalsStructWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion calls the underlying WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeEnumAttrWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeEnumAttrWithValueCompletion calls the underlying WriteAttributeEnumAttrWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnumAttrWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnumAttrWithValueCompletion(value, completion)
+}
+
+// WriteAttributeEnumAttrWithValueParamsCompletion calls the underlying WriteAttributeEnumAttrWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeEnumAttrWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeEnumAttrWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeStructAttrWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterSimpleStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeStructAttrWithCompletion(func(_p0 *raw.MTRUnitTestingClusterSimpleStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterSimpleStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterSimpleStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeStructAttrWithValueCompletion calls the underlying WriteAttributeStructAttrWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeStructAttrWithValueCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeStructAttrWithValueCompletion(value, completion)
+}
+
+// WriteAttributeStructAttrWithValueParamsCompletion calls the underlying WriteAttributeStructAttrWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeStructAttrWithValueParamsCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeStructAttrWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterSimpleStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRUnitTestingClusterSimpleStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterSimpleStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterSimpleStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeRangeRestrictedInt8uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeRangeRestrictedInt8uWithValueCompletion calls the underlying WriteAttributeRangeRestrictedInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion calls the underlying WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeRangeRestrictedInt8sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeRangeRestrictedInt8sWithValueCompletion calls the underlying WriteAttributeRangeRestrictedInt8sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt8sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion calls the underlying WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeRangeRestrictedInt16uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeRangeRestrictedInt16uWithValueCompletion calls the underlying WriteAttributeRangeRestrictedInt16uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt16uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion calls the underlying WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeRangeRestrictedInt16sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeRangeRestrictedInt16sWithValueCompletion calls the underlying WriteAttributeRangeRestrictedInt16sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt16sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion calls the underlying WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeListLongOctetStringWithCompletion calls the underlying ReadAttributeListLongOctetStringWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeListLongOctetStringWithCompletion(completion)
+}
+
+// WriteAttributeListLongOctetStringWithValueCompletion calls the underlying WriteAttributeListLongOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListLongOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListLongOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListLongOctetStringWithValueParamsCompletion calls the underlying WriteAttributeListLongOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListLongOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListLongOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeListFabricScopedWithParamsCompletion calls the underlying ReadAttributeListFabricScopedWithParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompletion(params *raw.MTRReadParams, completion objc.Block) {
+	x.inner.ReadAttributeListFabricScopedWithParamsCompletion(params, completion)
+}
+
+// WriteAttributeListFabricScopedWithValueCompletion calls the underlying WriteAttributeListFabricScopedWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListFabricScopedWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListFabricScopedWithValueCompletion(value, completion)
+}
+
+// WriteAttributeListFabricScopedWithValueParamsCompletion calls the underlying WriteAttributeListFabricScopedWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeListFabricScopedWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeListFabricScopedWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeTimedWriteBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeTimedWriteBooleanWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeTimedWriteBooleanWithValueCompletion calls the underlying WriteAttributeTimedWriteBooleanWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeTimedWriteBooleanWithValueCompletion(value, completion)
+}
+
+// WriteAttributeTimedWriteBooleanWithValueParamsCompletion calls the underlying WriteAttributeTimedWriteBooleanWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeTimedWriteBooleanWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneralErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeGeneralErrorBooleanWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeGeneralErrorBooleanWithValueCompletion calls the underlying WriteAttributeGeneralErrorBooleanWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeGeneralErrorBooleanWithValueCompletion(value, completion)
+}
+
+// WriteAttributeGeneralErrorBooleanWithValueParamsCompletion calls the underlying WriteAttributeGeneralErrorBooleanWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeGeneralErrorBooleanWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterErrorBooleanWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeClusterErrorBooleanWithValueCompletion calls the underlying WriteAttributeClusterErrorBooleanWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeClusterErrorBooleanWithValueCompletion(value, completion)
+}
+
+// WriteAttributeClusterErrorBooleanWithValueParamsCompletion calls the underlying WriteAttributeClusterErrorBooleanWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeClusterErrorBooleanWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeUnsupportedWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeUnsupportedWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeUnsupportedWithValueCompletion calls the underlying WriteAttributeUnsupportedWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeUnsupportedWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeUnsupportedWithValueCompletion(value, completion)
+}
+
+// WriteAttributeUnsupportedWithValueParamsCompletion calls the underlying WriteAttributeUnsupportedWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeUnsupportedWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeUnsupportedWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableBooleanWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableBooleanWithValueCompletion calls the underlying WriteAttributeNullableBooleanWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBooleanWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableBooleanWithValueParamsCompletion calls the underlying WriteAttributeNullableBooleanWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBooleanWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableBitmap8WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableBitmap8WithValueCompletion calls the underlying WriteAttributeNullableBitmap8WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap8WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableBitmap8WithValueParamsCompletion calls the underlying WriteAttributeNullableBitmap8WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap8WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableBitmap16WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableBitmap16WithValueCompletion calls the underlying WriteAttributeNullableBitmap16WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap16WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableBitmap16WithValueParamsCompletion calls the underlying WriteAttributeNullableBitmap16WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap16WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableBitmap32WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableBitmap32WithValueCompletion calls the underlying WriteAttributeNullableBitmap32WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap32WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap32WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableBitmap32WithValueParamsCompletion calls the underlying WriteAttributeNullableBitmap32WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap32WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap32WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableBitmap64WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableBitmap64WithValueCompletion calls the underlying WriteAttributeNullableBitmap64WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap64WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap64WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableBitmap64WithValueParamsCompletion calls the underlying WriteAttributeNullableBitmap64WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableBitmap64WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableBitmap64WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt8uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt8uWithValueCompletion calls the underlying WriteAttributeNullableInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt8uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt16uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt16uWithValueCompletion calls the underlying WriteAttributeNullableInt16uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt16uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt16uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt16uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt16uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt24uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt24uWithValueCompletion calls the underlying WriteAttributeNullableInt24uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt24uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt24uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt24uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt24uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt32uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt32uWithValueCompletion calls the underlying WriteAttributeNullableInt32uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt32uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt32uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt32uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt32uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt40uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt40uWithValueCompletion calls the underlying WriteAttributeNullableInt40uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt40uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt40uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt40uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt40uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt48uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt48uWithValueCompletion calls the underlying WriteAttributeNullableInt48uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt48uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt48uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt48uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt48uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt56uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt56uWithValueCompletion calls the underlying WriteAttributeNullableInt56uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt56uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt56uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt56uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt56uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt64uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt64uWithValueCompletion calls the underlying WriteAttributeNullableInt64uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt64uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt64uWithValueParamsCompletion calls the underlying WriteAttributeNullableInt64uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt64uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt8sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt8sWithValueCompletion calls the underlying WriteAttributeNullableInt8sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt8sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt8sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt8sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt8sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt16sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt16sWithValueCompletion calls the underlying WriteAttributeNullableInt16sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt16sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt16sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt16sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt16sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt24sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt24sWithValueCompletion calls the underlying WriteAttributeNullableInt24sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt24sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt24sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt24sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt24sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt24sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt32sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt32sWithValueCompletion calls the underlying WriteAttributeNullableInt32sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt32sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt32sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt32sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt32sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt32sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt40sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt40sWithValueCompletion calls the underlying WriteAttributeNullableInt40sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt40sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt40sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt40sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt40sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt40sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt48sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt48sWithValueCompletion calls the underlying WriteAttributeNullableInt48sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt48sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt48sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt48sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt48sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt48sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt56sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt56sWithValueCompletion calls the underlying WriteAttributeNullableInt56sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt56sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt56sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt56sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt56sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt56sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableInt64sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableInt64sWithValueCompletion calls the underlying WriteAttributeNullableInt64sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt64sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableInt64sWithValueParamsCompletion calls the underlying WriteAttributeNullableInt64sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableInt64sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableInt64sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableEnum8WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableEnum8WithValueCompletion calls the underlying WriteAttributeNullableEnum8WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnum8WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableEnum8WithValueParamsCompletion calls the underlying WriteAttributeNullableEnum8WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnum8WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableEnum16WithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableEnum16WithValueCompletion calls the underlying WriteAttributeNullableEnum16WithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnum16WithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableEnum16WithValueParamsCompletion calls the underlying WriteAttributeNullableEnum16WithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnum16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnum16WithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableFloatSingleWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableFloatSingleWithValueCompletion calls the underlying WriteAttributeNullableFloatSingleWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableFloatSingleWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableFloatSingleWithValueParamsCompletion calls the underlying WriteAttributeNullableFloatSingleWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableFloatSingleWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableFloatDoubleWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableFloatDoubleWithValueCompletion calls the underlying WriteAttributeNullableFloatDoubleWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableFloatDoubleWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableFloatDoubleWithValueParamsCompletion calls the underlying WriteAttributeNullableFloatDoubleWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableFloatDoubleWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableOctetStringWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableOctetStringWithValueCompletion calls the underlying WriteAttributeNullableOctetStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableOctetStringWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableOctetStringWithValueParamsCompletion calls the underlying WriteAttributeNullableOctetStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableOctetStringWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableCharStringWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableCharStringWithValueCompletion calls the underlying WriteAttributeNullableCharStringWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableCharStringWithValueCompletion(value string, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableCharStringWithValueCompletion(foundation.NSStringStringWithUTF8String(value), completion)
+}
+
+// WriteAttributeNullableCharStringWithValueParamsCompletion calls the underlying WriteAttributeNullableCharStringWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableCharStringWithValueParamsCompletion(foundation.NSStringStringWithUTF8String(value), params, completion)
+}
+
+// SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+	type _result struct {
+		val string
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = purego.GoString(_p0.Ptr())
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero string
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableEnumAttrWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableEnumAttrWithValueCompletion calls the underlying WriteAttributeNullableEnumAttrWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnumAttrWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableEnumAttrWithValueParamsCompletion calls the underlying WriteAttributeNullableEnumAttrWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableEnumAttrWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableStructWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterSimpleStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableStructWithCompletion(func(_p0 *raw.MTRUnitTestingClusterSimpleStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterSimpleStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterSimpleStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableStructWithValueCompletion calls the underlying WriteAttributeNullableStructWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableStructWithValueCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableStructWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableStructWithValueParamsCompletion calls the underlying WriteAttributeNullableStructWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableStructWithValueParamsCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableStructWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error) {
+	type _result struct {
+		val *MTRUnitTestingClusterSimpleStruct
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRUnitTestingClusterSimpleStruct, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRUnitTestingClusterSimpleStruct{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRUnitTestingClusterSimpleStruct
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableRangeRestrictedInt8uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableRangeRestrictedInt8sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableRangeRestrictedInt16uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeNullableRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeNullableRangeRestrictedInt16sWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion(value, completion)
+}
+
+// WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion calls the underlying WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeWriteOnlyInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeWriteOnlyInt8uWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// WriteAttributeWriteOnlyInt8uWithValueCompletion calls the underlying WriteAttributeWriteOnlyInt8uWithValueCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeWriteOnlyInt8uWithValueCompletion(value, completion)
+}
+
+// WriteAttributeWriteOnlyInt8uWithValueParamsCompletion calls the underlying WriteAttributeWriteOnlyInt8uWithValueParamsCompletion.
+func (x *MTRBaseClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
+	x.inner.WriteAttributeWriteOnlyInt8uWithValueParamsCompletion(value, params, completion)
+}
+
+// SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithCompletion calls the underlying ReadAttributeGeneratedCommandListWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeGeneratedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAcceptedCommandListWithCompletion calls the underlying ReadAttributeAcceptedCommandListWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAcceptedCommandListWithCompletion(completion)
+}
+
+// SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeAttributeListWithCompletion calls the underlying ReadAttributeAttributeListWithCompletion.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(completion objc.Block) {
+	x.inner.ReadAttributeAttributeListWithCompletion(completion)
+}
+
+// SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler calls the underlying SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block) {
+	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, reportHandler)
+}
+
+// ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
+// SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (x *MTRBaseClusterUnitTesting) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+	type _result struct {
+		val *foundation.NSNumber
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSNumber
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRBaseClusterUnitTesting) asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting { return x.inner }
 
 func (x *MTRBaseClusterUnitTesting) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return &x.inner.MTRGenericBaseCluster }
 
 func (x *MTRBaseClusterUnitTesting) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericBaseCluster.MTRCluster }
+
+// MTRBaseClusterUnitTestingable is the interface implemented by [MTRBaseClusterUnitTesting], for mocking and DI.
+type MTRBaseClusterUnitTestingable interface {
+	Unwrap() *raw.MTRBaseClusterUnitTesting
+	TestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestParams, completion func(unsafe.Pointer))
+	TestWithCompletion(completion func(unsafe.Pointer))
+	TestNotHandledWithParamsCompletion(params *raw.MTRUnitTestingClusterTestNotHandledParams, completion func(unsafe.Pointer))
+	TestNotHandledWithCompletion(completion func(unsafe.Pointer))
+	TestSpecificWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSpecificParams) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
+	TestSpecificWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
+	TestUnknownCommandWithParamsCompletion(params *raw.MTRUnitTestingClusterTestUnknownCommandParams, completion func(unsafe.Pointer))
+	TestUnknownCommandWithCompletion(completion func(unsafe.Pointer))
+	TestAddArgumentsWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestAddArgumentsParams) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error)
+	TestSimpleArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams) (*MTRUnitTestingClusterTestSimpleArgumentResponseParams, error)
+	TestStructArrayArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error)
+	TestStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestNestedStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestListStructArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListStructArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestListInt8UArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestListNestedStructListArgumentRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) (*MTRUnitTestingClusterBooleanResponseParams, error)
+	TestListInt8UReverseRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error)
+	TestEnumsRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEnumsRequestParams) (*MTRUnitTestingClusterTestEnumsResponseParams, error)
+	TestNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
+	TestNullableOptionalRequestWithCompletion(ctx context.Context) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
+	TestComplexNullableOptionalRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error)
+	SimpleStructEchoRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams) (*MTRUnitTestingClusterSimpleStructResponseParams, error)
+	TimedInvokeRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTimedInvokeRequestParams, completion func(unsafe.Pointer))
+	TimedInvokeRequestWithCompletion(completion func(unsafe.Pointer))
+	TestSimpleOptionalArgumentRequestWithParamsCompletion(params *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams, completion func(unsafe.Pointer))
+	TestSimpleOptionalArgumentRequestWithCompletion(completion func(unsafe.Pointer))
+	TestEmitTestEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams) (*MTRUnitTestingClusterTestEmitTestEventResponseParams, error)
+	TestEmitTestFabricScopedEventRequestWithParamsCompletion(ctx context.Context, params *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error)
+	ReadAttributeBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeBitmap8WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeBitmap8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeBitmap8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeBitmap16WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeBitmap16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeBitmap16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeBitmap32WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeBitmap32WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeBitmap32WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeBitmap64WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeBitmap64WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeBitmap64WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt24uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt24uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt24uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt32uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt32uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt32uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt40uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt40uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt40uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt48uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt48uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt48uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt56uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt56uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt56uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt64uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt64uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt64uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt24sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt24sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt24sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt32sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt32sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt32sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt40sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt40sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt40sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt48sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt48sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt48sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt56sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt56sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt56sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeInt64sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeInt64sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeInt64sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeEnum8WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeEnum8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeEnum8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeEnum16WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeEnum16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeEnum16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeFloatSingleWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeFloatSingleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeFloatSingleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeFloatDoubleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeFloatDoubleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error)
+	WriteAttributeOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer))
+	WriteAttributeOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
+	ReadAttributeListInt8uWithCompletion(completion objc.Block)
+	WriteAttributeListInt8uWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListInt8uWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListInt8uWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeListOctetStringWithCompletion(completion objc.Block)
+	WriteAttributeListOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeListStructOctetStringWithCompletion(completion objc.Block)
+	WriteAttributeListStructOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListStructOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListStructOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error)
+	WriteAttributeLongOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer))
+	WriteAttributeLongOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeLongOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
+	ReadAttributeCharStringWithCompletion(ctx context.Context) (string, error)
+	WriteAttributeCharStringWithValueCompletion(value string, completion func(unsafe.Pointer))
+	WriteAttributeCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeLongCharStringWithCompletion(ctx context.Context) (string, error)
+	WriteAttributeLongCharStringWithValueCompletion(value string, completion func(unsafe.Pointer))
+	WriteAttributeLongCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeLongCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeEpochUsWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeEpochUsWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeEpochUsWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeEpochUsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeEpochSWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeEpochSWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeEpochSWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeEpochSWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeVendorIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeVendorIdWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeVendorIdWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeVendorIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeListNullablesAndOptionalsStructWithCompletion(completion objc.Block)
+	WriteAttributeListNullablesAndOptionalsStructWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListNullablesAndOptionalsStructWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListNullablesAndOptionalsStructWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeEnumAttrWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeEnumAttrWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeEnumAttrWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeStructAttrWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error)
+	WriteAttributeStructAttrWithValueCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer))
+	WriteAttributeStructAttrWithValueParamsCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeStructAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error)
+	ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeRangeRestrictedInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeRangeRestrictedInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeRangeRestrictedInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeRangeRestrictedInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeRangeRestrictedInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeRangeRestrictedInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeRangeRestrictedInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeRangeRestrictedInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeListLongOctetStringWithCompletion(completion objc.Block)
+	WriteAttributeListLongOctetStringWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListLongOctetStringWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListLongOctetStringWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeListFabricScopedWithParamsCompletion(params *raw.MTRReadParams, completion objc.Block)
+	WriteAttributeListFabricScopedWithValueCompletion(value *foundation.NSArray[objc.ID], completion func(unsafe.Pointer))
+	WriteAttributeListFabricScopedWithValueParamsCompletion(value *foundation.NSArray[objc.ID], params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeListFabricScopedWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeTimedWriteBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeTimedWriteBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeTimedWriteBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeGeneralErrorBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeGeneralErrorBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeGeneralErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeClusterErrorBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeClusterErrorBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeClusterErrorBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeUnsupportedWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeUnsupportedWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeUnsupportedWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeUnsupportedWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableBooleanWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableBooleanWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableBooleanWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableBitmap8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableBitmap8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableBitmap8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableBitmap16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableBitmap16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableBitmap16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableBitmap32WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableBitmap32WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableBitmap32WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableBitmap64WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableBitmap64WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableBitmap64WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt24uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt24uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt24uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt32uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt32uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt32uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt40uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt40uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt40uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt48uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt48uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt48uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt56uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt56uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt56uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt64uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt64uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt64uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt24sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt24sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt24sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt32sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt32sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt32sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt40sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt40sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt40sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt48sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt48sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt48sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt56sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt56sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt56sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableInt64sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableInt64sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableInt64sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableEnum8WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableEnum8WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableEnum8WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableEnum16WithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableEnum16WithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableEnum16WithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableFloatSingleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableFloatSingleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableFloatSingleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableFloatDoubleWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableFloatDoubleWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableFloatDoubleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (*foundation.NSData, error)
+	WriteAttributeNullableOctetStringWithValueCompletion(value *foundation.NSData, completion func(unsafe.Pointer))
+	WriteAttributeNullableOctetStringWithValueParamsCompletion(value *foundation.NSData, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableOctetStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
+	ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (string, error)
+	WriteAttributeNullableCharStringWithValueCompletion(value string, completion func(unsafe.Pointer))
+	WriteAttributeNullableCharStringWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableCharStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableEnumAttrWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableEnumAttrWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableEnumAttrWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableStructWithCompletion(ctx context.Context) (*MTRUnitTestingClusterSimpleStruct, error)
+	WriteAttributeNullableStructWithValueCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, completion func(unsafe.Pointer))
+	WriteAttributeNullableStructWithValueParamsCompletion(value *raw.MTRUnitTestingClusterSimpleStruct, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableStructWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRUnitTestingClusterSimpleStruct, error)
+	ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableRangeRestrictedInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableRangeRestrictedInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableRangeRestrictedInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableRangeRestrictedInt8sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableRangeRestrictedInt8sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableRangeRestrictedInt8sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableRangeRestrictedInt16uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableRangeRestrictedInt16uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableRangeRestrictedInt16uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeNullableRangeRestrictedInt16sWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeNullableRangeRestrictedInt16sWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeNullableRangeRestrictedInt16sWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	WriteAttributeWriteOnlyInt8uWithValueCompletion(value *foundation.NSNumber, completion func(unsafe.Pointer))
+	WriteAttributeWriteOnlyInt8uWithValueParamsCompletion(value *foundation.NSNumber, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
+	SubscribeAttributeWriteOnlyInt8uWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeGeneratedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAcceptedCommandListWithCompletion(completion objc.Block)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeAttributeListWithCompletion(completion objc.Block)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params *raw.MTRSubscribeParams, subscriptionEstablished func(), reportHandler objc.Block)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+}
+
+var _ MTRBaseClusterUnitTestingable = (*MTRBaseClusterUnitTesting)(nil)
 

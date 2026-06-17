@@ -23,5 +23,90 @@ func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(_id)}
 }
 
+// FeatureChannelCount calls the underlying FeatureChannelCount.
+func (x *BatchNormalizationLayer) FeatureChannelCount() uint {
+	return x.inner.FeatureChannelCount()
+}
+
+// Mean calls the underlying Mean.
+func (x *BatchNormalizationLayer) Mean() *Tensor {
+	_r := x.inner.Mean()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Variance calls the underlying Variance.
+func (x *BatchNormalizationLayer) Variance() *Tensor {
+	_r := x.inner.Variance()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Beta calls the underlying Beta.
+func (x *BatchNormalizationLayer) Beta() *Tensor {
+	_r := x.inner.Beta()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Gamma calls the underlying Gamma.
+func (x *BatchNormalizationLayer) Gamma() *Tensor {
+	_r := x.inner.Gamma()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// BetaParameter calls the underlying BetaParameter.
+func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := x.inner.BetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// GammaParameter calls the underlying GammaParameter.
+func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := x.inner.GammaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// VarianceEpsilon calls the underlying VarianceEpsilon.
+func (x *BatchNormalizationLayer) VarianceEpsilon() float32 {
+	return x.inner.VarianceEpsilon()
+}
+
+// Momentum calls the underlying Momentum.
+func (x *BatchNormalizationLayer) Momentum() float32 {
+	return x.inner.Momentum()
+}
+
 func (x *BatchNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// BatchNormalizationLayerable is the interface implemented by [BatchNormalizationLayer], for mocking and DI.
+type BatchNormalizationLayerable interface {
+	Unwrap() *raw.MLCBatchNormalizationLayer
+	FeatureChannelCount() uint
+	Mean() *Tensor
+	Variance() *Tensor
+	Beta() *Tensor
+	Gamma() *Tensor
+	BetaParameter() *TensorParameter
+	GammaParameter() *TensorParameter
+	VarianceEpsilon() float32
+	Momentum() float32
+}
+
+var _ BatchNormalizationLayerable = (*BatchNormalizationLayer)(nil)
 

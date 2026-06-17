@@ -5,7 +5,10 @@
 package discrecordingui
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +25,29 @@ func NewEraseProgressPanel() *EraseProgressPanel {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DREraseProgressPanel")), objc.RegisterName("new"))
 	return &EraseProgressPanel{inner: raw.DREraseProgressPanelFromID(_id)}
 }
+
+// BeginProgressSheetForEraseModalForWindow calls the underlying BeginProgressSheetForEraseModalForWindow.
+func (x *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow) {
+	x.inner.BeginProgressSheetForEraseModalForWindow(erase, docWindow)
+}
+
+// BeginProgressPanelForErase calls the underlying BeginProgressPanelForErase.
+func (x *EraseProgressPanel) BeginProgressPanelForErase(erase *discrecording.DRErase) {
+	x.inner.BeginProgressPanelForErase(erase)
+}
+
+// SetDescription calls the underlying SetDescription.
+func (x *EraseProgressPanel) SetDescription(description string) {
+	x.inner.SetDescription(foundation.NSStringStringWithUTF8String(description))
+}
+
+// EraseProgressPanelable is the interface implemented by [EraseProgressPanel], for mocking and DI.
+type EraseProgressPanelable interface {
+	Unwrap() *raw.DREraseProgressPanel
+	BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow)
+	BeginProgressPanelForErase(erase *discrecording.DRErase)
+	SetDescription(description string)
+}
+
+var _ EraseProgressPanelable = (*EraseProgressPanel)(nil)
 

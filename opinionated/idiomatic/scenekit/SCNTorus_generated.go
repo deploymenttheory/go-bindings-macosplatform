@@ -47,5 +47,64 @@ func (x *Torus) WithPipeSegmentCount(pipeSegmentCount int) *Torus {
 	return x
 }
 
+// RingRadius calls the underlying RingRadius.
+func (x *Torus) RingRadius() float64 {
+	return x.inner.RingRadius()
+}
+
+// SetRingRadius calls the underlying SetRingRadius.
+func (x *Torus) SetRingRadius(ringRadius float64) {
+	x.inner.SetRingRadius(ringRadius)
+}
+
+// PipeRadius calls the underlying PipeRadius.
+func (x *Torus) PipeRadius() float64 {
+	return x.inner.PipeRadius()
+}
+
+// SetPipeRadius calls the underlying SetPipeRadius.
+func (x *Torus) SetPipeRadius(pipeRadius float64) {
+	x.inner.SetPipeRadius(pipeRadius)
+}
+
+// RingSegmentCount calls the underlying RingSegmentCount.
+func (x *Torus) RingSegmentCount() int {
+	return x.inner.RingSegmentCount()
+}
+
+// SetRingSegmentCount calls the underlying SetRingSegmentCount.
+func (x *Torus) SetRingSegmentCount(ringSegmentCount int) {
+	x.inner.SetRingSegmentCount(ringSegmentCount)
+}
+
+// PipeSegmentCount calls the underlying PipeSegmentCount.
+func (x *Torus) PipeSegmentCount() int {
+	return x.inner.PipeSegmentCount()
+}
+
+// SetPipeSegmentCount calls the underlying SetPipeSegmentCount.
+func (x *Torus) SetPipeSegmentCount(pipeSegmentCount int) {
+	x.inner.SetPipeSegmentCount(pipeSegmentCount)
+}
+
 func (x *Torus) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
+
+// Torusable is the interface implemented by [Torus], for mocking and DI.
+type Torusable interface {
+	Unwrap() *raw.SCNTorus
+	WithRingRadius(ringRadius float64) *Torus
+	WithPipeRadius(pipeRadius float64) *Torus
+	WithRingSegmentCount(ringSegmentCount int) *Torus
+	WithPipeSegmentCount(pipeSegmentCount int) *Torus
+	RingRadius() float64
+	SetRingRadius(ringRadius float64)
+	PipeRadius() float64
+	SetPipeRadius(pipeRadius float64)
+	RingSegmentCount() int
+	SetRingSegmentCount(ringSegmentCount int)
+	PipeSegmentCount() int
+	SetPipeSegmentCount(pipeSegmentCount int)
+}
+
+var _ Torusable = (*Torus)(nil)
 

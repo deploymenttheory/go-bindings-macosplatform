@@ -56,17 +56,25 @@ func NewMultiArrayWithPixelBufferShape(pixelBuffer unsafe.Pointer, shape *founda
 	return &MultiArray{inner: raw.MLMultiArrayFromID(_id)}
 }
 
+// DataPointer calls the underlying DataPointer.
+func (x *MultiArray) DataPointer() unsafe.Pointer {
+	return x.inner.DataPointer()
+}
+
+// DataType calls the underlying DataType.
+func (x *MultiArray) DataType() raw.MLMultiArrayDataType {
+	return x.inner.DataType()
+}
+
 // Shape returns the collection as a Go slice.
 func (x *MultiArray) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Strides returns the collection as a Go slice.
@@ -75,10 +83,73 @@ func (x *MultiArray) Strides() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// Count calls the underlying Count.
+func (x *MultiArray) Count() int {
+	return x.inner.Count()
+}
+
+// PixelBuffer calls the underlying PixelBuffer.
+func (x *MultiArray) PixelBuffer() unsafe.Pointer {
+	return x.inner.PixelBuffer()
+}
+
+// GetBytesWithHandler calls the underlying GetBytesWithHandler.
+func (x *MultiArray) GetBytesWithHandler(handler func(unsafe.Pointer, int)) {
+	x.inner.GetBytesWithHandler(handler)
+}
+
+// GetMutableBytesWithHandler calls the underlying GetMutableBytesWithHandler.
+func (x *MultiArray) GetMutableBytesWithHandler(handler objc.Block) {
+	x.inner.GetMutableBytesWithHandler(handler)
+}
+
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *MultiArray) ObjectAtIndexedSubscript(idx int) *foundation.NSNumber {
+	return x.inner.ObjectAtIndexedSubscript(idx)
+}
+
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *MultiArray) ObjectForKeyedSubscript(key *foundation.NSArray[*foundation.NSNumber]) *foundation.NSNumber {
+	return x.inner.ObjectForKeyedSubscript(key)
+}
+
+// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
+func (x *MultiArray) SetObjectAtIndexedSubscript(obj *foundation.NSNumber, idx int) {
+	x.inner.SetObjectAtIndexedSubscript(obj, idx)
+}
+
+// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
+func (x *MultiArray) SetObjectForKeyedSubscript(obj *foundation.NSNumber, key *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetObjectForKeyedSubscript(obj, key)
+}
+
+// TransferToMultiArray calls the underlying TransferToMultiArray.
+func (x *MultiArray) TransferToMultiArray(destinationMultiArray *raw.MLMultiArray) {
+	x.inner.TransferToMultiArray(destinationMultiArray)
+}
+
+// MultiArrayable is the interface implemented by [MultiArray], for mocking and DI.
+type MultiArrayable interface {
+	Unwrap() *raw.MLMultiArray
+	DataPointer() unsafe.Pointer
+	DataType() raw.MLMultiArrayDataType
+	Shape() []*foundation.NSNumber
+	Strides() []*foundation.NSNumber
+	Count() int
+	PixelBuffer() unsafe.Pointer
+	GetBytesWithHandler(handler func(unsafe.Pointer, int))
+	GetMutableBytesWithHandler(handler objc.Block)
+	ObjectAtIndexedSubscript(idx int) *foundation.NSNumber
+	ObjectForKeyedSubscript(key *foundation.NSArray[*foundation.NSNumber]) *foundation.NSNumber
+	SetObjectAtIndexedSubscript(obj *foundation.NSNumber, idx int)
+	SetObjectForKeyedSubscript(obj *foundation.NSNumber, key *foundation.NSArray[*foundation.NSNumber])
+	TransferToMultiArray(destinationMultiArray *raw.MLMultiArray)
+}
+
+var _ MultiArrayable = (*MultiArray)(nil)
 

@@ -23,3 +23,10 @@ func NewBluetoothAccessibilityIgnoredTextFieldCell() *BluetoothAccessibilityIgno
 	return &BluetoothAccessibilityIgnoredTextFieldCell{inner: raw.IOBluetoothAccessibilityIgnoredTextFieldCellFromID(_id)}
 }
 
+// BluetoothAccessibilityIgnoredTextFieldCellable is the interface implemented by [BluetoothAccessibilityIgnoredTextFieldCell], for mocking and DI.
+type BluetoothAccessibilityIgnoredTextFieldCellable interface {
+	Unwrap() *raw.IOBluetoothAccessibilityIgnoredTextFieldCell
+}
+
+var _ BluetoothAccessibilityIgnoredTextFieldCellable = (*BluetoothAccessibilityIgnoredTextFieldCell)(nil)
+

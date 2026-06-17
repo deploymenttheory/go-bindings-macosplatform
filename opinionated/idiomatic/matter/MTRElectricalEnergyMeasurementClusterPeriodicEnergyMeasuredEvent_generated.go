@@ -35,3 +35,44 @@ func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) WithE
 	return x
 }
 
+// EnergyImported calls the underlying EnergyImported.
+func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	_r := x.inner.EnergyImported()
+	if _r == nil {
+		return nil
+	}
+	return &MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct{inner: _r}
+}
+
+// SetEnergyImported calls the underlying SetEnergyImported.
+func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEnergyImported(energyImported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
+	x.inner.SetEnergyImported(energyImported)
+}
+
+// EnergyExported calls the underlying EnergyExported.
+func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	_r := x.inner.EnergyExported()
+	if _r == nil {
+		return nil
+	}
+	return &MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct{inner: _r}
+}
+
+// SetEnergyExported calls the underlying SetEnergyExported.
+func (x *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent) SetEnergyExported(energyExported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) {
+	x.inner.SetEnergyExported(energyExported)
+}
+
+// MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable is the interface implemented by [MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent], for mocking and DI.
+type MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable interface {
+	Unwrap() *raw.MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent
+	WithEnergyImported(energyImported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent
+	WithEnergyExported(energyExported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) *MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent
+	EnergyImported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	SetEnergyImported(energyImported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)
+	EnergyExported() *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
+	SetEnergyExported(energyExported *raw.MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)
+}
+
+var _ MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEventable = (*MTRElectricalEnergyMeasurementClusterPeriodicEnergyMeasuredEvent)(nil)
+

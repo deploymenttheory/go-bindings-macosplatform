@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,20 +25,50 @@ func NewCollectionList() *CollectionList {
 	return &CollectionList{inner: raw.PHCollectionListFromID(_id)}
 }
 
+// CollectionListType calls the underlying CollectionListType.
+func (x *CollectionList) CollectionListType() raw.PHCollectionListType {
+	return x.inner.CollectionListType()
+}
+
+// CollectionListSubtype calls the underlying CollectionListSubtype.
+func (x *CollectionList) CollectionListSubtype() raw.PHCollectionListSubtype {
+	return x.inner.CollectionListSubtype()
+}
+
+// StartDate calls the underlying StartDate.
+func (x *CollectionList) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *CollectionList) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
 // LocalizedLocationNames returns the collection as a Go slice.
-func (x *CollectionList) LocalizedLocationNames() []*foundation.NSString {
+func (x *CollectionList) LocalizedLocationNames() []string {
 	arr := x.inner.LocalizedLocationNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *CollectionList) asCollection() *raw.PHCollection { return &x.inner.PHCollection }
 
 func (x *CollectionList) asObject() *raw.PHObject { return &x.inner.PHCollection.PHObject }
+
+// CollectionListable is the interface implemented by [CollectionList], for mocking and DI.
+type CollectionListable interface {
+	Unwrap() *raw.PHCollectionList
+	CollectionListType() raw.PHCollectionListType
+	CollectionListSubtype() raw.PHCollectionListSubtype
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	LocalizedLocationNames() []string
+}
+
+var _ CollectionListable = (*CollectionList)(nil)
 

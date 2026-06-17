@@ -38,3 +38,45 @@ func (x *LocalPointsOfInterestRequest) WithPointOfInterestFilter(pointOfInterest
 	return x
 }
 
+// Coordinate calls the underlying Coordinate.
+func (x *LocalPointsOfInterestRequest) Coordinate() unsafe.Pointer {
+	return x.inner.Coordinate()
+}
+
+// Radius calls the underlying Radius.
+func (x *LocalPointsOfInterestRequest) Radius() unsafe.Pointer {
+	return x.inner.Radius()
+}
+
+// Region calls the underlying Region.
+func (x *LocalPointsOfInterestRequest) Region() raw.MKCoordinateRegion {
+	return x.inner.Region()
+}
+
+// PointOfInterestFilter calls the underlying PointOfInterestFilter.
+func (x *LocalPointsOfInterestRequest) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := x.inner.PointOfInterestFilter()
+	if _r == nil {
+		return nil
+	}
+	return &PointOfInterestFilter{inner: _r}
+}
+
+// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
+func (x *LocalPointsOfInterestRequest) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
+	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+}
+
+// LocalPointsOfInterestRequestable is the interface implemented by [LocalPointsOfInterestRequest], for mocking and DI.
+type LocalPointsOfInterestRequestable interface {
+	Unwrap() *raw.MKLocalPointsOfInterestRequest
+	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *LocalPointsOfInterestRequest
+	Coordinate() unsafe.Pointer
+	Radius() unsafe.Pointer
+	Region() raw.MKCoordinateRegion
+	PointOfInterestFilter() *PointOfInterestFilter
+	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+}
+
+var _ LocalPointsOfInterestRequestable = (*LocalPointsOfInterestRequest)(nil)
+

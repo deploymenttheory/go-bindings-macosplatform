@@ -50,3 +50,69 @@ func (x *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers ui
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *BrowserViewController) Delegate() raw.MCBrowserViewControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *BrowserViewController) SetDelegate(delegate raw.MCBrowserViewControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Browser calls the underlying Browser.
+func (x *BrowserViewController) Browser() *NearbyServiceBrowser {
+	_r := x.inner.Browser()
+	if _r == nil {
+		return nil
+	}
+	return &NearbyServiceBrowser{inner: _r}
+}
+
+// Session calls the underlying Session.
+func (x *BrowserViewController) Session() *Session {
+	_r := x.inner.Session()
+	if _r == nil {
+		return nil
+	}
+	return &Session{inner: _r}
+}
+
+// MinimumNumberOfPeers calls the underlying MinimumNumberOfPeers.
+func (x *BrowserViewController) MinimumNumberOfPeers() uint {
+	return x.inner.MinimumNumberOfPeers()
+}
+
+// SetMinimumNumberOfPeers calls the underlying SetMinimumNumberOfPeers.
+func (x *BrowserViewController) SetMinimumNumberOfPeers(minimumNumberOfPeers uint) {
+	x.inner.SetMinimumNumberOfPeers(minimumNumberOfPeers)
+}
+
+// MaximumNumberOfPeers calls the underlying MaximumNumberOfPeers.
+func (x *BrowserViewController) MaximumNumberOfPeers() uint {
+	return x.inner.MaximumNumberOfPeers()
+}
+
+// SetMaximumNumberOfPeers calls the underlying SetMaximumNumberOfPeers.
+func (x *BrowserViewController) SetMaximumNumberOfPeers(maximumNumberOfPeers uint) {
+	x.inner.SetMaximumNumberOfPeers(maximumNumberOfPeers)
+}
+
+// BrowserViewControllerable is the interface implemented by [BrowserViewController], for mocking and DI.
+type BrowserViewControllerable interface {
+	Unwrap() *raw.MCBrowserViewController
+	WithDelegate(delegate raw.MCBrowserViewControllerDelegate) *BrowserViewController
+	WithMinimumNumberOfPeers(minimumNumberOfPeers uint) *BrowserViewController
+	WithMaximumNumberOfPeers(maximumNumberOfPeers uint) *BrowserViewController
+	Delegate() raw.MCBrowserViewControllerDelegate
+	SetDelegate(delegate raw.MCBrowserViewControllerDelegate)
+	Browser() *NearbyServiceBrowser
+	Session() *Session
+	MinimumNumberOfPeers() uint
+	SetMinimumNumberOfPeers(minimumNumberOfPeers uint)
+	MaximumNumberOfPeers() uint
+	SetMaximumNumberOfPeers(maximumNumberOfPeers uint)
+}
+
+var _ BrowserViewControllerable = (*BrowserViewController)(nil)
+

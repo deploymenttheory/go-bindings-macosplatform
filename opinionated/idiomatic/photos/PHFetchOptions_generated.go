@@ -7,6 +7,7 @@ package photos
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -77,16 +78,107 @@ func (x *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChangeD
 	return x
 }
 
+// Predicate calls the underlying Predicate.
+func (x *FetchOptions) Predicate() *foundation.NSPredicate {
+	return x.inner.Predicate()
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *FetchOptions) SetPredicate(predicate *foundation.NSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
 // SortDescriptors returns the collection as a Go slice.
 func (x *FetchOptions) SortDescriptors() []*foundation.NSSortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
+		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// SetSortDescriptors calls the underlying SetSortDescriptors.
+func (x *FetchOptions) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
+	x.inner.SetSortDescriptors(sortDescriptors)
+}
+
+// IncludeHiddenAssets calls the underlying IncludeHiddenAssets.
+func (x *FetchOptions) IncludeHiddenAssets() bool {
+	return x.inner.IncludeHiddenAssets()
+}
+
+// SetIncludeHiddenAssets calls the underlying SetIncludeHiddenAssets.
+func (x *FetchOptions) SetIncludeHiddenAssets(includeHiddenAssets bool) {
+	x.inner.SetIncludeHiddenAssets(includeHiddenAssets)
+}
+
+// IncludeAllBurstAssets calls the underlying IncludeAllBurstAssets.
+func (x *FetchOptions) IncludeAllBurstAssets() bool {
+	return x.inner.IncludeAllBurstAssets()
+}
+
+// SetIncludeAllBurstAssets calls the underlying SetIncludeAllBurstAssets.
+func (x *FetchOptions) SetIncludeAllBurstAssets(includeAllBurstAssets bool) {
+	x.inner.SetIncludeAllBurstAssets(includeAllBurstAssets)
+}
+
+// IncludeAssetSourceTypes calls the underlying IncludeAssetSourceTypes.
+func (x *FetchOptions) IncludeAssetSourceTypes() raw.PHAssetSourceType {
+	return x.inner.IncludeAssetSourceTypes()
+}
+
+// SetIncludeAssetSourceTypes calls the underlying SetIncludeAssetSourceTypes.
+func (x *FetchOptions) SetIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType) {
+	x.inner.SetIncludeAssetSourceTypes(includeAssetSourceTypes)
+}
+
+// FetchLimit calls the underlying FetchLimit.
+func (x *FetchOptions) FetchLimit() uint {
+	return x.inner.FetchLimit()
+}
+
+// SetFetchLimit calls the underlying SetFetchLimit.
+func (x *FetchOptions) SetFetchLimit(fetchLimit uint) {
+	x.inner.SetFetchLimit(fetchLimit)
+}
+
+// WantsIncrementalChangeDetails calls the underlying WantsIncrementalChangeDetails.
+func (x *FetchOptions) WantsIncrementalChangeDetails() bool {
+	return x.inner.WantsIncrementalChangeDetails()
+}
+
+// SetWantsIncrementalChangeDetails calls the underlying SetWantsIncrementalChangeDetails.
+func (x *FetchOptions) SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) {
+	x.inner.SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails)
+}
+
+// FetchOptionsable is the interface implemented by [FetchOptions], for mocking and DI.
+type FetchOptionsable interface {
+	Unwrap() *raw.PHFetchOptions
+	WithPredicate(predicate *foundation.NSPredicate) *FetchOptions
+	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *FetchOptions
+	WithIncludeHiddenAssets(includeHiddenAssets bool) *FetchOptions
+	WithIncludeAllBurstAssets(includeAllBurstAssets bool) *FetchOptions
+	WithIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType) *FetchOptions
+	WithFetchLimit(fetchLimit uint) *FetchOptions
+	WithWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool) *FetchOptions
+	Predicate() *foundation.NSPredicate
+	SetPredicate(predicate *foundation.NSPredicate)
+	SortDescriptors() []*foundation.NSSortDescriptor
+	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+	IncludeHiddenAssets() bool
+	SetIncludeHiddenAssets(includeHiddenAssets bool)
+	IncludeAllBurstAssets() bool
+	SetIncludeAllBurstAssets(includeAllBurstAssets bool)
+	IncludeAssetSourceTypes() raw.PHAssetSourceType
+	SetIncludeAssetSourceTypes(includeAssetSourceTypes raw.PHAssetSourceType)
+	FetchLimit() uint
+	SetFetchLimit(fetchLimit uint)
+	WantsIncrementalChangeDetails() bool
+	SetWantsIncrementalChangeDetails(wantsIncrementalChangeDetails bool)
+}
+
+var _ FetchOptionsable = (*FetchOptions)(nil)
 

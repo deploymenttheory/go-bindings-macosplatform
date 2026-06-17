@@ -48,7 +48,74 @@ func (x *NEPacketTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEPac
 	return x
 }
 
+// IPv4Settings calls the underlying IPv4Settings.
+func (x *NEPacketTunnelNetworkSettings) IPv4Settings() *NEIPv4Settings {
+	_r := x.inner.IPv4Settings()
+	if _r == nil {
+		return nil
+	}
+	return &NEIPv4Settings{inner: _r}
+}
+
+// SetIPv4Settings calls the underlying SetIPv4Settings.
+func (x *NEPacketTunnelNetworkSettings) SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings) {
+	x.inner.SetIPv4Settings(iPv4Settings)
+}
+
+// IPv6Settings calls the underlying IPv6Settings.
+func (x *NEPacketTunnelNetworkSettings) IPv6Settings() *NEIPv6Settings {
+	_r := x.inner.IPv6Settings()
+	if _r == nil {
+		return nil
+	}
+	return &NEIPv6Settings{inner: _r}
+}
+
+// SetIPv6Settings calls the underlying SetIPv6Settings.
+func (x *NEPacketTunnelNetworkSettings) SetIPv6Settings(iPv6Settings *raw.NEIPv6Settings) {
+	x.inner.SetIPv6Settings(iPv6Settings)
+}
+
+// TunnelOverheadBytes calls the underlying TunnelOverheadBytes.
+func (x *NEPacketTunnelNetworkSettings) TunnelOverheadBytes() *foundation.NSNumber {
+	return x.inner.TunnelOverheadBytes()
+}
+
+// SetTunnelOverheadBytes calls the underlying SetTunnelOverheadBytes.
+func (x *NEPacketTunnelNetworkSettings) SetTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) {
+	x.inner.SetTunnelOverheadBytes(tunnelOverheadBytes)
+}
+
+// MTU calls the underlying MTU.
+func (x *NEPacketTunnelNetworkSettings) MTU() *foundation.NSNumber {
+	return x.inner.MTU()
+}
+
+// SetMTU calls the underlying SetMTU.
+func (x *NEPacketTunnelNetworkSettings) SetMTU(mTU *foundation.NSNumber) {
+	x.inner.SetMTU(mTU)
+}
+
 func (x *NEPacketTunnelNetworkSettings) asNEPacketTunnelNetworkSettings() *raw.NEPacketTunnelNetworkSettings { return x.inner }
 
 func (x *NEPacketTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings { return &x.inner.NETunnelNetworkSettings }
+
+// NEPacketTunnelNetworkSettingsable is the interface implemented by [NEPacketTunnelNetworkSettings], for mocking and DI.
+type NEPacketTunnelNetworkSettingsable interface {
+	Unwrap() *raw.NEPacketTunnelNetworkSettings
+	WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEPacketTunnelNetworkSettings
+	WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEPacketTunnelNetworkSettings
+	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEPacketTunnelNetworkSettings
+	WithMTU(mTU *foundation.NSNumber) *NEPacketTunnelNetworkSettings
+	IPv4Settings() *NEIPv4Settings
+	SetIPv4Settings(iPv4Settings *raw.NEIPv4Settings)
+	IPv6Settings() *NEIPv6Settings
+	SetIPv6Settings(iPv6Settings *raw.NEIPv6Settings)
+	TunnelOverheadBytes() *foundation.NSNumber
+	SetTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber)
+	MTU() *foundation.NSNumber
+	SetMTU(mTU *foundation.NSNumber)
+}
+
+var _ NEPacketTunnelNetworkSettingsable = (*NEPacketTunnelNetworkSettings)(nil)
 

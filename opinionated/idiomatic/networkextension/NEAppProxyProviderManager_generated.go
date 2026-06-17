@@ -27,3 +27,10 @@ func (x *NEAppProxyProviderManager) asNETunnelProviderManager() *raw.NETunnelPro
 
 func (x *NEAppProxyProviderManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NETunnelProviderManager.NEVPNManager }
 
+// NEAppProxyProviderManagerable is the interface implemented by [NEAppProxyProviderManager], for mocking and DI.
+type NEAppProxyProviderManagerable interface {
+	Unwrap() *raw.NEAppProxyProviderManager
+}
+
+var _ NEAppProxyProviderManagerable = (*NEAppProxyProviderManager)(nil)
+

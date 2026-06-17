@@ -48,3 +48,62 @@ func (x *MTRCommissionerControlClusterCommissionNodeParams) WithServerSideProces
 	return x
 }
 
+// RequestID calls the underlying RequestID.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) RequestID() *foundation.NSNumber {
+	return x.inner.RequestID()
+}
+
+// SetRequestID calls the underlying SetRequestID.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) SetRequestID(requestID *foundation.NSNumber) {
+	x.inner.SetRequestID(requestID)
+}
+
+// ResponseTimeoutSeconds calls the underlying ResponseTimeoutSeconds.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() *foundation.NSNumber {
+	return x.inner.ResponseTimeoutSeconds()
+}
+
+// SetResponseTimeoutSeconds calls the underlying SetResponseTimeoutSeconds.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) SetResponseTimeoutSeconds(responseTimeoutSeconds *foundation.NSNumber) {
+	x.inner.SetResponseTimeoutSeconds(responseTimeoutSeconds)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRCommissionerControlClusterCommissionNodeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRCommissionerControlClusterCommissionNodeParamsable is the interface implemented by [MTRCommissionerControlClusterCommissionNodeParams], for mocking and DI.
+type MTRCommissionerControlClusterCommissionNodeParamsable interface {
+	Unwrap() *raw.MTRCommissionerControlClusterCommissionNodeParams
+	WithRequestID(requestID *foundation.NSNumber) *MTRCommissionerControlClusterCommissionNodeParams
+	WithResponseTimeoutSeconds(responseTimeoutSeconds *foundation.NSNumber) *MTRCommissionerControlClusterCommissionNodeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRCommissionerControlClusterCommissionNodeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRCommissionerControlClusterCommissionNodeParams
+	RequestID() *foundation.NSNumber
+	SetRequestID(requestID *foundation.NSNumber)
+	ResponseTimeoutSeconds() *foundation.NSNumber
+	SetResponseTimeoutSeconds(responseTimeoutSeconds *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRCommissionerControlClusterCommissionNodeParamsable = (*MTRCommissionerControlClusterCommissionNodeParams)(nil)
+

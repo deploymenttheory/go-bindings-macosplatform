@@ -5,7 +5,10 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -49,18 +52,93 @@ func (x *Request) WithRevision(revision uint) *Request {
 	return x
 }
 
+// Cancel calls the underlying Cancel.
+func (x *Request) Cancel() {
+	x.inner.Cancel()
+}
+
+// PreferBackgroundProcessing calls the underlying PreferBackgroundProcessing.
+func (x *Request) PreferBackgroundProcessing() bool {
+	return x.inner.PreferBackgroundProcessing()
+}
+
+// SetPreferBackgroundProcessing calls the underlying SetPreferBackgroundProcessing.
+func (x *Request) SetPreferBackgroundProcessing(preferBackgroundProcessing bool) {
+	x.inner.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+}
+
+// UsesCPUOnly calls the underlying UsesCPUOnly.
+func (x *Request) UsesCPUOnly() bool {
+	return x.inner.UsesCPUOnly()
+}
+
+// SetUsesCPUOnly calls the underlying SetUsesCPUOnly.
+func (x *Request) SetUsesCPUOnly(usesCPUOnly bool) {
+	x.inner.SetUsesCPUOnly(usesCPUOnly)
+}
+
 // Results returns the collection as a Go slice.
 func (x *Request) Results() []*raw.VNObservation {
 	arr := x.inner.Results()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VNObservation, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VNObservation {
+		return raw.VNObservationFromID(purego.Retain(_id))
+	})
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *Request) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
+// Revision calls the underlying Revision.
+func (x *Request) Revision() uint {
+	return x.inner.Revision()
+}
+
+// SetRevision calls the underlying SetRevision.
+func (x *Request) SetRevision(revision uint) {
+	x.inner.SetRevision(revision)
+}
+
+// SupportedComputeStageDevicesAndReturnError calls the underlying SupportedComputeStageDevicesAndReturnError.
+func (x *Request) SupportedComputeStageDevicesAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
+	return x.inner.SupportedComputeStageDevicesAndReturnError()
+}
+
+// ComputeDeviceForComputeStage calls the underlying ComputeDeviceForComputeStage.
+func (x *Request) ComputeDeviceForComputeStage(computeStage *foundation.NSString) coreml.MLComputeDeviceProtocol {
+	return x.inner.ComputeDeviceForComputeStage(computeStage)
+}
+
+// SetComputeDeviceForComputeStage calls the underlying SetComputeDeviceForComputeStage.
+func (x *Request) SetComputeDeviceForComputeStage(computeDevice coreml.MLComputeDeviceProtocol, computeStage *foundation.NSString) {
+	x.inner.SetComputeDeviceForComputeStage(computeDevice, computeStage)
 }
 
 func (x *Request) asRequest() *raw.VNRequest { return x.inner }
+
+// Requestable is the interface implemented by [Request], for mocking and DI.
+type Requestable interface {
+	Unwrap() *raw.VNRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *Request
+	WithUsesCPUOnly(usesCPUOnly bool) *Request
+	WithRevision(revision uint) *Request
+	Cancel()
+	PreferBackgroundProcessing() bool
+	SetPreferBackgroundProcessing(preferBackgroundProcessing bool)
+	UsesCPUOnly() bool
+	SetUsesCPUOnly(usesCPUOnly bool)
+	Results() []*raw.VNObservation
+	CompletionHandler() objc.Block
+	Revision() uint
+	SetRevision(revision uint)
+	SupportedComputeStageDevicesAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
+	ComputeDeviceForComputeStage(computeStage *foundation.NSString) coreml.MLComputeDeviceProtocol
+	SetComputeDeviceForComputeStage(computeDevice coreml.MLComputeDeviceProtocol, computeStage *foundation.NSString)
+}
+
+var _ Requestable = (*Request)(nil)
 

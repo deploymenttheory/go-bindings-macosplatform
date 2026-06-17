@@ -25,3 +25,10 @@ func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 
 func (x *LocalizedNumberFormatRule) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// LocalizedNumberFormatRuleable is the interface implemented by [LocalizedNumberFormatRule], for mocking and DI.
+type LocalizedNumberFormatRuleable interface {
+	Unwrap() *raw.NSLocalizedNumberFormatRule
+}
+
+var _ LocalizedNumberFormatRuleable = (*LocalizedNumberFormatRule)(nil)
+

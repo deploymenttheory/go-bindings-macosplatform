@@ -47,9 +47,84 @@ func (x *CNNConvolutionGradient) WithSerializeWeightsAndBiases(serializeWeightsA
 	return x
 }
 
+// ReloadWeightsAndBiasesFromDataSource calls the underlying ReloadWeightsAndBiasesFromDataSource.
+func (x *CNNConvolutionGradient) ReloadWeightsAndBiasesFromDataSource() {
+	x.inner.ReloadWeightsAndBiasesFromDataSource()
+}
+
+// ReloadWeightsAndBiasesWithCommandBufferState calls the underlying ReloadWeightsAndBiasesWithCommandBufferState.
+func (x *CNNConvolutionGradient) ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState) {
+	x.inner.ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer, state)
+}
+
+// SourceGradientFeatureChannels calls the underlying SourceGradientFeatureChannels.
+func (x *CNNConvolutionGradient) SourceGradientFeatureChannels() uint {
+	return x.inner.SourceGradientFeatureChannels()
+}
+
+// SourceImageFeatureChannels calls the underlying SourceImageFeatureChannels.
+func (x *CNNConvolutionGradient) SourceImageFeatureChannels() uint {
+	return x.inner.SourceImageFeatureChannels()
+}
+
+// Groups calls the underlying Groups.
+func (x *CNNConvolutionGradient) Groups() uint {
+	return x.inner.Groups()
+}
+
+// ChannelMultiplier calls the underlying ChannelMultiplier.
+func (x *CNNConvolutionGradient) ChannelMultiplier() uint {
+	return x.inner.ChannelMultiplier()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *CNNConvolutionGradient) DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource {
+	return x.inner.DataSource()
+}
+
+// GradientOption calls the underlying GradientOption.
+func (x *CNNConvolutionGradient) GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption {
+	return x.inner.GradientOption()
+}
+
+// SetGradientOption calls the underlying SetGradientOption.
+func (x *CNNConvolutionGradient) SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) {
+	x.inner.SetGradientOption(gradientOption)
+}
+
+// SerializeWeightsAndBiases calls the underlying SerializeWeightsAndBiases.
+func (x *CNNConvolutionGradient) SerializeWeightsAndBiases() bool {
+	return x.inner.SerializeWeightsAndBiases()
+}
+
+// SetSerializeWeightsAndBiases calls the underlying SetSerializeWeightsAndBiases.
+func (x *CNNConvolutionGradient) SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool) {
+	x.inner.SetSerializeWeightsAndBiases(serializeWeightsAndBiases)
+}
+
 func (x *CNNConvolutionGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNConvolutionGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
 func (x *CNNConvolutionGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel }
+
+// CNNConvolutionGradientable is the interface implemented by [CNNConvolutionGradient], for mocking and DI.
+type CNNConvolutionGradientable interface {
+	Unwrap() *raw.MPSCNNConvolutionGradient
+	WithGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption) *CNNConvolutionGradient
+	WithSerializeWeightsAndBiases(serializeWeightsAndBiases bool) *CNNConvolutionGradient
+	ReloadWeightsAndBiasesFromDataSource()
+	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)
+	SourceGradientFeatureChannels() uint
+	SourceImageFeatureChannels() uint
+	Groups() uint
+	ChannelMultiplier() uint
+	DataSource() mpsneuralnetwork.MPSCNNConvolutionDataSource
+	GradientOption() mpsneuralnetwork.MPSCNNConvolutionGradientOption
+	SetGradientOption(gradientOption mpsneuralnetwork.MPSCNNConvolutionGradientOption)
+	SerializeWeightsAndBiases() bool
+	SetSerializeWeightsAndBiases(serializeWeightsAndBiases bool)
+}
+
+var _ CNNConvolutionGradientable = (*CNNConvolutionGradient)(nil)
 

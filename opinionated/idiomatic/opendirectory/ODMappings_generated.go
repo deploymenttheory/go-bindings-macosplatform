@@ -7,6 +7,7 @@ package opendirectory
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,113 @@ func (x *Mappings) WithFunction(function string) *Mappings {
 	x.inner.SetFunction(foundation.NSStringStringWithUTF8String(function))
 	return x
 }
+
+// RecordMapForStandardRecordType calls the underlying RecordMapForStandardRecordType.
+func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
+	_r := x.inner.RecordMapForStandardRecordType(foundation.NSStringStringWithUTF8String(stdType))
+	if _r == nil {
+		return nil
+	}
+	return &RecordMap{inner: _r}
+}
+
+// SetRecordMapForStandardRecordType calls the underlying SetRecordMapForStandardRecordType.
+func (x *Mappings) SetRecordMapForStandardRecordType(map_ *raw.ODRecordMap, stdType string) {
+	x.inner.SetRecordMapForStandardRecordType(map_, foundation.NSStringStringWithUTF8String(stdType))
+}
+
+// Comment calls the underlying Comment.
+func (x *Mappings) Comment() string {
+	_r := x.inner.Comment()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetComment calls the underlying SetComment.
+func (x *Mappings) SetComment(comment string) {
+	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
+}
+
+// TemplateName calls the underlying TemplateName.
+func (x *Mappings) TemplateName() string {
+	_r := x.inner.TemplateName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTemplateName calls the underlying SetTemplateName.
+func (x *Mappings) SetTemplateName(templateName string) {
+	x.inner.SetTemplateName(foundation.NSStringStringWithUTF8String(templateName))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *Mappings) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIdentifier calls the underlying SetIdentifier.
+func (x *Mappings) SetIdentifier(identifier string) {
+	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+}
+
+// RecordTypes calls the underlying RecordTypes.
+func (x *Mappings) RecordTypes() *foundation.NSArray[objc.ID] {
+	return x.inner.RecordTypes()
+}
+
+// Function calls the underlying Function.
+func (x *Mappings) Function() string {
+	_r := x.inner.Function()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFunction calls the underlying SetFunction.
+func (x *Mappings) SetFunction(function string) {
+	x.inner.SetFunction(foundation.NSStringStringWithUTF8String(function))
+}
+
+// FunctionAttributes calls the underlying FunctionAttributes.
+func (x *Mappings) FunctionAttributes() *foundation.NSArray[objc.ID] {
+	return x.inner.FunctionAttributes()
+}
+
+// SetFunctionAttributes calls the underlying SetFunctionAttributes.
+func (x *Mappings) SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID]) {
+	x.inner.SetFunctionAttributes(functionAttributes)
+}
+
+// Mappingsable is the interface implemented by [Mappings], for mocking and DI.
+type Mappingsable interface {
+	Unwrap() *raw.ODMappings
+	WithComment(comment string) *Mappings
+	WithTemplateName(templateName string) *Mappings
+	WithIdentifier(identifier string) *Mappings
+	WithFunction(function string) *Mappings
+	RecordMapForStandardRecordType(stdType string) *RecordMap
+	SetRecordMapForStandardRecordType(map_ *raw.ODRecordMap, stdType string)
+	Comment() string
+	SetComment(comment string)
+	TemplateName() string
+	SetTemplateName(templateName string)
+	Identifier() string
+	SetIdentifier(identifier string)
+	RecordTypes() *foundation.NSArray[objc.ID]
+	Function() string
+	SetFunction(function string)
+	FunctionAttributes() *foundation.NSArray[objc.ID]
+	SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID])
+}
+
+var _ Mappingsable = (*Mappings)(nil)
 

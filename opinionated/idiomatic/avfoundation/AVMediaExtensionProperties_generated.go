@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,53 @@ func NewMediaExtensionProperties() *MediaExtensionProperties {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaExtensionProperties")), objc.RegisterName("new"))
 	return &MediaExtensionProperties{inner: raw.AVMediaExtensionPropertiesFromID(_id)}
 }
+
+// ExtensionIdentifier calls the underlying ExtensionIdentifier.
+func (x *MediaExtensionProperties) ExtensionIdentifier() string {
+	_r := x.inner.ExtensionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExtensionName calls the underlying ExtensionName.
+func (x *MediaExtensionProperties) ExtensionName() string {
+	_r := x.inner.ExtensionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContainingBundleName calls the underlying ContainingBundleName.
+func (x *MediaExtensionProperties) ContainingBundleName() string {
+	_r := x.inner.ContainingBundleName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ExtensionURL calls the underlying ExtensionURL.
+func (x *MediaExtensionProperties) ExtensionURL() *foundation.NSURL {
+	return x.inner.ExtensionURL()
+}
+
+// ContainingBundleURL calls the underlying ContainingBundleURL.
+func (x *MediaExtensionProperties) ContainingBundleURL() *foundation.NSURL {
+	return x.inner.ContainingBundleURL()
+}
+
+// MediaExtensionPropertiesable is the interface implemented by [MediaExtensionProperties], for mocking and DI.
+type MediaExtensionPropertiesable interface {
+	Unwrap() *raw.AVMediaExtensionProperties
+	ExtensionIdentifier() string
+	ExtensionName() string
+	ContainingBundleName() string
+	ExtensionURL() *foundation.NSURL
+	ContainingBundleURL() *foundation.NSURL
+}
+
+var _ MediaExtensionPropertiesable = (*MediaExtensionProperties)(nil)
 

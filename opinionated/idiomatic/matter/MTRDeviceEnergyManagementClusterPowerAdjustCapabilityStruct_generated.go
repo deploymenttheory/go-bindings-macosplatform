@@ -30,3 +30,35 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) WithCause(
 	return x
 }
 
+// PowerAdjustCapability calls the underlying PowerAdjustCapability.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) PowerAdjustCapability() *foundation.NSArray[objc.ID] {
+	return x.inner.PowerAdjustCapability()
+}
+
+// SetPowerAdjustCapability calls the underlying SetPowerAdjustCapability.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetPowerAdjustCapability(powerAdjustCapability *foundation.NSArray[objc.ID]) {
+	x.inner.SetPowerAdjustCapability(powerAdjustCapability)
+}
+
+// Cause calls the underlying Cause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) Cause() *foundation.NSNumber {
+	return x.inner.Cause()
+}
+
+// SetCause calls the underlying SetCause.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct) SetCause(cause *foundation.NSNumber) {
+	x.inner.SetCause(cause)
+}
+
+// MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct
+	PowerAdjustCapability() *foundation.NSArray[objc.ID]
+	SetPowerAdjustCapability(powerAdjustCapability *foundation.NSArray[objc.ID])
+	Cause() *foundation.NSNumber
+	SetCause(cause *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStructable = (*MTRDeviceEnergyManagementClusterPowerAdjustCapabilityStruct)(nil)
+

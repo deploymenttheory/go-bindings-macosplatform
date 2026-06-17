@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterDiagnosticLogs wraps [raw.MTRClusterDiagnosticLogs] with a fluent Go API.
@@ -32,7 +35,98 @@ func NewMTRClusterDiagnosticLogsWithDeviceEndpointQueue(device *raw.MTRDevice, e
 	return &MTRClusterDiagnosticLogs{inner: raw.MTRClusterDiagnosticLogsFromID(_id)}
 }
 
+// RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
+	type _result struct {
+		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterDiagnosticLogs) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterDiagnosticLogs) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterDiagnosticLogs) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterDiagnosticLogs) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterDiagnosticLogs) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterDiagnosticLogs) RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error) {
+	type _result struct {
+		val *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRDiagnosticLogsClusterRetrieveLogsResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTRDiagnosticLogsClusterRetrieveLogsResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTRDiagnosticLogsClusterRetrieveLogsResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *MTRClusterDiagnosticLogs) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterDiagnosticLogs) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterDiagnosticLogsable is the interface implemented by [MTRClusterDiagnosticLogs], for mocking and DI.
+type MTRClusterDiagnosticLogsable interface {
+	Unwrap() *raw.MTRClusterDiagnosticLogs
+	RetrieveLogsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RetrieveLogsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRDiagnosticLogsClusterRetrieveLogsResponseParams, error)
+}
+
+var _ MTRClusterDiagnosticLogsable = (*MTRClusterDiagnosticLogs)(nil)
 

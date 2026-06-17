@@ -27,3 +27,10 @@ func (x *CNNInstanceNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGrad
 
 func (x *CNNInstanceNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
 
+// CNNInstanceNormalizationGradientable is the interface implemented by [CNNInstanceNormalizationGradient], for mocking and DI.
+type CNNInstanceNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNInstanceNormalizationGradient
+}
+
+var _ CNNInstanceNormalizationGradientable = (*CNNInstanceNormalizationGradient)(nil)
+

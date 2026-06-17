@@ -7,6 +7,7 @@ package accessibility
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,18 @@ func (x *MathExpressionTableCell) Expressions() []*raw.AXMathExpression {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AXMathExpression, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AXMathExpression {
+		return raw.AXMathExpressionFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MathExpressionTableCell) asMathExpression() *raw.AXMathExpression { return &x.inner.AXMathExpression }
+
+// MathExpressionTableCellable is the interface implemented by [MathExpressionTableCell], for mocking and DI.
+type MathExpressionTableCellable interface {
+	Unwrap() *raw.AXMathExpressionTableCell
+	Expressions() []*raw.AXMathExpression
+}
+
+var _ MathExpressionTableCellable = (*MathExpressionTableCell)(nil)
 

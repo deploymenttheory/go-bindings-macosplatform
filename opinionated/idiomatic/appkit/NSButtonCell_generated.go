@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -147,9 +149,340 @@ func (x *ButtonCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *Butto
 	return x
 }
 
+// SetButtonType calls the underlying SetButtonType.
+func (x *ButtonCell) SetButtonType(type_ raw.NSButtonType) {
+	x.inner.SetButtonType(type_)
+}
+
+// SetPeriodicDelayInterval calls the underlying SetPeriodicDelayInterval.
+func (x *ButtonCell) SetPeriodicDelayInterval(delay float32, interval float32) {
+	x.inner.SetPeriodicDelayInterval(delay, interval)
+}
+
+// MouseEntered calls the underlying MouseEntered.
+func (x *ButtonCell) MouseEntered(event *raw.NSEvent) {
+	x.inner.MouseEntered(event)
+}
+
+// MouseExited calls the underlying MouseExited.
+func (x *ButtonCell) MouseExited(event *raw.NSEvent) {
+	x.inner.MouseExited(event)
+}
+
+// DrawBezelWithFrameInView calls the underlying DrawBezelWithFrameInView.
+func (x *ButtonCell) DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView) {
+	x.inner.DrawBezelWithFrameInView(frame, controlView)
+}
+
+// DrawImageWithFrameInView calls the underlying DrawImageWithFrameInView.
+func (x *ButtonCell) DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView) {
+	x.inner.DrawImageWithFrameInView(image, frame, controlView)
+}
+
+// DrawTitleWithFrameInView calls the underlying DrawTitleWithFrameInView.
+func (x *ButtonCell) DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect {
+	return x.inner.DrawTitleWithFrameInView(title, frame, controlView)
+}
+
+// BezelStyle calls the underlying BezelStyle.
+func (x *ButtonCell) BezelStyle() raw.NSBezelStyle {
+	return x.inner.BezelStyle()
+}
+
+// SetBezelStyle calls the underlying SetBezelStyle.
+func (x *ButtonCell) SetBezelStyle(bezelStyle raw.NSBezelStyle) {
+	x.inner.SetBezelStyle(bezelStyle)
+}
+
+// HighlightsBy calls the underlying HighlightsBy.
+func (x *ButtonCell) HighlightsBy() raw.NSCellStyleMask {
+	return x.inner.HighlightsBy()
+}
+
+// SetHighlightsBy calls the underlying SetHighlightsBy.
+func (x *ButtonCell) SetHighlightsBy(highlightsBy raw.NSCellStyleMask) {
+	x.inner.SetHighlightsBy(highlightsBy)
+}
+
+// ShowsStateBy calls the underlying ShowsStateBy.
+func (x *ButtonCell) ShowsStateBy() raw.NSCellStyleMask {
+	return x.inner.ShowsStateBy()
+}
+
+// SetShowsStateBy calls the underlying SetShowsStateBy.
+func (x *ButtonCell) SetShowsStateBy(showsStateBy raw.NSCellStyleMask) {
+	x.inner.SetShowsStateBy(showsStateBy)
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *ButtonCell) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *ButtonCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// AlternateTitle calls the underlying AlternateTitle.
+func (x *ButtonCell) AlternateTitle() string {
+	_r := x.inner.AlternateTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlternateTitle calls the underlying SetAlternateTitle.
+func (x *ButtonCell) SetAlternateTitle(alternateTitle string) {
+	x.inner.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+}
+
+// AttributedAlternateTitle calls the underlying AttributedAlternateTitle.
+func (x *ButtonCell) AttributedAlternateTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedAlternateTitle()
+}
+
+// SetAttributedAlternateTitle calls the underlying SetAttributedAlternateTitle.
+func (x *ButtonCell) SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedAlternateTitle(attributedAlternateTitle)
+}
+
+// AlternateImage calls the underlying AlternateImage.
+func (x *ButtonCell) AlternateImage() *Image {
+	_r := x.inner.AlternateImage()
+	if _r == nil {
+		return nil
+	}
+	return &Image{inner: _r}
+}
+
+// SetAlternateImage calls the underlying SetAlternateImage.
+func (x *ButtonCell) SetAlternateImage(alternateImage *raw.NSImage) {
+	x.inner.SetAlternateImage(alternateImage)
+}
+
+// ImagePosition calls the underlying ImagePosition.
+func (x *ButtonCell) ImagePosition() raw.NSCellImagePosition {
+	return x.inner.ImagePosition()
+}
+
+// SetImagePosition calls the underlying SetImagePosition.
+func (x *ButtonCell) SetImagePosition(imagePosition raw.NSCellImagePosition) {
+	x.inner.SetImagePosition(imagePosition)
+}
+
+// ImageScaling calls the underlying ImageScaling.
+func (x *ButtonCell) ImageScaling() raw.NSImageScaling {
+	return x.inner.ImageScaling()
+}
+
+// SetImageScaling calls the underlying SetImageScaling.
+func (x *ButtonCell) SetImageScaling(imageScaling raw.NSImageScaling) {
+	x.inner.SetImageScaling(imageScaling)
+}
+
+// SetKeyEquivalent calls the underlying SetKeyEquivalent.
+func (x *ButtonCell) SetKeyEquivalent(keyEquivalent string) {
+	x.inner.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+}
+
+// KeyEquivalentModifierMask calls the underlying KeyEquivalentModifierMask.
+func (x *ButtonCell) KeyEquivalentModifierMask() raw.NSEventModifierFlags {
+	return x.inner.KeyEquivalentModifierMask()
+}
+
+// SetKeyEquivalentModifierMask calls the underlying SetKeyEquivalentModifierMask.
+func (x *ButtonCell) SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) {
+	x.inner.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+}
+
+// IsTransparent calls the underlying IsTransparent.
+func (x *ButtonCell) IsTransparent() bool {
+	return x.inner.IsTransparent()
+}
+
+// SetTransparent calls the underlying SetTransparent.
+func (x *ButtonCell) SetTransparent(transparent bool) {
+	x.inner.SetTransparent(transparent)
+}
+
+// ImageDimsWhenDisabled calls the underlying ImageDimsWhenDisabled.
+func (x *ButtonCell) ImageDimsWhenDisabled() bool {
+	return x.inner.ImageDimsWhenDisabled()
+}
+
+// SetImageDimsWhenDisabled calls the underlying SetImageDimsWhenDisabled.
+func (x *ButtonCell) SetImageDimsWhenDisabled(imageDimsWhenDisabled bool) {
+	x.inner.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+}
+
+// ShowsBorderOnlyWhileMouseInside calls the underlying ShowsBorderOnlyWhileMouseInside.
+func (x *ButtonCell) ShowsBorderOnlyWhileMouseInside() bool {
+	return x.inner.ShowsBorderOnlyWhileMouseInside()
+}
+
+// SetShowsBorderOnlyWhileMouseInside calls the underlying SetShowsBorderOnlyWhileMouseInside.
+func (x *ButtonCell) SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) {
+	x.inner.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+}
+
+// Sound calls the underlying Sound.
+func (x *ButtonCell) Sound() *Sound {
+	_r := x.inner.Sound()
+	if _r == nil {
+		return nil
+	}
+	return &Sound{inner: _r}
+}
+
+// SetSound calls the underlying SetSound.
+func (x *ButtonCell) SetSound(sound *raw.NSSound) {
+	x.inner.SetSound(sound)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *ButtonCell) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *ButtonCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// SetAlternateTitleWithMnemonic calls the underlying SetAlternateTitleWithMnemonic.
+func (x *ButtonCell) SetAlternateTitleWithMnemonic(stringWithAmpersand string) {
+	x.inner.SetAlternateTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+}
+
+// SetAlternateMnemonicLocation calls the underlying SetAlternateMnemonicLocation.
+func (x *ButtonCell) SetAlternateMnemonicLocation(location uint) {
+	x.inner.SetAlternateMnemonicLocation(location)
+}
+
+// AlternateMnemonicLocation calls the underlying AlternateMnemonicLocation.
+func (x *ButtonCell) AlternateMnemonicLocation() uint {
+	return x.inner.AlternateMnemonicLocation()
+}
+
+// AlternateMnemonic calls the underlying AlternateMnemonic.
+func (x *ButtonCell) AlternateMnemonic() string {
+	_r := x.inner.AlternateMnemonic()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetKeyEquivalentFontSize calls the underlying SetKeyEquivalentFontSize.
+func (x *ButtonCell) SetKeyEquivalentFontSize(fontName string, fontSize float64) {
+	x.inner.SetKeyEquivalentFontSize(foundation.NSStringStringWithUTF8String(fontName), fontSize)
+}
+
+// GradientType calls the underlying GradientType.
+func (x *ButtonCell) GradientType() raw.NSGradientType {
+	return x.inner.GradientType()
+}
+
+// SetGradientType calls the underlying SetGradientType.
+func (x *ButtonCell) SetGradientType(gradientType raw.NSGradientType) {
+	x.inner.SetGradientType(gradientType)
+}
+
+// KeyEquivalentFont calls the underlying KeyEquivalentFont.
+func (x *ButtonCell) KeyEquivalentFont() *Font {
+	_r := x.inner.KeyEquivalentFont()
+	if _r == nil {
+		return nil
+	}
+	return &Font{inner: _r}
+}
+
+// SetKeyEquivalentFont calls the underlying SetKeyEquivalentFont.
+func (x *ButtonCell) SetKeyEquivalentFont(keyEquivalentFont *raw.NSFont) {
+	x.inner.SetKeyEquivalentFont(keyEquivalentFont)
+}
+
 func (x *ButtonCell) asButtonCell() *raw.NSButtonCell { return x.inner }
 
 func (x *ButtonCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
 
 func (x *ButtonCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
+
+// ButtonCellable is the interface implemented by [ButtonCell], for mocking and DI.
+type ButtonCellable interface {
+	Unwrap() *raw.NSButtonCell
+	WithBezelStyle(bezelStyle raw.NSBezelStyle) *ButtonCell
+	WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *ButtonCell
+	WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *ButtonCell
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *ButtonCell
+	WithAlternateTitle(alternateTitle string) *ButtonCell
+	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *ButtonCell
+	WithAlternateImage(alternateImage *raw.NSImage) *ButtonCell
+	WithImagePosition(imagePosition raw.NSCellImagePosition) *ButtonCell
+	WithImageScaling(imageScaling raw.NSImageScaling) *ButtonCell
+	WithKeyEquivalent(keyEquivalent string) *ButtonCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *ButtonCell
+	WithTransparent(transparent bool) *ButtonCell
+	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *ButtonCell
+	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *ButtonCell
+	WithSound(sound *raw.NSSound) *ButtonCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *ButtonCell
+	WithGradientType(gradientType raw.NSGradientType) *ButtonCell
+	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *ButtonCell
+	SetButtonType(type_ raw.NSButtonType)
+	SetPeriodicDelayInterval(delay float32, interval float32)
+	MouseEntered(event *raw.NSEvent)
+	MouseExited(event *raw.NSEvent)
+	DrawBezelWithFrameInView(frame corefoundation.CGRect, controlView *raw.NSView)
+	DrawImageWithFrameInView(image *raw.NSImage, frame corefoundation.CGRect, controlView *raw.NSView)
+	DrawTitleWithFrameInView(title *foundation.NSAttributedString, frame corefoundation.CGRect, controlView *raw.NSView) corefoundation.CGRect
+	BezelStyle() raw.NSBezelStyle
+	SetBezelStyle(bezelStyle raw.NSBezelStyle)
+	HighlightsBy() raw.NSCellStyleMask
+	SetHighlightsBy(highlightsBy raw.NSCellStyleMask)
+	ShowsStateBy() raw.NSCellStyleMask
+	SetShowsStateBy(showsStateBy raw.NSCellStyleMask)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	AlternateTitle() string
+	SetAlternateTitle(alternateTitle string)
+	AttributedAlternateTitle() *foundation.NSAttributedString
+	SetAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString)
+	AlternateImage() *Image
+	SetAlternateImage(alternateImage *raw.NSImage)
+	ImagePosition() raw.NSCellImagePosition
+	SetImagePosition(imagePosition raw.NSCellImagePosition)
+	ImageScaling() raw.NSImageScaling
+	SetImageScaling(imageScaling raw.NSImageScaling)
+	SetKeyEquivalent(keyEquivalent string)
+	KeyEquivalentModifierMask() raw.NSEventModifierFlags
+	SetKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags)
+	IsTransparent() bool
+	SetTransparent(transparent bool)
+	ImageDimsWhenDisabled() bool
+	SetImageDimsWhenDisabled(imageDimsWhenDisabled bool)
+	ShowsBorderOnlyWhileMouseInside() bool
+	SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool)
+	Sound() *Sound
+	SetSound(sound *raw.NSSound)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	SetAlternateTitleWithMnemonic(stringWithAmpersand string)
+	SetAlternateMnemonicLocation(location uint)
+	AlternateMnemonicLocation() uint
+	AlternateMnemonic() string
+	SetKeyEquivalentFontSize(fontName string, fontSize float64)
+	GradientType() raw.NSGradientType
+	SetGradientType(gradientType raw.NSGradientType)
+	KeyEquivalentFont() *Font
+	SetKeyEquivalentFont(keyEquivalentFont *raw.NSFont)
+}
+
+var _ ButtonCellable = (*ButtonCell)(nil)
 

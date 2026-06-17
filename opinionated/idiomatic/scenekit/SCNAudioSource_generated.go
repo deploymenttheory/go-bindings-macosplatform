@@ -68,3 +68,94 @@ func (x *AudioSource) WithShouldStream(shouldStream bool) *AudioSource {
 	return x
 }
 
+// Load calls the underlying Load.
+func (x *AudioSource) Load() {
+	x.inner.Load()
+}
+
+// IsPositional calls the underlying IsPositional.
+func (x *AudioSource) IsPositional() bool {
+	return x.inner.IsPositional()
+}
+
+// SetPositional calls the underlying SetPositional.
+func (x *AudioSource) SetPositional(positional bool) {
+	x.inner.SetPositional(positional)
+}
+
+// Volume calls the underlying Volume.
+func (x *AudioSource) Volume() float32 {
+	return x.inner.Volume()
+}
+
+// SetVolume calls the underlying SetVolume.
+func (x *AudioSource) SetVolume(volume float32) {
+	x.inner.SetVolume(volume)
+}
+
+// Rate calls the underlying Rate.
+func (x *AudioSource) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *AudioSource) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// ReverbBlend calls the underlying ReverbBlend.
+func (x *AudioSource) ReverbBlend() float32 {
+	return x.inner.ReverbBlend()
+}
+
+// SetReverbBlend calls the underlying SetReverbBlend.
+func (x *AudioSource) SetReverbBlend(reverbBlend float32) {
+	x.inner.SetReverbBlend(reverbBlend)
+}
+
+// Loops calls the underlying Loops.
+func (x *AudioSource) Loops() bool {
+	return x.inner.Loops()
+}
+
+// SetLoops calls the underlying SetLoops.
+func (x *AudioSource) SetLoops(loops bool) {
+	x.inner.SetLoops(loops)
+}
+
+// ShouldStream calls the underlying ShouldStream.
+func (x *AudioSource) ShouldStream() bool {
+	return x.inner.ShouldStream()
+}
+
+// SetShouldStream calls the underlying SetShouldStream.
+func (x *AudioSource) SetShouldStream(shouldStream bool) {
+	x.inner.SetShouldStream(shouldStream)
+}
+
+// AudioSourceable is the interface implemented by [AudioSource], for mocking and DI.
+type AudioSourceable interface {
+	Unwrap() *raw.SCNAudioSource
+	WithPositional(positional bool) *AudioSource
+	WithVolume(volume float32) *AudioSource
+	WithRate(rate float32) *AudioSource
+	WithReverbBlend(reverbBlend float32) *AudioSource
+	WithLoops(loops bool) *AudioSource
+	WithShouldStream(shouldStream bool) *AudioSource
+	Load()
+	IsPositional() bool
+	SetPositional(positional bool)
+	Volume() float32
+	SetVolume(volume float32)
+	Rate() float32
+	SetRate(rate float32)
+	ReverbBlend() float32
+	SetReverbBlend(reverbBlend float32)
+	Loops() bool
+	SetLoops(loops bool)
+	ShouldStream() bool
+	SetShouldStream(shouldStream bool)
+}
+
+var _ AudioSourceable = (*AudioSource)(nil)
+

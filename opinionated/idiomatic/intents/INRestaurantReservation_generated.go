@@ -33,5 +33,34 @@ func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReserv
 	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(_id)}
 }
 
+// ReservationDuration calls the underlying ReservationDuration.
+func (x *RestaurantReservation) ReservationDuration() *DateComponentsRange {
+	_r := x.inner.ReservationDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// PartySize calls the underlying PartySize.
+func (x *RestaurantReservation) PartySize() *foundation.NSNumber {
+	return x.inner.PartySize()
+}
+
+// RestaurantLocation calls the underlying RestaurantLocation.
+func (x *RestaurantReservation) RestaurantLocation() *corelocation.CLPlacemark {
+	return x.inner.RestaurantLocation()
+}
+
 func (x *RestaurantReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
+
+// RestaurantReservationable is the interface implemented by [RestaurantReservation], for mocking and DI.
+type RestaurantReservationable interface {
+	Unwrap() *raw.INRestaurantReservation
+	ReservationDuration() *DateComponentsRange
+	PartySize() *foundation.NSNumber
+	RestaurantLocation() *corelocation.CLPlacemark
+}
+
+var _ RestaurantReservationable = (*RestaurantReservation)(nil)
 

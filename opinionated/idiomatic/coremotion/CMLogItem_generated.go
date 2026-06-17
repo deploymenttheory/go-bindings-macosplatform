@@ -23,5 +23,18 @@ func NewLogItem() *LogItem {
 	return &LogItem{inner: raw.CMLogItemFromID(_id)}
 }
 
+// Timestamp calls the underlying Timestamp.
+func (x *LogItem) Timestamp() float64 {
+	return x.inner.Timestamp()
+}
+
 func (x *LogItem) asLogItem() *raw.CMLogItem { return x.inner }
+
+// LogItemable is the interface implemented by [LogItem], for mocking and DI.
+type LogItemable interface {
+	Unwrap() *raw.CMLogItem
+	Timestamp() float64
+}
+
+var _ LogItemable = (*LogItem)(nil)
 

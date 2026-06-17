@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,11 +31,9 @@ func (x *SliceLayer) Start() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // End returns the collection as a Go slice.
@@ -43,11 +42,9 @@ func (x *SliceLayer) End() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Stride returns the collection as a Go slice.
@@ -56,12 +53,20 @@ func (x *SliceLayer) Stride() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 func (x *SliceLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// SliceLayerable is the interface implemented by [SliceLayer], for mocking and DI.
+type SliceLayerable interface {
+	Unwrap() *raw.MLCSliceLayer
+	Start() []*foundation.NSNumber
+	End() []*foundation.NSNumber
+	Stride() []*foundation.NSNumber
+}
+
+var _ SliceLayerable = (*SliceLayer)(nil)
 

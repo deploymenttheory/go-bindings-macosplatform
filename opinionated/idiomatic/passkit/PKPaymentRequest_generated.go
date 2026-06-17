@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -227,17 +228,106 @@ func (x *PaymentRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *Paymen
 	return x
 }
 
+// MerchantIdentifier calls the underlying MerchantIdentifier.
+func (x *PaymentRequest) MerchantIdentifier() string {
+	_r := x.inner.MerchantIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMerchantIdentifier calls the underlying SetMerchantIdentifier.
+func (x *PaymentRequest) SetMerchantIdentifier(merchantIdentifier string) {
+	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+}
+
+// AttributionIdentifier calls the underlying AttributionIdentifier.
+func (x *PaymentRequest) AttributionIdentifier() string {
+	_r := x.inner.AttributionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAttributionIdentifier calls the underlying SetAttributionIdentifier.
+func (x *PaymentRequest) SetAttributionIdentifier(attributionIdentifier string) {
+	x.inner.SetAttributionIdentifier(foundation.NSStringStringWithUTF8String(attributionIdentifier))
+}
+
+// CountryCode calls the underlying CountryCode.
+func (x *PaymentRequest) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCountryCode calls the underlying SetCountryCode.
+func (x *PaymentRequest) SetCountryCode(countryCode string) {
+	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
+}
+
 // SupportedNetworks returns the collection as a Go slice.
 func (x *PaymentRequest) SupportedNetworks() []*foundation.NSString {
 	arr := x.inner.SupportedNetworks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSupportedNetworks calls the underlying SetSupportedNetworks.
+func (x *PaymentRequest) SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSupportedNetworks(supportedNetworks)
+}
+
+// MerchantCapabilities calls the underlying MerchantCapabilities.
+func (x *PaymentRequest) MerchantCapabilities() raw.PKMerchantCapability {
+	return x.inner.MerchantCapabilities()
+}
+
+// SetMerchantCapabilities calls the underlying SetMerchantCapabilities.
+func (x *PaymentRequest) SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) {
+	x.inner.SetMerchantCapabilities(merchantCapabilities)
+}
+
+// SupportsCouponCode calls the underlying SupportsCouponCode.
+func (x *PaymentRequest) SupportsCouponCode() bool {
+	return x.inner.SupportsCouponCode()
+}
+
+// SetSupportsCouponCode calls the underlying SetSupportsCouponCode.
+func (x *PaymentRequest) SetSupportsCouponCode(supportsCouponCode bool) {
+	x.inner.SetSupportsCouponCode(supportsCouponCode)
+}
+
+// CouponCode calls the underlying CouponCode.
+func (x *PaymentRequest) CouponCode() string {
+	_r := x.inner.CouponCode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCouponCode calls the underlying SetCouponCode.
+func (x *PaymentRequest) SetCouponCode(couponCode string) {
+	x.inner.SetCouponCode(foundation.NSStringStringWithUTF8String(couponCode))
+}
+
+// MerchantCategoryCode calls the underlying MerchantCategoryCode.
+func (x *PaymentRequest) MerchantCategoryCode() int16 {
+	return x.inner.MerchantCategoryCode()
+}
+
+// SetMerchantCategoryCode calls the underlying SetMerchantCategoryCode.
+func (x *PaymentRequest) SetMerchantCategoryCode(merchantCategoryCode int16) {
+	x.inner.SetMerchantCategoryCode(merchantCategoryCode)
 }
 
 // PaymentSummaryItems returns the collection as a Go slice.
@@ -246,11 +336,96 @@ func (x *PaymentRequest) PaymentSummaryItems() []*raw.PKPaymentSummaryItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentSummaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentSummaryItem {
+		return raw.PKPaymentSummaryItemFromID(purego.Retain(_id))
+	})
+}
+
+// SetPaymentSummaryItems calls the underlying SetPaymentSummaryItems.
+func (x *PaymentRequest) SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem]) {
+	x.inner.SetPaymentSummaryItems(paymentSummaryItems)
+}
+
+// CurrencyCode calls the underlying CurrencyCode.
+func (x *PaymentRequest) CurrencyCode() string {
+	_r := x.inner.CurrencyCode()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCurrencyCode calls the underlying SetCurrencyCode.
+func (x *PaymentRequest) SetCurrencyCode(currencyCode string) {
+	x.inner.SetCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
+}
+
+// RequiredBillingContactFields calls the underlying RequiredBillingContactFields.
+func (x *PaymentRequest) RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.RequiredBillingContactFields()
+}
+
+// SetRequiredBillingContactFields calls the underlying SetRequiredBillingContactFields.
+func (x *PaymentRequest) SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetRequiredBillingContactFields(requiredBillingContactFields)
+}
+
+// RequiredBillingAddressFields calls the underlying RequiredBillingAddressFields.
+func (x *PaymentRequest) RequiredBillingAddressFields() raw.PKAddressField {
+	return x.inner.RequiredBillingAddressFields()
+}
+
+// SetRequiredBillingAddressFields calls the underlying SetRequiredBillingAddressFields.
+func (x *PaymentRequest) SetRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) {
+	x.inner.SetRequiredBillingAddressFields(requiredBillingAddressFields)
+}
+
+// BillingContact calls the underlying BillingContact.
+func (x *PaymentRequest) BillingContact() *Contact {
+	_r := x.inner.BillingContact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// SetBillingContact calls the underlying SetBillingContact.
+func (x *PaymentRequest) SetBillingContact(billingContact *raw.PKContact) {
+	x.inner.SetBillingContact(billingContact)
+}
+
+// RequiredShippingContactFields calls the underlying RequiredShippingContactFields.
+func (x *PaymentRequest) RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.RequiredShippingContactFields()
+}
+
+// SetRequiredShippingContactFields calls the underlying SetRequiredShippingContactFields.
+func (x *PaymentRequest) SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetRequiredShippingContactFields(requiredShippingContactFields)
+}
+
+// RequiredShippingAddressFields calls the underlying RequiredShippingAddressFields.
+func (x *PaymentRequest) RequiredShippingAddressFields() raw.PKAddressField {
+	return x.inner.RequiredShippingAddressFields()
+}
+
+// SetRequiredShippingAddressFields calls the underlying SetRequiredShippingAddressFields.
+func (x *PaymentRequest) SetRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) {
+	x.inner.SetRequiredShippingAddressFields(requiredShippingAddressFields)
+}
+
+// ShippingContact calls the underlying ShippingContact.
+func (x *PaymentRequest) ShippingContact() *Contact {
+	_r := x.inner.ShippingContact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
+// SetShippingContact calls the underlying SetShippingContact.
+func (x *PaymentRequest) SetShippingContact(shippingContact *raw.PKContact) {
+	x.inner.SetShippingContact(shippingContact)
 }
 
 // ShippingMethods returns the collection as a Go slice.
@@ -259,11 +434,54 @@ func (x *PaymentRequest) ShippingMethods() []*raw.PKShippingMethod {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKShippingMethod, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKShippingMethod {
+		return raw.PKShippingMethodFromID(purego.Retain(_id))
+	})
+}
+
+// SetShippingMethods calls the underlying SetShippingMethods.
+func (x *PaymentRequest) SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod]) {
+	x.inner.SetShippingMethods(shippingMethods)
+}
+
+// ShippingType calls the underlying ShippingType.
+func (x *PaymentRequest) ShippingType() raw.PKShippingType {
+	return x.inner.ShippingType()
+}
+
+// SetShippingType calls the underlying SetShippingType.
+func (x *PaymentRequest) SetShippingType(shippingType raw.PKShippingType) {
+	x.inner.SetShippingType(shippingType)
+}
+
+// ShippingContactEditingMode calls the underlying ShippingContactEditingMode.
+func (x *PaymentRequest) ShippingContactEditingMode() raw.PKShippingContactEditingMode {
+	return x.inner.ShippingContactEditingMode()
+}
+
+// SetShippingContactEditingMode calls the underlying SetShippingContactEditingMode.
+func (x *PaymentRequest) SetShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) {
+	x.inner.SetShippingContactEditingMode(shippingContactEditingMode)
+}
+
+// ApplicationData calls the underlying ApplicationData.
+func (x *PaymentRequest) ApplicationData() *foundation.NSData {
+	return x.inner.ApplicationData()
+}
+
+// SetApplicationData calls the underlying SetApplicationData.
+func (x *PaymentRequest) SetApplicationData(applicationData *foundation.NSData) {
+	x.inner.SetApplicationData(applicationData)
+}
+
+// SupportedCountries calls the underlying SupportedCountries.
+func (x *PaymentRequest) SupportedCountries() *foundation.NSSet[*foundation.NSString] {
+	return x.inner.SupportedCountries()
+}
+
+// SetSupportedCountries calls the underlying SetSupportedCountries.
+func (x *PaymentRequest) SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) {
+	x.inner.SetSupportedCountries(supportedCountries)
 }
 
 // MultiTokenContexts returns the collection as a Go slice.
@@ -272,10 +490,163 @@ func (x *PaymentRequest) MultiTokenContexts() []*raw.PKPaymentTokenContext {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentTokenContext, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentTokenContext {
+		return raw.PKPaymentTokenContextFromID(purego.Retain(_id))
+	})
 }
+
+// SetMultiTokenContexts calls the underlying SetMultiTokenContexts.
+func (x *PaymentRequest) SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext]) {
+	x.inner.SetMultiTokenContexts(multiTokenContexts)
+}
+
+// RecurringPaymentRequest calls the underlying RecurringPaymentRequest.
+func (x *PaymentRequest) RecurringPaymentRequest() *RecurringPaymentRequest {
+	_r := x.inner.RecurringPaymentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &RecurringPaymentRequest{inner: _r}
+}
+
+// SetRecurringPaymentRequest calls the underlying SetRecurringPaymentRequest.
+func (x *PaymentRequest) SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) {
+	x.inner.SetRecurringPaymentRequest(recurringPaymentRequest)
+}
+
+// AutomaticReloadPaymentRequest calls the underlying AutomaticReloadPaymentRequest.
+func (x *PaymentRequest) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
+	_r := x.inner.AutomaticReloadPaymentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AutomaticReloadPaymentRequest{inner: _r}
+}
+
+// SetAutomaticReloadPaymentRequest calls the underlying SetAutomaticReloadPaymentRequest.
+func (x *PaymentRequest) SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) {
+	x.inner.SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest)
+}
+
+// DeferredPaymentRequest calls the underlying DeferredPaymentRequest.
+func (x *PaymentRequest) DeferredPaymentRequest() *DeferredPaymentRequest {
+	_r := x.inner.DeferredPaymentRequest()
+	if _r == nil {
+		return nil
+	}
+	return &DeferredPaymentRequest{inner: _r}
+}
+
+// SetDeferredPaymentRequest calls the underlying SetDeferredPaymentRequest.
+func (x *PaymentRequest) SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) {
+	x.inner.SetDeferredPaymentRequest(deferredPaymentRequest)
+}
+
+// ApplePayLaterAvailability calls the underlying ApplePayLaterAvailability.
+func (x *PaymentRequest) ApplePayLaterAvailability() raw.PKApplePayLaterAvailability {
+	return x.inner.ApplePayLaterAvailability()
+}
+
+// SetApplePayLaterAvailability calls the underlying SetApplePayLaterAvailability.
+func (x *PaymentRequest) SetApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) {
+	x.inner.SetApplePayLaterAvailability(applePayLaterAvailability)
+}
+
+// IsDelegatedRequest calls the underlying IsDelegatedRequest.
+func (x *PaymentRequest) IsDelegatedRequest() bool {
+	return x.inner.IsDelegatedRequest()
+}
+
+// SetIsDelegatedRequest calls the underlying SetIsDelegatedRequest.
+func (x *PaymentRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
+	x.inner.SetIsDelegatedRequest(isDelegatedRequest)
+}
+
+// PaymentRequestable is the interface implemented by [PaymentRequest], for mocking and DI.
+type PaymentRequestable interface {
+	Unwrap() *raw.PKPaymentRequest
+	WithMerchantIdentifier(merchantIdentifier string) *PaymentRequest
+	WithAttributionIdentifier(attributionIdentifier string) *PaymentRequest
+	WithCountryCode(countryCode string) *PaymentRequest
+	WithSupportedNetworks(items ...*foundation.NSString) *PaymentRequest
+	WithMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability) *PaymentRequest
+	WithSupportsCouponCode(supportsCouponCode bool) *PaymentRequest
+	WithCouponCode(couponCode string) *PaymentRequest
+	WithMerchantCategoryCode(merchantCategoryCode int16) *PaymentRequest
+	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequest
+	WithCurrencyCode(currencyCode string) *PaymentRequest
+	WithRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
+	WithRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField) *PaymentRequest
+	WithBillingContact(billingContact *raw.PKContact) *PaymentRequest
+	WithRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString]) *PaymentRequest
+	WithRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField) *PaymentRequest
+	WithShippingContact(shippingContact *raw.PKContact) *PaymentRequest
+	WithShippingMethods(items ...*raw.PKShippingMethod) *PaymentRequest
+	WithShippingType(shippingType raw.PKShippingType) *PaymentRequest
+	WithShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode) *PaymentRequest
+	WithApplicationData(applicationData *foundation.NSData) *PaymentRequest
+	WithSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString]) *PaymentRequest
+	WithMultiTokenContexts(items ...*raw.PKPaymentTokenContext) *PaymentRequest
+	WithRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest) *PaymentRequest
+	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest) *PaymentRequest
+	WithDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest) *PaymentRequest
+	WithApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability) *PaymentRequest
+	WithIsDelegatedRequest(isDelegatedRequest bool) *PaymentRequest
+	MerchantIdentifier() string
+	SetMerchantIdentifier(merchantIdentifier string)
+	AttributionIdentifier() string
+	SetAttributionIdentifier(attributionIdentifier string)
+	CountryCode() string
+	SetCountryCode(countryCode string)
+	SupportedNetworks() []*foundation.NSString
+	SetSupportedNetworks(supportedNetworks *foundation.NSArray[*foundation.NSString])
+	MerchantCapabilities() raw.PKMerchantCapability
+	SetMerchantCapabilities(merchantCapabilities raw.PKMerchantCapability)
+	SupportsCouponCode() bool
+	SetSupportsCouponCode(supportsCouponCode bool)
+	CouponCode() string
+	SetCouponCode(couponCode string)
+	MerchantCategoryCode() int16
+	SetMerchantCategoryCode(merchantCategoryCode int16)
+	PaymentSummaryItems() []*raw.PKPaymentSummaryItem
+	SetPaymentSummaryItems(paymentSummaryItems *foundation.NSArray[*raw.PKPaymentSummaryItem])
+	CurrencyCode() string
+	SetCurrencyCode(currencyCode string)
+	RequiredBillingContactFields() *foundation.NSSet[*foundation.NSString]
+	SetRequiredBillingContactFields(requiredBillingContactFields *foundation.NSSet[*foundation.NSString])
+	RequiredBillingAddressFields() raw.PKAddressField
+	SetRequiredBillingAddressFields(requiredBillingAddressFields raw.PKAddressField)
+	BillingContact() *Contact
+	SetBillingContact(billingContact *raw.PKContact)
+	RequiredShippingContactFields() *foundation.NSSet[*foundation.NSString]
+	SetRequiredShippingContactFields(requiredShippingContactFields *foundation.NSSet[*foundation.NSString])
+	RequiredShippingAddressFields() raw.PKAddressField
+	SetRequiredShippingAddressFields(requiredShippingAddressFields raw.PKAddressField)
+	ShippingContact() *Contact
+	SetShippingContact(shippingContact *raw.PKContact)
+	ShippingMethods() []*raw.PKShippingMethod
+	SetShippingMethods(shippingMethods *foundation.NSArray[*raw.PKShippingMethod])
+	ShippingType() raw.PKShippingType
+	SetShippingType(shippingType raw.PKShippingType)
+	ShippingContactEditingMode() raw.PKShippingContactEditingMode
+	SetShippingContactEditingMode(shippingContactEditingMode raw.PKShippingContactEditingMode)
+	ApplicationData() *foundation.NSData
+	SetApplicationData(applicationData *foundation.NSData)
+	SupportedCountries() *foundation.NSSet[*foundation.NSString]
+	SetSupportedCountries(supportedCountries *foundation.NSSet[*foundation.NSString])
+	MultiTokenContexts() []*raw.PKPaymentTokenContext
+	SetMultiTokenContexts(multiTokenContexts *foundation.NSArray[*raw.PKPaymentTokenContext])
+	RecurringPaymentRequest() *RecurringPaymentRequest
+	SetRecurringPaymentRequest(recurringPaymentRequest *raw.PKRecurringPaymentRequest)
+	AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest
+	SetAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *raw.PKAutomaticReloadPaymentRequest)
+	DeferredPaymentRequest() *DeferredPaymentRequest
+	SetDeferredPaymentRequest(deferredPaymentRequest *raw.PKDeferredPaymentRequest)
+	ApplePayLaterAvailability() raw.PKApplePayLaterAvailability
+	SetApplePayLaterAvailability(applePayLaterAvailability raw.PKApplePayLaterAvailability)
+	IsDelegatedRequest() bool
+	SetIsDelegatedRequest(isDelegatedRequest bool)
+}
+
+var _ PaymentRequestable = (*PaymentRequest)(nil)
 

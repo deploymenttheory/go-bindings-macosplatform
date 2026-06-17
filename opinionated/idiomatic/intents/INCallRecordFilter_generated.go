@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,10 +32,28 @@ func (x *CallRecordFilter) Participants() []*raw.INPerson {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INPerson, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
+		return raw.INPersonFromID(purego.Retain(_id))
+	})
 }
+
+// CallTypes calls the underlying CallTypes.
+func (x *CallRecordFilter) CallTypes() raw.INCallRecordTypeOptions {
+	return x.inner.CallTypes()
+}
+
+// CallCapability calls the underlying CallCapability.
+func (x *CallRecordFilter) CallCapability() raw.INCallCapability {
+	return x.inner.CallCapability()
+}
+
+// CallRecordFilterable is the interface implemented by [CallRecordFilter], for mocking and DI.
+type CallRecordFilterable interface {
+	Unwrap() *raw.INCallRecordFilter
+	Participants() []*raw.INPerson
+	CallTypes() raw.INCallRecordTypeOptions
+	CallCapability() raw.INCallCapability
+}
+
+var _ CallRecordFilterable = (*CallRecordFilter)(nil)
 

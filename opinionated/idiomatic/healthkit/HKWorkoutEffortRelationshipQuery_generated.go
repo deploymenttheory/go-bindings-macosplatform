@@ -28,3 +28,10 @@ func NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler(p
 
 func (x *WorkoutEffortRelationshipQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// WorkoutEffortRelationshipQueryable is the interface implemented by [WorkoutEffortRelationshipQuery], for mocking and DI.
+type WorkoutEffortRelationshipQueryable interface {
+	Unwrap() *raw.HKWorkoutEffortRelationshipQuery
+}
+
+var _ WorkoutEffortRelationshipQueryable = (*WorkoutEffortRelationshipQuery)(nil)
+

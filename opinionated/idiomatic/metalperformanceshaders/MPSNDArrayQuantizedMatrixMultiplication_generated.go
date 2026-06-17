@@ -35,3 +35,10 @@ func (x *NDArrayQuantizedMatrixMultiplication) asNDArrayMultiaryBase() *mpsndarr
 
 func (x *NDArrayQuantizedMatrixMultiplication) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMatrixMultiplication.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
 
+// NDArrayQuantizedMatrixMultiplicationable is the interface implemented by [NDArrayQuantizedMatrixMultiplication], for mocking and DI.
+type NDArrayQuantizedMatrixMultiplicationable interface {
+	Unwrap() *raw.MPSNDArrayQuantizedMatrixMultiplication
+}
+
+var _ NDArrayQuantizedMatrixMultiplicationable = (*NDArrayQuantizedMatrixMultiplication)(nil)
+

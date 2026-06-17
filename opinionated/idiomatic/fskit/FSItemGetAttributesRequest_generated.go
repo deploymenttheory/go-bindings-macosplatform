@@ -29,3 +29,29 @@ func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes raw.FSI
 	return x
 }
 
+// IsAttributeWanted calls the underlying IsAttributeWanted.
+func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute raw.FSItemAttribute) bool {
+	return x.inner.IsAttributeWanted(attribute)
+}
+
+// WantedAttributes calls the underlying WantedAttributes.
+func (x *ItemGetAttributesRequest) WantedAttributes() raw.FSItemAttribute {
+	return x.inner.WantedAttributes()
+}
+
+// SetWantedAttributes calls the underlying SetWantedAttributes.
+func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes raw.FSItemAttribute) {
+	x.inner.SetWantedAttributes(wantedAttributes)
+}
+
+// ItemGetAttributesRequestable is the interface implemented by [ItemGetAttributesRequest], for mocking and DI.
+type ItemGetAttributesRequestable interface {
+	Unwrap() *raw.FSItemGetAttributesRequest
+	WithWantedAttributes(wantedAttributes raw.FSItemAttribute) *ItemGetAttributesRequest
+	IsAttributeWanted(attribute raw.FSItemAttribute) bool
+	WantedAttributes() raw.FSItemAttribute
+	SetWantedAttributes(wantedAttributes raw.FSItemAttribute)
+}
+
+var _ ItemGetAttributesRequestable = (*ItemGetAttributesRequest)(nil)
+

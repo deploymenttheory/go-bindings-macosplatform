@@ -8,6 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,4 +47,38 @@ func (x *Appearance) PerformAsCurrentDrawingAppearance(ctx context.Context) erro
 		return ctx.Err()
 	}
 }
+
+// BestMatchFromAppearancesWithNames calls the underlying BestMatchFromAppearancesWithNames.
+func (x *Appearance) BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) string {
+	_r := x.inner.BestMatchFromAppearancesWithNames(appearances)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Name calls the underlying Name.
+func (x *Appearance) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AllowsVibrancy calls the underlying AllowsVibrancy.
+func (x *Appearance) AllowsVibrancy() bool {
+	return x.inner.AllowsVibrancy()
+}
+
+// Appearanceable is the interface implemented by [Appearance], for mocking and DI.
+type Appearanceable interface {
+	Unwrap() *raw.NSAppearance
+	PerformAsCurrentDrawingAppearance(ctx context.Context) error
+	BestMatchFromAppearancesWithNames(appearances *foundation.NSArray[*foundation.NSString]) string
+	Name() string
+	AllowsVibrancy() bool
+}
+
+var _ Appearanceable = (*Appearance)(nil)
 

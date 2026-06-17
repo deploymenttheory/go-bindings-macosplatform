@@ -53,3 +53,75 @@ func (x *WKWebpagePreferences) WithSecurityRestrictionMode(securityRestrictionMo
 	return x
 }
 
+// PreferredContentMode calls the underlying PreferredContentMode.
+func (x *WKWebpagePreferences) PreferredContentMode() raw.WKContentMode {
+	return x.inner.PreferredContentMode()
+}
+
+// SetPreferredContentMode calls the underlying SetPreferredContentMode.
+func (x *WKWebpagePreferences) SetPreferredContentMode(preferredContentMode raw.WKContentMode) {
+	x.inner.SetPreferredContentMode(preferredContentMode)
+}
+
+// AllowsContentJavaScript calls the underlying AllowsContentJavaScript.
+func (x *WKWebpagePreferences) AllowsContentJavaScript() bool {
+	return x.inner.AllowsContentJavaScript()
+}
+
+// SetAllowsContentJavaScript calls the underlying SetAllowsContentJavaScript.
+func (x *WKWebpagePreferences) SetAllowsContentJavaScript(allowsContentJavaScript bool) {
+	x.inner.SetAllowsContentJavaScript(allowsContentJavaScript)
+}
+
+// IsLockdownModeEnabled calls the underlying IsLockdownModeEnabled.
+func (x *WKWebpagePreferences) IsLockdownModeEnabled() bool {
+	return x.inner.IsLockdownModeEnabled()
+}
+
+// SetLockdownModeEnabled calls the underlying SetLockdownModeEnabled.
+func (x *WKWebpagePreferences) SetLockdownModeEnabled(lockdownModeEnabled bool) {
+	x.inner.SetLockdownModeEnabled(lockdownModeEnabled)
+}
+
+// PreferredHTTPSNavigationPolicy calls the underlying PreferredHTTPSNavigationPolicy.
+func (x *WKWebpagePreferences) PreferredHTTPSNavigationPolicy() raw.WKWebpagePreferencesUpgradeToHTTPSPolicy {
+	return x.inner.PreferredHTTPSNavigationPolicy()
+}
+
+// SetPreferredHTTPSNavigationPolicy calls the underlying SetPreferredHTTPSNavigationPolicy.
+func (x *WKWebpagePreferences) SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy) {
+	x.inner.SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy)
+}
+
+// SecurityRestrictionMode calls the underlying SecurityRestrictionMode.
+func (x *WKWebpagePreferences) SecurityRestrictionMode() raw.WKSecurityRestrictionMode {
+	return x.inner.SecurityRestrictionMode()
+}
+
+// SetSecurityRestrictionMode calls the underlying SetSecurityRestrictionMode.
+func (x *WKWebpagePreferences) SetSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode) {
+	x.inner.SetSecurityRestrictionMode(securityRestrictionMode)
+}
+
+// WKWebpagePreferencesable is the interface implemented by [WKWebpagePreferences], for mocking and DI.
+type WKWebpagePreferencesable interface {
+	Unwrap() *raw.WKWebpagePreferences
+	WithPreferredContentMode(preferredContentMode raw.WKContentMode) *WKWebpagePreferences
+	WithAllowsContentJavaScript(allowsContentJavaScript bool) *WKWebpagePreferences
+	WithLockdownModeEnabled(lockdownModeEnabled bool) *WKWebpagePreferences
+	WithPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy) *WKWebpagePreferences
+	WithSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode) *WKWebpagePreferences
+	PreferredContentMode() raw.WKContentMode
+	SetPreferredContentMode(preferredContentMode raw.WKContentMode)
+	AllowsContentJavaScript() bool
+	SetAllowsContentJavaScript(allowsContentJavaScript bool)
+	IsLockdownModeEnabled() bool
+	SetLockdownModeEnabled(lockdownModeEnabled bool)
+	PreferredHTTPSNavigationPolicy() raw.WKWebpagePreferencesUpgradeToHTTPSPolicy
+	SetPreferredHTTPSNavigationPolicy(preferredHTTPSNavigationPolicy raw.WKWebpagePreferencesUpgradeToHTTPSPolicy)
+	SecurityRestrictionMode() raw.WKSecurityRestrictionMode
+	SetSecurityRestrictionMode(securityRestrictionMode raw.WKSecurityRestrictionMode)
+}
+
+var _ WKWebpagePreferencesable = (*WKWebpagePreferences)(nil)
+

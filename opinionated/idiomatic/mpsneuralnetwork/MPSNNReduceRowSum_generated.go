@@ -37,3 +37,10 @@ func (x *NNReduceRowSum) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inn
 
 func (x *NNReduceRowSum) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceRowSumable is the interface implemented by [NNReduceRowSum], for mocking and DI.
+type NNReduceRowSumable interface {
+	Unwrap() *raw.MPSNNReduceRowSum
+}
+
+var _ NNReduceRowSumable = (*NNReduceRowSum)(nil)
+

@@ -5,6 +5,8 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +25,54 @@ func NewImageManager() *ImageManager {
 	return &ImageManager{inner: raw.PHImageManagerFromID(_id)}
 }
 
+// RequestImageForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestImageForAssetTargetSizeContentModeOptionsResultHandler.
+func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, contentMode, options, resultHandler)
+}
+
+// RequestImageDataAndOrientationForAssetOptionsResultHandler calls the underlying RequestImageDataAndOrientationForAssetOptionsResultHandler.
+func (x *ImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestImageDataAndOrientationForAssetOptionsResultHandler(asset, options, resultHandler)
+}
+
+// CancelImageRequest calls the underlying CancelImageRequest.
+func (x *ImageManager) CancelImageRequest(requestID int32) {
+	x.inner.CancelImageRequest(requestID)
+}
+
+// RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler.
+func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, contentMode, options, resultHandler)
+}
+
+// RequestPlayerItemForVideoOptionsResultHandler calls the underlying RequestPlayerItemForVideoOptionsResultHandler.
+func (x *ImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestPlayerItemForVideoOptionsResultHandler(asset, options, resultHandler)
+}
+
+// RequestExportSessionForVideoOptionsExportPresetResultHandler calls the underlying RequestExportSessionForVideoOptionsExportPresetResultHandler.
+func (x *ImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, exportPreset string, resultHandler objc.Block) int32 {
+	return x.inner.RequestExportSessionForVideoOptionsExportPresetResultHandler(asset, options, foundation.NSStringStringWithUTF8String(exportPreset), resultHandler)
+}
+
+// RequestAVAssetForVideoOptionsResultHandler calls the underlying RequestAVAssetForVideoOptionsResultHandler.
+func (x *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32 {
+	return x.inner.RequestAVAssetForVideoOptionsResultHandler(asset, options, resultHandler)
+}
+
 func (x *ImageManager) asImageManager() *raw.PHImageManager { return x.inner }
+
+// ImageManagerable is the interface implemented by [ImageManager], for mocking and DI.
+type ImageManagerable interface {
+	Unwrap() *raw.PHImageManager
+	RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32
+	RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler objc.Block) int32
+	CancelImageRequest(requestID int32)
+	RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode raw.PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler objc.Block) int32
+	RequestPlayerItemForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32
+	RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, exportPreset string, resultHandler objc.Block) int32
+	RequestAVAssetForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler objc.Block) int32
+}
+
+var _ ImageManagerable = (*ImageManager)(nil)
 

@@ -5,8 +5,10 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RTree wraps [raw.GKRTree] with a fluent Go API.
@@ -29,4 +31,42 @@ func (x *RTree) WithQueryReserve(queryReserve uint) *RTree {
 	x.inner.SetQueryReserve(queryReserve)
 	return x
 }
+
+// AddElementBoundingRectMinBoundingRectMaxSplitStrategy calls the underlying AddElementBoundingRectMinBoundingRectMaxSplitStrategy.
+func (x *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy raw.GKRTreeSplitStrategy) {
+	x.inner.AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element, boundingRectMin, boundingRectMax, splitStrategy)
+}
+
+// RemoveElementBoundingRectMinBoundingRectMax calls the underlying RemoveElementBoundingRectMinBoundingRectMax.
+func (x *RTree) RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
+	x.inner.RemoveElementBoundingRectMinBoundingRectMax(element, boundingRectMin, boundingRectMax)
+}
+
+// ElementsInBoundingRectMinRectMax calls the underlying ElementsInBoundingRectMinRectMax.
+func (x *RTree) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID] {
+	return x.inner.ElementsInBoundingRectMinRectMax(rectMin, rectMax)
+}
+
+// QueryReserve calls the underlying QueryReserve.
+func (x *RTree) QueryReserve() uint {
+	return x.inner.QueryReserve()
+}
+
+// SetQueryReserve calls the underlying SetQueryReserve.
+func (x *RTree) SetQueryReserve(queryReserve uint) {
+	x.inner.SetQueryReserve(queryReserve)
+}
+
+// RTreeable is the interface implemented by [RTree], for mocking and DI.
+type RTreeable interface {
+	Unwrap() *raw.GKRTree[objc.ID]
+	WithQueryReserve(queryReserve uint) *RTree
+	AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy raw.GKRTreeSplitStrategy)
+	RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer)
+	ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID]
+	QueryReserve() uint
+	SetQueryReserve(queryReserve uint)
+}
+
+var _ RTreeable = (*RTree)(nil)
 

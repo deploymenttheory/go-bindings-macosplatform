@@ -36,3 +36,36 @@ func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState raw.MPNowPlayingP
 	return x
 }
 
+// NowPlayingInfo calls the underlying NowPlayingInfo.
+func (x *NowPlayingInfoCenter) NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.NowPlayingInfo()
+}
+
+// SetNowPlayingInfo calls the underlying SetNowPlayingInfo.
+func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetNowPlayingInfo(nowPlayingInfo)
+}
+
+// PlaybackState calls the underlying PlaybackState.
+func (x *NowPlayingInfoCenter) PlaybackState() raw.MPNowPlayingPlaybackState {
+	return x.inner.PlaybackState()
+}
+
+// SetPlaybackState calls the underlying SetPlaybackState.
+func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState raw.MPNowPlayingPlaybackState) {
+	x.inner.SetPlaybackState(playbackState)
+}
+
+// NowPlayingInfoCenterable is the interface implemented by [NowPlayingInfoCenter], for mocking and DI.
+type NowPlayingInfoCenterable interface {
+	Unwrap() *raw.MPNowPlayingInfoCenter
+	WithNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NowPlayingInfoCenter
+	WithPlaybackState(playbackState raw.MPNowPlayingPlaybackState) *NowPlayingInfoCenter
+	NowPlayingInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetNowPlayingInfo(nowPlayingInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PlaybackState() raw.MPNowPlayingPlaybackState
+	SetPlaybackState(playbackState raw.MPNowPlayingPlaybackState)
+}
+
+var _ NowPlayingInfoCenterable = (*NowPlayingInfoCenter)(nil)
+

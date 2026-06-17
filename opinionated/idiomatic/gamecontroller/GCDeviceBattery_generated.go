@@ -23,3 +23,22 @@ func NewDeviceBattery() *DeviceBattery {
 	return &DeviceBattery{inner: raw.GCDeviceBatteryFromID(_id)}
 }
 
+// BatteryLevel calls the underlying BatteryLevel.
+func (x *DeviceBattery) BatteryLevel() float32 {
+	return x.inner.BatteryLevel()
+}
+
+// BatteryState calls the underlying BatteryState.
+func (x *DeviceBattery) BatteryState() raw.GCDeviceBatteryState {
+	return x.inner.BatteryState()
+}
+
+// DeviceBatteryable is the interface implemented by [DeviceBattery], for mocking and DI.
+type DeviceBatteryable interface {
+	Unwrap() *raw.GCDeviceBattery
+	BatteryLevel() float32
+	BatteryState() raw.GCDeviceBatteryState
+}
+
+var _ DeviceBatteryable = (*DeviceBattery)(nil)
+

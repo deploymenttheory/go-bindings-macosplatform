@@ -23,5 +23,52 @@ func NewLensSpecification() *LensSpecification {
 	return &LensSpecification{inner: raw.HKLensSpecificationFromID(_id)}
 }
 
+// Sphere calls the underlying Sphere.
+func (x *LensSpecification) Sphere() *Quantity {
+	_r := x.inner.Sphere()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Cylinder calls the underlying Cylinder.
+func (x *LensSpecification) Cylinder() *Quantity {
+	_r := x.inner.Cylinder()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// Axis calls the underlying Axis.
+func (x *LensSpecification) Axis() *Quantity {
+	_r := x.inner.Axis()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// AddPower calls the underlying AddPower.
+func (x *LensSpecification) AddPower() *Quantity {
+	_r := x.inner.AddPower()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
 func (x *LensSpecification) asLensSpecification() *raw.HKLensSpecification { return x.inner }
+
+// LensSpecificationable is the interface implemented by [LensSpecification], for mocking and DI.
+type LensSpecificationable interface {
+	Unwrap() *raw.HKLensSpecification
+	Sphere() *Quantity
+	Cylinder() *Quantity
+	Axis() *Quantity
+	AddPower() *Quantity
+}
+
+var _ LensSpecificationable = (*LensSpecification)(nil)
 

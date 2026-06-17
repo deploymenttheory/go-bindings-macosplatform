@@ -7,6 +7,7 @@ package modelio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AreaLight wraps [raw.MDLAreaLight] with a fluent Go API.
@@ -35,9 +36,54 @@ func (x *AreaLight) WithAspect(aspect float32) *AreaLight {
 	return x
 }
 
+// AreaRadius calls the underlying AreaRadius.
+func (x *AreaLight) AreaRadius() float32 {
+	return x.inner.AreaRadius()
+}
+
+// SetAreaRadius calls the underlying SetAreaRadius.
+func (x *AreaLight) SetAreaRadius(areaRadius float32) {
+	x.inner.SetAreaRadius(areaRadius)
+}
+
+// SuperEllipticPower calls the underlying SuperEllipticPower.
+func (x *AreaLight) SuperEllipticPower() unsafe.Pointer {
+	return x.inner.SuperEllipticPower()
+}
+
+// SetSuperEllipticPower calls the underlying SetSuperEllipticPower.
+func (x *AreaLight) SetSuperEllipticPower(superEllipticPower unsafe.Pointer) {
+	x.inner.SetSuperEllipticPower(superEllipticPower)
+}
+
+// Aspect calls the underlying Aspect.
+func (x *AreaLight) Aspect() float32 {
+	return x.inner.Aspect()
+}
+
+// SetAspect calls the underlying SetAspect.
+func (x *AreaLight) SetAspect(aspect float32) {
+	x.inner.SetAspect(aspect)
+}
+
 func (x *AreaLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return &x.inner.MDLPhysicallyPlausibleLight }
 
 func (x *AreaLight) asLight() *raw.MDLLight { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight }
 
 func (x *AreaLight) asObject() *raw.MDLObject { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject }
+
+// AreaLightable is the interface implemented by [AreaLight], for mocking and DI.
+type AreaLightable interface {
+	Unwrap() *raw.MDLAreaLight
+	WithAreaRadius(areaRadius float32) *AreaLight
+	WithAspect(aspect float32) *AreaLight
+	AreaRadius() float32
+	SetAreaRadius(areaRadius float32)
+	SuperEllipticPower() unsafe.Pointer
+	SetSuperEllipticPower(superEllipticPower unsafe.Pointer)
+	Aspect() float32
+	SetAspect(aspect float32)
+}
+
+var _ AreaLightable = (*AreaLight)(nil)
 

@@ -6,8 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PlayerItemVideoOutput wraps [raw.AVPlayerItemVideoOutput] with a fluent Go API.
@@ -32,5 +34,48 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings *foundation.NSDic
 	return &PlayerItemVideoOutput{inner: raw.AVPlayerItemVideoOutputFromID(_id)}
 }
 
+// HasNewPixelBufferForItemTime calls the underlying HasNewPixelBufferForItemTime.
+func (x *PlayerItemVideoOutput) HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool {
+	return x.inner.HasNewPixelBufferForItemTime(itemTime)
+}
+
+// CopyPixelBufferForItemTimeItemTimeForDisplay calls the underlying CopyPixelBufferForItemTimeItemTimeForDisplay.
+func (x *PlayerItemVideoOutput) CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer {
+	return x.inner.CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime, outItemTimeForDisplay)
+}
+
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *PlayerItemVideoOutput) SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// RequestNotificationOfMediaDataChangeWithAdvanceInterval calls the underlying RequestNotificationOfMediaDataChangeWithAdvanceInterval.
+func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
+	x.inner.RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerItemVideoOutput) Delegate() raw.AVPlayerItemOutputPullDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *PlayerItemVideoOutput) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
 func (x *PlayerItemVideoOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+
+// PlayerItemVideoOutputable is the interface implemented by [PlayerItemVideoOutput], for mocking and DI.
+type PlayerItemVideoOutputable interface {
+	Unwrap() *raw.AVPlayerItemVideoOutput
+	HasNewPixelBufferForItemTime(itemTime coremedia.CMTime) bool
+	CopyPixelBufferForItemTimeItemTimeForDisplay(itemTime coremedia.CMTime, outItemTimeForDisplay *coremedia.CMTime) unsafe.Pointer
+	SetDelegateQueue(delegate raw.AVPlayerItemOutputPullDelegate, delegateQueue *foundation.NSObject)
+	RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64)
+	Delegate() raw.AVPlayerItemOutputPullDelegate
+	DelegateQueue() *foundation.NSObject
+}
+
+var _ PlayerItemVideoOutputable = (*PlayerItemVideoOutput)(nil)
 

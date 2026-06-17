@@ -24,7 +24,26 @@ func NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientSta
 	return &CNNUpsamplingNearestGradientNode{inner: raw.MPSCNNUpsamplingNearestGradientNodeFromID(_id)}
 }
 
+// ScaleFactorX calls the underlying ScaleFactorX.
+func (x *CNNUpsamplingNearestGradientNode) ScaleFactorX() float64 {
+	return x.inner.ScaleFactorX()
+}
+
+// ScaleFactorY calls the underlying ScaleFactorY.
+func (x *CNNUpsamplingNearestGradientNode) ScaleFactorY() float64 {
+	return x.inner.ScaleFactorY()
+}
+
 func (x *CNNUpsamplingNearestGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNUpsamplingNearestGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
+
+// CNNUpsamplingNearestGradientNodeable is the interface implemented by [CNNUpsamplingNearestGradientNode], for mocking and DI.
+type CNNUpsamplingNearestGradientNodeable interface {
+	Unwrap() *raw.MPSCNNUpsamplingNearestGradientNode
+	ScaleFactorX() float64
+	ScaleFactorY() float64
+}
+
+var _ CNNUpsamplingNearestGradientNodeable = (*CNNUpsamplingNearestGradientNode)(nil)
 

@@ -6,6 +6,7 @@ package glkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,51 @@ func NewMeshBuffer() *MeshBuffer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKMeshBuffer")), objc.RegisterName("new"))
 	return &MeshBuffer{inner: raw.GLKMeshBufferFromID(_id)}
 }
+
+// Length calls the underlying Length.
+func (x *MeshBuffer) Length() uint {
+	return x.inner.Length()
+}
+
+// Allocator calls the underlying Allocator.
+func (x *MeshBuffer) Allocator() *MeshBufferAllocator {
+	_r := x.inner.Allocator()
+	if _r == nil {
+		return nil
+	}
+	return &MeshBufferAllocator{inner: _r}
+}
+
+// GlBufferName calls the underlying GlBufferName.
+func (x *MeshBuffer) GlBufferName() uint32 {
+	return x.inner.GlBufferName()
+}
+
+// Offset calls the underlying Offset.
+func (x *MeshBuffer) Offset() uint {
+	return x.inner.Offset()
+}
+
+// Zone calls the underlying Zone.
+func (x *MeshBuffer) Zone() modelio.MDLMeshBufferZone {
+	return x.inner.Zone()
+}
+
+// Type calls the underlying Type.
+func (x *MeshBuffer) Type() modelio.MDLMeshBufferType {
+	return x.inner.Type()
+}
+
+// MeshBufferable is the interface implemented by [MeshBuffer], for mocking and DI.
+type MeshBufferable interface {
+	Unwrap() *raw.GLKMeshBuffer
+	Length() uint
+	Allocator() *MeshBufferAllocator
+	GlBufferName() uint32
+	Offset() uint
+	Zone() modelio.MDLMeshBufferZone
+	Type() modelio.MDLMeshBufferType
+}
+
+var _ MeshBufferable = (*MeshBuffer)(nil)
 

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,20 @@ func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObserva
 	return &ImageTranslationAlignmentObservation{inner: raw.VNImageTranslationAlignmentObservationFromID(_id)}
 }
 
+// AlignmentTransform calls the underlying AlignmentTransform.
+func (x *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
+	return x.inner.AlignmentTransform()
+}
+
 func (x *ImageTranslationAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation { return &x.inner.VNImageAlignmentObservation }
 
 func (x *ImageTranslationAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNImageAlignmentObservation.VNObservation }
+
+// ImageTranslationAlignmentObservationable is the interface implemented by [ImageTranslationAlignmentObservation], for mocking and DI.
+type ImageTranslationAlignmentObservationable interface {
+	Unwrap() *raw.VNImageTranslationAlignmentObservation
+	AlignmentTransform() corefoundation.CGAffineTransform
+}
+
+var _ ImageTranslationAlignmentObservationable = (*ImageTranslationAlignmentObservation)(nil)
 

@@ -25,3 +25,10 @@ func NewBooleanResolutionResult() *BooleanResolutionResult {
 
 func (x *BooleanResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// BooleanResolutionResultable is the interface implemented by [BooleanResolutionResult], for mocking and DI.
+type BooleanResolutionResultable interface {
+	Unwrap() *raw.INBooleanResolutionResult
+}
+
+var _ BooleanResolutionResultable = (*BooleanResolutionResult)(nil)
+

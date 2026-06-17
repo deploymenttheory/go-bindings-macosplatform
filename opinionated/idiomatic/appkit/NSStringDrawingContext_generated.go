@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -28,4 +29,36 @@ func (x *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64
 	x.inner.SetMinimumScaleFactor(minimumScaleFactor)
 	return x
 }
+
+// MinimumScaleFactor calls the underlying MinimumScaleFactor.
+func (x *StringDrawingContext) MinimumScaleFactor() float64 {
+	return x.inner.MinimumScaleFactor()
+}
+
+// SetMinimumScaleFactor calls the underlying SetMinimumScaleFactor.
+func (x *StringDrawingContext) SetMinimumScaleFactor(minimumScaleFactor float64) {
+	x.inner.SetMinimumScaleFactor(minimumScaleFactor)
+}
+
+// ActualScaleFactor calls the underlying ActualScaleFactor.
+func (x *StringDrawingContext) ActualScaleFactor() float64 {
+	return x.inner.ActualScaleFactor()
+}
+
+// TotalBounds calls the underlying TotalBounds.
+func (x *StringDrawingContext) TotalBounds() corefoundation.CGRect {
+	return x.inner.TotalBounds()
+}
+
+// StringDrawingContextable is the interface implemented by [StringDrawingContext], for mocking and DI.
+type StringDrawingContextable interface {
+	Unwrap() *raw.NSStringDrawingContext
+	WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext
+	MinimumScaleFactor() float64
+	SetMinimumScaleFactor(minimumScaleFactor float64)
+	ActualScaleFactor() float64
+	TotalBounds() corefoundation.CGRect
+}
+
+var _ StringDrawingContextable = (*StringDrawingContext)(nil)
 

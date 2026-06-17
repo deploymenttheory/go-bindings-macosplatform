@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,92 @@ func NewPostalAddress() *PostalAddress {
 	return &PostalAddress{inner: raw.CNPostalAddressFromID(_id)}
 }
 
+// Street calls the underlying Street.
+func (x *PostalAddress) Street() string {
+	_r := x.inner.Street()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubLocality calls the underlying SubLocality.
+func (x *PostalAddress) SubLocality() string {
+	_r := x.inner.SubLocality()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// City calls the underlying City.
+func (x *PostalAddress) City() string {
+	_r := x.inner.City()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SubAdministrativeArea calls the underlying SubAdministrativeArea.
+func (x *PostalAddress) SubAdministrativeArea() string {
+	_r := x.inner.SubAdministrativeArea()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// State calls the underlying State.
+func (x *PostalAddress) State() string {
+	_r := x.inner.State()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PostalCode calls the underlying PostalCode.
+func (x *PostalAddress) PostalCode() string {
+	_r := x.inner.PostalCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Country calls the underlying Country.
+func (x *PostalAddress) Country() string {
+	_r := x.inner.Country()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ISOCountryCode calls the underlying ISOCountryCode.
+func (x *PostalAddress) ISOCountryCode() string {
+	_r := x.inner.ISOCountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *PostalAddress) asPostalAddress() *raw.CNPostalAddress { return x.inner }
+
+// PostalAddressable is the interface implemented by [PostalAddress], for mocking and DI.
+type PostalAddressable interface {
+	Unwrap() *raw.CNPostalAddress
+	Street() string
+	SubLocality() string
+	City() string
+	SubAdministrativeArea() string
+	State() string
+	PostalCode() string
+	Country() string
+	ISOCountryCode() string
+}
+
+var _ PostalAddressable = (*PostalAddress)(nil)
 

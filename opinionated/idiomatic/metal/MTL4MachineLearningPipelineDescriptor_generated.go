@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -29,5 +30,57 @@ func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescr
 	return x
 }
 
+// SetInputDimensionsAtBufferIndex calls the underlying SetInputDimensionsAtBufferIndex.
+func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int) {
+	x.inner.SetInputDimensionsAtBufferIndex(dimensions, bufferIndex)
+}
+
+// SetInputDimensionsWithRange calls the underlying SetInputDimensionsWithRange.
+func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange) {
+	x.inner.SetInputDimensionsWithRange(dimensions, range_)
+}
+
+// InputDimensionsAtBufferIndex calls the underlying InputDimensionsAtBufferIndex.
+func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
+	_r := x.inner.InputDimensionsAtBufferIndex(bufferIndex)
+	if _r == nil {
+		return nil
+	}
+	return &TensorExtents{inner: _r}
+}
+
+// Reset calls the underlying Reset.
+func (x *MTL4MachineLearningPipelineDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// MachineLearningFunctionDescriptor calls the underlying MachineLearningFunctionDescriptor.
+func (x *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := x.inner.MachineLearningFunctionDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &MTL4FunctionDescriptor{inner: _r}
+}
+
+// SetMachineLearningFunctionDescriptor calls the underlying SetMachineLearningFunctionDescriptor.
+func (x *MTL4MachineLearningPipelineDescriptor) SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *raw.MTL4FunctionDescriptor) {
+	x.inner.SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor)
+}
+
 func (x *MTL4MachineLearningPipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor { return &x.inner.MTL4PipelineDescriptor }
+
+// MTL4MachineLearningPipelineDescriptorable is the interface implemented by [MTL4MachineLearningPipelineDescriptor], for mocking and DI.
+type MTL4MachineLearningPipelineDescriptorable interface {
+	Unwrap() *raw.MTL4MachineLearningPipelineDescriptor
+	WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor
+	SetInputDimensionsAtBufferIndex(dimensions *raw.MTLTensorExtents, bufferIndex int)
+	SetInputDimensionsWithRange(dimensions *foundation.NSArray[*raw.MTLTensorExtents], range_ foundation.NSRange)
+	InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents
+	Reset()
+	MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor
+	SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *raw.MTL4FunctionDescriptor)
+}
+
+var _ MTL4MachineLearningPipelineDescriptorable = (*MTL4MachineLearningPipelineDescriptor)(nil)
 

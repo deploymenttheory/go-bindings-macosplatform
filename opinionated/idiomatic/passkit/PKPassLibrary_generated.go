@@ -5,8 +5,12 @@
 package passkit
 
 import (
+	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PassLibrary wraps [raw.PKPassLibrary] with a fluent Go API.
@@ -23,17 +27,39 @@ func NewPassLibrary() *PassLibrary {
 	return &PassLibrary{inner: raw.PKPassLibraryFromID(_id)}
 }
 
+// IsPaymentPassActivationAvailable calls the underlying IsPaymentPassActivationAvailable.
+func (x *PassLibrary) IsPaymentPassActivationAvailable() bool {
+	return x.inner.IsPaymentPassActivationAvailable()
+}
+
 // Passes returns the collection as a Go slice.
 func (x *PassLibrary) Passes() []*raw.PKPass {
 	arr := x.inner.Passes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPass, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPass {
+		return raw.PKPassFromID(purego.Retain(_id))
+	})
+}
+
+// PassWithPassTypeIdentifierSerialNumber calls the underlying PassWithPassTypeIdentifierSerialNumber.
+func (x *PassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass {
+	_r := x.inner.PassWithPassTypeIdentifierSerialNumber(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(serialNumber))
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Pass{inner: _r}
+}
+
+// PassesWithReaderIdentifier calls the underlying PassesWithReaderIdentifier.
+func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass] {
+	return x.inner.PassesWithReaderIdentifier(foundation.NSStringStringWithUTF8String(readerIdentifier))
+}
+
+// PassesOfType calls the underlying PassesOfType.
+func (x *PassLibrary) PassesOfType(passType raw.PKPassType) *foundation.NSArray[*raw.PKPass] {
+	return x.inner.PassesOfType(passType)
 }
 
 // RemotePaymentPasses returns the collection as a Go slice.
@@ -42,11 +68,128 @@ func (x *PassLibrary) RemotePaymentPasses() []*raw.PKPaymentPass {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKPaymentPass, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKPaymentPass {
+		return raw.PKPaymentPassFromID(purego.Retain(_id))
+	})
+}
+
+// RemovePass calls the underlying RemovePass.
+func (x *PassLibrary) RemovePass(pass *raw.PKPass) {
+	x.inner.RemovePass(pass)
+}
+
+// ContainsPass calls the underlying ContainsPass.
+func (x *PassLibrary) ContainsPass(pass *raw.PKPass) bool {
+	return x.inner.ContainsPass(pass)
+}
+
+// ReplacePassWithPass calls the underlying ReplacePassWithPass.
+func (x *PassLibrary) ReplacePassWithPass(pass *raw.PKPass) bool {
+	return x.inner.ReplacePassWithPass(pass)
+}
+
+// AddPassesWithCompletionHandler calls the underlying AddPassesWithCompletionHandler.
+func (x *PassLibrary) AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(raw.PKPassLibraryAddPassesStatus)) {
+	x.inner.AddPassesWithCompletionHandler(passes, completion)
+}
+
+// OpenPaymentSetup calls the underlying OpenPaymentSetup.
+func (x *PassLibrary) OpenPaymentSetup() {
+	x.inner.OpenPaymentSetup()
+}
+
+// OpenPaymentSetupWithMerchantIdentifier calls the underlying OpenPaymentSetupWithMerchantIdentifier.
+func (x *PassLibrary) OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string) {
+	x.inner.OpenPaymentSetupWithMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+}
+
+// PresentPaymentPass calls the underlying PresentPaymentPass.
+func (x *PassLibrary) PresentPaymentPass(pass *raw.PKPaymentPass) {
+	x.inner.PresentPaymentPass(pass)
+}
+
+// PresentSecureElementPass calls the underlying PresentSecureElementPass.
+func (x *PassLibrary) PresentSecureElementPass(pass *raw.PKSecureElementPass) {
+	x.inner.PresentSecureElementPass(pass)
+}
+
+// CanAddPaymentPassWithPrimaryAccountIdentifier calls the underlying CanAddPaymentPassWithPrimaryAccountIdentifier.
+func (x *PassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
+	return x.inner.CanAddPaymentPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
+}
+
+// CanAddSecureElementPassWithPrimaryAccountIdentifier calls the underlying CanAddSecureElementPassWithPrimaryAccountIdentifier.
+func (x *PassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
+	return x.inner.CanAddSecureElementPassWithPrimaryAccountIdentifier(foundation.NSStringStringWithUTF8String(primaryAccountIdentifier))
+}
+
+// CanAddFelicaPass calls the underlying CanAddFelicaPass.
+func (x *PassLibrary) CanAddFelicaPass() bool {
+	return x.inner.CanAddFelicaPass()
+}
+
+// ActivatePaymentPassWithActivationDataCompletion calls the underlying ActivatePaymentPassWithActivationDataCompletion.
+func (x *PassLibrary) ActivatePaymentPassWithActivationDataCompletion(paymentPass *raw.PKPaymentPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
+	x.inner.ActivatePaymentPassWithActivationDataCompletion(paymentPass, activationData, completion)
+}
+
+// ActivatePaymentPassWithActivationCodeCompletion calls the underlying ActivatePaymentPassWithActivationCodeCompletion.
+func (x *PassLibrary) ActivatePaymentPassWithActivationCodeCompletion(paymentPass *raw.PKPaymentPass, activationCode string, completion func(bool, unsafe.Pointer)) {
+	x.inner.ActivatePaymentPassWithActivationCodeCompletion(paymentPass, foundation.NSStringStringWithUTF8String(activationCode), completion)
+}
+
+// ActivateSecureElementPassWithActivationDataCompletion calls the underlying ActivateSecureElementPassWithActivationDataCompletion.
+func (x *PassLibrary) ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer)) {
+	x.inner.ActivateSecureElementPassWithActivationDataCompletion(secureElementPass, activationData, completion)
+}
+
+// SignDataWithSecureElementPassCompletion calls the underlying SignDataWithSecureElementPassCompletion.
+func (x *PassLibrary) SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer)) {
+	x.inner.SignDataWithSecureElementPassCompletion(signData, secureElementPass, completion)
+}
+
+// EncryptedServiceProviderDataForSecureElementPassCompletion calls the underlying EncryptedServiceProviderDataForSecureElementPassCompletion.
+func (x *PassLibrary) EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion objc.Block) {
+	x.inner.EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass, completion)
+}
+
+// ServiceProviderDataForSecureElementPassCompletion blocks until the operation completes or ctx is cancelled.
+func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
 	}
-	return out
+	_ch := make(chan _result, 1)
+	x.inner.ServiceProviderDataForSecureElementPassCompletion(secureElementPass, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// AuthorizationStatusForCapability calls the underlying AuthorizationStatusForCapability.
+func (x *PassLibrary) AuthorizationStatusForCapability(capability raw.PKPassLibraryCapability) raw.PKPassLibraryAuthorizationStatus {
+	return x.inner.AuthorizationStatusForCapability(capability)
+}
+
+// RequestAuthorizationForCapabilityCompletion calls the underlying RequestAuthorizationForCapabilityCompletion.
+func (x *PassLibrary) RequestAuthorizationForCapabilityCompletion(capability raw.PKPassLibraryCapability, completion func(raw.PKPassLibraryAuthorizationStatus)) {
+	x.inner.RequestAuthorizationForCapabilityCompletion(capability, completion)
+}
+
+// IsSecureElementPassActivationAvailable calls the underlying IsSecureElementPassActivationAvailable.
+func (x *PassLibrary) IsSecureElementPassActivationAvailable() bool {
+	return x.inner.IsSecureElementPassActivationAvailable()
 }
 
 // RemoteSecureElementPasses returns the collection as a Go slice.
@@ -55,10 +198,42 @@ func (x *PassLibrary) RemoteSecureElementPasses() []*raw.PKSecureElementPass {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKSecureElementPass, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKSecureElementPass {
+		return raw.PKSecureElementPassFromID(purego.Retain(_id))
+	})
 }
+
+// PassLibraryable is the interface implemented by [PassLibrary], for mocking and DI.
+type PassLibraryable interface {
+	Unwrap() *raw.PKPassLibrary
+	IsPaymentPassActivationAvailable() bool
+	Passes() []*raw.PKPass
+	PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass
+	PassesWithReaderIdentifier(readerIdentifier string) *foundation.NSSet[*raw.PKSecureElementPass]
+	PassesOfType(passType raw.PKPassType) *foundation.NSArray[*raw.PKPass]
+	RemotePaymentPasses() []*raw.PKPaymentPass
+	RemovePass(pass *raw.PKPass)
+	ContainsPass(pass *raw.PKPass) bool
+	ReplacePassWithPass(pass *raw.PKPass) bool
+	AddPassesWithCompletionHandler(passes *foundation.NSArray[*raw.PKPass], completion func(raw.PKPassLibraryAddPassesStatus))
+	OpenPaymentSetup()
+	OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string)
+	PresentPaymentPass(pass *raw.PKPaymentPass)
+	PresentSecureElementPass(pass *raw.PKSecureElementPass)
+	CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
+	CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
+	CanAddFelicaPass() bool
+	ActivatePaymentPassWithActivationDataCompletion(paymentPass *raw.PKPaymentPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer))
+	ActivatePaymentPassWithActivationCodeCompletion(paymentPass *raw.PKPaymentPass, activationCode string, completion func(bool, unsafe.Pointer))
+	ActivateSecureElementPassWithActivationDataCompletion(secureElementPass *raw.PKSecureElementPass, activationData *foundation.NSData, completion func(bool, unsafe.Pointer))
+	SignDataWithSecureElementPassCompletion(signData *foundation.NSData, secureElementPass *raw.PKSecureElementPass, completion func(*foundation.NSData, *foundation.NSData, unsafe.Pointer))
+	EncryptedServiceProviderDataForSecureElementPassCompletion(secureElementPass *raw.PKSecureElementPass, completion objc.Block)
+	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *raw.PKSecureElementPass) (*foundation.NSData, error)
+	AuthorizationStatusForCapability(capability raw.PKPassLibraryCapability) raw.PKPassLibraryAuthorizationStatus
+	RequestAuthorizationForCapabilityCompletion(capability raw.PKPassLibraryCapability, completion func(raw.PKPassLibraryAuthorizationStatus))
+	IsSecureElementPassActivationAvailable() bool
+	RemoteSecureElementPasses() []*raw.PKSecureElementPass
+}
+
+var _ PassLibraryable = (*PassLibrary)(nil)
 

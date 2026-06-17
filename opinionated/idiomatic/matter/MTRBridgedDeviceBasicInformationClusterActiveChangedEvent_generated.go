@@ -30,3 +30,23 @@ func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromised
 	return x
 }
 
+// PromisedActiveDuration calls the underlying PromisedActiveDuration.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() *foundation.NSNumber {
+	return x.inner.PromisedActiveDuration()
+}
+
+// SetPromisedActiveDuration calls the underlying SetPromisedActiveDuration.
+func (x *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) {
+	x.inner.SetPromisedActiveDuration(promisedActiveDuration)
+}
+
+// MTRBridgedDeviceBasicInformationClusterActiveChangedEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterActiveChangedEvent], for mocking and DI.
+type MTRBridgedDeviceBasicInformationClusterActiveChangedEventable interface {
+	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
+	WithPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent
+	PromisedActiveDuration() *foundation.NSNumber
+	SetPromisedActiveDuration(promisedActiveDuration *foundation.NSNumber)
+}
+
+var _ MTRBridgedDeviceBasicInformationClusterActiveChangedEventable = (*MTRBridgedDeviceBasicInformationClusterActiveChangedEvent)(nil)
+

@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,4 +26,43 @@ func NewTicketedEventWithCategoryNameEventDurationLocation(category raw.INTicket
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCategory:name:eventDuration:location:"), category, foundation.NSStringStringWithUTF8String(name).Ptr(), eventDuration.Ptr(), location.Ptr())
 	return &TicketedEvent{inner: raw.INTicketedEventFromID(_id)}
 }
+
+// Category calls the underlying Category.
+func (x *TicketedEvent) Category() raw.INTicketedEventCategory {
+	return x.inner.Category()
+}
+
+// Name calls the underlying Name.
+func (x *TicketedEvent) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// EventDuration calls the underlying EventDuration.
+func (x *TicketedEvent) EventDuration() *DateComponentsRange {
+	_r := x.inner.EventDuration()
+	if _r == nil {
+		return nil
+	}
+	return &DateComponentsRange{inner: _r}
+}
+
+// Location calls the underlying Location.
+func (x *TicketedEvent) Location() *corelocation.CLPlacemark {
+	return x.inner.Location()
+}
+
+// TicketedEventable is the interface implemented by [TicketedEvent], for mocking and DI.
+type TicketedEventable interface {
+	Unwrap() *raw.INTicketedEvent
+	Category() raw.INTicketedEventCategory
+	Name() string
+	EventDuration() *DateComponentsRange
+	Location() *corelocation.CLPlacemark
+}
+
+var _ TicketedEventable = (*TicketedEvent)(nil)
 

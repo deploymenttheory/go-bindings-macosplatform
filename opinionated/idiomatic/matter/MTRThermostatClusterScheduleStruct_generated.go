@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,4 +54,92 @@ func (x *MTRThermostatClusterScheduleStruct) WithBuiltIn(builtIn *foundation.NSN
 	x.inner.SetBuiltIn(builtIn)
 	return x
 }
+
+// ScheduleHandle calls the underlying ScheduleHandle.
+func (x *MTRThermostatClusterScheduleStruct) ScheduleHandle() *foundation.NSData {
+	return x.inner.ScheduleHandle()
+}
+
+// SetScheduleHandle calls the underlying SetScheduleHandle.
+func (x *MTRThermostatClusterScheduleStruct) SetScheduleHandle(scheduleHandle *foundation.NSData) {
+	x.inner.SetScheduleHandle(scheduleHandle)
+}
+
+// SystemMode calls the underlying SystemMode.
+func (x *MTRThermostatClusterScheduleStruct) SystemMode() *foundation.NSNumber {
+	return x.inner.SystemMode()
+}
+
+// SetSystemMode calls the underlying SetSystemMode.
+func (x *MTRThermostatClusterScheduleStruct) SetSystemMode(systemMode *foundation.NSNumber) {
+	x.inner.SetSystemMode(systemMode)
+}
+
+// Name calls the underlying Name.
+func (x *MTRThermostatClusterScheduleStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRThermostatClusterScheduleStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// PresetHandle calls the underlying PresetHandle.
+func (x *MTRThermostatClusterScheduleStruct) PresetHandle() *foundation.NSData {
+	return x.inner.PresetHandle()
+}
+
+// SetPresetHandle calls the underlying SetPresetHandle.
+func (x *MTRThermostatClusterScheduleStruct) SetPresetHandle(presetHandle *foundation.NSData) {
+	x.inner.SetPresetHandle(presetHandle)
+}
+
+// Transitions calls the underlying Transitions.
+func (x *MTRThermostatClusterScheduleStruct) Transitions() *foundation.NSArray[objc.ID] {
+	return x.inner.Transitions()
+}
+
+// SetTransitions calls the underlying SetTransitions.
+func (x *MTRThermostatClusterScheduleStruct) SetTransitions(transitions *foundation.NSArray[objc.ID]) {
+	x.inner.SetTransitions(transitions)
+}
+
+// BuiltIn calls the underlying BuiltIn.
+func (x *MTRThermostatClusterScheduleStruct) BuiltIn() *foundation.NSNumber {
+	return x.inner.BuiltIn()
+}
+
+// SetBuiltIn calls the underlying SetBuiltIn.
+func (x *MTRThermostatClusterScheduleStruct) SetBuiltIn(builtIn *foundation.NSNumber) {
+	x.inner.SetBuiltIn(builtIn)
+}
+
+// MTRThermostatClusterScheduleStructable is the interface implemented by [MTRThermostatClusterScheduleStruct], for mocking and DI.
+type MTRThermostatClusterScheduleStructable interface {
+	Unwrap() *raw.MTRThermostatClusterScheduleStruct
+	WithScheduleHandle(scheduleHandle *foundation.NSData) *MTRThermostatClusterScheduleStruct
+	WithSystemMode(systemMode *foundation.NSNumber) *MTRThermostatClusterScheduleStruct
+	WithName(name string) *MTRThermostatClusterScheduleStruct
+	WithPresetHandle(presetHandle *foundation.NSData) *MTRThermostatClusterScheduleStruct
+	WithBuiltIn(builtIn *foundation.NSNumber) *MTRThermostatClusterScheduleStruct
+	ScheduleHandle() *foundation.NSData
+	SetScheduleHandle(scheduleHandle *foundation.NSData)
+	SystemMode() *foundation.NSNumber
+	SetSystemMode(systemMode *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	PresetHandle() *foundation.NSData
+	SetPresetHandle(presetHandle *foundation.NSData)
+	Transitions() *foundation.NSArray[objc.ID]
+	SetTransitions(transitions *foundation.NSArray[objc.ID])
+	BuiltIn() *foundation.NSNumber
+	SetBuiltIn(builtIn *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterScheduleStructable = (*MTRThermostatClusterScheduleStruct)(nil)
 

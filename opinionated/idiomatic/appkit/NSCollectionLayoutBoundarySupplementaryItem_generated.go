@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,7 +36,52 @@ func (x *CollectionLayoutBoundarySupplementaryItem) WithPinToVisibleBounds(pinTo
 	return x
 }
 
+// ExtendsBoundary calls the underlying ExtendsBoundary.
+func (x *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
+	return x.inner.ExtendsBoundary()
+}
+
+// SetExtendsBoundary calls the underlying SetExtendsBoundary.
+func (x *CollectionLayoutBoundarySupplementaryItem) SetExtendsBoundary(extendsBoundary bool) {
+	x.inner.SetExtendsBoundary(extendsBoundary)
+}
+
+// PinToVisibleBounds calls the underlying PinToVisibleBounds.
+func (x *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
+	return x.inner.PinToVisibleBounds()
+}
+
+// SetPinToVisibleBounds calls the underlying SetPinToVisibleBounds.
+func (x *CollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(pinToVisibleBounds bool) {
+	x.inner.SetPinToVisibleBounds(pinToVisibleBounds)
+}
+
+// Alignment calls the underlying Alignment.
+func (x *CollectionLayoutBoundarySupplementaryItem) Alignment() raw.NSRectAlignment {
+	return x.inner.Alignment()
+}
+
+// Offset calls the underlying Offset.
+func (x *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
+	return x.inner.Offset()
+}
+
 func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem { return &x.inner.NSCollectionLayoutSupplementaryItem }
 
 func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return &x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem }
+
+// CollectionLayoutBoundarySupplementaryItemable is the interface implemented by [CollectionLayoutBoundarySupplementaryItem], for mocking and DI.
+type CollectionLayoutBoundarySupplementaryItemable interface {
+	Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem
+	WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem
+	WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem
+	ExtendsBoundary() bool
+	SetExtendsBoundary(extendsBoundary bool)
+	PinToVisibleBounds() bool
+	SetPinToVisibleBounds(pinToVisibleBounds bool)
+	Alignment() raw.NSRectAlignment
+	Offset() corefoundation.CGPoint
+}
+
+var _ CollectionLayoutBoundarySupplementaryItemable = (*CollectionLayoutBoundarySupplementaryItem)(nil)
 

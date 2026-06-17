@@ -43,5 +43,42 @@ func (x *MTRUnitTestingClusterSimpleStructResponseParams) WithTimedInvokeTimeout
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.Arg1()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterSimpleStructResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
 func (x *MTRUnitTestingClusterSimpleStructResponseParams) asMTRUnitTestingClusterSimpleStructResponseParams() *raw.MTRUnitTestingClusterSimpleStructResponseParams { return x.inner }
+
+// MTRUnitTestingClusterSimpleStructResponseParamsable is the interface implemented by [MTRUnitTestingClusterSimpleStructResponseParams], for mocking and DI.
+type MTRUnitTestingClusterSimpleStructResponseParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterSimpleStructResponseParams
+	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructResponseParams
+	Arg1() *MTRUnitTestingClusterSimpleStruct
+	SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterSimpleStructResponseParamsable = (*MTRUnitTestingClusterSimpleStructResponseParams)(nil)
 

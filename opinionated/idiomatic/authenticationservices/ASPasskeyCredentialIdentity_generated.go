@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,66 @@ func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentit
 	x.inner.SetRank(rank)
 	return x
 }
+
+// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
+	_r := x.inner.RelyingPartyIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// UserName calls the underlying UserName.
+func (x *PasskeyCredentialIdentity) UserName() string {
+	_r := x.inner.UserName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CredentialID calls the underlying CredentialID.
+func (x *PasskeyCredentialIdentity) CredentialID() *foundation.NSData {
+	return x.inner.CredentialID()
+}
+
+// UserHandle calls the underlying UserHandle.
+func (x *PasskeyCredentialIdentity) UserHandle() *foundation.NSData {
+	return x.inner.UserHandle()
+}
+
+// RecordIdentifier calls the underlying RecordIdentifier.
+func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
+	_r := x.inner.RecordIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Rank calls the underlying Rank.
+func (x *PasskeyCredentialIdentity) Rank() int {
+	return x.inner.Rank()
+}
+
+// SetRank calls the underlying SetRank.
+func (x *PasskeyCredentialIdentity) SetRank(rank int) {
+	x.inner.SetRank(rank)
+}
+
+// PasskeyCredentialIdentityable is the interface implemented by [PasskeyCredentialIdentity], for mocking and DI.
+type PasskeyCredentialIdentityable interface {
+	Unwrap() *raw.ASPasskeyCredentialIdentity
+	WithRank(rank int) *PasskeyCredentialIdentity
+	RelyingPartyIdentifier() string
+	UserName() string
+	CredentialID() *foundation.NSData
+	UserHandle() *foundation.NSData
+	RecordIdentifier() string
+	Rank() int
+	SetRank(rank int)
+}
+
+var _ PasskeyCredentialIdentityable = (*PasskeyCredentialIdentity)(nil)
 

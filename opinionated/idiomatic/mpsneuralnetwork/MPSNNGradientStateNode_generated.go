@@ -27,3 +27,10 @@ func (x *NNGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNod
 
 func (x *NNGradientStateNode) asNNStateNode() *raw.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
+// NNGradientStateNodeable is the interface implemented by [NNGradientStateNode], for mocking and DI.
+type NNGradientStateNodeable interface {
+	Unwrap() *raw.MPSNNGradientStateNode
+}
+
+var _ NNGradientStateNodeable = (*NNGradientStateNode)(nil)
+

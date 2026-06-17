@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,4 +60,71 @@ func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context
 		return ctx.Err()
 	}
 }
+
+// DismissSheet calls the underlying DismissSheet.
+func (x *CertificatePresentation) DismissSheet() {
+	x.inner.DismissSheet()
+}
+
+// Trust calls the underlying Trust.
+func (x *CertificatePresentation) Trust() unsafe.Pointer {
+	return x.inner.Trust()
+}
+
+// Title calls the underlying Title.
+func (x *CertificatePresentation) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CertificatePresentation) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Message calls the underlying Message.
+func (x *CertificatePresentation) Message() string {
+	_r := x.inner.Message()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessage calls the underlying SetMessage.
+func (x *CertificatePresentation) SetMessage(message string) {
+	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+}
+
+// HelpURL calls the underlying HelpURL.
+func (x *CertificatePresentation) HelpURL() *foundation.NSURL {
+	return x.inner.HelpURL()
+}
+
+// SetHelpURL calls the underlying SetHelpURL.
+func (x *CertificatePresentation) SetHelpURL(helpURL string) {
+	x.inner.SetHelpURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(helpURL)))
+}
+
+// CertificatePresentationable is the interface implemented by [CertificatePresentation], for mocking and DI.
+type CertificatePresentationable interface {
+	Unwrap() *raw.SFCertificatePresentation
+	WithTitle(title string) *CertificatePresentation
+	WithMessage(message string) *CertificatePresentation
+	WithHelpURL(helpURL string) *CertificatePresentation
+	PresentSheetInWindowDismissHandler(ctx context.Context, window *appkit.NSWindow) error
+	DismissSheet()
+	Trust() unsafe.Pointer
+	Title() string
+	SetTitle(title string)
+	Message() string
+	SetMessage(message string)
+	HelpURL() *foundation.NSURL
+	SetHelpURL(helpURL string)
+}
+
+var _ CertificatePresentationable = (*CertificatePresentation)(nil)
 

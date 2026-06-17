@@ -6,6 +6,7 @@ package localauthentication
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +24,33 @@ func NewEnvironmentState() *EnvironmentState {
 	return &EnvironmentState{inner: raw.LAEnvironmentStateFromID(_id)}
 }
 
+// Biometry calls the underlying Biometry.
+func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
+	_r := x.inner.Biometry()
+	if _r == nil {
+		return nil
+	}
+	return &EnvironmentMechanismBiometry{inner: _r}
+}
+
+// UserPassword calls the underlying UserPassword.
+func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
+	_r := x.inner.UserPassword()
+	if _r == nil {
+		return nil
+	}
+	return &EnvironmentMechanismUserPassword{inner: _r}
+}
+
 // Companions returns the collection as a Go slice.
 func (x *EnvironmentState) Companions() []*raw.LAEnvironmentMechanismCompanion {
 	arr := x.inner.Companions()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.LAEnvironmentMechanismCompanion, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.LAEnvironmentMechanismCompanion {
+		return raw.LAEnvironmentMechanismCompanionFromID(purego.Retain(_id))
+	})
 }
 
 // AllMechanisms returns the collection as a Go slice.
@@ -42,10 +59,19 @@ func (x *EnvironmentState) AllMechanisms() []*raw.LAEnvironmentMechanism {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.LAEnvironmentMechanism, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.LAEnvironmentMechanism {
+		return raw.LAEnvironmentMechanismFromID(purego.Retain(_id))
+	})
 }
+
+// EnvironmentStateable is the interface implemented by [EnvironmentState], for mocking and DI.
+type EnvironmentStateable interface {
+	Unwrap() *raw.LAEnvironmentState
+	Biometry() *EnvironmentMechanismBiometry
+	UserPassword() *EnvironmentMechanismUserPassword
+	Companions() []*raw.LAEnvironmentMechanismCompanion
+	AllMechanisms() []*raw.LAEnvironmentMechanism
+}
+
+var _ EnvironmentStateable = (*EnvironmentState)(nil)
 

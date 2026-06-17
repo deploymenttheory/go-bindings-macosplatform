@@ -24,5 +24,66 @@ func NewAnimatedScalarArrayWithElementCount(arrayElementCount uint) *AnimatedSca
 	return &AnimatedScalarArray{inner: raw.MDLAnimatedScalarArrayFromID(_id)}
 }
 
+// SetFloatArrayCountAtTime calls the underlying SetFloatArrayCountAtTime.
+func (x *AnimatedScalarArray) SetFloatArrayCountAtTime(array *float32, count uint, time_ float64) {
+	x.inner.SetFloatArrayCountAtTime(array, count, time_)
+}
+
+// SetDoubleArrayCountAtTime calls the underlying SetDoubleArrayCountAtTime.
+func (x *AnimatedScalarArray) SetDoubleArrayCountAtTime(array *float64, count uint, time_ float64) {
+	x.inner.SetDoubleArrayCountAtTime(array, count, time_)
+}
+
+// GetFloatArrayMaxCountAtTime calls the underlying GetFloatArrayMaxCountAtTime.
+func (x *AnimatedScalarArray) GetFloatArrayMaxCountAtTime(array *float32, maxCount uint, time_ float64) uint {
+	return x.inner.GetFloatArrayMaxCountAtTime(array, maxCount, time_)
+}
+
+// GetDoubleArrayMaxCountAtTime calls the underlying GetDoubleArrayMaxCountAtTime.
+func (x *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(array *float64, maxCount uint, time_ float64) uint {
+	return x.inner.GetDoubleArrayMaxCountAtTime(array, maxCount, time_)
+}
+
+// ResetWithFloatArrayCountAtTimesCount calls the underlying ResetWithFloatArrayCountAtTimesCount.
+func (x *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesArray *float32, valuesCount uint, timesArray *float64, timesCount uint) {
+	x.inner.ResetWithFloatArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+}
+
+// ResetWithDoubleArrayCountAtTimesCount calls the underlying ResetWithDoubleArrayCountAtTimesCount.
+func (x *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesArray *float64, valuesCount uint, timesArray *float64, timesCount uint) {
+	x.inner.ResetWithDoubleArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+}
+
+// GetFloatArrayMaxCount calls the underlying GetFloatArrayMaxCount.
+func (x *AnimatedScalarArray) GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint {
+	return x.inner.GetFloatArrayMaxCount(valuesArray, maxCount)
+}
+
+// GetDoubleArrayMaxCount calls the underlying GetDoubleArrayMaxCount.
+func (x *AnimatedScalarArray) GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint {
+	return x.inner.GetDoubleArrayMaxCount(valuesArray, maxCount)
+}
+
+// ElementCount calls the underlying ElementCount.
+func (x *AnimatedScalarArray) ElementCount() uint {
+	return x.inner.ElementCount()
+}
+
 func (x *AnimatedScalarArray) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
+
+// AnimatedScalarArrayable is the interface implemented by [AnimatedScalarArray], for mocking and DI.
+type AnimatedScalarArrayable interface {
+	Unwrap() *raw.MDLAnimatedScalarArray
+	SetFloatArrayCountAtTime(array *float32, count uint, time_ float64)
+	SetDoubleArrayCountAtTime(array *float64, count uint, time_ float64)
+	GetFloatArrayMaxCountAtTime(array *float32, maxCount uint, time_ float64) uint
+	GetDoubleArrayMaxCountAtTime(array *float64, maxCount uint, time_ float64) uint
+	ResetWithFloatArrayCountAtTimesCount(valuesArray *float32, valuesCount uint, timesArray *float64, timesCount uint)
+	ResetWithDoubleArrayCountAtTimesCount(valuesArray *float64, valuesCount uint, timesArray *float64, timesCount uint)
+	GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint
+	GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint
+	ElementCount() uint
+}
+
+var _ AnimatedScalarArrayable = (*AnimatedScalarArray)(nil)
 

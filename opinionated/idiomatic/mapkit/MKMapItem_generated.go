@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -62,4 +63,158 @@ func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory *foundatio
 	x.inner.SetPointOfInterestCategory(pointOfInterestCategory)
 	return x
 }
+
+// OpenInMapsWithLaunchOptions calls the underlying OpenInMapsWithLaunchOptions.
+func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
+	return x.inner.OpenInMapsWithLaunchOptions(launchOptions)
+}
+
+// OpenInMapsWithLaunchOptionsCompletionHandler calls the underlying OpenInMapsWithLaunchOptionsCompletionHandler.
+func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
+	x.inner.OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions, completion)
+}
+
+// Identifier calls the underlying Identifier.
+func (x *MapItem) Identifier() *MapItemIdentifier {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return nil
+	}
+	return &MapItemIdentifier{inner: _r}
+}
+
+// AlternateIdentifiers calls the underlying AlternateIdentifiers.
+func (x *MapItem) AlternateIdentifiers() *foundation.NSSet[*raw.MKMapItemIdentifier] {
+	return x.inner.AlternateIdentifiers()
+}
+
+// Placemark calls the underlying Placemark.
+func (x *MapItem) Placemark() *Placemark {
+	_r := x.inner.Placemark()
+	if _r == nil {
+		return nil
+	}
+	return &Placemark{inner: _r}
+}
+
+// IsCurrentLocation calls the underlying IsCurrentLocation.
+func (x *MapItem) IsCurrentLocation() bool {
+	return x.inner.IsCurrentLocation()
+}
+
+// Location calls the underlying Location.
+func (x *MapItem) Location() unsafe.Pointer {
+	return x.inner.Location()
+}
+
+// Address calls the underlying Address.
+func (x *MapItem) Address() *Address {
+	_r := x.inner.Address()
+	if _r == nil {
+		return nil
+	}
+	return &Address{inner: _r}
+}
+
+// AddressRepresentations calls the underlying AddressRepresentations.
+func (x *MapItem) AddressRepresentations() *AddressRepresentations {
+	_r := x.inner.AddressRepresentations()
+	if _r == nil {
+		return nil
+	}
+	return &AddressRepresentations{inner: _r}
+}
+
+// Name calls the underlying Name.
+func (x *MapItem) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MapItem) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// PhoneNumber calls the underlying PhoneNumber.
+func (x *MapItem) PhoneNumber() string {
+	_r := x.inner.PhoneNumber()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPhoneNumber calls the underlying SetPhoneNumber.
+func (x *MapItem) SetPhoneNumber(phoneNumber string) {
+	x.inner.SetPhoneNumber(foundation.NSStringStringWithUTF8String(phoneNumber))
+}
+
+// Url calls the underlying Url.
+func (x *MapItem) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// SetUrl calls the underlying SetUrl.
+func (x *MapItem) SetUrl(url string) {
+	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *MapItem) TimeZone() *foundation.NSTimeZone {
+	return x.inner.TimeZone()
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *MapItem) SetTimeZone(timeZone *foundation.NSTimeZone) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// PointOfInterestCategory calls the underlying PointOfInterestCategory.
+func (x *MapItem) PointOfInterestCategory() string {
+	_r := x.inner.PointOfInterestCategory()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPointOfInterestCategory calls the underlying SetPointOfInterestCategory.
+func (x *MapItem) SetPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) {
+	x.inner.SetPointOfInterestCategory(pointOfInterestCategory)
+}
+
+// MapItemable is the interface implemented by [MapItem], for mocking and DI.
+type MapItemable interface {
+	Unwrap() *raw.MKMapItem
+	WithName(name string) *MapItem
+	WithPhoneNumber(phoneNumber string) *MapItem
+	WithUrl(url string) *MapItem
+	WithTimeZone(timeZone *foundation.NSTimeZone) *MapItem
+	WithPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) *MapItem
+	OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool))
+	Identifier() *MapItemIdentifier
+	AlternateIdentifiers() *foundation.NSSet[*raw.MKMapItemIdentifier]
+	Placemark() *Placemark
+	IsCurrentLocation() bool
+	Location() unsafe.Pointer
+	Address() *Address
+	AddressRepresentations() *AddressRepresentations
+	Name() string
+	SetName(name string)
+	PhoneNumber() string
+	SetPhoneNumber(phoneNumber string)
+	Url() *foundation.NSURL
+	SetUrl(url string)
+	TimeZone() *foundation.NSTimeZone
+	SetTimeZone(timeZone *foundation.NSTimeZone)
+	PointOfInterestCategory() string
+	SetPointOfInterestCategory(pointOfInterestCategory *foundation.NSString)
+}
+
+var _ MapItemable = (*MapItem)(nil)
 

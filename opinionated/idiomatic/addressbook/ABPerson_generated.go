@@ -25,5 +25,48 @@ func NewPersonWithVCardRepresentation(vCardData *foundation.NSData) *Person {
 	return &Person{inner: raw.ABPersonFromID(_id)}
 }
 
+// ParentGroups calls the underlying ParentGroups.
+func (x *Person) ParentGroups() *foundation.NSArray[objc.ID] {
+	return x.inner.ParentGroups()
+}
+
+// LinkedPeople calls the underlying LinkedPeople.
+func (x *Person) LinkedPeople() *foundation.NSArray[objc.ID] {
+	return x.inner.LinkedPeople()
+}
+
+// VCardRepresentation calls the underlying VCardRepresentation.
+func (x *Person) VCardRepresentation() *foundation.NSData {
+	return x.inner.VCardRepresentation()
+}
+
+// SetImageData calls the underlying SetImageData.
+func (x *Person) SetImageData(data *foundation.NSData) bool {
+	return x.inner.SetImageData(data)
+}
+
+// ImageData calls the underlying ImageData.
+func (x *Person) ImageData() *foundation.NSData {
+	return x.inner.ImageData()
+}
+
+// BeginLoadingImageDataForClient calls the underlying BeginLoadingImageDataForClient.
+func (x *Person) BeginLoadingImageDataForClient(client raw.ABImageClient) int {
+	return x.inner.BeginLoadingImageDataForClient(client)
+}
+
 func (x *Person) asRecord() *raw.ABRecord { return &x.inner.ABRecord }
+
+// Personable is the interface implemented by [Person], for mocking and DI.
+type Personable interface {
+	Unwrap() *raw.ABPerson
+	ParentGroups() *foundation.NSArray[objc.ID]
+	LinkedPeople() *foundation.NSArray[objc.ID]
+	VCardRepresentation() *foundation.NSData
+	SetImageData(data *foundation.NSData) bool
+	ImageData() *foundation.NSData
+	BeginLoadingImageDataForClient(client raw.ABImageClient) int
+}
+
+var _ Personable = (*Person)(nil)
 

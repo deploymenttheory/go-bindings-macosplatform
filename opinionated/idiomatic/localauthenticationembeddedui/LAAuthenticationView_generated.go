@@ -33,3 +33,22 @@ func NewAuthenticationViewWithContextControlSize(context_ *localauthentication.L
 	return &AuthenticationView{inner: raw.LAAuthenticationViewFromID(_id)}
 }
 
+// Context calls the underlying Context.
+func (x *AuthenticationView) Context() *localauthentication.LAContext {
+	return x.inner.Context()
+}
+
+// ControlSize calls the underlying ControlSize.
+func (x *AuthenticationView) ControlSize() appkit.NSControlSize {
+	return x.inner.ControlSize()
+}
+
+// AuthenticationViewable is the interface implemented by [AuthenticationView], for mocking and DI.
+type AuthenticationViewable interface {
+	Unwrap() *raw.LAAuthenticationView
+	Context() *localauthentication.LAContext
+	ControlSize() appkit.NSControlSize
+}
+
+var _ AuthenticationViewable = (*AuthenticationView)(nil)
+

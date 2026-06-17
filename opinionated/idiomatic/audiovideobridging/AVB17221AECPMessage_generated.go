@@ -7,6 +7,7 @@ package audiovideobridging
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AVB17221AECPMessage wraps [raw.AVB17221AECPMessage] with a fluent Go API.
@@ -59,5 +60,100 @@ func (x *AVB17221AECPMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17
 	return x
 }
 
+// ErrorForStatusCode calls the underlying ErrorForStatusCode.
+func (x *AVB17221AECPMessage) ErrorForStatusCode() unsafe.Pointer {
+	return x.inner.ErrorForStatusCode()
+}
+
+// MessageType calls the underlying MessageType.
+func (x *AVB17221AECPMessage) MessageType() raw.AVB17221AECPMessageType {
+	return x.inner.MessageType()
+}
+
+// SetMessageType calls the underlying SetMessageType.
+func (x *AVB17221AECPMessage) SetMessageType(messageType raw.AVB17221AECPMessageType) {
+	x.inner.SetMessageType(messageType)
+}
+
+// Status calls the underlying Status.
+func (x *AVB17221AECPMessage) Status() raw.AVB17221AECPStatusCode {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *AVB17221AECPMessage) SetStatus(status raw.AVB17221AECPStatusCode) {
+	x.inner.SetStatus(status)
+}
+
+// TargetEntityID calls the underlying TargetEntityID.
+func (x *AVB17221AECPMessage) TargetEntityID() uint64 {
+	return x.inner.TargetEntityID()
+}
+
+// SetTargetEntityID calls the underlying SetTargetEntityID.
+func (x *AVB17221AECPMessage) SetTargetEntityID(targetEntityID uint64) {
+	x.inner.SetTargetEntityID(targetEntityID)
+}
+
+// ControllerEntityID calls the underlying ControllerEntityID.
+func (x *AVB17221AECPMessage) ControllerEntityID() uint64 {
+	return x.inner.ControllerEntityID()
+}
+
+// SetControllerEntityID calls the underlying SetControllerEntityID.
+func (x *AVB17221AECPMessage) SetControllerEntityID(controllerEntityID uint64) {
+	x.inner.SetControllerEntityID(controllerEntityID)
+}
+
+// SequenceID calls the underlying SequenceID.
+func (x *AVB17221AECPMessage) SequenceID() uint16 {
+	return x.inner.SequenceID()
+}
+
+// SetSequenceID calls the underlying SetSequenceID.
+func (x *AVB17221AECPMessage) SetSequenceID(sequenceID uint16) {
+	x.inner.SetSequenceID(sequenceID)
+}
+
+// SourceMAC calls the underlying SourceMAC.
+func (x *AVB17221AECPMessage) SourceMAC() *MACAddress {
+	_r := x.inner.SourceMAC()
+	if _r == nil {
+		return nil
+	}
+	return &MACAddress{inner: _r}
+}
+
+// SetSourceMAC calls the underlying SetSourceMAC.
+func (x *AVB17221AECPMessage) SetSourceMAC(sourceMAC *raw.AVBMACAddress) {
+	x.inner.SetSourceMAC(sourceMAC)
+}
+
 func (x *AVB17221AECPMessage) asAVB17221AECPMessage() *raw.AVB17221AECPMessage { return x.inner }
+
+// AVB17221AECPMessageable is the interface implemented by [AVB17221AECPMessage], for mocking and DI.
+type AVB17221AECPMessageable interface {
+	Unwrap() *raw.AVB17221AECPMessage
+	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPMessage
+	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPMessage
+	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPMessage
+	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPMessage
+	WithSequenceID(sequenceID uint16) *AVB17221AECPMessage
+	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPMessage
+	ErrorForStatusCode() unsafe.Pointer
+	MessageType() raw.AVB17221AECPMessageType
+	SetMessageType(messageType raw.AVB17221AECPMessageType)
+	Status() raw.AVB17221AECPStatusCode
+	SetStatus(status raw.AVB17221AECPStatusCode)
+	TargetEntityID() uint64
+	SetTargetEntityID(targetEntityID uint64)
+	ControllerEntityID() uint64
+	SetControllerEntityID(controllerEntityID uint64)
+	SequenceID() uint16
+	SetSequenceID(sequenceID uint16)
+	SourceMAC() *MACAddress
+	SetSourceMAC(sourceMAC *raw.AVBMACAddress)
+}
+
+var _ AVB17221AECPMessageable = (*AVB17221AECPMessage)(nil)
 

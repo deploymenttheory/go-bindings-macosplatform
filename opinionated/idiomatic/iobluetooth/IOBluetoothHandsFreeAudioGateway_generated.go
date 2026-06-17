@@ -5,6 +5,7 @@
 package iobluetooth
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/ebitengine/purego/objc"
 )
@@ -24,5 +25,42 @@ func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *raw.IOBluetoo
 	return &IOBluetoothHandsFreeAudioGateway{inner: raw.IOBluetoothHandsFreeAudioGatewayFromID(_id)}
 }
 
+// CreateIndicatorMinMaxCurrentValue calls the underlying CreateIndicatorMinMaxCurrentValue.
+func (x *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
+	x.inner.CreateIndicatorMinMaxCurrentValue(foundation.NSStringStringWithUTF8String(indicatorName), minValue, maxValue, currentValue)
+}
+
+// ProcessATCommand calls the underlying ProcessATCommand.
+func (x *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
+	x.inner.ProcessATCommand(foundation.NSStringStringWithUTF8String(atCommand))
+}
+
+// SendOKResponse calls the underlying SendOKResponse.
+func (x *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
+	x.inner.SendOKResponse()
+}
+
+// SendResponse calls the underlying SendResponse.
+func (x *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
+	x.inner.SendResponse(foundation.NSStringStringWithUTF8String(response))
+}
+
+// SendResponseWithOK calls the underlying SendResponseWithOK.
+func (x *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
+	x.inner.SendResponseWithOK(foundation.NSStringStringWithUTF8String(response), withOK)
+}
+
 func (x *IOBluetoothHandsFreeAudioGateway) asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree { return &x.inner.IOBluetoothHandsFree }
+
+// IOBluetoothHandsFreeAudioGatewayable is the interface implemented by [IOBluetoothHandsFreeAudioGateway], for mocking and DI.
+type IOBluetoothHandsFreeAudioGatewayable interface {
+	Unwrap() *raw.IOBluetoothHandsFreeAudioGateway
+	CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int)
+	ProcessATCommand(atCommand string)
+	SendOKResponse()
+	SendResponse(response string)
+	SendResponseWithOK(response string, withOK bool)
+}
+
+var _ IOBluetoothHandsFreeAudioGatewayable = (*IOBluetoothHandsFreeAudioGateway)(nil)
 

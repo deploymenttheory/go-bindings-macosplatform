@@ -24,3 +24,66 @@ func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutpu
 	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(_id)}
 }
 
+// SourceFrame calls the underlying SourceFrame.
+func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	_r := x.inner.SourceFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// PreviousFrame calls the underlying PreviousFrame.
+func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
+	_r := x.inner.PreviousFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// PreviousOutputFrame calls the underlying PreviousOutputFrame.
+func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
+	_r := x.inner.PreviousOutputFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// OpticalFlow calls the underlying OpticalFlow.
+func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
+	_r := x.inner.OpticalFlow()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorOpticalFlow{inner: _r}
+}
+
+// SubmissionMode calls the underlying SubmissionMode.
+func (x *SuperResolutionScalerParameters) SubmissionMode() raw.VTSuperResolutionScalerParametersSubmissionMode {
+	return x.inner.SubmissionMode()
+}
+
+// DestinationFrame calls the underlying DestinationFrame.
+func (x *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := x.inner.DestinationFrame()
+	if _r == nil {
+		return nil
+	}
+	return &FrameProcessorFrame{inner: _r}
+}
+
+// SuperResolutionScalerParametersable is the interface implemented by [SuperResolutionScalerParameters], for mocking and DI.
+type SuperResolutionScalerParametersable interface {
+	Unwrap() *raw.VTSuperResolutionScalerParameters
+	SourceFrame() *FrameProcessorFrame
+	PreviousFrame() *FrameProcessorFrame
+	PreviousOutputFrame() *FrameProcessorFrame
+	OpticalFlow() *FrameProcessorOpticalFlow
+	SubmissionMode() raw.VTSuperResolutionScalerParametersSubmissionMode
+	DestinationFrame() *FrameProcessorFrame
+}
+
+var _ SuperResolutionScalerParametersable = (*SuperResolutionScalerParameters)(nil)
+

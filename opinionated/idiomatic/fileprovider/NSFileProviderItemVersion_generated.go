@@ -25,3 +25,22 @@ func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion 
 	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(_id)}
 }
 
+// ContentVersion calls the underlying ContentVersion.
+func (x *FileProviderItemVersion) ContentVersion() *foundation.NSData {
+	return x.inner.ContentVersion()
+}
+
+// MetadataVersion calls the underlying MetadataVersion.
+func (x *FileProviderItemVersion) MetadataVersion() *foundation.NSData {
+	return x.inner.MetadataVersion()
+}
+
+// FileProviderItemVersionable is the interface implemented by [FileProviderItemVersion], for mocking and DI.
+type FileProviderItemVersionable interface {
+	Unwrap() *raw.NSFileProviderItemVersion
+	ContentVersion() *foundation.NSData
+	MetadataVersion() *foundation.NSData
+}
+
+var _ FileProviderItemVersionable = (*FileProviderItemVersion)(nil)
+

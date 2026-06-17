@@ -36,3 +36,48 @@ func (x *MTRGroupsClusterGetGroupMembershipParams) WithServerSideProcessingTimeo
 	return x
 }
 
+// GroupList calls the underlying GroupList.
+func (x *MTRGroupsClusterGetGroupMembershipParams) GroupList() *foundation.NSArray[objc.ID] {
+	return x.inner.GroupList()
+}
+
+// SetGroupList calls the underlying SetGroupList.
+func (x *MTRGroupsClusterGetGroupMembershipParams) SetGroupList(groupList *foundation.NSArray[objc.ID]) {
+	x.inner.SetGroupList(groupList)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterGetGroupMembershipParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGroupsClusterGetGroupMembershipParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGroupsClusterGetGroupMembershipParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGroupsClusterGetGroupMembershipParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGroupsClusterGetGroupMembershipParamsable is the interface implemented by [MTRGroupsClusterGetGroupMembershipParams], for mocking and DI.
+type MTRGroupsClusterGetGroupMembershipParamsable interface {
+	Unwrap() *raw.MTRGroupsClusterGetGroupMembershipParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipParams
+	GroupList() *foundation.NSArray[objc.ID]
+	SetGroupList(groupList *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGroupsClusterGetGroupMembershipParamsable = (*MTRGroupsClusterGetGroupMembershipParams)(nil)
+

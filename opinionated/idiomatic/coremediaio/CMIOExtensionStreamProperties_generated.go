@@ -73,3 +73,120 @@ func (x *ExtensionStreamProperties) WithPropertiesDictionary(propertiesDictionar
 	return x
 }
 
+// SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
+func (x *ExtensionStreamProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
+	x.inner.SetPropertyStateForProperty(propertyState, property)
+}
+
+// ActiveFormatIndex calls the underlying ActiveFormatIndex.
+func (x *ExtensionStreamProperties) ActiveFormatIndex() *foundation.NSNumber {
+	return x.inner.ActiveFormatIndex()
+}
+
+// SetActiveFormatIndex calls the underlying SetActiveFormatIndex.
+func (x *ExtensionStreamProperties) SetActiveFormatIndex(activeFormatIndex *foundation.NSNumber) {
+	x.inner.SetActiveFormatIndex(activeFormatIndex)
+}
+
+// FrameDuration calls the underlying FrameDuration.
+func (x *ExtensionStreamProperties) FrameDuration() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.FrameDuration()
+}
+
+// SetFrameDuration calls the underlying SetFrameDuration.
+func (x *ExtensionStreamProperties) SetFrameDuration(frameDuration *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetFrameDuration(frameDuration)
+}
+
+// MaxFrameDuration calls the underlying MaxFrameDuration.
+func (x *ExtensionStreamProperties) MaxFrameDuration() *foundation.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.MaxFrameDuration()
+}
+
+// SetMaxFrameDuration calls the underlying SetMaxFrameDuration.
+func (x *ExtensionStreamProperties) SetMaxFrameDuration(maxFrameDuration *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetMaxFrameDuration(maxFrameDuration)
+}
+
+// SinkBufferQueueSize calls the underlying SinkBufferQueueSize.
+func (x *ExtensionStreamProperties) SinkBufferQueueSize() *foundation.NSNumber {
+	return x.inner.SinkBufferQueueSize()
+}
+
+// SetSinkBufferQueueSize calls the underlying SetSinkBufferQueueSize.
+func (x *ExtensionStreamProperties) SetSinkBufferQueueSize(sinkBufferQueueSize *foundation.NSNumber) {
+	x.inner.SetSinkBufferQueueSize(sinkBufferQueueSize)
+}
+
+// SinkBuffersRequiredForStartup calls the underlying SinkBuffersRequiredForStartup.
+func (x *ExtensionStreamProperties) SinkBuffersRequiredForStartup() *foundation.NSNumber {
+	return x.inner.SinkBuffersRequiredForStartup()
+}
+
+// SetSinkBuffersRequiredForStartup calls the underlying SetSinkBuffersRequiredForStartup.
+func (x *ExtensionStreamProperties) SetSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup *foundation.NSNumber) {
+	x.inner.SetSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup)
+}
+
+// SinkBufferUnderrunCount calls the underlying SinkBufferUnderrunCount.
+func (x *ExtensionStreamProperties) SinkBufferUnderrunCount() *foundation.NSNumber {
+	return x.inner.SinkBufferUnderrunCount()
+}
+
+// SetSinkBufferUnderrunCount calls the underlying SetSinkBufferUnderrunCount.
+func (x *ExtensionStreamProperties) SetSinkBufferUnderrunCount(sinkBufferUnderrunCount *foundation.NSNumber) {
+	x.inner.SetSinkBufferUnderrunCount(sinkBufferUnderrunCount)
+}
+
+// SinkEndOfData calls the underlying SinkEndOfData.
+func (x *ExtensionStreamProperties) SinkEndOfData() *foundation.NSNumber {
+	return x.inner.SinkEndOfData()
+}
+
+// SetSinkEndOfData calls the underlying SetSinkEndOfData.
+func (x *ExtensionStreamProperties) SetSinkEndOfData(sinkEndOfData *foundation.NSNumber) {
+	x.inner.SetSinkEndOfData(sinkEndOfData)
+}
+
+// PropertiesDictionary calls the underlying PropertiesDictionary.
+func (x *ExtensionStreamProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PropertiesDictionary()
+}
+
+// SetPropertiesDictionary calls the underlying SetPropertiesDictionary.
+func (x *ExtensionStreamProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPropertiesDictionary(propertiesDictionary)
+}
+
+// ExtensionStreamPropertiesable is the interface implemented by [ExtensionStreamProperties], for mocking and DI.
+type ExtensionStreamPropertiesable interface {
+	Unwrap() *raw.CMIOExtensionStreamProperties
+	WithActiveFormatIndex(activeFormatIndex *foundation.NSNumber) *ExtensionStreamProperties
+	WithFrameDuration(frameDuration *foundation.NSDictionary[objc.ID, objc.ID]) *ExtensionStreamProperties
+	WithMaxFrameDuration(maxFrameDuration *foundation.NSDictionary[objc.ID, objc.ID]) *ExtensionStreamProperties
+	WithSinkBufferQueueSize(sinkBufferQueueSize *foundation.NSNumber) *ExtensionStreamProperties
+	WithSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup *foundation.NSNumber) *ExtensionStreamProperties
+	WithSinkBufferUnderrunCount(sinkBufferUnderrunCount *foundation.NSNumber) *ExtensionStreamProperties
+	WithSinkEndOfData(sinkEndOfData *foundation.NSNumber) *ExtensionStreamProperties
+	WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionStreamProperties
+	SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString)
+	ActiveFormatIndex() *foundation.NSNumber
+	SetActiveFormatIndex(activeFormatIndex *foundation.NSNumber)
+	FrameDuration() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetFrameDuration(frameDuration *foundation.NSDictionary[objc.ID, objc.ID])
+	MaxFrameDuration() *foundation.NSDictionary[objc.ID, objc.ID]
+	SetMaxFrameDuration(maxFrameDuration *foundation.NSDictionary[objc.ID, objc.ID])
+	SinkBufferQueueSize() *foundation.NSNumber
+	SetSinkBufferQueueSize(sinkBufferQueueSize *foundation.NSNumber)
+	SinkBuffersRequiredForStartup() *foundation.NSNumber
+	SetSinkBuffersRequiredForStartup(sinkBuffersRequiredForStartup *foundation.NSNumber)
+	SinkBufferUnderrunCount() *foundation.NSNumber
+	SetSinkBufferUnderrunCount(sinkBufferUnderrunCount *foundation.NSNumber)
+	SinkEndOfData() *foundation.NSNumber
+	SetSinkEndOfData(sinkEndOfData *foundation.NSNumber)
+	PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ ExtensionStreamPropertiesable = (*ExtensionStreamProperties)(nil)
+

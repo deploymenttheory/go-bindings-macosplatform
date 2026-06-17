@@ -23,3 +23,10 @@ func NewMTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent() *MTRTimeSyn
 	return &MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent{inner: raw.MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventFromID(_id)}
 }
 
+// MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventable is the interface implemented by [MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent], for mocking and DI.
+type MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventable interface {
+	Unwrap() *raw.MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent
+}
+
+var _ MTRTimeSynchronizationClusterMissingTrustedTimeSourceEventable = (*MTRTimeSynchronizationClusterMissingTrustedTimeSourceEvent)(nil)
+

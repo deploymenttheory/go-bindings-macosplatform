@@ -7,6 +7,7 @@ package foundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,31 +33,78 @@ func NewOrthographyWithCoder(coder *raw.NSCoder) *Orthography {
 	return &Orthography{inner: raw.NSOrthographyFromID(_id)}
 }
 
+// DominantScript calls the underlying DominantScript.
+func (x *Orthography) DominantScript() *String {
+	_r := x.inner.DominantScript()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// LanguageMap calls the underlying LanguageMap.
+func (x *Orthography) LanguageMap() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.LanguageMap()
+}
+
+// LanguagesForScript calls the underlying LanguagesForScript.
+func (x *Orthography) LanguagesForScript(script string) *raw.NSArray[*raw.NSString] {
+	return x.inner.LanguagesForScript(foundation.NSStringStringWithUTF8String(script))
+}
+
+// DominantLanguageForScript calls the underlying DominantLanguageForScript.
+func (x *Orthography) DominantLanguageForScript(script string) *String {
+	_r := x.inner.DominantLanguageForScript(foundation.NSStringStringWithUTF8String(script))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DominantLanguage calls the underlying DominantLanguage.
+func (x *Orthography) DominantLanguage() *String {
+	_r := x.inner.DominantLanguage()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 // AllScripts returns the collection as a Go slice.
-func (x *Orthography) AllScripts() []*raw.NSString {
+func (x *Orthography) AllScripts() []string {
 	arr := x.inner.AllScripts()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // AllLanguages returns the collection as a Go slice.
-func (x *Orthography) AllLanguages() []*raw.NSString {
+func (x *Orthography) AllLanguages() []string {
 	arr := x.inner.AllLanguages()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 func (x *Orthography) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Orthographyable is the interface implemented by [Orthography], for mocking and DI.
+type Orthographyable interface {
+	Unwrap() *raw.NSOrthography
+	DominantScript() *String
+	LanguageMap() *raw.NSDictionary[*raw.NSString, objc.ID]
+	LanguagesForScript(script string) *raw.NSArray[*raw.NSString]
+	DominantLanguageForScript(script string) *String
+	DominantLanguage() *String
+	AllScripts() []string
+	AllLanguages() []string
+}
+
+var _ Orthographyable = (*Orthography)(nil)
 

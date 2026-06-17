@@ -27,3 +27,10 @@ func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(s
 
 func (x *NormalMapTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
+// NormalMapTextureable is the interface implemented by [NormalMapTexture], for mocking and DI.
+type NormalMapTextureable interface {
+	Unwrap() *raw.MDLNormalMapTexture
+}
+
+var _ NormalMapTextureable = (*NormalMapTexture)(nil)
+

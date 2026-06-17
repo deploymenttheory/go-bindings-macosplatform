@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,5 +49,72 @@ func (x *MTRMediaInputClusterInputInfoStruct) WithDescriptionString(descriptionS
 	return x
 }
 
+// Index calls the underlying Index.
+func (x *MTRMediaInputClusterInputInfoStruct) Index() *foundation.NSNumber {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *MTRMediaInputClusterInputInfoStruct) SetIndex(index *foundation.NSNumber) {
+	x.inner.SetIndex(index)
+}
+
+// InputType calls the underlying InputType.
+func (x *MTRMediaInputClusterInputInfoStruct) InputType() *foundation.NSNumber {
+	return x.inner.InputType()
+}
+
+// SetInputType calls the underlying SetInputType.
+func (x *MTRMediaInputClusterInputInfoStruct) SetInputType(inputType *foundation.NSNumber) {
+	x.inner.SetInputType(inputType)
+}
+
+// Name calls the underlying Name.
+func (x *MTRMediaInputClusterInputInfoStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRMediaInputClusterInputInfoStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// DescriptionString calls the underlying DescriptionString.
+func (x *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
+	_r := x.inner.DescriptionString()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDescriptionString calls the underlying SetDescriptionString.
+func (x *MTRMediaInputClusterInputInfoStruct) SetDescriptionString(descriptionString string) {
+	x.inner.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
+}
+
 func (x *MTRMediaInputClusterInputInfoStruct) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct { return x.inner }
+
+// MTRMediaInputClusterInputInfoStructable is the interface implemented by [MTRMediaInputClusterInputInfoStruct], for mocking and DI.
+type MTRMediaInputClusterInputInfoStructable interface {
+	Unwrap() *raw.MTRMediaInputClusterInputInfoStruct
+	WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterInputInfoStruct
+	WithInputType(inputType *foundation.NSNumber) *MTRMediaInputClusterInputInfoStruct
+	WithName(name string) *MTRMediaInputClusterInputInfoStruct
+	WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfoStruct
+	Index() *foundation.NSNumber
+	SetIndex(index *foundation.NSNumber)
+	InputType() *foundation.NSNumber
+	SetInputType(inputType *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	DescriptionString() string
+	SetDescriptionString(descriptionString string)
+}
+
+var _ MTRMediaInputClusterInputInfoStructable = (*MTRMediaInputClusterInputInfoStruct)(nil)
 

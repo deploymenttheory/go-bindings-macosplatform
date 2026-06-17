@@ -23,5 +23,70 @@ func NewGroupNormalizationLayer() *GroupNormalizationLayer {
 	return &GroupNormalizationLayer{inner: raw.MLCGroupNormalizationLayerFromID(_id)}
 }
 
+// FeatureChannelCount calls the underlying FeatureChannelCount.
+func (x *GroupNormalizationLayer) FeatureChannelCount() uint {
+	return x.inner.FeatureChannelCount()
+}
+
+// GroupCount calls the underlying GroupCount.
+func (x *GroupNormalizationLayer) GroupCount() uint {
+	return x.inner.GroupCount()
+}
+
+// Beta calls the underlying Beta.
+func (x *GroupNormalizationLayer) Beta() *Tensor {
+	_r := x.inner.Beta()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// Gamma calls the underlying Gamma.
+func (x *GroupNormalizationLayer) Gamma() *Tensor {
+	_r := x.inner.Gamma()
+	if _r == nil {
+		return nil
+	}
+	return &Tensor{inner: _r}
+}
+
+// BetaParameter calls the underlying BetaParameter.
+func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := x.inner.BetaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// GammaParameter calls the underlying GammaParameter.
+func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := x.inner.GammaParameter()
+	if _r == nil {
+		return nil
+	}
+	return &TensorParameter{inner: _r}
+}
+
+// VarianceEpsilon calls the underlying VarianceEpsilon.
+func (x *GroupNormalizationLayer) VarianceEpsilon() float32 {
+	return x.inner.VarianceEpsilon()
+}
+
 func (x *GroupNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// GroupNormalizationLayerable is the interface implemented by [GroupNormalizationLayer], for mocking and DI.
+type GroupNormalizationLayerable interface {
+	Unwrap() *raw.MLCGroupNormalizationLayer
+	FeatureChannelCount() uint
+	GroupCount() uint
+	Beta() *Tensor
+	Gamma() *Tensor
+	BetaParameter() *TensorParameter
+	GammaParameter() *TensorParameter
+	VarianceEpsilon() float32
+}
+
+var _ GroupNormalizationLayerable = (*GroupNormalizationLayer)(nil)
 

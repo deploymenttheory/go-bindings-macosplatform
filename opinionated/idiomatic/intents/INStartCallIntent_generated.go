@@ -7,6 +7,7 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,18 +26,62 @@ func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestina
 	return &StartCallIntent{inner: raw.INStartCallIntentFromID(_id)}
 }
 
+// CallRecordFilter calls the underlying CallRecordFilter.
+func (x *StartCallIntent) CallRecordFilter() *CallRecordFilter {
+	_r := x.inner.CallRecordFilter()
+	if _r == nil {
+		return nil
+	}
+	return &CallRecordFilter{inner: _r}
+}
+
+// CallRecordToCallBack calls the underlying CallRecordToCallBack.
+func (x *StartCallIntent) CallRecordToCallBack() *CallRecord {
+	_r := x.inner.CallRecordToCallBack()
+	if _r == nil {
+		return nil
+	}
+	return &CallRecord{inner: _r}
+}
+
+// AudioRoute calls the underlying AudioRoute.
+func (x *StartCallIntent) AudioRoute() raw.INCallAudioRoute {
+	return x.inner.AudioRoute()
+}
+
+// DestinationType calls the underlying DestinationType.
+func (x *StartCallIntent) DestinationType() raw.INCallDestinationType {
+	return x.inner.DestinationType()
+}
+
 // Contacts returns the collection as a Go slice.
 func (x *StartCallIntent) Contacts() []*raw.INPerson {
 	arr := x.inner.Contacts()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.INPerson, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.INPerson {
+		return raw.INPersonFromID(purego.Retain(_id))
+	})
+}
+
+// CallCapability calls the underlying CallCapability.
+func (x *StartCallIntent) CallCapability() raw.INCallCapability {
+	return x.inner.CallCapability()
 }
 
 func (x *StartCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
+
+// StartCallIntentable is the interface implemented by [StartCallIntent], for mocking and DI.
+type StartCallIntentable interface {
+	Unwrap() *raw.INStartCallIntent
+	CallRecordFilter() *CallRecordFilter
+	CallRecordToCallBack() *CallRecord
+	AudioRoute() raw.INCallAudioRoute
+	DestinationType() raw.INCallDestinationType
+	Contacts() []*raw.INPerson
+	CallCapability() raw.INCallCapability
+}
+
+var _ StartCallIntentable = (*StartCallIntent)(nil)
 

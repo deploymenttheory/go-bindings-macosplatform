@@ -98,7 +98,163 @@ func (x *NNBinaryArithmeticNode) WithMaximumValue(maximumValue float32) *NNBinar
 	return x
 }
 
+// GradientClass calls the underlying GradientClass.
+func (x *NNBinaryArithmeticNode) GradientClass() objc.Class {
+	return x.inner.GradientClass()
+}
+
+// PrimaryScale calls the underlying PrimaryScale.
+func (x *NNBinaryArithmeticNode) PrimaryScale() float32 {
+	return x.inner.PrimaryScale()
+}
+
+// SetPrimaryScale calls the underlying SetPrimaryScale.
+func (x *NNBinaryArithmeticNode) SetPrimaryScale(primaryScale float32) {
+	x.inner.SetPrimaryScale(primaryScale)
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *NNBinaryArithmeticNode) SecondaryScale() float32 {
+	return x.inner.SecondaryScale()
+}
+
+// SetSecondaryScale calls the underlying SetSecondaryScale.
+func (x *NNBinaryArithmeticNode) SetSecondaryScale(secondaryScale float32) {
+	x.inner.SetSecondaryScale(secondaryScale)
+}
+
+// Bias calls the underlying Bias.
+func (x *NNBinaryArithmeticNode) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *NNBinaryArithmeticNode) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
+// PrimaryStrideInPixelsX calls the underlying PrimaryStrideInPixelsX.
+func (x *NNBinaryArithmeticNode) PrimaryStrideInPixelsX() uint {
+	return x.inner.PrimaryStrideInPixelsX()
+}
+
+// SetPrimaryStrideInPixelsX calls the underlying SetPrimaryStrideInPixelsX.
+func (x *NNBinaryArithmeticNode) SetPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) {
+	x.inner.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+}
+
+// PrimaryStrideInPixelsY calls the underlying PrimaryStrideInPixelsY.
+func (x *NNBinaryArithmeticNode) PrimaryStrideInPixelsY() uint {
+	return x.inner.PrimaryStrideInPixelsY()
+}
+
+// SetPrimaryStrideInPixelsY calls the underlying SetPrimaryStrideInPixelsY.
+func (x *NNBinaryArithmeticNode) SetPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) {
+	x.inner.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+}
+
+// PrimaryStrideInFeatureChannels calls the underlying PrimaryStrideInFeatureChannels.
+func (x *NNBinaryArithmeticNode) PrimaryStrideInFeatureChannels() uint {
+	return x.inner.PrimaryStrideInFeatureChannels()
+}
+
+// SetPrimaryStrideInFeatureChannels calls the underlying SetPrimaryStrideInFeatureChannels.
+func (x *NNBinaryArithmeticNode) SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) {
+	x.inner.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+}
+
+// SecondaryStrideInPixelsX calls the underlying SecondaryStrideInPixelsX.
+func (x *NNBinaryArithmeticNode) SecondaryStrideInPixelsX() uint {
+	return x.inner.SecondaryStrideInPixelsX()
+}
+
+// SetSecondaryStrideInPixelsX calls the underlying SetSecondaryStrideInPixelsX.
+func (x *NNBinaryArithmeticNode) SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) {
+	x.inner.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+}
+
+// SecondaryStrideInPixelsY calls the underlying SecondaryStrideInPixelsY.
+func (x *NNBinaryArithmeticNode) SecondaryStrideInPixelsY() uint {
+	return x.inner.SecondaryStrideInPixelsY()
+}
+
+// SetSecondaryStrideInPixelsY calls the underlying SetSecondaryStrideInPixelsY.
+func (x *NNBinaryArithmeticNode) SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) {
+	x.inner.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+}
+
+// SecondaryStrideInFeatureChannels calls the underlying SecondaryStrideInFeatureChannels.
+func (x *NNBinaryArithmeticNode) SecondaryStrideInFeatureChannels() uint {
+	return x.inner.SecondaryStrideInFeatureChannels()
+}
+
+// SetSecondaryStrideInFeatureChannels calls the underlying SetSecondaryStrideInFeatureChannels.
+func (x *NNBinaryArithmeticNode) SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) {
+	x.inner.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *NNBinaryArithmeticNode) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// SetMinimumValue calls the underlying SetMinimumValue.
+func (x *NNBinaryArithmeticNode) SetMinimumValue(minimumValue float32) {
+	x.inner.SetMinimumValue(minimumValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *NNBinaryArithmeticNode) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// SetMaximumValue calls the underlying SetMaximumValue.
+func (x *NNBinaryArithmeticNode) SetMaximumValue(maximumValue float32) {
+	x.inner.SetMaximumValue(maximumValue)
+}
+
 func (x *NNBinaryArithmeticNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode { return x.inner }
 
 func (x *NNBinaryArithmeticNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// NNBinaryArithmeticNodeable is the interface implemented by [NNBinaryArithmeticNode], for mocking and DI.
+type NNBinaryArithmeticNodeable interface {
+	Unwrap() *raw.MPSNNBinaryArithmeticNode
+	WithPrimaryScale(primaryScale float32) *NNBinaryArithmeticNode
+	WithSecondaryScale(secondaryScale float32) *NNBinaryArithmeticNode
+	WithBias(bias float32) *NNBinaryArithmeticNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNBinaryArithmeticNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNBinaryArithmeticNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNBinaryArithmeticNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNBinaryArithmeticNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNBinaryArithmeticNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNBinaryArithmeticNode
+	WithMinimumValue(minimumValue float32) *NNBinaryArithmeticNode
+	WithMaximumValue(maximumValue float32) *NNBinaryArithmeticNode
+	GradientClass() objc.Class
+	PrimaryScale() float32
+	SetPrimaryScale(primaryScale float32)
+	SecondaryScale() float32
+	SetSecondaryScale(secondaryScale float32)
+	Bias() float32
+	SetBias(bias float32)
+	PrimaryStrideInPixelsX() uint
+	SetPrimaryStrideInPixelsX(primaryStrideInPixelsX uint)
+	PrimaryStrideInPixelsY() uint
+	SetPrimaryStrideInPixelsY(primaryStrideInPixelsY uint)
+	PrimaryStrideInFeatureChannels() uint
+	SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint)
+	SecondaryStrideInPixelsX() uint
+	SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint)
+	SecondaryStrideInPixelsY() uint
+	SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint)
+	SecondaryStrideInFeatureChannels() uint
+	SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint)
+	MinimumValue() float32
+	SetMinimumValue(minimumValue float32)
+	MaximumValue() float32
+	SetMaximumValue(maximumValue float32)
+}
+
+var _ NNBinaryArithmeticNodeable = (*NNBinaryArithmeticNode)(nil)
 

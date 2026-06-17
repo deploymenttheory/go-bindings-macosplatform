@@ -26,3 +26,10 @@ func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *raw.VZ
 
 func (x *NVMExpressControllerDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration { return &x.inner.VZStorageDeviceConfiguration }
 
+// NVMExpressControllerDeviceConfigurationable is the interface implemented by [NVMExpressControllerDeviceConfiguration], for mocking and DI.
+type NVMExpressControllerDeviceConfigurationable interface {
+	Unwrap() *raw.VZNVMExpressControllerDeviceConfiguration
+}
+
+var _ NVMExpressControllerDeviceConfigurationable = (*NVMExpressControllerDeviceConfiguration)(nil)
+

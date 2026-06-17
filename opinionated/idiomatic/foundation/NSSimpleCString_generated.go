@@ -29,3 +29,10 @@ func (x *SimpleCString) asString() *raw.NSString { return &x.inner.NSString }
 
 func (x *SimpleCString) asObject() *raw.NSObject { return &x.inner.NSString.NSObject }
 
+// SimpleCStringable is the interface implemented by [SimpleCString], for mocking and DI.
+type SimpleCStringable interface {
+	Unwrap() *raw.NSSimpleCString
+}
+
+var _ SimpleCStringable = (*SimpleCString)(nil)
+

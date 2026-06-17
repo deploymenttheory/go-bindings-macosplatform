@@ -23,3 +23,20 @@ func NewAuthorizationPasswordProvider() *AuthorizationPasswordProvider {
 	return &AuthorizationPasswordProvider{inner: raw.ASAuthorizationPasswordProviderFromID(_id)}
 }
 
+// CreateRequest calls the underlying CreateRequest.
+func (x *AuthorizationPasswordProvider) CreateRequest() *AuthorizationPasswordRequest {
+	_r := x.inner.CreateRequest()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPasswordRequest{inner: _r}
+}
+
+// AuthorizationPasswordProviderable is the interface implemented by [AuthorizationPasswordProvider], for mocking and DI.
+type AuthorizationPasswordProviderable interface {
+	Unwrap() *raw.ASAuthorizationPasswordProvider
+	CreateRequest() *AuthorizationPasswordRequest
+}
+
+var _ AuthorizationPasswordProviderable = (*AuthorizationPasswordProvider)(nil)
+

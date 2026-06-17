@@ -7,7 +7,10 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Matrix wraps [raw.NSMatrix] with a fluent Go API.
@@ -141,17 +144,299 @@ func (x *Matrix) WithKeyCell(keyCell CellProvider) *Matrix {
 	return x
 }
 
+// MakeCellAtRowColumn calls the underlying MakeCellAtRowColumn.
+func (x *Matrix) MakeCellAtRowColumn(row int, col int) *Cell {
+	_r := x.inner.MakeCellAtRowColumn(row, col)
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SendActionToForAllCells calls the underlying SendActionToForAllCells.
+func (x *Matrix) SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool) {
+	x.inner.SendActionToForAllCells(selector, object, flag)
+}
+
+// SortUsingSelector calls the underlying SortUsingSelector.
+func (x *Matrix) SortUsingSelector(comparator objc.SEL) {
+	x.inner.SortUsingSelector(comparator)
+}
+
+// SortUsingFunctionContext calls the underlying SortUsingFunctionContext.
+func (x *Matrix) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
+	x.inner.SortUsingFunctionContext(compare, context_)
+}
+
+// SetSelectionFromToAnchorHighlight calls the underlying SetSelectionFromToAnchorHighlight.
+func (x *Matrix) SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool) {
+	x.inner.SetSelectionFromToAnchorHighlight(startPos, endPos, anchorPos, lit)
+}
+
+// DeselectSelectedCell calls the underlying DeselectSelectedCell.
+func (x *Matrix) DeselectSelectedCell() {
+	x.inner.DeselectSelectedCell()
+}
+
+// DeselectAllCells calls the underlying DeselectAllCells.
+func (x *Matrix) DeselectAllCells() {
+	x.inner.DeselectAllCells()
+}
+
+// SelectCellAtRowColumn calls the underlying SelectCellAtRowColumn.
+func (x *Matrix) SelectCellAtRowColumn(row int, col int) {
+	x.inner.SelectCellAtRowColumn(row, col)
+}
+
+// SelectAll calls the underlying SelectAll.
+func (x *Matrix) SelectAll(sender objc.ID) {
+	x.inner.SelectAll(sender)
+}
+
+// SelectCellWithTag calls the underlying SelectCellWithTag.
+func (x *Matrix) SelectCellWithTag(tag int) bool {
+	return x.inner.SelectCellWithTag(tag)
+}
+
+// SetScrollable calls the underlying SetScrollable.
+func (x *Matrix) SetScrollable(flag bool) {
+	x.inner.SetScrollable(flag)
+}
+
+// SetStateAtRowColumn calls the underlying SetStateAtRowColumn.
+func (x *Matrix) SetStateAtRowColumn(value int, row int, col int) {
+	x.inner.SetStateAtRowColumn(value, row, col)
+}
+
+// GetNumberOfRowsColumns calls the underlying GetNumberOfRowsColumns.
+func (x *Matrix) GetNumberOfRowsColumns(rowCount *int64, colCount *int64) {
+	x.inner.GetNumberOfRowsColumns(rowCount, colCount)
+}
+
+// CellAtRowColumn calls the underlying CellAtRowColumn.
+func (x *Matrix) CellAtRowColumn(row int, col int) *Cell {
+	_r := x.inner.CellAtRowColumn(row, col)
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// CellFrameAtRowColumn calls the underlying CellFrameAtRowColumn.
+func (x *Matrix) CellFrameAtRowColumn(row int, col int) corefoundation.CGRect {
+	return x.inner.CellFrameAtRowColumn(row, col)
+}
+
+// GetRowColumnOfCell calls the underlying GetRowColumnOfCell.
+func (x *Matrix) GetRowColumnOfCell(row *int64, col *int64, cell *raw.NSCell) bool {
+	return x.inner.GetRowColumnOfCell(row, col, cell)
+}
+
+// GetRowColumnForPoint calls the underlying GetRowColumnForPoint.
+func (x *Matrix) GetRowColumnForPoint(row *int64, col *int64, point corefoundation.CGPoint) bool {
+	return x.inner.GetRowColumnForPoint(row, col, point)
+}
+
+// RenewRowsColumns calls the underlying RenewRowsColumns.
+func (x *Matrix) RenewRowsColumns(newRows int, newCols int) {
+	x.inner.RenewRowsColumns(newRows, newCols)
+}
+
+// PutCellAtRowColumn calls the underlying PutCellAtRowColumn.
+func (x *Matrix) PutCellAtRowColumn(newCell *raw.NSCell, row int, col int) {
+	x.inner.PutCellAtRowColumn(newCell, row, col)
+}
+
+// AddRow calls the underlying AddRow.
+func (x *Matrix) AddRow() {
+	x.inner.AddRow()
+}
+
+// AddRowWithCells calls the underlying AddRowWithCells.
+func (x *Matrix) AddRowWithCells(newCells *foundation.NSArray[*raw.NSCell]) {
+	x.inner.AddRowWithCells(newCells)
+}
+
+// InsertRow calls the underlying InsertRow.
+func (x *Matrix) InsertRow(row int) {
+	x.inner.InsertRow(row)
+}
+
+// InsertRowWithCells calls the underlying InsertRowWithCells.
+func (x *Matrix) InsertRowWithCells(row int, newCells *foundation.NSArray[*raw.NSCell]) {
+	x.inner.InsertRowWithCells(row, newCells)
+}
+
+// RemoveRow calls the underlying RemoveRow.
+func (x *Matrix) RemoveRow(row int) {
+	x.inner.RemoveRow(row)
+}
+
+// AddColumn calls the underlying AddColumn.
+func (x *Matrix) AddColumn() {
+	x.inner.AddColumn()
+}
+
+// AddColumnWithCells calls the underlying AddColumnWithCells.
+func (x *Matrix) AddColumnWithCells(newCells *foundation.NSArray[*raw.NSCell]) {
+	x.inner.AddColumnWithCells(newCells)
+}
+
+// InsertColumn calls the underlying InsertColumn.
+func (x *Matrix) InsertColumn(column int) {
+	x.inner.InsertColumn(column)
+}
+
+// InsertColumnWithCells calls the underlying InsertColumnWithCells.
+func (x *Matrix) InsertColumnWithCells(column int, newCells *foundation.NSArray[*raw.NSCell]) {
+	x.inner.InsertColumnWithCells(column, newCells)
+}
+
+// RemoveColumn calls the underlying RemoveColumn.
+func (x *Matrix) RemoveColumn(col int) {
+	x.inner.RemoveColumn(col)
+}
+
+// CellWithTag calls the underlying CellWithTag.
+func (x *Matrix) CellWithTag(tag int) *Cell {
+	_r := x.inner.CellWithTag(tag)
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SizeToCells calls the underlying SizeToCells.
+func (x *Matrix) SizeToCells() {
+	x.inner.SizeToCells()
+}
+
+// SetValidateSize calls the underlying SetValidateSize.
+func (x *Matrix) SetValidateSize(flag bool) {
+	x.inner.SetValidateSize(flag)
+}
+
+// DrawCellAtRowColumn calls the underlying DrawCellAtRowColumn.
+func (x *Matrix) DrawCellAtRowColumn(row int, col int) {
+	x.inner.DrawCellAtRowColumn(row, col)
+}
+
+// HighlightCellAtRowColumn calls the underlying HighlightCellAtRowColumn.
+func (x *Matrix) HighlightCellAtRowColumn(flag bool, row int, col int) {
+	x.inner.HighlightCellAtRowColumn(flag, row, col)
+}
+
+// ScrollCellToVisibleAtRowColumn calls the underlying ScrollCellToVisibleAtRowColumn.
+func (x *Matrix) ScrollCellToVisibleAtRowColumn(row int, col int) {
+	x.inner.ScrollCellToVisibleAtRowColumn(row, col)
+}
+
+// SendAction calls the underlying SendAction.
+func (x *Matrix) SendAction() bool {
+	return x.inner.SendAction()
+}
+
+// SendDoubleAction calls the underlying SendDoubleAction.
+func (x *Matrix) SendDoubleAction() {
+	x.inner.SendDoubleAction()
+}
+
+// TextShouldBeginEditing calls the underlying TextShouldBeginEditing.
+func (x *Matrix) TextShouldBeginEditing(textObject *raw.NSText) bool {
+	return x.inner.TextShouldBeginEditing(textObject)
+}
+
+// TextShouldEndEditing calls the underlying TextShouldEndEditing.
+func (x *Matrix) TextShouldEndEditing(textObject *raw.NSText) bool {
+	return x.inner.TextShouldEndEditing(textObject)
+}
+
+// TextDidBeginEditing calls the underlying TextDidBeginEditing.
+func (x *Matrix) TextDidBeginEditing(notification *foundation.NSNotification) {
+	x.inner.TextDidBeginEditing(notification)
+}
+
+// TextDidEndEditing calls the underlying TextDidEndEditing.
+func (x *Matrix) TextDidEndEditing(notification *foundation.NSNotification) {
+	x.inner.TextDidEndEditing(notification)
+}
+
+// TextDidChange calls the underlying TextDidChange.
+func (x *Matrix) TextDidChange(notification *foundation.NSNotification) {
+	x.inner.TextDidChange(notification)
+}
+
+// SelectText calls the underlying SelectText.
+func (x *Matrix) SelectText(sender objc.ID) {
+	x.inner.SelectText(sender)
+}
+
+// SelectTextAtRowColumn calls the underlying SelectTextAtRowColumn.
+func (x *Matrix) SelectTextAtRowColumn(row int, col int) *Cell {
+	_r := x.inner.SelectTextAtRowColumn(row, col)
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SetToolTipForCell calls the underlying SetToolTipForCell.
+func (x *Matrix) SetToolTipForCell(toolTipString string, cell *raw.NSCell) {
+	x.inner.SetToolTipForCell(foundation.NSStringStringWithUTF8String(toolTipString), cell)
+}
+
+// ToolTipForCell calls the underlying ToolTipForCell.
+func (x *Matrix) ToolTipForCell(cell *raw.NSCell) string {
+	_r := x.inner.ToolTipForCell(cell)
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Prototype calls the underlying Prototype.
+func (x *Matrix) Prototype() *Cell {
+	_r := x.inner.Prototype()
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SetPrototype calls the underlying SetPrototype.
+func (x *Matrix) SetPrototype(prototype *raw.NSCell) {
+	x.inner.SetPrototype(prototype)
+}
+
+// Mode calls the underlying Mode.
+func (x *Matrix) Mode() raw.NSMatrixMode {
+	return x.inner.Mode()
+}
+
+// SetMode calls the underlying SetMode.
+func (x *Matrix) SetMode(mode raw.NSMatrixMode) {
+	x.inner.SetMode(mode)
+}
+
+// AllowsEmptySelection calls the underlying AllowsEmptySelection.
+func (x *Matrix) AllowsEmptySelection() bool {
+	return x.inner.AllowsEmptySelection()
+}
+
+// SetAllowsEmptySelection calls the underlying SetAllowsEmptySelection.
+func (x *Matrix) SetAllowsEmptySelection(allowsEmptySelection bool) {
+	x.inner.SetAllowsEmptySelection(allowsEmptySelection)
+}
+
 // Cells returns the collection as a Go slice.
 func (x *Matrix) Cells() []*raw.NSCell {
 	arr := x.inner.Cells()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCell, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCell {
+		return raw.NSCellFromID(purego.Retain(_id))
+	})
 }
 
 // SelectedCells returns the collection as a Go slice.
@@ -160,11 +445,186 @@ func (x *Matrix) SelectedCells() []*raw.NSCell {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCell, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCell {
+		return raw.NSCellFromID(purego.Retain(_id))
+	})
+}
+
+// SelectedRow calls the underlying SelectedRow.
+func (x *Matrix) SelectedRow() int {
+	return x.inner.SelectedRow()
+}
+
+// SelectedColumn calls the underlying SelectedColumn.
+func (x *Matrix) SelectedColumn() int {
+	return x.inner.SelectedColumn()
+}
+
+// IsSelectionByRect calls the underlying IsSelectionByRect.
+func (x *Matrix) IsSelectionByRect() bool {
+	return x.inner.IsSelectionByRect()
+}
+
+// SetSelectionByRect calls the underlying SetSelectionByRect.
+func (x *Matrix) SetSelectionByRect(selectionByRect bool) {
+	x.inner.SetSelectionByRect(selectionByRect)
+}
+
+// CellSize calls the underlying CellSize.
+func (x *Matrix) CellSize() corefoundation.CGSize {
+	return x.inner.CellSize()
+}
+
+// SetCellSize calls the underlying SetCellSize.
+func (x *Matrix) SetCellSize(cellSize corefoundation.CGSize) {
+	x.inner.SetCellSize(cellSize)
+}
+
+// IntercellSpacing calls the underlying IntercellSpacing.
+func (x *Matrix) IntercellSpacing() corefoundation.CGSize {
+	return x.inner.IntercellSpacing()
+}
+
+// SetIntercellSpacing calls the underlying SetIntercellSpacing.
+func (x *Matrix) SetIntercellSpacing(intercellSpacing corefoundation.CGSize) {
+	x.inner.SetIntercellSpacing(intercellSpacing)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *Matrix) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *Matrix) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// CellBackgroundColor calls the underlying CellBackgroundColor.
+func (x *Matrix) CellBackgroundColor() *Color {
+	_r := x.inner.CellBackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetCellBackgroundColor calls the underlying SetCellBackgroundColor.
+func (x *Matrix) SetCellBackgroundColor(cellBackgroundColor *raw.NSColor) {
+	x.inner.SetCellBackgroundColor(cellBackgroundColor)
+}
+
+// DrawsCellBackground calls the underlying DrawsCellBackground.
+func (x *Matrix) DrawsCellBackground() bool {
+	return x.inner.DrawsCellBackground()
+}
+
+// SetDrawsCellBackground calls the underlying SetDrawsCellBackground.
+func (x *Matrix) SetDrawsCellBackground(drawsCellBackground bool) {
+	x.inner.SetDrawsCellBackground(drawsCellBackground)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *Matrix) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *Matrix) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// NumberOfRows calls the underlying NumberOfRows.
+func (x *Matrix) NumberOfRows() int {
+	return x.inner.NumberOfRows()
+}
+
+// NumberOfColumns calls the underlying NumberOfColumns.
+func (x *Matrix) NumberOfColumns() int {
+	return x.inner.NumberOfColumns()
+}
+
+// DoubleAction calls the underlying DoubleAction.
+func (x *Matrix) DoubleAction() objc.SEL {
+	return x.inner.DoubleAction()
+}
+
+// SetDoubleAction calls the underlying SetDoubleAction.
+func (x *Matrix) SetDoubleAction(doubleAction objc.SEL) {
+	x.inner.SetDoubleAction(doubleAction)
+}
+
+// AutosizesCells calls the underlying AutosizesCells.
+func (x *Matrix) AutosizesCells() bool {
+	return x.inner.AutosizesCells()
+}
+
+// SetAutosizesCells calls the underlying SetAutosizesCells.
+func (x *Matrix) SetAutosizesCells(autosizesCells bool) {
+	x.inner.SetAutosizesCells(autosizesCells)
+}
+
+// IsAutoscroll calls the underlying IsAutoscroll.
+func (x *Matrix) IsAutoscroll() bool {
+	return x.inner.IsAutoscroll()
+}
+
+// SetAutoscroll calls the underlying SetAutoscroll.
+func (x *Matrix) SetAutoscroll(autoscroll bool) {
+	x.inner.SetAutoscroll(autoscroll)
+}
+
+// MouseDownFlags calls the underlying MouseDownFlags.
+func (x *Matrix) MouseDownFlags() int {
+	return x.inner.MouseDownFlags()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Matrix) Delegate() raw.NSMatrixDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Matrix) SetDelegate(delegate raw.NSMatrixDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// AutorecalculatesCellSize calls the underlying AutorecalculatesCellSize.
+func (x *Matrix) AutorecalculatesCellSize() bool {
+	return x.inner.AutorecalculatesCellSize()
+}
+
+// SetAutorecalculatesCellSize calls the underlying SetAutorecalculatesCellSize.
+func (x *Matrix) SetAutorecalculatesCellSize(autorecalculatesCellSize bool) {
+	x.inner.SetAutorecalculatesCellSize(autorecalculatesCellSize)
+}
+
+// TabKeyTraversesCells calls the underlying TabKeyTraversesCells.
+func (x *Matrix) TabKeyTraversesCells() bool {
+	return x.inner.TabKeyTraversesCells()
+}
+
+// SetTabKeyTraversesCells calls the underlying SetTabKeyTraversesCells.
+func (x *Matrix) SetTabKeyTraversesCells(tabKeyTraversesCells bool) {
+	x.inner.SetTabKeyTraversesCells(tabKeyTraversesCells)
+}
+
+// KeyCell calls the underlying KeyCell.
+func (x *Matrix) KeyCell() *Cell {
+	_r := x.inner.KeyCell()
+	if _r == nil {
+		return nil
+	}
+	return &Cell{inner: _r}
+}
+
+// SetKeyCell calls the underlying SetKeyCell.
+func (x *Matrix) SetKeyCell(keyCell *raw.NSCell) {
+	x.inner.SetKeyCell(keyCell)
 }
 
 func (x *Matrix) asMatrix() *raw.NSMatrix { return x.inner }
@@ -174,4 +634,115 @@ func (x *Matrix) asControl() *raw.NSControl { return &x.inner.NSControl }
 func (x *Matrix) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *Matrix) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// Matrixable is the interface implemented by [Matrix], for mocking and DI.
+type Matrixable interface {
+	Unwrap() *raw.NSMatrix
+	WithPrototype(prototype CellProvider) *Matrix
+	WithMode(mode raw.NSMatrixMode) *Matrix
+	WithAllowsEmptySelection(allowsEmptySelection bool) *Matrix
+	WithSelectionByRect(selectionByRect bool) *Matrix
+	WithCellSize(cellSize corefoundation.CGSize) *Matrix
+	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *Matrix
+	WithBackgroundColor(backgroundColor *raw.NSColor) *Matrix
+	WithCellBackgroundColor(cellBackgroundColor *raw.NSColor) *Matrix
+	WithDrawsCellBackground(drawsCellBackground bool) *Matrix
+	WithDrawsBackground(drawsBackground bool) *Matrix
+	WithDoubleAction(doubleAction objc.SEL) *Matrix
+	WithAutosizesCells(autosizesCells bool) *Matrix
+	WithAutoscroll(autoscroll bool) *Matrix
+	WithDelegate(delegate raw.NSMatrixDelegate) *Matrix
+	WithAutorecalculatesCellSize(autorecalculatesCellSize bool) *Matrix
+	WithTabKeyTraversesCells(tabKeyTraversesCells bool) *Matrix
+	WithKeyCell(keyCell CellProvider) *Matrix
+	MakeCellAtRowColumn(row int, col int) *Cell
+	SendActionToForAllCells(selector objc.SEL, object objc.ID, flag bool)
+	SortUsingSelector(comparator objc.SEL)
+	SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer)
+	SetSelectionFromToAnchorHighlight(startPos int, endPos int, anchorPos int, lit bool)
+	DeselectSelectedCell()
+	DeselectAllCells()
+	SelectCellAtRowColumn(row int, col int)
+	SelectAll(sender objc.ID)
+	SelectCellWithTag(tag int) bool
+	SetScrollable(flag bool)
+	SetStateAtRowColumn(value int, row int, col int)
+	GetNumberOfRowsColumns(rowCount *int64, colCount *int64)
+	CellAtRowColumn(row int, col int) *Cell
+	CellFrameAtRowColumn(row int, col int) corefoundation.CGRect
+	GetRowColumnOfCell(row *int64, col *int64, cell *raw.NSCell) bool
+	GetRowColumnForPoint(row *int64, col *int64, point corefoundation.CGPoint) bool
+	RenewRowsColumns(newRows int, newCols int)
+	PutCellAtRowColumn(newCell *raw.NSCell, row int, col int)
+	AddRow()
+	AddRowWithCells(newCells *foundation.NSArray[*raw.NSCell])
+	InsertRow(row int)
+	InsertRowWithCells(row int, newCells *foundation.NSArray[*raw.NSCell])
+	RemoveRow(row int)
+	AddColumn()
+	AddColumnWithCells(newCells *foundation.NSArray[*raw.NSCell])
+	InsertColumn(column int)
+	InsertColumnWithCells(column int, newCells *foundation.NSArray[*raw.NSCell])
+	RemoveColumn(col int)
+	CellWithTag(tag int) *Cell
+	SizeToCells()
+	SetValidateSize(flag bool)
+	DrawCellAtRowColumn(row int, col int)
+	HighlightCellAtRowColumn(flag bool, row int, col int)
+	ScrollCellToVisibleAtRowColumn(row int, col int)
+	SendAction() bool
+	SendDoubleAction()
+	TextShouldBeginEditing(textObject *raw.NSText) bool
+	TextShouldEndEditing(textObject *raw.NSText) bool
+	TextDidBeginEditing(notification *foundation.NSNotification)
+	TextDidEndEditing(notification *foundation.NSNotification)
+	TextDidChange(notification *foundation.NSNotification)
+	SelectText(sender objc.ID)
+	SelectTextAtRowColumn(row int, col int) *Cell
+	SetToolTipForCell(toolTipString string, cell *raw.NSCell)
+	ToolTipForCell(cell *raw.NSCell) string
+	Prototype() *Cell
+	SetPrototype(prototype *raw.NSCell)
+	Mode() raw.NSMatrixMode
+	SetMode(mode raw.NSMatrixMode)
+	AllowsEmptySelection() bool
+	SetAllowsEmptySelection(allowsEmptySelection bool)
+	Cells() []*raw.NSCell
+	SelectedCells() []*raw.NSCell
+	SelectedRow() int
+	SelectedColumn() int
+	IsSelectionByRect() bool
+	SetSelectionByRect(selectionByRect bool)
+	CellSize() corefoundation.CGSize
+	SetCellSize(cellSize corefoundation.CGSize)
+	IntercellSpacing() corefoundation.CGSize
+	SetIntercellSpacing(intercellSpacing corefoundation.CGSize)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	CellBackgroundColor() *Color
+	SetCellBackgroundColor(cellBackgroundColor *raw.NSColor)
+	DrawsCellBackground() bool
+	SetDrawsCellBackground(drawsCellBackground bool)
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	NumberOfRows() int
+	NumberOfColumns() int
+	DoubleAction() objc.SEL
+	SetDoubleAction(doubleAction objc.SEL)
+	AutosizesCells() bool
+	SetAutosizesCells(autosizesCells bool)
+	IsAutoscroll() bool
+	SetAutoscroll(autoscroll bool)
+	MouseDownFlags() int
+	Delegate() raw.NSMatrixDelegate
+	SetDelegate(delegate raw.NSMatrixDelegate)
+	AutorecalculatesCellSize() bool
+	SetAutorecalculatesCellSize(autorecalculatesCellSize bool)
+	TabKeyTraversesCells() bool
+	SetTabKeyTraversesCells(tabKeyTraversesCells bool)
+	KeyCell() *Cell
+	SetKeyCell(keyCell *raw.NSCell)
+}
+
+var _ Matrixable = (*Matrix)(nil)
 

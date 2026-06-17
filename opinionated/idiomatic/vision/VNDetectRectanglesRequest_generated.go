@@ -59,7 +59,92 @@ func (x *DetectRectanglesRequest) WithMaximumObservations(maximumObservations ui
 	return x
 }
 
+// MinimumAspectRatio calls the underlying MinimumAspectRatio.
+func (x *DetectRectanglesRequest) MinimumAspectRatio() float32 {
+	return x.inner.MinimumAspectRatio()
+}
+
+// SetMinimumAspectRatio calls the underlying SetMinimumAspectRatio.
+func (x *DetectRectanglesRequest) SetMinimumAspectRatio(minimumAspectRatio float32) {
+	x.inner.SetMinimumAspectRatio(minimumAspectRatio)
+}
+
+// MaximumAspectRatio calls the underlying MaximumAspectRatio.
+func (x *DetectRectanglesRequest) MaximumAspectRatio() float32 {
+	return x.inner.MaximumAspectRatio()
+}
+
+// SetMaximumAspectRatio calls the underlying SetMaximumAspectRatio.
+func (x *DetectRectanglesRequest) SetMaximumAspectRatio(maximumAspectRatio float32) {
+	x.inner.SetMaximumAspectRatio(maximumAspectRatio)
+}
+
+// QuadratureTolerance calls the underlying QuadratureTolerance.
+func (x *DetectRectanglesRequest) QuadratureTolerance() float32 {
+	return x.inner.QuadratureTolerance()
+}
+
+// SetQuadratureTolerance calls the underlying SetQuadratureTolerance.
+func (x *DetectRectanglesRequest) SetQuadratureTolerance(quadratureTolerance float32) {
+	x.inner.SetQuadratureTolerance(quadratureTolerance)
+}
+
+// MinimumSize calls the underlying MinimumSize.
+func (x *DetectRectanglesRequest) MinimumSize() float32 {
+	return x.inner.MinimumSize()
+}
+
+// SetMinimumSize calls the underlying SetMinimumSize.
+func (x *DetectRectanglesRequest) SetMinimumSize(minimumSize float32) {
+	x.inner.SetMinimumSize(minimumSize)
+}
+
+// MinimumConfidence calls the underlying MinimumConfidence.
+func (x *DetectRectanglesRequest) MinimumConfidence() float32 {
+	return x.inner.MinimumConfidence()
+}
+
+// SetMinimumConfidence calls the underlying SetMinimumConfidence.
+func (x *DetectRectanglesRequest) SetMinimumConfidence(minimumConfidence float32) {
+	x.inner.SetMinimumConfidence(minimumConfidence)
+}
+
+// MaximumObservations calls the underlying MaximumObservations.
+func (x *DetectRectanglesRequest) MaximumObservations() uint {
+	return x.inner.MaximumObservations()
+}
+
+// SetMaximumObservations calls the underlying SetMaximumObservations.
+func (x *DetectRectanglesRequest) SetMaximumObservations(maximumObservations uint) {
+	x.inner.SetMaximumObservations(maximumObservations)
+}
+
 func (x *DetectRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectRectanglesRequestable is the interface implemented by [DetectRectanglesRequest], for mocking and DI.
+type DetectRectanglesRequestable interface {
+	Unwrap() *raw.VNDetectRectanglesRequest
+	WithMinimumAspectRatio(minimumAspectRatio float32) *DetectRectanglesRequest
+	WithMaximumAspectRatio(maximumAspectRatio float32) *DetectRectanglesRequest
+	WithQuadratureTolerance(quadratureTolerance float32) *DetectRectanglesRequest
+	WithMinimumSize(minimumSize float32) *DetectRectanglesRequest
+	WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest
+	WithMaximumObservations(maximumObservations uint) *DetectRectanglesRequest
+	MinimumAspectRatio() float32
+	SetMinimumAspectRatio(minimumAspectRatio float32)
+	MaximumAspectRatio() float32
+	SetMaximumAspectRatio(maximumAspectRatio float32)
+	QuadratureTolerance() float32
+	SetQuadratureTolerance(quadratureTolerance float32)
+	MinimumSize() float32
+	SetMinimumSize(minimumSize float32)
+	MinimumConfidence() float32
+	SetMinimumConfidence(minimumConfidence float32)
+	MaximumObservations() uint
+	SetMaximumObservations(maximumObservations uint)
+}
+
+var _ DetectRectanglesRequestable = (*DetectRectanglesRequest)(nil)
 

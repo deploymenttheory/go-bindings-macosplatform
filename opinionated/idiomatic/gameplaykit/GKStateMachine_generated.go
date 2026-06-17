@@ -25,3 +25,48 @@ func NewStateMachineWithStates(states *foundation.NSArray[*raw.GKState]) *StateM
 	return &StateMachine{inner: raw.GKStateMachineFromID(_id)}
 }
 
+// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+func (x *StateMachine) UpdateWithDeltaTime(sec float64) {
+	x.inner.UpdateWithDeltaTime(sec)
+}
+
+// StateForClass calls the underlying StateForClass.
+func (x *StateMachine) StateForClass(stateClass objc.Class) *State {
+	_r := x.inner.StateForClass(stateClass)
+	if _r == nil {
+		return nil
+	}
+	return &State{inner: _r}
+}
+
+// CanEnterState calls the underlying CanEnterState.
+func (x *StateMachine) CanEnterState(stateClass objc.Class) bool {
+	return x.inner.CanEnterState(stateClass)
+}
+
+// EnterState calls the underlying EnterState.
+func (x *StateMachine) EnterState(stateClass objc.Class) bool {
+	return x.inner.EnterState(stateClass)
+}
+
+// CurrentState calls the underlying CurrentState.
+func (x *StateMachine) CurrentState() *State {
+	_r := x.inner.CurrentState()
+	if _r == nil {
+		return nil
+	}
+	return &State{inner: _r}
+}
+
+// StateMachineable is the interface implemented by [StateMachine], for mocking and DI.
+type StateMachineable interface {
+	Unwrap() *raw.GKStateMachine
+	UpdateWithDeltaTime(sec float64)
+	StateForClass(stateClass objc.Class) *State
+	CanEnterState(stateClass objc.Class) bool
+	EnterState(stateClass objc.Class) bool
+	CurrentState() *State
+}
+
+var _ StateMachineable = (*StateMachine)(nil)
+

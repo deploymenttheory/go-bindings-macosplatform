@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,5 +61,118 @@ func (x *MTRGeneralDiagnosticsClusterNetworkInterface) WithType(type_ *foundatio
 	return x
 }
 
+// Name calls the underlying Name.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// IsOperational calls the underlying IsOperational.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IsOperational() *foundation.NSNumber {
+	return x.inner.IsOperational()
+}
+
+// SetIsOperational calls the underlying SetIsOperational.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIsOperational(isOperational *foundation.NSNumber) {
+	x.inner.SetIsOperational(isOperational)
+}
+
+// OffPremiseServicesReachableIPv4 calls the underlying OffPremiseServicesReachableIPv4.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv4() *foundation.NSNumber {
+	return x.inner.OffPremiseServicesReachableIPv4()
+}
+
+// SetOffPremiseServicesReachableIPv4 calls the underlying SetOffPremiseServicesReachableIPv4.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 *foundation.NSNumber) {
+	x.inner.SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4)
+}
+
+// OffPremiseServicesReachableIPv6 calls the underlying OffPremiseServicesReachableIPv6.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) OffPremiseServicesReachableIPv6() *foundation.NSNumber {
+	return x.inner.OffPremiseServicesReachableIPv6()
+}
+
+// SetOffPremiseServicesReachableIPv6 calls the underlying SetOffPremiseServicesReachableIPv6.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 *foundation.NSNumber) {
+	x.inner.SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6)
+}
+
+// HardwareAddress calls the underlying HardwareAddress.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) HardwareAddress() *foundation.NSData {
+	return x.inner.HardwareAddress()
+}
+
+// SetHardwareAddress calls the underlying SetHardwareAddress.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetHardwareAddress(hardwareAddress *foundation.NSData) {
+	x.inner.SetHardwareAddress(hardwareAddress)
+}
+
+// IPv4Addresses calls the underlying IPv4Addresses.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IPv4Addresses() *foundation.NSArray[objc.ID] {
+	return x.inner.IPv4Addresses()
+}
+
+// SetIPv4Addresses calls the underlying SetIPv4Addresses.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv4Addresses(iPv4Addresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetIPv4Addresses(iPv4Addresses)
+}
+
+// IPv6Addresses calls the underlying IPv6Addresses.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) IPv6Addresses() *foundation.NSArray[objc.ID] {
+	return x.inner.IPv6Addresses()
+}
+
+// SetIPv6Addresses calls the underlying SetIPv6Addresses.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetIPv6Addresses(iPv6Addresses *foundation.NSArray[objc.ID]) {
+	x.inner.SetIPv6Addresses(iPv6Addresses)
+}
+
+// Type calls the underlying Type.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterface) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
 func (x *MTRGeneralDiagnosticsClusterNetworkInterface) asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface { return x.inner }
+
+// MTRGeneralDiagnosticsClusterNetworkInterfaceable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkInterface], for mocking and DI.
+type MTRGeneralDiagnosticsClusterNetworkInterfaceable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterface
+	WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterface
+	WithIsOperational(isOperational *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterface
+	WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterface
+	WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterface
+	WithHardwareAddress(hardwareAddress *foundation.NSData) *MTRGeneralDiagnosticsClusterNetworkInterface
+	WithType(type_ *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterface
+	Name() string
+	SetName(name string)
+	IsOperational() *foundation.NSNumber
+	SetIsOperational(isOperational *foundation.NSNumber)
+	OffPremiseServicesReachableIPv4() *foundation.NSNumber
+	SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 *foundation.NSNumber)
+	OffPremiseServicesReachableIPv6() *foundation.NSNumber
+	SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 *foundation.NSNumber)
+	HardwareAddress() *foundation.NSData
+	SetHardwareAddress(hardwareAddress *foundation.NSData)
+	IPv4Addresses() *foundation.NSArray[objc.ID]
+	SetIPv4Addresses(iPv4Addresses *foundation.NSArray[objc.ID])
+	IPv6Addresses() *foundation.NSArray[objc.ID]
+	SetIPv6Addresses(iPv6Addresses *foundation.NSArray[objc.ID])
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterNetworkInterfaceable = (*MTRGeneralDiagnosticsClusterNetworkInterface)(nil)
 

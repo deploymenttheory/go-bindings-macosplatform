@@ -23,3 +23,16 @@ func NewStatusBar() *StatusBar {
 	return &StatusBar{inner: raw.NSStatusBarFromID(_id)}
 }
 
+// IsVertical calls the underlying IsVertical.
+func (x *StatusBar) IsVertical() bool {
+	return x.inner.IsVertical()
+}
+
+// StatusBarable is the interface implemented by [StatusBar], for mocking and DI.
+type StatusBarable interface {
+	Unwrap() *raw.NSStatusBar
+	IsVertical() bool
+}
+
+var _ StatusBarable = (*StatusBar)(nil)
+

@@ -66,7 +66,105 @@ func (x *ImageArithmetic) WithMaximumValue(maximumValue float32) *ImageArithmeti
 	return x
 }
 
+// PrimaryScale calls the underlying PrimaryScale.
+func (x *ImageArithmetic) PrimaryScale() float32 {
+	return x.inner.PrimaryScale()
+}
+
+// SetPrimaryScale calls the underlying SetPrimaryScale.
+func (x *ImageArithmetic) SetPrimaryScale(primaryScale float32) {
+	x.inner.SetPrimaryScale(primaryScale)
+}
+
+// SecondaryScale calls the underlying SecondaryScale.
+func (x *ImageArithmetic) SecondaryScale() float32 {
+	return x.inner.SecondaryScale()
+}
+
+// SetSecondaryScale calls the underlying SetSecondaryScale.
+func (x *ImageArithmetic) SetSecondaryScale(secondaryScale float32) {
+	x.inner.SetSecondaryScale(secondaryScale)
+}
+
+// Bias calls the underlying Bias.
+func (x *ImageArithmetic) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *ImageArithmetic) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
+// PrimaryStrideInPixels calls the underlying PrimaryStrideInPixels.
+func (x *ImageArithmetic) PrimaryStrideInPixels() metal.MTLSize {
+	return x.inner.PrimaryStrideInPixels()
+}
+
+// SetPrimaryStrideInPixels calls the underlying SetPrimaryStrideInPixels.
+func (x *ImageArithmetic) SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) {
+	x.inner.SetPrimaryStrideInPixels(primaryStrideInPixels)
+}
+
+// SecondaryStrideInPixels calls the underlying SecondaryStrideInPixels.
+func (x *ImageArithmetic) SecondaryStrideInPixels() metal.MTLSize {
+	return x.inner.SecondaryStrideInPixels()
+}
+
+// SetSecondaryStrideInPixels calls the underlying SetSecondaryStrideInPixels.
+func (x *ImageArithmetic) SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) {
+	x.inner.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+}
+
+// MinimumValue calls the underlying MinimumValue.
+func (x *ImageArithmetic) MinimumValue() float32 {
+	return x.inner.MinimumValue()
+}
+
+// SetMinimumValue calls the underlying SetMinimumValue.
+func (x *ImageArithmetic) SetMinimumValue(minimumValue float32) {
+	x.inner.SetMinimumValue(minimumValue)
+}
+
+// MaximumValue calls the underlying MaximumValue.
+func (x *ImageArithmetic) MaximumValue() float32 {
+	return x.inner.MaximumValue()
+}
+
+// SetMaximumValue calls the underlying SetMaximumValue.
+func (x *ImageArithmetic) SetMaximumValue(maximumValue float32) {
+	x.inner.SetMaximumValue(maximumValue)
+}
+
 func (x *ImageArithmetic) asImageArithmetic() *raw.MPSImageArithmetic { return x.inner }
 
 func (x *ImageArithmetic) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSBinaryImageKernel }
+
+// ImageArithmeticable is the interface implemented by [ImageArithmetic], for mocking and DI.
+type ImageArithmeticable interface {
+	Unwrap() *raw.MPSImageArithmetic
+	WithPrimaryScale(primaryScale float32) *ImageArithmetic
+	WithSecondaryScale(secondaryScale float32) *ImageArithmetic
+	WithBias(bias float32) *ImageArithmetic
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageArithmetic
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic
+	WithMinimumValue(minimumValue float32) *ImageArithmetic
+	WithMaximumValue(maximumValue float32) *ImageArithmetic
+	PrimaryScale() float32
+	SetPrimaryScale(primaryScale float32)
+	SecondaryScale() float32
+	SetSecondaryScale(secondaryScale float32)
+	Bias() float32
+	SetBias(bias float32)
+	PrimaryStrideInPixels() metal.MTLSize
+	SetPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize)
+	SecondaryStrideInPixels() metal.MTLSize
+	SetSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize)
+	MinimumValue() float32
+	SetMinimumValue(minimumValue float32)
+	MaximumValue() float32
+	SetMaximumValue(maximumValue float32)
+}
+
+var _ ImageArithmeticable = (*ImageArithmetic)(nil)
 

@@ -23,3 +23,36 @@ func NewVertexDescriptor() *VertexDescriptor {
 	return &VertexDescriptor{inner: raw.MTLVertexDescriptorFromID(_id)}
 }
 
+// Reset calls the underlying Reset.
+func (x *VertexDescriptor) Reset() {
+	x.inner.Reset()
+}
+
+// Layouts calls the underlying Layouts.
+func (x *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
+	_r := x.inner.Layouts()
+	if _r == nil {
+		return nil
+	}
+	return &VertexBufferLayoutDescriptorArray{inner: _r}
+}
+
+// Attributes calls the underlying Attributes.
+func (x *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
+	_r := x.inner.Attributes()
+	if _r == nil {
+		return nil
+	}
+	return &VertexAttributeDescriptorArray{inner: _r}
+}
+
+// VertexDescriptorable is the interface implemented by [VertexDescriptor], for mocking and DI.
+type VertexDescriptorable interface {
+	Unwrap() *raw.MTLVertexDescriptor
+	Reset()
+	Layouts() *VertexBufferLayoutDescriptorArray
+	Attributes() *VertexAttributeDescriptorArray
+}
+
+var _ VertexDescriptorable = (*VertexDescriptor)(nil)
+

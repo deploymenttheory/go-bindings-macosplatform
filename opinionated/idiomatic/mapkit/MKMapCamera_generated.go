@@ -7,6 +7,7 @@ package mapkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MapCamera wraps [raw.MKMapCamera] with a fluent Go API.
@@ -28,4 +29,72 @@ func (x *MapCamera) WithPitch(pitch float64) *MapCamera {
 	x.inner.SetPitch(pitch)
 	return x
 }
+
+// CenterCoordinate calls the underlying CenterCoordinate.
+func (x *MapCamera) CenterCoordinate() unsafe.Pointer {
+	return x.inner.CenterCoordinate()
+}
+
+// SetCenterCoordinate calls the underlying SetCenterCoordinate.
+func (x *MapCamera) SetCenterCoordinate(centerCoordinate unsafe.Pointer) {
+	x.inner.SetCenterCoordinate(centerCoordinate)
+}
+
+// CenterCoordinateDistance calls the underlying CenterCoordinateDistance.
+func (x *MapCamera) CenterCoordinateDistance() unsafe.Pointer {
+	return x.inner.CenterCoordinateDistance()
+}
+
+// SetCenterCoordinateDistance calls the underlying SetCenterCoordinateDistance.
+func (x *MapCamera) SetCenterCoordinateDistance(centerCoordinateDistance unsafe.Pointer) {
+	x.inner.SetCenterCoordinateDistance(centerCoordinateDistance)
+}
+
+// Heading calls the underlying Heading.
+func (x *MapCamera) Heading() unsafe.Pointer {
+	return x.inner.Heading()
+}
+
+// SetHeading calls the underlying SetHeading.
+func (x *MapCamera) SetHeading(heading unsafe.Pointer) {
+	x.inner.SetHeading(heading)
+}
+
+// Pitch calls the underlying Pitch.
+func (x *MapCamera) Pitch() float64 {
+	return x.inner.Pitch()
+}
+
+// SetPitch calls the underlying SetPitch.
+func (x *MapCamera) SetPitch(pitch float64) {
+	x.inner.SetPitch(pitch)
+}
+
+// Altitude calls the underlying Altitude.
+func (x *MapCamera) Altitude() unsafe.Pointer {
+	return x.inner.Altitude()
+}
+
+// SetAltitude calls the underlying SetAltitude.
+func (x *MapCamera) SetAltitude(altitude unsafe.Pointer) {
+	x.inner.SetAltitude(altitude)
+}
+
+// MapCameraable is the interface implemented by [MapCamera], for mocking and DI.
+type MapCameraable interface {
+	Unwrap() *raw.MKMapCamera
+	WithPitch(pitch float64) *MapCamera
+	CenterCoordinate() unsafe.Pointer
+	SetCenterCoordinate(centerCoordinate unsafe.Pointer)
+	CenterCoordinateDistance() unsafe.Pointer
+	SetCenterCoordinateDistance(centerCoordinateDistance unsafe.Pointer)
+	Heading() unsafe.Pointer
+	SetHeading(heading unsafe.Pointer)
+	Pitch() float64
+	SetPitch(pitch float64)
+	Altitude() unsafe.Pointer
+	SetAltitude(altitude unsafe.Pointer)
+}
+
+var _ MapCameraable = (*MapCamera)(nil)
 

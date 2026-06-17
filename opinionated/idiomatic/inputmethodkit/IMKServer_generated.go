@@ -32,3 +32,28 @@ func NewServerWithNameControllerClassDelegateClass(name string, controllerClassI
 	return &Server{inner: raw.IMKServerFromID(_id)}
 }
 
+// Bundle calls the underlying Bundle.
+func (x *Server) Bundle() *foundation.NSBundle {
+	return x.inner.Bundle()
+}
+
+// PaletteWillTerminate calls the underlying PaletteWillTerminate.
+func (x *Server) PaletteWillTerminate() bool {
+	return x.inner.PaletteWillTerminate()
+}
+
+// LastKeyEventWasDeadKey calls the underlying LastKeyEventWasDeadKey.
+func (x *Server) LastKeyEventWasDeadKey() bool {
+	return x.inner.LastKeyEventWasDeadKey()
+}
+
+// Serverable is the interface implemented by [Server], for mocking and DI.
+type Serverable interface {
+	Unwrap() *raw.IMKServer
+	Bundle() *foundation.NSBundle
+	PaletteWillTerminate() bool
+	LastKeyEventWasDeadKey() bool
+}
+
+var _ Serverable = (*Server)(nil)
+

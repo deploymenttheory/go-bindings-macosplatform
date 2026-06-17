@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +26,34 @@ func NewAssetVariantVideoAttributes() *AssetVariantVideoAttributes {
 	return &AssetVariantVideoAttributes{inner: raw.AVAssetVariantVideoAttributesFromID(_id)}
 }
 
+// VideoRange calls the underlying VideoRange.
+func (x *AssetVariantVideoAttributes) VideoRange() string {
+	_r := x.inner.VideoRange()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // CodecTypes returns the collection as a Go slice.
 func (x *AssetVariantVideoAttributes) CodecTypes() []*foundation.NSNumber {
 	arr := x.inner.CodecTypes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// PresentationSize calls the underlying PresentationSize.
+func (x *AssetVariantVideoAttributes) PresentationSize() corefoundation.CGSize {
+	return x.inner.PresentationSize()
+}
+
+// NominalFrameRate calls the underlying NominalFrameRate.
+func (x *AssetVariantVideoAttributes) NominalFrameRate() float64 {
+	return x.inner.NominalFrameRate()
 }
 
 // VideoLayoutAttributes returns the collection as a Go slice.
@@ -43,10 +62,20 @@ func (x *AssetVariantVideoAttributes) VideoLayoutAttributes() []*raw.AVAssetVari
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVAssetVariantVideoLayoutAttributes, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVAssetVariantVideoLayoutAttributes {
+		return raw.AVAssetVariantVideoLayoutAttributesFromID(purego.Retain(_id))
+	})
 }
+
+// AssetVariantVideoAttributesable is the interface implemented by [AssetVariantVideoAttributes], for mocking and DI.
+type AssetVariantVideoAttributesable interface {
+	Unwrap() *raw.AVAssetVariantVideoAttributes
+	VideoRange() string
+	CodecTypes() []*foundation.NSNumber
+	PresentationSize() corefoundation.CGSize
+	NominalFrameRate() float64
+	VideoLayoutAttributes() []*raw.AVAssetVariantVideoLayoutAttributes
+}
+
+var _ AssetVariantVideoAttributesable = (*AssetVariantVideoAttributes)(nil)
 

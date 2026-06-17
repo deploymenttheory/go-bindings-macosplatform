@@ -25,3 +25,10 @@ func NewAnnotationText() *AnnotationText {
 
 func (x *AnnotationText) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
+// AnnotationTextable is the interface implemented by [AnnotationText], for mocking and DI.
+type AnnotationTextable interface {
+	Unwrap() *raw.PDFAnnotationText
+}
+
+var _ AnnotationTextable = (*AnnotationText)(nil)
+

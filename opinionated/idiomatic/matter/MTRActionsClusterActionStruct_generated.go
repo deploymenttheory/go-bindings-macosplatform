@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,4 +60,93 @@ func (x *MTRActionsClusterActionStruct) WithState(state *foundation.NSNumber) *M
 	x.inner.SetState(state)
 	return x
 }
+
+// ActionID calls the underlying ActionID.
+func (x *MTRActionsClusterActionStruct) ActionID() *foundation.NSNumber {
+	return x.inner.ActionID()
+}
+
+// SetActionID calls the underlying SetActionID.
+func (x *MTRActionsClusterActionStruct) SetActionID(actionID *foundation.NSNumber) {
+	x.inner.SetActionID(actionID)
+}
+
+// Name calls the underlying Name.
+func (x *MTRActionsClusterActionStruct) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *MTRActionsClusterActionStruct) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Type calls the underlying Type.
+func (x *MTRActionsClusterActionStruct) Type() *foundation.NSNumber {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *MTRActionsClusterActionStruct) SetType(type_ *foundation.NSNumber) {
+	x.inner.SetType(type_)
+}
+
+// EndpointListID calls the underlying EndpointListID.
+func (x *MTRActionsClusterActionStruct) EndpointListID() *foundation.NSNumber {
+	return x.inner.EndpointListID()
+}
+
+// SetEndpointListID calls the underlying SetEndpointListID.
+func (x *MTRActionsClusterActionStruct) SetEndpointListID(endpointListID *foundation.NSNumber) {
+	x.inner.SetEndpointListID(endpointListID)
+}
+
+// SupportedCommands calls the underlying SupportedCommands.
+func (x *MTRActionsClusterActionStruct) SupportedCommands() *foundation.NSNumber {
+	return x.inner.SupportedCommands()
+}
+
+// SetSupportedCommands calls the underlying SetSupportedCommands.
+func (x *MTRActionsClusterActionStruct) SetSupportedCommands(supportedCommands *foundation.NSNumber) {
+	x.inner.SetSupportedCommands(supportedCommands)
+}
+
+// State calls the underlying State.
+func (x *MTRActionsClusterActionStruct) State() *foundation.NSNumber {
+	return x.inner.State()
+}
+
+// SetState calls the underlying SetState.
+func (x *MTRActionsClusterActionStruct) SetState(state *foundation.NSNumber) {
+	x.inner.SetState(state)
+}
+
+// MTRActionsClusterActionStructable is the interface implemented by [MTRActionsClusterActionStruct], for mocking and DI.
+type MTRActionsClusterActionStructable interface {
+	Unwrap() *raw.MTRActionsClusterActionStruct
+	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionStruct
+	WithName(name string) *MTRActionsClusterActionStruct
+	WithType(type_ *foundation.NSNumber) *MTRActionsClusterActionStruct
+	WithEndpointListID(endpointListID *foundation.NSNumber) *MTRActionsClusterActionStruct
+	WithSupportedCommands(supportedCommands *foundation.NSNumber) *MTRActionsClusterActionStruct
+	WithState(state *foundation.NSNumber) *MTRActionsClusterActionStruct
+	ActionID() *foundation.NSNumber
+	SetActionID(actionID *foundation.NSNumber)
+	Name() string
+	SetName(name string)
+	Type() *foundation.NSNumber
+	SetType(type_ *foundation.NSNumber)
+	EndpointListID() *foundation.NSNumber
+	SetEndpointListID(endpointListID *foundation.NSNumber)
+	SupportedCommands() *foundation.NSNumber
+	SetSupportedCommands(supportedCommands *foundation.NSNumber)
+	State() *foundation.NSNumber
+	SetState(state *foundation.NSNumber)
+}
+
+var _ MTRActionsClusterActionStructable = (*MTRActionsClusterActionStruct)(nil)
 

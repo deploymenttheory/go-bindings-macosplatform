@@ -49,3 +49,53 @@ func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) With
 	return x
 }
 
+// ErrorCode calls the underlying ErrorCode.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ErrorCode() *foundation.NSNumber {
+	return x.inner.ErrorCode()
+}
+
+// SetErrorCode calls the underlying SetErrorCode.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetErrorCode(errorCode *foundation.NSNumber) {
+	x.inner.SetErrorCode(errorCode)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable is the interface implemented by [MTRGeneralCommissioningClusterCommissioningCompleteResponseParams], for mocking and DI.
+type MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	WithDebugText(debugText string) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	ErrorCode() *foundation.NSNumber
+	SetErrorCode(errorCode *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable = (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams)(nil)
+

@@ -5,6 +5,8 @@
 package pencilkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -44,16 +46,76 @@ func NewDrawingWithDataError(data *foundation.NSData) (*Drawing, error) {
 	return &Drawing{inner: raw.PKDrawingFromID(_id)}, nil
 }
 
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *Drawing) DataRepresentation() *foundation.NSData {
+	return x.inner.DataRepresentation()
+}
+
+// ImageFromRectScale calls the underlying ImageFromRectScale.
+func (x *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) *appkit.NSImage {
+	return x.inner.ImageFromRectScale(rect, scale)
+}
+
+// DrawingByApplyingTransform calls the underlying DrawingByApplyingTransform.
+func (x *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
+	_r := x.inner.DrawingByApplyingTransform(transform)
+	if _r == nil {
+		return nil
+	}
+	return &Drawing{inner: _r}
+}
+
+// DrawingByAppendingDrawing calls the underlying DrawingByAppendingDrawing.
+func (x *Drawing) DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing {
+	_r := x.inner.DrawingByAppendingDrawing(drawing)
+	if _r == nil {
+		return nil
+	}
+	return &Drawing{inner: _r}
+}
+
+// DrawingByAppendingStrokes calls the underlying DrawingByAppendingStrokes.
+func (x *Drawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing {
+	_r := x.inner.DrawingByAppendingStrokes(strokes)
+	if _r == nil {
+		return nil
+	}
+	return &Drawing{inner: _r}
+}
+
 // Strokes returns the collection as a Go slice.
 func (x *Drawing) Strokes() []*raw.PKStroke {
 	arr := x.inner.Strokes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKStroke, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKStroke {
+		return raw.PKStrokeFromID(purego.Retain(_id))
+	})
 }
+
+// Bounds calls the underlying Bounds.
+func (x *Drawing) Bounds() corefoundation.CGRect {
+	return x.inner.Bounds()
+}
+
+// RequiredContentVersion calls the underlying RequiredContentVersion.
+func (x *Drawing) RequiredContentVersion() raw.PKContentVersion {
+	return x.inner.RequiredContentVersion()
+}
+
+// Drawingable is the interface implemented by [Drawing], for mocking and DI.
+type Drawingable interface {
+	Unwrap() *raw.PKDrawing
+	DataRepresentation() *foundation.NSData
+	ImageFromRectScale(rect corefoundation.CGRect, scale float64) *appkit.NSImage
+	DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing
+	DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing
+	DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing
+	Strokes() []*raw.PKStroke
+	Bounds() corefoundation.CGRect
+	RequiredContentVersion() raw.PKContentVersion
+}
+
+var _ Drawingable = (*Drawing)(nil)
 

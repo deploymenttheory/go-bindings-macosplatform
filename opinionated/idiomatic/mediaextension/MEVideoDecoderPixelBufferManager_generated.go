@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VideoDecoderPixelBufferManager wraps [raw.MEVideoDecoderPixelBufferManager] with a fluent Go API.
@@ -29,4 +30,36 @@ func (x *VideoDecoderPixelBufferManager) WithPixelBufferAttributes(pixelBufferAt
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
+
+// CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
+func (x *VideoDecoderPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
+	return x.inner.CreatePixelBufferAndReturnError()
+}
+
+// RegisterCustomPixelFormat calls the underlying RegisterCustomPixelFormat.
+func (x *VideoDecoderPixelBufferManager) RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.RegisterCustomPixelFormat(customPixelFormat)
+}
+
+// PixelBufferAttributes calls the underlying PixelBufferAttributes.
+func (x *VideoDecoderPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PixelBufferAttributes()
+}
+
+// SetPixelBufferAttributes calls the underlying SetPixelBufferAttributes.
+func (x *VideoDecoderPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
+}
+
+// VideoDecoderPixelBufferManagerable is the interface implemented by [VideoDecoderPixelBufferManager], for mocking and DI.
+type VideoDecoderPixelBufferManagerable interface {
+	Unwrap() *raw.MEVideoDecoderPixelBufferManager
+	WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *VideoDecoderPixelBufferManager
+	CreatePixelBufferAndReturnError() (unsafe.Pointer, error)
+	RegisterCustomPixelFormat(customPixelFormat *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ VideoDecoderPixelBufferManagerable = (*VideoDecoderPixelBufferManager)(nil)
 

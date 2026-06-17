@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,46 @@ func (x *AddSecureElementPassConfiguration) WithLocalizedDescription(localizedDe
 	return x
 }
 
+// IssuerIdentifier calls the underlying IssuerIdentifier.
+func (x *AddSecureElementPassConfiguration) IssuerIdentifier() string {
+	_r := x.inner.IssuerIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetIssuerIdentifier calls the underlying SetIssuerIdentifier.
+func (x *AddSecureElementPassConfiguration) SetIssuerIdentifier(issuerIdentifier string) {
+	x.inner.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+}
+
+// LocalizedDescription calls the underlying LocalizedDescription.
+func (x *AddSecureElementPassConfiguration) LocalizedDescription() string {
+	_r := x.inner.LocalizedDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedDescription calls the underlying SetLocalizedDescription.
+func (x *AddSecureElementPassConfiguration) SetLocalizedDescription(localizedDescription string) {
+	x.inner.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+}
+
 func (x *AddSecureElementPassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return x.inner }
+
+// AddSecureElementPassConfigurationable is the interface implemented by [AddSecureElementPassConfiguration], for mocking and DI.
+type AddSecureElementPassConfigurationable interface {
+	Unwrap() *raw.PKAddSecureElementPassConfiguration
+	WithIssuerIdentifier(issuerIdentifier string) *AddSecureElementPassConfiguration
+	WithLocalizedDescription(localizedDescription string) *AddSecureElementPassConfiguration
+	IssuerIdentifier() string
+	SetIssuerIdentifier(issuerIdentifier string)
+	LocalizedDescription() string
+	SetLocalizedDescription(localizedDescription string)
+}
+
+var _ AddSecureElementPassConfigurationable = (*AddSecureElementPassConfiguration)(nil)
 

@@ -6,8 +6,11 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AsynchronousVideoCompositionRequest wraps [raw.AVAsynchronousVideoCompositionRequest] with a fluent Go API.
@@ -24,17 +27,78 @@ func NewAsynchronousVideoCompositionRequest() *AsynchronousVideoCompositionReque
 	return &AsynchronousVideoCompositionRequest{inner: raw.AVAsynchronousVideoCompositionRequestFromID(_id)}
 }
 
+// SourceFrameByTrackID calls the underlying SourceFrameByTrackID.
+func (x *AsynchronousVideoCompositionRequest) SourceFrameByTrackID(trackID int32) unsafe.Pointer {
+	return x.inner.SourceFrameByTrackID(trackID)
+}
+
+// SourceSampleBufferByTrackID calls the underlying SourceSampleBufferByTrackID.
+func (x *AsynchronousVideoCompositionRequest) SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer {
+	return x.inner.SourceSampleBufferByTrackID(trackID)
+}
+
+// SourceTimedMetadataByTrackID calls the underlying SourceTimedMetadataByTrackID.
+func (x *AsynchronousVideoCompositionRequest) SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup {
+	_r := x.inner.SourceTimedMetadataByTrackID(trackID)
+	if _r == nil {
+		return nil
+	}
+	return &TimedMetadataGroup{inner: _r}
+}
+
+// FinishWithComposedVideoFrame calls the underlying FinishWithComposedVideoFrame.
+func (x *AsynchronousVideoCompositionRequest) FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer) {
+	x.inner.FinishWithComposedVideoFrame(composedVideoFrame)
+}
+
+// FinishWithError calls the underlying FinishWithError.
+func (x *AsynchronousVideoCompositionRequest) FinishWithError(error_ unsafe.Pointer) {
+	x.inner.FinishWithError(error_)
+}
+
+// FinishCancelledRequest calls the underlying FinishCancelledRequest.
+func (x *AsynchronousVideoCompositionRequest) FinishCancelledRequest() {
+	x.inner.FinishCancelledRequest()
+}
+
+// SourceTaggedBufferGroupByTrackID calls the underlying SourceTaggedBufferGroupByTrackID.
+func (x *AsynchronousVideoCompositionRequest) SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer {
+	return x.inner.SourceTaggedBufferGroupByTrackID(trackID)
+}
+
+// FinishWithComposedTaggedBufferGroup calls the underlying FinishWithComposedTaggedBufferGroup.
+func (x *AsynchronousVideoCompositionRequest) FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer) {
+	x.inner.FinishWithComposedTaggedBufferGroup(taggedBufferGroup)
+}
+
+// AttachSpatialVideoConfigurationToPixelBuffer calls the underlying AttachSpatialVideoConfigurationToPixelBuffer.
+func (x *AsynchronousVideoCompositionRequest) AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *raw.AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer) {
+	x.inner.AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration, pixelBuffer)
+}
+
+// RenderContext calls the underlying RenderContext.
+func (x *AsynchronousVideoCompositionRequest) RenderContext() *VideoCompositionRenderContext {
+	_r := x.inner.RenderContext()
+	if _r == nil {
+		return nil
+	}
+	return &VideoCompositionRenderContext{inner: _r}
+}
+
+// CompositionTime calls the underlying CompositionTime.
+func (x *AsynchronousVideoCompositionRequest) CompositionTime() coremedia.CMTime {
+	return x.inner.CompositionTime()
+}
+
 // SourceTrackIDs returns the collection as a Go slice.
 func (x *AsynchronousVideoCompositionRequest) SourceTrackIDs() []*foundation.NSNumber {
 	arr := x.inner.SourceTrackIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
@@ -43,10 +107,34 @@ func (x *AsynchronousVideoCompositionRequest) SourceSampleDataTrackIDs() []*foun
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// VideoCompositionInstruction calls the underlying VideoCompositionInstruction.
+func (x *AsynchronousVideoCompositionRequest) VideoCompositionInstruction() raw.AVVideoCompositionInstructionProtocol {
+	return x.inner.VideoCompositionInstruction()
+}
+
+// AsynchronousVideoCompositionRequestable is the interface implemented by [AsynchronousVideoCompositionRequest], for mocking and DI.
+type AsynchronousVideoCompositionRequestable interface {
+	Unwrap() *raw.AVAsynchronousVideoCompositionRequest
+	SourceFrameByTrackID(trackID int32) unsafe.Pointer
+	SourceSampleBufferByTrackID(trackID int32) unsafe.Pointer
+	SourceTimedMetadataByTrackID(trackID int32) *TimedMetadataGroup
+	FinishWithComposedVideoFrame(composedVideoFrame unsafe.Pointer)
+	FinishWithError(error_ unsafe.Pointer)
+	FinishCancelledRequest()
+	SourceTaggedBufferGroupByTrackID(trackID int32) unsafe.Pointer
+	FinishWithComposedTaggedBufferGroup(taggedBufferGroup unsafe.Pointer)
+	AttachSpatialVideoConfigurationToPixelBuffer(spatialVideoConfiguration *raw.AVSpatialVideoConfiguration, pixelBuffer unsafe.Pointer)
+	RenderContext() *VideoCompositionRenderContext
+	CompositionTime() coremedia.CMTime
+	SourceTrackIDs() []*foundation.NSNumber
+	SourceSampleDataTrackIDs() []*foundation.NSNumber
+	VideoCompositionInstruction() raw.AVVideoCompositionInstructionProtocol
+}
+
+var _ AsynchronousVideoCompositionRequestable = (*AsynchronousVideoCompositionRequest)(nil)
 

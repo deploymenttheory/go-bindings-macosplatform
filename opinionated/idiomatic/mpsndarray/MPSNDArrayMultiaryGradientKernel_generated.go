@@ -5,7 +5,9 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,7 +27,26 @@ func NewArrayMultiaryGradientKernelWithDeviceSourceCountSourceGradientIndex(devi
 	return &ArrayMultiaryGradientKernel{inner: raw.MPSNDArrayMultiaryGradientKernelFromID(_id)}
 }
 
+// EncodeToCommandBufferSourceArraysSourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraysSourceGradientGradientState.
+func (x *ArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
+	return x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf, sources, gradient, state)
+}
+
+// EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray.
+func (x *ArrayMultiaryGradientKernel) EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
+	x.inner.EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf, sources, gradient, state, destination)
+}
+
 func (x *ArrayMultiaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return x.inner }
 
 func (x *ArrayMultiaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryBase }
+
+// ArrayMultiaryGradientKernelable is the interface implemented by [ArrayMultiaryGradientKernel], for mocking and DI.
+type ArrayMultiaryGradientKernelable interface {
+	Unwrap() *raw.MPSNDArrayMultiaryGradientKernel
+	EncodeToCommandBufferSourceArraysSourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
+	EncodeToCommandBufferSourceArraysSourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sources *foundation.NSArray[*mpscore.MPSNDArray], gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
+}
+
+var _ ArrayMultiaryGradientKernelable = (*ArrayMultiaryGradientKernel)(nil)
 

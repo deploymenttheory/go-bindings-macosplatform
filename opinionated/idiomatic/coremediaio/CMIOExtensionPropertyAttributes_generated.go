@@ -25,3 +25,34 @@ func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minVa
 	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](_id)}
 }
 
+// MinValue calls the underlying MinValue.
+func (x *ExtensionPropertyAttributes) MinValue() objc.ID {
+	return x.inner.MinValue()
+}
+
+// MaxValue calls the underlying MaxValue.
+func (x *ExtensionPropertyAttributes) MaxValue() objc.ID {
+	return x.inner.MaxValue()
+}
+
+// ValidValues calls the underlying ValidValues.
+func (x *ExtensionPropertyAttributes) ValidValues() *foundation.NSArray[objc.ID] {
+	return x.inner.ValidValues()
+}
+
+// IsReadOnly calls the underlying IsReadOnly.
+func (x *ExtensionPropertyAttributes) IsReadOnly() bool {
+	return x.inner.IsReadOnly()
+}
+
+// ExtensionPropertyAttributesable is the interface implemented by [ExtensionPropertyAttributes], for mocking and DI.
+type ExtensionPropertyAttributesable interface {
+	Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID]
+	MinValue() objc.ID
+	MaxValue() objc.ID
+	ValidValues() *foundation.NSArray[objc.ID]
+	IsReadOnly() bool
+}
+
+var _ ExtensionPropertyAttributesable = (*ExtensionPropertyAttributes)(nil)
+

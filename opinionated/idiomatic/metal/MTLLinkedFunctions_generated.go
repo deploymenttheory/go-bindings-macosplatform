@@ -30,3 +30,59 @@ func (x *LinkedFunctions) WithGroups(groups *foundation.NSDictionary[*foundation
 	return x
 }
 
+// Functions calls the underlying Functions.
+func (x *LinkedFunctions) Functions() *foundation.NSArray[raw.MTLFunction] {
+	return x.inner.Functions()
+}
+
+// SetFunctions calls the underlying SetFunctions.
+func (x *LinkedFunctions) SetFunctions(functions *foundation.NSArray[raw.MTLFunction]) {
+	x.inner.SetFunctions(functions)
+}
+
+// BinaryFunctions calls the underlying BinaryFunctions.
+func (x *LinkedFunctions) BinaryFunctions() *foundation.NSArray[raw.MTLFunction] {
+	return x.inner.BinaryFunctions()
+}
+
+// SetBinaryFunctions calls the underlying SetBinaryFunctions.
+func (x *LinkedFunctions) SetBinaryFunctions(binaryFunctions *foundation.NSArray[raw.MTLFunction]) {
+	x.inner.SetBinaryFunctions(binaryFunctions)
+}
+
+// Groups calls the underlying Groups.
+func (x *LinkedFunctions) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Groups()
+}
+
+// SetGroups calls the underlying SetGroups.
+func (x *LinkedFunctions) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetGroups(groups)
+}
+
+// PrivateFunctions calls the underlying PrivateFunctions.
+func (x *LinkedFunctions) PrivateFunctions() *foundation.NSArray[raw.MTLFunction] {
+	return x.inner.PrivateFunctions()
+}
+
+// SetPrivateFunctions calls the underlying SetPrivateFunctions.
+func (x *LinkedFunctions) SetPrivateFunctions(privateFunctions *foundation.NSArray[raw.MTLFunction]) {
+	x.inner.SetPrivateFunctions(privateFunctions)
+}
+
+// LinkedFunctionsable is the interface implemented by [LinkedFunctions], for mocking and DI.
+type LinkedFunctionsable interface {
+	Unwrap() *raw.MTLLinkedFunctions
+	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *LinkedFunctions
+	Functions() *foundation.NSArray[raw.MTLFunction]
+	SetFunctions(functions *foundation.NSArray[raw.MTLFunction])
+	BinaryFunctions() *foundation.NSArray[raw.MTLFunction]
+	SetBinaryFunctions(binaryFunctions *foundation.NSArray[raw.MTLFunction])
+	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	PrivateFunctions() *foundation.NSArray[raw.MTLFunction]
+	SetPrivateFunctions(privateFunctions *foundation.NSArray[raw.MTLFunction])
+}
+
+var _ LinkedFunctionsable = (*LinkedFunctions)(nil)
+

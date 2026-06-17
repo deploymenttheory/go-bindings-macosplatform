@@ -5,6 +5,7 @@
 package coreaudiokit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,17 @@ func NewAUPannerView() *AUPannerView {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUPannerView")), objc.RegisterName("new"))
 	return &AUPannerView{inner: raw.AUPannerViewFromID(_id)}
 }
+
+// AudioUnit calls the underlying AudioUnit.
+func (x *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
+	return x.inner.AudioUnit()
+}
+
+// AUPannerViewable is the interface implemented by [AUPannerView], for mocking and DI.
+type AUPannerViewable interface {
+	Unwrap() *raw.AUPannerView
+	AudioUnit() *carboncore.ComponentInstanceRecord
+}
+
+var _ AUPannerViewable = (*AUPannerView)(nil)
 

@@ -25,3 +25,10 @@ func NewStorageDevice() *StorageDevice {
 
 func (x *StorageDevice) asStorageDevice() *raw.VZStorageDevice { return x.inner }
 
+// StorageDeviceable is the interface implemented by [StorageDevice], for mocking and DI.
+type StorageDeviceable interface {
+	Unwrap() *raw.VZStorageDevice
+}
+
+var _ StorageDeviceable = (*StorageDevice)(nil)
+

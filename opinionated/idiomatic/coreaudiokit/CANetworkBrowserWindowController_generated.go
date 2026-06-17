@@ -23,3 +23,10 @@ func NewCANetworkBrowserWindowController() *CANetworkBrowserWindowController {
 	return &CANetworkBrowserWindowController{inner: raw.CANetworkBrowserWindowControllerFromID(_id)}
 }
 
+// CANetworkBrowserWindowControllerable is the interface implemented by [CANetworkBrowserWindowController], for mocking and DI.
+type CANetworkBrowserWindowControllerable interface {
+	Unwrap() *raw.CANetworkBrowserWindowController
+}
+
+var _ CANetworkBrowserWindowControllerable = (*CANetworkBrowserWindowController)(nil)
+

@@ -31,3 +31,10 @@ func (x *ScrubberItemView) asView() *raw.NSView { return &x.inner.NSScrubberArra
 
 func (x *ScrubberItemView) asResponder() *raw.NSResponder { return &x.inner.NSScrubberArrangedView.NSView.NSResponder }
 
+// ScrubberItemViewable is the interface implemented by [ScrubberItemView], for mocking and DI.
+type ScrubberItemViewable interface {
+	Unwrap() *raw.NSScrubberItemView
+}
+
+var _ ScrubberItemViewable = (*ScrubberItemView)(nil)
+

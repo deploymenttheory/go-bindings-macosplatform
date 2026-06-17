@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -81,30 +82,70 @@ func (x *DictionaryController) WithLocalizedKeyTable(localizedKeyTable string) *
 	return x
 }
 
+// SetInitialKey calls the underlying SetInitialKey.
+func (x *DictionaryController) SetInitialKey(initialKey string) {
+	x.inner.SetInitialKey(foundation.NSStringStringWithUTF8String(initialKey))
+}
+
+// SetInitialValue calls the underlying SetInitialValue.
+func (x *DictionaryController) SetInitialValue(initialValue objc.ID) {
+	x.inner.SetInitialValue(initialValue)
+}
+
 // IncludedKeys returns the collection as a Go slice.
-func (x *DictionaryController) IncludedKeys() []*foundation.NSString {
+func (x *DictionaryController) IncludedKeys() []string {
 	arr := x.inner.IncludedKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetIncludedKeys calls the underlying SetIncludedKeys.
+func (x *DictionaryController) SetIncludedKeys(includedKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetIncludedKeys(includedKeys)
 }
 
 // ExcludedKeys returns the collection as a Go slice.
-func (x *DictionaryController) ExcludedKeys() []*foundation.NSString {
+func (x *DictionaryController) ExcludedKeys() []string {
 	arr := x.inner.ExcludedKeys()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetExcludedKeys calls the underlying SetExcludedKeys.
+func (x *DictionaryController) SetExcludedKeys(excludedKeys *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetExcludedKeys(excludedKeys)
+}
+
+// LocalizedKeyDictionary calls the underlying LocalizedKeyDictionary.
+func (x *DictionaryController) LocalizedKeyDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.LocalizedKeyDictionary()
+}
+
+// SetLocalizedKeyDictionary calls the underlying SetLocalizedKeyDictionary.
+func (x *DictionaryController) SetLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
+	x.inner.SetLocalizedKeyDictionary(localizedKeyDictionary)
+}
+
+// LocalizedKeyTable calls the underlying LocalizedKeyTable.
+func (x *DictionaryController) LocalizedKeyTable() string {
+	_r := x.inner.LocalizedKeyTable()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLocalizedKeyTable calls the underlying SetLocalizedKeyTable.
+func (x *DictionaryController) SetLocalizedKeyTable(localizedKeyTable string) {
+	x.inner.SetLocalizedKeyTable(foundation.NSStringStringWithUTF8String(localizedKeyTable))
 }
 
 func (x *DictionaryController) asArrayController() *raw.NSArrayController { return &x.inner.NSArrayController }
@@ -112,4 +153,27 @@ func (x *DictionaryController) asArrayController() *raw.NSArrayController { retu
 func (x *DictionaryController) asObjectController() *raw.NSObjectController { return &x.inner.NSArrayController.NSObjectController }
 
 func (x *DictionaryController) asController() *raw.NSController { return &x.inner.NSArrayController.NSObjectController.NSController }
+
+// DictionaryControllerable is the interface implemented by [DictionaryController], for mocking and DI.
+type DictionaryControllerable interface {
+	Unwrap() *raw.NSDictionaryController
+	WithInitialKey(initialKey string) *DictionaryController
+	WithInitialValue(initialValue objc.ID) *DictionaryController
+	WithIncludedKeys(items ...*foundation.NSString) *DictionaryController
+	WithExcludedKeys(items ...*foundation.NSString) *DictionaryController
+	WithLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *DictionaryController
+	WithLocalizedKeyTable(localizedKeyTable string) *DictionaryController
+	SetInitialKey(initialKey string)
+	SetInitialValue(initialValue objc.ID)
+	IncludedKeys() []string
+	SetIncludedKeys(includedKeys *foundation.NSArray[*foundation.NSString])
+	ExcludedKeys() []string
+	SetExcludedKeys(excludedKeys *foundation.NSArray[*foundation.NSString])
+	LocalizedKeyDictionary() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	SetLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	LocalizedKeyTable() string
+	SetLocalizedKeyTable(localizedKeyTable string)
+}
+
+var _ DictionaryControllerable = (*DictionaryController)(nil)
 

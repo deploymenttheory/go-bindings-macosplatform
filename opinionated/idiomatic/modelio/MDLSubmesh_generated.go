@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -63,4 +64,92 @@ func (x *Submesh) WithName(name string) *Submesh {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
+
+// IndexBufferAsIndexType calls the underlying IndexBufferAsIndexType.
+func (x *Submesh) IndexBufferAsIndexType(indexType raw.MDLIndexBitDepth) raw.MDLMeshBuffer {
+	return x.inner.IndexBufferAsIndexType(indexType)
+}
+
+// IndexBuffer calls the underlying IndexBuffer.
+func (x *Submesh) IndexBuffer() raw.MDLMeshBuffer {
+	return x.inner.IndexBuffer()
+}
+
+// IndexCount calls the underlying IndexCount.
+func (x *Submesh) IndexCount() uint {
+	return x.inner.IndexCount()
+}
+
+// IndexType calls the underlying IndexType.
+func (x *Submesh) IndexType() raw.MDLIndexBitDepth {
+	return x.inner.IndexType()
+}
+
+// GeometryType calls the underlying GeometryType.
+func (x *Submesh) GeometryType() raw.MDLGeometryType {
+	return x.inner.GeometryType()
+}
+
+// Material calls the underlying Material.
+func (x *Submesh) Material() *Material {
+	_r := x.inner.Material()
+	if _r == nil {
+		return nil
+	}
+	return &Material{inner: _r}
+}
+
+// SetMaterial calls the underlying SetMaterial.
+func (x *Submesh) SetMaterial(material *raw.MDLMaterial) {
+	x.inner.SetMaterial(material)
+}
+
+// Topology calls the underlying Topology.
+func (x *Submesh) Topology() *SubmeshTopology {
+	_r := x.inner.Topology()
+	if _r == nil {
+		return nil
+	}
+	return &SubmeshTopology{inner: _r}
+}
+
+// SetTopology calls the underlying SetTopology.
+func (x *Submesh) SetTopology(topology *raw.MDLSubmeshTopology) {
+	x.inner.SetTopology(topology)
+}
+
+// Name calls the underlying Name.
+func (x *Submesh) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *Submesh) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Submeshable is the interface implemented by [Submesh], for mocking and DI.
+type Submeshable interface {
+	Unwrap() *raw.MDLSubmesh
+	WithMaterial(material *raw.MDLMaterial) *Submesh
+	WithTopology(topology *raw.MDLSubmeshTopology) *Submesh
+	WithName(name string) *Submesh
+	IndexBufferAsIndexType(indexType raw.MDLIndexBitDepth) raw.MDLMeshBuffer
+	IndexBuffer() raw.MDLMeshBuffer
+	IndexCount() uint
+	IndexType() raw.MDLIndexBitDepth
+	GeometryType() raw.MDLGeometryType
+	Material() *Material
+	SetMaterial(material *raw.MDLMaterial)
+	Topology() *SubmeshTopology
+	SetTopology(topology *raw.MDLSubmeshTopology)
+	Name() string
+	SetName(name string)
+}
+
+var _ Submeshable = (*Submesh)(nil)
 

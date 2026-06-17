@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -104,5 +105,189 @@ func (x *LabelNode) WithBlendMode(blendMode raw.SKBlendMode) *LabelNode {
 	return x
 }
 
+// VerticalAlignmentMode calls the underlying VerticalAlignmentMode.
+func (x *LabelNode) VerticalAlignmentMode() raw.SKLabelVerticalAlignmentMode {
+	return x.inner.VerticalAlignmentMode()
+}
+
+// SetVerticalAlignmentMode calls the underlying SetVerticalAlignmentMode.
+func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode) {
+	x.inner.SetVerticalAlignmentMode(verticalAlignmentMode)
+}
+
+// HorizontalAlignmentMode calls the underlying HorizontalAlignmentMode.
+func (x *LabelNode) HorizontalAlignmentMode() raw.SKLabelHorizontalAlignmentMode {
+	return x.inner.HorizontalAlignmentMode()
+}
+
+// SetHorizontalAlignmentMode calls the underlying SetHorizontalAlignmentMode.
+func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode) {
+	x.inner.SetHorizontalAlignmentMode(horizontalAlignmentMode)
+}
+
+// NumberOfLines calls the underlying NumberOfLines.
+func (x *LabelNode) NumberOfLines() int {
+	return x.inner.NumberOfLines()
+}
+
+// SetNumberOfLines calls the underlying SetNumberOfLines.
+func (x *LabelNode) SetNumberOfLines(numberOfLines int) {
+	x.inner.SetNumberOfLines(numberOfLines)
+}
+
+// LineBreakMode calls the underlying LineBreakMode.
+func (x *LabelNode) LineBreakMode() appkit.NSLineBreakMode {
+	return x.inner.LineBreakMode()
+}
+
+// SetLineBreakMode calls the underlying SetLineBreakMode.
+func (x *LabelNode) SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode) {
+	x.inner.SetLineBreakMode(lineBreakMode)
+}
+
+// PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
+func (x *LabelNode) PreferredMaxLayoutWidth() float64 {
+	return x.inner.PreferredMaxLayoutWidth()
+}
+
+// SetPreferredMaxLayoutWidth calls the underlying SetPreferredMaxLayoutWidth.
+func (x *LabelNode) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
+	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+}
+
+// FontName calls the underlying FontName.
+func (x *LabelNode) FontName() string {
+	_r := x.inner.FontName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFontName calls the underlying SetFontName.
+func (x *LabelNode) SetFontName(fontName string) {
+	x.inner.SetFontName(foundation.NSStringStringWithUTF8String(fontName))
+}
+
+// Text calls the underlying Text.
+func (x *LabelNode) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetText calls the underlying SetText.
+func (x *LabelNode) SetText(text string) {
+	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+}
+
+// AttributedText calls the underlying AttributedText.
+func (x *LabelNode) AttributedText() *foundation.NSAttributedString {
+	return x.inner.AttributedText()
+}
+
+// SetAttributedText calls the underlying SetAttributedText.
+func (x *LabelNode) SetAttributedText(attributedText *foundation.NSAttributedString) {
+	x.inner.SetAttributedText(attributedText)
+}
+
+// FontSize calls the underlying FontSize.
+func (x *LabelNode) FontSize() float64 {
+	return x.inner.FontSize()
+}
+
+// SetFontSize calls the underlying SetFontSize.
+func (x *LabelNode) SetFontSize(fontSize float64) {
+	x.inner.SetFontSize(fontSize)
+}
+
+// FontColor calls the underlying FontColor.
+func (x *LabelNode) FontColor() *appkit.NSColor {
+	return x.inner.FontColor()
+}
+
+// SetFontColor calls the underlying SetFontColor.
+func (x *LabelNode) SetFontColor(fontColor *appkit.NSColor) {
+	x.inner.SetFontColor(fontColor)
+}
+
+// ColorBlendFactor calls the underlying ColorBlendFactor.
+func (x *LabelNode) ColorBlendFactor() float64 {
+	return x.inner.ColorBlendFactor()
+}
+
+// SetColorBlendFactor calls the underlying SetColorBlendFactor.
+func (x *LabelNode) SetColorBlendFactor(colorBlendFactor float64) {
+	x.inner.SetColorBlendFactor(colorBlendFactor)
+}
+
+// Color calls the underlying Color.
+func (x *LabelNode) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *LabelNode) SetColor(color *appkit.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// BlendMode calls the underlying BlendMode.
+func (x *LabelNode) BlendMode() raw.SKBlendMode {
+	return x.inner.BlendMode()
+}
+
+// SetBlendMode calls the underlying SetBlendMode.
+func (x *LabelNode) SetBlendMode(blendMode raw.SKBlendMode) {
+	x.inner.SetBlendMode(blendMode)
+}
+
 func (x *LabelNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// LabelNodeable is the interface implemented by [LabelNode], for mocking and DI.
+type LabelNodeable interface {
+	Unwrap() *raw.SKLabelNode
+	WithVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode) *LabelNode
+	WithHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode) *LabelNode
+	WithNumberOfLines(numberOfLines int) *LabelNode
+	WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode
+	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode
+	WithFontName(fontName string) *LabelNode
+	WithText(text string) *LabelNode
+	WithAttributedText(attributedText *foundation.NSAttributedString) *LabelNode
+	WithFontSize(fontSize float64) *LabelNode
+	WithFontColor(fontColor *appkit.NSColor) *LabelNode
+	WithColorBlendFactor(colorBlendFactor float64) *LabelNode
+	WithColor(color *appkit.NSColor) *LabelNode
+	WithBlendMode(blendMode raw.SKBlendMode) *LabelNode
+	VerticalAlignmentMode() raw.SKLabelVerticalAlignmentMode
+	SetVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode)
+	HorizontalAlignmentMode() raw.SKLabelHorizontalAlignmentMode
+	SetHorizontalAlignmentMode(horizontalAlignmentMode raw.SKLabelHorizontalAlignmentMode)
+	NumberOfLines() int
+	SetNumberOfLines(numberOfLines int)
+	LineBreakMode() appkit.NSLineBreakMode
+	SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode)
+	PreferredMaxLayoutWidth() float64
+	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
+	FontName() string
+	SetFontName(fontName string)
+	Text() string
+	SetText(text string)
+	AttributedText() *foundation.NSAttributedString
+	SetAttributedText(attributedText *foundation.NSAttributedString)
+	FontSize() float64
+	SetFontSize(fontSize float64)
+	FontColor() *appkit.NSColor
+	SetFontColor(fontColor *appkit.NSColor)
+	ColorBlendFactor() float64
+	SetColorBlendFactor(colorBlendFactor float64)
+	Color() *appkit.NSColor
+	SetColor(color *appkit.NSColor)
+	BlendMode() raw.SKBlendMode
+	SetBlendMode(blendMode raw.SKBlendMode)
+}
+
+var _ LabelNodeable = (*LabelNode)(nil)
 

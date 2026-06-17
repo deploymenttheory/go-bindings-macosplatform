@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,4 +48,75 @@ func (x *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
 	x.inner.SetAccessoryView(accessoryView.asView())
 	return x
 }
+
+// Title calls the underlying Title.
+func (x *WindowTab) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *WindowTab) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// AttributedTitle calls the underlying AttributedTitle.
+func (x *WindowTab) AttributedTitle() *foundation.NSAttributedString {
+	return x.inner.AttributedTitle()
+}
+
+// SetAttributedTitle calls the underlying SetAttributedTitle.
+func (x *WindowTab) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
+	x.inner.SetAttributedTitle(attributedTitle)
+}
+
+// ToolTip calls the underlying ToolTip.
+func (x *WindowTab) ToolTip() string {
+	_r := x.inner.ToolTip()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetToolTip calls the underlying SetToolTip.
+func (x *WindowTab) SetToolTip(toolTip string) {
+	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+}
+
+// AccessoryView calls the underlying AccessoryView.
+func (x *WindowTab) AccessoryView() *View {
+	_r := x.inner.AccessoryView()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetAccessoryView calls the underlying SetAccessoryView.
+func (x *WindowTab) SetAccessoryView(accessoryView *raw.NSView) {
+	x.inner.SetAccessoryView(accessoryView)
+}
+
+// WindowTabable is the interface implemented by [WindowTab], for mocking and DI.
+type WindowTabable interface {
+	Unwrap() *raw.NSWindowTab
+	WithTitle(title string) *WindowTab
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *WindowTab
+	WithToolTip(toolTip string) *WindowTab
+	WithAccessoryView(accessoryView ViewProvider) *WindowTab
+	Title() string
+	SetTitle(title string)
+	AttributedTitle() *foundation.NSAttributedString
+	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	ToolTip() string
+	SetToolTip(toolTip string)
+	AccessoryView() *View
+	SetAccessoryView(accessoryView *raw.NSView)
+}
+
+var _ WindowTabable = (*WindowTab)(nil)
 

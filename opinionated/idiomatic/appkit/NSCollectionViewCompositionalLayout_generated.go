@@ -51,5 +51,29 @@ func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *raw
 	return x
 }
 
+// Configuration calls the underlying Configuration.
+func (x *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionViewCompositionalLayoutConfiguration{inner: _r}
+}
+
+// SetConfiguration calls the underlying SetConfiguration.
+func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) {
+	x.inner.SetConfiguration(configuration)
+}
+
 func (x *CollectionViewCompositionalLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout { return &x.inner.NSCollectionViewLayout }
+
+// CollectionViewCompositionalLayoutable is the interface implemented by [CollectionViewCompositionalLayout], for mocking and DI.
+type CollectionViewCompositionalLayoutable interface {
+	Unwrap() *raw.NSCollectionViewCompositionalLayout
+	WithConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout
+	Configuration() *CollectionViewCompositionalLayoutConfiguration
+	SetConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration)
+}
+
+var _ CollectionViewCompositionalLayoutable = (*CollectionViewCompositionalLayout)(nil)
 

@@ -29,3 +29,10 @@ func (x *NEEthernetTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { 
 
 func (x *NEEthernetTunnelProvider) asNEProvider() *raw.NEProvider { return &x.inner.NEPacketTunnelProvider.NETunnelProvider.NEProvider }
 
+// NEEthernetTunnelProviderable is the interface implemented by [NEEthernetTunnelProvider], for mocking and DI.
+type NEEthernetTunnelProviderable interface {
+	Unwrap() *raw.NEEthernetTunnelProvider
+}
+
+var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)
+

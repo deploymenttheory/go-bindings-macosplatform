@@ -7,7 +7,9 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TextLayer wraps [raw.CATextLayer] with a fluent Go API.
@@ -60,5 +62,122 @@ func (x *TextLayer) WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantiz
 	return x
 }
 
+// String calls the underlying String.
+func (x *TextLayer) String() objc.ID {
+	return x.inner.String()
+}
+
+// SetString calls the underlying SetString.
+func (x *TextLayer) SetString(string_ objc.ID) {
+	x.inner.SetString(string_)
+}
+
+// Font calls the underlying Font.
+func (x *TextLayer) Font() unsafe.Pointer {
+	return x.inner.Font()
+}
+
+// SetFont calls the underlying SetFont.
+func (x *TextLayer) SetFont(font unsafe.Pointer) {
+	x.inner.SetFont(font)
+}
+
+// FontSize calls the underlying FontSize.
+func (x *TextLayer) FontSize() float64 {
+	return x.inner.FontSize()
+}
+
+// SetFontSize calls the underlying SetFontSize.
+func (x *TextLayer) SetFontSize(fontSize float64) {
+	x.inner.SetFontSize(fontSize)
+}
+
+// ForegroundColor calls the underlying ForegroundColor.
+func (x *TextLayer) ForegroundColor() unsafe.Pointer {
+	return x.inner.ForegroundColor()
+}
+
+// SetForegroundColor calls the underlying SetForegroundColor.
+func (x *TextLayer) SetForegroundColor(foregroundColor unsafe.Pointer) {
+	x.inner.SetForegroundColor(foregroundColor)
+}
+
+// IsWrapped calls the underlying IsWrapped.
+func (x *TextLayer) IsWrapped() bool {
+	return x.inner.IsWrapped()
+}
+
+// SetWrapped calls the underlying SetWrapped.
+func (x *TextLayer) SetWrapped(wrapped bool) {
+	x.inner.SetWrapped(wrapped)
+}
+
+// TruncationMode calls the underlying TruncationMode.
+func (x *TextLayer) TruncationMode() string {
+	_r := x.inner.TruncationMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTruncationMode calls the underlying SetTruncationMode.
+func (x *TextLayer) SetTruncationMode(truncationMode *foundation.NSString) {
+	x.inner.SetTruncationMode(truncationMode)
+}
+
+// AlignmentMode calls the underlying AlignmentMode.
+func (x *TextLayer) AlignmentMode() string {
+	_r := x.inner.AlignmentMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlignmentMode calls the underlying SetAlignmentMode.
+func (x *TextLayer) SetAlignmentMode(alignmentMode *foundation.NSString) {
+	x.inner.SetAlignmentMode(alignmentMode)
+}
+
+// AllowsFontSubpixelQuantization calls the underlying AllowsFontSubpixelQuantization.
+func (x *TextLayer) AllowsFontSubpixelQuantization() bool {
+	return x.inner.AllowsFontSubpixelQuantization()
+}
+
+// SetAllowsFontSubpixelQuantization calls the underlying SetAllowsFontSubpixelQuantization.
+func (x *TextLayer) SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) {
+	x.inner.SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization)
+}
+
 func (x *TextLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
+
+// TextLayerable is the interface implemented by [TextLayer], for mocking and DI.
+type TextLayerable interface {
+	Unwrap() *raw.CATextLayer
+	WithString(string_ objc.ID) *TextLayer
+	WithFontSize(fontSize float64) *TextLayer
+	WithWrapped(wrapped bool) *TextLayer
+	WithTruncationMode(truncationMode *foundation.NSString) *TextLayer
+	WithAlignmentMode(alignmentMode *foundation.NSString) *TextLayer
+	WithAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool) *TextLayer
+	String() objc.ID
+	SetString(string_ objc.ID)
+	Font() unsafe.Pointer
+	SetFont(font unsafe.Pointer)
+	FontSize() float64
+	SetFontSize(fontSize float64)
+	ForegroundColor() unsafe.Pointer
+	SetForegroundColor(foregroundColor unsafe.Pointer)
+	IsWrapped() bool
+	SetWrapped(wrapped bool)
+	TruncationMode() string
+	SetTruncationMode(truncationMode *foundation.NSString)
+	AlignmentMode() string
+	SetAlignmentMode(alignmentMode *foundation.NSString)
+	AllowsFontSubpixelQuantization() bool
+	SetAllowsFontSubpixelQuantization(allowsFontSubpixelQuantization bool)
+}
+
+var _ TextLayerable = (*TextLayer)(nil)
 

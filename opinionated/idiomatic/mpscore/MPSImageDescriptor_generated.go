@@ -72,3 +72,120 @@ func (x *ImageDescriptor) WithUsage(usage metal.MTLTextureUsage) *ImageDescripto
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *ImageDescriptor) Width() uint {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *ImageDescriptor) SetWidth(width uint) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *ImageDescriptor) Height() uint {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *ImageDescriptor) SetHeight(height uint) {
+	x.inner.SetHeight(height)
+}
+
+// FeatureChannels calls the underlying FeatureChannels.
+func (x *ImageDescriptor) FeatureChannels() uint {
+	return x.inner.FeatureChannels()
+}
+
+// SetFeatureChannels calls the underlying SetFeatureChannels.
+func (x *ImageDescriptor) SetFeatureChannels(featureChannels uint) {
+	x.inner.SetFeatureChannels(featureChannels)
+}
+
+// NumberOfImages calls the underlying NumberOfImages.
+func (x *ImageDescriptor) NumberOfImages() uint {
+	return x.inner.NumberOfImages()
+}
+
+// SetNumberOfImages calls the underlying SetNumberOfImages.
+func (x *ImageDescriptor) SetNumberOfImages(numberOfImages uint) {
+	x.inner.SetNumberOfImages(numberOfImages)
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *ImageDescriptor) PixelFormat() metal.MTLPixelFormat {
+	return x.inner.PixelFormat()
+}
+
+// ChannelFormat calls the underlying ChannelFormat.
+func (x *ImageDescriptor) ChannelFormat() raw.MPSImageFeatureChannelFormat {
+	return x.inner.ChannelFormat()
+}
+
+// SetChannelFormat calls the underlying SetChannelFormat.
+func (x *ImageDescriptor) SetChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat) {
+	x.inner.SetChannelFormat(channelFormat)
+}
+
+// CpuCacheMode calls the underlying CpuCacheMode.
+func (x *ImageDescriptor) CpuCacheMode() metal.MTLCPUCacheMode {
+	return x.inner.CpuCacheMode()
+}
+
+// SetCpuCacheMode calls the underlying SetCpuCacheMode.
+func (x *ImageDescriptor) SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) {
+	x.inner.SetCpuCacheMode(cpuCacheMode)
+}
+
+// StorageMode calls the underlying StorageMode.
+func (x *ImageDescriptor) StorageMode() metal.MTLStorageMode {
+	return x.inner.StorageMode()
+}
+
+// SetStorageMode calls the underlying SetStorageMode.
+func (x *ImageDescriptor) SetStorageMode(storageMode metal.MTLStorageMode) {
+	x.inner.SetStorageMode(storageMode)
+}
+
+// Usage calls the underlying Usage.
+func (x *ImageDescriptor) Usage() metal.MTLTextureUsage {
+	return x.inner.Usage()
+}
+
+// SetUsage calls the underlying SetUsage.
+func (x *ImageDescriptor) SetUsage(usage metal.MTLTextureUsage) {
+	x.inner.SetUsage(usage)
+}
+
+// ImageDescriptorable is the interface implemented by [ImageDescriptor], for mocking and DI.
+type ImageDescriptorable interface {
+	Unwrap() *raw.MPSImageDescriptor
+	WithWidth(width uint) *ImageDescriptor
+	WithHeight(height uint) *ImageDescriptor
+	WithFeatureChannels(featureChannels uint) *ImageDescriptor
+	WithNumberOfImages(numberOfImages uint) *ImageDescriptor
+	WithChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat) *ImageDescriptor
+	WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor
+	WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor
+	WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor
+	Width() uint
+	SetWidth(width uint)
+	Height() uint
+	SetHeight(height uint)
+	FeatureChannels() uint
+	SetFeatureChannels(featureChannels uint)
+	NumberOfImages() uint
+	SetNumberOfImages(numberOfImages uint)
+	PixelFormat() metal.MTLPixelFormat
+	ChannelFormat() raw.MPSImageFeatureChannelFormat
+	SetChannelFormat(channelFormat raw.MPSImageFeatureChannelFormat)
+	CpuCacheMode() metal.MTLCPUCacheMode
+	SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode)
+	StorageMode() metal.MTLStorageMode
+	SetStorageMode(storageMode metal.MTLStorageMode)
+	Usage() metal.MTLTextureUsage
+	SetUsage(usage metal.MTLTextureUsage)
+}
+
+var _ ImageDescriptorable = (*ImageDescriptor)(nil)
+

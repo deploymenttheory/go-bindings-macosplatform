@@ -25,3 +25,22 @@ func NewCNNNormalizationMeanAndVarianceStateWithMeanVariance(mean metal.MTLBuffe
 	return &CNNNormalizationMeanAndVarianceState{inner: raw.MPSCNNNormalizationMeanAndVarianceStateFromID(_id)}
 }
 
+// Mean calls the underlying Mean.
+func (x *CNNNormalizationMeanAndVarianceState) Mean() metal.MTLBuffer {
+	return x.inner.Mean()
+}
+
+// Variance calls the underlying Variance.
+func (x *CNNNormalizationMeanAndVarianceState) Variance() metal.MTLBuffer {
+	return x.inner.Variance()
+}
+
+// CNNNormalizationMeanAndVarianceStateable is the interface implemented by [CNNNormalizationMeanAndVarianceState], for mocking and DI.
+type CNNNormalizationMeanAndVarianceStateable interface {
+	Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState
+	Mean() metal.MTLBuffer
+	Variance() metal.MTLBuffer
+}
+
+var _ CNNNormalizationMeanAndVarianceStateable = (*CNNNormalizationMeanAndVarianceState)(nil)
+

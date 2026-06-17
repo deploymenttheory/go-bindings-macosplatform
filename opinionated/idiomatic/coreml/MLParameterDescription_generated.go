@@ -23,3 +23,36 @@ func NewParameterDescription() *ParameterDescription {
 	return &ParameterDescription{inner: raw.MLParameterDescriptionFromID(_id)}
 }
 
+// Key calls the underlying Key.
+func (x *ParameterDescription) Key() *ParameterKey {
+	_r := x.inner.Key()
+	if _r == nil {
+		return nil
+	}
+	return &ParameterKey{inner: _r}
+}
+
+// DefaultValue calls the underlying DefaultValue.
+func (x *ParameterDescription) DefaultValue() objc.ID {
+	return x.inner.DefaultValue()
+}
+
+// NumericConstraint calls the underlying NumericConstraint.
+func (x *ParameterDescription) NumericConstraint() *NumericConstraint {
+	_r := x.inner.NumericConstraint()
+	if _r == nil {
+		return nil
+	}
+	return &NumericConstraint{inner: _r}
+}
+
+// ParameterDescriptionable is the interface implemented by [ParameterDescription], for mocking and DI.
+type ParameterDescriptionable interface {
+	Unwrap() *raw.MLParameterDescription
+	Key() *ParameterKey
+	DefaultValue() objc.ID
+	NumericConstraint() *NumericConstraint
+}
+
+var _ ParameterDescriptionable = (*ParameterDescription)(nil)
+

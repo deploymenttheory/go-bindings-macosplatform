@@ -8,6 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BlockOperation wraps [raw.NSBlockOperation] with a fluent Go API.
@@ -38,7 +39,21 @@ func (x *BlockOperation) AddExecutionBlock(ctx context.Context) error {
 	}
 }
 
+// ExecutionBlocks calls the underlying ExecutionBlocks.
+func (x *BlockOperation) ExecutionBlocks() unsafe.Pointer {
+	return x.inner.ExecutionBlocks()
+}
+
 func (x *BlockOperation) asOperation() *raw.NSOperation { return &x.inner.NSOperation }
 
 func (x *BlockOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.NSObject }
+
+// BlockOperationable is the interface implemented by [BlockOperation], for mocking and DI.
+type BlockOperationable interface {
+	Unwrap() *raw.NSBlockOperation
+	AddExecutionBlock(ctx context.Context) error
+	ExecutionBlocks() unsafe.Pointer
+}
+
+var _ BlockOperationable = (*BlockOperation)(nil)
 

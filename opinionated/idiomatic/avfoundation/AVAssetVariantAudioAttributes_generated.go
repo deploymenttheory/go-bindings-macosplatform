@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,16 +25,32 @@ func NewAssetVariantAudioAttributes() *AssetVariantAudioAttributes {
 	return &AssetVariantAudioAttributes{inner: raw.AVAssetVariantAudioAttributesFromID(_id)}
 }
 
+// RenditionSpecificAttributesForMediaOption calls the underlying RenditionSpecificAttributesForMediaOption.
+func (x *AssetVariantAudioAttributes) RenditionSpecificAttributesForMediaOption(mediaSelectionOption *raw.AVMediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes {
+	_r := x.inner.RenditionSpecificAttributesForMediaOption(mediaSelectionOption)
+	if _r == nil {
+		return nil
+	}
+	return &AssetVariantAudioRenditionSpecificAttributes{inner: _r}
+}
+
 // FormatIDs returns the collection as a Go slice.
 func (x *AssetVariantAudioAttributes) FormatIDs() []*foundation.NSNumber {
 	arr := x.inner.FormatIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// AssetVariantAudioAttributesable is the interface implemented by [AssetVariantAudioAttributes], for mocking and DI.
+type AssetVariantAudioAttributesable interface {
+	Unwrap() *raw.AVAssetVariantAudioAttributes
+	RenditionSpecificAttributesForMediaOption(mediaSelectionOption *raw.AVMediaSelectionOption) *AssetVariantAudioRenditionSpecificAttributes
+	FormatIDs() []*foundation.NSNumber
+}
+
+var _ AssetVariantAudioAttributesable = (*AssetVariantAudioAttributes)(nil)
 

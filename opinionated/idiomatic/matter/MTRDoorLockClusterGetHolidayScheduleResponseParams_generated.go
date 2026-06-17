@@ -67,3 +67,88 @@ func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithTimedInvokeTime
 	return x
 }
 
+// HolidayIndex calls the underlying HolidayIndex.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) HolidayIndex() *foundation.NSNumber {
+	return x.inner.HolidayIndex()
+}
+
+// SetHolidayIndex calls the underlying SetHolidayIndex.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetHolidayIndex(holidayIndex *foundation.NSNumber) {
+	x.inner.SetHolidayIndex(holidayIndex)
+}
+
+// Status calls the underlying Status.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// LocalStartTime calls the underlying LocalStartTime.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalStartTime() *foundation.NSNumber {
+	return x.inner.LocalStartTime()
+}
+
+// SetLocalStartTime calls the underlying SetLocalStartTime.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetLocalStartTime(localStartTime *foundation.NSNumber) {
+	x.inner.SetLocalStartTime(localStartTime)
+}
+
+// LocalEndTime calls the underlying LocalEndTime.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalEndTime() *foundation.NSNumber {
+	return x.inner.LocalEndTime()
+}
+
+// SetLocalEndTime calls the underlying SetLocalEndTime.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetLocalEndTime(localEndTime *foundation.NSNumber) {
+	x.inner.SetLocalEndTime(localEndTime)
+}
+
+// OperatingMode calls the underlying OperatingMode.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) OperatingMode() *foundation.NSNumber {
+	return x.inner.OperatingMode()
+}
+
+// SetOperatingMode calls the underlying SetOperatingMode.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetOperatingMode(operatingMode *foundation.NSNumber) {
+	x.inner.SetOperatingMode(operatingMode)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetHolidayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRDoorLockClusterGetHolidayScheduleResponseParamsable is the interface implemented by [MTRDoorLockClusterGetHolidayScheduleResponseParams], for mocking and DI.
+type MTRDoorLockClusterGetHolidayScheduleResponseParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithHolidayIndex(holidayIndex *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithLocalStartTime(localStartTime *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithLocalEndTime(localEndTime *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithOperatingMode(operatingMode *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetHolidayScheduleResponseParams
+	HolidayIndex() *foundation.NSNumber
+	SetHolidayIndex(holidayIndex *foundation.NSNumber)
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	LocalStartTime() *foundation.NSNumber
+	SetLocalStartTime(localStartTime *foundation.NSNumber)
+	LocalEndTime() *foundation.NSNumber
+	SetLocalEndTime(localEndTime *foundation.NSNumber)
+	OperatingMode() *foundation.NSNumber
+	SetOperatingMode(operatingMode *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterGetHolidayScheduleResponseParamsable = (*MTRDoorLockClusterGetHolidayScheduleResponseParams)(nil)
+

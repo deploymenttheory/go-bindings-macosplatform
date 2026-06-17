@@ -29,3 +29,27 @@ func (x *MTROperationalStateClusterOperationalErrorEvent) WithErrorState(errorSt
 	return x
 }
 
+// ErrorState calls the underlying ErrorState.
+func (x *MTROperationalStateClusterOperationalErrorEvent) ErrorState() *MTROperationalStateClusterErrorStateStruct {
+	_r := x.inner.ErrorState()
+	if _r == nil {
+		return nil
+	}
+	return &MTROperationalStateClusterErrorStateStruct{inner: _r}
+}
+
+// SetErrorState calls the underlying SetErrorState.
+func (x *MTROperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct) {
+	x.inner.SetErrorState(errorState)
+}
+
+// MTROperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROperationalStateClusterOperationalErrorEvent], for mocking and DI.
+type MTROperationalStateClusterOperationalErrorEventable interface {
+	Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent
+	WithErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent
+	ErrorState() *MTROperationalStateClusterErrorStateStruct
+	SetErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct)
+}
+
+var _ MTROperationalStateClusterOperationalErrorEventable = (*MTROperationalStateClusterOperationalErrorEvent)(nil)
+

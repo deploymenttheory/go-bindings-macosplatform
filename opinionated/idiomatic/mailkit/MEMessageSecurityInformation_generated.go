@@ -7,6 +7,7 @@ package mailkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -39,10 +40,50 @@ func (x *MessageSecurityInformation) Signers() []*raw.MEMessageSigner {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEMessageSigner, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEMessageSigner {
+		return raw.MEMessageSignerFromID(purego.Retain(_id))
+	})
 }
+
+// IsEncrypted calls the underlying IsEncrypted.
+func (x *MessageSecurityInformation) IsEncrypted() bool {
+	return x.inner.IsEncrypted()
+}
+
+// SigningError calls the underlying SigningError.
+func (x *MessageSecurityInformation) SigningError() unsafe.Pointer {
+	return x.inner.SigningError()
+}
+
+// EncryptionError calls the underlying EncryptionError.
+func (x *MessageSecurityInformation) EncryptionError() unsafe.Pointer {
+	return x.inner.EncryptionError()
+}
+
+// ShouldBlockRemoteContent calls the underlying ShouldBlockRemoteContent.
+func (x *MessageSecurityInformation) ShouldBlockRemoteContent() bool {
+	return x.inner.ShouldBlockRemoteContent()
+}
+
+// LocalizedRemoteContentBlockingReason calls the underlying LocalizedRemoteContentBlockingReason.
+func (x *MessageSecurityInformation) LocalizedRemoteContentBlockingReason() string {
+	_r := x.inner.LocalizedRemoteContentBlockingReason()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MessageSecurityInformationable is the interface implemented by [MessageSecurityInformation], for mocking and DI.
+type MessageSecurityInformationable interface {
+	Unwrap() *raw.MEMessageSecurityInformation
+	Signers() []*raw.MEMessageSigner
+	IsEncrypted() bool
+	SigningError() unsafe.Pointer
+	EncryptionError() unsafe.Pointer
+	ShouldBlockRemoteContent() bool
+	LocalizedRemoteContentBlockingReason() string
+}
+
+var _ MessageSecurityInformationable = (*MessageSecurityInformation)(nil)
 

@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -60,16 +61,86 @@ func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...*foundatio
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *CollaborationOption) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *CollaborationOption) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Identifier calls the underlying Identifier.
+func (x *CollaborationOption) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *CollaborationOption) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *CollaborationOption) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// IsSelected calls the underlying IsSelected.
+func (x *CollaborationOption) IsSelected() bool {
+	return x.inner.IsSelected()
+}
+
+// SetSelected calls the underlying SetSelected.
+func (x *CollaborationOption) SetSelected(selected bool) {
+	x.inner.SetSelected(selected)
+}
+
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
-func (x *CollaborationOption) RequiredOptionsIdentifiers() []*foundation.NSString {
+func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
 	arr := x.inner.RequiredOptionsIdentifiers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
+
+// SetRequiredOptionsIdentifiers calls the underlying SetRequiredOptionsIdentifiers.
+func (x *CollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers)
+}
+
+// CollaborationOptionable is the interface implemented by [CollaborationOption], for mocking and DI.
+type CollaborationOptionable interface {
+	Unwrap() *raw.SWCollaborationOption
+	WithTitle(title string) *CollaborationOption
+	WithSubtitle(subtitle string) *CollaborationOption
+	WithSelected(selected bool) *CollaborationOption
+	WithRequiredOptionsIdentifiers(items ...*foundation.NSString) *CollaborationOption
+	Title() string
+	SetTitle(title string)
+	Identifier() string
+	Subtitle() string
+	SetSubtitle(subtitle string)
+	IsSelected() bool
+	SetSelected(selected bool)
+	RequiredOptionsIdentifiers() []string
+	SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString])
+}
+
+var _ CollaborationOptionable = (*CollaborationOption)(nil)
 

@@ -61,5 +61,47 @@ func (x *MutableCaptionRegion) WithWritingMode(writingMode raw.AVCaptionRegionWr
 	return x
 }
 
+// SetOrigin calls the underlying SetOrigin.
+func (x *MutableCaptionRegion) SetOrigin(origin raw.AVCaptionPoint) {
+	x.inner.SetOrigin(origin)
+}
+
+// SetSize calls the underlying SetSize.
+func (x *MutableCaptionRegion) SetSize(size raw.AVCaptionSize) {
+	x.inner.SetSize(size)
+}
+
+// SetScroll calls the underlying SetScroll.
+func (x *MutableCaptionRegion) SetScroll(scroll raw.AVCaptionRegionScroll) {
+	x.inner.SetScroll(scroll)
+}
+
+// SetDisplayAlignment calls the underlying SetDisplayAlignment.
+func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment) {
+	x.inner.SetDisplayAlignment(displayAlignment)
+}
+
+// SetWritingMode calls the underlying SetWritingMode.
+func (x *MutableCaptionRegion) SetWritingMode(writingMode raw.AVCaptionRegionWritingMode) {
+	x.inner.SetWritingMode(writingMode)
+}
+
 func (x *MutableCaptionRegion) asCaptionRegion() *raw.AVCaptionRegion { return &x.inner.AVCaptionRegion }
+
+// MutableCaptionRegionable is the interface implemented by [MutableCaptionRegion], for mocking and DI.
+type MutableCaptionRegionable interface {
+	Unwrap() *raw.AVMutableCaptionRegion
+	WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion
+	WithSize(size raw.AVCaptionSize) *MutableCaptionRegion
+	WithScroll(scroll raw.AVCaptionRegionScroll) *MutableCaptionRegion
+	WithDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment) *MutableCaptionRegion
+	WithWritingMode(writingMode raw.AVCaptionRegionWritingMode) *MutableCaptionRegion
+	SetOrigin(origin raw.AVCaptionPoint)
+	SetSize(size raw.AVCaptionSize)
+	SetScroll(scroll raw.AVCaptionRegionScroll)
+	SetDisplayAlignment(displayAlignment raw.AVCaptionRegionDisplayAlignment)
+	SetWritingMode(writingMode raw.AVCaptionRegionWritingMode)
+}
+
+var _ MutableCaptionRegionable = (*MutableCaptionRegion)(nil)
 

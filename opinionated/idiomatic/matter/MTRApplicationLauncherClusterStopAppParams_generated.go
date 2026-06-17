@@ -42,3 +42,53 @@ func (x *MTRApplicationLauncherClusterStopAppParams) WithServerSideProcessingTim
 	return x
 }
 
+// Application calls the underlying Application.
+func (x *MTRApplicationLauncherClusterStopAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := x.inner.Application()
+	if _r == nil {
+		return nil
+	}
+	return &MTRApplicationLauncherClusterApplicationStruct{inner: _r}
+}
+
+// SetApplication calls the underlying SetApplication.
+func (x *MTRApplicationLauncherClusterStopAppParams) SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct) {
+	x.inner.SetApplication(application)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterStopAppParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRApplicationLauncherClusterStopAppParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterStopAppParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRApplicationLauncherClusterStopAppParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRApplicationLauncherClusterStopAppParamsable is the interface implemented by [MTRApplicationLauncherClusterStopAppParams], for mocking and DI.
+type MTRApplicationLauncherClusterStopAppParamsable interface {
+	Unwrap() *raw.MTRApplicationLauncherClusterStopAppParams
+	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterStopAppParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRApplicationLauncherClusterStopAppParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRApplicationLauncherClusterStopAppParams
+	Application() *MTRApplicationLauncherClusterApplicationStruct
+	SetApplication(application *raw.MTRApplicationLauncherClusterApplicationStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRApplicationLauncherClusterStopAppParamsable = (*MTRApplicationLauncherClusterStopAppParams)(nil)
+

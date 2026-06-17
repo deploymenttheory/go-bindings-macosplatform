@@ -5,6 +5,7 @@
 package photos
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,26 @@ func NewAssetCreationRequest() *AssetCreationRequest {
 	return &AssetCreationRequest{inner: raw.PHAssetCreationRequestFromID(_id)}
 }
 
+// AddResourceWithTypeFileURLOptions calls the underlying AddResourceWithTypeFileURLOptions.
+func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
+	x.inner.AddResourceWithTypeFileURLOptions(type_, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
+}
+
+// AddResourceWithTypeDataOptions calls the underlying AddResourceWithTypeDataOptions.
+func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions) {
+	x.inner.AddResourceWithTypeDataOptions(type_, data, options)
+}
+
 func (x *AssetCreationRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest { return &x.inner.PHAssetChangeRequest }
 
 func (x *AssetCreationRequest) asChangeRequest() *raw.PHChangeRequest { return &x.inner.PHAssetChangeRequest.PHChangeRequest }
+
+// AssetCreationRequestable is the interface implemented by [AssetCreationRequest], for mocking and DI.
+type AssetCreationRequestable interface {
+	Unwrap() *raw.PHAssetCreationRequest
+	AddResourceWithTypeFileURLOptions(type_ raw.PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
+	AddResourceWithTypeDataOptions(type_ raw.PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
+}
+
+var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)
 

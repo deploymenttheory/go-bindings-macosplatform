@@ -38,3 +38,63 @@ func (x *SVGFDenoiser) WithBilateralFilterIterations(bilateralFilterIterations u
 	return x
 }
 
+// ClearTemporalHistory calls the underlying ClearTemporalHistory.
+func (x *SVGFDenoiser) ClearTemporalHistory() {
+	x.inner.ClearTemporalHistory()
+}
+
+// ReleaseTemporaryTextures calls the underlying ReleaseTemporaryTextures.
+func (x *SVGFDenoiser) ReleaseTemporaryTextures() {
+	x.inner.ReleaseTemporaryTextures()
+}
+
+// EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
+func (x *SVGFDenoiser) EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) metal.MTLTexture {
+	return x.inner.EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
+}
+
+// EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture calls the underlying EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture.
+func (x *SVGFDenoiser) EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) {
+	x.inner.EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer, sourceTexture, destinationTexture, sourceTexture2, destinationTexture2, motionVectorTexture, depthNormalTexture, previousDepthNormalTexture)
+}
+
+// Svgf calls the underlying Svgf.
+func (x *SVGFDenoiser) Svgf() *SVGF {
+	_r := x.inner.Svgf()
+	if _r == nil {
+		return nil
+	}
+	return &SVGF{inner: _r}
+}
+
+// TextureAllocator calls the underlying TextureAllocator.
+func (x *SVGFDenoiser) TextureAllocator() raw.MPSSVGFTextureAllocator {
+	return x.inner.TextureAllocator()
+}
+
+// BilateralFilterIterations calls the underlying BilateralFilterIterations.
+func (x *SVGFDenoiser) BilateralFilterIterations() uint {
+	return x.inner.BilateralFilterIterations()
+}
+
+// SetBilateralFilterIterations calls the underlying SetBilateralFilterIterations.
+func (x *SVGFDenoiser) SetBilateralFilterIterations(bilateralFilterIterations uint) {
+	x.inner.SetBilateralFilterIterations(bilateralFilterIterations)
+}
+
+// SVGFDenoiserable is the interface implemented by [SVGFDenoiser], for mocking and DI.
+type SVGFDenoiserable interface {
+	Unwrap() *raw.MPSSVGFDenoiser
+	WithBilateralFilterIterations(bilateralFilterIterations uint) *SVGFDenoiser
+	ClearTemporalHistory()
+	ReleaseTemporaryTextures()
+	EncodeToCommandBufferSourceTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture) metal.MTLTexture
+	EncodeToCommandBufferSourceTextureDestinationTextureSourceTexture2DestinationTexture2MotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture, sourceTexture2 metal.MTLTexture, destinationTexture2 metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture)
+	Svgf() *SVGF
+	TextureAllocator() raw.MPSSVGFTextureAllocator
+	BilateralFilterIterations() uint
+	SetBilateralFilterIterations(bilateralFilterIterations uint)
+}
+
+var _ SVGFDenoiserable = (*SVGFDenoiser)(nil)
+

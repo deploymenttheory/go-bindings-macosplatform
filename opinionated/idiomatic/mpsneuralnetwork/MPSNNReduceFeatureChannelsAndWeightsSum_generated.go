@@ -40,7 +40,20 @@ func NewNNReduceFeatureChannelsAndWeightsSumWithCoderDevice(aDecoder *foundation
 	return &NNReduceFeatureChannelsAndWeightsSum{inner: raw.MPSNNReduceFeatureChannelsAndWeightsSumFromID(_id)}
 }
 
+// DoWeightedSumByNonZeroWeights calls the underlying DoWeightedSumByNonZeroWeights.
+func (x *NNReduceFeatureChannelsAndWeightsSum) DoWeightedSumByNonZeroWeights() bool {
+	return x.inner.DoWeightedSumByNonZeroWeights()
+}
+
 func (x *NNReduceFeatureChannelsAndWeightsSum) asNNReduceBinary() *raw.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
 
 func (x *NNReduceFeatureChannelsAndWeightsSum) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
+
+// NNReduceFeatureChannelsAndWeightsSumable is the interface implemented by [NNReduceFeatureChannelsAndWeightsSum], for mocking and DI.
+type NNReduceFeatureChannelsAndWeightsSumable interface {
+	Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsSum
+	DoWeightedSumByNonZeroWeights() bool
+}
+
+var _ NNReduceFeatureChannelsAndWeightsSumable = (*NNReduceFeatureChannelsAndWeightsSum)(nil)
 

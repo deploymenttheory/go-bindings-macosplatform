@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *CaptureDeviceDiscoverySession) Devices() []*raw.AVCaptureDevice {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCaptureDevice, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCaptureDevice {
+		return raw.AVCaptureDeviceFromID(purego.Retain(_id))
+	})
 }
+
+// CaptureDeviceDiscoverySessionable is the interface implemented by [CaptureDeviceDiscoverySession], for mocking and DI.
+type CaptureDeviceDiscoverySessionable interface {
+	Unwrap() *raw.AVCaptureDeviceDiscoverySession
+	Devices() []*raw.AVCaptureDevice
+}
+
+var _ CaptureDeviceDiscoverySessionable = (*CaptureDeviceDiscoverySession)(nil)
 

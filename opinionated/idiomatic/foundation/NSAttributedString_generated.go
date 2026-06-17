@@ -102,7 +102,92 @@ func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAt
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
+// AttributesAtIndexEffectiveRange calls the underlying AttributesAtIndexEffectiveRange.
+func (x *AttributedString) AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.AttributesAtIndexEffectiveRange(location, range_)
+}
+
+// String calls the underlying String.
+func (x *AttributedString) String() *String {
+	_r := x.inner.String()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// AttributeAtIndexEffectiveRange calls the underlying AttributeAtIndexEffectiveRange.
+func (x *AttributedString) AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID {
+	return x.inner.AttributeAtIndexEffectiveRange(attrName, location, range_)
+}
+
+// AttributedSubstringFromRange calls the underlying AttributedSubstringFromRange.
+func (x *AttributedString) AttributedSubstringFromRange(range_ raw.NSRange) *AttributedString {
+	_r := x.inner.AttributedSubstringFromRange(range_)
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
+// AttributesAtIndexLongestEffectiveRangeInRange calls the underlying AttributesAtIndexLongestEffectiveRangeInRange.
+func (x *AttributedString) AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.AttributesAtIndexLongestEffectiveRangeInRange(location, range_, rangeLimit)
+}
+
+// AttributeAtIndexLongestEffectiveRangeInRange calls the underlying AttributeAtIndexLongestEffectiveRangeInRange.
+func (x *AttributedString) AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID {
+	return x.inner.AttributeAtIndexLongestEffectiveRangeInRange(attrName, location, range_, rangeLimit)
+}
+
+// IsEqualToAttributedString calls the underlying IsEqualToAttributedString.
+func (x *AttributedString) IsEqualToAttributedString(other *raw.NSAttributedString) bool {
+	return x.inner.IsEqualToAttributedString(other)
+}
+
+// EnumerateAttributesInRangeOptionsUsing calls the underlying EnumerateAttributesInRangeOptionsUsing.
+func (x *AttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateAttributesInRangeOptionsUsing(enumerationRange, opts, block)
+}
+
+// EnumerateAttributeInRangeOptionsUsing calls the underlying EnumerateAttributeInRangeOptionsUsing.
+func (x *AttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block) {
+	x.inner.EnumerateAttributeInRangeOptionsUsing(attrName, enumerationRange, opts, block)
+}
+
+// Length calls the underlying Length.
+func (x *AttributedString) Length() uint {
+	return x.inner.Length()
+}
+
+// AttributedStringByInflectingString calls the underlying AttributedStringByInflectingString.
+func (x *AttributedString) AttributedStringByInflectingString() *AttributedString {
+	_r := x.inner.AttributedStringByInflectingString()
+	if _r == nil {
+		return nil
+	}
+	return &AttributedString{inner: _r}
+}
+
 func (x *AttributedString) asAttributedString() *raw.NSAttributedString { return x.inner }
 
 func (x *AttributedString) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AttributedStringable is the interface implemented by [AttributedString], for mocking and DI.
+type AttributedStringable interface {
+	Unwrap() *raw.NSAttributedString
+	AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
+	String() *String
+	AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID
+	AttributedSubstringFromRange(range_ raw.NSRange) *AttributedString
+	AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
+	AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID
+	IsEqualToAttributedString(other *raw.NSAttributedString) bool
+	EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block)
+	EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts raw.NSAttributedStringEnumerationOptions, block objc.Block)
+	Length() uint
+	AttributedStringByInflectingString() *AttributedString
+}
+
+var _ AttributedStringable = (*AttributedString)(nil)
 

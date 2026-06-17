@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,22 @@ func NewRecognizedTextObservation() *RecognizedTextObservation {
 	return &RecognizedTextObservation{inner: raw.VNRecognizedTextObservationFromID(_id)}
 }
 
+// TopCandidates calls the underlying TopCandidates.
+func (x *RecognizedTextObservation) TopCandidates(maxCandidateCount uint) *foundation.NSArray[*raw.VNRecognizedText] {
+	return x.inner.TopCandidates(maxCandidateCount)
+}
+
 func (x *RecognizedTextObservation) asRectangleObservation() *raw.VNRectangleObservation { return &x.inner.VNRectangleObservation }
 
 func (x *RecognizedTextObservation) asDetectedObjectObservation() *raw.VNDetectedObjectObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation }
 
 func (x *RecognizedTextObservation) asObservation() *raw.VNObservation { return &x.inner.VNRectangleObservation.VNDetectedObjectObservation.VNObservation }
+
+// RecognizedTextObservationable is the interface implemented by [RecognizedTextObservation], for mocking and DI.
+type RecognizedTextObservationable interface {
+	Unwrap() *raw.VNRecognizedTextObservation
+	TopCandidates(maxCandidateCount uint) *foundation.NSArray[*raw.VNRecognizedText]
+}
+
+var _ RecognizedTextObservationable = (*RecognizedTextObservation)(nil)
 

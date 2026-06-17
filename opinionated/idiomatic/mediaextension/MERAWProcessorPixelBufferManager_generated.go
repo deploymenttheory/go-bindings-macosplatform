@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RAWProcessorPixelBufferManager wraps [raw.MERAWProcessorPixelBufferManager] with a fluent Go API.
@@ -29,4 +30,30 @@ func (x *RAWProcessorPixelBufferManager) WithPixelBufferAttributes(pixelBufferAt
 	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
 	return x
 }
+
+// CreatePixelBufferAndReturnError calls the underlying CreatePixelBufferAndReturnError.
+func (x *RAWProcessorPixelBufferManager) CreatePixelBufferAndReturnError() (unsafe.Pointer, error) {
+	return x.inner.CreatePixelBufferAndReturnError()
+}
+
+// PixelBufferAttributes calls the underlying PixelBufferAttributes.
+func (x *RAWProcessorPixelBufferManager) PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PixelBufferAttributes()
+}
+
+// SetPixelBufferAttributes calls the underlying SetPixelBufferAttributes.
+func (x *RAWProcessorPixelBufferManager) SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPixelBufferAttributes(pixelBufferAttributes)
+}
+
+// RAWProcessorPixelBufferManagerable is the interface implemented by [RAWProcessorPixelBufferManager], for mocking and DI.
+type RAWProcessorPixelBufferManagerable interface {
+	Unwrap() *raw.MERAWProcessorPixelBufferManager
+	WithPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID]) *RAWProcessorPixelBufferManager
+	CreatePixelBufferAndReturnError() (unsafe.Pointer, error)
+	PixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPixelBufferAttributes(pixelBufferAttributes *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ RAWProcessorPixelBufferManagerable = (*RAWProcessorPixelBufferManager)(nil)
 

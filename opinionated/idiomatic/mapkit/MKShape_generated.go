@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,5 +37,46 @@ func (x *Shape) WithSubtitle(subtitle string) *Shape {
 	return x
 }
 
+// Title calls the underlying Title.
+func (x *Shape) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *Shape) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *Shape) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *Shape) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
 func (x *Shape) asShape() *raw.MKShape { return x.inner }
+
+// Shapeable is the interface implemented by [Shape], for mocking and DI.
+type Shapeable interface {
+	Unwrap() *raw.MKShape
+	WithTitle(title string) *Shape
+	WithSubtitle(subtitle string) *Shape
+	Title() string
+	SetTitle(title string)
+	Subtitle() string
+	SetSubtitle(subtitle string)
+}
+
+var _ Shapeable = (*Shape)(nil)
 

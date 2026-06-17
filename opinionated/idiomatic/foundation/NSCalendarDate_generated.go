@@ -46,7 +46,136 @@ func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month uin
 	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
 }
 
+// DateByAddingYearsMonthsDaysHoursMinutesSeconds calls the underlying DateByAddingYearsMonthsDaysHoursMinutesSeconds.
+func (x *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate {
+	_r := x.inner.DateByAddingYearsMonthsDaysHoursMinutesSeconds(year, month, day, hour, minute, second)
+	if _r == nil {
+		return nil
+	}
+	return &CalendarDate{inner: _r}
+}
+
+// DayOfCommonEra calls the underlying DayOfCommonEra.
+func (x *CalendarDate) DayOfCommonEra() int {
+	return x.inner.DayOfCommonEra()
+}
+
+// DayOfMonth calls the underlying DayOfMonth.
+func (x *CalendarDate) DayOfMonth() int {
+	return x.inner.DayOfMonth()
+}
+
+// DayOfWeek calls the underlying DayOfWeek.
+func (x *CalendarDate) DayOfWeek() int {
+	return x.inner.DayOfWeek()
+}
+
+// DayOfYear calls the underlying DayOfYear.
+func (x *CalendarDate) DayOfYear() int {
+	return x.inner.DayOfYear()
+}
+
+// HourOfDay calls the underlying HourOfDay.
+func (x *CalendarDate) HourOfDay() int {
+	return x.inner.HourOfDay()
+}
+
+// MinuteOfHour calls the underlying MinuteOfHour.
+func (x *CalendarDate) MinuteOfHour() int {
+	return x.inner.MinuteOfHour()
+}
+
+// MonthOfYear calls the underlying MonthOfYear.
+func (x *CalendarDate) MonthOfYear() int {
+	return x.inner.MonthOfYear()
+}
+
+// SecondOfMinute calls the underlying SecondOfMinute.
+func (x *CalendarDate) SecondOfMinute() int {
+	return x.inner.SecondOfMinute()
+}
+
+// YearOfCommonEra calls the underlying YearOfCommonEra.
+func (x *CalendarDate) YearOfCommonEra() int {
+	return x.inner.YearOfCommonEra()
+}
+
+// CalendarFormat calls the underlying CalendarFormat.
+func (x *CalendarDate) CalendarFormat() *String {
+	_r := x.inner.CalendarFormat()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DescriptionWithCalendarFormatLocale calls the underlying DescriptionWithCalendarFormatLocale.
+func (x *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale objc.ID) *String {
+	_r := x.inner.DescriptionWithCalendarFormatLocale(foundation.NSStringStringWithUTF8String(format), locale)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// DescriptionWithCalendarFormat calls the underlying DescriptionWithCalendarFormat.
+func (x *CalendarDate) DescriptionWithCalendarFormat(format string) *String {
+	_r := x.inner.DescriptionWithCalendarFormat(foundation.NSStringStringWithUTF8String(format))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *CalendarDate) TimeZone() *TimeZone {
+	_r := x.inner.TimeZone()
+	if _r == nil {
+		return nil
+	}
+	return &TimeZone{inner: _r}
+}
+
+// SetCalendarFormat calls the underlying SetCalendarFormat.
+func (x *CalendarDate) SetCalendarFormat(format string) {
+	x.inner.SetCalendarFormat(foundation.NSStringStringWithUTF8String(format))
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *CalendarDate) SetTimeZone(aTimeZone *raw.NSTimeZone) {
+	x.inner.SetTimeZone(aTimeZone)
+}
+
+// YearsMonthsDaysHoursMinutesSecondsSinceDate calls the underlying YearsMonthsDaysHoursMinutesSecondsSinceDate.
+func (x *CalendarDate) YearsMonthsDaysHoursMinutesSecondsSinceDate(yp *int64, mop *int64, dp *int64, hp *int64, mip *int64, sp *int64, date *raw.NSCalendarDate) {
+	x.inner.YearsMonthsDaysHoursMinutesSecondsSinceDate(yp, mop, dp, hp, mip, sp, date)
+}
+
 func (x *CalendarDate) asDate() *raw.NSDate { return &x.inner.NSDate }
 
 func (x *CalendarDate) asObject() *raw.NSObject { return &x.inner.NSDate.NSObject }
+
+// CalendarDateable is the interface implemented by [CalendarDate], for mocking and DI.
+type CalendarDateable interface {
+	Unwrap() *raw.NSCalendarDate
+	DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate
+	DayOfCommonEra() int
+	DayOfMonth() int
+	DayOfWeek() int
+	DayOfYear() int
+	HourOfDay() int
+	MinuteOfHour() int
+	MonthOfYear() int
+	SecondOfMinute() int
+	YearOfCommonEra() int
+	CalendarFormat() *String
+	DescriptionWithCalendarFormatLocale(format string, locale objc.ID) *String
+	DescriptionWithCalendarFormat(format string) *String
+	TimeZone() *TimeZone
+	SetCalendarFormat(format string)
+	SetTimeZone(aTimeZone *raw.NSTimeZone)
+	YearsMonthsDaysHoursMinutesSecondsSinceDate(yp *int64, mop *int64, dp *int64, hp *int64, mip *int64, sp *int64, date *raw.NSCalendarDate)
+}
+
+var _ CalendarDateable = (*CalendarDate)(nil)
 

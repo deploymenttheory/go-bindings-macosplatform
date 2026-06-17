@@ -5,6 +5,7 @@
 package appkit
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,7 +48,88 @@ func (x *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter fun
 	return x
 }
 
+// DisplayMode calls the underlying DisplayMode.
+func (x *TextInsertionIndicator) DisplayMode() raw.NSTextInsertionIndicatorDisplayMode {
+	return x.inner.DisplayMode()
+}
+
+// SetDisplayMode calls the underlying SetDisplayMode.
+func (x *TextInsertionIndicator) SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) {
+	x.inner.SetDisplayMode(displayMode)
+}
+
+// Color calls the underlying Color.
+func (x *TextInsertionIndicator) Color() *Color {
+	_r := x.inner.Color()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetColor calls the underlying SetColor.
+func (x *TextInsertionIndicator) SetColor(color *raw.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// AutomaticModeOptions calls the underlying AutomaticModeOptions.
+func (x *TextInsertionIndicator) AutomaticModeOptions() raw.NSTextInsertionIndicatorAutomaticModeOptions {
+	return x.inner.AutomaticModeOptions()
+}
+
+// SetAutomaticModeOptions calls the underlying SetAutomaticModeOptions.
+func (x *TextInsertionIndicator) SetAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) {
+	x.inner.SetAutomaticModeOptions(automaticModeOptions)
+}
+
+// EffectsViewInserter calls the underlying EffectsViewInserter.
+func (x *TextInsertionIndicator) EffectsViewInserter() objc.Block {
+	return x.inner.EffectsViewInserter()
+}
+
+// SetEffectsViewInserter blocks until the operation completes or ctx is cancelled.
+func (x *TextInsertionIndicator) SetEffectsViewInserter(ctx context.Context) (*View, error) {
+	type _result struct {
+		val *View
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.SetEffectsViewInserter(func(_p0 *raw.NSView) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &View{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *View
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *TextInsertionIndicator) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *TextInsertionIndicator) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// TextInsertionIndicatorable is the interface implemented by [TextInsertionIndicator], for mocking and DI.
+type TextInsertionIndicatorable interface {
+	Unwrap() *raw.NSTextInsertionIndicator
+	WithDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode) *TextInsertionIndicator
+	WithColor(color *raw.NSColor) *TextInsertionIndicator
+	WithAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions) *TextInsertionIndicator
+	WithEffectsViewInserter(effectsViewInserter func(*raw.NSView)) *TextInsertionIndicator
+	DisplayMode() raw.NSTextInsertionIndicatorDisplayMode
+	SetDisplayMode(displayMode raw.NSTextInsertionIndicatorDisplayMode)
+	Color() *Color
+	SetColor(color *raw.NSColor)
+	AutomaticModeOptions() raw.NSTextInsertionIndicatorAutomaticModeOptions
+	SetAutomaticModeOptions(automaticModeOptions raw.NSTextInsertionIndicatorAutomaticModeOptions)
+	EffectsViewInserter() objc.Block
+	SetEffectsViewInserter(ctx context.Context) (*View, error)
+}
+
+var _ TextInsertionIndicatorable = (*TextInsertionIndicator)(nil)
 

@@ -23,7 +23,84 @@ func NewDOMNodeIterator() *DOMNodeIterator {
 	return &DOMNodeIterator{inner: raw.DOMNodeIteratorFromID(_id)}
 }
 
+// NextNode calls the underlying NextNode.
+func (x *DOMNodeIterator) NextNode() *DOMNode {
+	_r := x.inner.NextNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PreviousNode calls the underlying PreviousNode.
+func (x *DOMNodeIterator) PreviousNode() *DOMNode {
+	_r := x.inner.PreviousNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// Detach calls the underlying Detach.
+func (x *DOMNodeIterator) Detach() {
+	x.inner.Detach()
+}
+
+// Root calls the underlying Root.
+func (x *DOMNodeIterator) Root() *DOMNode {
+	_r := x.inner.Root()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// WhatToShow calls the underlying WhatToShow.
+func (x *DOMNodeIterator) WhatToShow() uint {
+	return x.inner.WhatToShow()
+}
+
+// Filter calls the underlying Filter.
+func (x *DOMNodeIterator) Filter() raw.DOMNodeFilter {
+	return x.inner.Filter()
+}
+
+// ExpandEntityReferences calls the underlying ExpandEntityReferences.
+func (x *DOMNodeIterator) ExpandEntityReferences() bool {
+	return x.inner.ExpandEntityReferences()
+}
+
+// ReferenceNode calls the underlying ReferenceNode.
+func (x *DOMNodeIterator) ReferenceNode() *DOMNode {
+	_r := x.inner.ReferenceNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PointerBeforeReferenceNode calls the underlying PointerBeforeReferenceNode.
+func (x *DOMNodeIterator) PointerBeforeReferenceNode() bool {
+	return x.inner.PointerBeforeReferenceNode()
+}
+
 func (x *DOMNodeIterator) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
 
 func (x *DOMNodeIterator) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
+
+// DOMNodeIteratorable is the interface implemented by [DOMNodeIterator], for mocking and DI.
+type DOMNodeIteratorable interface {
+	Unwrap() *raw.DOMNodeIterator
+	NextNode() *DOMNode
+	PreviousNode() *DOMNode
+	Detach()
+	Root() *DOMNode
+	WhatToShow() uint
+	Filter() raw.DOMNodeFilter
+	ExpandEntityReferences() bool
+	ReferenceNode() *DOMNode
+	PointerBeforeReferenceNode() bool
+}
+
+var _ DOMNodeIteratorable = (*DOMNodeIterator)(nil)
 

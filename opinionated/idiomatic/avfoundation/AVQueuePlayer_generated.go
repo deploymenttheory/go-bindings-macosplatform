@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,12 +32,48 @@ func (x *QueuePlayer) Items() []*raw.AVPlayerItem {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerItem {
+		return raw.AVPlayerItemFromID(purego.Retain(_id))
+	})
+}
+
+// AdvanceToNextItem calls the underlying AdvanceToNextItem.
+func (x *QueuePlayer) AdvanceToNextItem() {
+	x.inner.AdvanceToNextItem()
+}
+
+// CanInsertItemAfterItem calls the underlying CanInsertItemAfterItem.
+func (x *QueuePlayer) CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool {
+	return x.inner.CanInsertItemAfterItem(item, afterItem)
+}
+
+// InsertItemAfterItem calls the underlying InsertItemAfterItem.
+func (x *QueuePlayer) InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) {
+	x.inner.InsertItemAfterItem(item, afterItem)
+}
+
+// RemoveItem calls the underlying RemoveItem.
+func (x *QueuePlayer) RemoveItem(item *raw.AVPlayerItem) {
+	x.inner.RemoveItem(item)
+}
+
+// RemoveAllItems calls the underlying RemoveAllItems.
+func (x *QueuePlayer) RemoveAllItems() {
+	x.inner.RemoveAllItems()
 }
 
 func (x *QueuePlayer) asPlayer() *raw.AVPlayer { return &x.inner.AVPlayer }
+
+// QueuePlayerable is the interface implemented by [QueuePlayer], for mocking and DI.
+type QueuePlayerable interface {
+	Unwrap() *raw.AVQueuePlayer
+	Items() []*raw.AVPlayerItem
+	AdvanceToNextItem()
+	CanInsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem) bool
+	InsertItemAfterItem(item *raw.AVPlayerItem, afterItem *raw.AVPlayerItem)
+	RemoveItem(item *raw.AVPlayerItem)
+	RemoveAllItems()
+}
+
+var _ QueuePlayerable = (*QueuePlayer)(nil)
 

@@ -49,9 +49,55 @@ func (x *TrackOpticalFlowRequest) WithKeepNetworkOutput(keepNetworkOutput bool) 
 	return x
 }
 
+// ComputationAccuracy calls the underlying ComputationAccuracy.
+func (x *TrackOpticalFlowRequest) ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy {
+	return x.inner.ComputationAccuracy()
+}
+
+// SetComputationAccuracy calls the underlying SetComputationAccuracy.
+func (x *TrackOpticalFlowRequest) SetComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) {
+	x.inner.SetComputationAccuracy(computationAccuracy)
+}
+
+// OutputPixelFormat calls the underlying OutputPixelFormat.
+func (x *TrackOpticalFlowRequest) OutputPixelFormat() uint {
+	return x.inner.OutputPixelFormat()
+}
+
+// SetOutputPixelFormat calls the underlying SetOutputPixelFormat.
+func (x *TrackOpticalFlowRequest) SetOutputPixelFormat(outputPixelFormat uint) {
+	x.inner.SetOutputPixelFormat(outputPixelFormat)
+}
+
+// KeepNetworkOutput calls the underlying KeepNetworkOutput.
+func (x *TrackOpticalFlowRequest) KeepNetworkOutput() bool {
+	return x.inner.KeepNetworkOutput()
+}
+
+// SetKeepNetworkOutput calls the underlying SetKeepNetworkOutput.
+func (x *TrackOpticalFlowRequest) SetKeepNetworkOutput(keepNetworkOutput bool) {
+	x.inner.SetKeepNetworkOutput(keepNetworkOutput)
+}
+
 func (x *TrackOpticalFlowRequest) asStatefulRequest() *raw.VNStatefulRequest { return &x.inner.VNStatefulRequest }
 
 func (x *TrackOpticalFlowRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest }
 
 func (x *TrackOpticalFlowRequest) asRequest() *raw.VNRequest { return &x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest }
+
+// TrackOpticalFlowRequestable is the interface implemented by [TrackOpticalFlowRequest], for mocking and DI.
+type TrackOpticalFlowRequestable interface {
+	Unwrap() *raw.VNTrackOpticalFlowRequest
+	WithComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy) *TrackOpticalFlowRequest
+	WithOutputPixelFormat(outputPixelFormat uint) *TrackOpticalFlowRequest
+	WithKeepNetworkOutput(keepNetworkOutput bool) *TrackOpticalFlowRequest
+	ComputationAccuracy() raw.VNTrackOpticalFlowRequestComputationAccuracy
+	SetComputationAccuracy(computationAccuracy raw.VNTrackOpticalFlowRequestComputationAccuracy)
+	OutputPixelFormat() uint
+	SetOutputPixelFormat(outputPixelFormat uint)
+	KeepNetworkOutput() bool
+	SetKeepNetworkOutput(keepNetworkOutput bool)
+}
+
+var _ TrackOpticalFlowRequestable = (*TrackOpticalFlowRequest)(nil)
 

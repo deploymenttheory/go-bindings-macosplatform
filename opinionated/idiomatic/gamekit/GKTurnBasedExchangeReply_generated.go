@@ -5,7 +5,9 @@
 package gamekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,43 @@ func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedExchangeReply")), objc.RegisterName("new"))
 	return &TurnBasedExchangeReply{inner: raw.GKTurnBasedExchangeReplyFromID(_id)}
 }
+
+// Recipient calls the underlying Recipient.
+func (x *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
+	_r := x.inner.Recipient()
+	if _r == nil {
+		return nil
+	}
+	return &TurnBasedParticipant{inner: _r}
+}
+
+// Message calls the underlying Message.
+func (x *TurnBasedExchangeReply) Message() string {
+	_r := x.inner.Message()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Data calls the underlying Data.
+func (x *TurnBasedExchangeReply) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// ReplyDate calls the underlying ReplyDate.
+func (x *TurnBasedExchangeReply) ReplyDate() *foundation.NSDate {
+	return x.inner.ReplyDate()
+}
+
+// TurnBasedExchangeReplyable is the interface implemented by [TurnBasedExchangeReply], for mocking and DI.
+type TurnBasedExchangeReplyable interface {
+	Unwrap() *raw.GKTurnBasedExchangeReply
+	Recipient() *TurnBasedParticipant
+	Message() string
+	Data() *foundation.NSData
+	ReplyDate() *foundation.NSDate
+}
+
+var _ TurnBasedExchangeReplyable = (*TurnBasedExchangeReply)(nil)
 

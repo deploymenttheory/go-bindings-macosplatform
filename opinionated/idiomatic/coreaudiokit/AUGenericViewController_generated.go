@@ -30,3 +30,23 @@ func (x *AUGenericViewController) WithAuAudioUnit(auAudioUnit *audiotoolbox.AUAu
 	return x
 }
 
+// AuAudioUnit calls the underlying AuAudioUnit.
+func (x *AUGenericViewController) AuAudioUnit() *audiotoolbox.AUAudioUnit {
+	return x.inner.AuAudioUnit()
+}
+
+// SetAuAudioUnit calls the underlying SetAuAudioUnit.
+func (x *AUGenericViewController) SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) {
+	x.inner.SetAuAudioUnit(auAudioUnit)
+}
+
+// AUGenericViewControllerable is the interface implemented by [AUGenericViewController], for mocking and DI.
+type AUGenericViewControllerable interface {
+	Unwrap() *raw.AUGenericViewController
+	WithAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) *AUGenericViewController
+	AuAudioUnit() *audiotoolbox.AUAudioUnit
+	SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit)
+}
+
+var _ AUGenericViewControllerable = (*AUGenericViewController)(nil)
+

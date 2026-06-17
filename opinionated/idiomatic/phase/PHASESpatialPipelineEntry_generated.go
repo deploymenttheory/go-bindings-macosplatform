@@ -35,3 +35,40 @@ func (x *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMet
 	return x
 }
 
+// SendLevel calls the underlying SendLevel.
+func (x *SpatialPipelineEntry) SendLevel() float64 {
+	return x.inner.SendLevel()
+}
+
+// SetSendLevel calls the underlying SetSendLevel.
+func (x *SpatialPipelineEntry) SetSendLevel(sendLevel float64) {
+	x.inner.SetSendLevel(sendLevel)
+}
+
+// SendLevelMetaParameterDefinition calls the underlying SendLevelMetaParameterDefinition.
+func (x *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := x.inner.SendLevelMetaParameterDefinition()
+	if _r == nil {
+		return nil
+	}
+	return &NumberMetaParameterDefinition{inner: _r}
+}
+
+// SetSendLevelMetaParameterDefinition calls the underlying SetSendLevelMetaParameterDefinition.
+func (x *SpatialPipelineEntry) SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition) {
+	x.inner.SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition)
+}
+
+// SpatialPipelineEntryable is the interface implemented by [SpatialPipelineEntry], for mocking and DI.
+type SpatialPipelineEntryable interface {
+	Unwrap() *raw.PHASESpatialPipelineEntry
+	WithSendLevel(sendLevel float64) *SpatialPipelineEntry
+	WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry
+	SendLevel() float64
+	SetSendLevel(sendLevel float64)
+	SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition
+	SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition)
+}
+
+var _ SpatialPipelineEntryable = (*SpatialPipelineEntry)(nil)
+

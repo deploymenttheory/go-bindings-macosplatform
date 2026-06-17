@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,16 +24,42 @@ func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 	return &WorkoutEffortRelationship{inner: raw.HKWorkoutEffortRelationshipFromID(_id)}
 }
 
+// Workout calls the underlying Workout.
+func (x *WorkoutEffortRelationship) Workout() *Workout {
+	_r := x.inner.Workout()
+	if _r == nil {
+		return nil
+	}
+	return &Workout{inner: _r}
+}
+
+// Activity calls the underlying Activity.
+func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
+	_r := x.inner.Activity()
+	if _r == nil {
+		return nil
+	}
+	return &WorkoutActivity{inner: _r}
+}
+
 // Samples returns the collection as a Go slice.
 func (x *WorkoutEffortRelationship) Samples() []*raw.HKSample {
 	arr := x.inner.Samples()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKSample, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKSample {
+		return raw.HKSampleFromID(purego.Retain(_id))
+	})
 }
+
+// WorkoutEffortRelationshipable is the interface implemented by [WorkoutEffortRelationship], for mocking and DI.
+type WorkoutEffortRelationshipable interface {
+	Unwrap() *raw.HKWorkoutEffortRelationship
+	Workout() *Workout
+	Activity() *WorkoutActivity
+	Samples() []*raw.HKSample
+}
+
+var _ WorkoutEffortRelationshipable = (*WorkoutEffortRelationship)(nil)
 

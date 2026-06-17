@@ -6,6 +6,7 @@ package modelio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewTransformRotateZOp() *TransformRotateZOp {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformRotateZOp")), objc.RegisterName("new"))
 	return &TransformRotateZOp{inner: raw.MDLTransformRotateZOpFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *TransformRotateZOp) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AnimatedValue calls the underlying AnimatedValue.
+func (x *TransformRotateZOp) AnimatedValue() *AnimatedScalar {
+	_r := x.inner.AnimatedValue()
+	if _r == nil {
+		return nil
+	}
+	return &AnimatedScalar{inner: _r}
+}
+
+// TransformRotateZOpable is the interface implemented by [TransformRotateZOp], for mocking and DI.
+type TransformRotateZOpable interface {
+	Unwrap() *raw.MDLTransformRotateZOp
+	Name() string
+	AnimatedValue() *AnimatedScalar
+}
+
+var _ TransformRotateZOpable = (*TransformRotateZOp)(nil)
 

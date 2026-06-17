@@ -31,17 +31,25 @@ func NewMeshWithMeshError(mesh *modelio.MDLMesh) (*Mesh, error) {
 	return &Mesh{inner: raw.GLKMeshFromID(_id)}, nil
 }
 
+// VertexCount calls the underlying VertexCount.
+func (x *Mesh) VertexCount() uint {
+	return x.inner.VertexCount()
+}
+
 // VertexBuffers returns the collection as a Go slice.
 func (x *Mesh) VertexBuffers() []*raw.GLKMeshBuffer {
 	arr := x.inner.VertexBuffers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GLKMeshBuffer, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKMeshBuffer {
+		return raw.GLKMeshBufferFromID(purego.Retain(_id))
+	})
+}
+
+// VertexDescriptor calls the underlying VertexDescriptor.
+func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
+	return x.inner.VertexDescriptor()
 }
 
 // Submeshes returns the collection as a Go slice.
@@ -50,10 +58,29 @@ func (x *Mesh) Submeshes() []*raw.GLKSubmesh {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.GLKSubmesh, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.GLKSubmesh {
+		return raw.GLKSubmeshFromID(purego.Retain(_id))
+	})
 }
+
+// Name calls the underlying Name.
+func (x *Mesh) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Meshable is the interface implemented by [Mesh], for mocking and DI.
+type Meshable interface {
+	Unwrap() *raw.GLKMesh
+	VertexCount() uint
+	VertexBuffers() []*raw.GLKMeshBuffer
+	VertexDescriptor() *modelio.MDLVertexDescriptor
+	Submeshes() []*raw.GLKSubmesh
+	Name() string
+}
+
+var _ Meshable = (*Mesh)(nil)
 

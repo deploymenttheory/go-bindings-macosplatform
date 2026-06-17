@@ -33,9 +33,29 @@ func (x *NDArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *NDArrayVec
 	return x
 }
 
+// VectorAxis calls the underlying VectorAxis.
+func (x *NDArrayVectorLUTDequantize) VectorAxis() uint {
+	return x.inner.VectorAxis()
+}
+
+// SetVectorAxis calls the underlying SetVectorAxis.
+func (x *NDArrayVectorLUTDequantize) SetVectorAxis(vectorAxis uint) {
+	x.inner.SetVectorAxis(vectorAxis)
+}
+
 func (x *NDArrayVectorLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayVectorLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
 
 func (x *NDArrayVectorLUTDequantize) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel }
+
+// NDArrayVectorLUTDequantizeable is the interface implemented by [NDArrayVectorLUTDequantize], for mocking and DI.
+type NDArrayVectorLUTDequantizeable interface {
+	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
+	WithVectorAxis(vectorAxis uint) *NDArrayVectorLUTDequantize
+	VectorAxis() uint
+	SetVectorAxis(vectorAxis uint)
+}
+
+var _ NDArrayVectorLUTDequantizeable = (*NDArrayVectorLUTDequantize)(nil)
 

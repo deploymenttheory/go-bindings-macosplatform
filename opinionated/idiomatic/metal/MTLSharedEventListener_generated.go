@@ -31,3 +31,16 @@ func NewSharedEventListenerWithDispatchQueue(dispatchQueue *foundation.NSObject)
 	return &SharedEventListener{inner: raw.MTLSharedEventListenerFromID(_id)}
 }
 
+// DispatchQueue calls the underlying DispatchQueue.
+func (x *SharedEventListener) DispatchQueue() *foundation.NSObject {
+	return x.inner.DispatchQueue()
+}
+
+// SharedEventListenerable is the interface implemented by [SharedEventListener], for mocking and DI.
+type SharedEventListenerable interface {
+	Unwrap() *raw.MTLSharedEventListener
+	DispatchQueue() *foundation.NSObject
+}
+
+var _ SharedEventListenerable = (*SharedEventListener)(nil)
+

@@ -23,3 +23,28 @@ func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
 	return &CollectionLayoutSpacing{inner: raw.NSCollectionLayoutSpacingFromID(_id)}
 }
 
+// Spacing calls the underlying Spacing.
+func (x *CollectionLayoutSpacing) Spacing() float64 {
+	return x.inner.Spacing()
+}
+
+// IsFlexibleSpacing calls the underlying IsFlexibleSpacing.
+func (x *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
+	return x.inner.IsFlexibleSpacing()
+}
+
+// IsFixedSpacing calls the underlying IsFixedSpacing.
+func (x *CollectionLayoutSpacing) IsFixedSpacing() bool {
+	return x.inner.IsFixedSpacing()
+}
+
+// CollectionLayoutSpacingable is the interface implemented by [CollectionLayoutSpacing], for mocking and DI.
+type CollectionLayoutSpacingable interface {
+	Unwrap() *raw.NSCollectionLayoutSpacing
+	Spacing() float64
+	IsFlexibleSpacing() bool
+	IsFixedSpacing() bool
+}
+
+var _ CollectionLayoutSpacingable = (*CollectionLayoutSpacing)(nil)
+

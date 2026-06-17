@@ -25,5 +25,18 @@ func NewGenericURLResourceWithURL(url string) *GenericURLResource {
 	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(_id)}
 }
 
+// Url calls the underlying Url.
+func (x *GenericURLResource) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
 func (x *GenericURLResource) asResource() *raw.FSResource { return &x.inner.FSResource }
+
+// GenericURLResourceable is the interface implemented by [GenericURLResource], for mocking and DI.
+type GenericURLResourceable interface {
+	Unwrap() *raw.FSGenericURLResource
+	Url() *foundation.NSURL
+}
+
+var _ GenericURLResourceable = (*GenericURLResource)(nil)
 

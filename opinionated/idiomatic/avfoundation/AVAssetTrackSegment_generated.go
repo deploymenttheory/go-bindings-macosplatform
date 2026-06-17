@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,24 @@ func NewAssetTrackSegment() *AssetTrackSegment {
 	return &AssetTrackSegment{inner: raw.AVAssetTrackSegmentFromID(_id)}
 }
 
+// TimeMapping calls the underlying TimeMapping.
+func (x *AssetTrackSegment) TimeMapping() coremedia.CMTimeMapping {
+	return x.inner.TimeMapping()
+}
+
+// IsEmpty calls the underlying IsEmpty.
+func (x *AssetTrackSegment) IsEmpty() bool {
+	return x.inner.IsEmpty()
+}
+
 func (x *AssetTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment { return x.inner }
+
+// AssetTrackSegmentable is the interface implemented by [AssetTrackSegment], for mocking and DI.
+type AssetTrackSegmentable interface {
+	Unwrap() *raw.AVAssetTrackSegment
+	TimeMapping() coremedia.CMTimeMapping
+	IsEmpty() bool
+}
+
+var _ AssetTrackSegmentable = (*AssetTrackSegment)(nil)
 

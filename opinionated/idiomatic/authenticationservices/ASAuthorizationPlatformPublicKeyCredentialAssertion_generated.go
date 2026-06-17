@@ -23,3 +23,36 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatfo
 	return &AuthorizationPlatformPublicKeyCredentialAssertion{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionFromID(_id)}
 }
 
+// Attachment calls the underlying Attachment.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() raw.ASAuthorizationPublicKeyCredentialAttachment {
+	return x.inner.Attachment()
+}
+
+// LargeBlob calls the underlying LargeBlob.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	_r := x.inner.LargeBlob()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: _r}
+}
+
+// Prf calls the underlying Prf.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	_r := x.inner.Prf()
+	if _r == nil {
+		return nil
+	}
+	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: _r}
+}
+
+// AuthorizationPlatformPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertion], for mocking and DI.
+type AuthorizationPlatformPublicKeyCredentialAssertionable interface {
+	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertion
+	Attachment() raw.ASAuthorizationPublicKeyCredentialAttachment
+	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
+	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
+}
+
+var _ AuthorizationPlatformPublicKeyCredentialAssertionable = (*AuthorizationPlatformPublicKeyCredentialAssertion)(nil)
+

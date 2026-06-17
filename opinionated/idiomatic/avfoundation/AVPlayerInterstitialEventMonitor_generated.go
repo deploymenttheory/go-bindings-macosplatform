@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,18 +25,70 @@ func NewPlayerInterstitialEventMonitorWithPrimaryPlayer(primaryPlayer *raw.AVPla
 	return &PlayerInterstitialEventMonitor{inner: raw.AVPlayerInterstitialEventMonitorFromID(_id)}
 }
 
+// PrimaryPlayer calls the underlying PrimaryPlayer.
+func (x *PlayerInterstitialEventMonitor) PrimaryPlayer() *Player {
+	_r := x.inner.PrimaryPlayer()
+	if _r == nil {
+		return nil
+	}
+	return &Player{inner: _r}
+}
+
+// InterstitialPlayer calls the underlying InterstitialPlayer.
+func (x *PlayerInterstitialEventMonitor) InterstitialPlayer() *QueuePlayer {
+	_r := x.inner.InterstitialPlayer()
+	if _r == nil {
+		return nil
+	}
+	return &QueuePlayer{inner: _r}
+}
+
 // Events returns the collection as a Go slice.
 func (x *PlayerInterstitialEventMonitor) Events() []*raw.AVPlayerInterstitialEvent {
 	arr := x.inner.Events()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVPlayerInterstitialEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVPlayerInterstitialEvent {
+		return raw.AVPlayerInterstitialEventFromID(purego.Retain(_id))
+	})
+}
+
+// CurrentEvent calls the underlying CurrentEvent.
+func (x *PlayerInterstitialEventMonitor) CurrentEvent() *PlayerInterstitialEvent {
+	_r := x.inner.CurrentEvent()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &PlayerInterstitialEvent{inner: _r}
+}
+
+// CurrentEventSkippableState calls the underlying CurrentEventSkippableState.
+func (x *PlayerInterstitialEventMonitor) CurrentEventSkippableState() raw.AVPlayerInterstitialEventSkippableEventState {
+	return x.inner.CurrentEventSkippableState()
+}
+
+// CurrentEventSkipControlLabel calls the underlying CurrentEventSkipControlLabel.
+func (x *PlayerInterstitialEventMonitor) CurrentEventSkipControlLabel() string {
+	_r := x.inner.CurrentEventSkipControlLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *PlayerInterstitialEventMonitor) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor { return x.inner }
+
+// PlayerInterstitialEventMonitorable is the interface implemented by [PlayerInterstitialEventMonitor], for mocking and DI.
+type PlayerInterstitialEventMonitorable interface {
+	Unwrap() *raw.AVPlayerInterstitialEventMonitor
+	PrimaryPlayer() *Player
+	InterstitialPlayer() *QueuePlayer
+	Events() []*raw.AVPlayerInterstitialEvent
+	CurrentEvent() *PlayerInterstitialEvent
+	CurrentEventSkippableState() raw.AVPlayerInterstitialEventSkippableEventState
+	CurrentEventSkipControlLabel() string
+}
+
+var _ PlayerInterstitialEventMonitorable = (*PlayerInterstitialEventMonitor)(nil)
 

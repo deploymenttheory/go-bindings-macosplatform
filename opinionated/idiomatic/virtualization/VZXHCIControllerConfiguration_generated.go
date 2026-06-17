@@ -25,3 +25,10 @@ func NewXHCIControllerConfiguration() *XHCIControllerConfiguration {
 
 func (x *XHCIControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration { return &x.inner.VZUSBControllerConfiguration }
 
+// XHCIControllerConfigurationable is the interface implemented by [XHCIControllerConfiguration], for mocking and DI.
+type XHCIControllerConfigurationable interface {
+	Unwrap() *raw.VZXHCIControllerConfiguration
+}
+
+var _ XHCIControllerConfigurationable = (*XHCIControllerConfiguration)(nil)
+

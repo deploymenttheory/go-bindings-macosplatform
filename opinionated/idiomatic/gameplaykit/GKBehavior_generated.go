@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,64 @@ func NewBehavior() *Behavior {
 	return &Behavior{inner: raw.GKBehaviorFromID(_id)}
 }
 
+// SetWeightForGoal calls the underlying SetWeightForGoal.
+func (x *Behavior) SetWeightForGoal(weight float32, goal *raw.GKGoal) {
+	x.inner.SetWeightForGoal(weight, goal)
+}
+
+// WeightForGoal calls the underlying WeightForGoal.
+func (x *Behavior) WeightForGoal(goal *raw.GKGoal) float32 {
+	return x.inner.WeightForGoal(goal)
+}
+
+// RemoveGoal calls the underlying RemoveGoal.
+func (x *Behavior) RemoveGoal(goal *raw.GKGoal) {
+	x.inner.RemoveGoal(goal)
+}
+
+// RemoveAllGoals calls the underlying RemoveAllGoals.
+func (x *Behavior) RemoveAllGoals() {
+	x.inner.RemoveAllGoals()
+}
+
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *Behavior) ObjectAtIndexedSubscript(idx uint) *Goal {
+	_r := x.inner.ObjectAtIndexedSubscript(idx)
+	if _r == nil {
+		return nil
+	}
+	return &Goal{inner: _r}
+}
+
+// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
+func (x *Behavior) SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *raw.GKGoal) {
+	x.inner.SetObjectForKeyedSubscript(weight, goal)
+}
+
+// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
+func (x *Behavior) ObjectForKeyedSubscript(goal *raw.GKGoal) *foundation.NSNumber {
+	return x.inner.ObjectForKeyedSubscript(goal)
+}
+
+// GoalCount calls the underlying GoalCount.
+func (x *Behavior) GoalCount() int {
+	return x.inner.GoalCount()
+}
+
 func (x *Behavior) asBehavior() *raw.GKBehavior { return x.inner }
+
+// Behaviorable is the interface implemented by [Behavior], for mocking and DI.
+type Behaviorable interface {
+	Unwrap() *raw.GKBehavior
+	SetWeightForGoal(weight float32, goal *raw.GKGoal)
+	WeightForGoal(goal *raw.GKGoal) float32
+	RemoveGoal(goal *raw.GKGoal)
+	RemoveAllGoals()
+	ObjectAtIndexedSubscript(idx uint) *Goal
+	SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *raw.GKGoal)
+	ObjectForKeyedSubscript(goal *raw.GKGoal) *foundation.NSNumber
+	GoalCount() int
+}
+
+var _ Behaviorable = (*Behavior)(nil)
 

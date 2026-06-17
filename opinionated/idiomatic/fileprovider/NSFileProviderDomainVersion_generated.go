@@ -6,6 +6,7 @@ package fileprovider
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewFileProviderDomainVersion() *FileProviderDomainVersion {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderDomainVersion")), objc.RegisterName("new"))
 	return &FileProviderDomainVersion{inner: raw.NSFileProviderDomainVersionFromID(_id)}
 }
+
+// Next calls the underlying Next.
+func (x *FileProviderDomainVersion) Next() *FileProviderDomainVersion {
+	_r := x.inner.Next()
+	if _r == nil {
+		return nil
+	}
+	return &FileProviderDomainVersion{inner: _r}
+}
+
+// Compare calls the underlying Compare.
+func (x *FileProviderDomainVersion) Compare(otherVersion *raw.NSFileProviderDomainVersion) foundation.NSComparisonResult {
+	return x.inner.Compare(otherVersion)
+}
+
+// FileProviderDomainVersionable is the interface implemented by [FileProviderDomainVersion], for mocking and DI.
+type FileProviderDomainVersionable interface {
+	Unwrap() *raw.NSFileProviderDomainVersion
+	Next() *FileProviderDomainVersion
+	Compare(otherVersion *raw.NSFileProviderDomainVersion) foundation.NSComparisonResult
+}
+
+var _ FileProviderDomainVersionable = (*FileProviderDomainVersion)(nil)
 

@@ -23,3 +23,16 @@ func NewQuadtreeNode() *QuadtreeNode {
 	return &QuadtreeNode{inner: raw.GKQuadtreeNodeFromID(_id)}
 }
 
+// Quad calls the underlying Quad.
+func (x *QuadtreeNode) Quad() raw.GKQuad {
+	return x.inner.Quad()
+}
+
+// QuadtreeNodeable is the interface implemented by [QuadtreeNode], for mocking and DI.
+type QuadtreeNodeable interface {
+	Unwrap() *raw.GKQuadtreeNode
+	Quad() raw.GKQuad
+}
+
+var _ QuadtreeNodeable = (*QuadtreeNode)(nil)
+

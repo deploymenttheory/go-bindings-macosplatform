@@ -30,3 +30,23 @@ func (x *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField *appki
 	return x
 }
 
+// IssuerTextField calls the underlying IssuerTextField.
+func (x *ChooseIdentityTableCellView) IssuerTextField() *appkit.NSTextField {
+	return x.inner.IssuerTextField()
+}
+
+// SetIssuerTextField calls the underlying SetIssuerTextField.
+func (x *ChooseIdentityTableCellView) SetIssuerTextField(issuerTextField *appkit.NSTextField) {
+	x.inner.SetIssuerTextField(issuerTextField)
+}
+
+// ChooseIdentityTableCellViewable is the interface implemented by [ChooseIdentityTableCellView], for mocking and DI.
+type ChooseIdentityTableCellViewable interface {
+	Unwrap() *raw.SFChooseIdentityTableCellView
+	WithIssuerTextField(issuerTextField *appkit.NSTextField) *ChooseIdentityTableCellView
+	IssuerTextField() *appkit.NSTextField
+	SetIssuerTextField(issuerTextField *appkit.NSTextField)
+}
+
+var _ ChooseIdentityTableCellViewable = (*ChooseIdentityTableCellView)(nil)
+

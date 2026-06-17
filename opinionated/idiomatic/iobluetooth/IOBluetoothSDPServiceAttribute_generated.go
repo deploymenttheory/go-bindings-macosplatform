@@ -32,3 +32,36 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint
 	return &IOBluetoothSDPServiceAttribute{inner: raw.IOBluetoothSDPServiceAttributeFromID(_id)}
 }
 
+// GetAttributeID calls the underlying GetAttributeID.
+func (x *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
+	return x.inner.GetAttributeID()
+}
+
+// GetDataElement calls the underlying GetDataElement.
+func (x *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
+	_r := x.inner.GetDataElement()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothSDPDataElement{inner: _r}
+}
+
+// GetIDDataElement calls the underlying GetIDDataElement.
+func (x *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
+	_r := x.inner.GetIDDataElement()
+	if _r == nil {
+		return nil
+	}
+	return &IOBluetoothSDPDataElement{inner: _r}
+}
+
+// IOBluetoothSDPServiceAttributeable is the interface implemented by [IOBluetoothSDPServiceAttribute], for mocking and DI.
+type IOBluetoothSDPServiceAttributeable interface {
+	Unwrap() *raw.IOBluetoothSDPServiceAttribute
+	GetAttributeID() uint16
+	GetDataElement() *IOBluetoothSDPDataElement
+	GetIDDataElement() *IOBluetoothSDPDataElement
+}
+
+var _ IOBluetoothSDPServiceAttributeable = (*IOBluetoothSDPServiceAttribute)(nil)
+

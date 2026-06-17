@@ -40,5 +40,56 @@ func NewURLCredentialWithTrust(trust unsafe.Pointer) *URLCredential {
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
+// Persistence calls the underlying Persistence.
+func (x *URLCredential) Persistence() raw.NSURLCredentialPersistence {
+	return x.inner.Persistence()
+}
+
+// User calls the underlying User.
+func (x *URLCredential) User() *String {
+	_r := x.inner.User()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Password calls the underlying Password.
+func (x *URLCredential) Password() *String {
+	_r := x.inner.Password()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// HasPassword calls the underlying HasPassword.
+func (x *URLCredential) HasPassword() bool {
+	return x.inner.HasPassword()
+}
+
+// Identity calls the underlying Identity.
+func (x *URLCredential) Identity() unsafe.Pointer {
+	return x.inner.Identity()
+}
+
+// Certificates calls the underlying Certificates.
+func (x *URLCredential) Certificates() *raw.NSArray[objc.ID] {
+	return x.inner.Certificates()
+}
+
 func (x *URLCredential) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLCredentialable is the interface implemented by [URLCredential], for mocking and DI.
+type URLCredentialable interface {
+	Unwrap() *raw.NSURLCredential
+	Persistence() raw.NSURLCredentialPersistence
+	User() *String
+	Password() *String
+	HasPassword() bool
+	Identity() unsafe.Pointer
+	Certificates() *raw.NSArray[objc.ID]
+}
+
+var _ URLCredentialable = (*URLCredential)(nil)
 

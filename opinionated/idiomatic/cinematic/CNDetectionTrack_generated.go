@@ -6,6 +6,8 @@ package cinematic
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +25,68 @@ func NewDetectionTrack() *DetectionTrack {
 	return &DetectionTrack{inner: raw.CNDetectionTrackFromID(_id)}
 }
 
+// DetectionAtOrBeforeTime calls the underlying DetectionAtOrBeforeTime.
+func (x *DetectionTrack) DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection {
+	_r := x.inner.DetectionAtOrBeforeTime(time_)
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
+// DetectionNearestTime calls the underlying DetectionNearestTime.
+func (x *DetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *Detection {
+	_r := x.inner.DetectionNearestTime(time_)
+	if _r == nil {
+		return nil
+	}
+	return &Detection{inner: _r}
+}
+
+// DetectionsInTimeRange calls the underlying DetectionsInTimeRange.
+func (x *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection] {
+	return x.inner.DetectionsInTimeRange(timeRange)
+}
+
+// DetectionType calls the underlying DetectionType.
+func (x *DetectionTrack) DetectionType() raw.CNDetectionType {
+	return x.inner.DetectionType()
+}
+
+// DetectionID calls the underlying DetectionID.
+func (x *DetectionTrack) DetectionID() int64 {
+	return x.inner.DetectionID()
+}
+
+// DetectionGroupID calls the underlying DetectionGroupID.
+func (x *DetectionTrack) DetectionGroupID() int64 {
+	return x.inner.DetectionGroupID()
+}
+
+// IsUserCreated calls the underlying IsUserCreated.
+func (x *DetectionTrack) IsUserCreated() bool {
+	return x.inner.IsUserCreated()
+}
+
+// IsDiscrete calls the underlying IsDiscrete.
+func (x *DetectionTrack) IsDiscrete() bool {
+	return x.inner.IsDiscrete()
+}
+
 func (x *DetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return x.inner }
+
+// DetectionTrackable is the interface implemented by [DetectionTrack], for mocking and DI.
+type DetectionTrackable interface {
+	Unwrap() *raw.CNDetectionTrack
+	DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection
+	DetectionNearestTime(time_ coremedia.CMTime) *Detection
+	DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection]
+	DetectionType() raw.CNDetectionType
+	DetectionID() int64
+	DetectionGroupID() int64
+	IsUserCreated() bool
+	IsDiscrete() bool
+}
+
+var _ DetectionTrackable = (*DetectionTrack)(nil)
 

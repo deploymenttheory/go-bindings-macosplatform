@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,4 +53,108 @@ func (x *GridColumn) WithHidden(hidden bool) *GridColumn {
 	x.inner.SetHidden(hidden)
 	return x
 }
+
+// CellAtIndex calls the underlying CellAtIndex.
+func (x *GridColumn) CellAtIndex(index int) *GridCell {
+	_r := x.inner.CellAtIndex(index)
+	if _r == nil {
+		return nil
+	}
+	return &GridCell{inner: _r}
+}
+
+// MergeCellsInRange calls the underlying MergeCellsInRange.
+func (x *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
+	x.inner.MergeCellsInRange(range_)
+}
+
+// GridView calls the underlying GridView.
+func (x *GridColumn) GridView() *GridView {
+	_r := x.inner.GridView()
+	if _r == nil {
+		return nil
+	}
+	return &GridView{inner: _r}
+}
+
+// NumberOfCells calls the underlying NumberOfCells.
+func (x *GridColumn) NumberOfCells() int {
+	return x.inner.NumberOfCells()
+}
+
+// XPlacement calls the underlying XPlacement.
+func (x *GridColumn) XPlacement() raw.NSGridCellPlacement {
+	return x.inner.XPlacement()
+}
+
+// SetXPlacement calls the underlying SetXPlacement.
+func (x *GridColumn) SetXPlacement(xPlacement raw.NSGridCellPlacement) {
+	x.inner.SetXPlacement(xPlacement)
+}
+
+// Width calls the underlying Width.
+func (x *GridColumn) Width() float64 {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *GridColumn) SetWidth(width float64) {
+	x.inner.SetWidth(width)
+}
+
+// LeadingPadding calls the underlying LeadingPadding.
+func (x *GridColumn) LeadingPadding() float64 {
+	return x.inner.LeadingPadding()
+}
+
+// SetLeadingPadding calls the underlying SetLeadingPadding.
+func (x *GridColumn) SetLeadingPadding(leadingPadding float64) {
+	x.inner.SetLeadingPadding(leadingPadding)
+}
+
+// TrailingPadding calls the underlying TrailingPadding.
+func (x *GridColumn) TrailingPadding() float64 {
+	return x.inner.TrailingPadding()
+}
+
+// SetTrailingPadding calls the underlying SetTrailingPadding.
+func (x *GridColumn) SetTrailingPadding(trailingPadding float64) {
+	x.inner.SetTrailingPadding(trailingPadding)
+}
+
+// IsHidden calls the underlying IsHidden.
+func (x *GridColumn) IsHidden() bool {
+	return x.inner.IsHidden()
+}
+
+// SetHidden calls the underlying SetHidden.
+func (x *GridColumn) SetHidden(hidden bool) {
+	x.inner.SetHidden(hidden)
+}
+
+// GridColumnable is the interface implemented by [GridColumn], for mocking and DI.
+type GridColumnable interface {
+	Unwrap() *raw.NSGridColumn
+	WithXPlacement(xPlacement raw.NSGridCellPlacement) *GridColumn
+	WithWidth(width float64) *GridColumn
+	WithLeadingPadding(leadingPadding float64) *GridColumn
+	WithTrailingPadding(trailingPadding float64) *GridColumn
+	WithHidden(hidden bool) *GridColumn
+	CellAtIndex(index int) *GridCell
+	MergeCellsInRange(range_ foundation.NSRange)
+	GridView() *GridView
+	NumberOfCells() int
+	XPlacement() raw.NSGridCellPlacement
+	SetXPlacement(xPlacement raw.NSGridCellPlacement)
+	Width() float64
+	SetWidth(width float64)
+	LeadingPadding() float64
+	SetLeadingPadding(leadingPadding float64)
+	TrailingPadding() float64
+	SetTrailingPadding(trailingPadding float64)
+	IsHidden() bool
+	SetHidden(hidden bool)
+}
+
+var _ GridColumnable = (*GridColumn)(nil)
 

@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterTestEnumsRequestParams() *MTRTestClusterClusterTest
 
 func (x *MTRTestClusterClusterTestEnumsRequestParams) asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams { return &x.inner.MTRUnitTestingClusterTestEnumsRequestParams }
 
+// MTRTestClusterClusterTestEnumsRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsRequestParams], for mocking and DI.
+type MTRTestClusterClusterTestEnumsRequestParamsable interface {
+	Unwrap() *raw.MTRTestClusterClusterTestEnumsRequestParams
+}
+
+var _ MTRTestClusterClusterTestEnumsRequestParamsable = (*MTRTestClusterClusterTestEnumsRequestParams)(nil)
+

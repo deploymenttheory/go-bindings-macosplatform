@@ -7,6 +7,8 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,4 +67,124 @@ func (x *CapturePhotoSettings) WithShutterSoundSuppressionEnabled(shutterSoundSu
 	x.inner.SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled)
 	return x
 }
+
+// UniqueID calls the underlying UniqueID.
+func (x *CapturePhotoSettings) UniqueID() int64 {
+	return x.inner.UniqueID()
+}
+
+// Format calls the underlying Format.
+func (x *CapturePhotoSettings) Format() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Format()
+}
+
+// ProcessedFileType calls the underlying ProcessedFileType.
+func (x *CapturePhotoSettings) ProcessedFileType() string {
+	_r := x.inner.ProcessedFileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FlashMode calls the underlying FlashMode.
+func (x *CapturePhotoSettings) FlashMode() raw.AVCaptureFlashMode {
+	return x.inner.FlashMode()
+}
+
+// SetFlashMode calls the underlying SetFlashMode.
+func (x *CapturePhotoSettings) SetFlashMode(flashMode raw.AVCaptureFlashMode) {
+	x.inner.SetFlashMode(flashMode)
+}
+
+// PhotoQualityPrioritization calls the underlying PhotoQualityPrioritization.
+func (x *CapturePhotoSettings) PhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization {
+	return x.inner.PhotoQualityPrioritization()
+}
+
+// SetPhotoQualityPrioritization calls the underlying SetPhotoQualityPrioritization.
+func (x *CapturePhotoSettings) SetPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) {
+	x.inner.SetPhotoQualityPrioritization(photoQualityPrioritization)
+}
+
+// IsHighResolutionPhotoEnabled calls the underlying IsHighResolutionPhotoEnabled.
+func (x *CapturePhotoSettings) IsHighResolutionPhotoEnabled() bool {
+	return x.inner.IsHighResolutionPhotoEnabled()
+}
+
+// SetHighResolutionPhotoEnabled calls the underlying SetHighResolutionPhotoEnabled.
+func (x *CapturePhotoSettings) SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) {
+	x.inner.SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled)
+}
+
+// MaxPhotoDimensions calls the underlying MaxPhotoDimensions.
+func (x *CapturePhotoSettings) MaxPhotoDimensions() coremedia.CMVideoDimensions {
+	return x.inner.MaxPhotoDimensions()
+}
+
+// SetMaxPhotoDimensions calls the underlying SetMaxPhotoDimensions.
+func (x *CapturePhotoSettings) SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) {
+	x.inner.SetMaxPhotoDimensions(maxPhotoDimensions)
+}
+
+// IsConstantColorEnabled calls the underlying IsConstantColorEnabled.
+func (x *CapturePhotoSettings) IsConstantColorEnabled() bool {
+	return x.inner.IsConstantColorEnabled()
+}
+
+// SetConstantColorEnabled calls the underlying SetConstantColorEnabled.
+func (x *CapturePhotoSettings) SetConstantColorEnabled(constantColorEnabled bool) {
+	x.inner.SetConstantColorEnabled(constantColorEnabled)
+}
+
+// IsConstantColorFallbackPhotoDeliveryEnabled calls the underlying IsConstantColorFallbackPhotoDeliveryEnabled.
+func (x *CapturePhotoSettings) IsConstantColorFallbackPhotoDeliveryEnabled() bool {
+	return x.inner.IsConstantColorFallbackPhotoDeliveryEnabled()
+}
+
+// SetConstantColorFallbackPhotoDeliveryEnabled calls the underlying SetConstantColorFallbackPhotoDeliveryEnabled.
+func (x *CapturePhotoSettings) SetConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) {
+	x.inner.SetConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled)
+}
+
+// IsShutterSoundSuppressionEnabled calls the underlying IsShutterSoundSuppressionEnabled.
+func (x *CapturePhotoSettings) IsShutterSoundSuppressionEnabled() bool {
+	return x.inner.IsShutterSoundSuppressionEnabled()
+}
+
+// SetShutterSoundSuppressionEnabled calls the underlying SetShutterSoundSuppressionEnabled.
+func (x *CapturePhotoSettings) SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) {
+	x.inner.SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled)
+}
+
+// CapturePhotoSettingsable is the interface implemented by [CapturePhotoSettings], for mocking and DI.
+type CapturePhotoSettingsable interface {
+	Unwrap() *raw.AVCapturePhotoSettings
+	WithFlashMode(flashMode raw.AVCaptureFlashMode) *CapturePhotoSettings
+	WithPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization) *CapturePhotoSettings
+	WithHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool) *CapturePhotoSettings
+	WithMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions) *CapturePhotoSettings
+	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoSettings
+	WithConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool) *CapturePhotoSettings
+	WithShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool) *CapturePhotoSettings
+	UniqueID() int64
+	Format() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ProcessedFileType() string
+	FlashMode() raw.AVCaptureFlashMode
+	SetFlashMode(flashMode raw.AVCaptureFlashMode)
+	PhotoQualityPrioritization() raw.AVCapturePhotoQualityPrioritization
+	SetPhotoQualityPrioritization(photoQualityPrioritization raw.AVCapturePhotoQualityPrioritization)
+	IsHighResolutionPhotoEnabled() bool
+	SetHighResolutionPhotoEnabled(highResolutionPhotoEnabled bool)
+	MaxPhotoDimensions() coremedia.CMVideoDimensions
+	SetMaxPhotoDimensions(maxPhotoDimensions coremedia.CMVideoDimensions)
+	IsConstantColorEnabled() bool
+	SetConstantColorEnabled(constantColorEnabled bool)
+	IsConstantColorFallbackPhotoDeliveryEnabled() bool
+	SetConstantColorFallbackPhotoDeliveryEnabled(constantColorFallbackPhotoDeliveryEnabled bool)
+	IsShutterSoundSuppressionEnabled() bool
+	SetShutterSoundSuppressionEnabled(shutterSoundSuppressionEnabled bool)
+}
+
+var _ CapturePhotoSettingsable = (*CapturePhotoSettings)(nil)
 

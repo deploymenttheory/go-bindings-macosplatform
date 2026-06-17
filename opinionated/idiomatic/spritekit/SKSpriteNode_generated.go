@@ -127,5 +127,186 @@ func (x *SpriteNode) WithShader(shader *raw.SKShader) *SpriteNode {
 	return x
 }
 
+// ScaleToSize calls the underlying ScaleToSize.
+func (x *SpriteNode) ScaleToSize(size corefoundation.CGSize) {
+	x.inner.ScaleToSize(size)
+}
+
+// Texture calls the underlying Texture.
+func (x *SpriteNode) Texture() *Texture {
+	_r := x.inner.Texture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetTexture calls the underlying SetTexture.
+func (x *SpriteNode) SetTexture(texture *raw.SKTexture) {
+	x.inner.SetTexture(texture)
+}
+
+// NormalTexture calls the underlying NormalTexture.
+func (x *SpriteNode) NormalTexture() *Texture {
+	_r := x.inner.NormalTexture()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SetNormalTexture calls the underlying SetNormalTexture.
+func (x *SpriteNode) SetNormalTexture(normalTexture *raw.SKTexture) {
+	x.inner.SetNormalTexture(normalTexture)
+}
+
+// LightingBitMask calls the underlying LightingBitMask.
+func (x *SpriteNode) LightingBitMask() uint32 {
+	return x.inner.LightingBitMask()
+}
+
+// SetLightingBitMask calls the underlying SetLightingBitMask.
+func (x *SpriteNode) SetLightingBitMask(lightingBitMask uint32) {
+	x.inner.SetLightingBitMask(lightingBitMask)
+}
+
+// ShadowCastBitMask calls the underlying ShadowCastBitMask.
+func (x *SpriteNode) ShadowCastBitMask() uint32 {
+	return x.inner.ShadowCastBitMask()
+}
+
+// SetShadowCastBitMask calls the underlying SetShadowCastBitMask.
+func (x *SpriteNode) SetShadowCastBitMask(shadowCastBitMask uint32) {
+	x.inner.SetShadowCastBitMask(shadowCastBitMask)
+}
+
+// ShadowedBitMask calls the underlying ShadowedBitMask.
+func (x *SpriteNode) ShadowedBitMask() uint32 {
+	return x.inner.ShadowedBitMask()
+}
+
+// SetShadowedBitMask calls the underlying SetShadowedBitMask.
+func (x *SpriteNode) SetShadowedBitMask(shadowedBitMask uint32) {
+	x.inner.SetShadowedBitMask(shadowedBitMask)
+}
+
+// CenterRect calls the underlying CenterRect.
+func (x *SpriteNode) CenterRect() corefoundation.CGRect {
+	return x.inner.CenterRect()
+}
+
+// SetCenterRect calls the underlying SetCenterRect.
+func (x *SpriteNode) SetCenterRect(centerRect corefoundation.CGRect) {
+	x.inner.SetCenterRect(centerRect)
+}
+
+// ColorBlendFactor calls the underlying ColorBlendFactor.
+func (x *SpriteNode) ColorBlendFactor() float64 {
+	return x.inner.ColorBlendFactor()
+}
+
+// SetColorBlendFactor calls the underlying SetColorBlendFactor.
+func (x *SpriteNode) SetColorBlendFactor(colorBlendFactor float64) {
+	x.inner.SetColorBlendFactor(colorBlendFactor)
+}
+
+// Color calls the underlying Color.
+func (x *SpriteNode) Color() *appkit.NSColor {
+	return x.inner.Color()
+}
+
+// SetColor calls the underlying SetColor.
+func (x *SpriteNode) SetColor(color *appkit.NSColor) {
+	x.inner.SetColor(color)
+}
+
+// BlendMode calls the underlying BlendMode.
+func (x *SpriteNode) BlendMode() raw.SKBlendMode {
+	return x.inner.BlendMode()
+}
+
+// SetBlendMode calls the underlying SetBlendMode.
+func (x *SpriteNode) SetBlendMode(blendMode raw.SKBlendMode) {
+	x.inner.SetBlendMode(blendMode)
+}
+
+// AnchorPoint calls the underlying AnchorPoint.
+func (x *SpriteNode) AnchorPoint() corefoundation.CGPoint {
+	return x.inner.AnchorPoint()
+}
+
+// SetAnchorPoint calls the underlying SetAnchorPoint.
+func (x *SpriteNode) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
+	x.inner.SetAnchorPoint(anchorPoint)
+}
+
+// Size calls the underlying Size.
+func (x *SpriteNode) Size() corefoundation.CGSize {
+	return x.inner.Size()
+}
+
+// SetSize calls the underlying SetSize.
+func (x *SpriteNode) SetSize(size corefoundation.CGSize) {
+	x.inner.SetSize(size)
+}
+
+// Shader calls the underlying Shader.
+func (x *SpriteNode) Shader() *Shader {
+	_r := x.inner.Shader()
+	if _r == nil {
+		return nil
+	}
+	return &Shader{inner: _r}
+}
+
+// SetShader calls the underlying SetShader.
+func (x *SpriteNode) SetShader(shader *raw.SKShader) {
+	x.inner.SetShader(shader)
+}
+
 func (x *SpriteNode) asNode() *raw.SKNode { return &x.inner.SKNode }
+
+// SpriteNodeable is the interface implemented by [SpriteNode], for mocking and DI.
+type SpriteNodeable interface {
+	Unwrap() *raw.SKSpriteNode
+	WithTexture(texture TextureProvider) *SpriteNode
+	WithNormalTexture(normalTexture TextureProvider) *SpriteNode
+	WithLightingBitMask(lightingBitMask uint32) *SpriteNode
+	WithShadowCastBitMask(shadowCastBitMask uint32) *SpriteNode
+	WithShadowedBitMask(shadowedBitMask uint32) *SpriteNode
+	WithCenterRect(centerRect corefoundation.CGRect) *SpriteNode
+	WithColorBlendFactor(colorBlendFactor float64) *SpriteNode
+	WithColor(color *appkit.NSColor) *SpriteNode
+	WithBlendMode(blendMode raw.SKBlendMode) *SpriteNode
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *SpriteNode
+	WithSize(size corefoundation.CGSize) *SpriteNode
+	WithShader(shader *raw.SKShader) *SpriteNode
+	ScaleToSize(size corefoundation.CGSize)
+	Texture() *Texture
+	SetTexture(texture *raw.SKTexture)
+	NormalTexture() *Texture
+	SetNormalTexture(normalTexture *raw.SKTexture)
+	LightingBitMask() uint32
+	SetLightingBitMask(lightingBitMask uint32)
+	ShadowCastBitMask() uint32
+	SetShadowCastBitMask(shadowCastBitMask uint32)
+	ShadowedBitMask() uint32
+	SetShadowedBitMask(shadowedBitMask uint32)
+	CenterRect() corefoundation.CGRect
+	SetCenterRect(centerRect corefoundation.CGRect)
+	ColorBlendFactor() float64
+	SetColorBlendFactor(colorBlendFactor float64)
+	Color() *appkit.NSColor
+	SetColor(color *appkit.NSColor)
+	BlendMode() raw.SKBlendMode
+	SetBlendMode(blendMode raw.SKBlendMode)
+	AnchorPoint() corefoundation.CGPoint
+	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
+	Size() corefoundation.CGSize
+	SetSize(size corefoundation.CGSize)
+	Shader() *Shader
+	SetShader(shader *raw.SKShader)
+}
+
+var _ SpriteNodeable = (*SpriteNode)(nil)
 

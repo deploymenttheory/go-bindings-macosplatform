@@ -10,6 +10,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -144,16 +145,291 @@ func (x *AssetWriterInput) RequestMediaDataWhenReadyOnQueueUsing(ctx context.Con
 	}
 }
 
+// AppendSampleBuffer calls the underlying AppendSampleBuffer.
+func (x *AssetWriterInput) AppendSampleBuffer(sampleBuffer unsafe.Pointer) bool {
+	return x.inner.AppendSampleBuffer(sampleBuffer)
+}
+
+// MarkAsFinished calls the underlying MarkAsFinished.
+func (x *AssetWriterInput) MarkAsFinished() {
+	x.inner.MarkAsFinished()
+}
+
+// MediaType calls the underlying MediaType.
+func (x *AssetWriterInput) MediaType() string {
+	_r := x.inner.MediaType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// OutputSettings calls the underlying OutputSettings.
+func (x *AssetWriterInput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.OutputSettings()
+}
+
+// SourceFormatHint calls the underlying SourceFormatHint.
+func (x *AssetWriterInput) SourceFormatHint() unsafe.Pointer {
+	return x.inner.SourceFormatHint()
+}
+
 // Metadata returns the collection as a Go slice.
 func (x *AssetWriterInput) Metadata() []*raw.AVMetadataItem {
 	arr := x.inner.Metadata()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMetadataItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMetadataItem {
+		return raw.AVMetadataItemFromID(purego.Retain(_id))
+	})
 }
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *AssetWriterInput) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
+// IsReadyForMoreMediaData calls the underlying IsReadyForMoreMediaData.
+func (x *AssetWriterInput) IsReadyForMoreMediaData() bool {
+	return x.inner.IsReadyForMoreMediaData()
+}
+
+// ExpectsMediaDataInRealTime calls the underlying ExpectsMediaDataInRealTime.
+func (x *AssetWriterInput) ExpectsMediaDataInRealTime() bool {
+	return x.inner.ExpectsMediaDataInRealTime()
+}
+
+// SetExpectsMediaDataInRealTime calls the underlying SetExpectsMediaDataInRealTime.
+func (x *AssetWriterInput) SetExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool) {
+	x.inner.SetExpectsMediaDataInRealTime(expectsMediaDataInRealTime)
+}
+
+// LanguageCode calls the underlying LanguageCode.
+func (x *AssetWriterInput) LanguageCode() string {
+	_r := x.inner.LanguageCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLanguageCode calls the underlying SetLanguageCode.
+func (x *AssetWriterInput) SetLanguageCode(languageCode string) {
+	x.inner.SetLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
+}
+
+// ExtendedLanguageTag calls the underlying ExtendedLanguageTag.
+func (x *AssetWriterInput) ExtendedLanguageTag() string {
+	_r := x.inner.ExtendedLanguageTag()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetExtendedLanguageTag calls the underlying SetExtendedLanguageTag.
+func (x *AssetWriterInput) SetExtendedLanguageTag(extendedLanguageTag string) {
+	x.inner.SetExtendedLanguageTag(foundation.NSStringStringWithUTF8String(extendedLanguageTag))
+}
+
+// NaturalSize calls the underlying NaturalSize.
+func (x *AssetWriterInput) NaturalSize() corefoundation.CGSize {
+	return x.inner.NaturalSize()
+}
+
+// SetNaturalSize calls the underlying SetNaturalSize.
+func (x *AssetWriterInput) SetNaturalSize(naturalSize corefoundation.CGSize) {
+	x.inner.SetNaturalSize(naturalSize)
+}
+
+// Transform calls the underlying Transform.
+func (x *AssetWriterInput) Transform() corefoundation.CGAffineTransform {
+	return x.inner.Transform()
+}
+
+// SetTransform calls the underlying SetTransform.
+func (x *AssetWriterInput) SetTransform(transform corefoundation.CGAffineTransform) {
+	x.inner.SetTransform(transform)
+}
+
+// PreferredVolume calls the underlying PreferredVolume.
+func (x *AssetWriterInput) PreferredVolume() float32 {
+	return x.inner.PreferredVolume()
+}
+
+// SetPreferredVolume calls the underlying SetPreferredVolume.
+func (x *AssetWriterInput) SetPreferredVolume(preferredVolume float32) {
+	x.inner.SetPreferredVolume(preferredVolume)
+}
+
+// MarksOutputTrackAsEnabled calls the underlying MarksOutputTrackAsEnabled.
+func (x *AssetWriterInput) MarksOutputTrackAsEnabled() bool {
+	return x.inner.MarksOutputTrackAsEnabled()
+}
+
+// SetMarksOutputTrackAsEnabled calls the underlying SetMarksOutputTrackAsEnabled.
+func (x *AssetWriterInput) SetMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool) {
+	x.inner.SetMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled)
+}
+
+// MediaTimeScale calls the underlying MediaTimeScale.
+func (x *AssetWriterInput) MediaTimeScale() int32 {
+	return x.inner.MediaTimeScale()
+}
+
+// SetMediaTimeScale calls the underlying SetMediaTimeScale.
+func (x *AssetWriterInput) SetMediaTimeScale(mediaTimeScale int32) {
+	x.inner.SetMediaTimeScale(mediaTimeScale)
+}
+
+// PreferredMediaChunkDuration calls the underlying PreferredMediaChunkDuration.
+func (x *AssetWriterInput) PreferredMediaChunkDuration() coremedia.CMTime {
+	return x.inner.PreferredMediaChunkDuration()
+}
+
+// SetPreferredMediaChunkDuration calls the underlying SetPreferredMediaChunkDuration.
+func (x *AssetWriterInput) SetPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) {
+	x.inner.SetPreferredMediaChunkDuration(preferredMediaChunkDuration)
+}
+
+// PreferredMediaChunkAlignment calls the underlying PreferredMediaChunkAlignment.
+func (x *AssetWriterInput) PreferredMediaChunkAlignment() int {
+	return x.inner.PreferredMediaChunkAlignment()
+}
+
+// SetPreferredMediaChunkAlignment calls the underlying SetPreferredMediaChunkAlignment.
+func (x *AssetWriterInput) SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) {
+	x.inner.SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment)
+}
+
+// SampleReferenceBaseURL calls the underlying SampleReferenceBaseURL.
+func (x *AssetWriterInput) SampleReferenceBaseURL() *foundation.NSURL {
+	return x.inner.SampleReferenceBaseURL()
+}
+
+// SetSampleReferenceBaseURL calls the underlying SetSampleReferenceBaseURL.
+func (x *AssetWriterInput) SetSampleReferenceBaseURL(sampleReferenceBaseURL string) {
+	x.inner.SetSampleReferenceBaseURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(sampleReferenceBaseURL)))
+}
+
+// MediaDataLocation calls the underlying MediaDataLocation.
+func (x *AssetWriterInput) MediaDataLocation() string {
+	_r := x.inner.MediaDataLocation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMediaDataLocation calls the underlying SetMediaDataLocation.
+func (x *AssetWriterInput) SetMediaDataLocation(mediaDataLocation *foundation.NSString) {
+	x.inner.SetMediaDataLocation(mediaDataLocation)
+}
+
+// CanAddTrackAssociationWithTrackOfInputType calls the underlying CanAddTrackAssociationWithTrackOfInputType.
+func (x *AssetWriterInput) CanAddTrackAssociationWithTrackOfInputType(input *raw.AVAssetWriterInput, trackAssociationType string) bool {
+	return x.inner.CanAddTrackAssociationWithTrackOfInputType(input, foundation.NSStringStringWithUTF8String(trackAssociationType))
+}
+
+// AddTrackAssociationWithTrackOfInputType calls the underlying AddTrackAssociationWithTrackOfInputType.
+func (x *AssetWriterInput) AddTrackAssociationWithTrackOfInputType(input *raw.AVAssetWriterInput, trackAssociationType string) {
+	x.inner.AddTrackAssociationWithTrackOfInputType(input, foundation.NSStringStringWithUTF8String(trackAssociationType))
+}
+
+// RespondToEachPassDescriptionOnQueueUsing calls the underlying RespondToEachPassDescriptionOnQueueUsing.
+func (x *AssetWriterInput) RespondToEachPassDescriptionOnQueueUsing(queue *foundation.NSObject, block func()) {
+	x.inner.RespondToEachPassDescriptionOnQueueUsing(queue, block)
+}
+
+// MarkCurrentPassAsFinished calls the underlying MarkCurrentPassAsFinished.
+func (x *AssetWriterInput) MarkCurrentPassAsFinished() {
+	x.inner.MarkCurrentPassAsFinished()
+}
+
+// PerformsMultiPassEncodingIfSupported calls the underlying PerformsMultiPassEncodingIfSupported.
+func (x *AssetWriterInput) PerformsMultiPassEncodingIfSupported() bool {
+	return x.inner.PerformsMultiPassEncodingIfSupported()
+}
+
+// SetPerformsMultiPassEncodingIfSupported calls the underlying SetPerformsMultiPassEncodingIfSupported.
+func (x *AssetWriterInput) SetPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported bool) {
+	x.inner.SetPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported)
+}
+
+// CanPerformMultiplePasses calls the underlying CanPerformMultiplePasses.
+func (x *AssetWriterInput) CanPerformMultiplePasses() bool {
+	return x.inner.CanPerformMultiplePasses()
+}
+
+// CurrentPassDescription calls the underlying CurrentPassDescription.
+func (x *AssetWriterInput) CurrentPassDescription() *AssetWriterInputPassDescription {
+	_r := x.inner.CurrentPassDescription()
+	if _r == nil {
+		return nil
+	}
+	return &AssetWriterInputPassDescription{inner: _r}
+}
+
+// AssetWriterInputable is the interface implemented by [AssetWriterInput], for mocking and DI.
+type AssetWriterInputable interface {
+	Unwrap() *raw.AVAssetWriterInput
+	WithMetadata(items ...MetadataItemProvider) *AssetWriterInput
+	WithExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool) *AssetWriterInput
+	WithLanguageCode(languageCode string) *AssetWriterInput
+	WithExtendedLanguageTag(extendedLanguageTag string) *AssetWriterInput
+	WithNaturalSize(naturalSize corefoundation.CGSize) *AssetWriterInput
+	WithTransform(transform corefoundation.CGAffineTransform) *AssetWriterInput
+	WithPreferredVolume(preferredVolume float32) *AssetWriterInput
+	WithMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool) *AssetWriterInput
+	WithMediaTimeScale(mediaTimeScale int32) *AssetWriterInput
+	WithPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime) *AssetWriterInput
+	WithPreferredMediaChunkAlignment(preferredMediaChunkAlignment int) *AssetWriterInput
+	WithSampleReferenceBaseURL(sampleReferenceBaseURL string) *AssetWriterInput
+	WithMediaDataLocation(mediaDataLocation *foundation.NSString) *AssetWriterInput
+	WithPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported bool) *AssetWriterInput
+	RequestMediaDataWhenReadyOnQueueUsing(ctx context.Context, queue *foundation.NSObject) error
+	AppendSampleBuffer(sampleBuffer unsafe.Pointer) bool
+	MarkAsFinished()
+	MediaType() string
+	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SourceFormatHint() unsafe.Pointer
+	Metadata() []*raw.AVMetadataItem
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+	IsReadyForMoreMediaData() bool
+	ExpectsMediaDataInRealTime() bool
+	SetExpectsMediaDataInRealTime(expectsMediaDataInRealTime bool)
+	LanguageCode() string
+	SetLanguageCode(languageCode string)
+	ExtendedLanguageTag() string
+	SetExtendedLanguageTag(extendedLanguageTag string)
+	NaturalSize() corefoundation.CGSize
+	SetNaturalSize(naturalSize corefoundation.CGSize)
+	Transform() corefoundation.CGAffineTransform
+	SetTransform(transform corefoundation.CGAffineTransform)
+	PreferredVolume() float32
+	SetPreferredVolume(preferredVolume float32)
+	MarksOutputTrackAsEnabled() bool
+	SetMarksOutputTrackAsEnabled(marksOutputTrackAsEnabled bool)
+	MediaTimeScale() int32
+	SetMediaTimeScale(mediaTimeScale int32)
+	PreferredMediaChunkDuration() coremedia.CMTime
+	SetPreferredMediaChunkDuration(preferredMediaChunkDuration coremedia.CMTime)
+	PreferredMediaChunkAlignment() int
+	SetPreferredMediaChunkAlignment(preferredMediaChunkAlignment int)
+	SampleReferenceBaseURL() *foundation.NSURL
+	SetSampleReferenceBaseURL(sampleReferenceBaseURL string)
+	MediaDataLocation() string
+	SetMediaDataLocation(mediaDataLocation *foundation.NSString)
+	CanAddTrackAssociationWithTrackOfInputType(input *raw.AVAssetWriterInput, trackAssociationType string) bool
+	AddTrackAssociationWithTrackOfInputType(input *raw.AVAssetWriterInput, trackAssociationType string)
+	RespondToEachPassDescriptionOnQueueUsing(queue *foundation.NSObject, block func())
+	MarkCurrentPassAsFinished()
+	PerformsMultiPassEncodingIfSupported() bool
+	SetPerformsMultiPassEncodingIfSupported(performsMultiPassEncodingIfSupported bool)
+	CanPerformMultiplePasses() bool
+	CurrentPassDescription() *AssetWriterInputPassDescription
+}
+
+var _ AssetWriterInputable = (*AssetWriterInput)(nil)
 

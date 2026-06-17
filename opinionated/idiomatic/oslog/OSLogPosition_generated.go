@@ -23,3 +23,10 @@ func NewLogPosition() *LogPosition {
 	return &LogPosition{inner: raw.OSLogPositionFromID(_id)}
 }
 
+// LogPositionable is the interface implemented by [LogPosition], for mocking and DI.
+type LogPositionable interface {
+	Unwrap() *raw.OSLogPosition
+}
+
+var _ LogPositionable = (*LogPosition)(nil)
+

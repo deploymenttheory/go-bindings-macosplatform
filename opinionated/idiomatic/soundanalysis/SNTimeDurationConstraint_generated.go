@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -33,16 +34,34 @@ func NewTimeDurationConstraintWithDurationRange(durationRange coremedia.CMTimeRa
 	return &TimeDurationConstraint{inner: raw.SNTimeDurationConstraintFromID(_id)}
 }
 
+// Type calls the underlying Type.
+func (x *TimeDurationConstraint) Type() raw.SNTimeDurationConstraintType {
+	return x.inner.Type()
+}
+
 // EnumeratedDurations returns the collection as a Go slice.
 func (x *TimeDurationConstraint) EnumeratedDurations() []*foundation.NSValue {
 	arr := x.inner.EnumeratedDurations()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSValue, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
+		return foundation.NSValueFromID(purego.Retain(_id))
+	})
 }
+
+// DurationRange calls the underlying DurationRange.
+func (x *TimeDurationConstraint) DurationRange() coremedia.CMTimeRange {
+	return x.inner.DurationRange()
+}
+
+// TimeDurationConstraintable is the interface implemented by [TimeDurationConstraint], for mocking and DI.
+type TimeDurationConstraintable interface {
+	Unwrap() *raw.SNTimeDurationConstraint
+	Type() raw.SNTimeDurationConstraintType
+	EnumeratedDurations() []*foundation.NSValue
+	DurationRange() coremedia.CMTimeRange
+}
+
+var _ TimeDurationConstraintable = (*TimeDurationConstraint)(nil)
 

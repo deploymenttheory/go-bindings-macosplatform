@@ -35,3 +35,36 @@ func (x *DecodeFrameOptions) WithRealTimePlayback(realTimePlayback bool) *Decode
 	return x
 }
 
+// DoNotOutputFrame calls the underlying DoNotOutputFrame.
+func (x *DecodeFrameOptions) DoNotOutputFrame() bool {
+	return x.inner.DoNotOutputFrame()
+}
+
+// SetDoNotOutputFrame calls the underlying SetDoNotOutputFrame.
+func (x *DecodeFrameOptions) SetDoNotOutputFrame(doNotOutputFrame bool) {
+	x.inner.SetDoNotOutputFrame(doNotOutputFrame)
+}
+
+// RealTimePlayback calls the underlying RealTimePlayback.
+func (x *DecodeFrameOptions) RealTimePlayback() bool {
+	return x.inner.RealTimePlayback()
+}
+
+// SetRealTimePlayback calls the underlying SetRealTimePlayback.
+func (x *DecodeFrameOptions) SetRealTimePlayback(realTimePlayback bool) {
+	x.inner.SetRealTimePlayback(realTimePlayback)
+}
+
+// DecodeFrameOptionsable is the interface implemented by [DecodeFrameOptions], for mocking and DI.
+type DecodeFrameOptionsable interface {
+	Unwrap() *raw.MEDecodeFrameOptions
+	WithDoNotOutputFrame(doNotOutputFrame bool) *DecodeFrameOptions
+	WithRealTimePlayback(realTimePlayback bool) *DecodeFrameOptions
+	DoNotOutputFrame() bool
+	SetDoNotOutputFrame(doNotOutputFrame bool)
+	RealTimePlayback() bool
+	SetRealTimePlayback(realTimePlayback bool)
+}
+
+var _ DecodeFrameOptionsable = (*DecodeFrameOptions)(nil)
+

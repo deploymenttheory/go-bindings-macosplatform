@@ -26,5 +26,55 @@ func NewHostInterfaceWithIOServiceOptionsQueueErrorInterestHandler(ioService uin
 	return &HostInterface{inner: raw.IOUSBHostInterfaceFromID(_id)}
 }
 
+// SetIdleTimeoutError calls the underlying SetIdleTimeoutError.
+func (x *HostInterface) SetIdleTimeoutError(idleTimeout float64) (bool, error) {
+	return x.inner.SetIdleTimeoutError(idleTimeout)
+}
+
+// SelectAlternateSettingError calls the underlying SelectAlternateSettingError.
+func (x *HostInterface) SelectAlternateSettingError(alternateSetting uint) (bool, error) {
+	return x.inner.SelectAlternateSettingError(alternateSetting)
+}
+
+// CopyPipeWithAddressError calls the underlying CopyPipeWithAddressError.
+func (x *HostInterface) CopyPipeWithAddressError(address uint) (*HostPipe, error) {
+	_r, _err := x.inner.CopyPipeWithAddressError(address)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &HostPipe{inner: _r}, nil
+}
+
+// IdleTimeout calls the underlying IdleTimeout.
+func (x *HostInterface) IdleTimeout() float64 {
+	return x.inner.IdleTimeout()
+}
+
+// ConfigurationDescriptor calls the underlying ConfigurationDescriptor.
+func (x *HostInterface) ConfigurationDescriptor() unsafe.Pointer {
+	return x.inner.ConfigurationDescriptor()
+}
+
+// InterfaceDescriptor calls the underlying InterfaceDescriptor.
+func (x *HostInterface) InterfaceDescriptor() unsafe.Pointer {
+	return x.inner.InterfaceDescriptor()
+}
+
 func (x *HostInterface) asHostObject() *raw.IOUSBHostObject { return &x.inner.IOUSBHostObject }
+
+// HostInterfaceable is the interface implemented by [HostInterface], for mocking and DI.
+type HostInterfaceable interface {
+	Unwrap() *raw.IOUSBHostInterface
+	SetIdleTimeoutError(idleTimeout float64) (bool, error)
+	SelectAlternateSettingError(alternateSetting uint) (bool, error)
+	CopyPipeWithAddressError(address uint) (*HostPipe, error)
+	IdleTimeout() float64
+	ConfigurationDescriptor() unsafe.Pointer
+	InterfaceDescriptor() unsafe.Pointer
+}
+
+var _ HostInterfaceable = (*HostInterface)(nil)
 

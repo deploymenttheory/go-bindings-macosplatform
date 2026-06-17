@@ -25,3 +25,10 @@ func NewShuffledDistribution() *ShuffledDistribution {
 
 func (x *ShuffledDistribution) asRandomDistribution() *raw.GKRandomDistribution { return &x.inner.GKRandomDistribution }
 
+// ShuffledDistributionable is the interface implemented by [ShuffledDistribution], for mocking and DI.
+type ShuffledDistributionable interface {
+	Unwrap() *raw.GKShuffledDistribution
+}
+
+var _ ShuffledDistributionable = (*ShuffledDistribution)(nil)
+

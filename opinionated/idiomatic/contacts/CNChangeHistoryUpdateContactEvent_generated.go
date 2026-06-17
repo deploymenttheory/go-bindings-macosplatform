@@ -23,5 +23,22 @@ func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
 	return &ChangeHistoryUpdateContactEvent{inner: raw.CNChangeHistoryUpdateContactEventFromID(_id)}
 }
 
+// Contact calls the underlying Contact.
+func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
+	_r := x.inner.Contact()
+	if _r == nil {
+		return nil
+	}
+	return &Contact{inner: _r}
+}
+
 func (x *ChangeHistoryUpdateContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
+
+// ChangeHistoryUpdateContactEventable is the interface implemented by [ChangeHistoryUpdateContactEvent], for mocking and DI.
+type ChangeHistoryUpdateContactEventable interface {
+	Unwrap() *raw.CNChangeHistoryUpdateContactEvent
+	Contact() *Contact
+}
+
+var _ ChangeHistoryUpdateContactEventable = (*ChangeHistoryUpdateContactEvent)(nil)
 

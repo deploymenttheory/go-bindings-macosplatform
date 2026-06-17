@@ -23,7 +23,26 @@ func NewEnumerator() *Enumerator {
 	return &Enumerator{inner: raw.NSEnumeratorFromID[objc.ID](_id)}
 }
 
+// NextObject calls the underlying NextObject.
+func (x *Enumerator) NextObject() objc.ID {
+	return x.inner.NextObject()
+}
+
+// AllObjects calls the underlying AllObjects.
+func (x *Enumerator) AllObjects() *raw.NSArray[objc.ID] {
+	return x.inner.AllObjects()
+}
+
 func (x *Enumerator) asEnumerator() *raw.NSEnumerator[objc.ID] { return x.inner }
 
 func (x *Enumerator) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Enumeratorable is the interface implemented by [Enumerator], for mocking and DI.
+type Enumeratorable interface {
+	Unwrap() *raw.NSEnumerator[objc.ID]
+	NextObject() objc.ID
+	AllObjects() *raw.NSArray[objc.ID]
+}
+
+var _ Enumeratorable = (*Enumerator)(nil)
 

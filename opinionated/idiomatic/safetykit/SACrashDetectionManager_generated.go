@@ -7,6 +7,7 @@ package safetykit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CrashDetectionManager wraps [raw.SACrashDetectionManager] with a fluent Go API.
@@ -28,4 +29,36 @@ func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelega
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
+func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(raw.SAAuthorizationStatus, unsafe.Pointer)) {
+	x.inner.RequestAuthorizationWithCompletionHandler(handler)
+}
+
+// AuthorizationStatus calls the underlying AuthorizationStatus.
+func (x *CrashDetectionManager) AuthorizationStatus() raw.SAAuthorizationStatus {
+	return x.inner.AuthorizationStatus()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *CrashDetectionManager) Delegate() raw.SACrashDetectionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *CrashDetectionManager) SetDelegate(delegate raw.SACrashDetectionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// CrashDetectionManagerable is the interface implemented by [CrashDetectionManager], for mocking and DI.
+type CrashDetectionManagerable interface {
+	Unwrap() *raw.SACrashDetectionManager
+	WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager
+	RequestAuthorizationWithCompletionHandler(handler func(raw.SAAuthorizationStatus, unsafe.Pointer))
+	AuthorizationStatus() raw.SAAuthorizationStatus
+	Delegate() raw.SACrashDetectionDelegate
+	SetDelegate(delegate raw.SACrashDetectionDelegate)
+}
+
+var _ CrashDetectionManagerable = (*CrashDetectionManager)(nil)
 

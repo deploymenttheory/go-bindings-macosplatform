@@ -5,8 +5,10 @@
 package speech
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SpeechAudioBufferRecognitionRequest wraps [raw.SFSpeechAudioBufferRecognitionRequest] with a fluent Go API.
@@ -23,5 +25,36 @@ func NewSpeechAudioBufferRecognitionRequest() *SpeechAudioBufferRecognitionReque
 	return &SpeechAudioBufferRecognitionRequest{inner: raw.SFSpeechAudioBufferRecognitionRequestFromID(_id)}
 }
 
+// AppendAudioPCMBuffer calls the underlying AppendAudioPCMBuffer.
+func (x *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer) {
+	x.inner.AppendAudioPCMBuffer(audioPCMBuffer)
+}
+
+// AppendAudioSampleBuffer calls the underlying AppendAudioSampleBuffer.
+func (x *SpeechAudioBufferRecognitionRequest) AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer) {
+	x.inner.AppendAudioSampleBuffer(sampleBuffer)
+}
+
+// EndAudio calls the underlying EndAudio.
+func (x *SpeechAudioBufferRecognitionRequest) EndAudio() {
+	x.inner.EndAudio()
+}
+
+// NativeAudioFormat calls the underlying NativeAudioFormat.
+func (x *SpeechAudioBufferRecognitionRequest) NativeAudioFormat() *avfaudio.AVAudioFormat {
+	return x.inner.NativeAudioFormat()
+}
+
 func (x *SpeechAudioBufferRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest { return &x.inner.SFSpeechRecognitionRequest }
+
+// SpeechAudioBufferRecognitionRequestable is the interface implemented by [SpeechAudioBufferRecognitionRequest], for mocking and DI.
+type SpeechAudioBufferRecognitionRequestable interface {
+	Unwrap() *raw.SFSpeechAudioBufferRecognitionRequest
+	AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer)
+	AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer)
+	EndAudio()
+	NativeAudioFormat() *avfaudio.AVAudioFormat
+}
+
+var _ SpeechAudioBufferRecognitionRequestable = (*SpeechAudioBufferRecognitionRequest)(nil)
 

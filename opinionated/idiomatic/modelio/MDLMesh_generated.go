@@ -7,6 +7,7 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -131,17 +132,132 @@ func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	return x
 }
 
+// VertexAttributeDataForAttributeNamed calls the underlying VertexAttributeDataForAttributeNamed.
+func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData {
+	_r := x.inner.VertexAttributeDataForAttributeNamed(foundation.NSStringStringWithUTF8String(name))
+	if _r == nil {
+		return nil
+	}
+	return &VertexAttributeData{inner: _r}
+}
+
+// VertexAttributeDataForAttributeNamedAsFormat calls the underlying VertexAttributeDataForAttributeNamedAsFormat.
+func (x *Mesh) VertexAttributeDataForAttributeNamedAsFormat(name string, format raw.MDLVertexFormat) *VertexAttributeData {
+	_r := x.inner.VertexAttributeDataForAttributeNamedAsFormat(foundation.NSStringStringWithUTF8String(name), format)
+	if _r == nil {
+		return nil
+	}
+	return &VertexAttributeData{inner: _r}
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *Mesh) BoundingBox() raw.MDLAxisAlignedBoundingBox {
+	return x.inner.BoundingBox()
+}
+
+// VertexDescriptor calls the underlying VertexDescriptor.
+func (x *Mesh) VertexDescriptor() *VertexDescriptor {
+	_r := x.inner.VertexDescriptor()
+	if _r == nil {
+		return nil
+	}
+	return &VertexDescriptor{inner: _r}
+}
+
+// SetVertexDescriptor calls the underlying SetVertexDescriptor.
+func (x *Mesh) SetVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) {
+	x.inner.SetVertexDescriptor(vertexDescriptor)
+}
+
+// VertexCount calls the underlying VertexCount.
+func (x *Mesh) VertexCount() uint {
+	return x.inner.VertexCount()
+}
+
+// SetVertexCount calls the underlying SetVertexCount.
+func (x *Mesh) SetVertexCount(vertexCount uint) {
+	x.inner.SetVertexCount(vertexCount)
+}
+
+// VertexBuffers calls the underlying VertexBuffers.
+func (x *Mesh) VertexBuffers() *foundation.NSArray[raw.MDLMeshBuffer] {
+	return x.inner.VertexBuffers()
+}
+
+// SetVertexBuffers calls the underlying SetVertexBuffers.
+func (x *Mesh) SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer]) {
+	x.inner.SetVertexBuffers(vertexBuffers)
+}
+
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*raw.MDLSubmesh {
 	arr := x.inner.Submeshes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MDLSubmesh, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MDLSubmesh {
+		return raw.MDLSubmeshFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubmeshes calls the underlying SetSubmeshes.
+func (x *Mesh) SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh]) {
+	x.inner.SetSubmeshes(submeshes)
+}
+
+// Allocator calls the underlying Allocator.
+func (x *Mesh) Allocator() raw.MDLMeshBufferAllocator {
+	return x.inner.Allocator()
+}
+
+// AddAttributeWithNameFormat calls the underlying AddAttributeWithNameFormat.
+func (x *Mesh) AddAttributeWithNameFormat(name string, format raw.MDLVertexFormat) {
+	x.inner.AddAttributeWithNameFormat(foundation.NSStringStringWithUTF8String(name), format)
+}
+
+// AddAttributeWithNameFormatTypeDataStride calls the underlying AddAttributeWithNameFormatTypeDataStride.
+func (x *Mesh) AddAttributeWithNameFormatTypeDataStride(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int) {
+	x.inner.AddAttributeWithNameFormatTypeDataStride(foundation.NSStringStringWithUTF8String(name), format, foundation.NSStringStringWithUTF8String(type_), data, stride)
+}
+
+// AddAttributeWithNameFormatTypeDataStrideTime calls the underlying AddAttributeWithNameFormatTypeDataStrideTime.
+func (x *Mesh) AddAttributeWithNameFormatTypeDataStrideTime(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64) {
+	x.inner.AddAttributeWithNameFormatTypeDataStrideTime(foundation.NSStringStringWithUTF8String(name), format, foundation.NSStringStringWithUTF8String(type_), data, stride, time_)
+}
+
+// AddNormalsWithAttributeNamedCreaseThreshold calls the underlying AddNormalsWithAttributeNamedCreaseThreshold.
+func (x *Mesh) AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32) {
+	x.inner.AddNormalsWithAttributeNamedCreaseThreshold(foundation.NSStringStringWithUTF8String(attributeName), creaseThreshold)
+}
+
+// AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed.
+func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string) {
+	x.inner.AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName), foundation.NSStringStringWithUTF8String(bitangentAttributeName))
+}
+
+// AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed calls the underlying AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed.
+func (x *Mesh) AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
+	x.inner.AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(normalAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName))
+}
+
+// AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed calls the underlying AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed.
+func (x *Mesh) AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string) {
+	x.inner.AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName), foundation.NSStringStringWithUTF8String(normalAttributeName), foundation.NSStringStringWithUTF8String(tangentAttributeName))
+}
+
+// AddUnwrappedTextureCoordinatesForAttributeNamed calls the underlying AddUnwrappedTextureCoordinatesForAttributeNamed.
+func (x *Mesh) AddUnwrappedTextureCoordinatesForAttributeNamed(textureCoordinateAttributeName string) {
+	x.inner.AddUnwrappedTextureCoordinatesForAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName))
+}
+
+// FlipTextureCoordinatesInAttributeNamed calls the underlying FlipTextureCoordinatesInAttributeNamed.
+func (x *Mesh) FlipTextureCoordinatesInAttributeNamed(textureCoordinateAttributeName string) {
+	x.inner.FlipTextureCoordinatesInAttributeNamed(foundation.NSStringStringWithUTF8String(textureCoordinateAttributeName))
+}
+
+// MakeVerticesUnique calls the underlying MakeVerticesUnique.
+func (x *Mesh) MakeVerticesUnique() {
+	x.inner.MakeVerticesUnique()
 }
 
 // MakeVerticesUniqueAndReturnError returns any validation error.
@@ -150,5 +266,98 @@ func (x *Mesh) MakeVerticesUniqueAndReturnError() error {
 	return err
 }
 
+// ReplaceAttributeNamedWithData calls the underlying ReplaceAttributeNamedWithData.
+func (x *Mesh) ReplaceAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData) {
+	x.inner.ReplaceAttributeNamedWithData(foundation.NSStringStringWithUTF8String(name), newData)
+}
+
+// UpdateAttributeNamedWithData calls the underlying UpdateAttributeNamedWithData.
+func (x *Mesh) UpdateAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData) {
+	x.inner.UpdateAttributeNamedWithData(foundation.NSStringStringWithUTF8String(name), newData)
+}
+
+// RemoveAttributeNamed calls the underlying RemoveAttributeNamed.
+func (x *Mesh) RemoveAttributeNamed(name string) {
+	x.inner.RemoveAttributeNamed(foundation.NSStringStringWithUTF8String(name))
+}
+
+// GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
+func (x *Mesh) GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
+	return x.inner.GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize, raysPerSample, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
+}
+
+// GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
+func (x *Mesh) GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
+	return x.inner.GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
+}
+
+// GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed calls the underlying GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed.
+func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
+	return x.inner.GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))
+}
+
+// GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed calls the underlying GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed.
+func (x *Mesh) GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
+	return x.inner.GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality, attenuationFactor, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))
+}
+
+// GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
+func (x *Mesh) GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
+	return x.inner.GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize, lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
+}
+
+// GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed calls the underlying GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed.
+func (x *Mesh) GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool {
+	return x.inner.GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality, lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName), foundation.NSStringStringWithUTF8String(materialPropertyName))
+}
+
+// GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed calls the underlying GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed.
+func (x *Mesh) GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool {
+	return x.inner.GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider, objectsToConsider, foundation.NSStringStringWithUTF8String(vertexAttributeName))
+}
+
 func (x *Mesh) asObject() *raw.MDLObject { return &x.inner.MDLObject }
+
+// Meshable is the interface implemented by [Mesh], for mocking and DI.
+type Meshable interface {
+	Unwrap() *raw.MDLMesh
+	WithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *Mesh
+	WithVertexCount(vertexCount uint) *Mesh
+	WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh
+	VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData
+	VertexAttributeDataForAttributeNamedAsFormat(name string, format raw.MDLVertexFormat) *VertexAttributeData
+	BoundingBox() raw.MDLAxisAlignedBoundingBox
+	VertexDescriptor() *VertexDescriptor
+	SetVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor)
+	VertexCount() uint
+	SetVertexCount(vertexCount uint)
+	VertexBuffers() *foundation.NSArray[raw.MDLMeshBuffer]
+	SetVertexBuffers(vertexBuffers *foundation.NSArray[raw.MDLMeshBuffer])
+	Submeshes() []*raw.MDLSubmesh
+	SetSubmeshes(submeshes *foundation.NSMutableArray[*raw.MDLSubmesh])
+	Allocator() raw.MDLMeshBufferAllocator
+	AddAttributeWithNameFormat(name string, format raw.MDLVertexFormat)
+	AddAttributeWithNameFormatTypeDataStride(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int)
+	AddAttributeWithNameFormatTypeDataStrideTime(name string, format raw.MDLVertexFormat, type_ string, data *foundation.NSData, stride int, time_ float64)
+	AddNormalsWithAttributeNamedCreaseThreshold(attributeName string, creaseThreshold float32)
+	AddTangentBasisForTextureCoordinateAttributeNamedTangentAttributeNamedBitangentAttributeNamed(textureCoordinateAttributeName string, tangentAttributeName string, bitangentAttributeName string)
+	AddTangentBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string)
+	AddOrthTanBasisForTextureCoordinateAttributeNamedNormalAttributeNamedTangentAttributeNamed(textureCoordinateAttributeName string, normalAttributeName string, tangentAttributeName string)
+	AddUnwrappedTextureCoordinatesForAttributeNamed(textureCoordinateAttributeName string)
+	FlipTextureCoordinatesInAttributeNamed(textureCoordinateAttributeName string)
+	MakeVerticesUnique()
+	MakeVerticesUniqueAndReturnError() error
+	ReplaceAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData)
+	UpdateAttributeNamedWithData(name string, newData *raw.MDLVertexAttributeData)
+	RemoveAttributeNamed(name string)
+	GenerateAmbientOcclusionTextureWithSizeRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool
+	GenerateAmbientOcclusionTextureWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool
+	GenerateAmbientOcclusionVertexColorsWithRaysPerSampleAttenuationFactorObjectsToConsiderVertexAttributeNamed(raysPerSample int, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool
+	GenerateAmbientOcclusionVertexColorsWithQualityAttenuationFactorObjectsToConsiderVertexAttributeNamed(bakeQuality float32, attenuationFactor float32, objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool
+	GenerateLightMapTextureWithTextureSizeLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(textureSize unsafe.Pointer, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool
+	GenerateLightMapTextureWithQualityLightsToConsiderObjectsToConsiderVertexAttributeNamedMaterialPropertyNamed(bakeQuality float32, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string, materialPropertyName string) bool
+	GenerateLightMapVertexColorsWithLightsToConsiderObjectsToConsiderVertexAttributeNamed(lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], vertexAttributeName string) bool
+}
+
+var _ Meshable = (*Mesh)(nil)
 

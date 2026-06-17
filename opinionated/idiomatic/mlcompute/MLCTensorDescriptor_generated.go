@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,17 +25,25 @@ func NewTensorDescriptor() *TensorDescriptor {
 	return &TensorDescriptor{inner: raw.MLCTensorDescriptorFromID(_id)}
 }
 
+// DataType calls the underlying DataType.
+func (x *TensorDescriptor) DataType() raw.MLCDataType {
+	return x.inner.DataType()
+}
+
+// DimensionCount calls the underlying DimensionCount.
+func (x *TensorDescriptor) DimensionCount() uint {
+	return x.inner.DimensionCount()
+}
+
 // Shape returns the collection as a Go slice.
 func (x *TensorDescriptor) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // Stride returns the collection as a Go slice.
@@ -43,11 +52,14 @@ func (x *TensorDescriptor) Stride() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// TensorAllocationSizeInBytes calls the underlying TensorAllocationSizeInBytes.
+func (x *TensorDescriptor) TensorAllocationSizeInBytes() uint {
+	return x.inner.TensorAllocationSizeInBytes()
 }
 
 // SequenceLengths returns the collection as a Go slice.
@@ -56,11 +68,14 @@ func (x *TensorDescriptor) SequenceLengths() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SortedSequences calls the underlying SortedSequences.
+func (x *TensorDescriptor) SortedSequences() bool {
+	return x.inner.SortedSequences()
 }
 
 // BatchSizePerSequenceStep returns the collection as a Go slice.
@@ -69,10 +84,23 @@ func (x *TensorDescriptor) BatchSizePerSequenceStep() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
+
+// TensorDescriptorable is the interface implemented by [TensorDescriptor], for mocking and DI.
+type TensorDescriptorable interface {
+	Unwrap() *raw.MLCTensorDescriptor
+	DataType() raw.MLCDataType
+	DimensionCount() uint
+	Shape() []*foundation.NSNumber
+	Stride() []*foundation.NSNumber
+	TensorAllocationSizeInBytes() uint
+	SequenceLengths() []*foundation.NSNumber
+	SortedSequences() bool
+	BatchSizePerSequenceStep() []*foundation.NSNumber
+}
+
+var _ TensorDescriptorable = (*TensorDescriptor)(nil)
 

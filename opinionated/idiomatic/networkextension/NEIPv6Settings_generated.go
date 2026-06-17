@@ -7,6 +7,7 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -59,16 +60,14 @@ func (x *NEIPv6Settings) WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Se
 }
 
 // Addresses returns the collection as a Go slice.
-func (x *NEIPv6Settings) Addresses() []*foundation.NSString {
+func (x *NEIPv6Settings) Addresses() []string {
 	arr := x.inner.Addresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
 }
 
 // NetworkPrefixLengths returns the collection as a Go slice.
@@ -77,11 +76,9 @@ func (x *NEIPv6Settings) NetworkPrefixLengths() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
 }
 
 // IncludedRoutes returns the collection as a Go slice.
@@ -90,11 +87,14 @@ func (x *NEIPv6Settings) IncludedRoutes() []*raw.NEIPv6Route {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEIPv6Route, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv6Route {
+		return raw.NEIPv6RouteFromID(purego.Retain(_id))
+	})
+}
+
+// SetIncludedRoutes calls the underlying SetIncludedRoutes.
+func (x *NEIPv6Settings) SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv6Route]) {
+	x.inner.SetIncludedRoutes(includedRoutes)
 }
 
 // ExcludedRoutes returns the collection as a Go slice.
@@ -103,10 +103,28 @@ func (x *NEIPv6Settings) ExcludedRoutes() []*raw.NEIPv6Route {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NEIPv6Route, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NEIPv6Route {
+		return raw.NEIPv6RouteFromID(purego.Retain(_id))
+	})
 }
+
+// SetExcludedRoutes calls the underlying SetExcludedRoutes.
+func (x *NEIPv6Settings) SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv6Route]) {
+	x.inner.SetExcludedRoutes(excludedRoutes)
+}
+
+// NEIPv6Settingsable is the interface implemented by [NEIPv6Settings], for mocking and DI.
+type NEIPv6Settingsable interface {
+	Unwrap() *raw.NEIPv6Settings
+	WithIncludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings
+	WithExcludedRoutes(items ...*raw.NEIPv6Route) *NEIPv6Settings
+	Addresses() []string
+	NetworkPrefixLengths() []*foundation.NSNumber
+	IncludedRoutes() []*raw.NEIPv6Route
+	SetIncludedRoutes(includedRoutes *foundation.NSArray[*raw.NEIPv6Route])
+	ExcludedRoutes() []*raw.NEIPv6Route
+	SetExcludedRoutes(excludedRoutes *foundation.NSArray[*raw.NEIPv6Route])
+}
+
+var _ NEIPv6Settingsable = (*NEIPv6Settings)(nil)
 

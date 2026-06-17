@@ -23,7 +23,38 @@ func NewSuicaPassProperties() *SuicaPassProperties {
 	return &SuicaPassProperties{inner: raw.PKSuicaPassPropertiesFromID(_id)}
 }
 
+// IsInShinkansenStation calls the underlying IsInShinkansenStation.
+func (x *SuicaPassProperties) IsInShinkansenStation() bool {
+	return x.inner.IsInShinkansenStation()
+}
+
+// IsBalanceAllowedForCommute calls the underlying IsBalanceAllowedForCommute.
+func (x *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
+	return x.inner.IsBalanceAllowedForCommute()
+}
+
+// IsLowBalanceGateNotificationEnabled calls the underlying IsLowBalanceGateNotificationEnabled.
+func (x *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
+	return x.inner.IsLowBalanceGateNotificationEnabled()
+}
+
+// IsGreenCarTicketUsed calls the underlying IsGreenCarTicketUsed.
+func (x *SuicaPassProperties) IsGreenCarTicketUsed() bool {
+	return x.inner.IsGreenCarTicketUsed()
+}
+
 func (x *SuicaPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties { return &x.inner.PKTransitPassProperties }
 
 func (x *SuicaPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties { return &x.inner.PKTransitPassProperties.PKStoredValuePassProperties }
+
+// SuicaPassPropertiesable is the interface implemented by [SuicaPassProperties], for mocking and DI.
+type SuicaPassPropertiesable interface {
+	Unwrap() *raw.PKSuicaPassProperties
+	IsInShinkansenStation() bool
+	IsBalanceAllowedForCommute() bool
+	IsLowBalanceGateNotificationEnabled() bool
+	IsGreenCarTicketUsed() bool
+}
+
+var _ SuicaPassPropertiesable = (*SuicaPassProperties)(nil)
 

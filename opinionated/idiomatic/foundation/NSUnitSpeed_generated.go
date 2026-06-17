@@ -29,3 +29,10 @@ func (x *UnitSpeed) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
 
 func (x *UnitSpeed) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
 
+// UnitSpeedable is the interface implemented by [UnitSpeed], for mocking and DI.
+type UnitSpeedable interface {
+	Unwrap() *raw.NSUnitSpeed
+}
+
+var _ UnitSpeedable = (*UnitSpeed)(nil)
+

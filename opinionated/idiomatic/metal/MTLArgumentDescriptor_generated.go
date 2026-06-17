@@ -59,3 +59,88 @@ func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment u
 	return x
 }
 
+// DataType calls the underlying DataType.
+func (x *ArgumentDescriptor) DataType() raw.MTLDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *ArgumentDescriptor) SetDataType(dataType raw.MTLDataType) {
+	x.inner.SetDataType(dataType)
+}
+
+// Index calls the underlying Index.
+func (x *ArgumentDescriptor) Index() uint {
+	return x.inner.Index()
+}
+
+// SetIndex calls the underlying SetIndex.
+func (x *ArgumentDescriptor) SetIndex(index uint) {
+	x.inner.SetIndex(index)
+}
+
+// ArrayLength calls the underlying ArrayLength.
+func (x *ArgumentDescriptor) ArrayLength() uint {
+	return x.inner.ArrayLength()
+}
+
+// SetArrayLength calls the underlying SetArrayLength.
+func (x *ArgumentDescriptor) SetArrayLength(arrayLength uint) {
+	x.inner.SetArrayLength(arrayLength)
+}
+
+// Access calls the underlying Access.
+func (x *ArgumentDescriptor) Access() raw.MTLBindingAccess {
+	return x.inner.Access()
+}
+
+// SetAccess calls the underlying SetAccess.
+func (x *ArgumentDescriptor) SetAccess(access raw.MTLBindingAccess) {
+	x.inner.SetAccess(access)
+}
+
+// TextureType calls the underlying TextureType.
+func (x *ArgumentDescriptor) TextureType() raw.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// SetTextureType calls the underlying SetTextureType.
+func (x *ArgumentDescriptor) SetTextureType(textureType raw.MTLTextureType) {
+	x.inner.SetTextureType(textureType)
+}
+
+// ConstantBlockAlignment calls the underlying ConstantBlockAlignment.
+func (x *ArgumentDescriptor) ConstantBlockAlignment() uint {
+	return x.inner.ConstantBlockAlignment()
+}
+
+// SetConstantBlockAlignment calls the underlying SetConstantBlockAlignment.
+func (x *ArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment uint) {
+	x.inner.SetConstantBlockAlignment(constantBlockAlignment)
+}
+
+// ArgumentDescriptorable is the interface implemented by [ArgumentDescriptor], for mocking and DI.
+type ArgumentDescriptorable interface {
+	Unwrap() *raw.MTLArgumentDescriptor
+	WithDataType(dataType raw.MTLDataType) *ArgumentDescriptor
+	WithIndex(index uint) *ArgumentDescriptor
+	WithArrayLength(arrayLength uint) *ArgumentDescriptor
+	WithAccess(access raw.MTLBindingAccess) *ArgumentDescriptor
+	WithTextureType(textureType raw.MTLTextureType) *ArgumentDescriptor
+	WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor
+	DataType() raw.MTLDataType
+	SetDataType(dataType raw.MTLDataType)
+	Index() uint
+	SetIndex(index uint)
+	ArrayLength() uint
+	SetArrayLength(arrayLength uint)
+	Access() raw.MTLBindingAccess
+	SetAccess(access raw.MTLBindingAccess)
+	TextureType() raw.MTLTextureType
+	SetTextureType(textureType raw.MTLTextureType)
+	ConstantBlockAlignment() uint
+	SetConstantBlockAlignment(constantBlockAlignment uint)
+}
+
+var _ ArgumentDescriptorable = (*ArgumentDescriptor)(nil)
+

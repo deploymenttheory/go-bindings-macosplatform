@@ -25,3 +25,40 @@ func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestinati
 	return &CIDeviceInfo{inner: raw.MIDICIDeviceInfoFromID(_id)}
 }
 
+// ManufacturerID calls the underlying ManufacturerID.
+func (x *CIDeviceInfo) ManufacturerID() *foundation.NSData {
+	return x.inner.ManufacturerID()
+}
+
+// Family calls the underlying Family.
+func (x *CIDeviceInfo) Family() *foundation.NSData {
+	return x.inner.Family()
+}
+
+// ModelNumber calls the underlying ModelNumber.
+func (x *CIDeviceInfo) ModelNumber() *foundation.NSData {
+	return x.inner.ModelNumber()
+}
+
+// RevisionLevel calls the underlying RevisionLevel.
+func (x *CIDeviceInfo) RevisionLevel() *foundation.NSData {
+	return x.inner.RevisionLevel()
+}
+
+// MidiDestination calls the underlying MidiDestination.
+func (x *CIDeviceInfo) MidiDestination() uint {
+	return x.inner.MidiDestination()
+}
+
+// CIDeviceInfoable is the interface implemented by [CIDeviceInfo], for mocking and DI.
+type CIDeviceInfoable interface {
+	Unwrap() *raw.MIDICIDeviceInfo
+	ManufacturerID() *foundation.NSData
+	Family() *foundation.NSData
+	ModelNumber() *foundation.NSData
+	RevisionLevel() *foundation.NSData
+	MidiDestination() uint
+}
+
+var _ CIDeviceInfoable = (*CIDeviceInfo)(nil)
+

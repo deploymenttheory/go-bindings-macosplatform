@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -84,6 +85,223 @@ func (x *DOMHTMLAnchorElement) WithHref(href string) *DOMHTMLAnchorElement {
 	return x
 }
 
+// Charset calls the underlying Charset.
+func (x *DOMHTMLAnchorElement) Charset() string {
+	_r := x.inner.Charset()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCharset calls the underlying SetCharset.
+func (x *DOMHTMLAnchorElement) SetCharset(charset string) {
+	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+}
+
+// Coords calls the underlying Coords.
+func (x *DOMHTMLAnchorElement) Coords() string {
+	_r := x.inner.Coords()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetCoords calls the underlying SetCoords.
+func (x *DOMHTMLAnchorElement) SetCoords(coords string) {
+	x.inner.SetCoords(foundation.NSStringStringWithUTF8String(coords))
+}
+
+// Hreflang calls the underlying Hreflang.
+func (x *DOMHTMLAnchorElement) Hreflang() string {
+	_r := x.inner.Hreflang()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHreflang calls the underlying SetHreflang.
+func (x *DOMHTMLAnchorElement) SetHreflang(hreflang string) {
+	x.inner.SetHreflang(foundation.NSStringStringWithUTF8String(hreflang))
+}
+
+// Name calls the underlying Name.
+func (x *DOMHTMLAnchorElement) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *DOMHTMLAnchorElement) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Rel calls the underlying Rel.
+func (x *DOMHTMLAnchorElement) Rel() string {
+	_r := x.inner.Rel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRel calls the underlying SetRel.
+func (x *DOMHTMLAnchorElement) SetRel(rel string) {
+	x.inner.SetRel(foundation.NSStringStringWithUTF8String(rel))
+}
+
+// Rev calls the underlying Rev.
+func (x *DOMHTMLAnchorElement) Rev() string {
+	_r := x.inner.Rev()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRev calls the underlying SetRev.
+func (x *DOMHTMLAnchorElement) SetRev(rev string) {
+	x.inner.SetRev(foundation.NSStringStringWithUTF8String(rev))
+}
+
+// Shape calls the underlying Shape.
+func (x *DOMHTMLAnchorElement) Shape() string {
+	_r := x.inner.Shape()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetShape calls the underlying SetShape.
+func (x *DOMHTMLAnchorElement) SetShape(shape string) {
+	x.inner.SetShape(foundation.NSStringStringWithUTF8String(shape))
+}
+
+// Target calls the underlying Target.
+func (x *DOMHTMLAnchorElement) Target() string {
+	_r := x.inner.Target()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *DOMHTMLAnchorElement) SetTarget(target string) {
+	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLAnchorElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLAnchorElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
+// Text calls the underlying Text.
+func (x *DOMHTMLAnchorElement) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AbsoluteLinkURL calls the underlying AbsoluteLinkURL.
+func (x *DOMHTMLAnchorElement) AbsoluteLinkURL() *foundation.NSURL {
+	return x.inner.AbsoluteLinkURL()
+}
+
+// Href calls the underlying Href.
+func (x *DOMHTMLAnchorElement) Href() string {
+	_r := x.inner.Href()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetHref calls the underlying SetHref.
+func (x *DOMHTMLAnchorElement) SetHref(href string) {
+	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+}
+
+// Protocol calls the underlying Protocol.
+func (x *DOMHTMLAnchorElement) Protocol() string {
+	_r := x.inner.Protocol()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Host calls the underlying Host.
+func (x *DOMHTMLAnchorElement) Host() string {
+	_r := x.inner.Host()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Hostname calls the underlying Hostname.
+func (x *DOMHTMLAnchorElement) Hostname() string {
+	_r := x.inner.Hostname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Port calls the underlying Port.
+func (x *DOMHTMLAnchorElement) Port() string {
+	_r := x.inner.Port()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Pathname calls the underlying Pathname.
+func (x *DOMHTMLAnchorElement) Pathname() string {
+	_r := x.inner.Pathname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Search calls the underlying Search.
+func (x *DOMHTMLAnchorElement) Search() string {
+	_r := x.inner.Search()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// HashName calls the underlying HashName.
+func (x *DOMHTMLAnchorElement) HashName() string {
+	_r := x.inner.HashName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *DOMHTMLAnchorElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLAnchorElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -93,4 +311,50 @@ func (x *DOMHTMLAnchorElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLAnchorElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLAnchorElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLAnchorElementable is the interface implemented by [DOMHTMLAnchorElement], for mocking and DI.
+type DOMHTMLAnchorElementable interface {
+	Unwrap() *raw.DOMHTMLAnchorElement
+	WithCharset(charset string) *DOMHTMLAnchorElement
+	WithCoords(coords string) *DOMHTMLAnchorElement
+	WithHreflang(hreflang string) *DOMHTMLAnchorElement
+	WithName(name string) *DOMHTMLAnchorElement
+	WithRel(rel string) *DOMHTMLAnchorElement
+	WithRev(rev string) *DOMHTMLAnchorElement
+	WithShape(shape string) *DOMHTMLAnchorElement
+	WithTarget(target string) *DOMHTMLAnchorElement
+	WithType(type_ string) *DOMHTMLAnchorElement
+	WithHref(href string) *DOMHTMLAnchorElement
+	Charset() string
+	SetCharset(charset string)
+	Coords() string
+	SetCoords(coords string)
+	Hreflang() string
+	SetHreflang(hreflang string)
+	Name() string
+	SetName(name string)
+	Rel() string
+	SetRel(rel string)
+	Rev() string
+	SetRev(rev string)
+	Shape() string
+	SetShape(shape string)
+	Target() string
+	SetTarget(target string)
+	Type() string
+	SetType(type_ string)
+	Text() string
+	AbsoluteLinkURL() *foundation.NSURL
+	Href() string
+	SetHref(href string)
+	Protocol() string
+	Host() string
+	Hostname() string
+	Port() string
+	Pathname() string
+	Search() string
+	HashName() string
+}
+
+var _ DOMHTMLAnchorElementable = (*DOMHTMLAnchorElement)(nil)
 

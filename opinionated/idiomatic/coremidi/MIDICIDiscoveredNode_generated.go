@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,45 @@ func NewCIDiscoveredNode() *CIDiscoveredNode {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDiscoveredNode")), objc.RegisterName("new"))
 	return &CIDiscoveredNode{inner: raw.MIDICIDiscoveredNodeFromID(_id)}
 }
+
+// Destination calls the underlying Destination.
+func (x *CIDiscoveredNode) Destination() uint {
+	return x.inner.Destination()
+}
+
+// DeviceInfo calls the underlying DeviceInfo.
+func (x *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
+	_r := x.inner.DeviceInfo()
+	if _r == nil {
+		return nil
+	}
+	return &CIDeviceInfo{inner: _r}
+}
+
+// SupportsProfiles calls the underlying SupportsProfiles.
+func (x *CIDiscoveredNode) SupportsProfiles() bool {
+	return x.inner.SupportsProfiles()
+}
+
+// SupportsProperties calls the underlying SupportsProperties.
+func (x *CIDiscoveredNode) SupportsProperties() bool {
+	return x.inner.SupportsProperties()
+}
+
+// MaximumSysExSize calls the underlying MaximumSysExSize.
+func (x *CIDiscoveredNode) MaximumSysExSize() *foundation.NSNumber {
+	return x.inner.MaximumSysExSize()
+}
+
+// CIDiscoveredNodeable is the interface implemented by [CIDiscoveredNode], for mocking and DI.
+type CIDiscoveredNodeable interface {
+	Unwrap() *raw.MIDICIDiscoveredNode
+	Destination() uint
+	DeviceInfo() *CIDeviceInfo
+	SupportsProfiles() bool
+	SupportsProperties() bool
+	MaximumSysExSize() *foundation.NSNumber
+}
+
+var _ CIDiscoveredNodeable = (*CIDiscoveredNode)(nil)
 

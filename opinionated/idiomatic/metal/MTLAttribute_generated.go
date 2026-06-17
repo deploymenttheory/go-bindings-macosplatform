@@ -6,6 +6,7 @@ package metal
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,51 @@ func NewAttribute() *Attribute {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAttribute")), objc.RegisterName("new"))
 	return &Attribute{inner: raw.MTLAttributeFromID(_id)}
 }
+
+// Name calls the underlying Name.
+func (x *Attribute) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttributeIndex calls the underlying AttributeIndex.
+func (x *Attribute) AttributeIndex() uint {
+	return x.inner.AttributeIndex()
+}
+
+// AttributeType calls the underlying AttributeType.
+func (x *Attribute) AttributeType() raw.MTLDataType {
+	return x.inner.AttributeType()
+}
+
+// IsActive calls the underlying IsActive.
+func (x *Attribute) IsActive() bool {
+	return x.inner.IsActive()
+}
+
+// IsPatchData calls the underlying IsPatchData.
+func (x *Attribute) IsPatchData() bool {
+	return x.inner.IsPatchData()
+}
+
+// IsPatchControlPointData calls the underlying IsPatchControlPointData.
+func (x *Attribute) IsPatchControlPointData() bool {
+	return x.inner.IsPatchControlPointData()
+}
+
+// Attributeable is the interface implemented by [Attribute], for mocking and DI.
+type Attributeable interface {
+	Unwrap() *raw.MTLAttribute
+	Name() string
+	AttributeIndex() uint
+	AttributeType() raw.MTLDataType
+	IsActive() bool
+	IsPatchData() bool
+	IsPatchControlPointData() bool
+}
+
+var _ Attributeable = (*Attribute)(nil)
 

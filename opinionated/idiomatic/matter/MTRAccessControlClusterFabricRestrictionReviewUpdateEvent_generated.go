@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,4 +42,54 @@ func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithFabricIn
 	x.inner.SetFabricIndex(fabricIndex)
 	return x
 }
+
+// Token calls the underlying Token.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() *foundation.NSNumber {
+	return x.inner.Token()
+}
+
+// SetToken calls the underlying SetToken.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetToken(token *foundation.NSNumber) {
+	x.inner.SetToken(token)
+}
+
+// Instruction calls the underlying Instruction.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() string {
+	_r := x.inner.Instruction()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetInstruction calls the underlying SetInstruction.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetInstruction(instruction string) {
+	x.inner.SetInstruction(foundation.NSStringStringWithUTF8String(instruction))
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
+// MTRAccessControlClusterFabricRestrictionReviewUpdateEventable is the interface implemented by [MTRAccessControlClusterFabricRestrictionReviewUpdateEvent], for mocking and DI.
+type MTRAccessControlClusterFabricRestrictionReviewUpdateEventable interface {
+	Unwrap() *raw.MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
+	WithToken(token *foundation.NSNumber) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
+	WithInstruction(instruction string) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
+	Token() *foundation.NSNumber
+	SetToken(token *foundation.NSNumber)
+	Instruction() string
+	SetInstruction(instruction string)
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterFabricRestrictionReviewUpdateEventable = (*MTRAccessControlClusterFabricRestrictionReviewUpdateEvent)(nil)
 

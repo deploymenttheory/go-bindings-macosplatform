@@ -25,3 +25,10 @@ func NewTransformConstraint() *TransformConstraint {
 
 func (x *TransformConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
+// TransformConstraintable is the interface implemented by [TransformConstraint], for mocking and DI.
+type TransformConstraintable interface {
+	Unwrap() *raw.SCNTransformConstraint
+}
+
+var _ TransformConstraintable = (*TransformConstraint)(nil)
+

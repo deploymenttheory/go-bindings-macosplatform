@@ -6,6 +6,7 @@ package contacts
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,27 @@ func NewContactsUserDefaults() *ContactsUserDefaults {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactsUserDefaults")), objc.RegisterName("new"))
 	return &ContactsUserDefaults{inner: raw.CNContactsUserDefaultsFromID(_id)}
 }
+
+// SortOrder calls the underlying SortOrder.
+func (x *ContactsUserDefaults) SortOrder() raw.CNContactSortOrder {
+	return x.inner.SortOrder()
+}
+
+// CountryCode calls the underlying CountryCode.
+func (x *ContactsUserDefaults) CountryCode() string {
+	_r := x.inner.CountryCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContactsUserDefaultsable is the interface implemented by [ContactsUserDefaults], for mocking and DI.
+type ContactsUserDefaultsable interface {
+	Unwrap() *raw.CNContactsUserDefaults
+	SortOrder() raw.CNContactSortOrder
+	CountryCode() string
+}
+
+var _ ContactsUserDefaultsable = (*ContactsUserDefaults)(nil)
 

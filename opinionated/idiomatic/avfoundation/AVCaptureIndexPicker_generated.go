@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,18 +52,86 @@ func (x *CaptureIndexPicker) WithAccessibilityIdentifier(accessibilityIdentifier
 	return x
 }
 
+// SetActionQueueAction calls the underlying SetActionQueueAction.
+func (x *CaptureIndexPicker) SetActionQueueAction(actionQueue *foundation.NSObject, action func(int)) {
+	x.inner.SetActionQueueAction(actionQueue, action)
+}
+
+// SelectedIndex calls the underlying SelectedIndex.
+func (x *CaptureIndexPicker) SelectedIndex() int {
+	return x.inner.SelectedIndex()
+}
+
+// SetSelectedIndex calls the underlying SetSelectedIndex.
+func (x *CaptureIndexPicker) SetSelectedIndex(selectedIndex int) {
+	x.inner.SetSelectedIndex(selectedIndex)
+}
+
+// LocalizedTitle calls the underlying LocalizedTitle.
+func (x *CaptureIndexPicker) LocalizedTitle() string {
+	_r := x.inner.LocalizedTitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SymbolName calls the underlying SymbolName.
+func (x *CaptureIndexPicker) SymbolName() string {
+	_r := x.inner.SymbolName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NumberOfIndexes calls the underlying NumberOfIndexes.
+func (x *CaptureIndexPicker) NumberOfIndexes() int {
+	return x.inner.NumberOfIndexes()
+}
+
 // LocalizedIndexTitles returns the collection as a Go slice.
-func (x *CaptureIndexPicker) LocalizedIndexTitles() []*foundation.NSString {
+func (x *CaptureIndexPicker) LocalizedIndexTitles() []string {
 	arr := x.inner.LocalizedIndexTitles()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// AccessibilityIdentifier calls the underlying AccessibilityIdentifier.
+func (x *CaptureIndexPicker) AccessibilityIdentifier() string {
+	_r := x.inner.AccessibilityIdentifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAccessibilityIdentifier calls the underlying SetAccessibilityIdentifier.
+func (x *CaptureIndexPicker) SetAccessibilityIdentifier(accessibilityIdentifier string) {
+	x.inner.SetAccessibilityIdentifier(foundation.NSStringStringWithUTF8String(accessibilityIdentifier))
 }
 
 func (x *CaptureIndexPicker) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
+
+// CaptureIndexPickerable is the interface implemented by [CaptureIndexPicker], for mocking and DI.
+type CaptureIndexPickerable interface {
+	Unwrap() *raw.AVCaptureIndexPicker
+	WithSelectedIndex(selectedIndex int) *CaptureIndexPicker
+	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureIndexPicker
+	SetActionQueueAction(actionQueue *foundation.NSObject, action func(int))
+	SelectedIndex() int
+	SetSelectedIndex(selectedIndex int)
+	LocalizedTitle() string
+	SymbolName() string
+	NumberOfIndexes() int
+	LocalizedIndexTitles() []string
+	AccessibilityIdentifier() string
+	SetAccessibilityIdentifier(accessibilityIdentifier string)
+}
+
+var _ CaptureIndexPickerable = (*CaptureIndexPicker)(nil)
 

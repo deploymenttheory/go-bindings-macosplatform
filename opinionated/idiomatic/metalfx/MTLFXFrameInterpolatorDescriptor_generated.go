@@ -84,3 +84,152 @@ func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight uint) *Frame
 	return x
 }
 
+// NewFrameInterpolatorWithDevice calls the underlying NewFrameInterpolatorWithDevice.
+func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator {
+	return x.inner.NewFrameInterpolatorWithDevice(device)
+}
+
+// NewFrameInterpolatorWithDeviceCompiler calls the underlying NewFrameInterpolatorWithDeviceCompiler.
+func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator {
+	return x.inner.NewFrameInterpolatorWithDeviceCompiler(device, compiler)
+}
+
+// ColorTextureFormat calls the underlying ColorTextureFormat.
+func (x *FrameInterpolatorDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
+	return x.inner.ColorTextureFormat()
+}
+
+// SetColorTextureFormat calls the underlying SetColorTextureFormat.
+func (x *FrameInterpolatorDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetColorTextureFormat(colorTextureFormat)
+}
+
+// OutputTextureFormat calls the underlying OutputTextureFormat.
+func (x *FrameInterpolatorDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
+	return x.inner.OutputTextureFormat()
+}
+
+// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
+func (x *FrameInterpolatorDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetOutputTextureFormat(outputTextureFormat)
+}
+
+// DepthTextureFormat calls the underlying DepthTextureFormat.
+func (x *FrameInterpolatorDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
+	return x.inner.DepthTextureFormat()
+}
+
+// SetDepthTextureFormat calls the underlying SetDepthTextureFormat.
+func (x *FrameInterpolatorDescriptor) SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetDepthTextureFormat(depthTextureFormat)
+}
+
+// MotionTextureFormat calls the underlying MotionTextureFormat.
+func (x *FrameInterpolatorDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
+	return x.inner.MotionTextureFormat()
+}
+
+// SetMotionTextureFormat calls the underlying SetMotionTextureFormat.
+func (x *FrameInterpolatorDescriptor) SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetMotionTextureFormat(motionTextureFormat)
+}
+
+// UiTextureFormat calls the underlying UiTextureFormat.
+func (x *FrameInterpolatorDescriptor) UiTextureFormat() metal.MTLPixelFormat {
+	return x.inner.UiTextureFormat()
+}
+
+// SetUITextureFormat calls the underlying SetUITextureFormat.
+func (x *FrameInterpolatorDescriptor) SetUITextureFormat(uiTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetUITextureFormat(uiTextureFormat)
+}
+
+// Scaler calls the underlying Scaler.
+func (x *FrameInterpolatorDescriptor) Scaler() raw.MTLFXFrameInterpolatableScaler {
+	return x.inner.Scaler()
+}
+
+// SetScaler calls the underlying SetScaler.
+func (x *FrameInterpolatorDescriptor) SetScaler(scaler raw.MTLFXFrameInterpolatableScaler) {
+	x.inner.SetScaler(scaler)
+}
+
+// InputWidth calls the underlying InputWidth.
+func (x *FrameInterpolatorDescriptor) InputWidth() uint {
+	return x.inner.InputWidth()
+}
+
+// SetInputWidth calls the underlying SetInputWidth.
+func (x *FrameInterpolatorDescriptor) SetInputWidth(inputWidth uint) {
+	x.inner.SetInputWidth(inputWidth)
+}
+
+// InputHeight calls the underlying InputHeight.
+func (x *FrameInterpolatorDescriptor) InputHeight() uint {
+	return x.inner.InputHeight()
+}
+
+// SetInputHeight calls the underlying SetInputHeight.
+func (x *FrameInterpolatorDescriptor) SetInputHeight(inputHeight uint) {
+	x.inner.SetInputHeight(inputHeight)
+}
+
+// OutputWidth calls the underlying OutputWidth.
+func (x *FrameInterpolatorDescriptor) OutputWidth() uint {
+	return x.inner.OutputWidth()
+}
+
+// SetOutputWidth calls the underlying SetOutputWidth.
+func (x *FrameInterpolatorDescriptor) SetOutputWidth(outputWidth uint) {
+	x.inner.SetOutputWidth(outputWidth)
+}
+
+// OutputHeight calls the underlying OutputHeight.
+func (x *FrameInterpolatorDescriptor) OutputHeight() uint {
+	return x.inner.OutputHeight()
+}
+
+// SetOutputHeight calls the underlying SetOutputHeight.
+func (x *FrameInterpolatorDescriptor) SetOutputHeight(outputHeight uint) {
+	x.inner.SetOutputHeight(outputHeight)
+}
+
+// FrameInterpolatorDescriptorable is the interface implemented by [FrameInterpolatorDescriptor], for mocking and DI.
+type FrameInterpolatorDescriptorable interface {
+	Unwrap() *raw.MTLFXFrameInterpolatorDescriptor
+	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
+	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
+	WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
+	WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
+	WithUiTextureFormat(uiTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
+	WithScaler(scaler raw.MTLFXFrameInterpolatableScaler) *FrameInterpolatorDescriptor
+	WithInputWidth(inputWidth uint) *FrameInterpolatorDescriptor
+	WithInputHeight(inputHeight uint) *FrameInterpolatorDescriptor
+	WithOutputWidth(outputWidth uint) *FrameInterpolatorDescriptor
+	WithOutputHeight(outputHeight uint) *FrameInterpolatorDescriptor
+	NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator
+	NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator
+	ColorTextureFormat() metal.MTLPixelFormat
+	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
+	OutputTextureFormat() metal.MTLPixelFormat
+	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
+	DepthTextureFormat() metal.MTLPixelFormat
+	SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat)
+	MotionTextureFormat() metal.MTLPixelFormat
+	SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat)
+	UiTextureFormat() metal.MTLPixelFormat
+	SetUITextureFormat(uiTextureFormat metal.MTLPixelFormat)
+	Scaler() raw.MTLFXFrameInterpolatableScaler
+	SetScaler(scaler raw.MTLFXFrameInterpolatableScaler)
+	InputWidth() uint
+	SetInputWidth(inputWidth uint)
+	InputHeight() uint
+	SetInputHeight(inputHeight uint)
+	OutputWidth() uint
+	SetOutputWidth(outputWidth uint)
+	OutputHeight() uint
+	SetOutputHeight(outputHeight uint)
+}
+
+var _ FrameInterpolatorDescriptorable = (*FrameInterpolatorDescriptor)(nil)
+

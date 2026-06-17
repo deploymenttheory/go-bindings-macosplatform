@@ -29,3 +29,10 @@ func (x *HeartbeatSeriesSample) asSample() *raw.HKSample { return &x.inner.HKSer
 
 func (x *HeartbeatSeriesSample) asObject() *raw.HKObject { return &x.inner.HKSeriesSample.HKSample.HKObject }
 
+// HeartbeatSeriesSampleable is the interface implemented by [HeartbeatSeriesSample], for mocking and DI.
+type HeartbeatSeriesSampleable interface {
+	Unwrap() *raw.HKHeartbeatSeriesSample
+}
+
+var _ HeartbeatSeriesSampleable = (*HeartbeatSeriesSample)(nil)
+

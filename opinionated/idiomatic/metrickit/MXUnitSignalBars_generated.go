@@ -23,3 +23,10 @@ func NewUnitSignalBars() *UnitSignalBars {
 	return &UnitSignalBars{inner: raw.MXUnitSignalBarsFromID(_id)}
 }
 
+// UnitSignalBarsable is the interface implemented by [UnitSignalBars], for mocking and DI.
+type UnitSignalBarsable interface {
+	Unwrap() *raw.MXUnitSignalBars
+}
+
+var _ UnitSignalBarsable = (*UnitSignalBars)(nil)
+

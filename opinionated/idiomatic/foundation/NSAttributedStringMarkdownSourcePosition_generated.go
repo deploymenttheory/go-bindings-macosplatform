@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -24,5 +25,42 @@ func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEnd
 	return &AttributedStringMarkdownSourcePosition{inner: raw.NSAttributedStringMarkdownSourcePositionFromID(_id)}
 }
 
+// RangeInString calls the underlying RangeInString.
+func (x *AttributedStringMarkdownSourcePosition) RangeInString(string_ string) raw.NSRange {
+	return x.inner.RangeInString(foundation.NSStringStringWithUTF8String(string_))
+}
+
+// StartLine calls the underlying StartLine.
+func (x *AttributedStringMarkdownSourcePosition) StartLine() int {
+	return x.inner.StartLine()
+}
+
+// StartColumn calls the underlying StartColumn.
+func (x *AttributedStringMarkdownSourcePosition) StartColumn() int {
+	return x.inner.StartColumn()
+}
+
+// EndLine calls the underlying EndLine.
+func (x *AttributedStringMarkdownSourcePosition) EndLine() int {
+	return x.inner.EndLine()
+}
+
+// EndColumn calls the underlying EndColumn.
+func (x *AttributedStringMarkdownSourcePosition) EndColumn() int {
+	return x.inner.EndColumn()
+}
+
 func (x *AttributedStringMarkdownSourcePosition) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// AttributedStringMarkdownSourcePositionable is the interface implemented by [AttributedStringMarkdownSourcePosition], for mocking and DI.
+type AttributedStringMarkdownSourcePositionable interface {
+	Unwrap() *raw.NSAttributedStringMarkdownSourcePosition
+	RangeInString(string_ string) raw.NSRange
+	StartLine() int
+	StartColumn() int
+	EndLine() int
+	EndColumn() int
+}
+
+var _ AttributedStringMarkdownSourcePositionable = (*AttributedStringMarkdownSourcePosition)(nil)
 

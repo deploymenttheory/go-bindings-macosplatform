@@ -38,3 +38,104 @@ func (x *CISession) WithProfileSpecificDataHandler(profileSpecificDataHandler fu
 	return x
 }
 
+// ProfileStateForChannel calls the underlying ProfileStateForChannel.
+func (x *CISession) ProfileStateForChannel(channel uint8) *CIProfileState {
+	_r := x.inner.ProfileStateForChannel(channel)
+	if _r == nil {
+		return nil
+	}
+	return &CIProfileState{inner: _r}
+}
+
+// EnableProfileOnChannelError calls the underlying EnableProfileOnChannelError.
+func (x *CISession) EnableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
+	return x.inner.EnableProfileOnChannelError(profile, channel)
+}
+
+// DisableProfileOnChannelError calls the underlying DisableProfileOnChannelError.
+func (x *CISession) DisableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error) {
+	return x.inner.DisableProfileOnChannelError(profile, channel)
+}
+
+// SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
+func (x *CISession) SendProfileOnChannelProfileData(profile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
+	return x.inner.SendProfileOnChannelProfileData(profile, channel, profileSpecificData)
+}
+
+// MidiDestination calls the underlying MidiDestination.
+func (x *CISession) MidiDestination() uint {
+	return x.inner.MidiDestination()
+}
+
+// SupportsProfileCapability calls the underlying SupportsProfileCapability.
+func (x *CISession) SupportsProfileCapability() bool {
+	return x.inner.SupportsProfileCapability()
+}
+
+// SupportsPropertyCapability calls the underlying SupportsPropertyCapability.
+func (x *CISession) SupportsPropertyCapability() bool {
+	return x.inner.SupportsPropertyCapability()
+}
+
+// DeviceInfo calls the underlying DeviceInfo.
+func (x *CISession) DeviceInfo() *CIDeviceInfo {
+	_r := x.inner.DeviceInfo()
+	if _r == nil {
+		return nil
+	}
+	return &CIDeviceInfo{inner: _r}
+}
+
+// MaxSysExSize calls the underlying MaxSysExSize.
+func (x *CISession) MaxSysExSize() *foundation.NSNumber {
+	return x.inner.MaxSysExSize()
+}
+
+// MaxPropertyRequests calls the underlying MaxPropertyRequests.
+func (x *CISession) MaxPropertyRequests() *foundation.NSNumber {
+	return x.inner.MaxPropertyRequests()
+}
+
+// ProfileChangedCallback calls the underlying ProfileChangedCallback.
+func (x *CISession) ProfileChangedCallback() objc.Block {
+	return x.inner.ProfileChangedCallback()
+}
+
+// SetProfileChangedCallback calls the underlying SetProfileChangedCallback.
+func (x *CISession) SetProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) {
+	x.inner.SetProfileChangedCallback(profileChangedCallback)
+}
+
+// ProfileSpecificDataHandler calls the underlying ProfileSpecificDataHandler.
+func (x *CISession) ProfileSpecificDataHandler() objc.Block {
+	return x.inner.ProfileSpecificDataHandler()
+}
+
+// SetProfileSpecificDataHandler calls the underlying SetProfileSpecificDataHandler.
+func (x *CISession) SetProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) {
+	x.inner.SetProfileSpecificDataHandler(profileSpecificDataHandler)
+}
+
+// CISessionable is the interface implemented by [CISession], for mocking and DI.
+type CISessionable interface {
+	Unwrap() *raw.MIDICISession
+	WithProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool)) *CISession
+	WithProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData)) *CISession
+	ProfileStateForChannel(channel uint8) *CIProfileState
+	EnableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error)
+	DisableProfileOnChannelError(profile *raw.MIDICIProfile, channel uint8) (bool, error)
+	SendProfileOnChannelProfileData(profile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool
+	MidiDestination() uint
+	SupportsProfileCapability() bool
+	SupportsPropertyCapability() bool
+	DeviceInfo() *CIDeviceInfo
+	MaxSysExSize() *foundation.NSNumber
+	MaxPropertyRequests() *foundation.NSNumber
+	ProfileChangedCallback() objc.Block
+	SetProfileChangedCallback(profileChangedCallback func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, bool))
+	ProfileSpecificDataHandler() objc.Block
+	SetProfileSpecificDataHandler(profileSpecificDataHandler func(*raw.MIDICISession, uint8, *raw.MIDICIProfile, *foundation.NSData))
+}
+
+var _ CISessionable = (*CISession)(nil)
+

@@ -48,3 +48,62 @@ func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) WithMaxDuration(maxD
 	return x
 }
 
+// MinPower calls the underlying MinPower.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinPower() *foundation.NSNumber {
+	return x.inner.MinPower()
+}
+
+// SetMinPower calls the underlying SetMinPower.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinPower(minPower *foundation.NSNumber) {
+	x.inner.SetMinPower(minPower)
+}
+
+// MaxPower calls the underlying MaxPower.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxPower() *foundation.NSNumber {
+	return x.inner.MaxPower()
+}
+
+// SetMaxPower calls the underlying SetMaxPower.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxPower(maxPower *foundation.NSNumber) {
+	x.inner.SetMaxPower(maxPower)
+}
+
+// MinDuration calls the underlying MinDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MinDuration() *foundation.NSNumber {
+	return x.inner.MinDuration()
+}
+
+// SetMinDuration calls the underlying SetMinDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMinDuration(minDuration *foundation.NSNumber) {
+	x.inner.SetMinDuration(minDuration)
+}
+
+// MaxDuration calls the underlying MaxDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) MaxDuration() *foundation.NSNumber {
+	return x.inner.MaxDuration()
+}
+
+// SetMaxDuration calls the underlying SetMaxDuration.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustStruct) SetMaxDuration(maxDuration *foundation.NSNumber) {
+	x.inner.SetMaxDuration(maxDuration)
+}
+
+// MTRDeviceEnergyManagementClusterPowerAdjustStructable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustStruct], for mocking and DI.
+type MTRDeviceEnergyManagementClusterPowerAdjustStructable interface {
+	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustStruct
+	WithMinPower(minPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
+	WithMaxPower(maxPower *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
+	WithMinDuration(minDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
+	WithMaxDuration(maxDuration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustStruct
+	MinPower() *foundation.NSNumber
+	SetMinPower(minPower *foundation.NSNumber)
+	MaxPower() *foundation.NSNumber
+	SetMaxPower(maxPower *foundation.NSNumber)
+	MinDuration() *foundation.NSNumber
+	SetMinDuration(minDuration *foundation.NSNumber)
+	MaxDuration() *foundation.NSNumber
+	SetMaxDuration(maxDuration *foundation.NSNumber)
+}
+
+var _ MTRDeviceEnergyManagementClusterPowerAdjustStructable = (*MTRDeviceEnergyManagementClusterPowerAdjustStruct)(nil)
+

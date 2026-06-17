@@ -37,7 +37,72 @@ func (x *OpenGLView) WithPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *Open
 	return x
 }
 
+// ClearGLContext calls the underlying ClearGLContext.
+func (x *OpenGLView) ClearGLContext() {
+	x.inner.ClearGLContext()
+}
+
+// Update calls the underlying Update.
+func (x *OpenGLView) Update() {
+	x.inner.Update()
+}
+
+// Reshape calls the underlying Reshape.
+func (x *OpenGLView) Reshape() {
+	x.inner.Reshape()
+}
+
+// PrepareOpenGL calls the underlying PrepareOpenGL.
+func (x *OpenGLView) PrepareOpenGL() {
+	x.inner.PrepareOpenGL()
+}
+
+// OpenGLContext calls the underlying OpenGLContext.
+func (x *OpenGLView) OpenGLContext() *OpenGLContext {
+	_r := x.inner.OpenGLContext()
+	if _r == nil {
+		return nil
+	}
+	return &OpenGLContext{inner: _r}
+}
+
+// SetOpenGLContext calls the underlying SetOpenGLContext.
+func (x *OpenGLView) SetOpenGLContext(openGLContext *raw.NSOpenGLContext) {
+	x.inner.SetOpenGLContext(openGLContext)
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *OpenGLView) PixelFormat() *OpenGLPixelFormat {
+	_r := x.inner.PixelFormat()
+	if _r == nil {
+		return nil
+	}
+	return &OpenGLPixelFormat{inner: _r}
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *OpenGLView) SetPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
 func (x *OpenGLView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *OpenGLView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// OpenGLViewable is the interface implemented by [OpenGLView], for mocking and DI.
+type OpenGLViewable interface {
+	Unwrap() *raw.NSOpenGLView
+	WithOpenGLContext(openGLContext *raw.NSOpenGLContext) *OpenGLView
+	WithPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLView
+	ClearGLContext()
+	Update()
+	Reshape()
+	PrepareOpenGL()
+	OpenGLContext() *OpenGLContext
+	SetOpenGLContext(openGLContext *raw.NSOpenGLContext)
+	PixelFormat() *OpenGLPixelFormat
+	SetPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat)
+}
+
+var _ OpenGLViewable = (*OpenGLView)(nil)
 

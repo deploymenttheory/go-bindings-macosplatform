@@ -5,7 +5,9 @@
 package mailkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,17 +25,43 @@ func NewMessage() *Message {
 	return &Message{inner: raw.MEMessageFromID(_id)}
 }
 
+// State calls the underlying State.
+func (x *Message) State() raw.MEMessageState {
+	return x.inner.State()
+}
+
+// EncryptionState calls the underlying EncryptionState.
+func (x *Message) EncryptionState() raw.MEMessageEncryptionState {
+	return x.inner.EncryptionState()
+}
+
+// Subject calls the underlying Subject.
+func (x *Message) Subject() string {
+	_r := x.inner.Subject()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FromAddress calls the underlying FromAddress.
+func (x *Message) FromAddress() *EmailAddress {
+	_r := x.inner.FromAddress()
+	if _r == nil {
+		return nil
+	}
+	return &EmailAddress{inner: _r}
+}
+
 // ToAddresses returns the collection as a Go slice.
 func (x *Message) ToAddresses() []*raw.MEEmailAddress {
 	arr := x.inner.ToAddresses()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
 
 // CcAddresses returns the collection as a Go slice.
@@ -42,11 +70,9 @@ func (x *Message) CcAddresses() []*raw.MEEmailAddress {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
 
 // BccAddresses returns the collection as a Go slice.
@@ -55,11 +81,9 @@ func (x *Message) BccAddresses() []*raw.MEEmailAddress {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
 
 // ReplyToAddresses returns the collection as a Go slice.
@@ -68,11 +92,9 @@ func (x *Message) ReplyToAddresses() []*raw.MEEmailAddress {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
 
 // AllRecipientAddresses returns the collection as a Go slice.
@@ -81,10 +103,48 @@ func (x *Message) AllRecipientAddresses() []*raw.MEEmailAddress {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
+
+// DateSent calls the underlying DateSent.
+func (x *Message) DateSent() *foundation.NSDate {
+	return x.inner.DateSent()
+}
+
+// DateReceived calls the underlying DateReceived.
+func (x *Message) DateReceived() *foundation.NSDate {
+	return x.inner.DateReceived()
+}
+
+// Headers calls the underlying Headers.
+func (x *Message) Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.Headers()
+}
+
+// RawData calls the underlying RawData.
+func (x *Message) RawData() *foundation.NSData {
+	return x.inner.RawData()
+}
+
+// Messageable is the interface implemented by [Message], for mocking and DI.
+type Messageable interface {
+	Unwrap() *raw.MEMessage
+	State() raw.MEMessageState
+	EncryptionState() raw.MEMessageEncryptionState
+	Subject() string
+	FromAddress() *EmailAddress
+	ToAddresses() []*raw.MEEmailAddress
+	CcAddresses() []*raw.MEEmailAddress
+	BccAddresses() []*raw.MEEmailAddress
+	ReplyToAddresses() []*raw.MEEmailAddress
+	AllRecipientAddresses() []*raw.MEEmailAddress
+	DateSent() *foundation.NSDate
+	DateReceived() *foundation.NSDate
+	Headers() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	RawData() *foundation.NSData
+}
+
+var _ Messageable = (*Message)(nil)
 

@@ -41,7 +41,97 @@ func (x *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFor
 	return x
 }
 
+// StringFromValueUnit calls the underlying StringFromValueUnit.
+func (x *EnergyFormatter) StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String {
+	_r := x.inner.StringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StringFromJoules calls the underlying StringFromJoules.
+func (x *EnergyFormatter) StringFromJoules(numberInJoules float64) *String {
+	_r := x.inner.StringFromJoules(numberInJoules)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
+func (x *EnergyFormatter) UnitStringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String {
+	_r := x.inner.UnitStringFromValueUnit(value, unit)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// UnitStringFromJoulesUsedUnit calls the underlying UnitStringFromJoulesUsedUnit.
+func (x *EnergyFormatter) UnitStringFromJoulesUsedUnit(numberInJoules float64, unitp *raw.NSEnergyFormatterUnit) *String {
+	_r := x.inner.UnitStringFromJoulesUsedUnit(numberInJoules, unitp)
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// NumberFormatter calls the underlying NumberFormatter.
+func (x *EnergyFormatter) NumberFormatter() *NumberFormatter {
+	_r := x.inner.NumberFormatter()
+	if _r == nil {
+		return nil
+	}
+	return &NumberFormatter{inner: _r}
+}
+
+// SetNumberFormatter calls the underlying SetNumberFormatter.
+func (x *EnergyFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
+	x.inner.SetNumberFormatter(numberFormatter)
+}
+
+// UnitStyle calls the underlying UnitStyle.
+func (x *EnergyFormatter) UnitStyle() raw.NSFormattingUnitStyle {
+	return x.inner.UnitStyle()
+}
+
+// SetUnitStyle calls the underlying SetUnitStyle.
+func (x *EnergyFormatter) SetUnitStyle(unitStyle raw.NSFormattingUnitStyle) {
+	x.inner.SetUnitStyle(unitStyle)
+}
+
+// IsForFoodEnergyUse calls the underlying IsForFoodEnergyUse.
+func (x *EnergyFormatter) IsForFoodEnergyUse() bool {
+	return x.inner.IsForFoodEnergyUse()
+}
+
+// SetForFoodEnergyUse calls the underlying SetForFoodEnergyUse.
+func (x *EnergyFormatter) SetForFoodEnergyUse(forFoodEnergyUse bool) {
+	x.inner.SetForFoodEnergyUse(forFoodEnergyUse)
+}
+
 func (x *EnergyFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
 
 func (x *EnergyFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
+
+// EnergyFormatterable is the interface implemented by [EnergyFormatter], for mocking and DI.
+type EnergyFormatterable interface {
+	Unwrap() *raw.NSEnergyFormatter
+	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *EnergyFormatter
+	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *EnergyFormatter
+	WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter
+	StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String
+	StringFromJoules(numberInJoules float64) *String
+	UnitStringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String
+	UnitStringFromJoulesUsedUnit(numberInJoules float64, unitp *raw.NSEnergyFormatterUnit) *String
+	NumberFormatter() *NumberFormatter
+	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
+	UnitStyle() raw.NSFormattingUnitStyle
+	SetUnitStyle(unitStyle raw.NSFormattingUnitStyle)
+	IsForFoodEnergyUse() bool
+	SetForFoodEnergyUse(forFoodEnergyUse bool)
+}
+
+var _ EnergyFormatterable = (*EnergyFormatter)(nil)
 

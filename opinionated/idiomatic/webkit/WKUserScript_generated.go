@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,33 @@ func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), foundation.NSStringStringWithUTF8String(source).Ptr(), injectionTime, forMainFrameOnly, contentWorld.Ptr())
 	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
 }
+
+// Source calls the underlying Source.
+func (x *WKUserScript) Source() string {
+	_r := x.inner.Source()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// InjectionTime calls the underlying InjectionTime.
+func (x *WKUserScript) InjectionTime() raw.WKUserScriptInjectionTime {
+	return x.inner.InjectionTime()
+}
+
+// IsForMainFrameOnly calls the underlying IsForMainFrameOnly.
+func (x *WKUserScript) IsForMainFrameOnly() bool {
+	return x.inner.IsForMainFrameOnly()
+}
+
+// WKUserScriptable is the interface implemented by [WKUserScript], for mocking and DI.
+type WKUserScriptable interface {
+	Unwrap() *raw.WKUserScript
+	Source() string
+	InjectionTime() raw.WKUserScriptInjectionTime
+	IsForMainFrameOnly() bool
+}
+
+var _ WKUserScriptable = (*WKUserScript)(nil)
 

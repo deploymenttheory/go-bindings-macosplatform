@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -65,4 +66,130 @@ func (x *AuthorizationProviderExtensionKerberosMapping) WithSessionKeyKeyName(se
 	x.inner.SetSessionKeyKeyName(foundation.NSStringStringWithUTF8String(sessionKeyKeyName))
 	return x
 }
+
+// TicketKeyPath calls the underlying TicketKeyPath.
+func (x *AuthorizationProviderExtensionKerberosMapping) TicketKeyPath() string {
+	_r := x.inner.TicketKeyPath()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTicketKeyPath calls the underlying SetTicketKeyPath.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetTicketKeyPath(ticketKeyPath string) {
+	x.inner.SetTicketKeyPath(foundation.NSStringStringWithUTF8String(ticketKeyPath))
+}
+
+// MessageBufferKeyName calls the underlying MessageBufferKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) MessageBufferKeyName() string {
+	_r := x.inner.MessageBufferKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMessageBufferKeyName calls the underlying SetMessageBufferKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetMessageBufferKeyName(messageBufferKeyName string) {
+	x.inner.SetMessageBufferKeyName(foundation.NSStringStringWithUTF8String(messageBufferKeyName))
+}
+
+// RealmKeyName calls the underlying RealmKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) RealmKeyName() string {
+	_r := x.inner.RealmKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetRealmKeyName calls the underlying SetRealmKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetRealmKeyName(realmKeyName string) {
+	x.inner.SetRealmKeyName(foundation.NSStringStringWithUTF8String(realmKeyName))
+}
+
+// ServiceNameKeyName calls the underlying ServiceNameKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) ServiceNameKeyName() string {
+	_r := x.inner.ServiceNameKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetServiceNameKeyName calls the underlying SetServiceNameKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetServiceNameKeyName(serviceNameKeyName string) {
+	x.inner.SetServiceNameKeyName(foundation.NSStringStringWithUTF8String(serviceNameKeyName))
+}
+
+// ClientNameKeyName calls the underlying ClientNameKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) ClientNameKeyName() string {
+	_r := x.inner.ClientNameKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetClientNameKeyName calls the underlying SetClientNameKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetClientNameKeyName(clientNameKeyName string) {
+	x.inner.SetClientNameKeyName(foundation.NSStringStringWithUTF8String(clientNameKeyName))
+}
+
+// EncryptionKeyTypeKeyName calls the underlying EncryptionKeyTypeKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) EncryptionKeyTypeKeyName() string {
+	_r := x.inner.EncryptionKeyTypeKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetEncryptionKeyTypeKeyName calls the underlying SetEncryptionKeyTypeKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) {
+	x.inner.SetEncryptionKeyTypeKeyName(foundation.NSStringStringWithUTF8String(encryptionKeyTypeKeyName))
+}
+
+// SessionKeyKeyName calls the underlying SessionKeyKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SessionKeyKeyName() string {
+	_r := x.inner.SessionKeyKeyName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSessionKeyKeyName calls the underlying SetSessionKeyKeyName.
+func (x *AuthorizationProviderExtensionKerberosMapping) SetSessionKeyKeyName(sessionKeyKeyName string) {
+	x.inner.SetSessionKeyKeyName(foundation.NSStringStringWithUTF8String(sessionKeyKeyName))
+}
+
+// AuthorizationProviderExtensionKerberosMappingable is the interface implemented by [AuthorizationProviderExtensionKerberosMapping], for mocking and DI.
+type AuthorizationProviderExtensionKerberosMappingable interface {
+	Unwrap() *raw.ASAuthorizationProviderExtensionKerberosMapping
+	WithTicketKeyPath(ticketKeyPath string) *AuthorizationProviderExtensionKerberosMapping
+	WithMessageBufferKeyName(messageBufferKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	WithRealmKeyName(realmKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	WithServiceNameKeyName(serviceNameKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	WithClientNameKeyName(clientNameKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	WithEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	WithSessionKeyKeyName(sessionKeyKeyName string) *AuthorizationProviderExtensionKerberosMapping
+	TicketKeyPath() string
+	SetTicketKeyPath(ticketKeyPath string)
+	MessageBufferKeyName() string
+	SetMessageBufferKeyName(messageBufferKeyName string)
+	RealmKeyName() string
+	SetRealmKeyName(realmKeyName string)
+	ServiceNameKeyName() string
+	SetServiceNameKeyName(serviceNameKeyName string)
+	ClientNameKeyName() string
+	SetClientNameKeyName(clientNameKeyName string)
+	EncryptionKeyTypeKeyName() string
+	SetEncryptionKeyTypeKeyName(encryptionKeyTypeKeyName string)
+	SessionKeyKeyName() string
+	SetSessionKeyKeyName(sessionKeyKeyName string)
+}
+
+var _ AuthorizationProviderExtensionKerberosMappingable = (*AuthorizationProviderExtensionKerberosMapping)(nil)
 

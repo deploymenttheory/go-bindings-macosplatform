@@ -7,6 +7,7 @@ package corewlan
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,17 +31,33 @@ func (x *WiFiClient) WithDelegate(delegate objc.ID) *WiFiClient {
 	return x
 }
 
+// Interface calls the underlying Interface.
+func (x *WiFiClient) Interface() *Interface {
+	_r := x.inner.Interface()
+	if _r == nil {
+		return nil
+	}
+	return &Interface{inner: _r}
+}
+
 // InterfaceNames returns the collection as a Go slice.
-func (x *WiFiClient) InterfaceNames() []*foundation.NSString {
+func (x *WiFiClient) InterfaceNames() []string {
 	arr := x.inner.InterfaceNames()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// InterfaceWithName calls the underlying InterfaceWithName.
+func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
+	_r := x.inner.InterfaceWithName(foundation.NSStringStringWithUTF8String(interfaceName))
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &Interface{inner: _r}
 }
 
 // Interfaces returns the collection as a Go slice.
@@ -49,11 +66,19 @@ func (x *WiFiClient) Interfaces() []*raw.CWInterface {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CWInterface, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CWInterface {
+		return raw.CWInterfaceFromID(purego.Retain(_id))
+	})
+}
+
+// StartMonitoringEventWithTypeError calls the underlying StartMonitoringEventWithTypeError.
+func (x *WiFiClient) StartMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error) {
+	return x.inner.StartMonitoringEventWithTypeError(type_)
+}
+
+// StopMonitoringEventWithTypeError calls the underlying StopMonitoringEventWithTypeError.
+func (x *WiFiClient) StopMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error) {
+	return x.inner.StopMonitoringEventWithTypeError(type_)
 }
 
 // StopMonitoringAllEventsAndReturnError returns any validation error.
@@ -61,4 +86,31 @@ func (x *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
 	_, err := x.inner.StopMonitoringAllEventsAndReturnError()
 	return err
 }
+
+// Delegate calls the underlying Delegate.
+func (x *WiFiClient) Delegate() objc.ID {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *WiFiClient) SetDelegate(delegate objc.ID) {
+	x.inner.SetDelegate(delegate)
+}
+
+// WiFiClientable is the interface implemented by [WiFiClient], for mocking and DI.
+type WiFiClientable interface {
+	Unwrap() *raw.CWWiFiClient
+	WithDelegate(delegate objc.ID) *WiFiClient
+	Interface() *Interface
+	InterfaceNames() []string
+	InterfaceWithName(interfaceName string) *Interface
+	Interfaces() []*raw.CWInterface
+	StartMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
+	StopMonitoringEventWithTypeError(type_ raw.CWEventType) (bool, error)
+	StopMonitoringAllEventsAndReturnError() error
+	Delegate() objc.ID
+	SetDelegate(delegate objc.ID)
+}
+
+var _ WiFiClientable = (*WiFiClient)(nil)
 

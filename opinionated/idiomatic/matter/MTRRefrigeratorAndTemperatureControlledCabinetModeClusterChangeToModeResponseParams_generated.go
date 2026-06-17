@@ -43,3 +43,40 @@ func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRe
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// StatusText calls the underlying StatusText.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := x.inner.StatusText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStatusText calls the underlying SetStatusText.
+func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
+	x.inner.SetStatusText(foundation.NSStringStringWithUTF8String(statusText))
+}
+
+// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams], for mocking and DI.
+type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable interface {
+	Unwrap() *raw.MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
+	WithStatusText(statusText string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	StatusText() string
+	SetStatusText(statusText string)
+}
+
+var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams)(nil)
+

@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureResolvedPhotoSettings")), objc.RegisterName("new"))
 	return &CaptureResolvedPhotoSettings{inner: raw.AVCaptureResolvedPhotoSettingsFromID(_id)}
 }
+
+// UniqueID calls the underlying UniqueID.
+func (x *CaptureResolvedPhotoSettings) UniqueID() int64 {
+	return x.inner.UniqueID()
+}
+
+// PhotoDimensions calls the underlying PhotoDimensions.
+func (x *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
+	return x.inner.PhotoDimensions()
+}
+
+// ExpectedPhotoCount calls the underlying ExpectedPhotoCount.
+func (x *CaptureResolvedPhotoSettings) ExpectedPhotoCount() uint {
+	return x.inner.ExpectedPhotoCount()
+}
+
+// IsFastCapturePrioritizationEnabled calls the underlying IsFastCapturePrioritizationEnabled.
+func (x *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
+	return x.inner.IsFastCapturePrioritizationEnabled()
+}
+
+// CaptureResolvedPhotoSettingsable is the interface implemented by [CaptureResolvedPhotoSettings], for mocking and DI.
+type CaptureResolvedPhotoSettingsable interface {
+	Unwrap() *raw.AVCaptureResolvedPhotoSettings
+	UniqueID() int64
+	PhotoDimensions() coremedia.CMVideoDimensions
+	ExpectedPhotoCount() uint
+	IsFastCapturePrioritizationEnabled() bool
+}
+
+var _ CaptureResolvedPhotoSettingsable = (*CaptureResolvedPhotoSettings)(nil)
 

@@ -23,3 +23,50 @@ func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
 	return &CollectionLayoutEdgeSpacing{inner: raw.NSCollectionLayoutEdgeSpacingFromID(_id)}
 }
 
+// Leading calls the underlying Leading.
+func (x *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
+	_r := x.inner.Leading()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSpacing{inner: _r}
+}
+
+// Top calls the underlying Top.
+func (x *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
+	_r := x.inner.Top()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSpacing{inner: _r}
+}
+
+// Trailing calls the underlying Trailing.
+func (x *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
+	_r := x.inner.Trailing()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSpacing{inner: _r}
+}
+
+// Bottom calls the underlying Bottom.
+func (x *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
+	_r := x.inner.Bottom()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSpacing{inner: _r}
+}
+
+// CollectionLayoutEdgeSpacingable is the interface implemented by [CollectionLayoutEdgeSpacing], for mocking and DI.
+type CollectionLayoutEdgeSpacingable interface {
+	Unwrap() *raw.NSCollectionLayoutEdgeSpacing
+	Leading() *CollectionLayoutSpacing
+	Top() *CollectionLayoutSpacing
+	Trailing() *CollectionLayoutSpacing
+	Bottom() *CollectionLayoutSpacing
+}
+
+var _ CollectionLayoutEdgeSpacingable = (*CollectionLayoutEdgeSpacing)(nil)
+

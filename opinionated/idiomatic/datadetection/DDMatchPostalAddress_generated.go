@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,62 @@ func NewMatchPostalAddress() *MatchPostalAddress {
 	return &MatchPostalAddress{inner: raw.DDMatchPostalAddressFromID(_id)}
 }
 
+// Street calls the underlying Street.
+func (x *MatchPostalAddress) Street() string {
+	_r := x.inner.Street()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// City calls the underlying City.
+func (x *MatchPostalAddress) City() string {
+	_r := x.inner.City()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// State calls the underlying State.
+func (x *MatchPostalAddress) State() string {
+	_r := x.inner.State()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// PostalCode calls the underlying PostalCode.
+func (x *MatchPostalAddress) PostalCode() string {
+	_r := x.inner.PostalCode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Country calls the underlying Country.
+func (x *MatchPostalAddress) Country() string {
+	_r := x.inner.Country()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *MatchPostalAddress) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchPostalAddressable is the interface implemented by [MatchPostalAddress], for mocking and DI.
+type MatchPostalAddressable interface {
+	Unwrap() *raw.DDMatchPostalAddress
+	Street() string
+	City() string
+	State() string
+	PostalCode() string
+	Country() string
+}
+
+var _ MatchPostalAddressable = (*MatchPostalAddress)(nil)
 

@@ -23,5 +23,24 @@ func NewScatterLayer() *ScatterLayer {
 	return &ScatterLayer{inner: raw.MLCScatterLayerFromID(_id)}
 }
 
+// Dimension calls the underlying Dimension.
+func (x *ScatterLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
+// ReductionType calls the underlying ReductionType.
+func (x *ScatterLayer) ReductionType() raw.MLCReductionType {
+	return x.inner.ReductionType()
+}
+
 func (x *ScatterLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// ScatterLayerable is the interface implemented by [ScatterLayer], for mocking and DI.
+type ScatterLayerable interface {
+	Unwrap() *raw.MLCScatterLayer
+	Dimension() uint
+	ReductionType() raw.MLCReductionType
+}
+
+var _ ScatterLayerable = (*ScatterLayer)(nil)
 

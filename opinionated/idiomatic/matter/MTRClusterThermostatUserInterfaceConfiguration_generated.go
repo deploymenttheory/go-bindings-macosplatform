@@ -32,7 +32,98 @@ func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue(de
 	return &MTRClusterThermostatUserInterfaceConfiguration{inner: raw.MTRClusterThermostatUserInterfaceConfigurationFromID(_id)}
 }
 
+// ReadAttributeTemperatureDisplayModeWithParams calls the underlying ReadAttributeTemperatureDisplayModeWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTemperatureDisplayModeWithParams(params)
+}
+
+// WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval calls the underlying WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeKeypadLockoutWithParams calls the underlying ReadAttributeKeypadLockoutWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeKeypadLockoutWithParams(params)
+}
+
+// WriteAttributeKeypadLockoutWithValueExpectedValueInterval calls the underlying WriteAttributeKeypadLockoutWithValueExpectedValueInterval.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams calls the underlying WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeScheduleProgrammingVisibilityWithParams calls the underlying ReadAttributeScheduleProgrammingVisibilityWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeScheduleProgrammingVisibilityWithParams(params)
+}
+
+// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval calls the underlying WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
+	x.inner.WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+}
+
+// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
+	x.inner.WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
 func (x *MTRClusterThermostatUserInterfaceConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterThermostatUserInterfaceConfiguration) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterThermostatUserInterfaceConfigurationable is the interface implemented by [MTRClusterThermostatUserInterfaceConfiguration], for mocking and DI.
+type MTRClusterThermostatUserInterfaceConfigurationable interface {
+	Unwrap() *raw.MTRClusterThermostatUserInterfaceConfiguration
+	ReadAttributeTemperatureDisplayModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeKeypadLockoutWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeScheduleProgrammingVisibilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
+	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ MTRClusterThermostatUserInterfaceConfigurationable = (*MTRClusterThermostatUserInterfaceConfiguration)(nil)
 

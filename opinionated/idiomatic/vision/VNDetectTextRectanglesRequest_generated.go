@@ -29,7 +29,27 @@ func (x *DetectTextRectanglesRequest) WithReportCharacterBoxes(reportCharacterBo
 	return x
 }
 
+// ReportCharacterBoxes calls the underlying ReportCharacterBoxes.
+func (x *DetectTextRectanglesRequest) ReportCharacterBoxes() bool {
+	return x.inner.ReportCharacterBoxes()
+}
+
+// SetReportCharacterBoxes calls the underlying SetReportCharacterBoxes.
+func (x *DetectTextRectanglesRequest) SetReportCharacterBoxes(reportCharacterBoxes bool) {
+	x.inner.SetReportCharacterBoxes(reportCharacterBoxes)
+}
+
 func (x *DetectTextRectanglesRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectTextRectanglesRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectTextRectanglesRequestable is the interface implemented by [DetectTextRectanglesRequest], for mocking and DI.
+type DetectTextRectanglesRequestable interface {
+	Unwrap() *raw.VNDetectTextRectanglesRequest
+	WithReportCharacterBoxes(reportCharacterBoxes bool) *DetectTextRectanglesRequest
+	ReportCharacterBoxes() bool
+	SetReportCharacterBoxes(reportCharacterBoxes bool)
+}
+
+var _ DetectTextRectanglesRequestable = (*DetectTextRectanglesRequest)(nil)
 

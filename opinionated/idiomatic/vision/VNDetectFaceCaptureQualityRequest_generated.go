@@ -27,3 +27,10 @@ func (x *DetectFaceCaptureQualityRequest) asImageBasedRequest() *raw.VNImageBase
 
 func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
 
+// DetectFaceCaptureQualityRequestable is the interface implemented by [DetectFaceCaptureQualityRequest], for mocking and DI.
+type DetectFaceCaptureQualityRequestable interface {
+	Unwrap() *raw.VNDetectFaceCaptureQualityRequest
+}
+
+var _ DetectFaceCaptureQualityRequestable = (*DetectFaceCaptureQualityRequest)(nil)
+

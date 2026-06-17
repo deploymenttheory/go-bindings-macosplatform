@@ -23,3 +23,10 @@ func NewCPUComputeDevice() *CPUComputeDevice {
 	return &CPUComputeDevice{inner: raw.MLCPUComputeDeviceFromID(_id)}
 }
 
+// CPUComputeDeviceable is the interface implemented by [CPUComputeDevice], for mocking and DI.
+type CPUComputeDeviceable interface {
+	Unwrap() *raw.MLCPUComputeDevice
+}
+
+var _ CPUComputeDeviceable = (*CPUComputeDevice)(nil)
+

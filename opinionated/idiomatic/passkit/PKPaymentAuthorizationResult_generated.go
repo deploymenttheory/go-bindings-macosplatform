@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -41,4 +42,53 @@ func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *raw.PKPaymen
 	x.inner.SetOrderDetails(orderDetails)
 	return x
 }
+
+// Status calls the underlying Status.
+func (x *PaymentAuthorizationResult) Status() raw.PKPaymentAuthorizationStatus {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *PaymentAuthorizationResult) SetStatus(status raw.PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(status)
+}
+
+// Errors calls the underlying Errors.
+func (x *PaymentAuthorizationResult) Errors() *foundation.NSArray[objc.ID] {
+	return x.inner.Errors()
+}
+
+// SetErrors calls the underlying SetErrors.
+func (x *PaymentAuthorizationResult) SetErrors() error {
+	return x.inner.SetErrors()
+}
+
+// OrderDetails calls the underlying OrderDetails.
+func (x *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
+	_r := x.inner.OrderDetails()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentOrderDetails{inner: _r}
+}
+
+// SetOrderDetails calls the underlying SetOrderDetails.
+func (x *PaymentAuthorizationResult) SetOrderDetails(orderDetails *raw.PKPaymentOrderDetails) {
+	x.inner.SetOrderDetails(orderDetails)
+}
+
+// PaymentAuthorizationResultable is the interface implemented by [PaymentAuthorizationResult], for mocking and DI.
+type PaymentAuthorizationResultable interface {
+	Unwrap() *raw.PKPaymentAuthorizationResult
+	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentAuthorizationResult
+	WithOrderDetails(orderDetails *raw.PKPaymentOrderDetails) *PaymentAuthorizationResult
+	Status() raw.PKPaymentAuthorizationStatus
+	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	Errors() *foundation.NSArray[objc.ID]
+	SetErrors() error
+	OrderDetails() *PaymentOrderDetails
+	SetOrderDetails(orderDetails *raw.PKPaymentOrderDetails)
+}
+
+var _ PaymentAuthorizationResultable = (*PaymentAuthorizationResult)(nil)
 

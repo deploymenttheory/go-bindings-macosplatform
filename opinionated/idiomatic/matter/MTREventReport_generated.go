@@ -31,3 +31,68 @@ func NewMTREventReportWithResponseValueError(responseValue *foundation.NSDiction
 	return &MTREventReport{inner: raw.MTREventReportFromID(_id)}, nil
 }
 
+// Path calls the underlying Path.
+func (x *MTREventReport) Path() *MTREventPath {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &MTREventPath{inner: _r}
+}
+
+// EventNumber calls the underlying EventNumber.
+func (x *MTREventReport) EventNumber() *foundation.NSNumber {
+	return x.inner.EventNumber()
+}
+
+// Priority calls the underlying Priority.
+func (x *MTREventReport) Priority() *foundation.NSNumber {
+	return x.inner.Priority()
+}
+
+// EventTimeType calls the underlying EventTimeType.
+func (x *MTREventReport) EventTimeType() raw.MTREventTimeType {
+	return x.inner.EventTimeType()
+}
+
+// SystemUpTime calls the underlying SystemUpTime.
+func (x *MTREventReport) SystemUpTime() float64 {
+	return x.inner.SystemUpTime()
+}
+
+// TimestampDate calls the underlying TimestampDate.
+func (x *MTREventReport) TimestampDate() *foundation.NSDate {
+	return x.inner.TimestampDate()
+}
+
+// Value calls the underlying Value.
+func (x *MTREventReport) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// Error calls the underlying Error.
+func (x *MTREventReport) Error() unsafe.Pointer {
+	return x.inner.Error()
+}
+
+// Timestamp calls the underlying Timestamp.
+func (x *MTREventReport) Timestamp() *foundation.NSNumber {
+	return x.inner.Timestamp()
+}
+
+// MTREventReportable is the interface implemented by [MTREventReport], for mocking and DI.
+type MTREventReportable interface {
+	Unwrap() *raw.MTREventReport
+	Path() *MTREventPath
+	EventNumber() *foundation.NSNumber
+	Priority() *foundation.NSNumber
+	EventTimeType() raw.MTREventTimeType
+	SystemUpTime() float64
+	TimestampDate() *foundation.NSDate
+	Value() objc.ID
+	Error() unsafe.Pointer
+	Timestamp() *foundation.NSNumber
+}
+
+var _ MTREventReportable = (*MTREventReport)(nil)
+

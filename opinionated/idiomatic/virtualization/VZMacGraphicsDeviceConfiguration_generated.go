@@ -7,6 +7,7 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -47,12 +48,25 @@ func (x *MacGraphicsDeviceConfiguration) Displays() []*raw.VZMacGraphicsDisplayC
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.VZMacGraphicsDisplayConfiguration, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.VZMacGraphicsDisplayConfiguration {
+		return raw.VZMacGraphicsDisplayConfigurationFromID(purego.Retain(_id))
+	})
+}
+
+// SetDisplays calls the underlying SetDisplays.
+func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays *foundation.NSArray[*raw.VZMacGraphicsDisplayConfiguration]) {
+	x.inner.SetDisplays(displays)
 }
 
 func (x *MacGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration { return &x.inner.VZGraphicsDeviceConfiguration }
+
+// MacGraphicsDeviceConfigurationable is the interface implemented by [MacGraphicsDeviceConfiguration], for mocking and DI.
+type MacGraphicsDeviceConfigurationable interface {
+	Unwrap() *raw.VZMacGraphicsDeviceConfiguration
+	WithDisplays(items ...*raw.VZMacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration
+	Displays() []*raw.VZMacGraphicsDisplayConfiguration
+	SetDisplays(displays *foundation.NSArray[*raw.VZMacGraphicsDisplayConfiguration])
+}
+
+var _ MacGraphicsDeviceConfigurationable = (*MacGraphicsDeviceConfiguration)(nil)
 

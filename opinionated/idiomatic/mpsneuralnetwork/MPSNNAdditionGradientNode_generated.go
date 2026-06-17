@@ -29,3 +29,10 @@ func (x *NNAdditionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilt
 
 func (x *NNAdditionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// NNAdditionGradientNodeable is the interface implemented by [NNAdditionGradientNode], for mocking and DI.
+type NNAdditionGradientNodeable interface {
+	Unwrap() *raw.MPSNNAdditionGradientNode
+}
+
+var _ NNAdditionGradientNodeable = (*NNAdditionGradientNode)(nil)
+

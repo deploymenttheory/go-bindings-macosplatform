@@ -25,3 +25,10 @@ func NewSymbolMagicReplaceContentTransition() *SymbolMagicReplaceContentTransiti
 
 func (x *SymbolMagicReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition { return &x.inner.NSSymbolContentTransition }
 
+// SymbolMagicReplaceContentTransitionable is the interface implemented by [SymbolMagicReplaceContentTransition], for mocking and DI.
+type SymbolMagicReplaceContentTransitionable interface {
+	Unwrap() *raw.NSSymbolMagicReplaceContentTransition
+}
+
+var _ SymbolMagicReplaceContentTransitionable = (*SymbolMagicReplaceContentTransition)(nil)
+

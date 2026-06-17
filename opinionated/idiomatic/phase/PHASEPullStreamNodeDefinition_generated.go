@@ -39,9 +39,35 @@ func (x *PullStreamNodeDefinition) WithNormalize(normalize bool) *PullStreamNode
 	return x
 }
 
+// Format calls the underlying Format.
+func (x *PullStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
+	return x.inner.Format()
+}
+
+// Normalize calls the underlying Normalize.
+func (x *PullStreamNodeDefinition) Normalize() bool {
+	return x.inner.Normalize()
+}
+
+// SetNormalize calls the underlying SetNormalize.
+func (x *PullStreamNodeDefinition) SetNormalize(normalize bool) {
+	x.inner.SetNormalize(normalize)
+}
+
 func (x *PullStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition }
 
 func (x *PullStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition }
 
 func (x *PullStreamNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// PullStreamNodeDefinitionable is the interface implemented by [PullStreamNodeDefinition], for mocking and DI.
+type PullStreamNodeDefinitionable interface {
+	Unwrap() *raw.PHASEPullStreamNodeDefinition
+	WithNormalize(normalize bool) *PullStreamNodeDefinition
+	Format() *avfaudio.AVAudioFormat
+	Normalize() bool
+	SetNormalize(normalize bool)
+}
+
+var _ PullStreamNodeDefinitionable = (*PullStreamNodeDefinition)(nil)
 

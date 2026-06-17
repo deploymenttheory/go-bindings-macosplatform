@@ -29,5 +29,49 @@ func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
 	return x
 }
 
+// AddTargetAction calls the underlying AddTargetAction.
+func (x *RemoteCommand) AddTargetAction(target objc.ID, action objc.SEL) {
+	x.inner.AddTargetAction(target, action)
+}
+
+// RemoveTargetAction calls the underlying RemoveTargetAction.
+func (x *RemoteCommand) RemoveTargetAction(target objc.ID, action objc.SEL) {
+	x.inner.RemoveTargetAction(target, action)
+}
+
+// RemoveTarget calls the underlying RemoveTarget.
+func (x *RemoteCommand) RemoveTarget(target objc.ID) {
+	x.inner.RemoveTarget(target)
+}
+
+// AddTargetWithHandler calls the underlying AddTargetWithHandler.
+func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus) objc.ID {
+	return x.inner.AddTargetWithHandler(handler)
+}
+
+// IsEnabled calls the underlying IsEnabled.
+func (x *RemoteCommand) IsEnabled() bool {
+	return x.inner.IsEnabled()
+}
+
+// SetEnabled calls the underlying SetEnabled.
+func (x *RemoteCommand) SetEnabled(enabled bool) {
+	x.inner.SetEnabled(enabled)
+}
+
 func (x *RemoteCommand) asRemoteCommand() *raw.MPRemoteCommand { return x.inner }
+
+// RemoteCommandable is the interface implemented by [RemoteCommand], for mocking and DI.
+type RemoteCommandable interface {
+	Unwrap() *raw.MPRemoteCommand
+	WithEnabled(enabled bool) *RemoteCommand
+	AddTargetAction(target objc.ID, action objc.SEL)
+	RemoveTargetAction(target objc.ID, action objc.SEL)
+	RemoveTarget(target objc.ID)
+	AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus) objc.ID
+	IsEnabled() bool
+	SetEnabled(enabled bool)
+}
+
+var _ RemoteCommandable = (*RemoteCommand)(nil)
 

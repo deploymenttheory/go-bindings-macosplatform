@@ -25,3 +25,16 @@ func NewMediaDataStorageWithURLOptions(uRL string, options *foundation.NSDiction
 	return &MediaDataStorage{inner: raw.AVMediaDataStorageFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *MediaDataStorage) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
+// MediaDataStorageable is the interface implemented by [MediaDataStorage], for mocking and DI.
+type MediaDataStorageable interface {
+	Unwrap() *raw.AVMediaDataStorage
+	URL() *foundation.NSURL
+}
+
+var _ MediaDataStorageable = (*MediaDataStorage)(nil)
+

@@ -24,3 +24,34 @@ func NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel(manufact
 	return &MIDI2DeviceInfo{inner: raw.MIDI2DeviceInfoFromID(_id)}
 }
 
+// ManufacturerID calls the underlying ManufacturerID.
+func (x *MIDI2DeviceInfo) ManufacturerID() raw.MIDI2DeviceManufacturer {
+	return x.inner.ManufacturerID()
+}
+
+// Family calls the underlying Family.
+func (x *MIDI2DeviceInfo) Family() uint16 {
+	return x.inner.Family()
+}
+
+// ModelNumber calls the underlying ModelNumber.
+func (x *MIDI2DeviceInfo) ModelNumber() uint16 {
+	return x.inner.ModelNumber()
+}
+
+// RevisionLevel calls the underlying RevisionLevel.
+func (x *MIDI2DeviceInfo) RevisionLevel() raw.MIDI2DeviceRevisionLevel {
+	return x.inner.RevisionLevel()
+}
+
+// MIDI2DeviceInfoable is the interface implemented by [MIDI2DeviceInfo], for mocking and DI.
+type MIDI2DeviceInfoable interface {
+	Unwrap() *raw.MIDI2DeviceInfo
+	ManufacturerID() raw.MIDI2DeviceManufacturer
+	Family() uint16
+	ModelNumber() uint16
+	RevisionLevel() raw.MIDI2DeviceRevisionLevel
+}
+
+var _ MIDI2DeviceInfoable = (*MIDI2DeviceInfo)(nil)
+

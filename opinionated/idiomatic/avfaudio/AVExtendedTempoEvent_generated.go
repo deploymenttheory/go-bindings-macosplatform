@@ -30,5 +30,25 @@ func (x *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
 	return x
 }
 
+// Tempo calls the underlying Tempo.
+func (x *ExtendedTempoEvent) Tempo() float64 {
+	return x.inner.Tempo()
+}
+
+// SetTempo calls the underlying SetTempo.
+func (x *ExtendedTempoEvent) SetTempo(tempo float64) {
+	x.inner.SetTempo(tempo)
+}
+
 func (x *ExtendedTempoEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
+
+// ExtendedTempoEventable is the interface implemented by [ExtendedTempoEvent], for mocking and DI.
+type ExtendedTempoEventable interface {
+	Unwrap() *raw.AVExtendedTempoEvent
+	WithTempo(tempo float64) *ExtendedTempoEvent
+	Tempo() float64
+	SetTempo(tempo float64)
+}
+
+var _ ExtendedTempoEventable = (*ExtendedTempoEvent)(nil)
 

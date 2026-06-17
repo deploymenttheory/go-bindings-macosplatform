@@ -47,3 +47,74 @@ func (x *MatrixDescriptor) WithRowBytes(rowBytes uint) *MatrixDescriptor {
 	return x
 }
 
+// Rows calls the underlying Rows.
+func (x *MatrixDescriptor) Rows() uint {
+	return x.inner.Rows()
+}
+
+// SetRows calls the underlying SetRows.
+func (x *MatrixDescriptor) SetRows(rows uint) {
+	x.inner.SetRows(rows)
+}
+
+// Columns calls the underlying Columns.
+func (x *MatrixDescriptor) Columns() uint {
+	return x.inner.Columns()
+}
+
+// SetColumns calls the underlying SetColumns.
+func (x *MatrixDescriptor) SetColumns(columns uint) {
+	x.inner.SetColumns(columns)
+}
+
+// Matrices calls the underlying Matrices.
+func (x *MatrixDescriptor) Matrices() uint {
+	return x.inner.Matrices()
+}
+
+// DataType calls the underlying DataType.
+func (x *MatrixDescriptor) DataType() raw.MPSDataType {
+	return x.inner.DataType()
+}
+
+// SetDataType calls the underlying SetDataType.
+func (x *MatrixDescriptor) SetDataType(dataType raw.MPSDataType) {
+	x.inner.SetDataType(dataType)
+}
+
+// RowBytes calls the underlying RowBytes.
+func (x *MatrixDescriptor) RowBytes() uint {
+	return x.inner.RowBytes()
+}
+
+// SetRowBytes calls the underlying SetRowBytes.
+func (x *MatrixDescriptor) SetRowBytes(rowBytes uint) {
+	x.inner.SetRowBytes(rowBytes)
+}
+
+// MatrixBytes calls the underlying MatrixBytes.
+func (x *MatrixDescriptor) MatrixBytes() uint {
+	return x.inner.MatrixBytes()
+}
+
+// MatrixDescriptorable is the interface implemented by [MatrixDescriptor], for mocking and DI.
+type MatrixDescriptorable interface {
+	Unwrap() *raw.MPSMatrixDescriptor
+	WithRows(rows uint) *MatrixDescriptor
+	WithColumns(columns uint) *MatrixDescriptor
+	WithDataType(dataType raw.MPSDataType) *MatrixDescriptor
+	WithRowBytes(rowBytes uint) *MatrixDescriptor
+	Rows() uint
+	SetRows(rows uint)
+	Columns() uint
+	SetColumns(columns uint)
+	Matrices() uint
+	DataType() raw.MPSDataType
+	SetDataType(dataType raw.MPSDataType)
+	RowBytes() uint
+	SetRowBytes(rowBytes uint)
+	MatrixBytes() uint
+}
+
+var _ MatrixDescriptorable = (*MatrixDescriptor)(nil)
+

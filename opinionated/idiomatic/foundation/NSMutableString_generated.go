@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -24,7 +25,62 @@ func NewMutableStringWithCapacity(capacity uint) *MutableString {
 	return &MutableString{inner: raw.NSMutableStringFromID(_id)}
 }
 
+// ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
+func (x *MutableString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string) {
+	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(aString))
+}
+
+// InsertStringAtIndex calls the underlying InsertStringAtIndex.
+func (x *MutableString) InsertStringAtIndex(aString string, loc uint) {
+	x.inner.InsertStringAtIndex(foundation.NSStringStringWithUTF8String(aString), loc)
+}
+
+// DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
+func (x *MutableString) DeleteCharactersInRange(range_ raw.NSRange) {
+	x.inner.DeleteCharactersInRange(range_)
+}
+
+// AppendString calls the underlying AppendString.
+func (x *MutableString) AppendString(aString string) {
+	x.inner.AppendString(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// AppendFormat calls the underlying AppendFormat.
+func (x *MutableString) AppendFormat(format string) {
+	x.inner.AppendFormat(foundation.NSStringStringWithUTF8String(format))
+}
+
+// SetString calls the underlying SetString.
+func (x *MutableString) SetString(aString string) {
+	x.inner.SetString(foundation.NSStringStringWithUTF8String(aString))
+}
+
+// ReplaceOccurrencesOfStringWithStringOptionsRange calls the underlying ReplaceOccurrencesOfStringWithStringOptionsRange.
+func (x *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) uint {
+	return x.inner.ReplaceOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), options, searchRange)
+}
+
+// ApplyTransformReverseRangeUpdatedRange calls the underlying ApplyTransformReverseRangeUpdatedRange.
+func (x *MutableString) ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool {
+	return x.inner.ApplyTransformReverseRangeUpdatedRange(transform, reverse, range_, resultingRange)
+}
+
 func (x *MutableString) asString() *raw.NSString { return &x.inner.NSString }
 
 func (x *MutableString) asObject() *raw.NSObject { return &x.inner.NSString.NSObject }
+
+// MutableStringable is the interface implemented by [MutableString], for mocking and DI.
+type MutableStringable interface {
+	Unwrap() *raw.NSMutableString
+	ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string)
+	InsertStringAtIndex(aString string, loc uint)
+	DeleteCharactersInRange(range_ raw.NSRange)
+	AppendString(aString string)
+	AppendFormat(format string)
+	SetString(aString string)
+	ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options raw.NSStringCompareOptions, searchRange raw.NSRange) uint
+	ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool
+}
+
+var _ MutableStringable = (*MutableString)(nil)
 

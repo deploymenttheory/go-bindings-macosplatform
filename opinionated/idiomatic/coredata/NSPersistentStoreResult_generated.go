@@ -25,3 +25,10 @@ func NewPersistentStoreResult() *PersistentStoreResult {
 
 func (x *PersistentStoreResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return x.inner }
 
+// PersistentStoreResultable is the interface implemented by [PersistentStoreResult], for mocking and DI.
+type PersistentStoreResultable interface {
+	Unwrap() *raw.NSPersistentStoreResult
+}
+
+var _ PersistentStoreResultable = (*PersistentStoreResult)(nil)
+

@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -32,9 +33,62 @@ func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable b
 	return &DOMMutationEvent{inner: raw.DOMMutationEventFromID(_id)}
 }
 
+// NewValue calls the underlying NewValue.
+func (x *DOMMutationEvent) NewValue() string {
+	_r := x.inner.NewValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// RelatedNode calls the underlying RelatedNode.
+func (x *DOMMutationEvent) RelatedNode() *DOMNode {
+	_r := x.inner.RelatedNode()
+	if _r == nil {
+		return nil
+	}
+	return &DOMNode{inner: _r}
+}
+
+// PrevValue calls the underlying PrevValue.
+func (x *DOMMutationEvent) PrevValue() string {
+	_r := x.inner.PrevValue()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttrName calls the underlying AttrName.
+func (x *DOMMutationEvent) AttrName() string {
+	_r := x.inner.AttrName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AttrChange calls the underlying AttrChange.
+func (x *DOMMutationEvent) AttrChange() uint16 {
+	return x.inner.AttrChange()
+}
+
 func (x *DOMMutationEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
 
 func (x *DOMMutationEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
 
 func (x *DOMMutationEvent) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMEvent.DOMObject.WebScriptObject }
+
+// DOMMutationEventable is the interface implemented by [DOMMutationEvent], for mocking and DI.
+type DOMMutationEventable interface {
+	Unwrap() *raw.DOMMutationEvent
+	NewValue() string
+	RelatedNode() *DOMNode
+	PrevValue() string
+	AttrName() string
+	AttrChange() uint16
+}
+
+var _ DOMMutationEventable = (*DOMMutationEvent)(nil)
 

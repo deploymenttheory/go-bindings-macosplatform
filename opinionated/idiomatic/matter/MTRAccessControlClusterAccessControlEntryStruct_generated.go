@@ -42,5 +42,75 @@ func (x *MTRAccessControlClusterAccessControlEntryStruct) WithFabricIndex(fabric
 	return x
 }
 
+// Privilege calls the underlying Privilege.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) Privilege() *foundation.NSNumber {
+	return x.inner.Privilege()
+}
+
+// SetPrivilege calls the underlying SetPrivilege.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) SetPrivilege(privilege *foundation.NSNumber) {
+	x.inner.SetPrivilege(privilege)
+}
+
+// AuthMode calls the underlying AuthMode.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) AuthMode() *foundation.NSNumber {
+	return x.inner.AuthMode()
+}
+
+// SetAuthMode calls the underlying SetAuthMode.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) SetAuthMode(authMode *foundation.NSNumber) {
+	x.inner.SetAuthMode(authMode)
+}
+
+// Subjects calls the underlying Subjects.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) Subjects() *foundation.NSArray[objc.ID] {
+	return x.inner.Subjects()
+}
+
+// SetSubjects calls the underlying SetSubjects.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) SetSubjects(subjects *foundation.NSArray[objc.ID]) {
+	x.inner.SetSubjects(subjects)
+}
+
+// Targets calls the underlying Targets.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) Targets() *foundation.NSArray[objc.ID] {
+	return x.inner.Targets()
+}
+
+// SetTargets calls the underlying SetTargets.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targets *foundation.NSArray[objc.ID]) {
+	x.inner.SetTargets(targets)
+}
+
+// FabricIndex calls the underlying FabricIndex.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() *foundation.NSNumber {
+	return x.inner.FabricIndex()
+}
+
+// SetFabricIndex calls the underlying SetFabricIndex.
+func (x *MTRAccessControlClusterAccessControlEntryStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
+	x.inner.SetFabricIndex(fabricIndex)
+}
+
 func (x *MTRAccessControlClusterAccessControlEntryStruct) asMTRAccessControlClusterAccessControlEntryStruct() *raw.MTRAccessControlClusterAccessControlEntryStruct { return x.inner }
+
+// MTRAccessControlClusterAccessControlEntryStructable is the interface implemented by [MTRAccessControlClusterAccessControlEntryStruct], for mocking and DI.
+type MTRAccessControlClusterAccessControlEntryStructable interface {
+	Unwrap() *raw.MTRAccessControlClusterAccessControlEntryStruct
+	WithPrivilege(privilege *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryStruct
+	WithAuthMode(authMode *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryStruct
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterAccessControlEntryStruct
+	Privilege() *foundation.NSNumber
+	SetPrivilege(privilege *foundation.NSNumber)
+	AuthMode() *foundation.NSNumber
+	SetAuthMode(authMode *foundation.NSNumber)
+	Subjects() *foundation.NSArray[objc.ID]
+	SetSubjects(subjects *foundation.NSArray[objc.ID])
+	Targets() *foundation.NSArray[objc.ID]
+	SetTargets(targets *foundation.NSArray[objc.ID])
+	FabricIndex() *foundation.NSNumber
+	SetFabricIndex(fabricIndex *foundation.NSNumber)
+}
+
+var _ MTRAccessControlClusterAccessControlEntryStructable = (*MTRAccessControlClusterAccessControlEntryStruct)(nil)
 

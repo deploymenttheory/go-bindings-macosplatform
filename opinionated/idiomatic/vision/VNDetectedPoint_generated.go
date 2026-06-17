@@ -23,7 +23,20 @@ func NewDetectedPoint() *DetectedPoint {
 	return &DetectedPoint{inner: raw.VNDetectedPointFromID(_id)}
 }
 
+// Confidence calls the underlying Confidence.
+func (x *DetectedPoint) Confidence() float32 {
+	return x.inner.Confidence()
+}
+
 func (x *DetectedPoint) asDetectedPoint() *raw.VNDetectedPoint { return x.inner }
 
 func (x *DetectedPoint) asPoint() *raw.VNPoint { return &x.inner.VNPoint }
+
+// DetectedPointable is the interface implemented by [DetectedPoint], for mocking and DI.
+type DetectedPointable interface {
+	Unwrap() *raw.VNDetectedPoint
+	Confidence() float32
+}
+
+var _ DetectedPointable = (*DetectedPoint)(nil)
 

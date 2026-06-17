@@ -36,3 +36,40 @@ func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *raw.PKPayment
 	return x
 }
 
+// Status calls the underlying Status.
+func (x *PaymentRequestMerchantSessionUpdate) Status() raw.PKPaymentAuthorizationStatus {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status raw.PKPaymentAuthorizationStatus) {
+	x.inner.SetStatus(status)
+}
+
+// Session calls the underlying Session.
+func (x *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
+	_r := x.inner.Session()
+	if _r == nil {
+		return nil
+	}
+	return &PaymentMerchantSession{inner: _r}
+}
+
+// SetSession calls the underlying SetSession.
+func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *raw.PKPaymentMerchantSession) {
+	x.inner.SetSession(session)
+}
+
+// PaymentRequestMerchantSessionUpdateable is the interface implemented by [PaymentRequestMerchantSessionUpdate], for mocking and DI.
+type PaymentRequestMerchantSessionUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestMerchantSessionUpdate
+	WithStatus(status raw.PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
+	WithSession(session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
+	Status() raw.PKPaymentAuthorizationStatus
+	SetStatus(status raw.PKPaymentAuthorizationStatus)
+	Session() *PaymentMerchantSession
+	SetSession(session *raw.PKPaymentMerchantSession)
+}
+
+var _ PaymentRequestMerchantSessionUpdateable = (*PaymentRequestMerchantSessionUpdate)(nil)
+

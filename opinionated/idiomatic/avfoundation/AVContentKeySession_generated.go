@@ -5,8 +5,12 @@
 package avfoundation
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ContentKeySession wraps [raw.AVContentKeySession] with a fluent Go API.
@@ -22,4 +26,162 @@ func NewContentKeySession() *ContentKeySession {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVContentKeySession")), objc.RegisterName("new"))
 	return &ContentKeySession{inner: raw.AVContentKeySessionFromID(_id)}
 }
+
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *ContentKeySession) SetDelegateQueue(delegate raw.AVContentKeySessionDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Expire calls the underlying Expire.
+func (x *ContentKeySession) Expire() {
+	x.inner.Expire()
+}
+
+// ProcessContentKeyRequestWithIdentifierInitializationDataOptions calls the underlying ProcessContentKeyRequestWithIdentifierInitializationDataOptions.
+func (x *ContentKeySession) ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier objc.ID, initializationData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier, initializationData, options)
+}
+
+// RenewExpiringResponseDataForContentKeyRequest calls the underlying RenewExpiringResponseDataForContentKeyRequest.
+func (x *ContentKeySession) RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *raw.AVContentKeyRequest) {
+	x.inner.RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest)
+}
+
+// MakeSecureTokenForExpirationDateOfPersistableContentKey blocks until the operation completes or ctx is cancelled.
+func (x *ContentKeySession) MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData *foundation.NSData) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.MakeSecureTokenForExpirationDateOfPersistableContentKeyCompletionHandler(persistableContentKeyData, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// InvalidatePersistableContentKeyOptions blocks until the operation completes or ctx is cancelled.
+func (x *ContentKeySession) InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.InvalidatePersistableContentKeyOptionsCompletionHandler(persistableContentKeyData, options, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// InvalidateAllPersistableContentKeysForAppOptions blocks until the operation completes or ctx is cancelled.
+func (x *ContentKeySession) InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.InvalidateAllPersistableContentKeysForAppOptionsCompletionHandler(appIdentifier, options, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// Delegate calls the underlying Delegate.
+func (x *ContentKeySession) Delegate() raw.AVContentKeySessionDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *ContentKeySession) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
+// StorageURL calls the underlying StorageURL.
+func (x *ContentKeySession) StorageURL() *foundation.NSURL {
+	return x.inner.StorageURL()
+}
+
+// KeySystem calls the underlying KeySystem.
+func (x *ContentKeySession) KeySystem() string {
+	_r := x.inner.KeySystem()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ContentProtectionSessionIdentifier calls the underlying ContentProtectionSessionIdentifier.
+func (x *ContentKeySession) ContentProtectionSessionIdentifier() *foundation.NSData {
+	return x.inner.ContentProtectionSessionIdentifier()
+}
+
+// AddContentKeyRecipient calls the underlying AddContentKeyRecipient.
+func (x *ContentKeySession) AddContentKeyRecipient(recipient raw.AVContentKeyRecipient) {
+	x.inner.AddContentKeyRecipient(recipient)
+}
+
+// RemoveContentKeyRecipient calls the underlying RemoveContentKeyRecipient.
+func (x *ContentKeySession) RemoveContentKeyRecipient(recipient raw.AVContentKeyRecipient) {
+	x.inner.RemoveContentKeyRecipient(recipient)
+}
+
+// ContentKeyRecipients calls the underlying ContentKeyRecipients.
+func (x *ContentKeySession) ContentKeyRecipients() *foundation.NSArray[raw.AVContentKeyRecipient] {
+	return x.inner.ContentKeyRecipients()
+}
+
+// ContentKeySessionable is the interface implemented by [ContentKeySession], for mocking and DI.
+type ContentKeySessionable interface {
+	Unwrap() *raw.AVContentKeySession
+	SetDelegateQueue(delegate raw.AVContentKeySessionDelegate, delegateQueue *foundation.NSObject)
+	Expire()
+	ProcessContentKeyRequestWithIdentifierInitializationDataOptions(identifier objc.ID, initializationData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	RenewExpiringResponseDataForContentKeyRequest(contentKeyRequest *raw.AVContentKeyRequest)
+	MakeSecureTokenForExpirationDateOfPersistableContentKey(ctx context.Context, persistableContentKeyData *foundation.NSData) (*foundation.NSData, error)
+	InvalidatePersistableContentKeyOptions(ctx context.Context, persistableContentKeyData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	InvalidateAllPersistableContentKeysForAppOptions(ctx context.Context, appIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	Delegate() raw.AVContentKeySessionDelegate
+	DelegateQueue() *foundation.NSObject
+	StorageURL() *foundation.NSURL
+	KeySystem() string
+	ContentProtectionSessionIdentifier() *foundation.NSData
+	AddContentKeyRecipient(recipient raw.AVContentKeyRecipient)
+	RemoveContentKeyRecipient(recipient raw.AVContentKeyRecipient)
+	ContentKeyRecipients() *foundation.NSArray[raw.AVContentKeyRecipient]
+}
+
+var _ ContentKeySessionable = (*ContentKeySession)(nil)
 

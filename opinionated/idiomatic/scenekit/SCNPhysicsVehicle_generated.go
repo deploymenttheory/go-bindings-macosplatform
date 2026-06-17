@@ -6,6 +6,7 @@ package scenekit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,58 @@ func NewPhysicsVehicle() *PhysicsVehicle {
 	return &PhysicsVehicle{inner: raw.SCNPhysicsVehicleFromID(_id)}
 }
 
+// ApplyEngineForceForWheelAtIndex calls the underlying ApplyEngineForceForWheelAtIndex.
+func (x *PhysicsVehicle) ApplyEngineForceForWheelAtIndex(value float64, index int) {
+	x.inner.ApplyEngineForceForWheelAtIndex(value, index)
+}
+
+// SetSteeringAngleForWheelAtIndex calls the underlying SetSteeringAngleForWheelAtIndex.
+func (x *PhysicsVehicle) SetSteeringAngleForWheelAtIndex(value float64, index int) {
+	x.inner.SetSteeringAngleForWheelAtIndex(value, index)
+}
+
+// ApplyBrakingForceForWheelAtIndex calls the underlying ApplyBrakingForceForWheelAtIndex.
+func (x *PhysicsVehicle) ApplyBrakingForceForWheelAtIndex(value float64, index int) {
+	x.inner.ApplyBrakingForceForWheelAtIndex(value, index)
+}
+
+// SpeedInKilometersPerHour calls the underlying SpeedInKilometersPerHour.
+func (x *PhysicsVehicle) SpeedInKilometersPerHour() float64 {
+	return x.inner.SpeedInKilometersPerHour()
+}
+
 // Wheels returns the collection as a Go slice.
 func (x *PhysicsVehicle) Wheels() []*raw.SCNPhysicsVehicleWheel {
 	arr := x.inner.Wheels()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SCNPhysicsVehicleWheel, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SCNPhysicsVehicleWheel {
+		return raw.SCNPhysicsVehicleWheelFromID(purego.Retain(_id))
+	})
+}
+
+// ChassisBody calls the underlying ChassisBody.
+func (x *PhysicsVehicle) ChassisBody() *PhysicsBody {
+	_r := x.inner.ChassisBody()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &PhysicsBody{inner: _r}
 }
 
 func (x *PhysicsVehicle) asPhysicsBehavior() *raw.SCNPhysicsBehavior { return &x.inner.SCNPhysicsBehavior }
+
+// PhysicsVehicleable is the interface implemented by [PhysicsVehicle], for mocking and DI.
+type PhysicsVehicleable interface {
+	Unwrap() *raw.SCNPhysicsVehicle
+	ApplyEngineForceForWheelAtIndex(value float64, index int)
+	SetSteeringAngleForWheelAtIndex(value float64, index int)
+	ApplyBrakingForceForWheelAtIndex(value float64, index int)
+	SpeedInKilometersPerHour() float64
+	Wheels() []*raw.SCNPhysicsVehicleWheel
+	ChassisBody() *PhysicsBody
+}
+
+var _ PhysicsVehicleable = (*PhysicsVehicle)(nil)
 

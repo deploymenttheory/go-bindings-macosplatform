@@ -29,3 +29,10 @@ func (x *ImageAdd) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner
 
 func (x *ImageAdd) asBinaryImageKernel() *raw.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
 
+// ImageAddable is the interface implemented by [ImageAdd], for mocking and DI.
+type ImageAddable interface {
+	Unwrap() *raw.MPSImageAdd
+}
+
+var _ ImageAddable = (*ImageAdd)(nil)
+

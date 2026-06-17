@@ -34,3 +34,16 @@ func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOff
 	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
 }
 
+// SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets calls the underlying SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets.
+func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets raw.MPSMatrixCopyOffsets) {
+	x.inner.SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index, sourceMatrix, destinationMatrix, offsets)
+}
+
+// MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
+type MatrixCopyDescriptorable interface {
+	Unwrap() *raw.MPSMatrixCopyDescriptor
+	SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets raw.MPSMatrixCopyOffsets)
+}
+
+var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)
+

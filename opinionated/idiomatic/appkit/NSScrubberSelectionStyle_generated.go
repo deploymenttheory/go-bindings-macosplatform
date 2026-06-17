@@ -31,3 +31,20 @@ func NewScrubberSelectionStyleWithCoder(coder *foundation.NSCoder) *ScrubberSele
 	return &ScrubberSelectionStyle{inner: raw.NSScrubberSelectionStyleFromID(_id)}
 }
 
+// MakeSelectionView calls the underlying MakeSelectionView.
+func (x *ScrubberSelectionStyle) MakeSelectionView() *ScrubberSelectionView {
+	_r := x.inner.MakeSelectionView()
+	if _r == nil {
+		return nil
+	}
+	return &ScrubberSelectionView{inner: _r}
+}
+
+// ScrubberSelectionStyleable is the interface implemented by [ScrubberSelectionStyle], for mocking and DI.
+type ScrubberSelectionStyleable interface {
+	Unwrap() *raw.NSScrubberSelectionStyle
+	MakeSelectionView() *ScrubberSelectionView
+}
+
+var _ ScrubberSelectionStyleable = (*ScrubberSelectionStyle)(nil)
+

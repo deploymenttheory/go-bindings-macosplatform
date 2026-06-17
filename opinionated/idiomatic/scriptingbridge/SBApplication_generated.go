@@ -64,5 +64,82 @@ func (x *Application) WithTimeout(timeout int) *Application {
 	return x
 }
 
+// ClassForScriptingClass calls the underlying ClassForScriptingClass.
+func (x *Application) ClassForScriptingClass(className string) objc.Class {
+	return x.inner.ClassForScriptingClass(foundation.NSStringStringWithUTF8String(className))
+}
+
+// Activate calls the underlying Activate.
+func (x *Application) Activate() {
+	x.inner.Activate()
+}
+
+// IsRunning calls the underlying IsRunning.
+func (x *Application) IsRunning() bool {
+	return x.inner.IsRunning()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *Application) Delegate() raw.SBApplicationDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Application) SetDelegate(delegate raw.SBApplicationDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// LaunchFlags calls the underlying LaunchFlags.
+func (x *Application) LaunchFlags() launchservices.LSLaunchFlags {
+	return x.inner.LaunchFlags()
+}
+
+// SetLaunchFlags calls the underlying SetLaunchFlags.
+func (x *Application) SetLaunchFlags(launchFlags launchservices.LSLaunchFlags) {
+	x.inner.SetLaunchFlags(launchFlags)
+}
+
+// SendMode calls the underlying SendMode.
+func (x *Application) SendMode() int {
+	return x.inner.SendMode()
+}
+
+// SetSendMode calls the underlying SetSendMode.
+func (x *Application) SetSendMode(sendMode int) {
+	x.inner.SetSendMode(sendMode)
+}
+
+// Timeout calls the underlying Timeout.
+func (x *Application) Timeout() int {
+	return x.inner.Timeout()
+}
+
+// SetTimeout calls the underlying SetTimeout.
+func (x *Application) SetTimeout(timeout int) {
+	x.inner.SetTimeout(timeout)
+}
+
 func (x *Application) asObject() *raw.SBObject { return &x.inner.SBObject }
+
+// Applicationable is the interface implemented by [Application], for mocking and DI.
+type Applicationable interface {
+	Unwrap() *raw.SBApplication
+	WithDelegate(delegate raw.SBApplicationDelegate) *Application
+	WithLaunchFlags(launchFlags launchservices.LSLaunchFlags) *Application
+	WithSendMode(sendMode int) *Application
+	WithTimeout(timeout int) *Application
+	ClassForScriptingClass(className string) objc.Class
+	Activate()
+	IsRunning() bool
+	Delegate() raw.SBApplicationDelegate
+	SetDelegate(delegate raw.SBApplicationDelegate)
+	LaunchFlags() launchservices.LSLaunchFlags
+	SetLaunchFlags(launchFlags launchservices.LSLaunchFlags)
+	SendMode() int
+	SetSendMode(sendMode int)
+	Timeout() int
+	SetTimeout(timeout int)
+}
+
+var _ Applicationable = (*Application)(nil)
 

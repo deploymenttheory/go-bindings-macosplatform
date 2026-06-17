@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,7 +30,61 @@ func (x *TableHeaderView) WithTableView(tableView TableViewProvider) *TableHeade
 	return x
 }
 
+// HeaderRectOfColumn calls the underlying HeaderRectOfColumn.
+func (x *TableHeaderView) HeaderRectOfColumn(column int) corefoundation.CGRect {
+	return x.inner.HeaderRectOfColumn(column)
+}
+
+// ColumnAtPoint calls the underlying ColumnAtPoint.
+func (x *TableHeaderView) ColumnAtPoint(point corefoundation.CGPoint) int {
+	return x.inner.ColumnAtPoint(point)
+}
+
+// TableView calls the underlying TableView.
+func (x *TableHeaderView) TableView() *TableView {
+	_r := x.inner.TableView()
+	if _r == nil {
+		return nil
+	}
+	return &TableView{inner: _r}
+}
+
+// SetTableView calls the underlying SetTableView.
+func (x *TableHeaderView) SetTableView(tableView *raw.NSTableView) {
+	x.inner.SetTableView(tableView)
+}
+
+// DraggedColumn calls the underlying DraggedColumn.
+func (x *TableHeaderView) DraggedColumn() int {
+	return x.inner.DraggedColumn()
+}
+
+// DraggedDistance calls the underlying DraggedDistance.
+func (x *TableHeaderView) DraggedDistance() float64 {
+	return x.inner.DraggedDistance()
+}
+
+// ResizedColumn calls the underlying ResizedColumn.
+func (x *TableHeaderView) ResizedColumn() int {
+	return x.inner.ResizedColumn()
+}
+
 func (x *TableHeaderView) asView() *raw.NSView { return &x.inner.NSView }
 
 func (x *TableHeaderView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
+
+// TableHeaderViewable is the interface implemented by [TableHeaderView], for mocking and DI.
+type TableHeaderViewable interface {
+	Unwrap() *raw.NSTableHeaderView
+	WithTableView(tableView TableViewProvider) *TableHeaderView
+	HeaderRectOfColumn(column int) corefoundation.CGRect
+	ColumnAtPoint(point corefoundation.CGPoint) int
+	TableView() *TableView
+	SetTableView(tableView *raw.NSTableView)
+	DraggedColumn() int
+	DraggedDistance() float64
+	ResizedColumn() int
+}
+
+var _ TableHeaderViewable = (*TableHeaderView)(nil)
 

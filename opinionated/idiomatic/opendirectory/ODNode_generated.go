@@ -42,3 +42,176 @@ func NewNodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node
 	return &Node{inner: raw.ODNodeFromID(_id)}, nil
 }
 
+// SubnodeNamesAndReturnError calls the underlying SubnodeNamesAndReturnError.
+func (x *Node) SubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
+	return x.inner.SubnodeNamesAndReturnError()
+}
+
+// UnreachableSubnodeNamesAndReturnError calls the underlying UnreachableSubnodeNamesAndReturnError.
+func (x *Node) UnreachableSubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
+	return x.inner.UnreachableSubnodeNamesAndReturnError()
+}
+
+// NodeDetailsForKeysError calls the underlying NodeDetailsForKeysError.
+func (x *Node) NodeDetailsForKeysError(inKeys *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error) {
+	return x.inner.NodeDetailsForKeysError(inKeys)
+}
+
+// SupportedRecordTypesAndReturnError calls the underlying SupportedRecordTypesAndReturnError.
+func (x *Node) SupportedRecordTypesAndReturnError() (*foundation.NSArray[objc.ID], error) {
+	return x.inner.SupportedRecordTypesAndReturnError()
+}
+
+// SupportedAttributesForRecordTypeError calls the underlying SupportedAttributesForRecordTypeError.
+func (x *Node) SupportedAttributesForRecordTypeError(inRecordType *foundation.NSString) (*foundation.NSArray[objc.ID], error) {
+	return x.inner.SupportedAttributesForRecordTypeError(inRecordType)
+}
+
+// SetCredentialsWithRecordTypeRecordNamePasswordError calls the underlying SetCredentialsWithRecordTypeRecordNamePasswordError.
+func (x *Node) SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType *foundation.NSString, inRecordName string, inPassword string) (bool, error) {
+	return x.inner.SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), foundation.NSStringStringWithUTF8String(inPassword))
+}
+
+// SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError calls the underlying SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError.
+func (x *Node) SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error) {
+	return x.inner.SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType, inType, inItems, outItems, outContext)
+}
+
+// SetCredentialsUsingKerberosCacheError calls the underlying SetCredentialsUsingKerberosCacheError.
+func (x *Node) SetCredentialsUsingKerberosCacheError(inCacheName string) (bool, error) {
+	return x.inner.SetCredentialsUsingKerberosCacheError(foundation.NSStringStringWithUTF8String(inCacheName))
+}
+
+// CreateRecordWithRecordTypeNameAttributesError calls the underlying CreateRecordWithRecordTypeNameAttributesError.
+func (x *Node) CreateRecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes *foundation.NSDictionary[objc.ID, objc.ID]) (*Record, error) {
+	_r, _err := x.inner.CreateRecordWithRecordTypeNameAttributesError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), inAttributes)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Record{inner: _r}, nil
+}
+
+// RecordWithRecordTypeNameAttributesError calls the underlying RecordWithRecordTypeNameAttributesError.
+func (x *Node) RecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes objc.ID) (*Record, error) {
+	_r, _err := x.inner.RecordWithRecordTypeNameAttributesError(inRecordType, foundation.NSStringStringWithUTF8String(inRecordName), inAttributes)
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Record{inner: _r}, nil
+}
+
+// CustomCallSendDataError calls the underlying CustomCallSendDataError.
+func (x *Node) CustomCallSendDataError(inCustomCode int, inSendData *foundation.NSData) (*foundation.NSData, error) {
+	return x.inner.CustomCallSendDataError(inCustomCode, inSendData)
+}
+
+// CustomFunctionPayloadError calls the underlying CustomFunctionPayloadError.
+func (x *Node) CustomFunctionPayloadError(function string, payload objc.ID) (objc.ID, error) {
+	return x.inner.CustomFunctionPayloadError(foundation.NSStringStringWithUTF8String(function), payload)
+}
+
+// PoliciesAndReturnError calls the underlying PoliciesAndReturnError.
+func (x *Node) PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
+	return x.inner.PoliciesAndReturnError()
+}
+
+// SupportedPoliciesAndReturnError calls the underlying SupportedPoliciesAndReturnError.
+func (x *Node) SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
+	return x.inner.SupportedPoliciesAndReturnError()
+}
+
+// SetPoliciesError calls the underlying SetPoliciesError.
+func (x *Node) SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
+	return x.inner.SetPoliciesError(policies)
+}
+
+// SetPolicyValueError calls the underlying SetPolicyValueError.
+func (x *Node) SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error) {
+	return x.inner.SetPolicyValueError(policy, value)
+}
+
+// RemovePolicyError calls the underlying RemovePolicyError.
+func (x *Node) RemovePolicyError(policy *foundation.NSString) (bool, error) {
+	return x.inner.RemovePolicyError(policy)
+}
+
+// AddAccountPolicyToCategoryError calls the underlying AddAccountPolicyToCategoryError.
+func (x *Node) AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
+	return x.inner.AddAccountPolicyToCategoryError(policy, category)
+}
+
+// RemoveAccountPolicyFromCategoryError calls the underlying RemoveAccountPolicyFromCategoryError.
+func (x *Node) RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error) {
+	return x.inner.RemoveAccountPolicyFromCategoryError(policy, category)
+}
+
+// SetAccountPoliciesError calls the underlying SetAccountPoliciesError.
+func (x *Node) SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error) {
+	return x.inner.SetAccountPoliciesError(policies)
+}
+
+// AccountPoliciesAndReturnError calls the underlying AccountPoliciesAndReturnError.
+func (x *Node) AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error) {
+	return x.inner.AccountPoliciesAndReturnError()
+}
+
+// PasswordContentCheckForRecordNameError calls the underlying PasswordContentCheckForRecordNameError.
+func (x *Node) PasswordContentCheckForRecordNameError(password string, recordName string) (bool, error) {
+	return x.inner.PasswordContentCheckForRecordNameError(foundation.NSStringStringWithUTF8String(password), foundation.NSStringStringWithUTF8String(recordName))
+}
+
+// NodeName calls the underlying NodeName.
+func (x *Node) NodeName() string {
+	_r := x.inner.NodeName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Configuration calls the underlying Configuration.
+func (x *Node) Configuration() *Configuration {
+	_r := x.inner.Configuration()
+	if _r == nil {
+		return nil
+	}
+	return &Configuration{inner: _r}
+}
+
+// Nodeable is the interface implemented by [Node], for mocking and DI.
+type Nodeable interface {
+	Unwrap() *raw.ODNode
+	SubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error)
+	UnreachableSubnodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error)
+	NodeDetailsForKeysError(inKeys *foundation.NSArray[objc.ID]) (*foundation.NSDictionary[objc.ID, objc.ID], error)
+	SupportedRecordTypesAndReturnError() (*foundation.NSArray[objc.ID], error)
+	SupportedAttributesForRecordTypeError(inRecordType *foundation.NSString) (*foundation.NSArray[objc.ID], error)
+	SetCredentialsWithRecordTypeRecordNamePasswordError(inRecordType *foundation.NSString, inRecordName string, inPassword string) (bool, error)
+	SetCredentialsWithRecordTypeAuthenticationTypeAuthenticationItemsContinueItemsContextError(inRecordType *foundation.NSString, inType *foundation.NSString, inItems *foundation.NSArray[objc.ID], outItems *foundation.NSArray[objc.ID], outContext **foundation.ObjcObject) (bool, error)
+	SetCredentialsUsingKerberosCacheError(inCacheName string) (bool, error)
+	CreateRecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes *foundation.NSDictionary[objc.ID, objc.ID]) (*Record, error)
+	RecordWithRecordTypeNameAttributesError(inRecordType *foundation.NSString, inRecordName string, inAttributes objc.ID) (*Record, error)
+	CustomCallSendDataError(inCustomCode int, inSendData *foundation.NSData) (*foundation.NSData, error)
+	CustomFunctionPayloadError(function string, payload objc.ID) (objc.ID, error)
+	PoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
+	SupportedPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
+	SetPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error)
+	SetPolicyValueError(policy *foundation.NSString, value objc.ID) (bool, error)
+	RemovePolicyError(policy *foundation.NSString) (bool, error)
+	AddAccountPolicyToCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error)
+	RemoveAccountPolicyFromCategoryError(policy *foundation.NSDictionary[objc.ID, objc.ID], category *foundation.NSString) (bool, error)
+	SetAccountPoliciesError(policies *foundation.NSDictionary[objc.ID, objc.ID]) (bool, error)
+	AccountPoliciesAndReturnError() (*foundation.NSDictionary[objc.ID, objc.ID], error)
+	PasswordContentCheckForRecordNameError(password string, recordName string) (bool, error)
+	NodeName() string
+	Configuration() *Configuration
+}
+
+var _ Nodeable = (*Node)(nil)
+

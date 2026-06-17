@@ -25,3 +25,10 @@ func NewMTRChannelClusterLineupInfo() *MTRChannelClusterLineupInfo {
 
 func (x *MTRChannelClusterLineupInfo) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct { return &x.inner.MTRChannelClusterLineupInfoStruct }
 
+// MTRChannelClusterLineupInfoable is the interface implemented by [MTRChannelClusterLineupInfo], for mocking and DI.
+type MTRChannelClusterLineupInfoable interface {
+	Unwrap() *raw.MTRChannelClusterLineupInfo
+}
+
+var _ MTRChannelClusterLineupInfoable = (*MTRChannelClusterLineupInfo)(nil)
+

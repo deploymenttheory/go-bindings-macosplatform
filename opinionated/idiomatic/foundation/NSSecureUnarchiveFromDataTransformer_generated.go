@@ -27,3 +27,10 @@ func (x *SecureUnarchiveFromDataTransformer) asValueTransformer() *raw.NSValueTr
 
 func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject { return &x.inner.NSValueTransformer.NSObject }
 
+// SecureUnarchiveFromDataTransformerable is the interface implemented by [SecureUnarchiveFromDataTransformer], for mocking and DI.
+type SecureUnarchiveFromDataTransformerable interface {
+	Unwrap() *raw.NSSecureUnarchiveFromDataTransformer
+}
+
+var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)
+

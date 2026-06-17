@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +24,57 @@ func NewExternalStorageDevice() *ExternalStorageDevice {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExternalStorageDevice")), objc.RegisterName("new"))
 	return &ExternalStorageDevice{inner: raw.AVExternalStorageDeviceFromID(_id)}
 }
+
+// NextAvailableURLsWithPathExtensionsError calls the underlying NextAvailableURLsWithPathExtensionsError.
+func (x *ExternalStorageDevice) NextAvailableURLsWithPathExtensionsError(extensionArray *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSURL], error) {
+	return x.inner.NextAvailableURLsWithPathExtensionsError(extensionArray)
+}
+
+// DisplayName calls the underlying DisplayName.
+func (x *ExternalStorageDevice) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// FreeSize calls the underlying FreeSize.
+func (x *ExternalStorageDevice) FreeSize() int {
+	return x.inner.FreeSize()
+}
+
+// TotalSize calls the underlying TotalSize.
+func (x *ExternalStorageDevice) TotalSize() int {
+	return x.inner.TotalSize()
+}
+
+// IsConnected calls the underlying IsConnected.
+func (x *ExternalStorageDevice) IsConnected() bool {
+	return x.inner.IsConnected()
+}
+
+// Uuid calls the underlying Uuid.
+func (x *ExternalStorageDevice) Uuid() *foundation.NSUUID {
+	return x.inner.Uuid()
+}
+
+// IsNotRecommendedForCaptureUse calls the underlying IsNotRecommendedForCaptureUse.
+func (x *ExternalStorageDevice) IsNotRecommendedForCaptureUse() bool {
+	return x.inner.IsNotRecommendedForCaptureUse()
+}
+
+// ExternalStorageDeviceable is the interface implemented by [ExternalStorageDevice], for mocking and DI.
+type ExternalStorageDeviceable interface {
+	Unwrap() *raw.AVExternalStorageDevice
+	NextAvailableURLsWithPathExtensionsError(extensionArray *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSURL], error)
+	DisplayName() string
+	FreeSize() int
+	TotalSize() int
+	IsConnected() bool
+	Uuid() *foundation.NSUUID
+	IsNotRecommendedForCaptureUse() bool
+}
+
+var _ ExternalStorageDeviceable = (*ExternalStorageDevice)(nil)
 

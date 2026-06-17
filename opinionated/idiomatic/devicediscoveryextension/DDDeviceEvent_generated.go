@@ -24,3 +24,26 @@ func NewDDDeviceEventWithEventTypeDevice(type_ raw.DDEventType, device *raw.DDDe
 	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(_id)}
 }
 
+// Device calls the underlying Device.
+func (x *DDDeviceEvent) Device() *DDDevice {
+	_r := x.inner.Device()
+	if _r == nil {
+		return nil
+	}
+	return &DDDevice{inner: _r}
+}
+
+// EventType calls the underlying EventType.
+func (x *DDDeviceEvent) EventType() raw.DDEventType {
+	return x.inner.EventType()
+}
+
+// DDDeviceEventable is the interface implemented by [DDDeviceEvent], for mocking and DI.
+type DDDeviceEventable interface {
+	Unwrap() *raw.DDDeviceEvent
+	Device() *DDDevice
+	EventType() raw.DDEventType
+}
+
+var _ DDDeviceEventable = (*DDDeviceEvent)(nil)
+

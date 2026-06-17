@@ -25,3 +25,10 @@ func NewDirectoryShare() *DirectoryShare {
 
 func (x *DirectoryShare) asDirectoryShare() *raw.VZDirectoryShare { return x.inner }
 
+// DirectoryShareable is the interface implemented by [DirectoryShare], for mocking and DI.
+type DirectoryShareable interface {
+	Unwrap() *raw.VZDirectoryShare
+}
+
+var _ DirectoryShareable = (*DirectoryShare)(nil)
+

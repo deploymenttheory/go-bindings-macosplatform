@@ -54,3 +54,87 @@ func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithServerSideProcessingTi
 	return x
 }
 
+// NumberOfTransitionsForSequence calls the underlying NumberOfTransitionsForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) NumberOfTransitionsForSequence() *foundation.NSNumber {
+	return x.inner.NumberOfTransitionsForSequence()
+}
+
+// SetNumberOfTransitionsForSequence calls the underlying SetNumberOfTransitionsForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber) {
+	x.inner.SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence)
+}
+
+// DayOfWeekForSequence calls the underlying DayOfWeekForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) DayOfWeekForSequence() *foundation.NSNumber {
+	return x.inner.DayOfWeekForSequence()
+}
+
+// SetDayOfWeekForSequence calls the underlying SetDayOfWeekForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) {
+	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+}
+
+// ModeForSequence calls the underlying ModeForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) ModeForSequence() *foundation.NSNumber {
+	return x.inner.ModeForSequence()
+}
+
+// SetModeForSequence calls the underlying SetModeForSequence.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetModeForSequence(modeForSequence *foundation.NSNumber) {
+	x.inner.SetModeForSequence(modeForSequence)
+}
+
+// Transitions calls the underlying Transitions.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) Transitions() *foundation.NSArray[objc.ID] {
+	return x.inner.Transitions()
+}
+
+// SetTransitions calls the underlying SetTransitions.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetTransitions(transitions *foundation.NSArray[objc.ID]) {
+	x.inner.SetTransitions(transitions)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThermostatClusterSetWeeklyScheduleParamsable is the interface implemented by [MTRThermostatClusterSetWeeklyScheduleParams], for mocking and DI.
+type MTRThermostatClusterSetWeeklyScheduleParamsable interface {
+	Unwrap() *raw.MTRThermostatClusterSetWeeklyScheduleParams
+	WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber) *MTRThermostatClusterSetWeeklyScheduleParams
+	WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTRThermostatClusterSetWeeklyScheduleParams
+	WithModeForSequence(modeForSequence *foundation.NSNumber) *MTRThermostatClusterSetWeeklyScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetWeeklyScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetWeeklyScheduleParams
+	NumberOfTransitionsForSequence() *foundation.NSNumber
+	SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber)
+	DayOfWeekForSequence() *foundation.NSNumber
+	SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber)
+	ModeForSequence() *foundation.NSNumber
+	SetModeForSequence(modeForSequence *foundation.NSNumber)
+	Transitions() *foundation.NSArray[objc.ID]
+	SetTransitions(transitions *foundation.NSArray[objc.ID])
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThermostatClusterSetWeeklyScheduleParamsable = (*MTRThermostatClusterSetWeeklyScheduleParams)(nil)
+

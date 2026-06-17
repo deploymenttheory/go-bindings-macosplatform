@@ -36,3 +36,36 @@ func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithServerSideProcessin
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralDiagnosticsClusterTimeSnapshotParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTimeSnapshotParams], for mocking and DI.
+type MTRGeneralDiagnosticsClusterTimeSnapshotParamsable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterTimeSnapshotParamsable = (*MTRGeneralDiagnosticsClusterTimeSnapshotParams)(nil)
+

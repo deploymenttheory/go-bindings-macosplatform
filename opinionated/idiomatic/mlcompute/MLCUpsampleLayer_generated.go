@@ -7,6 +7,7 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,12 +31,30 @@ func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSNumber, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
+		return foundation.NSNumberFromID(purego.Retain(_id))
+	})
+}
+
+// SampleMode calls the underlying SampleMode.
+func (x *UpsampleLayer) SampleMode() raw.MLCSampleMode {
+	return x.inner.SampleMode()
+}
+
+// AlignsCorners calls the underlying AlignsCorners.
+func (x *UpsampleLayer) AlignsCorners() bool {
+	return x.inner.AlignsCorners()
 }
 
 func (x *UpsampleLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// UpsampleLayerable is the interface implemented by [UpsampleLayer], for mocking and DI.
+type UpsampleLayerable interface {
+	Unwrap() *raw.MLCUpsampleLayer
+	Shape() []*foundation.NSNumber
+	SampleMode() raw.MLCSampleMode
+	AlignsCorners() bool
+}
+
+var _ UpsampleLayerable = (*UpsampleLayer)(nil)
 

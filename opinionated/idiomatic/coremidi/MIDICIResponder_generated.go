@@ -6,6 +6,7 @@ package coremidi
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -30,4 +31,51 @@ func NewCIResponderWithDeviceInfoProfileDelegateProfileStatesSupportProperties(d
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceInfo:profileDelegate:profileStates:supportProperties:"), deviceInfo.Ptr(), delegate, profileList, propertiesSupported)
 	return &CIResponder{inner: raw.MIDICIResponderFromID(_id)}
 }
+
+// NotifyProfileOnChannelIsEnabled calls the underlying NotifyProfileOnChannelIsEnabled.
+func (x *CIResponder) NotifyProfileOnChannelIsEnabled(aProfile *raw.MIDICIProfile, channel uint8, enabledState bool) bool {
+	return x.inner.NotifyProfileOnChannelIsEnabled(aProfile, channel, enabledState)
+}
+
+// SendProfileOnChannelProfileData calls the underlying SendProfileOnChannelProfileData.
+func (x *CIResponder) SendProfileOnChannelProfileData(aProfile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool {
+	return x.inner.SendProfileOnChannelProfileData(aProfile, channel, profileSpecificData)
+}
+
+// Start calls the underlying Start.
+func (x *CIResponder) Start() bool {
+	return x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *CIResponder) Stop() {
+	x.inner.Stop()
+}
+
+// ProfileDelegate calls the underlying ProfileDelegate.
+func (x *CIResponder) ProfileDelegate() raw.MIDICIProfileResponderDelegate {
+	return x.inner.ProfileDelegate()
+}
+
+// DeviceInfo calls the underlying DeviceInfo.
+func (x *CIResponder) DeviceInfo() *CIDeviceInfo {
+	_r := x.inner.DeviceInfo()
+	if _r == nil {
+		return nil
+	}
+	return &CIDeviceInfo{inner: _r}
+}
+
+// CIResponderable is the interface implemented by [CIResponder], for mocking and DI.
+type CIResponderable interface {
+	Unwrap() *raw.MIDICIResponder
+	NotifyProfileOnChannelIsEnabled(aProfile *raw.MIDICIProfile, channel uint8, enabledState bool) bool
+	SendProfileOnChannelProfileData(aProfile *raw.MIDICIProfile, channel uint8, profileSpecificData *foundation.NSData) bool
+	Start() bool
+	Stop()
+	ProfileDelegate() raw.MIDICIProfileResponderDelegate
+	DeviceInfo() *CIDeviceInfo
+}
+
+var _ CIResponderable = (*CIResponder)(nil)
 

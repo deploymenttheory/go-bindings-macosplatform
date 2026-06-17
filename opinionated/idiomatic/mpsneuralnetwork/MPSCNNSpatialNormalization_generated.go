@@ -51,5 +51,51 @@ func (x *CNNSpatialNormalization) WithDelta(delta float32) *CNNSpatialNormalizat
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNSpatialNormalization) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNSpatialNormalization) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNSpatialNormalization) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNSpatialNormalization) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNSpatialNormalization) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNSpatialNormalization) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
 func (x *CNNSpatialNormalization) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKernel }
+
+// CNNSpatialNormalizationable is the interface implemented by [CNNSpatialNormalization], for mocking and DI.
+type CNNSpatialNormalizationable interface {
+	Unwrap() *raw.MPSCNNSpatialNormalization
+	WithAlpha(alpha float32) *CNNSpatialNormalization
+	WithBeta(beta float32) *CNNSpatialNormalization
+	WithDelta(delta float32) *CNNSpatialNormalization
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+}
+
+var _ CNNSpatialNormalizationable = (*CNNSpatialNormalization)(nil)
 

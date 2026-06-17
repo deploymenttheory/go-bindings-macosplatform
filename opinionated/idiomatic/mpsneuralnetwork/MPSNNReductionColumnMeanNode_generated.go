@@ -27,3 +27,10 @@ func (x *NNReductionColumnMeanNode) asNNUnaryReductionNode() *raw.MPSNNUnaryRedu
 
 func (x *NNReductionColumnMeanNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
 
+// NNReductionColumnMeanNodeable is the interface implemented by [NNReductionColumnMeanNode], for mocking and DI.
+type NNReductionColumnMeanNodeable interface {
+	Unwrap() *raw.MPSNNReductionColumnMeanNode
+}
+
+var _ NNReductionColumnMeanNodeable = (*NNReductionColumnMeanNode)(nil)
+

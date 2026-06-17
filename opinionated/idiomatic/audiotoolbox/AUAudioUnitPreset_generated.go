@@ -7,6 +7,7 @@ package audiotoolbox
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *AudioUnitPreset) WithName(name string) *AudioUnitPreset {
 	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
 	return x
 }
+
+// Number calls the underlying Number.
+func (x *AudioUnitPreset) Number() int {
+	return x.inner.Number()
+}
+
+// SetNumber calls the underlying SetNumber.
+func (x *AudioUnitPreset) SetNumber(number int) {
+	x.inner.SetNumber(number)
+}
+
+// Name calls the underlying Name.
+func (x *AudioUnitPreset) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *AudioUnitPreset) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// AudioUnitPresetable is the interface implemented by [AudioUnitPreset], for mocking and DI.
+type AudioUnitPresetable interface {
+	Unwrap() *raw.AUAudioUnitPreset
+	WithNumber(number int) *AudioUnitPreset
+	WithName(name string) *AudioUnitPreset
+	Number() int
+	SetNumber(number int)
+	Name() string
+	SetName(name string)
+}
+
+var _ AudioUnitPresetable = (*AudioUnitPreset)(nil)
 

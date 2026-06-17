@@ -29,3 +29,10 @@ func (x *ImageIntegral) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { ret
 
 func (x *ImageIntegral) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
+// ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
+type ImageIntegralable interface {
+	Unwrap() *raw.MPSImageIntegral
+}
+
+var _ ImageIntegralable = (*ImageIntegral)(nil)
+

@@ -31,5 +31,65 @@ func (x *XPCListener) WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListe
 	return x
 }
 
+// Resume calls the underlying Resume.
+func (x *XPCListener) Resume() {
+	x.inner.Resume()
+}
+
+// Suspend calls the underlying Suspend.
+func (x *XPCListener) Suspend() {
+	x.inner.Suspend()
+}
+
+// Activate calls the underlying Activate.
+func (x *XPCListener) Activate() {
+	x.inner.Activate()
+}
+
+// Invalidate calls the underlying Invalidate.
+func (x *XPCListener) Invalidate() {
+	x.inner.Invalidate()
+}
+
+// SetConnectionCodeSigningRequirement calls the underlying SetConnectionCodeSigningRequirement.
+func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
+	x.inner.SetConnectionCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))
+}
+
+// Delegate calls the underlying Delegate.
+func (x *XPCListener) Delegate() raw.NSXPCListenerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *XPCListener) SetDelegate(delegate raw.NSXPCListenerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Endpoint calls the underlying Endpoint.
+func (x *XPCListener) Endpoint() *XPCListenerEndpoint {
+	_r := x.inner.Endpoint()
+	if _r == nil {
+		return nil
+	}
+	return &XPCListenerEndpoint{inner: _r}
+}
+
 func (x *XPCListener) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// XPCListenerable is the interface implemented by [XPCListener], for mocking and DI.
+type XPCListenerable interface {
+	Unwrap() *raw.NSXPCListener
+	WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListener
+	Resume()
+	Suspend()
+	Activate()
+	Invalidate()
+	SetConnectionCodeSigningRequirement(requirement string)
+	Delegate() raw.NSXPCListenerDelegate
+	SetDelegate(delegate raw.NSXPCListenerDelegate)
+	Endpoint() *XPCListenerEndpoint
+}
+
+var _ XPCListenerable = (*XPCListener)(nil)
 

@@ -23,3 +23,16 @@ func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	return &VSSubscriptionRegistrationCenter{inner: raw.VSSubscriptionRegistrationCenterFromID(_id)}
 }
 
+// SetCurrentSubscription calls the underlying SetCurrentSubscription.
+func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *raw.VSSubscription) {
+	x.inner.SetCurrentSubscription(currentSubscription)
+}
+
+// VSSubscriptionRegistrationCenterable is the interface implemented by [VSSubscriptionRegistrationCenter], for mocking and DI.
+type VSSubscriptionRegistrationCenterable interface {
+	Unwrap() *raw.VSSubscriptionRegistrationCenter
+	SetCurrentSubscription(currentSubscription *raw.VSSubscription)
+}
+
+var _ VSSubscriptionRegistrationCenterable = (*VSSubscriptionRegistrationCenter)(nil)
+

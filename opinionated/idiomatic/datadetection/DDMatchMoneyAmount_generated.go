@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,28 @@ func NewMatchMoneyAmount() *MatchMoneyAmount {
 	return &MatchMoneyAmount{inner: raw.DDMatchMoneyAmountFromID(_id)}
 }
 
+// Currency calls the underlying Currency.
+func (x *MatchMoneyAmount) Currency() string {
+	_r := x.inner.Currency()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Amount calls the underlying Amount.
+func (x *MatchMoneyAmount) Amount() float64 {
+	return x.inner.Amount()
+}
+
 func (x *MatchMoneyAmount) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchMoneyAmountable is the interface implemented by [MatchMoneyAmount], for mocking and DI.
+type MatchMoneyAmountable interface {
+	Unwrap() *raw.DDMatchMoneyAmount
+	Currency() string
+	Amount() float64
+}
+
+var _ MatchMoneyAmountable = (*MatchMoneyAmount)(nil)
 

@@ -58,15 +58,25 @@ func (x *TextContentManager) WithAutomaticallySynchronizesToBackingStore(automat
 	return x
 }
 
+// AddTextLayoutManager calls the underlying AddTextLayoutManager.
+func (x *TextContentManager) AddTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) {
+	x.inner.AddTextLayoutManager(textLayoutManager)
+}
+
+// RemoveTextLayoutManager calls the underlying RemoveTextLayoutManager.
+func (x *TextContentManager) RemoveTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) {
+	x.inner.RemoveTextLayoutManager(textLayoutManager)
+}
+
 // SynchronizeTextLayoutManagers blocks until the operation completes or ctx is cancelled.
 func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.SynchronizeTextLayoutManagers(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -74,6 +84,11 @@ func (x *TextContentManager) SynchronizeTextLayoutManagers(ctx context.Context) 
 	case <-ctx.Done():
 		return ctx.Err()
 	}
+}
+
+// TextElementsForRange calls the underlying TextElementsForRange.
+func (x *TextContentManager) TextElementsForRange(range_ *raw.NSTextRange) *foundation.NSArray[*raw.NSTextElement] {
+	return x.inner.TextElementsForRange(range_)
 }
 
 // PerformEditingTransactionUsing blocks until the operation completes or ctx is cancelled.
@@ -90,18 +105,97 @@ func (x *TextContentManager) PerformEditingTransactionUsing(ctx context.Context)
 	}
 }
 
+// RecordEditActionInRangeNewTextRange calls the underlying RecordEditActionInRangeNewTextRange.
+func (x *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextRange *raw.NSTextRange, newTextRange *raw.NSTextRange) {
+	x.inner.RecordEditActionInRangeNewTextRange(originalTextRange, newTextRange)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TextContentManager) Delegate() raw.NSTextContentManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TextContentManager) SetDelegate(delegate raw.NSTextContentManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 // TextLayoutManagers returns the collection as a Go slice.
 func (x *TextContentManager) TextLayoutManagers() []*raw.NSTextLayoutManager {
 	arr := x.inner.TextLayoutManagers()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSTextLayoutManager, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSTextLayoutManager {
+		return raw.NSTextLayoutManagerFromID(purego.Retain(_id))
+	})
+}
+
+// PrimaryTextLayoutManager calls the underlying PrimaryTextLayoutManager.
+func (x *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
+	_r := x.inner.PrimaryTextLayoutManager()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &TextLayoutManager{inner: _r}
+}
+
+// SetPrimaryTextLayoutManager calls the underlying SetPrimaryTextLayoutManager.
+func (x *TextContentManager) SetPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) {
+	x.inner.SetPrimaryTextLayoutManager(primaryTextLayoutManager)
+}
+
+// HasEditingTransaction calls the underlying HasEditingTransaction.
+func (x *TextContentManager) HasEditingTransaction() bool {
+	return x.inner.HasEditingTransaction()
+}
+
+// AutomaticallySynchronizesTextLayoutManagers calls the underlying AutomaticallySynchronizesTextLayoutManagers.
+func (x *TextContentManager) AutomaticallySynchronizesTextLayoutManagers() bool {
+	return x.inner.AutomaticallySynchronizesTextLayoutManagers()
+}
+
+// SetAutomaticallySynchronizesTextLayoutManagers calls the underlying SetAutomaticallySynchronizesTextLayoutManagers.
+func (x *TextContentManager) SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) {
+	x.inner.SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers)
+}
+
+// AutomaticallySynchronizesToBackingStore calls the underlying AutomaticallySynchronizesToBackingStore.
+func (x *TextContentManager) AutomaticallySynchronizesToBackingStore() bool {
+	return x.inner.AutomaticallySynchronizesToBackingStore()
+}
+
+// SetAutomaticallySynchronizesToBackingStore calls the underlying SetAutomaticallySynchronizesToBackingStore.
+func (x *TextContentManager) SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) {
+	x.inner.SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore)
 }
 
 func (x *TextContentManager) asTextContentManager() *raw.NSTextContentManager { return x.inner }
+
+// TextContentManagerable is the interface implemented by [TextContentManager], for mocking and DI.
+type TextContentManagerable interface {
+	Unwrap() *raw.NSTextContentManager
+	WithDelegate(delegate raw.NSTextContentManagerDelegate) *TextContentManager
+	WithPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager) *TextContentManager
+	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentManager
+	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentManager
+	AddTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager)
+	RemoveTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager)
+	SynchronizeTextLayoutManagers(ctx context.Context) error
+	TextElementsForRange(range_ *raw.NSTextRange) *foundation.NSArray[*raw.NSTextElement]
+	PerformEditingTransactionUsing(ctx context.Context) error
+	RecordEditActionInRangeNewTextRange(originalTextRange *raw.NSTextRange, newTextRange *raw.NSTextRange)
+	Delegate() raw.NSTextContentManagerDelegate
+	SetDelegate(delegate raw.NSTextContentManagerDelegate)
+	TextLayoutManagers() []*raw.NSTextLayoutManager
+	PrimaryTextLayoutManager() *TextLayoutManager
+	SetPrimaryTextLayoutManager(primaryTextLayoutManager *raw.NSTextLayoutManager)
+	HasEditingTransaction() bool
+	AutomaticallySynchronizesTextLayoutManagers() bool
+	SetAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool)
+	AutomaticallySynchronizesToBackingStore() bool
+	SetAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool)
+}
+
+var _ TextContentManagerable = (*TextContentManager)(nil)
 

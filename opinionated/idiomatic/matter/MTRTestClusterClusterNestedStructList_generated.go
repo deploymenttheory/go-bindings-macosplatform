@@ -25,3 +25,10 @@ func NewMTRTestClusterClusterNestedStructList() *MTRTestClusterClusterNestedStru
 
 func (x *MTRTestClusterClusterNestedStructList) asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList { return &x.inner.MTRUnitTestingClusterNestedStructList }
 
+// MTRTestClusterClusterNestedStructListable is the interface implemented by [MTRTestClusterClusterNestedStructList], for mocking and DI.
+type MTRTestClusterClusterNestedStructListable interface {
+	Unwrap() *raw.MTRTestClusterClusterNestedStructList
+}
+
+var _ MTRTestClusterClusterNestedStructListable = (*MTRTestClusterClusterNestedStructList)(nil)
+

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,23 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNRecurrentImageState")), objc.RegisterName("new"))
 	return &RNNRecurrentImageState{inner: raw.MPSRNNRecurrentImageStateFromID(_id)}
 }
+
+// GetRecurrentOutputImageForLayerIndex calls the underlying GetRecurrentOutputImageForLayerIndex.
+func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
+	return x.inner.GetRecurrentOutputImageForLayerIndex(layerIndex)
+}
+
+// GetMemoryCellImageForLayerIndex calls the underlying GetMemoryCellImageForLayerIndex.
+func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
+	return x.inner.GetMemoryCellImageForLayerIndex(layerIndex)
+}
+
+// RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
+type RNNRecurrentImageStateable interface {
+	Unwrap() *raw.MPSRNNRecurrentImageState
+	GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
+	GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
+}
+
+var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)
 

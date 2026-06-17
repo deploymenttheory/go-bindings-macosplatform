@@ -5,6 +5,7 @@
 package quartz
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,36 @@ func (x *IKImageEditPanel) WithDataSource(dataSource objc.ID) *IKImageEditPanel 
 	x.inner.SetDataSource(dataSource)
 	return x
 }
+
+// ReloadData calls the underlying ReloadData.
+func (x *IKImageEditPanel) ReloadData() {
+	x.inner.ReloadData()
+}
+
+// DataSource calls the underlying DataSource.
+func (x *IKImageEditPanel) DataSource() objc.ID {
+	return x.inner.DataSource()
+}
+
+// SetDataSource calls the underlying SetDataSource.
+func (x *IKImageEditPanel) SetDataSource(dataSource objc.ID) {
+	x.inner.SetDataSource(dataSource)
+}
+
+// FilterArray calls the underlying FilterArray.
+func (x *IKImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
+	return x.inner.FilterArray()
+}
+
+// IKImageEditPanelable is the interface implemented by [IKImageEditPanel], for mocking and DI.
+type IKImageEditPanelable interface {
+	Unwrap() *raw.IKImageEditPanel
+	WithDataSource(dataSource objc.ID) *IKImageEditPanel
+	ReloadData()
+	DataSource() objc.ID
+	SetDataSource(dataSource objc.ID)
+	FilterArray() *foundation.NSArray[objc.ID]
+}
+
+var _ IKImageEditPanelable = (*IKImageEditPanel)(nil)
 

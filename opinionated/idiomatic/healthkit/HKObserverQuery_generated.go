@@ -35,3 +35,10 @@ func NewObserverQueryWithQueryDescriptorsUpdateHandler(queryDescriptors *foundat
 
 func (x *ObserverQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
+// ObserverQueryable is the interface implemented by [ObserverQuery], for mocking and DI.
+type ObserverQueryable interface {
+	Unwrap() *raw.HKObserverQuery
+}
+
+var _ ObserverQueryable = (*ObserverQuery)(nil)
+

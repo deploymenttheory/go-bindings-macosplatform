@@ -31,5 +31,60 @@ func NewURLProtocolWithTaskCachedResponseClient(task *raw.NSURLSessionTask, cach
 	return &URLProtocol{inner: raw.NSURLProtocolFromID(_id)}
 }
 
+// StartLoading calls the underlying StartLoading.
+func (x *URLProtocol) StartLoading() {
+	x.inner.StartLoading()
+}
+
+// StopLoading calls the underlying StopLoading.
+func (x *URLProtocol) StopLoading() {
+	x.inner.StopLoading()
+}
+
+// Client calls the underlying Client.
+func (x *URLProtocol) Client() raw.NSURLProtocolClient {
+	return x.inner.Client()
+}
+
+// Request calls the underlying Request.
+func (x *URLProtocol) Request() *URLRequest {
+	_r := x.inner.Request()
+	if _r == nil {
+		return nil
+	}
+	return &URLRequest{inner: _r}
+}
+
+// CachedResponse calls the underlying CachedResponse.
+func (x *URLProtocol) CachedResponse() *CachedURLResponse {
+	_r := x.inner.CachedResponse()
+	if _r == nil {
+		return nil
+	}
+	return &CachedURLResponse{inner: _r}
+}
+
+// Task calls the underlying Task.
+func (x *URLProtocol) Task() *URLSessionTask {
+	_r := x.inner.Task()
+	if _r == nil {
+		return nil
+	}
+	return &URLSessionTask{inner: _r}
+}
+
 func (x *URLProtocol) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLProtocolable is the interface implemented by [URLProtocol], for mocking and DI.
+type URLProtocolable interface {
+	Unwrap() *raw.NSURLProtocol
+	StartLoading()
+	StopLoading()
+	Client() raw.NSURLProtocolClient
+	Request() *URLRequest
+	CachedResponse() *CachedURLResponse
+	Task() *URLSessionTask
+}
+
+var _ URLProtocolable = (*URLProtocol)(nil)
 

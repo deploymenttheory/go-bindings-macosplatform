@@ -108,10 +108,300 @@ func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(b
 	return &URL{inner: raw.NSURLFromID(_id)}, nil
 }
 
+// GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
+func (x *URL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool {
+	return x.inner.GetFileSystemRepresentationMaxLength(buffer, maxBufferLength)
+}
+
+// IsFileReferenceURL calls the underlying IsFileReferenceURL.
+func (x *URL) IsFileReferenceURL() bool {
+	return x.inner.IsFileReferenceURL()
+}
+
+// FileReferenceURL calls the underlying FileReferenceURL.
+func (x *URL) FileReferenceURL() *URL {
+	_r := x.inner.FileReferenceURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// GetResourceValueForKeyError calls the underlying GetResourceValueForKeyError.
+func (x *URL) GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
+	return x.inner.GetResourceValueForKeyError(value, key)
+}
+
+// ResourceValuesForKeysError calls the underlying ResourceValuesForKeysError.
+func (x *URL) ResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
+	return x.inner.ResourceValuesForKeysError(keys)
+}
+
+// SetResourceValueForKeyError calls the underlying SetResourceValueForKeyError.
+func (x *URL) SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error) {
+	return x.inner.SetResourceValueForKeyError(value, key)
+}
+
+// SetResourceValuesError calls the underlying SetResourceValuesError.
+func (x *URL) SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error) {
+	return x.inner.SetResourceValuesError(keyedValues)
+}
+
+// RemoveCachedResourceValueForKey calls the underlying RemoveCachedResourceValueForKey.
+func (x *URL) RemoveCachedResourceValueForKey(key *raw.NSString) {
+	x.inner.RemoveCachedResourceValueForKey(key)
+}
+
+// RemoveAllCachedResourceValues calls the underlying RemoveAllCachedResourceValues.
+func (x *URL) RemoveAllCachedResourceValues() {
+	x.inner.RemoveAllCachedResourceValues()
+}
+
+// SetTemporaryResourceValueForKey calls the underlying SetTemporaryResourceValueForKey.
+func (x *URL) SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString) {
+	x.inner.SetTemporaryResourceValueForKey(value, key)
+}
+
+// BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError calls the underlying BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError.
+func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options raw.NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error) {
+	_r, _err := x.inner.BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options, keys, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)))
+	if _err != nil {
+		return nil, _err
+	}
+	if _r == nil {
+		return nil, nil
+	}
+	return &Data{inner: _r}, nil
+}
+
+// StartAccessingSecurityScopedResource calls the underlying StartAccessingSecurityScopedResource.
+func (x *URL) StartAccessingSecurityScopedResource() bool {
+	return x.inner.StartAccessingSecurityScopedResource()
+}
+
+// StopAccessingSecurityScopedResource calls the underlying StopAccessingSecurityScopedResource.
+func (x *URL) StopAccessingSecurityScopedResource() {
+	x.inner.StopAccessingSecurityScopedResource()
+}
+
+// DataRepresentation calls the underlying DataRepresentation.
+func (x *URL) DataRepresentation() *Data {
+	_r := x.inner.DataRepresentation()
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// AbsoluteString calls the underlying AbsoluteString.
+func (x *URL) AbsoluteString() *String {
+	_r := x.inner.AbsoluteString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// RelativeString calls the underlying RelativeString.
+func (x *URL) RelativeString() *String {
+	_r := x.inner.RelativeString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// BaseURL calls the underlying BaseURL.
+func (x *URL) BaseURL() *URL {
+	_r := x.inner.BaseURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// AbsoluteURL calls the underlying AbsoluteURL.
+func (x *URL) AbsoluteURL() *URL {
+	_r := x.inner.AbsoluteURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// Scheme calls the underlying Scheme.
+func (x *URL) Scheme() *String {
+	_r := x.inner.Scheme()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ResourceSpecifier calls the underlying ResourceSpecifier.
+func (x *URL) ResourceSpecifier() *String {
+	_r := x.inner.ResourceSpecifier()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Host calls the underlying Host.
+func (x *URL) Host() *String {
+	_r := x.inner.Host()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Port calls the underlying Port.
+func (x *URL) Port() *Number {
+	_r := x.inner.Port()
+	if _r == nil {
+		return nil
+	}
+	return &Number{inner: _r}
+}
+
+// User calls the underlying User.
+func (x *URL) User() *String {
+	_r := x.inner.User()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Password calls the underlying Password.
+func (x *URL) Password() *String {
+	_r := x.inner.Password()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Path calls the underlying Path.
+func (x *URL) Path() *String {
+	_r := x.inner.Path()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Fragment calls the underlying Fragment.
+func (x *URL) Fragment() *String {
+	_r := x.inner.Fragment()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ParameterString calls the underlying ParameterString.
+func (x *URL) ParameterString() *String {
+	_r := x.inner.ParameterString()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Query calls the underlying Query.
+func (x *URL) Query() *String {
+	_r := x.inner.Query()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// RelativePath calls the underlying RelativePath.
+func (x *URL) RelativePath() *String {
+	_r := x.inner.RelativePath()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// HasDirectoryPath calls the underlying HasDirectoryPath.
+func (x *URL) HasDirectoryPath() bool {
+	return x.inner.HasDirectoryPath()
+}
+
+// FileSystemRepresentation calls the underlying FileSystemRepresentation.
+func (x *URL) FileSystemRepresentation() unsafe.Pointer {
+	return x.inner.FileSystemRepresentation()
+}
+
+// IsFileURL calls the underlying IsFileURL.
+func (x *URL) IsFileURL() bool {
+	return x.inner.IsFileURL()
+}
+
+// StandardizedURL calls the underlying StandardizedURL.
+func (x *URL) StandardizedURL() *URL {
+	_r := x.inner.StandardizedURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// FilePathURL calls the underlying FilePathURL.
+func (x *URL) FilePathURL() *URL {
+	_r := x.inner.FilePathURL()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// GetPromisedItemResourceValueForKeyError calls the underlying GetPromisedItemResourceValueForKeyError.
+func (x *URL) GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
+	return x.inner.GetPromisedItemResourceValueForKeyError(value, key)
+}
+
+// PromisedItemResourceValuesForKeysError calls the underlying PromisedItemResourceValuesForKeysError.
+func (x *URL) PromisedItemResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
+	return x.inner.PromisedItemResourceValuesForKeysError(keys)
+}
+
 // CheckPromisedItemIsReachableAndReturnError returns any validation error.
 func (x *URL) CheckPromisedItemIsReachableAndReturnError() error {
 	_, err := x.inner.CheckPromisedItemIsReachableAndReturnError()
 	return err
+}
+
+// URLByAppendingPathComponent calls the underlying URLByAppendingPathComponent.
+func (x *URL) URLByAppendingPathComponent(pathComponent string) *URL {
+	_r := x.inner.URLByAppendingPathComponent(foundation.NSStringStringWithUTF8String(pathComponent))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLByAppendingPathComponentIsDirectory calls the underlying URLByAppendingPathComponentIsDirectory.
+func (x *URL) URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL {
+	_r := x.inner.URLByAppendingPathComponentIsDirectory(foundation.NSStringStringWithUTF8String(pathComponent), isDirectory)
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLByAppendingPathExtension calls the underlying URLByAppendingPathExtension.
+func (x *URL) URLByAppendingPathExtension(pathExtension string) *URL {
+	_r := x.inner.URLByAppendingPathExtension(foundation.NSStringStringWithUTF8String(pathExtension))
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
 }
 
 // CheckResourceIsReachableAndReturnError returns any validation error.
@@ -121,17 +411,168 @@ func (x *URL) CheckResourceIsReachableAndReturnError() error {
 }
 
 // PathComponents returns the collection as a Go slice.
-func (x *URL) PathComponents() []*raw.NSString {
+func (x *URL) PathComponents() []string {
 	arr := x.inner.PathComponents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// LastPathComponent calls the underlying LastPathComponent.
+func (x *URL) LastPathComponent() *String {
+	_r := x.inner.LastPathComponent()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &String{inner: _r}
+}
+
+// PathExtension calls the underlying PathExtension.
+func (x *URL) PathExtension() *String {
+	_r := x.inner.PathExtension()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// URLByDeletingLastPathComponent calls the underlying URLByDeletingLastPathComponent.
+func (x *URL) URLByDeletingLastPathComponent() *URL {
+	_r := x.inner.URLByDeletingLastPathComponent()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLByDeletingPathExtension calls the underlying URLByDeletingPathExtension.
+func (x *URL) URLByDeletingPathExtension() *URL {
+	_r := x.inner.URLByDeletingPathExtension()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLByStandardizingPath calls the underlying URLByStandardizingPath.
+func (x *URL) URLByStandardizingPath() *URL {
+	_r := x.inner.URLByStandardizingPath()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// URLByResolvingSymlinksInPath calls the underlying URLByResolvingSymlinksInPath.
+func (x *URL) URLByResolvingSymlinksInPath() *URL {
+	_r := x.inner.URLByResolvingSymlinksInPath()
+	if _r == nil {
+		return nil
+	}
+	return &URL{inner: _r}
+}
+
+// ResourceDataUsingCache calls the underlying ResourceDataUsingCache.
+func (x *URL) ResourceDataUsingCache(shouldUseCache bool) *Data {
+	_r := x.inner.ResourceDataUsingCache(shouldUseCache)
+	if _r == nil {
+		return nil
+	}
+	return &Data{inner: _r}
+}
+
+// LoadResourceDataNotifyingClientUsingCache calls the underlying LoadResourceDataNotifyingClientUsingCache.
+func (x *URL) LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool) {
+	x.inner.LoadResourceDataNotifyingClientUsingCache(client, shouldUseCache)
+}
+
+// PropertyForKey calls the underlying PropertyForKey.
+func (x *URL) PropertyForKey(propertyKey string) objc.ID {
+	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(propertyKey))
+}
+
+// SetResourceData calls the underlying SetResourceData.
+func (x *URL) SetResourceData(data *raw.NSData) bool {
+	return x.inner.SetResourceData(data)
+}
+
+// SetPropertyForKey calls the underlying SetPropertyForKey.
+func (x *URL) SetPropertyForKey(property objc.ID, propertyKey string) bool {
+	return x.inner.SetPropertyForKey(property, foundation.NSStringStringWithUTF8String(propertyKey))
+}
+
+// URLHandleUsingCache calls the underlying URLHandleUsingCache.
+func (x *URL) URLHandleUsingCache(shouldUseCache bool) *URLHandle {
+	_r := x.inner.URLHandleUsingCache(shouldUseCache)
+	if _r == nil {
+		return nil
+	}
+	return &URLHandle{inner: _r}
 }
 
 func (x *URL) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLable is the interface implemented by [URL], for mocking and DI.
+type URLable interface {
+	Unwrap() *raw.NSURL
+	GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool
+	IsFileReferenceURL() bool
+	FileReferenceURL() *URL
+	GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
+	ResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
+	SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error)
+	SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
+	RemoveCachedResourceValueForKey(key *raw.NSString)
+	RemoveAllCachedResourceValues()
+	SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString)
+	BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options raw.NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error)
+	StartAccessingSecurityScopedResource() bool
+	StopAccessingSecurityScopedResource()
+	DataRepresentation() *Data
+	AbsoluteString() *String
+	RelativeString() *String
+	BaseURL() *URL
+	AbsoluteURL() *URL
+	Scheme() *String
+	ResourceSpecifier() *String
+	Host() *String
+	Port() *Number
+	User() *String
+	Password() *String
+	Path() *String
+	Fragment() *String
+	ParameterString() *String
+	Query() *String
+	RelativePath() *String
+	HasDirectoryPath() bool
+	FileSystemRepresentation() unsafe.Pointer
+	IsFileURL() bool
+	StandardizedURL() *URL
+	FilePathURL() *URL
+	GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
+	PromisedItemResourceValuesForKeysError(keys *raw.NSArray[*raw.NSString]) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
+	CheckPromisedItemIsReachableAndReturnError() error
+	URLByAppendingPathComponent(pathComponent string) *URL
+	URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL
+	URLByAppendingPathExtension(pathExtension string) *URL
+	CheckResourceIsReachableAndReturnError() error
+	PathComponents() []string
+	LastPathComponent() *String
+	PathExtension() *String
+	URLByDeletingLastPathComponent() *URL
+	URLByDeletingPathExtension() *URL
+	URLByStandardizingPath() *URL
+	URLByResolvingSymlinksInPath() *URL
+	ResourceDataUsingCache(shouldUseCache bool) *Data
+	LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool)
+	PropertyForKey(propertyKey string) objc.ID
+	SetResourceData(data *raw.NSData) bool
+	SetPropertyForKey(property objc.ID, propertyKey string) bool
+	URLHandleUsingCache(shouldUseCache bool) *URLHandle
+}
+
+var _ URLable = (*URL)(nil)
 

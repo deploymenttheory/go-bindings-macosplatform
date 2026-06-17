@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,4 +56,67 @@ func (x *AccessibilityCustomAction) WithSelector(selector objc.SEL) *Accessibili
 	x.inner.SetSelector(selector)
 	return x
 }
+
+// Name calls the underlying Name.
+func (x *AccessibilityCustomAction) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *AccessibilityCustomAction) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Handler calls the underlying Handler.
+func (x *AccessibilityCustomAction) Handler() objc.Block {
+	return x.inner.Handler()
+}
+
+// SetHandler calls the underlying SetHandler.
+func (x *AccessibilityCustomAction) SetHandler(handler func() bool) {
+	x.inner.SetHandler(handler)
+}
+
+// Target calls the underlying Target.
+func (x *AccessibilityCustomAction) Target() foundation.NSObjectProtocol {
+	return x.inner.Target()
+}
+
+// SetTarget calls the underlying SetTarget.
+func (x *AccessibilityCustomAction) SetTarget(target foundation.NSObjectProtocol) {
+	x.inner.SetTarget(target)
+}
+
+// Selector calls the underlying Selector.
+func (x *AccessibilityCustomAction) Selector() objc.SEL {
+	return x.inner.Selector()
+}
+
+// SetSelector calls the underlying SetSelector.
+func (x *AccessibilityCustomAction) SetSelector(selector objc.SEL) {
+	x.inner.SetSelector(selector)
+}
+
+// AccessibilityCustomActionable is the interface implemented by [AccessibilityCustomAction], for mocking and DI.
+type AccessibilityCustomActionable interface {
+	Unwrap() *raw.NSAccessibilityCustomAction
+	WithName(name string) *AccessibilityCustomAction
+	WithHandler(handler func() bool) *AccessibilityCustomAction
+	WithTarget(target foundation.NSObjectProtocol) *AccessibilityCustomAction
+	WithSelector(selector objc.SEL) *AccessibilityCustomAction
+	Name() string
+	SetName(name string)
+	Handler() objc.Block
+	SetHandler(handler func() bool)
+	Target() foundation.NSObjectProtocol
+	SetTarget(target foundation.NSObjectProtocol)
+	Selector() objc.SEL
+	SetSelector(selector objc.SEL)
+}
+
+var _ AccessibilityCustomActionable = (*AccessibilityCustomAction)(nil)
 

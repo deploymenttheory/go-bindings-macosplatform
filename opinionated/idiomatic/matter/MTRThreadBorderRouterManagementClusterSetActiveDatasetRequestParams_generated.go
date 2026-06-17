@@ -48,3 +48,62 @@ func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Wi
 	return x
 }
 
+// ActiveDataset calls the underlying ActiveDataset.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() *foundation.NSData {
+	return x.inner.ActiveDataset()
+}
+
+// SetActiveDataset calls the underlying SetActiveDataset.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetActiveDataset(activeDataset *foundation.NSData) {
+	x.inner.SetActiveDataset(activeDataset)
+}
+
+// Breadcrumb calls the underlying Breadcrumb.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() *foundation.NSNumber {
+	return x.inner.Breadcrumb()
+}
+
+// SetBreadcrumb calls the underlying SetBreadcrumb.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
+	x.inner.SetBreadcrumb(breadcrumb)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams], for mocking and DI.
+type MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable interface {
+	Unwrap() *raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
+	WithActiveDataset(activeDataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
+	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams
+	ActiveDataset() *foundation.NSData
+	SetActiveDataset(activeDataset *foundation.NSData)
+	Breadcrumb() *foundation.NSNumber
+	SetBreadcrumb(breadcrumb *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsable = (*MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams)(nil)
+

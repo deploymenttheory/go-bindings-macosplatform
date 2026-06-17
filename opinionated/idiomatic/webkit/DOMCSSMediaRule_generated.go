@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,9 +24,54 @@ func NewDOMCSSMediaRule() *DOMCSSMediaRule {
 	return &DOMCSSMediaRule{inner: raw.DOMCSSMediaRuleFromID(_id)}
 }
 
+// InsertRuleIndex calls the underlying InsertRuleIndex.
+func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index uint) uint {
+	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
+}
+
+// DeleteRule calls the underlying DeleteRule.
+func (x *DOMCSSMediaRule) DeleteRule(index uint) {
+	x.inner.DeleteRule(index)
+}
+
+// Media calls the underlying Media.
+func (x *DOMCSSMediaRule) Media() *DOMMediaList {
+	_r := x.inner.Media()
+	if _r == nil {
+		return nil
+	}
+	return &DOMMediaList{inner: _r}
+}
+
+// CssRules calls the underlying CssRules.
+func (x *DOMCSSMediaRule) CssRules() *DOMCSSRuleList {
+	_r := x.inner.CssRules()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSRuleList{inner: _r}
+}
+
+// InsertRule calls the underlying InsertRule.
+func (x *DOMCSSMediaRule) InsertRule(rule string, index uint) uint {
+	return x.inner.InsertRule(foundation.NSStringStringWithUTF8String(rule), index)
+}
+
 func (x *DOMCSSMediaRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSMediaRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
 func (x *DOMCSSMediaRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+
+// DOMCSSMediaRuleable is the interface implemented by [DOMCSSMediaRule], for mocking and DI.
+type DOMCSSMediaRuleable interface {
+	Unwrap() *raw.DOMCSSMediaRule
+	InsertRuleIndex(rule string, index uint) uint
+	DeleteRule(index uint)
+	Media() *DOMMediaList
+	CssRules() *DOMCSSRuleList
+	InsertRule(rule string, index uint) uint
+}
+
+var _ DOMCSSMediaRuleable = (*DOMCSSMediaRule)(nil)
 

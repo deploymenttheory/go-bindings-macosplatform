@@ -30,3 +30,23 @@ func (x *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID *found
 	return x
 }
 
+// MessageID calls the underlying MessageID.
+func (x *MTRMessagesClusterMessagePresentedEvent) MessageID() *foundation.NSData {
+	return x.inner.MessageID()
+}
+
+// SetMessageID calls the underlying SetMessageID.
+func (x *MTRMessagesClusterMessagePresentedEvent) SetMessageID(messageID *foundation.NSData) {
+	x.inner.SetMessageID(messageID)
+}
+
+// MTRMessagesClusterMessagePresentedEventable is the interface implemented by [MTRMessagesClusterMessagePresentedEvent], for mocking and DI.
+type MTRMessagesClusterMessagePresentedEventable interface {
+	Unwrap() *raw.MTRMessagesClusterMessagePresentedEvent
+	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessagePresentedEvent
+	MessageID() *foundation.NSData
+	SetMessageID(messageID *foundation.NSData)
+}
+
+var _ MTRMessagesClusterMessagePresentedEventable = (*MTRMessagesClusterMessagePresentedEvent)(nil)
+

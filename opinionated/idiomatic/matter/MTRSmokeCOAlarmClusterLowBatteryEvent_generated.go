@@ -30,3 +30,23 @@ func (x *MTRSmokeCOAlarmClusterLowBatteryEvent) WithAlarmSeverityLevel(alarmSeve
 	return x
 }
 
+// AlarmSeverityLevel calls the underlying AlarmSeverityLevel.
+func (x *MTRSmokeCOAlarmClusterLowBatteryEvent) AlarmSeverityLevel() *foundation.NSNumber {
+	return x.inner.AlarmSeverityLevel()
+}
+
+// SetAlarmSeverityLevel calls the underlying SetAlarmSeverityLevel.
+func (x *MTRSmokeCOAlarmClusterLowBatteryEvent) SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) {
+	x.inner.SetAlarmSeverityLevel(alarmSeverityLevel)
+}
+
+// MTRSmokeCOAlarmClusterLowBatteryEventable is the interface implemented by [MTRSmokeCOAlarmClusterLowBatteryEvent], for mocking and DI.
+type MTRSmokeCOAlarmClusterLowBatteryEventable interface {
+	Unwrap() *raw.MTRSmokeCOAlarmClusterLowBatteryEvent
+	WithAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) *MTRSmokeCOAlarmClusterLowBatteryEvent
+	AlarmSeverityLevel() *foundation.NSNumber
+	SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber)
+}
+
+var _ MTRSmokeCOAlarmClusterLowBatteryEventable = (*MTRSmokeCOAlarmClusterLowBatteryEvent)(nil)
+

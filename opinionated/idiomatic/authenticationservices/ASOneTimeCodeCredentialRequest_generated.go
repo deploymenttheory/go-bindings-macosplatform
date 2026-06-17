@@ -24,3 +24,10 @@ func NewOneTimeCodeCredentialRequestWithCredentialIdentity(credentialIdentity *r
 	return &OneTimeCodeCredentialRequest{inner: raw.ASOneTimeCodeCredentialRequestFromID(_id)}
 }
 
+// OneTimeCodeCredentialRequestable is the interface implemented by [OneTimeCodeCredentialRequest], for mocking and DI.
+type OneTimeCodeCredentialRequestable interface {
+	Unwrap() *raw.ASOneTimeCodeCredentialRequest
+}
+
+var _ OneTimeCodeCredentialRequestable = (*OneTimeCodeCredentialRequest)(nil)
+

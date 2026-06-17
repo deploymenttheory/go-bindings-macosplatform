@@ -38,3 +38,49 @@ func (x *RecordZone) WithEncryptionScope(encryptionScope raw.CKRecordZoneEncrypt
 	return x
 }
 
+// ZoneID calls the underlying ZoneID.
+func (x *RecordZone) ZoneID() *RecordZoneID {
+	_r := x.inner.ZoneID()
+	if _r == nil {
+		return nil
+	}
+	return &RecordZoneID{inner: _r}
+}
+
+// Capabilities calls the underlying Capabilities.
+func (x *RecordZone) Capabilities() raw.CKRecordZoneCapabilities {
+	return x.inner.Capabilities()
+}
+
+// Share calls the underlying Share.
+func (x *RecordZone) Share() *Reference {
+	_r := x.inner.Share()
+	if _r == nil {
+		return nil
+	}
+	return &Reference{inner: _r}
+}
+
+// EncryptionScope calls the underlying EncryptionScope.
+func (x *RecordZone) EncryptionScope() raw.CKRecordZoneEncryptionScope {
+	return x.inner.EncryptionScope()
+}
+
+// SetEncryptionScope calls the underlying SetEncryptionScope.
+func (x *RecordZone) SetEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope) {
+	x.inner.SetEncryptionScope(encryptionScope)
+}
+
+// RecordZoneable is the interface implemented by [RecordZone], for mocking and DI.
+type RecordZoneable interface {
+	Unwrap() *raw.CKRecordZone
+	WithEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope) *RecordZone
+	ZoneID() *RecordZoneID
+	Capabilities() raw.CKRecordZoneCapabilities
+	Share() *Reference
+	EncryptionScope() raw.CKRecordZoneEncryptionScope
+	SetEncryptionScope(encryptionScope raw.CKRecordZoneEncryptionScope)
+}
+
+var _ RecordZoneable = (*RecordZone)(nil)
+

@@ -6,6 +6,9 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +26,52 @@ func NewAudioUnit() *AudioUnit {
 	return &AudioUnit{inner: raw.AVAudioUnitFromID(_id)}
 }
 
+// LoadAudioUnitPresetAtURLError calls the underlying LoadAudioUnitPresetAtURLError.
+func (x *AudioUnit) LoadAudioUnitPresetAtURLError(url string) (bool, error) {
+	return x.inner.LoadAudioUnitPresetAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// AudioComponentDescription calls the underlying AudioComponentDescription.
+func (x *AudioUnit) AudioComponentDescription() objc.ID {
+	return x.inner.AudioComponentDescription()
+}
+
+// AudioUnit calls the underlying AudioUnit.
+func (x *AudioUnit) AudioUnit() *carboncore.ComponentInstanceRecord {
+	return x.inner.AudioUnit()
+}
+
+// Name calls the underlying Name.
+func (x *AudioUnit) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// ManufacturerName calls the underlying ManufacturerName.
+func (x *AudioUnit) ManufacturerName() string {
+	_r := x.inner.ManufacturerName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *AudioUnit) asAudioUnit() *raw.AVAudioUnit { return x.inner }
 
 func (x *AudioUnit) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
+
+// AudioUnitable is the interface implemented by [AudioUnit], for mocking and DI.
+type AudioUnitable interface {
+	Unwrap() *raw.AVAudioUnit
+	LoadAudioUnitPresetAtURLError(url string) (bool, error)
+	AudioComponentDescription() objc.ID
+	AudioUnit() *carboncore.ComponentInstanceRecord
+	Name() string
+	ManufacturerName() string
+}
+
+var _ AudioUnitable = (*AudioUnit)(nil)
 

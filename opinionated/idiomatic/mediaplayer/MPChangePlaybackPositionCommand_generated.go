@@ -25,3 +25,10 @@ func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 
 func (x *ChangePlaybackPositionCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
 
+// ChangePlaybackPositionCommandable is the interface implemented by [ChangePlaybackPositionCommand], for mocking and DI.
+type ChangePlaybackPositionCommandable interface {
+	Unwrap() *raw.MPChangePlaybackPositionCommand
+}
+
+var _ ChangePlaybackPositionCommandable = (*ChangePlaybackPositionCommand)(nil)
+

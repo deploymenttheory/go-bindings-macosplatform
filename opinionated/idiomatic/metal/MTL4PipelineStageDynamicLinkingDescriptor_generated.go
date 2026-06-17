@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -28,4 +29,48 @@ func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCal
 	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
 	return x
 }
+
+// MaxCallStackDepth calls the underlying MaxCallStackDepth.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() uint {
+	return x.inner.MaxCallStackDepth()
+}
+
+// SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
+	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+}
+
+// BinaryLinkedFunctions calls the underlying BinaryLinkedFunctions.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
+	return x.inner.BinaryLinkedFunctions()
+}
+
+// SetBinaryLinkedFunctions calls the underlying SetBinaryLinkedFunctions.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions *foundation.NSArray[raw.MTL4BinaryFunction]) {
+	x.inner.SetBinaryLinkedFunctions(binaryLinkedFunctions)
+}
+
+// PreloadedLibraries calls the underlying PreloadedLibraries.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
+	return x.inner.PreloadedLibraries()
+}
+
+// SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary]) {
+	x.inner.SetPreloadedLibraries(preloadedLibraries)
+}
+
+// MTL4PipelineStageDynamicLinkingDescriptorable is the interface implemented by [MTL4PipelineStageDynamicLinkingDescriptor], for mocking and DI.
+type MTL4PipelineStageDynamicLinkingDescriptorable interface {
+	Unwrap() *raw.MTL4PipelineStageDynamicLinkingDescriptor
+	WithMaxCallStackDepth(maxCallStackDepth uint) *MTL4PipelineStageDynamicLinkingDescriptor
+	MaxCallStackDepth() uint
+	SetMaxCallStackDepth(maxCallStackDepth uint)
+	BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
+	SetBinaryLinkedFunctions(binaryLinkedFunctions *foundation.NSArray[raw.MTL4BinaryFunction])
+	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
+	SetPreloadedLibraries(preloadedLibraries *foundation.NSArray[raw.MTLDynamicLibrary])
+}
+
+var _ MTL4PipelineStageDynamicLinkingDescriptorable = (*MTL4PipelineStageDynamicLinkingDescriptor)(nil)
 

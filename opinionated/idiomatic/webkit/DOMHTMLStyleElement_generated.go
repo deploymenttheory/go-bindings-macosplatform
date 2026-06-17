@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,6 +43,44 @@ func (x *DOMHTMLStyleElement) WithType(type_ string) *DOMHTMLStyleElement {
 	return x
 }
 
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLStyleElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLStyleElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Media calls the underlying Media.
+func (x *DOMHTMLStyleElement) Media() string {
+	_r := x.inner.Media()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMedia calls the underlying SetMedia.
+func (x *DOMHTMLStyleElement) SetMedia(media string) {
+	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+}
+
+// Type calls the underlying Type.
+func (x *DOMHTMLStyleElement) Type() string {
+	_r := x.inner.Type()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetType calls the underlying SetType.
+func (x *DOMHTMLStyleElement) SetType(type_ string) {
+	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+}
+
 func (x *DOMHTMLStyleElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLStyleElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -51,4 +90,20 @@ func (x *DOMHTMLStyleElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTML
 func (x *DOMHTMLStyleElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLStyleElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLStyleElementable is the interface implemented by [DOMHTMLStyleElement], for mocking and DI.
+type DOMHTMLStyleElementable interface {
+	Unwrap() *raw.DOMHTMLStyleElement
+	WithDisabled(disabled bool) *DOMHTMLStyleElement
+	WithMedia(media string) *DOMHTMLStyleElement
+	WithType(type_ string) *DOMHTMLStyleElement
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Media() string
+	SetMedia(media string)
+	Type() string
+	SetType(type_ string)
+}
+
+var _ DOMHTMLStyleElementable = (*DOMHTMLStyleElement)(nil)
 

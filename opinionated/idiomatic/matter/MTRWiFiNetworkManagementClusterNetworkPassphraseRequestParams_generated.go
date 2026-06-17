@@ -36,3 +36,36 @@ func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) WithServ
 	return x
 }
 
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParamsable is the interface implemented by [MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams], for mocking and DI.
+type MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParamsable interface {
+	Unwrap() *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParamsable = (*MTRWiFiNetworkManagementClusterNetworkPassphraseRequestParams)(nil)
+

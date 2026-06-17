@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,7 +24,26 @@ func NewAsynchronousFetchResult() *AsynchronousFetchResult {
 	return &AsynchronousFetchResult{inner: raw.NSAsynchronousFetchResultFromID[objc.ID](_id)}
 }
 
+// FetchRequest calls the underlying FetchRequest.
+func (x *AsynchronousFetchResult) FetchRequest() *raw.NSAsynchronousFetchRequest[objc.ID] {
+	return x.inner.FetchRequest()
+}
+
+// FinalResult calls the underlying FinalResult.
+func (x *AsynchronousFetchResult) FinalResult() *foundation.NSArray[objc.ID] {
+	return x.inner.FinalResult()
+}
+
 func (x *AsynchronousFetchResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult { return &x.inner.NSPersistentStoreAsynchronousResult }
 
 func (x *AsynchronousFetchResult) asPersistentStoreResult() *raw.NSPersistentStoreResult { return &x.inner.NSPersistentStoreAsynchronousResult.NSPersistentStoreResult }
+
+// AsynchronousFetchResultable is the interface implemented by [AsynchronousFetchResult], for mocking and DI.
+type AsynchronousFetchResultable interface {
+	Unwrap() *raw.NSAsynchronousFetchResult[objc.ID]
+	FetchRequest() *raw.NSAsynchronousFetchRequest[objc.ID]
+	FinalResult() *foundation.NSArray[objc.ID]
+}
+
+var _ AsynchronousFetchResultable = (*AsynchronousFetchResult)(nil)
 

@@ -7,7 +7,9 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ExtensionStream wraps [raw.CMIOExtensionStream] with a fluent Go API.
@@ -32,16 +34,90 @@ func NewExtensionStreamWithLocalizedNameStreamIDDirectionCustomClockConfiguratio
 	return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(_id)}
 }
 
+// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
+func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.NotifyPropertiesChanged(propertyStates)
+}
+
+// SendSampleBufferDiscontinuityHostTimeInNanoseconds calls the underlying SendSampleBufferDiscontinuityHostTimeInNanoseconds.
+func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity raw.CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
+	x.inner.SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer, discontinuity, hostTimeInNanoseconds)
+}
+
+// ConsumeSampleBufferFromClientCompletionHandler calls the underlying ConsumeSampleBufferFromClientCompletionHandler.
+func (x *ExtensionStream) ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, raw.CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer)) {
+	x.inner.ConsumeSampleBufferFromClientCompletionHandler(client, completionHandler)
+}
+
+// NotifyScheduledOutputChanged calls the underlying NotifyScheduledOutputChanged.
+func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput) {
+	x.inner.NotifyScheduledOutputChanged(scheduledOutput)
+}
+
+// LocalizedName calls the underlying LocalizedName.
+func (x *ExtensionStream) LocalizedName() string {
+	_r := x.inner.LocalizedName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// StreamID calls the underlying StreamID.
+func (x *ExtensionStream) StreamID() *foundation.NSUUID {
+	return x.inner.StreamID()
+}
+
+// Direction calls the underlying Direction.
+func (x *ExtensionStream) Direction() raw.CMIOExtensionStreamDirection {
+	return x.inner.Direction()
+}
+
+// ClockType calls the underlying ClockType.
+func (x *ExtensionStream) ClockType() raw.CMIOExtensionStreamClockType {
+	return x.inner.ClockType()
+}
+
+// CustomClockConfiguration calls the underlying CustomClockConfiguration.
+func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
+	_r := x.inner.CustomClockConfiguration()
+	if _r == nil {
+		return nil
+	}
+	return &ExtensionStreamCustomClockConfiguration{inner: _r}
+}
+
+// Source calls the underlying Source.
+func (x *ExtensionStream) Source() raw.CMIOExtensionStreamSource {
+	return x.inner.Source()
+}
+
 // StreamingClients returns the collection as a Go slice.
 func (x *ExtensionStream) StreamingClients() []*raw.CMIOExtensionClient {
 	arr := x.inner.StreamingClients()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CMIOExtensionClient, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CMIOExtensionClient {
+		return raw.CMIOExtensionClientFromID(purego.Retain(_id))
+	})
 }
+
+// ExtensionStreamable is the interface implemented by [ExtensionStream], for mocking and DI.
+type ExtensionStreamable interface {
+	Unwrap() *raw.CMIOExtensionStream
+	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer unsafe.Pointer, discontinuity raw.CMIOExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
+	ConsumeSampleBufferFromClientCompletionHandler(client *raw.CMIOExtensionClient, completionHandler func(unsafe.Pointer, uint64, raw.CMIOExtensionStreamDiscontinuityFlags, bool, unsafe.Pointer))
+	NotifyScheduledOutputChanged(scheduledOutput *raw.CMIOExtensionScheduledOutput)
+	LocalizedName() string
+	StreamID() *foundation.NSUUID
+	Direction() raw.CMIOExtensionStreamDirection
+	ClockType() raw.CMIOExtensionStreamClockType
+	CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration
+	Source() raw.CMIOExtensionStreamSource
+	StreamingClients() []*raw.CMIOExtensionClient
+}
+
+var _ ExtensionStreamable = (*ExtensionStream)(nil)
 

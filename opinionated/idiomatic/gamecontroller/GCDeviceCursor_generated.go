@@ -27,3 +27,10 @@ func (x *DeviceCursor) asControllerDirectionPad() *raw.GCControllerDirectionPad 
 
 func (x *DeviceCursor) asControllerElement() *raw.GCControllerElement { return &x.inner.GCControllerDirectionPad.GCControllerElement }
 
+// DeviceCursorable is the interface implemented by [DeviceCursor], for mocking and DI.
+type DeviceCursorable interface {
+	Unwrap() *raw.GCDeviceCursor
+}
+
+var _ DeviceCursorable = (*DeviceCursor)(nil)
+

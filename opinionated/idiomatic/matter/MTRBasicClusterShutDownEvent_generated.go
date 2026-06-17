@@ -25,3 +25,10 @@ func NewMTRBasicClusterShutDownEvent() *MTRBasicClusterShutDownEvent {
 
 func (x *MTRBasicClusterShutDownEvent) asMTRBasicInformationClusterShutDownEvent() *raw.MTRBasicInformationClusterShutDownEvent { return &x.inner.MTRBasicInformationClusterShutDownEvent }
 
+// MTRBasicClusterShutDownEventable is the interface implemented by [MTRBasicClusterShutDownEvent], for mocking and DI.
+type MTRBasicClusterShutDownEventable interface {
+	Unwrap() *raw.MTRBasicClusterShutDownEvent
+}
+
+var _ MTRBasicClusterShutDownEventable = (*MTRBasicClusterShutDownEvent)(nil)
+

@@ -23,3 +23,10 @@ func NewAppKitAWT() *AppKitAWT {
 	return &AppKitAWT{inner: raw.JRSAppKitAWTFromID(_id)}
 }
 
+// AppKitAWTable is the interface implemented by [AppKitAWT], for mocking and DI.
+type AppKitAWTable interface {
+	Unwrap() *raw.JRSAppKitAWT
+}
+
+var _ AppKitAWTable = (*AppKitAWT)(nil)
+

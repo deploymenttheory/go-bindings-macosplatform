@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,4 +30,68 @@ func (x *TextViewportLayoutController) WithDelegate(delegate raw.NSTextViewportL
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// LayoutViewport calls the underlying LayoutViewport.
+func (x *TextViewportLayoutController) LayoutViewport() {
+	x.inner.LayoutViewport()
+}
+
+// RelocateViewportToTextLocation calls the underlying RelocateViewportToTextLocation.
+func (x *TextViewportLayoutController) RelocateViewportToTextLocation(textLocation raw.NSTextLocation) float64 {
+	return x.inner.RelocateViewportToTextLocation(textLocation)
+}
+
+// AdjustViewportByVerticalOffset calls the underlying AdjustViewportByVerticalOffset.
+func (x *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
+	x.inner.AdjustViewportByVerticalOffset(verticalOffset)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *TextViewportLayoutController) Delegate() raw.NSTextViewportLayoutControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *TextViewportLayoutController) SetDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// TextLayoutManager calls the underlying TextLayoutManager.
+func (x *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
+	_r := x.inner.TextLayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextLayoutManager{inner: _r}
+}
+
+// ViewportBounds calls the underlying ViewportBounds.
+func (x *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
+	return x.inner.ViewportBounds()
+}
+
+// ViewportRange calls the underlying ViewportRange.
+func (x *TextViewportLayoutController) ViewportRange() *TextRange {
+	_r := x.inner.ViewportRange()
+	if _r == nil {
+		return nil
+	}
+	return &TextRange{inner: _r}
+}
+
+// TextViewportLayoutControllerable is the interface implemented by [TextViewportLayoutController], for mocking and DI.
+type TextViewportLayoutControllerable interface {
+	Unwrap() *raw.NSTextViewportLayoutController
+	WithDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) *TextViewportLayoutController
+	LayoutViewport()
+	RelocateViewportToTextLocation(textLocation raw.NSTextLocation) float64
+	AdjustViewportByVerticalOffset(verticalOffset float64)
+	Delegate() raw.NSTextViewportLayoutControllerDelegate
+	SetDelegate(delegate raw.NSTextViewportLayoutControllerDelegate)
+	TextLayoutManager() *TextLayoutManager
+	ViewportBounds() corefoundation.CGRect
+	ViewportRange() *TextRange
+}
+
+var _ TextViewportLayoutControllerable = (*TextViewportLayoutController)(nil)
 

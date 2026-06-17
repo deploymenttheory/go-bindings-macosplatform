@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,6 +67,203 @@ func (x *DOMHTMLDocument) WithVlinkColor(vlinkColor string) *DOMHTMLDocument {
 	return x
 }
 
+// Open calls the underlying Open.
+func (x *DOMHTMLDocument) Open() {
+	x.inner.Open()
+}
+
+// Close calls the underlying Close.
+func (x *DOMHTMLDocument) Close() {
+	x.inner.Close()
+}
+
+// Write calls the underlying Write.
+func (x *DOMHTMLDocument) Write(text string) {
+	x.inner.Write(foundation.NSStringStringWithUTF8String(text))
+}
+
+// Writeln calls the underlying Writeln.
+func (x *DOMHTMLDocument) Writeln(text string) {
+	x.inner.Writeln(foundation.NSStringStringWithUTF8String(text))
+}
+
+// Clear calls the underlying Clear.
+func (x *DOMHTMLDocument) Clear() {
+	x.inner.Clear()
+}
+
+// CaptureEvents calls the underlying CaptureEvents.
+func (x *DOMHTMLDocument) CaptureEvents() {
+	x.inner.CaptureEvents()
+}
+
+// ReleaseEvents calls the underlying ReleaseEvents.
+func (x *DOMHTMLDocument) ReleaseEvents() {
+	x.inner.ReleaseEvents()
+}
+
+// Embeds calls the underlying Embeds.
+func (x *DOMHTMLDocument) Embeds() *DOMHTMLCollection {
+	_r := x.inner.Embeds()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
+// Plugins calls the underlying Plugins.
+func (x *DOMHTMLDocument) Plugins() *DOMHTMLCollection {
+	_r := x.inner.Plugins()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
+// Scripts calls the underlying Scripts.
+func (x *DOMHTMLDocument) Scripts() *DOMHTMLCollection {
+	_r := x.inner.Scripts()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLCollection{inner: _r}
+}
+
+// Width calls the underlying Width.
+func (x *DOMHTMLDocument) Width() int {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *DOMHTMLDocument) Height() int {
+	return x.inner.Height()
+}
+
+// Dir calls the underlying Dir.
+func (x *DOMHTMLDocument) Dir() string {
+	_r := x.inner.Dir()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDir calls the underlying SetDir.
+func (x *DOMHTMLDocument) SetDir(dir string) {
+	x.inner.SetDir(foundation.NSStringStringWithUTF8String(dir))
+}
+
+// DesignMode calls the underlying DesignMode.
+func (x *DOMHTMLDocument) DesignMode() string {
+	_r := x.inner.DesignMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDesignMode calls the underlying SetDesignMode.
+func (x *DOMHTMLDocument) SetDesignMode(designMode string) {
+	x.inner.SetDesignMode(foundation.NSStringStringWithUTF8String(designMode))
+}
+
+// CompatMode calls the underlying CompatMode.
+func (x *DOMHTMLDocument) CompatMode() string {
+	_r := x.inner.CompatMode()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BgColor calls the underlying BgColor.
+func (x *DOMHTMLDocument) BgColor() string {
+	_r := x.inner.BgColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBgColor calls the underlying SetBgColor.
+func (x *DOMHTMLDocument) SetBgColor(bgColor string) {
+	x.inner.SetBgColor(foundation.NSStringStringWithUTF8String(bgColor))
+}
+
+// FgColor calls the underlying FgColor.
+func (x *DOMHTMLDocument) FgColor() string {
+	_r := x.inner.FgColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFgColor calls the underlying SetFgColor.
+func (x *DOMHTMLDocument) SetFgColor(fgColor string) {
+	x.inner.SetFgColor(foundation.NSStringStringWithUTF8String(fgColor))
+}
+
+// AlinkColor calls the underlying AlinkColor.
+func (x *DOMHTMLDocument) AlinkColor() string {
+	_r := x.inner.AlinkColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetAlinkColor calls the underlying SetAlinkColor.
+func (x *DOMHTMLDocument) SetAlinkColor(alinkColor string) {
+	x.inner.SetAlinkColor(foundation.NSStringStringWithUTF8String(alinkColor))
+}
+
+// LinkColor calls the underlying LinkColor.
+func (x *DOMHTMLDocument) LinkColor() string {
+	_r := x.inner.LinkColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLinkColor calls the underlying SetLinkColor.
+func (x *DOMHTMLDocument) SetLinkColor(linkColor string) {
+	x.inner.SetLinkColor(foundation.NSStringStringWithUTF8String(linkColor))
+}
+
+// VlinkColor calls the underlying VlinkColor.
+func (x *DOMHTMLDocument) VlinkColor() string {
+	_r := x.inner.VlinkColor()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetVlinkColor calls the underlying SetVlinkColor.
+func (x *DOMHTMLDocument) SetVlinkColor(vlinkColor string) {
+	x.inner.SetVlinkColor(foundation.NSStringStringWithUTF8String(vlinkColor))
+}
+
+// CreateDocumentFragmentWithMarkupStringBaseURL calls the underlying CreateDocumentFragmentWithMarkupStringBaseURL.
+func (x *DOMHTMLDocument) CreateDocumentFragmentWithMarkupStringBaseURL(markupString string, baseURL string) *DOMDocumentFragment {
+	_r := x.inner.CreateDocumentFragmentWithMarkupStringBaseURL(foundation.NSStringStringWithUTF8String(markupString), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocumentFragment{inner: _r}
+}
+
+// CreateDocumentFragmentWithText calls the underlying CreateDocumentFragmentWithText.
+func (x *DOMHTMLDocument) CreateDocumentFragmentWithText(text string) *DOMDocumentFragment {
+	_r := x.inner.CreateDocumentFragmentWithText(foundation.NSStringStringWithUTF8String(text))
+	if _r == nil {
+		return nil
+	}
+	return &DOMDocumentFragment{inner: _r}
+}
+
 func (x *DOMHTMLDocument) asDOMDocument() *raw.DOMDocument { return &x.inner.DOMDocument }
 
 func (x *DOMHTMLDocument) asDOMNode() *raw.DOMNode { return &x.inner.DOMDocument.DOMNode }
@@ -73,4 +271,47 @@ func (x *DOMHTMLDocument) asDOMNode() *raw.DOMNode { return &x.inner.DOMDocument
 func (x *DOMHTMLDocument) asDOMObject() *raw.DOMObject { return &x.inner.DOMDocument.DOMNode.DOMObject }
 
 func (x *DOMHTMLDocument) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMDocument.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLDocumentable is the interface implemented by [DOMHTMLDocument], for mocking and DI.
+type DOMHTMLDocumentable interface {
+	Unwrap() *raw.DOMHTMLDocument
+	WithDir(dir string) *DOMHTMLDocument
+	WithDesignMode(designMode string) *DOMHTMLDocument
+	WithBgColor(bgColor string) *DOMHTMLDocument
+	WithFgColor(fgColor string) *DOMHTMLDocument
+	WithAlinkColor(alinkColor string) *DOMHTMLDocument
+	WithLinkColor(linkColor string) *DOMHTMLDocument
+	WithVlinkColor(vlinkColor string) *DOMHTMLDocument
+	Open()
+	Close()
+	Write(text string)
+	Writeln(text string)
+	Clear()
+	CaptureEvents()
+	ReleaseEvents()
+	Embeds() *DOMHTMLCollection
+	Plugins() *DOMHTMLCollection
+	Scripts() *DOMHTMLCollection
+	Width() int
+	Height() int
+	Dir() string
+	SetDir(dir string)
+	DesignMode() string
+	SetDesignMode(designMode string)
+	CompatMode() string
+	BgColor() string
+	SetBgColor(bgColor string)
+	FgColor() string
+	SetFgColor(fgColor string)
+	AlinkColor() string
+	SetAlinkColor(alinkColor string)
+	LinkColor() string
+	SetLinkColor(linkColor string)
+	VlinkColor() string
+	SetVlinkColor(vlinkColor string)
+	CreateDocumentFragmentWithMarkupStringBaseURL(markupString string, baseURL string) *DOMDocumentFragment
+	CreateDocumentFragmentWithText(text string) *DOMDocumentFragment
+}
+
+var _ DOMHTMLDocumentable = (*DOMHTMLDocument)(nil)
 

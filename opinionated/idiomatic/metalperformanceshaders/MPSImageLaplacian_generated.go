@@ -31,7 +31,27 @@ func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
 	return x
 }
 
+// Bias calls the underlying Bias.
+func (x *ImageLaplacian) Bias() float32 {
+	return x.inner.Bias()
+}
+
+// SetBias calls the underlying SetBias.
+func (x *ImageLaplacian) SetBias(bias float32) {
+	x.inner.SetBias(bias)
+}
+
 func (x *ImageLaplacian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 func (x *ImageLaplacian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
+
+// ImageLaplacianable is the interface implemented by [ImageLaplacian], for mocking and DI.
+type ImageLaplacianable interface {
+	Unwrap() *raw.MPSImageLaplacian
+	WithBias(bias float32) *ImageLaplacian
+	Bias() float32
+	SetBias(bias float32)
+}
+
+var _ ImageLaplacianable = (*ImageLaplacian)(nil)
 

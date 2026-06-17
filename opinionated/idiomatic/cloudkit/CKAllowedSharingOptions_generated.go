@@ -48,3 +48,62 @@ func (x *AllowedSharingOptions) WithAllowsAccessRequests(allowsAccessRequests bo
 	return x
 }
 
+// AllowedParticipantPermissionOptions calls the underlying AllowedParticipantPermissionOptions.
+func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() raw.CKSharingParticipantPermissionOption {
+	return x.inner.AllowedParticipantPermissionOptions()
+}
+
+// SetAllowedParticipantPermissionOptions calls the underlying SetAllowedParticipantPermissionOptions.
+func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption) {
+	x.inner.SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions)
+}
+
+// AllowedParticipantAccessOptions calls the underlying AllowedParticipantAccessOptions.
+func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() raw.CKSharingParticipantAccessOption {
+	return x.inner.AllowedParticipantAccessOptions()
+}
+
+// SetAllowedParticipantAccessOptions calls the underlying SetAllowedParticipantAccessOptions.
+func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) {
+	x.inner.SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions)
+}
+
+// AllowsParticipantsToInviteOthers calls the underlying AllowsParticipantsToInviteOthers.
+func (x *AllowedSharingOptions) AllowsParticipantsToInviteOthers() bool {
+	return x.inner.AllowsParticipantsToInviteOthers()
+}
+
+// SetAllowsParticipantsToInviteOthers calls the underlying SetAllowsParticipantsToInviteOthers.
+func (x *AllowedSharingOptions) SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) {
+	x.inner.SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers)
+}
+
+// AllowsAccessRequests calls the underlying AllowsAccessRequests.
+func (x *AllowedSharingOptions) AllowsAccessRequests() bool {
+	return x.inner.AllowsAccessRequests()
+}
+
+// SetAllowsAccessRequests calls the underlying SetAllowsAccessRequests.
+func (x *AllowedSharingOptions) SetAllowsAccessRequests(allowsAccessRequests bool) {
+	x.inner.SetAllowsAccessRequests(allowsAccessRequests)
+}
+
+// AllowedSharingOptionsable is the interface implemented by [AllowedSharingOptions], for mocking and DI.
+type AllowedSharingOptionsable interface {
+	Unwrap() *raw.CKAllowedSharingOptions
+	WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption) *AllowedSharingOptions
+	WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption) *AllowedSharingOptions
+	WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions
+	WithAllowsAccessRequests(allowsAccessRequests bool) *AllowedSharingOptions
+	AllowedParticipantPermissionOptions() raw.CKSharingParticipantPermissionOption
+	SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions raw.CKSharingParticipantPermissionOption)
+	AllowedParticipantAccessOptions() raw.CKSharingParticipantAccessOption
+	SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions raw.CKSharingParticipantAccessOption)
+	AllowsParticipantsToInviteOthers() bool
+	SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool)
+	AllowsAccessRequests() bool
+	SetAllowsAccessRequests(allowsAccessRequests bool)
+}
+
+var _ AllowedSharingOptionsable = (*AllowedSharingOptions)(nil)
+

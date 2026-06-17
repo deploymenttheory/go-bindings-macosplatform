@@ -67,3 +67,88 @@ func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) WithTimedInvokeTime
 	return x
 }
 
+// YearDayIndex calls the underlying YearDayIndex.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) YearDayIndex() *foundation.NSNumber {
+	return x.inner.YearDayIndex()
+}
+
+// SetYearDayIndex calls the underlying SetYearDayIndex.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetYearDayIndex(yearDayIndex *foundation.NSNumber) {
+	x.inner.SetYearDayIndex(yearDayIndex)
+}
+
+// UserIndex calls the underlying UserIndex.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) UserIndex() *foundation.NSNumber {
+	return x.inner.UserIndex()
+}
+
+// SetUserIndex calls the underlying SetUserIndex.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
+	x.inner.SetUserIndex(userIndex)
+}
+
+// Status calls the underlying Status.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) Status() *foundation.NSNumber {
+	return x.inner.Status()
+}
+
+// SetStatus calls the underlying SetStatus.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetStatus(status *foundation.NSNumber) {
+	x.inner.SetStatus(status)
+}
+
+// LocalStartTime calls the underlying LocalStartTime.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalStartTime() *foundation.NSNumber {
+	return x.inner.LocalStartTime()
+}
+
+// SetLocalStartTime calls the underlying SetLocalStartTime.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalStartTime(localStartTime *foundation.NSNumber) {
+	x.inner.SetLocalStartTime(localStartTime)
+}
+
+// LocalEndTime calls the underlying LocalEndTime.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) LocalEndTime() *foundation.NSNumber {
+	return x.inner.LocalEndTime()
+}
+
+// SetLocalEndTime calls the underlying SetLocalEndTime.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetLocalEndTime(localEndTime *foundation.NSNumber) {
+	x.inner.SetLocalEndTime(localEndTime)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRDoorLockClusterGetYearDayScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRDoorLockClusterGetYearDayScheduleResponseParamsable is the interface implemented by [MTRDoorLockClusterGetYearDayScheduleResponseParams], for mocking and DI.
+type MTRDoorLockClusterGetYearDayScheduleResponseParamsable interface {
+	Unwrap() *raw.MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithYearDayIndex(yearDayIndex *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithLocalStartTime(localStartTime *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithLocalEndTime(localEndTime *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetYearDayScheduleResponseParams
+	YearDayIndex() *foundation.NSNumber
+	SetYearDayIndex(yearDayIndex *foundation.NSNumber)
+	UserIndex() *foundation.NSNumber
+	SetUserIndex(userIndex *foundation.NSNumber)
+	Status() *foundation.NSNumber
+	SetStatus(status *foundation.NSNumber)
+	LocalStartTime() *foundation.NSNumber
+	SetLocalStartTime(localStartTime *foundation.NSNumber)
+	LocalEndTime() *foundation.NSNumber
+	SetLocalEndTime(localEndTime *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRDoorLockClusterGetYearDayScheduleResponseParamsable = (*MTRDoorLockClusterGetYearDayScheduleResponseParams)(nil)
+

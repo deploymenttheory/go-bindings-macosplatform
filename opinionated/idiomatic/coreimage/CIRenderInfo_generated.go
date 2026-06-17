@@ -23,3 +23,34 @@ func NewRenderInfo() *RenderInfo {
 	return &RenderInfo{inner: raw.CIRenderInfoFromID(_id)}
 }
 
+// KernelExecutionTime calls the underlying KernelExecutionTime.
+func (x *RenderInfo) KernelExecutionTime() float64 {
+	return x.inner.KernelExecutionTime()
+}
+
+// KernelCompileTime calls the underlying KernelCompileTime.
+func (x *RenderInfo) KernelCompileTime() float64 {
+	return x.inner.KernelCompileTime()
+}
+
+// PassCount calls the underlying PassCount.
+func (x *RenderInfo) PassCount() int {
+	return x.inner.PassCount()
+}
+
+// PixelsProcessed calls the underlying PixelsProcessed.
+func (x *RenderInfo) PixelsProcessed() int {
+	return x.inner.PixelsProcessed()
+}
+
+// RenderInfoable is the interface implemented by [RenderInfo], for mocking and DI.
+type RenderInfoable interface {
+	Unwrap() *raw.CIRenderInfo
+	KernelExecutionTime() float64
+	KernelCompileTime() float64
+	PassCount() int
+	PixelsProcessed() int
+}
+
+var _ RenderInfoable = (*RenderInfo)(nil)
+

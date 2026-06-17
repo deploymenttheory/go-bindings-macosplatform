@@ -6,7 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PlayerVideoOutput wraps [raw.AVPlayerVideoOutput] with a fluent Go API.
@@ -23,4 +25,17 @@ func NewPlayerVideoOutputWithSpecification(specification *raw.AVVideoOutputSpeci
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), specification.Ptr())
 	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(_id)}
 }
+
+// CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration calls the underlying CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration.
+func (x *PlayerVideoOutput) CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *raw.AVPlayerVideoOutputConfiguration) unsafe.Pointer {
+	return x.inner.CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime, presentationTimeStampOut, activeConfigurationOut)
+}
+
+// PlayerVideoOutputable is the interface implemented by [PlayerVideoOutput], for mocking and DI.
+type PlayerVideoOutputable interface {
+	Unwrap() *raw.AVPlayerVideoOutput
+	CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *raw.AVPlayerVideoOutputConfiguration) unsafe.Pointer
+}
+
+var _ PlayerVideoOutputable = (*PlayerVideoOutput)(nil)
 

@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftware
 
 func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent }
 
+// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent], for mocking and DI.
+type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+}
+
+var _ MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)
+

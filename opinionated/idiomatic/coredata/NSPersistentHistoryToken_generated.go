@@ -23,3 +23,10 @@ func NewPersistentHistoryToken() *PersistentHistoryToken {
 	return &PersistentHistoryToken{inner: raw.NSPersistentHistoryTokenFromID(_id)}
 }
 
+// PersistentHistoryTokenable is the interface implemented by [PersistentHistoryToken], for mocking and DI.
+type PersistentHistoryTokenable interface {
+	Unwrap() *raw.NSPersistentHistoryToken
+}
+
+var _ PersistentHistoryTokenable = (*PersistentHistoryToken)(nil)
+

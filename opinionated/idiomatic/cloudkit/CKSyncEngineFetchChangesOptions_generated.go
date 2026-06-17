@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -54,16 +55,63 @@ func (x *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*raw.CKR
 	return x
 }
 
+// Scope calls the underlying Scope.
+func (x *SyncEngineFetchChangesOptions) Scope() *SyncEngineFetchChangesScope {
+	_r := x.inner.Scope()
+	if _r == nil {
+		return nil
+	}
+	return &SyncEngineFetchChangesScope{inner: _r}
+}
+
+// SetScope calls the underlying SetScope.
+func (x *SyncEngineFetchChangesOptions) SetScope(scope *raw.CKSyncEngineFetchChangesScope) {
+	x.inner.SetScope(scope)
+}
+
+// OperationGroup calls the underlying OperationGroup.
+func (x *SyncEngineFetchChangesOptions) OperationGroup() *OperationGroup {
+	_r := x.inner.OperationGroup()
+	if _r == nil {
+		return nil
+	}
+	return &OperationGroup{inner: _r}
+}
+
+// SetOperationGroup calls the underlying SetOperationGroup.
+func (x *SyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *raw.CKOperationGroup) {
+	x.inner.SetOperationGroup(operationGroup)
+}
+
 // PrioritizedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*raw.CKRecordZoneID {
 	arr := x.inner.PrioritizedZoneIDs()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.CKRecordZoneID, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.CKRecordZoneID {
+		return raw.CKRecordZoneIDFromID(purego.Retain(_id))
+	})
 }
+
+// SetPrioritizedZoneIDs calls the underlying SetPrioritizedZoneIDs.
+func (x *SyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) {
+	x.inner.SetPrioritizedZoneIDs(prioritizedZoneIDs)
+}
+
+// SyncEngineFetchChangesOptionsable is the interface implemented by [SyncEngineFetchChangesOptions], for mocking and DI.
+type SyncEngineFetchChangesOptionsable interface {
+	Unwrap() *raw.CKSyncEngineFetchChangesOptions
+	WithScope(scope *raw.CKSyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions
+	WithOperationGroup(operationGroup *raw.CKOperationGroup) *SyncEngineFetchChangesOptions
+	WithPrioritizedZoneIDs(items ...*raw.CKRecordZoneID) *SyncEngineFetchChangesOptions
+	Scope() *SyncEngineFetchChangesScope
+	SetScope(scope *raw.CKSyncEngineFetchChangesScope)
+	OperationGroup() *OperationGroup
+	SetOperationGroup(operationGroup *raw.CKOperationGroup)
+	PrioritizedZoneIDs() []*raw.CKRecordZoneID
+	SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
+}
+
+var _ SyncEngineFetchChangesOptionsable = (*SyncEngineFetchChangesOptions)(nil)
 

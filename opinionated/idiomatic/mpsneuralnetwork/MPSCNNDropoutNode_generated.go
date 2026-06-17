@@ -39,5 +39,30 @@ func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *ra
 	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(_id)}
 }
 
+// KeepProbability calls the underlying KeepProbability.
+func (x *CNNDropoutNode) KeepProbability() float32 {
+	return x.inner.KeepProbability()
+}
+
+// Seed calls the underlying Seed.
+func (x *CNNDropoutNode) Seed() uint {
+	return x.inner.Seed()
+}
+
+// MaskStrideInPixels calls the underlying MaskStrideInPixels.
+func (x *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
+	return x.inner.MaskStrideInPixels()
+}
+
 func (x *CNNDropoutNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNDropoutNodeable is the interface implemented by [CNNDropoutNode], for mocking and DI.
+type CNNDropoutNodeable interface {
+	Unwrap() *raw.MPSCNNDropoutNode
+	KeepProbability() float32
+	Seed() uint
+	MaskStrideInPixels() metal.MTLSize
+}
+
+var _ CNNDropoutNodeable = (*CNNDropoutNode)(nil)
 

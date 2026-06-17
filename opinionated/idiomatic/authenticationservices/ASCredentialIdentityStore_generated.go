@@ -5,8 +5,11 @@
 package authenticationservices
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CredentialIdentityStore wraps [raw.ASCredentialIdentityStore] with a fluent Go API.
@@ -22,4 +25,99 @@ func NewCredentialIdentityStore() *CredentialIdentityStore {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialIdentityStore")), objc.RegisterName("new"))
 	return &CredentialIdentityStore{inner: raw.ASCredentialIdentityStoreFromID(_id)}
 }
+
+// GetCredentialIdentityStoreStateWithCompletion blocks until the operation completes or ctx is cancelled.
+func (x *CredentialIdentityStore) GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (*CredentialIdentityStoreState, error) {
+	type _result struct {
+		val *CredentialIdentityStoreState
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetCredentialIdentityStoreStateWithCompletion(func(_p0 *raw.ASCredentialIdentityStoreState) {
+		var _o _result
+		if _p0 != nil {
+			_o.val = &CredentialIdentityStoreState{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *CredentialIdentityStoreState
+		return _zero, ctx.Err()
+	}
+}
+
+// GetCredentialIdentitiesForServiceCredentialIdentityTypes blocks until the operation completes or ctx is cancelled.
+func (x *CredentialIdentityStore) GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes raw.ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error) {
+	type _result struct {
+		val *foundation.NSArray[raw.ASCredentialIdentity]
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.GetCredentialIdentitiesForServiceCredentialIdentityTypesCompletionHandler(serviceIdentifier, credentialIdentityTypes, func(_p0 *foundation.NSArray[raw.ASCredentialIdentity]) {
+		var _o _result
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSArray[raw.ASCredentialIdentity]
+		return _zero, ctx.Err()
+	}
+}
+
+// SaveCredentialIdentitiesCompletion calls the underlying SaveCredentialIdentitiesCompletion.
+func (x *CredentialIdentityStore) SaveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.SaveCredentialIdentitiesCompletion(credentialIdentities, completion)
+}
+
+// SaveCredentialIdentityEntriesCompletion calls the underlying SaveCredentialIdentityEntriesCompletion.
+func (x *CredentialIdentityStore) SaveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.SaveCredentialIdentityEntriesCompletion(credentialIdentities, completion)
+}
+
+// RemoveCredentialIdentitiesCompletion calls the underlying RemoveCredentialIdentitiesCompletion.
+func (x *CredentialIdentityStore) RemoveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.RemoveCredentialIdentitiesCompletion(credentialIdentities, completion)
+}
+
+// RemoveCredentialIdentityEntriesCompletion calls the underlying RemoveCredentialIdentityEntriesCompletion.
+func (x *CredentialIdentityStore) RemoveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.RemoveCredentialIdentityEntriesCompletion(credentialIdentities, completion)
+}
+
+// RemoveAllCredentialIdentitiesWithCompletion calls the underlying RemoveAllCredentialIdentitiesWithCompletion.
+func (x *CredentialIdentityStore) RemoveAllCredentialIdentitiesWithCompletion(completion func(bool, unsafe.Pointer)) {
+	x.inner.RemoveAllCredentialIdentitiesWithCompletion(completion)
+}
+
+// ReplaceCredentialIdentitiesWithIdentitiesCompletion calls the underlying ReplaceCredentialIdentitiesWithIdentitiesCompletion.
+func (x *CredentialIdentityStore) ReplaceCredentialIdentitiesWithIdentitiesCompletion(newCredentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.ReplaceCredentialIdentitiesWithIdentitiesCompletion(newCredentialIdentities, completion)
+}
+
+// ReplaceCredentialIdentityEntriesCompletion calls the underlying ReplaceCredentialIdentityEntriesCompletion.
+func (x *CredentialIdentityStore) ReplaceCredentialIdentityEntriesCompletion(newCredentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer)) {
+	x.inner.ReplaceCredentialIdentityEntriesCompletion(newCredentialIdentities, completion)
+}
+
+// CredentialIdentityStoreable is the interface implemented by [CredentialIdentityStore], for mocking and DI.
+type CredentialIdentityStoreable interface {
+	Unwrap() *raw.ASCredentialIdentityStore
+	GetCredentialIdentityStoreStateWithCompletion(ctx context.Context) (*CredentialIdentityStoreState, error)
+	GetCredentialIdentitiesForServiceCredentialIdentityTypes(ctx context.Context, serviceIdentifier *raw.ASCredentialServiceIdentifier, credentialIdentityTypes raw.ASCredentialIdentityTypes) (*foundation.NSArray[raw.ASCredentialIdentity], error)
+	SaveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer))
+	SaveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer))
+	RemoveCredentialIdentitiesCompletion(credentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer))
+	RemoveCredentialIdentityEntriesCompletion(credentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer))
+	RemoveAllCredentialIdentitiesWithCompletion(completion func(bool, unsafe.Pointer))
+	ReplaceCredentialIdentitiesWithIdentitiesCompletion(newCredentialIdentities *foundation.NSArray[*raw.ASPasswordCredentialIdentity], completion func(bool, unsafe.Pointer))
+	ReplaceCredentialIdentityEntriesCompletion(newCredentialIdentities *foundation.NSArray[raw.ASCredentialIdentity], completion func(bool, unsafe.Pointer))
+}
+
+var _ CredentialIdentityStoreable = (*CredentialIdentityStore)(nil)
 

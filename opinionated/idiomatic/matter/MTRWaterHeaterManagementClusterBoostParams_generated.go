@@ -42,3 +42,53 @@ func (x *MTRWaterHeaterManagementClusterBoostParams) WithServerSideProcessingTim
 	return x
 }
 
+// BoostInfo calls the underlying BoostInfo.
+func (x *MTRWaterHeaterManagementClusterBoostParams) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	_r := x.inner.BoostInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct{inner: _r}
+}
+
+// SetBoostInfo calls the underlying SetBoostInfo.
+func (x *MTRWaterHeaterManagementClusterBoostParams) SetBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
+	x.inner.SetBoostInfo(boostInfo)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRWaterHeaterManagementClusterBoostParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRWaterHeaterManagementClusterBoostParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRWaterHeaterManagementClusterBoostParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRWaterHeaterManagementClusterBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRWaterHeaterManagementClusterBoostParamsable is the interface implemented by [MTRWaterHeaterManagementClusterBoostParams], for mocking and DI.
+type MTRWaterHeaterManagementClusterBoostParamsable interface {
+	Unwrap() *raw.MTRWaterHeaterManagementClusterBoostParams
+	WithBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterManagementClusterBoostParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterManagementClusterBoostParams
+	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
+	SetBoostInfo(boostInfo *raw.MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRWaterHeaterManagementClusterBoostParamsable = (*MTRWaterHeaterManagementClusterBoostParams)(nil)
+

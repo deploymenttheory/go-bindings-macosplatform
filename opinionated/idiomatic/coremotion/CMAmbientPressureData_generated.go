@@ -6,6 +6,7 @@ package coremotion
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,24 @@ func NewAmbientPressureData() *AmbientPressureData {
 	return &AmbientPressureData{inner: raw.CMAmbientPressureDataFromID(_id)}
 }
 
+// Pressure calls the underlying Pressure.
+func (x *AmbientPressureData) Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure] {
+	return x.inner.Pressure()
+}
+
+// Temperature calls the underlying Temperature.
+func (x *AmbientPressureData) Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature] {
+	return x.inner.Temperature()
+}
+
 func (x *AmbientPressureData) asLogItem() *raw.CMLogItem { return &x.inner.CMLogItem }
+
+// AmbientPressureDataable is the interface implemented by [AmbientPressureData], for mocking and DI.
+type AmbientPressureDataable interface {
+	Unwrap() *raw.CMAmbientPressureData
+	Pressure() *foundation.NSMeasurement[*foundation.NSUnitPressure]
+	Temperature() *foundation.NSMeasurement[*foundation.NSUnitTemperature]
+}
+
+var _ AmbientPressureDataable = (*AmbientPressureData)(nil)
 

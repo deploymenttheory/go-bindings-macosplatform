@@ -25,3 +25,76 @@ func NewFilterShapeWithRect(r corefoundation.CGRect) *FilterShape {
 	return &FilterShape{inner: raw.CIFilterShapeFromID(_id)}
 }
 
+// TransformByInterior calls the underlying TransformByInterior.
+func (x *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape {
+	_r := x.inner.TransformByInterior(m, flag)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// InsetByXY calls the underlying InsetByXY.
+func (x *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
+	_r := x.inner.InsetByXY(dx, dy)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// UnionWith calls the underlying UnionWith.
+func (x *FilterShape) UnionWith(s2 *raw.CIFilterShape) *FilterShape {
+	_r := x.inner.UnionWith(s2)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// UnionWithRect calls the underlying UnionWithRect.
+func (x *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
+	_r := x.inner.UnionWithRect(r)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// IntersectWith calls the underlying IntersectWith.
+func (x *FilterShape) IntersectWith(s2 *raw.CIFilterShape) *FilterShape {
+	_r := x.inner.IntersectWith(s2)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// IntersectWithRect calls the underlying IntersectWithRect.
+func (x *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
+	_r := x.inner.IntersectWithRect(r)
+	if _r == nil {
+		return nil
+	}
+	return &FilterShape{inner: _r}
+}
+
+// Extent calls the underlying Extent.
+func (x *FilterShape) Extent() corefoundation.CGRect {
+	return x.inner.Extent()
+}
+
+// FilterShapeable is the interface implemented by [FilterShape], for mocking and DI.
+type FilterShapeable interface {
+	Unwrap() *raw.CIFilterShape
+	TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape
+	InsetByXY(dx int, dy int) *FilterShape
+	UnionWith(s2 *raw.CIFilterShape) *FilterShape
+	UnionWithRect(r corefoundation.CGRect) *FilterShape
+	IntersectWith(s2 *raw.CIFilterShape) *FilterShape
+	IntersectWithRect(r corefoundation.CGRect) *FilterShape
+	Extent() corefoundation.CGRect
+}
+
+var _ FilterShapeable = (*FilterShape)(nil)
+

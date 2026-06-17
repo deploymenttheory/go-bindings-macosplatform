@@ -23,3 +23,20 @@ func NewSendMessageAttachment() *SendMessageAttachment {
 	return &SendMessageAttachment{inner: raw.INSendMessageAttachmentFromID(_id)}
 }
 
+// AudioMessageFile calls the underlying AudioMessageFile.
+func (x *SendMessageAttachment) AudioMessageFile() *File {
+	_r := x.inner.AudioMessageFile()
+	if _r == nil {
+		return nil
+	}
+	return &File{inner: _r}
+}
+
+// SendMessageAttachmentable is the interface implemented by [SendMessageAttachment], for mocking and DI.
+type SendMessageAttachmentable interface {
+	Unwrap() *raw.INSendMessageAttachment
+	AudioMessageFile() *File
+}
+
+var _ SendMessageAttachmentable = (*SendMessageAttachment)(nil)
+

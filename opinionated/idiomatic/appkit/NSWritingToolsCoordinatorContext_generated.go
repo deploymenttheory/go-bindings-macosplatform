@@ -25,3 +25,34 @@ func NewWritingToolsCoordinatorContextWithAttributedStringRange(attributedString
 	return &WritingToolsCoordinatorContext{inner: raw.NSWritingToolsCoordinatorContextFromID(_id)}
 }
 
+// AttributedString calls the underlying AttributedString.
+func (x *WritingToolsCoordinatorContext) AttributedString() *foundation.NSAttributedString {
+	return x.inner.AttributedString()
+}
+
+// Range calls the underlying Range.
+func (x *WritingToolsCoordinatorContext) Range() foundation.NSRange {
+	return x.inner.Range()
+}
+
+// Identifier calls the underlying Identifier.
+func (x *WritingToolsCoordinatorContext) Identifier() *foundation.NSUUID {
+	return x.inner.Identifier()
+}
+
+// ResolvedRange calls the underlying ResolvedRange.
+func (x *WritingToolsCoordinatorContext) ResolvedRange() foundation.NSRange {
+	return x.inner.ResolvedRange()
+}
+
+// WritingToolsCoordinatorContextable is the interface implemented by [WritingToolsCoordinatorContext], for mocking and DI.
+type WritingToolsCoordinatorContextable interface {
+	Unwrap() *raw.NSWritingToolsCoordinatorContext
+	AttributedString() *foundation.NSAttributedString
+	Range() foundation.NSRange
+	Identifier() *foundation.NSUUID
+	ResolvedRange() foundation.NSRange
+}
+
+var _ WritingToolsCoordinatorContextable = (*WritingToolsCoordinatorContext)(nil)
+

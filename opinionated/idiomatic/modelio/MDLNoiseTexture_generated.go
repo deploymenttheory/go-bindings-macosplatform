@@ -42,3 +42,10 @@ func NewNoiseTextureCellularNoiseWithFrequencyNameTextureDimensionsChannelEncodi
 
 func (x *NoiseTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
+// NoiseTextureable is the interface implemented by [NoiseTexture], for mocking and DI.
+type NoiseTextureable interface {
+	Unwrap() *raw.MDLNoiseTexture
+}
+
+var _ NoiseTextureable = (*NoiseTexture)(nil)
+

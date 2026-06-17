@@ -24,3 +24,30 @@ func NewMaterialPropertyConnectionWithOutputInput(output *raw.MDLMaterialPropert
 	return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(_id)}
 }
 
+// Output calls the underlying Output.
+func (x *MaterialPropertyConnection) Output() *MaterialProperty {
+	_r := x.inner.Output()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// Input calls the underlying Input.
+func (x *MaterialPropertyConnection) Input() *MaterialProperty {
+	_r := x.inner.Input()
+	if _r == nil {
+		return nil
+	}
+	return &MaterialProperty{inner: _r}
+}
+
+// MaterialPropertyConnectionable is the interface implemented by [MaterialPropertyConnection], for mocking and DI.
+type MaterialPropertyConnectionable interface {
+	Unwrap() *raw.MDLMaterialPropertyConnection
+	Output() *MaterialProperty
+	Input() *MaterialProperty
+}
+
+var _ MaterialPropertyConnectionable = (*MaterialPropertyConnection)(nil)
+

@@ -31,3 +31,22 @@ func NewExtensionPropertyStateWithValueAttributes(value objc.ID, attributes *raw
 	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
 }
 
+// Value calls the underlying Value.
+func (x *ExtensionPropertyState) Value() objc.ID {
+	return x.inner.Value()
+}
+
+// Attributes calls the underlying Attributes.
+func (x *ExtensionPropertyState) Attributes() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
+	return x.inner.Attributes()
+}
+
+// ExtensionPropertyStateable is the interface implemented by [ExtensionPropertyState], for mocking and DI.
+type ExtensionPropertyStateable interface {
+	Unwrap() *raw.CMIOExtensionPropertyState[objc.ID]
+	Value() objc.ID
+	Attributes() *raw.CMIOExtensionPropertyAttributes[objc.ID]
+}
+
+var _ ExtensionPropertyStateable = (*ExtensionPropertyState)(nil)
+

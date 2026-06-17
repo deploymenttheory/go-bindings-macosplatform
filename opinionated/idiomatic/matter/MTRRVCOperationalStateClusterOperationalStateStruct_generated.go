@@ -7,6 +7,7 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTRRVCOperationalStateClusterOperationalStateStruct) WithOperationalSta
 	x.inner.SetOperationalStateLabel(foundation.NSStringStringWithUTF8String(operationalStateLabel))
 	return x
 }
+
+// OperationalStateID calls the underlying OperationalStateID.
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateID() *foundation.NSNumber {
+	return x.inner.OperationalStateID()
+}
+
+// SetOperationalStateID calls the underlying SetOperationalStateID.
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateID(operationalStateID *foundation.NSNumber) {
+	x.inner.SetOperationalStateID(operationalStateID)
+}
+
+// OperationalStateLabel calls the underlying OperationalStateLabel.
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) OperationalStateLabel() string {
+	_r := x.inner.OperationalStateLabel()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetOperationalStateLabel calls the underlying SetOperationalStateLabel.
+func (x *MTRRVCOperationalStateClusterOperationalStateStruct) SetOperationalStateLabel(operationalStateLabel string) {
+	x.inner.SetOperationalStateLabel(foundation.NSStringStringWithUTF8String(operationalStateLabel))
+}
+
+// MTRRVCOperationalStateClusterOperationalStateStructable is the interface implemented by [MTRRVCOperationalStateClusterOperationalStateStruct], for mocking and DI.
+type MTRRVCOperationalStateClusterOperationalStateStructable interface {
+	Unwrap() *raw.MTRRVCOperationalStateClusterOperationalStateStruct
+	WithOperationalStateID(operationalStateID *foundation.NSNumber) *MTRRVCOperationalStateClusterOperationalStateStruct
+	WithOperationalStateLabel(operationalStateLabel string) *MTRRVCOperationalStateClusterOperationalStateStruct
+	OperationalStateID() *foundation.NSNumber
+	SetOperationalStateID(operationalStateID *foundation.NSNumber)
+	OperationalStateLabel() string
+	SetOperationalStateLabel(operationalStateLabel string)
+}
+
+var _ MTRRVCOperationalStateClusterOperationalStateStructable = (*MTRRVCOperationalStateClusterOperationalStateStruct)(nil)
 

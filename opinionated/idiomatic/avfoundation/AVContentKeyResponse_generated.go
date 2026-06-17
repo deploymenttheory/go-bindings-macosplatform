@@ -23,3 +23,10 @@ func NewContentKeyResponse() *ContentKeyResponse {
 	return &ContentKeyResponse{inner: raw.AVContentKeyResponseFromID(_id)}
 }
 
+// ContentKeyResponseable is the interface implemented by [ContentKeyResponse], for mocking and DI.
+type ContentKeyResponseable interface {
+	Unwrap() *raw.AVContentKeyResponse
+}
+
+var _ ContentKeyResponseable = (*ContentKeyResponse)(nil)
+

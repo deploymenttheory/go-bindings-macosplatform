@@ -7,6 +7,7 @@ package foundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PointerFunctions wraps [raw.NSPointerFunctions] with a fluent Go API.
@@ -36,5 +37,110 @@ func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWrite
 	return x
 }
 
+// HashFunction calls the underlying HashFunction.
+func (x *PointerFunctions) HashFunction() unsafe.Pointer {
+	return x.inner.HashFunction()
+}
+
+// SetHashFunction calls the underlying SetHashFunction.
+func (x *PointerFunctions) SetHashFunction(hashFunction unsafe.Pointer) {
+	x.inner.SetHashFunction(hashFunction)
+}
+
+// IsEqualFunction calls the underlying IsEqualFunction.
+func (x *PointerFunctions) IsEqualFunction() unsafe.Pointer {
+	return x.inner.IsEqualFunction()
+}
+
+// SetIsEqualFunction calls the underlying SetIsEqualFunction.
+func (x *PointerFunctions) SetIsEqualFunction(isEqualFunction unsafe.Pointer) {
+	x.inner.SetIsEqualFunction(isEqualFunction)
+}
+
+// SizeFunction calls the underlying SizeFunction.
+func (x *PointerFunctions) SizeFunction() unsafe.Pointer {
+	return x.inner.SizeFunction()
+}
+
+// SetSizeFunction calls the underlying SetSizeFunction.
+func (x *PointerFunctions) SetSizeFunction(sizeFunction unsafe.Pointer) {
+	x.inner.SetSizeFunction(sizeFunction)
+}
+
+// DescriptionFunction calls the underlying DescriptionFunction.
+func (x *PointerFunctions) DescriptionFunction() unsafe.Pointer {
+	return x.inner.DescriptionFunction()
+}
+
+// SetDescriptionFunction calls the underlying SetDescriptionFunction.
+func (x *PointerFunctions) SetDescriptionFunction(descriptionFunction unsafe.Pointer) {
+	x.inner.SetDescriptionFunction(descriptionFunction)
+}
+
+// RelinquishFunction calls the underlying RelinquishFunction.
+func (x *PointerFunctions) RelinquishFunction() unsafe.Pointer {
+	return x.inner.RelinquishFunction()
+}
+
+// SetRelinquishFunction calls the underlying SetRelinquishFunction.
+func (x *PointerFunctions) SetRelinquishFunction(relinquishFunction unsafe.Pointer) {
+	x.inner.SetRelinquishFunction(relinquishFunction)
+}
+
+// AcquireFunction calls the underlying AcquireFunction.
+func (x *PointerFunctions) AcquireFunction() unsafe.Pointer {
+	return x.inner.AcquireFunction()
+}
+
+// SetAcquireFunction calls the underlying SetAcquireFunction.
+func (x *PointerFunctions) SetAcquireFunction(acquireFunction unsafe.Pointer) {
+	x.inner.SetAcquireFunction(acquireFunction)
+}
+
+// UsesStrongWriteBarrier calls the underlying UsesStrongWriteBarrier.
+func (x *PointerFunctions) UsesStrongWriteBarrier() bool {
+	return x.inner.UsesStrongWriteBarrier()
+}
+
+// SetUsesStrongWriteBarrier calls the underlying SetUsesStrongWriteBarrier.
+func (x *PointerFunctions) SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool) {
+	x.inner.SetUsesStrongWriteBarrier(usesStrongWriteBarrier)
+}
+
+// UsesWeakReadAndWriteBarriers calls the underlying UsesWeakReadAndWriteBarriers.
+func (x *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
+	return x.inner.UsesWeakReadAndWriteBarriers()
+}
+
+// SetUsesWeakReadAndWriteBarriers calls the underlying SetUsesWeakReadAndWriteBarriers.
+func (x *PointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
+	x.inner.SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers)
+}
+
 func (x *PointerFunctions) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PointerFunctionsable is the interface implemented by [PointerFunctions], for mocking and DI.
+type PointerFunctionsable interface {
+	Unwrap() *raw.NSPointerFunctions
+	WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions
+	WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions
+	HashFunction() unsafe.Pointer
+	SetHashFunction(hashFunction unsafe.Pointer)
+	IsEqualFunction() unsafe.Pointer
+	SetIsEqualFunction(isEqualFunction unsafe.Pointer)
+	SizeFunction() unsafe.Pointer
+	SetSizeFunction(sizeFunction unsafe.Pointer)
+	DescriptionFunction() unsafe.Pointer
+	SetDescriptionFunction(descriptionFunction unsafe.Pointer)
+	RelinquishFunction() unsafe.Pointer
+	SetRelinquishFunction(relinquishFunction unsafe.Pointer)
+	AcquireFunction() unsafe.Pointer
+	SetAcquireFunction(acquireFunction unsafe.Pointer)
+	UsesStrongWriteBarrier() bool
+	SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool)
+	UsesWeakReadAndWriteBarriers() bool
+	SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool)
+}
+
+var _ PointerFunctionsable = (*PointerFunctions)(nil)
 

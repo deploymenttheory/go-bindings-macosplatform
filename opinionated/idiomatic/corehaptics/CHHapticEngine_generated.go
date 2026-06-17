@@ -6,6 +6,7 @@ package corehaptics
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -78,9 +79,168 @@ func (x *HapticEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *Haptic
 	return x
 }
 
+// StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
+func (x *HapticEngine) StartWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	x.inner.StartWithCompletionHandler(completionHandler)
+}
+
 // StartAndReturnError returns any validation error.
 func (x *HapticEngine) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
+
+// StopWithCompletionHandler calls the underlying StopWithCompletionHandler.
+func (x *HapticEngine) StopWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
+	x.inner.StopWithCompletionHandler(completionHandler)
+}
+
+// NotifyWhenPlayersFinished calls the underlying NotifyWhenPlayersFinished.
+func (x *HapticEngine) NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) raw.CHHapticEngineFinishedAction) {
+	x.inner.NotifyWhenPlayersFinished(finishedHandler)
+}
+
+// CreatePlayerWithPatternError calls the underlying CreatePlayerWithPatternError.
+func (x *HapticEngine) CreatePlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticPatternPlayer, error) {
+	return x.inner.CreatePlayerWithPatternError(pattern)
+}
+
+// CreateAdvancedPlayerWithPatternError calls the underlying CreateAdvancedPlayerWithPatternError.
+func (x *HapticEngine) CreateAdvancedPlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticAdvancedPatternPlayer, error) {
+	return x.inner.CreateAdvancedPlayerWithPatternError(pattern)
+}
+
+// RegisterAudioResourceOptionsError calls the underlying RegisterAudioResourceOptionsError.
+func (x *HapticEngine) RegisterAudioResourceOptionsError(resourceURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (uint, error) {
+	return x.inner.RegisterAudioResourceOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resourceURL)), options)
+}
+
+// UnregisterAudioResourceError calls the underlying UnregisterAudioResourceError.
+func (x *HapticEngine) UnregisterAudioResourceError(resourceID uint) (bool, error) {
+	return x.inner.UnregisterAudioResourceError(resourceID)
+}
+
+// PlayPatternFromURLError calls the underlying PlayPatternFromURLError.
+func (x *HapticEngine) PlayPatternFromURLError(fileURL string) (bool, error) {
+	return x.inner.PlayPatternFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+}
+
+// PlayPatternFromDataError calls the underlying PlayPatternFromDataError.
+func (x *HapticEngine) PlayPatternFromDataError(data *foundation.NSData) (bool, error) {
+	return x.inner.PlayPatternFromDataError(data)
+}
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *HapticEngine) CurrentTime() float64 {
+	return x.inner.CurrentTime()
+}
+
+// StoppedHandler calls the underlying StoppedHandler.
+func (x *HapticEngine) StoppedHandler() objc.Block {
+	return x.inner.StoppedHandler()
+}
+
+// SetStoppedHandler calls the underlying SetStoppedHandler.
+func (x *HapticEngine) SetStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason)) {
+	x.inner.SetStoppedHandler(stoppedHandler)
+}
+
+// ResetHandler calls the underlying ResetHandler.
+func (x *HapticEngine) ResetHandler() objc.Block {
+	return x.inner.ResetHandler()
+}
+
+// SetResetHandler calls the underlying SetResetHandler.
+func (x *HapticEngine) SetResetHandler(resetHandler func()) {
+	x.inner.SetResetHandler(resetHandler)
+}
+
+// PlaysHapticsOnly calls the underlying PlaysHapticsOnly.
+func (x *HapticEngine) PlaysHapticsOnly() bool {
+	return x.inner.PlaysHapticsOnly()
+}
+
+// SetPlaysHapticsOnly calls the underlying SetPlaysHapticsOnly.
+func (x *HapticEngine) SetPlaysHapticsOnly(playsHapticsOnly bool) {
+	x.inner.SetPlaysHapticsOnly(playsHapticsOnly)
+}
+
+// PlaysAudioOnly calls the underlying PlaysAudioOnly.
+func (x *HapticEngine) PlaysAudioOnly() bool {
+	return x.inner.PlaysAudioOnly()
+}
+
+// SetPlaysAudioOnly calls the underlying SetPlaysAudioOnly.
+func (x *HapticEngine) SetPlaysAudioOnly(playsAudioOnly bool) {
+	x.inner.SetPlaysAudioOnly(playsAudioOnly)
+}
+
+// IsMutedForAudio calls the underlying IsMutedForAudio.
+func (x *HapticEngine) IsMutedForAudio() bool {
+	return x.inner.IsMutedForAudio()
+}
+
+// SetIsMutedForAudio calls the underlying SetIsMutedForAudio.
+func (x *HapticEngine) SetIsMutedForAudio(isMutedForAudio bool) {
+	x.inner.SetIsMutedForAudio(isMutedForAudio)
+}
+
+// IsMutedForHaptics calls the underlying IsMutedForHaptics.
+func (x *HapticEngine) IsMutedForHaptics() bool {
+	return x.inner.IsMutedForHaptics()
+}
+
+// SetIsMutedForHaptics calls the underlying SetIsMutedForHaptics.
+func (x *HapticEngine) SetIsMutedForHaptics(isMutedForHaptics bool) {
+	x.inner.SetIsMutedForHaptics(isMutedForHaptics)
+}
+
+// IsAutoShutdownEnabled calls the underlying IsAutoShutdownEnabled.
+func (x *HapticEngine) IsAutoShutdownEnabled() bool {
+	return x.inner.IsAutoShutdownEnabled()
+}
+
+// SetAutoShutdownEnabled calls the underlying SetAutoShutdownEnabled.
+func (x *HapticEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
+	x.inner.SetAutoShutdownEnabled(autoShutdownEnabled)
+}
+
+// HapticEngineable is the interface implemented by [HapticEngine], for mocking and DI.
+type HapticEngineable interface {
+	Unwrap() *raw.CHHapticEngine
+	WithStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason)) *HapticEngine
+	WithResetHandler(resetHandler func()) *HapticEngine
+	WithPlaysHapticsOnly(playsHapticsOnly bool) *HapticEngine
+	WithPlaysAudioOnly(playsAudioOnly bool) *HapticEngine
+	WithIsMutedForAudio(isMutedForAudio bool) *HapticEngine
+	WithIsMutedForHaptics(isMutedForHaptics bool) *HapticEngine
+	WithAutoShutdownEnabled(autoShutdownEnabled bool) *HapticEngine
+	StartWithCompletionHandler(completionHandler func(unsafe.Pointer))
+	StartAndReturnError() error
+	StopWithCompletionHandler(completionHandler func(unsafe.Pointer))
+	NotifyWhenPlayersFinished(finishedHandler func(unsafe.Pointer) raw.CHHapticEngineFinishedAction)
+	CreatePlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticPatternPlayer, error)
+	CreateAdvancedPlayerWithPatternError(pattern *raw.CHHapticPattern) (raw.CHHapticAdvancedPatternPlayer, error)
+	RegisterAudioResourceOptionsError(resourceURL string, options *foundation.NSDictionary[objc.ID, objc.ID]) (uint, error)
+	UnregisterAudioResourceError(resourceID uint) (bool, error)
+	PlayPatternFromURLError(fileURL string) (bool, error)
+	PlayPatternFromDataError(data *foundation.NSData) (bool, error)
+	CurrentTime() float64
+	StoppedHandler() objc.Block
+	SetStoppedHandler(stoppedHandler func(raw.CHHapticEngineStoppedReason))
+	ResetHandler() objc.Block
+	SetResetHandler(resetHandler func())
+	PlaysHapticsOnly() bool
+	SetPlaysHapticsOnly(playsHapticsOnly bool)
+	PlaysAudioOnly() bool
+	SetPlaysAudioOnly(playsAudioOnly bool)
+	IsMutedForAudio() bool
+	SetIsMutedForAudio(isMutedForAudio bool)
+	IsMutedForHaptics() bool
+	SetIsMutedForHaptics(isMutedForHaptics bool)
+	IsAutoShutdownEnabled() bool
+	SetAutoShutdownEnabled(autoShutdownEnabled bool)
+}
+
+var _ HapticEngineable = (*HapticEngine)(nil)
 

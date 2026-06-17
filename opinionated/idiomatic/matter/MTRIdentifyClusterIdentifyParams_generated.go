@@ -42,3 +42,49 @@ func (x *MTRIdentifyClusterIdentifyParams) WithServerSideProcessingTimeout(serve
 	return x
 }
 
+// IdentifyTime calls the underlying IdentifyTime.
+func (x *MTRIdentifyClusterIdentifyParams) IdentifyTime() *foundation.NSNumber {
+	return x.inner.IdentifyTime()
+}
+
+// SetIdentifyTime calls the underlying SetIdentifyTime.
+func (x *MTRIdentifyClusterIdentifyParams) SetIdentifyTime(identifyTime *foundation.NSNumber) {
+	x.inner.SetIdentifyTime(identifyTime)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRIdentifyClusterIdentifyParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRIdentifyClusterIdentifyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRIdentifyClusterIdentifyParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRIdentifyClusterIdentifyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRIdentifyClusterIdentifyParamsable is the interface implemented by [MTRIdentifyClusterIdentifyParams], for mocking and DI.
+type MTRIdentifyClusterIdentifyParamsable interface {
+	Unwrap() *raw.MTRIdentifyClusterIdentifyParams
+	WithIdentifyTime(identifyTime *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRIdentifyClusterIdentifyParams
+	IdentifyTime() *foundation.NSNumber
+	SetIdentifyTime(identifyTime *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRIdentifyClusterIdentifyParamsable = (*MTRIdentifyClusterIdentifyParams)(nil)
+

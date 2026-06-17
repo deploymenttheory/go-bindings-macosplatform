@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +37,79 @@ func (x *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTe
 	x.inner.SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds)
 	return x
 }
+
+// LoadView calls the underlying LoadView.
+func (x *TextAttachmentViewProvider) LoadView() {
+	x.inner.LoadView()
+}
+
+// AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition calls the underlying AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition.
+func (x *TextAttachmentViewProvider) AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location raw.NSTextLocation, textContainer *raw.NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect {
+	return x.inner.AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes, location, textContainer, proposedLineFragment, position)
+}
+
+// TextAttachment calls the underlying TextAttachment.
+func (x *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
+	_r := x.inner.TextAttachment()
+	if _r == nil {
+		return nil
+	}
+	return &TextAttachment{inner: _r}
+}
+
+// TextLayoutManager calls the underlying TextLayoutManager.
+func (x *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
+	_r := x.inner.TextLayoutManager()
+	if _r == nil {
+		return nil
+	}
+	return &TextLayoutManager{inner: _r}
+}
+
+// Location calls the underlying Location.
+func (x *TextAttachmentViewProvider) Location() raw.NSTextLocation {
+	return x.inner.Location()
+}
+
+// View calls the underlying View.
+func (x *TextAttachmentViewProvider) View() *View {
+	_r := x.inner.View()
+	if _r == nil {
+		return nil
+	}
+	return &View{inner: _r}
+}
+
+// SetView calls the underlying SetView.
+func (x *TextAttachmentViewProvider) SetView(view *raw.NSView) {
+	x.inner.SetView(view)
+}
+
+// TracksTextAttachmentViewBounds calls the underlying TracksTextAttachmentViewBounds.
+func (x *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
+	return x.inner.TracksTextAttachmentViewBounds()
+}
+
+// SetTracksTextAttachmentViewBounds calls the underlying SetTracksTextAttachmentViewBounds.
+func (x *TextAttachmentViewProvider) SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) {
+	x.inner.SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds)
+}
+
+// TextAttachmentViewProviderable is the interface implemented by [TextAttachmentViewProvider], for mocking and DI.
+type TextAttachmentViewProviderable interface {
+	Unwrap() *raw.NSTextAttachmentViewProvider
+	WithView(view ViewProvider) *TextAttachmentViewProvider
+	WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider
+	LoadView()
+	AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location raw.NSTextLocation, textContainer *raw.NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect
+	TextAttachment() *TextAttachment
+	TextLayoutManager() *TextLayoutManager
+	Location() raw.NSTextLocation
+	View() *View
+	SetView(view *raw.NSView)
+	TracksTextAttachmentViewBounds() bool
+	SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool)
+}
+
+var _ TextAttachmentViewProviderable = (*TextAttachmentViewProvider)(nil)
 

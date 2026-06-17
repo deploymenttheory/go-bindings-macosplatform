@@ -25,7 +25,36 @@ func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildEle
 	return &TextListElement{inner: raw.NSTextListElementFromID(_id)}
 }
 
+// TextList calls the underlying TextList.
+func (x *TextListElement) TextList() *TextList {
+	_r := x.inner.TextList()
+	if _r == nil {
+		return nil
+	}
+	return &TextList{inner: _r}
+}
+
+// Contents calls the underlying Contents.
+func (x *TextListElement) Contents() *foundation.NSAttributedString {
+	return x.inner.Contents()
+}
+
+// MarkerAttributes calls the underlying MarkerAttributes.
+func (x *TextListElement) MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.MarkerAttributes()
+}
+
 func (x *TextListElement) asTextParagraph() *raw.NSTextParagraph { return &x.inner.NSTextParagraph }
 
 func (x *TextListElement) asTextElement() *raw.NSTextElement { return &x.inner.NSTextParagraph.NSTextElement }
+
+// TextListElementable is the interface implemented by [TextListElement], for mocking and DI.
+type TextListElementable interface {
+	Unwrap() *raw.NSTextListElement
+	TextList() *TextList
+	Contents() *foundation.NSAttributedString
+	MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+}
+
+var _ TextListElementable = (*TextListElement)(nil)
 

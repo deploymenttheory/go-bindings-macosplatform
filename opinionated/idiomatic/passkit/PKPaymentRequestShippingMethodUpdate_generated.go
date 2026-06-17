@@ -25,3 +25,10 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 
 func (x *PaymentRequestShippingMethodUpdate) asPaymentRequestUpdate() *raw.PKPaymentRequestUpdate { return &x.inner.PKPaymentRequestUpdate }
 
+// PaymentRequestShippingMethodUpdateable is the interface implemented by [PaymentRequestShippingMethodUpdate], for mocking and DI.
+type PaymentRequestShippingMethodUpdateable interface {
+	Unwrap() *raw.PKPaymentRequestShippingMethodUpdate
+}
+
+var _ PaymentRequestShippingMethodUpdateable = (*PaymentRequestShippingMethodUpdate)(nil)
+

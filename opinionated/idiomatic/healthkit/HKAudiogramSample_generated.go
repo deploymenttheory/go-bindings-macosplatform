@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *AudiogramSample) SensitivityPoints() []*raw.HKAudiogramSensitivityPoint
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.HKAudiogramSensitivityPoint, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.HKAudiogramSensitivityPoint {
+		return raw.HKAudiogramSensitivityPointFromID(purego.Retain(_id))
+	})
 }
 
 func (x *AudiogramSample) asSample() *raw.HKSample { return &x.inner.HKSample }
 
 func (x *AudiogramSample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
+
+// AudiogramSampleable is the interface implemented by [AudiogramSample], for mocking and DI.
+type AudiogramSampleable interface {
+	Unwrap() *raw.HKAudiogramSample
+	SensitivityPoints() []*raw.HKAudiogramSensitivityPoint
+}
+
+var _ AudiogramSampleable = (*AudiogramSample)(nil)
 

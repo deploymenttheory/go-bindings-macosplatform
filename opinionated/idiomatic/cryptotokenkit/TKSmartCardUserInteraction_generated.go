@@ -7,6 +7,7 @@ package cryptotokenkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SmartCardUserInteraction wraps [raw.TKSmartCardUserInteraction] with a fluent Go API.
@@ -41,5 +42,57 @@ func (x *SmartCardUserInteraction) WithInteractionTimeout(interactionTimeout flo
 	return x
 }
 
+// RunWithReply calls the underlying RunWithReply.
+func (x *SmartCardUserInteraction) RunWithReply(reply func(bool, unsafe.Pointer)) {
+	x.inner.RunWithReply(reply)
+}
+
+// Cancel calls the underlying Cancel.
+func (x *SmartCardUserInteraction) Cancel() bool {
+	return x.inner.Cancel()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *SmartCardUserInteraction) Delegate() raw.TKSmartCardUserInteractionDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *SmartCardUserInteraction) SetDelegate(delegate raw.TKSmartCardUserInteractionDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// SetInitialTimeout calls the underlying SetInitialTimeout.
+func (x *SmartCardUserInteraction) SetInitialTimeout(initialTimeout float64) {
+	x.inner.SetInitialTimeout(initialTimeout)
+}
+
+// InteractionTimeout calls the underlying InteractionTimeout.
+func (x *SmartCardUserInteraction) InteractionTimeout() float64 {
+	return x.inner.InteractionTimeout()
+}
+
+// SetInteractionTimeout calls the underlying SetInteractionTimeout.
+func (x *SmartCardUserInteraction) SetInteractionTimeout(interactionTimeout float64) {
+	x.inner.SetInteractionTimeout(interactionTimeout)
+}
+
 func (x *SmartCardUserInteraction) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction { return x.inner }
+
+// SmartCardUserInteractionable is the interface implemented by [SmartCardUserInteraction], for mocking and DI.
+type SmartCardUserInteractionable interface {
+	Unwrap() *raw.TKSmartCardUserInteraction
+	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteraction
+	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteraction
+	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteraction
+	RunWithReply(reply func(bool, unsafe.Pointer))
+	Cancel() bool
+	Delegate() raw.TKSmartCardUserInteractionDelegate
+	SetDelegate(delegate raw.TKSmartCardUserInteractionDelegate)
+	SetInitialTimeout(initialTimeout float64)
+	InteractionTimeout() float64
+	SetInteractionTimeout(interactionTimeout float64)
+}
+
+var _ SmartCardUserInteractionable = (*SmartCardUserInteraction)(nil)
 

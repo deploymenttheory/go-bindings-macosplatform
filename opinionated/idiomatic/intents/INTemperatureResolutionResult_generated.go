@@ -25,3 +25,10 @@ func NewTemperatureResolutionResult() *TemperatureResolutionResult {
 
 func (x *TemperatureResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// TemperatureResolutionResultable is the interface implemented by [TemperatureResolutionResult], for mocking and DI.
+type TemperatureResolutionResultable interface {
+	Unwrap() *raw.INTemperatureResolutionResult
+}
+
+var _ TemperatureResolutionResultable = (*TemperatureResolutionResult)(nil)
+

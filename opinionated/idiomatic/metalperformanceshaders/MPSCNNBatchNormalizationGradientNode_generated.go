@@ -29,3 +29,10 @@ func (x *CNNBatchNormalizationGradientNode) asNNGradientFilterNode() *mpsneuraln
 
 func (x *CNNBatchNormalizationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
 
+// CNNBatchNormalizationGradientNodeable is the interface implemented by [CNNBatchNormalizationGradientNode], for mocking and DI.
+type CNNBatchNormalizationGradientNodeable interface {
+	Unwrap() *raw.MPSCNNBatchNormalizationGradientNode
+}
+
+var _ CNNBatchNormalizationGradientNodeable = (*CNNBatchNormalizationGradientNode)(nil)
+

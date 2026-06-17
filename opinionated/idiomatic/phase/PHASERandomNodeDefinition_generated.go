@@ -37,7 +37,33 @@ func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQue
 	return x
 }
 
+// AddSubtreeWeight calls the underlying AddSubtreeWeight.
+func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber) {
+	x.inner.AddSubtreeWeight(subtree, weight)
+}
+
+// UniqueSelectionQueueLength calls the underlying UniqueSelectionQueueLength.
+func (x *RandomNodeDefinition) UniqueSelectionQueueLength() int {
+	return x.inner.UniqueSelectionQueueLength()
+}
+
+// SetUniqueSelectionQueueLength calls the underlying SetUniqueSelectionQueueLength.
+func (x *RandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int) {
+	x.inner.SetUniqueSelectionQueueLength(uniqueSelectionQueueLength)
+}
+
 func (x *RandomNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition { return &x.inner.PHASESoundEventNodeDefinition }
 
 func (x *RandomNodeDefinition) asDefinition() *raw.PHASEDefinition { return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition }
+
+// RandomNodeDefinitionable is the interface implemented by [RandomNodeDefinition], for mocking and DI.
+type RandomNodeDefinitionable interface {
+	Unwrap() *raw.PHASERandomNodeDefinition
+	WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition
+	AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber)
+	UniqueSelectionQueueLength() int
+	SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int)
+}
+
+var _ RandomNodeDefinitionable = (*RandomNodeDefinition)(nil)
 

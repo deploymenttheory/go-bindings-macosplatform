@@ -25,7 +25,26 @@ func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items *foundation.NSArra
 	return &DateRangeMetadataGroup{inner: raw.AVDateRangeMetadataGroupFromID(_id)}
 }
 
+// StartDate calls the underlying StartDate.
+func (x *DateRangeMetadataGroup) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *DateRangeMetadataGroup) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
 func (x *DateRangeMetadataGroup) asDateRangeMetadataGroup() *raw.AVDateRangeMetadataGroup { return x.inner }
 
 func (x *DateRangeMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup { return &x.inner.AVMetadataGroup }
+
+// DateRangeMetadataGroupable is the interface implemented by [DateRangeMetadataGroup], for mocking and DI.
+type DateRangeMetadataGroupable interface {
+	Unwrap() *raw.AVDateRangeMetadataGroup
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+}
+
+var _ DateRangeMetadataGroupable = (*DateRangeMetadataGroup)(nil)
 

@@ -5,8 +5,11 @@
 package virtualization
 
 import (
+	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VirtioSocketDevice wraps [raw.VZVirtioSocketDevice] with a fluent Go API.
@@ -23,5 +26,51 @@ func NewVirtioSocketDevice() *VirtioSocketDevice {
 	return &VirtioSocketDevice{inner: raw.VZVirtioSocketDeviceFromID(_id)}
 }
 
+// SetSocketListenerForPort calls the underlying SetSocketListenerForPort.
+func (x *VirtioSocketDevice) SetSocketListenerForPort(listener *raw.VZVirtioSocketListener, port uint32) {
+	x.inner.SetSocketListenerForPort(listener, port)
+}
+
+// RemoveSocketListenerForPort calls the underlying RemoveSocketListenerForPort.
+func (x *VirtioSocketDevice) RemoveSocketListenerForPort(port uint32) {
+	x.inner.RemoveSocketListenerForPort(port)
+}
+
+// ConnectToPort blocks until the operation completes or ctx is cancelled.
+func (x *VirtioSocketDevice) ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error) {
+	type _result struct {
+		val *VirtioSocketConnection
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.ConnectToPortCompletionHandler(port, func(_p0 *raw.VZVirtioSocketConnection, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &VirtioSocketConnection{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *VirtioSocketConnection
+		return _zero, ctx.Err()
+	}
+}
+
 func (x *VirtioSocketDevice) asSocketDevice() *raw.VZSocketDevice { return &x.inner.VZSocketDevice }
+
+// VirtioSocketDeviceable is the interface implemented by [VirtioSocketDevice], for mocking and DI.
+type VirtioSocketDeviceable interface {
+	Unwrap() *raw.VZVirtioSocketDevice
+	SetSocketListenerForPort(listener *raw.VZVirtioSocketListener, port uint32)
+	RemoveSocketListenerForPort(port uint32)
+	ConnectToPort(ctx context.Context, port uint32) (*VirtioSocketConnection, error)
+}
+
+var _ VirtioSocketDeviceable = (*VirtioSocketDevice)(nil)
 

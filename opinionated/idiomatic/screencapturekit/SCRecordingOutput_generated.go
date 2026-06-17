@@ -5,6 +5,7 @@
 package screencapturekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,4 +24,23 @@ func NewRecordingOutputWithConfigurationDelegate(recordingOutputConfiguration *r
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConfiguration:delegate:"), recordingOutputConfiguration.Ptr(), delegate)
 	return &RecordingOutput{inner: raw.SCRecordingOutputFromID(_id)}
 }
+
+// RecordedDuration calls the underlying RecordedDuration.
+func (x *RecordingOutput) RecordedDuration() coremedia.CMTime {
+	return x.inner.RecordedDuration()
+}
+
+// RecordedFileSize calls the underlying RecordedFileSize.
+func (x *RecordingOutput) RecordedFileSize() int {
+	return x.inner.RecordedFileSize()
+}
+
+// RecordingOutputable is the interface implemented by [RecordingOutput], for mocking and DI.
+type RecordingOutputable interface {
+	Unwrap() *raw.SCRecordingOutput
+	RecordedDuration() coremedia.CMTime
+	RecordedFileSize() int
+}
+
+var _ RecordingOutputable = (*RecordingOutput)(nil)
 

@@ -29,3 +29,23 @@ func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelForma
 	return x
 }
 
+// PixelFormat calls the underlying PixelFormat.
+func (x *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() raw.MTLPixelFormat {
+	return x.inner.PixelFormat()
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *TileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat raw.MTLPixelFormat) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
+// TileRenderPipelineColorAttachmentDescriptorable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptor], for mocking and DI.
+type TileRenderPipelineColorAttachmentDescriptorable interface {
+	Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptor
+	WithPixelFormat(pixelFormat raw.MTLPixelFormat) *TileRenderPipelineColorAttachmentDescriptor
+	PixelFormat() raw.MTLPixelFormat
+	SetPixelFormat(pixelFormat raw.MTLPixelFormat)
+}
+
+var _ TileRenderPipelineColorAttachmentDescriptorable = (*TileRenderPipelineColorAttachmentDescriptor)(nil)
+

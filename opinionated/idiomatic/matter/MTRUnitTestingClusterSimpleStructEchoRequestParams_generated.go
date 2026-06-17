@@ -42,5 +42,55 @@ func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerSideProce
 	return x
 }
 
+// Arg1 calls the underlying Arg1.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
+	_r := x.inner.Arg1()
+	if _r == nil {
+		return nil
+	}
+	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+}
+
+// SetArg1 calls the underlying SetArg1.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct) {
+	x.inner.SetArg1(arg1)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
 func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams { return x.inner }
+
+// MTRUnitTestingClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRUnitTestingClusterSimpleStructEchoRequestParams], for mocking and DI.
+type MTRUnitTestingClusterSimpleStructEchoRequestParamsable interface {
+	Unwrap() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams
+	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams
+	Arg1() *MTRUnitTestingClusterSimpleStruct
+	SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRUnitTestingClusterSimpleStructEchoRequestParamsable = (*MTRUnitTestingClusterSimpleStructEchoRequestParams)(nil)
 

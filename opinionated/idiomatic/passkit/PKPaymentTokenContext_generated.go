@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,4 +55,92 @@ func (x *PaymentTokenContext) WithAmount(amount *foundation.NSDecimalNumber) *Pa
 	x.inner.SetAmount(amount)
 	return x
 }
+
+// MerchantIdentifier calls the underlying MerchantIdentifier.
+func (x *PaymentTokenContext) MerchantIdentifier() string {
+	_r := x.inner.MerchantIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMerchantIdentifier calls the underlying SetMerchantIdentifier.
+func (x *PaymentTokenContext) SetMerchantIdentifier(merchantIdentifier string) {
+	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+}
+
+// ExternalIdentifier calls the underlying ExternalIdentifier.
+func (x *PaymentTokenContext) ExternalIdentifier() string {
+	_r := x.inner.ExternalIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetExternalIdentifier calls the underlying SetExternalIdentifier.
+func (x *PaymentTokenContext) SetExternalIdentifier(externalIdentifier string) {
+	x.inner.SetExternalIdentifier(foundation.NSStringStringWithUTF8String(externalIdentifier))
+}
+
+// MerchantName calls the underlying MerchantName.
+func (x *PaymentTokenContext) MerchantName() string {
+	_r := x.inner.MerchantName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMerchantName calls the underlying SetMerchantName.
+func (x *PaymentTokenContext) SetMerchantName(merchantName string) {
+	x.inner.SetMerchantName(foundation.NSStringStringWithUTF8String(merchantName))
+}
+
+// MerchantDomain calls the underlying MerchantDomain.
+func (x *PaymentTokenContext) MerchantDomain() string {
+	_r := x.inner.MerchantDomain()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMerchantDomain calls the underlying SetMerchantDomain.
+func (x *PaymentTokenContext) SetMerchantDomain(merchantDomain string) {
+	x.inner.SetMerchantDomain(foundation.NSStringStringWithUTF8String(merchantDomain))
+}
+
+// Amount calls the underlying Amount.
+func (x *PaymentTokenContext) Amount() *foundation.NSDecimalNumber {
+	return x.inner.Amount()
+}
+
+// SetAmount calls the underlying SetAmount.
+func (x *PaymentTokenContext) SetAmount(amount *foundation.NSDecimalNumber) {
+	x.inner.SetAmount(amount)
+}
+
+// PaymentTokenContextable is the interface implemented by [PaymentTokenContext], for mocking and DI.
+type PaymentTokenContextable interface {
+	Unwrap() *raw.PKPaymentTokenContext
+	WithMerchantIdentifier(merchantIdentifier string) *PaymentTokenContext
+	WithExternalIdentifier(externalIdentifier string) *PaymentTokenContext
+	WithMerchantName(merchantName string) *PaymentTokenContext
+	WithMerchantDomain(merchantDomain string) *PaymentTokenContext
+	WithAmount(amount *foundation.NSDecimalNumber) *PaymentTokenContext
+	MerchantIdentifier() string
+	SetMerchantIdentifier(merchantIdentifier string)
+	ExternalIdentifier() string
+	SetExternalIdentifier(externalIdentifier string)
+	MerchantName() string
+	SetMerchantName(merchantName string)
+	MerchantDomain() string
+	SetMerchantDomain(merchantDomain string)
+	Amount() *foundation.NSDecimalNumber
+	SetAmount(amount *foundation.NSDecimalNumber)
+}
+
+var _ PaymentTokenContextable = (*PaymentTokenContext)(nil)
 

@@ -29,3 +29,10 @@ func (x *CNNNeuronAbsolute) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MP
 
 func (x *CNNNeuronAbsolute) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
 
+// CNNNeuronAbsoluteable is the interface implemented by [CNNNeuronAbsolute], for mocking and DI.
+type CNNNeuronAbsoluteable interface {
+	Unwrap() *raw.MPSCNNNeuronAbsolute
+}
+
+var _ CNNNeuronAbsoluteable = (*CNNNeuronAbsolute)(nil)
+

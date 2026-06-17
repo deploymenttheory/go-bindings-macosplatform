@@ -36,5 +36,38 @@ func (x *ExpressionDescription) WithExpressionResultType(expressionResultType ra
 	return x
 }
 
+// Expression calls the underlying Expression.
+func (x *ExpressionDescription) Expression() *foundation.NSExpression {
+	return x.inner.Expression()
+}
+
+// SetExpression calls the underlying SetExpression.
+func (x *ExpressionDescription) SetExpression(expression *foundation.NSExpression) {
+	x.inner.SetExpression(expression)
+}
+
+// ExpressionResultType calls the underlying ExpressionResultType.
+func (x *ExpressionDescription) ExpressionResultType() raw.NSAttributeType {
+	return x.inner.ExpressionResultType()
+}
+
+// SetExpressionResultType calls the underlying SetExpressionResultType.
+func (x *ExpressionDescription) SetExpressionResultType(expressionResultType raw.NSAttributeType) {
+	x.inner.SetExpressionResultType(expressionResultType)
+}
+
 func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescription { return &x.inner.NSPropertyDescription }
+
+// ExpressionDescriptionable is the interface implemented by [ExpressionDescription], for mocking and DI.
+type ExpressionDescriptionable interface {
+	Unwrap() *raw.NSExpressionDescription
+	WithExpression(expression *foundation.NSExpression) *ExpressionDescription
+	WithExpressionResultType(expressionResultType raw.NSAttributeType) *ExpressionDescription
+	Expression() *foundation.NSExpression
+	SetExpression(expression *foundation.NSExpression)
+	ExpressionResultType() raw.NSAttributeType
+	SetExpressionResultType(expressionResultType raw.NSAttributeType)
+}
+
+var _ ExpressionDescriptionable = (*ExpressionDescription)(nil)
 

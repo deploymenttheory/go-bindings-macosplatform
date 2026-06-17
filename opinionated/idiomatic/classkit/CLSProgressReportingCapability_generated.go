@@ -7,6 +7,7 @@ package classkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,5 +26,28 @@ func NewProgressReportingCapabilityWithKindDetails(kind raw.CLSProgressReporting
 	return &ProgressReportingCapability{inner: raw.CLSProgressReportingCapabilityFromID(_id)}
 }
 
+// Kind calls the underlying Kind.
+func (x *ProgressReportingCapability) Kind() raw.CLSProgressReportingCapabilityKind {
+	return x.inner.Kind()
+}
+
+// Details calls the underlying Details.
+func (x *ProgressReportingCapability) Details() string {
+	_r := x.inner.Details()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 func (x *ProgressReportingCapability) asObject() *raw.CLSObject { return &x.inner.CLSObject }
+
+// ProgressReportingCapabilityable is the interface implemented by [ProgressReportingCapability], for mocking and DI.
+type ProgressReportingCapabilityable interface {
+	Unwrap() *raw.CLSProgressReportingCapability
+	Kind() raw.CLSProgressReportingCapabilityKind
+	Details() string
+}
+
+var _ ProgressReportingCapabilityable = (*ProgressReportingCapability)(nil)
 

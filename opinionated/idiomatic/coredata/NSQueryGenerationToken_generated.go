@@ -23,3 +23,10 @@ func NewQueryGenerationToken() *QueryGenerationToken {
 	return &QueryGenerationToken{inner: raw.NSQueryGenerationTokenFromID(_id)}
 }
 
+// QueryGenerationTokenable is the interface implemented by [QueryGenerationToken], for mocking and DI.
+type QueryGenerationTokenable interface {
+	Unwrap() *raw.NSQueryGenerationToken
+}
+
+var _ QueryGenerationTokenable = (*QueryGenerationToken)(nil)
+

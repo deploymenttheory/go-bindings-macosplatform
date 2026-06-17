@@ -25,7 +25,36 @@ func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, stat
 	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(_id)}
 }
 
+// ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
+func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) *String {
+	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// StatusCode calls the underlying StatusCode.
+func (x *HTTPURLResponse) StatusCode() int {
+	return x.inner.StatusCode()
+}
+
+// AllHeaderFields calls the underlying AllHeaderFields.
+func (x *HTTPURLResponse) AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID] {
+	return x.inner.AllHeaderFields()
+}
+
 func (x *HTTPURLResponse) asURLResponse() *raw.NSURLResponse { return &x.inner.NSURLResponse }
 
 func (x *HTTPURLResponse) asObject() *raw.NSObject { return &x.inner.NSURLResponse.NSObject }
+
+// HTTPURLResponseable is the interface implemented by [HTTPURLResponse], for mocking and DI.
+type HTTPURLResponseable interface {
+	Unwrap() *raw.NSHTTPURLResponse
+	ValueForHTTPHeaderField(field string) *String
+	StatusCode() int
+	AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID]
+}
+
+var _ HTTPURLResponseable = (*HTTPURLResponse)(nil)
 

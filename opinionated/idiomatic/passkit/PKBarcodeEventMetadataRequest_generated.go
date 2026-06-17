@@ -6,6 +6,7 @@ package passkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,31 @@ func NewBarcodeEventMetadataRequest() *BarcodeEventMetadataRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventMetadataRequest")), objc.RegisterName("new"))
 	return &BarcodeEventMetadataRequest{inner: raw.PKBarcodeEventMetadataRequestFromID(_id)}
 }
+
+// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
+func (x *BarcodeEventMetadataRequest) DeviceAccountIdentifier() string {
+	_r := x.inner.DeviceAccountIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LastUsedBarcodeIdentifier calls the underlying LastUsedBarcodeIdentifier.
+func (x *BarcodeEventMetadataRequest) LastUsedBarcodeIdentifier() string {
+	_r := x.inner.LastUsedBarcodeIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BarcodeEventMetadataRequestable is the interface implemented by [BarcodeEventMetadataRequest], for mocking and DI.
+type BarcodeEventMetadataRequestable interface {
+	Unwrap() *raw.PKBarcodeEventMetadataRequest
+	DeviceAccountIdentifier() string
+	LastUsedBarcodeIdentifier() string
+}
+
+var _ BarcodeEventMetadataRequestable = (*BarcodeEventMetadataRequest)(nil)
 

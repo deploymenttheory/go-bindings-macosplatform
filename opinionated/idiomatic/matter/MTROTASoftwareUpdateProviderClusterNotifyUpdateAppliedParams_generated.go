@@ -25,3 +25,10 @@ func NewMTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *MTROtaSo
 
 func (x *MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams) asMTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *raw.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams { return &x.inner.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams }
 
+// MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams], for mocking and DI.
+type MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable interface {
+	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+}
+
+var _ MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParamsable = (*MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams)(nil)
+

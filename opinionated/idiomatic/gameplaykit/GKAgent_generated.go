@@ -65,7 +65,109 @@ func (x *Agent) WithMaxSpeed(maxSpeed float32) *Agent {
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *Agent) Delegate() raw.GKAgentDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *Agent) SetDelegate(delegate raw.GKAgentDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Behavior calls the underlying Behavior.
+func (x *Agent) Behavior() *Behavior {
+	_r := x.inner.Behavior()
+	if _r == nil {
+		return nil
+	}
+	return &Behavior{inner: _r}
+}
+
+// SetBehavior calls the underlying SetBehavior.
+func (x *Agent) SetBehavior(behavior *raw.GKBehavior) {
+	x.inner.SetBehavior(behavior)
+}
+
+// Mass calls the underlying Mass.
+func (x *Agent) Mass() float32 {
+	return x.inner.Mass()
+}
+
+// SetMass calls the underlying SetMass.
+func (x *Agent) SetMass(mass float32) {
+	x.inner.SetMass(mass)
+}
+
+// Radius calls the underlying Radius.
+func (x *Agent) Radius() float32 {
+	return x.inner.Radius()
+}
+
+// SetRadius calls the underlying SetRadius.
+func (x *Agent) SetRadius(radius float32) {
+	x.inner.SetRadius(radius)
+}
+
+// Speed calls the underlying Speed.
+func (x *Agent) Speed() float32 {
+	return x.inner.Speed()
+}
+
+// SetSpeed calls the underlying SetSpeed.
+func (x *Agent) SetSpeed(speed float32) {
+	x.inner.SetSpeed(speed)
+}
+
+// MaxAcceleration calls the underlying MaxAcceleration.
+func (x *Agent) MaxAcceleration() float32 {
+	return x.inner.MaxAcceleration()
+}
+
+// SetMaxAcceleration calls the underlying SetMaxAcceleration.
+func (x *Agent) SetMaxAcceleration(maxAcceleration float32) {
+	x.inner.SetMaxAcceleration(maxAcceleration)
+}
+
+// MaxSpeed calls the underlying MaxSpeed.
+func (x *Agent) MaxSpeed() float32 {
+	return x.inner.MaxSpeed()
+}
+
+// SetMaxSpeed calls the underlying SetMaxSpeed.
+func (x *Agent) SetMaxSpeed(maxSpeed float32) {
+	x.inner.SetMaxSpeed(maxSpeed)
+}
+
 func (x *Agent) asAgent() *raw.GKAgent { return x.inner }
 
 func (x *Agent) asComponent() *raw.GKComponent { return &x.inner.GKComponent }
+
+// Agentable is the interface implemented by [Agent], for mocking and DI.
+type Agentable interface {
+	Unwrap() *raw.GKAgent
+	WithDelegate(delegate raw.GKAgentDelegate) *Agent
+	WithBehavior(behavior BehaviorProvider) *Agent
+	WithMass(mass float32) *Agent
+	WithRadius(radius float32) *Agent
+	WithSpeed(speed float32) *Agent
+	WithMaxAcceleration(maxAcceleration float32) *Agent
+	WithMaxSpeed(maxSpeed float32) *Agent
+	Delegate() raw.GKAgentDelegate
+	SetDelegate(delegate raw.GKAgentDelegate)
+	Behavior() *Behavior
+	SetBehavior(behavior *raw.GKBehavior)
+	Mass() float32
+	SetMass(mass float32)
+	Radius() float32
+	SetRadius(radius float32)
+	Speed() float32
+	SetSpeed(speed float32)
+	MaxAcceleration() float32
+	SetMaxAcceleration(maxAcceleration float32)
+	MaxSpeed() float32
+	SetMaxSpeed(maxSpeed float32)
+}
+
+var _ Agentable = (*Agent)(nil)
 

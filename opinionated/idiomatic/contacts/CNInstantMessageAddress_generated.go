@@ -7,6 +7,7 @@ package contacts
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,31 @@ func NewInstantMessageAddressWithUsernameService(username string, service string
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUsername:service:"), foundation.NSStringStringWithUTF8String(username).Ptr(), foundation.NSStringStringWithUTF8String(service).Ptr())
 	return &InstantMessageAddress{inner: raw.CNInstantMessageAddressFromID(_id)}
 }
+
+// Username calls the underlying Username.
+func (x *InstantMessageAddress) Username() string {
+	_r := x.inner.Username()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Service calls the underlying Service.
+func (x *InstantMessageAddress) Service() string {
+	_r := x.inner.Service()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// InstantMessageAddressable is the interface implemented by [InstantMessageAddress], for mocking and DI.
+type InstantMessageAddressable interface {
+	Unwrap() *raw.CNInstantMessageAddress
+	Username() string
+	Service() string
+}
+
+var _ InstantMessageAddressable = (*InstantMessageAddress)(nil)
 

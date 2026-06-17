@@ -5,7 +5,9 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -96,43 +98,195 @@ func (x *MetadataQuery) WithOperationQueue(operationQueue *raw.NSOperationQueue)
 	return x
 }
 
+// StartQuery calls the underlying StartQuery.
+func (x *MetadataQuery) StartQuery() bool {
+	return x.inner.StartQuery()
+}
+
+// StopQuery calls the underlying StopQuery.
+func (x *MetadataQuery) StopQuery() {
+	x.inner.StopQuery()
+}
+
+// DisableUpdates calls the underlying DisableUpdates.
+func (x *MetadataQuery) DisableUpdates() {
+	x.inner.DisableUpdates()
+}
+
+// EnableUpdates calls the underlying EnableUpdates.
+func (x *MetadataQuery) EnableUpdates() {
+	x.inner.EnableUpdates()
+}
+
+// ResultAtIndex calls the underlying ResultAtIndex.
+func (x *MetadataQuery) ResultAtIndex(idx uint) objc.ID {
+	return x.inner.ResultAtIndex(idx)
+}
+
+// EnumerateResultsUsing calls the underlying EnumerateResultsUsing.
+func (x *MetadataQuery) EnumerateResultsUsing(block func(objc.ID, uint, *bool)) {
+	x.inner.EnumerateResultsUsing(block)
+}
+
+// EnumerateResultsWithOptionsUsing calls the underlying EnumerateResultsWithOptionsUsing.
+func (x *MetadataQuery) EnumerateResultsWithOptionsUsing(opts raw.NSEnumerationOptions, block func(objc.ID, uint, *bool)) {
+	x.inner.EnumerateResultsWithOptionsUsing(opts, block)
+}
+
+// IndexOfResult calls the underlying IndexOfResult.
+func (x *MetadataQuery) IndexOfResult(result objc.ID) uint {
+	return x.inner.IndexOfResult(result)
+}
+
+// ValueOfAttributeForResultAtIndex calls the underlying ValueOfAttributeForResultAtIndex.
+func (x *MetadataQuery) ValueOfAttributeForResultAtIndex(attrName string, idx uint) objc.ID {
+	return x.inner.ValueOfAttributeForResultAtIndex(foundation.NSStringStringWithUTF8String(attrName), idx)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *MetadataQuery) Delegate() raw.NSMetadataQueryDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *MetadataQuery) SetDelegate(delegate raw.NSMetadataQueryDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Predicate calls the underlying Predicate.
+func (x *MetadataQuery) Predicate() *Predicate {
+	_r := x.inner.Predicate()
+	if _r == nil {
+		return nil
+	}
+	return &Predicate{inner: _r}
+}
+
+// SetPredicate calls the underlying SetPredicate.
+func (x *MetadataQuery) SetPredicate(predicate *raw.NSPredicate) {
+	x.inner.SetPredicate(predicate)
+}
+
 // SortDescriptors returns the collection as a Go slice.
 func (x *MetadataQuery) SortDescriptors() []*raw.NSSortDescriptor {
 	arr := x.inner.SortDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSSortDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSSortDescriptor {
+		return raw.NSSortDescriptorFromID(purego.Retain(_id))
+	})
+}
+
+// SetSortDescriptors calls the underlying SetSortDescriptors.
+func (x *MetadataQuery) SetSortDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) {
+	x.inner.SetSortDescriptors(sortDescriptors)
 }
 
 // ValueListAttributes returns the collection as a Go slice.
-func (x *MetadataQuery) ValueListAttributes() []*raw.NSString {
+func (x *MetadataQuery) ValueListAttributes() []string {
 	arr := x.inner.ValueListAttributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetValueListAttributes calls the underlying SetValueListAttributes.
+func (x *MetadataQuery) SetValueListAttributes(valueListAttributes *raw.NSArray[*raw.NSString]) {
+	x.inner.SetValueListAttributes(valueListAttributes)
 }
 
 // GroupingAttributes returns the collection as a Go slice.
-func (x *MetadataQuery) GroupingAttributes() []*raw.NSString {
+func (x *MetadataQuery) GroupingAttributes() []string {
 	arr := x.inner.GroupingAttributes()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
+		return purego.GoString(_id)
+	})
+}
+
+// SetGroupingAttributes calls the underlying SetGroupingAttributes.
+func (x *MetadataQuery) SetGroupingAttributes(groupingAttributes *raw.NSArray[*raw.NSString]) {
+	x.inner.SetGroupingAttributes(groupingAttributes)
+}
+
+// NotificationBatchingInterval calls the underlying NotificationBatchingInterval.
+func (x *MetadataQuery) NotificationBatchingInterval() float64 {
+	return x.inner.NotificationBatchingInterval()
+}
+
+// SetNotificationBatchingInterval calls the underlying SetNotificationBatchingInterval.
+func (x *MetadataQuery) SetNotificationBatchingInterval(notificationBatchingInterval float64) {
+	x.inner.SetNotificationBatchingInterval(notificationBatchingInterval)
+}
+
+// SearchScopes calls the underlying SearchScopes.
+func (x *MetadataQuery) SearchScopes() *raw.NSArray[objc.ID] {
+	return x.inner.SearchScopes()
+}
+
+// SetSearchScopes calls the underlying SetSearchScopes.
+func (x *MetadataQuery) SetSearchScopes(searchScopes *raw.NSArray[objc.ID]) {
+	x.inner.SetSearchScopes(searchScopes)
+}
+
+// SearchItems calls the underlying SearchItems.
+func (x *MetadataQuery) SearchItems() *raw.NSArray[objc.ID] {
+	return x.inner.SearchItems()
+}
+
+// SetSearchItems calls the underlying SetSearchItems.
+func (x *MetadataQuery) SetSearchItems(searchItems *raw.NSArray[objc.ID]) {
+	x.inner.SetSearchItems(searchItems)
+}
+
+// OperationQueue calls the underlying OperationQueue.
+func (x *MetadataQuery) OperationQueue() *OperationQueue {
+	_r := x.inner.OperationQueue()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &OperationQueue{inner: _r}
+}
+
+// SetOperationQueue calls the underlying SetOperationQueue.
+func (x *MetadataQuery) SetOperationQueue(operationQueue *raw.NSOperationQueue) {
+	x.inner.SetOperationQueue(operationQueue)
+}
+
+// IsStarted calls the underlying IsStarted.
+func (x *MetadataQuery) IsStarted() bool {
+	return x.inner.IsStarted()
+}
+
+// IsGathering calls the underlying IsGathering.
+func (x *MetadataQuery) IsGathering() bool {
+	return x.inner.IsGathering()
+}
+
+// IsStopped calls the underlying IsStopped.
+func (x *MetadataQuery) IsStopped() bool {
+	return x.inner.IsStopped()
+}
+
+// ResultCount calls the underlying ResultCount.
+func (x *MetadataQuery) ResultCount() uint {
+	return x.inner.ResultCount()
+}
+
+// Results calls the underlying Results.
+func (x *MetadataQuery) Results() *raw.NSArray[objc.ID] {
+	return x.inner.Results()
+}
+
+// ValueLists calls the underlying ValueLists.
+func (x *MetadataQuery) ValueLists() *raw.NSDictionary[*raw.NSString, objc.ID] {
+	return x.inner.ValueLists()
 }
 
 // GroupedResults returns the collection as a Go slice.
@@ -141,12 +295,58 @@ func (x *MetadataQuery) GroupedResults() []*raw.NSMetadataQueryResultGroup {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSMetadataQueryResultGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMetadataQueryResultGroup {
+		return raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))
+	})
 }
 
 func (x *MetadataQuery) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MetadataQueryable is the interface implemented by [MetadataQuery], for mocking and DI.
+type MetadataQueryable interface {
+	Unwrap() *raw.NSMetadataQuery
+	WithDelegate(delegate raw.NSMetadataQueryDelegate) *MetadataQuery
+	WithPredicate(predicate PredicateProvider) *MetadataQuery
+	WithSortDescriptors(items ...*raw.NSSortDescriptor) *MetadataQuery
+	WithValueListAttributes(items ...StringProvider) *MetadataQuery
+	WithGroupingAttributes(items ...StringProvider) *MetadataQuery
+	WithNotificationBatchingInterval(notificationBatchingInterval float64) *MetadataQuery
+	WithOperationQueue(operationQueue *raw.NSOperationQueue) *MetadataQuery
+	StartQuery() bool
+	StopQuery()
+	DisableUpdates()
+	EnableUpdates()
+	ResultAtIndex(idx uint) objc.ID
+	EnumerateResultsUsing(block func(objc.ID, uint, *bool))
+	EnumerateResultsWithOptionsUsing(opts raw.NSEnumerationOptions, block func(objc.ID, uint, *bool))
+	IndexOfResult(result objc.ID) uint
+	ValueOfAttributeForResultAtIndex(attrName string, idx uint) objc.ID
+	Delegate() raw.NSMetadataQueryDelegate
+	SetDelegate(delegate raw.NSMetadataQueryDelegate)
+	Predicate() *Predicate
+	SetPredicate(predicate *raw.NSPredicate)
+	SortDescriptors() []*raw.NSSortDescriptor
+	SetSortDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
+	ValueListAttributes() []string
+	SetValueListAttributes(valueListAttributes *raw.NSArray[*raw.NSString])
+	GroupingAttributes() []string
+	SetGroupingAttributes(groupingAttributes *raw.NSArray[*raw.NSString])
+	NotificationBatchingInterval() float64
+	SetNotificationBatchingInterval(notificationBatchingInterval float64)
+	SearchScopes() *raw.NSArray[objc.ID]
+	SetSearchScopes(searchScopes *raw.NSArray[objc.ID])
+	SearchItems() *raw.NSArray[objc.ID]
+	SetSearchItems(searchItems *raw.NSArray[objc.ID])
+	OperationQueue() *OperationQueue
+	SetOperationQueue(operationQueue *raw.NSOperationQueue)
+	IsStarted() bool
+	IsGathering() bool
+	IsStopped() bool
+	ResultCount() uint
+	Results() *raw.NSArray[objc.ID]
+	ValueLists() *raw.NSDictionary[*raw.NSString, objc.ID]
+	GroupedResults() []*raw.NSMetadataQueryResultGroup
+}
+
+var _ MetadataQueryable = (*MetadataQuery)(nil)
 

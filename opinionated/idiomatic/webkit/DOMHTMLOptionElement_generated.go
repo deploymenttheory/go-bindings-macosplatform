@@ -7,6 +7,7 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,6 +55,87 @@ func (x *DOMHTMLOptionElement) WithValue(value string) *DOMHTMLOptionElement {
 	return x
 }
 
+// Disabled calls the underlying Disabled.
+func (x *DOMHTMLOptionElement) Disabled() bool {
+	return x.inner.Disabled()
+}
+
+// SetDisabled calls the underlying SetDisabled.
+func (x *DOMHTMLOptionElement) SetDisabled(disabled bool) {
+	x.inner.SetDisabled(disabled)
+}
+
+// Form calls the underlying Form.
+func (x *DOMHTMLOptionElement) Form() *DOMHTMLFormElement {
+	_r := x.inner.Form()
+	if _r == nil {
+		return nil
+	}
+	return &DOMHTMLFormElement{inner: _r}
+}
+
+// Label calls the underlying Label.
+func (x *DOMHTMLOptionElement) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *DOMHTMLOptionElement) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// DefaultSelected calls the underlying DefaultSelected.
+func (x *DOMHTMLOptionElement) DefaultSelected() bool {
+	return x.inner.DefaultSelected()
+}
+
+// SetDefaultSelected calls the underlying SetDefaultSelected.
+func (x *DOMHTMLOptionElement) SetDefaultSelected(defaultSelected bool) {
+	x.inner.SetDefaultSelected(defaultSelected)
+}
+
+// Selected calls the underlying Selected.
+func (x *DOMHTMLOptionElement) Selected() bool {
+	return x.inner.Selected()
+}
+
+// SetSelected calls the underlying SetSelected.
+func (x *DOMHTMLOptionElement) SetSelected(selected bool) {
+	x.inner.SetSelected(selected)
+}
+
+// Value calls the underlying Value.
+func (x *DOMHTMLOptionElement) Value() string {
+	_r := x.inner.Value()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetValue calls the underlying SetValue.
+func (x *DOMHTMLOptionElement) SetValue(value string) {
+	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+}
+
+// Text calls the underlying Text.
+func (x *DOMHTMLOptionElement) Text() string {
+	_r := x.inner.Text()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Index calls the underlying Index.
+func (x *DOMHTMLOptionElement) Index() int {
+	return x.inner.Index()
+}
+
 func (x *DOMHTMLOptionElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLOptionElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -63,4 +145,29 @@ func (x *DOMHTMLOptionElement) asDOMNode() *raw.DOMNode { return &x.inner.DOMHTM
 func (x *DOMHTMLOptionElement) asDOMObject() *raw.DOMObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject }
 
 func (x *DOMHTMLOptionElement) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject }
+
+// DOMHTMLOptionElementable is the interface implemented by [DOMHTMLOptionElement], for mocking and DI.
+type DOMHTMLOptionElementable interface {
+	Unwrap() *raw.DOMHTMLOptionElement
+	WithDisabled(disabled bool) *DOMHTMLOptionElement
+	WithLabel(label string) *DOMHTMLOptionElement
+	WithDefaultSelected(defaultSelected bool) *DOMHTMLOptionElement
+	WithSelected(selected bool) *DOMHTMLOptionElement
+	WithValue(value string) *DOMHTMLOptionElement
+	Disabled() bool
+	SetDisabled(disabled bool)
+	Form() *DOMHTMLFormElement
+	Label() string
+	SetLabel(label string)
+	DefaultSelected() bool
+	SetDefaultSelected(defaultSelected bool)
+	Selected() bool
+	SetSelected(selected bool)
+	Value() string
+	SetValue(value string)
+	Text() string
+	Index() int
+}
+
+var _ DOMHTMLOptionElementable = (*DOMHTMLOptionElement)(nil)
 

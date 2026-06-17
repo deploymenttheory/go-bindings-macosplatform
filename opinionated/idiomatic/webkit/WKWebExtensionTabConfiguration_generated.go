@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -22,4 +23,65 @@ func NewWKWebExtensionTabConfiguration() *WKWebExtensionTabConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionTabConfiguration")), objc.RegisterName("new"))
 	return &WKWebExtensionTabConfiguration{inner: raw.WKWebExtensionTabConfigurationFromID(_id)}
 }
+
+// Window calls the underlying Window.
+func (x *WKWebExtensionTabConfiguration) Window() raw.WKWebExtensionWindow {
+	return x.inner.Window()
+}
+
+// Index calls the underlying Index.
+func (x *WKWebExtensionTabConfiguration) Index() uint {
+	return x.inner.Index()
+}
+
+// ParentTab calls the underlying ParentTab.
+func (x *WKWebExtensionTabConfiguration) ParentTab() raw.WKWebExtensionTab {
+	return x.inner.ParentTab()
+}
+
+// Url calls the underlying Url.
+func (x *WKWebExtensionTabConfiguration) Url() *foundation.NSURL {
+	return x.inner.Url()
+}
+
+// ShouldBeActive calls the underlying ShouldBeActive.
+func (x *WKWebExtensionTabConfiguration) ShouldBeActive() bool {
+	return x.inner.ShouldBeActive()
+}
+
+// ShouldAddToSelection calls the underlying ShouldAddToSelection.
+func (x *WKWebExtensionTabConfiguration) ShouldAddToSelection() bool {
+	return x.inner.ShouldAddToSelection()
+}
+
+// ShouldBePinned calls the underlying ShouldBePinned.
+func (x *WKWebExtensionTabConfiguration) ShouldBePinned() bool {
+	return x.inner.ShouldBePinned()
+}
+
+// ShouldBeMuted calls the underlying ShouldBeMuted.
+func (x *WKWebExtensionTabConfiguration) ShouldBeMuted() bool {
+	return x.inner.ShouldBeMuted()
+}
+
+// ShouldReaderModeBeActive calls the underlying ShouldReaderModeBeActive.
+func (x *WKWebExtensionTabConfiguration) ShouldReaderModeBeActive() bool {
+	return x.inner.ShouldReaderModeBeActive()
+}
+
+// WKWebExtensionTabConfigurationable is the interface implemented by [WKWebExtensionTabConfiguration], for mocking and DI.
+type WKWebExtensionTabConfigurationable interface {
+	Unwrap() *raw.WKWebExtensionTabConfiguration
+	Window() raw.WKWebExtensionWindow
+	Index() uint
+	ParentTab() raw.WKWebExtensionTab
+	Url() *foundation.NSURL
+	ShouldBeActive() bool
+	ShouldAddToSelection() bool
+	ShouldBePinned() bool
+	ShouldBeMuted() bool
+	ShouldReaderModeBeActive() bool
+}
+
+var _ WKWebExtensionTabConfigurationable = (*WKWebExtensionTabConfiguration)(nil)
 

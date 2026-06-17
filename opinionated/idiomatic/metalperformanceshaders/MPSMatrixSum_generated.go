@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -40,5 +41,85 @@ func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *
 	return x
 }
 
+// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
+func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
+}
+
+// NeuronType calls the underlying NeuronType.
+func (x *MatrixSum) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
+	return x.inner.NeuronType()
+}
+
+// EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex calls the underlying EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex.
+func (x *MatrixSum) EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint) {
+	x.inner.EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer, sourceMatrices, resultMatrix, scaleVector, offsetVector, biasVector, startIndex)
+}
+
+// Rows calls the underlying Rows.
+func (x *MatrixSum) Rows() uint {
+	return x.inner.Rows()
+}
+
+// Columns calls the underlying Columns.
+func (x *MatrixSum) Columns() uint {
+	return x.inner.Columns()
+}
+
+// Count calls the underlying Count.
+func (x *MatrixSum) Count() uint {
+	return x.inner.Count()
+}
+
+// Transpose calls the underlying Transpose.
+func (x *MatrixSum) Transpose() bool {
+	return x.inner.Transpose()
+}
+
+// ResultMatrixOrigin calls the underlying ResultMatrixOrigin.
+func (x *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
+	return x.inner.ResultMatrixOrigin()
+}
+
+// SetResultMatrixOrigin calls the underlying SetResultMatrixOrigin.
+func (x *MatrixSum) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
+	x.inner.SetResultMatrixOrigin(resultMatrixOrigin)
+}
+
+// NeuronParameterA calls the underlying NeuronParameterA.
+func (x *MatrixSum) NeuronParameterA() float32 {
+	return x.inner.NeuronParameterA()
+}
+
+// NeuronParameterB calls the underlying NeuronParameterB.
+func (x *MatrixSum) NeuronParameterB() float32 {
+	return x.inner.NeuronParameterB()
+}
+
+// NeuronParameterC calls the underlying NeuronParameterC.
+func (x *MatrixSum) NeuronParameterC() float32 {
+	return x.inner.NeuronParameterC()
+}
+
 func (x *MatrixSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
+
+// MatrixSumable is the interface implemented by [MatrixSum], for mocking and DI.
+type MatrixSumable interface {
+	Unwrap() *raw.MPSMatrixSum
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
+	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
+	EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint)
+	Rows() uint
+	Columns() uint
+	Count() uint
+	Transpose() bool
+	ResultMatrixOrigin() metal.MTLOrigin
+	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
+	NeuronParameterA() float32
+	NeuronParameterB() float32
+	NeuronParameterC() float32
+}
+
+var _ MatrixSumable = (*MatrixSum)(nil)
 

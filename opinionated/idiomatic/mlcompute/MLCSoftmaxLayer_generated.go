@@ -23,5 +23,24 @@ func NewSoftmaxLayer() *SoftmaxLayer {
 	return &SoftmaxLayer{inner: raw.MLCSoftmaxLayerFromID(_id)}
 }
 
+// Operation calls the underlying Operation.
+func (x *SoftmaxLayer) Operation() raw.MLCSoftmaxOperation {
+	return x.inner.Operation()
+}
+
+// Dimension calls the underlying Dimension.
+func (x *SoftmaxLayer) Dimension() uint {
+	return x.inner.Dimension()
+}
+
 func (x *SoftmaxLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
+
+// SoftmaxLayerable is the interface implemented by [SoftmaxLayer], for mocking and DI.
+type SoftmaxLayerable interface {
+	Unwrap() *raw.MLCSoftmaxLayer
+	Operation() raw.MLCSoftmaxOperation
+	Dimension() uint
+}
+
+var _ SoftmaxLayerable = (*SoftmaxLayer)(nil)
 

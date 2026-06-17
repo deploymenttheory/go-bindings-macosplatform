@@ -39,3 +39,35 @@ func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
 	return x
 }
 
+// EncodeWithCoder calls the underlying EncodeWithCoder.
+func (x *TemporalAA) EncodeWithCoder(coder *foundation.NSCoder) {
+	x.inner.EncodeWithCoder(coder)
+}
+
+// EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture calls the underlying EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture.
+func (x *TemporalAA) EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture) {
+	x.inner.EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer, sourceTexture, previousTexture, destinationTexture, motionVectorTexture, depthTexture)
+}
+
+// BlendFactor calls the underlying BlendFactor.
+func (x *TemporalAA) BlendFactor() float32 {
+	return x.inner.BlendFactor()
+}
+
+// SetBlendFactor calls the underlying SetBlendFactor.
+func (x *TemporalAA) SetBlendFactor(blendFactor float32) {
+	x.inner.SetBlendFactor(blendFactor)
+}
+
+// TemporalAAable is the interface implemented by [TemporalAA], for mocking and DI.
+type TemporalAAable interface {
+	Unwrap() *raw.MPSTemporalAA
+	WithBlendFactor(blendFactor float32) *TemporalAA
+	EncodeWithCoder(coder *foundation.NSCoder)
+	EncodeToCommandBufferSourceTexturePreviousTextureDestinationTextureMotionVectorTextureDepthTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthTexture metal.MTLTexture)
+	BlendFactor() float32
+	SetBlendFactor(blendFactor float32)
+}
+
+var _ TemporalAAable = (*TemporalAA)(nil)
+

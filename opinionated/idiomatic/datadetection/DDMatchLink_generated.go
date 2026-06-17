@@ -6,6 +6,7 @@ package datadetection
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +24,18 @@ func NewMatchLink() *MatchLink {
 	return &MatchLink{inner: raw.DDMatchLinkFromID(_id)}
 }
 
+// URL calls the underlying URL.
+func (x *MatchLink) URL() *foundation.NSURL {
+	return x.inner.URL()
+}
+
 func (x *MatchLink) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
+
+// MatchLinkable is the interface implemented by [MatchLink], for mocking and DI.
+type MatchLinkable interface {
+	Unwrap() *raw.DDMatchLink
+	URL() *foundation.NSURL
+}
+
+var _ MatchLinkable = (*MatchLink)(nil)
 

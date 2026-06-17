@@ -6,6 +6,9 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +25,39 @@ func NewCoordinatedPlaybackSuspension() *CoordinatedPlaybackSuspension {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCoordinatedPlaybackSuspension")), objc.RegisterName("new"))
 	return &CoordinatedPlaybackSuspension{inner: raw.AVCoordinatedPlaybackSuspensionFromID(_id)}
 }
+
+// End calls the underlying End.
+func (x *CoordinatedPlaybackSuspension) End() {
+	x.inner.End()
+}
+
+// EndProposingNewTime calls the underlying EndProposingNewTime.
+func (x *CoordinatedPlaybackSuspension) EndProposingNewTime(time_ coremedia.CMTime) {
+	x.inner.EndProposingNewTime(time_)
+}
+
+// Reason calls the underlying Reason.
+func (x *CoordinatedPlaybackSuspension) Reason() string {
+	_r := x.inner.Reason()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// BeginDate calls the underlying BeginDate.
+func (x *CoordinatedPlaybackSuspension) BeginDate() *foundation.NSDate {
+	return x.inner.BeginDate()
+}
+
+// CoordinatedPlaybackSuspensionable is the interface implemented by [CoordinatedPlaybackSuspension], for mocking and DI.
+type CoordinatedPlaybackSuspensionable interface {
+	Unwrap() *raw.AVCoordinatedPlaybackSuspension
+	End()
+	EndProposingNewTime(time_ coremedia.CMTime)
+	Reason() string
+	BeginDate() *foundation.NSDate
+}
+
+var _ CoordinatedPlaybackSuspensionable = (*CoordinatedPlaybackSuspension)(nil)
 

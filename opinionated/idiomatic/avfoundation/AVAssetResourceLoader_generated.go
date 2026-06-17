@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -34,4 +35,55 @@ func (x *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(sendsC
 	x.inner.SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders)
 	return x
 }
+
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *AssetResourceLoader) SetDelegateQueue(delegate raw.AVAssetResourceLoaderDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AssetResourceLoader) Delegate() raw.AVAssetResourceLoaderDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *AssetResourceLoader) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
+// PreloadsEligibleContentKeys calls the underlying PreloadsEligibleContentKeys.
+func (x *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
+	return x.inner.PreloadsEligibleContentKeys()
+}
+
+// SetPreloadsEligibleContentKeys calls the underlying SetPreloadsEligibleContentKeys.
+func (x *AssetResourceLoader) SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) {
+	x.inner.SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys)
+}
+
+// SendsCommonMediaClientDataAsHTTPHeaders calls the underlying SendsCommonMediaClientDataAsHTTPHeaders.
+func (x *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
+	return x.inner.SendsCommonMediaClientDataAsHTTPHeaders()
+}
+
+// SetSendsCommonMediaClientDataAsHTTPHeaders calls the underlying SetSendsCommonMediaClientDataAsHTTPHeaders.
+func (x *AssetResourceLoader) SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) {
+	x.inner.SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders)
+}
+
+// AssetResourceLoaderable is the interface implemented by [AssetResourceLoader], for mocking and DI.
+type AssetResourceLoaderable interface {
+	Unwrap() *raw.AVAssetResourceLoader
+	WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader
+	WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader
+	SetDelegateQueue(delegate raw.AVAssetResourceLoaderDelegate, delegateQueue *foundation.NSObject)
+	Delegate() raw.AVAssetResourceLoaderDelegate
+	DelegateQueue() *foundation.NSObject
+	PreloadsEligibleContentKeys() bool
+	SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool)
+	SendsCommonMediaClientDataAsHTTPHeaders() bool
+	SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool)
+}
+
+var _ AssetResourceLoaderable = (*AssetResourceLoader)(nil)
 

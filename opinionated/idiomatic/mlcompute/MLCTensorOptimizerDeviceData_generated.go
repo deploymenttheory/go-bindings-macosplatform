@@ -23,3 +23,10 @@ func NewTensorOptimizerDeviceData() *TensorOptimizerDeviceData {
 	return &TensorOptimizerDeviceData{inner: raw.MLCTensorOptimizerDeviceDataFromID(_id)}
 }
 
+// TensorOptimizerDeviceDataable is the interface implemented by [TensorOptimizerDeviceData], for mocking and DI.
+type TensorOptimizerDeviceDataable interface {
+	Unwrap() *raw.MLCTensorOptimizerDeviceData
+}
+
+var _ TensorOptimizerDeviceDataable = (*TensorOptimizerDeviceData)(nil)
+

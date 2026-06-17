@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,16 +38,60 @@ func (x *DraggingItem) WithImageComponentsProvider(imageComponentsProvider objc.
 	return x
 }
 
+// SetDraggingFrameContents calls the underlying SetDraggingFrameContents.
+func (x *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID) {
+	x.inner.SetDraggingFrameContents(frame, contents)
+}
+
+// Item calls the underlying Item.
+func (x *DraggingItem) Item() objc.ID {
+	return x.inner.Item()
+}
+
+// DraggingFrame calls the underlying DraggingFrame.
+func (x *DraggingItem) DraggingFrame() corefoundation.CGRect {
+	return x.inner.DraggingFrame()
+}
+
+// SetDraggingFrame calls the underlying SetDraggingFrame.
+func (x *DraggingItem) SetDraggingFrame(draggingFrame corefoundation.CGRect) {
+	x.inner.SetDraggingFrame(draggingFrame)
+}
+
+// ImageComponentsProvider calls the underlying ImageComponentsProvider.
+func (x *DraggingItem) ImageComponentsProvider() objc.Block {
+	return x.inner.ImageComponentsProvider()
+}
+
+// SetImageComponentsProvider calls the underlying SetImageComponentsProvider.
+func (x *DraggingItem) SetImageComponentsProvider(imageComponentsProvider objc.Block) {
+	x.inner.SetImageComponentsProvider(imageComponentsProvider)
+}
+
 // ImageComponents returns the collection as a Go slice.
 func (x *DraggingItem) ImageComponents() []*raw.NSDraggingImageComponent {
 	arr := x.inner.ImageComponents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSDraggingImageComponent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSDraggingImageComponent {
+		return raw.NSDraggingImageComponentFromID(purego.Retain(_id))
+	})
 }
+
+// DraggingItemable is the interface implemented by [DraggingItem], for mocking and DI.
+type DraggingItemable interface {
+	Unwrap() *raw.NSDraggingItem
+	WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem
+	WithImageComponentsProvider(imageComponentsProvider objc.Block) *DraggingItem
+	SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID)
+	Item() objc.ID
+	DraggingFrame() corefoundation.CGRect
+	SetDraggingFrame(draggingFrame corefoundation.CGRect)
+	ImageComponentsProvider() objc.Block
+	SetImageComponentsProvider(imageComponentsProvider objc.Block)
+	ImageComponents() []*raw.NSDraggingImageComponent
+}
+
+var _ DraggingItemable = (*DraggingItem)(nil)
 

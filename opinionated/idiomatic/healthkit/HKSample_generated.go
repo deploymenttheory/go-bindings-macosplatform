@@ -5,6 +5,7 @@
 package healthkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,7 +24,42 @@ func NewSample() *Sample {
 	return &Sample{inner: raw.HKSampleFromID(_id)}
 }
 
+// SampleType calls the underlying SampleType.
+func (x *Sample) SampleType() *SampleType {
+	_r := x.inner.SampleType()
+	if _r == nil {
+		return nil
+	}
+	return &SampleType{inner: _r}
+}
+
+// StartDate calls the underlying StartDate.
+func (x *Sample) StartDate() *foundation.NSDate {
+	return x.inner.StartDate()
+}
+
+// EndDate calls the underlying EndDate.
+func (x *Sample) EndDate() *foundation.NSDate {
+	return x.inner.EndDate()
+}
+
+// HasUndeterminedDuration calls the underlying HasUndeterminedDuration.
+func (x *Sample) HasUndeterminedDuration() bool {
+	return x.inner.HasUndeterminedDuration()
+}
+
 func (x *Sample) asSample() *raw.HKSample { return x.inner }
 
 func (x *Sample) asObject() *raw.HKObject { return &x.inner.HKObject }
+
+// Sampleable is the interface implemented by [Sample], for mocking and DI.
+type Sampleable interface {
+	Unwrap() *raw.HKSample
+	SampleType() *SampleType
+	StartDate() *foundation.NSDate
+	EndDate() *foundation.NSDate
+	HasUndeterminedDuration() bool
+}
+
+var _ Sampleable = (*Sample)(nil)
 

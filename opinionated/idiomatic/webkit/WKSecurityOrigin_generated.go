@@ -6,6 +6,7 @@ package webkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,37 @@ func NewWKSecurityOrigin() *WKSecurityOrigin {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKSecurityOrigin")), objc.RegisterName("new"))
 	return &WKSecurityOrigin{inner: raw.WKSecurityOriginFromID(_id)}
 }
+
+// Protocol calls the underlying Protocol.
+func (x *WKSecurityOrigin) Protocol() string {
+	_r := x.inner.Protocol()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Host calls the underlying Host.
+func (x *WKSecurityOrigin) Host() string {
+	_r := x.inner.Host()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Port calls the underlying Port.
+func (x *WKSecurityOrigin) Port() int {
+	return x.inner.Port()
+}
+
+// WKSecurityOriginable is the interface implemented by [WKSecurityOrigin], for mocking and DI.
+type WKSecurityOriginable interface {
+	Unwrap() *raw.WKSecurityOrigin
+	Protocol() string
+	Host() string
+	Port() int
+}
+
+var _ WKSecurityOriginable = (*WKSecurityOrigin)(nil)
 

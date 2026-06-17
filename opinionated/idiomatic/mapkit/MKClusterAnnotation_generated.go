@@ -7,6 +7,7 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -36,4 +37,51 @@ func (x *ClusterAnnotation) WithSubtitle(subtitle string) *ClusterAnnotation {
 	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
 	return x
 }
+
+// Title calls the underlying Title.
+func (x *ClusterAnnotation) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *ClusterAnnotation) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// Subtitle calls the underlying Subtitle.
+func (x *ClusterAnnotation) Subtitle() string {
+	_r := x.inner.Subtitle()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *ClusterAnnotation) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// MemberAnnotations calls the underlying MemberAnnotations.
+func (x *ClusterAnnotation) MemberAnnotations() *foundation.NSArray[raw.MKAnnotation] {
+	return x.inner.MemberAnnotations()
+}
+
+// ClusterAnnotationable is the interface implemented by [ClusterAnnotation], for mocking and DI.
+type ClusterAnnotationable interface {
+	Unwrap() *raw.MKClusterAnnotation
+	WithTitle(title string) *ClusterAnnotation
+	WithSubtitle(subtitle string) *ClusterAnnotation
+	Title() string
+	SetTitle(title string)
+	Subtitle() string
+	SetSubtitle(subtitle string)
+	MemberAnnotations() *foundation.NSArray[raw.MKAnnotation]
+}
+
+var _ ClusterAnnotationable = (*ClusterAnnotation)(nil)
 

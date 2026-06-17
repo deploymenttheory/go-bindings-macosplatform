@@ -6,6 +6,7 @@ package coreimage
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -52,4 +53,63 @@ func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, colorSpace)
 	return &Color{inner: raw.CIColorFromID(_id)}
 }
+
+// NumberOfComponents calls the underlying NumberOfComponents.
+func (x *Color) NumberOfComponents() uint {
+	return x.inner.NumberOfComponents()
+}
+
+// Components calls the underlying Components.
+func (x *Color) Components() unsafe.Pointer {
+	return x.inner.Components()
+}
+
+// Alpha calls the underlying Alpha.
+func (x *Color) Alpha() float64 {
+	return x.inner.Alpha()
+}
+
+// ColorSpace calls the underlying ColorSpace.
+func (x *Color) ColorSpace() unsafe.Pointer {
+	return x.inner.ColorSpace()
+}
+
+// Red calls the underlying Red.
+func (x *Color) Red() float64 {
+	return x.inner.Red()
+}
+
+// Green calls the underlying Green.
+func (x *Color) Green() float64 {
+	return x.inner.Green()
+}
+
+// Blue calls the underlying Blue.
+func (x *Color) Blue() float64 {
+	return x.inner.Blue()
+}
+
+// StringRepresentation calls the underlying StringRepresentation.
+func (x *Color) StringRepresentation() string {
+	_r := x.inner.StringRepresentation()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Colorable is the interface implemented by [Color], for mocking and DI.
+type Colorable interface {
+	Unwrap() *raw.CIColor
+	NumberOfComponents() uint
+	Components() unsafe.Pointer
+	Alpha() float64
+	ColorSpace() unsafe.Pointer
+	Red() float64
+	Green() float64
+	Blue() float64
+	StringRepresentation() string
+}
+
+var _ Colorable = (*Color)(nil)
 

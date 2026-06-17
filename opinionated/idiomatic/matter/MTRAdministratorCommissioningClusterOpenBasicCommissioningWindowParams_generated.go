@@ -42,3 +42,49 @@ func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams)
 	return x
 }
 
+// CommissioningTimeout calls the underlying CommissioningTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) CommissioningTimeout() *foundation.NSNumber {
+	return x.inner.CommissioningTimeout()
+}
+
+// SetCommissioningTimeout calls the underlying SetCommissioningTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber) {
+	x.inner.SetCommissioningTimeout(commissioningTimeout)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParamsable is the interface implemented by [MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams], for mocking and DI.
+type MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParamsable interface {
+	Unwrap() *raw.MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams
+	WithCommissioningTimeout(commissioningTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams
+	CommissioningTimeout() *foundation.NSNumber
+	SetCommissioningTimeout(commissioningTimeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParamsable = (*MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams)(nil)
+

@@ -6,6 +6,7 @@ package foundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,58 @@ func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
 	return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(_id)}
 }
 
+// ResultAtIndex calls the underlying ResultAtIndex.
+func (x *MetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
+	return x.inner.ResultAtIndex(idx)
+}
+
+// Attribute calls the underlying Attribute.
+func (x *MetadataQueryResultGroup) Attribute() *String {
+	_r := x.inner.Attribute()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *MetadataQueryResultGroup) Value() objc.ID {
+	return x.inner.Value()
+}
+
 // Subgroups returns the collection as a Go slice.
 func (x *MetadataQueryResultGroup) Subgroups() []*raw.NSMetadataQueryResultGroup {
 	arr := x.inner.Subgroups()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSMetadataQueryResultGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSMetadataQueryResultGroup {
+		return raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))
+	})
+}
+
+// ResultCount calls the underlying ResultCount.
+func (x *MetadataQueryResultGroup) ResultCount() uint {
+	return x.inner.ResultCount()
+}
+
+// Results calls the underlying Results.
+func (x *MetadataQueryResultGroup) Results() *raw.NSArray[objc.ID] {
+	return x.inner.Results()
 }
 
 func (x *MetadataQueryResultGroup) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// MetadataQueryResultGroupable is the interface implemented by [MetadataQueryResultGroup], for mocking and DI.
+type MetadataQueryResultGroupable interface {
+	Unwrap() *raw.NSMetadataQueryResultGroup
+	ResultAtIndex(idx uint) objc.ID
+	Attribute() *String
+	Value() objc.ID
+	Subgroups() []*raw.NSMetadataQueryResultGroup
+	ResultCount() uint
+	Results() *raw.NSArray[objc.ID]
+}
+
+var _ MetadataQueryResultGroupable = (*MetadataQueryResultGroup)(nil)
 

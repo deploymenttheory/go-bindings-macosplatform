@@ -49,3 +49,53 @@ func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) WithTimedInvok
 	return x
 }
 
+// ErrorCode calls the underlying ErrorCode.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) ErrorCode() *foundation.NSNumber {
+	return x.inner.ErrorCode()
+}
+
+// SetErrorCode calls the underlying SetErrorCode.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetErrorCode(errorCode *foundation.NSNumber) {
+	x.inner.SetErrorCode(errorCode)
+}
+
+// DebugText calls the underlying DebugText.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) DebugText() string {
+	_r := x.inner.DebugText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetDebugText calls the underlying SetDebugText.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetDebugText(debugText string) {
+	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralCommissioningClusterArmFailSafeResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// MTRGeneralCommissioningClusterArmFailSafeResponseParamsable is the interface implemented by [MTRGeneralCommissioningClusterArmFailSafeResponseParams], for mocking and DI.
+type MTRGeneralCommissioningClusterArmFailSafeResponseParamsable interface {
+	Unwrap() *raw.MTRGeneralCommissioningClusterArmFailSafeResponseParams
+	WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+	WithDebugText(debugText string) *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterArmFailSafeResponseParams
+	ErrorCode() *foundation.NSNumber
+	SetErrorCode(errorCode *foundation.NSNumber)
+	DebugText() string
+	SetDebugText(debugText string)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+}
+
+var _ MTRGeneralCommissioningClusterArmFailSafeResponseParamsable = (*MTRGeneralCommissioningClusterArmFailSafeResponseParams)(nil)
+

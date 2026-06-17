@@ -33,3 +33,10 @@ func (x *ImageReduceRowMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
 
 func (x *ImageReduceRowMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel }
 
+// ImageReduceRowMaxable is the interface implemented by [ImageReduceRowMax], for mocking and DI.
+type ImageReduceRowMaxable interface {
+	Unwrap() *raw.MPSImageReduceRowMax
+}
+
+var _ ImageReduceRowMaxable = (*ImageReduceRowMax)(nil)
+

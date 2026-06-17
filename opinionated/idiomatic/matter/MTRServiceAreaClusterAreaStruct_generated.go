@@ -42,3 +42,53 @@ func (x *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *raw.MTRServiceA
 	return x
 }
 
+// AreaID calls the underlying AreaID.
+func (x *MTRServiceAreaClusterAreaStruct) AreaID() *foundation.NSNumber {
+	return x.inner.AreaID()
+}
+
+// SetAreaID calls the underlying SetAreaID.
+func (x *MTRServiceAreaClusterAreaStruct) SetAreaID(areaID *foundation.NSNumber) {
+	x.inner.SetAreaID(areaID)
+}
+
+// MapID calls the underlying MapID.
+func (x *MTRServiceAreaClusterAreaStruct) MapID() *foundation.NSNumber {
+	return x.inner.MapID()
+}
+
+// SetMapID calls the underlying SetMapID.
+func (x *MTRServiceAreaClusterAreaStruct) SetMapID(mapID *foundation.NSNumber) {
+	x.inner.SetMapID(mapID)
+}
+
+// AreaInfo calls the underlying AreaInfo.
+func (x *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
+	_r := x.inner.AreaInfo()
+	if _r == nil {
+		return nil
+	}
+	return &MTRServiceAreaClusterAreaInfoStruct{inner: _r}
+}
+
+// SetAreaInfo calls the underlying SetAreaInfo.
+func (x *MTRServiceAreaClusterAreaStruct) SetAreaInfo(areaInfo *raw.MTRServiceAreaClusterAreaInfoStruct) {
+	x.inner.SetAreaInfo(areaInfo)
+}
+
+// MTRServiceAreaClusterAreaStructable is the interface implemented by [MTRServiceAreaClusterAreaStruct], for mocking and DI.
+type MTRServiceAreaClusterAreaStructable interface {
+	Unwrap() *raw.MTRServiceAreaClusterAreaStruct
+	WithAreaID(areaID *foundation.NSNumber) *MTRServiceAreaClusterAreaStruct
+	WithMapID(mapID *foundation.NSNumber) *MTRServiceAreaClusterAreaStruct
+	WithAreaInfo(areaInfo *raw.MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct
+	AreaID() *foundation.NSNumber
+	SetAreaID(areaID *foundation.NSNumber)
+	MapID() *foundation.NSNumber
+	SetMapID(mapID *foundation.NSNumber)
+	AreaInfo() *MTRServiceAreaClusterAreaInfoStruct
+	SetAreaInfo(areaInfo *raw.MTRServiceAreaClusterAreaInfoStruct)
+}
+
+var _ MTRServiceAreaClusterAreaStructable = (*MTRServiceAreaClusterAreaStruct)(nil)
+

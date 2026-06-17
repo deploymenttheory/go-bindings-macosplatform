@@ -7,6 +7,7 @@ package avfoundation
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -37,5 +38,60 @@ func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolutio
 	return x
 }
 
+// SetDelegateQueue calls the underlying SetDelegateQueue.
+func (x *PlayerItemLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
+	x.inner.SetDelegateQueue(delegate, delegateQueue)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PlayerItemLegibleOutput) Delegate() raw.AVPlayerItemLegibleOutputPushDelegate {
+	return x.inner.Delegate()
+}
+
+// DelegateQueue calls the underlying DelegateQueue.
+func (x *PlayerItemLegibleOutput) DelegateQueue() *foundation.NSObject {
+	return x.inner.DelegateQueue()
+}
+
+// AdvanceIntervalForDelegateInvocation calls the underlying AdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	return x.inner.AdvanceIntervalForDelegateInvocation()
+}
+
+// SetAdvanceIntervalForDelegateInvocation calls the underlying SetAdvanceIntervalForDelegateInvocation.
+func (x *PlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
+	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
+}
+
+// TextStylingResolution calls the underlying TextStylingResolution.
+func (x *PlayerItemLegibleOutput) TextStylingResolution() string {
+	_r := x.inner.TextStylingResolution()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetTextStylingResolution calls the underlying SetTextStylingResolution.
+func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution *foundation.NSString) {
+	x.inner.SetTextStylingResolution(textStylingResolution)
+}
+
 func (x *PlayerItemLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput { return &x.inner.AVPlayerItemOutput }
+
+// PlayerItemLegibleOutputable is the interface implemented by [PlayerItemLegibleOutput], for mocking and DI.
+type PlayerItemLegibleOutputable interface {
+	Unwrap() *raw.AVPlayerItemLegibleOutput
+	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput
+	WithTextStylingResolution(textStylingResolution *foundation.NSString) *PlayerItemLegibleOutput
+	SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject)
+	Delegate() raw.AVPlayerItemLegibleOutputPushDelegate
+	DelegateQueue() *foundation.NSObject
+	AdvanceIntervalForDelegateInvocation() float64
+	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
+	TextStylingResolution() string
+	SetTextStylingResolution(textStylingResolution *foundation.NSString)
+}
+
+var _ PlayerItemLegibleOutputable = (*PlayerItemLegibleOutput)(nil)
 

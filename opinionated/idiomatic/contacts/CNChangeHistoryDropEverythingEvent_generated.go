@@ -25,3 +25,10 @@ func NewChangeHistoryDropEverythingEvent() *ChangeHistoryDropEverythingEvent {
 
 func (x *ChangeHistoryDropEverythingEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent { return &x.inner.CNChangeHistoryEvent }
 
+// ChangeHistoryDropEverythingEventable is the interface implemented by [ChangeHistoryDropEverythingEvent], for mocking and DI.
+type ChangeHistoryDropEverythingEventable interface {
+	Unwrap() *raw.CNChangeHistoryDropEverythingEvent
+}
+
+var _ ChangeHistoryDropEverythingEventable = (*ChangeHistoryDropEverythingEvent)(nil)
+

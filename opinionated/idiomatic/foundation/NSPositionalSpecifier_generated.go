@@ -24,5 +24,58 @@ func NewPositionalSpecifierWithPositionObjectSpecifier(position raw.NSInsertionP
 	return &PositionalSpecifier{inner: raw.NSPositionalSpecifierFromID(_id)}
 }
 
+// SetInsertionClassDescription calls the underlying SetInsertionClassDescription.
+func (x *PositionalSpecifier) SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription) {
+	x.inner.SetInsertionClassDescription(classDescription)
+}
+
+// Evaluate calls the underlying Evaluate.
+func (x *PositionalSpecifier) Evaluate() {
+	x.inner.Evaluate()
+}
+
+// Position calls the underlying Position.
+func (x *PositionalSpecifier) Position() raw.NSInsertionPosition {
+	return x.inner.Position()
+}
+
+// InsertionContainer calls the underlying InsertionContainer.
+func (x *PositionalSpecifier) InsertionContainer() objc.ID {
+	return x.inner.InsertionContainer()
+}
+
+// InsertionKey calls the underlying InsertionKey.
+func (x *PositionalSpecifier) InsertionKey() *String {
+	_r := x.inner.InsertionKey()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// InsertionIndex calls the underlying InsertionIndex.
+func (x *PositionalSpecifier) InsertionIndex() int {
+	return x.inner.InsertionIndex()
+}
+
+// InsertionReplaces calls the underlying InsertionReplaces.
+func (x *PositionalSpecifier) InsertionReplaces() bool {
+	return x.inner.InsertionReplaces()
+}
+
 func (x *PositionalSpecifier) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// PositionalSpecifierable is the interface implemented by [PositionalSpecifier], for mocking and DI.
+type PositionalSpecifierable interface {
+	Unwrap() *raw.NSPositionalSpecifier
+	SetInsertionClassDescription(classDescription *raw.NSScriptClassDescription)
+	Evaluate()
+	Position() raw.NSInsertionPosition
+	InsertionContainer() objc.ID
+	InsertionKey() *String
+	InsertionIndex() int
+	InsertionReplaces() bool
+}
+
+var _ PositionalSpecifierable = (*PositionalSpecifier)(nil)
 

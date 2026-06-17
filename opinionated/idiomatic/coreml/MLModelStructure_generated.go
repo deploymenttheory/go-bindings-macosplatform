@@ -23,3 +23,40 @@ func NewModelStructure() *ModelStructure {
 	return &ModelStructure{inner: raw.MLModelStructureFromID(_id)}
 }
 
+// NeuralNetwork calls the underlying NeuralNetwork.
+func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
+	_r := x.inner.NeuralNetwork()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructureNeuralNetwork{inner: _r}
+}
+
+// Program calls the underlying Program.
+func (x *ModelStructure) Program() *ModelStructureProgram {
+	_r := x.inner.Program()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructureProgram{inner: _r}
+}
+
+// Pipeline calls the underlying Pipeline.
+func (x *ModelStructure) Pipeline() *ModelStructurePipeline {
+	_r := x.inner.Pipeline()
+	if _r == nil {
+		return nil
+	}
+	return &ModelStructurePipeline{inner: _r}
+}
+
+// ModelStructureable is the interface implemented by [ModelStructure], for mocking and DI.
+type ModelStructureable interface {
+	Unwrap() *raw.MLModelStructure
+	NeuralNetwork() *ModelStructureNeuralNetwork
+	Program() *ModelStructureProgram
+	Pipeline() *ModelStructurePipeline
+}
+
+var _ ModelStructureable = (*ModelStructure)(nil)
+

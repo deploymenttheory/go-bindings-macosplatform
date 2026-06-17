@@ -67,5 +67,35 @@ func (x *ToolPickerInkingItem) WithAllowsColorSelection(allowsColorSelection boo
 	return x
 }
 
+// InkingTool calls the underlying InkingTool.
+func (x *ToolPickerInkingItem) InkingTool() *InkingTool {
+	_r := x.inner.InkingTool()
+	if _r == nil {
+		return nil
+	}
+	return &InkingTool{inner: _r}
+}
+
+// AllowsColorSelection calls the underlying AllowsColorSelection.
+func (x *ToolPickerInkingItem) AllowsColorSelection() bool {
+	return x.inner.AllowsColorSelection()
+}
+
+// SetAllowsColorSelection calls the underlying SetAllowsColorSelection.
+func (x *ToolPickerInkingItem) SetAllowsColorSelection(allowsColorSelection bool) {
+	x.inner.SetAllowsColorSelection(allowsColorSelection)
+}
+
 func (x *ToolPickerInkingItem) asToolPickerItem() *raw.PKToolPickerItem { return &x.inner.PKToolPickerItem }
+
+// ToolPickerInkingItemable is the interface implemented by [ToolPickerInkingItem], for mocking and DI.
+type ToolPickerInkingItemable interface {
+	Unwrap() *raw.PKToolPickerInkingItem
+	WithAllowsColorSelection(allowsColorSelection bool) *ToolPickerInkingItem
+	InkingTool() *InkingTool
+	AllowsColorSelection() bool
+	SetAllowsColorSelection(allowsColorSelection bool)
+}
+
+var _ ToolPickerInkingItemable = (*ToolPickerInkingItem)(nil)
 

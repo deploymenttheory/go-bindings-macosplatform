@@ -7,6 +7,7 @@ package coremediaio
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -42,4 +43,64 @@ func (x *ExtensionProviderProperties) WithPropertiesDictionary(propertiesDiction
 	x.inner.SetPropertiesDictionary(propertiesDictionary)
 	return x
 }
+
+// SetPropertyStateForProperty calls the underlying SetPropertyStateForProperty.
+func (x *ExtensionProviderProperties) SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString) {
+	x.inner.SetPropertyStateForProperty(propertyState, property)
+}
+
+// Name calls the underlying Name.
+func (x *ExtensionProviderProperties) Name() string {
+	_r := x.inner.Name()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetName calls the underlying SetName.
+func (x *ExtensionProviderProperties) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
+// Manufacturer calls the underlying Manufacturer.
+func (x *ExtensionProviderProperties) Manufacturer() string {
+	_r := x.inner.Manufacturer()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetManufacturer calls the underlying SetManufacturer.
+func (x *ExtensionProviderProperties) SetManufacturer(manufacturer string) {
+	x.inner.SetManufacturer(foundation.NSStringStringWithUTF8String(manufacturer))
+}
+
+// PropertiesDictionary calls the underlying PropertiesDictionary.
+func (x *ExtensionProviderProperties) PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.PropertiesDictionary()
+}
+
+// SetPropertiesDictionary calls the underlying SetPropertiesDictionary.
+func (x *ExtensionProviderProperties) SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.SetPropertiesDictionary(propertiesDictionary)
+}
+
+// ExtensionProviderPropertiesable is the interface implemented by [ExtensionProviderProperties], for mocking and DI.
+type ExtensionProviderPropertiesable interface {
+	Unwrap() *raw.CMIOExtensionProviderProperties
+	WithName(name string) *ExtensionProviderProperties
+	WithManufacturer(manufacturer string) *ExtensionProviderProperties
+	WithPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties
+	SetPropertyStateForProperty(propertyState *raw.CMIOExtensionPropertyState[objc.ID], property *foundation.NSString)
+	Name() string
+	SetName(name string)
+	Manufacturer() string
+	SetManufacturer(manufacturer string)
+	PropertiesDictionary() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	SetPropertiesDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+}
+
+var _ ExtensionProviderPropertiesable = (*ExtensionProviderProperties)(nil)
 

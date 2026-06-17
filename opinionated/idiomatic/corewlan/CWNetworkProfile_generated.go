@@ -6,6 +6,8 @@ package corewlan
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +32,40 @@ func NewNetworkProfileWithNetworkProfile(networkProfile *raw.CWNetworkProfile) *
 	return &NetworkProfile{inner: raw.CWNetworkProfileFromID(_id)}
 }
 
+// IsEqualToNetworkProfile calls the underlying IsEqualToNetworkProfile.
+func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool {
+	return x.inner.IsEqualToNetworkProfile(networkProfile)
+}
+
+// Ssid calls the underlying Ssid.
+func (x *NetworkProfile) Ssid() string {
+	_r := x.inner.Ssid()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SsidData calls the underlying SsidData.
+func (x *NetworkProfile) SsidData() *foundation.NSData {
+	return x.inner.SsidData()
+}
+
+// Security calls the underlying Security.
+func (x *NetworkProfile) Security() raw.CWSecurity {
+	return x.inner.Security()
+}
+
 func (x *NetworkProfile) asNetworkProfile() *raw.CWNetworkProfile { return x.inner }
+
+// NetworkProfileable is the interface implemented by [NetworkProfile], for mocking and DI.
+type NetworkProfileable interface {
+	Unwrap() *raw.CWNetworkProfile
+	IsEqualToNetworkProfile(networkProfile *raw.CWNetworkProfile) bool
+	Ssid() string
+	SsidData() *foundation.NSData
+	Security() raw.CWSecurity
+}
+
+var _ NetworkProfileable = (*NetworkProfile)(nil)
 

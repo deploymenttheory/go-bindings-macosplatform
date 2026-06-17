@@ -5,7 +5,10 @@
 package phase
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,17 +63,112 @@ func (x *Engine) StartAndReturnError() error {
 	return err
 }
 
+// Pause calls the underlying Pause.
+func (x *Engine) Pause() {
+	x.inner.Pause()
+}
+
+// Stop calls the underlying Stop.
+func (x *Engine) Stop() {
+	x.inner.Stop()
+}
+
+// Update calls the underlying Update.
+func (x *Engine) Update() {
+	x.inner.Update()
+}
+
+// OutputSpatializationMode calls the underlying OutputSpatializationMode.
+func (x *Engine) OutputSpatializationMode() raw.PHASESpatializationMode {
+	return x.inner.OutputSpatializationMode()
+}
+
+// SetOutputSpatializationMode calls the underlying SetOutputSpatializationMode.
+func (x *Engine) SetOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) {
+	x.inner.SetOutputSpatializationMode(outputSpatializationMode)
+}
+
+// RenderingState calls the underlying RenderingState.
+func (x *Engine) RenderingState() raw.PHASERenderingState {
+	return x.inner.RenderingState()
+}
+
+// RootObject calls the underlying RootObject.
+func (x *Engine) RootObject() *Object {
+	_r := x.inner.RootObject()
+	if _r == nil {
+		return nil
+	}
+	return &Object{inner: _r}
+}
+
+// DefaultMedium calls the underlying DefaultMedium.
+func (x *Engine) DefaultMedium() *Medium {
+	_r := x.inner.DefaultMedium()
+	if _r == nil {
+		return nil
+	}
+	return &Medium{inner: _r}
+}
+
+// SetDefaultMedium calls the underlying SetDefaultMedium.
+func (x *Engine) SetDefaultMedium(defaultMedium *raw.PHASEMedium) {
+	x.inner.SetDefaultMedium(defaultMedium)
+}
+
+// DefaultReverbPreset calls the underlying DefaultReverbPreset.
+func (x *Engine) DefaultReverbPreset() raw.PHASEReverbPreset {
+	return x.inner.DefaultReverbPreset()
+}
+
+// SetDefaultReverbPreset calls the underlying SetDefaultReverbPreset.
+func (x *Engine) SetDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) {
+	x.inner.SetDefaultReverbPreset(defaultReverbPreset)
+}
+
+// UnitsPerSecond calls the underlying UnitsPerSecond.
+func (x *Engine) UnitsPerSecond() float64 {
+	return x.inner.UnitsPerSecond()
+}
+
+// SetUnitsPerSecond calls the underlying SetUnitsPerSecond.
+func (x *Engine) SetUnitsPerSecond(unitsPerSecond float64) {
+	x.inner.SetUnitsPerSecond(unitsPerSecond)
+}
+
+// UnitsPerMeter calls the underlying UnitsPerMeter.
+func (x *Engine) UnitsPerMeter() float64 {
+	return x.inner.UnitsPerMeter()
+}
+
+// SetUnitsPerMeter calls the underlying SetUnitsPerMeter.
+func (x *Engine) SetUnitsPerMeter(unitsPerMeter float64) {
+	x.inner.SetUnitsPerMeter(unitsPerMeter)
+}
+
+// AssetRegistry calls the underlying AssetRegistry.
+func (x *Engine) AssetRegistry() *AssetRegistry {
+	_r := x.inner.AssetRegistry()
+	if _r == nil {
+		return nil
+	}
+	return &AssetRegistry{inner: _r}
+}
+
 // SoundEvents returns the collection as a Go slice.
 func (x *Engine) SoundEvents() []*raw.PHASESoundEvent {
 	arr := x.inner.SoundEvents()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASESoundEvent, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASESoundEvent {
+		return raw.PHASESoundEventFromID(purego.Retain(_id))
+	})
+}
+
+// Groups calls the underlying Groups.
+func (x *Engine) Groups() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroup] {
+	return x.inner.Groups()
 }
 
 // Duckers returns the collection as a Go slice.
@@ -79,10 +177,56 @@ func (x *Engine) Duckers() []*raw.PHASEDucker {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PHASEDucker, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PHASEDucker {
+		return raw.PHASEDuckerFromID(purego.Retain(_id))
+	})
 }
+
+// ActiveGroupPreset calls the underlying ActiveGroupPreset.
+func (x *Engine) ActiveGroupPreset() *GroupPreset {
+	_r := x.inner.ActiveGroupPreset()
+	if _r == nil {
+		return nil
+	}
+	return &GroupPreset{inner: _r}
+}
+
+// LastRenderTime calls the underlying LastRenderTime.
+func (x *Engine) LastRenderTime() *avfaudio.AVAudioTime {
+	return x.inner.LastRenderTime()
+}
+
+// Engineable is the interface implemented by [Engine], for mocking and DI.
+type Engineable interface {
+	Unwrap() *raw.PHASEEngine
+	WithOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode) *Engine
+	WithDefaultMedium(defaultMedium *raw.PHASEMedium) *Engine
+	WithDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset) *Engine
+	WithUnitsPerSecond(unitsPerSecond float64) *Engine
+	WithUnitsPerMeter(unitsPerMeter float64) *Engine
+	StartAndReturnError() error
+	Pause()
+	Stop()
+	Update()
+	OutputSpatializationMode() raw.PHASESpatializationMode
+	SetOutputSpatializationMode(outputSpatializationMode raw.PHASESpatializationMode)
+	RenderingState() raw.PHASERenderingState
+	RootObject() *Object
+	DefaultMedium() *Medium
+	SetDefaultMedium(defaultMedium *raw.PHASEMedium)
+	DefaultReverbPreset() raw.PHASEReverbPreset
+	SetDefaultReverbPreset(defaultReverbPreset raw.PHASEReverbPreset)
+	UnitsPerSecond() float64
+	SetUnitsPerSecond(unitsPerSecond float64)
+	UnitsPerMeter() float64
+	SetUnitsPerMeter(unitsPerMeter float64)
+	AssetRegistry() *AssetRegistry
+	SoundEvents() []*raw.PHASESoundEvent
+	Groups() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroup]
+	Duckers() []*raw.PHASEDucker
+	ActiveGroupPreset() *GroupPreset
+	LastRenderTime() *avfaudio.AVAudioTime
+}
+
+var _ Engineable = (*Engine)(nil)
 

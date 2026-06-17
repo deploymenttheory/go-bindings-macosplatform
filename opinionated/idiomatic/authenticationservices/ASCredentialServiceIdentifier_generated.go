@@ -7,6 +7,7 @@ package authenticationservices
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -31,4 +32,37 @@ func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier stri
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), type_, foundation.NSStringStringWithUTF8String(displayName).Ptr())
 	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
 }
+
+// DisplayName calls the underlying DisplayName.
+func (x *CredentialServiceIdentifier) DisplayName() string {
+	_r := x.inner.DisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Identifier calls the underlying Identifier.
+func (x *CredentialServiceIdentifier) Identifier() string {
+	_r := x.inner.Identifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Type calls the underlying Type.
+func (x *CredentialServiceIdentifier) Type() raw.ASCredentialServiceIdentifierType {
+	return x.inner.Type()
+}
+
+// CredentialServiceIdentifierable is the interface implemented by [CredentialServiceIdentifier], for mocking and DI.
+type CredentialServiceIdentifierable interface {
+	Unwrap() *raw.ASCredentialServiceIdentifier
+	DisplayName() string
+	Identifier() string
+	Type() raw.ASCredentialServiceIdentifierType
+}
+
+var _ CredentialServiceIdentifierable = (*CredentialServiceIdentifier)(nil)
 

@@ -7,6 +7,7 @@ package eventkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -25,16 +26,42 @@ func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(titl
 	return &VirtualConferenceDescriptor{inner: raw.EKVirtualConferenceDescriptorFromID(_id)}
 }
 
+// Title calls the underlying Title.
+func (x *VirtualConferenceDescriptor) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
 // URLDescriptors returns the collection as a Go slice.
 func (x *VirtualConferenceDescriptor) URLDescriptors() []*raw.EKVirtualConferenceURLDescriptor {
 	arr := x.inner.URLDescriptors()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.EKVirtualConferenceURLDescriptor, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.EKVirtualConferenceURLDescriptor {
+		return raw.EKVirtualConferenceURLDescriptorFromID(purego.Retain(_id))
+	})
 }
+
+// ConferenceDetails calls the underlying ConferenceDetails.
+func (x *VirtualConferenceDescriptor) ConferenceDetails() string {
+	_r := x.inner.ConferenceDetails()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VirtualConferenceDescriptorable is the interface implemented by [VirtualConferenceDescriptor], for mocking and DI.
+type VirtualConferenceDescriptorable interface {
+	Unwrap() *raw.EKVirtualConferenceDescriptor
+	Title() string
+	URLDescriptors() []*raw.EKVirtualConferenceURLDescriptor
+	ConferenceDetails() string
+}
+
+var _ VirtualConferenceDescriptorable = (*VirtualConferenceDescriptor)(nil)
 

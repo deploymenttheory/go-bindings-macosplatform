@@ -54,7 +54,79 @@ func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension 
 	return x
 }
 
+// ContrastAdjustment calls the underlying ContrastAdjustment.
+func (x *DetectContoursRequest) ContrastAdjustment() float32 {
+	return x.inner.ContrastAdjustment()
+}
+
+// SetContrastAdjustment calls the underlying SetContrastAdjustment.
+func (x *DetectContoursRequest) SetContrastAdjustment(contrastAdjustment float32) {
+	x.inner.SetContrastAdjustment(contrastAdjustment)
+}
+
+// ContrastPivot calls the underlying ContrastPivot.
+func (x *DetectContoursRequest) ContrastPivot() *foundation.NSNumber {
+	return x.inner.ContrastPivot()
+}
+
+// SetContrastPivot calls the underlying SetContrastPivot.
+func (x *DetectContoursRequest) SetContrastPivot(contrastPivot *foundation.NSNumber) {
+	x.inner.SetContrastPivot(contrastPivot)
+}
+
+// DetectsDarkOnLight calls the underlying DetectsDarkOnLight.
+func (x *DetectContoursRequest) DetectsDarkOnLight() bool {
+	return x.inner.DetectsDarkOnLight()
+}
+
+// SetDetectsDarkOnLight calls the underlying SetDetectsDarkOnLight.
+func (x *DetectContoursRequest) SetDetectsDarkOnLight(detectsDarkOnLight bool) {
+	x.inner.SetDetectsDarkOnLight(detectsDarkOnLight)
+}
+
+// DetectDarkOnLight calls the underlying DetectDarkOnLight.
+func (x *DetectContoursRequest) DetectDarkOnLight() bool {
+	return x.inner.DetectDarkOnLight()
+}
+
+// SetDetectDarkOnLight calls the underlying SetDetectDarkOnLight.
+func (x *DetectContoursRequest) SetDetectDarkOnLight(detectDarkOnLight bool) {
+	x.inner.SetDetectDarkOnLight(detectDarkOnLight)
+}
+
+// MaximumImageDimension calls the underlying MaximumImageDimension.
+func (x *DetectContoursRequest) MaximumImageDimension() uint {
+	return x.inner.MaximumImageDimension()
+}
+
+// SetMaximumImageDimension calls the underlying SetMaximumImageDimension.
+func (x *DetectContoursRequest) SetMaximumImageDimension(maximumImageDimension uint) {
+	x.inner.SetMaximumImageDimension(maximumImageDimension)
+}
+
 func (x *DetectContoursRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectContoursRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
+
+// DetectContoursRequestable is the interface implemented by [DetectContoursRequest], for mocking and DI.
+type DetectContoursRequestable interface {
+	Unwrap() *raw.VNDetectContoursRequest
+	WithContrastAdjustment(contrastAdjustment float32) *DetectContoursRequest
+	WithContrastPivot(contrastPivot *foundation.NSNumber) *DetectContoursRequest
+	WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest
+	WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest
+	WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest
+	ContrastAdjustment() float32
+	SetContrastAdjustment(contrastAdjustment float32)
+	ContrastPivot() *foundation.NSNumber
+	SetContrastPivot(contrastPivot *foundation.NSNumber)
+	DetectsDarkOnLight() bool
+	SetDetectsDarkOnLight(detectsDarkOnLight bool)
+	DetectDarkOnLight() bool
+	SetDetectDarkOnLight(detectDarkOnLight bool)
+	MaximumImageDimension() uint
+	SetMaximumImageDimension(maximumImageDimension uint)
+}
+
+var _ DetectContoursRequestable = (*DetectContoursRequest)(nil)
 

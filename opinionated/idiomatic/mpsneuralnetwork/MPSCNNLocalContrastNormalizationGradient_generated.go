@@ -69,7 +69,92 @@ func (x *CNNLocalContrastNormalizationGradient) WithPs(ps float32) *CNNLocalCont
 	return x
 }
 
+// Alpha calls the underlying Alpha.
+func (x *CNNLocalContrastNormalizationGradient) Alpha() float32 {
+	return x.inner.Alpha()
+}
+
+// SetAlpha calls the underlying SetAlpha.
+func (x *CNNLocalContrastNormalizationGradient) SetAlpha(alpha float32) {
+	x.inner.SetAlpha(alpha)
+}
+
+// Beta calls the underlying Beta.
+func (x *CNNLocalContrastNormalizationGradient) Beta() float32 {
+	return x.inner.Beta()
+}
+
+// SetBeta calls the underlying SetBeta.
+func (x *CNNLocalContrastNormalizationGradient) SetBeta(beta float32) {
+	x.inner.SetBeta(beta)
+}
+
+// Delta calls the underlying Delta.
+func (x *CNNLocalContrastNormalizationGradient) Delta() float32 {
+	return x.inner.Delta()
+}
+
+// SetDelta calls the underlying SetDelta.
+func (x *CNNLocalContrastNormalizationGradient) SetDelta(delta float32) {
+	x.inner.SetDelta(delta)
+}
+
+// P0 calls the underlying P0.
+func (x *CNNLocalContrastNormalizationGradient) P0() float32 {
+	return x.inner.P0()
+}
+
+// SetP0 calls the underlying SetP0.
+func (x *CNNLocalContrastNormalizationGradient) SetP0(p0 float32) {
+	x.inner.SetP0(p0)
+}
+
+// Pm calls the underlying Pm.
+func (x *CNNLocalContrastNormalizationGradient) Pm() float32 {
+	return x.inner.Pm()
+}
+
+// SetPm calls the underlying SetPm.
+func (x *CNNLocalContrastNormalizationGradient) SetPm(pm float32) {
+	x.inner.SetPm(pm)
+}
+
+// Ps calls the underlying Ps.
+func (x *CNNLocalContrastNormalizationGradient) Ps() float32 {
+	return x.inner.Ps()
+}
+
+// SetPs calls the underlying SetPs.
+func (x *CNNLocalContrastNormalizationGradient) SetPs(ps float32) {
+	x.inner.SetPs(ps)
+}
+
 func (x *CNNLocalContrastNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNLocalContrastNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
+
+// CNNLocalContrastNormalizationGradientable is the interface implemented by [CNNLocalContrastNormalizationGradient], for mocking and DI.
+type CNNLocalContrastNormalizationGradientable interface {
+	Unwrap() *raw.MPSCNNLocalContrastNormalizationGradient
+	WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradient
+	WithBeta(beta float32) *CNNLocalContrastNormalizationGradient
+	WithDelta(delta float32) *CNNLocalContrastNormalizationGradient
+	WithP0(p0 float32) *CNNLocalContrastNormalizationGradient
+	WithPm(pm float32) *CNNLocalContrastNormalizationGradient
+	WithPs(ps float32) *CNNLocalContrastNormalizationGradient
+	Alpha() float32
+	SetAlpha(alpha float32)
+	Beta() float32
+	SetBeta(beta float32)
+	Delta() float32
+	SetDelta(delta float32)
+	P0() float32
+	SetP0(p0 float32)
+	Pm() float32
+	SetPm(pm float32)
+	Ps() float32
+	SetPs(ps float32)
+}
+
+var _ CNNLocalContrastNormalizationGradientable = (*CNNLocalContrastNormalizationGradient)(nil)
 

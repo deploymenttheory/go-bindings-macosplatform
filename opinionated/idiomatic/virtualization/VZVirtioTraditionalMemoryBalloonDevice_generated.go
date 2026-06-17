@@ -29,5 +29,25 @@ func (x *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemorySiz
 	return x
 }
 
+// TargetVirtualMachineMemorySize calls the underlying TargetVirtualMachineMemorySize.
+func (x *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
+	return x.inner.TargetVirtualMachineMemorySize()
+}
+
+// SetTargetVirtualMachineMemorySize calls the underlying SetTargetVirtualMachineMemorySize.
+func (x *VirtioTraditionalMemoryBalloonDevice) SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) {
+	x.inner.SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize)
+}
+
 func (x *VirtioTraditionalMemoryBalloonDevice) asMemoryBalloonDevice() *raw.VZMemoryBalloonDevice { return &x.inner.VZMemoryBalloonDevice }
+
+// VirtioTraditionalMemoryBalloonDeviceable is the interface implemented by [VirtioTraditionalMemoryBalloonDevice], for mocking and DI.
+type VirtioTraditionalMemoryBalloonDeviceable interface {
+	Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDevice
+	WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice
+	TargetVirtualMachineMemorySize() uint64
+	SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64)
+}
+
+var _ VirtioTraditionalMemoryBalloonDeviceable = (*VirtioTraditionalMemoryBalloonDevice)(nil)
 

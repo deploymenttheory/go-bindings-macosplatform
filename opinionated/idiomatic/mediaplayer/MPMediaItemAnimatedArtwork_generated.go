@@ -25,3 +25,10 @@ func NewMediaItemAnimatedArtworkWithArtworkIDPreviewImageRequestHandlerVideoAsse
 	return &MediaItemAnimatedArtwork{inner: raw.MPMediaItemAnimatedArtworkFromID(_id)}
 }
 
+// MediaItemAnimatedArtworkable is the interface implemented by [MediaItemAnimatedArtwork], for mocking and DI.
+type MediaItemAnimatedArtworkable interface {
+	Unwrap() *raw.MPMediaItemAnimatedArtwork
+}
+
+var _ MediaItemAnimatedArtworkable = (*MediaItemAnimatedArtwork)(nil)
+

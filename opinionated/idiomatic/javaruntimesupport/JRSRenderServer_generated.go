@@ -23,3 +23,10 @@ func NewRenderServer() *RenderServer {
 	return &RenderServer{inner: raw.JRSRenderServerFromID(_id)}
 }
 
+// RenderServerable is the interface implemented by [RenderServer], for mocking and DI.
+type RenderServerable interface {
+	Unwrap() *raw.JRSRenderServer
+}
+
+var _ RenderServerable = (*RenderServer)(nil)
+

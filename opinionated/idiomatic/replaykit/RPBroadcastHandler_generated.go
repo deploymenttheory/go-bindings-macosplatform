@@ -5,6 +5,7 @@
 package replaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewBroadcastHandler() *BroadcastHandler {
 	return &BroadcastHandler{inner: raw.RPBroadcastHandlerFromID(_id)}
 }
 
+// UpdateServiceInfo calls the underlying UpdateServiceInfo.
+func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
+	x.inner.UpdateServiceInfo(serviceInfo)
+}
+
+// UpdateBroadcastURL calls the underlying UpdateBroadcastURL.
+func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
+	x.inner.UpdateBroadcastURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(broadcastURL)))
+}
+
 func (x *BroadcastHandler) asBroadcastHandler() *raw.RPBroadcastHandler { return x.inner }
+
+// BroadcastHandlerable is the interface implemented by [BroadcastHandler], for mocking and DI.
+type BroadcastHandlerable interface {
+	Unwrap() *raw.RPBroadcastHandler
+	UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject])
+	UpdateBroadcastURL(broadcastURL string)
+}
+
+var _ BroadcastHandlerable = (*BroadcastHandler)(nil)
 

@@ -23,5 +23,42 @@ func NewAdamWOptimizer() *AdamWOptimizer {
 	return &AdamWOptimizer{inner: raw.MLCAdamWOptimizerFromID(_id)}
 }
 
+// Beta1 calls the underlying Beta1.
+func (x *AdamWOptimizer) Beta1() float32 {
+	return x.inner.Beta1()
+}
+
+// Beta2 calls the underlying Beta2.
+func (x *AdamWOptimizer) Beta2() float32 {
+	return x.inner.Beta2()
+}
+
+// Epsilon calls the underlying Epsilon.
+func (x *AdamWOptimizer) Epsilon() float32 {
+	return x.inner.Epsilon()
+}
+
+// UsesAMSGrad calls the underlying UsesAMSGrad.
+func (x *AdamWOptimizer) UsesAMSGrad() bool {
+	return x.inner.UsesAMSGrad()
+}
+
+// TimeStep calls the underlying TimeStep.
+func (x *AdamWOptimizer) TimeStep() uint {
+	return x.inner.TimeStep()
+}
+
 func (x *AdamWOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
+
+// AdamWOptimizerable is the interface implemented by [AdamWOptimizer], for mocking and DI.
+type AdamWOptimizerable interface {
+	Unwrap() *raw.MLCAdamWOptimizer
+	Beta1() float32
+	Beta2() float32
+	Epsilon() float32
+	UsesAMSGrad() bool
+	TimeStep() uint
+}
+
+var _ AdamWOptimizerable = (*AdamWOptimizer)(nil)
 

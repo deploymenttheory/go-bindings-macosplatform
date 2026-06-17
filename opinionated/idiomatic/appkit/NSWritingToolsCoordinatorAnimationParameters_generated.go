@@ -36,6 +36,31 @@ func (x *WritingToolsCoordinatorAnimationParameters) WithCompletionHandler(compl
 	return x
 }
 
+// Duration calls the underlying Duration.
+func (x *WritingToolsCoordinatorAnimationParameters) Duration() float64 {
+	return x.inner.Duration()
+}
+
+// Delay calls the underlying Delay.
+func (x *WritingToolsCoordinatorAnimationParameters) Delay() float64 {
+	return x.inner.Delay()
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *WritingToolsCoordinatorAnimationParameters) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *WritingToolsCoordinatorAnimationParameters) SetProgressHandler(progressHandler func(float32)) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// CompletionHandler calls the underlying CompletionHandler.
+func (x *WritingToolsCoordinatorAnimationParameters) CompletionHandler() objc.Block {
+	return x.inner.CompletionHandler()
+}
+
 // Set blocks until the operation completes or ctx is cancelled.
 func (x *WritingToolsCoordinatorAnimationParameters) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
@@ -49,4 +74,19 @@ func (x *WritingToolsCoordinatorAnimationParameters) Set(ctx context.Context) er
 		return ctx.Err()
 	}
 }
+
+// WritingToolsCoordinatorAnimationParametersable is the interface implemented by [WritingToolsCoordinatorAnimationParameters], for mocking and DI.
+type WritingToolsCoordinatorAnimationParametersable interface {
+	Unwrap() *raw.NSWritingToolsCoordinatorAnimationParameters
+	WithProgressHandler(progressHandler func(float32)) *WritingToolsCoordinatorAnimationParameters
+	WithCompletionHandler(completionHandler func()) *WritingToolsCoordinatorAnimationParameters
+	Duration() float64
+	Delay() float64
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler func(float32))
+	CompletionHandler() objc.Block
+	Set(ctx context.Context) error
+}
+
+var _ WritingToolsCoordinatorAnimationParametersable = (*WritingToolsCoordinatorAnimationParameters)(nil)
 

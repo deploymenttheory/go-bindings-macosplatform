@@ -126,9 +126,245 @@ func (x *DatePicker) WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePi
 	return x
 }
 
+// DatePickerStyle calls the underlying DatePickerStyle.
+func (x *DatePicker) DatePickerStyle() raw.NSDatePickerStyle {
+	return x.inner.DatePickerStyle()
+}
+
+// SetDatePickerStyle calls the underlying SetDatePickerStyle.
+func (x *DatePicker) SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) {
+	x.inner.SetDatePickerStyle(datePickerStyle)
+}
+
+// IsBezeled calls the underlying IsBezeled.
+func (x *DatePicker) IsBezeled() bool {
+	return x.inner.IsBezeled()
+}
+
+// SetBezeled calls the underlying SetBezeled.
+func (x *DatePicker) SetBezeled(bezeled bool) {
+	x.inner.SetBezeled(bezeled)
+}
+
+// IsBordered calls the underlying IsBordered.
+func (x *DatePicker) IsBordered() bool {
+	return x.inner.IsBordered()
+}
+
+// SetBordered calls the underlying SetBordered.
+func (x *DatePicker) SetBordered(bordered bool) {
+	x.inner.SetBordered(bordered)
+}
+
+// DrawsBackground calls the underlying DrawsBackground.
+func (x *DatePicker) DrawsBackground() bool {
+	return x.inner.DrawsBackground()
+}
+
+// SetDrawsBackground calls the underlying SetDrawsBackground.
+func (x *DatePicker) SetDrawsBackground(drawsBackground bool) {
+	x.inner.SetDrawsBackground(drawsBackground)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *DatePicker) BackgroundColor() *Color {
+	_r := x.inner.BackgroundColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *DatePicker) SetBackgroundColor(backgroundColor *raw.NSColor) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// TextColor calls the underlying TextColor.
+func (x *DatePicker) TextColor() *Color {
+	_r := x.inner.TextColor()
+	if _r == nil {
+		return nil
+	}
+	return &Color{inner: _r}
+}
+
+// SetTextColor calls the underlying SetTextColor.
+func (x *DatePicker) SetTextColor(textColor *raw.NSColor) {
+	x.inner.SetTextColor(textColor)
+}
+
+// DatePickerMode calls the underlying DatePickerMode.
+func (x *DatePicker) DatePickerMode() raw.NSDatePickerMode {
+	return x.inner.DatePickerMode()
+}
+
+// SetDatePickerMode calls the underlying SetDatePickerMode.
+func (x *DatePicker) SetDatePickerMode(datePickerMode raw.NSDatePickerMode) {
+	x.inner.SetDatePickerMode(datePickerMode)
+}
+
+// DatePickerElements calls the underlying DatePickerElements.
+func (x *DatePicker) DatePickerElements() raw.NSDatePickerElementFlags {
+	return x.inner.DatePickerElements()
+}
+
+// SetDatePickerElements calls the underlying SetDatePickerElements.
+func (x *DatePicker) SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) {
+	x.inner.SetDatePickerElements(datePickerElements)
+}
+
+// Calendar calls the underlying Calendar.
+func (x *DatePicker) Calendar() *foundation.NSCalendar {
+	return x.inner.Calendar()
+}
+
+// SetCalendar calls the underlying SetCalendar.
+func (x *DatePicker) SetCalendar(calendar *foundation.NSCalendar) {
+	x.inner.SetCalendar(calendar)
+}
+
+// Locale calls the underlying Locale.
+func (x *DatePicker) Locale() *foundation.NSLocale {
+	return x.inner.Locale()
+}
+
+// SetLocale calls the underlying SetLocale.
+func (x *DatePicker) SetLocale(locale *foundation.NSLocale) {
+	x.inner.SetLocale(locale)
+}
+
+// TimeZone calls the underlying TimeZone.
+func (x *DatePicker) TimeZone() *foundation.NSTimeZone {
+	return x.inner.TimeZone()
+}
+
+// SetTimeZone calls the underlying SetTimeZone.
+func (x *DatePicker) SetTimeZone(timeZone *foundation.NSTimeZone) {
+	x.inner.SetTimeZone(timeZone)
+}
+
+// DateValue calls the underlying DateValue.
+func (x *DatePicker) DateValue() *foundation.NSDate {
+	return x.inner.DateValue()
+}
+
+// SetDateValue calls the underlying SetDateValue.
+func (x *DatePicker) SetDateValue(dateValue *foundation.NSDate) {
+	x.inner.SetDateValue(dateValue)
+}
+
+// TimeInterval calls the underlying TimeInterval.
+func (x *DatePicker) TimeInterval() float64 {
+	return x.inner.TimeInterval()
+}
+
+// SetTimeInterval calls the underlying SetTimeInterval.
+func (x *DatePicker) SetTimeInterval(timeInterval float64) {
+	x.inner.SetTimeInterval(timeInterval)
+}
+
+// MinDate calls the underlying MinDate.
+func (x *DatePicker) MinDate() *foundation.NSDate {
+	return x.inner.MinDate()
+}
+
+// SetMinDate calls the underlying SetMinDate.
+func (x *DatePicker) SetMinDate(minDate *foundation.NSDate) {
+	x.inner.SetMinDate(minDate)
+}
+
+// MaxDate calls the underlying MaxDate.
+func (x *DatePicker) MaxDate() *foundation.NSDate {
+	return x.inner.MaxDate()
+}
+
+// SetMaxDate calls the underlying SetMaxDate.
+func (x *DatePicker) SetMaxDate(maxDate *foundation.NSDate) {
+	x.inner.SetMaxDate(maxDate)
+}
+
+// PresentsCalendarOverlay calls the underlying PresentsCalendarOverlay.
+func (x *DatePicker) PresentsCalendarOverlay() bool {
+	return x.inner.PresentsCalendarOverlay()
+}
+
+// SetPresentsCalendarOverlay calls the underlying SetPresentsCalendarOverlay.
+func (x *DatePicker) SetPresentsCalendarOverlay(presentsCalendarOverlay bool) {
+	x.inner.SetPresentsCalendarOverlay(presentsCalendarOverlay)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *DatePicker) Delegate() raw.NSDatePickerCellDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *DatePicker) SetDelegate(delegate raw.NSDatePickerCellDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
 func (x *DatePicker) asControl() *raw.NSControl { return &x.inner.NSControl }
 
 func (x *DatePicker) asView() *raw.NSView { return &x.inner.NSControl.NSView }
 
 func (x *DatePicker) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
+
+// DatePickerable is the interface implemented by [DatePicker], for mocking and DI.
+type DatePickerable interface {
+	Unwrap() *raw.NSDatePicker
+	WithDatePickerStyle(datePickerStyle raw.NSDatePickerStyle) *DatePicker
+	WithBezeled(bezeled bool) *DatePicker
+	WithBordered(bordered bool) *DatePicker
+	WithDrawsBackground(drawsBackground bool) *DatePicker
+	WithBackgroundColor(backgroundColor *raw.NSColor) *DatePicker
+	WithTextColor(textColor *raw.NSColor) *DatePicker
+	WithDatePickerMode(datePickerMode raw.NSDatePickerMode) *DatePicker
+	WithDatePickerElements(datePickerElements raw.NSDatePickerElementFlags) *DatePicker
+	WithCalendar(calendar *foundation.NSCalendar) *DatePicker
+	WithLocale(locale *foundation.NSLocale) *DatePicker
+	WithTimeZone(timeZone *foundation.NSTimeZone) *DatePicker
+	WithDateValue(dateValue *foundation.NSDate) *DatePicker
+	WithTimeInterval(timeInterval float64) *DatePicker
+	WithMinDate(minDate *foundation.NSDate) *DatePicker
+	WithMaxDate(maxDate *foundation.NSDate) *DatePicker
+	WithPresentsCalendarOverlay(presentsCalendarOverlay bool) *DatePicker
+	WithDelegate(delegate raw.NSDatePickerCellDelegate) *DatePicker
+	DatePickerStyle() raw.NSDatePickerStyle
+	SetDatePickerStyle(datePickerStyle raw.NSDatePickerStyle)
+	IsBezeled() bool
+	SetBezeled(bezeled bool)
+	IsBordered() bool
+	SetBordered(bordered bool)
+	DrawsBackground() bool
+	SetDrawsBackground(drawsBackground bool)
+	BackgroundColor() *Color
+	SetBackgroundColor(backgroundColor *raw.NSColor)
+	TextColor() *Color
+	SetTextColor(textColor *raw.NSColor)
+	DatePickerMode() raw.NSDatePickerMode
+	SetDatePickerMode(datePickerMode raw.NSDatePickerMode)
+	DatePickerElements() raw.NSDatePickerElementFlags
+	SetDatePickerElements(datePickerElements raw.NSDatePickerElementFlags)
+	Calendar() *foundation.NSCalendar
+	SetCalendar(calendar *foundation.NSCalendar)
+	Locale() *foundation.NSLocale
+	SetLocale(locale *foundation.NSLocale)
+	TimeZone() *foundation.NSTimeZone
+	SetTimeZone(timeZone *foundation.NSTimeZone)
+	DateValue() *foundation.NSDate
+	SetDateValue(dateValue *foundation.NSDate)
+	TimeInterval() float64
+	SetTimeInterval(timeInterval float64)
+	MinDate() *foundation.NSDate
+	SetMinDate(minDate *foundation.NSDate)
+	MaxDate() *foundation.NSDate
+	SetMaxDate(maxDate *foundation.NSDate)
+	PresentsCalendarOverlay() bool
+	SetPresentsCalendarOverlay(presentsCalendarOverlay bool)
+	Delegate() raw.NSDatePickerCellDelegate
+	SetDelegate(delegate raw.NSDatePickerCellDelegate)
+}
+
+var _ DatePickerable = (*DatePicker)(nil)
 

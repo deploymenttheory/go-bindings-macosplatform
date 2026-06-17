@@ -8,6 +8,7 @@ import (
 	"context"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -45,11 +46,11 @@ func (x *SearchableIndex) WithIndexDelegate(indexDelegate raw.CSSearchableIndexD
 func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items *foundation.NSArray[*raw.CSSearchableItem]) error {
 	_ch := make(chan error, 1)
 	x.inner.IndexSearchableItemsCompletionHandler(items, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -63,11 +64,11 @@ func (x *SearchableIndex) IndexSearchableItems(ctx context.Context, items *found
 func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteSearchableItemsWithIdentifiersCompletionHandler(identifiers, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -81,11 +82,11 @@ func (x *SearchableIndex) DeleteSearchableItemsWithIdentifiers(ctx context.Conte
 func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers *foundation.NSArray[*foundation.NSString]) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteSearchableItemsWithDomainIdentifiersCompletionHandler(domainIdentifiers, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -99,11 +100,11 @@ func (x *SearchableIndex) DeleteSearchableItemsWithDomainIdentifiers(ctx context
 func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	x.inner.DeleteAllSearchableItemsWithCompletionHandler(func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -113,15 +114,30 @@ func (x *SearchableIndex) DeleteAllSearchableItems(ctx context.Context) error {
 	}
 }
 
+// IndexDelegate calls the underlying IndexDelegate.
+func (x *SearchableIndex) IndexDelegate() raw.CSSearchableIndexDelegate {
+	return x.inner.IndexDelegate()
+}
+
+// SetIndexDelegate calls the underlying SetIndexDelegate.
+func (x *SearchableIndex) SetIndexDelegate(indexDelegate raw.CSSearchableIndexDelegate) {
+	x.inner.SetIndexDelegate(indexDelegate)
+}
+
+// BeginIndexBatch calls the underlying BeginIndexBatch.
+func (x *SearchableIndex) BeginIndexBatch() {
+	x.inner.BeginIndexBatch()
+}
+
 // EndIndexBatchWithExpectedClientStateNewClientState blocks until the operation completes or ctx is cancelled.
 func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState *foundation.NSData, newClientState *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.EndIndexBatchWithExpectedClientStateNewClientStateCompletionHandler(expectedClientState, newClientState, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -135,11 +151,11 @@ func (x *SearchableIndex) EndIndexBatchWithExpectedClientStateNewClientState(ctx
 func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clientState *foundation.NSData) error {
 	_ch := make(chan error, 1)
 	x.inner.EndIndexBatchWithClientStateCompletionHandler(clientState, func(_p0 unsafe.Pointer) {
+		var _err error
 		if uintptr(_p0) != 0 {
-			_ch <- purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		} else {
-			_ch <- nil
+			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
 		}
+		_ch <- _err
 	})
 	select {
 	case err := <-_ch:
@@ -148,4 +164,71 @@ func (x *SearchableIndex) EndIndexBatchWithClientState(ctx context.Context, clie
 		return ctx.Err()
 	}
 }
+
+// FetchLastClientState blocks until the operation completes or ctx is cancelled.
+func (x *SearchableIndex) FetchLastClientState(ctx context.Context) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchLastClientStateWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// FetchDataForBundleIdentifierItemIdentifierContentType blocks until the operation completes or ctx is cancelled.
+func (x *SearchableIndex) FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType *uniformtypeidentifiers.UTType) (*foundation.NSData, error) {
+	type _result struct {
+		val *foundation.NSData
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.FetchDataForBundleIdentifierItemIdentifierContentTypeCompletionHandler(foundation.NSStringStringWithUTF8String(bundleIdentifier), foundation.NSStringStringWithUTF8String(itemIdentifier), contentType, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		_o.val = _p0
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *foundation.NSData
+		return _zero, ctx.Err()
+	}
+}
+
+// SearchableIndexable is the interface implemented by [SearchableIndex], for mocking and DI.
+type SearchableIndexable interface {
+	Unwrap() *raw.CSSearchableIndex
+	WithIndexDelegate(indexDelegate raw.CSSearchableIndexDelegate) *SearchableIndex
+	IndexSearchableItems(ctx context.Context, items *foundation.NSArray[*raw.CSSearchableItem]) error
+	DeleteSearchableItemsWithIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) error
+	DeleteSearchableItemsWithDomainIdentifiers(ctx context.Context, domainIdentifiers *foundation.NSArray[*foundation.NSString]) error
+	DeleteAllSearchableItems(ctx context.Context) error
+	IndexDelegate() raw.CSSearchableIndexDelegate
+	SetIndexDelegate(indexDelegate raw.CSSearchableIndexDelegate)
+	BeginIndexBatch()
+	EndIndexBatchWithExpectedClientStateNewClientState(ctx context.Context, expectedClientState *foundation.NSData, newClientState *foundation.NSData) error
+	EndIndexBatchWithClientState(ctx context.Context, clientState *foundation.NSData) error
+	FetchLastClientState(ctx context.Context) (*foundation.NSData, error)
+	FetchDataForBundleIdentifierItemIdentifierContentType(ctx context.Context, bundleIdentifier string, itemIdentifier string, contentType *uniformtypeidentifiers.UTType) (*foundation.NSData, error)
+}
+
+var _ SearchableIndexable = (*SearchableIndex)(nil)
 

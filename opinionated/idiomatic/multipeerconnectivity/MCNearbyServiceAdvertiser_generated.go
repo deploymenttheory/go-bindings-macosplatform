@@ -7,6 +7,7 @@ package multipeerconnectivity
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,62 @@ func (x *NearbyServiceAdvertiser) WithDelegate(delegate raw.MCNearbyServiceAdver
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// StartAdvertisingPeer calls the underlying StartAdvertisingPeer.
+func (x *NearbyServiceAdvertiser) StartAdvertisingPeer() {
+	x.inner.StartAdvertisingPeer()
+}
+
+// StopAdvertisingPeer calls the underlying StopAdvertisingPeer.
+func (x *NearbyServiceAdvertiser) StopAdvertisingPeer() {
+	x.inner.StopAdvertisingPeer()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *NearbyServiceAdvertiser) Delegate() raw.MCNearbyServiceAdvertiserDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *NearbyServiceAdvertiser) SetDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// MyPeerID calls the underlying MyPeerID.
+func (x *NearbyServiceAdvertiser) MyPeerID() *PeerID {
+	_r := x.inner.MyPeerID()
+	if _r == nil {
+		return nil
+	}
+	return &PeerID{inner: _r}
+}
+
+// DiscoveryInfo calls the underlying DiscoveryInfo.
+func (x *NearbyServiceAdvertiser) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.DiscoveryInfo()
+}
+
+// ServiceType calls the underlying ServiceType.
+func (x *NearbyServiceAdvertiser) ServiceType() string {
+	_r := x.inner.ServiceType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// NearbyServiceAdvertiserable is the interface implemented by [NearbyServiceAdvertiser], for mocking and DI.
+type NearbyServiceAdvertiserable interface {
+	Unwrap() *raw.MCNearbyServiceAdvertiser
+	WithDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate) *NearbyServiceAdvertiser
+	StartAdvertisingPeer()
+	StopAdvertisingPeer()
+	Delegate() raw.MCNearbyServiceAdvertiserDelegate
+	SetDelegate(delegate raw.MCNearbyServiceAdvertiserDelegate)
+	MyPeerID() *PeerID
+	DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	ServiceType() string
+}
+
+var _ NearbyServiceAdvertiserable = (*NearbyServiceAdvertiser)(nil)
 

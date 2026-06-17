@@ -35,3 +35,36 @@ func (x *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(f
 	return x
 }
 
+// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
+func (x *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
+	return x.inner.IsNetworkAccessAllowed()
+}
+
+// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
+func (x *AssetResourceRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
+	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+}
+
+// ProgressHandler calls the underlying ProgressHandler.
+func (x *AssetResourceRequestOptions) ProgressHandler() objc.Block {
+	return x.inner.ProgressHandler()
+}
+
+// SetProgressHandler calls the underlying SetProgressHandler.
+func (x *AssetResourceRequestOptions) SetProgressHandler(progressHandler func(float64)) {
+	x.inner.SetProgressHandler(progressHandler)
+}
+
+// AssetResourceRequestOptionsable is the interface implemented by [AssetResourceRequestOptions], for mocking and DI.
+type AssetResourceRequestOptionsable interface {
+	Unwrap() *raw.PHAssetResourceRequestOptions
+	WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions
+	WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions
+	IsNetworkAccessAllowed() bool
+	SetNetworkAccessAllowed(networkAccessAllowed bool)
+	ProgressHandler() objc.Block
+	SetProgressHandler(progressHandler func(float64))
+}
+
+var _ AssetResourceRequestOptionsable = (*AssetResourceRequestOptions)(nil)
+

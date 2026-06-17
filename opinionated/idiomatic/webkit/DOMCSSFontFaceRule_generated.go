@@ -23,9 +23,26 @@ func NewDOMCSSFontFaceRule() *DOMCSSFontFaceRule {
 	return &DOMCSSFontFaceRule{inner: raw.DOMCSSFontFaceRuleFromID(_id)}
 }
 
+// Style calls the underlying Style.
+func (x *DOMCSSFontFaceRule) Style() *DOMCSSStyleDeclaration {
+	_r := x.inner.Style()
+	if _r == nil {
+		return nil
+	}
+	return &DOMCSSStyleDeclaration{inner: _r}
+}
+
 func (x *DOMCSSFontFaceRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSFontFaceRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
 
 func (x *DOMCSSFontFaceRule) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMCSSRule.DOMObject.WebScriptObject }
+
+// DOMCSSFontFaceRuleable is the interface implemented by [DOMCSSFontFaceRule], for mocking and DI.
+type DOMCSSFontFaceRuleable interface {
+	Unwrap() *raw.DOMCSSFontFaceRule
+	Style() *DOMCSSStyleDeclaration
+}
+
+var _ DOMCSSFontFaceRuleable = (*DOMCSSFontFaceRule)(nil)
 

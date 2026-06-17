@@ -5,7 +5,10 @@
 package sharedwithyou
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,5 +26,44 @@ func NewCollaborationHighlight() *CollaborationHighlight {
 	return &CollaborationHighlight{inner: raw.SWCollaborationHighlightFromID(_id)}
 }
 
+// CollaborationIdentifier calls the underlying CollaborationIdentifier.
+func (x *CollaborationHighlight) CollaborationIdentifier() string {
+	_r := x.inner.CollaborationIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Title calls the underlying Title.
+func (x *CollaborationHighlight) Title() string {
+	_r := x.inner.Title()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// CreationDate calls the underlying CreationDate.
+func (x *CollaborationHighlight) CreationDate() *foundation.NSDate {
+	return x.inner.CreationDate()
+}
+
+// ContentType calls the underlying ContentType.
+func (x *CollaborationHighlight) ContentType() *uniformtypeidentifiers.UTType {
+	return x.inner.ContentType()
+}
+
 func (x *CollaborationHighlight) asHighlight() *raw.SWHighlight { return &x.inner.SWHighlight }
+
+// CollaborationHighlightable is the interface implemented by [CollaborationHighlight], for mocking and DI.
+type CollaborationHighlightable interface {
+	Unwrap() *raw.SWCollaborationHighlight
+	CollaborationIdentifier() string
+	Title() string
+	CreationDate() *foundation.NSDate
+	ContentType() *uniformtypeidentifiers.UTType
+}
+
+var _ CollaborationHighlightable = (*CollaborationHighlight)(nil)
 

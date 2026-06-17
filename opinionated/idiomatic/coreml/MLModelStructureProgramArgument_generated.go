@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,10 +30,16 @@ func (x *ModelStructureProgramArgument) Bindings() []*raw.MLModelStructureProgra
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MLModelStructureProgramBinding, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MLModelStructureProgramBinding {
+		return raw.MLModelStructureProgramBindingFromID(purego.Retain(_id))
+	})
 }
+
+// ModelStructureProgramArgumentable is the interface implemented by [ModelStructureProgramArgument], for mocking and DI.
+type ModelStructureProgramArgumentable interface {
+	Unwrap() *raw.MLModelStructureProgramArgument
+	Bindings() []*raw.MLModelStructureProgramBinding
+}
+
+var _ ModelStructureProgramArgumentable = (*ModelStructureProgramArgument)(nil)
 

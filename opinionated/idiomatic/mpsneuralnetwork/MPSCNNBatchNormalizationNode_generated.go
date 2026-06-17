@@ -36,5 +36,38 @@ func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle raw.MPSNNTra
 	return x
 }
 
+// Flags calls the underlying Flags.
+func (x *CNNBatchNormalizationNode) Flags() raw.MPSCNNBatchNormalizationFlags {
+	return x.inner.Flags()
+}
+
+// SetFlags calls the underlying SetFlags.
+func (x *CNNBatchNormalizationNode) SetFlags(flags raw.MPSCNNBatchNormalizationFlags) {
+	x.inner.SetFlags(flags)
+}
+
+// TrainingStyle calls the underlying TrainingStyle.
+func (x *CNNBatchNormalizationNode) TrainingStyle() raw.MPSNNTrainingStyle {
+	return x.inner.TrainingStyle()
+}
+
+// SetTrainingStyle calls the underlying SetTrainingStyle.
+func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) {
+	x.inner.SetTrainingStyle(trainingStyle)
+}
+
 func (x *CNNBatchNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+
+// CNNBatchNormalizationNodeable is the interface implemented by [CNNBatchNormalizationNode], for mocking and DI.
+type CNNBatchNormalizationNodeable interface {
+	Unwrap() *raw.MPSCNNBatchNormalizationNode
+	WithFlags(flags raw.MPSCNNBatchNormalizationFlags) *CNNBatchNormalizationNode
+	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNBatchNormalizationNode
+	Flags() raw.MPSCNNBatchNormalizationFlags
+	SetFlags(flags raw.MPSCNNBatchNormalizationFlags)
+	TrainingStyle() raw.MPSNNTrainingStyle
+	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
+}
+
+var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)
 

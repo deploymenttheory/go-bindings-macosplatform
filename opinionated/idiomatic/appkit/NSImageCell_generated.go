@@ -41,5 +41,51 @@ func (x *ImageCell) WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *
 	return x
 }
 
+// ImageAlignment calls the underlying ImageAlignment.
+func (x *ImageCell) ImageAlignment() raw.NSImageAlignment {
+	return x.inner.ImageAlignment()
+}
+
+// SetImageAlignment calls the underlying SetImageAlignment.
+func (x *ImageCell) SetImageAlignment(imageAlignment raw.NSImageAlignment) {
+	x.inner.SetImageAlignment(imageAlignment)
+}
+
+// ImageScaling calls the underlying ImageScaling.
+func (x *ImageCell) ImageScaling() raw.NSImageScaling {
+	return x.inner.ImageScaling()
+}
+
+// SetImageScaling calls the underlying SetImageScaling.
+func (x *ImageCell) SetImageScaling(imageScaling raw.NSImageScaling) {
+	x.inner.SetImageScaling(imageScaling)
+}
+
+// ImageFrameStyle calls the underlying ImageFrameStyle.
+func (x *ImageCell) ImageFrameStyle() raw.NSImageFrameStyle {
+	return x.inner.ImageFrameStyle()
+}
+
+// SetImageFrameStyle calls the underlying SetImageFrameStyle.
+func (x *ImageCell) SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) {
+	x.inner.SetImageFrameStyle(imageFrameStyle)
+}
+
 func (x *ImageCell) asCell() *raw.NSCell { return &x.inner.NSCell }
+
+// ImageCellable is the interface implemented by [ImageCell], for mocking and DI.
+type ImageCellable interface {
+	Unwrap() *raw.NSImageCell
+	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageCell
+	WithImageScaling(imageScaling raw.NSImageScaling) *ImageCell
+	WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageCell
+	ImageAlignment() raw.NSImageAlignment
+	SetImageAlignment(imageAlignment raw.NSImageAlignment)
+	ImageScaling() raw.NSImageScaling
+	SetImageScaling(imageScaling raw.NSImageScaling)
+	ImageFrameStyle() raw.NSImageFrameStyle
+	SetImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle)
+}
+
+var _ ImageCellable = (*ImageCell)(nil)
 

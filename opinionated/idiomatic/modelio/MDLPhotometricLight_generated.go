@@ -25,9 +25,60 @@ func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
 	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(_id)}
 }
 
+// GenerateSphericalHarmonicsFromLight calls the underlying GenerateSphericalHarmonicsFromLight.
+func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint) {
+	x.inner.GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel)
+}
+
+// GenerateCubemapFromLight calls the underlying GenerateCubemapFromLight.
+func (x *PhotometricLight) GenerateCubemapFromLight(textureSize uint) {
+	x.inner.GenerateCubemapFromLight(textureSize)
+}
+
+// GenerateTexture calls the underlying GenerateTexture.
+func (x *PhotometricLight) GenerateTexture(textureSize uint) *Texture {
+	_r := x.inner.GenerateTexture(textureSize)
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// LightCubeMap calls the underlying LightCubeMap.
+func (x *PhotometricLight) LightCubeMap() *Texture {
+	_r := x.inner.LightCubeMap()
+	if _r == nil {
+		return nil
+	}
+	return &Texture{inner: _r}
+}
+
+// SphericalHarmonicsLevel calls the underlying SphericalHarmonicsLevel.
+func (x *PhotometricLight) SphericalHarmonicsLevel() uint {
+	return x.inner.SphericalHarmonicsLevel()
+}
+
+// SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
+func (x *PhotometricLight) SphericalHarmonicsCoefficients() *foundation.NSData {
+	return x.inner.SphericalHarmonicsCoefficients()
+}
+
 func (x *PhotometricLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight { return &x.inner.MDLPhysicallyPlausibleLight }
 
 func (x *PhotometricLight) asLight() *raw.MDLLight { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight }
 
 func (x *PhotometricLight) asObject() *raw.MDLObject { return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject }
+
+// PhotometricLightable is the interface implemented by [PhotometricLight], for mocking and DI.
+type PhotometricLightable interface {
+	Unwrap() *raw.MDLPhotometricLight
+	GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint)
+	GenerateCubemapFromLight(textureSize uint)
+	GenerateTexture(textureSize uint) *Texture
+	LightCubeMap() *Texture
+	SphericalHarmonicsLevel() uint
+	SphericalHarmonicsCoefficients() *foundation.NSData
+}
+
+var _ PhotometricLightable = (*PhotometricLight)(nil)
 

@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,35 @@ func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
 	return &CollectionLayoutAnchor{inner: raw.NSCollectionLayoutAnchorFromID(_id)}
 }
+
+// Edges calls the underlying Edges.
+func (x *CollectionLayoutAnchor) Edges() raw.NSDirectionalRectEdge {
+	return x.inner.Edges()
+}
+
+// Offset calls the underlying Offset.
+func (x *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
+	return x.inner.Offset()
+}
+
+// IsAbsoluteOffset calls the underlying IsAbsoluteOffset.
+func (x *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
+	return x.inner.IsAbsoluteOffset()
+}
+
+// IsFractionalOffset calls the underlying IsFractionalOffset.
+func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
+	return x.inner.IsFractionalOffset()
+}
+
+// CollectionLayoutAnchorable is the interface implemented by [CollectionLayoutAnchor], for mocking and DI.
+type CollectionLayoutAnchorable interface {
+	Unwrap() *raw.NSCollectionLayoutAnchor
+	Edges() raw.NSDirectionalRectEdge
+	Offset() corefoundation.CGPoint
+	IsAbsoluteOffset() bool
+	IsFractionalOffset() bool
+}
+
+var _ CollectionLayoutAnchorable = (*CollectionLayoutAnchor)(nil)
 

@@ -29,5 +29,41 @@ func (x *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyb
 	return x
 }
 
+// ButtonForKeyCode calls the underlying ButtonForKeyCode.
+func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
+	_r := x.inner.ButtonForKeyCode(code)
+	if _r == nil {
+		return nil
+	}
+	return &ControllerButtonInput{inner: _r}
+}
+
+// KeyChangedHandler calls the underlying KeyChangedHandler.
+func (x *KeyboardInput) KeyChangedHandler() objc.Block {
+	return x.inner.KeyChangedHandler()
+}
+
+// SetKeyChangedHandler calls the underlying SetKeyChangedHandler.
+func (x *KeyboardInput) SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) {
+	x.inner.SetKeyChangedHandler(keyChangedHandler)
+}
+
+// IsAnyKeyPressed calls the underlying IsAnyKeyPressed.
+func (x *KeyboardInput) IsAnyKeyPressed() bool {
+	return x.inner.IsAnyKeyPressed()
+}
+
 func (x *KeyboardInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCPhysicalInputProfile }
+
+// KeyboardInputable is the interface implemented by [KeyboardInput], for mocking and DI.
+type KeyboardInputable interface {
+	Unwrap() *raw.GCKeyboardInput
+	WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) *KeyboardInput
+	ButtonForKeyCode(code int) *ControllerButtonInput
+	KeyChangedHandler() objc.Block
+	SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool))
+	IsAnyKeyPressed() bool
+}
+
+var _ KeyboardInputable = (*KeyboardInput)(nil)
 

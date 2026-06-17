@@ -6,7 +6,10 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SampleBufferRenderSynchronizer wraps [raw.AVSampleBufferRenderSynchronizer] with a fluent Go API.
@@ -34,4 +37,109 @@ func (x *SampleBufferRenderSynchronizer) WithDelaysRateChangeUntilHasSufficientM
 	x.inner.SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData)
 	return x
 }
+
+// CurrentTime calls the underlying CurrentTime.
+func (x *SampleBufferRenderSynchronizer) CurrentTime() coremedia.CMTime {
+	return x.inner.CurrentTime()
+}
+
+// SetRateTime calls the underlying SetRateTime.
+func (x *SampleBufferRenderSynchronizer) SetRateTime(rate float32, time_ coremedia.CMTime) {
+	x.inner.SetRateTime(rate, time_)
+}
+
+// SetRateTimeAtHostTime calls the underlying SetRateTimeAtHostTime.
+func (x *SampleBufferRenderSynchronizer) SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime) {
+	x.inner.SetRateTimeAtHostTime(rate, time_, hostTime)
+}
+
+// Timebase calls the underlying Timebase.
+func (x *SampleBufferRenderSynchronizer) Timebase() unsafe.Pointer {
+	return x.inner.Timebase()
+}
+
+// Rate calls the underlying Rate.
+func (x *SampleBufferRenderSynchronizer) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *SampleBufferRenderSynchronizer) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// DelaysRateChangeUntilHasSufficientMediaData calls the underlying DelaysRateChangeUntilHasSufficientMediaData.
+func (x *SampleBufferRenderSynchronizer) DelaysRateChangeUntilHasSufficientMediaData() bool {
+	return x.inner.DelaysRateChangeUntilHasSufficientMediaData()
+}
+
+// SetDelaysRateChangeUntilHasSufficientMediaData calls the underlying SetDelaysRateChangeUntilHasSufficientMediaData.
+func (x *SampleBufferRenderSynchronizer) SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) {
+	x.inner.SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData)
+}
+
+// AddRenderer calls the underlying AddRenderer.
+func (x *SampleBufferRenderSynchronizer) AddRenderer(renderer raw.AVQueuedSampleBufferRendering) {
+	x.inner.AddRenderer(renderer)
+}
+
+// RemoveRendererAtTimeCompletionHandler calls the underlying RemoveRendererAtTimeCompletionHandler.
+func (x *SampleBufferRenderSynchronizer) RemoveRendererAtTimeCompletionHandler(renderer raw.AVQueuedSampleBufferRendering, time_ coremedia.CMTime, completionHandler func(bool)) {
+	x.inner.RemoveRendererAtTimeCompletionHandler(renderer, time_, completionHandler)
+}
+
+// Renderers calls the underlying Renderers.
+func (x *SampleBufferRenderSynchronizer) Renderers() *foundation.NSArray[raw.AVQueuedSampleBufferRendering] {
+	return x.inner.Renderers()
+}
+
+// AddPeriodicTimeObserverForIntervalQueueUsing calls the underlying AddPeriodicTimeObserverForIntervalQueueUsing.
+func (x *SampleBufferRenderSynchronizer) AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID {
+	return x.inner.AddPeriodicTimeObserverForIntervalQueueUsing(interval, queue, block)
+}
+
+// AddBoundaryTimeObserverForTimesQueueUsing calls the underlying AddBoundaryTimeObserverForTimesQueueUsing.
+func (x *SampleBufferRenderSynchronizer) AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID {
+	return x.inner.AddBoundaryTimeObserverForTimesQueueUsing(times, queue, block)
+}
+
+// RemoveTimeObserver calls the underlying RemoveTimeObserver.
+func (x *SampleBufferRenderSynchronizer) RemoveTimeObserver(observer objc.ID) {
+	x.inner.RemoveTimeObserver(observer)
+}
+
+// IntendedSpatialAudioExperience calls the underlying IntendedSpatialAudioExperience.
+func (x *SampleBufferRenderSynchronizer) IntendedSpatialAudioExperience() unsafe.Pointer {
+	return x.inner.IntendedSpatialAudioExperience()
+}
+
+// SetIntendedSpatialAudioExperience calls the underlying SetIntendedSpatialAudioExperience.
+func (x *SampleBufferRenderSynchronizer) SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer) {
+	x.inner.SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience)
+}
+
+// SampleBufferRenderSynchronizerable is the interface implemented by [SampleBufferRenderSynchronizer], for mocking and DI.
+type SampleBufferRenderSynchronizerable interface {
+	Unwrap() *raw.AVSampleBufferRenderSynchronizer
+	WithRate(rate float32) *SampleBufferRenderSynchronizer
+	WithDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool) *SampleBufferRenderSynchronizer
+	CurrentTime() coremedia.CMTime
+	SetRateTime(rate float32, time_ coremedia.CMTime)
+	SetRateTimeAtHostTime(rate float32, time_ coremedia.CMTime, hostTime coremedia.CMTime)
+	Timebase() unsafe.Pointer
+	Rate() float32
+	SetRate(rate float32)
+	DelaysRateChangeUntilHasSufficientMediaData() bool
+	SetDelaysRateChangeUntilHasSufficientMediaData(delaysRateChangeUntilHasSufficientMediaData bool)
+	AddRenderer(renderer raw.AVQueuedSampleBufferRendering)
+	RemoveRendererAtTimeCompletionHandler(renderer raw.AVQueuedSampleBufferRendering, time_ coremedia.CMTime, completionHandler func(bool))
+	Renderers() *foundation.NSArray[raw.AVQueuedSampleBufferRendering]
+	AddPeriodicTimeObserverForIntervalQueueUsing(interval coremedia.CMTime, queue *foundation.NSObject, block objc.Block) objc.ID
+	AddBoundaryTimeObserverForTimesQueueUsing(times *foundation.NSArray[*foundation.NSValue], queue *foundation.NSObject, block func()) objc.ID
+	RemoveTimeObserver(observer objc.ID)
+	IntendedSpatialAudioExperience() unsafe.Pointer
+	SetIntendedSpatialAudioExperience(intendedSpatialAudioExperience unsafe.Pointer)
+}
+
+var _ SampleBufferRenderSynchronizerable = (*SampleBufferRenderSynchronizer)(nil)
 

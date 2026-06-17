@@ -25,3 +25,10 @@ func NewPropertyListSerialization() *PropertyListSerialization {
 
 func (x *PropertyListSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// PropertyListSerializationable is the interface implemented by [PropertyListSerialization], for mocking and DI.
+type PropertyListSerializationable interface {
+	Unwrap() *raw.NSPropertyListSerialization
+}
+
+var _ PropertyListSerializationable = (*PropertyListSerialization)(nil)
+

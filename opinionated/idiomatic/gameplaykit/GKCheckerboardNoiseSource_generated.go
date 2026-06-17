@@ -30,5 +30,25 @@ func (x *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *Checkerboa
 	return x
 }
 
+// SquareSize calls the underlying SquareSize.
+func (x *CheckerboardNoiseSource) SquareSize() float64 {
+	return x.inner.SquareSize()
+}
+
+// SetSquareSize calls the underlying SetSquareSize.
+func (x *CheckerboardNoiseSource) SetSquareSize(squareSize float64) {
+	x.inner.SetSquareSize(squareSize)
+}
+
 func (x *CheckerboardNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
+
+// CheckerboardNoiseSourceable is the interface implemented by [CheckerboardNoiseSource], for mocking and DI.
+type CheckerboardNoiseSourceable interface {
+	Unwrap() *raw.GKCheckerboardNoiseSource
+	WithSquareSize(squareSize float64) *CheckerboardNoiseSource
+	SquareSize() float64
+	SetSquareSize(squareSize float64)
+}
+
+var _ CheckerboardNoiseSourceable = (*CheckerboardNoiseSource)(nil)
 

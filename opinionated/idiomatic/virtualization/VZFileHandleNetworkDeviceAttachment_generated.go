@@ -31,5 +31,31 @@ func (x *FileHandleNetworkDeviceAttachment) WithMaximumTransmissionUnit(maximumT
 	return x
 }
 
+// FileHandle calls the underlying FileHandle.
+func (x *FileHandleNetworkDeviceAttachment) FileHandle() *foundation.NSFileHandle {
+	return x.inner.FileHandle()
+}
+
+// MaximumTransmissionUnit calls the underlying MaximumTransmissionUnit.
+func (x *FileHandleNetworkDeviceAttachment) MaximumTransmissionUnit() int {
+	return x.inner.MaximumTransmissionUnit()
+}
+
+// SetMaximumTransmissionUnit calls the underlying SetMaximumTransmissionUnit.
+func (x *FileHandleNetworkDeviceAttachment) SetMaximumTransmissionUnit(maximumTransmissionUnit int) {
+	x.inner.SetMaximumTransmissionUnit(maximumTransmissionUnit)
+}
+
 func (x *FileHandleNetworkDeviceAttachment) asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment { return &x.inner.VZNetworkDeviceAttachment }
+
+// FileHandleNetworkDeviceAttachmentable is the interface implemented by [FileHandleNetworkDeviceAttachment], for mocking and DI.
+type FileHandleNetworkDeviceAttachmentable interface {
+	Unwrap() *raw.VZFileHandleNetworkDeviceAttachment
+	WithMaximumTransmissionUnit(maximumTransmissionUnit int) *FileHandleNetworkDeviceAttachment
+	FileHandle() *foundation.NSFileHandle
+	MaximumTransmissionUnit() int
+	SetMaximumTransmissionUnit(maximumTransmissionUnit int)
+}
+
+var _ FileHandleNetworkDeviceAttachmentable = (*FileHandleNetworkDeviceAttachment)(nil)
 

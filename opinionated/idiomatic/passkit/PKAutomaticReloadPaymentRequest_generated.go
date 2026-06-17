@@ -7,6 +7,7 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,4 +55,88 @@ func (x *AutomaticReloadPaymentRequest) WithTokenNotificationURL(tokenNotificati
 	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
 	return x
 }
+
+// PaymentDescription calls the underlying PaymentDescription.
+func (x *AutomaticReloadPaymentRequest) PaymentDescription() string {
+	_r := x.inner.PaymentDescription()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetPaymentDescription calls the underlying SetPaymentDescription.
+func (x *AutomaticReloadPaymentRequest) SetPaymentDescription(paymentDescription string) {
+	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+}
+
+// AutomaticReloadBilling calls the underlying AutomaticReloadBilling.
+func (x *AutomaticReloadPaymentRequest) AutomaticReloadBilling() *AutomaticReloadPaymentSummaryItem {
+	_r := x.inner.AutomaticReloadBilling()
+	if _r == nil {
+		return nil
+	}
+	return &AutomaticReloadPaymentSummaryItem{inner: _r}
+}
+
+// SetAutomaticReloadBilling calls the underlying SetAutomaticReloadBilling.
+func (x *AutomaticReloadPaymentRequest) SetAutomaticReloadBilling(automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem) {
+	x.inner.SetAutomaticReloadBilling(automaticReloadBilling)
+}
+
+// BillingAgreement calls the underlying BillingAgreement.
+func (x *AutomaticReloadPaymentRequest) BillingAgreement() string {
+	_r := x.inner.BillingAgreement()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetBillingAgreement calls the underlying SetBillingAgreement.
+func (x *AutomaticReloadPaymentRequest) SetBillingAgreement(billingAgreement string) {
+	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+}
+
+// ManagementURL calls the underlying ManagementURL.
+func (x *AutomaticReloadPaymentRequest) ManagementURL() *foundation.NSURL {
+	return x.inner.ManagementURL()
+}
+
+// SetManagementURL calls the underlying SetManagementURL.
+func (x *AutomaticReloadPaymentRequest) SetManagementURL(managementURL string) {
+	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+}
+
+// TokenNotificationURL calls the underlying TokenNotificationURL.
+func (x *AutomaticReloadPaymentRequest) TokenNotificationURL() *foundation.NSURL {
+	return x.inner.TokenNotificationURL()
+}
+
+// SetTokenNotificationURL calls the underlying SetTokenNotificationURL.
+func (x *AutomaticReloadPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
+	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+}
+
+// AutomaticReloadPaymentRequestable is the interface implemented by [AutomaticReloadPaymentRequest], for mocking and DI.
+type AutomaticReloadPaymentRequestable interface {
+	Unwrap() *raw.PKAutomaticReloadPaymentRequest
+	WithPaymentDescription(paymentDescription string) *AutomaticReloadPaymentRequest
+	WithAutomaticReloadBilling(automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem) *AutomaticReloadPaymentRequest
+	WithBillingAgreement(billingAgreement string) *AutomaticReloadPaymentRequest
+	WithManagementURL(managementURL string) *AutomaticReloadPaymentRequest
+	WithTokenNotificationURL(tokenNotificationURL string) *AutomaticReloadPaymentRequest
+	PaymentDescription() string
+	SetPaymentDescription(paymentDescription string)
+	AutomaticReloadBilling() *AutomaticReloadPaymentSummaryItem
+	SetAutomaticReloadBilling(automaticReloadBilling *raw.PKAutomaticReloadPaymentSummaryItem)
+	BillingAgreement() string
+	SetBillingAgreement(billingAgreement string)
+	ManagementURL() *foundation.NSURL
+	SetManagementURL(managementURL string)
+	TokenNotificationURL() *foundation.NSURL
+	SetTokenNotificationURL(tokenNotificationURL string)
+}
+
+var _ AutomaticReloadPaymentRequestable = (*AutomaticReloadPaymentRequest)(nil)
 

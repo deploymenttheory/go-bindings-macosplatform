@@ -7,6 +7,7 @@ package browserenginekit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -24,4 +25,21 @@ func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputText:"), foundation.NSStringStringWithUTF8String(inputText).Ptr())
 	return &TextSuggestion{inner: raw.BETextSuggestionFromID(_id)}
 }
+
+// InputText calls the underlying InputText.
+func (x *TextSuggestion) InputText() string {
+	_r := x.inner.InputText()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// TextSuggestionable is the interface implemented by [TextSuggestion], for mocking and DI.
+type TextSuggestionable interface {
+	Unwrap() *raw.BETextSuggestion
+	InputText() string
+}
+
+var _ TextSuggestionable = (*TextSuggestion)(nil)
 

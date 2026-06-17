@@ -24,18 +24,18 @@ func NewScannerFeatureTemplate() *ScannerFeatureTemplate {
 	return &ScannerFeatureTemplate{inner: raw.ICScannerFeatureTemplateFromID(_id)}
 }
 
-// Targets returns the collection as a Go slice.
-func (x *ScannerFeatureTemplate) Targets() []*foundation.NSMutableArray[objc.ID] {
-	arr := x.inner.Targets()
-	if arr == nil {
-		return nil
-	}
-	out := make([]*foundation.NSMutableArray[objc.ID], arr.Count())
-	for i := range out {
-		out[i] = foundation.NSMutableArrayFromID[objc.ID](arr.ObjectAtIndex(uint(i)))
-	}
-	return out
+// Targets calls the underlying Targets.
+func (x *ScannerFeatureTemplate) Targets() *foundation.NSArray[objc.ID] {
+	return x.inner.Targets()
 }
 
 func (x *ScannerFeatureTemplate) asScannerFeature() *raw.ICScannerFeature { return &x.inner.ICScannerFeature }
+
+// ScannerFeatureTemplateable is the interface implemented by [ScannerFeatureTemplate], for mocking and DI.
+type ScannerFeatureTemplateable interface {
+	Unwrap() *raw.ICScannerFeatureTemplate
+	Targets() *foundation.NSArray[objc.ID]
+}
+
+var _ ScannerFeatureTemplateable = (*ScannerFeatureTemplate)(nil)
 

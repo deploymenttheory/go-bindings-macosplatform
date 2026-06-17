@@ -119,5 +119,110 @@ func (x *MutableNotificationContent) WithFilterCriteria(filterCriteria string) *
 	return x
 }
 
+// SetAttachments calls the underlying SetAttachments.
+func (x *MutableNotificationContent) SetAttachments(attachments *foundation.NSArray[*raw.UNNotificationAttachment]) {
+	x.inner.SetAttachments(attachments)
+}
+
+// SetBadge calls the underlying SetBadge.
+func (x *MutableNotificationContent) SetBadge(badge *foundation.NSNumber) {
+	x.inner.SetBadge(badge)
+}
+
+// SetBody calls the underlying SetBody.
+func (x *MutableNotificationContent) SetBody(body string) {
+	x.inner.SetBody(foundation.NSStringStringWithUTF8String(body))
+}
+
+// SetCategoryIdentifier calls the underlying SetCategoryIdentifier.
+func (x *MutableNotificationContent) SetCategoryIdentifier(categoryIdentifier string) {
+	x.inner.SetCategoryIdentifier(foundation.NSStringStringWithUTF8String(categoryIdentifier))
+}
+
+// SetSubtitle calls the underlying SetSubtitle.
+func (x *MutableNotificationContent) SetSubtitle(subtitle string) {
+	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+}
+
+// SetThreadIdentifier calls the underlying SetThreadIdentifier.
+func (x *MutableNotificationContent) SetThreadIdentifier(threadIdentifier string) {
+	x.inner.SetThreadIdentifier(foundation.NSStringStringWithUTF8String(threadIdentifier))
+}
+
+// SetTitle calls the underlying SetTitle.
+func (x *MutableNotificationContent) SetTitle(title string) {
+	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *MutableNotificationContent) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// SetSummaryArgument calls the underlying SetSummaryArgument.
+func (x *MutableNotificationContent) SetSummaryArgument(summaryArgument string) {
+	x.inner.SetSummaryArgument(foundation.NSStringStringWithUTF8String(summaryArgument))
+}
+
+// SetSummaryArgumentCount calls the underlying SetSummaryArgumentCount.
+func (x *MutableNotificationContent) SetSummaryArgumentCount(summaryArgumentCount uint) {
+	x.inner.SetSummaryArgumentCount(summaryArgumentCount)
+}
+
+// SetTargetContentIdentifier calls the underlying SetTargetContentIdentifier.
+func (x *MutableNotificationContent) SetTargetContentIdentifier(targetContentIdentifier string) {
+	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
+}
+
+// SetInterruptionLevel calls the underlying SetInterruptionLevel.
+func (x *MutableNotificationContent) SetInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel) {
+	x.inner.SetInterruptionLevel(interruptionLevel)
+}
+
+// SetRelevanceScore calls the underlying SetRelevanceScore.
+func (x *MutableNotificationContent) SetRelevanceScore(relevanceScore float64) {
+	x.inner.SetRelevanceScore(relevanceScore)
+}
+
+// SetFilterCriteria calls the underlying SetFilterCriteria.
+func (x *MutableNotificationContent) SetFilterCriteria(filterCriteria string) {
+	x.inner.SetFilterCriteria(foundation.NSStringStringWithUTF8String(filterCriteria))
+}
+
 func (x *MutableNotificationContent) asNotificationContent() *raw.UNNotificationContent { return &x.inner.UNNotificationContent }
+
+// MutableNotificationContentable is the interface implemented by [MutableNotificationContent], for mocking and DI.
+type MutableNotificationContentable interface {
+	Unwrap() *raw.UNMutableNotificationContent
+	WithAttachments(items ...*raw.UNNotificationAttachment) *MutableNotificationContent
+	WithBadge(badge *foundation.NSNumber) *MutableNotificationContent
+	WithBody(body string) *MutableNotificationContent
+	WithCategoryIdentifier(categoryIdentifier string) *MutableNotificationContent
+	WithSubtitle(subtitle string) *MutableNotificationContent
+	WithThreadIdentifier(threadIdentifier string) *MutableNotificationContent
+	WithTitle(title string) *MutableNotificationContent
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *MutableNotificationContent
+	WithSummaryArgument(summaryArgument string) *MutableNotificationContent
+	WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent
+	WithTargetContentIdentifier(targetContentIdentifier string) *MutableNotificationContent
+	WithInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel) *MutableNotificationContent
+	WithRelevanceScore(relevanceScore float64) *MutableNotificationContent
+	WithFilterCriteria(filterCriteria string) *MutableNotificationContent
+	SetAttachments(attachments *foundation.NSArray[*raw.UNNotificationAttachment])
+	SetBadge(badge *foundation.NSNumber)
+	SetBody(body string)
+	SetCategoryIdentifier(categoryIdentifier string)
+	SetSubtitle(subtitle string)
+	SetThreadIdentifier(threadIdentifier string)
+	SetTitle(title string)
+	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	SetSummaryArgument(summaryArgument string)
+	SetSummaryArgumentCount(summaryArgumentCount uint)
+	SetTargetContentIdentifier(targetContentIdentifier string)
+	SetInterruptionLevel(interruptionLevel raw.UNNotificationInterruptionLevel)
+	SetRelevanceScore(relevanceScore float64)
+	SetFilterCriteria(filterCriteria string)
+}
+
+var _ MutableNotificationContentable = (*MutableNotificationContent)(nil)
 

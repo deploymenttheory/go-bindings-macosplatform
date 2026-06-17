@@ -42,5 +42,51 @@ func (x *MTRContentLauncherClusterDimensionStruct) WithMetric(metric *foundation
 	return x
 }
 
+// Width calls the underlying Width.
+func (x *MTRContentLauncherClusterDimensionStruct) Width() *foundation.NSNumber {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *MTRContentLauncherClusterDimensionStruct) SetWidth(width *foundation.NSNumber) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *MTRContentLauncherClusterDimensionStruct) Height() *foundation.NSNumber {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *MTRContentLauncherClusterDimensionStruct) SetHeight(height *foundation.NSNumber) {
+	x.inner.SetHeight(height)
+}
+
+// Metric calls the underlying Metric.
+func (x *MTRContentLauncherClusterDimensionStruct) Metric() *foundation.NSNumber {
+	return x.inner.Metric()
+}
+
+// SetMetric calls the underlying SetMetric.
+func (x *MTRContentLauncherClusterDimensionStruct) SetMetric(metric *foundation.NSNumber) {
+	x.inner.SetMetric(metric)
+}
+
 func (x *MTRContentLauncherClusterDimensionStruct) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct { return x.inner }
+
+// MTRContentLauncherClusterDimensionStructable is the interface implemented by [MTRContentLauncherClusterDimensionStruct], for mocking and DI.
+type MTRContentLauncherClusterDimensionStructable interface {
+	Unwrap() *raw.MTRContentLauncherClusterDimensionStruct
+	WithWidth(width *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
+	WithHeight(height *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
+	WithMetric(metric *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
+	Width() *foundation.NSNumber
+	SetWidth(width *foundation.NSNumber)
+	Height() *foundation.NSNumber
+	SetHeight(height *foundation.NSNumber)
+	Metric() *foundation.NSNumber
+	SetMetric(metric *foundation.NSNumber)
+}
+
+var _ MTRContentLauncherClusterDimensionStructable = (*MTRContentLauncherClusterDimensionStruct)(nil)
 

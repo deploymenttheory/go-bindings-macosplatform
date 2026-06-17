@@ -7,6 +7,7 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,4 +36,41 @@ func (x *MTL4CompilerDescriptor) WithPipelineDataSetSerializer(pipelineDataSetSe
 	x.inner.SetPipelineDataSetSerializer(pipelineDataSetSerializer)
 	return x
 }
+
+// Label calls the underlying Label.
+func (x *MTL4CompilerDescriptor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *MTL4CompilerDescriptor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// PipelineDataSetSerializer calls the underlying PipelineDataSetSerializer.
+func (x *MTL4CompilerDescriptor) PipelineDataSetSerializer() raw.MTL4PipelineDataSetSerializer {
+	return x.inner.PipelineDataSetSerializer()
+}
+
+// SetPipelineDataSetSerializer calls the underlying SetPipelineDataSetSerializer.
+func (x *MTL4CompilerDescriptor) SetPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) {
+	x.inner.SetPipelineDataSetSerializer(pipelineDataSetSerializer)
+}
+
+// MTL4CompilerDescriptorable is the interface implemented by [MTL4CompilerDescriptor], for mocking and DI.
+type MTL4CompilerDescriptorable interface {
+	Unwrap() *raw.MTL4CompilerDescriptor
+	WithLabel(label string) *MTL4CompilerDescriptor
+	WithPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer) *MTL4CompilerDescriptor
+	Label() string
+	SetLabel(label string)
+	PipelineDataSetSerializer() raw.MTL4PipelineDataSetSerializer
+	SetPipelineDataSetSerializer(pipelineDataSetSerializer raw.MTL4PipelineDataSetSerializer)
+}
+
+var _ MTL4CompilerDescriptorable = (*MTL4CompilerDescriptor)(nil)
 

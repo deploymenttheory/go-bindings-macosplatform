@@ -29,3 +29,23 @@ func (x *MTL4CommandBufferOptions) WithLogState(logState raw.MTLLogState) *MTL4C
 	return x
 }
 
+// LogState calls the underlying LogState.
+func (x *MTL4CommandBufferOptions) LogState() raw.MTLLogState {
+	return x.inner.LogState()
+}
+
+// SetLogState calls the underlying SetLogState.
+func (x *MTL4CommandBufferOptions) SetLogState(logState raw.MTLLogState) {
+	x.inner.SetLogState(logState)
+}
+
+// MTL4CommandBufferOptionsable is the interface implemented by [MTL4CommandBufferOptions], for mocking and DI.
+type MTL4CommandBufferOptionsable interface {
+	Unwrap() *raw.MTL4CommandBufferOptions
+	WithLogState(logState raw.MTLLogState) *MTL4CommandBufferOptions
+	LogState() raw.MTLLogState
+	SetLogState(logState raw.MTLLogState)
+}
+
+var _ MTL4CommandBufferOptionsable = (*MTL4CommandBufferOptions)(nil)
+

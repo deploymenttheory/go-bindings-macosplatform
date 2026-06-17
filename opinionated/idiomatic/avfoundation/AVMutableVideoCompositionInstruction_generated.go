@@ -70,5 +70,52 @@ func (x *MutableVideoCompositionInstruction) WithRequiredSourceSampleDataTrackID
 	return x
 }
 
+// TimeRange calls the underlying TimeRange.
+func (x *MutableVideoCompositionInstruction) TimeRange() coremedia.CMTimeRange {
+	return x.inner.TimeRange()
+}
+
+// SetTimeRange calls the underlying SetTimeRange.
+func (x *MutableVideoCompositionInstruction) SetTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.SetTimeRange(timeRange)
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *MutableVideoCompositionInstruction) SetBackgroundColor(backgroundColor unsafe.Pointer) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// SetLayerInstructions calls the underlying SetLayerInstructions.
+func (x *MutableVideoCompositionInstruction) SetLayerInstructions(layerInstructions *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction]) {
+	x.inner.SetLayerInstructions(layerInstructions)
+}
+
+// SetEnablePostProcessing calls the underlying SetEnablePostProcessing.
+func (x *MutableVideoCompositionInstruction) SetEnablePostProcessing(enablePostProcessing bool) {
+	x.inner.SetEnablePostProcessing(enablePostProcessing)
+}
+
+// SetRequiredSourceSampleDataTrackIDs calls the underlying SetRequiredSourceSampleDataTrackIDs.
+func (x *MutableVideoCompositionInstruction) SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber]) {
+	x.inner.SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs)
+}
+
 func (x *MutableVideoCompositionInstruction) asVideoCompositionInstruction() *raw.AVVideoCompositionInstruction { return &x.inner.AVVideoCompositionInstruction }
+
+// MutableVideoCompositionInstructionable is the interface implemented by [MutableVideoCompositionInstruction], for mocking and DI.
+type MutableVideoCompositionInstructionable interface {
+	Unwrap() *raw.AVMutableVideoCompositionInstruction
+	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableVideoCompositionInstruction
+	WithLayerInstructions(items ...VideoCompositionLayerInstructionProvider) *MutableVideoCompositionInstruction
+	WithEnablePostProcessing(enablePostProcessing bool) *MutableVideoCompositionInstruction
+	WithRequiredSourceSampleDataTrackIDs(items ...*foundation.NSNumber) *MutableVideoCompositionInstruction
+	TimeRange() coremedia.CMTimeRange
+	SetTimeRange(timeRange coremedia.CMTimeRange)
+	SetBackgroundColor(backgroundColor unsafe.Pointer)
+	SetLayerInstructions(layerInstructions *foundation.NSArray[*raw.AVVideoCompositionLayerInstruction])
+	SetEnablePostProcessing(enablePostProcessing bool)
+	SetRequiredSourceSampleDataTrackIDs(requiredSourceSampleDataTrackIDs *foundation.NSArray[*foundation.NSNumber])
+}
+
+var _ MutableVideoCompositionInstructionable = (*MutableVideoCompositionInstruction)(nil)
 

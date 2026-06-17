@@ -55,3 +55,62 @@ func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithSignatur
 	return x
 }
 
+// AttestationElements calls the underlying AttestationElements.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() *foundation.NSData {
+	return x.inner.AttestationElements()
+}
+
+// SetAttestationElements calls the underlying SetAttestationElements.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationElements(attestationElements *foundation.NSData) {
+	x.inner.SetAttestationElements(attestationElements)
+}
+
+// AttestationSignature calls the underlying AttestationSignature.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() *foundation.NSData {
+	return x.inner.AttestationSignature()
+}
+
+// SetAttestationSignature calls the underlying SetAttestationSignature.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationSignature(attestationSignature *foundation.NSData) {
+	x.inner.SetAttestationSignature(attestationSignature)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// Signature calls the underlying Signature.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) Signature() *foundation.NSData {
+	return x.inner.Signature()
+}
+
+// SetSignature calls the underlying SetSignature.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetSignature(signature *foundation.NSData) {
+	x.inner.SetSignature(signature)
+}
+
+// MTROperationalCredentialsClusterAttestationResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterAttestationResponseParams], for mocking and DI.
+type MTROperationalCredentialsClusterAttestationResponseParamsable interface {
+	Unwrap() *raw.MTROperationalCredentialsClusterAttestationResponseParams
+	WithAttestationElements(attestationElements *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithAttestationSignature(attestationSignature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithSignature(signature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
+	AttestationElements() *foundation.NSData
+	SetAttestationElements(attestationElements *foundation.NSData)
+	AttestationSignature() *foundation.NSData
+	SetAttestationSignature(attestationSignature *foundation.NSData)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	Signature() *foundation.NSData
+	SetSignature(signature *foundation.NSData)
+}
+
+var _ MTROperationalCredentialsClusterAttestationResponseParamsable = (*MTROperationalCredentialsClusterAttestationResponseParams)(nil)
+

@@ -5,6 +5,7 @@
 package gameplaykit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,4 +24,65 @@ func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentClass:"), cls)
 	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](_id)}
 }
+
+// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
+func (x *ComponentSystem) ObjectAtIndexedSubscript(idx uint) objc.ID {
+	return x.inner.ObjectAtIndexedSubscript(idx)
+}
+
+// AddComponent calls the underlying AddComponent.
+func (x *ComponentSystem) AddComponent(component objc.ID) {
+	x.inner.AddComponent(component)
+}
+
+// AddComponentWithEntity calls the underlying AddComponentWithEntity.
+func (x *ComponentSystem) AddComponentWithEntity(entity *raw.GKEntity) {
+	x.inner.AddComponentWithEntity(entity)
+}
+
+// RemoveComponentWithEntity calls the underlying RemoveComponentWithEntity.
+func (x *ComponentSystem) RemoveComponentWithEntity(entity *raw.GKEntity) {
+	x.inner.RemoveComponentWithEntity(entity)
+}
+
+// RemoveComponent calls the underlying RemoveComponent.
+func (x *ComponentSystem) RemoveComponent(component objc.ID) {
+	x.inner.RemoveComponent(component)
+}
+
+// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
+func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
+	x.inner.UpdateWithDeltaTime(seconds)
+}
+
+// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
+func (x *ComponentSystem) ClassForGenericArgumentAtIndex(index uint) objc.Class {
+	return x.inner.ClassForGenericArgumentAtIndex(index)
+}
+
+// ComponentClass calls the underlying ComponentClass.
+func (x *ComponentSystem) ComponentClass() objc.Class {
+	return x.inner.ComponentClass()
+}
+
+// Components calls the underlying Components.
+func (x *ComponentSystem) Components() *foundation.NSArray[objc.ID] {
+	return x.inner.Components()
+}
+
+// ComponentSystemable is the interface implemented by [ComponentSystem], for mocking and DI.
+type ComponentSystemable interface {
+	Unwrap() *raw.GKComponentSystem[objc.ID]
+	ObjectAtIndexedSubscript(idx uint) objc.ID
+	AddComponent(component objc.ID)
+	AddComponentWithEntity(entity *raw.GKEntity)
+	RemoveComponentWithEntity(entity *raw.GKEntity)
+	RemoveComponent(component objc.ID)
+	UpdateWithDeltaTime(seconds float64)
+	ClassForGenericArgumentAtIndex(index uint) objc.Class
+	ComponentClass() objc.Class
+	Components() *foundation.NSArray[objc.ID]
+}
+
+var _ ComponentSystemable = (*ComponentSystem)(nil)
 

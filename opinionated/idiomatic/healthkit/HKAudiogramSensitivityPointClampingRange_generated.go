@@ -23,3 +23,30 @@ func NewAudiogramSensitivityPointClampingRange() *AudiogramSensitivityPointClamp
 	return &AudiogramSensitivityPointClampingRange{inner: raw.HKAudiogramSensitivityPointClampingRangeFromID(_id)}
 }
 
+// LowerBound calls the underlying LowerBound.
+func (x *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
+	_r := x.inner.LowerBound()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// UpperBound calls the underlying UpperBound.
+func (x *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
+	_r := x.inner.UpperBound()
+	if _r == nil {
+		return nil
+	}
+	return &Quantity{inner: _r}
+}
+
+// AudiogramSensitivityPointClampingRangeable is the interface implemented by [AudiogramSensitivityPointClampingRange], for mocking and DI.
+type AudiogramSensitivityPointClampingRangeable interface {
+	Unwrap() *raw.HKAudiogramSensitivityPointClampingRange
+	LowerBound() *Quantity
+	UpperBound() *Quantity
+}
+
+var _ AudiogramSensitivityPointClampingRangeable = (*AudiogramSensitivityPointClampingRange)(nil)
+

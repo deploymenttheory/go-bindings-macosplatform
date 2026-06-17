@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -25,5 +26,24 @@ func NewPICTImageRepWithData(pictData *foundation.NSData) *PICTImageRep {
 	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(_id)}
 }
 
+// PICTRepresentation calls the underlying PICTRepresentation.
+func (x *PICTImageRep) PICTRepresentation() *foundation.NSData {
+	return x.inner.PICTRepresentation()
+}
+
+// BoundingBox calls the underlying BoundingBox.
+func (x *PICTImageRep) BoundingBox() corefoundation.CGRect {
+	return x.inner.BoundingBox()
+}
+
 func (x *PICTImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
+
+// PICTImageRepable is the interface implemented by [PICTImageRep], for mocking and DI.
+type PICTImageRepable interface {
+	Unwrap() *raw.NSPICTImageRep
+	PICTRepresentation() *foundation.NSData
+	BoundingBox() corefoundation.CGRect
+}
+
+var _ PICTImageRepable = (*PICTImageRep)(nil)
 

@@ -23,3 +23,16 @@ func NewComputePlanCost() *ComputePlanCost {
 	return &ComputePlanCost{inner: raw.MLComputePlanCostFromID(_id)}
 }
 
+// Weight calls the underlying Weight.
+func (x *ComputePlanCost) Weight() float64 {
+	return x.inner.Weight()
+}
+
+// ComputePlanCostable is the interface implemented by [ComputePlanCost], for mocking and DI.
+type ComputePlanCostable interface {
+	Unwrap() *raw.MLComputePlanCost
+	Weight() float64
+}
+
+var _ ComputePlanCostable = (*ComputePlanCost)(nil)
+

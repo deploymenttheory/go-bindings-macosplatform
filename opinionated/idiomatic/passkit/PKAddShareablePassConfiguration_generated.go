@@ -6,6 +6,7 @@ package passkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -23,18 +24,40 @@ func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
 	return &AddShareablePassConfiguration{inner: raw.PKAddShareablePassConfigurationFromID(_id)}
 }
 
+// PrimaryAction calls the underlying PrimaryAction.
+func (x *AddShareablePassConfiguration) PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction {
+	return x.inner.PrimaryAction()
+}
+
 // CredentialsMetadata returns the collection as a Go slice.
 func (x *AddShareablePassConfiguration) CredentialsMetadata() []*raw.PKShareablePassMetadata {
 	arr := x.inner.CredentialsMetadata()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.PKShareablePassMetadata, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.PKShareablePassMetadata {
+		return raw.PKShareablePassMetadataFromID(purego.Retain(_id))
+	})
+}
+
+// ProvisioningPolicyIdentifier calls the underlying ProvisioningPolicyIdentifier.
+func (x *AddShareablePassConfiguration) ProvisioningPolicyIdentifier() string {
+	_r := x.inner.ProvisioningPolicyIdentifier()
+	if _r == nil {
+		return ""
 	}
-	return out
+	return purego.GoString(_r.Ptr())
 }
 
 func (x *AddShareablePassConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration { return &x.inner.PKAddSecureElementPassConfiguration }
+
+// AddShareablePassConfigurationable is the interface implemented by [AddShareablePassConfiguration], for mocking and DI.
+type AddShareablePassConfigurationable interface {
+	Unwrap() *raw.PKAddShareablePassConfiguration
+	PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction
+	CredentialsMetadata() []*raw.PKShareablePassMetadata
+	ProvisioningPolicyIdentifier() string
+}
+
+var _ AddShareablePassConfigurationable = (*AddShareablePassConfiguration)(nil)
 

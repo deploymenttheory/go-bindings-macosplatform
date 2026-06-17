@@ -25,3 +25,10 @@ func NewMassResolutionResult() *MassResolutionResult {
 
 func (x *MassResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult { return &x.inner.INIntentResolutionResult }
 
+// MassResolutionResultable is the interface implemented by [MassResolutionResult], for mocking and DI.
+type MassResolutionResultable interface {
+	Unwrap() *raw.INMassResolutionResult
+}
+
+var _ MassResolutionResultable = (*MassResolutionResult)(nil)
+

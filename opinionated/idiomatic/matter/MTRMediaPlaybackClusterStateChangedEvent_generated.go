@@ -78,3 +78,131 @@ func (x *MTRMediaPlaybackClusterStateChangedEvent) WithAudioAdvanceUnmuted(audio
 	return x
 }
 
+// CurrentState calls the underlying CurrentState.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() *foundation.NSNumber {
+	return x.inner.CurrentState()
+}
+
+// SetCurrentState calls the underlying SetCurrentState.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetCurrentState(currentState *foundation.NSNumber) {
+	x.inner.SetCurrentState(currentState)
+}
+
+// StartTime calls the underlying StartTime.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) StartTime() *foundation.NSNumber {
+	return x.inner.StartTime()
+}
+
+// SetStartTime calls the underlying SetStartTime.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetStartTime(startTime *foundation.NSNumber) {
+	x.inner.SetStartTime(startTime)
+}
+
+// Duration calls the underlying Duration.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) Duration() *foundation.NSNumber {
+	return x.inner.Duration()
+}
+
+// SetDuration calls the underlying SetDuration.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetDuration(duration *foundation.NSNumber) {
+	x.inner.SetDuration(duration)
+}
+
+// SampledPosition calls the underlying SampledPosition.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	_r := x.inner.SampledPosition()
+	if _r == nil {
+		return nil
+	}
+	return &MTRMediaPlaybackClusterPlaybackPositionStruct{inner: _r}
+}
+
+// SetSampledPosition calls the underlying SetSampledPosition.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSampledPosition(sampledPosition *raw.MTRMediaPlaybackClusterPlaybackPositionStruct) {
+	x.inner.SetSampledPosition(sampledPosition)
+}
+
+// PlaybackSpeed calls the underlying PlaybackSpeed.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() *foundation.NSNumber {
+	return x.inner.PlaybackSpeed()
+}
+
+// SetPlaybackSpeed calls the underlying SetPlaybackSpeed.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetPlaybackSpeed(playbackSpeed *foundation.NSNumber) {
+	x.inner.SetPlaybackSpeed(playbackSpeed)
+}
+
+// SeekRangeEnd calls the underlying SeekRangeEnd.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() *foundation.NSNumber {
+	return x.inner.SeekRangeEnd()
+}
+
+// SetSeekRangeEnd calls the underlying SetSeekRangeEnd.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeEnd(seekRangeEnd *foundation.NSNumber) {
+	x.inner.SetSeekRangeEnd(seekRangeEnd)
+}
+
+// SeekRangeStart calls the underlying SeekRangeStart.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() *foundation.NSNumber {
+	return x.inner.SeekRangeStart()
+}
+
+// SetSeekRangeStart calls the underlying SetSeekRangeStart.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeStart(seekRangeStart *foundation.NSNumber) {
+	x.inner.SetSeekRangeStart(seekRangeStart)
+}
+
+// Data calls the underlying Data.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) Data() *foundation.NSData {
+	return x.inner.Data()
+}
+
+// SetData calls the underlying SetData.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetData(data *foundation.NSData) {
+	x.inner.SetData(data)
+}
+
+// AudioAdvanceUnmuted calls the underlying AudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() *foundation.NSNumber {
+	return x.inner.AudioAdvanceUnmuted()
+}
+
+// SetAudioAdvanceUnmuted calls the underlying SetAudioAdvanceUnmuted.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
+	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+}
+
+// MTRMediaPlaybackClusterStateChangedEventable is the interface implemented by [MTRMediaPlaybackClusterStateChangedEvent], for mocking and DI.
+type MTRMediaPlaybackClusterStateChangedEventable interface {
+	Unwrap() *raw.MTRMediaPlaybackClusterStateChangedEvent
+	WithCurrentState(currentState *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithStartTime(startTime *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithDuration(duration *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithSampledPosition(sampledPosition MTRMediaPlaybackClusterPlaybackPositionStructProvider) *MTRMediaPlaybackClusterStateChangedEvent
+	WithPlaybackSpeed(playbackSpeed *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithSeekRangeEnd(seekRangeEnd *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithSeekRangeStart(seekRangeStart *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	WithData(data *foundation.NSData) *MTRMediaPlaybackClusterStateChangedEvent
+	WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	CurrentState() *foundation.NSNumber
+	SetCurrentState(currentState *foundation.NSNumber)
+	StartTime() *foundation.NSNumber
+	SetStartTime(startTime *foundation.NSNumber)
+	Duration() *foundation.NSNumber
+	SetDuration(duration *foundation.NSNumber)
+	SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct
+	SetSampledPosition(sampledPosition *raw.MTRMediaPlaybackClusterPlaybackPositionStruct)
+	PlaybackSpeed() *foundation.NSNumber
+	SetPlaybackSpeed(playbackSpeed *foundation.NSNumber)
+	SeekRangeEnd() *foundation.NSNumber
+	SetSeekRangeEnd(seekRangeEnd *foundation.NSNumber)
+	SeekRangeStart() *foundation.NSNumber
+	SetSeekRangeStart(seekRangeStart *foundation.NSNumber)
+	Data() *foundation.NSData
+	SetData(data *foundation.NSData)
+	AudioAdvanceUnmuted() *foundation.NSNumber
+	SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber)
+}
+
+var _ MTRMediaPlaybackClusterStateChangedEventable = (*MTRMediaPlaybackClusterStateChangedEvent)(nil)
+

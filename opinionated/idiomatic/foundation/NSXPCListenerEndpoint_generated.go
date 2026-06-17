@@ -25,3 +25,10 @@ func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 
 func (x *XPCListenerEndpoint) asObject() *raw.NSObject { return &x.inner.NSObject }
 
+// XPCListenerEndpointable is the interface implemented by [XPCListenerEndpoint], for mocking and DI.
+type XPCListenerEndpointable interface {
+	Unwrap() *raw.NSXPCListenerEndpoint
+}
+
+var _ XPCListenerEndpointable = (*XPCListenerEndpoint)(nil)
+

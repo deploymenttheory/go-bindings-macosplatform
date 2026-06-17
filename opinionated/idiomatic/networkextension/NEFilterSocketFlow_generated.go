@@ -5,8 +5,11 @@
 package networkextension
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NEFilterSocketFlow wraps [raw.NEFilterSocketFlow] with a fluent Go API.
@@ -23,5 +26,64 @@ func NewNEFilterSocketFlow() *NEFilterSocketFlow {
 	return &NEFilterSocketFlow{inner: raw.NEFilterSocketFlowFromID(_id)}
 }
 
+// RemoteFlowEndpoint calls the underlying RemoteFlowEndpoint.
+func (x *NEFilterSocketFlow) RemoteFlowEndpoint() *foundation.NSObject {
+	return x.inner.RemoteFlowEndpoint()
+}
+
+// RemoteEndpoint calls the underlying RemoteEndpoint.
+func (x *NEFilterSocketFlow) RemoteEndpoint() unsafe.Pointer {
+	return x.inner.RemoteEndpoint()
+}
+
+// RemoteHostname calls the underlying RemoteHostname.
+func (x *NEFilterSocketFlow) RemoteHostname() string {
+	_r := x.inner.RemoteHostname()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// LocalFlowEndpoint calls the underlying LocalFlowEndpoint.
+func (x *NEFilterSocketFlow) LocalFlowEndpoint() *foundation.NSObject {
+	return x.inner.LocalFlowEndpoint()
+}
+
+// LocalEndpoint calls the underlying LocalEndpoint.
+func (x *NEFilterSocketFlow) LocalEndpoint() unsafe.Pointer {
+	return x.inner.LocalEndpoint()
+}
+
+// SocketFamily calls the underlying SocketFamily.
+func (x *NEFilterSocketFlow) SocketFamily() int {
+	return x.inner.SocketFamily()
+}
+
+// SocketType calls the underlying SocketType.
+func (x *NEFilterSocketFlow) SocketType() int {
+	return x.inner.SocketType()
+}
+
+// SocketProtocol calls the underlying SocketProtocol.
+func (x *NEFilterSocketFlow) SocketProtocol() int {
+	return x.inner.SocketProtocol()
+}
+
 func (x *NEFilterSocketFlow) asNEFilterFlow() *raw.NEFilterFlow { return &x.inner.NEFilterFlow }
+
+// NEFilterSocketFlowable is the interface implemented by [NEFilterSocketFlow], for mocking and DI.
+type NEFilterSocketFlowable interface {
+	Unwrap() *raw.NEFilterSocketFlow
+	RemoteFlowEndpoint() *foundation.NSObject
+	RemoteEndpoint() unsafe.Pointer
+	RemoteHostname() string
+	LocalFlowEndpoint() *foundation.NSObject
+	LocalEndpoint() unsafe.Pointer
+	SocketFamily() int
+	SocketType() int
+	SocketProtocol() int
+}
+
+var _ NEFilterSocketFlowable = (*NEFilterSocketFlow)(nil)
 

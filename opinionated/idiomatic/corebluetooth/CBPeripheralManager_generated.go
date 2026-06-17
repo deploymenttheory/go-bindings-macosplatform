@@ -44,5 +44,91 @@ func (x *PeripheralManager) WithDelegate(delegate raw.CBPeripheralManagerDelegat
 	return x
 }
 
+// StartAdvertising calls the underlying StartAdvertising.
+func (x *PeripheralManager) StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
+	x.inner.StartAdvertising(advertisementData)
+}
+
+// StopAdvertising calls the underlying StopAdvertising.
+func (x *PeripheralManager) StopAdvertising() {
+	x.inner.StopAdvertising()
+}
+
+// SetDesiredConnectionLatencyForCentral calls the underlying SetDesiredConnectionLatencyForCentral.
+func (x *PeripheralManager) SetDesiredConnectionLatencyForCentral(latency raw.CBPeripheralManagerConnectionLatency, central *raw.CBCentral) {
+	x.inner.SetDesiredConnectionLatencyForCentral(latency, central)
+}
+
+// AddService calls the underlying AddService.
+func (x *PeripheralManager) AddService(service *raw.CBMutableService) {
+	x.inner.AddService(service)
+}
+
+// RemoveService calls the underlying RemoveService.
+func (x *PeripheralManager) RemoveService(service *raw.CBMutableService) {
+	x.inner.RemoveService(service)
+}
+
+// RemoveAllServices calls the underlying RemoveAllServices.
+func (x *PeripheralManager) RemoveAllServices() {
+	x.inner.RemoveAllServices()
+}
+
+// RespondToRequestWithResult calls the underlying RespondToRequestWithResult.
+func (x *PeripheralManager) RespondToRequestWithResult(request *raw.CBATTRequest, result raw.CBATTError) {
+	x.inner.RespondToRequestWithResult(request, result)
+}
+
+// UpdateValueForCharacteristicOnSubscribedCentrals calls the underlying UpdateValueForCharacteristicOnSubscribedCentrals.
+func (x *PeripheralManager) UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool {
+	return x.inner.UpdateValueForCharacteristicOnSubscribedCentrals(value, characteristic, centrals)
+}
+
+// PublishL2CAPChannelWithEncryption calls the underlying PublishL2CAPChannelWithEncryption.
+func (x *PeripheralManager) PublishL2CAPChannelWithEncryption(encryptionRequired bool) {
+	x.inner.PublishL2CAPChannelWithEncryption(encryptionRequired)
+}
+
+// UnpublishL2CAPChannel calls the underlying UnpublishL2CAPChannel.
+func (x *PeripheralManager) UnpublishL2CAPChannel(pSM uint16) {
+	x.inner.UnpublishL2CAPChannel(pSM)
+}
+
+// Delegate calls the underlying Delegate.
+func (x *PeripheralManager) Delegate() raw.CBPeripheralManagerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *PeripheralManager) SetDelegate(delegate raw.CBPeripheralManagerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// IsAdvertising calls the underlying IsAdvertising.
+func (x *PeripheralManager) IsAdvertising() bool {
+	return x.inner.IsAdvertising()
+}
+
 func (x *PeripheralManager) asManager() *raw.CBManager { return &x.inner.CBManager }
+
+// PeripheralManagerable is the interface implemented by [PeripheralManager], for mocking and DI.
+type PeripheralManagerable interface {
+	Unwrap() *raw.CBPeripheralManager
+	WithDelegate(delegate raw.CBPeripheralManagerDelegate) *PeripheralManager
+	StartAdvertising(advertisementData *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	StopAdvertising()
+	SetDesiredConnectionLatencyForCentral(latency raw.CBPeripheralManagerConnectionLatency, central *raw.CBCentral)
+	AddService(service *raw.CBMutableService)
+	RemoveService(service *raw.CBMutableService)
+	RemoveAllServices()
+	RespondToRequestWithResult(request *raw.CBATTRequest, result raw.CBATTError)
+	UpdateValueForCharacteristicOnSubscribedCentrals(value *foundation.NSData, characteristic *raw.CBMutableCharacteristic, centrals *foundation.NSArray[*raw.CBCentral]) bool
+	PublishL2CAPChannelWithEncryption(encryptionRequired bool)
+	UnpublishL2CAPChannel(pSM uint16)
+	Delegate() raw.CBPeripheralManagerDelegate
+	SetDelegate(delegate raw.CBPeripheralManagerDelegate)
+	IsAdvertising() bool
+}
+
+var _ PeripheralManagerable = (*PeripheralManager)(nil)
 

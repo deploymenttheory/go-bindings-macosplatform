@@ -7,6 +7,7 @@ package multipeerconnectivity
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,4 +31,62 @@ func (x *AdvertiserAssistant) WithDelegate(delegate raw.MCAdvertiserAssistantDel
 	x.inner.SetDelegate(delegate)
 	return x
 }
+
+// Start calls the underlying Start.
+func (x *AdvertiserAssistant) Start() {
+	x.inner.Start()
+}
+
+// Stop calls the underlying Stop.
+func (x *AdvertiserAssistant) Stop() {
+	x.inner.Stop()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *AdvertiserAssistant) Delegate() raw.MCAdvertiserAssistantDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *AdvertiserAssistant) SetDelegate(delegate raw.MCAdvertiserAssistantDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Session calls the underlying Session.
+func (x *AdvertiserAssistant) Session() *Session {
+	_r := x.inner.Session()
+	if _r == nil {
+		return nil
+	}
+	return &Session{inner: _r}
+}
+
+// DiscoveryInfo calls the underlying DiscoveryInfo.
+func (x *AdvertiserAssistant) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
+	return x.inner.DiscoveryInfo()
+}
+
+// ServiceType calls the underlying ServiceType.
+func (x *AdvertiserAssistant) ServiceType() string {
+	_r := x.inner.ServiceType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// AdvertiserAssistantable is the interface implemented by [AdvertiserAssistant], for mocking and DI.
+type AdvertiserAssistantable interface {
+	Unwrap() *raw.MCAdvertiserAssistant
+	WithDelegate(delegate raw.MCAdvertiserAssistantDelegate) *AdvertiserAssistant
+	Start()
+	Stop()
+	Delegate() raw.MCAdvertiserAssistantDelegate
+	SetDelegate(delegate raw.MCAdvertiserAssistantDelegate)
+	Session() *Session
+	DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	ServiceType() string
+}
+
+var _ AdvertiserAssistantable = (*AdvertiserAssistant)(nil)
 

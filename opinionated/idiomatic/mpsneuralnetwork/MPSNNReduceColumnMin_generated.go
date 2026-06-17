@@ -37,3 +37,10 @@ func (x *NNReduceColumnMin) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.
 
 func (x *NNReduceColumnMin) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
 
+// NNReduceColumnMinable is the interface implemented by [NNReduceColumnMin], for mocking and DI.
+type NNReduceColumnMinable interface {
+	Unwrap() *raw.MPSNNReduceColumnMin
+}
+
+var _ NNReduceColumnMinable = (*NNReduceColumnMin)(nil)
+

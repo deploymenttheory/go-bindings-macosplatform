@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // View wraps [raw.MTKView] with a fluent Go API.
@@ -141,4 +143,317 @@ func (x *View) WithPaused(paused bool) *View {
 	x.inner.SetPaused(paused)
 	return x
 }
+
+// ReleaseDrawables calls the underlying ReleaseDrawables.
+func (x *View) ReleaseDrawables() {
+	x.inner.ReleaseDrawables()
+}
+
+// Draw calls the underlying Draw.
+func (x *View) Draw() {
+	x.inner.Draw()
+}
+
+// Delegate calls the underlying Delegate.
+func (x *View) Delegate() raw.MTKViewDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *View) SetDelegate(delegate raw.MTKViewDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// Device calls the underlying Device.
+func (x *View) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// SetDevice calls the underlying SetDevice.
+func (x *View) SetDevice(device metal.MTLDevice) {
+	x.inner.SetDevice(device)
+}
+
+// CurrentDrawable calls the underlying CurrentDrawable.
+func (x *View) CurrentDrawable() quartzcore.CAMetalDrawable {
+	return x.inner.CurrentDrawable()
+}
+
+// FramebufferOnly calls the underlying FramebufferOnly.
+func (x *View) FramebufferOnly() bool {
+	return x.inner.FramebufferOnly()
+}
+
+// SetFramebufferOnly calls the underlying SetFramebufferOnly.
+func (x *View) SetFramebufferOnly(framebufferOnly bool) {
+	x.inner.SetFramebufferOnly(framebufferOnly)
+}
+
+// DepthStencilAttachmentTextureUsage calls the underlying DepthStencilAttachmentTextureUsage.
+func (x *View) DepthStencilAttachmentTextureUsage() metal.MTLTextureUsage {
+	return x.inner.DepthStencilAttachmentTextureUsage()
+}
+
+// SetDepthStencilAttachmentTextureUsage calls the underlying SetDepthStencilAttachmentTextureUsage.
+func (x *View) SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) {
+	x.inner.SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage)
+}
+
+// MultisampleColorAttachmentTextureUsage calls the underlying MultisampleColorAttachmentTextureUsage.
+func (x *View) MultisampleColorAttachmentTextureUsage() metal.MTLTextureUsage {
+	return x.inner.MultisampleColorAttachmentTextureUsage()
+}
+
+// SetMultisampleColorAttachmentTextureUsage calls the underlying SetMultisampleColorAttachmentTextureUsage.
+func (x *View) SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) {
+	x.inner.SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage)
+}
+
+// PresentsWithTransaction calls the underlying PresentsWithTransaction.
+func (x *View) PresentsWithTransaction() bool {
+	return x.inner.PresentsWithTransaction()
+}
+
+// SetPresentsWithTransaction calls the underlying SetPresentsWithTransaction.
+func (x *View) SetPresentsWithTransaction(presentsWithTransaction bool) {
+	x.inner.SetPresentsWithTransaction(presentsWithTransaction)
+}
+
+// ColorPixelFormat calls the underlying ColorPixelFormat.
+func (x *View) ColorPixelFormat() metal.MTLPixelFormat {
+	return x.inner.ColorPixelFormat()
+}
+
+// SetColorPixelFormat calls the underlying SetColorPixelFormat.
+func (x *View) SetColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) {
+	x.inner.SetColorPixelFormat(colorPixelFormat)
+}
+
+// DepthStencilPixelFormat calls the underlying DepthStencilPixelFormat.
+func (x *View) DepthStencilPixelFormat() metal.MTLPixelFormat {
+	return x.inner.DepthStencilPixelFormat()
+}
+
+// SetDepthStencilPixelFormat calls the underlying SetDepthStencilPixelFormat.
+func (x *View) SetDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) {
+	x.inner.SetDepthStencilPixelFormat(depthStencilPixelFormat)
+}
+
+// DepthStencilStorageMode calls the underlying DepthStencilStorageMode.
+func (x *View) DepthStencilStorageMode() metal.MTLStorageMode {
+	return x.inner.DepthStencilStorageMode()
+}
+
+// SetDepthStencilStorageMode calls the underlying SetDepthStencilStorageMode.
+func (x *View) SetDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) {
+	x.inner.SetDepthStencilStorageMode(depthStencilStorageMode)
+}
+
+// SampleCount calls the underlying SampleCount.
+func (x *View) SampleCount() uint {
+	return x.inner.SampleCount()
+}
+
+// SetSampleCount calls the underlying SetSampleCount.
+func (x *View) SetSampleCount(sampleCount uint) {
+	x.inner.SetSampleCount(sampleCount)
+}
+
+// ClearColor calls the underlying ClearColor.
+func (x *View) ClearColor() metal.MTLClearColor {
+	return x.inner.ClearColor()
+}
+
+// SetClearColor calls the underlying SetClearColor.
+func (x *View) SetClearColor(clearColor metal.MTLClearColor) {
+	x.inner.SetClearColor(clearColor)
+}
+
+// ClearDepth calls the underlying ClearDepth.
+func (x *View) ClearDepth() float64 {
+	return x.inner.ClearDepth()
+}
+
+// SetClearDepth calls the underlying SetClearDepth.
+func (x *View) SetClearDepth(clearDepth float64) {
+	x.inner.SetClearDepth(clearDepth)
+}
+
+// ClearStencil calls the underlying ClearStencil.
+func (x *View) ClearStencil() uint32 {
+	return x.inner.ClearStencil()
+}
+
+// SetClearStencil calls the underlying SetClearStencil.
+func (x *View) SetClearStencil(clearStencil uint32) {
+	x.inner.SetClearStencil(clearStencil)
+}
+
+// DepthStencilTexture calls the underlying DepthStencilTexture.
+func (x *View) DepthStencilTexture() metal.MTLTexture {
+	return x.inner.DepthStencilTexture()
+}
+
+// MultisampleColorTexture calls the underlying MultisampleColorTexture.
+func (x *View) MultisampleColorTexture() metal.MTLTexture {
+	return x.inner.MultisampleColorTexture()
+}
+
+// CurrentRenderPassDescriptor calls the underlying CurrentRenderPassDescriptor.
+func (x *View) CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor {
+	return x.inner.CurrentRenderPassDescriptor()
+}
+
+// CurrentMTL4RenderPassDescriptor calls the underlying CurrentMTL4RenderPassDescriptor.
+func (x *View) CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor {
+	return x.inner.CurrentMTL4RenderPassDescriptor()
+}
+
+// PreferredFramesPerSecond calls the underlying PreferredFramesPerSecond.
+func (x *View) PreferredFramesPerSecond() int {
+	return x.inner.PreferredFramesPerSecond()
+}
+
+// SetPreferredFramesPerSecond calls the underlying SetPreferredFramesPerSecond.
+func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
+	x.inner.SetPreferredFramesPerSecond(preferredFramesPerSecond)
+}
+
+// EnableSetNeedsDisplay calls the underlying EnableSetNeedsDisplay.
+func (x *View) EnableSetNeedsDisplay() bool {
+	return x.inner.EnableSetNeedsDisplay()
+}
+
+// SetEnableSetNeedsDisplay calls the underlying SetEnableSetNeedsDisplay.
+func (x *View) SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool) {
+	x.inner.SetEnableSetNeedsDisplay(enableSetNeedsDisplay)
+}
+
+// AutoResizeDrawable calls the underlying AutoResizeDrawable.
+func (x *View) AutoResizeDrawable() bool {
+	return x.inner.AutoResizeDrawable()
+}
+
+// SetAutoResizeDrawable calls the underlying SetAutoResizeDrawable.
+func (x *View) SetAutoResizeDrawable(autoResizeDrawable bool) {
+	x.inner.SetAutoResizeDrawable(autoResizeDrawable)
+}
+
+// DrawableSize calls the underlying DrawableSize.
+func (x *View) DrawableSize() corefoundation.CGSize {
+	return x.inner.DrawableSize()
+}
+
+// SetDrawableSize calls the underlying SetDrawableSize.
+func (x *View) SetDrawableSize(drawableSize corefoundation.CGSize) {
+	x.inner.SetDrawableSize(drawableSize)
+}
+
+// PreferredDrawableSize calls the underlying PreferredDrawableSize.
+func (x *View) PreferredDrawableSize() corefoundation.CGSize {
+	return x.inner.PreferredDrawableSize()
+}
+
+// PreferredDevice calls the underlying PreferredDevice.
+func (x *View) PreferredDevice() metal.MTLDevice {
+	return x.inner.PreferredDevice()
+}
+
+// IsPaused calls the underlying IsPaused.
+func (x *View) IsPaused() bool {
+	return x.inner.IsPaused()
+}
+
+// SetPaused calls the underlying SetPaused.
+func (x *View) SetPaused(paused bool) {
+	x.inner.SetPaused(paused)
+}
+
+// Colorspace calls the underlying Colorspace.
+func (x *View) Colorspace() unsafe.Pointer {
+	return x.inner.Colorspace()
+}
+
+// SetColorspace calls the underlying SetColorspace.
+func (x *View) SetColorspace(colorspace unsafe.Pointer) {
+	x.inner.SetColorspace(colorspace)
+}
+
+// ResidencySet calls the underlying ResidencySet.
+func (x *View) ResidencySet() metal.MTLResidencySet {
+	return x.inner.ResidencySet()
+}
+
+// Viewable is the interface implemented by [View], for mocking and DI.
+type Viewable interface {
+	Unwrap() *raw.MTKView
+	WithDelegate(delegate raw.MTKViewDelegate) *View
+	WithDevice(device metal.MTLDevice) *View
+	WithFramebufferOnly(framebufferOnly bool) *View
+	WithDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage) *View
+	WithMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage) *View
+	WithPresentsWithTransaction(presentsWithTransaction bool) *View
+	WithColorPixelFormat(colorPixelFormat metal.MTLPixelFormat) *View
+	WithDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat) *View
+	WithDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode) *View
+	WithSampleCount(sampleCount uint) *View
+	WithClearColor(clearColor metal.MTLClearColor) *View
+	WithClearDepth(clearDepth float64) *View
+	WithClearStencil(clearStencil uint32) *View
+	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
+	WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View
+	WithAutoResizeDrawable(autoResizeDrawable bool) *View
+	WithDrawableSize(drawableSize corefoundation.CGSize) *View
+	WithPaused(paused bool) *View
+	ReleaseDrawables()
+	Draw()
+	Delegate() raw.MTKViewDelegate
+	SetDelegate(delegate raw.MTKViewDelegate)
+	Device() metal.MTLDevice
+	SetDevice(device metal.MTLDevice)
+	CurrentDrawable() quartzcore.CAMetalDrawable
+	FramebufferOnly() bool
+	SetFramebufferOnly(framebufferOnly bool)
+	DepthStencilAttachmentTextureUsage() metal.MTLTextureUsage
+	SetDepthStencilAttachmentTextureUsage(depthStencilAttachmentTextureUsage metal.MTLTextureUsage)
+	MultisampleColorAttachmentTextureUsage() metal.MTLTextureUsage
+	SetMultisampleColorAttachmentTextureUsage(multisampleColorAttachmentTextureUsage metal.MTLTextureUsage)
+	PresentsWithTransaction() bool
+	SetPresentsWithTransaction(presentsWithTransaction bool)
+	ColorPixelFormat() metal.MTLPixelFormat
+	SetColorPixelFormat(colorPixelFormat metal.MTLPixelFormat)
+	DepthStencilPixelFormat() metal.MTLPixelFormat
+	SetDepthStencilPixelFormat(depthStencilPixelFormat metal.MTLPixelFormat)
+	DepthStencilStorageMode() metal.MTLStorageMode
+	SetDepthStencilStorageMode(depthStencilStorageMode metal.MTLStorageMode)
+	SampleCount() uint
+	SetSampleCount(sampleCount uint)
+	ClearColor() metal.MTLClearColor
+	SetClearColor(clearColor metal.MTLClearColor)
+	ClearDepth() float64
+	SetClearDepth(clearDepth float64)
+	ClearStencil() uint32
+	SetClearStencil(clearStencil uint32)
+	DepthStencilTexture() metal.MTLTexture
+	MultisampleColorTexture() metal.MTLTexture
+	CurrentRenderPassDescriptor() *metal.MTLRenderPassDescriptor
+	CurrentMTL4RenderPassDescriptor() *metal.MTL4RenderPassDescriptor
+	PreferredFramesPerSecond() int
+	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
+	EnableSetNeedsDisplay() bool
+	SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool)
+	AutoResizeDrawable() bool
+	SetAutoResizeDrawable(autoResizeDrawable bool)
+	DrawableSize() corefoundation.CGSize
+	SetDrawableSize(drawableSize corefoundation.CGSize)
+	PreferredDrawableSize() corefoundation.CGSize
+	PreferredDevice() metal.MTLDevice
+	IsPaused() bool
+	SetPaused(paused bool)
+	Colorspace() unsafe.Pointer
+	SetColorspace(colorspace unsafe.Pointer)
+	ResidencySet() metal.MTLResidencySet
+}
+
+var _ Viewable = (*View)(nil)
 

@@ -23,3 +23,10 @@ func NewMTRPumpConfigurationAndControlClusterAirDetectionEvent() *MTRPumpConfigu
 	return &MTRPumpConfigurationAndControlClusterAirDetectionEvent{inner: raw.MTRPumpConfigurationAndControlClusterAirDetectionEventFromID(_id)}
 }
 
+// MTRPumpConfigurationAndControlClusterAirDetectionEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterAirDetectionEvent], for mocking and DI.
+type MTRPumpConfigurationAndControlClusterAirDetectionEventable interface {
+	Unwrap() *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent
+}
+
+var _ MTRPumpConfigurationAndControlClusterAirDetectionEventable = (*MTRPumpConfigurationAndControlClusterAirDetectionEvent)(nil)
+

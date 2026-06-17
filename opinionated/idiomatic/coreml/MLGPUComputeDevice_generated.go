@@ -6,6 +6,7 @@ package coreml
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,17 @@ func NewGPUComputeDevice() *GPUComputeDevice {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLGPUComputeDevice")), objc.RegisterName("new"))
 	return &GPUComputeDevice{inner: raw.MLGPUComputeDeviceFromID(_id)}
 }
+
+// MetalDevice calls the underlying MetalDevice.
+func (x *GPUComputeDevice) MetalDevice() metal.MTLDevice {
+	return x.inner.MetalDevice()
+}
+
+// GPUComputeDeviceable is the interface implemented by [GPUComputeDevice], for mocking and DI.
+type GPUComputeDeviceable interface {
+	Unwrap() *raw.MLGPUComputeDevice
+	MetalDevice() metal.MTLDevice
+}
+
+var _ GPUComputeDeviceable = (*GPUComputeDevice)(nil)
 

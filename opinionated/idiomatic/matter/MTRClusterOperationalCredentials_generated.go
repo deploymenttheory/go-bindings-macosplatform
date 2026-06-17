@@ -5,9 +5,12 @@
 package matter
 
 import (
+	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRClusterOperationalCredentials wraps [raw.MTRClusterOperationalCredentials] with a fluent Go API.
@@ -32,7 +35,470 @@ func NewMTRClusterOperationalCredentialsWithDeviceEndpointQueue(device *raw.MTRD
 	return &MTRClusterOperationalCredentials{inner: raw.MTRClusterOperationalCredentialsFromID(_id)}
 }
 
+// AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterAttestationResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterAttestationResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterAttestationResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterAttestationResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterCertificateChainResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterCertificateChainResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterCertificateChainResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterCertificateChainResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterCSRResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterCSRResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterCSRResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterCSRResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion.
+func (x *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
+	x.inner.AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+}
+
+// ReadAttributeNOCsWithParams calls the underlying ReadAttributeNOCsWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeNOCsWithParams(params)
+}
+
+// ReadAttributeFabricsWithParams calls the underlying ReadAttributeFabricsWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFabricsWithParams(params)
+}
+
+// ReadAttributeSupportedFabricsWithParams calls the underlying ReadAttributeSupportedFabricsWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeSupportedFabricsWithParams(params)
+}
+
+// ReadAttributeCommissionedFabricsWithParams calls the underlying ReadAttributeCommissionedFabricsWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCommissionedFabricsWithParams(params)
+}
+
+// ReadAttributeTrustedRootCertificatesWithParams calls the underlying ReadAttributeTrustedRootCertificatesWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeTrustedRootCertificatesWithParams(params)
+}
+
+// ReadAttributeCurrentFabricIndexWithParams calls the underlying ReadAttributeCurrentFabricIndexWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeCurrentFabricIndexWithParams(params)
+}
+
+// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+}
+
+// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+}
+
+// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeAttributeListWithParams(params)
+}
+
+// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeFeatureMapWithParams(params)
+}
+
+// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
+func (x *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+}
+
+// AttestationRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterAttestationResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterAttestationResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterAttestationResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterAttestationResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterCertificateChainResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterCertificateChainResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterCertificateChainResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterCertificateChainResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// CSRRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCSRResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterCSRResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterCSRResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterCSRResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterCSRResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// AddNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// UpdateNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// RemoveFabricWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
+func (x *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error) {
+	type _result struct {
+		val *MTROperationalCredentialsClusterNOCResponseParams
+		err error
+	}
+	_ch := make(chan _result, 1)
+	x.inner.RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalCredentialsClusterNOCResponseParams, _p1 unsafe.Pointer) {
+		var _o _result
+		if uintptr(_p1) != 0 {
+			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
+		}
+		if _p0 != nil {
+			_o.val = &MTROperationalCredentialsClusterNOCResponseParams{inner: _p0}
+		}
+		_ch <- _o
+	})
+	select {
+	case _o := <-_ch:
+		return _o.val, _o.err
+	case <-ctx.Done():
+		var _zero *MTROperationalCredentialsClusterNOCResponseParams
+		return _zero, ctx.Err()
+	}
+}
+
+// AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
+func (x *MTRClusterOperationalCredentials) AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
+	x.inner.AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
+}
+
 func (x *MTRClusterOperationalCredentials) asMTRGenericCluster() *raw.MTRGenericCluster { return &x.inner.MTRGenericCluster }
 
 func (x *MTRClusterOperationalCredentials) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRGenericCluster.MTRCluster }
+
+// MTRClusterOperationalCredentialsable is the interface implemented by [MTRClusterOperationalCredentials], for mocking and DI.
+type MTRClusterOperationalCredentialsable interface {
+	Unwrap() *raw.MTRClusterOperationalCredentials
+	AttestationRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
+	CertificateChainRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
+	CSRRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCSRResponseParams, error)
+	AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
+	ReadAttributeNOCsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeSupportedFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCommissionedFabricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeTrustedRootCertificatesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeCurrentFabricIndexWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	AttestationRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterAttestationRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
+	CertificateChainRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterCertificateChainRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
+	CSRRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterCSRRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterCSRResponseParams, error)
+	AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalCredentialsClusterNOCResponseParams, error)
+	AddTrustedRootCertificateWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROperationalCredentialsClusterAddTrustedRootCertificateParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+}
+
+var _ MTRClusterOperationalCredentialsable = (*MTRClusterOperationalCredentials)(nil)
 

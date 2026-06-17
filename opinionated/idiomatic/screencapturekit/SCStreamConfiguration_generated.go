@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // StreamConfiguration wraps [raw.SCStreamConfiguration] with a fluent Go API.
@@ -193,4 +195,419 @@ func (x *StreamConfiguration) WithCaptureDynamicRange(captureDynamicRange raw.SC
 	x.inner.SetCaptureDynamicRange(captureDynamicRange)
 	return x
 }
+
+// Width calls the underlying Width.
+func (x *StreamConfiguration) Width() uint {
+	return x.inner.Width()
+}
+
+// SetWidth calls the underlying SetWidth.
+func (x *StreamConfiguration) SetWidth(width uint) {
+	x.inner.SetWidth(width)
+}
+
+// Height calls the underlying Height.
+func (x *StreamConfiguration) Height() uint {
+	return x.inner.Height()
+}
+
+// SetHeight calls the underlying SetHeight.
+func (x *StreamConfiguration) SetHeight(height uint) {
+	x.inner.SetHeight(height)
+}
+
+// MinimumFrameInterval calls the underlying MinimumFrameInterval.
+func (x *StreamConfiguration) MinimumFrameInterval() coremedia.CMTime {
+	return x.inner.MinimumFrameInterval()
+}
+
+// SetMinimumFrameInterval calls the underlying SetMinimumFrameInterval.
+func (x *StreamConfiguration) SetMinimumFrameInterval(minimumFrameInterval coremedia.CMTime) {
+	x.inner.SetMinimumFrameInterval(minimumFrameInterval)
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *StreamConfiguration) PixelFormat() uint {
+	return x.inner.PixelFormat()
+}
+
+// SetPixelFormat calls the underlying SetPixelFormat.
+func (x *StreamConfiguration) SetPixelFormat(pixelFormat uint) {
+	x.inner.SetPixelFormat(pixelFormat)
+}
+
+// ScalesToFit calls the underlying ScalesToFit.
+func (x *StreamConfiguration) ScalesToFit() bool {
+	return x.inner.ScalesToFit()
+}
+
+// SetScalesToFit calls the underlying SetScalesToFit.
+func (x *StreamConfiguration) SetScalesToFit(scalesToFit bool) {
+	x.inner.SetScalesToFit(scalesToFit)
+}
+
+// PreservesAspectRatio calls the underlying PreservesAspectRatio.
+func (x *StreamConfiguration) PreservesAspectRatio() bool {
+	return x.inner.PreservesAspectRatio()
+}
+
+// SetPreservesAspectRatio calls the underlying SetPreservesAspectRatio.
+func (x *StreamConfiguration) SetPreservesAspectRatio(preservesAspectRatio bool) {
+	x.inner.SetPreservesAspectRatio(preservesAspectRatio)
+}
+
+// StreamName calls the underlying StreamName.
+func (x *StreamConfiguration) StreamName() string {
+	_r := x.inner.StreamName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetStreamName calls the underlying SetStreamName.
+func (x *StreamConfiguration) SetStreamName(streamName string) {
+	x.inner.SetStreamName(foundation.NSStringStringWithUTF8String(streamName))
+}
+
+// ShowsCursor calls the underlying ShowsCursor.
+func (x *StreamConfiguration) ShowsCursor() bool {
+	return x.inner.ShowsCursor()
+}
+
+// SetShowsCursor calls the underlying SetShowsCursor.
+func (x *StreamConfiguration) SetShowsCursor(showsCursor bool) {
+	x.inner.SetShowsCursor(showsCursor)
+}
+
+// ShowMouseClicks calls the underlying ShowMouseClicks.
+func (x *StreamConfiguration) ShowMouseClicks() bool {
+	return x.inner.ShowMouseClicks()
+}
+
+// SetShowMouseClicks calls the underlying SetShowMouseClicks.
+func (x *StreamConfiguration) SetShowMouseClicks(showMouseClicks bool) {
+	x.inner.SetShowMouseClicks(showMouseClicks)
+}
+
+// BackgroundColor calls the underlying BackgroundColor.
+func (x *StreamConfiguration) BackgroundColor() unsafe.Pointer {
+	return x.inner.BackgroundColor()
+}
+
+// SetBackgroundColor calls the underlying SetBackgroundColor.
+func (x *StreamConfiguration) SetBackgroundColor(backgroundColor unsafe.Pointer) {
+	x.inner.SetBackgroundColor(backgroundColor)
+}
+
+// SourceRect calls the underlying SourceRect.
+func (x *StreamConfiguration) SourceRect() corefoundation.CGRect {
+	return x.inner.SourceRect()
+}
+
+// SetSourceRect calls the underlying SetSourceRect.
+func (x *StreamConfiguration) SetSourceRect(sourceRect corefoundation.CGRect) {
+	x.inner.SetSourceRect(sourceRect)
+}
+
+// DestinationRect calls the underlying DestinationRect.
+func (x *StreamConfiguration) DestinationRect() corefoundation.CGRect {
+	return x.inner.DestinationRect()
+}
+
+// SetDestinationRect calls the underlying SetDestinationRect.
+func (x *StreamConfiguration) SetDestinationRect(destinationRect corefoundation.CGRect) {
+	x.inner.SetDestinationRect(destinationRect)
+}
+
+// QueueDepth calls the underlying QueueDepth.
+func (x *StreamConfiguration) QueueDepth() int {
+	return x.inner.QueueDepth()
+}
+
+// SetQueueDepth calls the underlying SetQueueDepth.
+func (x *StreamConfiguration) SetQueueDepth(queueDepth int) {
+	x.inner.SetQueueDepth(queueDepth)
+}
+
+// ColorMatrix calls the underlying ColorMatrix.
+func (x *StreamConfiguration) ColorMatrix() unsafe.Pointer {
+	return x.inner.ColorMatrix()
+}
+
+// SetColorMatrix calls the underlying SetColorMatrix.
+func (x *StreamConfiguration) SetColorMatrix(colorMatrix unsafe.Pointer) {
+	x.inner.SetColorMatrix(colorMatrix)
+}
+
+// ColorSpaceName calls the underlying ColorSpaceName.
+func (x *StreamConfiguration) ColorSpaceName() unsafe.Pointer {
+	return x.inner.ColorSpaceName()
+}
+
+// SetColorSpaceName calls the underlying SetColorSpaceName.
+func (x *StreamConfiguration) SetColorSpaceName(colorSpaceName unsafe.Pointer) {
+	x.inner.SetColorSpaceName(colorSpaceName)
+}
+
+// CapturesAudio calls the underlying CapturesAudio.
+func (x *StreamConfiguration) CapturesAudio() bool {
+	return x.inner.CapturesAudio()
+}
+
+// SetCapturesAudio calls the underlying SetCapturesAudio.
+func (x *StreamConfiguration) SetCapturesAudio(capturesAudio bool) {
+	x.inner.SetCapturesAudio(capturesAudio)
+}
+
+// SampleRate calls the underlying SampleRate.
+func (x *StreamConfiguration) SampleRate() int {
+	return x.inner.SampleRate()
+}
+
+// SetSampleRate calls the underlying SetSampleRate.
+func (x *StreamConfiguration) SetSampleRate(sampleRate int) {
+	x.inner.SetSampleRate(sampleRate)
+}
+
+// ChannelCount calls the underlying ChannelCount.
+func (x *StreamConfiguration) ChannelCount() int {
+	return x.inner.ChannelCount()
+}
+
+// SetChannelCount calls the underlying SetChannelCount.
+func (x *StreamConfiguration) SetChannelCount(channelCount int) {
+	x.inner.SetChannelCount(channelCount)
+}
+
+// ExcludesCurrentProcessAudio calls the underlying ExcludesCurrentProcessAudio.
+func (x *StreamConfiguration) ExcludesCurrentProcessAudio() bool {
+	return x.inner.ExcludesCurrentProcessAudio()
+}
+
+// SetExcludesCurrentProcessAudio calls the underlying SetExcludesCurrentProcessAudio.
+func (x *StreamConfiguration) SetExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) {
+	x.inner.SetExcludesCurrentProcessAudio(excludesCurrentProcessAudio)
+}
+
+// IgnoreShadowsDisplay calls the underlying IgnoreShadowsDisplay.
+func (x *StreamConfiguration) IgnoreShadowsDisplay() bool {
+	return x.inner.IgnoreShadowsDisplay()
+}
+
+// SetIgnoreShadowsDisplay calls the underlying SetIgnoreShadowsDisplay.
+func (x *StreamConfiguration) SetIgnoreShadowsDisplay(ignoreShadowsDisplay bool) {
+	x.inner.SetIgnoreShadowsDisplay(ignoreShadowsDisplay)
+}
+
+// IgnoreShadowsSingleWindow calls the underlying IgnoreShadowsSingleWindow.
+func (x *StreamConfiguration) IgnoreShadowsSingleWindow() bool {
+	return x.inner.IgnoreShadowsSingleWindow()
+}
+
+// SetIgnoreShadowsSingleWindow calls the underlying SetIgnoreShadowsSingleWindow.
+func (x *StreamConfiguration) SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) {
+	x.inner.SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow)
+}
+
+// CaptureResolution calls the underlying CaptureResolution.
+func (x *StreamConfiguration) CaptureResolution() raw.SCCaptureResolutionType {
+	return x.inner.CaptureResolution()
+}
+
+// SetCaptureResolution calls the underlying SetCaptureResolution.
+func (x *StreamConfiguration) SetCaptureResolution(captureResolution raw.SCCaptureResolutionType) {
+	x.inner.SetCaptureResolution(captureResolution)
+}
+
+// CapturesShadowsOnly calls the underlying CapturesShadowsOnly.
+func (x *StreamConfiguration) CapturesShadowsOnly() bool {
+	return x.inner.CapturesShadowsOnly()
+}
+
+// SetCapturesShadowsOnly calls the underlying SetCapturesShadowsOnly.
+func (x *StreamConfiguration) SetCapturesShadowsOnly(capturesShadowsOnly bool) {
+	x.inner.SetCapturesShadowsOnly(capturesShadowsOnly)
+}
+
+// ShouldBeOpaque calls the underlying ShouldBeOpaque.
+func (x *StreamConfiguration) ShouldBeOpaque() bool {
+	return x.inner.ShouldBeOpaque()
+}
+
+// SetShouldBeOpaque calls the underlying SetShouldBeOpaque.
+func (x *StreamConfiguration) SetShouldBeOpaque(shouldBeOpaque bool) {
+	x.inner.SetShouldBeOpaque(shouldBeOpaque)
+}
+
+// IgnoreGlobalClipDisplay calls the underlying IgnoreGlobalClipDisplay.
+func (x *StreamConfiguration) IgnoreGlobalClipDisplay() bool {
+	return x.inner.IgnoreGlobalClipDisplay()
+}
+
+// SetIgnoreGlobalClipDisplay calls the underlying SetIgnoreGlobalClipDisplay.
+func (x *StreamConfiguration) SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) {
+	x.inner.SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay)
+}
+
+// IgnoreGlobalClipSingleWindow calls the underlying IgnoreGlobalClipSingleWindow.
+func (x *StreamConfiguration) IgnoreGlobalClipSingleWindow() bool {
+	return x.inner.IgnoreGlobalClipSingleWindow()
+}
+
+// SetIgnoreGlobalClipSingleWindow calls the underlying SetIgnoreGlobalClipSingleWindow.
+func (x *StreamConfiguration) SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) {
+	x.inner.SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow)
+}
+
+// PresenterOverlayPrivacyAlertSetting calls the underlying PresenterOverlayPrivacyAlertSetting.
+func (x *StreamConfiguration) PresenterOverlayPrivacyAlertSetting() raw.SCPresenterOverlayAlertSetting {
+	return x.inner.PresenterOverlayPrivacyAlertSetting()
+}
+
+// SetPresenterOverlayPrivacyAlertSetting calls the underlying SetPresenterOverlayPrivacyAlertSetting.
+func (x *StreamConfiguration) SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting) {
+	x.inner.SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting)
+}
+
+// IncludeChildWindows calls the underlying IncludeChildWindows.
+func (x *StreamConfiguration) IncludeChildWindows() bool {
+	return x.inner.IncludeChildWindows()
+}
+
+// SetIncludeChildWindows calls the underlying SetIncludeChildWindows.
+func (x *StreamConfiguration) SetIncludeChildWindows(includeChildWindows bool) {
+	x.inner.SetIncludeChildWindows(includeChildWindows)
+}
+
+// CaptureMicrophone calls the underlying CaptureMicrophone.
+func (x *StreamConfiguration) CaptureMicrophone() bool {
+	return x.inner.CaptureMicrophone()
+}
+
+// SetCaptureMicrophone calls the underlying SetCaptureMicrophone.
+func (x *StreamConfiguration) SetCaptureMicrophone(captureMicrophone bool) {
+	x.inner.SetCaptureMicrophone(captureMicrophone)
+}
+
+// MicrophoneCaptureDeviceID calls the underlying MicrophoneCaptureDeviceID.
+func (x *StreamConfiguration) MicrophoneCaptureDeviceID() string {
+	_r := x.inner.MicrophoneCaptureDeviceID()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetMicrophoneCaptureDeviceID calls the underlying SetMicrophoneCaptureDeviceID.
+func (x *StreamConfiguration) SetMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) {
+	x.inner.SetMicrophoneCaptureDeviceID(foundation.NSStringStringWithUTF8String(microphoneCaptureDeviceID))
+}
+
+// CaptureDynamicRange calls the underlying CaptureDynamicRange.
+func (x *StreamConfiguration) CaptureDynamicRange() raw.SCCaptureDynamicRange {
+	return x.inner.CaptureDynamicRange()
+}
+
+// SetCaptureDynamicRange calls the underlying SetCaptureDynamicRange.
+func (x *StreamConfiguration) SetCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange) {
+	x.inner.SetCaptureDynamicRange(captureDynamicRange)
+}
+
+// StreamConfigurationable is the interface implemented by [StreamConfiguration], for mocking and DI.
+type StreamConfigurationable interface {
+	Unwrap() *raw.SCStreamConfiguration
+	WithWidth(width uint) *StreamConfiguration
+	WithHeight(height uint) *StreamConfiguration
+	WithMinimumFrameInterval(minimumFrameInterval coremedia.CMTime) *StreamConfiguration
+	WithPixelFormat(pixelFormat uint) *StreamConfiguration
+	WithScalesToFit(scalesToFit bool) *StreamConfiguration
+	WithPreservesAspectRatio(preservesAspectRatio bool) *StreamConfiguration
+	WithStreamName(streamName string) *StreamConfiguration
+	WithShowsCursor(showsCursor bool) *StreamConfiguration
+	WithShowMouseClicks(showMouseClicks bool) *StreamConfiguration
+	WithSourceRect(sourceRect corefoundation.CGRect) *StreamConfiguration
+	WithDestinationRect(destinationRect corefoundation.CGRect) *StreamConfiguration
+	WithQueueDepth(queueDepth int) *StreamConfiguration
+	WithCapturesAudio(capturesAudio bool) *StreamConfiguration
+	WithSampleRate(sampleRate int) *StreamConfiguration
+	WithChannelCount(channelCount int) *StreamConfiguration
+	WithExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool) *StreamConfiguration
+	WithIgnoreShadowsDisplay(ignoreShadowsDisplay bool) *StreamConfiguration
+	WithIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool) *StreamConfiguration
+	WithCaptureResolution(captureResolution raw.SCCaptureResolutionType) *StreamConfiguration
+	WithCapturesShadowsOnly(capturesShadowsOnly bool) *StreamConfiguration
+	WithShouldBeOpaque(shouldBeOpaque bool) *StreamConfiguration
+	WithIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool) *StreamConfiguration
+	WithIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool) *StreamConfiguration
+	WithPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting) *StreamConfiguration
+	WithIncludeChildWindows(includeChildWindows bool) *StreamConfiguration
+	WithCaptureMicrophone(captureMicrophone bool) *StreamConfiguration
+	WithMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string) *StreamConfiguration
+	WithCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange) *StreamConfiguration
+	Width() uint
+	SetWidth(width uint)
+	Height() uint
+	SetHeight(height uint)
+	MinimumFrameInterval() coremedia.CMTime
+	SetMinimumFrameInterval(minimumFrameInterval coremedia.CMTime)
+	PixelFormat() uint
+	SetPixelFormat(pixelFormat uint)
+	ScalesToFit() bool
+	SetScalesToFit(scalesToFit bool)
+	PreservesAspectRatio() bool
+	SetPreservesAspectRatio(preservesAspectRatio bool)
+	StreamName() string
+	SetStreamName(streamName string)
+	ShowsCursor() bool
+	SetShowsCursor(showsCursor bool)
+	ShowMouseClicks() bool
+	SetShowMouseClicks(showMouseClicks bool)
+	BackgroundColor() unsafe.Pointer
+	SetBackgroundColor(backgroundColor unsafe.Pointer)
+	SourceRect() corefoundation.CGRect
+	SetSourceRect(sourceRect corefoundation.CGRect)
+	DestinationRect() corefoundation.CGRect
+	SetDestinationRect(destinationRect corefoundation.CGRect)
+	QueueDepth() int
+	SetQueueDepth(queueDepth int)
+	ColorMatrix() unsafe.Pointer
+	SetColorMatrix(colorMatrix unsafe.Pointer)
+	ColorSpaceName() unsafe.Pointer
+	SetColorSpaceName(colorSpaceName unsafe.Pointer)
+	CapturesAudio() bool
+	SetCapturesAudio(capturesAudio bool)
+	SampleRate() int
+	SetSampleRate(sampleRate int)
+	ChannelCount() int
+	SetChannelCount(channelCount int)
+	ExcludesCurrentProcessAudio() bool
+	SetExcludesCurrentProcessAudio(excludesCurrentProcessAudio bool)
+	IgnoreShadowsDisplay() bool
+	SetIgnoreShadowsDisplay(ignoreShadowsDisplay bool)
+	IgnoreShadowsSingleWindow() bool
+	SetIgnoreShadowsSingleWindow(ignoreShadowsSingleWindow bool)
+	CaptureResolution() raw.SCCaptureResolutionType
+	SetCaptureResolution(captureResolution raw.SCCaptureResolutionType)
+	CapturesShadowsOnly() bool
+	SetCapturesShadowsOnly(capturesShadowsOnly bool)
+	ShouldBeOpaque() bool
+	SetShouldBeOpaque(shouldBeOpaque bool)
+	IgnoreGlobalClipDisplay() bool
+	SetIgnoreGlobalClipDisplay(ignoreGlobalClipDisplay bool)
+	IgnoreGlobalClipSingleWindow() bool
+	SetIgnoreGlobalClipSingleWindow(ignoreGlobalClipSingleWindow bool)
+	PresenterOverlayPrivacyAlertSetting() raw.SCPresenterOverlayAlertSetting
+	SetPresenterOverlayPrivacyAlertSetting(presenterOverlayPrivacyAlertSetting raw.SCPresenterOverlayAlertSetting)
+	IncludeChildWindows() bool
+	SetIncludeChildWindows(includeChildWindows bool)
+	CaptureMicrophone() bool
+	SetCaptureMicrophone(captureMicrophone bool)
+	MicrophoneCaptureDeviceID() string
+	SetMicrophoneCaptureDeviceID(microphoneCaptureDeviceID string)
+	CaptureDynamicRange() raw.SCCaptureDynamicRange
+	SetCaptureDynamicRange(captureDynamicRange raw.SCCaptureDynamicRange)
+}
+
+var _ StreamConfigurationable = (*StreamConfiguration)(nil)
 

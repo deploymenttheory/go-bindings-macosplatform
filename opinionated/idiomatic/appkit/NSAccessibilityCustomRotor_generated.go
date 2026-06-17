@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,4 +56,67 @@ func (x *AccessibilityCustomRotor) WithItemLoadingDelegate(itemLoadingDelegate r
 	x.inner.SetItemLoadingDelegate(itemLoadingDelegate)
 	return x
 }
+
+// Type calls the underlying Type.
+func (x *AccessibilityCustomRotor) Type() raw.NSAccessibilityCustomRotorType {
+	return x.inner.Type()
+}
+
+// SetType calls the underlying SetType.
+func (x *AccessibilityCustomRotor) SetType(type_ raw.NSAccessibilityCustomRotorType) {
+	x.inner.SetType(type_)
+}
+
+// Label calls the underlying Label.
+func (x *AccessibilityCustomRotor) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *AccessibilityCustomRotor) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// ItemSearchDelegate calls the underlying ItemSearchDelegate.
+func (x *AccessibilityCustomRotor) ItemSearchDelegate() raw.NSAccessibilityCustomRotorItemSearchDelegate {
+	return x.inner.ItemSearchDelegate()
+}
+
+// SetItemSearchDelegate calls the underlying SetItemSearchDelegate.
+func (x *AccessibilityCustomRotor) SetItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) {
+	x.inner.SetItemSearchDelegate(itemSearchDelegate)
+}
+
+// ItemLoadingDelegate calls the underlying ItemLoadingDelegate.
+func (x *AccessibilityCustomRotor) ItemLoadingDelegate() raw.NSAccessibilityElementLoading {
+	return x.inner.ItemLoadingDelegate()
+}
+
+// SetItemLoadingDelegate calls the underlying SetItemLoadingDelegate.
+func (x *AccessibilityCustomRotor) SetItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading) {
+	x.inner.SetItemLoadingDelegate(itemLoadingDelegate)
+}
+
+// AccessibilityCustomRotorable is the interface implemented by [AccessibilityCustomRotor], for mocking and DI.
+type AccessibilityCustomRotorable interface {
+	Unwrap() *raw.NSAccessibilityCustomRotor
+	WithType(type_ raw.NSAccessibilityCustomRotorType) *AccessibilityCustomRotor
+	WithLabel(label string) *AccessibilityCustomRotor
+	WithItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate) *AccessibilityCustomRotor
+	WithItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading) *AccessibilityCustomRotor
+	Type() raw.NSAccessibilityCustomRotorType
+	SetType(type_ raw.NSAccessibilityCustomRotorType)
+	Label() string
+	SetLabel(label string)
+	ItemSearchDelegate() raw.NSAccessibilityCustomRotorItemSearchDelegate
+	SetItemSearchDelegate(itemSearchDelegate raw.NSAccessibilityCustomRotorItemSearchDelegate)
+	ItemLoadingDelegate() raw.NSAccessibilityElementLoading
+	SetItemLoadingDelegate(itemLoadingDelegate raw.NSAccessibilityElementLoading)
+}
+
+var _ AccessibilityCustomRotorable = (*AccessibilityCustomRotor)(nil)
 

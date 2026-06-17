@@ -54,3 +54,75 @@ func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServerSidePro
 	return x
 }
 
+// EnableKey calls the underlying EnableKey.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() *foundation.NSData {
+	return x.inner.EnableKey()
+}
+
+// SetEnableKey calls the underlying SetEnableKey.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetEnableKey(enableKey *foundation.NSData) {
+	x.inner.SetEnableKey(enableKey)
+}
+
+// Value calls the underlying Value.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() *foundation.NSNumber {
+	return x.inner.Value()
+}
+
+// SetValue calls the underlying SetValue.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetValue(value *foundation.NSNumber) {
+	x.inner.SetValue(value)
+}
+
+// GetCount calls the underlying GetCount.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) GetCount() *foundation.NSNumber {
+	return x.inner.GetCount()
+}
+
+// SetCount calls the underlying SetCount.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetCount(count *foundation.NSNumber) {
+	x.inner.SetCount(count)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterPayloadTestRequestParams], for mocking and DI.
+type MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable interface {
+	Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithEnableKey(enableKey *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithValue(value *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithCount(count *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	EnableKey() *foundation.NSData
+	SetEnableKey(enableKey *foundation.NSData)
+	Value() *foundation.NSNumber
+	SetValue(value *foundation.NSNumber)
+	GetCount() *foundation.NSNumber
+	SetCount(count *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestRequestParams)(nil)
+

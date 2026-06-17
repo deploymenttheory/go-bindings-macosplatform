@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -68,10 +69,40 @@ func (x *CollaborationShareOptions) OptionsGroups() []*raw.SWCollaborationOption
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.SWCollaborationOptionsGroup, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.SWCollaborationOptionsGroup {
+		return raw.SWCollaborationOptionsGroupFromID(purego.Retain(_id))
+	})
 }
+
+// SetOptionsGroups calls the underlying SetOptionsGroups.
+func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup]) {
+	x.inner.SetOptionsGroups(optionsGroups)
+}
+
+// Summary calls the underlying Summary.
+func (x *CollaborationShareOptions) Summary() string {
+	_r := x.inner.Summary()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSummary calls the underlying SetSummary.
+func (x *CollaborationShareOptions) SetSummary(summary string) {
+	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+}
+
+// CollaborationShareOptionsable is the interface implemented by [CollaborationShareOptions], for mocking and DI.
+type CollaborationShareOptionsable interface {
+	Unwrap() *raw.SWCollaborationShareOptions
+	WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions
+	WithSummary(summary string) *CollaborationShareOptions
+	OptionsGroups() []*raw.SWCollaborationOptionsGroup
+	SetOptionsGroups(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup])
+	Summary() string
+	SetSummary(summary string)
+}
+
+var _ CollaborationShareOptionsable = (*CollaborationShareOptions)(nil)
 

@@ -6,6 +6,7 @@ package videosubscriberaccount
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -22,4 +23,41 @@ func NewVSAccountProviderResponse() *VSAccountProviderResponse {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountProviderResponse")), objc.RegisterName("new"))
 	return &VSAccountProviderResponse{inner: raw.VSAccountProviderResponseFromID(_id)}
 }
+
+// AuthenticationScheme calls the underlying AuthenticationScheme.
+func (x *VSAccountProviderResponse) AuthenticationScheme() string {
+	_r := x.inner.AuthenticationScheme()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Status calls the underlying Status.
+func (x *VSAccountProviderResponse) Status() string {
+	_r := x.inner.Status()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Body calls the underlying Body.
+func (x *VSAccountProviderResponse) Body() string {
+	_r := x.inner.Body()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// VSAccountProviderResponseable is the interface implemented by [VSAccountProviderResponse], for mocking and DI.
+type VSAccountProviderResponseable interface {
+	Unwrap() *raw.VSAccountProviderResponse
+	AuthenticationScheme() string
+	Status() string
+	Body() string
+}
+
+var _ VSAccountProviderResponseable = (*VSAccountProviderResponse)(nil)
 

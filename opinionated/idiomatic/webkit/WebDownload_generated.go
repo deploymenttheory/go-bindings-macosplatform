@@ -23,3 +23,10 @@ func NewWebDownload() *WebDownload {
 	return &WebDownload{inner: raw.WebDownloadFromID(_id)}
 }
 
+// WebDownloadable is the interface implemented by [WebDownload], for mocking and DI.
+type WebDownloadable interface {
+	Unwrap() *raw.WebDownload
+}
+
+var _ WebDownloadable = (*WebDownload)(nil)
+

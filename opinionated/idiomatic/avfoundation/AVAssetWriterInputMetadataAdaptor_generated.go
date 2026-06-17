@@ -24,3 +24,26 @@ func NewAssetWriterInputMetadataAdaptorWithAssetWriterInput(input *raw.AVAssetWr
 	return &AssetWriterInputMetadataAdaptor{inner: raw.AVAssetWriterInputMetadataAdaptorFromID(_id)}
 }
 
+// AppendTimedMetadataGroup calls the underlying AppendTimedMetadataGroup.
+func (x *AssetWriterInputMetadataAdaptor) AppendTimedMetadataGroup(timedMetadataGroup *raw.AVTimedMetadataGroup) bool {
+	return x.inner.AppendTimedMetadataGroup(timedMetadataGroup)
+}
+
+// AssetWriterInput calls the underlying AssetWriterInput.
+func (x *AssetWriterInputMetadataAdaptor) AssetWriterInput() *AssetWriterInput {
+	_r := x.inner.AssetWriterInput()
+	if _r == nil {
+		return nil
+	}
+	return &AssetWriterInput{inner: _r}
+}
+
+// AssetWriterInputMetadataAdaptorable is the interface implemented by [AssetWriterInputMetadataAdaptor], for mocking and DI.
+type AssetWriterInputMetadataAdaptorable interface {
+	Unwrap() *raw.AVAssetWriterInputMetadataAdaptor
+	AppendTimedMetadataGroup(timedMetadataGroup *raw.AVTimedMetadataGroup) bool
+	AssetWriterInput() *AssetWriterInput
+}
+
+var _ AssetWriterInputMetadataAdaptorable = (*AssetWriterInputMetadataAdaptor)(nil)
+

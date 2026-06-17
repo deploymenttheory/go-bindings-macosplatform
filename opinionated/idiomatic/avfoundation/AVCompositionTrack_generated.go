@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -29,14 +30,20 @@ func (x *CompositionTrack) FormatDescriptionReplacements() []*raw.AVCompositionT
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVCompositionTrackFormatDescriptionReplacement, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVCompositionTrackFormatDescriptionReplacement {
+		return raw.AVCompositionTrackFormatDescriptionReplacementFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CompositionTrack) asCompositionTrack() *raw.AVCompositionTrack { return x.inner }
 
 func (x *CompositionTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVAssetTrack }
+
+// CompositionTrackable is the interface implemented by [CompositionTrack], for mocking and DI.
+type CompositionTrackable interface {
+	Unwrap() *raw.AVCompositionTrack
+	FormatDescriptionReplacements() []*raw.AVCompositionTrackFormatDescriptionReplacement
+}
+
+var _ CompositionTrackable = (*CompositionTrack)(nil)
 

@@ -5,6 +5,7 @@
 package usernotifications
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/ebitengine/purego/objc"
 )
@@ -23,5 +24,24 @@ func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
 	return &CalendarNotificationTrigger{inner: raw.UNCalendarNotificationTriggerFromID(_id)}
 }
 
+// NextTriggerDate calls the underlying NextTriggerDate.
+func (x *CalendarNotificationTrigger) NextTriggerDate() *foundation.NSDate {
+	return x.inner.NextTriggerDate()
+}
+
+// DateComponents calls the underlying DateComponents.
+func (x *CalendarNotificationTrigger) DateComponents() *foundation.NSDateComponents {
+	return x.inner.DateComponents()
+}
+
 func (x *CalendarNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger { return &x.inner.UNNotificationTrigger }
+
+// CalendarNotificationTriggerable is the interface implemented by [CalendarNotificationTrigger], for mocking and DI.
+type CalendarNotificationTriggerable interface {
+	Unwrap() *raw.UNCalendarNotificationTrigger
+	NextTriggerDate() *foundation.NSDate
+	DateComponents() *foundation.NSDateComponents
+}
+
+var _ CalendarNotificationTriggerable = (*CalendarNotificationTrigger)(nil)
 

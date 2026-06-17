@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -66,4 +67,114 @@ func (x *ModelConfiguration) WithFunctionName(functionName string) *ModelConfigu
 	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
 	return x
 }
+
+// ModelDisplayName calls the underlying ModelDisplayName.
+func (x *ModelConfiguration) ModelDisplayName() string {
+	_r := x.inner.ModelDisplayName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetModelDisplayName calls the underlying SetModelDisplayName.
+func (x *ModelConfiguration) SetModelDisplayName(modelDisplayName string) {
+	x.inner.SetModelDisplayName(foundation.NSStringStringWithUTF8String(modelDisplayName))
+}
+
+// ComputeUnits calls the underlying ComputeUnits.
+func (x *ModelConfiguration) ComputeUnits() raw.MLComputeUnits {
+	return x.inner.ComputeUnits()
+}
+
+// SetComputeUnits calls the underlying SetComputeUnits.
+func (x *ModelConfiguration) SetComputeUnits(computeUnits raw.MLComputeUnits) {
+	x.inner.SetComputeUnits(computeUnits)
+}
+
+// OptimizationHints calls the underlying OptimizationHints.
+func (x *ModelConfiguration) OptimizationHints() *OptimizationHints {
+	_r := x.inner.OptimizationHints()
+	if _r == nil {
+		return nil
+	}
+	return &OptimizationHints{inner: _r}
+}
+
+// SetOptimizationHints calls the underlying SetOptimizationHints.
+func (x *ModelConfiguration) SetOptimizationHints(optimizationHints *raw.MLOptimizationHints) {
+	x.inner.SetOptimizationHints(optimizationHints)
+}
+
+// AllowLowPrecisionAccumulationOnGPU calls the underlying AllowLowPrecisionAccumulationOnGPU.
+func (x *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
+	return x.inner.AllowLowPrecisionAccumulationOnGPU()
+}
+
+// SetAllowLowPrecisionAccumulationOnGPU calls the underlying SetAllowLowPrecisionAccumulationOnGPU.
+func (x *ModelConfiguration) SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) {
+	x.inner.SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU)
+}
+
+// PreferredMetalDevice calls the underlying PreferredMetalDevice.
+func (x *ModelConfiguration) PreferredMetalDevice() metal.MTLDevice {
+	return x.inner.PreferredMetalDevice()
+}
+
+// SetPreferredMetalDevice calls the underlying SetPreferredMetalDevice.
+func (x *ModelConfiguration) SetPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) {
+	x.inner.SetPreferredMetalDevice(preferredMetalDevice)
+}
+
+// Parameters calls the underlying Parameters.
+func (x *ModelConfiguration) Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID] {
+	return x.inner.Parameters()
+}
+
+// SetParameters calls the underlying SetParameters.
+func (x *ModelConfiguration) SetParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) {
+	x.inner.SetParameters(parameters)
+}
+
+// FunctionName calls the underlying FunctionName.
+func (x *ModelConfiguration) FunctionName() string {
+	_r := x.inner.FunctionName()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFunctionName calls the underlying SetFunctionName.
+func (x *ModelConfiguration) SetFunctionName(functionName string) {
+	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+}
+
+// ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
+type ModelConfigurationable interface {
+	Unwrap() *raw.MLModelConfiguration
+	WithModelDisplayName(modelDisplayName string) *ModelConfiguration
+	WithComputeUnits(computeUnits raw.MLComputeUnits) *ModelConfiguration
+	WithOptimizationHints(optimizationHints *raw.MLOptimizationHints) *ModelConfiguration
+	WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration
+	WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration
+	WithParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) *ModelConfiguration
+	WithFunctionName(functionName string) *ModelConfiguration
+	ModelDisplayName() string
+	SetModelDisplayName(modelDisplayName string)
+	ComputeUnits() raw.MLComputeUnits
+	SetComputeUnits(computeUnits raw.MLComputeUnits)
+	OptimizationHints() *OptimizationHints
+	SetOptimizationHints(optimizationHints *raw.MLOptimizationHints)
+	AllowLowPrecisionAccumulationOnGPU() bool
+	SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool)
+	PreferredMetalDevice() metal.MTLDevice
+	SetPreferredMetalDevice(preferredMetalDevice metal.MTLDevice)
+	Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]
+	SetParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID])
+	FunctionName() string
+	SetFunctionName(functionName string)
+}
+
+var _ ModelConfigurationable = (*ModelConfiguration)(nil)
 

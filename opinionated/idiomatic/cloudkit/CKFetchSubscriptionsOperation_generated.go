@@ -7,6 +7,7 @@ package cloudkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -66,14 +67,53 @@ func (x *FetchSubscriptionsOperation) SubscriptionIDs() []*foundation.NSString {
 	if arr == nil {
 		return nil
 	}
-	out := make([]*foundation.NSString, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
+		return foundation.NSStringFromID(purego.Retain(_id))
+	})
+}
+
+// SetSubscriptionIDs calls the underlying SetSubscriptionIDs.
+func (x *FetchSubscriptionsOperation) SetSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString]) {
+	x.inner.SetSubscriptionIDs(subscriptionIDs)
+}
+
+// PerSubscriptionCompletionBlock calls the underlying PerSubscriptionCompletionBlock.
+func (x *FetchSubscriptionsOperation) PerSubscriptionCompletionBlock() objc.Block {
+	return x.inner.PerSubscriptionCompletionBlock()
+}
+
+// SetPerSubscriptionCompletionBlock calls the underlying SetPerSubscriptionCompletionBlock.
+func (x *FetchSubscriptionsOperation) SetPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) {
+	x.inner.SetPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock)
+}
+
+// FetchSubscriptionCompletionBlock calls the underlying FetchSubscriptionCompletionBlock.
+func (x *FetchSubscriptionsOperation) FetchSubscriptionCompletionBlock() objc.Block {
+	return x.inner.FetchSubscriptionCompletionBlock()
+}
+
+// SetFetchSubscriptionCompletionBlock calls the underlying SetFetchSubscriptionCompletionBlock.
+func (x *FetchSubscriptionsOperation) SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) {
+	x.inner.SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock)
 }
 
 func (x *FetchSubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return &x.inner.CKDatabaseOperation }
 
 func (x *FetchSubscriptionsOperation) asOperation() *raw.CKOperation { return &x.inner.CKDatabaseOperation.CKOperation }
+
+// FetchSubscriptionsOperationable is the interface implemented by [FetchSubscriptionsOperation], for mocking and DI.
+type FetchSubscriptionsOperationable interface {
+	Unwrap() *raw.CKFetchSubscriptionsOperation
+	WithSubscriptionIDs(items ...*foundation.NSString) *FetchSubscriptionsOperation
+	WithPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *FetchSubscriptionsOperation
+	WithFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) *FetchSubscriptionsOperation
+	SubscriptionIDs() []*foundation.NSString
+	SetSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString])
+	PerSubscriptionCompletionBlock() objc.Block
+	SetPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer))
+	FetchSubscriptionCompletionBlock() objc.Block
+	SetFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block)
+}
+
+var _ FetchSubscriptionsOperationable = (*FetchSubscriptionsOperation)(nil)
 

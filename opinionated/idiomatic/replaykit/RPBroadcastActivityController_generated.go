@@ -29,3 +29,23 @@ func (x *BroadcastActivityController) WithDelegate(delegate raw.RPBroadcastActiv
 	return x
 }
 
+// Delegate calls the underlying Delegate.
+func (x *BroadcastActivityController) Delegate() raw.RPBroadcastActivityControllerDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *BroadcastActivityController) SetDelegate(delegate raw.RPBroadcastActivityControllerDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// BroadcastActivityControllerable is the interface implemented by [BroadcastActivityController], for mocking and DI.
+type BroadcastActivityControllerable interface {
+	Unwrap() *raw.RPBroadcastActivityController
+	WithDelegate(delegate raw.RPBroadcastActivityControllerDelegate) *BroadcastActivityController
+	Delegate() raw.RPBroadcastActivityControllerDelegate
+	SetDelegate(delegate raw.RPBroadcastActivityControllerDelegate)
+}
+
+var _ BroadcastActivityControllerable = (*BroadcastActivityController)(nil)
+

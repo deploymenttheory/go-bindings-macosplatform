@@ -54,3 +54,75 @@ func (x *MTROnOffClusterOnWithTimedOffParams) WithServerSideProcessingTimeout(se
 	return x
 }
 
+// OnOffControl calls the underlying OnOffControl.
+func (x *MTROnOffClusterOnWithTimedOffParams) OnOffControl() *foundation.NSNumber {
+	return x.inner.OnOffControl()
+}
+
+// SetOnOffControl calls the underlying SetOnOffControl.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOnOffControl(onOffControl *foundation.NSNumber) {
+	x.inner.SetOnOffControl(onOffControl)
+}
+
+// OnTime calls the underlying OnTime.
+func (x *MTROnOffClusterOnWithTimedOffParams) OnTime() *foundation.NSNumber {
+	return x.inner.OnTime()
+}
+
+// SetOnTime calls the underlying SetOnTime.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOnTime(onTime *foundation.NSNumber) {
+	x.inner.SetOnTime(onTime)
+}
+
+// OffWaitTime calls the underlying OffWaitTime.
+func (x *MTROnOffClusterOnWithTimedOffParams) OffWaitTime() *foundation.NSNumber {
+	return x.inner.OffWaitTime()
+}
+
+// SetOffWaitTime calls the underlying SetOffWaitTime.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetOffWaitTime(offWaitTime *foundation.NSNumber) {
+	x.inner.SetOffWaitTime(offWaitTime)
+}
+
+// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOnWithTimedOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
+	return x.inner.TimedInvokeTimeoutMs()
+}
+
+// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
+	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+}
+
+// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
+func (x *MTROnOffClusterOnWithTimedOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
+	return x.inner.ServerSideProcessingTimeout()
+}
+
+// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
+func (x *MTROnOffClusterOnWithTimedOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
+	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+}
+
+// MTROnOffClusterOnWithTimedOffParamsable is the interface implemented by [MTROnOffClusterOnWithTimedOffParams], for mocking and DI.
+type MTROnOffClusterOnWithTimedOffParamsable interface {
+	Unwrap() *raw.MTROnOffClusterOnWithTimedOffParams
+	WithOnOffControl(onOffControl *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
+	WithOnTime(onTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
+	WithOffWaitTime(offWaitTime *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROnOffClusterOnWithTimedOffParams
+	OnOffControl() *foundation.NSNumber
+	SetOnOffControl(onOffControl *foundation.NSNumber)
+	OnTime() *foundation.NSNumber
+	SetOnTime(onTime *foundation.NSNumber)
+	OffWaitTime() *foundation.NSNumber
+	SetOffWaitTime(offWaitTime *foundation.NSNumber)
+	TimedInvokeTimeoutMs() *foundation.NSNumber
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	ServerSideProcessingTimeout() *foundation.NSNumber
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+}
+
+var _ MTROnOffClusterOnWithTimedOffParamsable = (*MTROnOffClusterOnWithTimedOffParams)(nil)
+

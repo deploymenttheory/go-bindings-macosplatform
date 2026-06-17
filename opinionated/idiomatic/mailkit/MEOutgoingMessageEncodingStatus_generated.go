@@ -7,6 +7,7 @@ package mailkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
@@ -26,16 +27,40 @@ func NewOutgoingMessageEncodingStatusWithCanSignCanEncryptSecurityErrorAddresses
 	return &OutgoingMessageEncodingStatus{inner: raw.MEOutgoingMessageEncodingStatusFromID(_id)}
 }
 
+// CanSign calls the underlying CanSign.
+func (x *OutgoingMessageEncodingStatus) CanSign() bool {
+	return x.inner.CanSign()
+}
+
+// CanEncrypt calls the underlying CanEncrypt.
+func (x *OutgoingMessageEncodingStatus) CanEncrypt() bool {
+	return x.inner.CanEncrypt()
+}
+
+// SecurityError calls the underlying SecurityError.
+func (x *OutgoingMessageEncodingStatus) SecurityError() unsafe.Pointer {
+	return x.inner.SecurityError()
+}
+
 // AddressesFailingEncryption returns the collection as a Go slice.
 func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*raw.MEEmailAddress {
 	arr := x.inner.AddressesFailingEncryption()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.MEEmailAddress, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.MEEmailAddress {
+		return raw.MEEmailAddressFromID(purego.Retain(_id))
+	})
 }
+
+// OutgoingMessageEncodingStatusable is the interface implemented by [OutgoingMessageEncodingStatus], for mocking and DI.
+type OutgoingMessageEncodingStatusable interface {
+	Unwrap() *raw.MEOutgoingMessageEncodingStatus
+	CanSign() bool
+	CanEncrypt() bool
+	SecurityError() unsafe.Pointer
+	AddressesFailingEncryption() []*raw.MEEmailAddress
+}
+
+var _ OutgoingMessageEncodingStatusable = (*OutgoingMessageEncodingStatus)(nil)
 

@@ -25,3 +25,10 @@ func NewMacGraphicsDevice() *MacGraphicsDevice {
 
 func (x *MacGraphicsDevice) asGraphicsDevice() *raw.VZGraphicsDevice { return &x.inner.VZGraphicsDevice }
 
+// MacGraphicsDeviceable is the interface implemented by [MacGraphicsDevice], for mocking and DI.
+type MacGraphicsDeviceable interface {
+	Unwrap() *raw.VZMacGraphicsDevice
+}
+
+var _ MacGraphicsDeviceable = (*MacGraphicsDevice)(nil)
+

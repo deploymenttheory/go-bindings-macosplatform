@@ -113,7 +113,144 @@ func (x *MutableMovie) WithMetadata(items ...MetadataItemProvider) *MutableMovie
 	return x
 }
 
+// SetPreferredRate calls the underlying SetPreferredRate.
+func (x *MutableMovie) SetPreferredRate(preferredRate float32) {
+	x.inner.SetPreferredRate(preferredRate)
+}
+
+// SetPreferredVolume calls the underlying SetPreferredVolume.
+func (x *MutableMovie) SetPreferredVolume(preferredVolume float32) {
+	x.inner.SetPreferredVolume(preferredVolume)
+}
+
+// SetPreferredTransform calls the underlying SetPreferredTransform.
+func (x *MutableMovie) SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform) {
+	x.inner.SetPreferredTransform(preferredTransform)
+}
+
+// Timescale calls the underlying Timescale.
+func (x *MutableMovie) Timescale() int32 {
+	return x.inner.Timescale()
+}
+
+// SetTimescale calls the underlying SetTimescale.
+func (x *MutableMovie) SetTimescale(timescale int32) {
+	x.inner.SetTimescale(timescale)
+}
+
+// InsertTimeRangeOfAssetAtTimeCopySampleDataError calls the underlying InsertTimeRangeOfAssetAtTimeCopySampleDataError.
+func (x *MutableMovie) InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime, copySampleData bool) (bool, error) {
+	return x.inner.InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange, asset, startTime, copySampleData)
+}
+
+// InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
+func (x *MutableMovie) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.InsertEmptyTimeRange(timeRange)
+}
+
+// RemoveTimeRange calls the underlying RemoveTimeRange.
+func (x *MutableMovie) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
+	x.inner.RemoveTimeRange(timeRange)
+}
+
+// ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
+func (x *MutableMovie) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
+	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
+}
+
+// IsModified calls the underlying IsModified.
+func (x *MutableMovie) IsModified() bool {
+	return x.inner.IsModified()
+}
+
+// SetModified calls the underlying SetModified.
+func (x *MutableMovie) SetModified(modified bool) {
+	x.inner.SetModified(modified)
+}
+
+// SetDefaultMediaDataStorage calls the underlying SetDefaultMediaDataStorage.
+func (x *MutableMovie) SetDefaultMediaDataStorage(defaultMediaDataStorage *raw.AVMediaDataStorage) {
+	x.inner.SetDefaultMediaDataStorage(defaultMediaDataStorage)
+}
+
+// InterleavingPeriod calls the underlying InterleavingPeriod.
+func (x *MutableMovie) InterleavingPeriod() coremedia.CMTime {
+	return x.inner.InterleavingPeriod()
+}
+
+// SetInterleavingPeriod calls the underlying SetInterleavingPeriod.
+func (x *MutableMovie) SetInterleavingPeriod(interleavingPeriod coremedia.CMTime) {
+	x.inner.SetInterleavingPeriod(interleavingPeriod)
+}
+
+// MutableTrackCompatibleWithTrack calls the underlying MutableTrackCompatibleWithTrack.
+func (x *MutableMovie) MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableMovieTrack {
+	_r := x.inner.MutableTrackCompatibleWithTrack(track)
+	if _r == nil {
+		return nil
+	}
+	return &MutableMovieTrack{inner: _r}
+}
+
+// AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions calls the underlying AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions.
+func (x *MutableMovie) AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *raw.AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMovieTrack {
+	_r := x.inner.AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType, track, options)
+	if _r == nil {
+		return nil
+	}
+	return &MutableMovieTrack{inner: _r}
+}
+
+// AddMutableTracksCopyingSettingsFromTracksOptions calls the underlying AddMutableTracksCopyingSettingsFromTracksOptions.
+func (x *MutableMovie) AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*raw.AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.AVMutableMovieTrack] {
+	return x.inner.AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks, options)
+}
+
+// RemoveTrack calls the underlying RemoveTrack.
+func (x *MutableMovie) RemoveTrack(track *raw.AVMovieTrack) {
+	x.inner.RemoveTrack(track)
+}
+
+// SetMetadata calls the underlying SetMetadata.
+func (x *MutableMovie) SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem]) {
+	x.inner.SetMetadata(metadata)
+}
+
 func (x *MutableMovie) asMovie() *raw.AVMovie { return &x.inner.AVMovie }
 
 func (x *MutableMovie) asAsset() *raw.AVAsset { return &x.inner.AVMovie.AVAsset }
+
+// MutableMovieable is the interface implemented by [MutableMovie], for mocking and DI.
+type MutableMovieable interface {
+	Unwrap() *raw.AVMutableMovie
+	WithPreferredRate(preferredRate float32) *MutableMovie
+	WithPreferredVolume(preferredVolume float32) *MutableMovie
+	WithPreferredTransform(preferredTransform corefoundation.CGAffineTransform) *MutableMovie
+	WithTimescale(timescale int32) *MutableMovie
+	WithModified(modified bool) *MutableMovie
+	WithDefaultMediaDataStorage(defaultMediaDataStorage *raw.AVMediaDataStorage) *MutableMovie
+	WithInterleavingPeriod(interleavingPeriod coremedia.CMTime) *MutableMovie
+	WithMetadata(items ...MetadataItemProvider) *MutableMovie
+	SetPreferredRate(preferredRate float32)
+	SetPreferredVolume(preferredVolume float32)
+	SetPreferredTransform(preferredTransform corefoundation.CGAffineTransform)
+	Timescale() int32
+	SetTimescale(timescale int32)
+	InsertTimeRangeOfAssetAtTimeCopySampleDataError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime, copySampleData bool) (bool, error)
+	InsertEmptyTimeRange(timeRange coremedia.CMTimeRange)
+	RemoveTimeRange(timeRange coremedia.CMTimeRange)
+	ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime)
+	IsModified() bool
+	SetModified(modified bool)
+	SetDefaultMediaDataStorage(defaultMediaDataStorage *raw.AVMediaDataStorage)
+	InterleavingPeriod() coremedia.CMTime
+	SetInterleavingPeriod(interleavingPeriod coremedia.CMTime)
+	MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableMovieTrack
+	AddMutableTrackWithMediaTypeCopySettingsFromTrackOptions(mediaType *foundation.NSString, track *raw.AVAssetTrack, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MutableMovieTrack
+	AddMutableTracksCopyingSettingsFromTracksOptions(existingTracks *foundation.NSArray[*raw.AVAssetTrack], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.AVMutableMovieTrack]
+	RemoveTrack(track *raw.AVMovieTrack)
+	SetMetadata(metadata *foundation.NSArray[*raw.AVMetadataItem])
+}
+
+var _ MutableMovieable = (*MutableMovie)(nil)
 

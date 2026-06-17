@@ -7,6 +7,7 @@ package vision
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ImageHomographicAlignmentObservation wraps [raw.VNImageHomographicAlignmentObservation] with a fluent Go API.
@@ -23,7 +24,20 @@ func NewImageHomographicAlignmentObservation() *ImageHomographicAlignmentObserva
 	return &ImageHomographicAlignmentObservation{inner: raw.VNImageHomographicAlignmentObservationFromID(_id)}
 }
 
+// WarpTransform calls the underlying WarpTransform.
+func (x *ImageHomographicAlignmentObservation) WarpTransform() unsafe.Pointer {
+	return x.inner.WarpTransform()
+}
+
 func (x *ImageHomographicAlignmentObservation) asImageAlignmentObservation() *raw.VNImageAlignmentObservation { return &x.inner.VNImageAlignmentObservation }
 
 func (x *ImageHomographicAlignmentObservation) asObservation() *raw.VNObservation { return &x.inner.VNImageAlignmentObservation.VNObservation }
+
+// ImageHomographicAlignmentObservationable is the interface implemented by [ImageHomographicAlignmentObservation], for mocking and DI.
+type ImageHomographicAlignmentObservationable interface {
+	Unwrap() *raw.VNImageHomographicAlignmentObservation
+	WarpTransform() unsafe.Pointer
+}
+
+var _ ImageHomographicAlignmentObservationable = (*ImageHomographicAlignmentObservation)(nil)
 

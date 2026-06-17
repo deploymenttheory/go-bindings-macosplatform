@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,18 +36,64 @@ func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayo
 	return x
 }
 
+// ContentInsets calls the underlying ContentInsets.
+func (x *CollectionLayoutItem) ContentInsets() raw.NSDirectionalEdgeInsets {
+	return x.inner.ContentInsets()
+}
+
+// SetContentInsets calls the underlying SetContentInsets.
+func (x *CollectionLayoutItem) SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets) {
+	x.inner.SetContentInsets(contentInsets)
+}
+
+// EdgeSpacing calls the underlying EdgeSpacing.
+func (x *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
+	_r := x.inner.EdgeSpacing()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutEdgeSpacing{inner: _r}
+}
+
+// SetEdgeSpacing calls the underlying SetEdgeSpacing.
+func (x *CollectionLayoutItem) SetEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) {
+	x.inner.SetEdgeSpacing(edgeSpacing)
+}
+
+// LayoutSize calls the underlying LayoutSize.
+func (x *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
+	_r := x.inner.LayoutSize()
+	if _r == nil {
+		return nil
+	}
+	return &CollectionLayoutSize{inner: _r}
+}
+
 // SupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutItem) SupplementaryItems() []*raw.NSCollectionLayoutSupplementaryItem {
 	arr := x.inner.SupplementaryItems()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.NSCollectionLayoutSupplementaryItem, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
-	}
-	return out
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.NSCollectionLayoutSupplementaryItem {
+		return raw.NSCollectionLayoutSupplementaryItemFromID(purego.Retain(_id))
+	})
 }
 
 func (x *CollectionLayoutItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return x.inner }
+
+// CollectionLayoutItemable is the interface implemented by [CollectionLayoutItem], for mocking and DI.
+type CollectionLayoutItemable interface {
+	Unwrap() *raw.NSCollectionLayoutItem
+	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutItem
+	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutItem
+	ContentInsets() raw.NSDirectionalEdgeInsets
+	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
+	EdgeSpacing() *CollectionLayoutEdgeSpacing
+	SetEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing)
+	LayoutSize() *CollectionLayoutSize
+	SupplementaryItems() []*raw.NSCollectionLayoutSupplementaryItem
+}
+
+var _ CollectionLayoutItemable = (*CollectionLayoutItem)(nil)
 

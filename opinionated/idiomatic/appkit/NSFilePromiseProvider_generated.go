@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,4 +49,54 @@ func (x *FilePromiseProvider) WithUserInfo(userInfo objc.ID) *FilePromiseProvide
 	x.inner.SetUserInfo(userInfo)
 	return x
 }
+
+// FileType calls the underlying FileType.
+func (x *FilePromiseProvider) FileType() string {
+	_r := x.inner.FileType()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetFileType calls the underlying SetFileType.
+func (x *FilePromiseProvider) SetFileType(fileType string) {
+	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
+}
+
+// Delegate calls the underlying Delegate.
+func (x *FilePromiseProvider) Delegate() raw.NSFilePromiseProviderDelegate {
+	return x.inner.Delegate()
+}
+
+// SetDelegate calls the underlying SetDelegate.
+func (x *FilePromiseProvider) SetDelegate(delegate raw.NSFilePromiseProviderDelegate) {
+	x.inner.SetDelegate(delegate)
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *FilePromiseProvider) UserInfo() objc.ID {
+	return x.inner.UserInfo()
+}
+
+// SetUserInfo calls the underlying SetUserInfo.
+func (x *FilePromiseProvider) SetUserInfo(userInfo objc.ID) {
+	x.inner.SetUserInfo(userInfo)
+}
+
+// FilePromiseProviderable is the interface implemented by [FilePromiseProvider], for mocking and DI.
+type FilePromiseProviderable interface {
+	Unwrap() *raw.NSFilePromiseProvider
+	WithFileType(fileType string) *FilePromiseProvider
+	WithDelegate(delegate raw.NSFilePromiseProviderDelegate) *FilePromiseProvider
+	WithUserInfo(userInfo objc.ID) *FilePromiseProvider
+	FileType() string
+	SetFileType(fileType string)
+	Delegate() raw.NSFilePromiseProviderDelegate
+	SetDelegate(delegate raw.NSFilePromiseProviderDelegate)
+	UserInfo() objc.ID
+	SetUserInfo(userInfo objc.ID)
+}
+
+var _ FilePromiseProviderable = (*FilePromiseProvider)(nil)
 

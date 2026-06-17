@@ -24,3 +24,28 @@ func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float
 	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(_id)}
 }
 
+// Width calls the underlying Width.
+func (x *AUAudioUnitViewConfiguration) Width() float64 {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *AUAudioUnitViewConfiguration) Height() float64 {
+	return x.inner.Height()
+}
+
+// HostHasController calls the underlying HostHasController.
+func (x *AUAudioUnitViewConfiguration) HostHasController() bool {
+	return x.inner.HostHasController()
+}
+
+// AUAudioUnitViewConfigurationable is the interface implemented by [AUAudioUnitViewConfiguration], for mocking and DI.
+type AUAudioUnitViewConfigurationable interface {
+	Unwrap() *raw.AUAudioUnitViewConfiguration
+	Width() float64
+	Height() float64
+	HostHasController() bool
+}
+
+var _ AUAudioUnitViewConfigurationable = (*AUAudioUnitViewConfiguration)(nil)
+

@@ -47,3 +47,62 @@ func (x *AudioEnvironmentDistanceAttenuationParameters) WithRolloffFactor(rollof
 	return x
 }
 
+// DistanceAttenuationModel calls the underlying DistanceAttenuationModel.
+func (x *AudioEnvironmentDistanceAttenuationParameters) DistanceAttenuationModel() raw.AVAudioEnvironmentDistanceAttenuationModel {
+	return x.inner.DistanceAttenuationModel()
+}
+
+// SetDistanceAttenuationModel calls the underlying SetDistanceAttenuationModel.
+func (x *AudioEnvironmentDistanceAttenuationParameters) SetDistanceAttenuationModel(distanceAttenuationModel raw.AVAudioEnvironmentDistanceAttenuationModel) {
+	x.inner.SetDistanceAttenuationModel(distanceAttenuationModel)
+}
+
+// ReferenceDistance calls the underlying ReferenceDistance.
+func (x *AudioEnvironmentDistanceAttenuationParameters) ReferenceDistance() float32 {
+	return x.inner.ReferenceDistance()
+}
+
+// SetReferenceDistance calls the underlying SetReferenceDistance.
+func (x *AudioEnvironmentDistanceAttenuationParameters) SetReferenceDistance(referenceDistance float32) {
+	x.inner.SetReferenceDistance(referenceDistance)
+}
+
+// MaximumDistance calls the underlying MaximumDistance.
+func (x *AudioEnvironmentDistanceAttenuationParameters) MaximumDistance() float32 {
+	return x.inner.MaximumDistance()
+}
+
+// SetMaximumDistance calls the underlying SetMaximumDistance.
+func (x *AudioEnvironmentDistanceAttenuationParameters) SetMaximumDistance(maximumDistance float32) {
+	x.inner.SetMaximumDistance(maximumDistance)
+}
+
+// RolloffFactor calls the underlying RolloffFactor.
+func (x *AudioEnvironmentDistanceAttenuationParameters) RolloffFactor() float32 {
+	return x.inner.RolloffFactor()
+}
+
+// SetRolloffFactor calls the underlying SetRolloffFactor.
+func (x *AudioEnvironmentDistanceAttenuationParameters) SetRolloffFactor(rolloffFactor float32) {
+	x.inner.SetRolloffFactor(rolloffFactor)
+}
+
+// AudioEnvironmentDistanceAttenuationParametersable is the interface implemented by [AudioEnvironmentDistanceAttenuationParameters], for mocking and DI.
+type AudioEnvironmentDistanceAttenuationParametersable interface {
+	Unwrap() *raw.AVAudioEnvironmentDistanceAttenuationParameters
+	WithDistanceAttenuationModel(distanceAttenuationModel raw.AVAudioEnvironmentDistanceAttenuationModel) *AudioEnvironmentDistanceAttenuationParameters
+	WithReferenceDistance(referenceDistance float32) *AudioEnvironmentDistanceAttenuationParameters
+	WithMaximumDistance(maximumDistance float32) *AudioEnvironmentDistanceAttenuationParameters
+	WithRolloffFactor(rolloffFactor float32) *AudioEnvironmentDistanceAttenuationParameters
+	DistanceAttenuationModel() raw.AVAudioEnvironmentDistanceAttenuationModel
+	SetDistanceAttenuationModel(distanceAttenuationModel raw.AVAudioEnvironmentDistanceAttenuationModel)
+	ReferenceDistance() float32
+	SetReferenceDistance(referenceDistance float32)
+	MaximumDistance() float32
+	SetMaximumDistance(maximumDistance float32)
+	RolloffFactor() float32
+	SetRolloffFactor(rolloffFactor float32)
+}
+
+var _ AudioEnvironmentDistanceAttenuationParametersable = (*AudioEnvironmentDistanceAttenuationParameters)(nil)
+

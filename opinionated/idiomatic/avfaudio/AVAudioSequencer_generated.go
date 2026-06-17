@@ -6,6 +6,8 @@ package avfaudio
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -48,17 +50,98 @@ func (x *AudioSequencer) WithRate(rate float32) *AudioSequencer {
 	return x
 }
 
+// LoadFromURLOptionsError calls the underlying LoadFromURLOptionsError.
+func (x *AudioSequencer) LoadFromURLOptionsError(fileURL string, options raw.AVMusicSequenceLoadOptions) (bool, error) {
+	return x.inner.LoadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
+}
+
+// LoadFromDataOptionsError calls the underlying LoadFromDataOptionsError.
+func (x *AudioSequencer) LoadFromDataOptionsError(data *foundation.NSData, options raw.AVMusicSequenceLoadOptions) (bool, error) {
+	return x.inner.LoadFromDataOptionsError(data, options)
+}
+
+// WriteToURLSMPTEResolutionReplaceExistingError calls the underlying WriteToURLSMPTEResolutionReplaceExistingError.
+func (x *AudioSequencer) WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error) {
+	return x.inner.WriteToURLSMPTEResolutionReplaceExistingError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), resolution, replace)
+}
+
+// DataWithSMPTEResolutionError calls the underlying DataWithSMPTEResolutionError.
+func (x *AudioSequencer) DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error) {
+	return x.inner.DataWithSMPTEResolutionError(sMPTEResolution)
+}
+
+// SecondsForBeats calls the underlying SecondsForBeats.
+func (x *AudioSequencer) SecondsForBeats(beats float64) float64 {
+	return x.inner.SecondsForBeats(beats)
+}
+
+// BeatsForSeconds calls the underlying BeatsForSeconds.
+func (x *AudioSequencer) BeatsForSeconds(seconds float64) float64 {
+	return x.inner.BeatsForSeconds(seconds)
+}
+
+// ReverseEvents calls the underlying ReverseEvents.
+func (x *AudioSequencer) ReverseEvents() {
+	x.inner.ReverseEvents()
+}
+
+// CreateAndAppendTrack calls the underlying CreateAndAppendTrack.
+func (x *AudioSequencer) CreateAndAppendTrack() *MusicTrack {
+	_r := x.inner.CreateAndAppendTrack()
+	if _r == nil {
+		return nil
+	}
+	return &MusicTrack{inner: _r}
+}
+
+// RemoveTrack calls the underlying RemoveTrack.
+func (x *AudioSequencer) RemoveTrack(track *raw.AVMusicTrack) bool {
+	return x.inner.RemoveTrack(track)
+}
+
+// SetUserCallback calls the underlying SetUserCallback.
+func (x *AudioSequencer) SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64)) {
+	x.inner.SetUserCallback(userCallback)
+}
+
 // Tracks returns the collection as a Go slice.
 func (x *AudioSequencer) Tracks() []*raw.AVMusicTrack {
 	arr := x.inner.Tracks()
 	if arr == nil {
 		return nil
 	}
-	out := make([]*raw.AVMusicTrack, arr.Count())
-	for i := range out {
-		out[i] = arr.ObjectAtIndex(uint(i))
+	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *raw.AVMusicTrack {
+		return raw.AVMusicTrackFromID(purego.Retain(_id))
+	})
+}
+
+// TempoTrack calls the underlying TempoTrack.
+func (x *AudioSequencer) TempoTrack() *MusicTrack {
+	_r := x.inner.TempoTrack()
+	if _r == nil {
+		return nil
 	}
-	return out
+	return &MusicTrack{inner: _r}
+}
+
+// UserInfo calls the underlying UserInfo.
+func (x *AudioSequencer) UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
+	return x.inner.UserInfo()
+}
+
+// HostTimeForBeatsError calls the underlying HostTimeForBeatsError.
+func (x *AudioSequencer) HostTimeForBeatsError(inBeats float64) (uint64, error) {
+	return x.inner.HostTimeForBeatsError(inBeats)
+}
+
+// BeatsForHostTimeError calls the underlying BeatsForHostTimeError.
+func (x *AudioSequencer) BeatsForHostTimeError(inHostTime uint64) (float64, error) {
+	return x.inner.BeatsForHostTimeError(inHostTime)
+}
+
+// PrepareToPlay calls the underlying PrepareToPlay.
+func (x *AudioSequencer) PrepareToPlay() {
+	x.inner.PrepareToPlay()
 }
 
 // StartAndReturnError returns any validation error.
@@ -66,4 +149,79 @@ func (x *AudioSequencer) StartAndReturnError() error {
 	_, err := x.inner.StartAndReturnError()
 	return err
 }
+
+// Stop calls the underlying Stop.
+func (x *AudioSequencer) Stop() {
+	x.inner.Stop()
+}
+
+// CurrentPositionInSeconds calls the underlying CurrentPositionInSeconds.
+func (x *AudioSequencer) CurrentPositionInSeconds() float64 {
+	return x.inner.CurrentPositionInSeconds()
+}
+
+// SetCurrentPositionInSeconds calls the underlying SetCurrentPositionInSeconds.
+func (x *AudioSequencer) SetCurrentPositionInSeconds(currentPositionInSeconds float64) {
+	x.inner.SetCurrentPositionInSeconds(currentPositionInSeconds)
+}
+
+// CurrentPositionInBeats calls the underlying CurrentPositionInBeats.
+func (x *AudioSequencer) CurrentPositionInBeats() float64 {
+	return x.inner.CurrentPositionInBeats()
+}
+
+// SetCurrentPositionInBeats calls the underlying SetCurrentPositionInBeats.
+func (x *AudioSequencer) SetCurrentPositionInBeats(currentPositionInBeats float64) {
+	x.inner.SetCurrentPositionInBeats(currentPositionInBeats)
+}
+
+// IsPlaying calls the underlying IsPlaying.
+func (x *AudioSequencer) IsPlaying() bool {
+	return x.inner.IsPlaying()
+}
+
+// Rate calls the underlying Rate.
+func (x *AudioSequencer) Rate() float32 {
+	return x.inner.Rate()
+}
+
+// SetRate calls the underlying SetRate.
+func (x *AudioSequencer) SetRate(rate float32) {
+	x.inner.SetRate(rate)
+}
+
+// AudioSequencerable is the interface implemented by [AudioSequencer], for mocking and DI.
+type AudioSequencerable interface {
+	Unwrap() *raw.AVAudioSequencer
+	WithCurrentPositionInSeconds(currentPositionInSeconds float64) *AudioSequencer
+	WithCurrentPositionInBeats(currentPositionInBeats float64) *AudioSequencer
+	WithRate(rate float32) *AudioSequencer
+	LoadFromURLOptionsError(fileURL string, options raw.AVMusicSequenceLoadOptions) (bool, error)
+	LoadFromDataOptionsError(data *foundation.NSData, options raw.AVMusicSequenceLoadOptions) (bool, error)
+	WriteToURLSMPTEResolutionReplaceExistingError(fileURL string, resolution int, replace bool) (bool, error)
+	DataWithSMPTEResolutionError(sMPTEResolution int) (*foundation.NSData, error)
+	SecondsForBeats(beats float64) float64
+	BeatsForSeconds(seconds float64) float64
+	ReverseEvents()
+	CreateAndAppendTrack() *MusicTrack
+	RemoveTrack(track *raw.AVMusicTrack) bool
+	SetUserCallback(userCallback func(*raw.AVMusicTrack, *foundation.NSData, float64))
+	Tracks() []*raw.AVMusicTrack
+	TempoTrack() *MusicTrack
+	UserInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	HostTimeForBeatsError(inBeats float64) (uint64, error)
+	BeatsForHostTimeError(inHostTime uint64) (float64, error)
+	PrepareToPlay()
+	StartAndReturnError() error
+	Stop()
+	CurrentPositionInSeconds() float64
+	SetCurrentPositionInSeconds(currentPositionInSeconds float64)
+	CurrentPositionInBeats() float64
+	SetCurrentPositionInBeats(currentPositionInBeats float64)
+	IsPlaying() bool
+	Rate() float32
+	SetRate(rate float32)
+}
+
+var _ AudioSequencerable = (*AudioSequencer)(nil)
 

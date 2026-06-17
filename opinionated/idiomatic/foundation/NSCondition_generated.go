@@ -30,5 +30,53 @@ func (x *Condition) WithName(name string) *Condition {
 	return x
 }
 
+// Wait calls the underlying Wait.
+func (x *Condition) Wait() {
+	x.inner.Wait()
+}
+
+// WaitUntilDate calls the underlying WaitUntilDate.
+func (x *Condition) WaitUntilDate(limit *raw.NSDate) bool {
+	return x.inner.WaitUntilDate(limit)
+}
+
+// Signal calls the underlying Signal.
+func (x *Condition) Signal() {
+	x.inner.Signal()
+}
+
+// Broadcast calls the underlying Broadcast.
+func (x *Condition) Broadcast() {
+	x.inner.Broadcast()
+}
+
+// Name calls the underlying Name.
+func (x *Condition) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// SetName calls the underlying SetName.
+func (x *Condition) SetName(name string) {
+	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+}
+
 func (x *Condition) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// Conditionable is the interface implemented by [Condition], for mocking and DI.
+type Conditionable interface {
+	Unwrap() *raw.NSCondition
+	WithName(name string) *Condition
+	Wait()
+	WaitUntilDate(limit *raw.NSDate) bool
+	Signal()
+	Broadcast()
+	Name() *String
+	SetName(name string)
+}
+
+var _ Conditionable = (*Condition)(nil)
 

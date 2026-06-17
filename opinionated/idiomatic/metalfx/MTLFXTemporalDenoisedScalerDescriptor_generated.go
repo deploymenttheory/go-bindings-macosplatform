@@ -156,3 +156,308 @@ func (x *TemporalDenoisedScalerDescriptor) WithTransparencyOverlayTextureEnabled
 	return x
 }
 
+// NewTemporalDenoisedScalerWithDevice calls the underlying NewTemporalDenoisedScalerWithDevice.
+func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalDenoisedScaler {
+	return x.inner.NewTemporalDenoisedScalerWithDevice(device)
+}
+
+// NewTemporalDenoisedScalerWithDeviceCompiler calls the underlying NewTemporalDenoisedScalerWithDeviceCompiler.
+func (x *TemporalDenoisedScalerDescriptor) NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalDenoisedScaler {
+	return x.inner.NewTemporalDenoisedScalerWithDeviceCompiler(device, compiler)
+}
+
+// ColorTextureFormat calls the underlying ColorTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
+	return x.inner.ColorTextureFormat()
+}
+
+// SetColorTextureFormat calls the underlying SetColorTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetColorTextureFormat(colorTextureFormat)
+}
+
+// DepthTextureFormat calls the underlying DepthTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
+	return x.inner.DepthTextureFormat()
+}
+
+// SetDepthTextureFormat calls the underlying SetDepthTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetDepthTextureFormat(depthTextureFormat)
+}
+
+// MotionTextureFormat calls the underlying MotionTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
+	return x.inner.MotionTextureFormat()
+}
+
+// SetMotionTextureFormat calls the underlying SetMotionTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetMotionTextureFormat(motionTextureFormat)
+}
+
+// DiffuseAlbedoTextureFormat calls the underlying DiffuseAlbedoTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) DiffuseAlbedoTextureFormat() metal.MTLPixelFormat {
+	return x.inner.DiffuseAlbedoTextureFormat()
+}
+
+// SetDiffuseAlbedoTextureFormat calls the underlying SetDiffuseAlbedoTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat)
+}
+
+// SpecularAlbedoTextureFormat calls the underlying SpecularAlbedoTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SpecularAlbedoTextureFormat() metal.MTLPixelFormat {
+	return x.inner.SpecularAlbedoTextureFormat()
+}
+
+// SetSpecularAlbedoTextureFormat calls the underlying SetSpecularAlbedoTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat)
+}
+
+// NormalTextureFormat calls the underlying NormalTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) NormalTextureFormat() metal.MTLPixelFormat {
+	return x.inner.NormalTextureFormat()
+}
+
+// SetNormalTextureFormat calls the underlying SetNormalTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetNormalTextureFormat(normalTextureFormat)
+}
+
+// RoughnessTextureFormat calls the underlying RoughnessTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) RoughnessTextureFormat() metal.MTLPixelFormat {
+	return x.inner.RoughnessTextureFormat()
+}
+
+// SetRoughnessTextureFormat calls the underlying SetRoughnessTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetRoughnessTextureFormat(roughnessTextureFormat)
+}
+
+// SpecularHitDistanceTextureFormat calls the underlying SpecularHitDistanceTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SpecularHitDistanceTextureFormat() metal.MTLPixelFormat {
+	return x.inner.SpecularHitDistanceTextureFormat()
+}
+
+// SetSpecularHitDistanceTextureFormat calls the underlying SetSpecularHitDistanceTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat)
+}
+
+// DenoiseStrengthMaskTextureFormat calls the underlying DenoiseStrengthMaskTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) DenoiseStrengthMaskTextureFormat() metal.MTLPixelFormat {
+	return x.inner.DenoiseStrengthMaskTextureFormat()
+}
+
+// SetDenoiseStrengthMaskTextureFormat calls the underlying SetDenoiseStrengthMaskTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat)
+}
+
+// TransparencyOverlayTextureFormat calls the underlying TransparencyOverlayTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) TransparencyOverlayTextureFormat() metal.MTLPixelFormat {
+	return x.inner.TransparencyOverlayTextureFormat()
+}
+
+// SetTransparencyOverlayTextureFormat calls the underlying SetTransparencyOverlayTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat)
+}
+
+// OutputTextureFormat calls the underlying OutputTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
+	return x.inner.OutputTextureFormat()
+}
+
+// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetOutputTextureFormat(outputTextureFormat)
+}
+
+// InputWidth calls the underlying InputWidth.
+func (x *TemporalDenoisedScalerDescriptor) InputWidth() uint {
+	return x.inner.InputWidth()
+}
+
+// SetInputWidth calls the underlying SetInputWidth.
+func (x *TemporalDenoisedScalerDescriptor) SetInputWidth(inputWidth uint) {
+	x.inner.SetInputWidth(inputWidth)
+}
+
+// InputHeight calls the underlying InputHeight.
+func (x *TemporalDenoisedScalerDescriptor) InputHeight() uint {
+	return x.inner.InputHeight()
+}
+
+// SetInputHeight calls the underlying SetInputHeight.
+func (x *TemporalDenoisedScalerDescriptor) SetInputHeight(inputHeight uint) {
+	x.inner.SetInputHeight(inputHeight)
+}
+
+// OutputWidth calls the underlying OutputWidth.
+func (x *TemporalDenoisedScalerDescriptor) OutputWidth() uint {
+	return x.inner.OutputWidth()
+}
+
+// SetOutputWidth calls the underlying SetOutputWidth.
+func (x *TemporalDenoisedScalerDescriptor) SetOutputWidth(outputWidth uint) {
+	x.inner.SetOutputWidth(outputWidth)
+}
+
+// OutputHeight calls the underlying OutputHeight.
+func (x *TemporalDenoisedScalerDescriptor) OutputHeight() uint {
+	return x.inner.OutputHeight()
+}
+
+// SetOutputHeight calls the underlying SetOutputHeight.
+func (x *TemporalDenoisedScalerDescriptor) SetOutputHeight(outputHeight uint) {
+	x.inner.SetOutputHeight(outputHeight)
+}
+
+// RequiresSynchronousInitialization calls the underlying RequiresSynchronousInitialization.
+func (x *TemporalDenoisedScalerDescriptor) RequiresSynchronousInitialization() bool {
+	return x.inner.RequiresSynchronousInitialization()
+}
+
+// SetRequiresSynchronousInitialization calls the underlying SetRequiresSynchronousInitialization.
+func (x *TemporalDenoisedScalerDescriptor) SetRequiresSynchronousInitialization(requiresSynchronousInitialization bool) {
+	x.inner.SetRequiresSynchronousInitialization(requiresSynchronousInitialization)
+}
+
+// IsAutoExposureEnabled calls the underlying IsAutoExposureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) IsAutoExposureEnabled() bool {
+	return x.inner.IsAutoExposureEnabled()
+}
+
+// SetAutoExposureEnabled calls the underlying SetAutoExposureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) SetAutoExposureEnabled(autoExposureEnabled bool) {
+	x.inner.SetAutoExposureEnabled(autoExposureEnabled)
+}
+
+// IsReactiveMaskTextureEnabled calls the underlying IsReactiveMaskTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) IsReactiveMaskTextureEnabled() bool {
+	return x.inner.IsReactiveMaskTextureEnabled()
+}
+
+// SetReactiveMaskTextureEnabled calls the underlying SetReactiveMaskTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) {
+	x.inner.SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled)
+}
+
+// ReactiveMaskTextureFormat calls the underlying ReactiveMaskTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) ReactiveMaskTextureFormat() metal.MTLPixelFormat {
+	return x.inner.ReactiveMaskTextureFormat()
+}
+
+// SetReactiveMaskTextureFormat calls the underlying SetReactiveMaskTextureFormat.
+func (x *TemporalDenoisedScalerDescriptor) SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) {
+	x.inner.SetReactiveMaskTextureFormat(reactiveMaskTextureFormat)
+}
+
+// IsSpecularHitDistanceTextureEnabled calls the underlying IsSpecularHitDistanceTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) IsSpecularHitDistanceTextureEnabled() bool {
+	return x.inner.IsSpecularHitDistanceTextureEnabled()
+}
+
+// SetSpecularHitDistanceTextureEnabled calls the underlying SetSpecularHitDistanceTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool) {
+	x.inner.SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled)
+}
+
+// IsDenoiseStrengthMaskTextureEnabled calls the underlying IsDenoiseStrengthMaskTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) IsDenoiseStrengthMaskTextureEnabled() bool {
+	return x.inner.IsDenoiseStrengthMaskTextureEnabled()
+}
+
+// SetDenoiseStrengthMaskTextureEnabled calls the underlying SetDenoiseStrengthMaskTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool) {
+	x.inner.SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled)
+}
+
+// IsTransparencyOverlayTextureEnabled calls the underlying IsTransparencyOverlayTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) IsTransparencyOverlayTextureEnabled() bool {
+	return x.inner.IsTransparencyOverlayTextureEnabled()
+}
+
+// SetTransparencyOverlayTextureEnabled calls the underlying SetTransparencyOverlayTextureEnabled.
+func (x *TemporalDenoisedScalerDescriptor) SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool) {
+	x.inner.SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled)
+}
+
+// TemporalDenoisedScalerDescriptorable is the interface implemented by [TemporalDenoisedScalerDescriptor], for mocking and DI.
+type TemporalDenoisedScalerDescriptorable interface {
+	Unwrap() *raw.MTLFXTemporalDenoisedScalerDescriptor
+	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithInputWidth(inputWidth uint) *TemporalDenoisedScalerDescriptor
+	WithInputHeight(inputHeight uint) *TemporalDenoisedScalerDescriptor
+	WithOutputWidth(outputWidth uint) *TemporalDenoisedScalerDescriptor
+	WithOutputHeight(outputHeight uint) *TemporalDenoisedScalerDescriptor
+	WithRequiresSynchronousInitialization(requiresSynchronousInitialization bool) *TemporalDenoisedScalerDescriptor
+	WithAutoExposureEnabled(autoExposureEnabled bool) *TemporalDenoisedScalerDescriptor
+	WithReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor
+	WithReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat) *TemporalDenoisedScalerDescriptor
+	WithSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool) *TemporalDenoisedScalerDescriptor
+	WithDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool) *TemporalDenoisedScalerDescriptor
+	WithTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool) *TemporalDenoisedScalerDescriptor
+	NewTemporalDenoisedScalerWithDevice(device metal.MTLDevice) raw.MTLFXTemporalDenoisedScaler
+	NewTemporalDenoisedScalerWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXTemporalDenoisedScaler
+	ColorTextureFormat() metal.MTLPixelFormat
+	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
+	DepthTextureFormat() metal.MTLPixelFormat
+	SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat)
+	MotionTextureFormat() metal.MTLPixelFormat
+	SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat)
+	DiffuseAlbedoTextureFormat() metal.MTLPixelFormat
+	SetDiffuseAlbedoTextureFormat(diffuseAlbedoTextureFormat metal.MTLPixelFormat)
+	SpecularAlbedoTextureFormat() metal.MTLPixelFormat
+	SetSpecularAlbedoTextureFormat(specularAlbedoTextureFormat metal.MTLPixelFormat)
+	NormalTextureFormat() metal.MTLPixelFormat
+	SetNormalTextureFormat(normalTextureFormat metal.MTLPixelFormat)
+	RoughnessTextureFormat() metal.MTLPixelFormat
+	SetRoughnessTextureFormat(roughnessTextureFormat metal.MTLPixelFormat)
+	SpecularHitDistanceTextureFormat() metal.MTLPixelFormat
+	SetSpecularHitDistanceTextureFormat(specularHitDistanceTextureFormat metal.MTLPixelFormat)
+	DenoiseStrengthMaskTextureFormat() metal.MTLPixelFormat
+	SetDenoiseStrengthMaskTextureFormat(denoiseStrengthMaskTextureFormat metal.MTLPixelFormat)
+	TransparencyOverlayTextureFormat() metal.MTLPixelFormat
+	SetTransparencyOverlayTextureFormat(transparencyOverlayTextureFormat metal.MTLPixelFormat)
+	OutputTextureFormat() metal.MTLPixelFormat
+	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
+	InputWidth() uint
+	SetInputWidth(inputWidth uint)
+	InputHeight() uint
+	SetInputHeight(inputHeight uint)
+	OutputWidth() uint
+	SetOutputWidth(outputWidth uint)
+	OutputHeight() uint
+	SetOutputHeight(outputHeight uint)
+	RequiresSynchronousInitialization() bool
+	SetRequiresSynchronousInitialization(requiresSynchronousInitialization bool)
+	IsAutoExposureEnabled() bool
+	SetAutoExposureEnabled(autoExposureEnabled bool)
+	IsReactiveMaskTextureEnabled() bool
+	SetReactiveMaskTextureEnabled(reactiveMaskTextureEnabled bool)
+	ReactiveMaskTextureFormat() metal.MTLPixelFormat
+	SetReactiveMaskTextureFormat(reactiveMaskTextureFormat metal.MTLPixelFormat)
+	IsSpecularHitDistanceTextureEnabled() bool
+	SetSpecularHitDistanceTextureEnabled(specularHitDistanceTextureEnabled bool)
+	IsDenoiseStrengthMaskTextureEnabled() bool
+	SetDenoiseStrengthMaskTextureEnabled(denoiseStrengthMaskTextureEnabled bool)
+	IsTransparencyOverlayTextureEnabled() bool
+	SetTransparencyOverlayTextureEnabled(transparencyOverlayTextureEnabled bool)
+}
+
+var _ TemporalDenoisedScalerDescriptorable = (*TemporalDenoisedScalerDescriptor)(nil)
+

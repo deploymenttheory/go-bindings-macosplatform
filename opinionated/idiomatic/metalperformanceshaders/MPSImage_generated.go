@@ -9,7 +9,9 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Image wraps [raw.MPSImage] with a fluent Go API.
@@ -46,4 +48,184 @@ func (x *Image) WithLabel(label string) *Image {
 	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
+
+// BatchRepresentationWithSubRange calls the underlying BatchRepresentationWithSubRange.
+func (x *Image) BatchRepresentationWithSubRange(subRange foundation.NSRange) unsafe.Pointer {
+	return x.inner.BatchRepresentationWithSubRange(subRange)
+}
+
+// BatchRepresentation calls the underlying BatchRepresentation.
+func (x *Image) BatchRepresentation() unsafe.Pointer {
+	return x.inner.BatchRepresentation()
+}
+
+// SubImageWithFeatureChannelRange calls the underlying SubImageWithFeatureChannelRange.
+func (x *Image) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *mpscore.MPSImage {
+	return x.inner.SubImageWithFeatureChannelRange(range_)
+}
+
+// ResourceSize calls the underlying ResourceSize.
+func (x *Image) ResourceSize() uint {
+	return x.inner.ResourceSize()
+}
+
+// SetPurgeableState calls the underlying SetPurgeableState.
+func (x *Image) SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState {
+	return x.inner.SetPurgeableState(state)
+}
+
+// ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
+func (x *Image) ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
+func (x *Image) WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
+func (x *Image) WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerColumn, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+}
+
+// ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
+func (x *Image) ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+}
+
+// WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
+func (x *Image) WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
+}
+
+// ReadBytesDataLayoutImageIndex calls the underlying ReadBytesDataLayoutImageIndex.
+func (x *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint) {
+	x.inner.ReadBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
+}
+
+// WriteBytesDataLayoutImageIndex calls the underlying WriteBytesDataLayoutImageIndex.
+func (x *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint) {
+	x.inner.WriteBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
+}
+
+// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
+func (x *Image) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
+	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+}
+
+// Device calls the underlying Device.
+func (x *Image) Device() metal.MTLDevice {
+	return x.inner.Device()
+}
+
+// Width calls the underlying Width.
+func (x *Image) Width() uint {
+	return x.inner.Width()
+}
+
+// Height calls the underlying Height.
+func (x *Image) Height() uint {
+	return x.inner.Height()
+}
+
+// FeatureChannels calls the underlying FeatureChannels.
+func (x *Image) FeatureChannels() uint {
+	return x.inner.FeatureChannels()
+}
+
+// NumberOfImages calls the underlying NumberOfImages.
+func (x *Image) NumberOfImages() uint {
+	return x.inner.NumberOfImages()
+}
+
+// TextureType calls the underlying TextureType.
+func (x *Image) TextureType() metal.MTLTextureType {
+	return x.inner.TextureType()
+}
+
+// PixelFormat calls the underlying PixelFormat.
+func (x *Image) PixelFormat() metal.MTLPixelFormat {
+	return x.inner.PixelFormat()
+}
+
+// Precision calls the underlying Precision.
+func (x *Image) Precision() uint {
+	return x.inner.Precision()
+}
+
+// Usage calls the underlying Usage.
+func (x *Image) Usage() metal.MTLTextureUsage {
+	return x.inner.Usage()
+}
+
+// FeatureChannelFormat calls the underlying FeatureChannelFormat.
+func (x *Image) FeatureChannelFormat() mpscore.MPSImageFeatureChannelFormat {
+	return x.inner.FeatureChannelFormat()
+}
+
+// PixelSize calls the underlying PixelSize.
+func (x *Image) PixelSize() uint {
+	return x.inner.PixelSize()
+}
+
+// Texture calls the underlying Texture.
+func (x *Image) Texture() metal.MTLTexture {
+	return x.inner.Texture()
+}
+
+// Label calls the underlying Label.
+func (x *Image) Label() string {
+	_r := x.inner.Label()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetLabel calls the underlying SetLabel.
+func (x *Image) SetLabel(label string) {
+	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+}
+
+// Parent calls the underlying Parent.
+func (x *Image) Parent() *mpscore.MPSImage {
+	return x.inner.Parent()
+}
+
+// Imageable is the interface implemented by [Image], for mocking and DI.
+type Imageable interface {
+	Unwrap() *raw.MPSImage
+	WithLabel(label string) *Image
+	BatchRepresentationWithSubRange(subRange foundation.NSRange) unsafe.Pointer
+	BatchRepresentation() unsafe.Pointer
+	SubImageWithFeatureChannelRange(range_ foundation.NSRange) *mpscore.MPSImage
+	ResourceSize() uint
+	SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState
+	ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
+	ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
+	WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
+	ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint)
+	WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint)
+	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	Device() metal.MTLDevice
+	Width() uint
+	Height() uint
+	FeatureChannels() uint
+	NumberOfImages() uint
+	TextureType() metal.MTLTextureType
+	PixelFormat() metal.MTLPixelFormat
+	Precision() uint
+	Usage() metal.MTLTextureUsage
+	FeatureChannelFormat() mpscore.MPSImageFeatureChannelFormat
+	PixelSize() uint
+	Texture() metal.MTLTexture
+	Label() string
+	SetLabel(label string)
+	Parent() *mpscore.MPSImage
+}
+
+var _ Imageable = (*Image)(nil)
 

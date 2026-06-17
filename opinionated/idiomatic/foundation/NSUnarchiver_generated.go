@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -24,7 +25,42 @@ func NewUnarchiverForReadingWithData(data *raw.NSData) *Unarchiver {
 	return &Unarchiver{inner: raw.NSUnarchiverFromID(_id)}
 }
 
+// DecodeClassNameAsClassName calls the underlying DecodeClassNameAsClassName.
+func (x *Unarchiver) DecodeClassNameAsClassName(inArchiveName string, trueName string) {
+	x.inner.DecodeClassNameAsClassName(foundation.NSStringStringWithUTF8String(inArchiveName), foundation.NSStringStringWithUTF8String(trueName))
+}
+
+// ClassNameDecodedForArchiveClassName calls the underlying ClassNameDecodedForArchiveClassName.
+func (x *Unarchiver) ClassNameDecodedForArchiveClassName(inArchiveName string) *String {
+	_r := x.inner.ClassNameDecodedForArchiveClassName(foundation.NSStringStringWithUTF8String(inArchiveName))
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
+func (x *Unarchiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
+	x.inner.ReplaceObjectWithObject(object, newObject)
+}
+
+// IsAtEnd calls the underlying IsAtEnd.
+func (x *Unarchiver) IsAtEnd() bool {
+	return x.inner.IsAtEnd()
+}
+
 func (x *Unarchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
 
 func (x *Unarchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
+
+// Unarchiverable is the interface implemented by [Unarchiver], for mocking and DI.
+type Unarchiverable interface {
+	Unwrap() *raw.NSUnarchiver
+	DecodeClassNameAsClassName(inArchiveName string, trueName string)
+	ClassNameDecodedForArchiveClassName(inArchiveName string) *String
+	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)
+	IsAtEnd() bool
+}
+
+var _ Unarchiverable = (*Unarchiver)(nil)
 

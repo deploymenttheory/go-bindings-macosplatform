@@ -25,5 +25,32 @@ func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	return &URLQueryItem{inner: raw.NSURLQueryItemFromID(_id)}
 }
 
+// Name calls the underlying Name.
+func (x *URLQueryItem) Name() *String {
+	_r := x.inner.Name()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
+// Value calls the underlying Value.
+func (x *URLQueryItem) Value() *String {
+	_r := x.inner.Value()
+	if _r == nil {
+		return nil
+	}
+	return &String{inner: _r}
+}
+
 func (x *URLQueryItem) asObject() *raw.NSObject { return &x.inner.NSObject }
+
+// URLQueryItemable is the interface implemented by [URLQueryItem], for mocking and DI.
+type URLQueryItemable interface {
+	Unwrap() *raw.NSURLQueryItem
+	Name() *String
+	Value() *String
+}
+
+var _ URLQueryItemable = (*URLQueryItem)(nil)
 

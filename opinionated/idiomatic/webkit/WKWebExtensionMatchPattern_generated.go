@@ -42,3 +42,86 @@ func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host st
 	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(_id)}, nil
 }
 
+// MatchesURL calls the underlying MatchesURL.
+func (x *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
+	return x.inner.MatchesURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+}
+
+// MatchesURLOptions calls the underlying MatchesURLOptions.
+func (x *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options raw.WKWebExtensionMatchPatternOptions) bool {
+	return x.inner.MatchesURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+}
+
+// MatchesPattern calls the underlying MatchesPattern.
+func (x *WKWebExtensionMatchPattern) MatchesPattern(pattern *raw.WKWebExtensionMatchPattern) bool {
+	return x.inner.MatchesPattern(pattern)
+}
+
+// MatchesPatternOptions calls the underlying MatchesPatternOptions.
+func (x *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options raw.WKWebExtensionMatchPatternOptions) bool {
+	return x.inner.MatchesPatternOptions(pattern, options)
+}
+
+// String calls the underlying String.
+func (x *WKWebExtensionMatchPattern) String() string {
+	_r := x.inner.String()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Scheme calls the underlying Scheme.
+func (x *WKWebExtensionMatchPattern) Scheme() string {
+	_r := x.inner.Scheme()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Host calls the underlying Host.
+func (x *WKWebExtensionMatchPattern) Host() string {
+	_r := x.inner.Host()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// Path calls the underlying Path.
+func (x *WKWebExtensionMatchPattern) Path() string {
+	_r := x.inner.Path()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// MatchesAllURLs calls the underlying MatchesAllURLs.
+func (x *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
+	return x.inner.MatchesAllURLs()
+}
+
+// MatchesAllHosts calls the underlying MatchesAllHosts.
+func (x *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
+	return x.inner.MatchesAllHosts()
+}
+
+// WKWebExtensionMatchPatternable is the interface implemented by [WKWebExtensionMatchPattern], for mocking and DI.
+type WKWebExtensionMatchPatternable interface {
+	Unwrap() *raw.WKWebExtensionMatchPattern
+	MatchesURL(url string) bool
+	MatchesURLOptions(url string, options raw.WKWebExtensionMatchPatternOptions) bool
+	MatchesPattern(pattern *raw.WKWebExtensionMatchPattern) bool
+	MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options raw.WKWebExtensionMatchPatternOptions) bool
+	String() string
+	Scheme() string
+	Host() string
+	Path() string
+	MatchesAllURLs() bool
+	MatchesAllHosts() bool
+}
+
+var _ WKWebExtensionMatchPatternable = (*WKWebExtensionMatchPattern)(nil)
+

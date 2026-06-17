@@ -7,6 +7,7 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -30,5 +31,29 @@ func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedO
 	return x
 }
 
+// SelectedOptionIdentifier calls the underlying SelectedOptionIdentifier.
+func (x *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
+	_r := x.inner.SelectedOptionIdentifier()
+	if _r == nil {
+		return ""
+	}
+	return purego.GoString(_r.Ptr())
+}
+
+// SetSelectedOptionIdentifier calls the underlying SetSelectedOptionIdentifier.
+func (x *CollaborationOptionsPickerGroup) SetSelectedOptionIdentifier(selectedOptionIdentifier string) {
+	x.inner.SetSelectedOptionIdentifier(foundation.NSStringStringWithUTF8String(selectedOptionIdentifier))
+}
+
 func (x *CollaborationOptionsPickerGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup { return &x.inner.SWCollaborationOptionsGroup }
+
+// CollaborationOptionsPickerGroupable is the interface implemented by [CollaborationOptionsPickerGroup], for mocking and DI.
+type CollaborationOptionsPickerGroupable interface {
+	Unwrap() *raw.SWCollaborationOptionsPickerGroup
+	WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup
+	SelectedOptionIdentifier() string
+	SetSelectedOptionIdentifier(selectedOptionIdentifier string)
+}
+
+var _ CollaborationOptionsPickerGroupable = (*CollaborationOptionsPickerGroup)(nil)
 
