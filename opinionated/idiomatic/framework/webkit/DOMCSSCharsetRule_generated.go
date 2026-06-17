@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,12 @@ func NewDOMCSSCharsetRule() *DOMCSSCharsetRule {
 	return &DOMCSSCharsetRule{inner: raw.DOMCSSCharsetRuleFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSCharsetRule) WithCssText(cssText string) *DOMCSSCharsetRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // Encoding calls the underlying Encoding.
 func (x *DOMCSSCharsetRule) Encoding() string {
 	_r := x.inner.Encoding()
@@ -54,6 +61,7 @@ func (x *DOMCSSCharsetRule) asWebScriptObject() *raw.WebScriptObject { return &x
 // DOMCSSCharsetRuleable is the interface implemented by [DOMCSSCharsetRule], for mocking and DI.
 type DOMCSSCharsetRuleable interface {
 	Unwrap() *raw.DOMCSSCharsetRule
+	WithCssText(cssText string) *DOMCSSCharsetRule
 	Encoding() string
 }
 

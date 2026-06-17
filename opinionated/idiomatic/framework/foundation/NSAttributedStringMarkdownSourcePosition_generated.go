@@ -37,6 +37,12 @@ func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEnd
 	return &AttributedStringMarkdownSourcePosition{inner: raw.NSAttributedStringMarkdownSourcePositionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownSourcePosition {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RangeInString calls the underlying RangeInString.
 func (x *AttributedStringMarkdownSourcePosition) RangeInString(string_ string) raw.NSRange {
 	return x.inner.RangeInString(foundation.NSStringStringWithUTF8String(string_))
@@ -67,6 +73,7 @@ func (x *AttributedStringMarkdownSourcePosition) asObject() *raw.NSObject { retu
 // AttributedStringMarkdownSourcePositionable is the interface implemented by [AttributedStringMarkdownSourcePosition], for mocking and DI.
 type AttributedStringMarkdownSourcePositionable interface {
 	Unwrap() *raw.NSAttributedStringMarkdownSourcePosition
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedStringMarkdownSourcePosition
 	RangeInString(string_ string) raw.NSRange
 	StartLine() int
 	StartColumn() int

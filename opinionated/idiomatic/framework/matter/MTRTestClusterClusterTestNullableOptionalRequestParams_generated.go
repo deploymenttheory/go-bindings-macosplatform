@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestNullableOptionalRequestParams() *MTRTestCluster
 	return &MTRTestClusterClusterTestNullableOptionalRequestParams{inner: raw.MTRTestClusterClusterTestNullableOptionalRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetArg1(arg1)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestNullableOptionalRequestParams) asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams { return &x.inner.MTRUnitTestingClusterTestNullableOptionalRequestParams }
 
 // MTRTestClusterClusterTestNullableOptionalRequestParamsable is the interface implemented by [MTRTestClusterClusterTestNullableOptionalRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestNullableOptionalRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestNullableOptionalRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNullableOptionalRequestParams
 }
 
 var _ MTRTestClusterClusterTestNullableOptionalRequestParamsable = (*MTRTestClusterClusterTestNullableOptionalRequestParams)(nil)

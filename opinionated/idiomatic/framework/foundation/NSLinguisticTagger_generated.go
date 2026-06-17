@@ -44,6 +44,12 @@ func (x *LinguisticTagger) WithString(string_ string) *LinguisticTagger {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LinguisticTagger {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetOrthographyRange calls the underlying SetOrthographyRange.
 func (x *LinguisticTagger) SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange) {
 	x.inner.SetOrthographyRange(orthography, range_)
@@ -156,6 +162,7 @@ func (x *LinguisticTagger) asObject() *raw.NSObject { return &x.inner.NSObject }
 type LinguisticTaggerable interface {
 	Unwrap() *raw.NSLinguisticTagger
 	WithString(string_ string) *LinguisticTagger
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LinguisticTagger
 	SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange)
 	OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *raw.NSRange) *Orthography
 	StringEditedInRangeChangeInLength(newRange raw.NSRange, delta int)

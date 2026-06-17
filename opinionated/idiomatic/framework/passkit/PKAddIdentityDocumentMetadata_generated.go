@@ -37,6 +37,12 @@ func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingIn
 	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(_id)}
 }
 
+// WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
+func (x *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
+	x.inner.PKIdentityDocumentMetadata.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	return x
+}
+
 // Preview calls the underlying Preview.
 func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
 	_r := x.inner.Preview()
@@ -51,6 +57,7 @@ func (x *AddIdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdenti
 // AddIdentityDocumentMetadataable is the interface implemented by [AddIdentityDocumentMetadata], for mocking and DI.
 type AddIdentityDocumentMetadataable interface {
 	Unwrap() *raw.PKAddIdentityDocumentMetadata
+	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata
 	Preview() *AddPassMetadataPreview
 }
 

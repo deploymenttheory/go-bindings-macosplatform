@@ -43,6 +43,12 @@ func NewURLConnectionWithRequestDelegate(request *raw.NSURLRequest, delegate obj
 	return &URLConnection{inner: raw.NSURLConnectionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLConnection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLConnection {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Start calls the underlying Start.
 func (x *URLConnection) Start() {
 	x.inner.Start()
@@ -91,6 +97,7 @@ func (x *URLConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLConnectionable is the interface implemented by [URLConnection], for mocking and DI.
 type URLConnectionable interface {
 	Unwrap() *raw.NSURLConnection
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLConnection
 	Start()
 	Cancel()
 	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewCNNPoolingMaxGradientNode() *CNNPoolingMaxGradientNode {
 	return &CNNPoolingMaxGradientNode{inner: raw.MPSCNNPoolingMaxGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingMaxGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingMaxGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingMaxGradientNode) WithLabel(label string) *CNNPoolingMaxGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingMaxGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
 
 func (x *CNNPoolingMaxGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
@@ -45,6 +58,8 @@ func (x *CNNPoolingMaxGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilt
 // CNNPoolingMaxGradientNodeable is the interface implemented by [CNNPoolingMaxGradientNode], for mocking and DI.
 type CNNPoolingMaxGradientNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingMaxGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingMaxGradientNode
+	WithLabel(label string) *CNNPoolingMaxGradientNode
 }
 
 var _ CNNPoolingMaxGradientNodeable = (*CNNPoolingMaxGradientNode)(nil)

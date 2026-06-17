@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageHistogramSpecificationWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset.
 func (x *ImageHistogramSpecification) EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint) {
 	x.inner.EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer, source, sourceHistogram, sourceHistogramOffset, desiredHistogram, desiredHistogramOffset)
@@ -60,6 +79,9 @@ func (x *ImageHistogramSpecification) asUnaryImageKernel() *raw.MPSUnaryImageKer
 // ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
 type ImageHistogramSpecificationable interface {
 	Unwrap() *raw.MPSImageHistogramSpecification
+	WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification
+	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification
 	EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint)
 	HistogramInfo() raw.MPSImageHistogramInfo
 }

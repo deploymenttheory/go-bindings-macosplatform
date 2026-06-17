@@ -63,6 +63,12 @@ func (x *JapanIndividualNumberCardMetadata) WithPreview(preview AddPassMetadataP
 	return x
 }
 
+// WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
+func (x *JapanIndividualNumberCardMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata {
+	x.inner.PKIdentityDocumentMetadata.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	return x
+}
+
 // AuthenticationPassword calls the underlying AuthenticationPassword.
 func (x *JapanIndividualNumberCardMetadata) AuthenticationPassword() string {
 	_r := x.inner.AuthenticationPassword()
@@ -113,6 +119,7 @@ type JapanIndividualNumberCardMetadataable interface {
 	WithAuthenticationPassword(authenticationPassword string) *JapanIndividualNumberCardMetadata
 	WithSigningPassword(signingPassword string) *JapanIndividualNumberCardMetadata
 	WithPreview(preview AddPassMetadataPreviewProvider) *JapanIndividualNumberCardMetadata
+	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *JapanIndividualNumberCardMetadata
 	AuthenticationPassword() string
 	SetAuthenticationPassword(authenticationPassword string)
 	SigningPassword() string

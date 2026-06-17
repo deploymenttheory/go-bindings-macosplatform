@@ -138,6 +138,36 @@ func (x *Camera) WithSensorAspect(sensorAspect float32) *Camera {
 	return x
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *Camera) WithParent(parent ObjectProvider) *Camera {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *Camera) WithInstance(instance ObjectProvider) *Camera {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *Camera) WithTransform(transform raw.MDLTransformComponent) *Camera {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *Camera) WithChildren(children raw.MDLObjectContainerComponent) *Camera {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Camera) WithHidden(hidden bool) *Camera {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // FrameBoundingBoxSetNearAndFar calls the underlying FrameBoundingBoxSetNearAndFar.
 func (x *Camera) FrameBoundingBoxSetNearAndFar(boundingBox raw.MDLAxisAlignedBoundingBox, setNearAndFar bool) {
 	x.inner.FrameBoundingBoxSetNearAndFar(boundingBox, setNearAndFar)
@@ -416,6 +446,11 @@ type Cameraable interface {
 	WithShutterOpenInterval(shutterOpenInterval float64) *Camera
 	WithSensorVerticalAperture(sensorVerticalAperture float32) *Camera
 	WithSensorAspect(sensorAspect float32) *Camera
+	WithParent(parent ObjectProvider) *Camera
+	WithInstance(instance ObjectProvider) *Camera
+	WithTransform(transform raw.MDLTransformComponent) *Camera
+	WithChildren(children raw.MDLObjectContainerComponent) *Camera
+	WithHidden(hidden bool) *Camera
 	FrameBoundingBoxSetNearAndFar(boundingBox raw.MDLAxisAlignedBoundingBox, setNearAndFar bool)
 	LookAt(focusPosition unsafe.Pointer)
 	LookAtFrom(focusPosition unsafe.Pointer, cameraPosition unsafe.Pointer)

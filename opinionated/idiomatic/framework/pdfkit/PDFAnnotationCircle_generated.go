@@ -5,8 +5,12 @@
 package pdfkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AnnotationCircle wraps [raw.PDFAnnotationCircle] with a fluent Go API.
@@ -35,11 +39,307 @@ func NewAnnotationCircle() *AnnotationCircle {
 	return &AnnotationCircle{inner: raw.PDFAnnotationCircleFromID(_id)}
 }
 
+// WithPage sets the page property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithPage(page *raw.PDFPage) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetPage(page)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithType(type_ string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithBounds(bounds corefoundation.CGRect) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetBounds(bounds)
+	return x
+}
+
+// WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithShouldDisplay(shouldDisplay bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
+	return x
+}
+
+// WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithShouldPrint(shouldPrint bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithHighlighted(highlighted bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetHighlighted(highlighted)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithFont(font *appkit.NSFont) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetFont(font)
+	return x
+}
+
+// WithFontColor sets the fontColor property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithFontColor(fontColor *appkit.NSColor) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetFontColor(fontColor)
+	return x
+}
+
+// WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetAlignment(alignment)
+	return x
+}
+
+// WithStartPoint sets the startPoint property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetStartPoint(startPoint)
+	return x
+}
+
+// WithEndPoint sets the endPoint property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetEndPoint(endPoint)
+	return x
+}
+
+// WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetStartLineStyle(startLineStyle)
+	return x
+}
+
+// WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetEndLineStyle(endLineStyle)
+	return x
+}
+
+// WithIconType sets the iconType property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetIconType(iconType)
+	return x
+}
+
+// WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationCircle) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationCircle {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetQuadrilateralPoints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSValue](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetQuadrilateralPoints(_arr)
+	return x
+}
+
+// WithMarkupType sets the markupType property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithMarkupType(markupType raw.PDFMarkupType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetMarkupType(markupType)
+	return x
+}
+
+// WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetWidgetControlType(widgetControlType)
+	return x
+}
+
+// WithMultiline sets the multiline property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithMultiline(multiline bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetMultiline(multiline)
+	return x
+}
+
+// WithComb sets the comb property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithComb(comb bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetComb(comb)
+	return x
+}
+
+// WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithMaximumLength(maximumLength int) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
+	return x
+}
+
+// WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithWidgetStringValue(widgetStringValue string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+	return x
+}
+
+// WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+	return x
+}
+
+// WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
+	return x
+}
+
+// WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithRadiosInUnison(radiosInUnison bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
+	return x
+}
+
+// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithReadOnly(readOnly bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetReadOnly(readOnly)
+	return x
+}
+
+// WithListChoice sets the listChoice property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithListChoice(listChoice bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetListChoice(listChoice)
+	return x
+}
+
+// WithChoices sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationCircle) WithChoices(items ...*foundation.NSString) *AnnotationCircle {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetChoices(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetChoices(_arr)
+	return x
+}
+
+// WithValues sets the collection, converting the Go slice to an NSArray.
+func (x *AnnotationCircle) WithValues(items ...*foundation.NSString) *AnnotationCircle {
+	if len(items) == 0 {
+		x.inner.PDFAnnotation.SetValues(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.PDFAnnotation.SetValues(_arr)
+	return x
+}
+
+// WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetButtonWidgetState(buttonWidgetState)
+	return x
+}
+
+// WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+	return x
+}
+
+// WithOpen sets the open property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithOpen(open bool) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetOpen(open)
+	return x
+}
+
+// WithDestination sets the destination property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithDestination(destination *raw.PDFDestination) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetDestination(destination)
+	return x
+}
+
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithURL(uRL string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithFieldName sets the fieldName property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithFieldName(fieldName string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+	return x
+}
+
+// WithCaption sets the caption property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithCaption(caption string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithStampName sets the stampName property and returns the receiver for chaining.
+func (x *AnnotationCircle) WithStampName(stampName string) *AnnotationCircle {
+	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
+	return x
+}
+
 func (x *AnnotationCircle) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
 // AnnotationCircleable is the interface implemented by [AnnotationCircle], for mocking and DI.
 type AnnotationCircleable interface {
 	Unwrap() *raw.PDFAnnotationCircle
+	WithPage(page *raw.PDFPage) *AnnotationCircle
+	WithType(type_ string) *AnnotationCircle
+	WithBounds(bounds corefoundation.CGRect) *AnnotationCircle
+	WithShouldDisplay(shouldDisplay bool) *AnnotationCircle
+	WithShouldPrint(shouldPrint bool) *AnnotationCircle
+	WithHighlighted(highlighted bool) *AnnotationCircle
+	WithFont(font *appkit.NSFont) *AnnotationCircle
+	WithFontColor(fontColor *appkit.NSColor) *AnnotationCircle
+	WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationCircle
+	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationCircle
+	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationCircle
+	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationCircle
+	WithStartLineStyle(startLineStyle raw.PDFLineStyle) *AnnotationCircle
+	WithEndLineStyle(endLineStyle raw.PDFLineStyle) *AnnotationCircle
+	WithIconType(iconType raw.PDFTextAnnotationIconType) *AnnotationCircle
+	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationCircle
+	WithMarkupType(markupType raw.PDFMarkupType) *AnnotationCircle
+	WithWidgetControlType(widgetControlType raw.PDFWidgetControlType) *AnnotationCircle
+	WithMultiline(multiline bool) *AnnotationCircle
+	WithComb(comb bool) *AnnotationCircle
+	WithMaximumLength(maximumLength int) *AnnotationCircle
+	WithWidgetStringValue(widgetStringValue string) *AnnotationCircle
+	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationCircle
+	WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationCircle
+	WithRadiosInUnison(radiosInUnison bool) *AnnotationCircle
+	WithReadOnly(readOnly bool) *AnnotationCircle
+	WithListChoice(listChoice bool) *AnnotationCircle
+	WithChoices(items ...*foundation.NSString) *AnnotationCircle
+	WithValues(items ...*foundation.NSString) *AnnotationCircle
+	WithButtonWidgetState(buttonWidgetState raw.PDFWidgetCellState) *AnnotationCircle
+	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationCircle
+	WithOpen(open bool) *AnnotationCircle
+	WithDestination(destination *raw.PDFDestination) *AnnotationCircle
+	WithURL(uRL string) *AnnotationCircle
+	WithFieldName(fieldName string) *AnnotationCircle
+	WithCaption(caption string) *AnnotationCircle
+	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationCircle
+	WithStampName(stampName string) *AnnotationCircle
 }
 
 var _ AnnotationCircleable = (*AnnotationCircle)(nil)

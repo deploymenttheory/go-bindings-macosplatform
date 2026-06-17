@@ -37,6 +37,12 @@ func NewAnimatedVector3ArrayWithElementCount(arrayElementCount uint) *AnimatedVe
 	return &AnimatedVector3Array{inner: raw.MDLAnimatedVector3ArrayFromID(_id)}
 }
 
+// WithInterpolation sets the interpolation property and returns the receiver for chaining.
+func (x *AnimatedVector3Array) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector3Array {
+	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+	return x
+}
+
 // SetFloat3ArrayCountAtTime calls the underlying SetFloat3ArrayCountAtTime.
 func (x *AnimatedVector3Array) SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
 	x.inner.SetFloat3ArrayCountAtTime(array, count, time_)
@@ -87,6 +93,7 @@ func (x *AnimatedVector3Array) asAnimatedValue() *raw.MDLAnimatedValue { return 
 // AnimatedVector3Arrayable is the interface implemented by [AnimatedVector3Array], for mocking and DI.
 type AnimatedVector3Arrayable interface {
 	Unwrap() *raw.MDLAnimatedVector3Array
+	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedVector3Array
 	SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
 	SetDouble3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
 	GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint

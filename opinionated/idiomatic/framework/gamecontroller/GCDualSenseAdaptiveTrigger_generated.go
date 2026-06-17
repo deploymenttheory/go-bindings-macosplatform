@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,60 @@ func DualSenseAdaptiveTriggerFromID(id objc.ID) *DualSenseAdaptiveTrigger {
 func NewDualSenseAdaptiveTrigger() *DualSenseAdaptiveTrigger {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDualSenseAdaptiveTrigger")), objc.RegisterName("new"))
 	return &DualSenseAdaptiveTrigger{inner: raw.GCDualSenseAdaptiveTriggerFromID(_id)}
+}
+
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.SetPressedChangedHandler(pressedChangedHandler)
+	return x
+}
+
+// WithTouchedChangedHandler sets the touchedChangedHandler property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.SetTouchedChangedHandler(touchedChangedHandler)
+	return x
+}
+
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.SetValue(value)
+	return x
+}
+
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
+	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	return x
 }
 
 // SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength calls the underlying SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength.
@@ -92,6 +147,15 @@ func (x *DualSenseAdaptiveTrigger) asControllerElement() *raw.GCControllerElemen
 // DualSenseAdaptiveTriggerable is the interface implemented by [DualSenseAdaptiveTrigger], for mocking and DI.
 type DualSenseAdaptiveTriggerable interface {
 	Unwrap() *raw.GCDualSenseAdaptiveTrigger
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger
+	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger
+	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *DualSenseAdaptiveTrigger
+	WithValue(value float32) *DualSenseAdaptiveTrigger
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *DualSenseAdaptiveTrigger
+	WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger
+	WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger
 	SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32)
 	SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32)
 	SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths raw.GCDualSenseAdaptiveTriggerPositionalResistiveStrengths)

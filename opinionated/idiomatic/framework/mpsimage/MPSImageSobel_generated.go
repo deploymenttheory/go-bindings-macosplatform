@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,6 +53,24 @@ func NewImageSobelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTL
 	return &ImageSobel{inner: raw.MPSImageSobelFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageSobel) WithOffset(offset mpscore.MPSOffset) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageSobel) WithClipRect(clipRect metal.MTLRegion) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageSobel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageSobel) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
@@ -62,6 +81,9 @@ func (x *ImageSobel) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.i
 // ImageSobelable is the interface implemented by [ImageSobel], for mocking and DI.
 type ImageSobelable interface {
 	Unwrap() *raw.MPSImageSobel
+	WithOffset(offset mpscore.MPSOffset) *ImageSobel
+	WithClipRect(clipRect metal.MTLRegion) *ImageSobel
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageSobel
 	ColorTransform() *float32
 }
 

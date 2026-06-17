@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Cylinder wraps [raw.SCNCylinder] with a fluent Go API.
@@ -59,6 +61,80 @@ func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Cylinder) WithName(name string) *Cylinder {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Cylinder) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cylinder {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Cylinder) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Cylinder) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cylinder {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel uint) *Cylinder {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cylinder {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cylinder {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
+	return x
+}
+
 // Radius calls the underlying Radius.
 func (x *Cylinder) Radius() float64 {
 	return x.inner.Radius()
@@ -108,6 +184,15 @@ type Cylinderable interface {
 	WithHeight(height float64) *Cylinder
 	WithRadialSegmentCount(radialSegmentCount int) *Cylinder
 	WithHeightSegmentCount(heightSegmentCount int) *Cylinder
+	WithName(name string) *Cylinder
+	WithMaterials(items ...*raw.SCNMaterial) *Cylinder
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Cylinder
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Cylinder
+	WithSubdivisionLevel(subdivisionLevel uint) *Cylinder
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Cylinder
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Cylinder
 	Radius() float64
 	SetRadius(radius float64)
 	Height() float64

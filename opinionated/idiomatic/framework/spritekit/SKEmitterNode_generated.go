@@ -7,8 +7,10 @@ package spritekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // EmitterNode wraps [raw.SKEmitterNode] with a fluent Go API.
@@ -322,6 +324,166 @@ func (x *EmitterNode) WithParticleZPositionRange(particleZPositionRange float64)
 // WithParticleZPositionSpeed sets the particleZPositionSpeed property and returns the receiver for chaining.
 func (x *EmitterNode) WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode {
 	x.inner.SetParticleZPositionSpeed(particleZPositionSpeed)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *EmitterNode) WithPosition(position corefoundation.CGPoint) *EmitterNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *EmitterNode) WithZPosition(zPosition float64) *EmitterNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *EmitterNode) WithZRotation(zRotation float64) *EmitterNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *EmitterNode) WithXScale(xScale float64) *EmitterNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *EmitterNode) WithYScale(yScale float64) *EmitterNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *EmitterNode) WithSpeed(speed float64) *EmitterNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *EmitterNode) WithAlpha(alpha float64) *EmitterNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *EmitterNode) WithPaused(paused bool) *EmitterNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *EmitterNode) WithHidden(hidden bool) *EmitterNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *EmitterNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *EmitterNode) WithName(name string) *EmitterNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *EmitterNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EmitterNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *EmitterNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EmitterNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *EmitterNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EmitterNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *EmitterNode) WithConstraints(items ...*raw.SKConstraint) *EmitterNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *EmitterNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EmitterNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityElement(accessibilityElement bool) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityRole(accessibilityRole string) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilitySubrole(accessibilitySubrole string) *EmitterNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityParent(accessibilityParent objc.ID) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityHelp(accessibilityHelp string) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityLabel(accessibilityLabel string) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *EmitterNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EmitterNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -900,6 +1062,31 @@ type EmitterNodeable interface {
 	WithParticleRenderOrder(particleRenderOrder raw.SKParticleRenderOrder) *EmitterNode
 	WithParticleZPositionRange(particleZPositionRange float64) *EmitterNode
 	WithParticleZPositionSpeed(particleZPositionSpeed float64) *EmitterNode
+	WithPosition(position corefoundation.CGPoint) *EmitterNode
+	WithZPosition(zPosition float64) *EmitterNode
+	WithZRotation(zRotation float64) *EmitterNode
+	WithXScale(xScale float64) *EmitterNode
+	WithYScale(yScale float64) *EmitterNode
+	WithSpeed(speed float64) *EmitterNode
+	WithAlpha(alpha float64) *EmitterNode
+	WithPaused(paused bool) *EmitterNode
+	WithHidden(hidden bool) *EmitterNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *EmitterNode
+	WithName(name string) *EmitterNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *EmitterNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EmitterNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *EmitterNode
+	WithConstraints(items ...*raw.SKConstraint) *EmitterNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EmitterNode
+	WithAccessibilityElement(accessibilityElement bool) *EmitterNode
+	WithAccessibilityRole(accessibilityRole string) *EmitterNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EmitterNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *EmitterNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EmitterNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *EmitterNode
+	WithAccessibilityHelp(accessibilityHelp string) *EmitterNode
+	WithAccessibilityLabel(accessibilityLabel string) *EmitterNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *EmitterNode
 	AdvanceSimulationTime(sec float64)
 	ResetSimulation()
 	ParticleTexture() *Texture

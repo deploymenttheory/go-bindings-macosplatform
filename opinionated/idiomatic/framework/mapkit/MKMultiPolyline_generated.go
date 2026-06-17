@@ -38,6 +38,18 @@ func NewMultiPolylineWithPolylines(polylines *foundation.NSArray[*raw.MKPolyline
 	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *MultiPolyline) WithTitle(title string) *MultiPolyline {
+	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
+	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // Polylines returns the collection as a Go slice.
 func (x *MultiPolyline) Polylines() []*raw.MKPolyline {
 	arr := x.inner.Polylines()
@@ -54,6 +66,8 @@ func (x *MultiPolyline) asShape() *raw.MKShape { return &x.inner.MKShape }
 // MultiPolylineable is the interface implemented by [MultiPolyline], for mocking and DI.
 type MultiPolylineable interface {
 	Unwrap() *raw.MKMultiPolyline
+	WithTitle(title string) *MultiPolyline
+	WithSubtitle(subtitle string) *MultiPolyline
 	Polylines() []*raw.MKPolyline
 }
 

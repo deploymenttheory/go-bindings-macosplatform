@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TableHeaderCell wraps [raw.NSTableHeaderCell] with a fluent Go API.
@@ -36,6 +38,328 @@ func NewTableHeaderCell() *TableHeaderCell {
 	return &TableHeaderCell{inner: raw.NSTableHeaderCellFromID(_id)}
 }
 
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBackgroundColor(backgroundColor *raw.NSColor) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithDrawsBackground(drawsBackground bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
+	return x
+}
+
+// WithTextColor sets the textColor property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithTextColor(textColor *raw.NSColor) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithPlaceholderString(placeholderString string) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	return x
+}
+
+// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TableHeaderCell {
+	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
+	return x
+}
+
+// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
+func (x *TableHeaderCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TableHeaderCell {
+	if len(items) == 0 {
+		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(_arr)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithControlView(controlView ViewProvider) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithType(type_ raw.NSCellType) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithState(state int) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithTarget(target objc.ID) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAction(action objc.SEL) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithTag(tag int) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithTitle(title string) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithEnabled(enabled bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithContinuous(continuous bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithEditable(editable bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithSelectable(selectable bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBordered(bordered bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBezeled(bezeled bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithScrollable(scrollable bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithHighlighted(highlighted bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAlignment(alignment raw.NSTextAlignment) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithWraps(wraps bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithFont(font *raw.NSFont) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithFormatter(formatter *foundation.NSFormatter) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithObjectValue(objectValue objc.ID) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithStringValue(stringValue string) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithIntValue(intValue int) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithFloatValue(floatValue float32) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithDoubleValue(doubleValue float64) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithIntegerValue(integerValue int) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithImage(image *raw.NSImage) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithControlSize(controlSize raw.NSControlSize) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithRepresentedObject(representedObject objc.ID) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithMenu(menu *raw.NSMenu) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAllowsUndo(allowsUndo bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithImportsGraphics(importsGraphics bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *TableHeaderCell) WithControlTint(controlTint raw.NSControlTint) *TableHeaderCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // DrawSortIndicatorWithFrameInViewAscendingPriority calls the underlying DrawSortIndicatorWithFrameInViewAscendingPriority.
 func (x *TableHeaderCell) DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int) {
 	x.inner.DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame, controlView, ascending, priority)
@@ -55,6 +379,58 @@ func (x *TableHeaderCell) asCell() *raw.NSCell { return &x.inner.NSTextFieldCell
 // TableHeaderCellable is the interface implemented by [TableHeaderCell], for mocking and DI.
 type TableHeaderCellable interface {
 	Unwrap() *raw.NSTableHeaderCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *TableHeaderCell
+	WithDrawsBackground(drawsBackground bool) *TableHeaderCell
+	WithTextColor(textColor *raw.NSColor) *TableHeaderCell
+	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *TableHeaderCell
+	WithPlaceholderString(placeholderString string) *TableHeaderCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TableHeaderCell
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TableHeaderCell
+	WithControlView(controlView ViewProvider) *TableHeaderCell
+	WithType(type_ raw.NSCellType) *TableHeaderCell
+	WithState(state int) *TableHeaderCell
+	WithTarget(target objc.ID) *TableHeaderCell
+	WithAction(action objc.SEL) *TableHeaderCell
+	WithTag(tag int) *TableHeaderCell
+	WithTitle(title string) *TableHeaderCell
+	WithEnabled(enabled bool) *TableHeaderCell
+	WithContinuous(continuous bool) *TableHeaderCell
+	WithEditable(editable bool) *TableHeaderCell
+	WithSelectable(selectable bool) *TableHeaderCell
+	WithBordered(bordered bool) *TableHeaderCell
+	WithBezeled(bezeled bool) *TableHeaderCell
+	WithScrollable(scrollable bool) *TableHeaderCell
+	WithHighlighted(highlighted bool) *TableHeaderCell
+	WithAlignment(alignment raw.NSTextAlignment) *TableHeaderCell
+	WithWraps(wraps bool) *TableHeaderCell
+	WithFont(font *raw.NSFont) *TableHeaderCell
+	WithFormatter(formatter *foundation.NSFormatter) *TableHeaderCell
+	WithObjectValue(objectValue objc.ID) *TableHeaderCell
+	WithStringValue(stringValue string) *TableHeaderCell
+	WithIntValue(intValue int) *TableHeaderCell
+	WithFloatValue(floatValue float32) *TableHeaderCell
+	WithDoubleValue(doubleValue float64) *TableHeaderCell
+	WithIntegerValue(integerValue int) *TableHeaderCell
+	WithImage(image *raw.NSImage) *TableHeaderCell
+	WithControlSize(controlSize raw.NSControlSize) *TableHeaderCell
+	WithRepresentedObject(representedObject objc.ID) *TableHeaderCell
+	WithMenu(menu *raw.NSMenu) *TableHeaderCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TableHeaderCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TableHeaderCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TableHeaderCell
+	WithAllowsUndo(allowsUndo bool) *TableHeaderCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TableHeaderCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TableHeaderCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *TableHeaderCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *TableHeaderCell
+	WithShowsFirstResponder(showsFirstResponder bool) *TableHeaderCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TableHeaderCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TableHeaderCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TableHeaderCell
+	WithImportsGraphics(importsGraphics bool) *TableHeaderCell
+	WithAllowsMixedState(allowsMixedState bool) *TableHeaderCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TableHeaderCell
+	WithControlTint(controlTint raw.NSControlTint) *TableHeaderCell
 	DrawSortIndicatorWithFrameInViewAscendingPriority(cellFrame corefoundation.CGRect, controlView *raw.NSView, ascending bool, priority int)
 	SortIndicatorRectForBounds(rect corefoundation.CGRect) corefoundation.CGRect
 }

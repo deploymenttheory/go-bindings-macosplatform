@@ -53,6 +53,24 @@ func (x *SliderConstraint) WithOffset(offset raw.SCNVector3) *SliderConstraint {
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SliderConstraint) WithEnabled(enabled bool) *SliderConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *SliderConstraint) WithInfluenceFactor(influenceFactor float64) *SliderConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *SliderConstraint) WithIncremental(incremental bool) *SliderConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // CollisionCategoryBitMask calls the underlying CollisionCategoryBitMask.
 func (x *SliderConstraint) CollisionCategoryBitMask() uint {
 	return x.inner.CollisionCategoryBitMask()
@@ -91,6 +109,9 @@ type SliderConstraintable interface {
 	WithCollisionCategoryBitMask(collisionCategoryBitMask uint) *SliderConstraint
 	WithRadius(radius float64) *SliderConstraint
 	WithOffset(offset raw.SCNVector3) *SliderConstraint
+	WithEnabled(enabled bool) *SliderConstraint
+	WithInfluenceFactor(influenceFactor float64) *SliderConstraint
+	WithIncremental(incremental bool) *SliderConstraint
 	CollisionCategoryBitMask() uint
 	SetCollisionCategoryBitMask(collisionCategoryBitMask uint)
 	Radius() float64

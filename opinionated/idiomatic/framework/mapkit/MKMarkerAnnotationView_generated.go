@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -83,6 +84,132 @@ func (x *MarkerAnnotationView) WithSelectedGlyphImage(selectedGlyphImage *appkit
 // WithAnimatesWhenAdded sets the animatesWhenAdded property and returns the receiver for chaining.
 func (x *MarkerAnnotationView) WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView {
 	x.inner.SetAnimatesWhenAdded(animatesWhenAdded)
+	return x
+}
+
+// WithAnnotation sets the annotation property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithAnnotation(annotation raw.MKAnnotation) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetAnnotation(annotation)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithImage(image *appkit.NSImage) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetImage(image)
+	return x
+}
+
+// WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
+	return x
+}
+
+// WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
+	return x
+}
+
+// WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
+	return x
+}
+
+// WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
+	return x
+}
+
+// WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithEnabled(enabled bool) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetEnabled(enabled)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithHighlighted(highlighted bool) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetHighlighted(highlighted)
+	return x
+}
+
+// WithSelected sets the selected property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithSelected(selected bool) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetSelected(selected)
+	return x
+}
+
+// WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
+	return x
+}
+
+// WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
+	return x
+}
+
+// WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
+	return x
+}
+
+// WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
+	return x
+}
+
+// WithDraggable sets the draggable property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithDraggable(draggable bool) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetDraggable(draggable)
+	return x
+}
+
+// WithDragState sets the dragState property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithDragState(dragState raw.MKAnnotationViewDragState) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetDragState(dragState)
+	return x
+}
+
+// WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
+	return x
+}
+
+// WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithDisplayPriority(displayPriority float32) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
+	return x
+}
+
+// WithZPriority sets the zPriority property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithZPriority(zPriority float32) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetZPriority(zPriority)
+	return x
+}
+
+// WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
+	return x
+}
+
+// WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
+func (x *MarkerAnnotationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *MarkerAnnotationView {
+	x.inner.MKAnnotationView.SetCollisionMode(collisionMode)
 	return x
 }
 
@@ -183,6 +310,27 @@ type MarkerAnnotationViewable interface {
 	WithGlyphImage(glyphImage *appkit.NSImage) *MarkerAnnotationView
 	WithSelectedGlyphImage(selectedGlyphImage *appkit.NSImage) *MarkerAnnotationView
 	WithAnimatesWhenAdded(animatesWhenAdded bool) *MarkerAnnotationView
+	WithAnnotation(annotation raw.MKAnnotation) *MarkerAnnotationView
+	WithImage(image *appkit.NSImage) *MarkerAnnotationView
+	WithCenterOffset(centerOffset corefoundation.CGPoint) *MarkerAnnotationView
+	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *MarkerAnnotationView
+	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *MarkerAnnotationView
+	WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView
+	WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *MarkerAnnotationView
+	WithEnabled(enabled bool) *MarkerAnnotationView
+	WithHighlighted(highlighted bool) *MarkerAnnotationView
+	WithSelected(selected bool) *MarkerAnnotationView
+	WithCanShowCallout(canShowCallout bool) *MarkerAnnotationView
+	WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
+	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
+	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *MarkerAnnotationView
+	WithDraggable(draggable bool) *MarkerAnnotationView
+	WithDragState(dragState raw.MKAnnotationViewDragState) *MarkerAnnotationView
+	WithClusteringIdentifier(clusteringIdentifier string) *MarkerAnnotationView
+	WithDisplayPriority(displayPriority float32) *MarkerAnnotationView
+	WithZPriority(zPriority float32) *MarkerAnnotationView
+	WithSelectedZPriority(selectedZPriority float32) *MarkerAnnotationView
+	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *MarkerAnnotationView
 	TitleVisibility() raw.MKFeatureVisibility
 	SetTitleVisibility(titleVisibility raw.MKFeatureVisibility)
 	SubtitleVisibility() raw.MKFeatureVisibility

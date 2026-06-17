@@ -43,6 +43,22 @@ func NewPersistentCloudKitContainerializeCloudKitSchemaWithOptionsError(options 
 	return &PersistentCloudKitContainer{inner: raw.NSPersistentCloudKitContainerFromID(_id)}, nil
 }
 
+// WithPersistentStoreDescriptions sets the collection, converting the Go slice to an NSArray.
+func (x *PersistentCloudKitContainer) WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentCloudKitContainer {
+	if len(items) == 0 {
+		x.inner.NSPersistentContainer.SetPersistentStoreDescriptions(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStoreDescription](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentContainer.SetPersistentStoreDescriptions(_arr)
+	return x
+}
+
 // RecordForManagedObjectID calls the underlying RecordForManagedObjectID.
 func (x *PersistentCloudKitContainer) RecordForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID {
 	return x.inner.RecordForManagedObjectID(managedObjectID)
@@ -83,6 +99,7 @@ func (x *PersistentCloudKitContainer) asPersistentContainer() *raw.NSPersistentC
 // PersistentCloudKitContainerable is the interface implemented by [PersistentCloudKitContainer], for mocking and DI.
 type PersistentCloudKitContainerable interface {
 	Unwrap() *raw.NSPersistentCloudKitContainer
+	WithPersistentStoreDescriptions(items ...*raw.NSPersistentStoreDescription) *PersistentCloudKitContainer
 	RecordForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID
 	RecordsForManagedObjectIDs(managedObjectIDs *foundation.NSArray[*raw.NSManagedObjectID]) *foundation.NSDictionary[*raw.NSManagedObjectID, objc.ID]
 	RecordIDForManagedObjectID(managedObjectID *raw.NSManagedObjectID) objc.ID

@@ -42,6 +42,12 @@ func (x *RecursiveLock) WithName(name string) *RecursiveLock {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RecursiveLock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RecursiveLock {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TryLock calls the underlying TryLock.
 func (x *RecursiveLock) TryLock() bool {
 	return x.inner.TryLock()
@@ -72,6 +78,7 @@ func (x *RecursiveLock) asObject() *raw.NSObject { return &x.inner.NSObject }
 type RecursiveLockable interface {
 	Unwrap() *raw.NSRecursiveLock
 	WithName(name string) *RecursiveLock
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RecursiveLock
 	TryLock() bool
 	LockBeforeDate(limit *raw.NSDate) bool
 	Name() *String

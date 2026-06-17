@@ -38,6 +38,18 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 	return &CNNDropoutGradientState{inner: raw.MPSCNNDropoutGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNDropoutGradientState) WithReadCount(readCount uint) *CNNDropoutGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDropoutGradientState) WithLabel(label string) *CNNDropoutGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // MaskData calls the underlying MaskData.
 func (x *CNNDropoutGradientState) MaskData() *foundation.NSData {
 	return x.inner.MaskData()
@@ -50,6 +62,8 @@ func (x *CNNDropoutGradientState) asState() *mpscore.MPSState { return &x.inner.
 // CNNDropoutGradientStateable is the interface implemented by [CNNDropoutGradientState], for mocking and DI.
 type CNNDropoutGradientStateable interface {
 	Unwrap() *raw.MPSCNNDropoutGradientState
+	WithReadCount(readCount uint) *CNNDropoutGradientState
+	WithLabel(label string) *CNNDropoutGradientState
 	MaskData() *foundation.NSData
 }
 

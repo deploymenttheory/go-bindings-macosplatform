@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionFeatureChannelsArgumentMaxNode() *NNReductionFeatureChannelsA
 	return &NNReductionFeatureChannelsArgumentMaxNode{inner: raw.MPSNNReductionFeatureChannelsArgumentMaxNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMaxNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMaxNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsArgumentMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionFeatureChannelsArgumentMaxNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMaxNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionFeatureChannelsArgumentMaxNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionFeatureChannelsArgumentMaxNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionFeatureChannelsArgumentMaxNode) asNNFilterNode() *raw.MPSNNF
 // NNReductionFeatureChannelsArgumentMaxNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMaxNode], for mocking and DI.
 type NNReductionFeatureChannelsArgumentMaxNodeable interface {
 	Unwrap() *raw.MPSNNReductionFeatureChannelsArgumentMaxNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMaxNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionFeatureChannelsArgumentMaxNode
+	WithLabel(label string) *NNReductionFeatureChannelsArgumentMaxNode
 }
 
 var _ NNReductionFeatureChannelsArgumentMaxNodeable = (*NNReductionFeatureChannelsArgumentMaxNode)(nil)

@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,54 @@ func NewCNNNeuronExponentialWithDeviceABC(device metal.MTLDevice, a float32, b f
 	return &CNNNeuronExponential{inner: raw.MPSCNNNeuronExponentialFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithOffset(offset mpscore.MPSOffset) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithPadding(padding raw.MPSNNPadding) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronExponential) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronExponential {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNNeuronExponential) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronExponential) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -44,6 +93,14 @@ func (x *CNNNeuronExponential) asCNNKernel() *raw.MPSCNNKernel { return &x.inner
 // CNNNeuronExponentialable is the interface implemented by [CNNNeuronExponential], for mocking and DI.
 type CNNNeuronExponentialable interface {
 	Unwrap() *raw.MPSCNNNeuronExponential
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronExponential
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronExponential
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronExponential
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronExponential
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronExponential
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronExponential
+	WithPadding(padding raw.MPSNNPadding) *CNNNeuronExponential
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronExponential
 }
 
 var _ CNNNeuronExponentialable = (*CNNNeuronExponential)(nil)

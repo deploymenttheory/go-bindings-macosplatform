@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -63,6 +64,18 @@ func (x *CNNSpatialNormalizationGradientNode) WithBeta(beta float32) *CNNSpatial
 // WithDelta sets the delta property and returns the receiver for chaining.
 func (x *CNNSpatialNormalizationGradientNode) WithDelta(delta float32) *CNNSpatialNormalizationGradientNode {
 	x.inner.SetDelta(delta)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNSpatialNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationGradientNode) WithLabel(label string) *CNNSpatialNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -128,6 +141,8 @@ type CNNSpatialNormalizationGradientNodeable interface {
 	WithAlpha(alpha float32) *CNNSpatialNormalizationGradientNode
 	WithBeta(beta float32) *CNNSpatialNormalizationGradientNode
 	WithDelta(delta float32) *CNNSpatialNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNSpatialNormalizationGradientNode
+	WithLabel(label string) *CNNSpatialNormalizationGradientNode
 	KernelWidth() uint
 	SetKernelWidth(kernelWidth uint)
 	KernelHeight() uint

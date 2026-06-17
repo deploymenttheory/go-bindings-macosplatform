@@ -51,6 +51,18 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 	return &InputStream{inner: raw.NSInputStreamFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *InputStream) WithDelegate(delegate raw.NSStreamDelegate) *InputStream {
+	x.inner.NSStream.SetDelegate(delegate)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *InputStream) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InputStream {
+	x.inner.NSStream.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReadMaxLength calls the underlying ReadMaxLength.
 func (x *InputStream) ReadMaxLength(buffer *uint8, len_ uint) int {
 	return x.inner.ReadMaxLength(buffer, len_)
@@ -73,6 +85,8 @@ func (x *InputStream) asObject() *raw.NSObject { return &x.inner.NSStream.NSObje
 // InputStreamable is the interface implemented by [InputStream], for mocking and DI.
 type InputStreamable interface {
 	Unwrap() *raw.NSInputStream
+	WithDelegate(delegate raw.NSStreamDelegate) *InputStream
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InputStream
 	ReadMaxLength(buffer *uint8, len_ uint) int
 	GetBufferLength(buffer *uint8, len_ *uint) bool
 	HasBytesAvailable() bool

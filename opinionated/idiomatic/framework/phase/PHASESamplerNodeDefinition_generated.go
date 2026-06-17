@@ -57,6 +57,30 @@ func (x *SamplerNodeDefinition) WithPlaybackMode(playbackMode raw.PHASEPlaybackM
 	return x
 }
 
+// WithRate sets the rate property and returns the receiver for chaining.
+func (x *SamplerNodeDefinition) WithRate(rate float64) *SamplerNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetRate(rate)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *SamplerNodeDefinition) WithGroup(group *raw.PHASEGroup) *SamplerNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group)
+	return x
+}
+
+// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+func (x *SamplerNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
+// WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
+func (x *SamplerNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
 // AssetIdentifier calls the underlying AssetIdentifier.
 func (x *SamplerNodeDefinition) AssetIdentifier() string {
 	_r := x.inner.AssetIdentifier()
@@ -97,6 +121,10 @@ type SamplerNodeDefinitionable interface {
 	Unwrap() *raw.PHASESamplerNodeDefinition
 	WithCullOption(cullOption raw.PHASECullOption) *SamplerNodeDefinition
 	WithPlaybackMode(playbackMode raw.PHASEPlaybackMode) *SamplerNodeDefinition
+	WithRate(rate float64) *SamplerNodeDefinition
+	WithGroup(group *raw.PHASEGroup) *SamplerNodeDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
+	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SamplerNodeDefinition
 	AssetIdentifier() string
 	CullOption() raw.PHASECullOption
 	SetCullOption(cullOption raw.PHASECullOption)

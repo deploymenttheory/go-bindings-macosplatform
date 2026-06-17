@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,12 @@ func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
 	return &DOMCSSUnknownRule{inner: raw.DOMCSSUnknownRuleFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSUnknownRule) WithCssText(cssText string) *DOMCSSUnknownRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 func (x *DOMCSSUnknownRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
 
 func (x *DOMCSSUnknownRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
@@ -44,6 +51,7 @@ func (x *DOMCSSUnknownRule) asWebScriptObject() *raw.WebScriptObject { return &x
 // DOMCSSUnknownRuleable is the interface implemented by [DOMCSSUnknownRule], for mocking and DI.
 type DOMCSSUnknownRuleable interface {
 	Unwrap() *raw.DOMCSSUnknownRule
+	WithCssText(cssText string) *DOMCSSUnknownRule
 }
 
 var _ DOMCSSUnknownRuleable = (*DOMCSSUnknownRule)(nil)

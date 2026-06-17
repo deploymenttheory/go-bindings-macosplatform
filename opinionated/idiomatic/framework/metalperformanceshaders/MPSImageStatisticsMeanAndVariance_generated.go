@@ -53,6 +53,36 @@ func (x *ImageStatisticsMeanAndVariance) WithClipRectSource(clipRectSource metal
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageStatisticsMeanAndVariance) WithLabel(label string) *ImageStatisticsMeanAndVariance {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMeanAndVariance) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -71,6 +101,11 @@ func (x *ImageStatisticsMeanAndVariance) asKernel() *mpscore.MPSKernel { return 
 type ImageStatisticsMeanAndVarianceable interface {
 	Unwrap() *raw.MPSImageStatisticsMeanAndVariance
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMeanAndVariance
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMeanAndVariance
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMeanAndVariance
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMeanAndVariance
+	WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMeanAndVariance
+	WithLabel(label string) *ImageStatisticsMeanAndVariance
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

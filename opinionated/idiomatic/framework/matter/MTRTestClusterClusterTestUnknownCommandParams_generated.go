@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestUnknownCommandParams() *MTRTestClusterClusterTe
 	return &MTRTestClusterClusterTestUnknownCommandParams{inner: raw.MTRTestClusterClusterTestUnknownCommandParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestUnknownCommandParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams {
+	x.inner.MTRUnitTestingClusterTestUnknownCommandParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestUnknownCommandParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams {
+	x.inner.MTRUnitTestingClusterTestUnknownCommandParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestUnknownCommandParams) asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams { return &x.inner.MTRUnitTestingClusterTestUnknownCommandParams }
 
 // MTRTestClusterClusterTestUnknownCommandParamsable is the interface implemented by [MTRTestClusterClusterTestUnknownCommandParams], for mocking and DI.
 type MTRTestClusterClusterTestUnknownCommandParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestUnknownCommandParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestUnknownCommandParams
 }
 
 var _ MTRTestClusterClusterTestUnknownCommandParamsable = (*MTRTestClusterClusterTestUnknownCommandParams)(nil)

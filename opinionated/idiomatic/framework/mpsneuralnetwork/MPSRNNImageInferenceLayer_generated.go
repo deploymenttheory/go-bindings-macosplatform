@@ -71,6 +71,54 @@ func (x *RNNImageInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombi
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithPadding(padding raw.MPSNNPadding) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *RNNImageInferenceLayer) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *RNNImageInferenceLayer {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates.
 func (x *RNNImageInferenceLayer) EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *raw.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentImageState]) {
 	x.inner.EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceImages, destinationImages, recurrentInputState, recurrentOutputStates)
@@ -134,6 +182,14 @@ type RNNImageInferenceLayerable interface {
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNImageInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNImageInferenceLayer
 	WithBidirectionalCombineMode(bidirectionalCombineMode raw.MPSRNNBidirectionalCombineMode) *RNNImageInferenceLayer
+	WithOffset(offset mpscore.MPSOffset) *RNNImageInferenceLayer
+	WithClipRect(clipRect metal.MTLRegion) *RNNImageInferenceLayer
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *RNNImageInferenceLayer
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *RNNImageInferenceLayer
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *RNNImageInferenceLayer
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *RNNImageInferenceLayer
+	WithPadding(padding raw.MPSNNPadding) *RNNImageInferenceLayer
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *RNNImageInferenceLayer
 	EncodeSequenceToCommandBufferSourceImagesDestinationImagesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceImages *foundation.NSArray[*mpscore.MPSImage], destinationImages *foundation.NSArray[*mpscore.MPSImage], recurrentInputState *raw.MPSRNNRecurrentImageState, recurrentOutputStates *foundation.NSMutableArray[*raw.MPSRNNRecurrentImageState])
 	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardImagesDestinationBackwardImages(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSImage], destinationForwardImages *foundation.NSArray[*mpscore.MPSImage], destinationBackwardImages *foundation.NSArray[*mpscore.MPSImage])
 	InputFeatureChannels() uint

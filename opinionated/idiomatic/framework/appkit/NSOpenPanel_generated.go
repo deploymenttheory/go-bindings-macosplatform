@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -77,6 +79,616 @@ func (x *OpenPanel) WithCanDownloadUbiquitousContents(canDownloadUbiquitousConte
 // WithAccessoryViewDisclosed sets the accessoryViewDisclosed property and returns the receiver for chaining.
 func (x *OpenPanel) WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *OpenPanel {
 	x.inner.SetAccessoryViewDisclosed(accessoryViewDisclosed)
+	return x
+}
+
+// WithIdentifier sets the identifier property and returns the receiver for chaining.
+func (x *OpenPanel) WithIdentifier(identifier *foundation.NSString) *OpenPanel {
+	x.inner.NSSavePanel.SetIdentifier(identifier)
+	return x
+}
+
+// WithDirectoryURL sets the directoryURL property and returns the receiver for chaining.
+func (x *OpenPanel) WithDirectoryURL(directoryURL string) *OpenPanel {
+	x.inner.NSSavePanel.SetDirectoryURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryURL)))
+	return x
+}
+
+// WithAllowedContentTypes sets the collection, converting the Go slice to an NSArray.
+func (x *OpenPanel) WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *OpenPanel {
+	if len(items) == 0 {
+		x.inner.NSSavePanel.SetAllowedContentTypes(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*uniformtypeidentifiers.UTType](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSSavePanel.SetAllowedContentTypes(_arr)
+	return x
+}
+
+// WithAllowsOtherFileTypes sets the allowsOtherFileTypes property and returns the receiver for chaining.
+func (x *OpenPanel) WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPanel {
+	x.inner.NSSavePanel.SetAllowsOtherFileTypes(allowsOtherFileTypes)
+	return x
+}
+
+// WithCurrentContentType sets the currentContentType property and returns the receiver for chaining.
+func (x *OpenPanel) WithCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) *OpenPanel {
+	x.inner.NSSavePanel.SetCurrentContentType(currentContentType)
+	return x
+}
+
+// WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
+func (x *OpenPanel) WithAccessoryView(accessoryView ViewProvider) *OpenPanel {
+	x.inner.NSSavePanel.SetAccessoryView(accessoryView.asView())
+	return x
+}
+
+// WithCanCreateDirectories sets the canCreateDirectories property and returns the receiver for chaining.
+func (x *OpenPanel) WithCanCreateDirectories(canCreateDirectories bool) *OpenPanel {
+	x.inner.NSSavePanel.SetCanCreateDirectories(canCreateDirectories)
+	return x
+}
+
+// WithCanSelectHiddenExtension sets the canSelectHiddenExtension property and returns the receiver for chaining.
+func (x *OpenPanel) WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *OpenPanel {
+	x.inner.NSSavePanel.SetCanSelectHiddenExtension(canSelectHiddenExtension)
+	return x
+}
+
+// WithExtensionHidden sets the extensionHidden property and returns the receiver for chaining.
+func (x *OpenPanel) WithExtensionHidden(extensionHidden bool) *OpenPanel {
+	x.inner.NSSavePanel.SetExtensionHidden(extensionHidden)
+	return x
+}
+
+// WithTreatsFilePackagesAsDirectories sets the treatsFilePackagesAsDirectories property and returns the receiver for chaining.
+func (x *OpenPanel) WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *OpenPanel {
+	x.inner.NSSavePanel.SetTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories)
+	return x
+}
+
+// WithPrompt sets the prompt property and returns the receiver for chaining.
+func (x *OpenPanel) WithPrompt(prompt string) *OpenPanel {
+	x.inner.NSSavePanel.SetPrompt(foundation.NSStringStringWithUTF8String(prompt))
+	return x
+}
+
+// WithNameFieldLabel sets the nameFieldLabel property and returns the receiver for chaining.
+func (x *OpenPanel) WithNameFieldLabel(nameFieldLabel string) *OpenPanel {
+	x.inner.NSSavePanel.SetNameFieldLabel(foundation.NSStringStringWithUTF8String(nameFieldLabel))
+	return x
+}
+
+// WithNameFieldStringValue sets the nameFieldStringValue property and returns the receiver for chaining.
+func (x *OpenPanel) WithNameFieldStringValue(nameFieldStringValue string) *OpenPanel {
+	x.inner.NSSavePanel.SetNameFieldStringValue(foundation.NSStringStringWithUTF8String(nameFieldStringValue))
+	return x
+}
+
+// WithMessage sets the message property and returns the receiver for chaining.
+func (x *OpenPanel) WithMessage(message string) *OpenPanel {
+	x.inner.NSSavePanel.SetMessage(foundation.NSStringStringWithUTF8String(message))
+	return x
+}
+
+// WithShowsHiddenFiles sets the showsHiddenFiles property and returns the receiver for chaining.
+func (x *OpenPanel) WithShowsHiddenFiles(showsHiddenFiles bool) *OpenPanel {
+	x.inner.NSSavePanel.SetShowsHiddenFiles(showsHiddenFiles)
+	return x
+}
+
+// WithShowsTagField sets the showsTagField property and returns the receiver for chaining.
+func (x *OpenPanel) WithShowsTagField(showsTagField bool) *OpenPanel {
+	x.inner.NSSavePanel.SetShowsTagField(showsTagField)
+	return x
+}
+
+// WithTagNames sets the collection, converting the Go slice to an NSArray.
+func (x *OpenPanel) WithTagNames(items ...*foundation.NSString) *OpenPanel {
+	if len(items) == 0 {
+		x.inner.NSSavePanel.SetTagNames(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSSavePanel.SetTagNames(_arr)
+	return x
+}
+
+// WithShowsContentTypes sets the showsContentTypes property and returns the receiver for chaining.
+func (x *OpenPanel) WithShowsContentTypes(showsContentTypes bool) *OpenPanel {
+	x.inner.NSSavePanel.SetShowsContentTypes(showsContentTypes)
+	return x
+}
+
+// WithAllowedFileTypes sets the collection, converting the Go slice to an NSArray.
+func (x *OpenPanel) WithAllowedFileTypes(items ...*foundation.NSString) *OpenPanel {
+	if len(items) == 0 {
+		x.inner.NSSavePanel.SetAllowedFileTypes(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSSavePanel.SetAllowedFileTypes(_arr)
+	return x
+}
+
+// WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
+func (x *OpenPanel) WithFloatingPanel(floatingPanel bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.SetFloatingPanel(floatingPanel)
+	return x
+}
+
+// WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
+func (x *OpenPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+	return x
+}
+
+// WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
+func (x *OpenPanel) WithWorksWhenModal(worksWhenModal bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.SetWorksWhenModal(worksWhenModal)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *OpenPanel) WithTitle(title string) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *OpenPanel) WithSubtitle(subtitle string) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
+// WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
+func (x *OpenPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+	return x
+}
+
+// WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
+func (x *OpenPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
+	return x
+}
+
+// WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
+func (x *OpenPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+	return x
+}
+
+// WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *OpenPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *OpenPanel {
+	if len(items) == 0 {
+		x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(_arr)
+	return x
+}
+
+// WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
+func (x *OpenPanel) WithRepresentedURL(representedURL string) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
+	return x
+}
+
+// WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
+func (x *OpenPanel) WithRepresentedFilename(representedFilename string) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
+	return x
+}
+
+// WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
+func (x *OpenPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
+	return x
+}
+
+// WithContentView sets the contentView property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentView(contentView ViewProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentView(contentView.asView())
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *OpenPanel) WithDelegate(delegate raw.NSWindowDelegate) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDelegate(delegate)
+	return x
+}
+
+// WithStyleMask sets the styleMask property and returns the receiver for chaining.
+func (x *OpenPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetStyleMask(styleMask)
+	return x
+}
+
+// WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
+func (x *OpenPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
+	return x
+}
+
+// WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
+func (x *OpenPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
+func (x *OpenPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
+	return x
+}
+
+// WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
+func (x *OpenPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
+	return x
+}
+
+// WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
+func (x *OpenPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *OpenPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithMovable sets the movable property and returns the receiver for chaining.
+func (x *OpenPanel) WithMovable(movable bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMovable(movable)
+	return x
+}
+
+// WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
+func (x *OpenPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
+	return x
+}
+
+// WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
+func (x *OpenPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
+	return x
+}
+
+// WithCanHide sets the canHide property and returns the receiver for chaining.
+func (x *OpenPanel) WithCanHide(canHide bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetCanHide(canHide)
+	return x
+}
+
+// WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
+func (x *OpenPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+	return x
+}
+
+// WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
+func (x *OpenPanel) WithMiniwindowTitle(miniwindowTitle string) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
+	return x
+}
+
+// WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
+func (x *OpenPanel) WithDocumentEdited(documentEdited bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
+	return x
+}
+
+// WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
+func (x *OpenPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
+	return x
+}
+
+// WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
+func (x *OpenPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
+	return x
+}
+
+// WithBackingType sets the backingType property and returns the receiver for chaining.
+func (x *OpenPanel) WithBackingType(backingType raw.NSBackingStoreType) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetBackingType(backingType)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *OpenPanel) WithLevel(level int) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetLevel(level)
+	return x
+}
+
+// WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
+func (x *OpenPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+	return x
+}
+
+// WithHasShadow sets the hasShadow property and returns the receiver for chaining.
+func (x *OpenPanel) WithHasShadow(hasShadow bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetHasShadow(hasShadow)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *OpenPanel) WithAlphaValue(alphaValue float64) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *OpenPanel) WithOpaque(opaque bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetOpaque(opaque)
+	return x
+}
+
+// WithSharingType sets the sharingType property and returns the receiver for chaining.
+func (x *OpenPanel) WithSharingType(sharingType raw.NSWindowSharingType) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetSharingType(sharingType)
+	return x
+}
+
+// WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
+func (x *OpenPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
+	return x
+}
+
+// WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
+func (x *OpenPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
+	return x
+}
+
+// WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
+func (x *OpenPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
+	return x
+}
+
+// WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
+func (x *OpenPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+	return x
+}
+
+// WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
+func (x *OpenPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+	return x
+}
+
+// WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
+func (x *OpenPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithMinSize(minSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMaxSize(maxSize)
+	return x
+}
+
+// WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
+	return x
+}
+
+// WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
+func (x *OpenPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController sets the windowController property and returns the receiver for chaining.
+func (x *OpenPanel) WithWindowController(windowController *raw.NSWindowController) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetWindowController(windowController)
+	return x
+}
+
+// WithParentWindow sets the parentWindow property and returns the receiver for chaining.
+func (x *OpenPanel) WithParentWindow(parentWindow WindowProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
+	return x
+}
+
+// WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
+func (x *OpenPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAppearanceSource(appearanceSource)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *OpenPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetColorSpace(colorSpace)
+	return x
+}
+
+// WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
+func (x *OpenPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+	return x
+}
+
+// WithContentViewController sets the contentViewController property and returns the receiver for chaining.
+func (x *OpenPanel) WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetContentViewController(contentViewController.asViewController())
+	return x
+}
+
+// WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
+func (x *OpenPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
+	return x
+}
+
+// WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
+func (x *OpenPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
+	return x
+}
+
+// WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
+func (x *OpenPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
+	return x
+}
+
+// WithToolbar sets the toolbar property and returns the receiver for chaining.
+func (x *OpenPanel) WithToolbar(toolbar *raw.NSToolbar) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetToolbar(toolbar)
+	return x
+}
+
+// WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
+func (x *OpenPanel) WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
+	return x
+}
+
+// WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
+func (x *OpenPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+	return x
+}
+
+// WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
+func (x *OpenPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetTabbingIdentifier(tabbingIdentifier)
+	return x
+}
+
+// WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
+func (x *OpenPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
+	return x
+}
+
+// WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
+func (x *OpenPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
+	return x
+}
+
+// WithAutodisplay sets the autodisplay property and returns the receiver for chaining.
+func (x *OpenPanel) WithAutodisplay(autodisplay bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetAutodisplay(autodisplay)
+	return x
+}
+
+// WithOneShot sets the oneShot property and returns the receiver for chaining.
+func (x *OpenPanel) WithOneShot(oneShot bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetOneShot(oneShot)
+	return x
+}
+
+// WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
+func (x *OpenPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+	return x
+}
+
+// WithShowsResizeIndicator sets the showsResizeIndicator property and returns the receiver for chaining.
+func (x *OpenPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetShowsResizeIndicator(showsResizeIndicator)
+	return x
+}
+
+// WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
+func (x *OpenPanel) WithOrderedIndex(orderedIndex int) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
+	return x
+}
+
+// WithRestorable sets the restorable property and returns the receiver for chaining.
+func (x *OpenPanel) WithRestorable(restorable bool) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.SetRestorable(restorable)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *OpenPanel) WithNextResponder(nextResponder ResponderProvider) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *OpenPanel) WithMenu(menu *raw.NSMenu) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *OpenPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *OpenPanel) WithTouchBar(touchBar *raw.NSTouchBar) *OpenPanel {
+	x.inner.NSSavePanel.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -204,6 +816,101 @@ type OpenPanelable interface {
 	WithCanResolveUbiquitousConflicts(canResolveUbiquitousConflicts bool) *OpenPanel
 	WithCanDownloadUbiquitousContents(canDownloadUbiquitousContents bool) *OpenPanel
 	WithAccessoryViewDisclosed(accessoryViewDisclosed bool) *OpenPanel
+	WithIdentifier(identifier *foundation.NSString) *OpenPanel
+	WithDirectoryURL(directoryURL string) *OpenPanel
+	WithAllowedContentTypes(items ...*uniformtypeidentifiers.UTType) *OpenPanel
+	WithAllowsOtherFileTypes(allowsOtherFileTypes bool) *OpenPanel
+	WithCurrentContentType(currentContentType *uniformtypeidentifiers.UTType) *OpenPanel
+	WithAccessoryView(accessoryView ViewProvider) *OpenPanel
+	WithCanCreateDirectories(canCreateDirectories bool) *OpenPanel
+	WithCanSelectHiddenExtension(canSelectHiddenExtension bool) *OpenPanel
+	WithExtensionHidden(extensionHidden bool) *OpenPanel
+	WithTreatsFilePackagesAsDirectories(treatsFilePackagesAsDirectories bool) *OpenPanel
+	WithPrompt(prompt string) *OpenPanel
+	WithNameFieldLabel(nameFieldLabel string) *OpenPanel
+	WithNameFieldStringValue(nameFieldStringValue string) *OpenPanel
+	WithMessage(message string) *OpenPanel
+	WithShowsHiddenFiles(showsHiddenFiles bool) *OpenPanel
+	WithShowsTagField(showsTagField bool) *OpenPanel
+	WithTagNames(items ...*foundation.NSString) *OpenPanel
+	WithShowsContentTypes(showsContentTypes bool) *OpenPanel
+	WithAllowedFileTypes(items ...*foundation.NSString) *OpenPanel
+	WithFloatingPanel(floatingPanel bool) *OpenPanel
+	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *OpenPanel
+	WithWorksWhenModal(worksWhenModal bool) *OpenPanel
+	WithTitle(title string) *OpenPanel
+	WithSubtitle(subtitle string) *OpenPanel
+	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *OpenPanel
+	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *OpenPanel
+	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *OpenPanel
+	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *OpenPanel
+	WithRepresentedURL(representedURL string) *OpenPanel
+	WithRepresentedFilename(representedFilename string) *OpenPanel
+	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *OpenPanel
+	WithContentView(contentView ViewProvider) *OpenPanel
+	WithDelegate(delegate raw.NSWindowDelegate) *OpenPanel
+	WithStyleMask(styleMask raw.NSWindowStyleMask) *OpenPanel
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *OpenPanel
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *OpenPanel
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *OpenPanel
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *OpenPanel
+	WithViewsNeedDisplay(viewsNeedDisplay bool) *OpenPanel
+	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *OpenPanel
+	WithReleasedWhenClosed(releasedWhenClosed bool) *OpenPanel
+	WithBackgroundColor(backgroundColor *raw.NSColor) *OpenPanel
+	WithMovable(movable bool) *OpenPanel
+	WithMovableByWindowBackground(movableByWindowBackground bool) *OpenPanel
+	WithHidesOnDeactivate(hidesOnDeactivate bool) *OpenPanel
+	WithCanHide(canHide bool) *OpenPanel
+	WithMiniwindowImage(miniwindowImage *raw.NSImage) *OpenPanel
+	WithMiniwindowTitle(miniwindowTitle string) *OpenPanel
+	WithDocumentEdited(documentEdited bool) *OpenPanel
+	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *OpenPanel
+	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *OpenPanel
+	WithBackingType(backingType raw.NSBackingStoreType) *OpenPanel
+	WithLevel(level int) *OpenPanel
+	WithDepthLimit(depthLimit raw.NSWindowDepth) *OpenPanel
+	WithHasShadow(hasShadow bool) *OpenPanel
+	WithAlphaValue(alphaValue float64) *OpenPanel
+	WithOpaque(opaque bool) *OpenPanel
+	WithSharingType(sharingType raw.NSWindowSharingType) *OpenPanel
+	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *OpenPanel
+	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *OpenPanel
+	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *OpenPanel
+	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *OpenPanel
+	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *OpenPanel
+	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *OpenPanel
+	WithMinSize(minSize corefoundation.CGSize) *OpenPanel
+	WithMaxSize(maxSize corefoundation.CGSize) *OpenPanel
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *OpenPanel
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *OpenPanel
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *OpenPanel
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *OpenPanel
+	WithWindowController(windowController *raw.NSWindowController) *OpenPanel
+	WithParentWindow(parentWindow WindowProvider) *OpenPanel
+	WithAppearanceSource(appearanceSource *foundation.NSObject) *OpenPanel
+	WithColorSpace(colorSpace *raw.NSColorSpace) *OpenPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *OpenPanel
+	WithContentViewController(contentViewController ViewControllerProvider) *OpenPanel
+	WithInitialFirstResponder(initialFirstResponder ViewProvider) *OpenPanel
+	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *OpenPanel
+	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *OpenPanel
+	WithToolbar(toolbar *raw.NSToolbar) *OpenPanel
+	WithShowsToolbarButton(showsToolbarButton bool) *OpenPanel
+	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *OpenPanel
+	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *OpenPanel
+	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *OpenPanel
+	WithIgnoresMouseEvents(ignoresMouseEvents bool) *OpenPanel
+	WithAutodisplay(autodisplay bool) *OpenPanel
+	WithOneShot(oneShot bool) *OpenPanel
+	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *OpenPanel
+	WithShowsResizeIndicator(showsResizeIndicator bool) *OpenPanel
+	WithOrderedIndex(orderedIndex int) *OpenPanel
+	WithRestorable(restorable bool) *OpenPanel
+	WithNextResponder(nextResponder ResponderProvider) *OpenPanel
+	WithMenu(menu *raw.NSMenu) *OpenPanel
+	WithUserActivity(userActivity *foundation.NSUserActivity) *OpenPanel
+	WithTouchBar(touchBar *raw.NSTouchBar) *OpenPanel
 	URLs() []*foundation.NSURL
 	ResolvesAliases() bool
 	SetResolvesAliases(resolvesAliases bool)

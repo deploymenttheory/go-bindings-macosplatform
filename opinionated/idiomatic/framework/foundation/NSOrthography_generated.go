@@ -45,6 +45,12 @@ func NewOrthographyWithCoder(coder *raw.NSCoder) *Orthography {
 	return &Orthography{inner: raw.NSOrthographyFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Orthography) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Orthography {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DominantScript calls the underlying DominantScript.
 func (x *Orthography) DominantScript() *String {
 	_r := x.inner.DominantScript()
@@ -109,6 +115,7 @@ func (x *Orthography) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Orthographyable is the interface implemented by [Orthography], for mocking and DI.
 type Orthographyable interface {
 	Unwrap() *raw.NSOrthography
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Orthography
 	DominantScript() *String
 	LanguageMap() *raw.NSDictionary[*raw.NSString, objc.ID]
 	LanguagesForScript(script string) *raw.NSArray[*raw.NSString]

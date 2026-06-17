@@ -97,6 +97,108 @@ func (x *DOMHTMLIFrameElement) WithWidth(width string) *DOMHTMLIFrameElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithTitle(title string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithLang(lang string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithDir(dir string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithTabIndex(tabIndex int) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithAccessKey(accessKey string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithInnerText(innerText string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithOuterText(outerText string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithContentEditable(contentEditable string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithIdName(idName string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithScrollLeft(scrollLeft int) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithScrollTop(scrollTop int) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithInnerHTML(innerHTML string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithOuterHTML(outerHTML string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithClassName(className string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithNodeValue(nodeValue string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithPrefix(prefix string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLIFrameElement) WithTextContent(textContent string) *DOMHTMLIFrameElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Align calls the underlying Align.
 func (x *DOMHTMLIFrameElement) Align() string {
 	_r := x.inner.Align()
@@ -287,6 +389,23 @@ type DOMHTMLIFrameElementable interface {
 	WithScrolling(scrolling string) *DOMHTMLIFrameElement
 	WithSrc(src string) *DOMHTMLIFrameElement
 	WithWidth(width string) *DOMHTMLIFrameElement
+	WithTitle(title string) *DOMHTMLIFrameElement
+	WithLang(lang string) *DOMHTMLIFrameElement
+	WithDir(dir string) *DOMHTMLIFrameElement
+	WithTabIndex(tabIndex int) *DOMHTMLIFrameElement
+	WithAccessKey(accessKey string) *DOMHTMLIFrameElement
+	WithInnerText(innerText string) *DOMHTMLIFrameElement
+	WithOuterText(outerText string) *DOMHTMLIFrameElement
+	WithContentEditable(contentEditable string) *DOMHTMLIFrameElement
+	WithIdName(idName string) *DOMHTMLIFrameElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLIFrameElement
+	WithScrollTop(scrollTop int) *DOMHTMLIFrameElement
+	WithInnerHTML(innerHTML string) *DOMHTMLIFrameElement
+	WithOuterHTML(outerHTML string) *DOMHTMLIFrameElement
+	WithClassName(className string) *DOMHTMLIFrameElement
+	WithNodeValue(nodeValue string) *DOMHTMLIFrameElement
+	WithPrefix(prefix string) *DOMHTMLIFrameElement
+	WithTextContent(textContent string) *DOMHTMLIFrameElement
 	Align() string
 	SetAlign(align string)
 	FrameBorder() string

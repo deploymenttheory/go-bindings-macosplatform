@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -176,6 +177,18 @@ func (x *MTL4MeshRenderPipelineDescriptor) WithColorAttachmentMappingState(color
 // WithSupportIndirectCommandBuffers sets the supportIndirectCommandBuffers property and returns the receiver for chaining.
 func (x *MTL4MeshRenderPipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor {
 	x.inner.SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4MeshRenderPipelineDescriptor) WithLabel(label string) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MTL4MeshRenderPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options)
 	return x
 }
 
@@ -486,6 +499,8 @@ type MTL4MeshRenderPipelineDescriptorable interface {
 	WithSupportFragmentBinaryLinking(supportFragmentBinaryLinking bool) *MTL4MeshRenderPipelineDescriptor
 	WithColorAttachmentMappingState(colorAttachmentMappingState raw.MTL4LogicalToPhysicalColorAttachmentMappingState) *MTL4MeshRenderPipelineDescriptor
 	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers raw.MTL4IndirectCommandBufferSupportState) *MTL4MeshRenderPipelineDescriptor
+	WithLabel(label string) *MTL4MeshRenderPipelineDescriptor
+	WithOptions(options *raw.MTL4PipelineOptions) *MTL4MeshRenderPipelineDescriptor
 	Reset()
 	ObjectFunctionDescriptor() *MTL4FunctionDescriptor
 	SetObjectFunctionDescriptor(objectFunctionDescriptor *raw.MTL4FunctionDescriptor)

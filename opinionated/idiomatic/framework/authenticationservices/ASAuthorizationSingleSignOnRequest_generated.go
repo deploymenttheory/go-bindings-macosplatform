@@ -60,6 +60,40 @@ func (x *AuthorizationSingleSignOnRequest) WithUserInterfaceEnabled(userInterfac
 	return x
 }
 
+// WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
+func (x *AuthorizationSingleSignOnRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest {
+	if len(items) == 0 {
+		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(_arr)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *AuthorizationSingleSignOnRequest) WithState(state string) *AuthorizationSingleSignOnRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
+	return x
+}
+
+// WithNonce sets the nonce property and returns the receiver for chaining.
+func (x *AuthorizationSingleSignOnRequest) WithNonce(nonce string) *AuthorizationSingleSignOnRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+	return x
+}
+
+// WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
+func (x *AuthorizationSingleSignOnRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)
+	return x
+}
+
 // AuthorizationOptions returns the collection as a Go slice.
 func (x *AuthorizationSingleSignOnRequest) AuthorizationOptions() []*foundation.NSURLQueryItem {
 	arr := x.inner.AuthorizationOptions()
@@ -95,6 +129,10 @@ type AuthorizationSingleSignOnRequestable interface {
 	Unwrap() *raw.ASAuthorizationSingleSignOnRequest
 	WithAuthorizationOptions(items ...*foundation.NSURLQueryItem) *AuthorizationSingleSignOnRequest
 	WithUserInterfaceEnabled(userInterfaceEnabled bool) *AuthorizationSingleSignOnRequest
+	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationSingleSignOnRequest
+	WithState(state string) *AuthorizationSingleSignOnRequest
+	WithNonce(nonce string) *AuthorizationSingleSignOnRequest
+	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationSingleSignOnRequest
 	AuthorizationOptions() []*foundation.NSURLQueryItem
 	SetAuthorizationOptions(authorizationOptions *foundation.NSArray[*foundation.NSURLQueryItem])
 	IsUserInterfaceEnabled() bool

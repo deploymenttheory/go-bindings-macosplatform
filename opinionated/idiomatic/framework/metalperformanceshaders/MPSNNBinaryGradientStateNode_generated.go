@@ -36,11 +36,32 @@ func NewNNBinaryGradientStateNode() *NNBinaryGradientStateNode {
 	return &NNBinaryGradientStateNode{inner: raw.MPSNNBinaryGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *NNBinaryGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNBinaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *NNBinaryGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *NNBinaryGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode {
+	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *NNBinaryGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
 // NNBinaryGradientStateNodeable is the interface implemented by [NNBinaryGradientStateNode], for mocking and DI.
 type NNBinaryGradientStateNodeable interface {
 	Unwrap() *raw.MPSNNBinaryGradientStateNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNBinaryGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *NNBinaryGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *NNBinaryGradientStateNode
 }
 
 var _ NNBinaryGradientStateNodeable = (*NNBinaryGradientStateNode)(nil)

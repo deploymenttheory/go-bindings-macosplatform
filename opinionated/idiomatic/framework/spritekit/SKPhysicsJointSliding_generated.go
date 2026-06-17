@@ -53,6 +53,18 @@ func (x *PhysicsJointSliding) WithUpperDistanceLimit(upperDistanceLimit float64)
 	return x
 }
 
+// WithBodyA sets the bodyA property and returns the receiver for chaining.
+func (x *PhysicsJointSliding) WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointSliding {
+	x.inner.SKPhysicsJoint.SetBodyA(bodyA)
+	return x
+}
+
+// WithBodyB sets the bodyB property and returns the receiver for chaining.
+func (x *PhysicsJointSliding) WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointSliding {
+	x.inner.SKPhysicsJoint.SetBodyB(bodyB)
+	return x
+}
+
 // ShouldEnableLimits calls the underlying ShouldEnableLimits.
 func (x *PhysicsJointSliding) ShouldEnableLimits() bool {
 	return x.inner.ShouldEnableLimits()
@@ -91,6 +103,8 @@ type PhysicsJointSlidingable interface {
 	WithShouldEnableLimits(shouldEnableLimits bool) *PhysicsJointSliding
 	WithLowerDistanceLimit(lowerDistanceLimit float64) *PhysicsJointSliding
 	WithUpperDistanceLimit(upperDistanceLimit float64) *PhysicsJointSliding
+	WithBodyA(bodyA *raw.SKPhysicsBody) *PhysicsJointSliding
+	WithBodyB(bodyB *raw.SKPhysicsBody) *PhysicsJointSliding
 	ShouldEnableLimits() bool
 	SetShouldEnableLimits(shouldEnableLimits bool)
 	LowerDistanceLimit() float64

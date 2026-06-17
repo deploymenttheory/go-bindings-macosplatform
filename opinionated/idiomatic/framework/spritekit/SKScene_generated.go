@@ -8,8 +8,11 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Scene wraps [raw.SKScene] with a fluent Go API.
@@ -78,6 +81,202 @@ func (x *Scene) WithDelegate(delegate raw.SKSceneDelegate) *Scene {
 // WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
 func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
 	x.inner.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithFilter sets the filter property and returns the receiver for chaining.
+func (x *Scene) WithFilter(filter *coreimage.CIFilter) *Scene {
+	x.inner.SKEffectNode.SetFilter(filter)
+	return x
+}
+
+// WithShouldCenterFilter sets the shouldCenterFilter property and returns the receiver for chaining.
+func (x *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
+	x.inner.SKEffectNode.SetShouldCenterFilter(shouldCenterFilter)
+	return x
+}
+
+// WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
+func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
+	x.inner.SKEffectNode.SetShouldEnableEffects(shouldEnableEffects)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
+	x.inner.SKEffectNode.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithBlendMode sets the blendMode property and returns the receiver for chaining.
+func (x *Scene) WithBlendMode(blendMode raw.SKBlendMode) *Scene {
+	x.inner.SKEffectNode.SetBlendMode(blendMode)
+	return x
+}
+
+// WithShader sets the shader property and returns the receiver for chaining.
+func (x *Scene) WithShader(shader *raw.SKShader) *Scene {
+	x.inner.SKEffectNode.SetShader(shader)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
+	x.inner.SKEffectNode.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *Scene) WithZPosition(zPosition float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *Scene) WithZRotation(zRotation float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *Scene) WithXScale(xScale float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *Scene) WithYScale(yScale float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *Scene) WithSpeed(speed float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *Scene) WithAlpha(alpha float64) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *Scene) WithPaused(paused bool) *Scene {
+	x.inner.SKEffectNode.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Scene) WithHidden(hidden bool) *Scene {
+	x.inner.SKEffectNode.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
+	x.inner.SKEffectNode.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Scene) WithName(name string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *Scene) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Scene {
+	x.inner.SKEffectNode.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *Scene) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene {
+	x.inner.SKEffectNode.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *Scene) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Scene {
+	x.inner.SKEffectNode.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *Scene) WithConstraints(items ...*raw.SKConstraint) *Scene {
+	if len(items) == 0 {
+		x.inner.SKEffectNode.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKEffectNode.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *Scene) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityParent(accessibilityParent objc.ID) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
+	x.inner.SKEffectNode.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -251,6 +450,37 @@ type Sceneable interface {
 	WithBackgroundColor(backgroundColor *appkit.NSColor) *Scene
 	WithDelegate(delegate raw.SKSceneDelegate) *Scene
 	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene
+	WithFilter(filter *coreimage.CIFilter) *Scene
+	WithShouldCenterFilter(shouldCenterFilter bool) *Scene
+	WithShouldEnableEffects(shouldEnableEffects bool) *Scene
+	WithShouldRasterize(shouldRasterize bool) *Scene
+	WithBlendMode(blendMode raw.SKBlendMode) *Scene
+	WithShader(shader *raw.SKShader) *Scene
+	WithPosition(position corefoundation.CGPoint) *Scene
+	WithZPosition(zPosition float64) *Scene
+	WithZRotation(zRotation float64) *Scene
+	WithXScale(xScale float64) *Scene
+	WithYScale(yScale float64) *Scene
+	WithSpeed(speed float64) *Scene
+	WithAlpha(alpha float64) *Scene
+	WithPaused(paused bool) *Scene
+	WithHidden(hidden bool) *Scene
+	WithUserInteractionEnabled(userInteractionEnabled bool) *Scene
+	WithName(name string) *Scene
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *Scene
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *Scene
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *Scene
+	WithConstraints(items ...*raw.SKConstraint) *Scene
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *Scene
+	WithAccessibilityElement(accessibilityElement bool) *Scene
+	WithAccessibilityRole(accessibilityRole string) *Scene
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene
+	WithAccessibilitySubrole(accessibilitySubrole string) *Scene
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene
+	WithAccessibilityParent(accessibilityParent objc.ID) *Scene
+	WithAccessibilityHelp(accessibilityHelp string) *Scene
+	WithAccessibilityLabel(accessibilityLabel string) *Scene
+	WithAccessibilityEnabled(accessibilityEnabled bool) *Scene
 	SceneDidLoad()
 	ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint
 	ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint

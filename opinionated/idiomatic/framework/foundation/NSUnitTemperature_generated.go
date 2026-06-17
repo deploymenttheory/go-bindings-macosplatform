@@ -35,6 +35,12 @@ func NewUnitTemperature() *UnitTemperature {
 	return &UnitTemperature{inner: raw.NSUnitTemperatureFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitTemperature) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitTemperature {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitTemperature) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitTemperature) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitTemperature) asObject() *raw.NSObject { return &x.inner.NSDimension
 // UnitTemperatureable is the interface implemented by [UnitTemperature], for mocking and DI.
 type UnitTemperatureable interface {
 	Unwrap() *raw.NSUnitTemperature
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitTemperature
 }
 
 var _ UnitTemperatureable = (*UnitTemperature)(nil)

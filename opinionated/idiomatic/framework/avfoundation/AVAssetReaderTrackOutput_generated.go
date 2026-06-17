@@ -44,6 +44,18 @@ func (x *AssetReaderTrackOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgor
 	return x
 }
 
+// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+func (x *AssetReaderTrackOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderTrackOutput {
+	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+func (x *AssetReaderTrackOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderTrackOutput {
+	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	return x
+}
+
 // Track calls the underlying Track.
 func (x *AssetReaderTrackOutput) Track() *AssetTrack {
 	_r := x.inner.Track()
@@ -78,6 +90,8 @@ func (x *AssetReaderTrackOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput 
 type AssetReaderTrackOutputable interface {
 	Unwrap() *raw.AVAssetReaderTrackOutput
 	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderTrackOutput
+	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderTrackOutput
+	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderTrackOutput
 	Track() *AssetTrack
 	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	AudioTimePitchAlgorithm() string

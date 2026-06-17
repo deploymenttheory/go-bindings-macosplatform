@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +54,48 @@ func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithBound
 	return x
 }
 
+// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetOpaque(opaque)
+	return x
+}
+
+// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
+	return x
+}
+
+// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
+	return x
+}
+
+// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
+	return x
+}
+
 // BoundingBoxBuffers calls the underlying BoundingBoxBuffers.
 func (x *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor) BoundingBoxBuffers() raw.MTL4BufferRange {
 	return x.inner.BoundingBoxBuffers()
@@ -91,6 +134,13 @@ type MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptorable interface 
 	WithBoundingBoxBuffers(boundingBoxBuffers raw.MTL4BufferRange) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
 	WithBoundingBoxStride(boundingBoxStride uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
 	WithBoundingBoxCount(boundingBoxCount uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithOpaque(opaque bool) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithLabel(label string) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureMotionBoundingBoxGeometryDescriptor
 	BoundingBoxBuffers() raw.MTL4BufferRange
 	SetBoundingBoxBuffers(boundingBoxBuffers raw.MTL4BufferRange)
 	BoundingBoxStride() uint

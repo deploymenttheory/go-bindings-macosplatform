@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNGroupNormalizationGradientNodeWithSourceGradientSourceImageGradientSt
 	return &CNNGroupNormalizationGradientNode{inner: raw.MPSCNNGroupNormalizationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNGroupNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientNode) WithLabel(label string) *CNNGroupNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNGroupNormalizationGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *CNNGroupNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *CNNGroupNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFilterNod
 // CNNGroupNormalizationGradientNodeable is the interface implemented by [CNNGroupNormalizationGradientNode], for mocking and DI.
 type CNNGroupNormalizationGradientNodeable interface {
 	Unwrap() *raw.MPSCNNGroupNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNGroupNormalizationGradientNode
+	WithLabel(label string) *CNNGroupNormalizationGradientNode
 }
 
 var _ CNNGroupNormalizationGradientNodeable = (*CNNGroupNormalizationGradientNode)(nil)

@@ -89,6 +89,18 @@ func (x *ImageEDLines) WithMergeLocalityThreshold(mergeLocalityThreshold float32
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageEDLines) WithOptions(options mpscore.MPSKernelOptions) *ImageEDLines {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageEDLines) WithLabel(label string) *ImageEDLines {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset calls the underlying EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset.
 func (x *ImageEDLines) EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, dest metal.MTLTexture, endpointBuffer metal.MTLBuffer, endpointOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer, source, dest, endpointBuffer, endpointOffset)
@@ -181,6 +193,8 @@ type ImageEDLinesable interface {
 	WithGradientThreshold(gradientThreshold float32) *ImageEDLines
 	WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines
 	WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines
+	WithOptions(options mpscore.MPSKernelOptions) *ImageEDLines
+	WithLabel(label string) *ImageEDLines
 	EncodeToCommandBufferSourceTextureDestinationTextureEndpointBufferEndpointOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, dest metal.MTLTexture, endpointBuffer metal.MTLBuffer, endpointOffset uint)
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)

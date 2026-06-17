@@ -41,6 +41,66 @@ func (x *CNNSubPixelConvolutionDescriptor) WithSubPixelScaleFactor(subPixelScale
 	return x
 }
 
+// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetKernelWidth(kernelWidth)
+	return x
+}
+
+// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetKernelHeight(kernelHeight)
+	return x
+}
+
+// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+	return x
+}
+
+// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+	return x
+}
+
+// WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsX(strideInPixelsX)
+	return x
+}
+
+// WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsY(strideInPixelsY)
+	return x
+}
+
+// WithGroups sets the groups property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithGroups(groups uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetGroups(groups)
+	return x
+}
+
+// WithDilationRateX sets the dilationRateX property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateX(dilationRateX uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateX(dilationRateX)
+	return x
+}
+
+// WithDilationRateY sets the dilationRateY property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateY(dilationRateY)
+	return x
+}
+
+// WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
+func (x *CNNSubPixelConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+	return x
+}
+
 // SubPixelScaleFactor calls the underlying SubPixelScaleFactor.
 func (x *CNNSubPixelConvolutionDescriptor) SubPixelScaleFactor() uint {
 	return x.inner.SubPixelScaleFactor()
@@ -57,6 +117,16 @@ func (x *CNNSubPixelConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPS
 type CNNSubPixelConvolutionDescriptorable interface {
 	Unwrap() *raw.MPSCNNSubPixelConvolutionDescriptor
 	WithSubPixelScaleFactor(subPixelScaleFactor uint) *CNNSubPixelConvolutionDescriptor
+	WithKernelWidth(kernelWidth uint) *CNNSubPixelConvolutionDescriptor
+	WithKernelHeight(kernelHeight uint) *CNNSubPixelConvolutionDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor
+	WithStrideInPixelsX(strideInPixelsX uint) *CNNSubPixelConvolutionDescriptor
+	WithStrideInPixelsY(strideInPixelsY uint) *CNNSubPixelConvolutionDescriptor
+	WithGroups(groups uint) *CNNSubPixelConvolutionDescriptor
+	WithDilationRateX(dilationRateX uint) *CNNSubPixelConvolutionDescriptor
+	WithDilationRateY(dilationRateY uint) *CNNSubPixelConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor *raw.MPSNNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor
 	SubPixelScaleFactor() uint
 	SetSubPixelScaleFactor(subPixelScaleFactor uint)
 }

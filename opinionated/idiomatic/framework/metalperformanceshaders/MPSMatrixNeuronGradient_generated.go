@@ -67,6 +67,48 @@ func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
 	return x
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithBatchStart(batchStart uint) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithBatchSize(batchSize uint) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixNeuronGradient) WithLabel(label string) *MatrixNeuronGradient {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
@@ -151,6 +193,13 @@ type MatrixNeuronGradientable interface {
 	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuronGradient
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuronGradient
 	WithAlpha(alpha float64) *MatrixNeuronGradient
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
+	WithBatchStart(batchStart uint) *MatrixNeuronGradient
+	WithBatchSize(batchSize uint) *MatrixNeuronGradient
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuronGradient
+	WithLabel(label string) *MatrixNeuronGradient
 	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	NeuronParameterA() float32

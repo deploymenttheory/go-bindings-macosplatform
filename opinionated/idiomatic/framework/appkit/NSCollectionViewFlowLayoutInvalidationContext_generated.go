@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,6 +48,18 @@ func (x *CollectionViewFlowLayoutInvalidationContext) WithInvalidateFlowLayoutAt
 	return x
 }
 
+// WithContentOffsetAdjustment sets the contentOffsetAdjustment property and returns the receiver for chaining.
+func (x *CollectionViewFlowLayoutInvalidationContext) WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext {
+	x.inner.NSCollectionViewLayoutInvalidationContext.SetContentOffsetAdjustment(contentOffsetAdjustment)
+	return x
+}
+
+// WithContentSizeAdjustment sets the contentSizeAdjustment property and returns the receiver for chaining.
+func (x *CollectionViewFlowLayoutInvalidationContext) WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext {
+	x.inner.NSCollectionViewLayoutInvalidationContext.SetContentSizeAdjustment(contentSizeAdjustment)
+	return x
+}
+
 // InvalidateFlowLayoutDelegateMetrics calls the underlying InvalidateFlowLayoutDelegateMetrics.
 func (x *CollectionViewFlowLayoutInvalidationContext) InvalidateFlowLayoutDelegateMetrics() bool {
 	return x.inner.InvalidateFlowLayoutDelegateMetrics()
@@ -74,6 +87,8 @@ type CollectionViewFlowLayoutInvalidationContextable interface {
 	Unwrap() *raw.NSCollectionViewFlowLayoutInvalidationContext
 	WithInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool) *CollectionViewFlowLayoutInvalidationContext
 	WithInvalidateFlowLayoutAttributes(invalidateFlowLayoutAttributes bool) *CollectionViewFlowLayoutInvalidationContext
+	WithContentOffsetAdjustment(contentOffsetAdjustment corefoundation.CGPoint) *CollectionViewFlowLayoutInvalidationContext
+	WithContentSizeAdjustment(contentSizeAdjustment corefoundation.CGSize) *CollectionViewFlowLayoutInvalidationContext
 	InvalidateFlowLayoutDelegateMetrics() bool
 	SetInvalidateFlowLayoutDelegateMetrics(invalidateFlowLayoutDelegateMetrics bool)
 	InvalidateFlowLayoutAttributes() bool

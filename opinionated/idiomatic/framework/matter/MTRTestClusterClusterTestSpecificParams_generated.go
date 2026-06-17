@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestSpecificParams() *MTRTestClusterClusterTestSpec
 	return &MTRTestClusterClusterTestSpecificParams{inner: raw.MTRTestClusterClusterTestSpecificParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSpecificParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams {
+	x.inner.MTRUnitTestingClusterTestSpecificParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSpecificParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams {
+	x.inner.MTRUnitTestingClusterTestSpecificParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestSpecificParams) asMTRUnitTestingClusterTestSpecificParams() *raw.MTRUnitTestingClusterTestSpecificParams { return &x.inner.MTRUnitTestingClusterTestSpecificParams }
 
 // MTRTestClusterClusterTestSpecificParamsable is the interface implemented by [MTRTestClusterClusterTestSpecificParams], for mocking and DI.
 type MTRTestClusterClusterTestSpecificParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestSpecificParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams
 }
 
 var _ MTRTestClusterClusterTestSpecificParamsable = (*MTRTestClusterClusterTestSpecificParams)(nil)

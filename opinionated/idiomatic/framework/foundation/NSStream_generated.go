@@ -42,6 +42,12 @@ func (x *Stream) WithDelegate(delegate raw.NSStreamDelegate) *Stream {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Stream) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Stream {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Open calls the underlying Open.
 func (x *Stream) Open() {
 	x.inner.Open()
@@ -100,6 +106,7 @@ func (x *Stream) asObject() *raw.NSObject { return &x.inner.NSObject }
 type Streamable interface {
 	Unwrap() *raw.NSStream
 	WithDelegate(delegate raw.NSStreamDelegate) *Stream
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Stream
 	Open()
 	Close()
 	PropertyForKey(key *raw.NSString) objc.ID

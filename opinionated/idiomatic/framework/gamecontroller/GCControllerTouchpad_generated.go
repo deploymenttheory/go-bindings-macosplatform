@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -56,6 +57,36 @@ func (x *ControllerTouchpad) WithTouchUp(touchUp func(*raw.GCControllerTouchpad,
 // WithReportsAbsoluteTouchSurfaceValues sets the reportsAbsoluteTouchSurfaceValues property and returns the receiver for chaining.
 func (x *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad {
 	x.inner.SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues)
+	return x
+}
+
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerTouchpad) WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *ControllerTouchpad) WithLocalizedName(localizedName string) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerTouchpad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad {
+	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
@@ -136,6 +167,11 @@ type ControllerTouchpadable interface {
 	WithTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
 	WithTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
 	WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerTouchpad
+	WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad
+	WithLocalizedName(localizedName string) *ControllerTouchpad
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad
 	SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32)
 	Button() *ControllerButtonInput
 	TouchDown() objc.Block

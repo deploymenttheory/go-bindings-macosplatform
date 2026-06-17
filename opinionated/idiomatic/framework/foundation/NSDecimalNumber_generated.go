@@ -58,6 +58,12 @@ func NewDecimalNumberWithStringLocale(numberValue string, locale objc.ID) *Decim
 	return &DecimalNumber{inner: raw.NSDecimalNumberFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DecimalNumber) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumber {
+	x.inner.NSNumber.NSValue.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DecimalNumberByAdding calls the underlying DecimalNumberByAdding.
 func (x *DecimalNumber) DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber {
 	_r := x.inner.DecimalNumberByAdding(decimalNumber)
@@ -184,6 +190,7 @@ func (x *DecimalNumber) asObject() *raw.NSObject { return &x.inner.NSNumber.NSVa
 // DecimalNumberable is the interface implemented by [DecimalNumber], for mocking and DI.
 type DecimalNumberable interface {
 	Unwrap() *raw.NSDecimalNumber
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumber
 	DecimalNumberByAdding(decimalNumber *raw.NSDecimalNumber) *DecimalNumber
 	DecimalNumberByAddingWithBehavior(decimalNumber *raw.NSDecimalNumber, behavior raw.NSDecimalNumberBehaviors) *DecimalNumber
 	DecimalNumberBySubtracting(decimalNumber *raw.NSDecimalNumber) *DecimalNumber

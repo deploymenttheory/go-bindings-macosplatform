@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AuthorizationAppleIDRequest wraps [raw.ASAuthorizationAppleIDRequest] with a fluent Go API.
@@ -43,6 +44,40 @@ func (x *AuthorizationAppleIDRequest) WithUser(user string) *AuthorizationAppleI
 	return x
 }
 
+// WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
+func (x *AuthorizationAppleIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationAppleIDRequest {
+	if len(items) == 0 {
+		x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.ASAuthorizationOpenIDRequest.SetRequestedScopes(_arr)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *AuthorizationAppleIDRequest) WithState(state string) *AuthorizationAppleIDRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetState(foundation.NSStringStringWithUTF8String(state))
+	return x
+}
+
+// WithNonce sets the nonce property and returns the receiver for chaining.
+func (x *AuthorizationAppleIDRequest) WithNonce(nonce string) *AuthorizationAppleIDRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+	return x
+}
+
+// WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
+func (x *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationAppleIDRequest {
+	x.inner.ASAuthorizationOpenIDRequest.SetRequestedOperation(requestedOperation)
+	return x
+}
+
 // User calls the underlying User.
 func (x *AuthorizationAppleIDRequest) User() string {
 	_r := x.inner.User()
@@ -65,6 +100,10 @@ func (x *AuthorizationAppleIDRequest) asAuthorizationRequest() *raw.ASAuthorizat
 type AuthorizationAppleIDRequestable interface {
 	Unwrap() *raw.ASAuthorizationAppleIDRequest
 	WithUser(user string) *AuthorizationAppleIDRequest
+	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationAppleIDRequest
+	WithState(state string) *AuthorizationAppleIDRequest
+	WithNonce(nonce string) *AuthorizationAppleIDRequest
+	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationAppleIDRequest
 	User() string
 	SetUser(user string)
 }

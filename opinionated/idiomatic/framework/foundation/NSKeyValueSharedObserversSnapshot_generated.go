@@ -35,11 +35,18 @@ func NewKeyValueSharedObserversSnapshot() *KeyValueSharedObserversSnapshot {
 	return &KeyValueSharedObserversSnapshot{inner: raw.NSKeyValueSharedObserversSnapshotFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *KeyValueSharedObserversSnapshot) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObserversSnapshot {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *KeyValueSharedObserversSnapshot) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // KeyValueSharedObserversSnapshotable is the interface implemented by [KeyValueSharedObserversSnapshot], for mocking and DI.
 type KeyValueSharedObserversSnapshotable interface {
 	Unwrap() *raw.NSKeyValueSharedObserversSnapshot
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObserversSnapshot
 }
 
 var _ KeyValueSharedObserversSnapshotable = (*KeyValueSharedObserversSnapshot)(nil)

@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,108 @@ func NewDOMHTMLHtmlElement() *DOMHTMLHtmlElement {
 	return &DOMHTMLHtmlElement{inner: raw.DOMHTMLHtmlElementFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithTitle(title string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithLang(lang string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithDir(dir string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithTabIndex(tabIndex int) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithAccessKey(accessKey string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithInnerText(innerText string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithOuterText(outerText string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithContentEditable(contentEditable string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithIdName(idName string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithScrollLeft(scrollLeft int) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithScrollTop(scrollTop int) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithInnerHTML(innerHTML string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithOuterHTML(outerHTML string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithClassName(className string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithNodeValue(nodeValue string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithPrefix(prefix string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLHtmlElement) WithTextContent(textContent string) *DOMHTMLHtmlElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 func (x *DOMHTMLHtmlElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
 
 func (x *DOMHTMLHtmlElement) asDOMElement() *raw.DOMElement { return &x.inner.DOMHTMLElement.DOMElement }
@@ -48,6 +151,23 @@ func (x *DOMHTMLHtmlElement) asWebScriptObject() *raw.WebScriptObject { return &
 // DOMHTMLHtmlElementable is the interface implemented by [DOMHTMLHtmlElement], for mocking and DI.
 type DOMHTMLHtmlElementable interface {
 	Unwrap() *raw.DOMHTMLHtmlElement
+	WithTitle(title string) *DOMHTMLHtmlElement
+	WithLang(lang string) *DOMHTMLHtmlElement
+	WithDir(dir string) *DOMHTMLHtmlElement
+	WithTabIndex(tabIndex int) *DOMHTMLHtmlElement
+	WithAccessKey(accessKey string) *DOMHTMLHtmlElement
+	WithInnerText(innerText string) *DOMHTMLHtmlElement
+	WithOuterText(outerText string) *DOMHTMLHtmlElement
+	WithContentEditable(contentEditable string) *DOMHTMLHtmlElement
+	WithIdName(idName string) *DOMHTMLHtmlElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLHtmlElement
+	WithScrollTop(scrollTop int) *DOMHTMLHtmlElement
+	WithInnerHTML(innerHTML string) *DOMHTMLHtmlElement
+	WithOuterHTML(outerHTML string) *DOMHTMLHtmlElement
+	WithClassName(className string) *DOMHTMLHtmlElement
+	WithNodeValue(nodeValue string) *DOMHTMLHtmlElement
+	WithPrefix(prefix string) *DOMHTMLHtmlElement
+	WithTextContent(textContent string) *DOMHTMLHtmlElement
 }
 
 var _ DOMHTMLHtmlElementable = (*DOMHTMLHtmlElement)(nil)

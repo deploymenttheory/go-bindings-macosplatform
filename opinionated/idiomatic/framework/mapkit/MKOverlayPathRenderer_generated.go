@@ -104,6 +104,12 @@ func (x *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *Overlay
 	return x
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *OverlayPathRenderer) WithAlpha(alpha float64) *OverlayPathRenderer {
+	x.inner.MKOverlayRenderer.SetAlpha(alpha)
+	return x
+}
+
 // CreatePath calls the underlying CreatePath.
 func (x *OverlayPathRenderer) CreatePath() {
 	x.inner.CreatePath()
@@ -256,6 +262,7 @@ type OverlayPathRendererable interface {
 	WithLineDashPhase(lineDashPhase float64) *OverlayPathRenderer
 	WithLineDashPattern(items ...*foundation.NSNumber) *OverlayPathRenderer
 	WithShouldRasterize(shouldRasterize bool) *OverlayPathRenderer
+	WithAlpha(alpha float64) *OverlayPathRenderer
 	CreatePath()
 	InvalidatePath()
 	ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64)

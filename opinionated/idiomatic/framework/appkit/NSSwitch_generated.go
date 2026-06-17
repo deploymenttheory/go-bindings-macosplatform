@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Switch wraps [raw.NSSwitch] with a fluent Go API.
@@ -41,6 +46,484 @@ func (x *Switch) WithState(state int) *Switch {
 	return x
 }
 
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Switch) WithTarget(target objc.ID) *Switch {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Switch) WithAction(action objc.SEL) *Switch {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Switch) WithTag(tag int) *Switch {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Switch) WithIgnoresMultiClick(ignoresMultiClick bool) *Switch {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Switch) WithContinuous(continuous bool) *Switch {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Switch) WithEnabled(enabled bool) *Switch {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Switch) WithRefusesFirstResponder(refusesFirstResponder bool) *Switch {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Switch) WithHighlighted(highlighted bool) *Switch {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Switch) WithControlSize(controlSize raw.NSControlSize) *Switch {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Switch) WithFormatter(formatter *foundation.NSFormatter) *Switch {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Switch) WithObjectValue(objectValue objc.ID) *Switch {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Switch) WithStringValue(stringValue string) *Switch {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Switch) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Switch {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Switch) WithIntValue(intValue int) *Switch {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Switch) WithIntegerValue(integerValue int) *Switch {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Switch) WithFloatValue(floatValue float32) *Switch {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Switch) WithDoubleValue(doubleValue float64) *Switch {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Switch) WithFont(font *raw.NSFont) *Switch {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Switch) WithUsesSingleLineMode(usesSingleLineMode bool) *Switch {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Switch) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Switch {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Switch) WithAlignment(alignment raw.NSTextAlignment) *Switch {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Switch) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Switch {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Switch) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Switch) WithCell(cell CellProvider) *Switch {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Switch) WithSubviews(items ...ViewProvider) *Switch {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Switch) WithHidden(hidden bool) *Switch {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Switch) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Switch) WithAutoresizesSubviews(autoresizesSubviews bool) *Switch {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Switch) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Switch {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Switch) WithFrame(frame corefoundation.CGRect) *Switch {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Switch) WithFrameRotation(frameRotation float64) *Switch {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Switch) WithFrameCenterRotation(frameCenterRotation float64) *Switch {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Switch) WithBoundsRotation(boundsRotation float64) *Switch {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Switch) WithBounds(bounds corefoundation.CGRect) *Switch {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Switch) WithCanDrawConcurrently(canDrawConcurrently bool) *Switch {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Switch) WithNeedsDisplay(needsDisplay bool) *Switch {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Switch) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Switch) WithWantsRestingTouches(wantsRestingTouches bool) *Switch {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Switch) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Switch {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Switch) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Switch {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Switch) WithWantsLayer(wantsLayer bool) *Switch {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Switch) WithLayer(layer *quartzcore.CALayer) *Switch {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Switch) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Switch) WithNeedsLayout(needsLayout bool) *Switch {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Switch) WithAlphaValue(alphaValue float64) *Switch {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Switch) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Switch) WithBackgroundFilters(items ...*coreimage.CIFilter) *Switch {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Switch) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Switch {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Switch) WithContentFilters(items ...*coreimage.CIFilter) *Switch {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Switch) WithShadow(shadow *raw.NSShadow) *Switch {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Switch) WithClipsToBounds(clipsToBounds bool) *Switch {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Switch) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Switch) WithToolTip(toolTip string) *Switch {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Switch) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Switch {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Switch) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Switch) WithNextKeyView(nextKeyView ViewProvider) *Switch {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Switch) WithFocusRingType(focusRingType raw.NSFocusRingType) *Switch {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Switch) WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Switch) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Switch {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Switch) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Switch) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Switch) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Switch {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Switch) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Switch) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Switch) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Switch) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Switch) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Switch) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Switch) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Switch {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Switch) WithNextResponder(nextResponder ResponderProvider) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Switch) WithMenu(menu *raw.NSMenu) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Switch) WithUserActivity(userActivity *foundation.NSUserActivity) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Switch) WithTouchBar(touchBar *raw.NSTouchBar) *Switch {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // State calls the underlying State.
 func (x *Switch) State() int {
 	return x.inner.State()
@@ -61,6 +544,79 @@ func (x *Switch) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSVi
 type Switchable interface {
 	Unwrap() *raw.NSSwitch
 	WithState(state int) *Switch
+	WithTarget(target objc.ID) *Switch
+	WithAction(action objc.SEL) *Switch
+	WithTag(tag int) *Switch
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Switch
+	WithContinuous(continuous bool) *Switch
+	WithEnabled(enabled bool) *Switch
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Switch
+	WithHighlighted(highlighted bool) *Switch
+	WithControlSize(controlSize raw.NSControlSize) *Switch
+	WithFormatter(formatter *foundation.NSFormatter) *Switch
+	WithObjectValue(objectValue objc.ID) *Switch
+	WithStringValue(stringValue string) *Switch
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Switch
+	WithIntValue(intValue int) *Switch
+	WithIntegerValue(integerValue int) *Switch
+	WithFloatValue(floatValue float32) *Switch
+	WithDoubleValue(doubleValue float64) *Switch
+	WithFont(font *raw.NSFont) *Switch
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Switch
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Switch
+	WithAlignment(alignment raw.NSTextAlignment) *Switch
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Switch
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Switch
+	WithCell(cell CellProvider) *Switch
+	WithSubviews(items ...ViewProvider) *Switch
+	WithHidden(hidden bool) *Switch
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Switch
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Switch
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Switch
+	WithFrame(frame corefoundation.CGRect) *Switch
+	WithFrameRotation(frameRotation float64) *Switch
+	WithFrameCenterRotation(frameCenterRotation float64) *Switch
+	WithBoundsRotation(boundsRotation float64) *Switch
+	WithBounds(bounds corefoundation.CGRect) *Switch
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Switch
+	WithNeedsDisplay(needsDisplay bool) *Switch
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Switch
+	WithWantsRestingTouches(wantsRestingTouches bool) *Switch
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Switch
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Switch
+	WithWantsLayer(wantsLayer bool) *Switch
+	WithLayer(layer *quartzcore.CALayer) *Switch
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Switch
+	WithNeedsLayout(needsLayout bool) *Switch
+	WithAlphaValue(alphaValue float64) *Switch
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Switch
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Switch
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Switch
+	WithContentFilters(items ...*coreimage.CIFilter) *Switch
+	WithShadow(shadow *raw.NSShadow) *Switch
+	WithClipsToBounds(clipsToBounds bool) *Switch
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Switch
+	WithToolTip(toolTip string) *Switch
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Switch
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Switch
+	WithNextKeyView(nextKeyView ViewProvider) *Switch
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Switch
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Switch
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Switch
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Switch
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Switch
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Switch
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Switch
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Switch
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Switch
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Switch
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Switch
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Switch
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Switch
+	WithNextResponder(nextResponder ResponderProvider) *Switch
+	WithMenu(menu *raw.NSMenu) *Switch
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Switch
+	WithTouchBar(touchBar *raw.NSTouchBar) *Switch
 	State() int
 	SetState(state int)
 }

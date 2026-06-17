@@ -45,6 +45,12 @@ func NewBundleWithURL(url string) *Bundle {
 	return &Bundle{inner: raw.NSBundleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Bundle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Bundle {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Load calls the underlying Load.
 func (x *Bundle) Load() bool {
 	return x.inner.Load()
@@ -407,6 +413,7 @@ func (x *Bundle) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Bundleable is the interface implemented by [Bundle], for mocking and DI.
 type Bundleable interface {
 	Unwrap() *raw.NSBundle
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Bundle
 	Load() bool
 	Unload() bool
 	PreflightAndReturnError() error

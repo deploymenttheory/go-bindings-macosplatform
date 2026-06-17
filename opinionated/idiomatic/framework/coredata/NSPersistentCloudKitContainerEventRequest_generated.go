@@ -6,7 +6,9 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PersistentCloudKitContainerEventRequest wraps [raw.NSPersistentCloudKitContainerEventRequest] with a fluent Go API.
@@ -41,6 +43,22 @@ func (x *PersistentCloudKitContainerEventRequest) WithResultType(resultType raw.
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *PersistentCloudKitContainerEventRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // ResultType calls the underlying ResultType.
 func (x *PersistentCloudKitContainerEventRequest) ResultType() raw.NSPersistentCloudKitContainerEventResultType {
 	return x.inner.ResultType()
@@ -57,6 +75,7 @@ func (x *PersistentCloudKitContainerEventRequest) asPersistentStoreRequest() *ra
 type PersistentCloudKitContainerEventRequestable interface {
 	Unwrap() *raw.NSPersistentCloudKitContainerEventRequest
 	WithResultType(resultType raw.NSPersistentCloudKitContainerEventResultType) *PersistentCloudKitContainerEventRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *PersistentCloudKitContainerEventRequest
 	ResultType() raw.NSPersistentCloudKitContainerEventResultType
 	SetResultType(resultType raw.NSPersistentCloudKitContainerEventResultType)
 }

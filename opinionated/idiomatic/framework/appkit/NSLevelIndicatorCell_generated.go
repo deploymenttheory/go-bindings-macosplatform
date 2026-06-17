@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -82,6 +83,276 @@ func (x *LevelIndicatorCell) WithNumberOfTickMarks(numberOfTickMarks int) *Level
 // WithNumberOfMajorTickMarks sets the numberOfMajorTickMarks property and returns the receiver for chaining.
 func (x *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell {
 	x.inner.SetNumberOfMajorTickMarks(numberOfMajorTickMarks)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithType(type_ raw.NSCellType) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithTarget(target objc.ID) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAction(action objc.SEL) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithTag(tag int) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithTitle(title string) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithEnabled(enabled bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithContinuous(continuous bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithEditable(editable bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithSelectable(selectable bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithBordered(bordered bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithBezeled(bezeled bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithScrollable(scrollable bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAlignment(alignment raw.NSTextAlignment) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithFont(font *raw.NSFont) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithFormatter(formatter *foundation.NSFormatter) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithObjectValue(objectValue objc.ID) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithStringValue(stringValue string) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithIntValue(intValue int) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithFloatValue(floatValue float32) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithDoubleValue(doubleValue float64) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithImage(image *raw.NSImage) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithControlSize(controlSize raw.NSControlSize) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithRepresentedObject(representedObject objc.ID) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithMenu(menu *raw.NSMenu) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *LevelIndicatorCell) WithControlTint(controlTint raw.NSControlTint) *LevelIndicatorCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
 	return x
 }
 
@@ -190,6 +461,51 @@ type LevelIndicatorCellable interface {
 	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *LevelIndicatorCell
 	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell
 	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell
+	WithControlView(controlView ViewProvider) *LevelIndicatorCell
+	WithType(type_ raw.NSCellType) *LevelIndicatorCell
+	WithState(state int) *LevelIndicatorCell
+	WithTarget(target objc.ID) *LevelIndicatorCell
+	WithAction(action objc.SEL) *LevelIndicatorCell
+	WithTag(tag int) *LevelIndicatorCell
+	WithTitle(title string) *LevelIndicatorCell
+	WithEnabled(enabled bool) *LevelIndicatorCell
+	WithContinuous(continuous bool) *LevelIndicatorCell
+	WithEditable(editable bool) *LevelIndicatorCell
+	WithSelectable(selectable bool) *LevelIndicatorCell
+	WithBordered(bordered bool) *LevelIndicatorCell
+	WithBezeled(bezeled bool) *LevelIndicatorCell
+	WithScrollable(scrollable bool) *LevelIndicatorCell
+	WithHighlighted(highlighted bool) *LevelIndicatorCell
+	WithAlignment(alignment raw.NSTextAlignment) *LevelIndicatorCell
+	WithWraps(wraps bool) *LevelIndicatorCell
+	WithFont(font *raw.NSFont) *LevelIndicatorCell
+	WithFormatter(formatter *foundation.NSFormatter) *LevelIndicatorCell
+	WithObjectValue(objectValue objc.ID) *LevelIndicatorCell
+	WithStringValue(stringValue string) *LevelIndicatorCell
+	WithIntValue(intValue int) *LevelIndicatorCell
+	WithFloatValue(floatValue float32) *LevelIndicatorCell
+	WithDoubleValue(doubleValue float64) *LevelIndicatorCell
+	WithIntegerValue(integerValue int) *LevelIndicatorCell
+	WithImage(image *raw.NSImage) *LevelIndicatorCell
+	WithControlSize(controlSize raw.NSControlSize) *LevelIndicatorCell
+	WithRepresentedObject(representedObject objc.ID) *LevelIndicatorCell
+	WithMenu(menu *raw.NSMenu) *LevelIndicatorCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *LevelIndicatorCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *LevelIndicatorCell
+	WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *LevelIndicatorCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell
+	WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *LevelIndicatorCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *LevelIndicatorCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell
+	WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell
+	WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *LevelIndicatorCell
+	WithControlTint(controlTint raw.NSControlTint) *LevelIndicatorCell
 	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
 	TickMarkValueAtIndex(index int) float64
 	LevelIndicatorStyle() raw.NSLevelIndicatorStyle

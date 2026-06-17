@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,46 @@ func NewMTRTestClusterClusterTestEmitTestEventRequestParams() *MTRTestClusterClu
 	return &MTRTestClusterClusterTestEmitTestEventRequestParams{inner: raw.MTRTestClusterClusterTestEmitTestEventRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams.SetArg1(arg1)
+	return x
+}
+
+// WithArg2 sets the arg2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams.SetArg2(arg2)
+	return x
+}
+
+// WithArg3 sets the arg3 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams.SetArg3(arg3)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEmitTestEventRequestParams) asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams { return &x.inner.MTRUnitTestingClusterTestEmitTestEventRequestParams }
 
 // MTRTestClusterClusterTestEmitTestEventRequestParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestEventRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventRequestParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams
+	WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventRequestParams
 }
 
 var _ MTRTestClusterClusterTestEmitTestEventRequestParamsable = (*MTRTestClusterClusterTestEmitTestEventRequestParams)(nil)

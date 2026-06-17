@@ -103,6 +103,108 @@ func (x *DOMHTMLAppletElement) WithWidth(width string) *DOMHTMLAppletElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithTitle(title string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithLang(lang string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithDir(dir string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithTabIndex(tabIndex int) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithAccessKey(accessKey string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithInnerText(innerText string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithOuterText(outerText string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithContentEditable(contentEditable string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithIdName(idName string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithScrollLeft(scrollLeft int) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithScrollTop(scrollTop int) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithInnerHTML(innerHTML string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithOuterHTML(outerHTML string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithClassName(className string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithNodeValue(nodeValue string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithPrefix(prefix string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLAppletElement) WithTextContent(textContent string) *DOMHTMLAppletElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Align calls the underlying Align.
 func (x *DOMHTMLAppletElement) Align() string {
 	_r := x.inner.Align()
@@ -273,6 +375,23 @@ type DOMHTMLAppletElementable interface {
 	WithObject(object string) *DOMHTMLAppletElement
 	WithVspace(vspace int) *DOMHTMLAppletElement
 	WithWidth(width string) *DOMHTMLAppletElement
+	WithTitle(title string) *DOMHTMLAppletElement
+	WithLang(lang string) *DOMHTMLAppletElement
+	WithDir(dir string) *DOMHTMLAppletElement
+	WithTabIndex(tabIndex int) *DOMHTMLAppletElement
+	WithAccessKey(accessKey string) *DOMHTMLAppletElement
+	WithInnerText(innerText string) *DOMHTMLAppletElement
+	WithOuterText(outerText string) *DOMHTMLAppletElement
+	WithContentEditable(contentEditable string) *DOMHTMLAppletElement
+	WithIdName(idName string) *DOMHTMLAppletElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLAppletElement
+	WithScrollTop(scrollTop int) *DOMHTMLAppletElement
+	WithInnerHTML(innerHTML string) *DOMHTMLAppletElement
+	WithOuterHTML(outerHTML string) *DOMHTMLAppletElement
+	WithClassName(className string) *DOMHTMLAppletElement
+	WithNodeValue(nodeValue string) *DOMHTMLAppletElement
+	WithPrefix(prefix string) *DOMHTMLAppletElement
+	WithTextContent(textContent string) *DOMHTMLAppletElement
 	Align() string
 	SetAlign(align string)
 	Alt() string

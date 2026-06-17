@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams() *MTROtaSo
 	return &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{inner: raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(_id)}
 }
 
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithAction(action *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetAction(action)
+	return x
+}
+
+// WithDelayedActionTime sets the delayedActionTime property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetDelayedActionTime(delayedActionTime)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams { return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams }
 
 // MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	WithAction(action *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams)(nil)

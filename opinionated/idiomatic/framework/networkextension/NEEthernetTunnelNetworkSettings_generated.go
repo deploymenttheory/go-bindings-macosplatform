@@ -38,6 +38,42 @@ func NewNEEthernetTunnelNetworkSettingsWithTunnelRemoteAddressEthernetAddressMtu
 	return &NEEthernetTunnelNetworkSettings{inner: raw.NEEthernetTunnelNetworkSettingsFromID(_id)}
 }
 
+// WithIPv4Settings sets the iPv4Settings property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetIPv4Settings(iPv4Settings)
+	return x
+}
+
+// WithIPv6Settings sets the iPv6Settings property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetIPv6Settings(iPv6Settings)
+	return x
+}
+
+// WithTunnelOverheadBytes sets the tunnelOverheadBytes property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetTunnelOverheadBytes(tunnelOverheadBytes)
+	return x
+}
+
+// WithMTU sets the mTU property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithMTU(mTU *foundation.NSNumber) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.SetMTU(mTU)
+	return x
+}
+
+// WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetDNSSettings(dNSSettings.asNEDNSSettings())
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NEEthernetTunnelNetworkSettings) WithProxySettings(proxySettings *raw.NEProxySettings) *NEEthernetTunnelNetworkSettings {
+	x.inner.NEPacketTunnelNetworkSettings.NETunnelNetworkSettings.SetProxySettings(proxySettings)
+	return x
+}
+
 // EthernetAddress calls the underlying EthernetAddress.
 func (x *NEEthernetTunnelNetworkSettings) EthernetAddress() string {
 	_r := x.inner.EthernetAddress()
@@ -54,6 +90,12 @@ func (x *NEEthernetTunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETun
 // NEEthernetTunnelNetworkSettingsable is the interface implemented by [NEEthernetTunnelNetworkSettings], for mocking and DI.
 type NEEthernetTunnelNetworkSettingsable interface {
 	Unwrap() *raw.NEEthernetTunnelNetworkSettings
+	WithIPv4Settings(iPv4Settings *raw.NEIPv4Settings) *NEEthernetTunnelNetworkSettings
+	WithIPv6Settings(iPv6Settings *raw.NEIPv6Settings) *NEEthernetTunnelNetworkSettings
+	WithTunnelOverheadBytes(tunnelOverheadBytes *foundation.NSNumber) *NEEthernetTunnelNetworkSettings
+	WithMTU(mTU *foundation.NSNumber) *NEEthernetTunnelNetworkSettings
+	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NEEthernetTunnelNetworkSettings
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NEEthernetTunnelNetworkSettings
 	EthernetAddress() string
 }
 

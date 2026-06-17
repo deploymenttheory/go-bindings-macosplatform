@@ -35,6 +35,12 @@ func NewUnitConcentrationMass() *UnitConcentrationMass {
 	return &UnitConcentrationMass{inner: raw.NSUnitConcentrationMassFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitConcentrationMass) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConcentrationMass {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitConcentrationMass) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitConcentrationMass) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitConcentrationMass) asObject() *raw.NSObject { return &x.inner.NSDim
 // UnitConcentrationMassable is the interface implemented by [UnitConcentrationMass], for mocking and DI.
 type UnitConcentrationMassable interface {
 	Unwrap() *raw.NSUnitConcentrationMass
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConcentrationMass
 }
 
 var _ UnitConcentrationMassable = (*UnitConcentrationMass)(nil)

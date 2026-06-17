@@ -57,6 +57,18 @@ func (x *NNForwardLossNode) WithPropertyCallBack(propertyCallBack raw.MPSNNLossC
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNForwardLossNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNForwardLossNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // LossType calls the underlying LossType.
 func (x *NNForwardLossNode) LossType() raw.MPSCNNLossType {
 	return x.inner.LossType()
@@ -113,6 +125,8 @@ func (x *NNForwardLossNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.in
 type NNForwardLossNodeable interface {
 	Unwrap() *raw.MPSNNForwardLossNode
 	WithPropertyCallBack(propertyCallBack raw.MPSNNLossCallback) *NNForwardLossNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNForwardLossNode
+	WithLabel(label string) *NNForwardLossNode
 	LossType() raw.MPSCNNLossType
 	ReductionType() raw.MPSCNNReductionType
 	NumberOfClasses() uint

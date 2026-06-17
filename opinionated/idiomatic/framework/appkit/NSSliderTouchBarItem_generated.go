@@ -103,6 +103,12 @@ func (x *SliderTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *SliderTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // Slider calls the underlying Slider.
 func (x *SliderTouchBarItem) Slider() *Slider {
 	_r := x.inner.Slider()
@@ -240,6 +246,7 @@ type SliderTouchBarItemable interface {
 	WithTarget(target objc.ID) *SliderTouchBarItem
 	WithAction(action objc.SEL) *SliderTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *SliderTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *SliderTouchBarItem
 	Slider() *Slider
 	SetSlider(slider *raw.NSSlider)
 	DoubleValue() float64

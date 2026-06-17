@@ -56,6 +56,54 @@ func (x *RangeSpecifier) WithEndSpecifier(endSpecifier ScriptObjectSpecifierProv
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithKey(key string) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RangeSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RangeSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StartSpecifier calls the underlying StartSpecifier.
 func (x *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
 	_r := x.inner.StartSpecifier()
@@ -93,6 +141,14 @@ type RangeSpecifierable interface {
 	Unwrap() *raw.NSRangeSpecifier
 	WithStartSpecifier(startSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
 	WithEndSpecifier(endSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *RangeSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *RangeSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *RangeSpecifier
+	WithKey(key string) *RangeSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *RangeSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *RangeSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RangeSpecifier
 	StartSpecifier() *ScriptObjectSpecifier
 	SetStartSpecifier(startSpecifier *raw.NSScriptObjectSpecifier)
 	EndSpecifier() *ScriptObjectSpecifier

@@ -35,6 +35,12 @@ func NewNotificationCenter() *NotificationCenter {
 	return &NotificationCenter{inner: raw.NSNotificationCenterFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NotificationCenter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationCenter {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddObserverSelectorNameObject calls the underlying AddObserverSelectorNameObject.
 func (x *NotificationCenter) AddObserverSelectorNameObject(observer objc.ID, aSelector objc.SEL, aName *raw.NSString, anObject objc.ID) {
 	x.inner.AddObserverSelectorNameObject(observer, aSelector, aName, anObject)
@@ -77,6 +83,7 @@ func (x *NotificationCenter) asObject() *raw.NSObject { return &x.inner.NSObject
 // NotificationCenterable is the interface implemented by [NotificationCenter], for mocking and DI.
 type NotificationCenterable interface {
 	Unwrap() *raw.NSNotificationCenter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationCenter
 	AddObserverSelectorNameObject(observer objc.ID, aSelector objc.SEL, aName *raw.NSString, anObject objc.ID)
 	PostNotification(notification *raw.NSNotification)
 	PostNotificationNameObject(aName *raw.NSString, anObject objc.ID)

@@ -43,6 +43,12 @@ func NewRegularExpressionWithPatternOptionsError(pattern string, options raw.NSR
 	return &RegularExpression{inner: raw.NSRegularExpressionFromID(_id)}, nil
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RegularExpression) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RegularExpression {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Pattern calls the underlying Pattern.
 func (x *RegularExpression) Pattern() *String {
 	_r := x.inner.Pattern()
@@ -121,6 +127,7 @@ func (x *RegularExpression) asObject() *raw.NSObject { return &x.inner.NSObject 
 // RegularExpressionable is the interface implemented by [RegularExpression], for mocking and DI.
 type RegularExpressionable interface {
 	Unwrap() *raw.NSRegularExpression
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RegularExpression
 	Pattern() *String
 	Options() raw.NSRegularExpressionOptions
 	NumberOfCaptureGroups() uint

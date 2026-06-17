@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -53,6 +54,18 @@ func NewCNNLossLabelsWithDeviceLossImageSizeLabelsImageWeightsImage(device metal
 	return &CNNLossLabels{inner: raw.MPSCNNLossLabelsFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNLossLabels) WithReadCount(readCount uint) *CNNLossLabels {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLossLabels) WithLabel(label string) *CNNLossLabels {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // LossImage calls the underlying LossImage.
 func (x *CNNLossLabels) LossImage() *mpscore.MPSImage {
 	return x.inner.LossImage()
@@ -73,6 +86,8 @@ func (x *CNNLossLabels) asState() *mpscore.MPSState { return &x.inner.MPSState }
 // CNNLossLabelsable is the interface implemented by [CNNLossLabels], for mocking and DI.
 type CNNLossLabelsable interface {
 	Unwrap() *raw.MPSCNNLossLabels
+	WithReadCount(readCount uint) *CNNLossLabels
+	WithLabel(label string) *CNNLossLabels
 	LossImage() *mpscore.MPSImage
 	LabelsImage() *mpscore.MPSImage
 	WeightsImage() *mpscore.MPSImage

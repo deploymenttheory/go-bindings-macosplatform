@@ -266,6 +266,12 @@ func NewStringWithCString(bytes_ string) *String {
 	return &String{inner: raw.NSStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *String) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *String {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CharacterAtIndex calls the underlying CharacterAtIndex.
 func (x *String) CharacterAtIndex(index uint) uint16 {
 	return x.inner.CharacterAtIndex(index)
@@ -1021,6 +1027,7 @@ func (x *String) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Stringable is the interface implemented by [String], for mocking and DI.
 type Stringable interface {
 	Unwrap() *raw.NSString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *String
 	CharacterAtIndex(index uint) uint16
 	Length() uint
 	SubstringFromIndex(from uint) *String

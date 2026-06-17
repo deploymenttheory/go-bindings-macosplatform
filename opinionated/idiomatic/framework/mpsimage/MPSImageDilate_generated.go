@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageDilate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageDilate) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -62,6 +81,9 @@ func (x *ImageDilate) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.
 // ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
 type ImageDilateable interface {
 	Unwrap() *raw.MPSImageDilate
+	WithOffset(offset mpscore.MPSOffset) *ImageDilate
+	WithClipRect(clipRect metal.MTLRegion) *ImageDilate
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate
 	KernelHeight() uint
 	KernelWidth() uint
 }

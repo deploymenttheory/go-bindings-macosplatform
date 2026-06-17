@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,30 @@ func NewDOMProcessingInstruction() *DOMProcessingInstruction {
 	return &DOMProcessingInstruction{inner: raw.DOMProcessingInstructionFromID(_id)}
 }
 
+// WithData sets the data property and returns the receiver for chaining.
+func (x *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
+	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
+	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
+	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
+	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Target calls the underlying Target.
 func (x *DOMProcessingInstruction) Target() string {
 	_r := x.inner.Target()
@@ -56,6 +81,10 @@ func (x *DOMProcessingInstruction) asWebScriptObject() *raw.WebScriptObject { re
 // DOMProcessingInstructionable is the interface implemented by [DOMProcessingInstruction], for mocking and DI.
 type DOMProcessingInstructionable interface {
 	Unwrap() *raw.DOMProcessingInstruction
+	WithData(data string) *DOMProcessingInstruction
+	WithNodeValue(nodeValue string) *DOMProcessingInstruction
+	WithPrefix(prefix string) *DOMProcessingInstruction
+	WithTextContent(textContent string) *DOMProcessingInstruction
 	Target() string
 }
 

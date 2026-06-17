@@ -96,6 +96,60 @@ func (x *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(mo
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithDatabase(database *raw.CKDatabase) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithGroup(group *raw.CKOperationGroup) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithContainer(container *raw.CKContainer) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // SubscriptionsToSave returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*raw.CKSubscription {
 	arr := x.inner.SubscriptionsToSave()
@@ -191,6 +245,15 @@ type ModifySubscriptionsOperationable interface {
 	WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation
 	WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation
 	WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock objc.Block) *ModifySubscriptionsOperation
+	WithDatabase(database *raw.CKDatabase) *ModifySubscriptionsOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifySubscriptionsOperation
+	WithGroup(group *raw.CKOperationGroup) *ModifySubscriptionsOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation
+	WithContainer(container *raw.CKContainer) *ModifySubscriptionsOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation
+	WithLongLived(longLived bool) *ModifySubscriptionsOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation
 	SubscriptionsToSave() []*raw.CKSubscription
 	SetSubscriptionsToSave(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription])
 	SubscriptionIDsToDelete() []*foundation.NSString

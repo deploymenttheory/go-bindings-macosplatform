@@ -36,6 +36,12 @@ func NewMethodSignature() *MethodSignature {
 	return &MethodSignature{inner: raw.NSMethodSignatureFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MethodSignature) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MethodSignature {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetArgumentTypeAtIndex calls the underlying GetArgumentTypeAtIndex.
 func (x *MethodSignature) GetArgumentTypeAtIndex(idx uint) string {
 	return x.inner.GetArgumentTypeAtIndex(idx)
@@ -71,6 +77,7 @@ func (x *MethodSignature) asObject() *raw.NSObject { return &x.inner.NSObject }
 // MethodSignatureable is the interface implemented by [MethodSignature], for mocking and DI.
 type MethodSignatureable interface {
 	Unwrap() *raw.NSMethodSignature
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MethodSignature
 	GetArgumentTypeAtIndex(idx uint) string
 	IsOneway() bool
 	NumberOfArguments() uint

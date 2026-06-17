@@ -44,6 +44,12 @@ func NewURLSessionWebSocketMessageWithString(string_ string) *URLSessionWebSocke
 	return &URLSessionWebSocketMessage{inner: raw.NSURLSessionWebSocketMessageFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionWebSocketMessage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionWebSocketMessage {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Type calls the underlying Type.
 func (x *URLSessionWebSocketMessage) Type() raw.NSURLSessionWebSocketMessageType {
 	return x.inner.Type()
@@ -72,6 +78,7 @@ func (x *URLSessionWebSocketMessage) asObject() *raw.NSObject { return &x.inner.
 // URLSessionWebSocketMessageable is the interface implemented by [URLSessionWebSocketMessage], for mocking and DI.
 type URLSessionWebSocketMessageable interface {
 	Unwrap() *raw.NSURLSessionWebSocketMessage
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionWebSocketMessage
 	Type() raw.NSURLSessionWebSocketMessageType
 	Data() *Data
 	String() *String

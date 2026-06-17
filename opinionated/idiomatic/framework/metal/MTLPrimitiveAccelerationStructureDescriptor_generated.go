@@ -84,6 +84,12 @@ func (x *PrimitiveAccelerationStructureDescriptor) WithMotionKeyframeCount(motio
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *PrimitiveAccelerationStructureDescriptor) WithUsage(usage raw.MTLAccelerationStructureUsage) *PrimitiveAccelerationStructureDescriptor {
+	x.inner.MTLAccelerationStructureDescriptor.SetUsage(usage)
+	return x
+}
+
 // GeometryDescriptors returns the collection as a Go slice.
 func (x *PrimitiveAccelerationStructureDescriptor) GeometryDescriptors() []*raw.MTLAccelerationStructureGeometryDescriptor {
 	arr := x.inner.GeometryDescriptors()
@@ -161,6 +167,7 @@ type PrimitiveAccelerationStructureDescriptorable interface {
 	WithMotionStartTime(motionStartTime float32) *PrimitiveAccelerationStructureDescriptor
 	WithMotionEndTime(motionEndTime float32) *PrimitiveAccelerationStructureDescriptor
 	WithMotionKeyframeCount(motionKeyframeCount uint) *PrimitiveAccelerationStructureDescriptor
+	WithUsage(usage raw.MTLAccelerationStructureUsage) *PrimitiveAccelerationStructureDescriptor
 	GeometryDescriptors() []*raw.MTLAccelerationStructureGeometryDescriptor
 	SetGeometryDescriptors(geometryDescriptors *foundation.NSArray[*raw.MTLAccelerationStructureGeometryDescriptor])
 	MotionStartBorderMode() raw.MTLMotionBorderMode

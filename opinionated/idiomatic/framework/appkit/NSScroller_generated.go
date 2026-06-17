@@ -7,7 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Scroller wraps [raw.NSScroller] with a fluent Go API.
@@ -63,6 +67,484 @@ func (x *Scroller) WithArrowsPosition(arrowsPosition raw.NSScrollArrowPosition) 
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *Scroller) WithControlTint(controlTint raw.NSControlTint) *Scroller {
 	x.inner.SetControlTint(controlTint)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Scroller) WithTarget(target objc.ID) *Scroller {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Scroller) WithAction(action objc.SEL) *Scroller {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Scroller) WithTag(tag int) *Scroller {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Scroller) WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Scroller) WithContinuous(continuous bool) *Scroller {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Scroller) WithEnabled(enabled bool) *Scroller {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Scroller) WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Scroller) WithHighlighted(highlighted bool) *Scroller {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Scroller) WithControlSize(controlSize raw.NSControlSize) *Scroller {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Scroller) WithFormatter(formatter *foundation.NSFormatter) *Scroller {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Scroller) WithObjectValue(objectValue objc.ID) *Scroller {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Scroller) WithStringValue(stringValue string) *Scroller {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Scroller) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Scroller {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Scroller) WithIntValue(intValue int) *Scroller {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Scroller) WithIntegerValue(integerValue int) *Scroller {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Scroller) WithFloatValue(floatValue float32) *Scroller {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Scroller) WithDoubleValue(doubleValue float64) *Scroller {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Scroller) WithFont(font *raw.NSFont) *Scroller {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Scroller) WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Scroller) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Scroller {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Scroller) WithAlignment(alignment raw.NSTextAlignment) *Scroller {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Scroller) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Scroller {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Scroller) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Scroller) WithCell(cell CellProvider) *Scroller {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Scroller) WithSubviews(items ...ViewProvider) *Scroller {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Scroller) WithHidden(hidden bool) *Scroller {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Scroller) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Scroller) WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Scroller) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scroller {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Scroller) WithFrame(frame corefoundation.CGRect) *Scroller {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Scroller) WithFrameRotation(frameRotation float64) *Scroller {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Scroller) WithFrameCenterRotation(frameCenterRotation float64) *Scroller {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Scroller) WithBoundsRotation(boundsRotation float64) *Scroller {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Scroller) WithBounds(bounds corefoundation.CGRect) *Scroller {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Scroller) WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Scroller) WithNeedsDisplay(needsDisplay bool) *Scroller {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Scroller) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Scroller) WithWantsRestingTouches(wantsRestingTouches bool) *Scroller {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Scroller) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scroller {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Scroller) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scroller {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Scroller) WithWantsLayer(wantsLayer bool) *Scroller {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Scroller) WithLayer(layer *quartzcore.CALayer) *Scroller {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Scroller) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Scroller) WithNeedsLayout(needsLayout bool) *Scroller {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Scroller) WithAlphaValue(alphaValue float64) *Scroller {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Scroller) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Scroller) WithBackgroundFilters(items ...*coreimage.CIFilter) *Scroller {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Scroller) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scroller {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Scroller) WithContentFilters(items ...*coreimage.CIFilter) *Scroller {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Scroller) WithShadow(shadow *raw.NSShadow) *Scroller {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Scroller) WithClipsToBounds(clipsToBounds bool) *Scroller {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Scroller) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Scroller) WithToolTip(toolTip string) *Scroller {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Scroller) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scroller {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Scroller) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Scroller) WithNextKeyView(nextKeyView ViewProvider) *Scroller {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Scroller) WithFocusRingType(focusRingType raw.NSFocusRingType) *Scroller {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Scroller) WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Scroller) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scroller {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Scroller) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Scroller) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Scroller) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scroller {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Scroller) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Scroller) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Scroller) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Scroller) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Scroller) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Scroller) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Scroller) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scroller {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Scroller) WithNextResponder(nextResponder ResponderProvider) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Scroller) WithMenu(menu *raw.NSMenu) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Scroller) WithUserActivity(userActivity *foundation.NSUserActivity) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Scroller) WithTouchBar(touchBar *raw.NSTouchBar) *Scroller {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -195,6 +677,79 @@ type Scrollerable interface {
 	WithKnobProportion(knobProportion float64) *Scroller
 	WithArrowsPosition(arrowsPosition raw.NSScrollArrowPosition) *Scroller
 	WithControlTint(controlTint raw.NSControlTint) *Scroller
+	WithTarget(target objc.ID) *Scroller
+	WithAction(action objc.SEL) *Scroller
+	WithTag(tag int) *Scroller
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Scroller
+	WithContinuous(continuous bool) *Scroller
+	WithEnabled(enabled bool) *Scroller
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Scroller
+	WithHighlighted(highlighted bool) *Scroller
+	WithControlSize(controlSize raw.NSControlSize) *Scroller
+	WithFormatter(formatter *foundation.NSFormatter) *Scroller
+	WithObjectValue(objectValue objc.ID) *Scroller
+	WithStringValue(stringValue string) *Scroller
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Scroller
+	WithIntValue(intValue int) *Scroller
+	WithIntegerValue(integerValue int) *Scroller
+	WithFloatValue(floatValue float32) *Scroller
+	WithDoubleValue(doubleValue float64) *Scroller
+	WithFont(font *raw.NSFont) *Scroller
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Scroller
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Scroller
+	WithAlignment(alignment raw.NSTextAlignment) *Scroller
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Scroller
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Scroller
+	WithCell(cell CellProvider) *Scroller
+	WithSubviews(items ...ViewProvider) *Scroller
+	WithHidden(hidden bool) *Scroller
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Scroller
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Scroller
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Scroller
+	WithFrame(frame corefoundation.CGRect) *Scroller
+	WithFrameRotation(frameRotation float64) *Scroller
+	WithFrameCenterRotation(frameCenterRotation float64) *Scroller
+	WithBoundsRotation(boundsRotation float64) *Scroller
+	WithBounds(bounds corefoundation.CGRect) *Scroller
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Scroller
+	WithNeedsDisplay(needsDisplay bool) *Scroller
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Scroller
+	WithWantsRestingTouches(wantsRestingTouches bool) *Scroller
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Scroller
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Scroller
+	WithWantsLayer(wantsLayer bool) *Scroller
+	WithLayer(layer *quartzcore.CALayer) *Scroller
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Scroller
+	WithNeedsLayout(needsLayout bool) *Scroller
+	WithAlphaValue(alphaValue float64) *Scroller
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Scroller
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Scroller
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Scroller
+	WithContentFilters(items ...*coreimage.CIFilter) *Scroller
+	WithShadow(shadow *raw.NSShadow) *Scroller
+	WithClipsToBounds(clipsToBounds bool) *Scroller
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Scroller
+	WithToolTip(toolTip string) *Scroller
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Scroller
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Scroller
+	WithNextKeyView(nextKeyView ViewProvider) *Scroller
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Scroller
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Scroller
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Scroller
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Scroller
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Scroller
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Scroller
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Scroller
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Scroller
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Scroller
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Scroller
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Scroller
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Scroller
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Scroller
+	WithNextResponder(nextResponder ResponderProvider) *Scroller
+	WithMenu(menu *raw.NSMenu) *Scroller
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Scroller
+	WithTouchBar(touchBar *raw.NSTouchBar) *Scroller
 	RectForPart(partCode raw.NSScrollerPart) corefoundation.CGRect
 	CheckSpaceForParts()
 	DrawKnob()

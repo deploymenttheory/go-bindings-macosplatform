@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,66 @@ func NewNNMultiplicationGradientNode() *NNMultiplicationGradientNode {
 	return &NNMultiplicationGradientNode{inner: raw.MPSNNMultiplicationGradientNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithBias(bias float32) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetBias(bias)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNMultiplicationGradientNode) WithLabel(label string) *NNMultiplicationGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNMultiplicationGradientNode) asNNArithmeticGradientNode() *mpsneuralnetwork.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
 
 func (x *NNMultiplicationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
@@ -45,6 +106,16 @@ func (x *NNMultiplicationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNF
 // NNMultiplicationGradientNodeable is the interface implemented by [NNMultiplicationGradientNode], for mocking and DI.
 type NNMultiplicationGradientNodeable interface {
 	Unwrap() *raw.MPSNNMultiplicationGradientNode
+	WithPrimaryScale(primaryScale float32) *NNMultiplicationGradientNode
+	WithSecondaryScale(secondaryScale float32) *NNMultiplicationGradientNode
+	WithBias(bias float32) *NNMultiplicationGradientNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNMultiplicationGradientNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNMultiplicationGradientNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNMultiplicationGradientNode
+	WithMinimumValue(minimumValue float32) *NNMultiplicationGradientNode
+	WithMaximumValue(maximumValue float32) *NNMultiplicationGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNMultiplicationGradientNode
+	WithLabel(label string) *NNMultiplicationGradientNode
 }
 
 var _ NNMultiplicationGradientNodeable = (*NNMultiplicationGradientNode)(nil)

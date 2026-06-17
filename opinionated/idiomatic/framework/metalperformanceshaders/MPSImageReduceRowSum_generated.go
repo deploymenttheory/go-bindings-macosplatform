@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewImageReduceRowSumWithDevice(device metal.MTLDevice) *ImageReduceRowSum {
 	return &ImageReduceRowSum{inner: raw.MPSImageReduceRowSumFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithLabel(label string) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageReduceRowSum) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowSum) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -48,6 +85,12 @@ func (x *ImageReduceRowSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSI
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
 	Unwrap() *raw.MPSImageReduceRowSum
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum
+	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowSum
+	WithLabel(label string) *ImageReduceRowSum
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)

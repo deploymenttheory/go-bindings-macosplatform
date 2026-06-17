@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDe
 	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageBox) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageBox) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -62,6 +81,9 @@ func (x *ImageBox) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inn
 // ImageBoxable is the interface implemented by [ImageBox], for mocking and DI.
 type ImageBoxable interface {
 	Unwrap() *raw.MPSImageBox
+	WithOffset(offset mpscore.MPSOffset) *ImageBox
+	WithClipRect(clipRect metal.MTLRegion) *ImageBox
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox
 	KernelHeight() uint
 	KernelWidth() uint
 }

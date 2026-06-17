@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -46,6 +47,66 @@ func NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorYAli
 	return &CNNUpsamplingBilinear{inner: raw.MPSCNNUpsamplingBilinearFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinear) WithLabel(label string) *CNNUpsamplingBilinear {
+	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNUpsamplingBilinear) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling { return &x.inner.MPSCNNUpsampling }
 
 func (x *CNNUpsamplingBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNUpsampling.MPSCNNKernel }
@@ -55,6 +116,16 @@ func (x *CNNUpsamplingBilinear) asKernel() *mpscore.MPSKernel { return &x.inner.
 // CNNUpsamplingBilinearable is the interface implemented by [CNNUpsamplingBilinear], for mocking and DI.
 type CNNUpsamplingBilinearable interface {
 	Unwrap() *raw.MPSCNNUpsamplingBilinear
+	WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear
+	WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinear
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear
+	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinear
+	WithLabel(label string) *CNNUpsamplingBilinear
 }
 
 var _ CNNUpsamplingBilinearable = (*CNNUpsamplingBilinear)(nil)

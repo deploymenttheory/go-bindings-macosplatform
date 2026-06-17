@@ -36,6 +36,12 @@ func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
 	return &AnimatedMatrix4x4{inner: raw.MDLAnimatedMatrix4x4FromID(_id)}
 }
 
+// WithInterpolation sets the interpolation property and returns the receiver for chaining.
+func (x *AnimatedMatrix4x4) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedMatrix4x4 {
+	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+	return x
+}
+
 // SetFloat4x4AtTime calls the underlying SetFloat4x4AtTime.
 func (x *AnimatedMatrix4x4) SetFloat4x4AtTime(value unsafe.Pointer, time_ float64) {
 	x.inner.SetFloat4x4AtTime(value, time_)
@@ -81,6 +87,7 @@ func (x *AnimatedMatrix4x4) asAnimatedValue() *raw.MDLAnimatedValue { return &x.
 // AnimatedMatrix4x4able is the interface implemented by [AnimatedMatrix4x4], for mocking and DI.
 type AnimatedMatrix4x4able interface {
 	Unwrap() *raw.MDLAnimatedMatrix4x4
+	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedMatrix4x4
 	SetFloat4x4AtTime(value unsafe.Pointer, time_ float64)
 	SetDouble4x4AtTime(value unsafe.Pointer, time_ float64)
 	Float4x4AtTime(time_ float64) unsafe.Pointer

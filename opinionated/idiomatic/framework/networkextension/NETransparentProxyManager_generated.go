@@ -5,8 +5,10 @@
 package networkextension
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // NETransparentProxyManager wraps [raw.NETransparentProxyManager] with a fluent Go API.
@@ -35,11 +37,63 @@ func NewNETransparentProxyManager() *NETransparentProxyManager {
 	return &NETransparentProxyManager{inner: raw.NETransparentProxyManagerFromID(_id)}
 }
 
+// WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
+func (x *NETransparentProxyManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager {
+	if len(items) == 0 {
+		x.inner.NEVPNManager.SetOnDemandRules(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEVPNManager.SetOnDemandRules(_arr)
+	return x
+}
+
+// WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
+func (x *NETransparentProxyManager) WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager {
+	x.inner.NEVPNManager.SetOnDemandEnabled(onDemandEnabled)
+	return x
+}
+
+// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+func (x *NETransparentProxyManager) WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager {
+	x.inner.NEVPNManager.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	return x
+}
+
+// WithProtocol sets the protocol property and returns the receiver for chaining.
+func (x *NETransparentProxyManager) WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager {
+	x.inner.NEVPNManager.SetProtocol(protocol.asNEVPNProtocol())
+	return x
+}
+
+// WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
+func (x *NETransparentProxyManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager {
+	x.inner.NEVPNManager.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *NETransparentProxyManager) WithEnabled(enabled bool) *NETransparentProxyManager {
+	x.inner.NEVPNManager.SetEnabled(enabled)
+	return x
+}
+
 func (x *NETransparentProxyManager) asNEVPNManager() *raw.NEVPNManager { return &x.inner.NEVPNManager }
 
 // NETransparentProxyManagerable is the interface implemented by [NETransparentProxyManager], for mocking and DI.
 type NETransparentProxyManagerable interface {
 	Unwrap() *raw.NETransparentProxyManager
+	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETransparentProxyManager
+	WithOnDemandEnabled(onDemandEnabled bool) *NETransparentProxyManager
+	WithLocalizedDescription(localizedDescription string) *NETransparentProxyManager
+	WithProtocol(protocol NEVPNProtocolProvider) *NETransparentProxyManager
+	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETransparentProxyManager
+	WithEnabled(enabled bool) *NETransparentProxyManager
 }
 
 var _ NETransparentProxyManagerable = (*NETransparentProxyManager)(nil)

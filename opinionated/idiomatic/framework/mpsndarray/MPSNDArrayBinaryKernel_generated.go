@@ -38,6 +38,12 @@ func NewArrayBinaryKernelWithDevice(device metal.MTLDevice) *ArrayBinaryKernel {
 	return &ArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayBinaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArray.
 func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf, primarySourceArray, secondarySourceArray)
@@ -117,6 +123,7 @@ func (x *ArrayBinaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { 
 // ArrayBinaryKernelable is the interface implemented by [ArrayBinaryKernel], for mocking and DI.
 type ArrayBinaryKernelable interface {
 	Unwrap() *raw.MPSNDArrayBinaryKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinaryKernel
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray

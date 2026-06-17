@@ -78,6 +78,24 @@ func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData *fou
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForPINOperation) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation {
+	x.inner.TKSmartCardUserInteraction.SetDelegate(delegate)
+	return x
+}
+
+// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForPINOperation) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation {
+	x.inner.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
+	return x
+}
+
+// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation {
+	x.inner.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
+	return x
+}
+
 // PINCompletion calls the underlying PINCompletion.
 func (x *SmartCardUserInteractionForPINOperation) PINCompletion() raw.TKSmartCardPINCompletion {
 	return x.inner.PINCompletion()
@@ -146,6 +164,9 @@ type SmartCardUserInteractionForPINOperationable interface {
 	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation
 	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForPINOperation
+	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation
+	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation
+	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation
 	PINCompletion() raw.TKSmartCardPINCompletion
 	SetPINCompletion(pINCompletion raw.TKSmartCardPINCompletion)
 	PINMessageIndices() []*foundation.NSNumber

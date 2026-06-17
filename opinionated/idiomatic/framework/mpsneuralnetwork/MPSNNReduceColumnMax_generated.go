@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,60 @@ func NewNNReduceColumnMaxWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &NNReduceColumnMax{inner: raw.MPSNNReduceColumnMaxFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithPadding(padding raw.MPSNNPadding) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceColumnMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMax {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *NNReduceColumnMax) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceColumnMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -52,6 +107,15 @@ func (x *NNReduceColumnMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MP
 // NNReduceColumnMaxable is the interface implemented by [NNReduceColumnMax], for mocking and DI.
 type NNReduceColumnMaxable interface {
 	Unwrap() *raw.MPSNNReduceColumnMax
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMax
+	WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMax
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMax
+	WithPadding(padding raw.MPSNNPadding) *NNReduceColumnMax
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMax
 }
 
 var _ NNReduceColumnMaxable = (*NNReduceColumnMax)(nil)

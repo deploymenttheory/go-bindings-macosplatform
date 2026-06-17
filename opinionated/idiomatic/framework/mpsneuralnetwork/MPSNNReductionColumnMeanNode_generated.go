@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionColumnMeanNode() *NNReductionColumnMeanNode {
 	return &NNReductionColumnMeanNode{inner: raw.MPSNNReductionColumnMeanNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionColumnMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMeanNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionColumnMeanNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionColumnMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionColumnMeanNode) WithLabel(label string) *NNReductionColumnMeanNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionColumnMeanNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionColumnMeanNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionColumnMeanNode) asNNFilterNode() *raw.MPSNNFilterNode { retu
 // NNReductionColumnMeanNodeable is the interface implemented by [NNReductionColumnMeanNode], for mocking and DI.
 type NNReductionColumnMeanNodeable interface {
 	Unwrap() *raw.MPSNNReductionColumnMeanNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMeanNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionColumnMeanNode
+	WithLabel(label string) *NNReductionColumnMeanNode
 }
 
 var _ NNReductionColumnMeanNodeable = (*NNReductionColumnMeanNode)(nil)

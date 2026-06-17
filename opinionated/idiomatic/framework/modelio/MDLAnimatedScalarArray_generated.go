@@ -36,6 +36,12 @@ func NewAnimatedScalarArrayWithElementCount(arrayElementCount uint) *AnimatedSca
 	return &AnimatedScalarArray{inner: raw.MDLAnimatedScalarArrayFromID(_id)}
 }
 
+// WithInterpolation sets the interpolation property and returns the receiver for chaining.
+func (x *AnimatedScalarArray) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedScalarArray {
+	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+	return x
+}
+
 // SetFloatArrayCountAtTime calls the underlying SetFloatArrayCountAtTime.
 func (x *AnimatedScalarArray) SetFloatArrayCountAtTime(array *float32, count uint, time_ float64) {
 	x.inner.SetFloatArrayCountAtTime(array, count, time_)
@@ -86,6 +92,7 @@ func (x *AnimatedScalarArray) asAnimatedValue() *raw.MDLAnimatedValue { return &
 // AnimatedScalarArrayable is the interface implemented by [AnimatedScalarArray], for mocking and DI.
 type AnimatedScalarArrayable interface {
 	Unwrap() *raw.MDLAnimatedScalarArray
+	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedScalarArray
 	SetFloatArrayCountAtTime(array *float32, count uint, time_ float64)
 	SetDoubleArrayCountAtTime(array *float64, count uint, time_ float64)
 	GetFloatArrayMaxCountAtTime(array *float32, maxCount uint, time_ float64) uint

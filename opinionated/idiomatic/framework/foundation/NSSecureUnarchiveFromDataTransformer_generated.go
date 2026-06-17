@@ -35,6 +35,12 @@ func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer
 	return &SecureUnarchiveFromDataTransformer{inner: raw.NSSecureUnarchiveFromDataTransformerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SecureUnarchiveFromDataTransformer {
+	x.inner.NSValueTransformer.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *SecureUnarchiveFromDataTransformer) asValueTransformer() *raw.NSValueTransformer { return &x.inner.NSValueTransformer }
 
 func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject { return &x.inner.NSValueTransformer.NSObject }
@@ -42,6 +48,7 @@ func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject { return &
 // SecureUnarchiveFromDataTransformerable is the interface implemented by [SecureUnarchiveFromDataTransformer], for mocking and DI.
 type SecureUnarchiveFromDataTransformerable interface {
 	Unwrap() *raw.NSSecureUnarchiveFromDataTransformer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SecureUnarchiveFromDataTransformer
 }
 
 var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)

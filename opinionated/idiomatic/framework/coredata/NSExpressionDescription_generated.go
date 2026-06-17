@@ -48,6 +48,60 @@ func (x *ExpressionDescription) WithExpressionResultType(expressionResultType ra
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithName(name string) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithOptional(optional bool) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithTransient(transient bool) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithIndexed(indexed bool) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithVersionHashModifier(versionHashModifier string) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription {
+	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	return x
+}
+
 // Expression calls the underlying Expression.
 func (x *ExpressionDescription) Expression() *foundation.NSExpression {
 	return x.inner.Expression()
@@ -75,6 +129,15 @@ type ExpressionDescriptionable interface {
 	Unwrap() *raw.NSExpressionDescription
 	WithExpression(expression *foundation.NSExpression) *ExpressionDescription
 	WithExpressionResultType(expressionResultType raw.NSAttributeType) *ExpressionDescription
+	WithName(name string) *ExpressionDescription
+	WithOptional(optional bool) *ExpressionDescription
+	WithTransient(transient bool) *ExpressionDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *ExpressionDescription
+	WithIndexed(indexed bool) *ExpressionDescription
+	WithVersionHashModifier(versionHashModifier string) *ExpressionDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription
+	WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription
 	Expression() *foundation.NSExpression
 	SetExpression(expression *foundation.NSExpression)
 	ExpressionResultType() raw.NSAttributeType

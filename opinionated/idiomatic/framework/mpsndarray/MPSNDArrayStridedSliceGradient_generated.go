@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,12 @@ func NewArrayStridedSliceGradient() *ArrayStridedSliceGradient {
 	return &ArrayStridedSliceGradient{inner: raw.MPSNDArrayStridedSliceGradientFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayStridedSliceGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSliceGradient {
+	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 func (x *ArrayStridedSliceGradient) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel }
 
 func (x *ArrayStridedSliceGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
@@ -44,6 +51,7 @@ func (x *ArrayStridedSliceGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiar
 // ArrayStridedSliceGradientable is the interface implemented by [ArrayStridedSliceGradient], for mocking and DI.
 type ArrayStridedSliceGradientable interface {
 	Unwrap() *raw.MPSNDArrayStridedSliceGradient
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSliceGradient
 }
 
 var _ ArrayStridedSliceGradientable = (*ArrayStridedSliceGradient)(nil)

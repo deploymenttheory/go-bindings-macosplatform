@@ -49,6 +49,108 @@ func (x *DOMHTMLOptGroupElement) WithLabel(label string) *DOMHTMLOptGroupElement
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithTitle(title string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithLang(lang string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithDir(dir string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithTabIndex(tabIndex int) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithAccessKey(accessKey string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithInnerText(innerText string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithOuterText(outerText string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithContentEditable(contentEditable string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithIdName(idName string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithScrollLeft(scrollLeft int) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithScrollTop(scrollTop int) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithInnerHTML(innerHTML string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithOuterHTML(outerHTML string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithClassName(className string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithNodeValue(nodeValue string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithPrefix(prefix string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLOptGroupElement) WithTextContent(textContent string) *DOMHTMLOptGroupElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Disabled calls the underlying Disabled.
 func (x *DOMHTMLOptGroupElement) Disabled() bool {
 	return x.inner.Disabled()
@@ -88,6 +190,23 @@ type DOMHTMLOptGroupElementable interface {
 	Unwrap() *raw.DOMHTMLOptGroupElement
 	WithDisabled(disabled bool) *DOMHTMLOptGroupElement
 	WithLabel(label string) *DOMHTMLOptGroupElement
+	WithTitle(title string) *DOMHTMLOptGroupElement
+	WithLang(lang string) *DOMHTMLOptGroupElement
+	WithDir(dir string) *DOMHTMLOptGroupElement
+	WithTabIndex(tabIndex int) *DOMHTMLOptGroupElement
+	WithAccessKey(accessKey string) *DOMHTMLOptGroupElement
+	WithInnerText(innerText string) *DOMHTMLOptGroupElement
+	WithOuterText(outerText string) *DOMHTMLOptGroupElement
+	WithContentEditable(contentEditable string) *DOMHTMLOptGroupElement
+	WithIdName(idName string) *DOMHTMLOptGroupElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLOptGroupElement
+	WithScrollTop(scrollTop int) *DOMHTMLOptGroupElement
+	WithInnerHTML(innerHTML string) *DOMHTMLOptGroupElement
+	WithOuterHTML(outerHTML string) *DOMHTMLOptGroupElement
+	WithClassName(className string) *DOMHTMLOptGroupElement
+	WithNodeValue(nodeValue string) *DOMHTMLOptGroupElement
+	WithPrefix(prefix string) *DOMHTMLOptGroupElement
+	WithTextContent(textContent string) *DOMHTMLOptGroupElement
 	Disabled() bool
 	SetDisabled(disabled bool)
 	Label() string

@@ -54,6 +54,30 @@ func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGr
 	return x
 }
 
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *AnimationGroup) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *AnimationGroup {
+	x.inner.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *AnimationGroup) WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup {
+	x.inner.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
+	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *AnimationGroup) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup {
+	x.inner.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	return x
+}
+
 // Animations returns the collection as a Go slice.
 func (x *AnimationGroup) Animations() []*raw.CAAnimation {
 	arr := x.inner.Animations()
@@ -76,6 +100,10 @@ func (x *AnimationGroup) asAnimation() *raw.CAAnimation { return &x.inner.CAAnim
 type AnimationGroupable interface {
 	Unwrap() *raw.CAAnimationGroup
 	WithAnimations(items ...AnimationProvider) *AnimationGroup
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *AnimationGroup
+	WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup
+	WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup
 	Animations() []*raw.CAAnimation
 	SetAnimations(animations *foundation.NSArray[*raw.CAAnimation])
 }

@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageHistogramEqualizationWithCoderDevice(aDecoder *foundation.NSCoder, 
 	return &ImageHistogramEqualization{inner: raw.MPSImageHistogramEqualizationFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageHistogramEqualization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramEqualization {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset.
 func (x *ImageHistogramEqualization) EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer, source, histogram, histogramOffset)
@@ -60,6 +79,9 @@ func (x *ImageHistogramEqualization) asUnaryImageKernel() *raw.MPSUnaryImageKern
 // ImageHistogramEqualizationable is the interface implemented by [ImageHistogramEqualization], for mocking and DI.
 type ImageHistogramEqualizationable interface {
 	Unwrap() *raw.MPSImageHistogramEqualization
+	WithOffset(offset mpscore.MPSOffset) *ImageHistogramEqualization
+	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramEqualization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramEqualization
 	EncodeTransformToCommandBufferSourceTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
 	HistogramInfo() raw.MPSImageHistogramInfo
 }

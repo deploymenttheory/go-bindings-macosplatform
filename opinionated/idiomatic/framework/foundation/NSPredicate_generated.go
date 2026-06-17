@@ -35,6 +35,12 @@ func NewPredicate() *Predicate {
 	return &Predicate{inner: raw.NSPredicateFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Predicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PredicateWithSubstitutionVariables calls the underlying PredicateWithSubstitutionVariables.
 func (x *Predicate) PredicateWithSubstitutionVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate {
 	_r := x.inner.PredicateWithSubstitutionVariables(variables)
@@ -80,6 +86,7 @@ func (x *Predicate) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Predicateable is the interface implemented by [Predicate], for mocking and DI.
 type Predicateable interface {
 	Unwrap() *raw.NSPredicate
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate
 	PredicateWithSubstitutionVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate
 	EvaluateWithObject(object objc.ID) bool
 	EvaluateWithObjectSubstitutionVariables(object objc.ID, bindings *raw.NSDictionary[*raw.NSString, objc.ID]) bool

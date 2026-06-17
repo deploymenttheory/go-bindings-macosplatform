@@ -47,6 +47,72 @@ func NewNNReduceFeatureChannelsMinWithCoderDevice(aDecoder *foundation.NSCoder, 
 	return &NNReduceFeatureChannelsMin{inner: raw.MPSNNReduceFeatureChannelsMinFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithOffset(offset mpscore.MPSOffset) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsMin) WithLabel(label string) *NNReduceFeatureChannelsMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReduceFeatureChannelsMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceFeatureChannelsMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -56,6 +122,17 @@ func (x *NNReduceFeatureChannelsMin) asKernel() *mpscore.MPSKernel { return &x.i
 // NNReduceFeatureChannelsMinable is the interface implemented by [NNReduceFeatureChannelsMin], for mocking and DI.
 type NNReduceFeatureChannelsMinable interface {
 	Unwrap() *raw.MPSNNReduceFeatureChannelsMin
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceFeatureChannelsMin
+	WithOffset(offset mpscore.MPSOffset) *NNReduceFeatureChannelsMin
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsMin
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsMin
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceFeatureChannelsMin
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsMin
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsMin
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsMin
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsMin
+	WithLabel(label string) *NNReduceFeatureChannelsMin
 }
 
 var _ NNReduceFeatureChannelsMinable = (*NNReduceFeatureChannelsMin)(nil)

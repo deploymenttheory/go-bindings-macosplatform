@@ -37,6 +37,12 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 	return &MorphologyPronoun{inner: raw.NSMorphologyPronounFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MorphologyPronoun) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyPronoun {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Pronoun calls the underlying Pronoun.
 func (x *MorphologyPronoun) Pronoun() *String {
 	_r := x.inner.Pronoun()
@@ -69,6 +75,7 @@ func (x *MorphologyPronoun) asObject() *raw.NSObject { return &x.inner.NSObject 
 // MorphologyPronounable is the interface implemented by [MorphologyPronoun], for mocking and DI.
 type MorphologyPronounable interface {
 	Unwrap() *raw.NSMorphologyPronoun
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MorphologyPronoun
 	Pronoun() *String
 	Morphology() *Morphology
 	DependentMorphology() *Morphology

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewSoftmaxLayer() *SoftmaxLayer {
 	return &SoftmaxLayer{inner: raw.MLCSoftmaxLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SoftmaxLayer) WithLabel(label string) *SoftmaxLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *SoftmaxLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Operation calls the underlying Operation.
 func (x *SoftmaxLayer) Operation() raw.MLCSoftmaxOperation {
 	return x.inner.Operation()
@@ -50,6 +63,8 @@ func (x *SoftmaxLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // SoftmaxLayerable is the interface implemented by [SoftmaxLayer], for mocking and DI.
 type SoftmaxLayerable interface {
 	Unwrap() *raw.MLCSoftmaxLayer
+	WithLabel(label string) *SoftmaxLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SoftmaxLayer
 	Operation() raw.MLCSoftmaxOperation
 	Dimension() uint
 }

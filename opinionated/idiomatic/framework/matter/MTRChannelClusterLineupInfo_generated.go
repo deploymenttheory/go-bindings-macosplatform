@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRChannelClusterLineupInfo() *MTRChannelClusterLineupInfo {
 	return &MTRChannelClusterLineupInfo{inner: raw.MTRChannelClusterLineupInfoFromID(_id)}
 }
 
+// WithOperatorName sets the operatorName property and returns the receiver for chaining.
+func (x *MTRChannelClusterLineupInfo) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo {
+	x.inner.MTRChannelClusterLineupInfoStruct.SetOperatorName(foundation.NSStringStringWithUTF8String(operatorName))
+	return x
+}
+
+// WithLineupName sets the lineupName property and returns the receiver for chaining.
+func (x *MTRChannelClusterLineupInfo) WithLineupName(lineupName string) *MTRChannelClusterLineupInfo {
+	x.inner.MTRChannelClusterLineupInfoStruct.SetLineupName(foundation.NSStringStringWithUTF8String(lineupName))
+	return x
+}
+
+// WithPostalCode sets the postalCode property and returns the receiver for chaining.
+func (x *MTRChannelClusterLineupInfo) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo {
+	x.inner.MTRChannelClusterLineupInfoStruct.SetPostalCode(foundation.NSStringStringWithUTF8String(postalCode))
+	return x
+}
+
+// WithLineupInfoType sets the lineupInfoType property and returns the receiver for chaining.
+func (x *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfo {
+	x.inner.MTRChannelClusterLineupInfoStruct.SetLineupInfoType(lineupInfoType)
+	return x
+}
+
 func (x *MTRChannelClusterLineupInfo) asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct { return &x.inner.MTRChannelClusterLineupInfoStruct }
 
 // MTRChannelClusterLineupInfoable is the interface implemented by [MTRChannelClusterLineupInfo], for mocking and DI.
 type MTRChannelClusterLineupInfoable interface {
 	Unwrap() *raw.MTRChannelClusterLineupInfo
+	WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo
+	WithLineupName(lineupName string) *MTRChannelClusterLineupInfo
+	WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo
+	WithLineupInfoType(lineupInfoType *foundation.NSNumber) *MTRChannelClusterLineupInfo
 }
 
 var _ MTRChannelClusterLineupInfoable = (*MTRChannelClusterLineupInfo)(nil)

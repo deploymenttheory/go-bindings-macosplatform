@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -56,6 +57,36 @@ func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight uint) *CNNSp
 	return x
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationNode) WithAlpha(alpha float32) *CNNSpatialNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetAlpha(alpha)
+	return x
+}
+
+// WithBeta sets the beta property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationNode) WithBeta(beta float32) *CNNSpatialNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetBeta(beta)
+	return x
+}
+
+// WithDelta sets the delta property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationNode) WithDelta(delta float32) *CNNSpatialNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.SetDelta(delta)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNormalizationNode {
+	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelWidth calls the underlying KernelWidth.
 func (x *CNNSpatialNormalizationNode) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -85,6 +116,11 @@ type CNNSpatialNormalizationNodeable interface {
 	Unwrap() *raw.MPSCNNSpatialNormalizationNode
 	WithKernelWidth(kernelWidth uint) *CNNSpatialNormalizationNode
 	WithKernelHeight(kernelHeight uint) *CNNSpatialNormalizationNode
+	WithAlpha(alpha float32) *CNNSpatialNormalizationNode
+	WithBeta(beta float32) *CNNSpatialNormalizationNode
+	WithDelta(delta float32) *CNNSpatialNormalizationNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalizationNode
+	WithLabel(label string) *CNNSpatialNormalizationNode
 	KernelWidth() uint
 	SetKernelWidth(kernelWidth uint)
 	KernelHeight() uint

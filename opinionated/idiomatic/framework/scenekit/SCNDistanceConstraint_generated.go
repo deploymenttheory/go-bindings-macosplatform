@@ -53,6 +53,24 @@ func (x *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *Dista
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *DistanceConstraint) WithEnabled(enabled bool) *DistanceConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *DistanceConstraint) WithInfluenceFactor(influenceFactor float64) *DistanceConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // Target calls the underlying Target.
 func (x *DistanceConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -95,6 +113,9 @@ type DistanceConstraintable interface {
 	WithTarget(target NodeProvider) *DistanceConstraint
 	WithMinimumDistance(minimumDistance float64) *DistanceConstraint
 	WithMaximumDistance(maximumDistance float64) *DistanceConstraint
+	WithEnabled(enabled bool) *DistanceConstraint
+	WithInfluenceFactor(influenceFactor float64) *DistanceConstraint
+	WithIncremental(incremental bool) *DistanceConstraint
 	Target() *Node
 	SetTarget(target *raw.SCNNode)
 	MinimumDistance() float64

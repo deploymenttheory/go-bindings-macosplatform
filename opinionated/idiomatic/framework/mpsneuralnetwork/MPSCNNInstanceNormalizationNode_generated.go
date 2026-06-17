@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -42,6 +43,18 @@ func (x *CNNInstanceNormalizationNode) WithTrainingStyle(trainingStyle raw.MPSNN
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNInstanceNormalizationNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationNode) WithLabel(label string) *CNNInstanceNormalizationNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // TrainingStyle calls the underlying TrainingStyle.
 func (x *CNNInstanceNormalizationNode) TrainingStyle() raw.MPSNNTrainingStyle {
 	return x.inner.TrainingStyle()
@@ -58,6 +71,8 @@ func (x *CNNInstanceNormalizationNode) asNNFilterNode() *raw.MPSNNFilterNode { r
 type CNNInstanceNormalizationNodeable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalizationNode
 	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNInstanceNormalizationNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNInstanceNormalizationNode
+	WithLabel(label string) *CNNInstanceNormalizationNode
 	TrainingStyle() raw.MPSNNTrainingStyle
 	SetTrainingStyle(trainingStyle raw.MPSNNTrainingStyle)
 }

@@ -7,8 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ScrollView wraps [raw.NSScrollView] with a fluent Go API.
@@ -258,6 +261,340 @@ func (x *ScrollView) WithVerticalRulerView(verticalRulerView *raw.NSRulerView) *
 // WithFindBarPosition sets the findBarPosition property and returns the receiver for chaining.
 func (x *ScrollView) WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView {
 	x.inner.SetFindBarPosition(findBarPosition)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *ScrollView) WithSubviews(items ...ViewProvider) *ScrollView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ScrollView) WithHidden(hidden bool) *ScrollView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *ScrollView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *ScrollView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ScrollView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrollView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ScrollView) WithFrame(frame corefoundation.CGRect) *ScrollView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *ScrollView) WithFrameRotation(frameRotation float64) *ScrollView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *ScrollView) WithFrameCenterRotation(frameCenterRotation float64) *ScrollView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *ScrollView) WithBoundsRotation(boundsRotation float64) *ScrollView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ScrollView) WithBounds(bounds corefoundation.CGRect) *ScrollView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *ScrollView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrollView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *ScrollView) WithNeedsDisplay(needsDisplay bool) *ScrollView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *ScrollView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *ScrollView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *ScrollView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrollView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *ScrollView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrollView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *ScrollView) WithWantsLayer(wantsLayer bool) *ScrollView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *ScrollView) WithLayer(layer *quartzcore.CALayer) *ScrollView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *ScrollView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *ScrollView) WithNeedsLayout(needsLayout bool) *ScrollView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ScrollView) WithAlphaValue(alphaValue float64) *ScrollView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *ScrollView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrollView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ScrollView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ScrollView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrollView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ScrollView) WithContentFilters(items ...*coreimage.CIFilter) *ScrollView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *ScrollView) WithShadow(shadow *raw.NSShadow) *ScrollView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *ScrollView) WithClipsToBounds(clipsToBounds bool) *ScrollView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *ScrollView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ScrollView) WithToolTip(toolTip string) *ScrollView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ScrollView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrollView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *ScrollView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *ScrollView) WithNextKeyView(nextKeyView ViewProvider) *ScrollView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ScrollView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrollView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *ScrollView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ScrollView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrollView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *ScrollView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *ScrollView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *ScrollView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrollView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *ScrollView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrollView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *ScrollView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrollView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ScrollView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrollView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ScrollView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *ScrollView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrollView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *ScrollView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrollView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ScrollView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrollView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ScrollView) WithNextResponder(nextResponder ResponderProvider) *ScrollView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ScrollView) WithMenu(menu *raw.NSMenu) *ScrollView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ScrollView) WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ScrollView) WithTouchBar(touchBar *raw.NSTouchBar) *ScrollView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -731,6 +1068,55 @@ type ScrollViewable interface {
 	WithHorizontalRulerView(horizontalRulerView *raw.NSRulerView) *ScrollView
 	WithVerticalRulerView(verticalRulerView *raw.NSRulerView) *ScrollView
 	WithFindBarPosition(findBarPosition raw.NSScrollViewFindBarPosition) *ScrollView
+	WithSubviews(items ...ViewProvider) *ScrollView
+	WithHidden(hidden bool) *ScrollView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrollView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrollView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ScrollView
+	WithFrame(frame corefoundation.CGRect) *ScrollView
+	WithFrameRotation(frameRotation float64) *ScrollView
+	WithFrameCenterRotation(frameCenterRotation float64) *ScrollView
+	WithBoundsRotation(boundsRotation float64) *ScrollView
+	WithBounds(bounds corefoundation.CGRect) *ScrollView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *ScrollView
+	WithNeedsDisplay(needsDisplay bool) *ScrollView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrollView
+	WithWantsRestingTouches(wantsRestingTouches bool) *ScrollView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ScrollView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ScrollView
+	WithWantsLayer(wantsLayer bool) *ScrollView
+	WithLayer(layer *quartzcore.CALayer) *ScrollView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrollView
+	WithNeedsLayout(needsLayout bool) *ScrollView
+	WithAlphaValue(alphaValue float64) *ScrollView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrollView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *ScrollView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ScrollView
+	WithContentFilters(items ...*coreimage.CIFilter) *ScrollView
+	WithShadow(shadow *raw.NSShadow) *ScrollView
+	WithClipsToBounds(clipsToBounds bool) *ScrollView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrollView
+	WithToolTip(toolTip string) *ScrollView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ScrollView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrollView
+	WithNextKeyView(nextKeyView ViewProvider) *ScrollView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ScrollView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrollView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ScrollView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrollView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrollView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ScrollView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrollView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrollView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrollView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrollView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrollView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrollView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ScrollView
+	WithNextResponder(nextResponder ResponderProvider) *ScrollView
+	WithMenu(menu *raw.NSMenu) *ScrollView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ScrollView
+	WithTouchBar(touchBar *raw.NSTouchBar) *ScrollView
 	Tile()
 	FlashScrollers()
 	MagnifyToFitRect(rect corefoundation.CGRect)

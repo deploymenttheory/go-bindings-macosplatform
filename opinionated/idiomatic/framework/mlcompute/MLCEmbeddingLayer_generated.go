@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func EmbeddingLayerFromID(id objc.ID) *EmbeddingLayer {
 func NewEmbeddingLayer() *EmbeddingLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCEmbeddingLayer")), objc.RegisterName("new"))
 	return &EmbeddingLayer{inner: raw.MLCEmbeddingLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // Descriptor calls the underlying Descriptor.
@@ -67,6 +80,8 @@ func (x *EmbeddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // EmbeddingLayerable is the interface implemented by [EmbeddingLayer], for mocking and DI.
 type EmbeddingLayerable interface {
 	Unwrap() *raw.MLCEmbeddingLayer
+	WithLabel(label string) *EmbeddingLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer
 	Descriptor() *EmbeddingDescriptor
 	Weights() *Tensor
 	WeightsParameter() *TensorParameter

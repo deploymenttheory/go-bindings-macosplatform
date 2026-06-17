@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestParams() *MTRTestClusterClusterTestParams {
 	return &MTRTestClusterClusterTestParams{inner: raw.MTRTestClusterClusterTestParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestParams {
+	x.inner.MTRUnitTestingClusterTestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestParams {
+	x.inner.MTRUnitTestingClusterTestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestParams) asMTRUnitTestingClusterTestParams() *raw.MTRUnitTestingClusterTestParams { return &x.inner.MTRUnitTestingClusterTestParams }
 
 // MTRTestClusterClusterTestParamsable is the interface implemented by [MTRTestClusterClusterTestParams], for mocking and DI.
 type MTRTestClusterClusterTestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestParams
 }
 
 var _ MTRTestClusterClusterTestParamsable = (*MTRTestClusterClusterTestParams)(nil)

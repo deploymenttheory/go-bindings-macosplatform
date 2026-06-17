@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNLossNodeWithSourceLossDescriptor(source *mpsneuralnetwork.MPSNNImageN
 	return &CNNLossNode{inner: raw.MPSCNNLossNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNLossNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLossNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLossNode) WithLabel(label string) *CNNLossNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // InputLabels calls the underlying InputLabels.
 func (x *CNNLossNode) InputLabels() *mpsneuralnetwork.MPSNNLabelsNode {
 	return x.inner.InputLabels()
@@ -47,6 +60,8 @@ func (x *CNNLossNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { retur
 // CNNLossNodeable is the interface implemented by [CNNLossNode], for mocking and DI.
 type CNNLossNodeable interface {
 	Unwrap() *raw.MPSCNNLossNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLossNode
+	WithLabel(label string) *CNNLossNode
 	InputLabels() *mpsneuralnetwork.MPSNNLabelsNode
 }
 

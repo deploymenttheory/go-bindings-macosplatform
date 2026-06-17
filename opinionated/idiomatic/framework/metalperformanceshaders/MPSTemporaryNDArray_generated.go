@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -42,6 +43,12 @@ func (x *TemporaryNDArray) WithReadCount(readCount uint) *TemporaryNDArray {
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TemporaryNDArray) WithLabel(label string) *TemporaryNDArray {
+	x.inner.MPSNDArray.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReadCount calls the underlying ReadCount.
 func (x *TemporaryNDArray) ReadCount() uint {
 	return x.inner.ReadCount()
@@ -58,6 +65,7 @@ func (x *TemporaryNDArray) asNDArray() *mpscore.MPSNDArray { return &x.inner.MPS
 type TemporaryNDArrayable interface {
 	Unwrap() *raw.MPSTemporaryNDArray
 	WithReadCount(readCount uint) *TemporaryNDArray
+	WithLabel(label string) *TemporaryNDArray
 	ReadCount() uint
 	SetReadCount(readCount uint)
 }

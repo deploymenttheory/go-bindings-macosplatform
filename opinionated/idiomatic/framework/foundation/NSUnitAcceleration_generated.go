@@ -35,6 +35,12 @@ func NewUnitAcceleration() *UnitAcceleration {
 	return &UnitAcceleration{inner: raw.NSUnitAccelerationFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitAcceleration) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAcceleration {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitAcceleration) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitAcceleration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitAcceleration) asObject() *raw.NSObject { return &x.inner.NSDimensio
 // UnitAccelerationable is the interface implemented by [UnitAcceleration], for mocking and DI.
 type UnitAccelerationable interface {
 	Unwrap() *raw.NSUnitAcceleration
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAcceleration
 }
 
 var _ UnitAccelerationable = (*UnitAcceleration)(nil)

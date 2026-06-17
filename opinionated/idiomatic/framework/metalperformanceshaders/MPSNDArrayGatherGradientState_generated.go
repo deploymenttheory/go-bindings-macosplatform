@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -37,6 +38,18 @@ func NewNDArrayGatherGradientState() *NDArrayGatherGradientState {
 	return &NDArrayGatherGradientState{inner: raw.MPSNDArrayGatherGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *NDArrayGatherGradientState) WithReadCount(readCount uint) *NDArrayGatherGradientState {
+	x.inner.MPSNDArrayGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayGatherGradientState) WithLabel(label string) *NDArrayGatherGradientState {
+	x.inner.MPSNDArrayGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayGatherGradientState) asNDArrayGradientState() *mpsndarray.MPSNDArrayGradientState { return &x.inner.MPSNDArrayGradientState }
 
 func (x *NDArrayGatherGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNDArrayGradientState.MPSState }
@@ -44,6 +57,8 @@ func (x *NDArrayGatherGradientState) asState() *mpscore.MPSState { return &x.inn
 // NDArrayGatherGradientStateable is the interface implemented by [NDArrayGatherGradientState], for mocking and DI.
 type NDArrayGatherGradientStateable interface {
 	Unwrap() *raw.MPSNDArrayGatherGradientState
+	WithReadCount(readCount uint) *NDArrayGatherGradientState
+	WithLabel(label string) *NDArrayGatherGradientState
 }
 
 var _ NDArrayGatherGradientStateable = (*NDArrayGatherGradientState)(nil)

@@ -7,8 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // OutlineView wraps [raw.NSOutlineView] with a fluent Go API.
@@ -70,6 +73,680 @@ func (x *OutlineView) WithAutosaveExpandedItems(autosaveExpandedItems bool) *Out
 // WithStronglyReferencesItems sets the stronglyReferencesItems property and returns the receiver for chaining.
 func (x *OutlineView) WithStronglyReferencesItems(stronglyReferencesItems bool) *OutlineView {
 	x.inner.SetStronglyReferencesItems(stronglyReferencesItems)
+	return x
+}
+
+// WithDataSource sets the dataSource property and returns the receiver for chaining.
+func (x *OutlineView) WithDataSource(dataSource raw.NSTableViewDataSource) *OutlineView {
+	x.inner.NSTableView.SetDataSource(dataSource)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *OutlineView) WithDelegate(delegate raw.NSTableViewDelegate) *OutlineView {
+	x.inner.NSTableView.SetDelegate(delegate)
+	return x
+}
+
+// WithHeaderView sets the headerView property and returns the receiver for chaining.
+func (x *OutlineView) WithHeaderView(headerView *raw.NSTableHeaderView) *OutlineView {
+	x.inner.NSTableView.SetHeaderView(headerView)
+	return x
+}
+
+// WithCornerView sets the cornerView property and returns the receiver for chaining.
+func (x *OutlineView) WithCornerView(cornerView ViewProvider) *OutlineView {
+	x.inner.NSTableView.SetCornerView(cornerView.asView())
+	return x
+}
+
+// WithAllowsColumnReordering sets the allowsColumnReordering property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsColumnReordering(allowsColumnReordering bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsColumnReordering(allowsColumnReordering)
+	return x
+}
+
+// WithAllowsColumnResizing sets the allowsColumnResizing property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsColumnResizing(allowsColumnResizing)
+	return x
+}
+
+// WithColumnAutoresizingStyle sets the columnAutoresizingStyle property and returns the receiver for chaining.
+func (x *OutlineView) WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *OutlineView {
+	x.inner.NSTableView.SetColumnAutoresizingStyle(columnAutoresizingStyle)
+	return x
+}
+
+// WithGridStyleMask sets the gridStyleMask property and returns the receiver for chaining.
+func (x *OutlineView) WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *OutlineView {
+	x.inner.NSTableView.SetGridStyleMask(gridStyleMask)
+	return x
+}
+
+// WithIntercellSpacing sets the intercellSpacing property and returns the receiver for chaining.
+func (x *OutlineView) WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView {
+	x.inner.NSTableView.SetIntercellSpacing(intercellSpacing)
+	return x
+}
+
+// WithUsesAlternatingRowBackgroundColors sets the usesAlternatingRowBackgroundColors property and returns the receiver for chaining.
+func (x *OutlineView) WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView {
+	x.inner.NSTableView.SetUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *OutlineView) WithBackgroundColor(backgroundColor *raw.NSColor) *OutlineView {
+	x.inner.NSTableView.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithGridColor sets the gridColor property and returns the receiver for chaining.
+func (x *OutlineView) WithGridColor(gridColor *raw.NSColor) *OutlineView {
+	x.inner.NSTableView.SetGridColor(gridColor)
+	return x
+}
+
+// WithRowSizeStyle sets the rowSizeStyle property and returns the receiver for chaining.
+func (x *OutlineView) WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *OutlineView {
+	x.inner.NSTableView.SetRowSizeStyle(rowSizeStyle)
+	return x
+}
+
+// WithRowHeight sets the rowHeight property and returns the receiver for chaining.
+func (x *OutlineView) WithRowHeight(rowHeight float64) *OutlineView {
+	x.inner.NSTableView.SetRowHeight(rowHeight)
+	return x
+}
+
+// WithDoubleAction sets the doubleAction property and returns the receiver for chaining.
+func (x *OutlineView) WithDoubleAction(doubleAction objc.SEL) *OutlineView {
+	x.inner.NSTableView.SetDoubleAction(doubleAction)
+	return x
+}
+
+// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
+func (x *OutlineView) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *OutlineView {
+	if len(items) == 0 {
+		x.inner.NSTableView.SetSortDescriptors(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTableView.SetSortDescriptors(_arr)
+	return x
+}
+
+// WithHighlightedTableColumn sets the highlightedTableColumn property and returns the receiver for chaining.
+func (x *OutlineView) WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *OutlineView {
+	x.inner.NSTableView.SetHighlightedTableColumn(highlightedTableColumn)
+	return x
+}
+
+// WithVerticalMotionCanBeginDrag sets the verticalMotionCanBeginDrag property and returns the receiver for chaining.
+func (x *OutlineView) WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *OutlineView {
+	x.inner.NSTableView.SetVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag)
+	return x
+}
+
+// WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsMultipleSelection(allowsMultipleSelection bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsMultipleSelection(allowsMultipleSelection)
+	return x
+}
+
+// WithAllowsEmptySelection sets the allowsEmptySelection property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsEmptySelection(allowsEmptySelection bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsEmptySelection(allowsEmptySelection)
+	return x
+}
+
+// WithAllowsColumnSelection sets the allowsColumnSelection property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsColumnSelection(allowsColumnSelection bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsColumnSelection(allowsColumnSelection)
+	return x
+}
+
+// WithAllowsTypeSelect sets the allowsTypeSelect property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsTypeSelect(allowsTypeSelect bool) *OutlineView {
+	x.inner.NSTableView.SetAllowsTypeSelect(allowsTypeSelect)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *OutlineView) WithStyle(style raw.NSTableViewStyle) *OutlineView {
+	x.inner.NSTableView.SetStyle(style)
+	return x
+}
+
+// WithSelectionHighlightStyle sets the selectionHighlightStyle property and returns the receiver for chaining.
+func (x *OutlineView) WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *OutlineView {
+	x.inner.NSTableView.SetSelectionHighlightStyle(selectionHighlightStyle)
+	return x
+}
+
+// WithDraggingDestinationFeedbackStyle sets the draggingDestinationFeedbackStyle property and returns the receiver for chaining.
+func (x *OutlineView) WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *OutlineView {
+	x.inner.NSTableView.SetDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle)
+	return x
+}
+
+// WithAutosaveName sets the autosaveName property and returns the receiver for chaining.
+func (x *OutlineView) WithAutosaveName(autosaveName *foundation.NSString) *OutlineView {
+	x.inner.NSTableView.SetAutosaveName(autosaveName)
+	return x
+}
+
+// WithAutosaveTableColumns sets the autosaveTableColumns property and returns the receiver for chaining.
+func (x *OutlineView) WithAutosaveTableColumns(autosaveTableColumns bool) *OutlineView {
+	x.inner.NSTableView.SetAutosaveTableColumns(autosaveTableColumns)
+	return x
+}
+
+// WithFloatsGroupRows sets the floatsGroupRows property and returns the receiver for chaining.
+func (x *OutlineView) WithFloatsGroupRows(floatsGroupRows bool) *OutlineView {
+	x.inner.NSTableView.SetFloatsGroupRows(floatsGroupRows)
+	return x
+}
+
+// WithRowActionsVisible sets the rowActionsVisible property and returns the receiver for chaining.
+func (x *OutlineView) WithRowActionsVisible(rowActionsVisible bool) *OutlineView {
+	x.inner.NSTableView.SetRowActionsVisible(rowActionsVisible)
+	return x
+}
+
+// WithUsesStaticContents sets the usesStaticContents property and returns the receiver for chaining.
+func (x *OutlineView) WithUsesStaticContents(usesStaticContents bool) *OutlineView {
+	x.inner.NSTableView.SetUsesStaticContents(usesStaticContents)
+	return x
+}
+
+// WithUsesAutomaticRowHeights sets the usesAutomaticRowHeights property and returns the receiver for chaining.
+func (x *OutlineView) WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool) *OutlineView {
+	x.inner.NSTableView.SetUsesAutomaticRowHeights(usesAutomaticRowHeights)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *OutlineView) WithTarget(target objc.ID) *OutlineView {
+	x.inner.NSTableView.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *OutlineView) WithAction(action objc.SEL) *OutlineView {
+	x.inner.NSTableView.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *OutlineView) WithTag(tag int) *OutlineView {
+	x.inner.NSTableView.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *OutlineView) WithIgnoresMultiClick(ignoresMultiClick bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *OutlineView) WithContinuous(continuous bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *OutlineView) WithEnabled(enabled bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *OutlineView) WithRefusesFirstResponder(refusesFirstResponder bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *OutlineView) WithHighlighted(highlighted bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *OutlineView) WithControlSize(controlSize raw.NSControlSize) *OutlineView {
+	x.inner.NSTableView.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *OutlineView) WithFormatter(formatter *foundation.NSFormatter) *OutlineView {
+	x.inner.NSTableView.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *OutlineView) WithObjectValue(objectValue objc.ID) *OutlineView {
+	x.inner.NSTableView.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *OutlineView) WithStringValue(stringValue string) *OutlineView {
+	x.inner.NSTableView.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *OutlineView) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *OutlineView {
+	x.inner.NSTableView.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *OutlineView) WithIntValue(intValue int) *OutlineView {
+	x.inner.NSTableView.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *OutlineView) WithIntegerValue(integerValue int) *OutlineView {
+	x.inner.NSTableView.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *OutlineView) WithFloatValue(floatValue float32) *OutlineView {
+	x.inner.NSTableView.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *OutlineView) WithDoubleValue(doubleValue float64) *OutlineView {
+	x.inner.NSTableView.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *OutlineView) WithFont(font *raw.NSFont) *OutlineView {
+	x.inner.NSTableView.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *OutlineView) WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *OutlineView) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *OutlineView {
+	x.inner.NSTableView.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *OutlineView) WithAlignment(alignment raw.NSTextAlignment) *OutlineView {
+	x.inner.NSTableView.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *OutlineView) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *OutlineView {
+	x.inner.NSTableView.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *OutlineView {
+	x.inner.NSTableView.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *OutlineView) WithCell(cell CellProvider) *OutlineView {
+	x.inner.NSTableView.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *OutlineView) WithSubviews(items ...ViewProvider) *OutlineView {
+	if len(items) == 0 {
+		x.inner.NSTableView.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTableView.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *OutlineView) WithHidden(hidden bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *OutlineView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *OutlineView) WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *OutlineView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *OutlineView) WithFrame(frame corefoundation.CGRect) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *OutlineView) WithFrameRotation(frameRotation float64) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *OutlineView) WithFrameCenterRotation(frameCenterRotation float64) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *OutlineView) WithBoundsRotation(boundsRotation float64) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *OutlineView) WithBounds(bounds corefoundation.CGRect) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *OutlineView) WithCanDrawConcurrently(canDrawConcurrently bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *OutlineView) WithNeedsDisplay(needsDisplay bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *OutlineView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *OutlineView) WithWantsRestingTouches(wantsRestingTouches bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *OutlineView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *OutlineView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *OutlineView) WithWantsLayer(wantsLayer bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *OutlineView) WithLayer(layer *quartzcore.CALayer) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *OutlineView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *OutlineView) WithNeedsLayout(needsLayout bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *OutlineView) WithAlphaValue(alphaValue float64) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *OutlineView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *OutlineView) WithBackgroundFilters(items ...*coreimage.CIFilter) *OutlineView {
+	if len(items) == 0 {
+		x.inner.NSTableView.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTableView.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *OutlineView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *OutlineView) WithContentFilters(items ...*coreimage.CIFilter) *OutlineView {
+	if len(items) == 0 {
+		x.inner.NSTableView.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTableView.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *OutlineView) WithShadow(shadow *raw.NSShadow) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *OutlineView) WithClipsToBounds(clipsToBounds bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *OutlineView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *OutlineView) WithToolTip(toolTip string) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *OutlineView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *OutlineView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *OutlineView) WithNextKeyView(nextKeyView ViewProvider) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *OutlineView) WithFocusRingType(focusRingType raw.NSFocusRingType) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *OutlineView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView {
+	if len(items) == 0 {
+		x.inner.NSTableView.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTableView.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *OutlineView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *OutlineView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *OutlineView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *OutlineView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *OutlineView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *OutlineView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *OutlineView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *OutlineView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *OutlineView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *OutlineView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *OutlineView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *OutlineView) WithNextResponder(nextResponder ResponderProvider) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *OutlineView) WithMenu(menu *raw.NSMenu) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *OutlineView) WithUserActivity(userActivity *foundation.NSUserActivity) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *OutlineView) WithTouchBar(touchBar *raw.NSTouchBar) *OutlineView {
+	x.inner.NSTableView.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -264,6 +941,110 @@ type OutlineViewable interface {
 	WithAutoresizesOutlineColumn(autoresizesOutlineColumn bool) *OutlineView
 	WithAutosaveExpandedItems(autosaveExpandedItems bool) *OutlineView
 	WithStronglyReferencesItems(stronglyReferencesItems bool) *OutlineView
+	WithDataSource(dataSource raw.NSTableViewDataSource) *OutlineView
+	WithDelegate(delegate raw.NSTableViewDelegate) *OutlineView
+	WithHeaderView(headerView *raw.NSTableHeaderView) *OutlineView
+	WithCornerView(cornerView ViewProvider) *OutlineView
+	WithAllowsColumnReordering(allowsColumnReordering bool) *OutlineView
+	WithAllowsColumnResizing(allowsColumnResizing bool) *OutlineView
+	WithColumnAutoresizingStyle(columnAutoresizingStyle raw.NSTableViewColumnAutoresizingStyle) *OutlineView
+	WithGridStyleMask(gridStyleMask raw.NSTableViewGridLineStyle) *OutlineView
+	WithIntercellSpacing(intercellSpacing corefoundation.CGSize) *OutlineView
+	WithUsesAlternatingRowBackgroundColors(usesAlternatingRowBackgroundColors bool) *OutlineView
+	WithBackgroundColor(backgroundColor *raw.NSColor) *OutlineView
+	WithGridColor(gridColor *raw.NSColor) *OutlineView
+	WithRowSizeStyle(rowSizeStyle raw.NSTableViewRowSizeStyle) *OutlineView
+	WithRowHeight(rowHeight float64) *OutlineView
+	WithDoubleAction(doubleAction objc.SEL) *OutlineView
+	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *OutlineView
+	WithHighlightedTableColumn(highlightedTableColumn *raw.NSTableColumn) *OutlineView
+	WithVerticalMotionCanBeginDrag(verticalMotionCanBeginDrag bool) *OutlineView
+	WithAllowsMultipleSelection(allowsMultipleSelection bool) *OutlineView
+	WithAllowsEmptySelection(allowsEmptySelection bool) *OutlineView
+	WithAllowsColumnSelection(allowsColumnSelection bool) *OutlineView
+	WithAllowsTypeSelect(allowsTypeSelect bool) *OutlineView
+	WithStyle(style raw.NSTableViewStyle) *OutlineView
+	WithSelectionHighlightStyle(selectionHighlightStyle raw.NSTableViewSelectionHighlightStyle) *OutlineView
+	WithDraggingDestinationFeedbackStyle(draggingDestinationFeedbackStyle raw.NSTableViewDraggingDestinationFeedbackStyle) *OutlineView
+	WithAutosaveName(autosaveName *foundation.NSString) *OutlineView
+	WithAutosaveTableColumns(autosaveTableColumns bool) *OutlineView
+	WithFloatsGroupRows(floatsGroupRows bool) *OutlineView
+	WithRowActionsVisible(rowActionsVisible bool) *OutlineView
+	WithUsesStaticContents(usesStaticContents bool) *OutlineView
+	WithUsesAutomaticRowHeights(usesAutomaticRowHeights bool) *OutlineView
+	WithTarget(target objc.ID) *OutlineView
+	WithAction(action objc.SEL) *OutlineView
+	WithTag(tag int) *OutlineView
+	WithIgnoresMultiClick(ignoresMultiClick bool) *OutlineView
+	WithContinuous(continuous bool) *OutlineView
+	WithEnabled(enabled bool) *OutlineView
+	WithRefusesFirstResponder(refusesFirstResponder bool) *OutlineView
+	WithHighlighted(highlighted bool) *OutlineView
+	WithControlSize(controlSize raw.NSControlSize) *OutlineView
+	WithFormatter(formatter *foundation.NSFormatter) *OutlineView
+	WithObjectValue(objectValue objc.ID) *OutlineView
+	WithStringValue(stringValue string) *OutlineView
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *OutlineView
+	WithIntValue(intValue int) *OutlineView
+	WithIntegerValue(integerValue int) *OutlineView
+	WithFloatValue(floatValue float32) *OutlineView
+	WithDoubleValue(doubleValue float64) *OutlineView
+	WithFont(font *raw.NSFont) *OutlineView
+	WithUsesSingleLineMode(usesSingleLineMode bool) *OutlineView
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *OutlineView
+	WithAlignment(alignment raw.NSTextAlignment) *OutlineView
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *OutlineView
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *OutlineView
+	WithCell(cell CellProvider) *OutlineView
+	WithSubviews(items ...ViewProvider) *OutlineView
+	WithHidden(hidden bool) *OutlineView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OutlineView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *OutlineView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *OutlineView
+	WithFrame(frame corefoundation.CGRect) *OutlineView
+	WithFrameRotation(frameRotation float64) *OutlineView
+	WithFrameCenterRotation(frameCenterRotation float64) *OutlineView
+	WithBoundsRotation(boundsRotation float64) *OutlineView
+	WithBounds(bounds corefoundation.CGRect) *OutlineView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *OutlineView
+	WithNeedsDisplay(needsDisplay bool) *OutlineView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *OutlineView
+	WithWantsRestingTouches(wantsRestingTouches bool) *OutlineView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *OutlineView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *OutlineView
+	WithWantsLayer(wantsLayer bool) *OutlineView
+	WithLayer(layer *quartzcore.CALayer) *OutlineView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OutlineView
+	WithNeedsLayout(needsLayout bool) *OutlineView
+	WithAlphaValue(alphaValue float64) *OutlineView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OutlineView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *OutlineView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OutlineView
+	WithContentFilters(items ...*coreimage.CIFilter) *OutlineView
+	WithShadow(shadow *raw.NSShadow) *OutlineView
+	WithClipsToBounds(clipsToBounds bool) *OutlineView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OutlineView
+	WithToolTip(toolTip string) *OutlineView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *OutlineView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OutlineView
+	WithNextKeyView(nextKeyView ViewProvider) *OutlineView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *OutlineView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *OutlineView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *OutlineView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OutlineView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OutlineView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *OutlineView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OutlineView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OutlineView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OutlineView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OutlineView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OutlineView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OutlineView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *OutlineView
+	WithNextResponder(nextResponder ResponderProvider) *OutlineView
+	WithMenu(menu *raw.NSMenu) *OutlineView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *OutlineView
+	WithTouchBar(touchBar *raw.NSTouchBar) *OutlineView
 	IsExpandable(item objc.ID) bool
 	NumberOfChildrenOfItem(item objc.ID) int
 	ChildOfItem(index int, item objc.ID) objc.ID

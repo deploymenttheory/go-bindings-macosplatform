@@ -45,6 +45,18 @@ func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable b
 	return &DOMMutationEvent{inner: raw.DOMMutationEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
+	x.inner.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
+	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // NewValue calls the underlying NewValue.
 func (x *DOMMutationEvent) NewValue() string {
 	_r := x.inner.NewValue()
@@ -95,6 +107,8 @@ func (x *DOMMutationEvent) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMMutationEventable is the interface implemented by [DOMMutationEvent], for mocking and DI.
 type DOMMutationEventable interface {
 	Unwrap() *raw.DOMMutationEvent
+	WithReturnValue(returnValue bool) *DOMMutationEvent
+	WithCancelBubble(cancelBubble bool) *DOMMutationEvent
 	NewValue() string
 	RelatedNode() *DOMNode
 	PrevValue() string

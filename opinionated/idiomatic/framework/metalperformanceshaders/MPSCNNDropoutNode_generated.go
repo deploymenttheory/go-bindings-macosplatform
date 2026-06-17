@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -52,6 +53,18 @@ func NewCNNDropoutNodeWithSourceKeepProbabilitySeedMaskStrideInPixels(source *mp
 	return &CNNDropoutNode{inner: raw.MPSCNNDropoutNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNDropoutNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KeepProbability calls the underlying KeepProbability.
 func (x *CNNDropoutNode) KeepProbability() float32 {
 	return x.inner.KeepProbability()
@@ -72,6 +85,8 @@ func (x *CNNDropoutNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { re
 // CNNDropoutNodeable is the interface implemented by [CNNDropoutNode], for mocking and DI.
 type CNNDropoutNodeable interface {
 	Unwrap() *raw.MPSCNNDropoutNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutNode
+	WithLabel(label string) *CNNDropoutNode
 	KeepProbability() float32
 	Seed() uint
 	MaskStrideInPixels() metal.MTLSize

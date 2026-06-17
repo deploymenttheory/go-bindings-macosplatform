@@ -189,6 +189,18 @@ func (x *RAWFilter) WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAW
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *RAWFilter) WithName(name string) *RAWFilter {
+	x.inner.CIFilter.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RAWFilter) WithEnabled(enabled bool) *RAWFilter {
+	x.inner.CIFilter.SetEnabled(enabled)
+	return x
+}
+
 // SupportedDecoderVersions returns the collection as a Go slice.
 func (x *RAWFilter) SupportedDecoderVersions() []*foundation.NSString {
 	arr := x.inner.SupportedDecoderVersions()
@@ -606,6 +618,8 @@ type RAWFilterable interface {
 	WithNeutralTemperature(neutralTemperature float32) *RAWFilter
 	WithNeutralTint(neutralTint float32) *RAWFilter
 	WithLinearSpaceFilter(linearSpaceFilter FilterProvider) *RAWFilter
+	WithName(name string) *RAWFilter
+	WithEnabled(enabled bool) *RAWFilter
 	SupportedDecoderVersions() []*foundation.NSString
 	NativeSize() corefoundation.CGSize
 	Properties() *foundation.NSDictionary[objc.ID, objc.ID]

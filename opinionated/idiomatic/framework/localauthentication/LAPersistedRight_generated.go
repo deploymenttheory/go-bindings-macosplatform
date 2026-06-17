@@ -35,6 +35,12 @@ func NewPersistedRight() *PersistedRight {
 	return &PersistedRight{inner: raw.LAPersistedRightFromID(_id)}
 }
 
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *PersistedRight) WithTag(tag int) *PersistedRight {
+	x.inner.LARight.SetTag(tag)
+	return x
+}
+
 // Key calls the underlying Key.
 func (x *PersistedRight) Key() *PrivateKey {
 	_r := x.inner.Key()
@@ -58,6 +64,7 @@ func (x *PersistedRight) asRight() *raw.LARight { return &x.inner.LARight }
 // PersistedRightable is the interface implemented by [PersistedRight], for mocking and DI.
 type PersistedRightable interface {
 	Unwrap() *raw.LAPersistedRight
+	WithTag(tag int) *PersistedRight
 	Key() *PrivateKey
 	Secret() *Secret
 }

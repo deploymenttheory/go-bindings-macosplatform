@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRBasicClusterReachableChangedEvent() *MTRBasicClusterReachableChangedE
 	return &MTRBasicClusterReachableChangedEvent{inner: raw.MTRBasicClusterReachableChangedEventFromID(_id)}
 }
 
+// WithReachableNewValue sets the reachableNewValue property and returns the receiver for chaining.
+func (x *MTRBasicClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue *foundation.NSNumber) *MTRBasicClusterReachableChangedEvent {
+	x.inner.MTRBasicInformationClusterReachableChangedEvent.SetReachableNewValue(reachableNewValue)
+	return x
+}
+
 func (x *MTRBasicClusterReachableChangedEvent) asMTRBasicInformationClusterReachableChangedEvent() *raw.MTRBasicInformationClusterReachableChangedEvent { return &x.inner.MTRBasicInformationClusterReachableChangedEvent }
 
 // MTRBasicClusterReachableChangedEventable is the interface implemented by [MTRBasicClusterReachableChangedEvent], for mocking and DI.
 type MTRBasicClusterReachableChangedEventable interface {
 	Unwrap() *raw.MTRBasicClusterReachableChangedEvent
+	WithReachableNewValue(reachableNewValue *foundation.NSNumber) *MTRBasicClusterReachableChangedEvent
 }
 
 var _ MTRBasicClusterReachableChangedEventable = (*MTRBasicClusterReachableChangedEvent)(nil)

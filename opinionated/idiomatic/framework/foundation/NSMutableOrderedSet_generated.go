@@ -50,6 +50,12 @@ func NewMutableOrderedSetWithCapacity(numItems uint) *MutableOrderedSet {
 	return &MutableOrderedSet{inner: raw.NSMutableOrderedSetFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableOrderedSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableOrderedSet {
+	x.inner.NSOrderedSet.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // InsertObjectAtIndex calls the underlying InsertObjectAtIndex.
 func (x *MutableOrderedSet) InsertObjectAtIndex(object objc.ID, idx uint) {
 	x.inner.InsertObjectAtIndex(object, idx)
@@ -207,6 +213,7 @@ func (x *MutableOrderedSet) asObject() *raw.NSObject { return &x.inner.NSOrdered
 // MutableOrderedSetable is the interface implemented by [MutableOrderedSet], for mocking and DI.
 type MutableOrderedSetable interface {
 	Unwrap() *raw.NSMutableOrderedSet[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableOrderedSet
 	InsertObjectAtIndex(object objc.ID, idx uint)
 	RemoveObjectAtIndex(idx uint)
 	ReplaceObjectAtIndexWithObject(idx uint, object objc.ID)

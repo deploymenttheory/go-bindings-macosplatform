@@ -79,6 +79,60 @@ func (x *AttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption b
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *AttributeDescription) WithName(name string) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *AttributeDescription) WithOptional(optional bool) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *AttributeDescription) WithTransient(transient bool) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *AttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *AttributeDescription) WithIndexed(indexed bool) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *AttributeDescription) WithVersionHashModifier(versionHashModifier string) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *AttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *AttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription {
+	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	return x
+}
+
 // AttributeType calls the underlying AttributeType.
 func (x *AttributeDescription) AttributeType() raw.NSAttributeType {
 	return x.inner.AttributeType()
@@ -171,6 +225,15 @@ type AttributeDescriptionable interface {
 	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *AttributeDescription
 	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *AttributeDescription
 	WithAllowsCloudEncryption(allowsCloudEncryption bool) *AttributeDescription
+	WithName(name string) *AttributeDescription
+	WithOptional(optional bool) *AttributeDescription
+	WithTransient(transient bool) *AttributeDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *AttributeDescription
+	WithIndexed(indexed bool) *AttributeDescription
+	WithVersionHashModifier(versionHashModifier string) *AttributeDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *AttributeDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *AttributeDescription
+	WithRenamingIdentifier(renamingIdentifier string) *AttributeDescription
 	AttributeType() raw.NSAttributeType
 	SetAttributeType(attributeType raw.NSAttributeType)
 	AttributeValueClassName() string

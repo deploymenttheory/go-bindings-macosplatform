@@ -37,11 +37,25 @@ func NewNNConcatenationNodeWithSources(sourceNodes *foundation.NSArray[*raw.MPSN
 	return &NNConcatenationNode{inner: raw.MPSNNConcatenationNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNConcatenationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNConcatenationNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNConcatenationNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNConcatenationNodeable is the interface implemented by [NNConcatenationNode], for mocking and DI.
 type NNConcatenationNodeable interface {
 	Unwrap() *raw.MPSNNConcatenationNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNConcatenationNode
+	WithLabel(label string) *NNConcatenationNode
 }
 
 var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)

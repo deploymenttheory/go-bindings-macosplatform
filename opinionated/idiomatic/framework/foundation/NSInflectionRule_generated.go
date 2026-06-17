@@ -35,6 +35,12 @@ func NewInflectionRule() *InflectionRule {
 	return &InflectionRule{inner: raw.NSInflectionRuleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *InflectionRule) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRule {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *InflectionRule) asInflectionRule() *raw.NSInflectionRule { return x.inner }
 
 func (x *InflectionRule) asObject() *raw.NSObject { return &x.inner.NSObject }
@@ -42,6 +48,7 @@ func (x *InflectionRule) asObject() *raw.NSObject { return &x.inner.NSObject }
 // InflectionRuleable is the interface implemented by [InflectionRule], for mocking and DI.
 type InflectionRuleable interface {
 	Unwrap() *raw.NSInflectionRule
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRule
 }
 
 var _ InflectionRuleable = (*InflectionRule)(nil)

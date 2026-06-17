@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -71,6 +72,24 @@ func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageCanny) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ColorTransform calls the underlying ColorTransform.
 func (x *ImageCanny) ColorTransform() *float32 {
 	return x.inner.ColorTransform()
@@ -119,6 +138,9 @@ type ImageCannyable interface {
 	WithHighThreshold(highThreshold float32) *ImageCanny
 	WithLowThreshold(lowThreshold float32) *ImageCanny
 	WithUseFastMode(useFastMode bool) *ImageCanny
+	WithOffset(offset mpscore.MPSOffset) *ImageCanny
+	WithClipRect(clipRect metal.MTLRegion) *ImageCanny
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny
 	ColorTransform() *float32
 	Sigma() float32
 	HighThreshold() float32

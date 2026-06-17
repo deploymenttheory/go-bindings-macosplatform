@@ -59,6 +59,18 @@ func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupN
 	return &SendMessageIntent{inner: raw.INSendMessageIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // Recipients returns the collection as a Go slice.
 func (x *SendMessageIntent) Recipients() []*raw.INPerson {
 	arr := x.inner.Recipients()
@@ -145,6 +157,8 @@ func (x *SendMessageIntent) asIntent() *raw.INIntent { return &x.inner.INIntent 
 // SendMessageIntentable is the interface implemented by [SendMessageIntent], for mocking and DI.
 type SendMessageIntentable interface {
 	Unwrap() *raw.INSendMessageIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent
 	Recipients() []*raw.INPerson
 	OutgoingMessageType() raw.INOutgoingMessageType
 	Content() string

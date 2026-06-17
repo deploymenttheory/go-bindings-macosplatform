@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -53,6 +54,18 @@ func NewCNNConvolutionWeightsAndBiasesStateWithWeightsWeightsOffsetBiasesBiasesO
 	return &CNNConvolutionWeightsAndBiasesState{inner: raw.MPSCNNConvolutionWeightsAndBiasesStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNConvolutionWeightsAndBiasesState) WithReadCount(readCount uint) *CNNConvolutionWeightsAndBiasesState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionWeightsAndBiasesState) WithLabel(label string) *CNNConvolutionWeightsAndBiasesState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Weights calls the underlying Weights.
 func (x *CNNConvolutionWeightsAndBiasesState) Weights() metal.MTLBuffer {
 	return x.inner.Weights()
@@ -78,6 +91,8 @@ func (x *CNNConvolutionWeightsAndBiasesState) asState() *mpscore.MPSState { retu
 // CNNConvolutionWeightsAndBiasesStateable is the interface implemented by [CNNConvolutionWeightsAndBiasesState], for mocking and DI.
 type CNNConvolutionWeightsAndBiasesStateable interface {
 	Unwrap() *raw.MPSCNNConvolutionWeightsAndBiasesState
+	WithReadCount(readCount uint) *CNNConvolutionWeightsAndBiasesState
+	WithLabel(label string) *CNNConvolutionWeightsAndBiasesState
 	Weights() metal.MTLBuffer
 	Biases() metal.MTLBuffer
 	WeightsOffset() uint

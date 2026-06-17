@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,6 +45,54 @@ func NewCustomImageRepWithDrawSelectorDelegate(selector objc.SEL, delegate objc.
 	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *CustomImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CustomImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *CustomImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CustomImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // DrawingHandler calls the underlying DrawingHandler.
 func (x *CustomImageRep) DrawingHandler() objc.Block {
 	return x.inner.DrawingHandler()
@@ -64,6 +113,14 @@ func (x *CustomImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageR
 // CustomImageRepable is the interface implemented by [CustomImageRep], for mocking and DI.
 type CustomImageRepable interface {
 	Unwrap() *raw.NSCustomImageRep
+	WithSize(size corefoundation.CGSize) *CustomImageRep
+	WithAlpha(alpha bool) *CustomImageRep
+	WithOpaque(opaque bool) *CustomImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *CustomImageRep
+	WithBitsPerSample(bitsPerSample int) *CustomImageRep
+	WithPixelsWide(pixelsWide int) *CustomImageRep
+	WithPixelsHigh(pixelsHigh int) *CustomImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *CustomImageRep
 	DrawingHandler() objc.Block
 	DrawSelector() objc.SEL
 	Delegate() objc.ID

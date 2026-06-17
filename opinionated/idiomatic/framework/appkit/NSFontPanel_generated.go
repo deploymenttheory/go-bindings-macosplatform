@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // FontPanel wraps [raw.NSFontPanel] with a fluent Go API.
@@ -44,6 +47,472 @@ func (x *FontPanel) WithAccessoryView(accessoryView ViewProvider) *FontPanel {
 // WithEnabled sets the enabled property and returns the receiver for chaining.
 func (x *FontPanel) WithEnabled(enabled bool) *FontPanel {
 	x.inner.SetEnabled(enabled)
+	return x
+}
+
+// WithFloatingPanel sets the floatingPanel property and returns the receiver for chaining.
+func (x *FontPanel) WithFloatingPanel(floatingPanel bool) *FontPanel {
+	x.inner.NSPanel.SetFloatingPanel(floatingPanel)
+	return x
+}
+
+// WithBecomesKeyOnlyIfNeeded sets the becomesKeyOnlyIfNeeded property and returns the receiver for chaining.
+func (x *FontPanel) WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel {
+	x.inner.NSPanel.SetBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded)
+	return x
+}
+
+// WithWorksWhenModal sets the worksWhenModal property and returns the receiver for chaining.
+func (x *FontPanel) WithWorksWhenModal(worksWhenModal bool) *FontPanel {
+	x.inner.NSPanel.SetWorksWhenModal(worksWhenModal)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *FontPanel) WithTitle(title string) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *FontPanel) WithSubtitle(subtitle string) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
+// WithTitleVisibility sets the titleVisibility property and returns the receiver for chaining.
+func (x *FontPanel) WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitleVisibility(titleVisibility)
+	return x
+}
+
+// WithTitlebarAppearsTransparent sets the titlebarAppearsTransparent property and returns the receiver for chaining.
+func (x *FontPanel) WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarAppearsTransparent(titlebarAppearsTransparent)
+	return x
+}
+
+// WithToolbarStyle sets the toolbarStyle property and returns the receiver for chaining.
+func (x *FontPanel) WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetToolbarStyle(toolbarStyle)
+	return x
+}
+
+// WithTitlebarAccessoryViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *FontPanel) WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *FontPanel {
+	if len(items) == 0 {
+		x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSTitlebarAccessoryViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPanel.NSWindow.SetTitlebarAccessoryViewControllers(_arr)
+	return x
+}
+
+// WithRepresentedURL sets the representedURL property and returns the receiver for chaining.
+func (x *FontPanel) WithRepresentedURL(representedURL string) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetRepresentedURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(representedURL)))
+	return x
+}
+
+// WithRepresentedFilename sets the representedFilename property and returns the receiver for chaining.
+func (x *FontPanel) WithRepresentedFilename(representedFilename string) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetRepresentedFilename(foundation.NSStringStringWithUTF8String(representedFilename))
+	return x
+}
+
+// WithExcludedFromWindowsMenu sets the excludedFromWindowsMenu property and returns the receiver for chaining.
+func (x *FontPanel) WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetExcludedFromWindowsMenu(excludedFromWindowsMenu)
+	return x
+}
+
+// WithContentView sets the contentView property and returns the receiver for chaining.
+func (x *FontPanel) WithContentView(contentView ViewProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentView(contentView.asView())
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *FontPanel) WithDelegate(delegate raw.NSWindowDelegate) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDelegate(delegate)
+	return x
+}
+
+// WithStyleMask sets the styleMask property and returns the receiver for chaining.
+func (x *FontPanel) WithStyleMask(styleMask raw.NSWindowStyleMask) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetStyleMask(styleMask)
+	return x
+}
+
+// WithResizeIncrements sets the resizeIncrements property and returns the receiver for chaining.
+func (x *FontPanel) WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetResizeIncrements(resizeIncrements)
+	return x
+}
+
+// WithAspectRatio sets the aspectRatio property and returns the receiver for chaining.
+func (x *FontPanel) WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAspectRatio(aspectRatio)
+	return x
+}
+
+// WithContentResizeIncrements sets the contentResizeIncrements property and returns the receiver for chaining.
+func (x *FontPanel) WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentResizeIncrements(contentResizeIncrements)
+	return x
+}
+
+// WithContentAspectRatio sets the contentAspectRatio property and returns the receiver for chaining.
+func (x *FontPanel) WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentAspectRatio(contentAspectRatio)
+	return x
+}
+
+// WithViewsNeedDisplay sets the viewsNeedDisplay property and returns the receiver for chaining.
+func (x *FontPanel) WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetViewsNeedDisplay(viewsNeedDisplay)
+	return x
+}
+
+// WithPreservesContentDuringLiveResize sets the preservesContentDuringLiveResize property and returns the receiver for chaining.
+func (x *FontPanel) WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetPreservesContentDuringLiveResize(preservesContentDuringLiveResize)
+	return x
+}
+
+// WithReleasedWhenClosed sets the releasedWhenClosed property and returns the receiver for chaining.
+func (x *FontPanel) WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetReleasedWhenClosed(releasedWhenClosed)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *FontPanel) WithBackgroundColor(backgroundColor *raw.NSColor) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithMovable sets the movable property and returns the receiver for chaining.
+func (x *FontPanel) WithMovable(movable bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMovable(movable)
+	return x
+}
+
+// WithMovableByWindowBackground sets the movableByWindowBackground property and returns the receiver for chaining.
+func (x *FontPanel) WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMovableByWindowBackground(movableByWindowBackground)
+	return x
+}
+
+// WithHidesOnDeactivate sets the hidesOnDeactivate property and returns the receiver for chaining.
+func (x *FontPanel) WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetHidesOnDeactivate(hidesOnDeactivate)
+	return x
+}
+
+// WithCanHide sets the canHide property and returns the receiver for chaining.
+func (x *FontPanel) WithCanHide(canHide bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetCanHide(canHide)
+	return x
+}
+
+// WithMiniwindowImage sets the miniwindowImage property and returns the receiver for chaining.
+func (x *FontPanel) WithMiniwindowImage(miniwindowImage *raw.NSImage) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowImage(miniwindowImage)
+	return x
+}
+
+// WithMiniwindowTitle sets the miniwindowTitle property and returns the receiver for chaining.
+func (x *FontPanel) WithMiniwindowTitle(miniwindowTitle string) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMiniwindowTitle(foundation.NSStringStringWithUTF8String(miniwindowTitle))
+	return x
+}
+
+// WithDocumentEdited sets the documentEdited property and returns the receiver for chaining.
+func (x *FontPanel) WithDocumentEdited(documentEdited bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDocumentEdited(documentEdited)
+	return x
+}
+
+// WithPreventsApplicationTerminationWhenModal sets the preventsApplicationTerminationWhenModal property and returns the receiver for chaining.
+func (x *FontPanel) WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal)
+	return x
+}
+
+// WithAllowsToolTipsWhenApplicationIsInactive sets the allowsToolTipsWhenApplicationIsInactive property and returns the receiver for chaining.
+func (x *FontPanel) WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive)
+	return x
+}
+
+// WithBackingType sets the backingType property and returns the receiver for chaining.
+func (x *FontPanel) WithBackingType(backingType raw.NSBackingStoreType) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetBackingType(backingType)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *FontPanel) WithLevel(level int) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetLevel(level)
+	return x
+}
+
+// WithDepthLimit sets the depthLimit property and returns the receiver for chaining.
+func (x *FontPanel) WithDepthLimit(depthLimit raw.NSWindowDepth) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDepthLimit(depthLimit)
+	return x
+}
+
+// WithHasShadow sets the hasShadow property and returns the receiver for chaining.
+func (x *FontPanel) WithHasShadow(hasShadow bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetHasShadow(hasShadow)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *FontPanel) WithAlphaValue(alphaValue float64) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *FontPanel) WithOpaque(opaque bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetOpaque(opaque)
+	return x
+}
+
+// WithSharingType sets the sharingType property and returns the receiver for chaining.
+func (x *FontPanel) WithSharingType(sharingType raw.NSWindowSharingType) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetSharingType(sharingType)
+	return x
+}
+
+// WithAllowsConcurrentViewDrawing sets the allowsConcurrentViewDrawing property and returns the receiver for chaining.
+func (x *FontPanel) WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing)
+	return x
+}
+
+// WithDisplaysWhenScreenProfileChanges sets the displaysWhenScreenProfileChanges property and returns the receiver for chaining.
+func (x *FontPanel) WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges)
+	return x
+}
+
+// WithCanBecomeVisibleWithoutLogin sets the canBecomeVisibleWithoutLogin property and returns the receiver for chaining.
+func (x *FontPanel) WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin)
+	return x
+}
+
+// WithCollectionBehavior sets the collectionBehavior property and returns the receiver for chaining.
+func (x *FontPanel) WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetCollectionBehavior(collectionBehavior)
+	return x
+}
+
+// WithAnimationBehavior sets the animationBehavior property and returns the receiver for chaining.
+func (x *FontPanel) WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAnimationBehavior(animationBehavior)
+	return x
+}
+
+// WithFrameAutosaveName sets the frameAutosaveName property and returns the receiver for chaining.
+func (x *FontPanel) WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetFrameAutosaveName(frameAutosaveName)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *FontPanel) WithMinSize(minSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *FontPanel) WithMaxSize(maxSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMaxSize(maxSize)
+	return x
+}
+
+// WithContentMinSize sets the contentMinSize property and returns the receiver for chaining.
+func (x *FontPanel) WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentMinSize(contentMinSize)
+	return x
+}
+
+// WithContentMaxSize sets the contentMaxSize property and returns the receiver for chaining.
+func (x *FontPanel) WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentMaxSize(contentMaxSize)
+	return x
+}
+
+// WithMinFullScreenContentSize sets the minFullScreenContentSize property and returns the receiver for chaining.
+func (x *FontPanel) WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMinFullScreenContentSize(minFullScreenContentSize)
+	return x
+}
+
+// WithMaxFullScreenContentSize sets the maxFullScreenContentSize property and returns the receiver for chaining.
+func (x *FontPanel) WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetMaxFullScreenContentSize(maxFullScreenContentSize)
+	return x
+}
+
+// WithWindowController sets the windowController property and returns the receiver for chaining.
+func (x *FontPanel) WithWindowController(windowController *raw.NSWindowController) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetWindowController(windowController)
+	return x
+}
+
+// WithParentWindow sets the parentWindow property and returns the receiver for chaining.
+func (x *FontPanel) WithParentWindow(parentWindow WindowProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetParentWindow(parentWindow.asWindow())
+	return x
+}
+
+// WithAppearanceSource sets the appearanceSource property and returns the receiver for chaining.
+func (x *FontPanel) WithAppearanceSource(appearanceSource *foundation.NSObject) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAppearanceSource(appearanceSource)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *FontPanel) WithColorSpace(colorSpace *raw.NSColorSpace) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetColorSpace(colorSpace)
+	return x
+}
+
+// WithTitlebarSeparatorStyle sets the titlebarSeparatorStyle property and returns the receiver for chaining.
+func (x *FontPanel) WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTitlebarSeparatorStyle(titlebarSeparatorStyle)
+	return x
+}
+
+// WithContentViewController sets the contentViewController property and returns the receiver for chaining.
+func (x *FontPanel) WithContentViewController(contentViewController ViewControllerProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetContentViewController(contentViewController.asViewController())
+	return x
+}
+
+// WithInitialFirstResponder sets the initialFirstResponder property and returns the receiver for chaining.
+func (x *FontPanel) WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetInitialFirstResponder(initialFirstResponder.asView())
+	return x
+}
+
+// WithDefaultButtonCell sets the defaultButtonCell property and returns the receiver for chaining.
+func (x *FontPanel) WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetDefaultButtonCell(defaultButtonCell.asButtonCell())
+	return x
+}
+
+// WithAutorecalculatesKeyViewLoop sets the autorecalculatesKeyViewLoop property and returns the receiver for chaining.
+func (x *FontPanel) WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop)
+	return x
+}
+
+// WithToolbar sets the toolbar property and returns the receiver for chaining.
+func (x *FontPanel) WithToolbar(toolbar *raw.NSToolbar) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetToolbar(toolbar)
+	return x
+}
+
+// WithShowsToolbarButton sets the showsToolbarButton property and returns the receiver for chaining.
+func (x *FontPanel) WithShowsToolbarButton(showsToolbarButton bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetShowsToolbarButton(showsToolbarButton)
+	return x
+}
+
+// WithTabbingMode sets the tabbingMode property and returns the receiver for chaining.
+func (x *FontPanel) WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingMode(tabbingMode)
+	return x
+}
+
+// WithTabbingIdentifier sets the tabbingIdentifier property and returns the receiver for chaining.
+func (x *FontPanel) WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetTabbingIdentifier(tabbingIdentifier)
+	return x
+}
+
+// WithAcceptsMouseMovedEvents sets the acceptsMouseMovedEvents property and returns the receiver for chaining.
+func (x *FontPanel) WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAcceptsMouseMovedEvents(acceptsMouseMovedEvents)
+	return x
+}
+
+// WithIgnoresMouseEvents sets the ignoresMouseEvents property and returns the receiver for chaining.
+func (x *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetIgnoresMouseEvents(ignoresMouseEvents)
+	return x
+}
+
+// WithAutodisplay sets the autodisplay property and returns the receiver for chaining.
+func (x *FontPanel) WithAutodisplay(autodisplay bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetAutodisplay(autodisplay)
+	return x
+}
+
+// WithOneShot sets the oneShot property and returns the receiver for chaining.
+func (x *FontPanel) WithOneShot(oneShot bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetOneShot(oneShot)
+	return x
+}
+
+// WithPreferredBackingLocation sets the preferredBackingLocation property and returns the receiver for chaining.
+func (x *FontPanel) WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetPreferredBackingLocation(preferredBackingLocation)
+	return x
+}
+
+// WithShowsResizeIndicator sets the showsResizeIndicator property and returns the receiver for chaining.
+func (x *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetShowsResizeIndicator(showsResizeIndicator)
+	return x
+}
+
+// WithOrderedIndex sets the orderedIndex property and returns the receiver for chaining.
+func (x *FontPanel) WithOrderedIndex(orderedIndex int) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetOrderedIndex(orderedIndex)
+	return x
+}
+
+// WithRestorable sets the restorable property and returns the receiver for chaining.
+func (x *FontPanel) WithRestorable(restorable bool) *FontPanel {
+	x.inner.NSPanel.NSWindow.SetRestorable(restorable)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *FontPanel) WithNextResponder(nextResponder ResponderProvider) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *FontPanel) WithMenu(menu *raw.NSMenu) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *FontPanel) WithUserActivity(userActivity *foundation.NSUserActivity) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *FontPanel) WithTouchBar(touchBar *raw.NSTouchBar) *FontPanel {
+	x.inner.NSPanel.NSWindow.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -101,6 +570,82 @@ type FontPanelable interface {
 	Unwrap() *raw.NSFontPanel
 	WithAccessoryView(accessoryView ViewProvider) *FontPanel
 	WithEnabled(enabled bool) *FontPanel
+	WithFloatingPanel(floatingPanel bool) *FontPanel
+	WithBecomesKeyOnlyIfNeeded(becomesKeyOnlyIfNeeded bool) *FontPanel
+	WithWorksWhenModal(worksWhenModal bool) *FontPanel
+	WithTitle(title string) *FontPanel
+	WithSubtitle(subtitle string) *FontPanel
+	WithTitleVisibility(titleVisibility raw.NSWindowTitleVisibility) *FontPanel
+	WithTitlebarAppearsTransparent(titlebarAppearsTransparent bool) *FontPanel
+	WithToolbarStyle(toolbarStyle raw.NSWindowToolbarStyle) *FontPanel
+	WithTitlebarAccessoryViewControllers(items ...*raw.NSTitlebarAccessoryViewController) *FontPanel
+	WithRepresentedURL(representedURL string) *FontPanel
+	WithRepresentedFilename(representedFilename string) *FontPanel
+	WithExcludedFromWindowsMenu(excludedFromWindowsMenu bool) *FontPanel
+	WithContentView(contentView ViewProvider) *FontPanel
+	WithDelegate(delegate raw.NSWindowDelegate) *FontPanel
+	WithStyleMask(styleMask raw.NSWindowStyleMask) *FontPanel
+	WithResizeIncrements(resizeIncrements corefoundation.CGSize) *FontPanel
+	WithAspectRatio(aspectRatio corefoundation.CGSize) *FontPanel
+	WithContentResizeIncrements(contentResizeIncrements corefoundation.CGSize) *FontPanel
+	WithContentAspectRatio(contentAspectRatio corefoundation.CGSize) *FontPanel
+	WithViewsNeedDisplay(viewsNeedDisplay bool) *FontPanel
+	WithPreservesContentDuringLiveResize(preservesContentDuringLiveResize bool) *FontPanel
+	WithReleasedWhenClosed(releasedWhenClosed bool) *FontPanel
+	WithBackgroundColor(backgroundColor *raw.NSColor) *FontPanel
+	WithMovable(movable bool) *FontPanel
+	WithMovableByWindowBackground(movableByWindowBackground bool) *FontPanel
+	WithHidesOnDeactivate(hidesOnDeactivate bool) *FontPanel
+	WithCanHide(canHide bool) *FontPanel
+	WithMiniwindowImage(miniwindowImage *raw.NSImage) *FontPanel
+	WithMiniwindowTitle(miniwindowTitle string) *FontPanel
+	WithDocumentEdited(documentEdited bool) *FontPanel
+	WithPreventsApplicationTerminationWhenModal(preventsApplicationTerminationWhenModal bool) *FontPanel
+	WithAllowsToolTipsWhenApplicationIsInactive(allowsToolTipsWhenApplicationIsInactive bool) *FontPanel
+	WithBackingType(backingType raw.NSBackingStoreType) *FontPanel
+	WithLevel(level int) *FontPanel
+	WithDepthLimit(depthLimit raw.NSWindowDepth) *FontPanel
+	WithHasShadow(hasShadow bool) *FontPanel
+	WithAlphaValue(alphaValue float64) *FontPanel
+	WithOpaque(opaque bool) *FontPanel
+	WithSharingType(sharingType raw.NSWindowSharingType) *FontPanel
+	WithAllowsConcurrentViewDrawing(allowsConcurrentViewDrawing bool) *FontPanel
+	WithDisplaysWhenScreenProfileChanges(displaysWhenScreenProfileChanges bool) *FontPanel
+	WithCanBecomeVisibleWithoutLogin(canBecomeVisibleWithoutLogin bool) *FontPanel
+	WithCollectionBehavior(collectionBehavior raw.NSWindowCollectionBehavior) *FontPanel
+	WithAnimationBehavior(animationBehavior raw.NSWindowAnimationBehavior) *FontPanel
+	WithFrameAutosaveName(frameAutosaveName *foundation.NSString) *FontPanel
+	WithMinSize(minSize corefoundation.CGSize) *FontPanel
+	WithMaxSize(maxSize corefoundation.CGSize) *FontPanel
+	WithContentMinSize(contentMinSize corefoundation.CGSize) *FontPanel
+	WithContentMaxSize(contentMaxSize corefoundation.CGSize) *FontPanel
+	WithMinFullScreenContentSize(minFullScreenContentSize corefoundation.CGSize) *FontPanel
+	WithMaxFullScreenContentSize(maxFullScreenContentSize corefoundation.CGSize) *FontPanel
+	WithWindowController(windowController *raw.NSWindowController) *FontPanel
+	WithParentWindow(parentWindow WindowProvider) *FontPanel
+	WithAppearanceSource(appearanceSource *foundation.NSObject) *FontPanel
+	WithColorSpace(colorSpace *raw.NSColorSpace) *FontPanel
+	WithTitlebarSeparatorStyle(titlebarSeparatorStyle raw.NSTitlebarSeparatorStyle) *FontPanel
+	WithContentViewController(contentViewController ViewControllerProvider) *FontPanel
+	WithInitialFirstResponder(initialFirstResponder ViewProvider) *FontPanel
+	WithDefaultButtonCell(defaultButtonCell ButtonCellProvider) *FontPanel
+	WithAutorecalculatesKeyViewLoop(autorecalculatesKeyViewLoop bool) *FontPanel
+	WithToolbar(toolbar *raw.NSToolbar) *FontPanel
+	WithShowsToolbarButton(showsToolbarButton bool) *FontPanel
+	WithTabbingMode(tabbingMode raw.NSWindowTabbingMode) *FontPanel
+	WithTabbingIdentifier(tabbingIdentifier *foundation.NSString) *FontPanel
+	WithAcceptsMouseMovedEvents(acceptsMouseMovedEvents bool) *FontPanel
+	WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel
+	WithAutodisplay(autodisplay bool) *FontPanel
+	WithOneShot(oneShot bool) *FontPanel
+	WithPreferredBackingLocation(preferredBackingLocation raw.NSWindowBackingLocation) *FontPanel
+	WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel
+	WithOrderedIndex(orderedIndex int) *FontPanel
+	WithRestorable(restorable bool) *FontPanel
+	WithNextResponder(nextResponder ResponderProvider) *FontPanel
+	WithMenu(menu *raw.NSMenu) *FontPanel
+	WithUserActivity(userActivity *foundation.NSUserActivity) *FontPanel
+	WithTouchBar(touchBar *raw.NSTouchBar) *FontPanel
 	SetPanelFontIsMultiple(fontObj *raw.NSFont, flag bool)
 	PanelConvertFont(fontObj *raw.NSFont) *Font
 	ReloadDefaultFontFamilies()

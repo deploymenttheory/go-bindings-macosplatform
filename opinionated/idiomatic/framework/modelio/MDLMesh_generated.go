@@ -144,6 +144,36 @@ func (x *Mesh) WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh {
 	return x
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *Mesh) WithParent(parent ObjectProvider) *Mesh {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *Mesh) WithInstance(instance ObjectProvider) *Mesh {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *Mesh) WithTransform(transform raw.MDLTransformComponent) *Mesh {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *Mesh) WithChildren(children raw.MDLObjectContainerComponent) *Mesh {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Mesh) WithHidden(hidden bool) *Mesh {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // VertexAttributeDataForAttributeNamed calls the underlying VertexAttributeDataForAttributeNamed.
 func (x *Mesh) VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData {
 	_r := x.inner.VertexAttributeDataForAttributeNamed(foundation.NSStringStringWithUTF8String(name))
@@ -336,6 +366,11 @@ type Meshable interface {
 	WithVertexDescriptor(vertexDescriptor *raw.MDLVertexDescriptor) *Mesh
 	WithVertexCount(vertexCount uint) *Mesh
 	WithSubmeshes(items ...*raw.MDLSubmesh) *Mesh
+	WithParent(parent ObjectProvider) *Mesh
+	WithInstance(instance ObjectProvider) *Mesh
+	WithTransform(transform raw.MDLTransformComponent) *Mesh
+	WithChildren(children raw.MDLObjectContainerComponent) *Mesh
+	WithHidden(hidden bool) *Mesh
 	VertexAttributeDataForAttributeNamed(name string) *VertexAttributeData
 	VertexAttributeDataForAttributeNamedAsFormat(name string, format raw.MDLVertexFormat) *VertexAttributeData
 	BoundingBox() raw.MDLAxisAlignedBoundingBox

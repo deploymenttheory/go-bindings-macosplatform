@@ -5,6 +5,7 @@
 package modelio
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,12 @@ func PhysicallyPlausibleScatteringFunctionFromID(id objc.ID) *PhysicallyPlausibl
 func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFunction {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPhysicallyPlausibleScatteringFunction")), objc.RegisterName("new"))
 	return &PhysicallyPlausibleScatteringFunction{inner: raw.MDLPhysicallyPlausibleScatteringFunctionFromID(_id)}
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
+	x.inner.MDLScatteringFunction.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
 }
 
 // Subsurface calls the underlying Subsurface.
@@ -139,6 +146,7 @@ func (x *PhysicallyPlausibleScatteringFunction) asScatteringFunction() *raw.MDLS
 // PhysicallyPlausibleScatteringFunctionable is the interface implemented by [PhysicallyPlausibleScatteringFunction], for mocking and DI.
 type PhysicallyPlausibleScatteringFunctionable interface {
 	Unwrap() *raw.MDLPhysicallyPlausibleScatteringFunction
+	WithName(name string) *PhysicallyPlausibleScatteringFunction
 	Subsurface() *MaterialProperty
 	Metallic() *MaterialProperty
 	SpecularAmount() *MaterialProperty

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewHomographicImageRegistrationRequest() *HomographicImageRegistrationReque
 	return &HomographicImageRegistrationRequest{inner: raw.VNHomographicImageRegistrationRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *HomographicImageRegistrationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *HomographicImageRegistrationRequest {
+	x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *HomographicImageRegistrationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *HomographicImageRegistrationRequest {
+	x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *HomographicImageRegistrationRequest) WithUsesCPUOnly(usesCPUOnly bool) *HomographicImageRegistrationRequest {
+	x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *HomographicImageRegistrationRequest) WithRevision(revision uint) *HomographicImageRegistrationRequest {
+	x.inner.VNImageRegistrationRequest.VNTargetedImageRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *HomographicImageRegistrationRequest) asImageRegistrationRequest() *raw.VNImageRegistrationRequest { return &x.inner.VNImageRegistrationRequest }
 
 func (x *HomographicImageRegistrationRequest) asTargetedImageRequest() *raw.VNTargetedImageRequest { return &x.inner.VNImageRegistrationRequest.VNTargetedImageRequest }
@@ -46,6 +71,10 @@ func (x *HomographicImageRegistrationRequest) asRequest() *raw.VNRequest { retur
 // HomographicImageRegistrationRequestable is the interface implemented by [HomographicImageRegistrationRequest], for mocking and DI.
 type HomographicImageRegistrationRequestable interface {
 	Unwrap() *raw.VNHomographicImageRegistrationRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *HomographicImageRegistrationRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *HomographicImageRegistrationRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *HomographicImageRegistrationRequest
+	WithRevision(revision uint) *HomographicImageRegistrationRequest
 }
 
 var _ HomographicImageRegistrationRequestable = (*HomographicImageRegistrationRequest)(nil)

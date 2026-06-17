@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestSpecificResponseParams() *MTRTestClusterCluster
 	return &MTRTestClusterClusterTestSpecificResponseParams{inner: raw.MTRTestClusterClusterTestSpecificResponseParamsFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSpecificResponseParams) WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestSpecificResponseParams {
+	x.inner.MTRUnitTestingClusterTestSpecificResponseParams.SetReturnValue(returnValue)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSpecificResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificResponseParams {
+	x.inner.MTRUnitTestingClusterTestSpecificResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestSpecificResponseParams) asMTRUnitTestingClusterTestSpecificResponseParams() *raw.MTRUnitTestingClusterTestSpecificResponseParams { return &x.inner.MTRUnitTestingClusterTestSpecificResponseParams }
 
 // MTRTestClusterClusterTestSpecificResponseParamsable is the interface implemented by [MTRTestClusterClusterTestSpecificResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestSpecificResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestSpecificResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestSpecificResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificResponseParams
 }
 
 var _ MTRTestClusterClusterTestSpecificResponseParamsable = (*MTRTestClusterClusterTestSpecificResponseParams)(nil)

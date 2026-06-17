@@ -35,6 +35,12 @@ func NewNEEthernetTunnelProvider() *NEEthernetTunnelProvider {
 	return &NEEthernetTunnelProvider{inner: raw.NEEthernetTunnelProviderFromID(_id)}
 }
 
+// WithReasserting sets the reasserting property and returns the receiver for chaining.
+func (x *NEEthernetTunnelProvider) WithReasserting(reasserting bool) *NEEthernetTunnelProvider {
+	x.inner.NEPacketTunnelProvider.NETunnelProvider.SetReasserting(reasserting)
+	return x
+}
+
 func (x *NEEthernetTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider { return &x.inner.NEPacketTunnelProvider }
 
 func (x *NEEthernetTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider { return &x.inner.NEPacketTunnelProvider.NETunnelProvider }
@@ -44,6 +50,7 @@ func (x *NEEthernetTunnelProvider) asNEProvider() *raw.NEProvider { return &x.in
 // NEEthernetTunnelProviderable is the interface implemented by [NEEthernetTunnelProvider], for mocking and DI.
 type NEEthernetTunnelProviderable interface {
 	Unwrap() *raw.NEEthernetTunnelProvider
+	WithReasserting(reasserting bool) *NEEthernetTunnelProvider
 }
 
 var _ NEEthernetTunnelProviderable = (*NEEthernetTunnelProvider)(nil)

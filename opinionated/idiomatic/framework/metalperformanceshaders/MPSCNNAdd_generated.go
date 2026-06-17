@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,156 @@ func NewCNNAddWithDevice(device metal.MTLDevice) *CNNAdd {
 	return &CNNAdd{inner: raw.MPSCNNAddFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryScale(primaryScale float32) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryScale(secondaryScale float32) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *CNNAdd) WithBias(bias float32) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *CNNAdd) WithMinimumValue(minimumValue float32) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *CNNAdd) WithMaximumValue(maximumValue float32) *CNNAdd {
+	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNAdd) WithClipRect(clipRect metal.MTLRegion) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNAdd) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNAdd) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNAdd) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNAdd) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNAdd) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNAdd) WithOptions(options mpscore.MPSKernelOptions) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNAdd) WithLabel(label string) *CNNAdd {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNAdd) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
 func (x *CNNAdd) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
@@ -48,6 +199,31 @@ func (x *CNNAdd) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArithmeti
 // CNNAddable is the interface implemented by [CNNAdd], for mocking and DI.
 type CNNAddable interface {
 	Unwrap() *raw.MPSCNNAdd
+	WithPrimaryScale(primaryScale float32) *CNNAdd
+	WithSecondaryScale(secondaryScale float32) *CNNAdd
+	WithBias(bias float32) *CNNAdd
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNAdd
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNAdd
+	WithMinimumValue(minimumValue float32) *CNNAdd
+	WithMaximumValue(maximumValue float32) *CNNAdd
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNAdd
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNAdd
+	WithClipRect(clipRect metal.MTLRegion) *CNNAdd
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNAdd
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNAdd
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNAdd
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNAdd
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNAdd
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNAdd
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNAdd
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNAdd
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNAdd
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNAdd
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNAdd
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNAdd
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNAdd
+	WithOptions(options mpscore.MPSKernelOptions) *CNNAdd
+	WithLabel(label string) *CNNAdd
 }
 
 var _ CNNAddable = (*CNNAdd)(nil)

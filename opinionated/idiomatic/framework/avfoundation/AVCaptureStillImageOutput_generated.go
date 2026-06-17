@@ -50,6 +50,12 @@ func (x *CaptureStillImageOutput) WithHighResolutionStillImageOutputEnabled(high
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureStillImageOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // CaptureStillImageAsynchronouslyFromConnectionCompletionHandler calls the underlying CaptureStillImageAsynchronouslyFromConnectionCompletionHandler.
 func (x *CaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
 	x.inner.CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection, handler)
@@ -109,6 +115,7 @@ type CaptureStillImageOutputable interface {
 	Unwrap() *raw.AVCaptureStillImageOutput
 	WithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureStillImageOutput
 	WithHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) *CaptureStillImageOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput
 	CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer))
 	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -69,6 +70,18 @@ func (x *CNNLocalContrastNormalizationGradientNode) WithPm(pm float32) *CNNLocal
 // WithPs sets the ps property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradientNode) WithPs(ps float32) *CNNLocalContrastNormalizationGradientNode {
 	x.inner.SetPs(ps)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLocalContrastNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradientNode) WithLabel(label string) *CNNLocalContrastNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -155,6 +168,8 @@ type CNNLocalContrastNormalizationGradientNodeable interface {
 	WithP0(p0 float32) *CNNLocalContrastNormalizationGradientNode
 	WithPm(pm float32) *CNNLocalContrastNormalizationGradientNode
 	WithPs(ps float32) *CNNLocalContrastNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNLocalContrastNormalizationGradientNode
+	WithLabel(label string) *CNNLocalContrastNormalizationGradientNode
 	Alpha() float32
 	SetAlpha(alpha float32)
 	Beta() float32

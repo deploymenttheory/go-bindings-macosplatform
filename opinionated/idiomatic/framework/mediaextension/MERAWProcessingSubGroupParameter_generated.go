@@ -38,6 +38,12 @@ func NewRAWProcessingSubGroupParameterWithNameDescriptionParameters(name string,
 	return &RAWProcessingSubGroupParameter{inner: raw.MERAWProcessingSubGroupParameterFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProcessingSubGroupParameter {
+	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	return x
+}
+
 // SubGroupParameters returns the collection as a Go slice.
 func (x *RAWProcessingSubGroupParameter) SubGroupParameters() []*raw.MERAWProcessingParameter {
 	arr := x.inner.SubGroupParameters()
@@ -54,6 +60,7 @@ func (x *RAWProcessingSubGroupParameter) asRAWProcessingParameter() *raw.MERAWPr
 // RAWProcessingSubGroupParameterable is the interface implemented by [RAWProcessingSubGroupParameter], for mocking and DI.
 type RAWProcessingSubGroupParameterable interface {
 	Unwrap() *raw.MERAWProcessingSubGroupParameter
+	WithEnabled(enabled bool) *RAWProcessingSubGroupParameter
 	SubGroupParameters() []*raw.MERAWProcessingParameter
 }
 

@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BatchUpdateRequest wraps [raw.NSBatchUpdateRequest] with a fluent Go API.
@@ -66,6 +67,22 @@ func (x *BatchUpdateRequest) WithResultType(resultType raw.NSBatchUpdateRequestR
 // WithPropertiesToUpdate sets the propertiesToUpdate property and returns the receiver for chaining.
 func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest {
 	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
+	return x
+}
+
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
 	return x
 }
 
@@ -136,6 +153,7 @@ type BatchUpdateRequestable interface {
 	WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest
 	WithResultType(resultType raw.NSBatchUpdateRequestResultType) *BatchUpdateRequest
 	WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest
 	EntityName() string
 	Entity() *EntityDescription
 	Predicate() *foundation.NSPredicate

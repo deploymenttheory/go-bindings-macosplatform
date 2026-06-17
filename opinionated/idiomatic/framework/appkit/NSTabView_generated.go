@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -106,6 +108,340 @@ func (x *TabView) WithDelegate(delegate raw.NSTabViewDelegate) *TabView {
 // WithControlTint sets the controlTint property and returns the receiver for chaining.
 func (x *TabView) WithControlTint(controlTint raw.NSControlTint) *TabView {
 	x.inner.SetControlTint(controlTint)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *TabView) WithSubviews(items ...ViewProvider) *TabView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TabView) WithHidden(hidden bool) *TabView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *TabView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *TabView) WithAutoresizesSubviews(autoresizesSubviews bool) *TabView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TabView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TabView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TabView) WithFrame(frame corefoundation.CGRect) *TabView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *TabView) WithFrameRotation(frameRotation float64) *TabView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *TabView) WithFrameCenterRotation(frameCenterRotation float64) *TabView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *TabView) WithBoundsRotation(boundsRotation float64) *TabView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TabView) WithBounds(bounds corefoundation.CGRect) *TabView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *TabView) WithCanDrawConcurrently(canDrawConcurrently bool) *TabView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *TabView) WithNeedsDisplay(needsDisplay bool) *TabView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *TabView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *TabView) WithWantsRestingTouches(wantsRestingTouches bool) *TabView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *TabView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TabView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *TabView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TabView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *TabView) WithWantsLayer(wantsLayer bool) *TabView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *TabView) WithLayer(layer *quartzcore.CALayer) *TabView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *TabView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TabView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *TabView) WithNeedsLayout(needsLayout bool) *TabView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *TabView) WithAlphaValue(alphaValue float64) *TabView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *TabView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TabView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TabView) WithBackgroundFilters(items ...*coreimage.CIFilter) *TabView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TabView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TabView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *TabView) WithContentFilters(items ...*coreimage.CIFilter) *TabView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *TabView) WithShadow(shadow *raw.NSShadow) *TabView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *TabView) WithClipsToBounds(clipsToBounds bool) *TabView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *TabView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *TabView) WithToolTip(toolTip string) *TabView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TabView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TabView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *TabView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *TabView) WithNextKeyView(nextKeyView ViewProvider) *TabView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TabView) WithFocusRingType(focusRingType raw.NSFocusRingType) *TabView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *TabView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *TabView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TabView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *TabView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *TabView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *TabView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TabView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *TabView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *TabView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TabView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TabView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TabView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *TabView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *TabView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TabView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *TabView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TabView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *TabView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TabView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TabView) WithNextResponder(nextResponder ResponderProvider) *TabView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TabView) WithMenu(menu *raw.NSMenu) *TabView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TabView) WithUserActivity(userActivity *foundation.NSUserActivity) *TabView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TabView) WithTouchBar(touchBar *raw.NSTouchBar) *TabView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -343,6 +679,55 @@ type TabViewable interface {
 	WithControlSize(controlSize raw.NSControlSize) *TabView
 	WithDelegate(delegate raw.NSTabViewDelegate) *TabView
 	WithControlTint(controlTint raw.NSControlTint) *TabView
+	WithSubviews(items ...ViewProvider) *TabView
+	WithHidden(hidden bool) *TabView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TabView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *TabView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *TabView
+	WithFrame(frame corefoundation.CGRect) *TabView
+	WithFrameRotation(frameRotation float64) *TabView
+	WithFrameCenterRotation(frameCenterRotation float64) *TabView
+	WithBoundsRotation(boundsRotation float64) *TabView
+	WithBounds(bounds corefoundation.CGRect) *TabView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *TabView
+	WithNeedsDisplay(needsDisplay bool) *TabView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *TabView
+	WithWantsRestingTouches(wantsRestingTouches bool) *TabView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *TabView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *TabView
+	WithWantsLayer(wantsLayer bool) *TabView
+	WithLayer(layer *quartzcore.CALayer) *TabView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TabView
+	WithNeedsLayout(needsLayout bool) *TabView
+	WithAlphaValue(alphaValue float64) *TabView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TabView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *TabView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *TabView
+	WithContentFilters(items ...*coreimage.CIFilter) *TabView
+	WithShadow(shadow *raw.NSShadow) *TabView
+	WithClipsToBounds(clipsToBounds bool) *TabView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TabView
+	WithToolTip(toolTip string) *TabView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TabView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TabView
+	WithNextKeyView(nextKeyView ViewProvider) *TabView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TabView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *TabView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *TabView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TabView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *TabView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *TabView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TabView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TabView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TabView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TabView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TabView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TabView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *TabView
+	WithNextResponder(nextResponder ResponderProvider) *TabView
+	WithMenu(menu *raw.NSMenu) *TabView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TabView
+	WithTouchBar(touchBar *raw.NSTouchBar) *TabView
 	SelectTabViewItem(tabViewItem *raw.NSTabViewItem)
 	SelectTabViewItemAtIndex(index int)
 	SelectTabViewItemWithIdentifier(identifier objc.ID)

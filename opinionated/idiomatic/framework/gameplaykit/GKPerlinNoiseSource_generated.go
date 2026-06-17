@@ -42,6 +42,30 @@ func (x *PerlinNoiseSource) WithPersistence(persistence float64) *PerlinNoiseSou
 	return x
 }
 
+// WithFrequency sets the frequency property and returns the receiver for chaining.
+func (x *PerlinNoiseSource) WithFrequency(frequency float64) *PerlinNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
+	return x
+}
+
+// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+func (x *PerlinNoiseSource) WithOctaveCount(octaveCount int) *PerlinNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
+	return x
+}
+
+// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+func (x *PerlinNoiseSource) WithLacunarity(lacunarity float64) *PerlinNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
+	return x
+}
+
+// WithSeed sets the seed property and returns the receiver for chaining.
+func (x *PerlinNoiseSource) WithSeed(seed int32) *PerlinNoiseSource {
+	x.inner.GKCoherentNoiseSource.SetSeed(seed)
+	return x
+}
+
 // Persistence calls the underlying Persistence.
 func (x *PerlinNoiseSource) Persistence() float64 {
 	return x.inner.Persistence()
@@ -60,6 +84,10 @@ func (x *PerlinNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner
 type PerlinNoiseSourceable interface {
 	Unwrap() *raw.GKPerlinNoiseSource
 	WithPersistence(persistence float64) *PerlinNoiseSource
+	WithFrequency(frequency float64) *PerlinNoiseSource
+	WithOctaveCount(octaveCount int) *PerlinNoiseSource
+	WithLacunarity(lacunarity float64) *PerlinNoiseSource
+	WithSeed(seed int32) *PerlinNoiseSource
 	Persistence() float64
 	SetPersistence(persistence float64)
 }

@@ -101,6 +101,12 @@ func (x *DateComponentsFormatter) WithFormattingContext(formattingContext raw.NS
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DateComponentsFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponentsFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromDateComponents calls the underlying StringFromDateComponents.
 func (x *DateComponentsFormatter) StringFromDateComponents(components *raw.NSDateComponents) *String {
 	_r := x.inner.StringFromDateComponents(components)
@@ -264,6 +270,7 @@ type DateComponentsFormatterable interface {
 	WithIncludesApproximationPhrase(includesApproximationPhrase bool) *DateComponentsFormatter
 	WithIncludesTimeRemainingPhrase(includesTimeRemainingPhrase bool) *DateComponentsFormatter
 	WithFormattingContext(formattingContext raw.NSFormattingContext) *DateComponentsFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateComponentsFormatter
 	StringFromDateComponents(components *raw.NSDateComponents) *String
 	StringFromDateToDate(startDate *raw.NSDate, endDate *raw.NSDate) *String
 	StringFromTimeInterval(ti float64) *String

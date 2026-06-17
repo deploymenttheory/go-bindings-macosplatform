@@ -51,6 +51,18 @@ func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, ti
 	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *PointAnnotation) WithTitle(title string) *PointAnnotation {
+	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
+	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // Coordinate calls the underlying Coordinate.
 func (x *PointAnnotation) Coordinate() unsafe.Pointer {
 	return x.inner.Coordinate()
@@ -66,6 +78,8 @@ func (x *PointAnnotation) asShape() *raw.MKShape { return &x.inner.MKShape }
 // PointAnnotationable is the interface implemented by [PointAnnotation], for mocking and DI.
 type PointAnnotationable interface {
 	Unwrap() *raw.MKPointAnnotation
+	WithTitle(title string) *PointAnnotation
+	WithSubtitle(subtitle string) *PointAnnotation
 	Coordinate() unsafe.Pointer
 	SetCoordinate(coordinate unsafe.Pointer)
 }

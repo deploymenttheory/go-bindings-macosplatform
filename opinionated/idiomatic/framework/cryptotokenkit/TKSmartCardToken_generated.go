@@ -37,6 +37,12 @@ func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *raw.TKSma
 	return &SmartCardToken{inner: raw.TKSmartCardTokenFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SmartCardToken) WithDelegate(delegate raw.TKTokenDelegate) *SmartCardToken {
+	x.inner.TKToken.SetDelegate(delegate)
+	return x
+}
+
 // AID calls the underlying AID.
 func (x *SmartCardToken) AID() *foundation.NSData {
 	return x.inner.AID()
@@ -47,6 +53,7 @@ func (x *SmartCardToken) asToken() *raw.TKToken { return &x.inner.TKToken }
 // SmartCardTokenable is the interface implemented by [SmartCardToken], for mocking and DI.
 type SmartCardTokenable interface {
 	Unwrap() *raw.TKSmartCardToken
+	WithDelegate(delegate raw.TKTokenDelegate) *SmartCardToken
 	AID() *foundation.NSData
 }
 

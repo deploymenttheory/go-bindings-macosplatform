@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,42 @@ func NewImageReduceColumnMeanWithDevice(device metal.MTLDevice) *ImageReduceColu
 	return &ImageReduceColumnMean{inner: raw.MPSImageReduceColumnMeanFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageReduceColumnMean) WithLabel(label string) *ImageReduceColumnMean {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageReduceColumnMean) asImageReduceUnary() *mpsimage.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceColumnMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -48,6 +85,12 @@ func (x *ImageReduceColumnMean) asKernel() *mpscore.MPSKernel { return &x.inner.
 // ImageReduceColumnMeanable is the interface implemented by [ImageReduceColumnMean], for mocking and DI.
 type ImageReduceColumnMeanable interface {
 	Unwrap() *raw.MPSImageReduceColumnMean
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMean
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMean
+	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMean
+	WithLabel(label string) *ImageReduceColumnMean
 }
 
 var _ ImageReduceColumnMeanable = (*ImageReduceColumnMean)(nil)

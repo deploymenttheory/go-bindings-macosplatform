@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,54 @@ func NewCNNPoolingMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.
 	return &CNNPoolingMax{inner: raw.MPSCNNPoolingMaxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithOffset(offset mpscore.MPSOffset) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithPadding(padding raw.MPSNNPadding) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNPoolingMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNPoolingMax) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
 func (x *CNNPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
@@ -52,6 +101,14 @@ func (x *CNNPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNN
 // CNNPoolingMaxable is the interface implemented by [CNNPoolingMax], for mocking and DI.
 type CNNPoolingMaxable interface {
 	Unwrap() *raw.MPSCNNPoolingMax
+	WithOffset(offset mpscore.MPSOffset) *CNNPoolingMax
+	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingMax
+	WithPadding(padding raw.MPSNNPadding) *CNNPoolingMax
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingMax
 }
 
 var _ CNNPoolingMaxable = (*CNNPoolingMax)(nil)

@@ -49,6 +49,12 @@ func (x *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioCo
 	return x
 }
 
+// WithAttachment sets the attachment property and returns the receiver for chaining.
+func (x *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
+	x.inner.VZConsolePortConfiguration.SetAttachment(attachment.asSerialPortAttachment())
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *VirtioConsolePortConfiguration) Name() string {
 	_r := x.inner.Name()
@@ -80,6 +86,7 @@ type VirtioConsolePortConfigurationable interface {
 	Unwrap() *raw.VZVirtioConsolePortConfiguration
 	WithName(name string) *VirtioConsolePortConfiguration
 	WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration
+	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration
 	Name() string
 	SetName(name string)
 	IsConsole() bool

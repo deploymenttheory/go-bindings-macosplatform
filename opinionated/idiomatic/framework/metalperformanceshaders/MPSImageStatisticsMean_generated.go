@@ -53,6 +53,36 @@ func (x *ImageStatisticsMean) WithClipRectSource(clipRectSource metal.MTLRegion)
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageStatisticsMean) WithLabel(label string) *ImageStatisticsMean {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -71,6 +101,11 @@ func (x *ImageStatisticsMean) asKernel() *mpscore.MPSKernel { return &x.inner.MP
 type ImageStatisticsMeanable interface {
 	Unwrap() *raw.MPSImageStatisticsMean
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean
+	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean
+	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean
+	WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMean
+	WithLabel(label string) *ImageStatisticsMean
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

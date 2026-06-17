@@ -47,6 +47,72 @@ func (x *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencil
 	return x
 }
 
+// WithTexture sets the texture property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithTexture(texture raw.MTLTexture) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetTexture(texture)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithLevel(level uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLevel(level)
+	return x
+}
+
+// WithSlice sets the slice property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithSlice(slice uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetSlice(slice)
+	return x
+}
+
+// WithDepthPlane sets the depthPlane property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithDepthPlane(depthPlane uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetDepthPlane(depthPlane)
+	return x
+}
+
+// WithResolveTexture sets the resolveTexture property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveTexture(resolveTexture)
+	return x
+}
+
+// WithResolveLevel sets the resolveLevel property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithResolveLevel(resolveLevel uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveLevel(resolveLevel)
+	return x
+}
+
+// WithResolveSlice sets the resolveSlice property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithResolveSlice(resolveSlice uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveSlice(resolveSlice)
+	return x
+}
+
+// WithResolveDepthPlane sets the resolveDepthPlane property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveDepthPlane(resolveDepthPlane)
+	return x
+}
+
+// WithLoadAction sets the loadAction property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(loadAction)
+	return x
+}
+
+// WithStoreAction sets the storeAction property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(storeAction)
+	return x
+}
+
+// WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
+func (x *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(storeActionOptions)
+	return x
+}
+
 // ClearStencil calls the underlying ClearStencil.
 func (x *RenderPassStencilAttachmentDescriptor) ClearStencil() uint32 {
 	return x.inner.ClearStencil()
@@ -74,6 +140,17 @@ type RenderPassStencilAttachmentDescriptorable interface {
 	Unwrap() *raw.MTLRenderPassStencilAttachmentDescriptor
 	WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor
 	WithStencilResolveFilter(stencilResolveFilter raw.MTLMultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor
+	WithTexture(texture raw.MTLTexture) *RenderPassStencilAttachmentDescriptor
+	WithLevel(level uint) *RenderPassStencilAttachmentDescriptor
+	WithSlice(slice uint) *RenderPassStencilAttachmentDescriptor
+	WithDepthPlane(depthPlane uint) *RenderPassStencilAttachmentDescriptor
+	WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassStencilAttachmentDescriptor
+	WithResolveLevel(resolveLevel uint) *RenderPassStencilAttachmentDescriptor
+	WithResolveSlice(resolveSlice uint) *RenderPassStencilAttachmentDescriptor
+	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassStencilAttachmentDescriptor
+	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassStencilAttachmentDescriptor
+	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassStencilAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassStencilAttachmentDescriptor
 	ClearStencil() uint32
 	SetClearStencil(clearStencil uint32)
 	StencilResolveFilter() raw.MTLMultisampleStencilResolveFilter

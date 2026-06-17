@@ -36,6 +36,12 @@ func NewHost() *Host {
 	return &Host{inner: raw.NSHostFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Host) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Host {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsEqualToHost calls the underlying IsEqualToHost.
 func (x *Host) IsEqualToHost(aHost *raw.NSHost) bool {
 	return x.inner.IsEqualToHost(aHost)
@@ -95,6 +101,7 @@ func (x *Host) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Hostable is the interface implemented by [Host], for mocking and DI.
 type Hostable interface {
 	Unwrap() *raw.NSHost
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Host
 	IsEqualToHost(aHost *raw.NSHost) bool
 	Name() *String
 	Names() []string

@@ -60,6 +60,42 @@ func (x *AVB17221AECPAEMMessage) WithCommandSpecificData(commandSpecificData *fo
 	return x
 }
 
+// WithMessageType sets the messageType property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+	return x
+}
+
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(status)
+	return x
+}
+
+// WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
+	return x
+}
+
+// WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
+	return x
+}
+
+// WithSequenceID sets the sequenceID property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
+	return x
+}
+
+// WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
+func (x *AVB17221AECPAEMMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAEMMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+	return x
+}
+
 // CommandType calls the underlying CommandType.
 func (x *AVB17221AECPAEMMessage) CommandType() raw.AVB17221AEMCommandType {
 	return x.inner.CommandType()
@@ -109,6 +145,12 @@ type AVB17221AECPAEMMessageable interface {
 	WithUnsolicited(unsolicited bool) *AVB17221AECPAEMMessage
 	WithControllerRequest(controllerRequest bool) *AVB17221AECPAEMMessage
 	WithCommandSpecificData(commandSpecificData *foundation.NSData) *AVB17221AECPAEMMessage
+	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAEMMessage
+	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAEMMessage
+	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAEMMessage
+	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAEMMessage
+	WithSequenceID(sequenceID uint16) *AVB17221AECPAEMMessage
+	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAEMMessage
 	CommandType() raw.AVB17221AEMCommandType
 	SetCommandType(commandType raw.AVB17221AEMCommandType)
 	IsUnsolicited() bool

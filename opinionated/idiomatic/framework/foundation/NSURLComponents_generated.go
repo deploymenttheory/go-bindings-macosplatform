@@ -181,6 +181,12 @@ func (x *URLComponents) WithPercentEncodedQueryItems(items ...*raw.NSURLQueryIte
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLComponents {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // URLRelativeToURL calls the underlying URLRelativeToURL.
 func (x *URLComponents) URLRelativeToURL(baseURL string) *URL {
 	_r := x.inner.URLRelativeToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
@@ -512,6 +518,7 @@ type URLComponentsable interface {
 	WithEncodedHost(encodedHost string) *URLComponents
 	WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
 	WithPercentEncodedQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLComponents
 	URLRelativeToURL(baseURL string) *URL
 	URL() *URL
 	String() *String

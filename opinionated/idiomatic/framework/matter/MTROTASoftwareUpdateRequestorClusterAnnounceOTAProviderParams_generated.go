@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,74 @@ func NewMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams() *MTROtaS
 	return &MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams{inner: raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsFromID(_id)}
 }
 
+// WithProviderNodeID sets the providerNodeID property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetProviderNodeID(providerNodeID)
+	return x
+}
+
+// WithVendorID sets the vendorID property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVendorID(vendorID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetVendorID(vendorID)
+	return x
+}
+
+// WithAnnouncementReason sets the announcementReason property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithAnnouncementReason(announcementReason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetAnnouncementReason(announcementReason)
+	return x
+}
+
+// WithMetadataForNode sets the metadataForNode property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithMetadataForNode(metadataForNode *foundation.NSData) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetMetadataForNode(metadataForNode)
+	return x
+}
+
+// WithEndpoint sets the endpoint property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetEndpoint(endpoint)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
+// WithProviderNodeId sets the providerNodeId property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithProviderNodeId(providerNodeId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetProviderNodeId(providerNodeId)
+	return x
+}
+
+// WithVendorId sets the vendorId property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVendorId(vendorId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
+	x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams.SetVendorId(vendorId)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams { return &x.inner.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams }
 
 // MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithProviderNodeID(providerNodeID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithVendorID(vendorID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithAnnouncementReason(announcementReason *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithMetadataForNode(metadataForNode *foundation.NSData) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithEndpoint(endpoint *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithProviderNodeId(providerNodeId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
+	WithVendorId(vendorId *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsable = (*MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams)(nil)

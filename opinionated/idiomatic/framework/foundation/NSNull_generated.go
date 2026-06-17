@@ -35,11 +35,18 @@ func NewNull() *Null {
 	return &Null{inner: raw.NSNullFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Null) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Null {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *Null) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Nullable is the interface implemented by [Null], for mocking and DI.
 type Nullable interface {
 	Unwrap() *raw.NSNull
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Null
 }
 
 var _ Nullable = (*Null)(nil)

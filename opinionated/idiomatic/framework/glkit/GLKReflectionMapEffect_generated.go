@@ -5,6 +5,7 @@
 package glkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -36,6 +37,52 @@ func NewReflectionMapEffect() *ReflectionMapEffect {
 	return &ReflectionMapEffect{inner: raw.GLKReflectionMapEffectFromID(_id)}
 }
 
+// WithColorMaterialEnabled sets the colorMaterialEnabled property and returns the receiver for chaining.
+func (x *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetColorMaterialEnabled(colorMaterialEnabled)
+	return x
+}
+
+// WithLightModelTwoSided sets the lightModelTwoSided property and returns the receiver for chaining.
+func (x *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetLightModelTwoSided(lightModelTwoSided)
+	return x
+}
+
+// WithUseConstantColor sets the useConstantColor property and returns the receiver for chaining.
+func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetUseConstantColor(useConstantColor)
+	return x
+}
+
+// WithLightingType sets the lightingType property and returns the receiver for chaining.
+func (x *ReflectionMapEffect) WithLightingType(lightingType raw.GLKLightingType) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetLightingType(lightingType)
+	return x
+}
+
+// WithTextureOrder sets the collection, converting the Go slice to an NSArray.
+func (x *ReflectionMapEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect {
+	if len(items) == 0 {
+		x.inner.GLKBaseEffect.SetTextureOrder(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.GLKEffectPropertyTexture](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.GLKBaseEffect.SetTextureOrder(_arr)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
+	x.inner.GLKBaseEffect.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // TextureCubeMap calls the underlying TextureCubeMap.
 func (x *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
 	_r := x.inner.TextureCubeMap()
@@ -60,6 +107,12 @@ func (x *ReflectionMapEffect) asBaseEffect() *raw.GLKBaseEffect { return &x.inne
 // ReflectionMapEffectable is the interface implemented by [ReflectionMapEffect], for mocking and DI.
 type ReflectionMapEffectable interface {
 	Unwrap() *raw.GLKReflectionMapEffect
+	WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect
+	WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect
+	WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect
+	WithLightingType(lightingType raw.GLKLightingType) *ReflectionMapEffect
+	WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect
+	WithLabel(label string) *ReflectionMapEffect
 	TextureCubeMap() *EffectPropertyTexture
 	Matrix() unsafe.Pointer
 	SetMatrix(matrix unsafe.Pointer)

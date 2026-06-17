@@ -5,8 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MultiPolylineRenderer wraps [raw.MKMultiPolylineRenderer] with a fluent Go API.
@@ -36,6 +40,76 @@ func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *raw.MKMultiPolylin
 	return &MultiPolylineRenderer{inner: raw.MKMultiPolylineRendererFromID(_id)}
 }
 
+// WithFillColor sets the fillColor property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithFillColor(fillColor *appkit.NSColor) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+	return x
+}
+
+// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+	return x
+}
+
+// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithLineWidth(lineWidth float64) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
+	return x
+}
+
+// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
+	return x
+}
+
+// WithLineCap sets the lineCap property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	return x
+}
+
+// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithMiterLimit(miterLimit float64) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	return x
+}
+
+// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
+func (x *MultiPolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolylineRenderer {
+	if len(items) == 0 {
+		x.inner.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRenderer {
+	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	return x
+}
+
 // MultiPolyline calls the underlying MultiPolyline.
 func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
 	_r := x.inner.MultiPolyline()
@@ -52,6 +126,16 @@ func (x *MultiPolylineRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { ret
 // MultiPolylineRendererable is the interface implemented by [MultiPolylineRenderer], for mocking and DI.
 type MultiPolylineRendererable interface {
 	Unwrap() *raw.MKMultiPolylineRenderer
+	WithFillColor(fillColor *appkit.NSColor) *MultiPolylineRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolylineRenderer
+	WithLineWidth(lineWidth float64) *MultiPolylineRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolylineRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolylineRenderer
+	WithMiterLimit(miterLimit float64) *MultiPolylineRenderer
+	WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolylineRenderer
+	WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer
+	WithAlpha(alpha float64) *MultiPolylineRenderer
 	MultiPolyline() *MultiPolyline
 }
 

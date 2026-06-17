@@ -36,6 +36,12 @@ func NewInflectionRuleExplicitWithMorphology(morphology *raw.NSMorphology) *Infl
 	return &InflectionRuleExplicit{inner: raw.NSInflectionRuleExplicitFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRuleExplicit {
+	x.inner.NSInflectionRule.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Morphology calls the underlying Morphology.
 func (x *InflectionRuleExplicit) Morphology() *Morphology {
 	_r := x.inner.Morphology()
@@ -52,6 +58,7 @@ func (x *InflectionRuleExplicit) asObject() *raw.NSObject { return &x.inner.NSIn
 // InflectionRuleExplicitable is the interface implemented by [InflectionRuleExplicit], for mocking and DI.
 type InflectionRuleExplicitable interface {
 	Unwrap() *raw.NSInflectionRuleExplicit
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRuleExplicit
 	Morphology() *Morphology
 }
 

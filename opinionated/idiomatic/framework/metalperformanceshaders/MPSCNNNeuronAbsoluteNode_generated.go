@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNNeuronAbsoluteNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageN
 	return &CNNNeuronAbsoluteNode{inner: raw.MPSCNNNeuronAbsoluteNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronAbsoluteNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronAbsoluteNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronAbsoluteNode) WithLabel(label string) *CNNNeuronAbsoluteNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronAbsoluteNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronAbsoluteNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -44,6 +57,8 @@ func (x *CNNNeuronAbsoluteNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNo
 // CNNNeuronAbsoluteNodeable is the interface implemented by [CNNNeuronAbsoluteNode], for mocking and DI.
 type CNNNeuronAbsoluteNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronAbsoluteNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronAbsoluteNode
+	WithLabel(label string) *CNNNeuronAbsoluteNode
 }
 
 var _ CNNNeuronAbsoluteNodeable = (*CNNNeuronAbsoluteNode)(nil)

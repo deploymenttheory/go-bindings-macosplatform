@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewGenerateForegroundInstanceMaskRequest() *GenerateForegroundInstanceMaskR
 	return &GenerateForegroundInstanceMaskRequest{inner: raw.VNGenerateForegroundInstanceMaskRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GenerateForegroundInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GenerateForegroundInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GenerateForegroundInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GenerateForegroundInstanceMaskRequest) WithRevision(revision uint) *GenerateForegroundInstanceMaskRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *GenerateForegroundInstanceMaskRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *GenerateForegroundInstanceMaskRequest) asRequest() *raw.VNRequest { ret
 // GenerateForegroundInstanceMaskRequestable is the interface implemented by [GenerateForegroundInstanceMaskRequest], for mocking and DI.
 type GenerateForegroundInstanceMaskRequestable interface {
 	Unwrap() *raw.VNGenerateForegroundInstanceMaskRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateForegroundInstanceMaskRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateForegroundInstanceMaskRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GenerateForegroundInstanceMaskRequest
+	WithRevision(revision uint) *GenerateForegroundInstanceMaskRequest
 }
 
 var _ GenerateForegroundInstanceMaskRequestable = (*GenerateForegroundInstanceMaskRequest)(nil)

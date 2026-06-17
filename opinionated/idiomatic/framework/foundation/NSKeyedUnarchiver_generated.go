@@ -74,6 +74,12 @@ func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy raw.NS
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *KeyedUnarchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedUnarchiver {
+	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // FinishDecoding calls the underlying FinishDecoding.
 func (x *KeyedUnarchiver) FinishDecoding() {
 	x.inner.FinishDecoding()
@@ -119,6 +125,7 @@ type KeyedUnarchiverable interface {
 	WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver
 	WithDecodingFailurePolicy(decodingFailurePolicy raw.NSDecodingFailurePolicy) *KeyedUnarchiver
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedUnarchiver
 	FinishDecoding()
 	SetClassForClassName(cls objc.Class, codedName string)
 	ClassForClassName(codedName string) objc.Class

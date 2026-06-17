@@ -42,6 +42,18 @@ func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayou
 	return x
 }
 
+// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
+func (x *CollectionLayoutDecorationItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem {
+	x.inner.NSCollectionLayoutItem.SetContentInsets(contentInsets)
+	return x
+}
+
+// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
+	x.inner.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing)
+	return x
+}
+
 // ZIndex calls the underlying ZIndex.
 func (x *CollectionLayoutDecorationItem) ZIndex() int {
 	return x.inner.ZIndex()
@@ -67,6 +79,8 @@ func (x *CollectionLayoutDecorationItem) asCollectionLayoutItem() *raw.NSCollect
 type CollectionLayoutDecorationItemable interface {
 	Unwrap() *raw.NSCollectionLayoutDecorationItem
 	WithZIndex(zIndex int) *CollectionLayoutDecorationItem
+	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutDecorationItem
+	WithEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem
 	ZIndex() int
 	SetZIndex(zIndex int)
 	ElementKind() string

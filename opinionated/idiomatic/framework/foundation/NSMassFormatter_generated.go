@@ -53,6 +53,12 @@ func (x *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormatt
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MassFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MassFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromValueUnit calls the underlying StringFromValueUnit.
 func (x *MassFormatter) StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String {
 	_r := x.inner.StringFromValueUnit(value, unit)
@@ -133,6 +139,7 @@ type MassFormatterable interface {
 	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *MassFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *MassFormatter
 	WithForPersonMassUse(forPersonMassUse bool) *MassFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MassFormatter
 	StringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String
 	StringFromKilograms(numberInKilograms float64) *String
 	UnitStringFromValueUnit(value float64, unit raw.NSMassFormatterUnit) *String

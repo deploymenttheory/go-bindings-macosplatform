@@ -71,6 +71,12 @@ func (x *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProc
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessingListParameter {
+	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	return x
+}
+
 // HasNeutralValue calls the underlying HasNeutralValue.
 func (x *RAWProcessingListParameter) HasNeutralValue(outNeutralValue *int64) bool {
 	return x.inner.HasNeutralValue(outNeutralValue)
@@ -108,6 +114,7 @@ func (x *RAWProcessingListParameter) asRAWProcessingParameter() *raw.MERAWProces
 type RAWProcessingListParameterable interface {
 	Unwrap() *raw.MERAWProcessingListParameter
 	WithCurrentValue(currentValue int) *RAWProcessingListParameter
+	WithEnabled(enabled bool) *RAWProcessingListParameter
 	HasNeutralValue(outNeutralValue *int64) bool
 	HasCameraValue(outCameraValue *int64) bool
 	ListElements() []*raw.MERAWProcessingListElementParameter

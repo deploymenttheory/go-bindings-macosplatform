@@ -96,6 +96,18 @@ func (x *CNNKernel) WithDestinationImageAllocator(destinationImageAllocator mpsc
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNKernel) WithLabel(label string) *CNNKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceImageDestinationImage calls the underlying EncodeToCommandBufferSourceImageDestinationImage.
 func (x *CNNKernel) EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceImageDestinationImage(commandBuffer, sourceImage, destinationImage)
@@ -314,6 +326,8 @@ type CNNKernelable interface {
 	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNKernel
 	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNKernel
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNKernel
+	WithOptions(options mpscore.MPSKernelOptions) *CNNKernel
+	WithLabel(label string) *CNNKernel
 	EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
 	EncodeToCommandBufferSourceImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationState *mpscore.MPSState, destinationImage *mpscore.MPSImage)
 	EncodeBatchToCommandBufferSourceImagesDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationImages unsafe.Pointer)

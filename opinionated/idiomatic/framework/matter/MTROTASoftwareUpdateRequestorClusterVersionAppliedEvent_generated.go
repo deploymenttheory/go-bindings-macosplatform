@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwar
 	return &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID(_id)}
 }
 
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
+// WithProductID sets the productID property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent.SetProductID(productID)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent }
 
 // MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+	WithProductID(productID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)

@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageThresholdBinaryInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdBinaryInverse{inner: raw.MPSImageThresholdBinaryInverseFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdBinaryInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdBinaryInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdBinaryInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinaryInverse {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdBinaryInverse) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -65,6 +84,9 @@ func (x *ImageThresholdBinaryInverse) asUnaryImageKernel() *raw.MPSUnaryImageKer
 // ImageThresholdBinaryInverseable is the interface implemented by [ImageThresholdBinaryInverse], for mocking and DI.
 type ImageThresholdBinaryInverseable interface {
 	Unwrap() *raw.MPSImageThresholdBinaryInverse
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinaryInverse
 	ThresholdValue() float32
 	MaximumValue() float32
 	Transform() *float32

@@ -39,6 +39,12 @@ func NewNEPacketTunnelProvider() *NEPacketTunnelProvider {
 	return &NEPacketTunnelProvider{inner: raw.NEPacketTunnelProviderFromID(_id)}
 }
 
+// WithReasserting sets the reasserting property and returns the receiver for chaining.
+func (x *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
+	x.inner.NETunnelProvider.SetReasserting(reasserting)
+	return x
+}
+
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error {
 	_ch := make(chan error, 1)
@@ -117,6 +123,7 @@ func (x *NEPacketTunnelProvider) asNEProvider() *raw.NEProvider { return &x.inne
 // NEPacketTunnelProviderable is the interface implemented by [NEPacketTunnelProvider], for mocking and DI.
 type NEPacketTunnelProviderable interface {
 	Unwrap() *raw.NEPacketTunnelProvider
+	WithReasserting(reasserting bool) *NEPacketTunnelProvider
 	StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error
 	StopTunnelWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
 	CancelTunnelWithError(error_ unsafe.Pointer)

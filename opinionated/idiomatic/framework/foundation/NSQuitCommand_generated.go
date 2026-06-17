@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewQuitCommand() *QuitCommand {
 	return &QuitCommand{inner: raw.NSQuitCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *QuitCommand) WithDirectParameter(directParameter objc.ID) *QuitCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *QuitCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *QuitCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *QuitCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *QuitCommand) WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *QuitCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *QuitCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *QuitCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *QuitCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *QuitCommand) WithScriptErrorString(scriptErrorString string) *QuitCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *QuitCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *QuitCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SaveOptions calls the underlying SaveOptions.
 func (x *QuitCommand) SaveOptions() raw.NSSaveOptions {
 	return x.inner.SaveOptions()
@@ -47,6 +96,14 @@ func (x *QuitCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand
 // QuitCommandable is the interface implemented by [QuitCommand], for mocking and DI.
 type QuitCommandable interface {
 	Unwrap() *raw.NSQuitCommand
+	WithDirectParameter(directParameter objc.ID) *QuitCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *QuitCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *QuitCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *QuitCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *QuitCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *QuitCommand
+	WithScriptErrorString(scriptErrorString string) *QuitCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *QuitCommand
 	SaveOptions() raw.NSSaveOptions
 }
 

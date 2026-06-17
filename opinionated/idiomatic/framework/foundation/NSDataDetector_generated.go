@@ -42,6 +42,12 @@ func NewDataDetectorWithTypesError(checkingTypes uint64) (*DataDetector, error) 
 	return &DataDetector{inner: raw.NSDataDetectorFromID(_id)}, nil
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DataDetector) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DataDetector {
+	x.inner.NSRegularExpression.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CheckingTypes calls the underlying CheckingTypes.
 func (x *DataDetector) CheckingTypes() uint64 {
 	return x.inner.CheckingTypes()
@@ -54,6 +60,7 @@ func (x *DataDetector) asObject() *raw.NSObject { return &x.inner.NSRegularExpre
 // DataDetectorable is the interface implemented by [DataDetector], for mocking and DI.
 type DataDetectorable interface {
 	Unwrap() *raw.NSDataDetector
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DataDetector
 	CheckingTypes() uint64
 }
 

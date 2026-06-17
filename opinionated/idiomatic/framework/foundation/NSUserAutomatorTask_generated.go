@@ -42,6 +42,12 @@ func (x *UserAutomatorTask) WithVariables(variables *raw.NSDictionary[*raw.NSStr
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask {
+	x.inner.NSUserScriptTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ExecuteWithInputCompletionHandler calls the underlying ExecuteWithInputCompletionHandler.
 func (x *UserAutomatorTask) ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer)) {
 	x.inner.ExecuteWithInputCompletionHandler(input, handler)
@@ -65,6 +71,7 @@ func (x *UserAutomatorTask) asObject() *raw.NSObject { return &x.inner.NSUserScr
 type UserAutomatorTaskable interface {
 	Unwrap() *raw.NSUserAutomatorTask
 	WithVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAutomatorTask
 	ExecuteWithInputCompletionHandler(input raw.NSSecureCoding, handler func(objc.ID, unsafe.Pointer))
 	Variables() *raw.NSDictionary[*raw.NSString, objc.ID]
 	SetVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID])

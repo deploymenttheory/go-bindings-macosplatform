@@ -60,6 +60,30 @@ func (x *CalTask) WithCompletedDate(completedDate *foundation.NSDate) *CalTask {
 	return x
 }
 
+// WithCalendar sets the calendar property and returns the receiver for chaining.
+func (x *CalTask) WithCalendar(calendar *raw.CalCalendar) *CalTask {
+	x.inner.CalCalendarItem.SetCalendar(calendar)
+	return x
+}
+
+// WithNotes sets the notes property and returns the receiver for chaining.
+func (x *CalTask) WithNotes(notes string) *CalTask {
+	x.inner.CalCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	return x
+}
+
+// WithUrl sets the url property and returns the receiver for chaining.
+func (x *CalTask) WithUrl(url string) *CalTask {
+	x.inner.CalCalendarItem.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *CalTask) WithTitle(title string) *CalTask {
+	x.inner.CalCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
 // DueDate calls the underlying DueDate.
 func (x *CalTask) DueDate() *foundation.NSDate {
 	return x.inner.DueDate()
@@ -109,6 +133,10 @@ type CalTaskable interface {
 	WithPriority(priority uint) *CalTask
 	WithIsCompleted(isCompleted bool) *CalTask
 	WithCompletedDate(completedDate *foundation.NSDate) *CalTask
+	WithCalendar(calendar *raw.CalCalendar) *CalTask
+	WithNotes(notes string) *CalTask
+	WithUrl(url string) *CalTask
+	WithTitle(title string) *CalTask
 	DueDate() *foundation.NSDate
 	SetDueDate(dueDate *foundation.NSDate)
 	Priority() uint

@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,6 +49,24 @@ func (x *ImageLaplacianPyramid) WithLaplacianScale(laplacianScale float32) *Imag
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // GetLaplacianBias calls the underlying GetLaplacianBias.
 func (x *ImageLaplacianPyramid) GetLaplacianBias() float32 {
 	return x.inner.GetLaplacianBias()
@@ -78,6 +98,9 @@ type ImageLaplacianPyramidable interface {
 	Unwrap() *raw.MPSImageLaplacianPyramid
 	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid
 	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramid
 	GetLaplacianBias() float32
 	SetLaplacianBias(laplacianBias float32)
 	GetLaplacianScale() float32

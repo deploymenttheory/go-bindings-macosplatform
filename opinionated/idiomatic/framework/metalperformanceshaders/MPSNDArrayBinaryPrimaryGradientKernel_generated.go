@@ -40,6 +40,24 @@ func NewNDArrayBinaryPrimaryGradientKernelWithCoderDevice(coder *foundation.NSCo
 	return &NDArrayBinaryPrimaryGradientKernel{inner: raw.MPSNDArrayBinaryPrimaryGradientKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayBinaryPrimaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryPrimaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayBinaryPrimaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryPrimaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayBinaryPrimaryGradientKernel) WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState.
 func (x *NDArrayBinaryPrimaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state)
@@ -59,6 +77,9 @@ func (x *NDArrayBinaryPrimaryGradientKernel) asKernel() *mpscore.MPSKernel { ret
 // NDArrayBinaryPrimaryGradientKernelable is the interface implemented by [NDArrayBinaryPrimaryGradientKernel], for mocking and DI.
 type NDArrayBinaryPrimaryGradientKernelable interface {
 	Unwrap() *raw.MPSNDArrayBinaryPrimaryGradientKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayBinaryPrimaryGradientKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayBinaryPrimaryGradientKernel
+	WithLabel(label string) *NDArrayBinaryPrimaryGradientKernel
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }

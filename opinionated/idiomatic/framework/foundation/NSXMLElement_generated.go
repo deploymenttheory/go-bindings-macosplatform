@@ -103,6 +103,36 @@ func (x *XMLElement) WithNamespaces(items ...XMLNodeProvider) *XMLElement {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *XMLElement) WithName(name string) *XMLElement {
+	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *XMLElement) WithObjectValue(objectValue objc.ID) *XMLElement {
+	x.inner.NSXMLNode.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *XMLElement) WithStringValue(stringValue string) *XMLElement {
+	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithURI sets the uRI property and returns the receiver for chaining.
+func (x *XMLElement) WithURI(uRI string) *XMLElement {
+	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLElement) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLElement {
+	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ElementsForName calls the underlying ElementsForName.
 func (x *XMLElement) ElementsForName(name string) *raw.NSArray[*raw.NSXMLElement] {
 	return x.inner.ElementsForName(foundation.NSStringStringWithUTF8String(name))
@@ -264,6 +294,11 @@ type XMLElementable interface {
 	Unwrap() *raw.NSXMLElement
 	WithAttributes(items ...XMLNodeProvider) *XMLElement
 	WithNamespaces(items ...XMLNodeProvider) *XMLElement
+	WithName(name string) *XMLElement
+	WithObjectValue(objectValue objc.ID) *XMLElement
+	WithStringValue(stringValue string) *XMLElement
+	WithURI(uRI string) *XMLElement
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLElement
 	ElementsForName(name string) *raw.NSArray[*raw.NSXMLElement]
 	ElementsForLocalNameURI(localName string, uRI string) *raw.NSArray[*raw.NSXMLElement]
 	AddAttribute(attribute *raw.NSXMLNode)

@@ -50,6 +50,12 @@ func (x *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminatio
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ProcessInfo) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ProcessInfo {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // OperatingSystem calls the underlying OperatingSystem.
 func (x *ProcessInfo) OperatingSystem() uint {
 	return x.inner.OperatingSystem()
@@ -260,6 +266,7 @@ type ProcessInfoable interface {
 	Unwrap() *raw.NSProcessInfo
 	WithProcessName(processName string) *ProcessInfo
 	WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ProcessInfo
 	OperatingSystem() uint
 	OperatingSystemName() *String
 	IsOperatingSystemAtLeastVersion(version raw.NSOperatingSystemVersion) bool

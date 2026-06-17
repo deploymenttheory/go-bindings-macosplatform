@@ -84,6 +84,12 @@ func (x *GroupTouchBarItem) WithPrioritizedCompressionOptions(items ...*raw.NSUs
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *GroupTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // GroupTouchBar calls the underlying GroupTouchBar.
 func (x *GroupTouchBarItem) GroupTouchBar() *TouchBar {
 	_r := x.inner.GroupTouchBar()
@@ -169,6 +175,7 @@ type GroupTouchBarItemable interface {
 	WithPrefersEqualWidths(prefersEqualWidths bool) *GroupTouchBarItem
 	WithPreferredItemWidth(preferredItemWidth float64) *GroupTouchBarItem
 	WithPrioritizedCompressionOptions(items ...*raw.NSUserInterfaceCompressionOptions) *GroupTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *GroupTouchBarItem
 	GroupTouchBar() *TouchBar
 	SetGroupTouchBar(groupTouchBar *raw.NSTouchBar)
 	SetCustomizationLabel(customizationLabel string)

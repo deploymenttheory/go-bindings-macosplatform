@@ -37,6 +37,12 @@ func NewRunLoop() *RunLoop {
 	return &RunLoop{inner: raw.NSRunLoopFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *RunLoop) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RunLoop {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetCFRunLoop calls the underlying GetCFRunLoop.
 func (x *RunLoop) GetCFRunLoop() unsafe.Pointer {
 	return x.inner.GetCFRunLoop()
@@ -148,6 +154,7 @@ func (x *RunLoop) asObject() *raw.NSObject { return &x.inner.NSObject }
 // RunLoopable is the interface implemented by [RunLoop], for mocking and DI.
 type RunLoopable interface {
 	Unwrap() *raw.NSRunLoop
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RunLoop
 	GetCFRunLoop() unsafe.Pointer
 	AddTimerForMode(timer *raw.NSTimer, mode *raw.NSString)
 	AddPortForMode(aPort *raw.NSPort, mode *raw.NSString)

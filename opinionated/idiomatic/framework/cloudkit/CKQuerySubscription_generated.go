@@ -58,6 +58,12 @@ func (x *QuerySubscription) WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscri
 	return x
 }
 
+// WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
+func (x *QuerySubscription) WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *QuerySubscription {
+	x.inner.CKSubscription.SetNotificationInfo(notificationInfo)
+	return x
+}
+
 // RecordType calls the underlying RecordType.
 func (x *QuerySubscription) RecordType() string {
 	_r := x.inner.RecordType()
@@ -97,6 +103,7 @@ func (x *QuerySubscription) asSubscription() *raw.CKSubscription { return &x.inn
 type QuerySubscriptionable interface {
 	Unwrap() *raw.CKQuerySubscription
 	WithZoneID(zoneID *raw.CKRecordZoneID) *QuerySubscription
+	WithNotificationInfo(notificationInfo *raw.CKNotificationInfo) *QuerySubscription
 	RecordType() string
 	Predicate() *foundation.NSPredicate
 	ZoneID() *RecordZoneID

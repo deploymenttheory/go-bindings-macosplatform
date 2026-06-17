@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +38,24 @@ func NewNNReductionColumnMinNode() *NNReductionColumnMinNode {
 	return &NNReductionColumnMinNode{inner: raw.MPSNNReductionColumnMinNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionColumnMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionColumnMinNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionColumnMinNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionColumnMinNode) WithLabel(label string) *NNReductionColumnMinNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionColumnMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionColumnMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -43,6 +63,9 @@ func (x *NNReductionColumnMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilte
 // NNReductionColumnMinNodeable is the interface implemented by [NNReductionColumnMinNode], for mocking and DI.
 type NNReductionColumnMinNodeable interface {
 	Unwrap() *raw.MPSNNReductionColumnMinNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnMinNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionColumnMinNode
+	WithLabel(label string) *NNReductionColumnMinNode
 }
 
 var _ NNReductionColumnMinNodeable = (*NNReductionColumnMinNode)(nil)

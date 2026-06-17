@@ -47,6 +47,36 @@ func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDe
 	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageBox) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageBox) WithOptions(options mpscore.MPSKernelOptions) *ImageBox {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageBox) WithLabel(label string) *ImageBox {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageBox) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -64,6 +94,11 @@ func (x *ImageBox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImage
 // ImageBoxable is the interface implemented by [ImageBox], for mocking and DI.
 type ImageBoxable interface {
 	Unwrap() *raw.MPSImageBox
+	WithOffset(offset mpscore.MPSOffset) *ImageBox
+	WithClipRect(clipRect metal.MTLRegion) *ImageBox
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox
+	WithOptions(options mpscore.MPSKernelOptions) *ImageBox
+	WithLabel(label string) *ImageBox
 	KernelHeight() uint
 	KernelWidth() uint
 }

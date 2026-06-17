@@ -5,6 +5,7 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewPolyline() *Polyline {
 	return &Polyline{inner: raw.MKPolylineFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *Polyline) WithTitle(title string) *Polyline {
+	x.inner.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *Polyline) WithSubtitle(subtitle string) *Polyline {
+	x.inner.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 func (x *Polyline) asPolyline() *raw.MKPolyline { return x.inner }
 
 func (x *Polyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKMultiPoint }
@@ -44,6 +57,8 @@ func (x *Polyline) asShape() *raw.MKShape { return &x.inner.MKMultiPoint.MKShape
 // Polylineable is the interface implemented by [Polyline], for mocking and DI.
 type Polylineable interface {
 	Unwrap() *raw.MKPolyline
+	WithTitle(title string) *Polyline
+	WithSubtitle(subtitle string) *Polyline
 }
 
 var _ Polylineable = (*Polyline)(nil)

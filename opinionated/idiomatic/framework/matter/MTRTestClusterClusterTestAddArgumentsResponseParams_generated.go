@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestAddArgumentsResponseParams() *MTRTestClusterClu
 	return &MTRTestClusterClusterTestAddArgumentsResponseParams{inner: raw.MTRTestClusterClusterTestAddArgumentsResponseParamsFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsResponseParams) WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsResponseParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsResponseParams.SetReturnValue(returnValue)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestAddArgumentsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsResponseParams {
+	x.inner.MTRUnitTestingClusterTestAddArgumentsResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestAddArgumentsResponseParams) asMTRUnitTestingClusterTestAddArgumentsResponseParams() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams { return &x.inner.MTRUnitTestingClusterTestAddArgumentsResponseParams }
 
 // MTRTestClusterClusterTestAddArgumentsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestAddArgumentsResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestAddArgumentsResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestAddArgumentsResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestAddArgumentsResponseParams
 }
 
 var _ MTRTestClusterClusterTestAddArgumentsResponseParamsable = (*MTRTestClusterClusterTestAddArgumentsResponseParams)(nil)

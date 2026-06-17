@@ -35,6 +35,12 @@ func NewUnitInformationStorage() *UnitInformationStorage {
 	return &UnitInformationStorage{inner: raw.NSUnitInformationStorageFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitInformationStorage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitInformationStorage {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitInformationStorage) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitInformationStorage) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitInformationStorage) asObject() *raw.NSObject { return &x.inner.NSDi
 // UnitInformationStorageable is the interface implemented by [UnitInformationStorage], for mocking and DI.
 type UnitInformationStorageable interface {
 	Unwrap() *raw.NSUnitInformationStorage
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitInformationStorage
 }
 
 var _ UnitInformationStorageable = (*UnitInformationStorage)(nil)

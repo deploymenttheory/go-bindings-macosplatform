@@ -36,11 +36,32 @@ func NewNNGradientStateNode() *NNGradientStateNode {
 	return &NNGradientStateNode{inner: raw.MPSNNGradientStateNodeFromID(_id)}
 }
 
+// WithHandle sets the handle property and returns the receiver for chaining.
+func (x *NNGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNGradientStateNode {
+	x.inner.MPSNNStateNode.SetHandle(handle)
+	return x
+}
+
+// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+func (x *NNGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode {
+	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	return x
+}
+
+// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+func (x *NNGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode {
+	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	return x
+}
+
 func (x *NNGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode { return &x.inner.MPSNNStateNode }
 
 // NNGradientStateNodeable is the interface implemented by [NNGradientStateNode], for mocking and DI.
 type NNGradientStateNodeable interface {
 	Unwrap() *raw.MPSNNGradientStateNode
+	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNGradientStateNode
+	WithExportFromGraph(exportFromGraph bool) *NNGradientStateNode
+	WithSynchronizeResource(synchronizeResource bool) *NNGradientStateNode
 }
 
 var _ NNGradientStateNodeable = (*NNGradientStateNode)(nil)

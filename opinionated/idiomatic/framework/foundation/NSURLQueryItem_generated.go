@@ -37,6 +37,12 @@ func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	return &URLQueryItem{inner: raw.NSURLQueryItemFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLQueryItem) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLQueryItem {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *URLQueryItem) Name() *String {
 	_r := x.inner.Name()
@@ -60,6 +66,7 @@ func (x *URLQueryItem) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLQueryItemable is the interface implemented by [URLQueryItem], for mocking and DI.
 type URLQueryItemable interface {
 	Unwrap() *raw.NSURLQueryItem
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLQueryItem
 	Name() *String
 	Value() *String
 }

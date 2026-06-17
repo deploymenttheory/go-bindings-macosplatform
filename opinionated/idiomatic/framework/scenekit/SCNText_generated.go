@@ -11,6 +11,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Text wraps [raw.SCNText] with a fluent Go API.
@@ -102,6 +103,80 @@ func (x *Text) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text {
 // WithFlatness sets the flatness property and returns the receiver for chaining.
 func (x *Text) WithFlatness(flatness float64) *Text {
 	x.inner.SetFlatness(flatness)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Text) WithName(name string) *Text {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithMaterials(items ...*raw.SCNMaterial) *Text {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Text) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Text {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Text) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Text) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Text {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Text) WithSubdivisionLevel(subdivisionLevel uint) *Text {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Text {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Text {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -244,6 +319,15 @@ type Textable interface {
 	WithChamferSegmentCount(chamferSegmentCount int) *Text
 	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Text
 	WithFlatness(flatness float64) *Text
+	WithName(name string) *Text
+	WithMaterials(items ...*raw.SCNMaterial) *Text
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Text
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Text
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Text
+	WithSubdivisionLevel(subdivisionLevel uint) *Text
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Text
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Text
 	ExtrusionDepth() float64
 	SetExtrusionDepth(extrusionDepth float64)
 	String() objc.ID

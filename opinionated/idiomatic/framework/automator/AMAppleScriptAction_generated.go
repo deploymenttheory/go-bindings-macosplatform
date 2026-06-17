@@ -6,6 +6,7 @@ package automator
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -42,6 +43,18 @@ func (x *AppleScriptAction) WithScript(script *osakit.OSAScript) *AppleScriptAct
 	return x
 }
 
+// WithParameters sets the parameters property and returns the receiver for chaining.
+func (x *AppleScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AppleScriptAction {
+	x.inner.AMBundleAction.SetParameters(parameters)
+	return x
+}
+
+// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+func (x *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
+	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)
+	return x
+}
+
 // Script calls the underlying Script.
 func (x *AppleScriptAction) Script() *osakit.OSAScript {
 	return x.inner.Script()
@@ -60,6 +73,8 @@ func (x *AppleScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleA
 type AppleScriptActionable interface {
 	Unwrap() *raw.AMAppleScriptAction
 	WithScript(script *osakit.OSAScript) *AppleScriptAction
+	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AppleScriptAction
+	WithProgressValue(progressValue float64) *AppleScriptAction
 	Script() *osakit.OSAScript
 	SetScript(script *osakit.OSAScript)
 }

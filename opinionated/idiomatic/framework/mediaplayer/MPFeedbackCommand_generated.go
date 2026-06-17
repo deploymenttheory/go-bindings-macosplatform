@@ -55,6 +55,12 @@ func (x *FeedbackCommand) WithLocalizedShortTitle(localizedShortTitle string) *F
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *FeedbackCommand) WithEnabled(enabled bool) *FeedbackCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // IsActive calls the underlying IsActive.
 func (x *FeedbackCommand) IsActive() bool {
 	return x.inner.IsActive()
@@ -101,6 +107,7 @@ type FeedbackCommandable interface {
 	WithActive(active bool) *FeedbackCommand
 	WithLocalizedTitle(localizedTitle string) *FeedbackCommand
 	WithLocalizedShortTitle(localizedShortTitle string) *FeedbackCommand
+	WithEnabled(enabled bool) *FeedbackCommand
 	IsActive() bool
 	SetActive(active bool)
 	LocalizedTitle() string

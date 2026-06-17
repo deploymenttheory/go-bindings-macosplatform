@@ -67,6 +67,108 @@ func (x *DOMHTMLButtonElement) WithValue(value string) *DOMHTMLButtonElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithTitle(title string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithLang(lang string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithDir(dir string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithTabIndex(tabIndex int) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithAccessKey(accessKey string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithInnerText(innerText string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithOuterText(outerText string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithContentEditable(contentEditable string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithIdName(idName string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithScrollLeft(scrollLeft int) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithScrollTop(scrollTop int) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithInnerHTML(innerHTML string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithOuterHTML(outerHTML string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithClassName(className string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithNodeValue(nodeValue string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithPrefix(prefix string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLButtonElement) WithTextContent(textContent string) *DOMHTMLButtonElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Autofocus calls the underlying Autofocus.
 func (x *DOMHTMLButtonElement) Autofocus() bool {
 	return x.inner.Autofocus()
@@ -161,6 +263,23 @@ type DOMHTMLButtonElementable interface {
 	WithType(type_ string) *DOMHTMLButtonElement
 	WithName(name string) *DOMHTMLButtonElement
 	WithValue(value string) *DOMHTMLButtonElement
+	WithTitle(title string) *DOMHTMLButtonElement
+	WithLang(lang string) *DOMHTMLButtonElement
+	WithDir(dir string) *DOMHTMLButtonElement
+	WithTabIndex(tabIndex int) *DOMHTMLButtonElement
+	WithAccessKey(accessKey string) *DOMHTMLButtonElement
+	WithInnerText(innerText string) *DOMHTMLButtonElement
+	WithOuterText(outerText string) *DOMHTMLButtonElement
+	WithContentEditable(contentEditable string) *DOMHTMLButtonElement
+	WithIdName(idName string) *DOMHTMLButtonElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLButtonElement
+	WithScrollTop(scrollTop int) *DOMHTMLButtonElement
+	WithInnerHTML(innerHTML string) *DOMHTMLButtonElement
+	WithOuterHTML(outerHTML string) *DOMHTMLButtonElement
+	WithClassName(className string) *DOMHTMLButtonElement
+	WithNodeValue(nodeValue string) *DOMHTMLButtonElement
+	WithPrefix(prefix string) *DOMHTMLButtonElement
+	WithTextContent(textContent string) *DOMHTMLButtonElement
 	Autofocus() bool
 	SetAutofocus(autofocus bool)
 	Disabled() bool

@@ -47,6 +47,126 @@ func NewCNNNeuronGradientWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &CNNNeuronGradient{inner: raw.MPSCNNNeuronGradientFromID(_id)}
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithKernelOffsetX(kernelOffsetX int) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithKernelOffsetY(kernelOffsetY int) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronGradient) WithLabel(label string) *CNNNeuronGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // NeuronType calls the underlying NeuronType.
 func (x *CNNNeuronGradient) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
 	return x.inner.NeuronType()
@@ -81,6 +201,26 @@ func (x *CNNNeuronGradient) asKernel() *mpscore.MPSKernel { return &x.inner.MPSC
 // CNNNeuronGradientable is the interface implemented by [CNNNeuronGradient], for mocking and DI.
 type CNNNeuronGradientable interface {
 	Unwrap() *raw.MPSCNNNeuronGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNNeuronGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNNeuronGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNNeuronGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNNeuronGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNNeuronGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNNeuronGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNNeuronGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNNeuronGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNNeuronGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNNeuronGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNNeuronGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNNeuronGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNNeuronGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNNeuronGradient
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNNeuronGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronGradient
+	WithOptions(options mpscore.MPSKernelOptions) *CNNNeuronGradient
+	WithLabel(label string) *CNNNeuronGradient
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	A() float32
 	B() float32

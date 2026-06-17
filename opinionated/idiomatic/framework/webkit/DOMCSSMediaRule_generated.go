@@ -36,6 +36,12 @@ func NewDOMCSSMediaRule() *DOMCSSMediaRule {
 	return &DOMCSSMediaRule{inner: raw.DOMCSSMediaRuleFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSMediaRule) WithCssText(cssText string) *DOMCSSMediaRule {
+	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // InsertRuleIndex calls the underlying InsertRuleIndex.
 func (x *DOMCSSMediaRule) InsertRuleIndex(rule string, index uint) uint {
 	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
@@ -78,6 +84,7 @@ func (x *DOMCSSMediaRule) asWebScriptObject() *raw.WebScriptObject { return &x.i
 // DOMCSSMediaRuleable is the interface implemented by [DOMCSSMediaRule], for mocking and DI.
 type DOMCSSMediaRuleable interface {
 	Unwrap() *raw.DOMCSSMediaRule
+	WithCssText(cssText string) *DOMCSSMediaRule
 	InsertRuleIndex(rule string, index uint) uint
 	DeleteRule(index uint)
 	Media() *DOMMediaList

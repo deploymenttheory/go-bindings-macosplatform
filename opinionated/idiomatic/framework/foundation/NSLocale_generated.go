@@ -44,6 +44,12 @@ func NewLocaleWithCoder(coder *raw.NSCoder) *Locale {
 	return &Locale{inner: raw.NSLocaleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Locale) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Locale {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Locale) ObjectForKey(key *raw.NSString) objc.ID {
 	return x.inner.ObjectForKey(key)
@@ -320,6 +326,7 @@ func (x *Locale) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Localeable is the interface implemented by [Locale], for mocking and DI.
 type Localeable interface {
 	Unwrap() *raw.NSLocale
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Locale
 	ObjectForKey(key *raw.NSString) objc.ID
 	DisplayNameForKeyValue(key *raw.NSString, value objc.ID) *String
 	LocalizedStringForLocaleIdentifier(localeIdentifier string) *String

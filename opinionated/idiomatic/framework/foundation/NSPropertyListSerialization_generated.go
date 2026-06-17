@@ -35,11 +35,18 @@ func NewPropertyListSerialization() *PropertyListSerialization {
 	return &PropertyListSerialization{inner: raw.NSPropertyListSerializationFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PropertyListSerialization) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PropertyListSerialization {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *PropertyListSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // PropertyListSerializationable is the interface implemented by [PropertyListSerialization], for mocking and DI.
 type PropertyListSerializationable interface {
 	Unwrap() *raw.NSPropertyListSerialization
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PropertyListSerialization
 }
 
 var _ PropertyListSerializationable = (*PropertyListSerialization)(nil)

@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewCloseCommand() *CloseCommand {
 	return &CloseCommand{inner: raw.NSCloseCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *CloseCommand) WithDirectParameter(directParameter objc.ID) *CloseCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *CloseCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloseCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *CloseCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *CloseCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloseCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *CloseCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CloseCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *CloseCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CloseCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *CloseCommand) WithScriptErrorString(scriptErrorString string) *CloseCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CloseCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SaveOptions calls the underlying SaveOptions.
 func (x *CloseCommand) SaveOptions() raw.NSSaveOptions {
 	return x.inner.SaveOptions()
@@ -47,6 +96,14 @@ func (x *CloseCommand) asObject() *raw.NSObject { return &x.inner.NSScriptComman
 // CloseCommandable is the interface implemented by [CloseCommand], for mocking and DI.
 type CloseCommandable interface {
 	Unwrap() *raw.NSCloseCommand
+	WithDirectParameter(directParameter objc.ID) *CloseCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloseCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *CloseCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *CloseCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *CloseCommand
+	WithScriptErrorString(scriptErrorString string) *CloseCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CloseCommand
 	SaveOptions() raw.NSSaveOptions
 }
 

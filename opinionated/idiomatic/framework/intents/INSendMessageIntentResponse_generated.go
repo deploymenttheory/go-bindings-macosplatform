@@ -37,6 +37,12 @@ func NewSendMessageIntentResponseWithCodeUserActivity(code raw.INSendMessageInte
 	return &SendMessageIntentResponse{inner: raw.INSendMessageIntentResponseFromID(_id)}
 }
 
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *SendMessageIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse {
+	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	return x
+}
+
 // Code calls the underlying Code.
 func (x *SendMessageIntentResponse) Code() raw.INSendMessageIntentResponseCode {
 	return x.inner.Code()
@@ -57,6 +63,7 @@ func (x *SendMessageIntentResponse) asIntentResponse() *raw.INIntentResponse { r
 // SendMessageIntentResponseable is the interface implemented by [SendMessageIntentResponse], for mocking and DI.
 type SendMessageIntentResponseable interface {
 	Unwrap() *raw.INSendMessageIntentResponse
+	WithUserActivity(userActivity *foundation.NSUserActivity) *SendMessageIntentResponse
 	Code() raw.INSendMessageIntentResponseCode
 	SentMessages() *foundation.NSArray[objc.ID]
 	SetSentMessages(sentMessages *foundation.NSArray[objc.ID])

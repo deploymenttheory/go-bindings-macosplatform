@@ -59,6 +59,12 @@ func (x *UserNotificationCenter) WithScheduledNotifications(items ...*raw.NSUser
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserNotificationCenter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationCenter {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ScheduleNotification calls the underlying ScheduleNotification.
 func (x *UserNotificationCenter) ScheduleNotification(notification *raw.NSUserNotification) {
 	x.inner.ScheduleNotification(notification)
@@ -128,6 +134,7 @@ type UserNotificationCenterable interface {
 	Unwrap() *raw.NSUserNotificationCenter
 	WithDelegate(delegate raw.NSUserNotificationCenterDelegate) *UserNotificationCenter
 	WithScheduledNotifications(items ...*raw.NSUserNotification) *UserNotificationCenter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationCenter
 	ScheduleNotification(notification *raw.NSUserNotification)
 	RemoveScheduledNotification(notification *raw.NSUserNotification)
 	DeliverNotification(notification *raw.NSUserNotification)

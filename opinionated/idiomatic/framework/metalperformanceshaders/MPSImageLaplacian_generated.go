@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -43,6 +45,36 @@ func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithOffset(offset mpscore.MPSOffset) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithLabel(label string) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Bias calls the underlying Bias.
 func (x *ImageLaplacian) Bias() float32 {
 	return x.inner.Bias()
@@ -61,6 +93,11 @@ func (x *ImageLaplacian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnar
 type ImageLaplacianable interface {
 	Unwrap() *raw.MPSImageLaplacian
 	WithBias(bias float32) *ImageLaplacian
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacian
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian
+	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacian
+	WithLabel(label string) *ImageLaplacian
 	Bias() float32
 	SetBias(bias float32)
 }

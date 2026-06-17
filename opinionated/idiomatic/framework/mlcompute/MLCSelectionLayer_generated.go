@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewSelectionLayer() *SelectionLayer {
 	return &SelectionLayer{inner: raw.MLCSelectionLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SelectionLayer) WithLabel(label string) *SelectionLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *SelectionLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 func (x *SelectionLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // SelectionLayerable is the interface implemented by [SelectionLayer], for mocking and DI.
 type SelectionLayerable interface {
 	Unwrap() *raw.MLCSelectionLayer
+	WithLabel(label string) *SelectionLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SelectionLayer
 }
 
 var _ SelectionLayerable = (*SelectionLayer)(nil)

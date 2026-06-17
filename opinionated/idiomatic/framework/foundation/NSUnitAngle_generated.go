@@ -35,6 +35,12 @@ func NewUnitAngle() *UnitAngle {
 	return &UnitAngle{inner: raw.NSUnitAngleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitAngle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAngle {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitAngle) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitAngle) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitAngle) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUni
 // UnitAngleable is the interface implemented by [UnitAngle], for mocking and DI.
 type UnitAngleable interface {
 	Unwrap() *raw.NSUnitAngle
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAngle
 }
 
 var _ UnitAngleable = (*UnitAngle)(nil)

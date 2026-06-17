@@ -88,6 +88,12 @@ func (x *XMLParser) WithShouldResolveExternalEntities(shouldResolveExternalEntit
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLParser) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLParser {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Parse calls the underlying Parse.
 func (x *XMLParser) Parse() bool {
 	return x.inner.Parse()
@@ -202,6 +208,7 @@ type XMLParserable interface {
 	WithExternalEntityResolvingPolicy(externalEntityResolvingPolicy raw.NSXMLParserExternalEntityResolvingPolicy) *XMLParser
 	WithAllowedExternalEntityURLs(allowedExternalEntityURLs *raw.NSSet[*raw.NSURL]) *XMLParser
 	WithShouldResolveExternalEntities(shouldResolveExternalEntities bool) *XMLParser
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLParser
 	Parse() bool
 	AbortParsing()
 	Delegate() raw.NSXMLParserDelegate

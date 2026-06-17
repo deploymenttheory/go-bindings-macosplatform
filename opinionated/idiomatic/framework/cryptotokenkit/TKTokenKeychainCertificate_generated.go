@@ -38,6 +38,18 @@ func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef unsafe.Po
 	return &TokenKeychainCertificate{inner: raw.TKTokenKeychainCertificateFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
+	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithConstraints sets the constraints property and returns the receiver for chaining.
+func (x *TokenKeychainCertificate) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate {
+	x.inner.TKTokenKeychainItem.SetConstraints(constraints)
+	return x
+}
+
 // Data calls the underlying Data.
 func (x *TokenKeychainCertificate) Data() *foundation.NSData {
 	return x.inner.Data()
@@ -48,6 +60,8 @@ func (x *TokenKeychainCertificate) asTokenKeychainItem() *raw.TKTokenKeychainIte
 // TokenKeychainCertificateable is the interface implemented by [TokenKeychainCertificate], for mocking and DI.
 type TokenKeychainCertificateable interface {
 	Unwrap() *raw.TKTokenKeychainCertificate
+	WithLabel(label string) *TokenKeychainCertificate
+	WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainCertificate
 	Data() *foundation.NSData
 }
 

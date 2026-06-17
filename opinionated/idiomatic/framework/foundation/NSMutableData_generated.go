@@ -50,6 +50,12 @@ func (x *MutableData) WithLength(length uint) *MutableData {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableData) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableData {
+	x.inner.NSData.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MutableBytes calls the underlying MutableBytes.
 func (x *MutableData) MutableBytes() unsafe.Pointer {
 	return x.inner.MutableBytes()
@@ -115,6 +121,7 @@ func (x *MutableData) asObject() *raw.NSObject { return &x.inner.NSData.NSObject
 type MutableDataable interface {
 	Unwrap() *raw.NSMutableData
 	WithLength(length uint) *MutableData
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableData
 	MutableBytes() unsafe.Pointer
 	SetLength(length uint)
 	AppendBytesLength(bytes_ unsafe.Pointer, length uint)

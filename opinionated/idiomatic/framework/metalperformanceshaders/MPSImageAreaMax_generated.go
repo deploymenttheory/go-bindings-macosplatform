@@ -47,6 +47,36 @@ func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageAreaMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageAreaMax) WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMax {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageAreaMax) WithLabel(label string) *ImageAreaMax {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageAreaMax) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -64,6 +94,11 @@ func (x *ImageAreaMax) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryI
 // ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
 type ImageAreaMaxable interface {
 	Unwrap() *raw.MPSImageAreaMax
+	WithOffset(offset mpscore.MPSOffset) *ImageAreaMax
+	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax
+	WithOptions(options mpscore.MPSKernelOptions) *ImageAreaMax
+	WithLabel(label string) *ImageAreaMax
 	KernelHeight() uint
 	KernelWidth() uint
 }

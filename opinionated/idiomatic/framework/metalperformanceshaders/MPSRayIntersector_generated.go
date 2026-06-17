@@ -120,6 +120,18 @@ func (x *RayIntersector) WithRayMask(rayMask uint) *RayIntersector {
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *RayIntersector) WithOptions(options mpscore.MPSKernelOptions) *RayIntersector {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RayIntersector) WithLabel(label string) *RayIntersector {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *RayIntersector) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RayIntersector {
 	_r := x.inner.CopyWithZoneDevice(zone, device)
@@ -301,6 +313,8 @@ type RayIntersectorable interface {
 	WithIntersectionDataType(intersectionDataType mpsrayintersector.MPSIntersectionDataType) *RayIntersector
 	WithRayIndexDataType(rayIndexDataType mpscore.MPSDataType) *RayIntersector
 	WithRayMask(rayMask uint) *RayIntersector
+	WithOptions(options mpscore.MPSKernelOptions) *RayIntersector
+	WithLabel(label string) *RayIntersector
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RayIntersector
 	RecommendedMinimumRayBatchSizeForRayCount(rayCount uint) uint
 	EncodeWithCoder(coder *foundation.NSCoder)

@@ -35,6 +35,30 @@ func NewDirectionalGamepad() *DirectionalGamepad {
 	return &DirectionalGamepad{inner: raw.GCDirectionalGamepadFromID(_id)}
 }
 
+// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
+func (x *DirectionalGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *DirectionalGamepad {
+	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
+func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
+	x.inner.GCMicroGamepad.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	return x
+}
+
+// WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
+func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
+	x.inner.GCMicroGamepad.SetAllowsRotation(allowsRotation)
+	return x
+}
+
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad {
+	x.inner.GCMicroGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 func (x *DirectionalGamepad) asMicroGamepad() *raw.GCMicroGamepad { return &x.inner.GCMicroGamepad }
 
 func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { return &x.inner.GCMicroGamepad.GCPhysicalInputProfile }
@@ -42,6 +66,10 @@ func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfil
 // DirectionalGamepadable is the interface implemented by [DirectionalGamepad], for mocking and DI.
 type DirectionalGamepadable interface {
 	Unwrap() *raw.GCDirectionalGamepad
+	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *DirectionalGamepad
+	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad
+	WithAllowsRotation(allowsRotation bool) *DirectionalGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad
 }
 
 var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)

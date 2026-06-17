@@ -47,6 +47,36 @@ func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageDilate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageDilate) WithOptions(options mpscore.MPSKernelOptions) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageDilate) WithLabel(label string) *ImageDilate {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImageDilate) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -64,6 +94,11 @@ func (x *ImageDilate) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryIm
 // ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
 type ImageDilateable interface {
 	Unwrap() *raw.MPSImageDilate
+	WithOffset(offset mpscore.MPSOffset) *ImageDilate
+	WithClipRect(clipRect metal.MTLRegion) *ImageDilate
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate
+	WithOptions(options mpscore.MPSKernelOptions) *ImageDilate
+	WithLabel(label string) *ImageDilate
 	KernelHeight() uint
 	KernelWidth() uint
 }

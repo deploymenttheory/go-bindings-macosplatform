@@ -35,6 +35,36 @@ func NewParameterTree() *ParameterTree {
 	return &ParameterTree{inner: raw.AUParameterTreeFromID(_id)}
 }
 
+// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
+func (x *ParameterTree) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree {
+	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
+	return x
+}
+
+// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
+func (x *ParameterTree) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree {
+	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
+	return x
+}
+
+// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
+func (x *ParameterTree) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree {
+	x.inner.AUParameterGroup.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
+	return x
+}
+
+// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
+func (x *ParameterTree) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree {
+	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
+	return x
+}
+
+// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
+func (x *ParameterTree) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree {
+	x.inner.AUParameterGroup.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
+	return x
+}
+
 // ParameterWithAddress calls the underlying ParameterWithAddress.
 func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
 	_r := x.inner.ParameterWithAddress(address)
@@ -60,6 +90,11 @@ func (x *ParameterTree) asParameterNode() *raw.AUParameterNode { return &x.inner
 // ParameterTreeable is the interface implemented by [ParameterTree], for mocking and DI.
 type ParameterTreeable interface {
 	Unwrap() *raw.AUParameterTree
+	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree
+	WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree
+	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree
+	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree
+	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree
 	ParameterWithAddress(address uint64) *Parameter
 	ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter
 }

@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -91,6 +92,30 @@ func (x *RecognizeTextRequest) WithAutomaticallyDetectsLanguage(automaticallyDet
 // WithMinimumTextHeight sets the minimumTextHeight property and returns the receiver for chaining.
 func (x *RecognizeTextRequest) WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest {
 	x.inner.SetMinimumTextHeight(minimumTextHeight)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *RecognizeTextRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeTextRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *RecognizeTextRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeTextRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *RecognizeTextRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeTextRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *RecognizeTextRequest) WithRevision(revision uint) *RecognizeTextRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -193,6 +218,10 @@ type RecognizeTextRequestable interface {
 	WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest
 	WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest
 	WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeTextRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeTextRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeTextRequest
+	WithRevision(revision uint) *RecognizeTextRequest
 	SupportedRecognitionLanguages() ([]string, error)
 	RecognitionLanguages() []string
 	SetRecognitionLanguages(recognitionLanguages *foundation.NSArray[*foundation.NSString])

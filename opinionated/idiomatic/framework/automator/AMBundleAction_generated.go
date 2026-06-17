@@ -43,6 +43,12 @@ func (x *BundleAction) WithParameters(parameters *foundation.NSMutableDictionary
 	return x
 }
 
+// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+func (x *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
+	x.inner.AMAction.SetProgressValue(progressValue)
+	return x
+}
+
 // AwakeFromBundle calls the underlying AwakeFromBundle.
 func (x *BundleAction) AwakeFromBundle() {
 	x.inner.AwakeFromBundle()
@@ -81,6 +87,7 @@ func (x *BundleAction) asAction() *raw.AMAction { return &x.inner.AMAction }
 type BundleActionable interface {
 	Unwrap() *raw.AMBundleAction
 	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *BundleAction
+	WithProgressValue(progressValue float64) *BundleAction
 	AwakeFromBundle()
 	HasView() bool
 	View() *appkit.NSView

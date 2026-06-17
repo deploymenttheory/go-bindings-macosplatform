@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewNNReductionColumnSumNode() *NNReductionColumnSumNode {
 	return &NNReductionColumnSumNode{inner: raw.MPSNNReductionColumnSumNodeFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReductionColumnSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnSumNode {
+	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionColumnSumNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionColumnSumNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionColumnSumNode) WithLabel(label string) *NNReductionColumnSumNode {
+	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionColumnSumNode) asNNUnaryReductionNode() *raw.MPSNNUnaryReductionNode { return &x.inner.MPSNNUnaryReductionNode }
 
 func (x *NNReductionColumnSumNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode }
@@ -42,6 +62,9 @@ func (x *NNReductionColumnSumNode) asNNFilterNode() *raw.MPSNNFilterNode { retur
 // NNReductionColumnSumNodeable is the interface implemented by [NNReductionColumnSumNode], for mocking and DI.
 type NNReductionColumnSumNodeable interface {
 	Unwrap() *raw.MPSNNReductionColumnSumNode
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionColumnSumNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionColumnSumNode
+	WithLabel(label string) *NNReductionColumnSumNode
 }
 
 var _ NNReductionColumnSumNodeable = (*NNReductionColumnSumNode)(nil)

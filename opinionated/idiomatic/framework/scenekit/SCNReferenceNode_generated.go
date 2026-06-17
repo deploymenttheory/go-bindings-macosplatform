@@ -5,9 +5,12 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ReferenceNode wraps [raw.SCNReferenceNode] with a fluent Go API.
@@ -56,6 +59,200 @@ func (x *ReferenceNode) WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingP
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *ReferenceNode) WithName(name string) *ReferenceNode {
+	x.inner.SCNNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithLight sets the light property and returns the receiver for chaining.
+func (x *ReferenceNode) WithLight(light *raw.SCNLight) *ReferenceNode {
+	x.inner.SCNNode.SetLight(light)
+	return x
+}
+
+// WithCamera sets the camera property and returns the receiver for chaining.
+func (x *ReferenceNode) WithCamera(camera *raw.SCNCamera) *ReferenceNode {
+	x.inner.SCNNode.SetCamera(camera)
+	return x
+}
+
+// WithGeometry sets the geometry property and returns the receiver for chaining.
+func (x *ReferenceNode) WithGeometry(geometry GeometryProvider) *ReferenceNode {
+	x.inner.SCNNode.SetGeometry(geometry.asGeometry())
+	return x
+}
+
+// WithSkinner sets the skinner property and returns the receiver for chaining.
+func (x *ReferenceNode) WithSkinner(skinner *raw.SCNSkinner) *ReferenceNode {
+	x.inner.SCNNode.SetSkinner(skinner)
+	return x
+}
+
+// WithMorpher sets the morpher property and returns the receiver for chaining.
+func (x *ReferenceNode) WithMorpher(morpher *raw.SCNMorpher) *ReferenceNode {
+	x.inner.SCNNode.SetMorpher(morpher)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *ReferenceNode) WithTransform(transform quartzcore.CATransform3D) *ReferenceNode {
+	x.inner.SCNNode.SetTransform(transform)
+	return x
+}
+
+// WithWorldTransform sets the worldTransform property and returns the receiver for chaining.
+func (x *ReferenceNode) WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode {
+	x.inner.SCNNode.SetWorldTransform(worldTransform)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *ReferenceNode) WithPosition(position raw.SCNVector3) *ReferenceNode {
+	x.inner.SCNNode.SetPosition(position)
+	return x
+}
+
+// WithWorldPosition sets the worldPosition property and returns the receiver for chaining.
+func (x *ReferenceNode) WithWorldPosition(worldPosition raw.SCNVector3) *ReferenceNode {
+	x.inner.SCNNode.SetWorldPosition(worldPosition)
+	return x
+}
+
+// WithRotation sets the rotation property and returns the receiver for chaining.
+func (x *ReferenceNode) WithRotation(rotation raw.SCNVector4) *ReferenceNode {
+	x.inner.SCNNode.SetRotation(rotation)
+	return x
+}
+
+// WithOrientation sets the orientation property and returns the receiver for chaining.
+func (x *ReferenceNode) WithOrientation(orientation raw.SCNVector4) *ReferenceNode {
+	x.inner.SCNNode.SetOrientation(orientation)
+	return x
+}
+
+// WithWorldOrientation sets the worldOrientation property and returns the receiver for chaining.
+func (x *ReferenceNode) WithWorldOrientation(worldOrientation raw.SCNVector4) *ReferenceNode {
+	x.inner.SCNNode.SetWorldOrientation(worldOrientation)
+	return x
+}
+
+// WithEulerAngles sets the eulerAngles property and returns the receiver for chaining.
+func (x *ReferenceNode) WithEulerAngles(eulerAngles raw.SCNVector3) *ReferenceNode {
+	x.inner.SCNNode.SetEulerAngles(eulerAngles)
+	return x
+}
+
+// WithScale sets the scale property and returns the receiver for chaining.
+func (x *ReferenceNode) WithScale(scale raw.SCNVector3) *ReferenceNode {
+	x.inner.SCNNode.SetScale(scale)
+	return x
+}
+
+// WithPivot sets the pivot property and returns the receiver for chaining.
+func (x *ReferenceNode) WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode {
+	x.inner.SCNNode.SetPivot(pivot)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
+	x.inner.SCNNode.SetHidden(hidden)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *ReferenceNode) WithOpacity(opacity float64) *ReferenceNode {
+	x.inner.SCNNode.SetOpacity(opacity)
+	return x
+}
+
+// WithRenderingOrder sets the renderingOrder property and returns the receiver for chaining.
+func (x *ReferenceNode) WithRenderingOrder(renderingOrder int) *ReferenceNode {
+	x.inner.SCNNode.SetRenderingOrder(renderingOrder)
+	return x
+}
+
+// WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
+func (x *ReferenceNode) WithCastsShadow(castsShadow bool) *ReferenceNode {
+	x.inner.SCNNode.SetCastsShadow(castsShadow)
+	return x
+}
+
+// WithMovabilityHint sets the movabilityHint property and returns the receiver for chaining.
+func (x *ReferenceNode) WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *ReferenceNode {
+	x.inner.SCNNode.SetMovabilityHint(movabilityHint)
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *ReferenceNode) WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *ReferenceNode {
+	x.inner.SCNNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithPhysicsField sets the physicsField property and returns the receiver for chaining.
+func (x *ReferenceNode) WithPhysicsField(physicsField *raw.SCNPhysicsField) *ReferenceNode {
+	x.inner.SCNNode.SetPhysicsField(physicsField)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *ReferenceNode) WithConstraints(items ...ConstraintProvider) *ReferenceNode {
+	if len(items) == 0 {
+		x.inner.SCNNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asConstraint().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNNode.SetConstraints(_arr)
+	return x
+}
+
+// WithFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ReferenceNode) WithFilters(items ...*coreimage.CIFilter) *ReferenceNode {
+	if len(items) == 0 {
+		x.inner.SCNNode.SetFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNNode.SetFilters(_arr)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
+	x.inner.SCNNode.SetPaused(paused)
+	return x
+}
+
+// WithRendererDelegate sets the rendererDelegate property and returns the receiver for chaining.
+func (x *ReferenceNode) WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *ReferenceNode {
+	x.inner.SCNNode.SetRendererDelegate(rendererDelegate)
+	return x
+}
+
+// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
+func (x *ReferenceNode) WithCategoryBitMask(categoryBitMask uint) *ReferenceNode {
+	x.inner.SCNNode.SetCategoryBitMask(categoryBitMask)
+	return x
+}
+
+// WithFocusBehavior sets the focusBehavior property and returns the receiver for chaining.
+func (x *ReferenceNode) WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *ReferenceNode {
+	x.inner.SCNNode.SetFocusBehavior(focusBehavior)
+	return x
+}
+
 // Load calls the underlying Load.
 func (x *ReferenceNode) Load() {
 	x.inner.Load()
@@ -98,6 +295,35 @@ type ReferenceNodeable interface {
 	Unwrap() *raw.SCNReferenceNode
 	WithReferenceURL(referenceURL string) *ReferenceNode
 	WithLoadingPolicy(loadingPolicy raw.SCNReferenceLoadingPolicy) *ReferenceNode
+	WithName(name string) *ReferenceNode
+	WithLight(light *raw.SCNLight) *ReferenceNode
+	WithCamera(camera *raw.SCNCamera) *ReferenceNode
+	WithGeometry(geometry GeometryProvider) *ReferenceNode
+	WithSkinner(skinner *raw.SCNSkinner) *ReferenceNode
+	WithMorpher(morpher *raw.SCNMorpher) *ReferenceNode
+	WithTransform(transform quartzcore.CATransform3D) *ReferenceNode
+	WithWorldTransform(worldTransform quartzcore.CATransform3D) *ReferenceNode
+	WithPosition(position raw.SCNVector3) *ReferenceNode
+	WithWorldPosition(worldPosition raw.SCNVector3) *ReferenceNode
+	WithRotation(rotation raw.SCNVector4) *ReferenceNode
+	WithOrientation(orientation raw.SCNVector4) *ReferenceNode
+	WithWorldOrientation(worldOrientation raw.SCNVector4) *ReferenceNode
+	WithEulerAngles(eulerAngles raw.SCNVector3) *ReferenceNode
+	WithScale(scale raw.SCNVector3) *ReferenceNode
+	WithPivot(pivot quartzcore.CATransform3D) *ReferenceNode
+	WithHidden(hidden bool) *ReferenceNode
+	WithOpacity(opacity float64) *ReferenceNode
+	WithRenderingOrder(renderingOrder int) *ReferenceNode
+	WithCastsShadow(castsShadow bool) *ReferenceNode
+	WithMovabilityHint(movabilityHint raw.SCNMovabilityHint) *ReferenceNode
+	WithPhysicsBody(physicsBody *raw.SCNPhysicsBody) *ReferenceNode
+	WithPhysicsField(physicsField *raw.SCNPhysicsField) *ReferenceNode
+	WithConstraints(items ...ConstraintProvider) *ReferenceNode
+	WithFilters(items ...*coreimage.CIFilter) *ReferenceNode
+	WithPaused(paused bool) *ReferenceNode
+	WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *ReferenceNode
+	WithCategoryBitMask(categoryBitMask uint) *ReferenceNode
+	WithFocusBehavior(focusBehavior raw.SCNNodeFocusBehavior) *ReferenceNode
 	Load()
 	Unload()
 	ReferenceURL() *foundation.NSURL

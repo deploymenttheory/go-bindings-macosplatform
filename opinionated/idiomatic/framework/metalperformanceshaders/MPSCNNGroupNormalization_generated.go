@@ -53,6 +53,66 @@ func (x *CNNGroupNormalization) WithEpsilon(epsilon float32) *CNNGroupNormalizat
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithOffset(offset mpscore.MPSOffset) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNGroupNormalization) WithLabel(label string) *CNNGroupNormalization {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReloadGammaAndBetaFromDataSource calls the underlying ReloadGammaAndBetaFromDataSource.
 func (x *CNNGroupNormalization) ReloadGammaAndBetaFromDataSource() {
 	x.inner.ReloadGammaAndBetaFromDataSource()
@@ -96,6 +156,16 @@ func (x *CNNGroupNormalization) asKernel() *mpscore.MPSKernel { return &x.inner.
 type CNNGroupNormalizationable interface {
 	Unwrap() *raw.MPSCNNGroupNormalization
 	WithEpsilon(epsilon float32) *CNNGroupNormalization
+	WithOffset(offset mpscore.MPSOffset) *CNNGroupNormalization
+	WithClipRect(clipRect metal.MTLRegion) *CNNGroupNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNGroupNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNGroupNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNGroupNormalization
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNGroupNormalization
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNGroupNormalization
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNGroupNormalization
+	WithOptions(options mpscore.MPSKernelOptions) *CNNGroupNormalization
+	WithLabel(label string) *CNNGroupNormalization
 	ReloadGammaAndBetaFromDataSource()
 	ReloadGammaAndBetaWithCommandBufferGammaAndBetaState(commandBuffer metal.MTLCommandBuffer, gammaAndBetaState *mpsneuralnetwork.MPSCNNNormalizationGammaAndBetaState)
 	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNGroupNormalizationGradientState

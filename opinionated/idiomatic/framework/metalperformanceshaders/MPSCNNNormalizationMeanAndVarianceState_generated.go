@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -38,6 +39,18 @@ func NewCNNNormalizationMeanAndVarianceStateWithMeanVariance(mean metal.MTLBuffe
 	return &CNNNormalizationMeanAndVarianceState{inner: raw.MPSCNNNormalizationMeanAndVarianceStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNNormalizationMeanAndVarianceState) WithReadCount(readCount uint) *CNNNormalizationMeanAndVarianceState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNormalizationMeanAndVarianceState) WithLabel(label string) *CNNNormalizationMeanAndVarianceState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Mean calls the underlying Mean.
 func (x *CNNNormalizationMeanAndVarianceState) Mean() metal.MTLBuffer {
 	return x.inner.Mean()
@@ -53,6 +66,8 @@ func (x *CNNNormalizationMeanAndVarianceState) asState() *mpscore.MPSState { ret
 // CNNNormalizationMeanAndVarianceStateable is the interface implemented by [CNNNormalizationMeanAndVarianceState], for mocking and DI.
 type CNNNormalizationMeanAndVarianceStateable interface {
 	Unwrap() *raw.MPSCNNNormalizationMeanAndVarianceState
+	WithReadCount(readCount uint) *CNNNormalizationMeanAndVarianceState
+	WithLabel(label string) *CNNNormalizationMeanAndVarianceState
 	Mean() metal.MTLBuffer
 	Variance() metal.MTLBuffer
 }

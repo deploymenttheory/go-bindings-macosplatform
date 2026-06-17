@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
@@ -63,6 +64,30 @@ func (x *DetectContoursRequest) WithDetectDarkOnLight(detectDarkOnLight bool) *D
 // WithMaximumImageDimension sets the maximumImageDimension property and returns the receiver for chaining.
 func (x *DetectContoursRequest) WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest {
 	x.inner.SetMaximumImageDimension(maximumImageDimension)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectContoursRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectContoursRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectContoursRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectContoursRequest) WithRevision(revision uint) *DetectContoursRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -128,6 +153,10 @@ type DetectContoursRequestable interface {
 	WithDetectsDarkOnLight(detectsDarkOnLight bool) *DetectContoursRequest
 	WithDetectDarkOnLight(detectDarkOnLight bool) *DetectContoursRequest
 	WithMaximumImageDimension(maximumImageDimension uint) *DetectContoursRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectContoursRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectContoursRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectContoursRequest
+	WithRevision(revision uint) *DetectContoursRequest
 	ContrastAdjustment() float32
 	SetContrastAdjustment(contrastAdjustment float32)
 	ContrastPivot() *foundation.NSNumber

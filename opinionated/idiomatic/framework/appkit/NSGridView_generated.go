@@ -7,8 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // GridView wraps [raw.NSGridView] with a fluent Go API.
@@ -72,6 +75,340 @@ func (x *GridView) WithRowSpacing(rowSpacing float64) *GridView {
 // WithColumnSpacing sets the columnSpacing property and returns the receiver for chaining.
 func (x *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
 	x.inner.SetColumnSpacing(columnSpacing)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *GridView) WithSubviews(items ...ViewProvider) *GridView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *GridView) WithHidden(hidden bool) *GridView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *GridView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *GridView) WithAutoresizesSubviews(autoresizesSubviews bool) *GridView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *GridView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GridView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *GridView) WithFrame(frame corefoundation.CGRect) *GridView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *GridView) WithFrameRotation(frameRotation float64) *GridView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *GridView) WithFrameCenterRotation(frameCenterRotation float64) *GridView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *GridView) WithBoundsRotation(boundsRotation float64) *GridView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *GridView) WithBounds(bounds corefoundation.CGRect) *GridView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *GridView) WithCanDrawConcurrently(canDrawConcurrently bool) *GridView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *GridView) WithNeedsDisplay(needsDisplay bool) *GridView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *GridView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *GridView) WithWantsRestingTouches(wantsRestingTouches bool) *GridView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GridView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *GridView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GridView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *GridView) WithWantsLayer(wantsLayer bool) *GridView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *GridView) WithLayer(layer *quartzcore.CALayer) *GridView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *GridView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *GridView) WithNeedsLayout(needsLayout bool) *GridView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *GridView) WithAlphaValue(alphaValue float64) *GridView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *GridView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *GridView) WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *GridView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GridView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *GridView) WithContentFilters(items ...*coreimage.CIFilter) *GridView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *GridView) WithShadow(shadow *raw.NSShadow) *GridView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *GridView) WithClipsToBounds(clipsToBounds bool) *GridView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *GridView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *GridView) WithToolTip(toolTip string) *GridView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GridView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *GridView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *GridView) WithFocusRingType(focusRingType raw.NSFocusRingType) *GridView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *GridView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GridView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GridView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *GridView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *GridView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *GridView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *GridView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *GridView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *GridView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GridView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *GridView) WithMenu(menu *raw.NSMenu) *GridView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *GridView) WithUserActivity(userActivity *foundation.NSUserActivity) *GridView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *GridView) WithTouchBar(touchBar *raw.NSTouchBar) *GridView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -254,6 +591,55 @@ type GridViewable interface {
 	WithRowAlignment(rowAlignment raw.NSGridRowAlignment) *GridView
 	WithRowSpacing(rowSpacing float64) *GridView
 	WithColumnSpacing(columnSpacing float64) *GridView
+	WithSubviews(items ...ViewProvider) *GridView
+	WithHidden(hidden bool) *GridView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *GridView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *GridView
+	WithFrame(frame corefoundation.CGRect) *GridView
+	WithFrameRotation(frameRotation float64) *GridView
+	WithFrameCenterRotation(frameCenterRotation float64) *GridView
+	WithBoundsRotation(boundsRotation float64) *GridView
+	WithBounds(bounds corefoundation.CGRect) *GridView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *GridView
+	WithNeedsDisplay(needsDisplay bool) *GridView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView
+	WithWantsRestingTouches(wantsRestingTouches bool) *GridView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *GridView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *GridView
+	WithWantsLayer(wantsLayer bool) *GridView
+	WithLayer(layer *quartzcore.CALayer) *GridView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView
+	WithNeedsLayout(needsLayout bool) *GridView
+	WithAlphaValue(alphaValue float64) *GridView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GridView
+	WithContentFilters(items ...*coreimage.CIFilter) *GridView
+	WithShadow(shadow *raw.NSShadow) *GridView
+	WithClipsToBounds(clipsToBounds bool) *GridView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView
+	WithToolTip(toolTip string) *GridView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *GridView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView
+	WithNextKeyView(nextKeyView ViewProvider) *GridView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *GridView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *GridView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *GridView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *GridView
+	WithNextResponder(nextResponder ResponderProvider) *GridView
+	WithMenu(menu *raw.NSMenu) *GridView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *GridView
+	WithTouchBar(touchBar *raw.NSTouchBar) *GridView
 	RowAtIndex(index int) *GridRow
 	IndexOfRow(row *raw.NSGridRow) int
 	ColumnAtIndex(index int) *GridColumn

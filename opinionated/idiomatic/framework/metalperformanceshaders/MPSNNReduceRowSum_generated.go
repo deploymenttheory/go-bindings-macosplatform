@@ -47,6 +47,72 @@ func NewNNReduceRowSumWithCoderDevice(aDecoder *foundation.NSCoder, device metal
 	return &NNReduceRowSum{inner: raw.MPSNNReduceRowSumFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithOffset(offset mpscore.MPSOffset) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithClipRect(clipRect metal.MTLRegion) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithOptions(options mpscore.MPSKernelOptions) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceRowSum) WithLabel(label string) *NNReduceRowSum {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReduceRowSum) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceRowSum) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -56,6 +122,17 @@ func (x *NNReduceRowSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNRe
 // NNReduceRowSumable is the interface implemented by [NNReduceRowSum], for mocking and DI.
 type NNReduceRowSumable interface {
 	Unwrap() *raw.MPSNNReduceRowSum
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceRowSum
+	WithOffset(offset mpscore.MPSOffset) *NNReduceRowSum
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceRowSum
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceRowSum
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceRowSum
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceRowSum
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceRowSum
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceRowSum
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceRowSum
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceRowSum
+	WithLabel(label string) *NNReduceRowSum
 }
 
 var _ NNReduceRowSumable = (*NNReduceRowSum)(nil)

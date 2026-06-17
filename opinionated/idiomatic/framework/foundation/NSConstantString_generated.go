@@ -35,6 +35,12 @@ func NewConstantString() *ConstantString {
 	return &ConstantString{inner: raw.NSConstantStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ConstantString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConstantString {
+	x.inner.NSSimpleCString.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *ConstantString) asSimpleCString() *raw.NSSimpleCString { return &x.inner.NSSimpleCString }
 
 func (x *ConstantString) asString() *raw.NSString { return &x.inner.NSSimpleCString.NSString }
@@ -44,6 +50,7 @@ func (x *ConstantString) asObject() *raw.NSObject { return &x.inner.NSSimpleCStr
 // ConstantStringable is the interface implemented by [ConstantString], for mocking and DI.
 type ConstantStringable interface {
 	Unwrap() *raw.NSConstantString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConstantString
 }
 
 var _ ConstantStringable = (*ConstantString)(nil)

@@ -92,6 +92,12 @@ func (x *CapturePhotoOutput) WithConstantColorEnabled(constantColorEnabled bool)
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CapturePhotoOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // CapturePhotoWithSettingsDelegate calls the underlying CapturePhotoWithSettingsDelegate.
 func (x *CapturePhotoOutput) CapturePhotoWithSettingsDelegate(settings *raw.AVCapturePhotoSettings, delegate raw.AVCapturePhotoCaptureDelegate) {
 	x.inner.CapturePhotoWithSettingsDelegate(settings, delegate)
@@ -280,6 +286,7 @@ type CapturePhotoOutputable interface {
 	WithZeroShutterLagEnabled(zeroShutterLagEnabled bool) *CapturePhotoOutput
 	WithResponsiveCaptureEnabled(responsiveCaptureEnabled bool) *CapturePhotoOutput
 	WithConstantColorEnabled(constantColorEnabled bool) *CapturePhotoOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CapturePhotoOutput
 	CapturePhotoWithSettingsDelegate(settings *raw.AVCapturePhotoSettings, delegate raw.AVCapturePhotoCaptureDelegate)
 	SupportedPhotoPixelFormatTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSNumber]
 	SupportedPhotoCodecTypesForFileType(fileType *foundation.NSString) *foundation.NSArray[*foundation.NSString]

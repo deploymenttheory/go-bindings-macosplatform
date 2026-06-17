@@ -38,6 +38,12 @@ func NewExceptionWithNameReasonUserInfo(aName *raw.NSString, aReason string, aUs
 	return &Exception{inner: raw.NSExceptionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Exception) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Exception {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Raise calls the underlying Raise.
 func (x *Exception) Raise() {
 	x.inner.Raise()
@@ -93,6 +99,7 @@ func (x *Exception) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Exceptionable is the interface implemented by [Exception], for mocking and DI.
 type Exceptionable interface {
 	Unwrap() *raw.NSException
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Exception
 	Raise()
 	Name() *String
 	Reason() *String

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -34,6 +35,18 @@ func LSTMLayerFromID(id objc.ID) *LSTMLayer {
 func NewLSTMLayer() *LSTMLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCLSTMLayer")), objc.RegisterName("new"))
 	return &LSTMLayer{inner: raw.MLCLSTMLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *LSTMLayer) WithLabel(label string) *LSTMLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *LSTMLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // Descriptor calls the underlying Descriptor.
@@ -158,6 +171,8 @@ func (x *LSTMLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // LSTMLayerable is the interface implemented by [LSTMLayer], for mocking and DI.
 type LSTMLayerable interface {
 	Unwrap() *raw.MLCLSTMLayer
+	WithLabel(label string) *LSTMLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LSTMLayer
 	Descriptor() *LSTMDescriptor
 	GateActivations() []*raw.MLCActivationDescriptor
 	OutputResultActivation() *ActivationDescriptor

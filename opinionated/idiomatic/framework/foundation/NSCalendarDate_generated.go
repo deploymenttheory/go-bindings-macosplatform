@@ -58,6 +58,12 @@ func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month uin
 	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CalendarDate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CalendarDate {
+	x.inner.NSDate.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DateByAddingYearsMonthsDaysHoursMinutesSeconds calls the underlying DateByAddingYearsMonthsDaysHoursMinutesSeconds.
 func (x *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate {
 	_r := x.inner.DateByAddingYearsMonthsDaysHoursMinutesSeconds(year, month, day, hour, minute, second)
@@ -170,6 +176,7 @@ func (x *CalendarDate) asObject() *raw.NSObject { return &x.inner.NSDate.NSObjec
 // CalendarDateable is the interface implemented by [CalendarDate], for mocking and DI.
 type CalendarDateable interface {
 	Unwrap() *raw.NSCalendarDate
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CalendarDate
 	DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate
 	DayOfCommonEra() int
 	DayOfMonth() int

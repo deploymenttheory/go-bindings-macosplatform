@@ -9,6 +9,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CollaborationOptionsPickerGroup wraps [raw.SWCollaborationOptionsPickerGroup] with a fluent Go API.
@@ -43,6 +44,34 @@ func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedO
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
+	x.inner.SWCollaborationOptionsGroup.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithFooter sets the footer property and returns the receiver for chaining.
+func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
+	x.inner.SWCollaborationOptionsGroup.SetFooter(foundation.NSStringStringWithUTF8String(footer))
+	return x
+}
+
+// WithOptions sets the collection, converting the Go slice to an NSArray.
+func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup {
+	if len(items) == 0 {
+		x.inner.SWCollaborationOptionsGroup.SetOptions(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOption](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SWCollaborationOptionsGroup.SetOptions(_arr)
+	return x
+}
+
 // SelectedOptionIdentifier calls the underlying SelectedOptionIdentifier.
 func (x *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
 	_r := x.inner.SelectedOptionIdentifier()
@@ -63,6 +92,9 @@ func (x *CollaborationOptionsPickerGroup) asCollaborationOptionsGroup() *raw.SWC
 type CollaborationOptionsPickerGroupable interface {
 	Unwrap() *raw.SWCollaborationOptionsPickerGroup
 	WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup
+	WithTitle(title string) *CollaborationOptionsPickerGroup
+	WithFooter(footer string) *CollaborationOptionsPickerGroup
+	WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup
 	SelectedOptionIdentifier() string
 	SetSelectedOptionIdentifier(selectedOptionIdentifier string)
 }

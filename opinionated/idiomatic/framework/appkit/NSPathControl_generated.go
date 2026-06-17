@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -115,6 +118,484 @@ func (x *PathControl) WithBackgroundColor(backgroundColor *raw.NSColor) *PathCon
 // WithDelegate sets the delegate property and returns the receiver for chaining.
 func (x *PathControl) WithDelegate(delegate raw.NSPathControlDelegate) *PathControl {
 	x.inner.SetDelegate(delegate)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PathControl) WithTarget(target objc.ID) *PathControl {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PathControl) WithAction(action objc.SEL) *PathControl {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *PathControl) WithTag(tag int) *PathControl {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *PathControl) WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *PathControl) WithContinuous(continuous bool) *PathControl {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PathControl) WithEnabled(enabled bool) *PathControl {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *PathControl) WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *PathControl) WithHighlighted(highlighted bool) *PathControl {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *PathControl) WithControlSize(controlSize raw.NSControlSize) *PathControl {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *PathControl) WithFormatter(formatter *foundation.NSFormatter) *PathControl {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *PathControl) WithObjectValue(objectValue objc.ID) *PathControl {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *PathControl) WithStringValue(stringValue string) *PathControl {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *PathControl) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathControl {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *PathControl) WithIntValue(intValue int) *PathControl {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *PathControl) WithIntegerValue(integerValue int) *PathControl {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *PathControl) WithFloatValue(floatValue float32) *PathControl {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *PathControl) WithDoubleValue(doubleValue float64) *PathControl {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *PathControl) WithFont(font *raw.NSFont) *PathControl {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *PathControl) WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *PathControl) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathControl {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *PathControl) WithAlignment(alignment raw.NSTextAlignment) *PathControl {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *PathControl) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathControl {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *PathControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *PathControl) WithCell(cell CellProvider) *PathControl {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *PathControl) WithSubviews(items ...ViewProvider) *PathControl {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *PathControl) WithHidden(hidden bool) *PathControl {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *PathControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *PathControl) WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *PathControl) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PathControl {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *PathControl) WithFrame(frame corefoundation.CGRect) *PathControl {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *PathControl) WithFrameRotation(frameRotation float64) *PathControl {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *PathControl) WithFrameCenterRotation(frameCenterRotation float64) *PathControl {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *PathControl) WithBoundsRotation(boundsRotation float64) *PathControl {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *PathControl) WithBounds(bounds corefoundation.CGRect) *PathControl {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *PathControl) WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *PathControl) WithNeedsDisplay(needsDisplay bool) *PathControl {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *PathControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *PathControl) WithWantsRestingTouches(wantsRestingTouches bool) *PathControl {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *PathControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PathControl {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *PathControl) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PathControl {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *PathControl) WithWantsLayer(wantsLayer bool) *PathControl {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *PathControl) WithLayer(layer *quartzcore.CALayer) *PathControl {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *PathControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *PathControl) WithNeedsLayout(needsLayout bool) *PathControl {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *PathControl) WithAlphaValue(alphaValue float64) *PathControl {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *PathControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *PathControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *PathControl {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *PathControl) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PathControl {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *PathControl) WithContentFilters(items ...*coreimage.CIFilter) *PathControl {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *PathControl) WithShadow(shadow *raw.NSShadow) *PathControl {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *PathControl) WithClipsToBounds(clipsToBounds bool) *PathControl {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *PathControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *PathControl) WithToolTip(toolTip string) *PathControl {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *PathControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathControl {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *PathControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *PathControl) WithNextKeyView(nextKeyView ViewProvider) *PathControl {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *PathControl) WithFocusRingType(focusRingType raw.NSFocusRingType) *PathControl {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *PathControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *PathControl) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PathControl {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *PathControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *PathControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *PathControl) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PathControl {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *PathControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *PathControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *PathControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *PathControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *PathControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *PathControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *PathControl) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PathControl {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *PathControl) WithNextResponder(nextResponder ResponderProvider) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *PathControl) WithMenu(menu *raw.NSMenu) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *PathControl) WithUserActivity(userActivity *foundation.NSUserActivity) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *PathControl) WithTouchBar(touchBar *raw.NSTouchBar) *PathControl {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -296,6 +777,79 @@ type PathControlable interface {
 	WithPathItems(items ...*raw.NSPathControlItem) *PathControl
 	WithBackgroundColor(backgroundColor *raw.NSColor) *PathControl
 	WithDelegate(delegate raw.NSPathControlDelegate) *PathControl
+	WithTarget(target objc.ID) *PathControl
+	WithAction(action objc.SEL) *PathControl
+	WithTag(tag int) *PathControl
+	WithIgnoresMultiClick(ignoresMultiClick bool) *PathControl
+	WithContinuous(continuous bool) *PathControl
+	WithEnabled(enabled bool) *PathControl
+	WithRefusesFirstResponder(refusesFirstResponder bool) *PathControl
+	WithHighlighted(highlighted bool) *PathControl
+	WithControlSize(controlSize raw.NSControlSize) *PathControl
+	WithFormatter(formatter *foundation.NSFormatter) *PathControl
+	WithObjectValue(objectValue objc.ID) *PathControl
+	WithStringValue(stringValue string) *PathControl
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PathControl
+	WithIntValue(intValue int) *PathControl
+	WithIntegerValue(integerValue int) *PathControl
+	WithFloatValue(floatValue float32) *PathControl
+	WithDoubleValue(doubleValue float64) *PathControl
+	WithFont(font *raw.NSFont) *PathControl
+	WithUsesSingleLineMode(usesSingleLineMode bool) *PathControl
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PathControl
+	WithAlignment(alignment raw.NSTextAlignment) *PathControl
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PathControl
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PathControl
+	WithCell(cell CellProvider) *PathControl
+	WithSubviews(items ...ViewProvider) *PathControl
+	WithHidden(hidden bool) *PathControl
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PathControl
+	WithAutoresizesSubviews(autoresizesSubviews bool) *PathControl
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *PathControl
+	WithFrame(frame corefoundation.CGRect) *PathControl
+	WithFrameRotation(frameRotation float64) *PathControl
+	WithFrameCenterRotation(frameCenterRotation float64) *PathControl
+	WithBoundsRotation(boundsRotation float64) *PathControl
+	WithBounds(bounds corefoundation.CGRect) *PathControl
+	WithCanDrawConcurrently(canDrawConcurrently bool) *PathControl
+	WithNeedsDisplay(needsDisplay bool) *PathControl
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PathControl
+	WithWantsRestingTouches(wantsRestingTouches bool) *PathControl
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *PathControl
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *PathControl
+	WithWantsLayer(wantsLayer bool) *PathControl
+	WithLayer(layer *quartzcore.CALayer) *PathControl
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PathControl
+	WithNeedsLayout(needsLayout bool) *PathControl
+	WithAlphaValue(alphaValue float64) *PathControl
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PathControl
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *PathControl
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PathControl
+	WithContentFilters(items ...*coreimage.CIFilter) *PathControl
+	WithShadow(shadow *raw.NSShadow) *PathControl
+	WithClipsToBounds(clipsToBounds bool) *PathControl
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PathControl
+	WithToolTip(toolTip string) *PathControl
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PathControl
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PathControl
+	WithNextKeyView(nextKeyView ViewProvider) *PathControl
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *PathControl
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *PathControl
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *PathControl
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PathControl
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PathControl
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *PathControl
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PathControl
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PathControl
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PathControl
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PathControl
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PathControl
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PathControl
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *PathControl
+	WithNextResponder(nextResponder ResponderProvider) *PathControl
+	WithMenu(menu *raw.NSMenu) *PathControl
+	WithUserActivity(userActivity *foundation.NSUserActivity) *PathControl
+	WithTouchBar(touchBar *raw.NSTouchBar) *PathControl
 	SetDraggingSourceOperationMaskForLocal(mask raw.NSDragOperation, isLocal bool)
 	IsEditable() bool
 	SetEditable(editable bool)

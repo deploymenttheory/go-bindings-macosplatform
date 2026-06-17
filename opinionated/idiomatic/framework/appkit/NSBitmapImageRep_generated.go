@@ -81,6 +81,54 @@ func NewBitmapImageRepWithData(data *foundation.NSData) *BitmapImageRep {
 	return &BitmapImageRep{inner: raw.NSBitmapImageRepFromID(_id)}
 }
 
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithSize(size corefoundation.CGSize) *BitmapImageRep {
+	x.inner.NSImageRep.SetSize(size)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithAlpha(alpha bool) *BitmapImageRep {
+	x.inner.NSImageRep.SetAlpha(alpha)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithOpaque(opaque bool) *BitmapImageRep {
+	x.inner.NSImageRep.SetOpaque(opaque)
+	return x
+}
+
+// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *BitmapImageRep {
+	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+	return x
+}
+
+// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithBitsPerSample(bitsPerSample int) *BitmapImageRep {
+	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	return x
+}
+
+// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithPixelsWide(pixelsWide int) *BitmapImageRep {
+	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	return x
+}
+
+// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithPixelsHigh(pixelsHigh int) *BitmapImageRep {
+	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	return x
+}
+
+// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
+func (x *BitmapImageRep) WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *BitmapImageRep {
+	x.inner.NSImageRep.SetLayoutDirection(layoutDirection)
+	return x
+}
+
 // GetBitmapDataPlanes calls the underlying GetBitmapDataPlanes.
 func (x *BitmapImageRep) GetBitmapDataPlanes(data *uint8) {
 	x.inner.GetBitmapDataPlanes(data)
@@ -237,6 +285,14 @@ func (x *BitmapImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageR
 // BitmapImageRepable is the interface implemented by [BitmapImageRep], for mocking and DI.
 type BitmapImageRepable interface {
 	Unwrap() *raw.NSBitmapImageRep
+	WithSize(size corefoundation.CGSize) *BitmapImageRep
+	WithAlpha(alpha bool) *BitmapImageRep
+	WithOpaque(opaque bool) *BitmapImageRep
+	WithColorSpaceName(colorSpaceName *foundation.NSString) *BitmapImageRep
+	WithBitsPerSample(bitsPerSample int) *BitmapImageRep
+	WithPixelsWide(pixelsWide int) *BitmapImageRep
+	WithPixelsHigh(pixelsHigh int) *BitmapImageRep
+	WithLayoutDirection(layoutDirection raw.NSImageLayoutDirection) *BitmapImageRep
 	GetBitmapDataPlanes(data *uint8)
 	GetCompressionFactor(compression *raw.NSTIFFCompression, factor *float32)
 	SetCompressionFactor(compression raw.NSTIFFCompression, factor float32)

@@ -72,6 +72,48 @@ func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConn
 	return x
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithBatchStart(batchStart uint) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithBatchSize(batchSize uint) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixFullyConnectedGradient) WithLabel(label string) *MatrixFullyConnectedGradient {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix calls the underlying EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix.
 func (x *MatrixFullyConnectedGradient) EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer, gradientMatrix, weightMatrix, resultGradientForDataMatrix)
@@ -142,6 +184,13 @@ type MatrixFullyConnectedGradientable interface {
 	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnectedGradient
 	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnectedGradient
 	WithAlpha(alpha float64) *MatrixFullyConnectedGradient
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
+	WithBatchStart(batchStart uint) *MatrixFullyConnectedGradient
+	WithBatchSize(batchSize uint) *MatrixFullyConnectedGradient
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixFullyConnectedGradient
+	WithLabel(label string) *MatrixFullyConnectedGradient
 	EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix)
 	EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector)
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixFullyConnectedGradient

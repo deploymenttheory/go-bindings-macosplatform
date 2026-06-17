@@ -100,6 +100,30 @@ func (x *ViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefou
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ViewController) WithNextResponder(nextResponder ResponderProvider) *ViewController {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ViewController) WithMenu(menu *raw.NSMenu) *ViewController {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ViewController) WithTouchBar(touchBar *raw.NSTouchBar) *ViewController {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // LoadView calls the underlying LoadView.
 func (x *ViewController) LoadView() {
 	x.inner.LoadView()
@@ -427,6 +451,10 @@ type ViewControllerable interface {
 	WithChildViewControllers(items ...ViewControllerProvider) *ViewController
 	WithSourceItemView(sourceItemView ViewProvider) *ViewController
 	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *ViewController
+	WithNextResponder(nextResponder ResponderProvider) *ViewController
+	WithMenu(menu *raw.NSMenu) *ViewController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ViewController
+	WithTouchBar(touchBar *raw.NSTouchBar) *ViewController
 	LoadView()
 	LoadViewIfNeeded()
 	CommitEditingWithDelegateDidCommitSelectorContextInfo(delegate objc.ID, didCommitSelector objc.SEL, contextInfo unsafe.Pointer)

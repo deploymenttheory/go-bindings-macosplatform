@@ -5,6 +5,7 @@
 package gamecontroller
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
 	"github.com/ebitengine/purego/objc"
 )
@@ -38,6 +39,36 @@ func NewControllerDirectionPad() *ControllerDirectionPad {
 // WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
 func (x *ControllerDirectionPad) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad {
 	x.inner.SetValueChangedHandler(valueChangedHandler)
+	return x
+}
+
+// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
+func (x *ControllerDirectionPad) WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetPreferredSystemGestureState(preferredSystemGestureState)
+	return x
+}
+
+// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerDirectionPad) WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	return x
+}
+
+// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+func (x *ControllerDirectionPad) WithLocalizedName(localizedName string) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	return x
+}
+
+// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+func (x *ControllerDirectionPad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	return x
+}
+
+// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+func (x *ControllerDirectionPad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad {
+	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
 	return x
 }
 
@@ -118,6 +149,11 @@ func (x *ControllerDirectionPad) asControllerElement() *raw.GCControllerElement 
 type ControllerDirectionPadable interface {
 	Unwrap() *raw.GCControllerDirectionPad
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32)) *ControllerDirectionPad
+	WithPreferredSystemGestureState(preferredSystemGestureState raw.GCSystemGestureState) *ControllerDirectionPad
+	WithSfSymbolsName(sfSymbolsName string) *ControllerDirectionPad
+	WithLocalizedName(localizedName string) *ControllerDirectionPad
+	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerDirectionPad
+	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerDirectionPad
 	SetValueForXAxisYAxis(xAxis float32, yAxis float32)
 	ValueChangedHandler() objc.Block
 	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerDirectionPad, float32, float32))

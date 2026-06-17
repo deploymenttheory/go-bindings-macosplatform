@@ -5,8 +5,11 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TransformLayer wraps [raw.CATransformLayer] with a fluent Go API.
@@ -35,11 +38,388 @@ func NewTransformLayer() *TransformLayer {
 	return &TransformLayer{inner: raw.CATransformLayerFromID(_id)}
 }
 
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *TransformLayer) WithBounds(bounds corefoundation.CGRect) *TransformLayer {
+	x.inner.CALayer.SetBounds(bounds)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *TransformLayer) WithPosition(position corefoundation.CGPoint) *TransformLayer {
+	x.inner.CALayer.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *TransformLayer) WithZPosition(zPosition float64) *TransformLayer {
+	x.inner.CALayer.SetZPosition(zPosition)
+	return x
+}
+
+// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
+func (x *TransformLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TransformLayer {
+	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	return x
+}
+
+// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+func (x *TransformLayer) WithAnchorPointZ(anchorPointZ float64) *TransformLayer {
+	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *TransformLayer) WithTransform(transform raw.CATransform3D) *TransformLayer {
+	x.inner.CALayer.SetTransform(transform)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *TransformLayer) WithFrame(frame corefoundation.CGRect) *TransformLayer {
+	x.inner.CALayer.SetFrame(frame)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TransformLayer) WithHidden(hidden bool) *TransformLayer {
+	x.inner.CALayer.SetHidden(hidden)
+	return x
+}
+
+// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+func (x *TransformLayer) WithDoubleSided(doubleSided bool) *TransformLayer {
+	x.inner.CALayer.SetDoubleSided(doubleSided)
+	return x
+}
+
+// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+func (x *TransformLayer) WithGeometryFlipped(geometryFlipped bool) *TransformLayer {
+	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	return x
+}
+
+// WithSublayers sets the collection, converting the Go slice to an NSArray.
+func (x *TransformLayer) WithSublayers(items ...LayerProvider) *TransformLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetSublayers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asLayer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CALayer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetSublayers(_arr)
+	return x
+}
+
+// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
+func (x *TransformLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *TransformLayer {
+	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	return x
+}
+
+// WithMask sets the mask property and returns the receiver for chaining.
+func (x *TransformLayer) WithMask(mask LayerProvider) *TransformLayer {
+	x.inner.CALayer.SetMask(mask.asLayer())
+	return x
+}
+
+// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+func (x *TransformLayer) WithMasksToBounds(masksToBounds bool) *TransformLayer {
+	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	return x
+}
+
+// WithContents sets the contents property and returns the receiver for chaining.
+func (x *TransformLayer) WithContents(contents objc.ID) *TransformLayer {
+	x.inner.CALayer.SetContents(contents)
+	return x
+}
+
+// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TransformLayer {
+	x.inner.CALayer.SetContentsRect(contentsRect)
+	return x
+}
+
+// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsGravity(contentsGravity *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetContentsGravity(contentsGravity)
+	return x
+}
+
+// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsScale(contentsScale float64) *TransformLayer {
+	x.inner.CALayer.SetContentsScale(contentsScale)
+	return x
+}
+
+// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TransformLayer {
+	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	return x
+}
+
+// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsFormat(contentsFormat *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetContentsFormat(contentsFormat)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+func (x *TransformLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer {
+	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	return x
+}
+
+// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
+func (x *TransformLayer) WithToneMapMode(toneMapMode *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetToneMapMode(toneMapMode)
+	return x
+}
+
+// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
+func (x *TransformLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+	return x
+}
+
+// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+func (x *TransformLayer) WithContentsHeadroom(contentsHeadroom float64) *TransformLayer {
+	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	return x
+}
+
+// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
+func (x *TransformLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+	return x
+}
+
+// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
+func (x *TransformLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+	return x
+}
+
+// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+func (x *TransformLayer) WithMinificationFilterBias(minificationFilterBias float32) *TransformLayer {
+	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *TransformLayer) WithOpaque(opaque bool) *TransformLayer {
+	x.inner.CALayer.SetOpaque(opaque)
+	return x
+}
+
+// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+func (x *TransformLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer {
+	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	return x
+}
+
+// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+func (x *TransformLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer {
+	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	return x
+}
+
+// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
+func (x *TransformLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TransformLayer {
+	x.inner.CALayer.SetEdgeAntialiasingMask(edgeAntialiasingMask)
+	return x
+}
+
+// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+func (x *TransformLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer {
+	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	return x
+}
+
+// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+func (x *TransformLayer) WithCornerRadius(cornerRadius float64) *TransformLayer {
+	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	return x
+}
+
+// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
+func (x *TransformLayer) WithMaskedCorners(maskedCorners raw.CACornerMask) *TransformLayer {
+	x.inner.CALayer.SetMaskedCorners(maskedCorners)
+	return x
+}
+
+// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
+func (x *TransformLayer) WithCornerCurve(cornerCurve *foundation.NSString) *TransformLayer {
+	x.inner.CALayer.SetCornerCurve(cornerCurve)
+	return x
+}
+
+// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+func (x *TransformLayer) WithBorderWidth(borderWidth float64) *TransformLayer {
+	x.inner.CALayer.SetBorderWidth(borderWidth)
+	return x
+}
+
+// WithOpacity sets the opacity property and returns the receiver for chaining.
+func (x *TransformLayer) WithOpacity(opacity float32) *TransformLayer {
+	x.inner.CALayer.SetOpacity(opacity)
+	return x
+}
+
+// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+func (x *TransformLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TransformLayer {
+	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *TransformLayer) WithCompositingFilter(compositingFilter objc.ID) *TransformLayer {
+	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *TransformLayer) WithShouldRasterize(shouldRasterize bool) *TransformLayer {
+	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+func (x *TransformLayer) WithRasterizationScale(rasterizationScale float64) *TransformLayer {
+	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	return x
+}
+
+// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+func (x *TransformLayer) WithShadowOpacity(shadowOpacity float32) *TransformLayer {
+	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
+	return x
+}
+
+// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
+func (x *TransformLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer {
+	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	return x
+}
+
+// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+func (x *TransformLayer) WithShadowRadius(shadowRadius float64) *TransformLayer {
+	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *TransformLayer) WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TransformLayer {
+	x.inner.CALayer.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+func (x *TransformLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *TransformLayer {
+	x.inner.CALayer.SetLayoutManager(layoutManager)
+	return x
+}
+
+// WithActions sets the actions property and returns the receiver for chaining.
+func (x *TransformLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TransformLayer {
+	x.inner.CALayer.SetActions(actions)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *TransformLayer) WithName(name string) *TransformLayer {
+	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *TransformLayer) WithDelegate(delegate raw.CALayerDelegate) *TransformLayer {
+	x.inner.CALayer.SetDelegate(delegate)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *TransformLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TransformLayer {
+	x.inner.CALayer.SetStyle(style)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *TransformLayer) WithConstraints(items ...*raw.CAConstraint) *TransformLayer {
+	if len(items) == 0 {
+		x.inner.CALayer.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.CALayer.SetConstraints(_arr)
+	return x
+}
+
 func (x *TransformLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // TransformLayerable is the interface implemented by [TransformLayer], for mocking and DI.
 type TransformLayerable interface {
 	Unwrap() *raw.CATransformLayer
+	WithBounds(bounds corefoundation.CGRect) *TransformLayer
+	WithPosition(position corefoundation.CGPoint) *TransformLayer
+	WithZPosition(zPosition float64) *TransformLayer
+	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TransformLayer
+	WithAnchorPointZ(anchorPointZ float64) *TransformLayer
+	WithTransform(transform raw.CATransform3D) *TransformLayer
+	WithFrame(frame corefoundation.CGRect) *TransformLayer
+	WithHidden(hidden bool) *TransformLayer
+	WithDoubleSided(doubleSided bool) *TransformLayer
+	WithGeometryFlipped(geometryFlipped bool) *TransformLayer
+	WithSublayers(items ...LayerProvider) *TransformLayer
+	WithSublayerTransform(sublayerTransform raw.CATransform3D) *TransformLayer
+	WithMask(mask LayerProvider) *TransformLayer
+	WithMasksToBounds(masksToBounds bool) *TransformLayer
+	WithContents(contents objc.ID) *TransformLayer
+	WithContentsRect(contentsRect corefoundation.CGRect) *TransformLayer
+	WithContentsGravity(contentsGravity *foundation.NSString) *TransformLayer
+	WithContentsScale(contentsScale float64) *TransformLayer
+	WithContentsCenter(contentsCenter corefoundation.CGRect) *TransformLayer
+	WithContentsFormat(contentsFormat *foundation.NSString) *TransformLayer
+	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer
+	WithToneMapMode(toneMapMode *foundation.NSString) *TransformLayer
+	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TransformLayer
+	WithContentsHeadroom(contentsHeadroom float64) *TransformLayer
+	WithMinificationFilter(minificationFilter *foundation.NSString) *TransformLayer
+	WithMagnificationFilter(magnificationFilter *foundation.NSString) *TransformLayer
+	WithMinificationFilterBias(minificationFilterBias float32) *TransformLayer
+	WithOpaque(opaque bool) *TransformLayer
+	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TransformLayer
+	WithDrawsAsynchronously(drawsAsynchronously bool) *TransformLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask raw.CAEdgeAntialiasingMask) *TransformLayer
+	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TransformLayer
+	WithCornerRadius(cornerRadius float64) *TransformLayer
+	WithMaskedCorners(maskedCorners raw.CACornerMask) *TransformLayer
+	WithCornerCurve(cornerCurve *foundation.NSString) *TransformLayer
+	WithBorderWidth(borderWidth float64) *TransformLayer
+	WithOpacity(opacity float32) *TransformLayer
+	WithAllowsGroupOpacity(allowsGroupOpacity bool) *TransformLayer
+	WithCompositingFilter(compositingFilter objc.ID) *TransformLayer
+	WithShouldRasterize(shouldRasterize bool) *TransformLayer
+	WithRasterizationScale(rasterizationScale float64) *TransformLayer
+	WithShadowOpacity(shadowOpacity float32) *TransformLayer
+	WithShadowOffset(shadowOffset corefoundation.CGSize) *TransformLayer
+	WithShadowRadius(shadowRadius float64) *TransformLayer
+	WithAutoresizingMask(autoresizingMask raw.CAAutoresizingMask) *TransformLayer
+	WithLayoutManager(layoutManager raw.CALayoutManager) *TransformLayer
+	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TransformLayer
+	WithName(name string) *TransformLayer
+	WithDelegate(delegate raw.CALayerDelegate) *TransformLayer
+	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TransformLayer
+	WithConstraints(items ...*raw.CAConstraint) *TransformLayer
 }
 
 var _ TransformLayerable = (*TransformLayer)(nil)

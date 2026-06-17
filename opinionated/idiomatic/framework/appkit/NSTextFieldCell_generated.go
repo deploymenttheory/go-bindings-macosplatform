@@ -98,6 +98,276 @@ func (x *TextFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSStr
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *TextFieldCell) WithType(type_ raw.NSCellType) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *TextFieldCell) WithState(state int) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *TextFieldCell) WithTarget(target objc.ID) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAction(action objc.SEL) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *TextFieldCell) WithTag(tag int) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TextFieldCell) WithTitle(title string) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TextFieldCell) WithEnabled(enabled bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *TextFieldCell) WithContinuous(continuous bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *TextFieldCell) WithEditable(editable bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *TextFieldCell) WithSelectable(selectable bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *TextFieldCell) WithBordered(bordered bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *TextFieldCell) WithBezeled(bezeled bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *TextFieldCell) WithScrollable(scrollable bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *TextFieldCell) WithHighlighted(highlighted bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAlignment(alignment raw.NSTextAlignment) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *TextFieldCell) WithFont(font *raw.NSFont) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *TextFieldCell) WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithObjectValue(objectValue objc.ID) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithStringValue(stringValue string) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithIntValue(intValue int) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithFloatValue(floatValue float32) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithDoubleValue(doubleValue float64) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *TextFieldCell) WithImage(image *raw.NSImage) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *TextFieldCell) WithControlSize(controlSize raw.NSControlSize) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *TextFieldCell) WithRepresentedObject(representedObject objc.ID) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TextFieldCell) WithMenu(menu *raw.NSMenu) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *TextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *TextFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAllowsUndo(allowsUndo bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *TextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *TextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *TextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *TextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TextFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *TextFieldCell) WithImportsGraphics(importsGraphics bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *TextFieldCell) WithAllowsMixedState(allowsMixedState bool) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *TextFieldCell) WithControlTint(controlTint raw.NSControlTint) *TextFieldCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // SetWantsNotificationForMarkedText calls the underlying SetWantsNotificationForMarkedText.
 func (x *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 	x.inner.SetWantsNotificationForMarkedText(flag)
@@ -207,6 +477,51 @@ type TextFieldCellable interface {
 	WithPlaceholderString(placeholderString string) *TextFieldCell
 	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell
 	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextFieldCell
+	WithControlView(controlView ViewProvider) *TextFieldCell
+	WithType(type_ raw.NSCellType) *TextFieldCell
+	WithState(state int) *TextFieldCell
+	WithTarget(target objc.ID) *TextFieldCell
+	WithAction(action objc.SEL) *TextFieldCell
+	WithTag(tag int) *TextFieldCell
+	WithTitle(title string) *TextFieldCell
+	WithEnabled(enabled bool) *TextFieldCell
+	WithContinuous(continuous bool) *TextFieldCell
+	WithEditable(editable bool) *TextFieldCell
+	WithSelectable(selectable bool) *TextFieldCell
+	WithBordered(bordered bool) *TextFieldCell
+	WithBezeled(bezeled bool) *TextFieldCell
+	WithScrollable(scrollable bool) *TextFieldCell
+	WithHighlighted(highlighted bool) *TextFieldCell
+	WithAlignment(alignment raw.NSTextAlignment) *TextFieldCell
+	WithWraps(wraps bool) *TextFieldCell
+	WithFont(font *raw.NSFont) *TextFieldCell
+	WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell
+	WithObjectValue(objectValue objc.ID) *TextFieldCell
+	WithStringValue(stringValue string) *TextFieldCell
+	WithIntValue(intValue int) *TextFieldCell
+	WithFloatValue(floatValue float32) *TextFieldCell
+	WithDoubleValue(doubleValue float64) *TextFieldCell
+	WithIntegerValue(integerValue int) *TextFieldCell
+	WithImage(image *raw.NSImage) *TextFieldCell
+	WithControlSize(controlSize raw.NSControlSize) *TextFieldCell
+	WithRepresentedObject(representedObject objc.ID) *TextFieldCell
+	WithMenu(menu *raw.NSMenu) *TextFieldCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextFieldCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextFieldCell
+	WithAllowsUndo(allowsUndo bool) *TextFieldCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextFieldCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell
+	WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextFieldCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextFieldCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell
+	WithImportsGraphics(importsGraphics bool) *TextFieldCell
+	WithAllowsMixedState(allowsMixedState bool) *TextFieldCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextFieldCell
+	WithControlTint(controlTint raw.NSControlTint) *TextFieldCell
 	SetWantsNotificationForMarkedText(flag bool)
 	BackgroundColor() *Color
 	SetBackgroundColor(backgroundColor *raw.NSColor)

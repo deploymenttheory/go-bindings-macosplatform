@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Stepper wraps [raw.NSStepper] with a fluent Go API.
@@ -62,6 +67,484 @@ func (x *Stepper) WithValueWraps(valueWraps bool) *Stepper {
 // WithAutorepeat sets the autorepeat property and returns the receiver for chaining.
 func (x *Stepper) WithAutorepeat(autorepeat bool) *Stepper {
 	x.inner.SetAutorepeat(autorepeat)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Stepper) WithTarget(target objc.ID) *Stepper {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Stepper) WithAction(action objc.SEL) *Stepper {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Stepper) WithTag(tag int) *Stepper {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Stepper) WithIgnoresMultiClick(ignoresMultiClick bool) *Stepper {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Stepper) WithContinuous(continuous bool) *Stepper {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Stepper) WithEnabled(enabled bool) *Stepper {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Stepper) WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Stepper) WithHighlighted(highlighted bool) *Stepper {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Stepper) WithControlSize(controlSize raw.NSControlSize) *Stepper {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Stepper) WithFormatter(formatter *foundation.NSFormatter) *Stepper {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Stepper) WithObjectValue(objectValue objc.ID) *Stepper {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Stepper) WithStringValue(stringValue string) *Stepper {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Stepper) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Stepper {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Stepper) WithIntValue(intValue int) *Stepper {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Stepper) WithIntegerValue(integerValue int) *Stepper {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Stepper) WithFloatValue(floatValue float32) *Stepper {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Stepper) WithDoubleValue(doubleValue float64) *Stepper {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Stepper) WithFont(font *raw.NSFont) *Stepper {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Stepper) WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Stepper) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Stepper {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Stepper) WithAlignment(alignment raw.NSTextAlignment) *Stepper {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Stepper) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Stepper {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Stepper) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Stepper) WithCell(cell CellProvider) *Stepper {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Stepper) WithSubviews(items ...ViewProvider) *Stepper {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Stepper) WithHidden(hidden bool) *Stepper {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Stepper) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Stepper {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Stepper) WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Stepper) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Stepper {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Stepper) WithFrame(frame corefoundation.CGRect) *Stepper {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Stepper) WithFrameRotation(frameRotation float64) *Stepper {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Stepper) WithFrameCenterRotation(frameCenterRotation float64) *Stepper {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Stepper) WithBoundsRotation(boundsRotation float64) *Stepper {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Stepper) WithBounds(bounds corefoundation.CGRect) *Stepper {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Stepper) WithCanDrawConcurrently(canDrawConcurrently bool) *Stepper {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Stepper) WithNeedsDisplay(needsDisplay bool) *Stepper {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Stepper) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Stepper {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Stepper) WithWantsRestingTouches(wantsRestingTouches bool) *Stepper {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Stepper) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Stepper {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Stepper) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Stepper {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Stepper) WithWantsLayer(wantsLayer bool) *Stepper {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Stepper) WithLayer(layer *quartzcore.CALayer) *Stepper {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Stepper) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Stepper {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Stepper) WithNeedsLayout(needsLayout bool) *Stepper {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Stepper) WithAlphaValue(alphaValue float64) *Stepper {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Stepper) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Stepper {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Stepper) WithBackgroundFilters(items ...*coreimage.CIFilter) *Stepper {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Stepper) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Stepper {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Stepper) WithContentFilters(items ...*coreimage.CIFilter) *Stepper {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Stepper) WithShadow(shadow *raw.NSShadow) *Stepper {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Stepper) WithClipsToBounds(clipsToBounds bool) *Stepper {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Stepper) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Stepper) WithToolTip(toolTip string) *Stepper {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Stepper) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Stepper {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Stepper) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Stepper {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Stepper) WithNextKeyView(nextKeyView ViewProvider) *Stepper {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Stepper) WithFocusRingType(focusRingType raw.NSFocusRingType) *Stepper {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Stepper) WithGestureRecognizers(items ...GestureRecognizerProvider) *Stepper {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Stepper) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Stepper {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Stepper) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Stepper) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Stepper) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Stepper {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Stepper) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Stepper {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Stepper) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Stepper {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Stepper) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Stepper {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Stepper) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Stepper {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Stepper) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Stepper {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Stepper) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Stepper {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Stepper) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Stepper {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Stepper) WithMenu(menu *raw.NSMenu) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Stepper) WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Stepper) WithTouchBar(touchBar *raw.NSTouchBar) *Stepper {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -129,6 +612,79 @@ type Stepperable interface {
 	WithIncrement(increment float64) *Stepper
 	WithValueWraps(valueWraps bool) *Stepper
 	WithAutorepeat(autorepeat bool) *Stepper
+	WithTarget(target objc.ID) *Stepper
+	WithAction(action objc.SEL) *Stepper
+	WithTag(tag int) *Stepper
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Stepper
+	WithContinuous(continuous bool) *Stepper
+	WithEnabled(enabled bool) *Stepper
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper
+	WithHighlighted(highlighted bool) *Stepper
+	WithControlSize(controlSize raw.NSControlSize) *Stepper
+	WithFormatter(formatter *foundation.NSFormatter) *Stepper
+	WithObjectValue(objectValue objc.ID) *Stepper
+	WithStringValue(stringValue string) *Stepper
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Stepper
+	WithIntValue(intValue int) *Stepper
+	WithIntegerValue(integerValue int) *Stepper
+	WithFloatValue(floatValue float32) *Stepper
+	WithDoubleValue(doubleValue float64) *Stepper
+	WithFont(font *raw.NSFont) *Stepper
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Stepper
+	WithAlignment(alignment raw.NSTextAlignment) *Stepper
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Stepper
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper
+	WithCell(cell CellProvider) *Stepper
+	WithSubviews(items ...ViewProvider) *Stepper
+	WithHidden(hidden bool) *Stepper
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Stepper
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Stepper
+	WithFrame(frame corefoundation.CGRect) *Stepper
+	WithFrameRotation(frameRotation float64) *Stepper
+	WithFrameCenterRotation(frameCenterRotation float64) *Stepper
+	WithBoundsRotation(boundsRotation float64) *Stepper
+	WithBounds(bounds corefoundation.CGRect) *Stepper
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Stepper
+	WithNeedsDisplay(needsDisplay bool) *Stepper
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Stepper
+	WithWantsRestingTouches(wantsRestingTouches bool) *Stepper
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Stepper
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Stepper
+	WithWantsLayer(wantsLayer bool) *Stepper
+	WithLayer(layer *quartzcore.CALayer) *Stepper
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Stepper
+	WithNeedsLayout(needsLayout bool) *Stepper
+	WithAlphaValue(alphaValue float64) *Stepper
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Stepper
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Stepper
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Stepper
+	WithContentFilters(items ...*coreimage.CIFilter) *Stepper
+	WithShadow(shadow *raw.NSShadow) *Stepper
+	WithClipsToBounds(clipsToBounds bool) *Stepper
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper
+	WithToolTip(toolTip string) *Stepper
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Stepper
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Stepper
+	WithNextKeyView(nextKeyView ViewProvider) *Stepper
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Stepper
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Stepper
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Stepper
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Stepper
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Stepper
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Stepper
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Stepper
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Stepper
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Stepper
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Stepper
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Stepper
+	WithNextResponder(nextResponder ResponderProvider) *Stepper
+	WithMenu(menu *raw.NSMenu) *Stepper
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper
+	WithTouchBar(touchBar *raw.NSTouchBar) *Stepper
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64

@@ -42,6 +42,102 @@ func (x *DerivedAttributeDescription) WithDerivationExpression(derivationExpress
 	return x
 }
 
+// WithAttributeType sets the attributeType property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithAttributeType(attributeType raw.NSAttributeType) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeType(attributeType)
+	return x
+}
+
+// WithAttributeValueClassName sets the attributeValueClassName property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
+	return x
+}
+
+// WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithDefaultValue(defaultValue objc.ID) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetDefaultValue(defaultValue)
+	return x
+}
+
+// WithValueTransformerName sets the valueTransformerName property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithValueTransformerName(valueTransformerName string) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
+	return x
+}
+
+// WithAllowsExternalBinaryDataStorage sets the allowsExternalBinaryDataStorage property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
+	return x
+}
+
+// WithPreservesValueInHistoryOnDeletion sets the preservesValueInHistoryOnDeletion property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
+	return x
+}
+
+// WithAllowsCloudEncryption sets the allowsCloudEncryption property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.SetAllowsCloudEncryption(allowsCloudEncryption)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithName(name string) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithOptional(optional bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithTransient(transient bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithIndexed(indexed bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithVersionHashModifier(versionHashModifier string) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *DerivedAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *DerivedAttributeDescription {
+	x.inner.NSAttributeDescription.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	return x
+}
+
 // DerivationExpression calls the underlying DerivationExpression.
 func (x *DerivedAttributeDescription) DerivationExpression() *foundation.NSExpression {
 	return x.inner.DerivationExpression()
@@ -60,6 +156,22 @@ func (x *DerivedAttributeDescription) asPropertyDescription() *raw.NSPropertyDes
 type DerivedAttributeDescriptionable interface {
 	Unwrap() *raw.NSDerivedAttributeDescription
 	WithDerivationExpression(derivationExpression *foundation.NSExpression) *DerivedAttributeDescription
+	WithAttributeType(attributeType raw.NSAttributeType) *DerivedAttributeDescription
+	WithAttributeValueClassName(attributeValueClassName string) *DerivedAttributeDescription
+	WithDefaultValue(defaultValue objc.ID) *DerivedAttributeDescription
+	WithValueTransformerName(valueTransformerName string) *DerivedAttributeDescription
+	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *DerivedAttributeDescription
+	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *DerivedAttributeDescription
+	WithAllowsCloudEncryption(allowsCloudEncryption bool) *DerivedAttributeDescription
+	WithName(name string) *DerivedAttributeDescription
+	WithOptional(optional bool) *DerivedAttributeDescription
+	WithTransient(transient bool) *DerivedAttributeDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *DerivedAttributeDescription
+	WithIndexed(indexed bool) *DerivedAttributeDescription
+	WithVersionHashModifier(versionHashModifier string) *DerivedAttributeDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *DerivedAttributeDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *DerivedAttributeDescription
+	WithRenamingIdentifier(renamingIdentifier string) *DerivedAttributeDescription
 	DerivationExpression() *foundation.NSExpression
 	SetDerivationExpression(derivationExpression *foundation.NSExpression)
 }

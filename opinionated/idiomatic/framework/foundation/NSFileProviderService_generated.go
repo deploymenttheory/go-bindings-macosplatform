@@ -38,6 +38,12 @@ func NewFileProviderService() *FileProviderService {
 	return &FileProviderService{inner: raw.NSFileProviderServiceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileProviderService) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileProviderService {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetFileProviderConnection blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderService) GetFileProviderConnection(ctx context.Context) (*XPCConnection, error) {
 	type _result struct {
@@ -78,6 +84,7 @@ func (x *FileProviderService) asObject() *raw.NSObject { return &x.inner.NSObjec
 // FileProviderServiceable is the interface implemented by [FileProviderService], for mocking and DI.
 type FileProviderServiceable interface {
 	Unwrap() *raw.NSFileProviderService
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileProviderService
 	GetFileProviderConnection(ctx context.Context) (*XPCConnection, error)
 	Name() *String
 }

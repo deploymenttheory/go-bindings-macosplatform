@@ -42,6 +42,12 @@ func (x *MouseInput) WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseIn
 	return x
 }
 
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *MouseInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MouseInput {
+	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // MouseMovedHandler calls the underlying MouseMovedHandler.
 func (x *MouseInput) MouseMovedHandler() objc.Block {
 	return x.inner.MouseMovedHandler()
@@ -105,6 +111,7 @@ func (x *MouseInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile { retu
 type MouseInputable interface {
 	Unwrap() *raw.GCMouseInput
 	WithMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32)) *MouseInput
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MouseInput
 	MouseMovedHandler() objc.Block
 	SetMouseMovedHandler(mouseMovedHandler func(*raw.GCMouseInput, float32, float32))
 	Scroll() *DeviceCursor

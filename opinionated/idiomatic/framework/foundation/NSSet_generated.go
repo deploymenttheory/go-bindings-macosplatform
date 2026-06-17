@@ -78,6 +78,12 @@ func NewSetWithArray(array *raw.NSArray[objc.ID]) *Set {
 	return &Set{inner: raw.NSSetFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Set) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Set {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Member calls the underlying Member.
 func (x *Set) Member(object objc.ID) objc.ID {
 	return x.inner.Member(object)
@@ -194,6 +200,7 @@ func (x *Set) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Setable is the interface implemented by [Set], for mocking and DI.
 type Setable interface {
 	Unwrap() *raw.NSSet[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Set
 	Member(object objc.ID) objc.ID
 	ObjectEnumerator() *raw.NSEnumerator[objc.ID]
 	Count() uint

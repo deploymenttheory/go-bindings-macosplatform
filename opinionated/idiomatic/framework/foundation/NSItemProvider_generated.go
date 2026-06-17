@@ -71,6 +71,12 @@ func (x *ItemProvider) WithPreviewImageHandler(previewImageHandler objc.Block) *
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ItemProvider) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ItemProvider {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler calls the underlying RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler.
 func (x *ItemProvider) RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block) {
 	x.inner.RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(foundation.NSStringStringWithUTF8String(typeIdentifier), visibility, loadHandler)
@@ -204,6 +210,7 @@ type ItemProviderable interface {
 	Unwrap() *raw.NSItemProvider
 	WithSuggestedName(suggestedName string) *ItemProvider
 	WithPreviewImageHandler(previewImageHandler objc.Block) *ItemProvider
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ItemProvider
 	RegisterDataRepresentationForTypeIdentifierVisibilityLoadHandler(typeIdentifier string, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block)
 	RegisterFileRepresentationForTypeIdentifierFileOptionsVisibilityLoadHandler(typeIdentifier string, fileOptions raw.NSItemProviderFileOptions, visibility raw.NSItemProviderRepresentationVisibility, loadHandler objc.Block)
 	RegisteredTypeIdentifiersWithFileOptions(fileOptions raw.NSItemProviderFileOptions) *raw.NSArray[*raw.NSString]

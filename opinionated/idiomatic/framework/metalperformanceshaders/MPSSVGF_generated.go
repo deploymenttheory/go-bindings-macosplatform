@@ -138,6 +138,18 @@ func (x *SVGF) WithChannelCount2(channelCount2 uint) *SVGF {
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *SVGF) WithOptions(options mpscore.MPSKernelOptions) *SVGF {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SVGF) WithLabel(label string) *SVGF {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
 func (x *SVGF) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *SVGF {
 	_r := x.inner.CopyWithZoneDevice(zone, device)
@@ -352,6 +364,8 @@ type SVGFable interface {
 	WithBilateralFilterRadius(bilateralFilterRadius uint) *SVGF
 	WithChannelCount(channelCount uint) *SVGF
 	WithChannelCount2(channelCount2 uint) *SVGF
+	WithOptions(options mpscore.MPSKernelOptions) *SVGF
+	WithLabel(label string) *SVGF
 	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *SVGF
 	EncodeWithCoder(coder *foundation.NSCoder)
 	EncodeReprojectionToCommandBufferSourceTexturePreviousTextureDestinationTexturePreviousLuminanceMomentsTextureDestinationLuminanceMomentsTexturePreviousFrameCountTextureDestinationFrameCountTextureMotionVectorTextureDepthNormalTexturePreviousDepthNormalTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, previousTexture metal.MTLTexture, destinationTexture metal.MTLTexture, previousLuminanceMomentsTexture metal.MTLTexture, destinationLuminanceMomentsTexture metal.MTLTexture, previousFrameCountTexture metal.MTLTexture, destinationFrameCountTexture metal.MTLTexture, motionVectorTexture metal.MTLTexture, depthNormalTexture metal.MTLTexture, previousDepthNormalTexture metal.MTLTexture)

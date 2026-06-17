@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -74,6 +75,18 @@ func (x *MTL4TileRenderPipelineDescriptor) WithStaticLinkingDescriptor(staticLin
 // WithSupportBinaryLinking sets the supportBinaryLinking property and returns the receiver for chaining.
 func (x *MTL4TileRenderPipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor {
 	x.inner.SetSupportBinaryLinking(supportBinaryLinking)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4TileRenderPipelineDescriptor) WithLabel(label string) *MTL4TileRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MTL4TileRenderPipelineDescriptor) WithOptions(options *raw.MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor {
+	x.inner.MTL4PipelineDescriptor.SetOptions(options)
 	return x
 }
 
@@ -181,6 +194,8 @@ type MTL4TileRenderPipelineDescriptorable interface {
 	WithRequiredThreadsPerThreadgroup(requiredThreadsPerThreadgroup raw.MTLSize) *MTL4TileRenderPipelineDescriptor
 	WithStaticLinkingDescriptor(staticLinkingDescriptor *raw.MTL4StaticLinkingDescriptor) *MTL4TileRenderPipelineDescriptor
 	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4TileRenderPipelineDescriptor
+	WithLabel(label string) *MTL4TileRenderPipelineDescriptor
+	WithOptions(options *raw.MTL4PipelineOptions) *MTL4TileRenderPipelineDescriptor
 	Reset()
 	TileFunctionDescriptor() *MTL4FunctionDescriptor
 	SetTileFunctionDescriptor(tileFunctionDescriptor *raw.MTL4FunctionDescriptor)

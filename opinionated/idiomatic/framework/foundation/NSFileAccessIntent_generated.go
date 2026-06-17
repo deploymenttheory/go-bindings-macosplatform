@@ -35,6 +35,12 @@ func NewFileAccessIntent() *FileAccessIntent {
 	return &FileAccessIntent{inner: raw.NSFileAccessIntentFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileAccessIntent) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileAccessIntent {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // URL calls the underlying URL.
 func (x *FileAccessIntent) URL() *URL {
 	_r := x.inner.URL()
@@ -49,6 +55,7 @@ func (x *FileAccessIntent) asObject() *raw.NSObject { return &x.inner.NSObject }
 // FileAccessIntentable is the interface implemented by [FileAccessIntent], for mocking and DI.
 type FileAccessIntentable interface {
 	Unwrap() *raw.NSFileAccessIntent
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileAccessIntent
 	URL() *URL
 }
 

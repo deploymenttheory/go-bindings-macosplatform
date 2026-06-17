@@ -5,8 +5,12 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PolylineRenderer wraps [raw.MKPolylineRenderer] with a fluent Go API.
@@ -45,6 +49,76 @@ func (x *PolylineRenderer) WithStrokeStart(strokeStart float64) *PolylineRendere
 // WithStrokeEnd sets the strokeEnd property and returns the receiver for chaining.
 func (x *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
 	x.inner.SetStrokeEnd(strokeEnd)
+	return x
+}
+
+// WithFillColor sets the fillColor property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithFillColor(fillColor *appkit.NSColor) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+	return x
+}
+
+// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+	return x
+}
+
+// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithLineWidth(lineWidth float64) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
+	return x
+}
+
+// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
+	return x
+}
+
+// WithLineCap sets the lineCap property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	return x
+}
+
+// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithMiterLimit(miterLimit float64) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	return x
+}
+
+// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithLineDashPhase(lineDashPhase float64) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	return x
+}
+
+// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
+func (x *PolylineRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *PolylineRenderer {
+	if len(items) == 0 {
+		x.inner.MKOverlayPathRenderer.SetLineDashPattern(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+	return x
+}
+
+// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithShouldRasterize(shouldRasterize bool) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
+	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
 	return x
 }
 
@@ -88,6 +162,16 @@ type PolylineRendererable interface {
 	Unwrap() *raw.MKPolylineRenderer
 	WithStrokeStart(strokeStart float64) *PolylineRenderer
 	WithStrokeEnd(strokeEnd float64) *PolylineRenderer
+	WithFillColor(fillColor *appkit.NSColor) *PolylineRenderer
+	WithStrokeColor(strokeColor *appkit.NSColor) *PolylineRenderer
+	WithLineWidth(lineWidth float64) *PolylineRenderer
+	WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolylineRenderer
+	WithLineCap(lineCap coregraphics.CGLineCap) *PolylineRenderer
+	WithMiterLimit(miterLimit float64) *PolylineRenderer
+	WithLineDashPhase(lineDashPhase float64) *PolylineRenderer
+	WithLineDashPattern(items ...*foundation.NSNumber) *PolylineRenderer
+	WithShouldRasterize(shouldRasterize bool) *PolylineRenderer
+	WithAlpha(alpha float64) *PolylineRenderer
 	Polyline() *Polyline
 	StrokeStart() float64
 	SetStrokeStart(strokeStart float64)

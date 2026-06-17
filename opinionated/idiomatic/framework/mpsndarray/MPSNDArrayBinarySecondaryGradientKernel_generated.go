@@ -39,6 +39,12 @@ func NewArrayBinarySecondaryGradientKernelWithCoderDevice(coder *foundation.NSCo
 	return &ArrayBinarySecondaryGradientKernel{inner: raw.MPSNDArrayBinarySecondaryGradientKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayBinarySecondaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinarySecondaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState.
 func (x *ArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state)
@@ -56,6 +62,7 @@ func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArr
 // ArrayBinarySecondaryGradientKernelable is the interface implemented by [ArrayBinarySecondaryGradientKernel], for mocking and DI.
 type ArrayBinarySecondaryGradientKernelable interface {
 	Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinarySecondaryGradientKernel
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
 	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }

@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,12 @@ func NewDOMCSSValueList() *DOMCSSValueList {
 	return &DOMCSSValueList{inner: raw.DOMCSSValueListFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSValueList) WithCssText(cssText string) *DOMCSSValueList {
+	x.inner.DOMCSSValue.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // Item calls the underlying Item.
 func (x *DOMCSSValueList) Item(index uint) *DOMCSSValue {
 	_r := x.inner.Item(index)
@@ -58,6 +65,7 @@ func (x *DOMCSSValueList) asWebScriptObject() *raw.WebScriptObject { return &x.i
 // DOMCSSValueListable is the interface implemented by [DOMCSSValueList], for mocking and DI.
 type DOMCSSValueListable interface {
 	Unwrap() *raw.DOMCSSValueList
+	WithCssText(cssText string) *DOMCSSValueList
 	Item(index uint) *DOMCSSValue
 	Length() uint
 }

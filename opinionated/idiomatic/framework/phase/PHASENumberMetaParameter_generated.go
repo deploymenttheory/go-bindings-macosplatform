@@ -35,6 +35,12 @@ func NewNumberMetaParameter() *NumberMetaParameter {
 	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(_id)}
 }
 
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *NumberMetaParameter) WithValue(value objc.ID) *NumberMetaParameter {
+	x.inner.PHASEMetaParameter.SetValue(value)
+	return x
+}
+
 // FadeToValueDuration calls the underlying FadeToValueDuration.
 func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
 	x.inner.FadeToValueDuration(value, duration)
@@ -55,6 +61,7 @@ func (x *NumberMetaParameter) asMetaParameter() *raw.PHASEMetaParameter { return
 // NumberMetaParameterable is the interface implemented by [NumberMetaParameter], for mocking and DI.
 type NumberMetaParameterable interface {
 	Unwrap() *raw.PHASENumberMetaParameter
+	WithValue(value objc.ID) *NumberMetaParameter
 	FadeToValueDuration(value float64, duration float64)
 	Minimum() float64
 	Maximum() float64

@@ -63,6 +63,12 @@ func (x *FileHandle) WithWriteabilityHandler(writeabilityHandler func(*raw.NSFil
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileHandle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileHandle {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ReadDataToEndOfFileAndReturnError calls the underlying ReadDataToEndOfFileAndReturnError.
 func (x *FileHandle) ReadDataToEndOfFileAndReturnError() (*Data, error) {
 	_r, _err := x.inner.ReadDataToEndOfFileAndReturnError()
@@ -294,6 +300,7 @@ type FileHandleable interface {
 	Unwrap() *raw.NSFileHandle
 	WithReadabilityHandler(readabilityHandler func(*raw.NSFileHandle)) *FileHandle
 	WithWriteabilityHandler(writeabilityHandler func(*raw.NSFileHandle)) *FileHandle
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileHandle
 	ReadDataToEndOfFileAndReturnError() (*Data, error)
 	ReadDataUpToLengthError(length uint) (*Data, error)
 	WriteDataError(data *raw.NSData) (bool, error)

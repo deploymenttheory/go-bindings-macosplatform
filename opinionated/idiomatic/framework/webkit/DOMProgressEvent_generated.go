@@ -35,6 +35,18 @@ func NewDOMProgressEvent() *DOMProgressEvent {
 	return &DOMProgressEvent{inner: raw.DOMProgressEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMProgressEvent) WithReturnValue(returnValue bool) *DOMProgressEvent {
+	x.inner.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMProgressEvent) WithCancelBubble(cancelBubble bool) *DOMProgressEvent {
+	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // LengthComputable calls the underlying LengthComputable.
 func (x *DOMProgressEvent) LengthComputable() bool {
 	return x.inner.LengthComputable()
@@ -59,6 +71,8 @@ func (x *DOMProgressEvent) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMProgressEventable is the interface implemented by [DOMProgressEvent], for mocking and DI.
 type DOMProgressEventable interface {
 	Unwrap() *raw.DOMProgressEvent
+	WithReturnValue(returnValue bool) *DOMProgressEvent
+	WithCancelBubble(cancelBubble bool) *DOMProgressEvent
 	LengthComputable() bool
 	Loaded() uint64
 	Total() uint64

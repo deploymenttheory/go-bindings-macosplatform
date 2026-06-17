@@ -42,6 +42,24 @@ func (x *IKConstraint) WithTargetPosition(targetPosition raw.SCNVector3) *IKCons
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *IKConstraint) WithEnabled(enabled bool) *IKConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *IKConstraint) WithInfluenceFactor(influenceFactor float64) *IKConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *IKConstraint) WithIncremental(incremental bool) *IKConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // SetMaxAllowedRotationAngleForJoint calls the underlying SetMaxAllowedRotationAngleForJoint.
 func (x *IKConstraint) SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode) {
 	x.inner.SetMaxAllowedRotationAngleForJoint(angle, node)
@@ -77,6 +95,9 @@ func (x *IKConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNCo
 type IKConstraintable interface {
 	Unwrap() *raw.SCNIKConstraint
 	WithTargetPosition(targetPosition raw.SCNVector3) *IKConstraint
+	WithEnabled(enabled bool) *IKConstraint
+	WithInfluenceFactor(influenceFactor float64) *IKConstraint
+	WithIncremental(incremental bool) *IKConstraint
 	SetMaxAllowedRotationAngleForJoint(angle float64, node *raw.SCNNode)
 	MaxAllowedRotationAngleForJoint(node *raw.SCNNode) float64
 	ChainRootNode() *Node

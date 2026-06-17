@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -36,6 +37,18 @@ func CNNBatchNormalizationStateFromID(id objc.ID) *CNNBatchNormalizationState {
 func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalizationState")), objc.RegisterName("new"))
 	return &CNNBatchNormalizationState{inner: raw.MPSCNNBatchNormalizationStateFromID(_id)}
+}
+
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNBatchNormalizationState) WithReadCount(readCount uint) *CNNBatchNormalizationState {
+	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBatchNormalizationState) WithLabel(label string) *CNNBatchNormalizationState {
+	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
 }
 
 // Reset calls the underlying Reset.
@@ -85,6 +98,8 @@ func (x *CNNBatchNormalizationState) asState() *mpscore.MPSState { return &x.inn
 // CNNBatchNormalizationStateable is the interface implemented by [CNNBatchNormalizationState], for mocking and DI.
 type CNNBatchNormalizationStateable interface {
 	Unwrap() *raw.MPSCNNBatchNormalizationState
+	WithReadCount(readCount uint) *CNNBatchNormalizationState
+	WithLabel(label string) *CNNBatchNormalizationState
 	Reset()
 	Gamma() metal.MTLBuffer
 	Beta() metal.MTLBuffer

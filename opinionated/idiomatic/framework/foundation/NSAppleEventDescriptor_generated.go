@@ -65,6 +65,12 @@ func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransac
 	return &AppleEventDescriptor{inner: raw.NSAppleEventDescriptorFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AppleEventDescriptor) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetParamDescriptorForKeyword calls the underlying SetParamDescriptorForKeyword.
 func (x *AppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint) {
 	x.inner.SetParamDescriptorForKeyword(descriptor, keyword)
@@ -268,6 +274,7 @@ func (x *AppleEventDescriptor) asObject() *raw.NSObject { return &x.inner.NSObje
 // AppleEventDescriptorable is the interface implemented by [AppleEventDescriptor], for mocking and DI.
 type AppleEventDescriptorable interface {
 	Unwrap() *raw.NSAppleEventDescriptor
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
 	SetParamDescriptorForKeyword(descriptor *raw.NSAppleEventDescriptor, keyword uint)
 	ParamDescriptorForKeyword(keyword uint) *AppleEventDescriptor
 	RemoveParamDescriptorWithKeyword(keyword uint)

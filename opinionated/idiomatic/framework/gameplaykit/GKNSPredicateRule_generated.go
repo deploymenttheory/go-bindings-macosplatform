@@ -37,6 +37,12 @@ func NewNSPredicateRuleWithPredicate(predicate *foundation.NSPredicate) *NSPredi
 	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(_id)}
 }
 
+// WithSalience sets the salience property and returns the receiver for chaining.
+func (x *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
+	x.inner.GKRule.SetSalience(salience)
+	return x
+}
+
 // Predicate calls the underlying Predicate.
 func (x *NSPredicateRule) Predicate() *foundation.NSPredicate {
 	return x.inner.Predicate()
@@ -47,6 +53,7 @@ func (x *NSPredicateRule) asRule() *raw.GKRule { return &x.inner.GKRule }
 // NSPredicateRuleable is the interface implemented by [NSPredicateRule], for mocking and DI.
 type NSPredicateRuleable interface {
 	Unwrap() *raw.GKNSPredicateRule
+	WithSalience(salience int) *NSPredicateRule
 	Predicate() *foundation.NSPredicate
 }
 

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
@@ -37,6 +38,18 @@ func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
 	return &CNNArithmeticGradientState{inner: raw.MPSCNNArithmeticGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNArithmeticGradientState) WithReadCount(readCount uint) *CNNArithmeticGradientState {
+	x.inner.MPSNNBinaryGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNArithmeticGradientState) WithLabel(label string) *CNNArithmeticGradientState {
+	x.inner.MPSNNBinaryGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNArithmeticGradientState) asNNBinaryGradientState() *mpsneuralnetwork.MPSNNBinaryGradientState { return &x.inner.MPSNNBinaryGradientState }
 
 func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState { return &x.inner.MPSNNBinaryGradientState.MPSState }
@@ -44,6 +57,8 @@ func (x *CNNArithmeticGradientState) asState() *mpscore.MPSState { return &x.inn
 // CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
 type CNNArithmeticGradientStateable interface {
 	Unwrap() *raw.MPSCNNArithmeticGradientState
+	WithReadCount(readCount uint) *CNNArithmeticGradientState
+	WithLabel(label string) *CNNArithmeticGradientState
 }
 
 var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)

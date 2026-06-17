@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,90 @@ func NewImageDivideWithDevice(device metal.MTLDevice) *ImageDivide {
 	return &ImageDivide{inner: raw.MPSImageDivideFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *ImageDivide) WithPrimaryScale(primaryScale float32) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *ImageDivide) WithSecondaryScale(secondaryScale float32) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *ImageDivide) WithBias(bias float32) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageDivide) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
+	return x
+}
+
+// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
+func (x *ImageDivide) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *ImageDivide) WithMinimumValue(minimumValue float32) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *ImageDivide) WithMaximumValue(maximumValue float32) *ImageDivide {
+	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *ImageDivide) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *ImageDivide) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageDivide) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageDivide) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageDivide) WithClipRect(clipRect metal.MTLRegion) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageDivide) WithOptions(options mpscore.MPSKernelOptions) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageDivide) WithLabel(label string) *ImageDivide {
+	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageDivide) asImageArithmetic() *mpsimage.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
 
 func (x *ImageDivide) asBinaryImageKernel() *mpsimage.MPSBinaryImageKernel { return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel }
@@ -48,6 +133,20 @@ func (x *ImageDivide) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageAr
 // ImageDivideable is the interface implemented by [ImageDivide], for mocking and DI.
 type ImageDivideable interface {
 	Unwrap() *raw.MPSImageDivide
+	WithPrimaryScale(primaryScale float32) *ImageDivide
+	WithSecondaryScale(secondaryScale float32) *ImageDivide
+	WithBias(bias float32) *ImageDivide
+	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageDivide
+	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageDivide
+	WithMinimumValue(minimumValue float32) *ImageDivide
+	WithMaximumValue(maximumValue float32) *ImageDivide
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageDivide
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageDivide
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageDivide
+	WithClipRect(clipRect metal.MTLRegion) *ImageDivide
+	WithOptions(options mpscore.MPSKernelOptions) *ImageDivide
+	WithLabel(label string) *ImageDivide
 }
 
 var _ ImageDivideable = (*ImageDivide)(nil)

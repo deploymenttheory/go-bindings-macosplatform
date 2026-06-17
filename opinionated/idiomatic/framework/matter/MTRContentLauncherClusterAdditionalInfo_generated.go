@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAddi
 	return &MTRContentLauncherClusterAdditionalInfo{inner: raw.MTRContentLauncherClusterAdditionalInfoFromID(_id)}
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
+	x.inner.MTRContentLauncherClusterAdditionalInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
+	x.inner.MTRContentLauncherClusterAdditionalInfoStruct.SetValue(foundation.NSStringStringWithUTF8String(value))
+	return x
+}
+
 func (x *MTRContentLauncherClusterAdditionalInfo) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct { return &x.inner.MTRContentLauncherClusterAdditionalInfoStruct }
 
 // MTRContentLauncherClusterAdditionalInfoable is the interface implemented by [MTRContentLauncherClusterAdditionalInfo], for mocking and DI.
 type MTRContentLauncherClusterAdditionalInfoable interface {
 	Unwrap() *raw.MTRContentLauncherClusterAdditionalInfo
+	WithName(name string) *MTRContentLauncherClusterAdditionalInfo
+	WithValue(value string) *MTRContentLauncherClusterAdditionalInfo
 }
 
 var _ MTRContentLauncherClusterAdditionalInfoable = (*MTRContentLauncherClusterAdditionalInfo)(nil)

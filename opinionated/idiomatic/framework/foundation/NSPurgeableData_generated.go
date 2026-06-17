@@ -35,6 +35,18 @@ func NewPurgeableData() *PurgeableData {
 	return &PurgeableData{inner: raw.NSPurgeableDataFromID(_id)}
 }
 
+// WithLength sets the length property and returns the receiver for chaining.
+func (x *PurgeableData) WithLength(length uint) *PurgeableData {
+	x.inner.NSMutableData.SetLength(length)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PurgeableData) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PurgeableData {
+	x.inner.NSMutableData.NSData.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *PurgeableData) asMutableData() *raw.NSMutableData { return &x.inner.NSMutableData }
 
 func (x *PurgeableData) asData() *raw.NSData { return &x.inner.NSMutableData.NSData }
@@ -44,6 +56,8 @@ func (x *PurgeableData) asObject() *raw.NSObject { return &x.inner.NSMutableData
 // PurgeableDataable is the interface implemented by [PurgeableData], for mocking and DI.
 type PurgeableDataable interface {
 	Unwrap() *raw.NSPurgeableData
+	WithLength(length uint) *PurgeableData
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PurgeableData
 }
 
 var _ PurgeableDataable = (*PurgeableData)(nil)

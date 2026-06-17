@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -115,6 +116,54 @@ func (x *TreeController) WithSelectionIndexPaths(items ...*foundation.NSIndexPat
 // WithSelectionIndexPath sets the selectionIndexPath property and returns the receiver for chaining.
 func (x *TreeController) WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) *TreeController {
 	x.inner.SetSelectionIndexPath(selectionIndexPath)
+	return x
+}
+
+// WithContent sets the content property and returns the receiver for chaining.
+func (x *TreeController) WithContent(content objc.ID) *TreeController {
+	x.inner.NSObjectController.SetContent(content)
+	return x
+}
+
+// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+func (x *TreeController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *TreeController {
+	x.inner.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	return x
+}
+
+// WithObjectClass sets the objectClass property and returns the receiver for chaining.
+func (x *TreeController) WithObjectClass(objectClass objc.Class) *TreeController {
+	x.inner.NSObjectController.SetObjectClass(objectClass)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *TreeController) WithEditable(editable bool) *TreeController {
+	x.inner.NSObjectController.SetEditable(editable)
+	return x
+}
+
+// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
+func (x *TreeController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *TreeController {
+	x.inner.NSObjectController.SetManagedObjectContext(managedObjectContext)
+	return x
+}
+
+// WithEntityName sets the entityName property and returns the receiver for chaining.
+func (x *TreeController) WithEntityName(entityName string) *TreeController {
+	x.inner.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	return x
+}
+
+// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
+func (x *TreeController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *TreeController {
+	x.inner.NSObjectController.SetFetchPredicate(fetchPredicate)
+	return x
+}
+
+// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+func (x *TreeController) WithUsesLazyFetching(usesLazyFetching bool) *TreeController {
+	x.inner.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
 	return x
 }
 
@@ -381,6 +430,14 @@ type TreeControllerable interface {
 	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *TreeController
 	WithSelectionIndexPaths(items ...*foundation.NSIndexPath) *TreeController
 	WithSelectionIndexPath(selectionIndexPath *foundation.NSIndexPath) *TreeController
+	WithContent(content objc.ID) *TreeController
+	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *TreeController
+	WithObjectClass(objectClass objc.Class) *TreeController
+	WithEditable(editable bool) *TreeController
+	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *TreeController
+	WithEntityName(entityName string) *TreeController
+	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *TreeController
+	WithUsesLazyFetching(usesLazyFetching bool) *TreeController
 	RearrangeObjects()
 	AddChild(sender objc.ID)
 	Insert(sender objc.ID)

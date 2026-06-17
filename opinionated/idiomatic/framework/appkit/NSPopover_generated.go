@@ -92,6 +92,30 @@ func (x *Popover) WithHasFullSizeContent(hasFullSizeContent bool) *Popover {
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Popover) WithNextResponder(nextResponder ResponderProvider) *Popover {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Popover) WithMenu(menu *raw.NSMenu) *Popover {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Popover) WithUserActivity(userActivity *foundation.NSUserActivity) *Popover {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Popover) WithTouchBar(touchBar *raw.NSTouchBar) *Popover {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
 func (x *Popover) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge) {
 	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
@@ -232,6 +256,10 @@ type Popoverable interface {
 	WithContentSize(contentSize corefoundation.CGSize) *Popover
 	WithPositioningRect(positioningRect corefoundation.CGRect) *Popover
 	WithHasFullSizeContent(hasFullSizeContent bool) *Popover
+	WithNextResponder(nextResponder ResponderProvider) *Popover
+	WithMenu(menu *raw.NSMenu) *Popover
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Popover
+	WithTouchBar(touchBar *raw.NSTouchBar) *Popover
 	ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *raw.NSView, preferredEdge foundation.NSRectEdge)
 	ShowRelativeToToolbarItem(toolbarItem *raw.NSToolbarItem)
 	PerformClose(sender objc.ID)

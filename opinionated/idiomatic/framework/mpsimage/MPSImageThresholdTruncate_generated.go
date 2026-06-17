@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, devi
 	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdTruncate) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -60,6 +79,9 @@ func (x *ImageThresholdTruncate) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
 // ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
 type ImageThresholdTruncateable interface {
 	Unwrap() *raw.MPSImageThresholdTruncate
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate
 	ThresholdValue() float32
 	Transform() *float32
 }

@@ -47,6 +47,42 @@ func NewImageBilinearScaleWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageBilinearScale{inner: raw.MPSImageBilinearScaleFromID(_id)}
 }
 
+// WithScaleTransform sets the scaleTransform property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale {
+	x.inner.MPSImageScale.SetScaleTransform(scaleTransform)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithOptions(options mpscore.MPSKernelOptions) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageBilinearScale) asImageScale() *mpsimage.MPSImageScale { return &x.inner.MPSImageScale }
 
 func (x *ImageBilinearScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
@@ -56,6 +92,12 @@ func (x *ImageBilinearScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
 type ImageBilinearScaleable interface {
 	Unwrap() *raw.MPSImageBilinearScale
+	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale
+	WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBilinearScale
+	WithOptions(options mpscore.MPSKernelOptions) *ImageBilinearScale
+	WithLabel(label string) *ImageBilinearScale
 }
 
 var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)

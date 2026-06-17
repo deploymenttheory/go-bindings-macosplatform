@@ -53,6 +53,30 @@ func (x *NNOptimizerAdam) WithTimeStep(timeStep uint) *NNOptimizerAdam {
 	return x
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithLearningRate(learningRate float32) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNOptimizerAdam) WithLabel(label string) *NNOptimizerAdam {
+	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector.
 func (x *NNOptimizerAdam) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputMomentumVector, inputVelocityVector, resultValuesVector)
@@ -136,6 +160,10 @@ func (x *NNOptimizerAdam) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNNO
 type NNOptimizerAdamable interface {
 	Unwrap() *raw.MPSNNOptimizerAdam
 	WithTimeStep(timeStep uint) *NNOptimizerAdam
+	WithLearningRate(learningRate float32) *NNOptimizerAdam
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerAdam
+	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerAdam
+	WithLabel(label string) *NNOptimizerAdam
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
 	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputMomentumMatrixInputVelocityMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputMomentumMatrix *mpscore.MPSMatrix, inputVelocityMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputMomentumVectorInputVelocityVectorMaximumVelocityVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputMomentumVector *mpscore.MPSVector, inputVelocityVector *mpscore.MPSVector, maximumVelocityVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)

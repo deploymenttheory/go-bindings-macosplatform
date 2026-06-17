@@ -6,6 +6,7 @@ package mpsndarray
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,12 @@ func NewArrayAffineInt4DequantizeWithDeviceQuantizationDescriptor(device metal.M
 	return &ArrayAffineInt4Dequantize{inner: raw.MPSNDArrayAffineInt4DequantizeFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayAffineInt4Dequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayAffineInt4Dequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 func (x *ArrayAffineInt4Dequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *ArrayAffineInt4Dequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
@@ -44,6 +51,7 @@ func (x *ArrayAffineInt4Dequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiar
 // ArrayAffineInt4Dequantizeable is the interface implemented by [ArrayAffineInt4Dequantize], for mocking and DI.
 type ArrayAffineInt4Dequantizeable interface {
 	Unwrap() *raw.MPSNDArrayAffineInt4Dequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayAffineInt4Dequantize
 }
 
 var _ ArrayAffineInt4Dequantizeable = (*ArrayAffineInt4Dequantize)(nil)

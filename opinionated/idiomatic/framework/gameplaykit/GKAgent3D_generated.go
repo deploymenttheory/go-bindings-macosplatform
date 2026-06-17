@@ -42,6 +42,48 @@ func (x *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *Agent3D) WithDelegate(delegate raw.GKAgentDelegate) *Agent3D {
+	x.inner.GKAgent.SetDelegate(delegate)
+	return x
+}
+
+// WithBehavior sets the behavior property and returns the receiver for chaining.
+func (x *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
+	x.inner.GKAgent.SetBehavior(behavior.asBehavior())
+	return x
+}
+
+// WithMass sets the mass property and returns the receiver for chaining.
+func (x *Agent3D) WithMass(mass float32) *Agent3D {
+	x.inner.GKAgent.SetMass(mass)
+	return x
+}
+
+// WithRadius sets the radius property and returns the receiver for chaining.
+func (x *Agent3D) WithRadius(radius float32) *Agent3D {
+	x.inner.GKAgent.SetRadius(radius)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *Agent3D) WithSpeed(speed float32) *Agent3D {
+	x.inner.GKAgent.SetSpeed(speed)
+	return x
+}
+
+// WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
+func (x *Agent3D) WithMaxAcceleration(maxAcceleration float32) *Agent3D {
+	x.inner.GKAgent.SetMaxAcceleration(maxAcceleration)
+	return x
+}
+
+// WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
+func (x *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
+	x.inner.GKAgent.SetMaxSpeed(maxSpeed)
+	return x
+}
+
 // Position calls the underlying Position.
 func (x *Agent3D) Position() unsafe.Pointer {
 	return x.inner.Position()
@@ -85,6 +127,13 @@ func (x *Agent3D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKCom
 type Agent3Dable interface {
 	Unwrap() *raw.GKAgent3D
 	WithRightHanded(rightHanded bool) *Agent3D
+	WithDelegate(delegate raw.GKAgentDelegate) *Agent3D
+	WithBehavior(behavior BehaviorProvider) *Agent3D
+	WithMass(mass float32) *Agent3D
+	WithRadius(radius float32) *Agent3D
+	WithSpeed(speed float32) *Agent3D
+	WithMaxAcceleration(maxAcceleration float32) *Agent3D
+	WithMaxSpeed(maxSpeed float32) *Agent3D
 	Position() unsafe.Pointer
 	SetPosition(position unsafe.Pointer)
 	Velocity() unsafe.Pointer

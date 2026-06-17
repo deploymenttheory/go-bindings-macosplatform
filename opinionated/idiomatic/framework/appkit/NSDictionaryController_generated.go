@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -94,6 +95,124 @@ func (x *DictionaryController) WithLocalizedKeyTable(localizedKeyTable string) *
 	return x
 }
 
+// WithAutomaticallyRearrangesObjects sets the automaticallyRearrangesObjects property and returns the receiver for chaining.
+func (x *DictionaryController) WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *DictionaryController {
+	x.inner.NSArrayController.SetAutomaticallyRearrangesObjects(automaticallyRearrangesObjects)
+	return x
+}
+
+// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
+func (x *DictionaryController) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController {
+	if len(items) == 0 {
+		x.inner.NSArrayController.SetSortDescriptors(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSArrayController.SetSortDescriptors(_arr)
+	return x
+}
+
+// WithFilterPredicate sets the filterPredicate property and returns the receiver for chaining.
+func (x *DictionaryController) WithFilterPredicate(filterPredicate *foundation.NSPredicate) *DictionaryController {
+	x.inner.NSArrayController.SetFilterPredicate(filterPredicate)
+	return x
+}
+
+// WithClearsFilterPredicateOnInsertion sets the clearsFilterPredicateOnInsertion property and returns the receiver for chaining.
+func (x *DictionaryController) WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *DictionaryController {
+	x.inner.NSArrayController.SetClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion)
+	return x
+}
+
+// WithAvoidsEmptySelection sets the avoidsEmptySelection property and returns the receiver for chaining.
+func (x *DictionaryController) WithAvoidsEmptySelection(avoidsEmptySelection bool) *DictionaryController {
+	x.inner.NSArrayController.SetAvoidsEmptySelection(avoidsEmptySelection)
+	return x
+}
+
+// WithPreservesSelection sets the preservesSelection property and returns the receiver for chaining.
+func (x *DictionaryController) WithPreservesSelection(preservesSelection bool) *DictionaryController {
+	x.inner.NSArrayController.SetPreservesSelection(preservesSelection)
+	return x
+}
+
+// WithSelectsInsertedObjects sets the selectsInsertedObjects property and returns the receiver for chaining.
+func (x *DictionaryController) WithSelectsInsertedObjects(selectsInsertedObjects bool) *DictionaryController {
+	x.inner.NSArrayController.SetSelectsInsertedObjects(selectsInsertedObjects)
+	return x
+}
+
+// WithAlwaysUsesMultipleValuesMarker sets the alwaysUsesMultipleValuesMarker property and returns the receiver for chaining.
+func (x *DictionaryController) WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *DictionaryController {
+	x.inner.NSArrayController.SetAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker)
+	return x
+}
+
+// WithSelectionIndexes sets the selectionIndexes property and returns the receiver for chaining.
+func (x *DictionaryController) WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *DictionaryController {
+	x.inner.NSArrayController.SetSelectionIndexes(selectionIndexes)
+	return x
+}
+
+// WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
+func (x *DictionaryController) WithSelectionIndex(selectionIndex uint) *DictionaryController {
+	x.inner.NSArrayController.SetSelectionIndex(selectionIndex)
+	return x
+}
+
+// WithContent sets the content property and returns the receiver for chaining.
+func (x *DictionaryController) WithContent(content objc.ID) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetContent(content)
+	return x
+}
+
+// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+func (x *DictionaryController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	return x
+}
+
+// WithObjectClass sets the objectClass property and returns the receiver for chaining.
+func (x *DictionaryController) WithObjectClass(objectClass objc.Class) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetObjectClass(objectClass)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *DictionaryController) WithEditable(editable bool) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetEditable(editable)
+	return x
+}
+
+// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
+func (x *DictionaryController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetManagedObjectContext(managedObjectContext)
+	return x
+}
+
+// WithEntityName sets the entityName property and returns the receiver for chaining.
+func (x *DictionaryController) WithEntityName(entityName string) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	return x
+}
+
+// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
+func (x *DictionaryController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetFetchPredicate(fetchPredicate)
+	return x
+}
+
+// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+func (x *DictionaryController) WithUsesLazyFetching(usesLazyFetching bool) *DictionaryController {
+	x.inner.NSArrayController.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
+	return x
+}
+
 // SetInitialKey calls the underlying SetInitialKey.
 func (x *DictionaryController) SetInitialKey(initialKey string) {
 	x.inner.SetInitialKey(foundation.NSStringStringWithUTF8String(initialKey))
@@ -175,6 +294,24 @@ type DictionaryControllerable interface {
 	WithExcludedKeys(items ...*foundation.NSString) *DictionaryController
 	WithLocalizedKeyDictionary(localizedKeyDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *DictionaryController
 	WithLocalizedKeyTable(localizedKeyTable string) *DictionaryController
+	WithAutomaticallyRearrangesObjects(automaticallyRearrangesObjects bool) *DictionaryController
+	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *DictionaryController
+	WithFilterPredicate(filterPredicate *foundation.NSPredicate) *DictionaryController
+	WithClearsFilterPredicateOnInsertion(clearsFilterPredicateOnInsertion bool) *DictionaryController
+	WithAvoidsEmptySelection(avoidsEmptySelection bool) *DictionaryController
+	WithPreservesSelection(preservesSelection bool) *DictionaryController
+	WithSelectsInsertedObjects(selectsInsertedObjects bool) *DictionaryController
+	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *DictionaryController
+	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *DictionaryController
+	WithSelectionIndex(selectionIndex uint) *DictionaryController
+	WithContent(content objc.ID) *DictionaryController
+	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *DictionaryController
+	WithObjectClass(objectClass objc.Class) *DictionaryController
+	WithEditable(editable bool) *DictionaryController
+	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *DictionaryController
+	WithEntityName(entityName string) *DictionaryController
+	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *DictionaryController
+	WithUsesLazyFetching(usesLazyFetching bool) *DictionaryController
 	SetInitialKey(initialKey string)
 	SetInitialValue(initialValue objc.ID)
 	IncludedKeys() []string

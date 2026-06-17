@@ -48,6 +48,66 @@ func NewCNNDropoutWithDeviceKeepProbabilitySeedMaskStrideInPixels(device metal.M
 	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNDropout) WithOffset(offset mpscore.MPSOffset) *CNNDropout {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDropout) WithClipRect(clipRect metal.MTLRegion) *CNNDropout {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNDropout) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDropout) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropout {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDropout) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNDropout) WithOptions(options mpscore.MPSKernelOptions) *CNNDropout {
+	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDropout) WithLabel(label string) *CNNDropout {
+	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
 func (x *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
 	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
@@ -90,6 +150,16 @@ func (x *CNNDropout) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKerne
 // CNNDropoutable is the interface implemented by [CNNDropout], for mocking and DI.
 type CNNDropoutable interface {
 	Unwrap() *raw.MPSCNNDropout
+	WithOffset(offset mpscore.MPSOffset) *CNNDropout
+	WithClipRect(clipRect metal.MTLRegion) *CNNDropout
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropout
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout
+	WithOptions(options mpscore.MPSKernelOptions) *CNNDropout
+	WithLabel(label string) *CNNDropout
 	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState
 	ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState
 	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState

@@ -6,6 +6,7 @@ package speech
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -37,6 +38,58 @@ func NewSpeechAudioBufferRecognitionRequest() *SpeechAudioBufferRecognitionReque
 	return &SpeechAudioBufferRecognitionRequest{inner: raw.SFSpeechAudioBufferRecognitionRequestFromID(_id)}
 }
 
+// WithTaskHint sets the taskHint property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetTaskHint(taskHint)
+	return x
+}
+
+// WithShouldReportPartialResults sets the shouldReportPartialResults property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetShouldReportPartialResults(shouldReportPartialResults)
+	return x
+}
+
+// WithContextualStrings sets the collection, converting the Go slice to an NSArray.
+func (x *SpeechAudioBufferRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechAudioBufferRecognitionRequest {
+	if len(items) == 0 {
+		x.inner.SFSpeechRecognitionRequest.SetContextualStrings(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SFSpeechRecognitionRequest.SetContextualStrings(_arr)
+	return x
+}
+
+// WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
+	return x
+}
+
+// WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
+	return x
+}
+
+// WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetAddsPunctuation(addsPunctuation)
+	return x
+}
+
+// WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
+func (x *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel)
+	return x
+}
+
 // AppendAudioPCMBuffer calls the underlying AppendAudioPCMBuffer.
 func (x *SpeechAudioBufferRecognitionRequest) AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer) {
 	x.inner.AppendAudioPCMBuffer(audioPCMBuffer)
@@ -62,6 +115,13 @@ func (x *SpeechAudioBufferRecognitionRequest) asSpeechRecognitionRequest() *raw.
 // SpeechAudioBufferRecognitionRequestable is the interface implemented by [SpeechAudioBufferRecognitionRequest], for mocking and DI.
 type SpeechAudioBufferRecognitionRequestable interface {
 	Unwrap() *raw.SFSpeechAudioBufferRecognitionRequest
+	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechAudioBufferRecognitionRequest
+	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechAudioBufferRecognitionRequest
+	WithContextualStrings(items ...*foundation.NSString) *SpeechAudioBufferRecognitionRequest
+	WithInteractionIdentifier(interactionIdentifier string) *SpeechAudioBufferRecognitionRequest
+	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechAudioBufferRecognitionRequest
+	WithAddsPunctuation(addsPunctuation bool) *SpeechAudioBufferRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest
 	AppendAudioPCMBuffer(audioPCMBuffer *avfaudio.AVAudioPCMBuffer)
 	AppendAudioSampleBuffer(sampleBuffer unsafe.Pointer)
 	EndAudio()

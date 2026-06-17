@@ -51,6 +51,30 @@ func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNode
 	return x
 }
 
+// WithRate sets the rate property and returns the receiver for chaining.
+func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetRate(rate)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *PushStreamNodeDefinition) WithGroup(group *raw.PHASEGroup) *PushStreamNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group)
+	return x
+}
+
+// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+func (x *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
+// WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
+func (x *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
+	x.inner.PHASEGeneratorNodeDefinition.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
 // Format calls the underlying Format.
 func (x *PushStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
 	return x.inner.Format()
@@ -76,6 +100,10 @@ func (x *PushStreamNodeDefinition) asDefinition() *raw.PHASEDefinition { return 
 type PushStreamNodeDefinitionable interface {
 	Unwrap() *raw.PHASEPushStreamNodeDefinition
 	WithNormalize(normalize bool) *PushStreamNodeDefinition
+	WithRate(rate float64) *PushStreamNodeDefinition
+	WithGroup(group *raw.PHASEGroup) *PushStreamNodeDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
+	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
 	Format() *avfaudio.AVAudioFormat
 	Normalize() bool
 	SetNormalize(normalize bool)

@@ -49,6 +49,12 @@ func (x *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPrev
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // OutputDeviceUniqueID calls the underlying OutputDeviceUniqueID.
 func (x *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
 	_r := x.inner.OutputDeviceUniqueID()
@@ -80,6 +86,7 @@ type CaptureAudioPreviewOutputable interface {
 	Unwrap() *raw.AVCaptureAudioPreviewOutput
 	WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput
 	WithVolume(volume float32) *CaptureAudioPreviewOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput
 	OutputDeviceUniqueID() string
 	SetOutputDeviceUniqueID(outputDeviceUniqueID string)
 	Volume() float32

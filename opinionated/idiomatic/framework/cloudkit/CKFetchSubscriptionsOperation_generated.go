@@ -73,6 +73,60 @@ func (x *FetchSubscriptionsOperation) WithFetchSubscriptionCompletionBlock(fetch
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithDatabase(database *raw.CKDatabase) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithGroup(group *raw.CKOperationGroup) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithContainer(container *raw.CKContainer) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithLongLived(longLived bool) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // SubscriptionIDs returns the collection as a Go slice.
 func (x *FetchSubscriptionsOperation) SubscriptionIDs() []*foundation.NSString {
 	arr := x.inner.SubscriptionIDs()
@@ -119,6 +173,15 @@ type FetchSubscriptionsOperationable interface {
 	WithSubscriptionIDs(items ...*foundation.NSString) *FetchSubscriptionsOperation
 	WithPerSubscriptionCompletionBlock(perSubscriptionCompletionBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *FetchSubscriptionsOperation
 	WithFetchSubscriptionCompletionBlock(fetchSubscriptionCompletionBlock objc.Block) *FetchSubscriptionsOperation
+	WithDatabase(database *raw.CKDatabase) *FetchSubscriptionsOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchSubscriptionsOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchSubscriptionsOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation
+	WithContainer(container *raw.CKContainer) *FetchSubscriptionsOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation
+	WithLongLived(longLived bool) *FetchSubscriptionsOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation
 	SubscriptionIDs() []*foundation.NSString
 	SetSubscriptionIDs(subscriptionIDs *foundation.NSArray[*foundation.NSString])
 	PerSubscriptionCompletionBlock() objc.Block

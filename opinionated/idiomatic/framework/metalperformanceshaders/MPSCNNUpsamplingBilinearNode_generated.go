@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -44,6 +45,18 @@ func NewCNNUpsamplingBilinearNodeWithSourceIntegerScaleFactorXIntegerScaleFactor
 	return &CNNUpsamplingBilinearNode{inner: raw.MPSCNNUpsamplingBilinearNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinearNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearNode) WithLabel(label string) *CNNUpsamplingBilinearNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ScaleFactorX calls the underlying ScaleFactorX.
 func (x *CNNUpsamplingBilinearNode) ScaleFactorX() float64 {
 	return x.inner.ScaleFactorX()
@@ -64,6 +77,8 @@ func (x *CNNUpsamplingBilinearNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilt
 // CNNUpsamplingBilinearNodeable is the interface implemented by [CNNUpsamplingBilinearNode], for mocking and DI.
 type CNNUpsamplingBilinearNodeable interface {
 	Unwrap() *raw.MPSCNNUpsamplingBilinearNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinearNode
+	WithLabel(label string) *CNNUpsamplingBilinearNode
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 	AlignCorners() bool

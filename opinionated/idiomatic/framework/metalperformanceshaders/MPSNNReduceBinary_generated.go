@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -62,6 +63,102 @@ func (x *NNReduceBinary) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) 
 	return x
 }
 
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithClipRect(clipRect metal.MTLRegion) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithOptions(options mpscore.MPSKernelOptions) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceBinary) WithLabel(label string) *NNReduceBinary {
+	x.inner.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // PrimarySourceClipRect calls the underlying PrimarySourceClipRect.
 func (x *NNReduceBinary) PrimarySourceClipRect() metal.MTLRegion {
 	return x.inner.PrimarySourceClipRect()
@@ -113,6 +210,22 @@ type NNReduceBinaryable interface {
 	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceBinary
 	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceBinary
 	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceBinary
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceBinary
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceBinary
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceBinary
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceBinary
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceBinary
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceBinary
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceBinary
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceBinary
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceBinary
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceBinary
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceBinary
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceBinary
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceBinary
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceBinary
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceBinary
+	WithLabel(label string) *NNReduceBinary
 	PrimarySourceClipRect() metal.MTLRegion
 	SetPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion)
 	SecondarySourceClipRect() metal.MTLRegion

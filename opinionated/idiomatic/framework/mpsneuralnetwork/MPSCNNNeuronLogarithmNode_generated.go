@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,18 @@ func NewCNNNeuronLogarithmNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeu
 	return &CNNNeuronLogarithmNode{inner: raw.MPSCNNNeuronLogarithmNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithmNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronLogarithmNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronLogarithmNode) WithLabel(label string) *CNNNeuronLogarithmNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronLogarithmNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronLogarithmNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -50,6 +63,8 @@ func (x *CNNNeuronLogarithmNode) asNNFilterNode() *raw.MPSNNFilterNode { return 
 // CNNNeuronLogarithmNodeable is the interface implemented by [CNNNeuronLogarithmNode], for mocking and DI.
 type CNNNeuronLogarithmNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronLogarithmNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronLogarithmNode
+	WithLabel(label string) *CNNNeuronLogarithmNode
 }
 
 var _ CNNNeuronLogarithmNodeable = (*CNNNeuronLogarithmNode)(nil)

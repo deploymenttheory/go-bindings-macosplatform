@@ -89,6 +89,12 @@ func (x *ByteCountFormatter) WithFormattingContext(formattingContext raw.NSForma
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ByteCountFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ByteCountFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromByteCount calls the underlying StringFromByteCount.
 func (x *ByteCountFormatter) StringFromByteCount(byteCount int64) *String {
 	_r := x.inner.StringFromByteCount(byteCount)
@@ -213,6 +219,7 @@ type ByteCountFormatterable interface {
 	WithAdaptive(adaptive bool) *ByteCountFormatter
 	WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter
 	WithFormattingContext(formattingContext raw.NSFormattingContext) *ByteCountFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ByteCountFormatter
 	StringFromByteCount(byteCount int64) *String
 	StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String
 	AllowedUnits() raw.NSByteCountFormatterUnits

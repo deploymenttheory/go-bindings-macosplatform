@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRContentLauncherClusterStyleInformation() *MTRContentLauncherClusterSt
 	return &MTRContentLauncherClusterStyleInformation{inner: raw.MTRContentLauncherClusterStyleInformationFromID(_id)}
 }
 
+// WithImageURL sets the imageURL property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterStyleInformation) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation {
+	x.inner.MTRContentLauncherClusterStyleInformationStruct.SetImageURL(foundation.NSStringStringWithUTF8String(imageURL))
+	return x
+}
+
+// WithImageUrl sets the imageUrl property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterStyleInformation) WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformation {
+	x.inner.MTRContentLauncherClusterStyleInformationStruct.SetImageUrl(foundation.NSStringStringWithUTF8String(imageUrl))
+	return x
+}
+
+// WithColor sets the color property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterStyleInformation) WithColor(color string) *MTRContentLauncherClusterStyleInformation {
+	x.inner.MTRContentLauncherClusterStyleInformationStruct.SetColor(foundation.NSStringStringWithUTF8String(color))
+	return x
+}
+
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
+	x.inner.MTRContentLauncherClusterStyleInformationStruct.SetSize(size.asMTRContentLauncherClusterDimensionStruct())
+	return x
+}
+
 func (x *MTRContentLauncherClusterStyleInformation) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct { return &x.inner.MTRContentLauncherClusterStyleInformationStruct }
 
 // MTRContentLauncherClusterStyleInformationable is the interface implemented by [MTRContentLauncherClusterStyleInformation], for mocking and DI.
 type MTRContentLauncherClusterStyleInformationable interface {
 	Unwrap() *raw.MTRContentLauncherClusterStyleInformation
+	WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation
+	WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformation
+	WithColor(color string) *MTRContentLauncherClusterStyleInformation
+	WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation
 }
 
 var _ MTRContentLauncherClusterStyleInformationable = (*MTRContentLauncherClusterStyleInformation)(nil)

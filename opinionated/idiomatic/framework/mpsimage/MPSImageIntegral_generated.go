@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +37,32 @@ func NewImageIntegral() *ImageIntegral {
 	return &ImageIntegral{inner: raw.MPSImageIntegralFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageIntegral) WithOffset(offset mpscore.MPSOffset) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageIntegral) WithClipRect(clipRect metal.MTLRegion) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageIntegral) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageIntegral) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSUnaryImageKernel }
 
 // ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
 type ImageIntegralable interface {
 	Unwrap() *raw.MPSImageIntegral
+	WithOffset(offset mpscore.MPSOffset) *ImageIntegral
+	WithClipRect(clipRect metal.MTLRegion) *ImageIntegral
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageIntegral
 }
 
 var _ ImageIntegralable = (*ImageIntegral)(nil)

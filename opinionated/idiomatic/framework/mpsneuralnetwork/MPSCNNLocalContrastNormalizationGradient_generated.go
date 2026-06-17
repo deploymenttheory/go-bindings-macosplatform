@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -78,6 +79,114 @@ func (x *CNNLocalContrastNormalizationGradient) WithPm(pm float32) *CNNLocalCont
 // WithPs sets the ps property and returns the receiver for chaining.
 func (x *CNNLocalContrastNormalizationGradient) WithPs(ps float32) *CNNLocalContrastNormalizationGradient {
 	x.inner.SetPs(ps)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithKernelOffsetX(kernelOffsetX int) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithKernelOffsetY(kernelOffsetY int) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithPadding(padding raw.MPSNNPadding) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNLocalContrastNormalizationGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLocalContrastNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
@@ -154,6 +263,24 @@ type CNNLocalContrastNormalizationGradientable interface {
 	WithP0(p0 float32) *CNNLocalContrastNormalizationGradient
 	WithPm(pm float32) *CNNLocalContrastNormalizationGradient
 	WithPs(ps float32) *CNNLocalContrastNormalizationGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNLocalContrastNormalizationGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNLocalContrastNormalizationGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalizationGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNLocalContrastNormalizationGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalizationGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNLocalContrastNormalizationGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalizationGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNLocalContrastNormalizationGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNLocalContrastNormalizationGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNLocalContrastNormalizationGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNLocalContrastNormalizationGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNLocalContrastNormalizationGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNLocalContrastNormalizationGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLocalContrastNormalizationGradient
 	Alpha() float32
 	SetAlpha(alpha float32)
 	Beta() float32

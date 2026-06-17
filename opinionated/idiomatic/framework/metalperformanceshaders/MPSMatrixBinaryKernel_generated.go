@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -64,6 +65,18 @@ func (x *MatrixBinaryKernel) WithBatchStart(batchStart uint) *MatrixBinaryKernel
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixBinaryKernel) WithBatchSize(batchSize uint) *MatrixBinaryKernel {
 	x.inner.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixBinaryKernel) WithOptions(options mpscore.MPSKernelOptions) *MatrixBinaryKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixBinaryKernel) WithLabel(label string) *MatrixBinaryKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -127,6 +140,8 @@ type MatrixBinaryKernelable interface {
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixBinaryKernel
 	WithBatchStart(batchStart uint) *MatrixBinaryKernel
 	WithBatchSize(batchSize uint) *MatrixBinaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixBinaryKernel
+	WithLabel(label string) *MatrixBinaryKernel
 	PrimarySourceMatrixOrigin() metal.MTLOrigin
 	SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin)
 	SecondarySourceMatrixOrigin() metal.MTLOrigin

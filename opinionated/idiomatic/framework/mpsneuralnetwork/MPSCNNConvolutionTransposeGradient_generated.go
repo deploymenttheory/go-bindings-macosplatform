@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -48,6 +49,114 @@ func NewCNNConvolutionTransposeGradientWithCoderDevice(aDecoder *foundation.NSCo
 // WithGradientOption sets the gradientOption property and returns the receiver for chaining.
 func (x *CNNConvolutionTransposeGradient) WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient {
 	x.inner.SetGradientOption(gradientOption)
+	return x
+}
+
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithPadding(padding raw.MPSNNPadding) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionTransposeGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
@@ -99,6 +208,24 @@ func (x *CNNConvolutionTransposeGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryK
 type CNNConvolutionTransposeGradientable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeGradient
 	WithGradientOption(gradientOption raw.MPSCNNConvolutionGradientOption) *CNNConvolutionTransposeGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNConvolutionTransposeGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNConvolutionTransposeGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNConvolutionTransposeGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNConvolutionTransposeGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNConvolutionTransposeGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNConvolutionTransposeGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNConvolutionTransposeGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNConvolutionTransposeGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNConvolutionTransposeGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNConvolutionTransposeGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTransposeGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNConvolutionTransposeGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNConvolutionTransposeGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNConvolutionTransposeGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNConvolutionTransposeGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNConvolutionTransposeGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNConvolutionTransposeGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNConvolutionTransposeGradient
 	ReloadWeightsAndBiasesFromDataSource()
 	ReloadWeightsAndBiasesWithCommandBufferState(commandBuffer metal.MTLCommandBuffer, state *raw.MPSCNNConvolutionWeightsAndBiasesState)
 	SourceGradientFeatureChannels() uint

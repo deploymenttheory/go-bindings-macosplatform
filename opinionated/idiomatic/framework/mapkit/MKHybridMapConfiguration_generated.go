@@ -54,6 +54,12 @@ func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapC
 	return x
 }
 
+// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
+func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *HybridMapConfiguration {
+	x.inner.MKMapConfiguration.SetElevationStyle(elevationStyle)
+	return x
+}
+
 // PointOfInterestFilter calls the underlying PointOfInterestFilter.
 func (x *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := x.inner.PointOfInterestFilter()
@@ -85,6 +91,7 @@ type HybridMapConfigurationable interface {
 	Unwrap() *raw.MKHybridMapConfiguration
 	WithPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) *HybridMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration
+	WithElevationStyle(elevationStyle raw.MKMapElevationStyle) *HybridMapConfiguration
 	PointOfInterestFilter() *PointOfInterestFilter
 	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
 	ShowsTraffic() bool

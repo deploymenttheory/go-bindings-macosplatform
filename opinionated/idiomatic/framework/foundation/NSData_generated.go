@@ -131,6 +131,12 @@ func NewDataWithBase64Encoding(base64String string) *Data {
 	return &Data{inner: raw.NSDataFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Data) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Data {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Length calls the underlying Length.
 func (x *Data) Length() uint {
 	return x.inner.Length()
@@ -258,6 +264,7 @@ func (x *Data) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Dataable is the interface implemented by [Data], for mocking and DI.
 type Dataable interface {
 	Unwrap() *raw.NSData
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Data
 	Length() uint
 	Bytes() unsafe.Pointer
 	GetBytesLength(buffer unsafe.Pointer, length uint)

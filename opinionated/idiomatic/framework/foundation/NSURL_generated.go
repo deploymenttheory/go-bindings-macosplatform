@@ -120,6 +120,12 @@ func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(b
 	return &URL{inner: raw.NSURLFromID(_id)}, nil
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URL) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URL {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
 func (x *URL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool {
 	return x.inner.GetFileSystemRepresentationMaxLength(buffer, maxBufferLength)
@@ -530,6 +536,7 @@ func (x *URL) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLable is the interface implemented by [URL], for mocking and DI.
 type URLable interface {
 	Unwrap() *raw.NSURL
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URL
 	GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool
 	IsFileReferenceURL() bool
 	FileReferenceURL() *URL

@@ -39,6 +39,12 @@ func NewNEAppProxyProvider() *NEAppProxyProvider {
 	return &NEAppProxyProvider{inner: raw.NEAppProxyProviderFromID(_id)}
 }
 
+// WithReasserting sets the reasserting property and returns the receiver for chaining.
+func (x *NEAppProxyProvider) WithReasserting(reasserting bool) *NEAppProxyProvider {
+	x.inner.NETunnelProvider.SetReasserting(reasserting)
+	return x
+}
+
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
 	_ch := make(chan error, 1)
@@ -100,6 +106,7 @@ func (x *NEAppProxyProvider) asNEProvider() *raw.NEProvider { return &x.inner.NE
 // NEAppProxyProviderable is the interface implemented by [NEAppProxyProvider], for mocking and DI.
 type NEAppProxyProviderable interface {
 	Unwrap() *raw.NEAppProxyProvider
+	WithReasserting(reasserting bool) *NEAppProxyProvider
 	StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
 	StopProxyWithReason(ctx context.Context, reason raw.NEProviderStopReason) error
 	CancelProxyWithError(error_ unsafe.Pointer)

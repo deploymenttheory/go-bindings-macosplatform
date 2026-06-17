@@ -37,6 +37,12 @@ func NewHangUpCallIntentResponseWithCodeUserActivity(code raw.INHangUpCallIntent
 	return &HangUpCallIntentResponse{inner: raw.INHangUpCallIntentResponseFromID(_id)}
 }
 
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *HangUpCallIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *HangUpCallIntentResponse {
+	x.inner.INIntentResponse.SetUserActivity(userActivity)
+	return x
+}
+
 // Code calls the underlying Code.
 func (x *HangUpCallIntentResponse) Code() raw.INHangUpCallIntentResponseCode {
 	return x.inner.Code()
@@ -47,6 +53,7 @@ func (x *HangUpCallIntentResponse) asIntentResponse() *raw.INIntentResponse { re
 // HangUpCallIntentResponseable is the interface implemented by [HangUpCallIntentResponse], for mocking and DI.
 type HangUpCallIntentResponseable interface {
 	Unwrap() *raw.INHangUpCallIntentResponse
+	WithUserActivity(userActivity *foundation.NSUserActivity) *HangUpCallIntentResponse
 	Code() raw.INHangUpCallIntentResponseCode
 }
 

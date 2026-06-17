@@ -5,6 +5,7 @@
 package quartzcore
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
 )
@@ -53,6 +54,54 @@ func (x *BasicAnimation) WithByValue(byValue objc.ID) *BasicAnimation {
 	return x
 }
 
+// WithKeyPath sets the keyPath property and returns the receiver for chaining.
+func (x *BasicAnimation) WithKeyPath(keyPath string) *BasicAnimation {
+	x.inner.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
+	return x
+}
+
+// WithAdditive sets the additive property and returns the receiver for chaining.
+func (x *BasicAnimation) WithAdditive(additive bool) *BasicAnimation {
+	x.inner.CAPropertyAnimation.SetAdditive(additive)
+	return x
+}
+
+// WithCumulative sets the cumulative property and returns the receiver for chaining.
+func (x *BasicAnimation) WithCumulative(cumulative bool) *BasicAnimation {
+	x.inner.CAPropertyAnimation.SetCumulative(cumulative)
+	return x
+}
+
+// WithValueFunction sets the valueFunction property and returns the receiver for chaining.
+func (x *BasicAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *BasicAnimation {
+	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction)
+	return x
+}
+
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *BasicAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *BasicAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *BasicAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *BasicAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *BasicAnimation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *BasicAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	return x
+}
+
 // FromValue calls the underlying FromValue.
 func (x *BasicAnimation) FromValue() objc.ID {
 	return x.inner.FromValue()
@@ -95,6 +144,14 @@ type BasicAnimationable interface {
 	WithFromValue(fromValue objc.ID) *BasicAnimation
 	WithToValue(toValue objc.ID) *BasicAnimation
 	WithByValue(byValue objc.ID) *BasicAnimation
+	WithKeyPath(keyPath string) *BasicAnimation
+	WithAdditive(additive bool) *BasicAnimation
+	WithCumulative(cumulative bool) *BasicAnimation
+	WithValueFunction(valueFunction *raw.CAValueFunction) *BasicAnimation
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *BasicAnimation
+	WithDelegate(delegate raw.CAAnimationDelegate) *BasicAnimation
+	WithRemovedOnCompletion(removedOnCompletion bool) *BasicAnimation
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *BasicAnimation
 	FromValue() objc.ID
 	SetFromValue(fromValue objc.ID)
 	ToValue() objc.ID

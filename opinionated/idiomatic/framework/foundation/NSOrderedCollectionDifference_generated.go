@@ -50,6 +50,12 @@ func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexes
 	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionDifference {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // DifferenceByTransformingChangesWith calls the underlying DifferenceByTransformingChangesWith.
 func (x *OrderedCollectionDifference) DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
 	return x.inner.DifferenceByTransformingChangesWith(block)
@@ -80,6 +86,7 @@ func (x *OrderedCollectionDifference) asObject() *raw.NSObject { return &x.inner
 // OrderedCollectionDifferenceable is the interface implemented by [OrderedCollectionDifference], for mocking and DI.
 type OrderedCollectionDifferenceable interface {
 	Unwrap() *raw.NSOrderedCollectionDifference[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionDifference
 	DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
 	InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID]
 	Insertions() *raw.NSArray[objc.ID]

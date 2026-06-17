@@ -105,6 +105,24 @@ func (x *InstanceAccelerationStructure) WithInstanceCount(instanceCount uint) *I
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *InstanceAccelerationStructure) WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *InstanceAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *InstanceAccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *InstanceAccelerationStructure {
+	x.inner.MPSAccelerationStructure.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *InstanceAccelerationStructure) WithLabel(label string) *InstanceAccelerationStructure {
+	x.inner.MPSAccelerationStructure.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // AccelerationStructures returns the collection as a Go slice.
 func (x *InstanceAccelerationStructure) AccelerationStructures() []*mpsrayintersector.MPSPolygonAccelerationStructure {
 	arr := x.inner.AccelerationStructures()
@@ -217,6 +235,9 @@ type InstanceAccelerationStructureable interface {
 	WithMaskBuffer(maskBuffer metal.MTLBuffer) *InstanceAccelerationStructure
 	WithMaskBufferOffset(maskBufferOffset uint) *InstanceAccelerationStructure
 	WithInstanceCount(instanceCount uint) *InstanceAccelerationStructure
+	WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *InstanceAccelerationStructure
+	WithOptions(options mpscore.MPSKernelOptions) *InstanceAccelerationStructure
+	WithLabel(label string) *InstanceAccelerationStructure
 	AccelerationStructures() []*mpsrayintersector.MPSPolygonAccelerationStructure
 	SetAccelerationStructures(accelerationStructures *foundation.NSArray[*mpsrayintersector.MPSPolygonAccelerationStructure])
 	InstanceBuffer() metal.MTLBuffer

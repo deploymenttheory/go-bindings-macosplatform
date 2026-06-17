@@ -72,6 +72,12 @@ func (x *DateIntervalFormatter) WithTimeStyle(timeStyle raw.NSDateIntervalFormat
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DateIntervalFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateIntervalFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromDateToDate calls the underlying StringFromDateToDate.
 func (x *DateIntervalFormatter) StringFromDateToDate(fromDate *raw.NSDate, toDate *raw.NSDate) *String {
 	_r := x.inner.StringFromDateToDate(fromDate, toDate)
@@ -179,6 +185,7 @@ type DateIntervalFormatterable interface {
 	WithDateTemplate(dateTemplate string) *DateIntervalFormatter
 	WithDateStyle(dateStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter
 	WithTimeStyle(timeStyle raw.NSDateIntervalFormatterStyle) *DateIntervalFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateIntervalFormatter
 	StringFromDateToDate(fromDate *raw.NSDate, toDate *raw.NSDate) *String
 	StringFromDateInterval(dateInterval *raw.NSDateInterval) *String
 	Locale() *Locale

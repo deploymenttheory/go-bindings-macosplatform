@@ -58,6 +58,36 @@ func (x *MatrixSoftMaxGradient) WithSourceColumns(sourceColumns uint) *MatrixSof
 	return x
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSoftMaxGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSoftMaxGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSoftMaxGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixSoftMaxGradient) WithBatchStart(batchStart uint) *MatrixSoftMaxGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixSoftMaxGradient {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 // EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix calls the underlying EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix.
 func (x *MatrixSoftMaxGradient) EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, forwardOutputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer, gradientMatrix, forwardOutputMatrix, resultMatrix)
@@ -92,6 +122,11 @@ type MatrixSoftMaxGradientable interface {
 	Unwrap() *raw.MPSMatrixSoftMaxGradient
 	WithSourceRows(sourceRows uint) *MatrixSoftMaxGradient
 	WithSourceColumns(sourceColumns uint) *MatrixSoftMaxGradient
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSoftMaxGradient
+	WithBatchStart(batchStart uint) *MatrixSoftMaxGradient
+	WithBatchSize(batchSize uint) *MatrixSoftMaxGradient
 	EncodeToCommandBufferGradientMatrixForwardOutputMatrixResultMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, forwardOutputMatrix *mpscore.MPSMatrix, resultMatrix *mpscore.MPSMatrix)
 	SourceRows() uint
 	SetSourceRows(sourceRows uint)

@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -59,6 +60,24 @@ func NewImagePyramidWithCoderDevice(aDecoder *foundation.NSCoder, device metal.M
 	return &ImagePyramid{inner: raw.MPSImagePyramidFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImagePyramid) WithOffset(offset mpscore.MPSOffset) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImagePyramid) WithClipRect(clipRect metal.MTLRegion) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImagePyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // KernelHeight calls the underlying KernelHeight.
 func (x *ImagePyramid) KernelHeight() uint {
 	return x.inner.KernelHeight()
@@ -76,6 +95,9 @@ func (x *ImagePyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x
 // ImagePyramidable is the interface implemented by [ImagePyramid], for mocking and DI.
 type ImagePyramidable interface {
 	Unwrap() *raw.MPSImagePyramid
+	WithOffset(offset mpscore.MPSOffset) *ImagePyramid
+	WithClipRect(clipRect metal.MTLRegion) *ImagePyramid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImagePyramid
 	KernelHeight() uint
 	KernelWidth() uint
 }

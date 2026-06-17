@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
@@ -37,6 +39,60 @@ func NewMatrixLogSoftMaxGradient() *MatrixLogSoftMaxGradient {
 	return &MatrixLogSoftMaxGradient{inner: raw.MPSMatrixLogSoftMaxGradientFromID(_id)}
 }
 
+// WithSourceRows sets the sourceRows property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithSourceRows(sourceRows uint) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.SetSourceRows(sourceRows)
+	return x
+}
+
+// WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithSourceColumns(sourceColumns uint) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.SetSourceColumns(sourceColumns)
+	return x
+}
+
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithBatchStart(batchStart uint) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixLogSoftMaxGradient) WithLabel(label string) *MatrixLogSoftMaxGradient {
+	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *mpsmatrix.MPSMatrixSoftMaxGradient { return &x.inner.MPSMatrixSoftMaxGradient }
 
 func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel { return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel }
@@ -46,6 +102,15 @@ func (x *MatrixLogSoftMaxGradient) asKernel() *mpscore.MPSKernel { return &x.inn
 // MatrixLogSoftMaxGradientable is the interface implemented by [MatrixLogSoftMaxGradient], for mocking and DI.
 type MatrixLogSoftMaxGradientable interface {
 	Unwrap() *raw.MPSMatrixLogSoftMaxGradient
+	WithSourceRows(sourceRows uint) *MatrixLogSoftMaxGradient
+	WithSourceColumns(sourceColumns uint) *MatrixLogSoftMaxGradient
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
+	WithBatchStart(batchStart uint) *MatrixLogSoftMaxGradient
+	WithBatchSize(batchSize uint) *MatrixLogSoftMaxGradient
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMaxGradient
+	WithLabel(label string) *MatrixLogSoftMaxGradient
 }
 
 var _ MatrixLogSoftMaxGradientable = (*MatrixLogSoftMaxGradient)(nil)

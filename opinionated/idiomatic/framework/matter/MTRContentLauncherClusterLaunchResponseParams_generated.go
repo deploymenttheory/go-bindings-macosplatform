@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRContentLauncherClusterLaunchResponseParams() *MTRContentLauncherClust
 	return &MTRContentLauncherClusterLaunchResponseParams{inner: raw.MTRContentLauncherClusterLaunchResponseParamsFromID(_id)}
 }
 
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterLaunchResponseParams) WithStatus(status *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams {
+	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetStatus(status)
+	return x
+}
+
+// WithData sets the data property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterLaunchResponseParams) WithData(data string) *MTRContentLauncherClusterLaunchResponseParams {
+	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetData(foundation.NSStringStringWithUTF8String(data))
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterLaunchResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams {
+	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRContentLauncherClusterLaunchResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams { return &x.inner.MTRContentLauncherClusterLauncherResponseParams }
 
 // MTRContentLauncherClusterLaunchResponseParamsable is the interface implemented by [MTRContentLauncherClusterLaunchResponseParams], for mocking and DI.
 type MTRContentLauncherClusterLaunchResponseParamsable interface {
 	Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams
+	WithStatus(status *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams
+	WithData(data string) *MTRContentLauncherClusterLaunchResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams
 }
 
 var _ MTRContentLauncherClusterLaunchResponseParamsable = (*MTRContentLauncherClusterLaunchResponseParams)(nil)

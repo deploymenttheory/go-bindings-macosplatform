@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -57,6 +58,30 @@ func (x *GeneratePersonSegmentationRequest) WithOutputPixelFormat(outputPixelFor
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GeneratePersonSegmentationRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GeneratePersonSegmentationRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GeneratePersonSegmentationRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GeneratePersonSegmentationRequest) WithRevision(revision uint) *GeneratePersonSegmentationRequest {
+	x.inner.VNStatefulRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // SupportedOutputPixelFormats returns the collection as a Go slice.
 func (x *GeneratePersonSegmentationRequest) SupportedOutputPixelFormats() ([]*foundation.NSNumber, error) {
 	arr, err := x.inner.SupportedOutputPixelFormatsAndReturnError()
@@ -102,6 +127,10 @@ type GeneratePersonSegmentationRequestable interface {
 	Unwrap() *raw.VNGeneratePersonSegmentationRequest
 	WithQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel) *GeneratePersonSegmentationRequest
 	WithOutputPixelFormat(outputPixelFormat uint) *GeneratePersonSegmentationRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonSegmentationRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonSegmentationRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonSegmentationRequest
+	WithRevision(revision uint) *GeneratePersonSegmentationRequest
 	SupportedOutputPixelFormats() ([]*foundation.NSNumber, error)
 	QualityLevel() raw.VNGeneratePersonSegmentationRequestQualityLevel
 	SetQualityLevel(qualityLevel raw.VNGeneratePersonSegmentationRequestQualityLevel)

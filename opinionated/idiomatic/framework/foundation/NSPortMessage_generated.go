@@ -42,6 +42,12 @@ func (x *PortMessage) WithMsgid(msgid uint32) *PortMessage {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PortMessage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortMessage {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SendBeforeDate calls the underlying SendBeforeDate.
 func (x *PortMessage) SendBeforeDate(date *raw.NSDate) bool {
 	return x.inner.SendBeforeDate(date)
@@ -86,6 +92,7 @@ func (x *PortMessage) asObject() *raw.NSObject { return &x.inner.NSObject }
 type PortMessageable interface {
 	Unwrap() *raw.NSPortMessage
 	WithMsgid(msgid uint32) *PortMessage
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortMessage
 	SendBeforeDate(date *raw.NSDate) bool
 	Components() *raw.NSArray[objc.ID]
 	ReceivePort() *Port

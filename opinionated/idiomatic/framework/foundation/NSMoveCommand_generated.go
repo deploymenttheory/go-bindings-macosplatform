@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewMoveCommand() *MoveCommand {
 	return &MoveCommand{inner: raw.NSMoveCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *MoveCommand) WithDirectParameter(directParameter objc.ID) *MoveCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *MoveCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *MoveCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *MoveCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *MoveCommand) WithScriptErrorNumber(scriptErrorNumber int) *MoveCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *MoveCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *MoveCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *MoveCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *MoveCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *MoveCommand) WithScriptErrorString(scriptErrorString string) *MoveCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MoveCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // KeySpecifier calls the underlying KeySpecifier.
 func (x *MoveCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := x.inner.KeySpecifier()
@@ -51,6 +100,14 @@ func (x *MoveCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand
 // MoveCommandable is the interface implemented by [MoveCommand], for mocking and DI.
 type MoveCommandable interface {
 	Unwrap() *raw.NSMoveCommand
+	WithDirectParameter(directParameter objc.ID) *MoveCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *MoveCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *MoveCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *MoveCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *MoveCommand
+	WithScriptErrorString(scriptErrorString string) *MoveCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

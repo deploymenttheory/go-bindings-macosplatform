@@ -41,6 +41,12 @@ func (x *ChangeShuffleModeCommand) WithCurrentShuffleType(currentShuffleType raw
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleModeCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // CurrentShuffleType calls the underlying CurrentShuffleType.
 func (x *ChangeShuffleModeCommand) CurrentShuffleType() raw.MPShuffleType {
 	return x.inner.CurrentShuffleType()
@@ -57,6 +63,7 @@ func (x *ChangeShuffleModeCommand) asRemoteCommand() *raw.MPRemoteCommand { retu
 type ChangeShuffleModeCommandable interface {
 	Unwrap() *raw.MPChangeShuffleModeCommand
 	WithCurrentShuffleType(currentShuffleType raw.MPShuffleType) *ChangeShuffleModeCommand
+	WithEnabled(enabled bool) *ChangeShuffleModeCommand
 	CurrentShuffleType() raw.MPShuffleType
 	SetCurrentShuffleType(currentShuffleType raw.MPShuffleType)
 }

@@ -59,6 +59,18 @@ func NewDOMKeyboardEventKeyboardEventCanBubbleCancelableViewKeyIdentifierKeyLoca
 	return &DOMKeyboardEvent{inner: raw.DOMKeyboardEventFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *DOMKeyboardEvent) WithReturnValue(returnValue bool) *DOMKeyboardEvent {
+	x.inner.DOMUIEvent.DOMEvent.SetReturnValue(returnValue)
+	return x
+}
+
+// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+func (x *DOMKeyboardEvent) WithCancelBubble(cancelBubble bool) *DOMKeyboardEvent {
+	x.inner.DOMUIEvent.DOMEvent.SetCancelBubble(cancelBubble)
+	return x
+}
+
 // GetModifierState calls the underlying GetModifierState.
 func (x *DOMKeyboardEvent) GetModifierState(keyIdentifierArg string) bool {
 	return x.inner.GetModifierState(foundation.NSStringStringWithUTF8String(keyIdentifierArg))
@@ -119,6 +131,8 @@ func (x *DOMKeyboardEvent) asWebScriptObject() *raw.WebScriptObject { return &x.
 // DOMKeyboardEventable is the interface implemented by [DOMKeyboardEvent], for mocking and DI.
 type DOMKeyboardEventable interface {
 	Unwrap() *raw.DOMKeyboardEvent
+	WithReturnValue(returnValue bool) *DOMKeyboardEvent
+	WithCancelBubble(cancelBubble bool) *DOMKeyboardEvent
 	GetModifierState(keyIdentifierArg string) bool
 	KeyIdentifier() string
 	Location() uint

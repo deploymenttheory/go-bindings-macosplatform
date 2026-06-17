@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewGatherLayer() *GatherLayer {
 	return &GatherLayer{inner: raw.MLCGatherLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *GatherLayer) WithLabel(label string) *GatherLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Dimension calls the underlying Dimension.
 func (x *GatherLayer) Dimension() uint {
 	return x.inner.Dimension()
@@ -45,6 +58,8 @@ func (x *GatherLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // GatherLayerable is the interface implemented by [GatherLayer], for mocking and DI.
 type GatherLayerable interface {
 	Unwrap() *raw.MLCGatherLayer
+	WithLabel(label string) *GatherLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer
 	Dimension() uint
 }
 

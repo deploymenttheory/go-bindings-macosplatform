@@ -5,8 +5,12 @@
 package mpsrayintersector
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TriangleAccelerationStructure wraps [raw.MPSTriangleAccelerationStructure] with a fluent Go API.
@@ -41,6 +45,88 @@ func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount uint) *T
 	return x
 }
 
+// WithPolygonType sets the polygonType property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithPolygonType(polygonType raw.MPSPolygonType) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(polygonType)
+	return x
+}
+
+// WithVertexStride sets the vertexStride property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithVertexStride(vertexStride uint) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexStride(vertexStride)
+	return x
+}
+
+// WithIndexType sets the indexType property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithIndexType(indexType mpscore.MPSDataType) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexType(indexType)
+	return x
+}
+
+// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexBuffer(vertexBuffer)
+	return x
+}
+
+// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset uint) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexBufferOffset(vertexBufferOffset)
+	return x
+}
+
+// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithIndexBuffer(indexBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexBuffer(indexBuffer)
+	return x
+}
+
+// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithIndexBufferOffset(indexBufferOffset uint) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexBufferOffset(indexBufferOffset)
+	return x
+}
+
+// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetMaskBuffer(maskBuffer)
+	return x
+}
+
+// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetMaskBufferOffset(maskBufferOffset)
+	return x
+}
+
+// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithPolygonCount(polygonCount uint) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonCount(polygonCount)
+	return x
+}
+
+// WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
+func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure {
+	if len(items) == 0 {
+		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(_arr)
+	return x
+}
+
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *TriangleAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *TriangleAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
 // TriangleCount calls the underlying TriangleCount.
 func (x *TriangleAccelerationStructure) TriangleCount() uint {
 	return x.inner.TriangleCount()
@@ -59,6 +145,18 @@ func (x *TriangleAccelerationStructure) asAccelerationStructure() *raw.MPSAccele
 type TriangleAccelerationStructureable interface {
 	Unwrap() *raw.MPSTriangleAccelerationStructure
 	WithTriangleCount(triangleCount uint) *TriangleAccelerationStructure
+	WithPolygonType(polygonType raw.MPSPolygonType) *TriangleAccelerationStructure
+	WithVertexStride(vertexStride uint) *TriangleAccelerationStructure
+	WithIndexType(indexType mpscore.MPSDataType) *TriangleAccelerationStructure
+	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *TriangleAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset uint) *TriangleAccelerationStructure
+	WithIndexBuffer(indexBuffer metal.MTLBuffer) *TriangleAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset uint) *TriangleAccelerationStructure
+	WithMaskBuffer(maskBuffer metal.MTLBuffer) *TriangleAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset uint) *TriangleAccelerationStructure
+	WithPolygonCount(polygonCount uint) *TriangleAccelerationStructure
+	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure
+	WithUsage(usage raw.MPSAccelerationStructureUsage) *TriangleAccelerationStructure
 	TriangleCount() uint
 	SetTriangleCount(triangleCount uint)
 }

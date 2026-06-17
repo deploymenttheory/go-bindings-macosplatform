@@ -37,6 +37,30 @@ func NewDOMText() *DOMText {
 	return &DOMText{inner: raw.DOMTextFromID(_id)}
 }
 
+// WithData sets the data property and returns the receiver for chaining.
+func (x *DOMText) WithData(data string) *DOMText {
+	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMText) WithNodeValue(nodeValue string) *DOMText {
+	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMText) WithPrefix(prefix string) *DOMText {
+	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMText) WithTextContent(textContent string) *DOMText {
+	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // SplitText calls the underlying SplitText.
 func (x *DOMText) SplitText(offset uint) *DOMText {
 	_r := x.inner.SplitText(offset)
@@ -77,6 +101,10 @@ func (x *DOMText) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOM
 // DOMTextable is the interface implemented by [DOMText], for mocking and DI.
 type DOMTextable interface {
 	Unwrap() *raw.DOMText
+	WithData(data string) *DOMText
+	WithNodeValue(nodeValue string) *DOMText
+	WithPrefix(prefix string) *DOMText
+	WithTextContent(textContent string) *DOMText
 	SplitText(offset uint) *DOMText
 	ReplaceWholeText(content string) *DOMText
 	WholeText() string

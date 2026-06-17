@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -58,6 +59,114 @@ func (x *NNGramMatrixCalculationGradient) WithAlpha(alpha float32) *NNGramMatrix
 	return x
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithPadding(padding raw.MPSNNPadding) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *NNGramMatrixCalculationGradient) Alpha() float32 {
 	return x.inner.Alpha()
@@ -76,6 +185,24 @@ func (x *NNGramMatrixCalculationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryK
 type NNGramMatrixCalculationGradientable interface {
 	Unwrap() *raw.MPSNNGramMatrixCalculationGradient
 	WithAlpha(alpha float32) *NNGramMatrixCalculationGradient
+	WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient
+	WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
+	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient
+	WithPadding(padding raw.MPSNNPadding) *NNGramMatrixCalculationGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculationGradient
 	Alpha() float32
 	SetAlpha(alpha float32)
 }

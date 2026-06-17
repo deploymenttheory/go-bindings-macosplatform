@@ -58,6 +58,60 @@ func (x *FetchWebAuthTokenOperation) WithFetchWebAuthTokenCompletionBlock(fetchW
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithDatabase(database *raw.CKDatabase) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithGroup(group *raw.CKOperationGroup) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithContainer(container *raw.CKContainer) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithLongLived(longLived bool) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchWebAuthTokenOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchWebAuthTokenOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // APIToken calls the underlying APIToken.
 func (x *FetchWebAuthTokenOperation) APIToken() string {
 	_r := x.inner.APIToken()
@@ -112,6 +166,15 @@ type FetchWebAuthTokenOperationable interface {
 	Unwrap() *raw.CKFetchWebAuthTokenOperation
 	WithAPIToken(aPIToken string) *FetchWebAuthTokenOperation
 	WithFetchWebAuthTokenCompletionBlock(fetchWebAuthTokenCompletionBlock func(*foundation.NSString, unsafe.Pointer)) *FetchWebAuthTokenOperation
+	WithDatabase(database *raw.CKDatabase) *FetchWebAuthTokenOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchWebAuthTokenOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchWebAuthTokenOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchWebAuthTokenOperation
+	WithContainer(container *raw.CKContainer) *FetchWebAuthTokenOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchWebAuthTokenOperation
+	WithLongLived(longLived bool) *FetchWebAuthTokenOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchWebAuthTokenOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchWebAuthTokenOperation
 	APIToken() string
 	SetAPIToken(aPIToken string)
 	FetchWebAuthTokenCompletionBlock() objc.Block

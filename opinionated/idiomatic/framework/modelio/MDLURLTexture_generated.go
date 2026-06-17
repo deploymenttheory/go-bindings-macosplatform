@@ -43,6 +43,18 @@ func (x *URLTexture) WithURL(uRL string) *URLTexture {
 	return x
 }
 
+// WithIsCube sets the isCube property and returns the receiver for chaining.
+func (x *URLTexture) WithIsCube(isCube bool) *URLTexture {
+	x.inner.MDLTexture.SetIsCube(isCube)
+	return x
+}
+
+// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+func (x *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
+	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	return x
+}
+
 // URL calls the underlying URL.
 func (x *URLTexture) URL() *foundation.NSURL {
 	return x.inner.URL()
@@ -59,6 +71,8 @@ func (x *URLTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 type URLTextureable interface {
 	Unwrap() *raw.MDLURLTexture
 	WithURL(uRL string) *URLTexture
+	WithIsCube(isCube bool) *URLTexture
+	WithHasAlphaValues(hasAlphaValues bool) *URLTexture
 	URL() *foundation.NSURL
 	SetURL(uRL string)
 }

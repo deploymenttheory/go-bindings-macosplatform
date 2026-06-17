@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
 	return &MTRDoorLockClusterDlCredential{inner: raw.MTRDoorLockClusterDlCredentialFromID(_id)}
 }
 
+// WithCredentialType sets the credentialType property and returns the receiver for chaining.
+func (x *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType *foundation.NSNumber) *MTRDoorLockClusterDlCredential {
+	x.inner.MTRDoorLockClusterCredentialStruct.SetCredentialType(credentialType)
+	return x
+}
+
+// WithCredentialIndex sets the credentialIndex property and returns the receiver for chaining.
+func (x *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex *foundation.NSNumber) *MTRDoorLockClusterDlCredential {
+	x.inner.MTRDoorLockClusterCredentialStruct.SetCredentialIndex(credentialIndex)
+	return x
+}
+
 func (x *MTRDoorLockClusterDlCredential) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct { return &x.inner.MTRDoorLockClusterCredentialStruct }
 
 // MTRDoorLockClusterDlCredentialable is the interface implemented by [MTRDoorLockClusterDlCredential], for mocking and DI.
 type MTRDoorLockClusterDlCredentialable interface {
 	Unwrap() *raw.MTRDoorLockClusterDlCredential
+	WithCredentialType(credentialType *foundation.NSNumber) *MTRDoorLockClusterDlCredential
+	WithCredentialIndex(credentialIndex *foundation.NSNumber) *MTRDoorLockClusterDlCredential
 }
 
 var _ MTRDoorLockClusterDlCredentialable = (*MTRDoorLockClusterDlCredential)(nil)

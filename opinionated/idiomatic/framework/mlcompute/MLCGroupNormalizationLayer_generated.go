@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func GroupNormalizationLayerFromID(id objc.ID) *GroupNormalizationLayer {
 func NewGroupNormalizationLayer() *GroupNormalizationLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCGroupNormalizationLayer")), objc.RegisterName("new"))
 	return &GroupNormalizationLayer{inner: raw.MLCGroupNormalizationLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // FeatureChannelCount calls the underlying FeatureChannelCount.
@@ -91,6 +104,8 @@ func (x *GroupNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCL
 // GroupNormalizationLayerable is the interface implemented by [GroupNormalizationLayer], for mocking and DI.
 type GroupNormalizationLayerable interface {
 	Unwrap() *raw.MLCGroupNormalizationLayer
+	WithLabel(label string) *GroupNormalizationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer
 	FeatureChannelCount() uint
 	GroupCount() uint
 	Beta() *Tensor

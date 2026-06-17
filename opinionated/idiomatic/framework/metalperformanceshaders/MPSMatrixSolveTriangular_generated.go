@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,48 @@ func NewMatrixSolveTriangularWithDeviceRightUpperTransposeUnitOrderNumberOfRight
 	return &MatrixSolveTriangular{inner: raw.MPSMatrixSolveTriangularFromID(_id)}
 }
 
+// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	return x
+}
+
+// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithBatchStart(batchStart uint) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithBatchSize(batchSize uint) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixSolveTriangular) WithLabel(label string) *MatrixSolveTriangular {
+	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix calls the underlying EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix.
 func (x *MatrixSolveTriangular) EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer, sourceMatrix, rightHandSideMatrix, solutionMatrix)
@@ -51,6 +94,13 @@ func (x *MatrixSolveTriangular) asKernel() *mpscore.MPSKernel { return &x.inner.
 // MatrixSolveTriangularable is the interface implemented by [MatrixSolveTriangular], for mocking and DI.
 type MatrixSolveTriangularable interface {
 	Unwrap() *raw.MPSMatrixSolveTriangular
+	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
+	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveTriangular
+	WithBatchStart(batchStart uint) *MatrixSolveTriangular
+	WithBatchSize(batchSize uint) *MatrixSolveTriangular
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixSolveTriangular
+	WithLabel(label string) *MatrixSolveTriangular
 	EncodeToCommandBufferSourceMatrixRightHandSideMatrixSolutionMatrix(commandBuffer metal.MTLCommandBuffer, sourceMatrix *mpscore.MPSMatrix, rightHandSideMatrix *mpscore.MPSMatrix, solutionMatrix *mpscore.MPSMatrix)
 }
 

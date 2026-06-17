@@ -36,6 +36,12 @@ func NewCharacterSetWithCoder(coder *raw.NSCoder) *CharacterSet {
 	return &CharacterSet{inner: raw.NSCharacterSetFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CharacterSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CharacterSet {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CharacterIsMember calls the underlying CharacterIsMember.
 func (x *CharacterSet) CharacterIsMember(aCharacter uint16) bool {
 	return x.inner.CharacterIsMember(aCharacter)
@@ -81,6 +87,7 @@ func (x *CharacterSet) asObject() *raw.NSObject { return &x.inner.NSObject }
 // CharacterSetable is the interface implemented by [CharacterSet], for mocking and DI.
 type CharacterSetable interface {
 	Unwrap() *raw.NSCharacterSet
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CharacterSet
 	CharacterIsMember(aCharacter uint16) bool
 	LongCharacterIsMember(theLongChar uint) bool
 	IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool

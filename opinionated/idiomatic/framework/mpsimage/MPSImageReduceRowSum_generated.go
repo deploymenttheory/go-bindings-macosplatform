@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,30 @@ func NewImageReduceRowSumWithDevice(device metal.MTLDevice) *ImageReduceRowSum {
 	return &ImageReduceRowSum{inner: raw.MPSImageReduceRowSumFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageReduceRowSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum {
+	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageReduceRowSum) asImageReduceUnary() *raw.MPSImageReduceUnary { return &x.inner.MPSImageReduceUnary }
 
 func (x *ImageReduceRowSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel }
@@ -44,6 +69,10 @@ func (x *ImageReduceRowSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel { retu
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
 	Unwrap() *raw.MPSImageReduceRowSum
+	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum
+	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum
+	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)

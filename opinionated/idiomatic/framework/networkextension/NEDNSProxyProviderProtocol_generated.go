@@ -49,6 +49,90 @@ func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundle
 	return x
 }
 
+// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	return x
+}
+
+// WithUsername sets the username property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
+	return x
+}
+
+// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
+	return x
+}
+
+// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
+	return x
+}
+
+// WithIdentityData sets the identityData property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityData(identityData)
+	return x
+}
+
+// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+	return x
+}
+
+// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *raw.NEProxySettings) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+	return x
+}
+
+// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
+	return x
+}
+
+// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
+	return x
+}
+
+// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
+	return x
+}
+
+// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
+	return x
+}
+
+// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	return x
+}
+
+// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
+func (x *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {
+	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
+	return x
+}
+
 // ProviderConfiguration calls the underlying ProviderConfiguration.
 func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ProviderConfiguration()
@@ -80,6 +164,20 @@ type NEDNSProxyProviderProtocolable interface {
 	Unwrap() *raw.NEDNSProxyProviderProtocol
 	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NEDNSProxyProviderProtocol
 	WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol
+	WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol
+	WithUsername(username string) *NEDNSProxyProviderProtocol
+	WithPasswordReference(passwordReference *foundation.NSData) *NEDNSProxyProviderProtocol
+	WithIdentityReference(identityReference *foundation.NSData) *NEDNSProxyProviderProtocol
+	WithIdentityData(identityData *foundation.NSData) *NEDNSProxyProviderProtocol
+	WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol
+	WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NEDNSProxyProviderProtocol
+	WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol
+	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol
+	WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol
+	WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol
+	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol
+	WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol
 	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	ProviderBundleIdentifier() string

@@ -41,6 +41,78 @@ func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes raw
 	return x
 }
 
+// WithUid sets the uid property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithUid(uid uint32) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetUid(uid)
+	return x
+}
+
+// WithGid sets the gid property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetGid(gid)
+	return x
+}
+
+// WithMode sets the mode property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetMode(mode)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithType(type_ raw.FSItemType) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetType(type_)
+	return x
+}
+
+// WithLinkCount sets the linkCount property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetLinkCount(linkCount)
+	return x
+}
+
+// WithFlags sets the flags property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetFlags(flags)
+	return x
+}
+
+// WithSize sets the size property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetSize(size)
+	return x
+}
+
+// WithAllocSize sets the allocSize property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetAllocSize(allocSize)
+	return x
+}
+
+// WithFileID sets the fileID property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithFileID(fileID raw.FSItemID) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetFileID(fileID)
+	return x
+}
+
+// WithParentID sets the parentID property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithParentID(parentID raw.FSItemID) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetParentID(parentID)
+	return x
+}
+
+// WithSupportsLimitedXAttrs sets the supportsLimitedXAttrs property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
+	return x
+}
+
+// WithInhibitKernelOffloadedIO sets the inhibitKernelOffloadedIO property and returns the receiver for chaining.
+func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
+	x.inner.FSItemAttributes.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
+	return x
+}
+
 // WasAttributeConsumed calls the underlying WasAttributeConsumed.
 func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute raw.FSItemAttribute) bool {
 	return x.inner.WasAttributeConsumed(attribute)
@@ -62,6 +134,18 @@ func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes { re
 type ItemSetAttributesRequestable interface {
 	Unwrap() *raw.FSItemSetAttributesRequest
 	WithConsumedAttributes(consumedAttributes raw.FSItemAttribute) *ItemSetAttributesRequest
+	WithUid(uid uint32) *ItemSetAttributesRequest
+	WithGid(gid uint32) *ItemSetAttributesRequest
+	WithMode(mode uint32) *ItemSetAttributesRequest
+	WithType(type_ raw.FSItemType) *ItemSetAttributesRequest
+	WithLinkCount(linkCount uint32) *ItemSetAttributesRequest
+	WithFlags(flags uint32) *ItemSetAttributesRequest
+	WithSize(size uint64) *ItemSetAttributesRequest
+	WithAllocSize(allocSize uint64) *ItemSetAttributesRequest
+	WithFileID(fileID raw.FSItemID) *ItemSetAttributesRequest
+	WithParentID(parentID raw.FSItemID) *ItemSetAttributesRequest
+	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest
+	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest
 	WasAttributeConsumed(attribute raw.FSItemAttribute) bool
 	ConsumedAttributes() raw.FSItemAttribute
 	SetConsumedAttributes(consumedAttributes raw.FSItemAttribute)

@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageThresholdToZeroWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &ImageThresholdToZero{inner: raw.MPSImageThresholdToZeroFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdToZero) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdToZero) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdToZero) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZero {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdToZero) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -60,6 +79,9 @@ func (x *ImageThresholdToZero) asUnaryImageKernel() *raw.MPSUnaryImageKernel { r
 // ImageThresholdToZeroable is the interface implemented by [ImageThresholdToZero], for mocking and DI.
 type ImageThresholdToZeroable interface {
 	Unwrap() *raw.MPSImageThresholdToZero
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZero
 	ThresholdValue() float32
 	Transform() *float32
 }

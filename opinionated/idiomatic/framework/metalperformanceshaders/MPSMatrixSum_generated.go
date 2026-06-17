@@ -53,6 +53,18 @@ func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixSum) WithOptions(options mpscore.MPSKernelOptions) *MatrixSum {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixSum) WithLabel(label string) *MatrixSum {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
 func (x *MatrixSum) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
 	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
@@ -119,6 +131,8 @@ func (x *MatrixSum) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 type MatrixSumable interface {
 	Unwrap() *raw.MPSMatrixSum
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixSum
+	WithLabel(label string) *MatrixSum
 	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
 	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	EncodeToCommandBufferSourceMatricesResultMatrixScaleVectorOffsetVectorBiasVectorStartIndex(buffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], resultMatrix *mpscore.MPSMatrix, scaleVector *mpscore.MPSVector, offsetVector *mpscore.MPSVector, biasVector *mpscore.MPSVector, startIndex uint)

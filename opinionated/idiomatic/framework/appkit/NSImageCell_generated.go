@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,6 +54,276 @@ func (x *ImageCell) WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
+	x.inner.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *ImageCell) WithType(type_ raw.NSCellType) *ImageCell {
+	x.inner.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *ImageCell) WithState(state int) *ImageCell {
+	x.inner.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *ImageCell) WithTarget(target objc.ID) *ImageCell {
+	x.inner.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *ImageCell) WithAction(action objc.SEL) *ImageCell {
+	x.inner.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *ImageCell) WithTag(tag int) *ImageCell {
+	x.inner.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *ImageCell) WithTitle(title string) *ImageCell {
+	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ImageCell) WithEnabled(enabled bool) *ImageCell {
+	x.inner.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *ImageCell) WithContinuous(continuous bool) *ImageCell {
+	x.inner.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *ImageCell) WithEditable(editable bool) *ImageCell {
+	x.inner.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *ImageCell) WithSelectable(selectable bool) *ImageCell {
+	x.inner.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *ImageCell) WithBordered(bordered bool) *ImageCell {
+	x.inner.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *ImageCell) WithBezeled(bezeled bool) *ImageCell {
+	x.inner.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *ImageCell) WithScrollable(scrollable bool) *ImageCell {
+	x.inner.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
+	x.inner.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *ImageCell) WithAlignment(alignment raw.NSTextAlignment) *ImageCell {
+	x.inner.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *ImageCell) WithWraps(wraps bool) *ImageCell {
+	x.inner.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *ImageCell) WithFont(font *raw.NSFont) *ImageCell {
+	x.inner.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *ImageCell) WithFormatter(formatter *foundation.NSFormatter) *ImageCell {
+	x.inner.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *ImageCell) WithObjectValue(objectValue objc.ID) *ImageCell {
+	x.inner.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *ImageCell) WithStringValue(stringValue string) *ImageCell {
+	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *ImageCell) WithIntValue(intValue int) *ImageCell {
+	x.inner.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
+	x.inner.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
+	x.inner.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
+	x.inner.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *ImageCell) WithImage(image *raw.NSImage) *ImageCell {
+	x.inner.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *ImageCell) WithControlSize(controlSize raw.NSControlSize) *ImageCell {
+	x.inner.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *ImageCell) WithRepresentedObject(representedObject objc.ID) *ImageCell {
+	x.inner.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ImageCell) WithMenu(menu *raw.NSMenu) *ImageCell {
+	x.inner.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
+	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageCell {
+	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *ImageCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageCell {
+	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
+	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
+	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
+	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
+	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
+	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ImageCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageCell {
+	x.inner.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *ImageCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell {
+	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
+	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
+	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
+	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *ImageCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ImageCell {
+	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *ImageCell) WithControlTint(controlTint raw.NSControlTint) *ImageCell {
+	x.inner.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // ImageAlignment calls the underlying ImageAlignment.
 func (x *ImageCell) ImageAlignment() raw.NSImageAlignment {
 	return x.inner.ImageAlignment()
@@ -91,6 +362,51 @@ type ImageCellable interface {
 	WithImageAlignment(imageAlignment raw.NSImageAlignment) *ImageCell
 	WithImageScaling(imageScaling raw.NSImageScaling) *ImageCell
 	WithImageFrameStyle(imageFrameStyle raw.NSImageFrameStyle) *ImageCell
+	WithControlView(controlView ViewProvider) *ImageCell
+	WithType(type_ raw.NSCellType) *ImageCell
+	WithState(state int) *ImageCell
+	WithTarget(target objc.ID) *ImageCell
+	WithAction(action objc.SEL) *ImageCell
+	WithTag(tag int) *ImageCell
+	WithTitle(title string) *ImageCell
+	WithEnabled(enabled bool) *ImageCell
+	WithContinuous(continuous bool) *ImageCell
+	WithEditable(editable bool) *ImageCell
+	WithSelectable(selectable bool) *ImageCell
+	WithBordered(bordered bool) *ImageCell
+	WithBezeled(bezeled bool) *ImageCell
+	WithScrollable(scrollable bool) *ImageCell
+	WithHighlighted(highlighted bool) *ImageCell
+	WithAlignment(alignment raw.NSTextAlignment) *ImageCell
+	WithWraps(wraps bool) *ImageCell
+	WithFont(font *raw.NSFont) *ImageCell
+	WithFormatter(formatter *foundation.NSFormatter) *ImageCell
+	WithObjectValue(objectValue objc.ID) *ImageCell
+	WithStringValue(stringValue string) *ImageCell
+	WithIntValue(intValue int) *ImageCell
+	WithFloatValue(floatValue float32) *ImageCell
+	WithDoubleValue(doubleValue float64) *ImageCell
+	WithIntegerValue(integerValue int) *ImageCell
+	WithImage(image *raw.NSImage) *ImageCell
+	WithControlSize(controlSize raw.NSControlSize) *ImageCell
+	WithRepresentedObject(representedObject objc.ID) *ImageCell
+	WithMenu(menu *raw.NSMenu) *ImageCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *ImageCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *ImageCell
+	WithAllowsUndo(allowsUndo bool) *ImageCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ImageCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell
+	WithShowsFirstResponder(showsFirstResponder bool) *ImageCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ImageCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell
+	WithImportsGraphics(importsGraphics bool) *ImageCell
+	WithAllowsMixedState(allowsMixedState bool) *ImageCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *ImageCell
+	WithControlTint(controlTint raw.NSControlTint) *ImageCell
 	ImageAlignment() raw.NSImageAlignment
 	SetImageAlignment(imageAlignment raw.NSImageAlignment)
 	ImageScaling() raw.NSImageScaling

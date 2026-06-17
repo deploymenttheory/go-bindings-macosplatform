@@ -35,6 +35,12 @@ func NewEnumerator() *Enumerator {
 	return &Enumerator{inner: raw.NSEnumeratorFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Enumerator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Enumerator {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // NextObject calls the underlying NextObject.
 func (x *Enumerator) NextObject() objc.ID {
 	return x.inner.NextObject()
@@ -52,6 +58,7 @@ func (x *Enumerator) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Enumeratorable is the interface implemented by [Enumerator], for mocking and DI.
 type Enumeratorable interface {
 	Unwrap() *raw.NSEnumerator[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Enumerator
 	NextObject() objc.ID
 	AllObjects() *raw.NSArray[objc.ID]
 }

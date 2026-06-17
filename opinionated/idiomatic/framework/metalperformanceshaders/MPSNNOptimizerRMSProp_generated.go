@@ -47,6 +47,30 @@ func NewNNOptimizerRMSPropWithDeviceDecayEpsilonOptimizerDescriptor(device metal
 	return &NNOptimizerRMSProp{inner: raw.MPSNNOptimizerRMSPropFromID(_id)}
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *NNOptimizerRMSProp) WithLearningRate(learningRate float32) *NNOptimizerRMSProp {
+	x.inner.MPSNNOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+func (x *NNOptimizerRMSProp) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp {
+	x.inner.MPSNNOptimizer.SetApplyGradientClipping(applyGradientClipping)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNOptimizerRMSProp) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerRMSProp {
+	x.inner.MPSNNOptimizer.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNOptimizerRMSProp) WithLabel(label string) *NNOptimizerRMSProp {
+	x.inner.MPSNNOptimizer.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector calls the underlying EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector.
 func (x *NNOptimizerRMSProp) EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector) {
 	x.inner.EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer, inputGradientVector, inputValuesVector, inputSumOfSquaresVector, resultValuesVector)
@@ -89,6 +113,10 @@ func (x *NNOptimizerRMSProp) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // NNOptimizerRMSPropable is the interface implemented by [NNOptimizerRMSProp], for mocking and DI.
 type NNOptimizerRMSPropable interface {
 	Unwrap() *raw.MPSNNOptimizerRMSProp
+	WithLearningRate(learningRate float32) *NNOptimizerRMSProp
+	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerRMSProp
+	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizerRMSProp
+	WithLabel(label string) *NNOptimizerRMSProp
 	EncodeToCommandBufferInputGradientVectorInputValuesVectorInputSumOfSquaresVectorResultValuesVector(commandBuffer metal.MTLCommandBuffer, inputGradientVector *mpscore.MPSVector, inputValuesVector *mpscore.MPSVector, inputSumOfSquaresVector *mpscore.MPSVector, resultValuesVector *mpscore.MPSVector)
 	EncodeToCommandBufferInputGradientMatrixInputValuesMatrixInputSumOfSquaresMatrixResultValuesMatrix(commandBuffer metal.MTLCommandBuffer, inputGradientMatrix *mpscore.MPSMatrix, inputValuesMatrix *mpscore.MPSMatrix, inputSumOfSquaresMatrix *mpscore.MPSMatrix, resultValuesMatrix *mpscore.MPSMatrix)
 	EncodeToCommandBufferConvolutionGradientStateConvolutionSourceStateInputSumOfSquaresVectorsResultState(commandBuffer metal.MTLCommandBuffer, convolutionGradientState *mpsneuralnetwork.MPSCNNConvolutionGradientState, convolutionSourceState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState, inputSumOfSquaresVectors *foundation.NSArray[*mpscore.MPSVector], resultState *mpsneuralnetwork.MPSCNNConvolutionWeightsAndBiasesState)

@@ -72,6 +72,18 @@ func (x *RNNMatrixTrainingLayer) WithAccumulateWeightGradients(accumulateWeightG
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *RNNMatrixTrainingLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixTrainingLayer {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RNNMatrixTrainingLayer) WithLabel(label string) *RNNMatrixTrainingLayer {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // CreateWeightGradientMatricesDataType calls the underlying CreateWeightGradientMatricesDataType.
 func (x *RNNMatrixTrainingLayer) CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType) {
 	x.inner.CreateWeightGradientMatricesDataType(matricesOut, dataType)
@@ -180,6 +192,8 @@ type RNNMatrixTrainingLayerable interface {
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixTrainingLayer
 	WithTrainingStateIsTemporary(trainingStateIsTemporary bool) *RNNMatrixTrainingLayer
 	WithAccumulateWeightGradients(accumulateWeightGradients bool) *RNNMatrixTrainingLayer
+	WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixTrainingLayer
+	WithLabel(label string) *RNNMatrixTrainingLayer
 	CreateWeightGradientMatricesDataType(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType)
 	CreateTemporaryWeightGradientMatricesDataTypeCommandBuffer(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix], dataType mpscore.MPSDataType, commandBuffer metal.MTLCommandBuffer)
 	CreateWeightMatrices(matricesOut *foundation.NSMutableArray[*mpscore.MPSMatrix])

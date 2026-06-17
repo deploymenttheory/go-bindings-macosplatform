@@ -36,6 +36,12 @@ func NewXPCInterface() *XPCInterface {
 	return &XPCInterface{inner: raw.NSXPCInterfaceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XPCInterface) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCInterface {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetClassesForSelectorArgumentIndexOfReply calls the underlying SetClassesForSelectorArgumentIndexOfReply.
 func (x *XPCInterface) SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool) {
 	x.inner.SetClassesForSelectorArgumentIndexOfReply(classes, sel, arg, ofReply)
@@ -85,6 +91,7 @@ func (x *XPCInterface) asObject() *raw.NSObject { return &x.inner.NSObject }
 // XPCInterfaceable is the interface implemented by [XPCInterface], for mocking and DI.
 type XPCInterfaceable interface {
 	Unwrap() *raw.NSXPCInterface
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCInterface
 	SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool)
 	ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class]
 	SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool)

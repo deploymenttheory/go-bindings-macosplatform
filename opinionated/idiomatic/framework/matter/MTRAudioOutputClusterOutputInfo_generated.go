@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRAudioOutputClusterOutputInfo() *MTRAudioOutputClusterOutputInfo {
 	return &MTRAudioOutputClusterOutputInfo{inner: raw.MTRAudioOutputClusterOutputInfoFromID(_id)}
 }
 
+// WithIndex sets the index property and returns the receiver for chaining.
+func (x *MTRAudioOutputClusterOutputInfo) WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo {
+	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetIndex(index)
+	return x
+}
+
+// WithOutputType sets the outputType property and returns the receiver for chaining.
+func (x *MTRAudioOutputClusterOutputInfo) WithOutputType(outputType *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo {
+	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetOutputType(outputType)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRAudioOutputClusterOutputInfo) WithName(name string) *MTRAudioOutputClusterOutputInfo {
+	x.inner.MTRAudioOutputClusterOutputInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
 func (x *MTRAudioOutputClusterOutputInfo) asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct { return &x.inner.MTRAudioOutputClusterOutputInfoStruct }
 
 // MTRAudioOutputClusterOutputInfoable is the interface implemented by [MTRAudioOutputClusterOutputInfo], for mocking and DI.
 type MTRAudioOutputClusterOutputInfoable interface {
 	Unwrap() *raw.MTRAudioOutputClusterOutputInfo
+	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo
+	WithOutputType(outputType *foundation.NSNumber) *MTRAudioOutputClusterOutputInfo
+	WithName(name string) *MTRAudioOutputClusterOutputInfo
 }
 
 var _ MTRAudioOutputClusterOutputInfoable = (*MTRAudioOutputClusterOutputInfo)(nil)

@@ -49,6 +49,12 @@ func (x *AffineTransform) WithTransformStruct(transformStruct raw.NSAffineTransf
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AffineTransform) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AffineTransform {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // TranslateXByYBy calls the underlying TranslateXByYBy.
 func (x *AffineTransform) TranslateXByYBy(deltaX float64, deltaY float64) {
 	x.inner.TranslateXByYBy(deltaX, deltaY)
@@ -115,6 +121,7 @@ func (x *AffineTransform) asObject() *raw.NSObject { return &x.inner.NSObject }
 type AffineTransformable interface {
 	Unwrap() *raw.NSAffineTransform
 	WithTransformStruct(transformStruct raw.NSAffineTransformStruct) *AffineTransform
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AffineTransform
 	TranslateXByYBy(deltaX float64, deltaY float64)
 	RotateByDegrees(angle float64)
 	RotateByRadians(angle float64)

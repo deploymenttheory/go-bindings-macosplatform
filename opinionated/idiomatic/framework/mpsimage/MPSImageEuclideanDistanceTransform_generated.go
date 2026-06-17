@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -51,6 +52,24 @@ func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadiu
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageEuclideanDistanceTransform) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // SearchLimitRadius calls the underlying SearchLimitRadius.
 func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
 	return x.inner.SearchLimitRadius()
@@ -67,6 +86,9 @@ func (x *ImageEuclideanDistanceTransform) asUnaryImageKernel() *raw.MPSUnaryImag
 type ImageEuclideanDistanceTransformable interface {
 	Unwrap() *raw.MPSImageEuclideanDistanceTransform
 	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
+	WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform
+	WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform
 	SearchLimitRadius() float32
 	SetSearchLimitRadius(searchLimitRadius float32)
 }

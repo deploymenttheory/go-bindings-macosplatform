@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,18 @@ func NewCNNNeuronExponentialNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNN
 	return &CNNNeuronExponentialNode{inner: raw.MPSCNNNeuronExponentialNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronExponentialNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronExponentialNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronExponentialNode) WithLabel(label string) *CNNNeuronExponentialNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronExponentialNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronExponentialNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -50,6 +63,8 @@ func (x *CNNNeuronExponentialNode) asNNFilterNode() *raw.MPSNNFilterNode { retur
 // CNNNeuronExponentialNodeable is the interface implemented by [CNNNeuronExponentialNode], for mocking and DI.
 type CNNNeuronExponentialNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronExponentialNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronExponentialNode
+	WithLabel(label string) *CNNNeuronExponentialNode
 }
 
 var _ CNNNeuronExponentialNodeable = (*CNNNeuronExponentialNode)(nil)

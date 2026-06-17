@@ -85,6 +85,30 @@ func (x *MTRSubscribeParams) WithAutoResubscribe(autoResubscribe *foundation.NSN
 	return x
 }
 
+// WithFilterByFabric sets the filterByFabric property and returns the receiver for chaining.
+func (x *MTRSubscribeParams) WithFilterByFabric(filterByFabric bool) *MTRSubscribeParams {
+	x.inner.MTRReadParams.SetFilterByFabric(filterByFabric)
+	return x
+}
+
+// WithMinEventNumber sets the minEventNumber property and returns the receiver for chaining.
+func (x *MTRSubscribeParams) WithMinEventNumber(minEventNumber *foundation.NSNumber) *MTRSubscribeParams {
+	x.inner.MTRReadParams.SetMinEventNumber(minEventNumber)
+	return x
+}
+
+// WithAssumeUnknownAttributesReportable sets the assumeUnknownAttributesReportable property and returns the receiver for chaining.
+func (x *MTRSubscribeParams) WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRSubscribeParams {
+	x.inner.MTRReadParams.SetAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable)
+	return x
+}
+
+// WithFabricFiltered sets the fabricFiltered property and returns the receiver for chaining.
+func (x *MTRSubscribeParams) WithFabricFiltered(fabricFiltered *foundation.NSNumber) *MTRSubscribeParams {
+	x.inner.MTRReadParams.SetFabricFiltered(fabricFiltered)
+	return x
+}
+
 // ShouldReplaceExistingSubscriptions calls the underlying ShouldReplaceExistingSubscriptions.
 func (x *MTRSubscribeParams) ShouldReplaceExistingSubscriptions() bool {
 	return x.inner.ShouldReplaceExistingSubscriptions()
@@ -167,6 +191,10 @@ type MTRSubscribeParamsable interface {
 	WithReportEventsUrgently(reportEventsUrgently bool) *MTRSubscribeParams
 	WithKeepPreviousSubscriptions(keepPreviousSubscriptions *foundation.NSNumber) *MTRSubscribeParams
 	WithAutoResubscribe(autoResubscribe *foundation.NSNumber) *MTRSubscribeParams
+	WithFilterByFabric(filterByFabric bool) *MTRSubscribeParams
+	WithMinEventNumber(minEventNumber *foundation.NSNumber) *MTRSubscribeParams
+	WithAssumeUnknownAttributesReportable(assumeUnknownAttributesReportable bool) *MTRSubscribeParams
+	WithFabricFiltered(fabricFiltered *foundation.NSNumber) *MTRSubscribeParams
 	ShouldReplaceExistingSubscriptions() bool
 	SetReplaceExistingSubscriptions(replaceExistingSubscriptions bool)
 	ShouldResubscribeAutomatically() bool

@@ -35,6 +35,12 @@ func NewUnitArea() *UnitArea {
 	return &UnitArea{inner: raw.NSUnitAreaFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitArea) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitArea {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitArea) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitArea) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitArea) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit
 // UnitAreaable is the interface implemented by [UnitArea], for mocking and DI.
 type UnitAreaable interface {
 	Unwrap() *raw.NSUnitArea
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitArea
 }
 
 var _ UnitAreaable = (*UnitArea)(nil)

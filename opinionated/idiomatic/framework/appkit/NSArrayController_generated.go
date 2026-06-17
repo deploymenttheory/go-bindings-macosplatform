@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -105,6 +106,54 @@ func (x *ArrayController) WithSelectionIndexes(selectionIndexes *foundation.NSIn
 // WithSelectionIndex sets the selectionIndex property and returns the receiver for chaining.
 func (x *ArrayController) WithSelectionIndex(selectionIndex uint) *ArrayController {
 	x.inner.SetSelectionIndex(selectionIndex)
+	return x
+}
+
+// WithContent sets the content property and returns the receiver for chaining.
+func (x *ArrayController) WithContent(content objc.ID) *ArrayController {
+	x.inner.NSObjectController.SetContent(content)
+	return x
+}
+
+// WithAutomaticallyPreparesContent sets the automaticallyPreparesContent property and returns the receiver for chaining.
+func (x *ArrayController) WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController {
+	x.inner.NSObjectController.SetAutomaticallyPreparesContent(automaticallyPreparesContent)
+	return x
+}
+
+// WithObjectClass sets the objectClass property and returns the receiver for chaining.
+func (x *ArrayController) WithObjectClass(objectClass objc.Class) *ArrayController {
+	x.inner.NSObjectController.SetObjectClass(objectClass)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *ArrayController) WithEditable(editable bool) *ArrayController {
+	x.inner.NSObjectController.SetEditable(editable)
+	return x
+}
+
+// WithManagedObjectContext sets the managedObjectContext property and returns the receiver for chaining.
+func (x *ArrayController) WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ArrayController {
+	x.inner.NSObjectController.SetManagedObjectContext(managedObjectContext)
+	return x
+}
+
+// WithEntityName sets the entityName property and returns the receiver for chaining.
+func (x *ArrayController) WithEntityName(entityName string) *ArrayController {
+	x.inner.NSObjectController.SetEntityName(foundation.NSStringStringWithUTF8String(entityName))
+	return x
+}
+
+// WithFetchPredicate sets the fetchPredicate property and returns the receiver for chaining.
+func (x *ArrayController) WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ArrayController {
+	x.inner.NSObjectController.SetFetchPredicate(fetchPredicate)
+	return x
+}
+
+// WithUsesLazyFetching sets the usesLazyFetching property and returns the receiver for chaining.
+func (x *ArrayController) WithUsesLazyFetching(usesLazyFetching bool) *ArrayController {
+	x.inner.NSObjectController.SetUsesLazyFetching(usesLazyFetching)
 	return x
 }
 
@@ -349,6 +398,14 @@ type ArrayControllerable interface {
 	WithAlwaysUsesMultipleValuesMarker(alwaysUsesMultipleValuesMarker bool) *ArrayController
 	WithSelectionIndexes(selectionIndexes *foundation.NSIndexSet) *ArrayController
 	WithSelectionIndex(selectionIndex uint) *ArrayController
+	WithContent(content objc.ID) *ArrayController
+	WithAutomaticallyPreparesContent(automaticallyPreparesContent bool) *ArrayController
+	WithObjectClass(objectClass objc.Class) *ArrayController
+	WithEditable(editable bool) *ArrayController
+	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *ArrayController
+	WithEntityName(entityName string) *ArrayController
+	WithFetchPredicate(fetchPredicate *foundation.NSPredicate) *ArrayController
+	WithUsesLazyFetching(usesLazyFetching bool) *ArrayController
 	RearrangeObjects()
 	DidChangeArrangementCriteria()
 	ArrangeObjects(objects *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID]

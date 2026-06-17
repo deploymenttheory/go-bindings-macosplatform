@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,24 @@ func NewDOMDocumentFragment() *DOMDocumentFragment {
 	return &DOMDocumentFragment{inner: raw.DOMDocumentFragmentFromID(_id)}
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 func (x *DOMDocumentFragment) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
 
 func (x *DOMDocumentFragment) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
@@ -44,6 +63,9 @@ func (x *DOMDocumentFragment) asWebScriptObject() *raw.WebScriptObject { return 
 // DOMDocumentFragmentable is the interface implemented by [DOMDocumentFragment], for mocking and DI.
 type DOMDocumentFragmentable interface {
 	Unwrap() *raw.DOMDocumentFragment
+	WithNodeValue(nodeValue string) *DOMDocumentFragment
+	WithPrefix(prefix string) *DOMDocumentFragment
+	WithTextContent(textContent string) *DOMDocumentFragment
 }
 
 var _ DOMDocumentFragmentable = (*DOMDocumentFragment)(nil)

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestNotHandledParams() *MTRTestClusterClusterTestNo
 	return &MTRTestClusterClusterTestNotHandledParams{inner: raw.MTRTestClusterClusterTestNotHandledParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNotHandledParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNotHandledParams {
+	x.inner.MTRUnitTestingClusterTestNotHandledParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNotHandledParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNotHandledParams {
+	x.inner.MTRUnitTestingClusterTestNotHandledParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestNotHandledParams) asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams { return &x.inner.MTRUnitTestingClusterTestNotHandledParams }
 
 // MTRTestClusterClusterTestNotHandledParamsable is the interface implemented by [MTRTestClusterClusterTestNotHandledParams], for mocking and DI.
 type MTRTestClusterClusterTestNotHandledParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestNotHandledParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNotHandledParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNotHandledParams
 }
 
 var _ MTRTestClusterClusterTestNotHandledParamsable = (*MTRTestClusterClusterTestNotHandledParams)(nil)

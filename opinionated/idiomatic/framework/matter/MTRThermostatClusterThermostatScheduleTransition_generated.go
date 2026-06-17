@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 	return &MTRThermostatClusterThermostatScheduleTransition{inner: raw.MTRThermostatClusterThermostatScheduleTransitionFromID(_id)}
 }
 
+// WithTransitionTime sets the transitionTime property and returns the receiver for chaining.
+func (x *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition {
+	x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct.SetTransitionTime(transitionTime)
+	return x
+}
+
+// WithHeatSetpoint sets the heatSetpoint property and returns the receiver for chaining.
+func (x *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition {
+	x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct.SetHeatSetpoint(heatSetpoint)
+	return x
+}
+
+// WithCoolSetpoint sets the coolSetpoint property and returns the receiver for chaining.
+func (x *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition {
+	x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct.SetCoolSetpoint(coolSetpoint)
+	return x
+}
+
 func (x *MTRThermostatClusterThermostatScheduleTransition) asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct { return &x.inner.MTRThermostatClusterWeeklyScheduleTransitionStruct }
 
 // MTRThermostatClusterThermostatScheduleTransitionable is the interface implemented by [MTRThermostatClusterThermostatScheduleTransition], for mocking and DI.
 type MTRThermostatClusterThermostatScheduleTransitionable interface {
 	Unwrap() *raw.MTRThermostatClusterThermostatScheduleTransition
+	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition
+	WithHeatSetpoint(heatSetpoint *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition
+	WithCoolSetpoint(coolSetpoint *foundation.NSNumber) *MTRThermostatClusterThermostatScheduleTransition
 }
 
 var _ MTRThermostatClusterThermostatScheduleTransitionable = (*MTRThermostatClusterThermostatScheduleTransition)(nil)

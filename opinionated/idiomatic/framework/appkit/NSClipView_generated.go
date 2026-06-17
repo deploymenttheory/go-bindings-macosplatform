@@ -7,8 +7,11 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // ClipView wraps [raw.NSClipView] with a fluent Go API.
@@ -76,6 +79,340 @@ func (x *ClipView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsCon
 // WithCopiesOnScroll sets the copiesOnScroll property and returns the receiver for chaining.
 func (x *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
 	x.inner.SetCopiesOnScroll(copiesOnScroll)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *ClipView) WithSubviews(items ...ViewProvider) *ClipView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *ClipView) WithHidden(hidden bool) *ClipView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *ClipView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *ClipView) WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *ClipView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ClipView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *ClipView) WithFrame(frame corefoundation.CGRect) *ClipView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *ClipView) WithFrameRotation(frameRotation float64) *ClipView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *ClipView) WithFrameCenterRotation(frameCenterRotation float64) *ClipView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *ClipView) WithBoundsRotation(boundsRotation float64) *ClipView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *ClipView) WithBounds(bounds corefoundation.CGRect) *ClipView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *ClipView) WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *ClipView) WithNeedsDisplay(needsDisplay bool) *ClipView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *ClipView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *ClipView) WithWantsRestingTouches(wantsRestingTouches bool) *ClipView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ClipView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *ClipView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ClipView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *ClipView) WithWantsLayer(wantsLayer bool) *ClipView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *ClipView) WithLayer(layer *quartzcore.CALayer) *ClipView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *ClipView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *ClipView) WithNeedsLayout(needsLayout bool) *ClipView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *ClipView) WithAlphaValue(alphaValue float64) *ClipView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *ClipView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ClipView) WithBackgroundFilters(items ...*coreimage.CIFilter) *ClipView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *ClipView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ClipView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *ClipView) WithContentFilters(items ...*coreimage.CIFilter) *ClipView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *ClipView) WithShadow(shadow *raw.NSShadow) *ClipView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *ClipView) WithClipsToBounds(clipsToBounds bool) *ClipView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *ClipView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *ClipView) WithToolTip(toolTip string) *ClipView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ClipView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *ClipView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *ClipView) WithFocusRingType(focusRingType raw.NSFocusRingType) *ClipView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *ClipView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClipView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *ClipView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ClipView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *ClipView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *ClipView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ClipView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *ClipView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *ClipView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *ClipView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClipView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *ClipView) WithMenu(menu *raw.NSMenu) *ClipView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *ClipView) WithUserActivity(userActivity *foundation.NSUserActivity) *ClipView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *ClipView) WithTouchBar(touchBar *raw.NSTouchBar) *ClipView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -210,6 +547,55 @@ type ClipViewable interface {
 	WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView
 	WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView
 	WithCopiesOnScroll(copiesOnScroll bool) *ClipView
+	WithSubviews(items ...ViewProvider) *ClipView
+	WithHidden(hidden bool) *ClipView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *ClipView
+	WithFrame(frame corefoundation.CGRect) *ClipView
+	WithFrameRotation(frameRotation float64) *ClipView
+	WithFrameCenterRotation(frameCenterRotation float64) *ClipView
+	WithBoundsRotation(boundsRotation float64) *ClipView
+	WithBounds(bounds corefoundation.CGRect) *ClipView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView
+	WithNeedsDisplay(needsDisplay bool) *ClipView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView
+	WithWantsRestingTouches(wantsRestingTouches bool) *ClipView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *ClipView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *ClipView
+	WithWantsLayer(wantsLayer bool) *ClipView
+	WithLayer(layer *quartzcore.CALayer) *ClipView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView
+	WithNeedsLayout(needsLayout bool) *ClipView
+	WithAlphaValue(alphaValue float64) *ClipView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *ClipView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *ClipView
+	WithContentFilters(items ...*coreimage.CIFilter) *ClipView
+	WithShadow(shadow *raw.NSShadow) *ClipView
+	WithClipsToBounds(clipsToBounds bool) *ClipView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView
+	WithToolTip(toolTip string) *ClipView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *ClipView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView
+	WithNextKeyView(nextKeyView ViewProvider) *ClipView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *ClipView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *ClipView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *ClipView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *ClipView
+	WithNextResponder(nextResponder ResponderProvider) *ClipView
+	WithMenu(menu *raw.NSMenu) *ClipView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *ClipView
+	WithTouchBar(touchBar *raw.NSTouchBar) *ClipView
 	ViewFrameChanged(notification *foundation.NSNotification)
 	ViewBoundsChanged(notification *foundation.NSNotification)
 	ScrollToPoint(newOrigin corefoundation.CGPoint)

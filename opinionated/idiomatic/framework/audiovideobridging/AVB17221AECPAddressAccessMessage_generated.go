@@ -54,6 +54,42 @@ func (x *AVB17221AECPAddressAccessMessage) WithTlvs(items ...*raw.AVB17221AECPAd
 	return x
 }
 
+// WithMessageType sets the messageType property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+	return x
+}
+
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(status)
+	return x
+}
+
+// WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
+	return x
+}
+
+// WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
+	return x
+}
+
+// WithSequenceID sets the sequenceID property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
+	return x
+}
+
+// WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
+func (x *AVB17221AECPAddressAccessMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAddressAccessMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+	return x
+}
+
 // Tlvs returns the collection as a Go slice.
 func (x *AVB17221AECPAddressAccessMessage) Tlvs() []*raw.AVB17221AECPAddressAccessTLV {
 	arr := x.inner.Tlvs()
@@ -76,6 +112,12 @@ func (x *AVB17221AECPAddressAccessMessage) asAVB17221AECPMessage() *raw.AVB17221
 type AVB17221AECPAddressAccessMessageable interface {
 	Unwrap() *raw.AVB17221AECPAddressAccessMessage
 	WithTlvs(items ...*raw.AVB17221AECPAddressAccessTLV) *AVB17221AECPAddressAccessMessage
+	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPAddressAccessMessage
+	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPAddressAccessMessage
+	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPAddressAccessMessage
+	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPAddressAccessMessage
+	WithSequenceID(sequenceID uint16) *AVB17221AECPAddressAccessMessage
+	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPAddressAccessMessage
 	Tlvs() []*raw.AVB17221AECPAddressAccessTLV
 	SetTlvs(tlvs *foundation.NSArray[*raw.AVB17221AECPAddressAccessTLV])
 }

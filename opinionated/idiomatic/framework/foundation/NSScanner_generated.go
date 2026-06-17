@@ -61,6 +61,12 @@ func (x *Scanner) WithLocale(locale objc.ID) *Scanner {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Scanner) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Scanner {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // String calls the underlying String.
 func (x *Scanner) String() *String {
 	_r := x.inner.String()
@@ -203,6 +209,7 @@ type Scannerable interface {
 	WithCharactersToBeSkipped(charactersToBeSkipped CharacterSetProvider) *Scanner
 	WithCaseSensitive(caseSensitive bool) *Scanner
 	WithLocale(locale objc.ID) *Scanner
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Scanner
 	String() *String
 	ScanLocation() uint
 	SetScanLocation(scanLocation uint)

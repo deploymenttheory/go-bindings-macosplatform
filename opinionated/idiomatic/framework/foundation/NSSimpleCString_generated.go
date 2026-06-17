@@ -35,6 +35,12 @@ func NewSimpleCString() *SimpleCString {
 	return &SimpleCString{inner: raw.NSSimpleCStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SimpleCString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SimpleCString {
+	x.inner.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *SimpleCString) asSimpleCString() *raw.NSSimpleCString { return x.inner }
 
 func (x *SimpleCString) asString() *raw.NSString { return &x.inner.NSString }
@@ -44,6 +50,7 @@ func (x *SimpleCString) asObject() *raw.NSObject { return &x.inner.NSString.NSOb
 // SimpleCStringable is the interface implemented by [SimpleCString], for mocking and DI.
 type SimpleCStringable interface {
 	Unwrap() *raw.NSSimpleCString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SimpleCString
 }
 
 var _ SimpleCStringable = (*SimpleCString)(nil)

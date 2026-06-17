@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,156 @@ func NewCNNMultiplyWithDevice(device metal.MTLDevice) *CNNMultiply {
 	return &CNNMultiply{inner: raw.MPSCNNMultiplyFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryScale(primaryScale float32) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryScale(secondaryScale float32) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *CNNMultiply) WithBias(bias float32) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *CNNMultiply) WithMinimumValue(minimumValue float32) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *CNNMultiply) WithMaximumValue(maximumValue float32) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNMultiply) WithClipRect(clipRect metal.MTLRegion) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNMultiply) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNMultiply) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNMultiply) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNMultiply) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNMultiply) WithOptions(options mpscore.MPSKernelOptions) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNMultiply) WithLabel(label string) *CNNMultiply {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNMultiply) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
 func (x *CNNMultiply) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
@@ -48,6 +199,31 @@ func (x *CNNMultiply) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArit
 // CNNMultiplyable is the interface implemented by [CNNMultiply], for mocking and DI.
 type CNNMultiplyable interface {
 	Unwrap() *raw.MPSCNNMultiply
+	WithPrimaryScale(primaryScale float32) *CNNMultiply
+	WithSecondaryScale(secondaryScale float32) *CNNMultiply
+	WithBias(bias float32) *CNNMultiply
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNMultiply
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNMultiply
+	WithMinimumValue(minimumValue float32) *CNNMultiply
+	WithMaximumValue(maximumValue float32) *CNNMultiply
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNMultiply
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNMultiply
+	WithClipRect(clipRect metal.MTLRegion) *CNNMultiply
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNMultiply
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNMultiply
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNMultiply
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNMultiply
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNMultiply
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNMultiply
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNMultiply
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNMultiply
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNMultiply
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNMultiply
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNMultiply
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNMultiply
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNMultiply
+	WithOptions(options mpscore.MPSKernelOptions) *CNNMultiply
+	WithLabel(label string) *CNNMultiply
 }
 
 var _ CNNMultiplyable = (*CNNMultiply)(nil)

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +50,18 @@ func (x *NNGramMatrixCalculationNode) WithPropertyCallBack(propertyCallBack raw.
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationNode) WithLabel(label string) *NNGramMatrixCalculationNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *NNGramMatrixCalculationNode) Alpha() float32 {
 	return x.inner.Alpha()
@@ -70,6 +83,8 @@ func (x *NNGramMatrixCalculationNode) asNNFilterNode() *raw.MPSNNFilterNode { re
 type NNGramMatrixCalculationNodeable interface {
 	Unwrap() *raw.MPSNNGramMatrixCalculationNode
 	WithPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback) *NNGramMatrixCalculationNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationNode
+	WithLabel(label string) *NNGramMatrixCalculationNode
 	Alpha() float32
 	PropertyCallBack() raw.MPSNNGramMatrixCallback
 	SetPropertyCallBack(propertyCallBack raw.MPSNNGramMatrixCallback)

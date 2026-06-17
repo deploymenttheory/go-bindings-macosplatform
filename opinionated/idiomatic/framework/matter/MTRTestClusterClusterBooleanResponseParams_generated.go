@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterBooleanResponseParams() *MTRTestClusterClusterBoole
 	return &MTRTestClusterClusterBooleanResponseParams{inner: raw.MTRTestClusterClusterBooleanResponseParamsFromID(_id)}
 }
 
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterBooleanResponseParams) WithValue(value *foundation.NSNumber) *MTRTestClusterClusterBooleanResponseParams {
+	x.inner.MTRUnitTestingClusterBooleanResponseParams.SetValue(value)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterBooleanResponseParams {
+	x.inner.MTRUnitTestingClusterBooleanResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams { return &x.inner.MTRUnitTestingClusterBooleanResponseParams }
 
 // MTRTestClusterClusterBooleanResponseParamsable is the interface implemented by [MTRTestClusterClusterBooleanResponseParams], for mocking and DI.
 type MTRTestClusterClusterBooleanResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterBooleanResponseParams
+	WithValue(value *foundation.NSNumber) *MTRTestClusterClusterBooleanResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterBooleanResponseParams
 }
 
 var _ MTRTestClusterClusterBooleanResponseParamsable = (*MTRTestClusterClusterBooleanResponseParams)(nil)

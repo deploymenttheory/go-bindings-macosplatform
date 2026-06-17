@@ -48,6 +48,36 @@ func (x *XMLDTD) WithSystemID(systemID string) *XMLDTD {
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *XMLDTD) WithName(name string) *XMLDTD {
+	x.inner.NSXMLNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *XMLDTD) WithObjectValue(objectValue objc.ID) *XMLDTD {
+	x.inner.NSXMLNode.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *XMLDTD) WithStringValue(stringValue string) *XMLDTD {
+	x.inner.NSXMLNode.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithURI sets the uRI property and returns the receiver for chaining.
+func (x *XMLDTD) WithURI(uRI string) *XMLDTD {
+	x.inner.NSXMLNode.SetURI(foundation.NSStringStringWithUTF8String(uRI))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XMLDTD) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTD {
+	x.inner.NSXMLNode.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // InsertChildAtIndex calls the underlying InsertChildAtIndex.
 func (x *XMLDTD) InsertChildAtIndex(child *raw.NSXMLNode, index uint) {
 	x.inner.InsertChildAtIndex(child, index)
@@ -151,6 +181,11 @@ type XMLDTDable interface {
 	Unwrap() *raw.NSXMLDTD
 	WithPublicID(publicID string) *XMLDTD
 	WithSystemID(systemID string) *XMLDTD
+	WithName(name string) *XMLDTD
+	WithObjectValue(objectValue objc.ID) *XMLDTD
+	WithStringValue(stringValue string) *XMLDTD
+	WithURI(uRI string) *XMLDTD
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XMLDTD
 	InsertChildAtIndex(child *raw.NSXMLNode, index uint)
 	InsertChildrenAtIndex(children *raw.NSArray[*raw.NSXMLNode], index uint)
 	RemoveChildAtIndex(index uint)

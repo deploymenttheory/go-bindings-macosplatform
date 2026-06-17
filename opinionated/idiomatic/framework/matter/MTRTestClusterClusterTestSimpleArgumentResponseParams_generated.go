@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestSimpleArgumentResponseParams() *MTRTestClusterC
 	return &MTRTestClusterClusterTestSimpleArgumentResponseParams{inner: raw.MTRTestClusterClusterTestSimpleArgumentResponseParamsFromID(_id)}
 }
 
+// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSimpleArgumentResponseParams) WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentResponseParams {
+	x.inner.MTRUnitTestingClusterTestSimpleArgumentResponseParams.SetReturnValue(returnValue)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestSimpleArgumentResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentResponseParams {
+	x.inner.MTRUnitTestingClusterTestSimpleArgumentResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestSimpleArgumentResponseParams) asMTRUnitTestingClusterTestSimpleArgumentResponseParams() *raw.MTRUnitTestingClusterTestSimpleArgumentResponseParams { return &x.inner.MTRUnitTestingClusterTestSimpleArgumentResponseParams }
 
 // MTRTestClusterClusterTestSimpleArgumentResponseParamsable is the interface implemented by [MTRTestClusterClusterTestSimpleArgumentResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestSimpleArgumentResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestSimpleArgumentResponseParams
+	WithReturnValue(returnValue *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSimpleArgumentResponseParams
 }
 
 var _ MTRTestClusterClusterTestSimpleArgumentResponseParamsable = (*MTRTestClusterClusterTestSimpleArgumentResponseParams)(nil)

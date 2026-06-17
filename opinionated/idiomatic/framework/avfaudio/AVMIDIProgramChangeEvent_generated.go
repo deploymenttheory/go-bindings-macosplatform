@@ -42,6 +42,12 @@ func (x *MIDIProgramChangeEvent) WithProgramNumber(programNumber uint) *MIDIProg
 	return x
 }
 
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MIDIProgramChangeEvent) WithChannel(channel uint) *MIDIProgramChangeEvent {
+	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+	return x
+}
+
 // ProgramNumber calls the underlying ProgramNumber.
 func (x *MIDIProgramChangeEvent) ProgramNumber() uint {
 	return x.inner.ProgramNumber()
@@ -60,6 +66,7 @@ func (x *MIDIProgramChangeEvent) asMusicEvent() *raw.AVMusicEvent { return &x.in
 type MIDIProgramChangeEventable interface {
 	Unwrap() *raw.AVMIDIProgramChangeEvent
 	WithProgramNumber(programNumber uint) *MIDIProgramChangeEvent
+	WithChannel(channel uint) *MIDIProgramChangeEvent
 	ProgramNumber() uint
 	SetProgramNumber(programNumber uint)
 }

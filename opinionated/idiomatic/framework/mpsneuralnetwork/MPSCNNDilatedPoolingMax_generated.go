@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,54 @@ func NewCNNDilatedPoolingMaxWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &CNNDilatedPoolingMax{inner: raw.MPSCNNDilatedPoolingMaxFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithOffset(offset mpscore.MPSOffset) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMax) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMax {
+	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNDilatedPoolingMax) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.MPSCNNPooling }
 
 func (x *CNNDilatedPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNPooling.MPSCNNKernel }
@@ -52,6 +101,14 @@ func (x *CNNDilatedPoolingMax) asCNNKernel() *raw.MPSCNNKernel { return &x.inner
 // CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
 type CNNDilatedPoolingMaxable interface {
 	Unwrap() *raw.MPSCNNDilatedPoolingMax
+	WithOffset(offset mpscore.MPSOffset) *CNNDilatedPoolingMax
+	WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMax
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMax
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDilatedPoolingMax
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMax
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMax
+	WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMax
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMax
 }
 
 var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)

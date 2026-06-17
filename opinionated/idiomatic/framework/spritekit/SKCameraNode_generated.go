@@ -5,9 +5,11 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CameraNode wraps [raw.SKCameraNode] with a fluent Go API.
@@ -36,6 +38,166 @@ func NewCameraNode() *CameraNode {
 	return &CameraNode{inner: raw.SKCameraNodeFromID(_id)}
 }
 
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *CameraNode) WithPosition(position corefoundation.CGPoint) *CameraNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *CameraNode) WithZPosition(zPosition float64) *CameraNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *CameraNode) WithZRotation(zRotation float64) *CameraNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *CameraNode) WithXScale(xScale float64) *CameraNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *CameraNode) WithYScale(yScale float64) *CameraNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *CameraNode) WithSpeed(speed float64) *CameraNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *CameraNode) WithAlpha(alpha float64) *CameraNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *CameraNode) WithPaused(paused bool) *CameraNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *CameraNode) WithHidden(hidden bool) *CameraNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *CameraNode) WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *CameraNode) WithName(name string) *CameraNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *CameraNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CameraNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *CameraNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CameraNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *CameraNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CameraNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *CameraNode) WithConstraints(items ...*raw.SKConstraint) *CameraNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *CameraNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CameraNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityElement(accessibilityElement bool) *CameraNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityRole(accessibilityRole string) *CameraNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityParent(accessibilityParent objc.ID) *CameraNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityHelp(accessibilityHelp string) *CameraNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityLabel(accessibilityLabel string) *CameraNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *CameraNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CameraNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	return x
+}
+
 // ContainsNode calls the underlying ContainsNode.
 func (x *CameraNode) ContainsNode(node *raw.SKNode) bool {
 	return x.inner.ContainsNode(node)
@@ -51,6 +213,31 @@ func (x *CameraNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 // CameraNodeable is the interface implemented by [CameraNode], for mocking and DI.
 type CameraNodeable interface {
 	Unwrap() *raw.SKCameraNode
+	WithPosition(position corefoundation.CGPoint) *CameraNode
+	WithZPosition(zPosition float64) *CameraNode
+	WithZRotation(zRotation float64) *CameraNode
+	WithXScale(xScale float64) *CameraNode
+	WithYScale(yScale float64) *CameraNode
+	WithSpeed(speed float64) *CameraNode
+	WithAlpha(alpha float64) *CameraNode
+	WithPaused(paused bool) *CameraNode
+	WithHidden(hidden bool) *CameraNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *CameraNode
+	WithName(name string) *CameraNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *CameraNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *CameraNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *CameraNode
+	WithConstraints(items ...*raw.SKConstraint) *CameraNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *CameraNode
+	WithAccessibilityElement(accessibilityElement bool) *CameraNode
+	WithAccessibilityRole(accessibilityRole string) *CameraNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *CameraNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *CameraNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *CameraNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *CameraNode
+	WithAccessibilityHelp(accessibilityHelp string) *CameraNode
+	WithAccessibilityLabel(accessibilityLabel string) *CameraNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *CameraNode
 	ContainsNode(node *raw.SKNode) bool
 	ContainedNodeSet() *foundation.NSSet[*raw.SKNode]
 }

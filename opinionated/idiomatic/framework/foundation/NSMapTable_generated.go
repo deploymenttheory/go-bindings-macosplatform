@@ -43,6 +43,12 @@ func NewMapTableWithKeyPointerFunctionsValuePointerFunctionsCapacity(keyFunction
 	return &MapTable{inner: raw.NSMapTableFromID[objc.ID, objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MapTable) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MapTable {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *MapTable) ObjectForKey(aKey objc.ID) objc.ID {
 	return x.inner.ObjectForKey(aKey)
@@ -106,6 +112,7 @@ func (x *MapTable) asObject() *raw.NSObject { return &x.inner.NSObject }
 // MapTableable is the interface implemented by [MapTable], for mocking and DI.
 type MapTableable interface {
 	Unwrap() *raw.NSMapTable[objc.ID, objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MapTable
 	ObjectForKey(aKey objc.ID) objc.ID
 	RemoveObjectForKey(aKey objc.ID)
 	SetObjectForKey(anObject objc.ID, aKey objc.ID)

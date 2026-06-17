@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -61,6 +62,18 @@ func (x *MatrixUnaryKernel) WithBatchSize(batchSize uint) *MatrixUnaryKernel {
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixUnaryKernel) WithOptions(options mpscore.MPSKernelOptions) *MatrixUnaryKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixUnaryKernel) WithLabel(label string) *MatrixUnaryKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SourceMatrixOrigin calls the underlying SourceMatrixOrigin.
 func (x *MatrixUnaryKernel) SourceMatrixOrigin() metal.MTLOrigin {
 	return x.inner.SourceMatrixOrigin()
@@ -110,6 +123,8 @@ type MatrixUnaryKernelable interface {
 	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixUnaryKernel
 	WithBatchStart(batchStart uint) *MatrixUnaryKernel
 	WithBatchSize(batchSize uint) *MatrixUnaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixUnaryKernel
+	WithLabel(label string) *MatrixUnaryKernel
 	SourceMatrixOrigin() metal.MTLOrigin
 	SetSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin)
 	ResultMatrixOrigin() metal.MTLOrigin

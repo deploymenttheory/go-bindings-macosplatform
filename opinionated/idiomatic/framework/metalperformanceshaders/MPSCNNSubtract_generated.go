@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,156 @@ func NewCNNSubtractWithDevice(device metal.MTLDevice) *CNNSubtract {
 	return &CNNSubtract{inner: raw.MPSCNNSubtractFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryScale(primaryScale float32) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryScale(secondaryScale float32) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *CNNSubtract) WithBias(bias float32) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *CNNSubtract) WithMinimumValue(minimumValue float32) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *CNNSubtract) WithMaximumValue(maximumValue float32) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNSubtract) WithClipRect(clipRect metal.MTLRegion) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtract) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNSubtract) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNSubtract) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNSubtract) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNSubtract) WithOptions(options mpscore.MPSKernelOptions) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNSubtract) WithLabel(label string) *CNNSubtract {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNSubtract) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic { return &x.inner.MPSCNNArithmetic }
 
 func (x *CNNSubtract) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel }
@@ -48,6 +199,31 @@ func (x *CNNSubtract) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNArit
 // CNNSubtractable is the interface implemented by [CNNSubtract], for mocking and DI.
 type CNNSubtractable interface {
 	Unwrap() *raw.MPSCNNSubtract
+	WithPrimaryScale(primaryScale float32) *CNNSubtract
+	WithSecondaryScale(secondaryScale float32) *CNNSubtract
+	WithBias(bias float32) *CNNSubtract
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *CNNSubtract
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNSubtract
+	WithMinimumValue(minimumValue float32) *CNNSubtract
+	WithMaximumValue(maximumValue float32) *CNNSubtract
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNSubtract
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNSubtract
+	WithClipRect(clipRect metal.MTLRegion) *CNNSubtract
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSubtract
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNSubtract
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNSubtract
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNSubtract
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNSubtract
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtract
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNSubtract
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNSubtract
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNSubtract
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNSubtract
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNSubtract
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSubtract
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSubtract
+	WithOptions(options mpscore.MPSKernelOptions) *CNNSubtract
+	WithLabel(label string) *CNNSubtract
 }
 
 var _ CNNSubtractable = (*CNNSubtract)(nil)

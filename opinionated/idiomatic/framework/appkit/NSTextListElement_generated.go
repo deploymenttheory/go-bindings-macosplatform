@@ -37,6 +37,18 @@ func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildEle
 	return &TextListElement{inner: raw.NSTextListElementFromID(_id)}
 }
 
+// WithTextContentManager sets the textContentManager property and returns the receiver for chaining.
+func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
+	x.inner.NSTextParagraph.NSTextElement.SetTextContentManager(textContentManager.asTextContentManager())
+	return x
+}
+
+// WithElementRange sets the elementRange property and returns the receiver for chaining.
+func (x *TextListElement) WithElementRange(elementRange *raw.NSTextRange) *TextListElement {
+	x.inner.NSTextParagraph.NSTextElement.SetElementRange(elementRange)
+	return x
+}
+
 // TextList calls the underlying TextList.
 func (x *TextListElement) TextList() *TextList {
 	_r := x.inner.TextList()
@@ -63,6 +75,8 @@ func (x *TextListElement) asTextElement() *raw.NSTextElement { return &x.inner.N
 // TextListElementable is the interface implemented by [TextListElement], for mocking and DI.
 type TextListElementable interface {
 	Unwrap() *raw.NSTextListElement
+	WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement
+	WithElementRange(elementRange *raw.NSTextRange) *TextListElement
 	TextList() *TextList
 	Contents() *foundation.NSAttributedString
 	MarkerAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]

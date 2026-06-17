@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,11 +38,25 @@ func NewCNNLogSoftMaxNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode)
 	return &CNNLogSoftMaxNode{inner: raw.MPSCNNLogSoftMaxNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLogSoftMaxNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNLogSoftMaxNode) WithLabel(label string) *CNNLogSoftMaxNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNLogSoftMaxNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // CNNLogSoftMaxNodeable is the interface implemented by [CNNLogSoftMaxNode], for mocking and DI.
 type CNNLogSoftMaxNodeable interface {
 	Unwrap() *raw.MPSCNNLogSoftMaxNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNLogSoftMaxNode
+	WithLabel(label string) *CNNLogSoftMaxNode
 }
 
 var _ CNNLogSoftMaxNodeable = (*CNNLogSoftMaxNode)(nil)

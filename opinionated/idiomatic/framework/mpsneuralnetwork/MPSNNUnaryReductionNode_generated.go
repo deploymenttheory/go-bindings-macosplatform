@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -43,6 +44,18 @@ func (x *NNUnaryReductionNode) WithClipRectSource(clipRectSource metal.MTLRegion
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNUnaryReductionNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNUnaryReductionNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNUnaryReductionNode) WithLabel(label string) *NNUnaryReductionNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ClipRectSource calls the underlying ClipRectSource.
 func (x *NNUnaryReductionNode) ClipRectSource() metal.MTLRegion {
 	return x.inner.ClipRectSource()
@@ -61,6 +74,8 @@ func (x *NNUnaryReductionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x
 type NNUnaryReductionNodeable interface {
 	Unwrap() *raw.MPSNNUnaryReductionNode
 	WithClipRectSource(clipRectSource metal.MTLRegion) *NNUnaryReductionNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNUnaryReductionNode
+	WithLabel(label string) *NNUnaryReductionNode
 	ClipRectSource() metal.MTLRegion
 	SetClipRectSource(clipRectSource metal.MTLRegion)
 }

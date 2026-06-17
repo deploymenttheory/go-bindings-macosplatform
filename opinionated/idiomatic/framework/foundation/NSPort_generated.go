@@ -35,6 +35,12 @@ func NewPort() *Port {
 	return &Port{inner: raw.NSPortFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Port) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Port {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Invalidate calls the underlying Invalidate.
 func (x *Port) Invalidate() {
 	x.inner.Invalidate()
@@ -97,6 +103,7 @@ func (x *Port) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Portable is the interface implemented by [Port], for mocking and DI.
 type Portable interface {
 	Unwrap() *raw.NSPort
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Port
 	Invalidate()
 	SetDelegate(anObject raw.NSPortDelegate)
 	Delegate() raw.NSPortDelegate

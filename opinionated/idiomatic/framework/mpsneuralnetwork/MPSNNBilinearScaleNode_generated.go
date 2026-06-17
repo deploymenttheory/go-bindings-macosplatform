@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewNNBilinearScaleNode() *NNBilinearScaleNode {
 	return &NNBilinearScaleNode{inner: raw.MPSNNBilinearScaleNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNBilinearScaleNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNBilinearScaleNode {
+	x.inner.MPSNNScaleNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNBilinearScaleNode) WithLabel(label string) *NNBilinearScaleNode {
+	x.inner.MPSNNScaleNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNBilinearScaleNode) asNNScaleNode() *raw.MPSNNScaleNode { return &x.inner.MPSNNScaleNode }
 
 func (x *NNBilinearScaleNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNScaleNode.MPSNNFilterNode }
@@ -42,6 +55,8 @@ func (x *NNBilinearScaleNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.
 // NNBilinearScaleNodeable is the interface implemented by [NNBilinearScaleNode], for mocking and DI.
 type NNBilinearScaleNodeable interface {
 	Unwrap() *raw.MPSNNBilinearScaleNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNBilinearScaleNode
+	WithLabel(label string) *NNBilinearScaleNode
 }
 
 var _ NNBilinearScaleNodeable = (*NNBilinearScaleNode)(nil)

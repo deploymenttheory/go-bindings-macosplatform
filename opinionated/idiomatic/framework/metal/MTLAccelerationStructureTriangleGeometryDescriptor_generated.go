@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -98,6 +99,54 @@ func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatr
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
 func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
+	return x
+}
+
+// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetOpaque(opaque)
+	return x
+}
+
+// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
+	return x
+}
+
+// WithPrimitiveDataBufferOffset sets the primitiveDataBufferOffset property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataBufferOffset(primitiveDataBufferOffset)
+	return x
+}
+
+// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
+	return x
+}
+
+// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
+func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureTriangleGeometryDescriptor {
+	x.inner.MTLAccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
@@ -227,6 +276,14 @@ type AccelerationStructureTriangleGeometryDescriptorable interface {
 	WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor
 	WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor
 	WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *AccelerationStructureTriangleGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *AccelerationStructureTriangleGeometryDescriptor
+	WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor
+	WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTLBuffer) *AccelerationStructureTriangleGeometryDescriptor
+	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset uint) *AccelerationStructureTriangleGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *AccelerationStructureTriangleGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *AccelerationStructureTriangleGeometryDescriptor
 	VertexBuffer() raw.MTLBuffer
 	SetVertexBuffer(vertexBuffer raw.MTLBuffer)
 	VertexBufferOffset() uint

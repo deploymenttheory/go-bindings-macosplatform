@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,109 @@ func NewMTRThreadNetworkDiagnosticsClusterNeighborTable() *MTRThreadNetworkDiagn
 	return &MTRThreadNetworkDiagnosticsClusterNeighborTable{inner: raw.MTRThreadNetworkDiagnosticsClusterNeighborTableFromID(_id)}
 }
 
+// WithExtAddress sets the extAddress property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetExtAddress(extAddress)
+	return x
+}
+
+// WithAge sets the age property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetAge(age)
+	return x
+}
+
+// WithRloc16 sets the rloc16 property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetRloc16(rloc16)
+	return x
+}
+
+// WithLinkFrameCounter sets the linkFrameCounter property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLinkFrameCounter(linkFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLinkFrameCounter(linkFrameCounter)
+	return x
+}
+
+// WithMleFrameCounter sets the mleFrameCounter property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMleFrameCounter(mleFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetMleFrameCounter(mleFrameCounter)
+	return x
+}
+
+// WithLqi sets the lqi property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLqi(lqi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLqi(lqi)
+	return x
+}
+
+// WithAverageRssi sets the averageRssi property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAverageRssi(averageRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetAverageRssi(averageRssi)
+	return x
+}
+
+// WithLastRssi sets the lastRssi property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLastRssi(lastRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLastRssi(lastRssi)
+	return x
+}
+
+// WithFrameErrorRate sets the frameErrorRate property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFrameErrorRate(frameErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFrameErrorRate(frameErrorRate)
+	return x
+}
+
+// WithMessageErrorRate sets the messageErrorRate property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMessageErrorRate(messageErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetMessageErrorRate(messageErrorRate)
+	return x
+}
+
+// WithRxOnWhenIdle sets the rxOnWhenIdle property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetRxOnWhenIdle(rxOnWhenIdle)
+	return x
+}
+
+// WithFullThreadDevice sets the fullThreadDevice property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullThreadDevice(fullThreadDevice *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFullThreadDevice(fullThreadDevice)
+	return x
+}
+
+// WithFullNetworkData sets the fullNetworkData property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullNetworkData(fullNetworkData *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFullNetworkData(fullNetworkData)
+	return x
+}
+
+// WithIsChild sets the isChild property and returns the receiver for chaining.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithIsChild(isChild *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetIsChild(isChild)
+	return x
+}
+
 func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct { return &x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct }
 
 // MTRThreadNetworkDiagnosticsClusterNeighborTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNeighborTable], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterNeighborTableable interface {
 	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLinkFrameCounter(linkFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithMleFrameCounter(mleFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLqi(lqi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithAverageRssi(averageRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLastRssi(lastRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFrameErrorRate(frameErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithMessageErrorRate(messageErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFullThreadDevice(fullThreadDevice *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFullNetworkData(fullNetworkData *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithIsChild(isChild *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterNeighborTableable = (*MTRThreadNetworkDiagnosticsClusterNeighborTable)(nil)

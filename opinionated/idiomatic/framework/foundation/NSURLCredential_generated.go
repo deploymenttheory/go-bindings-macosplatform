@@ -52,6 +52,12 @@ func NewURLCredentialWithTrust(trust unsafe.Pointer) *URLCredential {
 	return &URLCredential{inner: raw.NSURLCredentialFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLCredential) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredential {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Persistence calls the underlying Persistence.
 func (x *URLCredential) Persistence() raw.NSURLCredentialPersistence {
 	return x.inner.Persistence()
@@ -95,6 +101,7 @@ func (x *URLCredential) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLCredentialable is the interface implemented by [URLCredential], for mocking and DI.
 type URLCredentialable interface {
 	Unwrap() *raw.NSURLCredential
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCredential
 	Persistence() raw.NSURLCredentialPersistence
 	User() *String
 	Password() *String

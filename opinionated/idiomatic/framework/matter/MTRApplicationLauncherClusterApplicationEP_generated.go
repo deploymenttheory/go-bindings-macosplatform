@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRApplicationLauncherClusterApplicationEP() *MTRApplicationLauncherClus
 	return &MTRApplicationLauncherClusterApplicationEP{inner: raw.MTRApplicationLauncherClusterApplicationEPFromID(_id)}
 }
 
+// WithApplication sets the application property and returns the receiver for chaining.
+func (x *MTRApplicationLauncherClusterApplicationEP) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP {
+	x.inner.MTRApplicationLauncherClusterApplicationEPStruct.SetApplication(application.asMTRApplicationLauncherClusterApplicationStruct())
+	return x
+}
+
+// WithEndpoint sets the endpoint property and returns the receiver for chaining.
+func (x *MTRApplicationLauncherClusterApplicationEP) WithEndpoint(endpoint *foundation.NSNumber) *MTRApplicationLauncherClusterApplicationEP {
+	x.inner.MTRApplicationLauncherClusterApplicationEPStruct.SetEndpoint(endpoint)
+	return x
+}
+
 func (x *MTRApplicationLauncherClusterApplicationEP) asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct { return &x.inner.MTRApplicationLauncherClusterApplicationEPStruct }
 
 // MTRApplicationLauncherClusterApplicationEPable is the interface implemented by [MTRApplicationLauncherClusterApplicationEP], for mocking and DI.
 type MTRApplicationLauncherClusterApplicationEPable interface {
 	Unwrap() *raw.MTRApplicationLauncherClusterApplicationEP
+	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterApplicationEP
+	WithEndpoint(endpoint *foundation.NSNumber) *MTRApplicationLauncherClusterApplicationEP
 }
 
 var _ MTRApplicationLauncherClusterApplicationEPable = (*MTRApplicationLauncherClusterApplicationEP)(nil)

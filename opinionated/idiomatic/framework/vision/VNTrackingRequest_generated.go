@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -50,6 +51,30 @@ func (x *TrackingRequest) WithTrackingLevel(trackingLevel raw.VNRequestTrackingL
 // WithLastFrame sets the lastFrame property and returns the receiver for chaining.
 func (x *TrackingRequest) WithLastFrame(lastFrame bool) *TrackingRequest {
 	x.inner.SetLastFrame(lastFrame)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TrackingRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TrackingRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TrackingRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TrackingRequest) WithRevision(revision uint) *TrackingRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -104,6 +129,10 @@ type TrackingRequestable interface {
 	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackingRequest
 	WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackingRequest
 	WithLastFrame(lastFrame bool) *TrackingRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackingRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackingRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TrackingRequest
+	WithRevision(revision uint) *TrackingRequest
 	SupportedNumberOfTrackersAndReturnError() (uint, error)
 	InputObservation() *DetectedObjectObservation
 	SetInputObservation(inputObservation *raw.VNDetectedObjectObservation)

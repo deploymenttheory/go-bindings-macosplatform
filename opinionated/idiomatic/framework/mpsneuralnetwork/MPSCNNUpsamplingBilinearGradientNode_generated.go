@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNUpsamplingBilinearGradientNodeWithSourceGradientSourceImageGradientSt
 	return &CNNUpsamplingBilinearGradientNode{inner: raw.MPSCNNUpsamplingBilinearGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNUpsamplingBilinearGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNUpsamplingBilinearGradientNode) WithLabel(label string) *CNNUpsamplingBilinearGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ScaleFactorX calls the underlying ScaleFactorX.
 func (x *CNNUpsamplingBilinearGradientNode) ScaleFactorX() float64 {
 	return x.inner.ScaleFactorX()
@@ -53,6 +66,8 @@ func (x *CNNUpsamplingBilinearGradientNode) asNNFilterNode() *raw.MPSNNFilterNod
 // CNNUpsamplingBilinearGradientNodeable is the interface implemented by [CNNUpsamplingBilinearGradientNode], for mocking and DI.
 type CNNUpsamplingBilinearGradientNodeable interface {
 	Unwrap() *raw.MPSCNNUpsamplingBilinearGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNUpsamplingBilinearGradientNode
+	WithLabel(label string) *CNNUpsamplingBilinearGradientNode
 	ScaleFactorX() float64
 	ScaleFactorY() float64
 }

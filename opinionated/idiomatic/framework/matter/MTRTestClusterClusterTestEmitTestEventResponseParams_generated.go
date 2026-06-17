@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestEmitTestEventResponseParams() *MTRTestClusterCl
 	return &MTRTestClusterClusterTestEmitTestEventResponseParams{inner: raw.MTRTestClusterClusterTestEmitTestEventResponseParamsFromID(_id)}
 }
 
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventResponseParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventResponseParams.SetValue(value)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventResponseParams {
+	x.inner.MTRUnitTestingClusterTestEmitTestEventResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) asMTRUnitTestingClusterTestEmitTestEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams { return &x.inner.MTRUnitTestingClusterTestEmitTestEventResponseParams }
 
 // MTRTestClusterClusterTestEmitTestEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestEventResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEmitTestEventResponseParams
+	WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestEventResponseParams
 }
 
 var _ MTRTestClusterClusterTestEmitTestEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestEventResponseParams)(nil)

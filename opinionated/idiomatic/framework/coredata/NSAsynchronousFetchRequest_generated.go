@@ -6,7 +6,9 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AsynchronousFetchRequest wraps [raw.NSAsynchronousFetchRequest] with a fluent Go API.
@@ -42,6 +44,22 @@ func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // FetchRequest calls the underlying FetchRequest.
 func (x *AsynchronousFetchRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
 	return x.inner.FetchRequest()
@@ -68,6 +86,7 @@ func (x *AsynchronousFetchRequest) asPersistentStoreRequest() *raw.NSPersistentS
 type AsynchronousFetchRequestable interface {
 	Unwrap() *raw.NSAsynchronousFetchRequest[objc.ID]
 	WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest
 	FetchRequest() *raw.NSFetchRequest[objc.ID]
 	CompletionBlock() objc.Block
 	EstimatedResultCount() int

@@ -6,6 +6,7 @@ package mpsimage
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -75,6 +76,36 @@ func (x *ImageArithmetic) WithMinimumValue(minimumValue float32) *ImageArithmeti
 // WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
 func (x *ImageArithmetic) WithMaximumValue(maximumValue float32) *ImageArithmetic {
 	x.inner.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *ImageArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	x.inner.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *ImageArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic {
+	x.inner.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageArithmetic) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageArithmetic {
+	x.inner.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *ImageArithmetic) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageArithmetic {
+	x.inner.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageArithmetic) WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic {
+	x.inner.MPSBinaryImageKernel.SetClipRect(clipRect)
 	return x
 }
 
@@ -162,6 +193,11 @@ type ImageArithmeticable interface {
 	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageArithmetic
 	WithMinimumValue(minimumValue float32) *ImageArithmetic
 	WithMaximumValue(maximumValue float32) *ImageArithmetic
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageArithmetic
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageArithmetic
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageArithmetic
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageArithmetic
+	WithClipRect(clipRect metal.MTLRegion) *ImageArithmetic
 	PrimaryScale() float32
 	SetPrimaryScale(primaryScale float32)
 	SecondaryScale() float32

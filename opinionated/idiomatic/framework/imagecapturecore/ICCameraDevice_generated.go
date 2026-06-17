@@ -51,6 +51,12 @@ func (x *CameraDevice) WithPtpEventHandler(ptpEventHandler func(*foundation.NSDa
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *CameraDevice) WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice {
+	x.inner.ICDevice.SetDelegate(delegate)
+	return x
+}
+
 // FilesOfType calls the underlying FilesOfType.
 func (x *CameraDevice) FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString] {
 	return x.inner.FilesOfType(foundation.NSStringStringWithUTF8String(fileUTType))
@@ -236,6 +242,7 @@ type CameraDeviceable interface {
 	Unwrap() *raw.ICCameraDevice
 	WithMediaPresentation(mediaPresentation raw.ICMediaPresentation) *CameraDevice
 	WithPtpEventHandler(ptpEventHandler func(*foundation.NSData)) *CameraDevice
+	WithDelegate(delegate raw.ICDeviceDelegate) *CameraDevice
 	FilesOfType(fileUTType string) *foundation.NSArray[*foundation.NSString]
 	RequestReadDataFromFileAtOffsetLengthReadDelegateDidReadDataSelectorContextInfo(file *raw.ICCameraFile, offset int64, length int64, readDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
 	RequestDownloadFileOptionsDownloadDelegateDidDownloadSelectorContextInfo(file *raw.ICCameraFile, options *foundation.NSDictionary[*foundation.NSString, objc.ID], downloadDelegate raw.ICCameraDeviceDownloadDelegate, selector objc.SEL, contextInfo unsafe.Pointer)

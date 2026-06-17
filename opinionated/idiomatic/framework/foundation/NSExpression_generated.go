@@ -44,6 +44,12 @@ func NewExpressionWithCoder(coder *raw.NSCoder) *Expression {
 	return &Expression{inner: raw.NSExpressionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Expression) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Expression {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ExpressionValueWithObjectContext calls the underlying ExpressionValueWithObjectContext.
 func (x *Expression) ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID {
 	return x.inner.ExpressionValueWithObjectContext(object, context_)
@@ -171,6 +177,7 @@ func (x *Expression) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Expressionable is the interface implemented by [Expression], for mocking and DI.
 type Expressionable interface {
 	Unwrap() *raw.NSExpression
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Expression
 	ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID
 	AllowEvaluation()
 	ExpressionType() raw.NSExpressionType

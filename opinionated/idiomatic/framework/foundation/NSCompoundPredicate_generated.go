@@ -43,6 +43,12 @@ func NewCompoundPredicateWithCoder(coder *raw.NSCoder) *CompoundPredicate {
 	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *CompoundPredicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CompoundPredicate {
+	x.inner.NSPredicate.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CompoundPredicateType calls the underlying CompoundPredicateType.
 func (x *CompoundPredicate) CompoundPredicateType() raw.NSCompoundPredicateType {
 	return x.inner.CompoundPredicateType()
@@ -60,6 +66,7 @@ func (x *CompoundPredicate) asObject() *raw.NSObject { return &x.inner.NSPredica
 // CompoundPredicateable is the interface implemented by [CompoundPredicate], for mocking and DI.
 type CompoundPredicateable interface {
 	Unwrap() *raw.NSCompoundPredicate
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CompoundPredicate
 	CompoundPredicateType() raw.NSCompoundPredicateType
 	Subpredicates() *raw.NSArray[objc.ID]
 }

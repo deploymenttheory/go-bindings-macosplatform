@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTRApplicationBasicClusterApplicationBasicApplication() *MTRApplicationB
 	return &MTRApplicationBasicClusterApplicationBasicApplication{inner: raw.MTRApplicationBasicClusterApplicationBasicApplicationFromID(_id)}
 }
 
+// WithCatalogVendorID sets the catalogVendorID property and returns the receiver for chaining.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication {
+	x.inner.MTRApplicationBasicClusterApplicationStruct.SetCatalogVendorID(catalogVendorID)
+	return x
+}
+
+// WithCatalogVendorId sets the catalogVendorId property and returns the receiver for chaining.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication {
+	x.inner.MTRApplicationBasicClusterApplicationStruct.SetCatalogVendorId(catalogVendorId)
+	return x
+}
+
+// WithApplicationID sets the applicationID property and returns the receiver for chaining.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication {
+	x.inner.MTRApplicationBasicClusterApplicationStruct.SetApplicationID(foundation.NSStringStringWithUTF8String(applicationID))
+	return x
+}
+
+// WithApplicationId sets the applicationId property and returns the receiver for chaining.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication {
+	x.inner.MTRApplicationBasicClusterApplicationStruct.SetApplicationId(foundation.NSStringStringWithUTF8String(applicationId))
+	return x
+}
+
 func (x *MTRApplicationBasicClusterApplicationBasicApplication) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct { return &x.inner.MTRApplicationBasicClusterApplicationStruct }
 
 // MTRApplicationBasicClusterApplicationBasicApplicationable is the interface implemented by [MTRApplicationBasicClusterApplicationBasicApplication], for mocking and DI.
 type MTRApplicationBasicClusterApplicationBasicApplicationable interface {
 	Unwrap() *raw.MTRApplicationBasicClusterApplicationBasicApplication
+	WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication
+	WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication
+	WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication
+	WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication
 }
 
 var _ MTRApplicationBasicClusterApplicationBasicApplicationable = (*MTRApplicationBasicClusterApplicationBasicApplication)(nil)

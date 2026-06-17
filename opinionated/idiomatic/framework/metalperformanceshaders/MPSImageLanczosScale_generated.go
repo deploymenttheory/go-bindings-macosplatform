@@ -47,6 +47,42 @@ func NewImageLanczosScaleWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &ImageLanczosScale{inner: raw.MPSImageLanczosScaleFromID(_id)}
 }
 
+// WithScaleTransform sets the scaleTransform property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageLanczosScale {
+	x.inner.MPSImageScale.SetScaleTransform(scaleTransform)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLanczosScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithOptions(options mpscore.MPSKernelOptions) *ImageLanczosScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageLanczosScale) WithLabel(label string) *ImageLanczosScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageLanczosScale) asImageScale() *mpsimage.MPSImageScale { return &x.inner.MPSImageScale }
 
 func (x *ImageLanczosScale) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
@@ -56,6 +92,12 @@ func (x *ImageLanczosScale) asKernel() *mpscore.MPSKernel { return &x.inner.MPSI
 // ImageLanczosScaleable is the interface implemented by [ImageLanczosScale], for mocking and DI.
 type ImageLanczosScaleable interface {
 	Unwrap() *raw.MPSImageLanczosScale
+	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageLanczosScale
+	WithOffset(offset mpscore.MPSOffset) *ImageLanczosScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageLanczosScale
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLanczosScale
+	WithOptions(options mpscore.MPSKernelOptions) *ImageLanczosScale
+	WithLabel(label string) *ImageLanczosScale
 }
 
 var _ ImageLanczosScaleable = (*ImageLanczosScale)(nil)

@@ -5,8 +5,12 @@
 package mpsrayintersector
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // QuadrilateralAccelerationStructure wraps [raw.MPSQuadrilateralAccelerationStructure] with a fluent Go API.
@@ -41,6 +45,88 @@ func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilatera
 	return x
 }
 
+// WithPolygonType sets the polygonType property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithPolygonType(polygonType raw.MPSPolygonType) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(polygonType)
+	return x
+}
+
+// WithVertexStride sets the vertexStride property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithVertexStride(vertexStride uint) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexStride(vertexStride)
+	return x
+}
+
+// WithIndexType sets the indexType property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithIndexType(indexType mpscore.MPSDataType) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexType(indexType)
+	return x
+}
+
+// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexBuffer(vertexBuffer)
+	return x
+}
+
+// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset uint) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetVertexBufferOffset(vertexBufferOffset)
+	return x
+}
+
+// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithIndexBuffer(indexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexBuffer(indexBuffer)
+	return x
+}
+
+// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithIndexBufferOffset(indexBufferOffset uint) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetIndexBufferOffset(indexBufferOffset)
+	return x
+}
+
+// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetMaskBuffer(maskBuffer)
+	return x
+}
+
+// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetMaskBufferOffset(maskBufferOffset)
+	return x
+}
+
+// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithPolygonCount(polygonCount uint) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonCount(polygonCount)
+	return x
+}
+
+// WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
+func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *QuadrilateralAccelerationStructure {
+	if len(items) == 0 {
+		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(_arr)
+	return x
+}
+
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *QuadrilateralAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure {
+	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
 // QuadrilateralCount calls the underlying QuadrilateralCount.
 func (x *QuadrilateralAccelerationStructure) QuadrilateralCount() uint {
 	return x.inner.QuadrilateralCount()
@@ -59,6 +145,18 @@ func (x *QuadrilateralAccelerationStructure) asAccelerationStructure() *raw.MPSA
 type QuadrilateralAccelerationStructureable interface {
 	Unwrap() *raw.MPSQuadrilateralAccelerationStructure
 	WithQuadrilateralCount(quadrilateralCount uint) *QuadrilateralAccelerationStructure
+	WithPolygonType(polygonType raw.MPSPolygonType) *QuadrilateralAccelerationStructure
+	WithVertexStride(vertexStride uint) *QuadrilateralAccelerationStructure
+	WithIndexType(indexType mpscore.MPSDataType) *QuadrilateralAccelerationStructure
+	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset uint) *QuadrilateralAccelerationStructure
+	WithIndexBuffer(indexBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset uint) *QuadrilateralAccelerationStructure
+	WithMaskBuffer(maskBuffer metal.MTLBuffer) *QuadrilateralAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset uint) *QuadrilateralAccelerationStructure
+	WithPolygonCount(polygonCount uint) *QuadrilateralAccelerationStructure
+	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *QuadrilateralAccelerationStructure
+	WithUsage(usage raw.MPSAccelerationStructureUsage) *QuadrilateralAccelerationStructure
 	QuadrilateralCount() uint
 	SetQuadrilateralCount(quadrilateralCount uint)
 }

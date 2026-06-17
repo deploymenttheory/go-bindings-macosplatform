@@ -7,9 +7,12 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Slider wraps [raw.NSSlider] with a fluent Go API.
@@ -107,6 +110,484 @@ func (x *Slider) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *
 // WithAllowsTickMarkValuesOnly sets the allowsTickMarkValuesOnly property and returns the receiver for chaining.
 func (x *Slider) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider {
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Slider) WithTarget(target objc.ID) *Slider {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Slider) WithAction(action objc.SEL) *Slider {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Slider) WithTag(tag int) *Slider {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Slider) WithIgnoresMultiClick(ignoresMultiClick bool) *Slider {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Slider) WithContinuous(continuous bool) *Slider {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Slider) WithEnabled(enabled bool) *Slider {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Slider) WithRefusesFirstResponder(refusesFirstResponder bool) *Slider {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Slider) WithHighlighted(highlighted bool) *Slider {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Slider) WithControlSize(controlSize raw.NSControlSize) *Slider {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Slider) WithFormatter(formatter *foundation.NSFormatter) *Slider {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Slider) WithObjectValue(objectValue objc.ID) *Slider {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Slider) WithStringValue(stringValue string) *Slider {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Slider) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Slider {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Slider) WithIntValue(intValue int) *Slider {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Slider) WithIntegerValue(integerValue int) *Slider {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Slider) WithFloatValue(floatValue float32) *Slider {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Slider) WithDoubleValue(doubleValue float64) *Slider {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Slider) WithFont(font *raw.NSFont) *Slider {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Slider) WithUsesSingleLineMode(usesSingleLineMode bool) *Slider {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Slider) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Slider {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Slider) WithAlignment(alignment raw.NSTextAlignment) *Slider {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Slider) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Slider {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Slider) WithCell(cell CellProvider) *Slider {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Slider) WithSubviews(items ...ViewProvider) *Slider {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Slider) WithHidden(hidden bool) *Slider {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Slider) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Slider) WithAutoresizesSubviews(autoresizesSubviews bool) *Slider {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Slider) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Slider {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Slider) WithFrame(frame corefoundation.CGRect) *Slider {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Slider) WithFrameRotation(frameRotation float64) *Slider {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Slider) WithFrameCenterRotation(frameCenterRotation float64) *Slider {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Slider) WithBoundsRotation(boundsRotation float64) *Slider {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Slider) WithBounds(bounds corefoundation.CGRect) *Slider {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Slider) WithCanDrawConcurrently(canDrawConcurrently bool) *Slider {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Slider) WithNeedsDisplay(needsDisplay bool) *Slider {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Slider) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Slider) WithWantsRestingTouches(wantsRestingTouches bool) *Slider {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Slider {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Slider) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Slider {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Slider) WithWantsLayer(wantsLayer bool) *Slider {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Slider) WithLayer(layer *quartzcore.CALayer) *Slider {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Slider) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Slider) WithNeedsLayout(needsLayout bool) *Slider {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Slider) WithAlphaValue(alphaValue float64) *Slider {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Slider) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Slider) WithBackgroundFilters(items ...*coreimage.CIFilter) *Slider {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Slider) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Slider {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Slider) WithContentFilters(items ...*coreimage.CIFilter) *Slider {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Slider) WithShadow(shadow *raw.NSShadow) *Slider {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Slider) WithClipsToBounds(clipsToBounds bool) *Slider {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Slider) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Slider) WithToolTip(toolTip string) *Slider {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Slider {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Slider) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Slider) WithFocusRingType(focusRingType raw.NSFocusRingType) *Slider {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Slider) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Slider {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Slider {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Slider) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Slider) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Slider) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Slider) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Slider) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Slider) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Slider {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Slider) WithMenu(menu *raw.NSMenu) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Slider) WithUserActivity(userActivity *foundation.NSUserActivity) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Slider) WithTouchBar(touchBar *raw.NSTouchBar) *Slider {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -341,6 +822,79 @@ type Sliderable interface {
 	WithNumberOfTickMarks(numberOfTickMarks int) *Slider
 	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *Slider
 	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider
+	WithTarget(target objc.ID) *Slider
+	WithAction(action objc.SEL) *Slider
+	WithTag(tag int) *Slider
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Slider
+	WithContinuous(continuous bool) *Slider
+	WithEnabled(enabled bool) *Slider
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Slider
+	WithHighlighted(highlighted bool) *Slider
+	WithControlSize(controlSize raw.NSControlSize) *Slider
+	WithFormatter(formatter *foundation.NSFormatter) *Slider
+	WithObjectValue(objectValue objc.ID) *Slider
+	WithStringValue(stringValue string) *Slider
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Slider
+	WithIntValue(intValue int) *Slider
+	WithIntegerValue(integerValue int) *Slider
+	WithFloatValue(floatValue float32) *Slider
+	WithDoubleValue(doubleValue float64) *Slider
+	WithFont(font *raw.NSFont) *Slider
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Slider
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Slider
+	WithAlignment(alignment raw.NSTextAlignment) *Slider
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Slider
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider
+	WithCell(cell CellProvider) *Slider
+	WithSubviews(items ...ViewProvider) *Slider
+	WithHidden(hidden bool) *Slider
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Slider
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Slider
+	WithFrame(frame corefoundation.CGRect) *Slider
+	WithFrameRotation(frameRotation float64) *Slider
+	WithFrameCenterRotation(frameCenterRotation float64) *Slider
+	WithBoundsRotation(boundsRotation float64) *Slider
+	WithBounds(bounds corefoundation.CGRect) *Slider
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Slider
+	WithNeedsDisplay(needsDisplay bool) *Slider
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider
+	WithWantsRestingTouches(wantsRestingTouches bool) *Slider
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Slider
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Slider
+	WithWantsLayer(wantsLayer bool) *Slider
+	WithLayer(layer *quartzcore.CALayer) *Slider
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider
+	WithNeedsLayout(needsLayout bool) *Slider
+	WithAlphaValue(alphaValue float64) *Slider
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Slider
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Slider
+	WithContentFilters(items ...*coreimage.CIFilter) *Slider
+	WithShadow(shadow *raw.NSShadow) *Slider
+	WithClipsToBounds(clipsToBounds bool) *Slider
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider
+	WithToolTip(toolTip string) *Slider
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Slider
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider
+	WithNextKeyView(nextKeyView ViewProvider) *Slider
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Slider
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Slider
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Slider
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Slider
+	WithNextResponder(nextResponder ResponderProvider) *Slider
+	WithMenu(menu *raw.NSMenu) *Slider
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Slider
+	WithTouchBar(touchBar *raw.NSTouchBar) *Slider
 	SliderType() raw.NSSliderType
 	SetSliderType(sliderType raw.NSSliderType)
 	MinValue() float64

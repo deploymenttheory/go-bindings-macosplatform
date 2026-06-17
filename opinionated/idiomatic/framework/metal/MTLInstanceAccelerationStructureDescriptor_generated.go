@@ -102,6 +102,12 @@ func (x *InstanceAccelerationStructureDescriptor) WithMotionTransformStride(moti
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *InstanceAccelerationStructureDescriptor) WithUsage(usage raw.MTLAccelerationStructureUsage) *InstanceAccelerationStructureDescriptor {
+	x.inner.MTLAccelerationStructureDescriptor.SetUsage(usage)
+	return x
+}
+
 // InstanceDescriptorBuffer calls the underlying InstanceDescriptorBuffer.
 func (x *InstanceAccelerationStructureDescriptor) InstanceDescriptorBuffer() raw.MTLBuffer {
 	return x.inner.InstanceDescriptorBuffer()
@@ -238,6 +244,7 @@ type InstanceAccelerationStructureDescriptorable interface {
 	WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout raw.MTLMatrixLayout) *InstanceAccelerationStructureDescriptor
 	WithMotionTransformType(motionTransformType raw.MTLTransformType) *InstanceAccelerationStructureDescriptor
 	WithMotionTransformStride(motionTransformStride uint) *InstanceAccelerationStructureDescriptor
+	WithUsage(usage raw.MTLAccelerationStructureUsage) *InstanceAccelerationStructureDescriptor
 	InstanceDescriptorBuffer() raw.MTLBuffer
 	SetInstanceDescriptorBuffer(instanceDescriptorBuffer raw.MTLBuffer)
 	InstanceDescriptorBufferOffset() uint

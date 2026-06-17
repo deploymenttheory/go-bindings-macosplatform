@@ -5,6 +5,7 @@
 package webkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDOMComment() *DOMComment {
 	return &DOMComment{inner: raw.DOMCommentFromID(_id)}
 }
 
+// WithData sets the data property and returns the receiver for chaining.
+func (x *DOMComment) WithData(data string) *DOMComment {
+	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
+	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMComment) WithPrefix(prefix string) *DOMComment {
+	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMComment) WithTextContent(textContent string) *DOMComment {
+	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 func (x *DOMComment) asDOMCharacterData() *raw.DOMCharacterData { return &x.inner.DOMCharacterData }
 
 func (x *DOMComment) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
@@ -46,6 +71,10 @@ func (x *DOMComment) asWebScriptObject() *raw.WebScriptObject { return &x.inner.
 // DOMCommentable is the interface implemented by [DOMComment], for mocking and DI.
 type DOMCommentable interface {
 	Unwrap() *raw.DOMComment
+	WithData(data string) *DOMComment
+	WithNodeValue(nodeValue string) *DOMComment
+	WithPrefix(prefix string) *DOMComment
+	WithTextContent(textContent string) *DOMComment
 }
 
 var _ DOMCommentable = (*DOMComment)(nil)

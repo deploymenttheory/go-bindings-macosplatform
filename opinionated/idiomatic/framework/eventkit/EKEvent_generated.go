@@ -9,6 +9,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Event wraps [raw.EKEvent] with a fluent Go API.
@@ -64,6 +65,74 @@ func (x *Event) WithStructuredLocation(structuredLocation *raw.EKStructuredLocat
 // WithAvailability sets the availability property and returns the receiver for chaining.
 func (x *Event) WithAvailability(availability raw.EKEventAvailability) *Event {
 	x.inner.SetAvailability(availability)
+	return x
+}
+
+// WithCalendar sets the calendar property and returns the receiver for chaining.
+func (x *Event) WithCalendar(calendar *raw.EKCalendar) *Event {
+	x.inner.EKCalendarItem.SetCalendar(calendar)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *Event) WithTitle(title string) *Event {
+	x.inner.EKCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLocation sets the location property and returns the receiver for chaining.
+func (x *Event) WithLocation(location string) *Event {
+	x.inner.EKCalendarItem.SetLocation(foundation.NSStringStringWithUTF8String(location))
+	return x
+}
+
+// WithNotes sets the notes property and returns the receiver for chaining.
+func (x *Event) WithNotes(notes string) *Event {
+	x.inner.EKCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	return x
+}
+
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *Event) WithURL(uRL string) *Event {
+	x.inner.EKCalendarItem.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithTimeZone sets the timeZone property and returns the receiver for chaining.
+func (x *Event) WithTimeZone(timeZone *foundation.NSTimeZone) *Event {
+	x.inner.EKCalendarItem.SetTimeZone(timeZone)
+	return x
+}
+
+// WithAlarms sets the collection, converting the Go slice to an NSArray.
+func (x *Event) WithAlarms(items ...*raw.EKAlarm) *Event {
+	if len(items) == 0 {
+		x.inner.EKCalendarItem.SetAlarms(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.EKAlarm](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.EKCalendarItem.SetAlarms(_arr)
+	return x
+}
+
+// WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
+func (x *Event) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event {
+	if len(items) == 0 {
+		x.inner.EKCalendarItem.SetRecurrenceRules(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.EKRecurrenceRule](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.EKCalendarItem.SetRecurrenceRules(_arr)
 	return x
 }
 
@@ -189,6 +258,14 @@ type Eventable interface {
 	WithEndDate(endDate *foundation.NSDate) *Event
 	WithStructuredLocation(structuredLocation *raw.EKStructuredLocation) *Event
 	WithAvailability(availability raw.EKEventAvailability) *Event
+	WithCalendar(calendar *raw.EKCalendar) *Event
+	WithTitle(title string) *Event
+	WithLocation(location string) *Event
+	WithNotes(notes string) *Event
+	WithURL(uRL string) *Event
+	WithTimeZone(timeZone *foundation.NSTimeZone) *Event
+	WithAlarms(items ...*raw.EKAlarm) *Event
+	WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Event
 	CompareStartDateWithEvent(other *raw.EKEvent) foundation.NSComparisonResult
 	EventIdentifier() string
 	IsAllDay() bool

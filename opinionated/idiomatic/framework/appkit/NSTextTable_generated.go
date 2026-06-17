@@ -61,6 +61,18 @@ func (x *TextTable) WithHidesEmptyCells(hidesEmptyCells bool) *TextTable {
 	return x
 }
 
+// WithVerticalAlignment sets the verticalAlignment property and returns the receiver for chaining.
+func (x *TextTable) WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTable {
+	x.inner.NSTextBlock.SetVerticalAlignment(verticalAlignment)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *TextTable) WithBackgroundColor(backgroundColor *raw.NSColor) *TextTable {
+	x.inner.NSTextBlock.SetBackgroundColor(backgroundColor)
+	return x
+}
+
 // RectForBlockLayoutAtPointInRectTextContainerCharacterRange calls the underlying RectForBlockLayoutAtPointInRectTextContainerCharacterRange.
 func (x *TextTable) RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect {
 	return x.inner.RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block, startingPoint, rect, textContainer, charRange)
@@ -125,6 +137,8 @@ type TextTableable interface {
 	WithLayoutAlgorithm(layoutAlgorithm raw.NSTextTableLayoutAlgorithm) *TextTable
 	WithCollapsesBorders(collapsesBorders bool) *TextTable
 	WithHidesEmptyCells(hidesEmptyCells bool) *TextTable
+	WithVerticalAlignment(verticalAlignment raw.NSTextBlockVerticalAlignment) *TextTable
+	WithBackgroundColor(backgroundColor *raw.NSColor) *TextTable
 	RectForBlockLayoutAtPointInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
 	BoundsRectForBlockContentRectInRectTextContainerCharacterRange(block *raw.NSTextTableBlock, contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *raw.NSTextContainer, charRange foundation.NSRange) corefoundation.CGRect
 	DrawBackgroundForBlockWithFrameInViewCharacterRangeLayoutManager(block *raw.NSTextTableBlock, frameRect corefoundation.CGRect, controlView *raw.NSView, charRange foundation.NSRange, layoutManager *raw.NSLayoutManager)

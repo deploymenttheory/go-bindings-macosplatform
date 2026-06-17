@@ -49,6 +49,90 @@ func (x *NETunnelProviderProtocol) WithProviderBundleIdentifier(providerBundleId
 	return x
 }
 
+// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithServerAddress(serverAddress string) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	return x
+}
+
+// WithUsername sets the username property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithUsername(username string) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
+	return x
+}
+
+// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
+	return x
+}
+
+// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
+	return x
+}
+
+// WithIdentityData sets the identityData property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityData(identityData)
+	return x
+}
+
+// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+	return x
+}
+
+// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
+	return x
+}
+
+// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetProxySettings(proxySettings)
+	return x
+}
+
+// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
+	return x
+}
+
+// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
+	return x
+}
+
+// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
+	return x
+}
+
+// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
+	return x
+}
+
+// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	return x
+}
+
+// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
+func (x *NETunnelProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NETunnelProviderProtocol {
+	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
+	return x
+}
+
 // ProviderConfiguration calls the underlying ProviderConfiguration.
 func (x *NETunnelProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ProviderConfiguration()
@@ -80,6 +164,20 @@ type NETunnelProviderProtocolable interface {
 	Unwrap() *raw.NETunnelProviderProtocol
 	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NETunnelProviderProtocol
 	WithProviderBundleIdentifier(providerBundleIdentifier string) *NETunnelProviderProtocol
+	WithServerAddress(serverAddress string) *NETunnelProviderProtocol
+	WithUsername(username string) *NETunnelProviderProtocol
+	WithPasswordReference(passwordReference *foundation.NSData) *NETunnelProviderProtocol
+	WithIdentityReference(identityReference *foundation.NSData) *NETunnelProviderProtocol
+	WithIdentityData(identityData *foundation.NSData) *NETunnelProviderProtocol
+	WithIdentityDataPassword(identityDataPassword string) *NETunnelProviderProtocol
+	WithDisconnectOnSleep(disconnectOnSleep bool) *NETunnelProviderProtocol
+	WithProxySettings(proxySettings *raw.NEProxySettings) *NETunnelProviderProtocol
+	WithIncludeAllNetworks(includeAllNetworks bool) *NETunnelProviderProtocol
+	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NETunnelProviderProtocol
+	WithExcludeCellularServices(excludeCellularServices bool) *NETunnelProviderProtocol
+	WithExcludeAPNs(excludeAPNs bool) *NETunnelProviderProtocol
+	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NETunnelProviderProtocol
+	WithEnforceRoutes(enforceRoutes bool) *NETunnelProviderProtocol
 	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
 	ProviderBundleIdentifier() string

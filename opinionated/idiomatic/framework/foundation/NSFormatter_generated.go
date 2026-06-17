@@ -36,6 +36,12 @@ func NewFormatter() *Formatter {
 	return &Formatter{inner: raw.NSFormatterFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Formatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Formatter {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringForObjectValue calls the underlying StringForObjectValue.
 func (x *Formatter) StringForObjectValue(obj objc.ID) *String {
 	_r := x.inner.StringForObjectValue(obj)
@@ -85,6 +91,7 @@ func (x *Formatter) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Formatterable is the interface implemented by [Formatter], for mocking and DI.
 type Formatterable interface {
 	Unwrap() *raw.NSFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Formatter
 	StringForObjectValue(obj objc.ID) *String
 	AttributedStringForObjectValueWithDefaultAttributes(obj objc.ID, attrs *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString
 	EditingStringForObjectValue(obj objc.ID) *String

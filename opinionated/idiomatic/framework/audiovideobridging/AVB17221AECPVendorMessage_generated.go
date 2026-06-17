@@ -48,6 +48,42 @@ func (x *AVB17221AECPVendorMessage) WithProtocolSpecificData(protocolSpecificDat
 	return x
 }
 
+// WithMessageType sets the messageType property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetMessageType(messageType)
+	return x
+}
+
+// WithStatus sets the status property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetStatus(status)
+	return x
+}
+
+// WithTargetEntityID sets the targetEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetTargetEntityID(targetEntityID)
+	return x
+}
+
+// WithControllerEntityID sets the controllerEntityID property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetControllerEntityID(controllerEntityID)
+	return x
+}
+
+// WithSequenceID sets the sequenceID property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetSequenceID(sequenceID)
+	return x
+}
+
+// WithSourceMAC sets the sourceMAC property and returns the receiver for chaining.
+func (x *AVB17221AECPVendorMessage) WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPVendorMessage {
+	x.inner.AVB17221AECPMessage.SetSourceMAC(sourceMAC)
+	return x
+}
+
 // ProtocolID calls the underlying ProtocolID.
 func (x *AVB17221AECPVendorMessage) ProtocolID() uint64 {
 	return x.inner.ProtocolID()
@@ -75,6 +111,12 @@ type AVB17221AECPVendorMessageable interface {
 	Unwrap() *raw.AVB17221AECPVendorMessage
 	WithProtocolID(protocolID uint64) *AVB17221AECPVendorMessage
 	WithProtocolSpecificData(protocolSpecificData *foundation.NSData) *AVB17221AECPVendorMessage
+	WithMessageType(messageType raw.AVB17221AECPMessageType) *AVB17221AECPVendorMessage
+	WithStatus(status raw.AVB17221AECPStatusCode) *AVB17221AECPVendorMessage
+	WithTargetEntityID(targetEntityID uint64) *AVB17221AECPVendorMessage
+	WithControllerEntityID(controllerEntityID uint64) *AVB17221AECPVendorMessage
+	WithSequenceID(sequenceID uint16) *AVB17221AECPVendorMessage
+	WithSourceMAC(sourceMAC *raw.AVBMACAddress) *AVB17221AECPVendorMessage
 	ProtocolID() uint64
 	SetProtocolID(protocolID uint64)
 	ProtocolSpecificData() *foundation.NSData

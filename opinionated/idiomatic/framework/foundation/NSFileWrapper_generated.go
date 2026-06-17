@@ -110,6 +110,12 @@ func (x *FileWrapper) WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.N
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *FileWrapper) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MatchesContentsOfURL calls the underlying MatchesContentsOfURL.
 func (x *FileWrapper) MatchesContentsOfURL(url string) bool {
 	return x.inner.MatchesContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
@@ -292,6 +298,7 @@ type FileWrapperable interface {
 	WithPreferredFilename(preferredFilename string) *FileWrapper
 	WithFilename(filename string) *FileWrapper
 	WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
 	MatchesContentsOfURL(url string) bool
 	ReadFromURLOptionsError(url string, options raw.NSFileWrapperReadingOptions) (bool, error)
 	WriteToURLOptionsOriginalContentsURLError(url string, options raw.NSFileWrapperWritingOptions, originalContentsURL string) (bool, error)

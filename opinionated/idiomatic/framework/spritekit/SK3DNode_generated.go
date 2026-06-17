@@ -89,6 +89,166 @@ func (x *SK3DNode) WithAutoenablesDefaultLighting(autoenablesDefaultLighting boo
 	return x
 }
 
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *SK3DNode) WithPosition(position corefoundation.CGPoint) *SK3DNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *SK3DNode) WithZPosition(zPosition float64) *SK3DNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *SK3DNode) WithZRotation(zRotation float64) *SK3DNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *SK3DNode) WithXScale(xScale float64) *SK3DNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *SK3DNode) WithYScale(yScale float64) *SK3DNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *SK3DNode) WithSpeed(speed float64) *SK3DNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *SK3DNode) WithAlpha(alpha float64) *SK3DNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *SK3DNode) WithPaused(paused bool) *SK3DNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *SK3DNode) WithHidden(hidden bool) *SK3DNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *SK3DNode) WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *SK3DNode) WithName(name string) *SK3DNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *SK3DNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SK3DNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *SK3DNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *SK3DNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SK3DNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *SK3DNode) WithConstraints(items ...*raw.SKConstraint) *SK3DNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *SK3DNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityElement(accessibilityElement bool) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityRole(accessibilityRole string) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilitySubrole(accessibilitySubrole string) *SK3DNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityParent(accessibilityParent objc.ID) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityHelp(accessibilityHelp string) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityLabel(accessibilityLabel string) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *SK3DNode) WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	return x
+}
+
 // HitTestOptions calls the underlying HitTestOptions.
 func (x *SK3DNode) HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult] {
 	return x.inner.HitTestOptions(point, options)
@@ -186,6 +346,31 @@ type SK3DNodeable interface {
 	WithLoops(loops bool) *SK3DNode
 	WithPointOfView(pointOfView *scenekit.SCNNode) *SK3DNode
 	WithAutoenablesDefaultLighting(autoenablesDefaultLighting bool) *SK3DNode
+	WithPosition(position corefoundation.CGPoint) *SK3DNode
+	WithZPosition(zPosition float64) *SK3DNode
+	WithZRotation(zRotation float64) *SK3DNode
+	WithXScale(xScale float64) *SK3DNode
+	WithYScale(yScale float64) *SK3DNode
+	WithSpeed(speed float64) *SK3DNode
+	WithAlpha(alpha float64) *SK3DNode
+	WithPaused(paused bool) *SK3DNode
+	WithHidden(hidden bool) *SK3DNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *SK3DNode
+	WithName(name string) *SK3DNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *SK3DNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *SK3DNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *SK3DNode
+	WithConstraints(items ...*raw.SKConstraint) *SK3DNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *SK3DNode
+	WithAccessibilityElement(accessibilityElement bool) *SK3DNode
+	WithAccessibilityRole(accessibilityRole string) *SK3DNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *SK3DNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *SK3DNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *SK3DNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *SK3DNode
+	WithAccessibilityHelp(accessibilityHelp string) *SK3DNode
+	WithAccessibilityLabel(accessibilityLabel string) *SK3DNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *SK3DNode
 	HitTestOptions(point corefoundation.CGPoint, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*scenekit.SCNHitTestResult]
 	ProjectPoint(point unsafe.Pointer) unsafe.Pointer
 	UnprojectPoint(point unsafe.Pointer) unsafe.Pointer

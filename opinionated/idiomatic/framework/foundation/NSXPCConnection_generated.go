@@ -83,6 +83,12 @@ func (x *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XPC
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XPCConnection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCConnection {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // RemoteObjectProxyWithErrorHandler calls the underlying RemoteObjectProxyWithErrorHandler.
 func (x *XPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
 	return x.inner.RemoteObjectProxyWithErrorHandler(handler)
@@ -261,6 +267,7 @@ type XPCConnectionable interface {
 	WithRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) *XPCConnection
 	WithInterruptionHandler(interruptionHandler func()) *XPCConnection
 	WithInvalidationHandler(invalidationHandler func()) *XPCConnection
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCConnection
 	RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
 	SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
 	Resume()

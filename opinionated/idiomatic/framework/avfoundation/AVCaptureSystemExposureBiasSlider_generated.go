@@ -43,11 +43,18 @@ func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDev
 	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
+	x.inner.AVCaptureControl.SetEnabled(enabled)
+	return x
+}
+
 func (x *CaptureSystemExposureBiasSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
 
 // CaptureSystemExposureBiasSliderable is the interface implemented by [CaptureSystemExposureBiasSlider], for mocking and DI.
 type CaptureSystemExposureBiasSliderable interface {
 	Unwrap() *raw.AVCaptureSystemExposureBiasSlider
+	WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider
 }
 
 var _ CaptureSystemExposureBiasSliderable = (*CaptureSystemExposureBiasSlider)(nil)

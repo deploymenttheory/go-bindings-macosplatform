@@ -6,8 +6,10 @@ package scenekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Shape wraps [raw.SCNShape] with a fluent Go API.
@@ -63,6 +65,80 @@ func (x *Shape) WithChamferRadius(chamferRadius float64) *Shape {
 // WithChamferProfile sets the chamferProfile property and returns the receiver for chaining.
 func (x *Shape) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape {
 	x.inner.SetChamferProfile(chamferProfile)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Shape) WithName(name string) *Shape {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Shape) WithMaterials(items ...*raw.SCNMaterial) *Shape {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Shape) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Shape {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Shape) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Shape) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Shape {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Shape) WithSubdivisionLevel(subdivisionLevel uint) *Shape {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Shape) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Shape) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Shape {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Shape) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Shape {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -126,6 +202,15 @@ type Shapeable interface {
 	WithChamferMode(chamferMode raw.SCNChamferMode) *Shape
 	WithChamferRadius(chamferRadius float64) *Shape
 	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape
+	WithName(name string) *Shape
+	WithMaterials(items ...*raw.SCNMaterial) *Shape
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Shape
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Shape
+	WithSubdivisionLevel(subdivisionLevel uint) *Shape
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Shape
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Shape
 	Path() *appkit.NSBezierPath
 	SetPath(path *appkit.NSBezierPath)
 	ExtrusionDepth() float64

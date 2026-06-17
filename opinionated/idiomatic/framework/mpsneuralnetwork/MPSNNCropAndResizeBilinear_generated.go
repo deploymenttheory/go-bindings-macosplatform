@@ -46,6 +46,54 @@ func NewNNCropAndResizeBilinearWithCoderDevice(aDecoder *foundation.NSCoder, dev
 	return &NNCropAndResizeBilinear{inner: raw.MPSNNCropAndResizeBilinearFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithPadding(padding raw.MPSNNPadding) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNCropAndResizeBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCropAndResizeBilinear {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // ResizeWidth calls the underlying ResizeWidth.
 func (x *NNCropAndResizeBilinear) ResizeWidth() uint {
 	return x.inner.ResizeWidth()
@@ -71,6 +119,14 @@ func (x *NNCropAndResizeBilinear) asCNNKernel() *raw.MPSCNNKernel { return &x.in
 // NNCropAndResizeBilinearable is the interface implemented by [NNCropAndResizeBilinear], for mocking and DI.
 type NNCropAndResizeBilinearable interface {
 	Unwrap() *raw.MPSNNCropAndResizeBilinear
+	WithOffset(offset mpscore.MPSOffset) *NNCropAndResizeBilinear
+	WithClipRect(clipRect metal.MTLRegion) *NNCropAndResizeBilinear
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCropAndResizeBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNCropAndResizeBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNCropAndResizeBilinear
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNCropAndResizeBilinear
+	WithPadding(padding raw.MPSNNPadding) *NNCropAndResizeBilinear
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCropAndResizeBilinear
 	ResizeWidth() uint
 	ResizeHeight() uint
 	NumberOfRegions() uint

@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Reminder wraps [raw.EKReminder] with a fluent Go API.
@@ -63,6 +64,74 @@ func (x *Reminder) WithCompletionDate(completionDate *foundation.NSDate) *Remind
 // WithPriority sets the priority property and returns the receiver for chaining.
 func (x *Reminder) WithPriority(priority uint) *Reminder {
 	x.inner.SetPriority(priority)
+	return x
+}
+
+// WithCalendar sets the calendar property and returns the receiver for chaining.
+func (x *Reminder) WithCalendar(calendar *raw.EKCalendar) *Reminder {
+	x.inner.EKCalendarItem.SetCalendar(calendar)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *Reminder) WithTitle(title string) *Reminder {
+	x.inner.EKCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLocation sets the location property and returns the receiver for chaining.
+func (x *Reminder) WithLocation(location string) *Reminder {
+	x.inner.EKCalendarItem.SetLocation(foundation.NSStringStringWithUTF8String(location))
+	return x
+}
+
+// WithNotes sets the notes property and returns the receiver for chaining.
+func (x *Reminder) WithNotes(notes string) *Reminder {
+	x.inner.EKCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	return x
+}
+
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *Reminder) WithURL(uRL string) *Reminder {
+	x.inner.EKCalendarItem.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithTimeZone sets the timeZone property and returns the receiver for chaining.
+func (x *Reminder) WithTimeZone(timeZone *foundation.NSTimeZone) *Reminder {
+	x.inner.EKCalendarItem.SetTimeZone(timeZone)
+	return x
+}
+
+// WithAlarms sets the collection, converting the Go slice to an NSArray.
+func (x *Reminder) WithAlarms(items ...*raw.EKAlarm) *Reminder {
+	if len(items) == 0 {
+		x.inner.EKCalendarItem.SetAlarms(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.EKAlarm](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.EKCalendarItem.SetAlarms(_arr)
+	return x
+}
+
+// WithRecurrenceRules sets the collection, converting the Go slice to an NSArray.
+func (x *Reminder) WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder {
+	if len(items) == 0 {
+		x.inner.EKCalendarItem.SetRecurrenceRules(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.EKRecurrenceRule](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.EKCalendarItem.SetRecurrenceRules(_arr)
 	return x
 }
 
@@ -128,6 +197,14 @@ type Reminderable interface {
 	WithCompleted(completed bool) *Reminder
 	WithCompletionDate(completionDate *foundation.NSDate) *Reminder
 	WithPriority(priority uint) *Reminder
+	WithCalendar(calendar *raw.EKCalendar) *Reminder
+	WithTitle(title string) *Reminder
+	WithLocation(location string) *Reminder
+	WithNotes(notes string) *Reminder
+	WithURL(uRL string) *Reminder
+	WithTimeZone(timeZone *foundation.NSTimeZone) *Reminder
+	WithAlarms(items ...*raw.EKAlarm) *Reminder
+	WithRecurrenceRules(items ...*raw.EKRecurrenceRule) *Reminder
 	StartDateComponents() *foundation.NSDateComponents
 	SetStartDateComponents(startDateComponents *foundation.NSDateComponents)
 	DueDateComponents() *foundation.NSDateComponents

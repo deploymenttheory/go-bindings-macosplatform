@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -73,6 +74,102 @@ func (x *NNLossGradient) WithDelta(delta float32) *NNLossGradient {
 // WithComputeLabelGradients sets the computeLabelGradients property and returns the receiver for chaining.
 func (x *NNLossGradient) WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient {
 	x.inner.SetComputeLabelGradients(computeLabelGradients)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNLossGradient) WithClipRect(clipRect metal.MTLRegion) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLossGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNLossGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNLossGradient) WithPadding(padding raw.MPSNNPadding) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNLossGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLossGradient {
+	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
 	return x
 }
 
@@ -166,6 +263,22 @@ type NNLossGradientable interface {
 	WithEpsilon(epsilon float32) *NNLossGradient
 	WithDelta(delta float32) *NNLossGradient
 	WithComputeLabelGradients(computeLabelGradients bool) *NNLossGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNLossGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNLossGradient
+	WithClipRect(clipRect metal.MTLRegion) *NNLossGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNLossGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNLossGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNLossGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNLossGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNLossGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNLossGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNLossGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNLossGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNLossGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNLossGradient
+	WithPadding(padding raw.MPSNNPadding) *NNLossGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNLossGradient
 	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStates(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer) unsafe.Pointer
 	EncodeBatchToCommandBufferSourceGradientsSourceImagesLabelsWeightsSourceStatesDestinationGradients(commandBuffer metal.MTLCommandBuffer, sourceGradients unsafe.Pointer, sourceImages unsafe.Pointer, labels unsafe.Pointer, weights unsafe.Pointer, sourceStates unsafe.Pointer, destinationGradients unsafe.Pointer)
 	LossType() raw.MPSCNNLossType

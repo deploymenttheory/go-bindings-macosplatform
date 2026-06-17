@@ -76,6 +76,56 @@ func (x *MTRControllerFactoryParams) WithCdCerts(items ...*foundation.NSData) *M
 	return x
 }
 
+// WithOtaProviderDelegate sets the otaProviderDelegate property and returns the receiver for chaining.
+func (x *MTRControllerFactoryParams) WithOtaProviderDelegate(otaProviderDelegate raw.MTROTAProviderDelegate) *MTRControllerFactoryParams {
+	x.inner.MTRDeviceControllerFactoryParams.SetOtaProviderDelegate(otaProviderDelegate)
+	return x
+}
+
+// WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
+func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams {
+	if len(items) == 0 {
+		x.inner.MTRDeviceControllerFactoryParams.SetProductAttestationAuthorityCertificates(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSData](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MTRDeviceControllerFactoryParams.SetProductAttestationAuthorityCertificates(_arr)
+	return x
+}
+
+// WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
+func (x *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams {
+	if len(items) == 0 {
+		x.inner.MTRDeviceControllerFactoryParams.SetCertificationDeclarationCertificates(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSData](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MTRDeviceControllerFactoryParams.SetCertificationDeclarationCertificates(_arr)
+	return x
+}
+
+// WithPort sets the port property and returns the receiver for chaining.
+func (x *MTRControllerFactoryParams) WithPort(port *foundation.NSNumber) *MTRControllerFactoryParams {
+	x.inner.MTRDeviceControllerFactoryParams.SetPort(port)
+	return x
+}
+
+// WithShouldStartServer sets the shouldStartServer property and returns the receiver for chaining.
+func (x *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams {
+	x.inner.MTRDeviceControllerFactoryParams.SetShouldStartServer(shouldStartServer)
+	return x
+}
+
 // StorageDelegate calls the underlying StorageDelegate.
 func (x *MTRControllerFactoryParams) StorageDelegate() raw.MTRPersistentStorageDelegate {
 	return x.inner.StorageDelegate()
@@ -131,6 +181,11 @@ type MTRControllerFactoryParamsable interface {
 	WithStartServer(startServer bool) *MTRControllerFactoryParams
 	WithPaaCerts(items ...*foundation.NSData) *MTRControllerFactoryParams
 	WithCdCerts(items ...*foundation.NSData) *MTRControllerFactoryParams
+	WithOtaProviderDelegate(otaProviderDelegate raw.MTROTAProviderDelegate) *MTRControllerFactoryParams
+	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams
+	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRControllerFactoryParams
+	WithPort(port *foundation.NSNumber) *MTRControllerFactoryParams
+	WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams
 	StorageDelegate() raw.MTRPersistentStorageDelegate
 	StartServer() bool
 	SetStartServer(startServer bool)

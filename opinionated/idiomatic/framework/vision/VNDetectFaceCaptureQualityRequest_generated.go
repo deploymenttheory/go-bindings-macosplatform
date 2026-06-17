@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewDetectFaceCaptureQualityRequest() *DetectFaceCaptureQualityRequest {
 	return &DetectFaceCaptureQualityRequest{inner: raw.VNDetectFaceCaptureQualityRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectFaceCaptureQualityRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectFaceCaptureQualityRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectFaceCaptureQualityRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectFaceCaptureQualityRequest) WithRevision(revision uint) *DetectFaceCaptureQualityRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *DetectFaceCaptureQualityRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *DetectFaceCaptureQualityRequest) asRequest() *raw.VNRequest { return &x
 // DetectFaceCaptureQualityRequestable is the interface implemented by [DetectFaceCaptureQualityRequest], for mocking and DI.
 type DetectFaceCaptureQualityRequestable interface {
 	Unwrap() *raw.VNDetectFaceCaptureQualityRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest
+	WithRevision(revision uint) *DetectFaceCaptureQualityRequest
 }
 
 var _ DetectFaceCaptureQualityRequestable = (*DetectFaceCaptureQualityRequest)(nil)

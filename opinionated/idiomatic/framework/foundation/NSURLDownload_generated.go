@@ -50,6 +50,12 @@ func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *U
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLDownload) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLDownload {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Cancel calls the underlying Cancel.
 func (x *URLDownload) Cancel() {
 	x.inner.Cancel()
@@ -94,6 +100,7 @@ func (x *URLDownload) asObject() *raw.NSObject { return &x.inner.NSObject }
 type URLDownloadable interface {
 	Unwrap() *raw.NSURLDownload
 	WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLDownload
 	Cancel()
 	SetDestinationAllowOverwrite(path string, allowOverwrite bool)
 	Request() *URLRequest

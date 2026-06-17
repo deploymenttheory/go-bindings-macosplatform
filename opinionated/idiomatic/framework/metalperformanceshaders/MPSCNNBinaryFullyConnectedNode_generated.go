@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -44,6 +45,30 @@ func NewCNNBinaryFullyConnectedNodeWithSourceWeightsOutputBiasTermsOutputScaleTe
 	return &CNNBinaryFullyConnectedNode{inner: raw.MPSCNNBinaryFullyConnectedNodeFromID(_id)}
 }
 
+// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBinaryFullyConnectedNode {
+	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+	return x
+}
+
+// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
+	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnectedNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBinaryFullyConnectedNode {
+	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
+	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNBinaryFullyConnectedNode) asCNNBinaryConvolutionNode() *mpsneuralnetwork.MPSCNNBinaryConvolutionNode { return &x.inner.MPSCNNBinaryConvolutionNode }
 
 func (x *CNNBinaryFullyConnectedNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode { return &x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode }
@@ -53,6 +78,10 @@ func (x *CNNBinaryFullyConnectedNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFi
 // CNNBinaryFullyConnectedNodeable is the interface implemented by [CNNBinaryFullyConnectedNode], for mocking and DI.
 type CNNBinaryFullyConnectedNodeable interface {
 	Unwrap() *raw.MPSCNNBinaryFullyConnectedNode
+	WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBinaryFullyConnectedNode
+	WithAccumulatorPrecision(accumulatorPrecision mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBinaryFullyConnectedNode
+	WithLabel(label string) *CNNBinaryFullyConnectedNode
 }
 
 var _ CNNBinaryFullyConnectedNodeable = (*CNNBinaryFullyConnectedNode)(nil)

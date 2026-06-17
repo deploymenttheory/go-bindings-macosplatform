@@ -47,6 +47,72 @@ func NewNNReduceColumnMinWithCoderDevice(aDecoder *foundation.NSCoder, device me
 	return &NNReduceColumnMin{inner: raw.MPSNNReduceColumnMinFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithOptions(options mpscore.MPSKernelOptions) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceColumnMin) WithLabel(label string) *NNReduceColumnMin {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReduceColumnMin) asNNReduceUnary() *mpsneuralnetwork.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceColumnMin) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -56,6 +122,17 @@ func (x *NNReduceColumnMin) asKernel() *mpscore.MPSKernel { return &x.inner.MPSN
 // NNReduceColumnMinable is the interface implemented by [NNReduceColumnMin], for mocking and DI.
 type NNReduceColumnMinable interface {
 	Unwrap() *raw.MPSNNReduceColumnMin
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMin
+	WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMin
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMin
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMin
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMin
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMin
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMin
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceColumnMin
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMin
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceColumnMin
+	WithLabel(label string) *NNReduceColumnMin
 }
 
 var _ NNReduceColumnMinable = (*NNReduceColumnMin)(nil)

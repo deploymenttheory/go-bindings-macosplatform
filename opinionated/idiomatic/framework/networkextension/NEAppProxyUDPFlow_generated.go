@@ -39,6 +39,12 @@ func NewNEAppProxyUDPFlow() *NEAppProxyUDPFlow {
 	return &NEAppProxyUDPFlow{inner: raw.NEAppProxyUDPFlowFromID(_id)}
 }
 
+// WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
+func (x *NEAppProxyUDPFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow {
+	x.inner.NEAppProxyFlow.SetNetworkInterface(networkInterface)
+	return x
+}
+
 // ReadDatagramsAndFlowEndpointsWithCompletionHandler calls the underlying ReadDatagramsAndFlowEndpointsWithCompletionHandler.
 func (x *NEAppProxyUDPFlow) ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block) {
 	x.inner.ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler)
@@ -100,6 +106,7 @@ func (x *NEAppProxyUDPFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return &x.i
 // NEAppProxyUDPFlowable is the interface implemented by [NEAppProxyUDPFlow], for mocking and DI.
 type NEAppProxyUDPFlowable interface {
 	Unwrap() *raw.NEAppProxyUDPFlow
+	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyUDPFlow
 	ReadDatagramsAndFlowEndpointsWithCompletionHandler(completionHandler objc.Block)
 	ReadDatagramsWithCompletionHandler(completionHandler objc.Block)
 	WriteDatagramsSentByFlowEndpoints(ctx context.Context, datagrams *foundation.NSArray[*foundation.NSData], remoteEndpoints unsafe.Pointer) error

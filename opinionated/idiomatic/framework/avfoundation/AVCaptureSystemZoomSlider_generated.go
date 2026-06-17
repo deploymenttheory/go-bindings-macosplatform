@@ -43,11 +43,18 @@ func NewCaptureSystemZoomSliderWithDeviceAction(device *raw.AVCaptureDevice, act
 	return &CaptureSystemZoomSlider{inner: raw.AVCaptureSystemZoomSliderFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *CaptureSystemZoomSlider) WithEnabled(enabled bool) *CaptureSystemZoomSlider {
+	x.inner.AVCaptureControl.SetEnabled(enabled)
+	return x
+}
+
 func (x *CaptureSystemZoomSlider) asCaptureControl() *raw.AVCaptureControl { return &x.inner.AVCaptureControl }
 
 // CaptureSystemZoomSliderable is the interface implemented by [CaptureSystemZoomSlider], for mocking and DI.
 type CaptureSystemZoomSliderable interface {
 	Unwrap() *raw.AVCaptureSystemZoomSlider
+	WithEnabled(enabled bool) *CaptureSystemZoomSlider
 }
 
 var _ CaptureSystemZoomSliderable = (*CaptureSystemZoomSlider)(nil)

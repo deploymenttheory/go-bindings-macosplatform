@@ -44,6 +44,72 @@ func (x *PersistentDocument) WithManagedObjectContext(managedObjectContext *core
 	return x
 }
 
+// WithFileType sets the fileType property and returns the receiver for chaining.
+func (x *PersistentDocument) WithFileType(fileType string) *PersistentDocument {
+	x.inner.NSDocument.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
+	return x
+}
+
+// WithFileURL sets the fileURL property and returns the receiver for chaining.
+func (x *PersistentDocument) WithFileURL(fileURL string) *PersistentDocument {
+	x.inner.NSDocument.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+	return x
+}
+
+// WithFileModificationDate sets the fileModificationDate property and returns the receiver for chaining.
+func (x *PersistentDocument) WithFileModificationDate(fileModificationDate *foundation.NSDate) *PersistentDocument {
+	x.inner.NSDocument.SetFileModificationDate(fileModificationDate)
+	return x
+}
+
+// WithDraft sets the draft property and returns the receiver for chaining.
+func (x *PersistentDocument) WithDraft(draft bool) *PersistentDocument {
+	x.inner.NSDocument.SetDraft(draft)
+	return x
+}
+
+// WithAutosavedContentsFileURL sets the autosavedContentsFileURL property and returns the receiver for chaining.
+func (x *PersistentDocument) WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument {
+	x.inner.NSDocument.SetAutosavedContentsFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(autosavedContentsFileURL)))
+	return x
+}
+
+// WithPrintInfo sets the printInfo property and returns the receiver for chaining.
+func (x *PersistentDocument) WithPrintInfo(printInfo *raw.NSPrintInfo) *PersistentDocument {
+	x.inner.NSDocument.SetPrintInfo(printInfo)
+	return x
+}
+
+// WithUndoManager sets the undoManager property and returns the receiver for chaining.
+func (x *PersistentDocument) WithUndoManager(undoManager *foundation.NSUndoManager) *PersistentDocument {
+	x.inner.NSDocument.SetUndoManager(undoManager)
+	return x
+}
+
+// WithHasUndoManager sets the hasUndoManager property and returns the receiver for chaining.
+func (x *PersistentDocument) WithHasUndoManager(hasUndoManager bool) *PersistentDocument {
+	x.inner.NSDocument.SetHasUndoManager(hasUndoManager)
+	return x
+}
+
+// WithDisplayName sets the displayName property and returns the receiver for chaining.
+func (x *PersistentDocument) WithDisplayName(displayName string) *PersistentDocument {
+	x.inner.NSDocument.SetDisplayName(foundation.NSStringStringWithUTF8String(displayName))
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *PersistentDocument) WithUserActivity(userActivity *foundation.NSUserActivity) *PersistentDocument {
+	x.inner.NSDocument.SetUserActivity(userActivity)
+	return x
+}
+
+// WithLastComponentOfFileName sets the lastComponentOfFileName property and returns the receiver for chaining.
+func (x *PersistentDocument) WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument {
+	x.inner.NSDocument.SetLastComponentOfFileName(foundation.NSStringStringWithUTF8String(lastComponentOfFileName))
+	return x
+}
+
 // ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError calls the underlying ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError.
 func (x *PersistentDocument) ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url string, fileType string, configuration string, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
 	return x.inner.ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSStringStringWithUTF8String(fileType), foundation.NSStringStringWithUTF8String(configuration), storeOptions)
@@ -84,6 +150,17 @@ func (x *PersistentDocument) asDocument() *raw.NSDocument { return &x.inner.NSDo
 type PersistentDocumentable interface {
 	Unwrap() *raw.NSPersistentDocument
 	WithManagedObjectContext(managedObjectContext *coredata.NSManagedObjectContext) *PersistentDocument
+	WithFileType(fileType string) *PersistentDocument
+	WithFileURL(fileURL string) *PersistentDocument
+	WithFileModificationDate(fileModificationDate *foundation.NSDate) *PersistentDocument
+	WithDraft(draft bool) *PersistentDocument
+	WithAutosavedContentsFileURL(autosavedContentsFileURL string) *PersistentDocument
+	WithPrintInfo(printInfo *raw.NSPrintInfo) *PersistentDocument
+	WithUndoManager(undoManager *foundation.NSUndoManager) *PersistentDocument
+	WithHasUndoManager(hasUndoManager bool) *PersistentDocument
+	WithDisplayName(displayName string) *PersistentDocument
+	WithUserActivity(userActivity *foundation.NSUserActivity) *PersistentDocument
+	WithLastComponentOfFileName(lastComponentOfFileName string) *PersistentDocument
 	ConfigurePersistentStoreCoordinatorForURLOfTypeModelConfigurationStoreOptionsError(url string, fileType string, configuration string, storeOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
 	PersistentStoreTypeForFileType(fileType string) string
 	ManagedObjectContext() *coredata.NSManagedObjectContext

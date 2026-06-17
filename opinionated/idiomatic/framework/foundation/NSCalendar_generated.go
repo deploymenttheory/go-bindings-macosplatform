@@ -61,6 +61,12 @@ func (x *Calendar) WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Cale
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Calendar) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Calendar {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MinimumRangeOfUnit calls the underlying MinimumRangeOfUnit.
 func (x *Calendar) MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange {
 	return x.inner.MinimumRangeOfUnit(unit)
@@ -578,6 +584,7 @@ type Calendarable interface {
 	WithTimeZone(timeZone *raw.NSTimeZone) *Calendar
 	WithFirstWeekday(firstWeekday uint) *Calendar
 	WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek uint) *Calendar
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Calendar
 	MinimumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
 	MaximumRangeOfUnit(unit raw.NSCalendarUnit) raw.NSRange
 	RangeOfUnitInUnitForDate(smaller raw.NSCalendarUnit, larger raw.NSCalendarUnit, date *raw.NSDate) raw.NSRange

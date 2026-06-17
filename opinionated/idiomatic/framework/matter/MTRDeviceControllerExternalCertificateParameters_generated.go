@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // MTRDeviceControllerExternalCertificateParameters wraps [raw.MTRDeviceControllerExternalCertificateParameters] with a fluent Go API.
@@ -37,6 +38,62 @@ func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStora
 	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(_id)}
 }
 
+// WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
+	if len(items) == 0 {
+		x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSData](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(_arr)
+	return x
+}
+
+// WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
+	if len(items) == 0 {
+		x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSData](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(_arr)
+	return x
+}
+
+// WithShouldAdvertiseOperational sets the shouldAdvertiseOperational property and returns the receiver for chaining.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters {
+	x.inner.MTRDeviceControllerParameters.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
+	return x
+}
+
+// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the concurrentSubscriptionEstablishmentsAllowedOnThread property and returns the receiver for chaining.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters {
+	x.inner.MTRDeviceControllerParameters.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
+	return x
+}
+
+// WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
+	x.inner.MTRDeviceControllerParameters.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
+	return x
+}
+
+// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {
+	x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	return x
+}
+
 // RootCertificate calls the underlying RootCertificate.
 func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *foundation.NSData {
 	return x.inner.RootCertificate()
@@ -49,6 +106,12 @@ func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceController
 // MTRDeviceControllerExternalCertificateParametersable is the interface implemented by [MTRDeviceControllerExternalCertificateParameters], for mocking and DI.
 type MTRDeviceControllerExternalCertificateParametersable interface {
 	Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters
+	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters
+	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters
+	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters
+	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters
+	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters
+	WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters
 	RootCertificate() *foundation.NSData
 }
 

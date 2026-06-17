@@ -150,6 +150,52 @@ func (x *NETunnelProviderManager) WithAssociatedDomains(items ...*foundation.NSS
 	return x
 }
 
+// WithOnDemandRules sets the collection, converting the Go slice to an NSArray.
+func (x *NETunnelProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager {
+	if len(items) == 0 {
+		x.inner.NEVPNManager.SetOnDemandRules(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asNEOnDemandRule().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NEOnDemandRule](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NEVPNManager.SetOnDemandRules(_arr)
+	return x
+}
+
+// WithOnDemandEnabled sets the onDemandEnabled property and returns the receiver for chaining.
+func (x *NETunnelProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NETunnelProviderManager {
+	x.inner.NEVPNManager.SetOnDemandEnabled(onDemandEnabled)
+	return x
+}
+
+// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+func (x *NETunnelProviderManager) WithLocalizedDescription(localizedDescription string) *NETunnelProviderManager {
+	x.inner.NEVPNManager.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	return x
+}
+
+// WithProtocol sets the protocol property and returns the receiver for chaining.
+func (x *NETunnelProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager {
+	x.inner.NEVPNManager.SetProtocol(protocol.asNEVPNProtocol())
+	return x
+}
+
+// WithProtocolConfiguration sets the protocolConfiguration property and returns the receiver for chaining.
+func (x *NETunnelProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager {
+	x.inner.NEVPNManager.SetProtocolConfiguration(protocolConfiguration.asNEVPNProtocol())
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *NETunnelProviderManager) WithEnabled(enabled bool) *NETunnelProviderManager {
+	x.inner.NEVPNManager.SetEnabled(enabled)
+	return x
+}
+
 // CopyAppRules returns the collection as a Go slice.
 func (x *NETunnelProviderManager) CopyAppRules() []*raw.NEAppRule {
 	arr := x.inner.CopyAppRules()
@@ -292,6 +338,12 @@ type NETunnelProviderManagerable interface {
 	WithAppRules(items ...*raw.NEAppRule) *NETunnelProviderManager
 	WithExcludedDomains(items ...*foundation.NSString) *NETunnelProviderManager
 	WithAssociatedDomains(items ...*foundation.NSString) *NETunnelProviderManager
+	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NETunnelProviderManager
+	WithOnDemandEnabled(onDemandEnabled bool) *NETunnelProviderManager
+	WithLocalizedDescription(localizedDescription string) *NETunnelProviderManager
+	WithProtocol(protocol NEVPNProtocolProvider) *NETunnelProviderManager
+	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NETunnelProviderManager
+	WithEnabled(enabled bool) *NETunnelProviderManager
 	CopyAppRules() []*raw.NEAppRule
 	RoutingMethod() raw.NETunnelProviderRoutingMethod
 	SafariDomains() []string

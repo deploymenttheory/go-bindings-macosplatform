@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -116,6 +117,48 @@ func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveB
 // WithCurveEndCaps sets the curveEndCaps property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor {
 	x.inner.SetCurveEndCaps(curveEndCaps)
+	return x
+}
+
+// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetOpaque(opaque)
+	return x
+}
+
+// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
+	return x
+}
+
+// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
+	return x
+}
+
+// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
@@ -278,6 +321,13 @@ type MTL4AccelerationStructureCurveGeometryDescriptorable interface {
 	WithCurveType(curveType raw.MTLCurveType) *MTL4AccelerationStructureCurveGeometryDescriptor
 	WithCurveBasis(curveBasis raw.MTLCurveBasis) *MTL4AccelerationStructureCurveGeometryDescriptor
 	WithCurveEndCaps(curveEndCaps raw.MTLCurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithOpaque(opaque bool) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithLabel(label string) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureCurveGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureCurveGeometryDescriptor
 	ControlPointBuffer() raw.MTL4BufferRange
 	SetControlPointBuffer(controlPointBuffer raw.MTL4BufferRange)
 	ControlPointCount() uint

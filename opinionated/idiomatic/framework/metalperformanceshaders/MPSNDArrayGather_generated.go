@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
@@ -43,6 +44,24 @@ func (x *NDArrayGather) WithAxis(axis uint) *NDArrayGather {
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayGather) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGather {
+	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayGather) WithOptions(options mpscore.MPSKernelOptions) *NDArrayGather {
+	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayGather) WithLabel(label string) *NDArrayGather {
+	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Axis calls the underlying Axis.
 func (x *NDArrayGather) Axis() uint {
 	return x.inner.Axis()
@@ -65,6 +84,9 @@ func (x *NDArrayGather) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDArr
 type NDArrayGatherable interface {
 	Unwrap() *raw.MPSNDArrayGather
 	WithAxis(axis uint) *NDArrayGather
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGather
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayGather
+	WithLabel(label string) *NDArrayGather
 	Axis() uint
 	SetAxis(axis uint)
 }

@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,60 @@ func NewNNReduceColumnMeanWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &NNReduceColumnMean{inner: raw.MPSNNReduceColumnMeanFromID(_id)}
 }
 
+// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.SetClipRectSource(clipRectSource)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithPadding(padding raw.MPSNNPadding) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceColumnMean) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMean {
+	x.inner.MPSNNReduceUnary.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *NNReduceColumnMean) asNNReduceUnary() *raw.MPSNNReduceUnary { return &x.inner.MPSNNReduceUnary }
 
 func (x *NNReduceColumnMean) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSNNReduceUnary.MPSCNNKernel }
@@ -52,6 +107,15 @@ func (x *NNReduceColumnMean) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.M
 // NNReduceColumnMeanable is the interface implemented by [NNReduceColumnMean], for mocking and DI.
 type NNReduceColumnMeanable interface {
 	Unwrap() *raw.MPSNNReduceColumnMean
+	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceColumnMean
+	WithOffset(offset mpscore.MPSOffset) *NNReduceColumnMean
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceColumnMean
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceColumnMean
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceColumnMean
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceColumnMean
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceColumnMean
+	WithPadding(padding raw.MPSNNPadding) *NNReduceColumnMean
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceColumnMean
 }
 
 var _ NNReduceColumnMeanable = (*NNReduceColumnMean)(nil)

@@ -59,6 +59,18 @@ func (x *ImageCopyToMatrix) WithDestinationMatrixBatchIndex(destinationMatrixBat
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageCopyToMatrix) WithOptions(options mpscore.MPSKernelOptions) *ImageCopyToMatrix {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageCopyToMatrix) WithLabel(label string) *ImageCopyToMatrix {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceImageDestinationMatrix calls the underlying EncodeToCommandBufferSourceImageDestinationMatrix.
 func (x *ImageCopyToMatrix) EncodeToCommandBufferSourceImageDestinationMatrix(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationMatrix *mpscore.MPSMatrix) {
 	x.inner.EncodeToCommandBufferSourceImageDestinationMatrix(commandBuffer, sourceImage, destinationMatrix)
@@ -101,6 +113,8 @@ type ImageCopyToMatrixable interface {
 	Unwrap() *raw.MPSImageCopyToMatrix
 	WithDestinationMatrixOrigin(destinationMatrixOrigin metal.MTLOrigin) *ImageCopyToMatrix
 	WithDestinationMatrixBatchIndex(destinationMatrixBatchIndex uint) *ImageCopyToMatrix
+	WithOptions(options mpscore.MPSKernelOptions) *ImageCopyToMatrix
+	WithLabel(label string) *ImageCopyToMatrix
 	EncodeToCommandBufferSourceImageDestinationMatrix(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationMatrix *mpscore.MPSMatrix)
 	EncodeBatchToCommandBufferSourceImagesDestinationMatrix(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, destinationMatrix *mpscore.MPSMatrix)
 	DestinationMatrixOrigin() metal.MTLOrigin

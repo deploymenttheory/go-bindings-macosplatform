@@ -35,6 +35,12 @@ func NewUnitEnergy() *UnitEnergy {
 	return &UnitEnergy{inner: raw.NSUnitEnergyFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitEnergy) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitEnergy {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitEnergy) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitEnergy) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitEnergy) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUn
 // UnitEnergyable is the interface implemented by [UnitEnergy], for mocking and DI.
 type UnitEnergyable interface {
 	Unwrap() *raw.NSUnitEnergy
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitEnergy
 }
 
 var _ UnitEnergyable = (*UnitEnergy)(nil)

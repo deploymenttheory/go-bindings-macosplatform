@@ -36,6 +36,30 @@ func NewIncrementalStore() *IncrementalStore {
 	return &IncrementalStore{inner: raw.NSIncrementalStoreFromID(_id)}
 }
 
+// WithURL sets the uRL property and returns the receiver for chaining.
+func (x *IncrementalStore) WithURL(uRL string) *IncrementalStore {
+	x.inner.NSPersistentStore.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	return x
+}
+
+// WithIdentifier sets the identifier property and returns the receiver for chaining.
+func (x *IncrementalStore) WithIdentifier(identifier string) *IncrementalStore {
+	x.inner.NSPersistentStore.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	return x
+}
+
+// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+func (x *IncrementalStore) WithReadOnly(readOnly bool) *IncrementalStore {
+	x.inner.NSPersistentStore.SetReadOnly(readOnly)
+	return x
+}
+
+// WithMetadata sets the metadata property and returns the receiver for chaining.
+func (x *IncrementalStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *IncrementalStore {
+	x.inner.NSPersistentStore.SetMetadata(metadata)
+	return x
+}
+
 // ExecuteRequestWithContextError calls the underlying ExecuteRequestWithContextError.
 func (x *IncrementalStore) ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
 	return x.inner.ExecuteRequestWithContextError(request, context_)
@@ -92,6 +116,10 @@ func (x *IncrementalStore) asPersistentStore() *raw.NSPersistentStore { return &
 // IncrementalStoreable is the interface implemented by [IncrementalStore], for mocking and DI.
 type IncrementalStoreable interface {
 	Unwrap() *raw.NSIncrementalStore
+	WithURL(uRL string) *IncrementalStore
+	WithIdentifier(identifier string) *IncrementalStore
+	WithReadOnly(readOnly bool) *IncrementalStore
+	WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *IncrementalStore
 	ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error)
 	NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error)
 	NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error)

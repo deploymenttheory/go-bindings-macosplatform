@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewCNNPoolingAverageNode() *CNNPoolingAverageNode {
 	return &CNNPoolingAverageNode{inner: raw.MPSCNNPoolingAverageNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingAverageNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingAverageNode {
+	x.inner.MPSCNNPoolingNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingAverageNode) WithLabel(label string) *CNNPoolingAverageNode {
+	x.inner.MPSCNNPoolingNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingAverageNode) asCNNPoolingNode() *raw.MPSCNNPoolingNode { return &x.inner.MPSCNNPoolingNode }
 
 func (x *CNNPoolingAverageNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNPoolingNode.MPSNNFilterNode }
@@ -42,6 +55,8 @@ func (x *CNNPoolingAverageNode) asNNFilterNode() *raw.MPSNNFilterNode { return &
 // CNNPoolingAverageNodeable is the interface implemented by [CNNPoolingAverageNode], for mocking and DI.
 type CNNPoolingAverageNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingAverageNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNPoolingAverageNode
+	WithLabel(label string) *CNNPoolingAverageNode
 }
 
 var _ CNNPoolingAverageNodeable = (*CNNPoolingAverageNode)(nil)

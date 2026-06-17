@@ -95,6 +95,60 @@ func (x *FetchRecordsOperation) WithFetchRecordsCompletionBlock(fetchRecordsComp
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithDatabase(database *raw.CKDatabase) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithGroup(group *raw.CKOperationGroup) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithContainer(container *raw.CKContainer) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithLongLived(longLived bool) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // RecordIDs returns the collection as a Go slice.
 func (x *FetchRecordsOperation) RecordIDs() []*raw.CKRecordID {
 	arr := x.inner.RecordIDs()
@@ -169,6 +223,15 @@ type FetchRecordsOperationable interface {
 	WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) *FetchRecordsOperation
 	WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) *FetchRecordsOperation
 	WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) *FetchRecordsOperation
+	WithDatabase(database *raw.CKDatabase) *FetchRecordsOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchRecordsOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchRecordsOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation
+	WithContainer(container *raw.CKContainer) *FetchRecordsOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation
+	WithLongLived(longLived bool) *FetchRecordsOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation
 	RecordIDs() []*raw.CKRecordID
 	SetRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID])
 	DesiredKeys() []*foundation.NSString

@@ -36,6 +36,12 @@ func NewNotificationQueueWithNotificationCenter(notificationCenter *raw.NSNotifi
 	return &NotificationQueue{inner: raw.NSNotificationQueueFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *NotificationQueue) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationQueue {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // EnqueueNotificationPostingStyle calls the underlying EnqueueNotificationPostingStyle.
 func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle) {
 	x.inner.EnqueueNotificationPostingStyle(notification, postingStyle)
@@ -56,6 +62,7 @@ func (x *NotificationQueue) asObject() *raw.NSObject { return &x.inner.NSObject 
 // NotificationQueueable is the interface implemented by [NotificationQueue], for mocking and DI.
 type NotificationQueueable interface {
 	Unwrap() *raw.NSNotificationQueue
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *NotificationQueue
 	EnqueueNotificationPostingStyle(notification *raw.NSNotification, postingStyle raw.NSPostingStyle)
 	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *raw.NSNotification, postingStyle raw.NSPostingStyle, coalesceMask raw.NSNotificationCoalescing, modes *raw.NSArray[*raw.NSString])
 	DequeueNotificationsMatchingCoalesceMask(notification *raw.NSNotification, coalesceMask uint)

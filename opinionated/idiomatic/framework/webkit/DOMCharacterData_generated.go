@@ -43,6 +43,24 @@ func (x *DOMCharacterData) WithData(data string) *DOMCharacterData {
 	return x
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // SubstringDataLength calls the underlying SubstringDataLength.
 func (x *DOMCharacterData) SubstringDataLength(offset uint, length uint) string {
 	_r := x.inner.SubstringDataLength(offset, length)
@@ -127,6 +145,9 @@ func (x *DOMCharacterData) asWebScriptObject() *raw.WebScriptObject { return &x.
 type DOMCharacterDataable interface {
 	Unwrap() *raw.DOMCharacterData
 	WithData(data string) *DOMCharacterData
+	WithNodeValue(nodeValue string) *DOMCharacterData
+	WithPrefix(prefix string) *DOMCharacterData
+	WithTextContent(textContent string) *DOMCharacterData
 	SubstringDataLength(offset uint, length uint) string
 	AppendData(data string)
 	InsertDataData(offset uint, data string)

@@ -38,6 +38,18 @@ func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier st
 	return &EditMessageIntent{inner: raw.INEditMessageIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // MessageIdentifier calls the underlying MessageIdentifier.
 func (x *EditMessageIntent) MessageIdentifier() string {
 	_r := x.inner.MessageIdentifier()
@@ -61,6 +73,8 @@ func (x *EditMessageIntent) asIntent() *raw.INIntent { return &x.inner.INIntent 
 // EditMessageIntentable is the interface implemented by [EditMessageIntent], for mocking and DI.
 type EditMessageIntentable interface {
 	Unwrap() *raw.INEditMessageIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent
 	MessageIdentifier() string
 	EditedContent() string
 }

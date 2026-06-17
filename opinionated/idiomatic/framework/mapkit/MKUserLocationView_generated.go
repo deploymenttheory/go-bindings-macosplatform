@@ -5,6 +5,9 @@
 package mapkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +38,158 @@ func NewUserLocationView() *UserLocationView {
 	return &UserLocationView{inner: raw.MKUserLocationViewFromID(_id)}
 }
 
+// WithAnnotation sets the annotation property and returns the receiver for chaining.
+func (x *UserLocationView) WithAnnotation(annotation raw.MKAnnotation) *UserLocationView {
+	x.inner.MKAnnotationView.SetAnnotation(annotation)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *UserLocationView) WithImage(image *appkit.NSImage) *UserLocationView {
+	x.inner.MKAnnotationView.SetImage(image)
+	return x
+}
+
+// WithCenterOffset sets the centerOffset property and returns the receiver for chaining.
+func (x *UserLocationView) WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView {
+	x.inner.MKAnnotationView.SetCenterOffset(centerOffset)
+	return x
+}
+
+// WithAccessoryOffset sets the accessoryOffset property and returns the receiver for chaining.
+func (x *UserLocationView) WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView {
+	x.inner.MKAnnotationView.SetAccessoryOffset(accessoryOffset)
+	return x
+}
+
+// WithCalloutOffset sets the calloutOffset property and returns the receiver for chaining.
+func (x *UserLocationView) WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView {
+	x.inner.MKAnnotationView.SetCalloutOffset(calloutOffset)
+	return x
+}
+
+// WithLeftCalloutOffset sets the leftCalloutOffset property and returns the receiver for chaining.
+func (x *UserLocationView) WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	x.inner.MKAnnotationView.SetLeftCalloutOffset(leftCalloutOffset)
+	return x
+}
+
+// WithRightCalloutOffset sets the rightCalloutOffset property and returns the receiver for chaining.
+func (x *UserLocationView) WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView {
+	x.inner.MKAnnotationView.SetRightCalloutOffset(rightCalloutOffset)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *UserLocationView) WithEnabled(enabled bool) *UserLocationView {
+	x.inner.MKAnnotationView.SetEnabled(enabled)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *UserLocationView) WithHighlighted(highlighted bool) *UserLocationView {
+	x.inner.MKAnnotationView.SetHighlighted(highlighted)
+	return x
+}
+
+// WithSelected sets the selected property and returns the receiver for chaining.
+func (x *UserLocationView) WithSelected(selected bool) *UserLocationView {
+	x.inner.MKAnnotationView.SetSelected(selected)
+	return x
+}
+
+// WithCanShowCallout sets the canShowCallout property and returns the receiver for chaining.
+func (x *UserLocationView) WithCanShowCallout(canShowCallout bool) *UserLocationView {
+	x.inner.MKAnnotationView.SetCanShowCallout(canShowCallout)
+	return x
+}
+
+// WithLeftCalloutAccessoryView sets the leftCalloutAccessoryView property and returns the receiver for chaining.
+func (x *UserLocationView) WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *UserLocationView {
+	x.inner.MKAnnotationView.SetLeftCalloutAccessoryView(leftCalloutAccessoryView)
+	return x
+}
+
+// WithRightCalloutAccessoryView sets the rightCalloutAccessoryView property and returns the receiver for chaining.
+func (x *UserLocationView) WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *UserLocationView {
+	x.inner.MKAnnotationView.SetRightCalloutAccessoryView(rightCalloutAccessoryView)
+	return x
+}
+
+// WithDetailCalloutAccessoryView sets the detailCalloutAccessoryView property and returns the receiver for chaining.
+func (x *UserLocationView) WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *UserLocationView {
+	x.inner.MKAnnotationView.SetDetailCalloutAccessoryView(detailCalloutAccessoryView)
+	return x
+}
+
+// WithDraggable sets the draggable property and returns the receiver for chaining.
+func (x *UserLocationView) WithDraggable(draggable bool) *UserLocationView {
+	x.inner.MKAnnotationView.SetDraggable(draggable)
+	return x
+}
+
+// WithDragState sets the dragState property and returns the receiver for chaining.
+func (x *UserLocationView) WithDragState(dragState raw.MKAnnotationViewDragState) *UserLocationView {
+	x.inner.MKAnnotationView.SetDragState(dragState)
+	return x
+}
+
+// WithClusteringIdentifier sets the clusteringIdentifier property and returns the receiver for chaining.
+func (x *UserLocationView) WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView {
+	x.inner.MKAnnotationView.SetClusteringIdentifier(foundation.NSStringStringWithUTF8String(clusteringIdentifier))
+	return x
+}
+
+// WithDisplayPriority sets the displayPriority property and returns the receiver for chaining.
+func (x *UserLocationView) WithDisplayPriority(displayPriority float32) *UserLocationView {
+	x.inner.MKAnnotationView.SetDisplayPriority(displayPriority)
+	return x
+}
+
+// WithZPriority sets the zPriority property and returns the receiver for chaining.
+func (x *UserLocationView) WithZPriority(zPriority float32) *UserLocationView {
+	x.inner.MKAnnotationView.SetZPriority(zPriority)
+	return x
+}
+
+// WithSelectedZPriority sets the selectedZPriority property and returns the receiver for chaining.
+func (x *UserLocationView) WithSelectedZPriority(selectedZPriority float32) *UserLocationView {
+	x.inner.MKAnnotationView.SetSelectedZPriority(selectedZPriority)
+	return x
+}
+
+// WithCollisionMode sets the collisionMode property and returns the receiver for chaining.
+func (x *UserLocationView) WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *UserLocationView {
+	x.inner.MKAnnotationView.SetCollisionMode(collisionMode)
+	return x
+}
+
 func (x *UserLocationView) asAnnotationView() *raw.MKAnnotationView { return &x.inner.MKAnnotationView }
 
 // UserLocationViewable is the interface implemented by [UserLocationView], for mocking and DI.
 type UserLocationViewable interface {
 	Unwrap() *raw.MKUserLocationView
+	WithAnnotation(annotation raw.MKAnnotation) *UserLocationView
+	WithImage(image *appkit.NSImage) *UserLocationView
+	WithCenterOffset(centerOffset corefoundation.CGPoint) *UserLocationView
+	WithAccessoryOffset(accessoryOffset corefoundation.CGPoint) *UserLocationView
+	WithCalloutOffset(calloutOffset corefoundation.CGPoint) *UserLocationView
+	WithLeftCalloutOffset(leftCalloutOffset corefoundation.CGPoint) *UserLocationView
+	WithRightCalloutOffset(rightCalloutOffset corefoundation.CGPoint) *UserLocationView
+	WithEnabled(enabled bool) *UserLocationView
+	WithHighlighted(highlighted bool) *UserLocationView
+	WithSelected(selected bool) *UserLocationView
+	WithCanShowCallout(canShowCallout bool) *UserLocationView
+	WithLeftCalloutAccessoryView(leftCalloutAccessoryView *appkit.NSView) *UserLocationView
+	WithRightCalloutAccessoryView(rightCalloutAccessoryView *appkit.NSView) *UserLocationView
+	WithDetailCalloutAccessoryView(detailCalloutAccessoryView *appkit.NSView) *UserLocationView
+	WithDraggable(draggable bool) *UserLocationView
+	WithDragState(dragState raw.MKAnnotationViewDragState) *UserLocationView
+	WithClusteringIdentifier(clusteringIdentifier string) *UserLocationView
+	WithDisplayPriority(displayPriority float32) *UserLocationView
+	WithZPriority(zPriority float32) *UserLocationView
+	WithSelectedZPriority(selectedZPriority float32) *UserLocationView
+	WithCollisionMode(collisionMode raw.MKAnnotationViewCollisionMode) *UserLocationView
 }
 
 var _ UserLocationViewable = (*UserLocationView)(nil)

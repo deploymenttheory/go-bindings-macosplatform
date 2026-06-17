@@ -36,6 +36,12 @@ func NewTermOfAddress() *TermOfAddress {
 	return &TermOfAddress{inner: raw.NSTermOfAddressFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *TermOfAddress) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TermOfAddress {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // LanguageIdentifier calls the underlying LanguageIdentifier.
 func (x *TermOfAddress) LanguageIdentifier() *String {
 	_r := x.inner.LanguageIdentifier()
@@ -61,6 +67,7 @@ func (x *TermOfAddress) asObject() *raw.NSObject { return &x.inner.NSObject }
 // TermOfAddressable is the interface implemented by [TermOfAddress], for mocking and DI.
 type TermOfAddressable interface {
 	Unwrap() *raw.NSTermOfAddress
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TermOfAddress
 	LanguageIdentifier() *String
 	Pronouns() []*raw.NSMorphologyPronoun
 }

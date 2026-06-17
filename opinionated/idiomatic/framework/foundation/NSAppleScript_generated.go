@@ -44,6 +44,12 @@ func NewAppleScriptWithSource(source string) *AppleScript {
 	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AppleScript) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleScript {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CompileAndReturnError calls the underlying CompileAndReturnError.
 func (x *AppleScript) CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
 	return x.inner.CompileAndReturnError(errorInfo)
@@ -86,6 +92,7 @@ func (x *AppleScript) asObject() *raw.NSObject { return &x.inner.NSObject }
 // AppleScriptable is the interface implemented by [AppleScript], for mocking and DI.
 type AppleScriptable interface {
 	Unwrap() *raw.NSAppleScript
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleScript
 	CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool
 	ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
 	ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor

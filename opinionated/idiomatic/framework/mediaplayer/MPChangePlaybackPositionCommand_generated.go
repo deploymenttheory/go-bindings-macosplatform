@@ -35,11 +35,18 @@ func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 	return &ChangePlaybackPositionCommand{inner: raw.MPChangePlaybackPositionCommandFromID(_id)}
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 func (x *ChangePlaybackPositionCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
 
 // ChangePlaybackPositionCommandable is the interface implemented by [ChangePlaybackPositionCommand], for mocking and DI.
 type ChangePlaybackPositionCommandable interface {
 	Unwrap() *raw.MPChangePlaybackPositionCommand
+	WithEnabled(enabled bool) *ChangePlaybackPositionCommand
 }
 
 var _ ChangePlaybackPositionCommandable = (*ChangePlaybackPositionCommand)(nil)

@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -47,6 +48,12 @@ func (x *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplic
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayMatrixMultiplication) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMatrixMultiplication {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *ArrayMatrixMultiplication) Alpha() float64 {
 	return x.inner.Alpha()
@@ -78,6 +85,7 @@ type ArrayMatrixMultiplicationable interface {
 	Unwrap() *raw.MPSNDArrayMatrixMultiplication
 	WithAlpha(alpha float64) *ArrayMatrixMultiplication
 	WithBeta(beta float64) *ArrayMatrixMultiplication
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMatrixMultiplication
 	Alpha() float64
 	SetAlpha(alpha float64)
 	Beta() float64

@@ -37,6 +37,12 @@ func NewDOMCSSPrimitiveValue() *DOMCSSPrimitiveValue {
 	return &DOMCSSPrimitiveValue{inner: raw.DOMCSSPrimitiveValueFromID(_id)}
 }
 
+// WithCssText sets the cssText property and returns the receiver for chaining.
+func (x *DOMCSSPrimitiveValue) WithCssText(cssText string) *DOMCSSPrimitiveValue {
+	x.inner.DOMCSSValue.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	return x
+}
+
 // SetFloatValueFloatValue calls the underlying SetFloatValueFloatValue.
 func (x *DOMCSSPrimitiveValue) SetFloatValueFloatValue(unitType uint16, floatValue float32) {
 	x.inner.SetFloatValueFloatValue(unitType, floatValue)
@@ -112,6 +118,7 @@ func (x *DOMCSSPrimitiveValue) asWebScriptObject() *raw.WebScriptObject { return
 // DOMCSSPrimitiveValueable is the interface implemented by [DOMCSSPrimitiveValue], for mocking and DI.
 type DOMCSSPrimitiveValueable interface {
 	Unwrap() *raw.DOMCSSPrimitiveValue
+	WithCssText(cssText string) *DOMCSSPrimitiveValue
 	SetFloatValueFloatValue(unitType uint16, floatValue float32)
 	GetFloatValue(unitType uint16) float32
 	SetStringValueStringValue(stringType uint16, stringValue string)

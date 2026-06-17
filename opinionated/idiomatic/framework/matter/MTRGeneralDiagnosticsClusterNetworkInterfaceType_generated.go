@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,53 @@ func NewMTRGeneralDiagnosticsClusterNetworkInterfaceType() *MTRGeneralDiagnostic
 	return &MTRGeneralDiagnosticsClusterNetworkInterfaceType{inner: raw.MTRGeneralDiagnosticsClusterNetworkInterfaceTypeFromID(_id)}
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithIsOperational sets the isOperational property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithIsOperational(isOperational *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetIsOperational(isOperational)
+	return x
+}
+
+// WithOffPremiseServicesReachableIPv4 sets the offPremiseServicesReachableIPv4 property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4)
+	return x
+}
+
+// WithOffPremiseServicesReachableIPv6 sets the offPremiseServicesReachableIPv6 property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6)
+	return x
+}
+
+// WithHardwareAddress sets the hardwareAddress property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithHardwareAddress(hardwareAddress *foundation.NSData) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetHardwareAddress(hardwareAddress)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) WithType(type_ *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType {
+	x.inner.MTRGeneralDiagnosticsClusterNetworkInterface.SetType(type_)
+	return x
+}
+
 func (x *MTRGeneralDiagnosticsClusterNetworkInterfaceType) asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface { return &x.inner.MTRGeneralDiagnosticsClusterNetworkInterface }
 
 // MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable is the interface implemented by [MTRGeneralDiagnosticsClusterNetworkInterfaceType], for mocking and DI.
 type MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable interface {
 	Unwrap() *raw.MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithName(name string) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithIsOperational(isOperational *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithOffPremiseServicesReachableIPv4(offPremiseServicesReachableIPv4 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithOffPremiseServicesReachableIPv6(offPremiseServicesReachableIPv6 *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithHardwareAddress(hardwareAddress *foundation.NSData) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
+	WithType(type_ *foundation.NSNumber) *MTRGeneralDiagnosticsClusterNetworkInterfaceType
 }
 
 var _ MTRGeneralDiagnosticsClusterNetworkInterfaceTypeable = (*MTRGeneralDiagnosticsClusterNetworkInterfaceType)(nil)

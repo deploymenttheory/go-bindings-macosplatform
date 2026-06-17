@@ -35,6 +35,12 @@ func NewUnitIlluminance() *UnitIlluminance {
 	return &UnitIlluminance{inner: raw.NSUnitIlluminanceFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitIlluminance) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitIlluminance {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitIlluminance) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitIlluminance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitIlluminance) asObject() *raw.NSObject { return &x.inner.NSDimension
 // UnitIlluminanceable is the interface implemented by [UnitIlluminance], for mocking and DI.
 type UnitIlluminanceable interface {
 	Unwrap() *raw.NSUnitIlluminance
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitIlluminance
 }
 
 var _ UnitIlluminanceable = (*UnitIlluminance)(nil)

@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BackgroundExtensionView wraps [raw.NSBackgroundExtensionView] with a fluent Go API.
@@ -47,6 +52,340 @@ func (x *BackgroundExtensionView) WithAutomaticallyPlacesContentView(automatical
 	return x
 }
 
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *BackgroundExtensionView) WithSubviews(items ...ViewProvider) *BackgroundExtensionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithHidden(hidden bool) *BackgroundExtensionView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *BackgroundExtensionView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithFrameRotation(frameRotation float64) *BackgroundExtensionView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithBoundsRotation(boundsRotation float64) *BackgroundExtensionView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithCanDrawConcurrently(canDrawConcurrently bool) *BackgroundExtensionView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *BackgroundExtensionView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithWantsLayer(wantsLayer bool) *BackgroundExtensionView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithLayer(layer *quartzcore.CALayer) *BackgroundExtensionView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithNeedsLayout(needsLayout bool) *BackgroundExtensionView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAlphaValue(alphaValue float64) *BackgroundExtensionView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *BackgroundExtensionView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *BackgroundExtensionView) WithBackgroundFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *BackgroundExtensionView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *BackgroundExtensionView) WithContentFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithShadow(shadow *raw.NSShadow) *BackgroundExtensionView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithToolTip(toolTip string) *BackgroundExtensionView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BackgroundExtensionView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithFocusRingType(focusRingType raw.NSFocusRingType) *BackgroundExtensionView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *BackgroundExtensionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *BackgroundExtensionView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *BackgroundExtensionView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *BackgroundExtensionView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithMenu(menu *raw.NSMenu) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithUserActivity(userActivity *foundation.NSUserActivity) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *BackgroundExtensionView) WithTouchBar(touchBar *raw.NSTouchBar) *BackgroundExtensionView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // ContentView calls the underlying ContentView.
 func (x *BackgroundExtensionView) ContentView() *View {
 	_r := x.inner.ContentView()
@@ -80,6 +419,55 @@ type BackgroundExtensionViewable interface {
 	Unwrap() *raw.NSBackgroundExtensionView
 	WithContentView(contentView ViewProvider) *BackgroundExtensionView
 	WithAutomaticallyPlacesContentView(automaticallyPlacesContentView bool) *BackgroundExtensionView
+	WithSubviews(items ...ViewProvider) *BackgroundExtensionView
+	WithHidden(hidden bool) *BackgroundExtensionView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *BackgroundExtensionView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *BackgroundExtensionView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *BackgroundExtensionView
+	WithFrame(frame corefoundation.CGRect) *BackgroundExtensionView
+	WithFrameRotation(frameRotation float64) *BackgroundExtensionView
+	WithFrameCenterRotation(frameCenterRotation float64) *BackgroundExtensionView
+	WithBoundsRotation(boundsRotation float64) *BackgroundExtensionView
+	WithBounds(bounds corefoundation.CGRect) *BackgroundExtensionView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *BackgroundExtensionView
+	WithNeedsDisplay(needsDisplay bool) *BackgroundExtensionView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *BackgroundExtensionView
+	WithWantsRestingTouches(wantsRestingTouches bool) *BackgroundExtensionView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *BackgroundExtensionView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *BackgroundExtensionView
+	WithWantsLayer(wantsLayer bool) *BackgroundExtensionView
+	WithLayer(layer *quartzcore.CALayer) *BackgroundExtensionView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *BackgroundExtensionView
+	WithNeedsLayout(needsLayout bool) *BackgroundExtensionView
+	WithAlphaValue(alphaValue float64) *BackgroundExtensionView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *BackgroundExtensionView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *BackgroundExtensionView
+	WithContentFilters(items ...*coreimage.CIFilter) *BackgroundExtensionView
+	WithShadow(shadow *raw.NSShadow) *BackgroundExtensionView
+	WithClipsToBounds(clipsToBounds bool) *BackgroundExtensionView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *BackgroundExtensionView
+	WithToolTip(toolTip string) *BackgroundExtensionView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *BackgroundExtensionView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *BackgroundExtensionView
+	WithNextKeyView(nextKeyView ViewProvider) *BackgroundExtensionView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *BackgroundExtensionView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *BackgroundExtensionView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *BackgroundExtensionView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *BackgroundExtensionView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *BackgroundExtensionView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *BackgroundExtensionView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *BackgroundExtensionView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *BackgroundExtensionView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *BackgroundExtensionView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *BackgroundExtensionView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *BackgroundExtensionView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *BackgroundExtensionView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *BackgroundExtensionView
+	WithNextResponder(nextResponder ResponderProvider) *BackgroundExtensionView
+	WithMenu(menu *raw.NSMenu) *BackgroundExtensionView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *BackgroundExtensionView
+	WithTouchBar(touchBar *raw.NSTouchBar) *BackgroundExtensionView
 	ContentView() *View
 	SetContentView(contentView *raw.NSView)
 	AutomaticallyPlacesContentView() bool

@@ -98,6 +98,12 @@ func NewArrayWithContentsOfURL(url string) *Array {
 	return &Array{inner: raw.NSArrayFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Array) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Array {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectAtIndex calls the underlying ObjectAtIndex.
 func (x *Array) ObjectAtIndex(index uint) objc.ID {
 	return x.inner.ObjectAtIndex(index)
@@ -403,6 +409,7 @@ func (x *Array) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Arrayable is the interface implemented by [Array], for mocking and DI.
 type Arrayable interface {
 	Unwrap() *raw.NSArray[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Array
 	ObjectAtIndex(index uint) objc.ID
 	Count() uint
 	ArrayByAddingObject(anObject objc.ID) *raw.NSArray[objc.ID]

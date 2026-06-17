@@ -78,6 +78,12 @@ func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PersonNameComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponents {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // NamePrefix calls the underlying NamePrefix.
 func (x *PersonNameComponents) NamePrefix() *String {
 	_r := x.inner.NamePrefix()
@@ -188,6 +194,7 @@ type PersonNameComponentsable interface {
 	WithNameSuffix(nameSuffix string) *PersonNameComponents
 	WithNickname(nickname string) *PersonNameComponents
 	WithPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) *PersonNameComponents
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponents
 	NamePrefix() *String
 	SetNamePrefix(namePrefix string)
 	GivenName() *String

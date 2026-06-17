@@ -103,6 +103,12 @@ func (x *PickerTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *PickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PickerTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // SetImageAtIndex calls the underlying SetImageAtIndex.
 func (x *PickerTouchBarItem) SetImageAtIndex(image *raw.NSImage, index int) {
 	x.inner.SetImageAtIndex(image, index)
@@ -274,6 +280,7 @@ type PickerTouchBarItemable interface {
 	WithAction(action objc.SEL) *PickerTouchBarItem
 	WithEnabled(enabled bool) *PickerTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *PickerTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *PickerTouchBarItem
 	SetImageAtIndex(image *raw.NSImage, index int)
 	ImageAtIndex(index int) *Image
 	SetLabelAtIndex(label string, index int)

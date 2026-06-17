@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,66 @@ func NewNNAdditionGradientNode() *NNAdditionGradientNode {
 	return &NNAdditionGradientNode{inner: raw.MPSNNAdditionGradientNodeFromID(_id)}
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithBias(bias float32) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetBias(bias)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithMinimumValue(minimumValue float32) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithMaximumValue(maximumValue float32) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNAdditionGradientNode) WithLabel(label string) *NNAdditionGradientNode {
+	x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNAdditionGradientNode) asNNArithmeticGradientNode() *raw.MPSNNArithmeticGradientNode { return &x.inner.MPSNNArithmeticGradientNode }
 
 func (x *NNAdditionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNArithmeticGradientNode.MPSNNGradientFilterNode }
@@ -44,6 +105,16 @@ func (x *NNAdditionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return 
 // NNAdditionGradientNodeable is the interface implemented by [NNAdditionGradientNode], for mocking and DI.
 type NNAdditionGradientNodeable interface {
 	Unwrap() *raw.MPSNNAdditionGradientNode
+	WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode
+	WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode
+	WithBias(bias float32) *NNAdditionGradientNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNAdditionGradientNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNAdditionGradientNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNAdditionGradientNode
+	WithMinimumValue(minimumValue float32) *NNAdditionGradientNode
+	WithMaximumValue(maximumValue float32) *NNAdditionGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNAdditionGradientNode
+	WithLabel(label string) *NNAdditionGradientNode
 }
 
 var _ NNAdditionGradientNodeable = (*NNAdditionGradientNode)(nil)

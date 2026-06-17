@@ -80,6 +80,54 @@ func (x *FetchShareParticipantsOperation) WithFetchShareParticipantsCompletionBl
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithGroup(group *raw.CKOperationGroup) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithContainer(container *raw.CKContainer) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithLongLived(longLived bool) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *FetchShareParticipantsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // UserIdentityLookupInfos returns the collection as a Go slice.
 func (x *FetchShareParticipantsOperation) UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo {
 	arr := x.inner.UserIdentityLookupInfos()
@@ -166,6 +214,14 @@ type FetchShareParticipantsOperationable interface {
 	WithShareParticipantFetchedBlock(shareParticipantFetchedBlock func(*raw.CKShareParticipant)) *FetchShareParticipantsOperation
 	WithPerShareParticipantCompletionBlock(perShareParticipantCompletionBlock func(*raw.CKUserIdentityLookupInfo, *raw.CKShareParticipant, unsafe.Pointer)) *FetchShareParticipantsOperation
 	WithFetchShareParticipantsCompletionBlock(fetchShareParticipantsCompletionBlock func(unsafe.Pointer)) *FetchShareParticipantsOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *FetchShareParticipantsOperation
+	WithGroup(group *raw.CKOperationGroup) *FetchShareParticipantsOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareParticipantsOperation
+	WithContainer(container *raw.CKContainer) *FetchShareParticipantsOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareParticipantsOperation
+	WithLongLived(longLived bool) *FetchShareParticipantsOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareParticipantsOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareParticipantsOperation
 	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
 	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
 	ShareParticipantFetchedBlock() objc.Block

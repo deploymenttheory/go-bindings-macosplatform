@@ -77,6 +77,18 @@ func (x *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImageK
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *BinaryImageKernel) WithOptions(options mpscore.MPSKernelOptions) *BinaryImageKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *BinaryImageKernel) WithLabel(label string) *BinaryImageKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator.
 func (x *BinaryImageKernel) EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, inPlaceSecondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
 	return x.inner.EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer, primaryTexture, inPlaceSecondaryTexture, copyAllocator)
@@ -167,6 +179,8 @@ type BinaryImageKernelable interface {
 	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel
 	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel
 	WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel
+	WithOptions(options mpscore.MPSKernelOptions) *BinaryImageKernel
+	WithLabel(label string) *BinaryImageKernel
 	EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, inPlaceSecondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
 	EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, inPlacePrimaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
 	EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, destinationTexture metal.MTLTexture)

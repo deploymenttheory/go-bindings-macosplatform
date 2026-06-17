@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,6 +42,60 @@ func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest *raw.NSFetchR
 	return x
 }
 
+// WithName sets the name property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithName(name string) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithOptional(optional bool) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithIndexed(indexed bool) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription {
+	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	return x
+}
+
 // FetchRequest calls the underlying FetchRequest.
 func (x *FetchedPropertyDescription) FetchRequest() *raw.NSFetchRequest[objc.ID] {
 	return x.inner.FetchRequest()
@@ -57,6 +112,15 @@ func (x *FetchedPropertyDescription) asPropertyDescription() *raw.NSPropertyDesc
 type FetchedPropertyDescriptionable interface {
 	Unwrap() *raw.NSFetchedPropertyDescription
 	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *FetchedPropertyDescription
+	WithName(name string) *FetchedPropertyDescription
+	WithOptional(optional bool) *FetchedPropertyDescription
+	WithTransient(transient bool) *FetchedPropertyDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FetchedPropertyDescription
+	WithIndexed(indexed bool) *FetchedPropertyDescription
+	WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription
+	WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription
 	FetchRequest() *raw.NSFetchRequest[objc.ID]
 	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])
 }

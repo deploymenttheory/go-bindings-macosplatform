@@ -116,6 +116,12 @@ func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolyg
 	return x
 }
 
+// WithUsage sets the usage property and returns the receiver for chaining.
+func (x *PolygonAccelerationStructure) WithUsage(usage raw.MPSAccelerationStructureUsage) *PolygonAccelerationStructure {
+	x.inner.MPSAccelerationStructure.SetUsage(usage)
+	return x
+}
+
 // PolygonType calls the underlying PolygonType.
 func (x *PolygonAccelerationStructure) PolygonType() raw.MPSPolygonType {
 	return x.inner.PolygonType()
@@ -250,6 +256,7 @@ type PolygonAccelerationStructureable interface {
 	WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure
 	WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure
 	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *PolygonAccelerationStructure
+	WithUsage(usage raw.MPSAccelerationStructureUsage) *PolygonAccelerationStructure
 	PolygonType() raw.MPSPolygonType
 	SetPolygonType(polygonType raw.MPSPolygonType)
 	VertexStride() uint

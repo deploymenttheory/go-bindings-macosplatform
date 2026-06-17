@@ -67,6 +67,18 @@ func (x *AddCarKeyPassConfiguration) WithProductPlanIdentifier(productPlanIdenti
 	return x
 }
 
+// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
+func (x *AddCarKeyPassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddCarKeyPassConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	return x
+}
+
+// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+func (x *AddCarKeyPassConfiguration) WithLocalizedDescription(localizedDescription string) *AddCarKeyPassConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	return x
+}
+
 // Password calls the underlying Password.
 func (x *AddCarKeyPassConfiguration) Password() string {
 	_r := x.inner.Password()
@@ -143,6 +155,8 @@ type AddCarKeyPassConfigurationable interface {
 	WithManufacturerIdentifier(manufacturerIdentifier string) *AddCarKeyPassConfiguration
 	WithProvisioningTemplateIdentifier(provisioningTemplateIdentifier string) *AddCarKeyPassConfiguration
 	WithProductPlanIdentifier(productPlanIdentifier string) *AddCarKeyPassConfiguration
+	WithIssuerIdentifier(issuerIdentifier string) *AddCarKeyPassConfiguration
+	WithLocalizedDescription(localizedDescription string) *AddCarKeyPassConfiguration
 	Password() string
 	SetPassword(password string)
 	SupportedRadioTechnologies() raw.PKRadioTechnology

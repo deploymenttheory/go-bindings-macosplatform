@@ -5,6 +5,7 @@
 package gamekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,36 @@ func (x *AchievementViewController) WithAchievementDelegate(achievementDelegate 
 	return x
 }
 
+// WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
+func (x *AchievementViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetGameCenterDelegate(gameCenterDelegate)
+	return x
+}
+
+// WithViewState sets the viewState property and returns the receiver for chaining.
+func (x *AchievementViewController) WithViewState(viewState raw.GKGameCenterViewControllerState) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetViewState(viewState)
+	return x
+}
+
+// WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
+func (x *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetLeaderboardTimeScope(leaderboardTimeScope)
+	return x
+}
+
+// WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
+func (x *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+	return x
+}
+
+// WithLeaderboardCategory sets the leaderboardCategory property and returns the receiver for chaining.
+func (x *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
+	x.inner.GKGameCenterViewController.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
+	return x
+}
+
 // AchievementDelegate calls the underlying AchievementDelegate.
 func (x *AchievementViewController) AchievementDelegate() raw.GKAchievementViewControllerDelegate {
 	return x.inner.AchievementDelegate()
@@ -57,6 +88,11 @@ func (x *AchievementViewController) asGameCenterViewController() *raw.GKGameCent
 type AchievementViewControllerable interface {
 	Unwrap() *raw.GKAchievementViewController
 	WithAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate) *AchievementViewController
+	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *AchievementViewController
+	WithViewState(viewState raw.GKGameCenterViewControllerState) *AchievementViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope raw.GKLeaderboardTimeScope) *AchievementViewController
+	WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController
+	WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController
 	AchievementDelegate() raw.GKAchievementViewControllerDelegate
 	SetAchievementDelegate(achievementDelegate raw.GKAchievementViewControllerDelegate)
 }

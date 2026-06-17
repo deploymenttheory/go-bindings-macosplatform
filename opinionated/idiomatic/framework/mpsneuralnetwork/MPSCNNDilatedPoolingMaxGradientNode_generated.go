@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientSta
 	return &CNNDilatedPoolingMaxGradientNode{inner: raw.MPSCNNDilatedPoolingMaxGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDilatedPoolingMaxGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDilatedPoolingMaxGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // DilationRateX calls the underlying DilationRateX.
 func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() uint {
 	return x.inner.DilationRateX()
@@ -55,6 +68,8 @@ func (x *CNNDilatedPoolingMaxGradientNode) asNNFilterNode() *raw.MPSNNFilterNode
 // CNNDilatedPoolingMaxGradientNodeable is the interface implemented by [CNNDilatedPoolingMaxGradientNode], for mocking and DI.
 type CNNDilatedPoolingMaxGradientNodeable interface {
 	Unwrap() *raw.MPSCNNDilatedPoolingMaxGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDilatedPoolingMaxGradientNode
+	WithLabel(label string) *CNNDilatedPoolingMaxGradientNode
 	DilationRateX() uint
 	DilationRateY() uint
 }

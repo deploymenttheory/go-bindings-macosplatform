@@ -55,6 +55,24 @@ func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *raw.PKDate
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ShippingMethod) WithLabel(label string) *ShippingMethod {
+	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithAmount sets the amount property and returns the receiver for chaining.
+func (x *ShippingMethod) WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod {
+	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *ShippingMethod) WithType(type_ raw.PKPaymentSummaryItemType) *ShippingMethod {
+	x.inner.PKPaymentSummaryItem.SetType(type_)
+	return x
+}
+
 // Identifier calls the underlying Identifier.
 func (x *ShippingMethod) Identifier() string {
 	_r := x.inner.Identifier()
@@ -105,6 +123,9 @@ type ShippingMethodable interface {
 	WithIdentifier(identifier string) *ShippingMethod
 	WithDetail(detail string) *ShippingMethod
 	WithDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) *ShippingMethod
+	WithLabel(label string) *ShippingMethod
+	WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod
+	WithType(type_ raw.PKPaymentSummaryItemType) *ShippingMethod
 	Identifier() string
 	SetIdentifier(identifier string)
 	Detail() string

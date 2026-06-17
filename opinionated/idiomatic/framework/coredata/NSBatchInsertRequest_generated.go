@@ -114,6 +114,22 @@ func (x *BatchInsertRequest) WithResultType(resultType raw.NSBatchInsertRequestR
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *BatchInsertRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // EntityName calls the underlying EntityName.
 func (x *BatchInsertRequest) EntityName() string {
 	_r := x.inner.EntityName()
@@ -181,6 +197,7 @@ type BatchInsertRequestable interface {
 	WithDictionaryHandler(dictionaryHandler objc.Block) *BatchInsertRequest
 	WithManagedObjectHandler(managedObjectHandler func(*raw.NSManagedObject) bool) *BatchInsertRequest
 	WithResultType(resultType raw.NSBatchInsertRequestResultType) *BatchInsertRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *BatchInsertRequest
 	EntityName() string
 	Entity() *EntityDescription
 	ObjectsToInsert() *foundation.NSArray[objc.ID]

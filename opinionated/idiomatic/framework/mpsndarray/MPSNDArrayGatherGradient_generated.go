@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,12 @@ func NewArrayGatherGradient() *ArrayGatherGradient {
 	return &ArrayGatherGradient{inner: raw.MPSNDArrayGatherGradientFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayGatherGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGatherGradient {
+	x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 func (x *ArrayGatherGradient) asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel }
 
 func (x *ArrayGatherGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel { return &x.inner.MPSNDArrayBinaryPrimaryGradientKernel.MPSNDArrayMultiaryGradientKernel }
@@ -44,6 +51,7 @@ func (x *ArrayGatherGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase 
 // ArrayGatherGradientable is the interface implemented by [ArrayGatherGradient], for mocking and DI.
 type ArrayGatherGradientable interface {
 	Unwrap() *raw.MPSNDArrayGatherGradient
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayGatherGradient
 }
 
 var _ ArrayGatherGradientable = (*ArrayGatherGradient)(nil)

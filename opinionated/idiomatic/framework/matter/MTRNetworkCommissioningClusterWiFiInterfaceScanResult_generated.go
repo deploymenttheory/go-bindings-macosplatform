@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,53 @@ func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult() *MTRNetworkCommi
 	return &MTRNetworkCommissioningClusterWiFiInterfaceScanResult{inner: raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID(_id)}
 }
 
+// WithSecurity sets the security property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSecurity(security *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetSecurity(security)
+	return x
+}
+
+// WithSsid sets the ssid property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetSsid(ssid)
+	return x
+}
+
+// WithBssid sets the bssid property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetBssid(bssid)
+	return x
+}
+
+// WithChannel sets the channel property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetChannel(channel)
+	return x
+}
+
+// WithWiFiBand sets the wiFiBand property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithWiFiBand(wiFiBand *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetWiFiBand(wiFiBand)
+	return x
+}
+
+// WithRssi sets the rssi property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetRssi(rssi)
+	return x
+}
+
 func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct { return &x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct }
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResult], for mocking and DI.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultable interface {
 	Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithSecurity(security *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithBssid(bssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithWiFiBand(wiFiBand *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
 }
 
 var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResult)(nil)

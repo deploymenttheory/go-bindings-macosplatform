@@ -79,6 +79,12 @@ func (x *ButtonTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *ButtonTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // Title calls the underlying Title.
 func (x *ButtonTouchBarItem) Title() string {
 	_r := x.inner.Title()
@@ -168,6 +174,7 @@ type ButtonTouchBarItemable interface {
 	WithAction(action objc.SEL) *ButtonTouchBarItem
 	WithEnabled(enabled bool) *ButtonTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *ButtonTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *ButtonTouchBarItem
 	Title() string
 	SetTitle(title string)
 	Image() *Image

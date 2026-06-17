@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,46 @@ func NewMTRTimeSynchronizationClusterSetUtcTimeParams() *MTRTimeSynchronizationC
 	return &MTRTimeSynchronizationClusterSetUtcTimeParams{inner: raw.MTRTimeSynchronizationClusterSetUtcTimeParamsFromID(_id)}
 }
 
+// WithUtcTime sets the utcTime property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithUtcTime(utcTime *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetUtcTime(utcTime)
+	return x
+}
+
+// WithGranularity sets the granularity property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithGranularity(granularity *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetGranularity(granularity)
+	return x
+}
+
+// WithTimeSource sets the timeSource property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithTimeSource(timeSource *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetTimeSource(timeSource)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams {
+	x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTimeSynchronizationClusterSetUtcTimeParams) asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams { return &x.inner.MTRTimeSynchronizationClusterSetUTCTimeParams }
 
 // MTRTimeSynchronizationClusterSetUtcTimeParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetUtcTimeParams], for mocking and DI.
 type MTRTimeSynchronizationClusterSetUtcTimeParamsable interface {
 	Unwrap() *raw.MTRTimeSynchronizationClusterSetUtcTimeParams
+	WithUtcTime(utcTime *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
+	WithGranularity(granularity *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
+	WithTimeSource(timeSource *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTimeSynchronizationClusterSetUtcTimeParams
 }
 
 var _ MTRTimeSynchronizationClusterSetUtcTimeParamsable = (*MTRTimeSynchronizationClusterSetUtcTimeParams)(nil)

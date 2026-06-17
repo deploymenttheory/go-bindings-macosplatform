@@ -47,6 +47,126 @@ func NewNNReduceFeatureChannelsAndWeightsMeanWithCoderDevice(aDecoder *foundatio
 	return &NNReduceFeatureChannelsAndWeightsMean{inner: raw.MPSNNReduceFeatureChannelsAndWeightsMeanFromID(_id)}
 }
 
+// WithPrimarySourceClipRect sets the primarySourceClipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.SetPrimarySourceClipRect(primarySourceClipRect)
+	return x
+}
+
+// WithSecondarySourceClipRect sets the secondarySourceClipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.SetSecondarySourceClipRect(secondarySourceClipRect)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsMean) WithLabel(label string) *NNReduceFeatureChannelsAndWeightsMean {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReduceFeatureChannelsAndWeightsMean) asNNReduceBinary() *mpsneuralnetwork.MPSNNReduceBinary { return &x.inner.MPSNNReduceBinary }
 
 func (x *NNReduceFeatureChannelsAndWeightsMean) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel { return &x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel }
@@ -56,6 +176,26 @@ func (x *NNReduceFeatureChannelsAndWeightsMean) asKernel() *mpscore.MPSKernel { 
 // NNReduceFeatureChannelsAndWeightsMeanable is the interface implemented by [NNReduceFeatureChannelsAndWeightsMean], for mocking and DI.
 type NNReduceFeatureChannelsAndWeightsMeanable interface {
 	Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsMean
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsMean
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsMean
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsMean
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsAndWeightsMean
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsAndWeightsMean
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsAndWeightsMean
+	WithLabel(label string) *NNReduceFeatureChannelsAndWeightsMean
 }
 
 var _ NNReduceFeatureChannelsAndWeightsMeanable = (*NNReduceFeatureChannelsAndWeightsMean)(nil)

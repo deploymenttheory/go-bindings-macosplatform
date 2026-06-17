@@ -73,6 +73,18 @@ func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalComb
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *RNNMatrixInferenceLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixInferenceLayer {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates.
 func (x *RNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState]) {
 	x.inner.EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, recurrentInputState, recurrentOutputStates)
@@ -150,6 +162,8 @@ type RNNMatrixInferenceLayerable interface {
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
 	WithBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
+	WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixInferenceLayer
+	WithLabel(label string) *RNNMatrixInferenceLayer
 	EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState])
 	EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState])
 	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix])

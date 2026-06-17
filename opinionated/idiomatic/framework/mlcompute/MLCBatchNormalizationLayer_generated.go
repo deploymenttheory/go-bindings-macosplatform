@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func BatchNormalizationLayerFromID(id objc.ID) *BatchNormalizationLayer {
 func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCBatchNormalizationLayer")), objc.RegisterName("new"))
 	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // FeatureChannelCount calls the underlying FeatureChannelCount.
@@ -109,6 +122,8 @@ func (x *BatchNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCL
 // BatchNormalizationLayerable is the interface implemented by [BatchNormalizationLayer], for mocking and DI.
 type BatchNormalizationLayerable interface {
 	Unwrap() *raw.MLCBatchNormalizationLayer
+	WithLabel(label string) *BatchNormalizationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer
 	FeatureChannelCount() uint
 	Mean() *Tensor
 	Variance() *Tensor

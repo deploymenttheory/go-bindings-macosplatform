@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -52,6 +53,54 @@ func NewCNNBinaryConvolutionWithCoderDevice(aDecoder *foundation.NSCoder, device
 	return &CNNBinaryConvolution{inner: raw.MPSCNNBinaryConvolutionFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithPadding(padding raw.MPSNNPadding) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNBinaryConvolution) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryConvolution {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // InputFeatureChannels calls the underlying InputFeatureChannels.
 func (x *CNNBinaryConvolution) InputFeatureChannels() uint {
 	return x.inner.InputFeatureChannels()
@@ -69,6 +118,14 @@ func (x *CNNBinaryConvolution) asCNNKernel() *raw.MPSCNNKernel { return &x.inner
 // CNNBinaryConvolutionable is the interface implemented by [CNNBinaryConvolution], for mocking and DI.
 type CNNBinaryConvolutionable interface {
 	Unwrap() *raw.MPSCNNBinaryConvolution
+	WithOffset(offset mpscore.MPSOffset) *CNNBinaryConvolution
+	WithClipRect(clipRect metal.MTLRegion) *CNNBinaryConvolution
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNBinaryConvolution
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNBinaryConvolution
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNBinaryConvolution
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNBinaryConvolution
+	WithPadding(padding raw.MPSNNPadding) *CNNBinaryConvolution
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryConvolution
 	InputFeatureChannels() uint
 	OutputFeatureChannels() uint
 }

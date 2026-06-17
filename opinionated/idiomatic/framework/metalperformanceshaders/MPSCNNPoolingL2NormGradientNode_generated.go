@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewCNNPoolingL2NormGradientNode() *CNNPoolingL2NormGradientNode {
 	return &CNNPoolingL2NormGradientNode{inner: raw.MPSCNNPoolingL2NormGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2NormGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingL2NormGradientNode) WithLabel(label string) *CNNPoolingL2NormGradientNode {
+	x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNPoolingL2NormGradientNode) asCNNPoolingGradientNode() *mpsneuralnetwork.MPSCNNPoolingGradientNode { return &x.inner.MPSCNNPoolingGradientNode }
 
 func (x *CNNPoolingL2NormGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSCNNPoolingGradientNode.MPSNNGradientFilterNode }
@@ -45,6 +58,8 @@ func (x *CNNPoolingL2NormGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNF
 // CNNPoolingL2NormGradientNodeable is the interface implemented by [CNNPoolingL2NormGradientNode], for mocking and DI.
 type CNNPoolingL2NormGradientNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingL2NormGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2NormGradientNode
+	WithLabel(label string) *CNNPoolingL2NormGradientNode
 }
 
 var _ CNNPoolingL2NormGradientNodeable = (*CNNPoolingL2NormGradientNode)(nil)

@@ -37,6 +37,18 @@ func NewUpsampleLayer() *UpsampleLayer {
 	return &UpsampleLayer{inner: raw.MLCUpsampleLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *UpsampleLayer) WithLabel(label string) *UpsampleLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *UpsampleLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Shape returns the collection as a Go slice.
 func (x *UpsampleLayer) Shape() []*foundation.NSNumber {
 	arr := x.inner.Shape()
@@ -63,6 +75,8 @@ func (x *UpsampleLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // UpsampleLayerable is the interface implemented by [UpsampleLayer], for mocking and DI.
 type UpsampleLayerable interface {
 	Unwrap() *raw.MLCUpsampleLayer
+	WithLabel(label string) *UpsampleLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *UpsampleLayer
 	Shape() []*foundation.NSNumber
 	SampleMode() raw.MLCSampleMode
 	AlignsCorners() bool

@@ -6,8 +6,11 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // CollectionViewItem wraps [raw.NSCollectionViewItem] with a fluent Go API.
@@ -57,6 +60,82 @@ func (x *CollectionViewItem) WithImageView(imageView *raw.NSImageView) *Collecti
 // WithTextField sets the textField property and returns the receiver for chaining.
 func (x *CollectionViewItem) WithTextField(textField TextFieldProvider) *CollectionViewItem {
 	x.inner.SetTextField(textField.asTextField())
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithRepresentedObject(representedObject objc.ID) *CollectionViewItem {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithTitle(title string) *CollectionViewItem {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithView(view ViewProvider) *CollectionViewItem {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *CollectionViewItem) WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithMenu(menu *raw.NSMenu) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *CollectionViewItem) WithTouchBar(touchBar *raw.NSTouchBar) *CollectionViewItem {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -139,6 +218,17 @@ type CollectionViewItemable interface {
 	WithHighlightState(highlightState raw.NSCollectionViewItemHighlightState) *CollectionViewItem
 	WithImageView(imageView *raw.NSImageView) *CollectionViewItem
 	WithTextField(textField TextFieldProvider) *CollectionViewItem
+	WithRepresentedObject(representedObject objc.ID) *CollectionViewItem
+	WithTitle(title string) *CollectionViewItem
+	WithView(view ViewProvider) *CollectionViewItem
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *CollectionViewItem
+	WithChildViewControllers(items ...ViewControllerProvider) *CollectionViewItem
+	WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *CollectionViewItem
+	WithNextResponder(nextResponder ResponderProvider) *CollectionViewItem
+	WithMenu(menu *raw.NSMenu) *CollectionViewItem
+	WithUserActivity(userActivity *foundation.NSUserActivity) *CollectionViewItem
+	WithTouchBar(touchBar *raw.NSTouchBar) *CollectionViewItem
 	CollectionView() *CollectionView
 	IsSelected() bool
 	SetSelected(selected bool)

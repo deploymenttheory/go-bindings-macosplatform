@@ -5,6 +5,7 @@
 package fskit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 	return &VolumeIdentifier{inner: raw.FSVolumeIdentifierFromID(_id)}
 }
 
+// WithUuid sets the uuid property and returns the receiver for chaining.
+func (x *VolumeIdentifier) WithUuid(uuid *foundation.NSUUID) *VolumeIdentifier {
+	x.inner.FSEntityIdentifier.SetUuid(uuid)
+	return x
+}
+
+// WithQualifier sets the qualifier property and returns the receiver for chaining.
+func (x *VolumeIdentifier) WithQualifier(qualifier *foundation.NSData) *VolumeIdentifier {
+	x.inner.FSEntityIdentifier.SetQualifier(qualifier)
+	return x
+}
+
 func (x *VolumeIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return &x.inner.FSEntityIdentifier }
 
 // VolumeIdentifierable is the interface implemented by [VolumeIdentifier], for mocking and DI.
 type VolumeIdentifierable interface {
 	Unwrap() *raw.FSVolumeIdentifier
+	WithUuid(uuid *foundation.NSUUID) *VolumeIdentifier
+	WithQualifier(qualifier *foundation.NSData) *VolumeIdentifier
 }
 
 var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)

@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewGramMatrixLayer() *GramMatrixLayer {
 	return &GramMatrixLayer{inner: raw.MLCGramMatrixLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *GramMatrixLayer) WithLabel(label string) *GramMatrixLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Scale calls the underlying Scale.
 func (x *GramMatrixLayer) Scale() float32 {
 	return x.inner.Scale()
@@ -45,6 +58,8 @@ func (x *GramMatrixLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // GramMatrixLayerable is the interface implemented by [GramMatrixLayer], for mocking and DI.
 type GramMatrixLayerable interface {
 	Unwrap() *raw.MLCGramMatrixLayer
+	WithLabel(label string) *GramMatrixLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer
 	Scale() float32
 }
 

@@ -35,6 +35,18 @@ func NewAdamOptimizer() *AdamOptimizer {
 	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(_id)}
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
+	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
+	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	return x
+}
+
 // Beta1 calls the underlying Beta1.
 func (x *AdamOptimizer) Beta1() float32 {
 	return x.inner.Beta1()
@@ -65,6 +77,8 @@ func (x *AdamOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOpt
 // AdamOptimizerable is the interface implemented by [AdamOptimizer], for mocking and DI.
 type AdamOptimizerable interface {
 	Unwrap() *raw.MLCAdamOptimizer
+	WithLearningRate(learningRate float32) *AdamOptimizer
+	WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer
 	Beta1() float32
 	Beta2() float32
 	Epsilon() float32

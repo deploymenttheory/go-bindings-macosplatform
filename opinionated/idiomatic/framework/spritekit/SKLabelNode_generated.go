@@ -6,10 +6,12 @@ package spritekit
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // LabelNode wraps [raw.SKLabelNode] with a fluent Go API.
@@ -114,6 +116,166 @@ func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
 // WithBlendMode sets the blendMode property and returns the receiver for chaining.
 func (x *LabelNode) WithBlendMode(blendMode raw.SKBlendMode) *LabelNode {
 	x.inner.SetBlendMode(blendMode)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *LabelNode) WithPaused(paused bool) *LabelNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *LabelNode) WithName(name string) *LabelNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *LabelNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LabelNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *LabelNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LabelNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *LabelNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityParent(accessibilityParent objc.ID) *LabelNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -273,6 +435,31 @@ type LabelNodeable interface {
 	WithColorBlendFactor(colorBlendFactor float64) *LabelNode
 	WithColor(color *appkit.NSColor) *LabelNode
 	WithBlendMode(blendMode raw.SKBlendMode) *LabelNode
+	WithPosition(position corefoundation.CGPoint) *LabelNode
+	WithZPosition(zPosition float64) *LabelNode
+	WithZRotation(zRotation float64) *LabelNode
+	WithXScale(xScale float64) *LabelNode
+	WithYScale(yScale float64) *LabelNode
+	WithSpeed(speed float64) *LabelNode
+	WithAlpha(alpha float64) *LabelNode
+	WithPaused(paused bool) *LabelNode
+	WithHidden(hidden bool) *LabelNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode
+	WithName(name string) *LabelNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *LabelNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *LabelNode
+	WithConstraints(items ...*raw.SKConstraint) *LabelNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode
+	WithAccessibilityElement(accessibilityElement bool) *LabelNode
+	WithAccessibilityRole(accessibilityRole string) *LabelNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *LabelNode
+	WithAccessibilityHelp(accessibilityHelp string) *LabelNode
+	WithAccessibilityLabel(accessibilityLabel string) *LabelNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode
 	VerticalAlignmentMode() raw.SKLabelVerticalAlignmentMode
 	SetVerticalAlignmentMode(verticalAlignmentMode raw.SKLabelVerticalAlignmentMode)
 	HorizontalAlignmentMode() raw.SKLabelHorizontalAlignmentMode

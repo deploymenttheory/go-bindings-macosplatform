@@ -50,6 +50,12 @@ func (x *PointerArray) WithCount(count uint) *PointerArray {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PointerArray) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerArray {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PointerAtIndex calls the underlying PointerAtIndex.
 func (x *PointerArray) PointerAtIndex(index uint) unsafe.Pointer {
 	return x.inner.PointerAtIndex(index)
@@ -110,6 +116,7 @@ func (x *PointerArray) asObject() *raw.NSObject { return &x.inner.NSObject }
 type PointerArrayable interface {
 	Unwrap() *raw.NSPointerArray
 	WithCount(count uint) *PointerArray
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerArray
 	PointerAtIndex(index uint) unsafe.Pointer
 	AddPointer(pointer unsafe.Pointer)
 	RemovePointerAtIndex(index uint)

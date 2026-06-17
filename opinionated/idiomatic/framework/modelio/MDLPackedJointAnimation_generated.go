@@ -38,6 +38,36 @@ func NewPackedJointAnimationWithNameJointPaths(name string, jointPaths *foundati
 	return &PackedJointAnimation{inner: raw.MDLPackedJointAnimationFromID(_id)}
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *PackedJointAnimation) WithParent(parent ObjectProvider) *PackedJointAnimation {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *PackedJointAnimation) WithInstance(instance ObjectProvider) *PackedJointAnimation {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *PackedJointAnimation) WithTransform(transform raw.MDLTransformComponent) *PackedJointAnimation {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *PackedJointAnimation) WithChildren(children raw.MDLObjectContainerComponent) *PackedJointAnimation {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *PackedJointAnimation) WithHidden(hidden bool) *PackedJointAnimation {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // JointPaths returns the collection as a Go slice.
 func (x *PackedJointAnimation) JointPaths() []string {
 	arr := x.inner.JointPaths()
@@ -81,6 +111,11 @@ func (x *PackedJointAnimation) asObject() *raw.MDLObject { return &x.inner.MDLOb
 // PackedJointAnimationable is the interface implemented by [PackedJointAnimation], for mocking and DI.
 type PackedJointAnimationable interface {
 	Unwrap() *raw.MDLPackedJointAnimation
+	WithParent(parent ObjectProvider) *PackedJointAnimation
+	WithInstance(instance ObjectProvider) *PackedJointAnimation
+	WithTransform(transform raw.MDLTransformComponent) *PackedJointAnimation
+	WithChildren(children raw.MDLObjectContainerComponent) *PackedJointAnimation
+	WithHidden(hidden bool) *PackedJointAnimation
 	JointPaths() []string
 	Translations() *AnimatedVector3Array
 	Rotations() *AnimatedQuaternionArray

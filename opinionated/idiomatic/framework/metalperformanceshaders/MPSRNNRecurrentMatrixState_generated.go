@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewRNNRecurrentMatrixState() *RNNRecurrentMatrixState {
 	return &RNNRecurrentMatrixState{inner: raw.MPSRNNRecurrentMatrixStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *RNNRecurrentMatrixState) WithReadCount(readCount uint) *RNNRecurrentMatrixState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RNNRecurrentMatrixState) WithLabel(label string) *RNNRecurrentMatrixState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // GetRecurrentOutputMatrixForLayerIndex calls the underlying GetRecurrentOutputMatrixForLayerIndex.
 func (x *RNNRecurrentMatrixState) GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix {
 	return x.inner.GetRecurrentOutputMatrixForLayerIndex(layerIndex)
@@ -51,6 +64,8 @@ func (x *RNNRecurrentMatrixState) asState() *mpscore.MPSState { return &x.inner.
 // RNNRecurrentMatrixStateable is the interface implemented by [RNNRecurrentMatrixState], for mocking and DI.
 type RNNRecurrentMatrixStateable interface {
 	Unwrap() *raw.MPSRNNRecurrentMatrixState
+	WithReadCount(readCount uint) *RNNRecurrentMatrixState
+	WithLabel(label string) *RNNRecurrentMatrixState
 	GetRecurrentOutputMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
 	GetMemoryCellMatrixForLayerIndex(layerIndex uint) *mpscore.MPSMatrix
 }

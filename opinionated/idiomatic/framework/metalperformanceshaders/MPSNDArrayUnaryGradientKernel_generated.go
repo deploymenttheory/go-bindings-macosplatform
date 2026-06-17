@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,24 @@ func NewNDArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *NDArrayUna
 	return &NDArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayUnaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayUnaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayUnaryGradientKernel) WithLabel(label string) *NDArrayUnaryGradientKernel {
+	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientState.
 func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf, sourceArray, gradient, state)
@@ -58,6 +77,9 @@ func (x *NDArrayUnaryGradientKernel) asKernel() *mpscore.MPSKernel { return &x.i
 // NDArrayUnaryGradientKernelable is the interface implemented by [NDArrayUnaryGradientKernel], for mocking and DI.
 type NDArrayUnaryGradientKernelable interface {
 	Unwrap() *raw.MPSNDArrayUnaryGradientKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryGradientKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryGradientKernel
+	WithLabel(label string) *NDArrayUnaryGradientKernel
 	EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }

@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -40,6 +41,36 @@ func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(
 	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageConversion) WithOptions(options mpscore.MPSKernelOptions) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageConversion) WithLabel(label string) *ImageConversion {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // SourceAlpha calls the underlying SourceAlpha.
 func (x *ImageConversion) SourceAlpha() mpsimage.MPSAlphaType {
 	return x.inner.SourceAlpha()
@@ -57,6 +88,11 @@ func (x *ImageConversion) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUna
 // ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
 type ImageConversionable interface {
 	Unwrap() *raw.MPSImageConversion
+	WithOffset(offset mpscore.MPSOffset) *ImageConversion
+	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion
+	WithOptions(options mpscore.MPSKernelOptions) *ImageConversion
+	WithLabel(label string) *ImageConversion
 	SourceAlpha() mpsimage.MPSAlphaType
 	DestinationAlpha() mpsimage.MPSAlphaType
 }

@@ -134,6 +134,12 @@ func (x *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvi
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserActivity) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserActivity {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddUserInfoEntriesFromDictionary calls the underlying AddUserInfoEntriesFromDictionary.
 func (x *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID]) {
 	x.inner.AddUserInfoEntriesFromDictionary(otherDictionary)
@@ -362,6 +368,7 @@ type UserActivityable interface {
 	WithEligibleForSearch(eligibleForSearch bool) *UserActivity
 	WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity
 	WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserActivity
 	AddUserInfoEntriesFromDictionary(otherDictionary *raw.NSDictionary[objc.ID, objc.ID])
 	BecomeCurrent()
 	ResignCurrent()

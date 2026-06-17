@@ -35,11 +35,18 @@ func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 	return &LocalizedNumberFormatRule{inner: raw.NSLocalizedNumberFormatRuleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LocalizedNumberFormatRule {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *LocalizedNumberFormatRule) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // LocalizedNumberFormatRuleable is the interface implemented by [LocalizedNumberFormatRule], for mocking and DI.
 type LocalizedNumberFormatRuleable interface {
 	Unwrap() *raw.NSLocalizedNumberFormatRule
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LocalizedNumberFormatRule
 }
 
 var _ LocalizedNumberFormatRuleable = (*LocalizedNumberFormatRule)(nil)

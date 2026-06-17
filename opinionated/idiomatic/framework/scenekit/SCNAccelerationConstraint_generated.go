@@ -59,6 +59,24 @@ func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConst
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // MaximumLinearAcceleration calls the underlying MaximumLinearAcceleration.
 func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
 	return x.inner.MaximumLinearAcceleration()
@@ -108,6 +126,9 @@ type AccelerationConstraintable interface {
 	WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint
 	WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint
 	WithDamping(damping float64) *AccelerationConstraint
+	WithEnabled(enabled bool) *AccelerationConstraint
+	WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint
+	WithIncremental(incremental bool) *AccelerationConstraint
 	MaximumLinearAcceleration() float64
 	SetMaximumLinearAcceleration(maximumLinearAcceleration float64)
 	MaximumLinearVelocity() float64

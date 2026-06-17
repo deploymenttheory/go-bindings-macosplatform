@@ -37,6 +37,48 @@ func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *raw.
 	return &LightProbe{inner: raw.MDLLightProbeFromID(_id)}
 }
 
+// WithLightType sets the lightType property and returns the receiver for chaining.
+func (x *LightProbe) WithLightType(lightType raw.MDLLightType) *LightProbe {
+	x.inner.MDLLight.SetLightType(lightType)
+	return x
+}
+
+// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
+	x.inner.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	return x
+}
+
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
+	x.inner.MDLLight.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
+	x.inner.MDLLight.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *LightProbe) WithTransform(transform raw.MDLTransformComponent) *LightProbe {
+	x.inner.MDLLight.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *LightProbe) WithChildren(children raw.MDLObjectContainerComponent) *LightProbe {
+	x.inner.MDLLight.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *LightProbe) WithHidden(hidden bool) *LightProbe {
+	x.inner.MDLLight.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // GenerateSphericalHarmonicsFromIrradiance calls the underlying GenerateSphericalHarmonicsFromIrradiance.
 func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint) {
 	x.inner.GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel)
@@ -77,6 +119,13 @@ func (x *LightProbe) asObject() *raw.MDLObject { return &x.inner.MDLLight.MDLObj
 // LightProbeable is the interface implemented by [LightProbe], for mocking and DI.
 type LightProbeable interface {
 	Unwrap() *raw.MDLLightProbe
+	WithLightType(lightType raw.MDLLightType) *LightProbe
+	WithColorSpace(colorSpace string) *LightProbe
+	WithParent(parent ObjectProvider) *LightProbe
+	WithInstance(instance ObjectProvider) *LightProbe
+	WithTransform(transform raw.MDLTransformComponent) *LightProbe
+	WithChildren(children raw.MDLObjectContainerComponent) *LightProbe
+	WithHidden(hidden bool) *LightProbe
 	GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel uint)
 	ReflectiveTexture() *Texture
 	IrradianceTexture() *Texture

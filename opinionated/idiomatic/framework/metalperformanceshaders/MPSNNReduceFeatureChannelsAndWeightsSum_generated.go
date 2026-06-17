@@ -54,6 +54,126 @@ func NewNNReduceFeatureChannelsAndWeightsSumWithCoderDevice(aDecoder *foundation
 	return &NNReduceFeatureChannelsAndWeightsSum{inner: raw.MPSNNReduceFeatureChannelsAndWeightsSumFromID(_id)}
 }
 
+// WithPrimarySourceClipRect sets the primarySourceClipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.SetPrimarySourceClipRect(primarySourceClipRect)
+	return x
+}
+
+// WithSecondarySourceClipRect sets the secondarySourceClipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.SetSecondarySourceClipRect(secondarySourceClipRect)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReduceFeatureChannelsAndWeightsSum) WithLabel(label string) *NNReduceFeatureChannelsAndWeightsSum {
+	x.inner.MPSNNReduceBinary.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // DoWeightedSumByNonZeroWeights calls the underlying DoWeightedSumByNonZeroWeights.
 func (x *NNReduceFeatureChannelsAndWeightsSum) DoWeightedSumByNonZeroWeights() bool {
 	return x.inner.DoWeightedSumByNonZeroWeights()
@@ -68,6 +188,26 @@ func (x *NNReduceFeatureChannelsAndWeightsSum) asKernel() *mpscore.MPSKernel { r
 // NNReduceFeatureChannelsAndWeightsSumable is the interface implemented by [NNReduceFeatureChannelsAndWeightsSum], for mocking and DI.
 type NNReduceFeatureChannelsAndWeightsSumable interface {
 	Unwrap() *raw.MPSNNReduceFeatureChannelsAndWeightsSum
+	WithPrimarySourceClipRect(primarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondarySourceClipRect(secondarySourceClipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNReduceFeatureChannelsAndWeightsSum
+	WithClipRect(clipRect metal.MTLRegion) *NNReduceFeatureChannelsAndWeightsSum
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNReduceFeatureChannelsAndWeightsSum
+	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceFeatureChannelsAndWeightsSum
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceFeatureChannelsAndWeightsSum
+	WithOptions(options mpscore.MPSKernelOptions) *NNReduceFeatureChannelsAndWeightsSum
+	WithLabel(label string) *NNReduceFeatureChannelsAndWeightsSum
 	DoWeightedSumByNonZeroWeights() bool
 }
 

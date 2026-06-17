@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterNestedStructList() *MTRTestClusterClusterNestedStru
 	return &MTRTestClusterClusterNestedStructList{inner: raw.MTRTestClusterClusterNestedStructListFromID(_id)}
 }
 
+// WithA sets the a property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStructList) WithA(a *foundation.NSNumber) *MTRTestClusterClusterNestedStructList {
+	x.inner.MTRUnitTestingClusterNestedStructList.SetA(a)
+	return x
+}
+
+// WithB sets the b property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStructList) WithB(b *foundation.NSNumber) *MTRTestClusterClusterNestedStructList {
+	x.inner.MTRUnitTestingClusterNestedStructList.SetB(b)
+	return x
+}
+
+// WithC sets the c property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterNestedStructList) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStructList {
+	x.inner.MTRUnitTestingClusterNestedStructList.SetC(c.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
 func (x *MTRTestClusterClusterNestedStructList) asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList { return &x.inner.MTRUnitTestingClusterNestedStructList }
 
 // MTRTestClusterClusterNestedStructListable is the interface implemented by [MTRTestClusterClusterNestedStructList], for mocking and DI.
 type MTRTestClusterClusterNestedStructListable interface {
 	Unwrap() *raw.MTRTestClusterClusterNestedStructList
+	WithA(a *foundation.NSNumber) *MTRTestClusterClusterNestedStructList
+	WithB(b *foundation.NSNumber) *MTRTestClusterClusterNestedStructList
+	WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStructList
 }
 
 var _ MTRTestClusterClusterNestedStructListable = (*MTRTestClusterClusterNestedStructList)(nil)

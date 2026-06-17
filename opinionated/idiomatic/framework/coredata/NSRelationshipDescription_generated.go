@@ -6,6 +6,7 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -68,6 +69,60 @@ func (x *RelationshipDescription) WithDeleteRule(deleteRule raw.NSDeleteRule) *R
 // WithOrdered sets the ordered property and returns the receiver for chaining.
 func (x *RelationshipDescription) WithOrdered(ordered bool) *RelationshipDescription {
 	x.inner.SetOrdered(ordered)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithName(name string) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithOptional sets the optional property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithOptional(optional bool) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetOptional(optional)
+	return x
+}
+
+// WithTransient sets the transient property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithTransient(transient bool) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetTransient(transient)
+	return x
+}
+
+// WithUserInfo sets the userInfo property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+	return x
+}
+
+// WithIndexed sets the indexed property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithIndexed(indexed bool) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	return x
+}
+
+// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithVersionHashModifier(versionHashModifier string) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	return x
+}
+
+// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	return x
+}
+
+// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	return x
+}
+
+// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+func (x *RelationshipDescription) WithRenamingIdentifier(renamingIdentifier string) *RelationshipDescription {
+	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
 	return x
 }
 
@@ -155,6 +210,15 @@ type RelationshipDescriptionable interface {
 	WithMinCount(minCount uint) *RelationshipDescription
 	WithDeleteRule(deleteRule raw.NSDeleteRule) *RelationshipDescription
 	WithOrdered(ordered bool) *RelationshipDescription
+	WithName(name string) *RelationshipDescription
+	WithOptional(optional bool) *RelationshipDescription
+	WithTransient(transient bool) *RelationshipDescription
+	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *RelationshipDescription
+	WithIndexed(indexed bool) *RelationshipDescription
+	WithVersionHashModifier(versionHashModifier string) *RelationshipDescription
+	WithIndexedBySpotlight(indexedBySpotlight bool) *RelationshipDescription
+	WithStoredInExternalRecord(storedInExternalRecord bool) *RelationshipDescription
+	WithRenamingIdentifier(renamingIdentifier string) *RelationshipDescription
 	DestinationEntity() *EntityDescription
 	SetDestinationEntity(destinationEntity *raw.NSEntityDescription)
 	InverseRelationship() *RelationshipDescription

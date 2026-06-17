@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewCalculateImageAestheticsScoresRequest() *CalculateImageAestheticsScoresR
 	return &CalculateImageAestheticsScoresRequest{inner: raw.VNCalculateImageAestheticsScoresRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *CalculateImageAestheticsScoresRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *CalculateImageAestheticsScoresRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *CalculateImageAestheticsScoresRequest) WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *CalculateImageAestheticsScoresRequest) WithRevision(revision uint) *CalculateImageAestheticsScoresRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *CalculateImageAestheticsScoresRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *CalculateImageAestheticsScoresRequest) asRequest() *raw.VNRequest { ret
 // CalculateImageAestheticsScoresRequestable is the interface implemented by [CalculateImageAestheticsScoresRequest], for mocking and DI.
 type CalculateImageAestheticsScoresRequestable interface {
 	Unwrap() *raw.VNCalculateImageAestheticsScoresRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CalculateImageAestheticsScoresRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CalculateImageAestheticsScoresRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *CalculateImageAestheticsScoresRequest
+	WithRevision(revision uint) *CalculateImageAestheticsScoresRequest
 }
 
 var _ CalculateImageAestheticsScoresRequestable = (*CalculateImageAestheticsScoresRequest)(nil)

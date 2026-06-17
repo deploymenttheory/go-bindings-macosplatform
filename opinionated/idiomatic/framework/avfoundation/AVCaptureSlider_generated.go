@@ -87,6 +87,12 @@ func (x *CaptureSlider) WithAccessibilityIdentifier(accessibilityIdentifier stri
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *CaptureSlider) WithEnabled(enabled bool) *CaptureSlider {
+	x.inner.AVCaptureControl.SetEnabled(enabled)
+	return x
+}
+
 // SetActionQueueAction calls the underlying SetActionQueueAction.
 func (x *CaptureSlider) SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32)) {
 	x.inner.SetActionQueueAction(actionQueue, action)
@@ -173,6 +179,7 @@ type CaptureSliderable interface {
 	WithLocalizedValueFormat(localizedValueFormat string) *CaptureSlider
 	WithProminentValues(items ...*foundation.NSNumber) *CaptureSlider
 	WithAccessibilityIdentifier(accessibilityIdentifier string) *CaptureSlider
+	WithEnabled(enabled bool) *CaptureSlider
 	SetActionQueueAction(actionQueue *foundation.NSObject, action func(float32))
 	Value() float32
 	SetValue(value float32)

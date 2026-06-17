@@ -53,6 +53,12 @@ func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
 	return x
 }
 
+// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
+func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad {
+	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+	return x
+}
+
 // SaveSnapshot calls the underlying SaveSnapshot.
 func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
 	_r := x.inner.SaveSnapshot()
@@ -152,6 +158,7 @@ type MicroGamepadable interface {
 	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepad
 	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad
 	WithAllowsRotation(allowsRotation bool) *MicroGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad
 	SaveSnapshot() *MicroGamepadSnapshot
 	SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad)
 	Controller() *Controller

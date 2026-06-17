@@ -77,6 +77,24 @@ func (x *ReplicatorConstraint) WithScaleOffset(scaleOffset raw.SCNVector3) *Repl
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
+	x.inner.SCNConstraint.SetEnabled(enabled)
+	return x
+}
+
+// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+func (x *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {
+	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	return x
+}
+
+// WithIncremental sets the incremental property and returns the receiver for chaining.
+func (x *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorConstraint {
+	x.inner.SCNConstraint.SetIncremental(incremental)
+	return x
+}
+
 // Target calls the underlying Target.
 func (x *ReplicatorConstraint) Target() *Node {
 	_r := x.inner.Target()
@@ -163,6 +181,9 @@ type ReplicatorConstraintable interface {
 	WithOrientationOffset(orientationOffset raw.SCNVector4) *ReplicatorConstraint
 	WithPositionOffset(positionOffset raw.SCNVector3) *ReplicatorConstraint
 	WithScaleOffset(scaleOffset raw.SCNVector3) *ReplicatorConstraint
+	WithEnabled(enabled bool) *ReplicatorConstraint
+	WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint
+	WithIncremental(incremental bool) *ReplicatorConstraint
 	Target() *Node
 	SetTarget(target *raw.SCNNode)
 	ReplicatesOrientation() bool

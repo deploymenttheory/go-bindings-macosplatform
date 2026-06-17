@@ -54,6 +54,12 @@ func (x *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // SetView calls the underlying SetView.
 func (x *CustomTouchBarItem) SetView(view *raw.NSView) {
 	x.inner.SetView(view)
@@ -77,6 +83,7 @@ type CustomTouchBarItemable interface {
 	WithView(view ViewProvider) *CustomTouchBarItem
 	WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem
 	SetView(view *raw.NSView)
 	SetViewController(viewController *raw.NSViewController)
 	SetCustomizationLabel(customizationLabel string)

@@ -7,6 +7,7 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -87,6 +88,276 @@ func (x *SliderCell) WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPositio
 // WithAllowsTickMarkValuesOnly sets the allowsTickMarkValuesOnly property and returns the receiver for chaining.
 func (x *SliderCell) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell {
 	x.inner.SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *SliderCell) WithControlView(controlView ViewProvider) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *SliderCell) WithType(type_ raw.NSCellType) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *SliderCell) WithState(state int) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SliderCell) WithTarget(target objc.ID) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SliderCell) WithAction(action objc.SEL) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SliderCell) WithTag(tag int) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SliderCell) WithTitle(title string) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SliderCell) WithEnabled(enabled bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *SliderCell) WithContinuous(continuous bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *SliderCell) WithEditable(editable bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *SliderCell) WithSelectable(selectable bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SliderCell) WithBordered(bordered bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *SliderCell) WithBezeled(bezeled bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *SliderCell) WithScrollable(scrollable bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *SliderCell) WithHighlighted(highlighted bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *SliderCell) WithAlignment(alignment raw.NSTextAlignment) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *SliderCell) WithWraps(wraps bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *SliderCell) WithFont(font *raw.NSFont) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *SliderCell) WithFormatter(formatter *foundation.NSFormatter) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *SliderCell) WithObjectValue(objectValue objc.ID) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *SliderCell) WithStringValue(stringValue string) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *SliderCell) WithIntValue(intValue int) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *SliderCell) WithFloatValue(floatValue float32) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *SliderCell) WithDoubleValue(doubleValue float64) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *SliderCell) WithIntegerValue(integerValue int) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SliderCell) WithImage(image *raw.NSImage) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *SliderCell) WithControlSize(controlSize raw.NSControlSize) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SliderCell) WithRepresentedObject(representedObject objc.ID) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SliderCell) WithMenu(menu *raw.NSMenu) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *SliderCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *SliderCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *SliderCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *SliderCell) WithAllowsUndo(allowsUndo bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *SliderCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *SliderCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *SliderCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *SliderCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *SliderCell) WithShowsFirstResponder(showsFirstResponder bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *SliderCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *SliderCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *SliderCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *SliderCell) WithImportsGraphics(importsGraphics bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *SliderCell) WithAllowsMixedState(allowsMixedState bool) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *SliderCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *SliderCell) WithControlTint(controlTint raw.NSControlTint) *SliderCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
 	return x
 }
 
@@ -289,6 +560,51 @@ type SliderCellable interface {
 	WithNumberOfTickMarks(numberOfTickMarks int) *SliderCell
 	WithTickMarkPosition(tickMarkPosition raw.NSTickMarkPosition) *SliderCell
 	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *SliderCell
+	WithControlView(controlView ViewProvider) *SliderCell
+	WithType(type_ raw.NSCellType) *SliderCell
+	WithState(state int) *SliderCell
+	WithTarget(target objc.ID) *SliderCell
+	WithAction(action objc.SEL) *SliderCell
+	WithTag(tag int) *SliderCell
+	WithTitle(title string) *SliderCell
+	WithEnabled(enabled bool) *SliderCell
+	WithContinuous(continuous bool) *SliderCell
+	WithEditable(editable bool) *SliderCell
+	WithSelectable(selectable bool) *SliderCell
+	WithBordered(bordered bool) *SliderCell
+	WithBezeled(bezeled bool) *SliderCell
+	WithScrollable(scrollable bool) *SliderCell
+	WithHighlighted(highlighted bool) *SliderCell
+	WithAlignment(alignment raw.NSTextAlignment) *SliderCell
+	WithWraps(wraps bool) *SliderCell
+	WithFont(font *raw.NSFont) *SliderCell
+	WithFormatter(formatter *foundation.NSFormatter) *SliderCell
+	WithObjectValue(objectValue objc.ID) *SliderCell
+	WithStringValue(stringValue string) *SliderCell
+	WithIntValue(intValue int) *SliderCell
+	WithFloatValue(floatValue float32) *SliderCell
+	WithDoubleValue(doubleValue float64) *SliderCell
+	WithIntegerValue(integerValue int) *SliderCell
+	WithImage(image *raw.NSImage) *SliderCell
+	WithControlSize(controlSize raw.NSControlSize) *SliderCell
+	WithRepresentedObject(representedObject objc.ID) *SliderCell
+	WithMenu(menu *raw.NSMenu) *SliderCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SliderCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SliderCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SliderCell
+	WithAllowsUndo(allowsUndo bool) *SliderCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SliderCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SliderCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *SliderCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *SliderCell
+	WithShowsFirstResponder(showsFirstResponder bool) *SliderCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *SliderCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SliderCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SliderCell
+	WithImportsGraphics(importsGraphics bool) *SliderCell
+	WithAllowsMixedState(allowsMixedState bool) *SliderCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SliderCell
+	WithControlTint(controlTint raw.NSControlTint) *SliderCell
 	KnobRectFlipped(flipped bool) corefoundation.CGRect
 	BarRectFlipped(flipped bool) corefoundation.CGRect
 	DrawKnob(knobRect corefoundation.CGRect)

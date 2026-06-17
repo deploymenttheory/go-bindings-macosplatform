@@ -38,6 +38,18 @@ func NewGetReservationDetailsIntentWithReservationContainerReferenceReservationI
 	return &GetReservationDetailsIntent{inner: raw.INGetReservationDetailsIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *GetReservationDetailsIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // ReservationContainerReference calls the underlying ReservationContainerReference.
 func (x *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
 	_r := x.inner.ReservationContainerReference()
@@ -63,6 +75,8 @@ func (x *GetReservationDetailsIntent) asIntent() *raw.INIntent { return &x.inner
 // GetReservationDetailsIntentable is the interface implemented by [GetReservationDetailsIntent], for mocking and DI.
 type GetReservationDetailsIntentable interface {
 	Unwrap() *raw.INGetReservationDetailsIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *GetReservationDetailsIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent
 	ReservationContainerReference() *SpeakableString
 	ReservationItemReferences() []*raw.INSpeakableString
 }

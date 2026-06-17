@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -36,11 +37,25 @@ func NewNNGradientState() *NNGradientState {
 	return &NNGradientState{inner: raw.MPSNNGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *NNGradientState) WithReadCount(readCount uint) *NNGradientState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGradientState) WithLabel(label string) *NNGradientState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNGradientState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
 type NNGradientStateable interface {
 	Unwrap() *raw.MPSNNGradientState
+	WithReadCount(readCount uint) *NNGradientState
+	WithLabel(label string) *NNGradientState
 }
 
 var _ NNGradientStateable = (*NNGradientState)(nil)

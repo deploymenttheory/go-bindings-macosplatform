@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -51,6 +52,18 @@ func NewCNNPoolingNodeWithSourceFilterSize(sourceNode *mpsneuralnetwork.MPSNNIma
 	return &CNNPoolingNode{inner: raw.MPSCNNPoolingNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNPoolingNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNPoolingNode) WithLabel(label string) *CNNPoolingNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelWidth calls the underlying KernelWidth.
 func (x *CNNPoolingNode) KernelWidth() uint {
 	return x.inner.KernelWidth()
@@ -76,6 +89,8 @@ func (x *CNNPoolingNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { re
 // CNNPoolingNodeable is the interface implemented by [CNNPoolingNode], for mocking and DI.
 type CNNPoolingNodeable interface {
 	Unwrap() *raw.MPSCNNPoolingNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNPoolingNode
+	WithLabel(label string) *CNNPoolingNode
 	KernelWidth() uint
 	KernelHeight() uint
 	StrideInPixelsX() uint

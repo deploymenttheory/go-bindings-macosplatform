@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNNeuronGeLUNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode)
 	return &CNNNeuronGeLUNode{inner: raw.MPSCNNNeuronGeLUNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronGeLUNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronGeLUNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronGeLUNode) WithLabel(label string) *CNNNeuronGeLUNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronGeLUNode) asCNNNeuronNode() *mpsneuralnetwork.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronGeLUNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -44,6 +57,8 @@ func (x *CNNNeuronGeLUNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
 // CNNNeuronGeLUNodeable is the interface implemented by [CNNNeuronGeLUNode], for mocking and DI.
 type CNNNeuronGeLUNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronGeLUNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNNeuronGeLUNode
+	WithLabel(label string) *CNNNeuronGeLUNode
 }
 
 var _ CNNNeuronGeLUNodeable = (*CNNNeuronGeLUNode)(nil)

@@ -79,6 +79,12 @@ func (x *URLSessionTask) WithPrefersIncrementalDelivery(prefersIncrementalDelive
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTask {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Cancel calls the underlying Cancel.
 func (x *URLSessionTask) Cancel() {
 	x.inner.Cancel()
@@ -257,6 +263,7 @@ type URLSessionTaskable interface {
 	WithTaskDescription(taskDescription string) *URLSessionTask
 	WithPriority(priority float32) *URLSessionTask
 	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTask
 	Cancel()
 	Suspend()
 	Resume()

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
 	return &MTRBasicClusterLeaveEvent{inner: raw.MTRBasicClusterLeaveEventFromID(_id)}
 }
 
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBasicClusterLeaveEvent {
+	x.inner.MTRBasicInformationClusterLeaveEvent.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTRBasicClusterLeaveEvent) asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent { return &x.inner.MTRBasicInformationClusterLeaveEvent }
 
 // MTRBasicClusterLeaveEventable is the interface implemented by [MTRBasicClusterLeaveEvent], for mocking and DI.
 type MTRBasicClusterLeaveEventable interface {
 	Unwrap() *raw.MTRBasicClusterLeaveEvent
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRBasicClusterLeaveEvent
 }
 
 var _ MTRBasicClusterLeaveEventable = (*MTRBasicClusterLeaveEvent)(nil)

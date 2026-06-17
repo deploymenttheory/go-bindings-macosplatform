@@ -74,6 +74,54 @@ func (x *DiscoverUserIdentitiesOperation) WithDiscoverUserIdentitiesCompletionBl
 	return x
 }
 
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithGroup(group *raw.CKOperationGroup) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithContainer(container *raw.CKContainer) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation {
+	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // UserIdentityLookupInfos returns the collection as a Go slice.
 func (x *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo {
 	arr := x.inner.UserIdentityLookupInfos()
@@ -131,6 +179,14 @@ type DiscoverUserIdentitiesOperationable interface {
 	WithUserIdentityLookupInfos(items ...*raw.CKUserIdentityLookupInfo) *DiscoverUserIdentitiesOperation
 	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(*raw.CKUserIdentity, *raw.CKUserIdentityLookupInfo)) *DiscoverUserIdentitiesOperation
 	WithDiscoverUserIdentitiesCompletionBlock(discoverUserIdentitiesCompletionBlock func(unsafe.Pointer)) *DiscoverUserIdentitiesOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *DiscoverUserIdentitiesOperation
+	WithGroup(group *raw.CKOperationGroup) *DiscoverUserIdentitiesOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation
+	WithContainer(container *raw.CKContainer) *DiscoverUserIdentitiesOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation
+	WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation
 	UserIdentityLookupInfos() []*raw.CKUserIdentityLookupInfo
 	SetUserIdentityLookupInfos(userIdentityLookupInfos *foundation.NSArray[*raw.CKUserIdentityLookupInfo])
 	UserIdentityDiscoveredBlock() objc.Block

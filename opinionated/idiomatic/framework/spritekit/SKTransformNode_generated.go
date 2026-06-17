@@ -5,6 +5,8 @@
 package spritekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -45,6 +47,166 @@ func (x *TransformNode) WithXRotation(xRotation float64) *TransformNode {
 // WithYRotation sets the yRotation property and returns the receiver for chaining.
 func (x *TransformNode) WithYRotation(yRotation float64) *TransformNode {
 	x.inner.SetYRotation(yRotation)
+	return x
+}
+
+// WithPosition sets the position property and returns the receiver for chaining.
+func (x *TransformNode) WithPosition(position corefoundation.CGPoint) *TransformNode {
+	x.inner.SKNode.SetPosition(position)
+	return x
+}
+
+// WithZPosition sets the zPosition property and returns the receiver for chaining.
+func (x *TransformNode) WithZPosition(zPosition float64) *TransformNode {
+	x.inner.SKNode.SetZPosition(zPosition)
+	return x
+}
+
+// WithZRotation sets the zRotation property and returns the receiver for chaining.
+func (x *TransformNode) WithZRotation(zRotation float64) *TransformNode {
+	x.inner.SKNode.SetZRotation(zRotation)
+	return x
+}
+
+// WithXScale sets the xScale property and returns the receiver for chaining.
+func (x *TransformNode) WithXScale(xScale float64) *TransformNode {
+	x.inner.SKNode.SetXScale(xScale)
+	return x
+}
+
+// WithYScale sets the yScale property and returns the receiver for chaining.
+func (x *TransformNode) WithYScale(yScale float64) *TransformNode {
+	x.inner.SKNode.SetYScale(yScale)
+	return x
+}
+
+// WithSpeed sets the speed property and returns the receiver for chaining.
+func (x *TransformNode) WithSpeed(speed float64) *TransformNode {
+	x.inner.SKNode.SetSpeed(speed)
+	return x
+}
+
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *TransformNode) WithAlpha(alpha float64) *TransformNode {
+	x.inner.SKNode.SetAlpha(alpha)
+	return x
+}
+
+// WithPaused sets the paused property and returns the receiver for chaining.
+func (x *TransformNode) WithPaused(paused bool) *TransformNode {
+	x.inner.SKNode.SetPaused(paused)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *TransformNode) WithHidden(hidden bool) *TransformNode {
+	x.inner.SKNode.SetHidden(hidden)
+	return x
+}
+
+// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+func (x *TransformNode) WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode {
+	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *TransformNode) WithName(name string) *TransformNode {
+	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+func (x *TransformNode) WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TransformNode {
+	x.inner.SKNode.SetPhysicsBody(physicsBody)
+	return x
+}
+
+// WithUserData sets the userData property and returns the receiver for chaining.
+func (x *TransformNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode {
+	x.inner.SKNode.SetUserData(userData)
+	return x
+}
+
+// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+func (x *TransformNode) WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TransformNode {
+	x.inner.SKNode.SetReachConstraints(reachConstraints)
+	return x
+}
+
+// WithConstraints sets the collection, converting the Go slice to an NSArray.
+func (x *TransformNode) WithConstraints(items ...*raw.SKConstraint) *TransformNode {
+	if len(items) == 0 {
+		x.inner.SKNode.SetConstraints(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SKNode.SetConstraints(_arr)
+	return x
+}
+
+// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
+func (x *TransformNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode {
+	x.inner.SKNode.SetAttributeValues(attributeValues)
+	return x
+}
+
+// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityElement(accessibilityElement bool) *TransformNode {
+	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	return x
+}
+
+// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityRole(accessibilityRole string) *TransformNode {
+	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	return x
+}
+
+// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode {
+	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	return x
+}
+
+// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode {
+	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
+	return x
+}
+
+// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode {
+	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	return x
+}
+
+// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityParent(accessibilityParent objc.ID) *TransformNode {
+	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+	return x
+}
+
+// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityHelp(accessibilityHelp string) *TransformNode {
+	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	return x
+}
+
+// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityLabel(accessibilityLabel string) *TransformNode {
+	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	return x
+}
+
+// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+func (x *TransformNode) WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode {
+	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
 	return x
 }
 
@@ -105,6 +267,31 @@ type TransformNodeable interface {
 	Unwrap() *raw.SKTransformNode
 	WithXRotation(xRotation float64) *TransformNode
 	WithYRotation(yRotation float64) *TransformNode
+	WithPosition(position corefoundation.CGPoint) *TransformNode
+	WithZPosition(zPosition float64) *TransformNode
+	WithZRotation(zRotation float64) *TransformNode
+	WithXScale(xScale float64) *TransformNode
+	WithYScale(yScale float64) *TransformNode
+	WithSpeed(speed float64) *TransformNode
+	WithAlpha(alpha float64) *TransformNode
+	WithPaused(paused bool) *TransformNode
+	WithHidden(hidden bool) *TransformNode
+	WithUserInteractionEnabled(userInteractionEnabled bool) *TransformNode
+	WithName(name string) *TransformNode
+	WithPhysicsBody(physicsBody *raw.SKPhysicsBody) *TransformNode
+	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *TransformNode
+	WithReachConstraints(reachConstraints *raw.SKReachConstraints) *TransformNode
+	WithConstraints(items ...*raw.SKConstraint) *TransformNode
+	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *TransformNode
+	WithAccessibilityElement(accessibilityElement bool) *TransformNode
+	WithAccessibilityRole(accessibilityRole string) *TransformNode
+	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *TransformNode
+	WithAccessibilitySubrole(accessibilitySubrole string) *TransformNode
+	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *TransformNode
+	WithAccessibilityParent(accessibilityParent objc.ID) *TransformNode
+	WithAccessibilityHelp(accessibilityHelp string) *TransformNode
+	WithAccessibilityLabel(accessibilityLabel string) *TransformNode
+	WithAccessibilityEnabled(accessibilityEnabled bool) *TransformNode
 	SetEulerAngles(euler unsafe.Pointer)
 	EulerAngles() unsafe.Pointer
 	SetRotationMatrix(rotationMatrix unsafe.Pointer)

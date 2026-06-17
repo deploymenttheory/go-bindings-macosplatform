@@ -49,6 +49,12 @@ func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDe
 	return x
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ScannerDevice) WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice {
+	x.inner.ICDevice.SetDelegate(delegate)
+	return x
+}
+
 // RequestOpenSessionWithCredentialsPassword calls the underlying RequestOpenSessionWithCredentialsPassword.
 func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
 	x.inner.RequestOpenSessionWithCredentialsPassword(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password))
@@ -151,6 +157,7 @@ type ScannerDeviceable interface {
 	Unwrap() *raw.ICScannerDevice
 	WithTransferMode(transferMode raw.ICScannerTransferMode) *ScannerDevice
 	WithMaxMemoryBandSize(maxMemoryBandSize uint) *ScannerDevice
+	WithDelegate(delegate raw.ICDeviceDelegate) *ScannerDevice
 	RequestOpenSessionWithCredentialsPassword(username string, password string)
 	RequestSelectFunctionalUnit(type_ raw.ICScannerFunctionalUnitType)
 	RequestOverviewScan()

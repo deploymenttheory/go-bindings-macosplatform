@@ -35,6 +35,12 @@ func NewUnitSpeed() *UnitSpeed {
 	return &UnitSpeed{inner: raw.NSUnitSpeedFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitSpeed) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitSpeed {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitSpeed) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitSpeed) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitSpeed) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUni
 // UnitSpeedable is the interface implemented by [UnitSpeed], for mocking and DI.
 type UnitSpeedable interface {
 	Unwrap() *raw.NSUnitSpeed
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitSpeed
 }
 
 var _ UnitSpeedable = (*UnitSpeed)(nil)

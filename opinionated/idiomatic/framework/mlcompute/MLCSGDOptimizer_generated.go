@@ -35,6 +35,18 @@ func NewSGDOptimizer() *SGDOptimizer {
 	return &SGDOptimizer{inner: raw.MLCSGDOptimizerFromID(_id)}
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *SGDOptimizer) WithLearningRate(learningRate float32) *SGDOptimizer {
+	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+func (x *SGDOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer {
+	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	return x
+}
+
 // MomentumScale calls the underlying MomentumScale.
 func (x *SGDOptimizer) MomentumScale() float32 {
 	return x.inner.MomentumScale()
@@ -50,6 +62,8 @@ func (x *SGDOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOpti
 // SGDOptimizerable is the interface implemented by [SGDOptimizer], for mocking and DI.
 type SGDOptimizerable interface {
 	Unwrap() *raw.MLCSGDOptimizer
+	WithLearningRate(learningRate float32) *SGDOptimizer
+	WithAppliesGradientClipping(appliesGradientClipping bool) *SGDOptimizer
 	MomentumScale() float32
 	UsesNesterovMomentum() bool
 }

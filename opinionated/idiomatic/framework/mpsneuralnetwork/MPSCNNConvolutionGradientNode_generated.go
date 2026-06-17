@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNConvolutionGradientNodeWithSourceGradientSourceImageConvolutionGradie
 	return &CNNConvolutionGradientNode{inner: raw.MPSCNNConvolutionGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionGradientNode) WithLabel(label string) *CNNConvolutionGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNConvolutionGradientNode) asCNNConvolutionGradientNode() *raw.MPSCNNConvolutionGradientNode { return x.inner }
 
 func (x *CNNConvolutionGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
@@ -45,6 +58,8 @@ func (x *CNNConvolutionGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { ret
 // CNNConvolutionGradientNodeable is the interface implemented by [CNNConvolutionGradientNode], for mocking and DI.
 type CNNConvolutionGradientNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionGradientNode
+	WithLabel(label string) *CNNConvolutionGradientNode
 }
 
 var _ CNNConvolutionGradientNodeable = (*CNNConvolutionGradientNode)(nil)

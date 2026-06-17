@@ -37,6 +37,12 @@ func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount uint) *Animate
 	return &AnimatedQuaternionArray{inner: raw.MDLAnimatedQuaternionArrayFromID(_id)}
 }
 
+// WithInterpolation sets the interpolation property and returns the receiver for chaining.
+func (x *AnimatedQuaternionArray) WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedQuaternionArray {
+	x.inner.MDLAnimatedValue.SetInterpolation(interpolation)
+	return x
+}
+
 // SetFloatQuaternionArrayCountAtTime calls the underlying SetFloatQuaternionArrayCountAtTime.
 func (x *AnimatedQuaternionArray) SetFloatQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
 	x.inner.SetFloatQuaternionArrayCountAtTime(array, count, time_)
@@ -87,6 +93,7 @@ func (x *AnimatedQuaternionArray) asAnimatedValue() *raw.MDLAnimatedValue { retu
 // AnimatedQuaternionArrayable is the interface implemented by [AnimatedQuaternionArray], for mocking and DI.
 type AnimatedQuaternionArrayable interface {
 	Unwrap() *raw.MDLAnimatedQuaternionArray
+	WithInterpolation(interpolation raw.MDLAnimatedValueInterpolation) *AnimatedQuaternionArray
 	SetFloatQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
 	SetDoubleQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
 	GetFloatQuaternionArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint

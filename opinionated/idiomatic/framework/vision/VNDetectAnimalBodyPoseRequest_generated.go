@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -35,6 +36,30 @@ func DetectAnimalBodyPoseRequestFromID(id objc.ID) *DetectAnimalBodyPoseRequest 
 func NewDetectAnimalBodyPoseRequest() *DetectAnimalBodyPoseRequest {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VNDetectAnimalBodyPoseRequest")), objc.RegisterName("new"))
 	return &DetectAnimalBodyPoseRequest{inner: raw.VNDetectAnimalBodyPoseRequestFromID(_id)}
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectAnimalBodyPoseRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectAnimalBodyPoseRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectAnimalBodyPoseRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectAnimalBodyPoseRequest) WithRevision(revision uint) *DetectAnimalBodyPoseRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
 }
 
 // SupportedJointNames returns the collection as a Go slice.
@@ -72,6 +97,10 @@ func (x *DetectAnimalBodyPoseRequest) asRequest() *raw.VNRequest { return &x.inn
 // DetectAnimalBodyPoseRequestable is the interface implemented by [DetectAnimalBodyPoseRequest], for mocking and DI.
 type DetectAnimalBodyPoseRequestable interface {
 	Unwrap() *raw.VNDetectAnimalBodyPoseRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectAnimalBodyPoseRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectAnimalBodyPoseRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectAnimalBodyPoseRequest
+	WithRevision(revision uint) *DetectAnimalBodyPoseRequest
 	SupportedJointNames() ([]*foundation.NSString, error)
 	SupportedJointsGroupNames() ([]*foundation.NSString, error)
 }

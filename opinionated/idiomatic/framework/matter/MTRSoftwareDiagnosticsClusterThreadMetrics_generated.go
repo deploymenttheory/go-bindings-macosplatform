@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,46 @@ func NewMTRSoftwareDiagnosticsClusterThreadMetrics() *MTRSoftwareDiagnosticsClus
 	return &MTRSoftwareDiagnosticsClusterThreadMetrics{inner: raw.MTRSoftwareDiagnosticsClusterThreadMetricsFromID(_id)}
 }
 
+// WithId sets the id_ property and returns the receiver for chaining.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct.SetId(id_)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithStackFreeCurrent sets the stackFreeCurrent property and returns the receiver for chaining.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct.SetStackFreeCurrent(stackFreeCurrent)
+	return x
+}
+
+// WithStackFreeMinimum sets the stackFreeMinimum property and returns the receiver for chaining.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct.SetStackFreeMinimum(stackFreeMinimum)
+	return x
+}
+
+// WithStackSize sets the stackSize property and returns the receiver for chaining.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackSize(stackSize *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics {
+	x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct.SetStackSize(stackSize)
+	return x
+}
+
 func (x *MTRSoftwareDiagnosticsClusterThreadMetrics) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct { return &x.inner.MTRSoftwareDiagnosticsClusterThreadMetricsStruct }
 
 // MTRSoftwareDiagnosticsClusterThreadMetricsable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetrics], for mocking and DI.
 type MTRSoftwareDiagnosticsClusterThreadMetricsable interface {
 	Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetrics
+	WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics
+	WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics
+	WithStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics
+	WithStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics
+	WithStackSize(stackSize *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetrics
 }
 
 var _ MTRSoftwareDiagnosticsClusterThreadMetricsable = (*MTRSoftwareDiagnosticsClusterThreadMetrics)(nil)

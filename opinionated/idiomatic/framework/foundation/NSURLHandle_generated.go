@@ -37,6 +37,12 @@ func NewURLHandleWithURLCached(anURL string, willCache bool) *URLHandle {
 	return &URLHandle{inner: raw.NSURLHandleFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLHandle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLHandle {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Status calls the underlying Status.
 func (x *URLHandle) Status() raw.NSURLHandleStatus {
 	return x.inner.Status()
@@ -153,6 +159,7 @@ func (x *URLHandle) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLHandleable is the interface implemented by [URLHandle], for mocking and DI.
 type URLHandleable interface {
 	Unwrap() *raw.NSURLHandle
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLHandle
 	Status() raw.NSURLHandleStatus
 	FailureReason() *String
 	AddClient(client raw.NSURLHandleClient)

@@ -54,6 +54,18 @@ func (x *NDArrayMultiaryBase) WithDestinationArrayAllocator(destinationArrayAllo
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayMultiaryBase) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryBase {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayMultiaryBase) WithLabel(label string) *NDArrayMultiaryBase {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // OffsetsAtSourceIndex calls the underlying OffsetsAtSourceIndex.
 func (x *NDArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets {
 	return x.inner.OffsetsAtSourceIndex(sourceIndex)
@@ -119,6 +131,8 @@ func (x *NDArrayMultiaryBase) asKernel() *mpscore.MPSKernel { return &x.inner.MP
 type NDArrayMultiaryBaseable interface {
 	Unwrap() *raw.MPSNDArrayMultiaryBase
 	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryBase
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryBase
+	WithLabel(label string) *NDArrayMultiaryBase
 	OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets
 	EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode
 	KernelSizesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes

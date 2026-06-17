@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,11 +37,25 @@ func NewNNInitialGradientNodeWithSource(source *raw.MPSNNImageNode) *NNInitialGr
 	return &NNInitialGradientNode{inner: raw.MPSNNInitialGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNInitialGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNInitialGradientNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNInitialGradientNode) WithLabel(label string) *NNInitialGradientNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNInitialGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNInitialGradientNodeable is the interface implemented by [NNInitialGradientNode], for mocking and DI.
 type NNInitialGradientNodeable interface {
 	Unwrap() *raw.MPSNNInitialGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNInitialGradientNode
+	WithLabel(label string) *NNInitialGradientNode
 }
 
 var _ NNInitialGradientNodeable = (*NNInitialGradientNode)(nil)

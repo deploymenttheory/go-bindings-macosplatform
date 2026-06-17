@@ -50,6 +50,36 @@ func (x *Light) WithColorSpace(colorSpace string) *Light {
 	return x
 }
 
+// WithParent sets the parent property and returns the receiver for chaining.
+func (x *Light) WithParent(parent ObjectProvider) *Light {
+	x.inner.MDLObject.SetParent(parent.asObject())
+	return x
+}
+
+// WithInstance sets the instance property and returns the receiver for chaining.
+func (x *Light) WithInstance(instance ObjectProvider) *Light {
+	x.inner.MDLObject.SetInstance(instance.asObject())
+	return x
+}
+
+// WithTransform sets the transform property and returns the receiver for chaining.
+func (x *Light) WithTransform(transform raw.MDLTransformComponent) *Light {
+	x.inner.MDLObject.SetTransform(transform)
+	return x
+}
+
+// WithChildren sets the children property and returns the receiver for chaining.
+func (x *Light) WithChildren(children raw.MDLObjectContainerComponent) *Light {
+	x.inner.MDLObject.SetChildren(children)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Light) WithHidden(hidden bool) *Light {
+	x.inner.MDLObject.SetHidden(hidden)
+	return x
+}
+
 // IrradianceAtPoint calls the underlying IrradianceAtPoint.
 func (x *Light) IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer {
 	return x.inner.IrradianceAtPoint(point)
@@ -93,6 +123,11 @@ type Lightable interface {
 	Unwrap() *raw.MDLLight
 	WithLightType(lightType raw.MDLLightType) *Light
 	WithColorSpace(colorSpace string) *Light
+	WithParent(parent ObjectProvider) *Light
+	WithInstance(instance ObjectProvider) *Light
+	WithTransform(transform raw.MDLTransformComponent) *Light
+	WithChildren(children raw.MDLObjectContainerComponent) *Light
+	WithHidden(hidden bool) *Light
 	IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer
 	IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer
 	LightType() raw.MDLLightType

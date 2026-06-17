@@ -59,6 +59,18 @@ func (x *ImageNormalizedHistogram) WithZeroHistogram(zeroHistogram bool) *ImageN
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageNormalizedHistogram) WithOptions(options mpscore.MPSKernelOptions) *ImageNormalizedHistogram {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageNormalizedHistogram) WithLabel(label string) *ImageNormalizedHistogram {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset calls the underlying EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset.
 func (x *ImageNormalizedHistogram) EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint) {
 	x.inner.EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer, source, minmaxTexture, histogram, histogramOffset)
@@ -101,6 +113,8 @@ type ImageNormalizedHistogramable interface {
 	Unwrap() *raw.MPSImageNormalizedHistogram
 	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram
 	WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram
+	WithOptions(options mpscore.MPSKernelOptions) *ImageNormalizedHistogram
+	WithLabel(label string) *ImageNormalizedHistogram
 	EncodeToCommandBufferSourceTextureMinmaxTextureHistogramHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, minmaxTexture metal.MTLTexture, histogram metal.MTLBuffer, histogramOffset uint)
 	HistogramSizeForSourceFormat(sourceFormat metal.MTLPixelFormat) uint
 	ClipRectSource() metal.MTLRegion

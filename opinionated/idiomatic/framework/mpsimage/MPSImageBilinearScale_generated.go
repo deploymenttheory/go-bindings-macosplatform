@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,30 @@ func NewImageBilinearScaleWithCoderDevice(aDecoder *foundation.NSCoder, device m
 	return &ImageBilinearScale{inner: raw.MPSImageBilinearScaleFromID(_id)}
 }
 
+// WithScaleTransform sets the scaleTransform property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale {
+	x.inner.MPSImageScale.SetScaleTransform(scaleTransform)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageBilinearScale) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBilinearScale {
+	x.inner.MPSImageScale.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageBilinearScale) asImageScale() *raw.MPSImageScale { return &x.inner.MPSImageScale }
 
 func (x *ImageBilinearScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageScale.MPSUnaryImageKernel }
@@ -52,6 +77,10 @@ func (x *ImageBilinearScale) asUnaryImageKernel() *raw.MPSUnaryImageKernel { ret
 // ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
 type ImageBilinearScaleable interface {
 	Unwrap() *raw.MPSImageBilinearScale
+	WithScaleTransform(scaleTransform *mpscore.MPSScaleTransform) *ImageBilinearScale
+	WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale
+	WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBilinearScale
 }
 
 var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)

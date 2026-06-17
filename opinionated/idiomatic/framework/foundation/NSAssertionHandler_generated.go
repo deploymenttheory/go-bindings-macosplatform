@@ -35,11 +35,18 @@ func NewAssertionHandler() *AssertionHandler {
 	return &AssertionHandler{inner: raw.NSAssertionHandlerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AssertionHandler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AssertionHandler {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *AssertionHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AssertionHandlerable is the interface implemented by [AssertionHandler], for mocking and DI.
 type AssertionHandlerable interface {
 	Unwrap() *raw.NSAssertionHandler
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AssertionHandler
 }
 
 var _ AssertionHandlerable = (*AssertionHandler)(nil)

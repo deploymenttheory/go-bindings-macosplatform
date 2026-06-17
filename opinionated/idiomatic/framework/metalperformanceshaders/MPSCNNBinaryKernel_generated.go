@@ -144,6 +144,18 @@ func (x *CNNBinaryKernel) WithDestinationImageAllocator(destinationImageAllocato
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *CNNBinaryKernel) WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryKernel {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBinaryKernel) WithLabel(label string) *CNNBinaryKernel {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage calls the underlying EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage.
 func (x *CNNBinaryKernel) EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer, primaryImage, secondaryImage, destinationImage)
@@ -450,6 +462,8 @@ type CNNBinaryKernelable interface {
 	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNBinaryKernel
 	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNBinaryKernel
 	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNBinaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *CNNBinaryKernel
+	WithLabel(label string) *CNNBinaryKernel
 	EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
 	EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationImages unsafe.Pointer)
 	EncodeToCommandBufferPrimaryImageSecondaryImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage) *mpscore.MPSImage

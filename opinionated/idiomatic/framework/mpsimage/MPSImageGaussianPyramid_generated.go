@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewImageGaussianPyramid() *ImageGaussianPyramid {
 	return &ImageGaussianPyramid{inner: raw.MPSImageGaussianPyramidFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageGaussianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageGaussianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageGaussianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid {
+	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageGaussianPyramid) asImagePyramid() *raw.MPSImagePyramid { return &x.inner.MPSImagePyramid }
 
 func (x *ImageGaussianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImagePyramid.MPSUnaryImageKernel }
@@ -42,6 +62,9 @@ func (x *ImageGaussianPyramid) asUnaryImageKernel() *raw.MPSUnaryImageKernel { r
 // ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
 type ImageGaussianPyramidable interface {
 	Unwrap() *raw.MPSImageGaussianPyramid
+	WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid
+	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianPyramid
 }
 
 var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)

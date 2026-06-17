@@ -44,6 +44,18 @@ func (x *AssetReaderVideoCompositionOutput) WithVideoComposition(videoCompositio
 	return x
 }
 
+// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+func (x *AssetReaderVideoCompositionOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput {
+	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	return x
+}
+
+// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+func (x *AssetReaderVideoCompositionOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput {
+	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	return x
+}
+
 // VideoTracks returns the collection as a Go slice.
 func (x *AssetReaderVideoCompositionOutput) VideoTracks() []*raw.AVAssetTrack {
 	arr := x.inner.VideoTracks()
@@ -85,6 +97,8 @@ func (x *AssetReaderVideoCompositionOutput) asAssetReaderOutput() *raw.AVAssetRe
 type AssetReaderVideoCompositionOutputable interface {
 	Unwrap() *raw.AVAssetReaderVideoCompositionOutput
 	WithVideoComposition(videoComposition VideoCompositionProvider) *AssetReaderVideoCompositionOutput
+	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderVideoCompositionOutput
+	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderVideoCompositionOutput
 	VideoTracks() []*raw.AVAssetTrack
 	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	VideoComposition() *VideoComposition

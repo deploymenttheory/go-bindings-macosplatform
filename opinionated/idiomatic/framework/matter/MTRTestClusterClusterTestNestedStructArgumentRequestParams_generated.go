@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestNestedStructArgumentRequestParams() *MTRTestClu
 	return &MTRTestClusterClusterTestNestedStructArgumentRequestParams{inner: raw.MTRTestClusterClusterTestNestedStructArgumentRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNestedStructArgumentRequestParams) WithArg1(arg1 MTRUnitTestingClusterNestedStructProvider) *MTRTestClusterClusterTestNestedStructArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestNestedStructArgumentRequestParams.SetArg1(arg1.asMTRUnitTestingClusterNestedStruct())
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNestedStructArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNestedStructArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestNestedStructArgumentRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestNestedStructArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNestedStructArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestNestedStructArgumentRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestNestedStructArgumentRequestParams) asMTRUnitTestingClusterTestNestedStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestNestedStructArgumentRequestParams }
 
 // MTRTestClusterClusterTestNestedStructArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestNestedStructArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestNestedStructArgumentRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestNestedStructArgumentRequestParams
+	WithArg1(arg1 MTRUnitTestingClusterNestedStructProvider) *MTRTestClusterClusterTestNestedStructArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestNestedStructArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestNestedStructArgumentRequestParams
 }
 
 var _ MTRTestClusterClusterTestNestedStructArgumentRequestParamsable = (*MTRTestClusterClusterTestNestedStructArgumentRequestParams)(nil)

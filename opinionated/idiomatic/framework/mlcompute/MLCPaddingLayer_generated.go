@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -33,6 +34,18 @@ func PaddingLayerFromID(id objc.ID) *PaddingLayer {
 func NewPaddingLayer() *PaddingLayer {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCPaddingLayer")), objc.RegisterName("new"))
 	return &PaddingLayer{inner: raw.MLCPaddingLayerFromID(_id)}
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
 }
 
 // PaddingType calls the underlying PaddingType.
@@ -70,6 +83,8 @@ func (x *PaddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // PaddingLayerable is the interface implemented by [PaddingLayer], for mocking and DI.
 type PaddingLayerable interface {
 	Unwrap() *raw.MLCPaddingLayer
+	WithLabel(label string) *PaddingLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer
 	PaddingType() raw.MLCPaddingType
 	PaddingLeft() uint
 	PaddingRight() uint

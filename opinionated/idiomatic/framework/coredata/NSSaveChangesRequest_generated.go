@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SaveChangesRequest wraps [raw.NSSaveChangesRequest] with a fluent Go API.
@@ -37,6 +38,22 @@ func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedO
 	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(_id)}
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // InsertedObjects calls the underlying InsertedObjects.
 func (x *SaveChangesRequest) InsertedObjects() *foundation.NSSet[*raw.NSManagedObject] {
 	return x.inner.InsertedObjects()
@@ -62,6 +79,7 @@ func (x *SaveChangesRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRe
 // SaveChangesRequestable is the interface implemented by [SaveChangesRequest], for mocking and DI.
 type SaveChangesRequestable interface {
 	Unwrap() *raw.NSSaveChangesRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest
 	InsertedObjects() *foundation.NSSet[*raw.NSManagedObject]
 	UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject]
 	DeletedObjects() *foundation.NSSet[*raw.NSManagedObject]

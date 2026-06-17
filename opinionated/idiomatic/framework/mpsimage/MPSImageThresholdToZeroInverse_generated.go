@@ -7,6 +7,7 @@ package mpsimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -45,6 +46,24 @@ func NewImageThresholdToZeroInverseWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageThresholdToZeroInverse{inner: raw.MPSImageThresholdToZeroInverseFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageThresholdToZeroInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZeroInverse {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // ThresholdValue calls the underlying ThresholdValue.
 func (x *ImageThresholdToZeroInverse) ThresholdValue() float32 {
 	return x.inner.ThresholdValue()
@@ -60,6 +79,9 @@ func (x *ImageThresholdToZeroInverse) asUnaryImageKernel() *raw.MPSUnaryImageKer
 // ImageThresholdToZeroInverseable is the interface implemented by [ImageThresholdToZeroInverse], for mocking and DI.
 type ImageThresholdToZeroInverseable interface {
 	Unwrap() *raw.MPSImageThresholdToZeroInverse
+	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZeroInverse
+	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZeroInverse
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdToZeroInverse
 	ThresholdValue() float32
 	Transform() *float32
 }

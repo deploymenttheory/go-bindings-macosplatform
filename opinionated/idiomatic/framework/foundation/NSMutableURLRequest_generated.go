@@ -156,6 +156,12 @@ func (x *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining 
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableURLRequest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest {
+	x.inner.NSURLRequest.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetURL calls the underlying SetURL.
 func (x *MutableURLRequest) SetURL(uRL string) {
 	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
@@ -293,6 +299,7 @@ type MutableURLRequestable interface {
 	WithHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) *MutableURLRequest
 	WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest
 	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest
 	SetURL(uRL string)
 	SetCachePolicy(cachePolicy raw.NSURLRequestCachePolicy)
 	SetTimeoutInterval(timeoutInterval float64)

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRNetworkCommissioningClusterNetworkInfo() *MTRNetworkCommissioningClus
 	return &MTRNetworkCommissioningClusterNetworkInfo{inner: raw.MTRNetworkCommissioningClusterNetworkInfoFromID(_id)}
 }
 
+// WithNetworkID sets the networkID property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterNetworkInfo {
+	x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct.SetNetworkID(networkID)
+	return x
+}
+
+// WithConnected sets the connected property and returns the receiver for chaining.
+func (x *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkInfo {
+	x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct.SetConnected(connected)
+	return x
+}
+
 func (x *MTRNetworkCommissioningClusterNetworkInfo) asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct { return &x.inner.MTRNetworkCommissioningClusterNetworkInfoStruct }
 
 // MTRNetworkCommissioningClusterNetworkInfoable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfo], for mocking and DI.
 type MTRNetworkCommissioningClusterNetworkInfoable interface {
 	Unwrap() *raw.MTRNetworkCommissioningClusterNetworkInfo
+	WithNetworkID(networkID *foundation.NSData) *MTRNetworkCommissioningClusterNetworkInfo
+	WithConnected(connected *foundation.NSNumber) *MTRNetworkCommissioningClusterNetworkInfo
 }
 
 var _ MTRNetworkCommissioningClusterNetworkInfoable = (*MTRNetworkCommissioningClusterNetworkInfo)(nil)

@@ -84,6 +84,12 @@ func (x *Morphology) WithDefiniteness(definiteness raw.NSGrammaticalDefiniteness
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Morphology) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Morphology {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // GrammaticalGender calls the underlying GrammaticalGender.
 func (x *Morphology) GrammaticalGender() raw.NSGrammaticalGender {
 	return x.inner.GrammaticalGender()
@@ -196,6 +202,7 @@ type Morphologyable interface {
 	WithGrammaticalPerson(grammaticalPerson raw.NSGrammaticalPerson) *Morphology
 	WithPronounType(pronounType raw.NSGrammaticalPronounType) *Morphology
 	WithDefiniteness(definiteness raw.NSGrammaticalDefiniteness) *Morphology
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Morphology
 	GrammaticalGender() raw.NSGrammaticalGender
 	SetGrammaticalGender(grammaticalGender raw.NSGrammaticalGender)
 	PartOfSpeech() raw.NSGrammaticalPartOfSpeech

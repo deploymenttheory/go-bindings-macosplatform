@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewDisbursementSummaryItem() *DisbursementSummaryItem {
 	return &DisbursementSummaryItem{inner: raw.PKDisbursementSummaryItemFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *DisbursementSummaryItem) WithLabel(label string) *DisbursementSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithAmount sets the amount property and returns the receiver for chaining.
+func (x *DisbursementSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *DisbursementSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *DisbursementSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(type_)
+	return x
+}
+
 func (x *DisbursementSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return &x.inner.PKPaymentSummaryItem }
 
 // DisbursementSummaryItemable is the interface implemented by [DisbursementSummaryItem], for mocking and DI.
 type DisbursementSummaryItemable interface {
 	Unwrap() *raw.PKDisbursementSummaryItem
+	WithLabel(label string) *DisbursementSummaryItem
+	WithAmount(amount *foundation.NSDecimalNumber) *DisbursementSummaryItem
+	WithType(type_ raw.PKPaymentSummaryItemType) *DisbursementSummaryItem
 }
 
 var _ DisbursementSummaryItemable = (*DisbursementSummaryItem)(nil)

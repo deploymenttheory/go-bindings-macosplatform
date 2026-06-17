@@ -49,6 +49,12 @@ func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWrite
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PointerFunctions) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerFunctions {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // HashFunction calls the underlying HashFunction.
 func (x *PointerFunctions) HashFunction() unsafe.Pointer {
 	return x.inner.HashFunction()
@@ -136,6 +142,7 @@ type PointerFunctionsable interface {
 	Unwrap() *raw.NSPointerFunctions
 	WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions
 	WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerFunctions
 	HashFunction() unsafe.Pointer
 	SetHashFunction(hashFunction unsafe.Pointer)
 	IsEqualFunction() unsafe.Pointer

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewNNGradientFilterNode() *NNGradientFilterNode {
 	return &NNGradientFilterNode{inner: raw.MPSNNGradientFilterNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNGradientFilterNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGradientFilterNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGradientFilterNode) WithLabel(label string) *NNGradientFilterNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNGradientFilterNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return x.inner }
 
 func (x *NNGradientFilterNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
@@ -42,6 +55,8 @@ func (x *NNGradientFilterNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x
 // NNGradientFilterNodeable is the interface implemented by [NNGradientFilterNode], for mocking and DI.
 type NNGradientFilterNodeable interface {
 	Unwrap() *raw.MPSNNGradientFilterNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGradientFilterNode
+	WithLabel(label string) *NNGradientFilterNode
 }
 
 var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)

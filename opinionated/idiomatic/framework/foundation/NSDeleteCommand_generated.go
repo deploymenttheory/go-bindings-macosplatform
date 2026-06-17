@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewDeleteCommand() *DeleteCommand {
 	return &DeleteCommand{inner: raw.NSDeleteCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *DeleteCommand) WithDirectParameter(directParameter objc.ID) *DeleteCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *DeleteCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *DeleteCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *DeleteCommand) WithScriptErrorString(scriptErrorString string) *DeleteCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *DeleteCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // KeySpecifier calls the underlying KeySpecifier.
 func (x *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := x.inner.KeySpecifier()
@@ -51,6 +100,14 @@ func (x *DeleteCommand) asObject() *raw.NSObject { return &x.inner.NSScriptComma
 // DeleteCommandable is the interface implemented by [DeleteCommand], for mocking and DI.
 type DeleteCommandable interface {
 	Unwrap() *raw.NSDeleteCommand
+	WithDirectParameter(directParameter objc.ID) *DeleteCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *DeleteCommand
+	WithScriptErrorString(scriptErrorString string) *DeleteCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

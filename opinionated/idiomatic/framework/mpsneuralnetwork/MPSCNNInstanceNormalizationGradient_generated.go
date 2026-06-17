@@ -5,6 +5,8 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,114 @@ func NewCNNInstanceNormalizationGradient() *CNNInstanceNormalizationGradient {
 	return &CNNInstanceNormalizationGradient{inner: raw.MPSCNNInstanceNormalizationGradientFromID(_id)}
 }
 
+// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithKernelOffsetX(kernelOffsetX int) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	return x
+}
+
+// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithKernelOffsetY(kernelOffsetY int) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithPadding(padding raw.MPSNNPadding) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNInstanceNormalizationGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalizationGradient {
+	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNInstanceNormalizationGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel { return &x.inner.MPSCNNGradientKernel }
 
 func (x *CNNInstanceNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel { return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel }
@@ -42,6 +152,24 @@ func (x *CNNInstanceNormalizationGradient) asCNNBinaryKernel() *raw.MPSCNNBinary
 // CNNInstanceNormalizationGradientable is the interface implemented by [CNNInstanceNormalizationGradient], for mocking and DI.
 type CNNInstanceNormalizationGradientable interface {
 	Unwrap() *raw.MPSCNNInstanceNormalizationGradient
+	WithKernelOffsetX(kernelOffsetX int) *CNNInstanceNormalizationGradient
+	WithKernelOffsetY(kernelOffsetY int) *CNNInstanceNormalizationGradient
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNInstanceNormalizationGradient
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNInstanceNormalizationGradient
+	WithClipRect(clipRect metal.MTLRegion) *CNNInstanceNormalizationGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNInstanceNormalizationGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNInstanceNormalizationGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNInstanceNormalizationGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNInstanceNormalizationGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNInstanceNormalizationGradient
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalizationGradient
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNInstanceNormalizationGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNInstanceNormalizationGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNInstanceNormalizationGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNInstanceNormalizationGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNInstanceNormalizationGradient
+	WithPadding(padding raw.MPSNNPadding) *CNNInstanceNormalizationGradient
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNInstanceNormalizationGradient
 }
 
 var _ CNNInstanceNormalizationGradientable = (*CNNInstanceNormalizationGradient)(nil)

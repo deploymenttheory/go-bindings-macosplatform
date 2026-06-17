@@ -47,6 +47,72 @@ func (x *RenderPassDepthAttachmentDescriptor) WithDepthResolveFilter(depthResolv
 	return x
 }
 
+// WithTexture sets the texture property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithTexture(texture raw.MTLTexture) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetTexture(texture)
+	return x
+}
+
+// WithLevel sets the level property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithLevel(level uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLevel(level)
+	return x
+}
+
+// WithSlice sets the slice property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithSlice(slice uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetSlice(slice)
+	return x
+}
+
+// WithDepthPlane sets the depthPlane property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithDepthPlane(depthPlane uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetDepthPlane(depthPlane)
+	return x
+}
+
+// WithResolveTexture sets the resolveTexture property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveTexture(resolveTexture)
+	return x
+}
+
+// WithResolveLevel sets the resolveLevel property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithResolveLevel(resolveLevel uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveLevel(resolveLevel)
+	return x
+}
+
+// WithResolveSlice sets the resolveSlice property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithResolveSlice(resolveSlice uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveSlice(resolveSlice)
+	return x
+}
+
+// WithResolveDepthPlane sets the resolveDepthPlane property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetResolveDepthPlane(resolveDepthPlane)
+	return x
+}
+
+// WithLoadAction sets the loadAction property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetLoadAction(loadAction)
+	return x
+}
+
+// WithStoreAction sets the storeAction property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreAction(storeAction)
+	return x
+}
+
+// WithStoreActionOptions sets the storeActionOptions property and returns the receiver for chaining.
+func (x *RenderPassDepthAttachmentDescriptor) WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassDepthAttachmentDescriptor {
+	x.inner.MTLRenderPassAttachmentDescriptor.SetStoreActionOptions(storeActionOptions)
+	return x
+}
+
 // ClearDepth calls the underlying ClearDepth.
 func (x *RenderPassDepthAttachmentDescriptor) ClearDepth() float64 {
 	return x.inner.ClearDepth()
@@ -74,6 +140,17 @@ type RenderPassDepthAttachmentDescriptorable interface {
 	Unwrap() *raw.MTLRenderPassDepthAttachmentDescriptor
 	WithClearDepth(clearDepth float64) *RenderPassDepthAttachmentDescriptor
 	WithDepthResolveFilter(depthResolveFilter raw.MTLMultisampleDepthResolveFilter) *RenderPassDepthAttachmentDescriptor
+	WithTexture(texture raw.MTLTexture) *RenderPassDepthAttachmentDescriptor
+	WithLevel(level uint) *RenderPassDepthAttachmentDescriptor
+	WithSlice(slice uint) *RenderPassDepthAttachmentDescriptor
+	WithDepthPlane(depthPlane uint) *RenderPassDepthAttachmentDescriptor
+	WithResolveTexture(resolveTexture raw.MTLTexture) *RenderPassDepthAttachmentDescriptor
+	WithResolveLevel(resolveLevel uint) *RenderPassDepthAttachmentDescriptor
+	WithResolveSlice(resolveSlice uint) *RenderPassDepthAttachmentDescriptor
+	WithResolveDepthPlane(resolveDepthPlane uint) *RenderPassDepthAttachmentDescriptor
+	WithLoadAction(loadAction raw.MTLLoadAction) *RenderPassDepthAttachmentDescriptor
+	WithStoreAction(storeAction raw.MTLStoreAction) *RenderPassDepthAttachmentDescriptor
+	WithStoreActionOptions(storeActionOptions raw.MTLStoreActionOptions) *RenderPassDepthAttachmentDescriptor
 	ClearDepth() float64
 	SetClearDepth(clearDepth float64)
 	DepthResolveFilter() raw.MTLMultisampleDepthResolveFilter

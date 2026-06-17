@@ -6,7 +6,9 @@ package cryptotokenkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SmartCardUserInteractionForSecurePINChange wraps [raw.TKSmartCardUserInteractionForSecurePINChange] with a fluent Go API.
@@ -41,6 +43,64 @@ func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConf
 	return x
 }
 
+// WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(pINCompletion)
+	return x
+}
+
+// WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange {
+	if len(items) == 0 {
+		x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(_arr)
+	return x
+}
+
+// WithLocale sets the locale property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetLocale(locale)
+	return x
+}
+
+// WithResultSW sets the resultSW property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultSW(resultSW)
+	return x
+}
+
+// WithResultData sets the resultData property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultData(resultData)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetDelegate(delegate)
+	return x
+}
+
+// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
+	return x
+}
+
+// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+func (x *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange {
+	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
+	return x
+}
+
 // PINConfirmation calls the underlying PINConfirmation.
 func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() raw.TKSmartCardPINConfirmation {
 	return x.inner.PINConfirmation()
@@ -59,6 +119,14 @@ func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction(
 type SmartCardUserInteractionForSecurePINChangeable interface {
 	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange
 	WithPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
+	WithPINCompletion(pINCompletion raw.TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
+	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange
+	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINChange
+	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange
+	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINChange
+	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange
+	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange
+	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange
 	PINConfirmation() raw.TKSmartCardPINConfirmation
 	SetPINConfirmation(pINConfirmation raw.TKSmartCardPINConfirmation)
 }

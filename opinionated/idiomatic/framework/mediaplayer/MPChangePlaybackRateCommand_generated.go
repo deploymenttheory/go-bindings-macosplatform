@@ -54,6 +54,12 @@ func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundat
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // SupportedPlaybackRates returns the collection as a Go slice.
 func (x *ChangePlaybackRateCommand) SupportedPlaybackRates() []*foundation.NSNumber {
 	arr := x.inner.SupportedPlaybackRates()
@@ -76,6 +82,7 @@ func (x *ChangePlaybackRateCommand) asRemoteCommand() *raw.MPRemoteCommand { ret
 type ChangePlaybackRateCommandable interface {
 	Unwrap() *raw.MPChangePlaybackRateCommand
 	WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand
+	WithEnabled(enabled bool) *ChangePlaybackRateCommand
 	SupportedPlaybackRates() []*foundation.NSNumber
 	SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber])
 }

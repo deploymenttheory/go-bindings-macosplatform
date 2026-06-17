@@ -130,6 +130,54 @@ func (x *KeyframeAnimation) WithRotationMode(rotationMode *foundation.NSString) 
 	return x
 }
 
+// WithKeyPath sets the keyPath property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithKeyPath(keyPath string) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.SetKeyPath(foundation.NSStringStringWithUTF8String(keyPath))
+	return x
+}
+
+// WithAdditive sets the additive property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithAdditive(additive bool) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.SetAdditive(additive)
+	return x
+}
+
+// WithCumulative sets the cumulative property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.SetCumulative(cumulative)
+	return x
+}
+
+// WithValueFunction sets the valueFunction property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithValueFunction(valueFunction *raw.CAValueFunction) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.SetValueFunction(valueFunction)
+	return x
+}
+
+// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetTimingFunction(timingFunction)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithDelegate(delegate raw.CAAnimationDelegate) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetDelegate(delegate)
+	return x
+}
+
+// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
+	return x
+}
+
+// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
+func (x *KeyframeAnimation) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *KeyframeAnimation {
+	x.inner.CAPropertyAnimation.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	return x
+}
+
 // Values calls the underlying Values.
 func (x *KeyframeAnimation) Values() *foundation.NSArray[objc.ID] {
 	return x.inner.Values()
@@ -272,6 +320,14 @@ type KeyframeAnimationable interface {
 	WithContinuityValues(items ...*foundation.NSNumber) *KeyframeAnimation
 	WithBiasValues(items ...*foundation.NSNumber) *KeyframeAnimation
 	WithRotationMode(rotationMode *foundation.NSString) *KeyframeAnimation
+	WithKeyPath(keyPath string) *KeyframeAnimation
+	WithAdditive(additive bool) *KeyframeAnimation
+	WithCumulative(cumulative bool) *KeyframeAnimation
+	WithValueFunction(valueFunction *raw.CAValueFunction) *KeyframeAnimation
+	WithTimingFunction(timingFunction *raw.CAMediaTimingFunction) *KeyframeAnimation
+	WithDelegate(delegate raw.CAAnimationDelegate) *KeyframeAnimation
+	WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation
+	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *KeyframeAnimation
 	Values() *foundation.NSArray[objc.ID]
 	SetValues(values *foundation.NSArray[objc.ID])
 	Path() unsafe.Pointer

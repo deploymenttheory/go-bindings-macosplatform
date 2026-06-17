@@ -35,6 +35,12 @@ func NewUnitDuration() *UnitDuration {
 	return &UnitDuration{inner: raw.NSUnitDurationFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitDuration) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDuration {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitDuration) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitDuration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitDuration) asObject() *raw.NSObject { return &x.inner.NSDimension.NS
 // UnitDurationable is the interface implemented by [UnitDuration], for mocking and DI.
 type UnitDurationable interface {
 	Unwrap() *raw.NSUnitDuration
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitDuration
 }
 
 var _ UnitDurationable = (*UnitDuration)(nil)

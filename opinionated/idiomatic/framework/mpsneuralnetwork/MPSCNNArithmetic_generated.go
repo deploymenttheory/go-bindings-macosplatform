@@ -80,6 +80,102 @@ func (x *CNNArithmetic) WithMaximumValue(maximumValue float32) *CNNArithmetic {
 	return x
 }
 
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithClipRect(clipRect metal.MTLRegion) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithPadding(padding raw.MPSNNPadding) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNArithmetic) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNArithmetic {
+	x.inner.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage calls the underlying EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage.
 func (x *CNNArithmetic) EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *raw.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer, primaryImage, secondaryImage, destinationState, destinationImage)
@@ -174,6 +270,22 @@ type CNNArithmeticable interface {
 	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *CNNArithmetic
 	WithMinimumValue(minimumValue float32) *CNNArithmetic
 	WithMaximumValue(maximumValue float32) *CNNArithmetic
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNArithmetic
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNArithmetic
+	WithClipRect(clipRect metal.MTLRegion) *CNNArithmetic
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNArithmetic
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNArithmetic
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNArithmetic
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNArithmetic
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNArithmetic
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNArithmetic
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNArithmetic
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNArithmetic
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNArithmetic
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNArithmetic
+	WithPadding(padding raw.MPSNNPadding) *CNNArithmetic
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNArithmetic
 	EncodeToCommandBufferPrimaryImageSecondaryImageDestinationStateDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationState *raw.MPSCNNArithmeticGradientState, destinationImage *mpscore.MPSImage)
 	EncodeBatchToCommandBufferPrimaryImagesSecondaryImagesDestinationStatesDestinationImages(commandBuffer metal.MTLCommandBuffer, primaryImages unsafe.Pointer, secondaryImages unsafe.Pointer, destinationStates unsafe.Pointer, destinationImages unsafe.Pointer)
 	PrimaryScale() float32

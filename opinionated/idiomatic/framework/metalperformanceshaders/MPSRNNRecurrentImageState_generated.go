@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 	return &RNNRecurrentImageState{inner: raw.MPSRNNRecurrentImageStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *RNNRecurrentImageState) WithReadCount(readCount uint) *RNNRecurrentImageState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RNNRecurrentImageState) WithLabel(label string) *RNNRecurrentImageState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // GetRecurrentOutputImageForLayerIndex calls the underlying GetRecurrentOutputImageForLayerIndex.
 func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
 	return x.inner.GetRecurrentOutputImageForLayerIndex(layerIndex)
@@ -51,6 +64,8 @@ func (x *RNNRecurrentImageState) asState() *mpscore.MPSState { return &x.inner.M
 // RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
 type RNNRecurrentImageStateable interface {
 	Unwrap() *raw.MPSRNNRecurrentImageState
+	WithReadCount(readCount uint) *RNNRecurrentImageState
+	WithLabel(label string) *RNNRecurrentImageState
 	GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
 	GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
 }

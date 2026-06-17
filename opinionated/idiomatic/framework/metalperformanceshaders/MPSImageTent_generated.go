@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,36 @@ func NewImageTent() *ImageTent {
 	return &ImageTent{inner: raw.MPSImageTentFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageTent) WithOffset(offset mpscore.MPSOffset) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageTent) WithClipRect(clipRect metal.MTLRegion) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageTent) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageTent) WithOptions(options mpscore.MPSKernelOptions) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageTent) WithLabel(label string) *ImageTent {
+	x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageTent) asImageBox() *mpsimage.MPSImageBox { return &x.inner.MPSImageBox }
 
 func (x *ImageTent) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel { return &x.inner.MPSImageBox.MPSUnaryImageKernel }
@@ -46,6 +78,11 @@ func (x *ImageTent) asKernel() *mpscore.MPSKernel { return &x.inner.MPSImageBox.
 // ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
 type ImageTentable interface {
 	Unwrap() *raw.MPSImageTent
+	WithOffset(offset mpscore.MPSOffset) *ImageTent
+	WithClipRect(clipRect metal.MTLRegion) *ImageTent
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent
+	WithOptions(options mpscore.MPSKernelOptions) *ImageTent
+	WithLabel(label string) *ImageTent
 }
 
 var _ ImageTentable = (*ImageTent)(nil)

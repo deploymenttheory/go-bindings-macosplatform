@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -36,11 +37,25 @@ func NewNNMultiaryGradientState() *NNMultiaryGradientState {
 	return &NNMultiaryGradientState{inner: raw.MPSNNMultiaryGradientStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *NNMultiaryGradientState) WithReadCount(readCount uint) *NNMultiaryGradientState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNMultiaryGradientState) WithLabel(label string) *NNMultiaryGradientState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNMultiaryGradientState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // NNMultiaryGradientStateable is the interface implemented by [NNMultiaryGradientState], for mocking and DI.
 type NNMultiaryGradientStateable interface {
 	Unwrap() *raw.MPSNNMultiaryGradientState
+	WithReadCount(readCount uint) *NNMultiaryGradientState
+	WithLabel(label string) *NNMultiaryGradientState
 }
 
 var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)

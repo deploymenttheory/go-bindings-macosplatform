@@ -6,9 +6,13 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // RuleEditor wraps [raw.NSRuleEditor] with a fluent Go API.
@@ -106,6 +110,484 @@ func (x *RuleEditor) WithCriteriaKeyPath(criteriaKeyPath string) *RuleEditor {
 // WithDisplayValuesKeyPath sets the displayValuesKeyPath property and returns the receiver for chaining.
 func (x *RuleEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *RuleEditor {
 	x.inner.SetDisplayValuesKeyPath(foundation.NSStringStringWithUTF8String(displayValuesKeyPath))
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *RuleEditor) WithTarget(target objc.ID) *RuleEditor {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *RuleEditor) WithAction(action objc.SEL) *RuleEditor {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *RuleEditor) WithTag(tag int) *RuleEditor {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *RuleEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *RuleEditor {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *RuleEditor) WithContinuous(continuous bool) *RuleEditor {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RuleEditor) WithEnabled(enabled bool) *RuleEditor {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *RuleEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *RuleEditor) WithHighlighted(highlighted bool) *RuleEditor {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *RuleEditor) WithControlSize(controlSize raw.NSControlSize) *RuleEditor {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *RuleEditor) WithFormatter(formatter *foundation.NSFormatter) *RuleEditor {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithObjectValue(objectValue objc.ID) *RuleEditor {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithStringValue(stringValue string) *RuleEditor {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *RuleEditor {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithIntValue(intValue int) *RuleEditor {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithIntegerValue(integerValue int) *RuleEditor {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithFloatValue(floatValue float32) *RuleEditor {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithDoubleValue(doubleValue float64) *RuleEditor {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *RuleEditor) WithFont(font *raw.NSFont) *RuleEditor {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *RuleEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *RuleEditor) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *RuleEditor {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *RuleEditor) WithAlignment(alignment raw.NSTextAlignment) *RuleEditor {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *RuleEditor) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *RuleEditor {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *RuleEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *RuleEditor) WithCell(cell CellProvider) *RuleEditor {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *RuleEditor) WithSubviews(items ...ViewProvider) *RuleEditor {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *RuleEditor) WithHidden(hidden bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *RuleEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *RuleEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *RuleEditor) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RuleEditor {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *RuleEditor) WithFrame(frame corefoundation.CGRect) *RuleEditor {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *RuleEditor) WithFrameRotation(frameRotation float64) *RuleEditor {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *RuleEditor) WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *RuleEditor) WithBoundsRotation(boundsRotation float64) *RuleEditor {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *RuleEditor) WithBounds(bounds corefoundation.CGRect) *RuleEditor {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *RuleEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *RuleEditor) WithNeedsDisplay(needsDisplay bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *RuleEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *RuleEditor) WithWantsRestingTouches(wantsRestingTouches bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *RuleEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *RuleEditor) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *RuleEditor) WithWantsLayer(wantsLayer bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *RuleEditor) WithLayer(layer *quartzcore.CALayer) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *RuleEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *RuleEditor) WithNeedsLayout(needsLayout bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *RuleEditor) WithAlphaValue(alphaValue float64) *RuleEditor {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *RuleEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *RuleEditor) WithBackgroundFilters(items ...*coreimage.CIFilter) *RuleEditor {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *RuleEditor) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RuleEditor {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *RuleEditor) WithContentFilters(items ...*coreimage.CIFilter) *RuleEditor {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *RuleEditor) WithShadow(shadow *raw.NSShadow) *RuleEditor {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *RuleEditor) WithClipsToBounds(clipsToBounds bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *RuleEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *RuleEditor) WithToolTip(toolTip string) *RuleEditor {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *RuleEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RuleEditor {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *RuleEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *RuleEditor) WithNextKeyView(nextKeyView ViewProvider) *RuleEditor {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *RuleEditor) WithFocusRingType(focusRingType raw.NSFocusRingType) *RuleEditor {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *RuleEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *RuleEditor) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RuleEditor {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *RuleEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *RuleEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *RuleEditor) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RuleEditor {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *RuleEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *RuleEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *RuleEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *RuleEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *RuleEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *RuleEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RuleEditor {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *RuleEditor) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RuleEditor {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *RuleEditor) WithNextResponder(nextResponder ResponderProvider) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *RuleEditor) WithMenu(menu *raw.NSMenu) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *RuleEditor) WithUserActivity(userActivity *foundation.NSUserActivity) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *RuleEditor) WithTouchBar(touchBar *raw.NSTouchBar) *RuleEditor {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -362,6 +844,79 @@ type RuleEditorable interface {
 	WithSubrowsKeyPath(subrowsKeyPath string) *RuleEditor
 	WithCriteriaKeyPath(criteriaKeyPath string) *RuleEditor
 	WithDisplayValuesKeyPath(displayValuesKeyPath string) *RuleEditor
+	WithTarget(target objc.ID) *RuleEditor
+	WithAction(action objc.SEL) *RuleEditor
+	WithTag(tag int) *RuleEditor
+	WithIgnoresMultiClick(ignoresMultiClick bool) *RuleEditor
+	WithContinuous(continuous bool) *RuleEditor
+	WithEnabled(enabled bool) *RuleEditor
+	WithRefusesFirstResponder(refusesFirstResponder bool) *RuleEditor
+	WithHighlighted(highlighted bool) *RuleEditor
+	WithControlSize(controlSize raw.NSControlSize) *RuleEditor
+	WithFormatter(formatter *foundation.NSFormatter) *RuleEditor
+	WithObjectValue(objectValue objc.ID) *RuleEditor
+	WithStringValue(stringValue string) *RuleEditor
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *RuleEditor
+	WithIntValue(intValue int) *RuleEditor
+	WithIntegerValue(integerValue int) *RuleEditor
+	WithFloatValue(floatValue float32) *RuleEditor
+	WithDoubleValue(doubleValue float64) *RuleEditor
+	WithFont(font *raw.NSFont) *RuleEditor
+	WithUsesSingleLineMode(usesSingleLineMode bool) *RuleEditor
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *RuleEditor
+	WithAlignment(alignment raw.NSTextAlignment) *RuleEditor
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *RuleEditor
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *RuleEditor
+	WithCell(cell CellProvider) *RuleEditor
+	WithSubviews(items ...ViewProvider) *RuleEditor
+	WithHidden(hidden bool) *RuleEditor
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RuleEditor
+	WithAutoresizesSubviews(autoresizesSubviews bool) *RuleEditor
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *RuleEditor
+	WithFrame(frame corefoundation.CGRect) *RuleEditor
+	WithFrameRotation(frameRotation float64) *RuleEditor
+	WithFrameCenterRotation(frameCenterRotation float64) *RuleEditor
+	WithBoundsRotation(boundsRotation float64) *RuleEditor
+	WithBounds(bounds corefoundation.CGRect) *RuleEditor
+	WithCanDrawConcurrently(canDrawConcurrently bool) *RuleEditor
+	WithNeedsDisplay(needsDisplay bool) *RuleEditor
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RuleEditor
+	WithWantsRestingTouches(wantsRestingTouches bool) *RuleEditor
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *RuleEditor
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *RuleEditor
+	WithWantsLayer(wantsLayer bool) *RuleEditor
+	WithLayer(layer *quartzcore.CALayer) *RuleEditor
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RuleEditor
+	WithNeedsLayout(needsLayout bool) *RuleEditor
+	WithAlphaValue(alphaValue float64) *RuleEditor
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RuleEditor
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *RuleEditor
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *RuleEditor
+	WithContentFilters(items ...*coreimage.CIFilter) *RuleEditor
+	WithShadow(shadow *raw.NSShadow) *RuleEditor
+	WithClipsToBounds(clipsToBounds bool) *RuleEditor
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RuleEditor
+	WithToolTip(toolTip string) *RuleEditor
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *RuleEditor
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RuleEditor
+	WithNextKeyView(nextKeyView ViewProvider) *RuleEditor
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *RuleEditor
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *RuleEditor
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *RuleEditor
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RuleEditor
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RuleEditor
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *RuleEditor
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RuleEditor
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RuleEditor
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RuleEditor
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RuleEditor
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RuleEditor
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RuleEditor
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *RuleEditor
+	WithNextResponder(nextResponder ResponderProvider) *RuleEditor
+	WithMenu(menu *raw.NSMenu) *RuleEditor
+	WithUserActivity(userActivity *foundation.NSUserActivity) *RuleEditor
+	WithTouchBar(touchBar *raw.NSTouchBar) *RuleEditor
 	ReloadCriteria()
 	ReloadPredicate()
 	PredicateForRow(row int) *foundation.NSPredicate

@@ -36,6 +36,12 @@ func NewMutableCharacterSet() *MutableCharacterSet {
 	return &MutableCharacterSet{inner: raw.NSMutableCharacterSetFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MutableCharacterSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableCharacterSet {
+	x.inner.NSCharacterSet.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddCharactersInRange calls the underlying AddCharactersInRange.
 func (x *MutableCharacterSet) AddCharactersInRange(aRange raw.NSRange) {
 	x.inner.AddCharactersInRange(aRange)
@@ -78,6 +84,7 @@ func (x *MutableCharacterSet) asObject() *raw.NSObject { return &x.inner.NSChara
 // MutableCharacterSetable is the interface implemented by [MutableCharacterSet], for mocking and DI.
 type MutableCharacterSetable interface {
 	Unwrap() *raw.NSMutableCharacterSet
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableCharacterSet
 	AddCharactersInRange(aRange raw.NSRange)
 	RemoveCharactersInRange(aRange raw.NSRange)
 	AddCharactersInString(aString string)

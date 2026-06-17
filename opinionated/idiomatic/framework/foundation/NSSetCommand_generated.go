@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewSetCommand() *SetCommand {
 	return &SetCommand{inner: raw.NSSetCommandFromID(_id)}
 }
 
+// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
+func (x *SetCommand) WithDirectParameter(directParameter objc.ID) *SetCommand {
+	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+	return x
+}
+
+// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+func (x *SetCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand {
+	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithArguments sets the arguments property and returns the receiver for chaining.
+func (x *SetCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand {
+	x.inner.NSScriptCommand.SetArguments(arguments)
+	return x
+}
+
+// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+func (x *SetCommand) WithScriptErrorNumber(scriptErrorNumber int) *SetCommand {
+	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	return x
+}
+
+// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+func (x *SetCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *SetCommand {
+	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor)
+	return x
+}
+
+// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+func (x *SetCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *SetCommand {
+	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor)
+	return x
+}
+
+// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
+func (x *SetCommand) WithScriptErrorString(scriptErrorString string) *SetCommand {
+	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SetCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand {
+	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // KeySpecifier calls the underlying KeySpecifier.
 func (x *SetCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := x.inner.KeySpecifier()
@@ -51,6 +100,14 @@ func (x *SetCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.
 // SetCommandable is the interface implemented by [SetCommand], for mocking and DI.
 type SetCommandable interface {
 	Unwrap() *raw.NSSetCommand
+	WithDirectParameter(directParameter objc.ID) *SetCommand
+	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *SetCommand
+	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand
+	WithScriptErrorNumber(scriptErrorNumber int) *SetCommand
+	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *raw.NSAppleEventDescriptor) *SetCommand
+	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *raw.NSAppleEventDescriptor) *SetCommand
+	WithScriptErrorString(scriptErrorString string) *SetCommand
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SetCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

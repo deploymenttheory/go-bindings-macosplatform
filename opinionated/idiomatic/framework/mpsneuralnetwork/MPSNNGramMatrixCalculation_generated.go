@@ -7,6 +7,7 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -58,6 +59,54 @@ func (x *NNGramMatrixCalculation) WithAlpha(alpha float32) *NNGramMatrixCalculat
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithPadding(padding raw.MPSNNPadding) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculation) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculation {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *NNGramMatrixCalculation) Alpha() float32 {
 	return x.inner.Alpha()
@@ -74,6 +123,14 @@ func (x *NNGramMatrixCalculation) asCNNKernel() *raw.MPSCNNKernel { return &x.in
 type NNGramMatrixCalculationable interface {
 	Unwrap() *raw.MPSNNGramMatrixCalculation
 	WithAlpha(alpha float32) *NNGramMatrixCalculation
+	WithOffset(offset mpscore.MPSOffset) *NNGramMatrixCalculation
+	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculation
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculation
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNGramMatrixCalculation
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNGramMatrixCalculation
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculation
+	WithPadding(padding raw.MPSNNPadding) *NNGramMatrixCalculation
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculation
 	Alpha() float32
 	SetAlpha(alpha float32)
 }

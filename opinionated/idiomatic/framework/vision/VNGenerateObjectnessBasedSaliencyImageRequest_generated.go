@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,30 @@ func NewGenerateObjectnessBasedSaliencyImageRequest() *GenerateObjectnessBasedSa
 	return &GenerateObjectnessBasedSaliencyImageRequest{inner: raw.VNGenerateObjectnessBasedSaliencyImageRequestFromID(_id)}
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *GenerateObjectnessBasedSaliencyImageRequest) WithRevision(revision uint) *GenerateObjectnessBasedSaliencyImageRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *GenerateObjectnessBasedSaliencyImageRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNImageBasedRequest }
 
 func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBasedRequest.VNRequest }
@@ -42,6 +67,10 @@ func (x *GenerateObjectnessBasedSaliencyImageRequest) asRequest() *raw.VNRequest
 // GenerateObjectnessBasedSaliencyImageRequestable is the interface implemented by [GenerateObjectnessBasedSaliencyImageRequest], for mocking and DI.
 type GenerateObjectnessBasedSaliencyImageRequestable interface {
 	Unwrap() *raw.VNGenerateObjectnessBasedSaliencyImageRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateObjectnessBasedSaliencyImageRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateObjectnessBasedSaliencyImageRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *GenerateObjectnessBasedSaliencyImageRequest
+	WithRevision(revision uint) *GenerateObjectnessBasedSaliencyImageRequest
 }
 
 var _ GenerateObjectnessBasedSaliencyImageRequestable = (*GenerateObjectnessBasedSaliencyImageRequest)(nil)

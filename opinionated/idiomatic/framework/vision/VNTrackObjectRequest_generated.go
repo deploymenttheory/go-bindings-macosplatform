@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -44,6 +45,48 @@ func NewTrackObjectRequestWithDetectedObjectObservationCompletionHandler(observa
 	return &TrackObjectRequest{inner: raw.VNTrackObjectRequestFromID(_id)}
 }
 
+// WithInputObservation sets the inputObservation property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.SetInputObservation(inputObservation.asDetectedObjectObservation())
+	return x
+}
+
+// WithTrackingLevel sets the trackingLevel property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.SetTrackingLevel(trackingLevel)
+	return x
+}
+
+// WithLastFrame sets the lastFrame property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithLastFrame(lastFrame bool) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.SetLastFrame(lastFrame)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *TrackObjectRequest) WithRevision(revision uint) *TrackObjectRequest {
+	x.inner.VNTrackingRequest.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 func (x *TrackObjectRequest) asTrackingRequest() *raw.VNTrackingRequest { return &x.inner.VNTrackingRequest }
 
 func (x *TrackObjectRequest) asImageBasedRequest() *raw.VNImageBasedRequest { return &x.inner.VNTrackingRequest.VNImageBasedRequest }
@@ -53,6 +96,13 @@ func (x *TrackObjectRequest) asRequest() *raw.VNRequest { return &x.inner.VNTrac
 // TrackObjectRequestable is the interface implemented by [TrackObjectRequest], for mocking and DI.
 type TrackObjectRequestable interface {
 	Unwrap() *raw.VNTrackObjectRequest
+	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackObjectRequest
+	WithTrackingLevel(trackingLevel raw.VNRequestTrackingLevel) *TrackObjectRequest
+	WithLastFrame(lastFrame bool) *TrackObjectRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackObjectRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackObjectRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *TrackObjectRequest
+	WithRevision(revision uint) *TrackObjectRequest
 }
 
 var _ TrackObjectRequestable = (*TrackObjectRequest)(nil)

@@ -64,6 +64,18 @@ func (x *ImageGuidedFilter) WithReconstructOffset(reconstructOffset float32) *Im
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageGuidedFilter) WithOptions(options mpscore.MPSKernelOptions) *ImageGuidedFilter {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageGuidedFilter) WithLabel(label string) *ImageGuidedFilter {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture calls the underlying EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture.
 func (x *ImageGuidedFilter) EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTexture metal.MTLTexture) {
 	x.inner.EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer, sourceTexture, guidanceTexture, weightsTexture, destinationCoefficientsTexture)
@@ -127,6 +139,8 @@ type ImageGuidedFilterable interface {
 	WithEpsilon(epsilon float32) *ImageGuidedFilter
 	WithReconstructScale(reconstructScale float32) *ImageGuidedFilter
 	WithReconstructOffset(reconstructOffset float32) *ImageGuidedFilter
+	WithOptions(options mpscore.MPSKernelOptions) *ImageGuidedFilter
+	WithLabel(label string) *ImageGuidedFilter
 	EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTexture metal.MTLTexture)
 	EncodeReconstructionToCommandBufferGuidanceTextureCoefficientsTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, guidanceTexture metal.MTLTexture, coefficientsTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
 	EncodeRegressionToCommandBufferSourceTextureGuidanceTextureWeightsTextureDestinationCoefficientsTextureADestinationCoefficientsTextureB(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, guidanceTexture metal.MTLTexture, weightsTexture metal.MTLTexture, destinationCoefficientsTextureA metal.MTLTexture, destinationCoefficientsTextureB metal.MTLTexture)

@@ -36,6 +36,12 @@ func NewGarbageCollector() *GarbageCollector {
 	return &GarbageCollector{inner: raw.NSGarbageCollectorFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *GarbageCollector) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *GarbageCollector {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // IsCollecting calls the underlying IsCollecting.
 func (x *GarbageCollector) IsCollecting() bool {
 	return x.inner.IsCollecting()
@@ -86,6 +92,7 @@ func (x *GarbageCollector) asObject() *raw.NSObject { return &x.inner.NSObject }
 // GarbageCollectorable is the interface implemented by [GarbageCollector], for mocking and DI.
 type GarbageCollectorable interface {
 	Unwrap() *raw.NSGarbageCollector
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *GarbageCollector
 	IsCollecting() bool
 	Disable()
 	Enable()

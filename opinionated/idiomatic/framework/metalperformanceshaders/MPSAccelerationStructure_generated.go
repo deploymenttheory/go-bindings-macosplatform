@@ -68,6 +68,18 @@ func (x *AccelerationStructure) WithUsage(usage mpsrayintersector.MPSAcceleratio
 	return x
 }
 
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *AccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *AccelerationStructure {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *AccelerationStructure) WithLabel(label string) *AccelerationStructure {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Rebuild calls the underlying Rebuild.
 func (x *AccelerationStructure) Rebuild() {
 	x.inner.Rebuild()
@@ -137,6 +149,8 @@ func (x *AccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.
 type AccelerationStructureable interface {
 	Unwrap() *raw.MPSAccelerationStructure
 	WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *AccelerationStructure
+	WithOptions(options mpscore.MPSKernelOptions) *AccelerationStructure
+	WithLabel(label string) *AccelerationStructure
 	Rebuild()
 	RebuildWithCompletionHandler(completionHandler func(*mpsrayintersector.MPSAccelerationStructure))
 	EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer)

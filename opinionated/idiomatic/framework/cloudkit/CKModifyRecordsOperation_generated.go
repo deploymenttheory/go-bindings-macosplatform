@@ -126,6 +126,60 @@ func (x *ModifyRecordsOperation) WithModifyRecordsCompletionBlock(modifyRecordsC
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithDatabase(database *raw.CKDatabase) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithGroup(group *raw.CKOperationGroup) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithContainer(container *raw.CKContainer) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithLongLived(longLived bool) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *ModifyRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // RecordsToSave returns the collection as a Go slice.
 func (x *ModifyRecordsOperation) RecordsToSave() []*raw.CKRecord {
 	arr := x.inner.RecordsToSave()
@@ -297,6 +351,15 @@ type ModifyRecordsOperationable interface {
 	WithPerRecordSaveBlock(perRecordSaveBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *ModifyRecordsOperation
 	WithPerRecordDeleteBlock(perRecordDeleteBlock func(*raw.CKRecordID, unsafe.Pointer)) *ModifyRecordsOperation
 	WithModifyRecordsCompletionBlock(modifyRecordsCompletionBlock func(*foundation.NSArray[*raw.CKRecord], *foundation.NSArray[*raw.CKRecordID], unsafe.Pointer)) *ModifyRecordsOperation
+	WithDatabase(database *raw.CKDatabase) *ModifyRecordsOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordsOperation
+	WithGroup(group *raw.CKOperationGroup) *ModifyRecordsOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordsOperation
+	WithContainer(container *raw.CKContainer) *ModifyRecordsOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordsOperation
+	WithLongLived(longLived bool) *ModifyRecordsOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordsOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordsOperation
 	RecordsToSave() []*raw.CKRecord
 	SetRecordsToSave(recordsToSave *foundation.NSArray[*raw.CKRecord])
 	RecordIDsToDelete() []*raw.CKRecordID

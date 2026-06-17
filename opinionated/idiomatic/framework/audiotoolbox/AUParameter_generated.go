@@ -44,6 +44,36 @@ func (x *Parameter) WithValue(value float32) *Parameter {
 	return x
 }
 
+// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
+func (x *Parameter) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *Parameter {
+	x.inner.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
+	return x
+}
+
+// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
+func (x *Parameter) WithImplementorValueProvider(implementorValueProvider objc.Block) *Parameter {
+	x.inner.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
+	return x
+}
+
+// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
+func (x *Parameter) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *Parameter {
+	x.inner.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
+	return x
+}
+
+// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
+func (x *Parameter) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *Parameter {
+	x.inner.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
+	return x
+}
+
+// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
+func (x *Parameter) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter {
+	x.inner.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
+	return x
+}
+
 // SetValueOriginator calls the underlying SetValueOriginator.
 func (x *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
 	x.inner.SetValueOriginator(value, originator)
@@ -145,6 +175,11 @@ func (x *Parameter) asParameterNode() *raw.AUParameterNode { return &x.inner.AUP
 type Parameterable interface {
 	Unwrap() *raw.AUParameter
 	WithValue(value float32) *Parameter
+	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *Parameter
+	WithImplementorValueProvider(implementorValueProvider objc.Block) *Parameter
+	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *Parameter
+	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *Parameter
+	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter
 	SetValueOriginator(value float32, originator unsafe.Pointer)
 	SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64)
 	SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType raw.AUParameterAutomationEventType)

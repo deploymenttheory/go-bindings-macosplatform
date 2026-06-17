@@ -46,6 +46,12 @@ func NewArrayMultiaryKernelWithCoderDevice(coder *foundation.NSCoder, device met
 	return &ArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayMultiaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryKernel {
+	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // EncodeToCommandBufferSourceArrays calls the underlying EncodeToCommandBufferSourceArrays.
 func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
 	return x.inner.EncodeToCommandBufferSourceArrays(cmdBuf, sourceArrays)
@@ -78,6 +84,7 @@ func (x *ArrayMultiaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase 
 // ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
 type ArrayMultiaryKernelable interface {
 	Unwrap() *raw.MPSNDArrayMultiaryKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryKernel
 	EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
 	EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray

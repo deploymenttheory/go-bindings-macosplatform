@@ -35,6 +35,12 @@ func NewURLSessionTaskTransactionMetrics() *URLSessionTaskTransactionMetrics {
 	return &URLSessionTaskTransactionMetrics{inner: raw.NSURLSessionTaskTransactionMetricsFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionTaskTransactionMetrics) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskTransactionMetrics {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Request calls the underlying Request.
 func (x *URLSessionTaskTransactionMetrics) Request() *URLRequest {
 	_r := x.inner.Request()
@@ -290,6 +296,7 @@ func (x *URLSessionTaskTransactionMetrics) asObject() *raw.NSObject { return &x.
 // URLSessionTaskTransactionMetricsable is the interface implemented by [URLSessionTaskTransactionMetrics], for mocking and DI.
 type URLSessionTaskTransactionMetricsable interface {
 	Unwrap() *raw.NSURLSessionTaskTransactionMetrics
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionTaskTransactionMetrics
 	Request() *URLRequest
 	Response() *URLResponse
 	FetchStartDate() *Date

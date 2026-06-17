@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +37,24 @@ func NewImageErode() *ImageErode {
 	return &ImageErode{inner: raw.MPSImageErodeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageErode) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode {
+	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 func (x *ImageErode) asImageDilate() *raw.MPSImageDilate { return &x.inner.MPSImageDilate }
 
 func (x *ImageErode) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.inner.MPSImageDilate.MPSUnaryImageKernel }
@@ -42,6 +62,9 @@ func (x *ImageErode) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return &x.i
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
 	Unwrap() *raw.MPSImageErode
+	WithOffset(offset mpscore.MPSOffset) *ImageErode
+	WithClipRect(clipRect metal.MTLRegion) *ImageErode
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)

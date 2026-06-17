@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,67 @@ func NewMTRTestClusterClusterSimpleStruct() *MTRTestClusterClusterSimpleStruct {
 	return &MTRTestClusterClusterSimpleStruct{inner: raw.MTRTestClusterClusterSimpleStructFromID(_id)}
 }
 
+// WithA sets the a property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithA(a *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetA(a)
+	return x
+}
+
+// WithB sets the b property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithB(b *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetB(b)
+	return x
+}
+
+// WithC sets the c property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithC(c *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetC(c)
+	return x
+}
+
+// WithD sets the d property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithD(d *foundation.NSData) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetD(d)
+	return x
+}
+
+// WithE sets the e property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithE(e string) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetE(foundation.NSStringStringWithUTF8String(e))
+	return x
+}
+
+// WithF sets the f property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithF(f *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetF(f)
+	return x
+}
+
+// WithG sets the g property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithG(g *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetG(g)
+	return x
+}
+
+// WithH sets the h property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStruct) WithH(h *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct {
+	x.inner.MTRUnitTestingClusterSimpleStruct.SetH(h)
+	return x
+}
+
 func (x *MTRTestClusterClusterSimpleStruct) asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct { return &x.inner.MTRUnitTestingClusterSimpleStruct }
 
 // MTRTestClusterClusterSimpleStructable is the interface implemented by [MTRTestClusterClusterSimpleStruct], for mocking and DI.
 type MTRTestClusterClusterSimpleStructable interface {
 	Unwrap() *raw.MTRTestClusterClusterSimpleStruct
+	WithA(a *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
+	WithB(b *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
+	WithC(c *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
+	WithD(d *foundation.NSData) *MTRTestClusterClusterSimpleStruct
+	WithE(e string) *MTRTestClusterClusterSimpleStruct
+	WithF(f *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
+	WithG(g *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
+	WithH(h *foundation.NSNumber) *MTRTestClusterClusterSimpleStruct
 }
 
 var _ MTRTestClusterClusterSimpleStructable = (*MTRTestClusterClusterSimpleStruct)(nil)

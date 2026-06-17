@@ -43,6 +43,12 @@ func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
 	return &UserScriptTask{inner: raw.NSUserScriptTaskFromID(_id)}, nil
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserScriptTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserScriptTask {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ExecuteWithCompletionHandler calls the underlying ExecuteWithCompletionHandler.
 func (x *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
 	x.inner.ExecuteWithCompletionHandler(handler)
@@ -64,6 +70,7 @@ func (x *UserScriptTask) asObject() *raw.NSObject { return &x.inner.NSObject }
 // UserScriptTaskable is the interface implemented by [UserScriptTask], for mocking and DI.
 type UserScriptTaskable interface {
 	Unwrap() *raw.NSUserScriptTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserScriptTask
 	ExecuteWithCompletionHandler(handler func(unsafe.Pointer))
 	ScriptURL() *URL
 }

@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRTestClusterClusterTestListInt8UArgumentRequestParams() *MTRTestCluste
 	return &MTRTestClusterClusterTestListInt8UArgumentRequestParams{inner: raw.MTRTestClusterClusterTestListInt8UArgumentRequestParamsFromID(_id)}
 }
 
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UArgumentRequestParams {
+	x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams { return &x.inner.MTRUnitTestingClusterTestListInt8UArgumentRequestParams }
 
 // MTRTestClusterClusterTestListInt8UArgumentRequestParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UArgumentRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestListInt8UArgumentRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestListInt8UArgumentRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UArgumentRequestParams
 }
 
 var _ MTRTestClusterClusterTestListInt8UArgumentRequestParamsable = (*MTRTestClusterClusterTestListInt8UArgumentRequestParams)(nil)

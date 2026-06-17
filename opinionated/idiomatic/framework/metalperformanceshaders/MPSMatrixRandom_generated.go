@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -47,6 +48,18 @@ func (x *MatrixRandom) WithBatchStart(batchStart uint) *MatrixRandom {
 // WithBatchSize sets the batchSize property and returns the receiver for chaining.
 func (x *MatrixRandom) WithBatchSize(batchSize uint) *MatrixRandom {
 	x.inner.SetBatchSize(batchSize)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *MatrixRandom) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandom {
+	x.inner.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatrixRandom) WithLabel(label string) *MatrixRandom {
+	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
 	return x
 }
 
@@ -97,6 +110,8 @@ type MatrixRandomable interface {
 	Unwrap() *raw.MPSMatrixRandom
 	WithBatchStart(batchStart uint) *MatrixRandom
 	WithBatchSize(batchSize uint) *MatrixRandom
+	WithOptions(options mpscore.MPSKernelOptions) *MatrixRandom
+	WithLabel(label string) *MatrixRandom
 	EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector)
 	EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix)
 	DestinationDataType() mpscore.MPSDataType

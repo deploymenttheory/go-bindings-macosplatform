@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -40,6 +41,24 @@ func NewNDArrayIdentityWithDevice(device metal.MTLDevice) *NDArrayIdentity {
 	return &NDArrayIdentity{inner: raw.MPSNDArrayIdentityFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayIdentity) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayIdentity {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayIdentity) WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayIdentity) WithLabel(label string) *NDArrayIdentity {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // ReshapeWithCommandBufferSourceArrayShapeDestinationArray calls the underlying ReshapeWithCommandBufferSourceArrayShapeDestinationArray.
 func (x *NDArrayIdentity) ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
 	return x.inner.ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf, sourceArray, shape, destinationArray)
@@ -71,6 +90,9 @@ func (x *NDArrayIdentity) asKernel() *mpscore.MPSKernel { return &x.inner.MPSNDA
 // NDArrayIdentityable is the interface implemented by [NDArrayIdentity], for mocking and DI.
 type NDArrayIdentityable interface {
 	Unwrap() *raw.MPSNDArrayIdentity
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayIdentity
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayIdentity
+	WithLabel(label string) *NDArrayIdentity
 	ReshapeWithCommandBufferSourceArrayShapeDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	ReshapeWithCommandBufferSourceArrayDimensionCountDimensionSizesDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, numberOfDimensions uint, dimensionSizes *uint, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	ReshapeWithCommandEncoderCommandBufferSourceArrayShapeDestinationArray(encoder metal.MTLComputeCommandEncoder, cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, shape unsafe.Pointer, destinationArray *mpscore.MPSNDArray) *mpscore.MPSNDArray

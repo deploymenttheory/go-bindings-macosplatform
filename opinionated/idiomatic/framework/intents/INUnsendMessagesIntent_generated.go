@@ -38,6 +38,18 @@ func NewUnsendMessagesIntentWithMessageIdentifiers(messageIdentifiers *foundatio
 	return &UnsendMessagesIntent{inner: raw.INUnsendMessagesIntentFromID(_id)}
 }
 
+// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+func (x *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent {
+	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	return x
+}
+
+// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+func (x *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
+	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	return x
+}
+
 // MessageIdentifiers returns the collection as a Go slice.
 func (x *UnsendMessagesIntent) MessageIdentifiers() []string {
 	arr := x.inner.MessageIdentifiers()
@@ -54,6 +66,8 @@ func (x *UnsendMessagesIntent) asIntent() *raw.INIntent { return &x.inner.INInte
 // UnsendMessagesIntentable is the interface implemented by [UnsendMessagesIntent], for mocking and DI.
 type UnsendMessagesIntentable interface {
 	Unwrap() *raw.INUnsendMessagesIntent
+	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *UnsendMessagesIntent
+	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent
 	MessageIdentifiers() []string
 }
 

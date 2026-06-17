@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,18 @@ func NewNNLanczosScaleNode() *NNLanczosScaleNode {
 	return &NNLanczosScaleNode{inner: raw.MPSNNLanczosScaleNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNLanczosScaleNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNLanczosScaleNode {
+	x.inner.MPSNNScaleNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNLanczosScaleNode) WithLabel(label string) *NNLanczosScaleNode {
+	x.inner.MPSNNScaleNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNLanczosScaleNode) asNNScaleNode() *mpsneuralnetwork.MPSNNScaleNode { return &x.inner.MPSNNScaleNode }
 
 func (x *NNLanczosScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNScaleNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *NNLanczosScaleNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode 
 // NNLanczosScaleNodeable is the interface implemented by [NNLanczosScaleNode], for mocking and DI.
 type NNLanczosScaleNodeable interface {
 	Unwrap() *raw.MPSNNLanczosScaleNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNLanczosScaleNode
+	WithLabel(label string) *NNLanczosScaleNode
 }
 
 var _ NNLanczosScaleNodeable = (*NNLanczosScaleNode)(nil)

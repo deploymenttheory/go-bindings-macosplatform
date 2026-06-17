@@ -47,6 +47,36 @@ func NewImageHistogramSpecificationWithCoderDevice(aDecoder *foundation.NSCoder,
 	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithOptions(options mpscore.MPSKernelOptions) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageHistogramSpecification) WithLabel(label string) *ImageHistogramSpecification {
+	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset.
 func (x *ImageHistogramSpecification) EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint) {
 	x.inner.EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer, source, sourceHistogram, sourceHistogramOffset, desiredHistogram, desiredHistogramOffset)
@@ -64,6 +94,11 @@ func (x *ImageHistogramSpecification) asKernel() *mpscore.MPSKernel { return &x.
 // ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
 type ImageHistogramSpecificationable interface {
 	Unwrap() *raw.MPSImageHistogramSpecification
+	WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification
+	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification
+	WithOptions(options mpscore.MPSKernelOptions) *ImageHistogramSpecification
+	WithLabel(label string) *ImageHistogramSpecification
 	EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint)
 	HistogramInfo() mpsimage.MPSImageHistogramInfo
 }

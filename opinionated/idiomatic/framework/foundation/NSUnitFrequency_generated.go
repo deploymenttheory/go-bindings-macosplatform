@@ -35,6 +35,12 @@ func NewUnitFrequency() *UnitFrequency {
 	return &UnitFrequency{inner: raw.NSUnitFrequencyFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UnitFrequency) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFrequency {
+	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *UnitFrequency) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
 
 func (x *UnitFrequency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
@@ -44,6 +50,7 @@ func (x *UnitFrequency) asObject() *raw.NSObject { return &x.inner.NSDimension.N
 // UnitFrequencyable is the interface implemented by [UnitFrequency], for mocking and DI.
 type UnitFrequencyable interface {
 	Unwrap() *raw.NSUnitFrequency
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFrequency
 }
 
 var _ UnitFrequencyable = (*UnitFrequency)(nil)

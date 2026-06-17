@@ -37,6 +37,18 @@ func NewLayerNormalizationLayer() *LayerNormalizationLayer {
 	return &LayerNormalizationLayer{inner: raw.MLCLayerNormalizationLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *LayerNormalizationLayer) WithLabel(label string) *LayerNormalizationLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *LayerNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // NormalizedShape returns the collection as a Go slice.
 func (x *LayerNormalizationLayer) NormalizedShape() []*foundation.NSNumber {
 	arr := x.inner.NormalizedShape()
@@ -94,6 +106,8 @@ func (x *LayerNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCL
 // LayerNormalizationLayerable is the interface implemented by [LayerNormalizationLayer], for mocking and DI.
 type LayerNormalizationLayerable interface {
 	Unwrap() *raw.MLCLayerNormalizationLayer
+	WithLabel(label string) *LayerNormalizationLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LayerNormalizationLayer
 	NormalizedShape() []*foundation.NSNumber
 	Beta() *Tensor
 	Gamma() *Tensor

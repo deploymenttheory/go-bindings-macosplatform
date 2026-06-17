@@ -47,6 +47,54 @@ func NewCNNYOLOLossWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MT
 	return &CNNYOLOLoss{inner: raw.MPSCNNYOLOLossFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithOffset(offset mpscore.MPSOffset) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithClipRect(clipRect metal.MTLRegion) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithPadding(padding raw.MPSNNPadding) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNYOLOLoss) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNYOLOLoss {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // EncodeToCommandBufferSourceImageLabelsDestinationImage calls the underlying EncodeToCommandBufferSourceImageLabelsDestinationImage.
 func (x *CNNYOLOLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage) {
 	x.inner.EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer, sourceImage, labels, destinationImage)
@@ -163,6 +211,14 @@ func (x *CNNYOLOLoss) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKe
 // CNNYOLOLossable is the interface implemented by [CNNYOLOLoss], for mocking and DI.
 type CNNYOLOLossable interface {
 	Unwrap() *raw.MPSCNNYOLOLoss
+	WithOffset(offset mpscore.MPSOffset) *CNNYOLOLoss
+	WithClipRect(clipRect metal.MTLRegion) *CNNYOLOLoss
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNYOLOLoss
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNYOLOLoss
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNYOLOLoss
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNYOLOLoss
+	WithPadding(padding raw.MPSNNPadding) *CNNYOLOLoss
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNYOLOLoss
 	EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels, destinationImage *mpscore.MPSImage)
 	EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *raw.MPSCNNLossLabels) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer)

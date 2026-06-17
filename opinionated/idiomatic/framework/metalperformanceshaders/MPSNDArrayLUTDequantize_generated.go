@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -39,6 +40,24 @@ func NewNDArrayLUTDequantizeWithDevice(device metal.MTLDevice) *NDArrayLUTDequan
 	return &NDArrayLUTDequantize{inner: raw.MPSNDArrayLUTDequantizeFromID(_id)}
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayLUTDequantize) WithOptions(options mpscore.MPSKernelOptions) *NDArrayLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayLUTDequantize) WithLabel(label string) *NDArrayLUTDequantize {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NDArrayLUTDequantize) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel { return &x.inner.MPSNDArrayMultiaryKernel }
 
 func (x *NDArrayLUTDequantize) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase { return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase }
@@ -48,6 +67,9 @@ func (x *NDArrayLUTDequantize) asKernel() *mpscore.MPSKernel { return &x.inner.M
 // NDArrayLUTDequantizeable is the interface implemented by [NDArrayLUTDequantize], for mocking and DI.
 type NDArrayLUTDequantizeable interface {
 	Unwrap() *raw.MPSNDArrayLUTDequantize
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayLUTDequantize
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayLUTDequantize
+	WithLabel(label string) *NDArrayLUTDequantize
 }
 
 var _ NDArrayLUTDequantizeable = (*NDArrayLUTDequantize)(nil)

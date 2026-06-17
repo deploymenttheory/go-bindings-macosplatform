@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -50,6 +51,30 @@ func (x *CoreMLRequest) WithImageCropAndScaleOption(imageCropAndScaleOption raw.
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *CoreMLRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *CoreMLRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *CoreMLRequest) WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *CoreMLRequest) WithRevision(revision uint) *CoreMLRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // Model calls the underlying Model.
 func (x *CoreMLRequest) Model() *CoreMLModel {
 	_r := x.inner.Model()
@@ -77,6 +102,10 @@ func (x *CoreMLRequest) asRequest() *raw.VNRequest { return &x.inner.VNImageBase
 type CoreMLRequestable interface {
 	Unwrap() *raw.VNCoreMLRequest
 	WithImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption) *CoreMLRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *CoreMLRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *CoreMLRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *CoreMLRequest
+	WithRevision(revision uint) *CoreMLRequest
 	Model() *CoreMLModel
 	ImageCropAndScaleOption() raw.VNImageCropAndScaleOption
 	SetImageCropAndScaleOption(imageCropAndScaleOption raw.VNImageCropAndScaleOption)

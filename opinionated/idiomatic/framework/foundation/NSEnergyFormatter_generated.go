@@ -53,6 +53,12 @@ func (x *EnergyFormatter) WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFor
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *EnergyFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *EnergyFormatter {
+	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // StringFromValueUnit calls the underlying StringFromValueUnit.
 func (x *EnergyFormatter) StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String {
 	_r := x.inner.StringFromValueUnit(value, unit)
@@ -133,6 +139,7 @@ type EnergyFormatterable interface {
 	WithNumberFormatter(numberFormatter *raw.NSNumberFormatter) *EnergyFormatter
 	WithUnitStyle(unitStyle raw.NSFormattingUnitStyle) *EnergyFormatter
 	WithForFoodEnergyUse(forFoodEnergyUse bool) *EnergyFormatter
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *EnergyFormatter
 	StringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String
 	StringFromJoules(numberInJoules float64) *String
 	UnitStringFromValueUnit(value float64, unit raw.NSEnergyFormatterUnit) *String

@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,54 @@ func NewCNNNeuronSigmoidWithDevice(device metal.MTLDevice) *CNNNeuronSigmoid {
 	return &CNNNeuronSigmoid{inner: raw.MPSCNNNeuronSigmoidFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithOffset(offset mpscore.MPSOffset) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithPadding(padding raw.MPSNNPadding) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoid) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronSigmoid {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNNeuronSigmoid) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronSigmoid) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -44,6 +93,14 @@ func (x *CNNNeuronSigmoid) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPS
 // CNNNeuronSigmoidable is the interface implemented by [CNNNeuronSigmoid], for mocking and DI.
 type CNNNeuronSigmoidable interface {
 	Unwrap() *raw.MPSCNNNeuronSigmoid
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronSigmoid
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSigmoid
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronSigmoid
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronSigmoid
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronSigmoid
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronSigmoid
+	WithPadding(padding raw.MPSNNPadding) *CNNNeuronSigmoid
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronSigmoid
 }
 
 var _ CNNNeuronSigmoidable = (*CNNNeuronSigmoid)(nil)

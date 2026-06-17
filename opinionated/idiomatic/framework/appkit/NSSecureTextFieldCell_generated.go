@@ -6,7 +6,9 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SecureTextFieldCell wraps [raw.NSSecureTextFieldCell] with a fluent Go API.
@@ -41,6 +43,328 @@ func (x *SecureTextFieldCell) WithEchosBullets(echosBullets bool) *SecureTextFie
 	return x
 }
 
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetDrawsBackground(drawsBackground)
+	return x
+}
+
+// WithTextColor sets the textColor property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithTextColor(textColor *raw.NSColor) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetTextColor(textColor)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithPlaceholderString(placeholderString string) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	return x
+}
+
+// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.SetPlaceholderAttributedString(placeholderAttributedString)
+	return x
+}
+
+// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
+func (x *SecureTextFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *SecureTextFieldCell {
+	if len(items) == 0 {
+		x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSTextFieldCell.SetAllowedInputSourceLocales(_arr)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithControlView(controlView ViewProvider) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithType(type_ raw.NSCellType) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithState(state int) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithTarget(target objc.ID) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAction(action objc.SEL) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithTag(tag int) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithTitle(title string) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithEnabled(enabled bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithContinuous(continuous bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithEditable(editable bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithSelectable(selectable bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBordered(bordered bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBezeled(bezeled bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithScrollable(scrollable bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithHighlighted(highlighted bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAlignment(alignment raw.NSTextAlignment) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithWraps(wraps bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithFont(font *raw.NSFont) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithFormatter(formatter *foundation.NSFormatter) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithObjectValue(objectValue objc.ID) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithStringValue(stringValue string) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithIntValue(intValue int) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithFloatValue(floatValue float32) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithDoubleValue(doubleValue float64) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithIntegerValue(integerValue int) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithImage(image *raw.NSImage) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithControlSize(controlSize raw.NSControlSize) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithRepresentedObject(representedObject objc.ID) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithMenu(menu *raw.NSMenu) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *SecureTextFieldCell) WithControlTint(controlTint raw.NSControlTint) *SecureTextFieldCell {
+	x.inner.NSTextFieldCell.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // EchosBullets calls the underlying EchosBullets.
 func (x *SecureTextFieldCell) EchosBullets() bool {
 	return x.inner.EchosBullets()
@@ -61,6 +385,58 @@ func (x *SecureTextFieldCell) asCell() *raw.NSCell { return &x.inner.NSTextField
 type SecureTextFieldCellable interface {
 	Unwrap() *raw.NSSecureTextFieldCell
 	WithEchosBullets(echosBullets bool) *SecureTextFieldCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *SecureTextFieldCell
+	WithDrawsBackground(drawsBackground bool) *SecureTextFieldCell
+	WithTextColor(textColor *raw.NSColor) *SecureTextFieldCell
+	WithBezelStyle(bezelStyle raw.NSTextFieldBezelStyle) *SecureTextFieldCell
+	WithPlaceholderString(placeholderString string) *SecureTextFieldCell
+	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SecureTextFieldCell
+	WithAllowedInputSourceLocales(items ...*foundation.NSString) *SecureTextFieldCell
+	WithControlView(controlView ViewProvider) *SecureTextFieldCell
+	WithType(type_ raw.NSCellType) *SecureTextFieldCell
+	WithState(state int) *SecureTextFieldCell
+	WithTarget(target objc.ID) *SecureTextFieldCell
+	WithAction(action objc.SEL) *SecureTextFieldCell
+	WithTag(tag int) *SecureTextFieldCell
+	WithTitle(title string) *SecureTextFieldCell
+	WithEnabled(enabled bool) *SecureTextFieldCell
+	WithContinuous(continuous bool) *SecureTextFieldCell
+	WithEditable(editable bool) *SecureTextFieldCell
+	WithSelectable(selectable bool) *SecureTextFieldCell
+	WithBordered(bordered bool) *SecureTextFieldCell
+	WithBezeled(bezeled bool) *SecureTextFieldCell
+	WithScrollable(scrollable bool) *SecureTextFieldCell
+	WithHighlighted(highlighted bool) *SecureTextFieldCell
+	WithAlignment(alignment raw.NSTextAlignment) *SecureTextFieldCell
+	WithWraps(wraps bool) *SecureTextFieldCell
+	WithFont(font *raw.NSFont) *SecureTextFieldCell
+	WithFormatter(formatter *foundation.NSFormatter) *SecureTextFieldCell
+	WithObjectValue(objectValue objc.ID) *SecureTextFieldCell
+	WithStringValue(stringValue string) *SecureTextFieldCell
+	WithIntValue(intValue int) *SecureTextFieldCell
+	WithFloatValue(floatValue float32) *SecureTextFieldCell
+	WithDoubleValue(doubleValue float64) *SecureTextFieldCell
+	WithIntegerValue(integerValue int) *SecureTextFieldCell
+	WithImage(image *raw.NSImage) *SecureTextFieldCell
+	WithControlSize(controlSize raw.NSControlSize) *SecureTextFieldCell
+	WithRepresentedObject(representedObject objc.ID) *SecureTextFieldCell
+	WithMenu(menu *raw.NSMenu) *SecureTextFieldCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *SecureTextFieldCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *SecureTextFieldCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *SecureTextFieldCell
+	WithAllowsUndo(allowsUndo bool) *SecureTextFieldCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *SecureTextFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *SecureTextFieldCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *SecureTextFieldCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *SecureTextFieldCell
+	WithShowsFirstResponder(showsFirstResponder bool) *SecureTextFieldCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *SecureTextFieldCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SecureTextFieldCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SecureTextFieldCell
+	WithImportsGraphics(importsGraphics bool) *SecureTextFieldCell
+	WithAllowsMixedState(allowsMixedState bool) *SecureTextFieldCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *SecureTextFieldCell
+	WithControlTint(controlTint raw.NSControlTint) *SecureTextFieldCell
 	EchosBullets() bool
 	SetEchosBullets(echosBullets bool)
 }

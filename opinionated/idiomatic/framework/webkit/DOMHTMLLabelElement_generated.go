@@ -43,6 +43,108 @@ func (x *DOMHTMLLabelElement) WithHtmlFor(htmlFor string) *DOMHTMLLabelElement {
 	return x
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithTitle(title string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithLang sets the lang property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithLang(lang string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	return x
+}
+
+// WithDir sets the dir property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithDir(dir string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	return x
+}
+
+// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithTabIndex(tabIndex int) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	return x
+}
+
+// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithAccessKey(accessKey string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	return x
+}
+
+// WithInnerText sets the innerText property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithInnerText(innerText string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	return x
+}
+
+// WithOuterText sets the outerText property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithOuterText(outerText string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	return x
+}
+
+// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithContentEditable(contentEditable string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	return x
+}
+
+// WithIdName sets the idName property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithIdName(idName string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	return x
+}
+
+// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithScrollLeft(scrollLeft int) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	return x
+}
+
+// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithScrollTop(scrollTop int) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	return x
+}
+
+// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithInnerHTML(innerHTML string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	return x
+}
+
+// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithOuterHTML(outerHTML string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	return x
+}
+
+// WithClassName sets the className property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithClassName(className string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	return x
+}
+
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithNodeValue(nodeValue string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithPrefix(prefix string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMHTMLLabelElement) WithTextContent(textContent string) *DOMHTMLLabelElement {
+	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Form calls the underlying Form.
 func (x *DOMHTMLLabelElement) Form() *DOMHTMLFormElement {
 	_r := x.inner.Form()
@@ -80,6 +182,23 @@ func (x *DOMHTMLLabelElement) asWebScriptObject() *raw.WebScriptObject { return 
 type DOMHTMLLabelElementable interface {
 	Unwrap() *raw.DOMHTMLLabelElement
 	WithHtmlFor(htmlFor string) *DOMHTMLLabelElement
+	WithTitle(title string) *DOMHTMLLabelElement
+	WithLang(lang string) *DOMHTMLLabelElement
+	WithDir(dir string) *DOMHTMLLabelElement
+	WithTabIndex(tabIndex int) *DOMHTMLLabelElement
+	WithAccessKey(accessKey string) *DOMHTMLLabelElement
+	WithInnerText(innerText string) *DOMHTMLLabelElement
+	WithOuterText(outerText string) *DOMHTMLLabelElement
+	WithContentEditable(contentEditable string) *DOMHTMLLabelElement
+	WithIdName(idName string) *DOMHTMLLabelElement
+	WithScrollLeft(scrollLeft int) *DOMHTMLLabelElement
+	WithScrollTop(scrollTop int) *DOMHTMLLabelElement
+	WithInnerHTML(innerHTML string) *DOMHTMLLabelElement
+	WithOuterHTML(outerHTML string) *DOMHTMLLabelElement
+	WithClassName(className string) *DOMHTMLLabelElement
+	WithNodeValue(nodeValue string) *DOMHTMLLabelElement
+	WithPrefix(prefix string) *DOMHTMLLabelElement
+	WithTextContent(textContent string) *DOMHTMLLabelElement
 	Form() *DOMHTMLFormElement
 	HtmlFor() string
 	SetHtmlFor(htmlFor string)

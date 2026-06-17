@@ -8,6 +8,7 @@ import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // BatchDeleteRequest wraps [raw.NSBatchDeleteRequest] with a fluent Go API.
@@ -50,6 +51,22 @@ func (x *BatchDeleteRequest) WithResultType(resultType raw.NSBatchDeleteRequestR
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // ResultType calls the underlying ResultType.
 func (x *BatchDeleteRequest) ResultType() raw.NSBatchDeleteRequestResultType {
 	return x.inner.ResultType()
@@ -71,6 +88,7 @@ func (x *BatchDeleteRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRe
 type BatchDeleteRequestable interface {
 	Unwrap() *raw.NSBatchDeleteRequest
 	WithResultType(resultType raw.NSBatchDeleteRequestResultType) *BatchDeleteRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *BatchDeleteRequest
 	ResultType() raw.NSBatchDeleteRequestResultType
 	SetResultType(resultType raw.NSBatchDeleteRequestResultType)
 	FetchRequest() *raw.NSFetchRequest[objc.ID]

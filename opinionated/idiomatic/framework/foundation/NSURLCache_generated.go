@@ -57,6 +57,12 @@ func (x *URLCache) WithDiskCapacity(diskCapacity uint) *URLCache {
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLCache) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCache {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // CachedResponseForRequest calls the underlying CachedResponseForRequest.
 func (x *URLCache) CachedResponseForRequest(request *raw.NSURLRequest) *CachedURLResponse {
 	_r := x.inner.CachedResponseForRequest(request)
@@ -156,6 +162,7 @@ type URLCacheable interface {
 	Unwrap() *raw.NSURLCache
 	WithMemoryCapacity(memoryCapacity uint) *URLCache
 	WithDiskCapacity(diskCapacity uint) *URLCache
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLCache
 	CachedResponseForRequest(request *raw.NSURLRequest) *CachedURLResponse
 	StoreCachedResponseForRequest(cachedResponse *raw.NSCachedURLResponse, request *raw.NSURLRequest)
 	RemoveCachedResponseForRequest(request *raw.NSURLRequest)

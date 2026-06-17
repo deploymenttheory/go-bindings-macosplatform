@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNNeuronSigmoidNodeWithSource(sourceNode *raw.MPSNNImageNode) *CNNNeuro
 	return &CNNNeuronSigmoidNode{inner: raw.MPSCNNNeuronSigmoidNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoidNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronSigmoidNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
+	x.inner.MPSCNNNeuronNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNNeuronSigmoidNode) asCNNNeuronNode() *raw.MPSCNNNeuronNode { return &x.inner.MPSCNNNeuronNode }
 
 func (x *CNNNeuronSigmoidNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNNeuronNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *CNNNeuronSigmoidNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x
 // CNNNeuronSigmoidNodeable is the interface implemented by [CNNNeuronSigmoidNode], for mocking and DI.
 type CNNNeuronSigmoidNodeable interface {
 	Unwrap() *raw.MPSCNNNeuronSigmoidNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNNeuronSigmoidNode
+	WithLabel(label string) *CNNNeuronSigmoidNode
 }
 
 var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)

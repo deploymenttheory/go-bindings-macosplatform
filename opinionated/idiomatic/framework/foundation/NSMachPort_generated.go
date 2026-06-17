@@ -43,6 +43,12 @@ func NewMachPortWithMachPortOptions(machPort uint32, f raw.NSMachPortOptions) *M
 	return &MachPort{inner: raw.NSMachPortFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MachPort) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachPort {
+	x.inner.NSPort.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // MachPort calls the underlying MachPort.
 func (x *MachPort) MachPort() uint32 {
 	return x.inner.MachPort()
@@ -55,6 +61,7 @@ func (x *MachPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
 // MachPortable is the interface implemented by [MachPort], for mocking and DI.
 type MachPortable interface {
 	Unwrap() *raw.NSMachPort
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MachPort
 	MachPort() uint32
 }
 

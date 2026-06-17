@@ -50,6 +50,12 @@ func NewComparisonPredicateWithCoder(coder *raw.NSCoder) *ComparisonPredicate {
 	return &ComparisonPredicate{inner: raw.NSComparisonPredicateFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ComparisonPredicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ComparisonPredicate {
+	x.inner.NSPredicate.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PredicateOperatorType calls the underlying PredicateOperatorType.
 func (x *ComparisonPredicate) PredicateOperatorType() raw.NSPredicateOperatorType {
 	return x.inner.PredicateOperatorType()
@@ -95,6 +101,7 @@ func (x *ComparisonPredicate) asObject() *raw.NSObject { return &x.inner.NSPredi
 // ComparisonPredicateable is the interface implemented by [ComparisonPredicate], for mocking and DI.
 type ComparisonPredicateable interface {
 	Unwrap() *raw.NSComparisonPredicate
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ComparisonPredicate
 	PredicateOperatorType() raw.NSPredicateOperatorType
 	ComparisonPredicateModifier() raw.NSComparisonPredicateModifier
 	LeftExpression() *Expression

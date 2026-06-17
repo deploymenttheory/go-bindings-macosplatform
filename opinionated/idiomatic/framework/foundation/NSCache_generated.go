@@ -66,6 +66,12 @@ func (x *Cache) WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscarded
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Cache) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Cache {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectForKey calls the underlying ObjectForKey.
 func (x *Cache) ObjectForKey(key objc.ID) objc.ID {
 	return x.inner.ObjectForKey(key)
@@ -155,6 +161,7 @@ type Cacheable interface {
 	WithTotalCostLimit(totalCostLimit uint) *Cache
 	WithCountLimit(countLimit uint) *Cache
 	WithEvictsObjectsWithDiscardedContent(evictsObjectsWithDiscardedContent bool) *Cache
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Cache
 	ObjectForKey(key objc.ID) objc.ID
 	SetObjectForKey(obj objc.ID, key objc.ID)
 	SetObjectForKeyCost(obj objc.ID, key objc.ID, g uint)

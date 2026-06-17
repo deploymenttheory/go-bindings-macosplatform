@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,11 +37,25 @@ func NewNNReshapeNodeWithSourceResultWidthResultHeightResultFeatureChannels(sour
 	return &NNReshapeNode{inner: raw.MPSNNReshapeNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReshapeNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReshapeNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReshapeNode) WithLabel(label string) *NNReshapeNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReshapeNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
 
 // NNReshapeNodeable is the interface implemented by [NNReshapeNode], for mocking and DI.
 type NNReshapeNodeable interface {
 	Unwrap() *raw.MPSNNReshapeNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReshapeNode
+	WithLabel(label string) *NNReshapeNode
 }
 
 var _ NNReshapeNodeable = (*NNReshapeNode)(nil)

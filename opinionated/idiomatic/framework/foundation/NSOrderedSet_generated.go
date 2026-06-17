@@ -120,6 +120,12 @@ func NewOrderedSetWithSetCopyItems(set *raw.NSSet[objc.ID], flag bool) *OrderedS
 	return &OrderedSet{inner: raw.NSOrderedSetFromID[objc.ID](_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *OrderedSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedSet {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ObjectAtIndex calls the underlying ObjectAtIndex.
 func (x *OrderedSet) ObjectAtIndex(idx uint) objc.ID {
 	return x.inner.ObjectAtIndex(idx)
@@ -342,6 +348,7 @@ func (x *OrderedSet) asObject() *raw.NSObject { return &x.inner.NSObject }
 // OrderedSetable is the interface implemented by [OrderedSet], for mocking and DI.
 type OrderedSetable interface {
 	Unwrap() *raw.NSOrderedSet[objc.ID]
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedSet
 	ObjectAtIndex(idx uint) objc.ID
 	IndexOfObject(object objc.ID) uint
 	Count() uint

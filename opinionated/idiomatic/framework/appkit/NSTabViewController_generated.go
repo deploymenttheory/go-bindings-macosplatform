@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -81,6 +82,82 @@ func (x *TabViewController) WithTabViewItems(items ...*raw.NSTabViewItem) *TabVi
 // WithSelectedTabViewItemIndex sets the selectedTabViewItemIndex property and returns the receiver for chaining.
 func (x *TabViewController) WithSelectedTabViewItemIndex(selectedTabViewItemIndex int) *TabViewController {
 	x.inner.SetSelectedTabViewItemIndex(selectedTabViewItemIndex)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *TabViewController) WithRepresentedObject(representedObject objc.ID) *TabViewController {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TabViewController) WithTitle(title string) *TabViewController {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *TabViewController) WithView(view ViewProvider) *TabViewController {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *TabViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TabViewController {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *TabViewController) WithChildViewControllers(items ...ViewControllerProvider) *TabViewController {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *TabViewController) WithSourceItemView(sourceItemView ViewProvider) *TabViewController {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *TabViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TabViewController {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TabViewController) WithNextResponder(nextResponder ResponderProvider) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TabViewController) WithMenu(menu *raw.NSMenu) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TabViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TabViewController) WithTouchBar(touchBar *raw.NSTouchBar) *TabViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -230,6 +307,17 @@ type TabViewControllerable interface {
 	WithCanPropagateSelectedChildViewControllerTitle(canPropagateSelectedChildViewControllerTitle bool) *TabViewController
 	WithTabViewItems(items ...*raw.NSTabViewItem) *TabViewController
 	WithSelectedTabViewItemIndex(selectedTabViewItemIndex int) *TabViewController
+	WithRepresentedObject(representedObject objc.ID) *TabViewController
+	WithTitle(title string) *TabViewController
+	WithView(view ViewProvider) *TabViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TabViewController
+	WithChildViewControllers(items ...ViewControllerProvider) *TabViewController
+	WithSourceItemView(sourceItemView ViewProvider) *TabViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TabViewController
+	WithNextResponder(nextResponder ResponderProvider) *TabViewController
+	WithMenu(menu *raw.NSMenu) *TabViewController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TabViewController
+	WithTouchBar(touchBar *raw.NSTouchBar) *TabViewController
 	AddTabViewItem(tabViewItem *raw.NSTabViewItem)
 	InsertTabViewItemAtIndex(tabViewItem *raw.NSTabViewItem, index int)
 	RemoveTabViewItem(tabViewItem *raw.NSTabViewItem)

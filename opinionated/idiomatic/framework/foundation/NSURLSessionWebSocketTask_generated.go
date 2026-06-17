@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -41,6 +42,54 @@ func NewURLSessionWebSocketTask() *URLSessionWebSocketTask {
 // WithMaximumMessageSize sets the maximumMessageSize property and returns the receiver for chaining.
 func (x *URLSessionWebSocketTask) WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask {
 	x.inner.SetMaximumMessageSize(maximumMessageSize)
+	return x
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetDelegate(delegate)
+	return x
+}
+
+// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	return x
+}
+
+// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	return x
+}
+
+// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	return x
+}
+
+// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithTaskDescription(taskDescription string) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+	return x
+}
+
+// WithPriority sets the priority property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithPriority(priority float32) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetPriority(priority)
+	return x
+}
+
+// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionWebSocketTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionWebSocketTask {
+	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
 	return x
 }
 
@@ -143,6 +192,14 @@ func (x *URLSessionWebSocketTask) asObject() *raw.NSObject { return &x.inner.NSU
 type URLSessionWebSocketTaskable interface {
 	Unwrap() *raw.NSURLSessionWebSocketTask
 	WithMaximumMessageSize(maximumMessageSize int) *URLSessionWebSocketTask
+	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionWebSocketTask
+	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionWebSocketTask
+	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionWebSocketTask
+	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionWebSocketTask
+	WithTaskDescription(taskDescription string) *URLSessionWebSocketTask
+	WithPriority(priority float32) *URLSessionWebSocketTask
+	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionWebSocketTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionWebSocketTask
 	SendMessage(ctx context.Context, message *raw.NSURLSessionWebSocketMessage) error
 	ReceiveMessage(ctx context.Context) (*URLSessionWebSocketMessage, error)
 	SendPingWithPongReceiveHandler(ctx context.Context) error

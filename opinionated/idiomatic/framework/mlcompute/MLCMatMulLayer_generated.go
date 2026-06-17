@@ -5,6 +5,7 @@
 package mlcompute
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,18 @@ func NewMatMulLayer() *MatMulLayer {
 	return &MatMulLayer{inner: raw.MLCMatMulLayerFromID(_id)}
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MatMulLayer) WithLabel(label string) *MatMulLayer {
+	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+func (x *MatMulLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer {
+	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	return x
+}
+
 // Descriptor calls the underlying Descriptor.
 func (x *MatMulLayer) Descriptor() *MatMulDescriptor {
 	_r := x.inner.Descriptor()
@@ -49,6 +62,8 @@ func (x *MatMulLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 // MatMulLayerable is the interface implemented by [MatMulLayer], for mocking and DI.
 type MatMulLayerable interface {
 	Unwrap() *raw.MLCMatMulLayer
+	WithLabel(label string) *MatMulLayer
+	WithIsDebuggingEnabled(isDebuggingEnabled bool) *MatMulLayer
 	Descriptor() *MatMulDescriptor
 }
 

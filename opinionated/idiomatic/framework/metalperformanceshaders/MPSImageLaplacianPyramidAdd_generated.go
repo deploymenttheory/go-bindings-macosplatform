@@ -5,6 +5,8 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
@@ -37,6 +39,48 @@ func NewImageLaplacianPyramidAdd() *ImageLaplacianPyramidAdd {
 	return &ImageLaplacianPyramidAdd{inner: raw.MPSImageLaplacianPyramidAddFromID(_id)}
 }
 
+// WithLaplacianBias sets the laplacianBias property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.SetLaplacianBias(laplacianBias)
+	return x
+}
+
+// WithLaplacianScale sets the laplacianScale property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.SetLaplacianScale(laplacianScale)
+	return x
+}
+
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *ImageLaplacianPyramidAdd) WithLabel(label string) *ImageLaplacianPyramidAdd {
+	x.inner.MPSImageLaplacianPyramid.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *ImageLaplacianPyramidAdd) asImageLaplacianPyramid() *mpsimage.MPSImageLaplacianPyramid { return &x.inner.MPSImageLaplacianPyramid }
 
 func (x *ImageLaplacianPyramidAdd) asImagePyramid() *mpsimage.MPSImagePyramid { return &x.inner.MPSImageLaplacianPyramid.MPSImagePyramid }
@@ -48,6 +92,13 @@ func (x *ImageLaplacianPyramidAdd) asKernel() *mpscore.MPSKernel { return &x.inn
 // ImageLaplacianPyramidAddable is the interface implemented by [ImageLaplacianPyramidAdd], for mocking and DI.
 type ImageLaplacianPyramidAddable interface {
 	Unwrap() *raw.MPSImageLaplacianPyramidAdd
+	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd
+	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramidAdd
+	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramidAdd
+	WithLabel(label string) *ImageLaplacianPyramidAdd
 }
 
 var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)

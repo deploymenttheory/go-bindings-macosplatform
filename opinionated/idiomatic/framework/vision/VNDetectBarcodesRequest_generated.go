@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
@@ -60,6 +61,30 @@ func (x *DetectBarcodesRequest) WithCoalesceCompositeSymbologies(coalesceComposi
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectBarcodesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectBarcodesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectBarcodesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectBarcodesRequest) WithRevision(revision uint) *DetectBarcodesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // SupportedSymbologies returns the collection as a Go slice.
 func (x *DetectBarcodesRequest) SupportedSymbologies() ([]*foundation.NSString, error) {
 	arr, err := x.inner.SupportedSymbologiesAndReturnError()
@@ -109,6 +134,10 @@ type DetectBarcodesRequestable interface {
 	Unwrap() *raw.VNDetectBarcodesRequest
 	WithSymbologies(items ...*foundation.NSString) *DetectBarcodesRequest
 	WithCoalesceCompositeSymbologies(coalesceCompositeSymbologies bool) *DetectBarcodesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectBarcodesRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectBarcodesRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectBarcodesRequest
+	WithRevision(revision uint) *DetectBarcodesRequest
 	SupportedSymbologies() ([]*foundation.NSString, error)
 	Symbologies() []*foundation.NSString
 	SetSymbologies(symbologies *foundation.NSArray[*foundation.NSString])

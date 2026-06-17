@@ -7,7 +7,10 @@ package audiotoolbox
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // AudioUnitV2Bridge wraps [raw.AUAudioUnitV2Bridge] with a fluent Go API.
@@ -36,6 +39,142 @@ func NewAudioUnitV2Bridge() *AudioUnitV2Bridge {
 	return &AudioUnitV2Bridge{inner: raw.AUAudioUnitV2BridgeFromID(_id)}
 }
 
+// WithRenderResourcesAllocated sets the renderResourcesAllocated property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetRenderResourcesAllocated(renderResourcesAllocated)
+	return x
+}
+
+// WithMaximumFramesToRender sets the maximumFramesToRender property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetMaximumFramesToRender(maximumFramesToRender)
+	return x
+}
+
+// WithParameterTree sets the parameterTree property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetParameterTree(parameterTree)
+	return x
+}
+
+// WithMIDIOutputEventBlock sets the mIDIOutputEventBlock property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetMIDIOutputEventBlock(mIDIOutputEventBlock)
+	return x
+}
+
+// WithMIDIOutputEventListBlock sets the mIDIOutputEventListBlock property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetMIDIOutputEventListBlock(mIDIOutputEventListBlock)
+	return x
+}
+
+// WithHostMIDIProtocol sets the hostMIDIProtocol property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetHostMIDIProtocol(hostMIDIProtocol)
+	return x
+}
+
+// WithFullState sets the fullState property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetFullState(fullState)
+	return x
+}
+
+// WithFullStateForDocument sets the fullStateForDocument property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetFullStateForDocument(fullStateForDocument)
+	return x
+}
+
+// WithCurrentPreset sets the currentPreset property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetCurrentPreset(currentPreset)
+	return x
+}
+
+// WithRenderQuality sets the renderQuality property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithRenderQuality(renderQuality int) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetRenderQuality(renderQuality)
+	return x
+}
+
+// WithShouldBypassEffect sets the shouldBypassEffect property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetShouldBypassEffect(shouldBypassEffect)
+	return x
+}
+
+// WithRenderingOffline sets the renderingOffline property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithRenderingOffline(renderingOffline bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetRenderingOffline(renderingOffline)
+	return x
+}
+
+// WithMusicalContextBlock sets the musicalContextBlock property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetMusicalContextBlock(musicalContextBlock)
+	return x
+}
+
+// WithTransportStateBlock sets the transportStateBlock property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetTransportStateBlock(transportStateBlock)
+	return x
+}
+
+// WithContextName sets the contextName property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithContextName(contextName string) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetContextName(foundation.NSStringStringWithUTF8String(contextName))
+	return x
+}
+
+// WithChannelMap sets the collection, converting the Go slice to an NSArray.
+func (x *AudioUnitV2Bridge) WithChannelMap(items ...*foundation.NSNumber) *AudioUnitV2Bridge {
+	if len(items) == 0 {
+		x.inner.AUAudioUnit.SetChannelMap(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.AUAudioUnit.SetChannelMap(_arr)
+	return x
+}
+
+// WithInputEnabled sets the inputEnabled property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithInputEnabled(inputEnabled bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetInputEnabled(inputEnabled)
+	return x
+}
+
+// WithOutputEnabled sets the outputEnabled property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithOutputEnabled(outputEnabled bool) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetOutputEnabled(outputEnabled)
+	return x
+}
+
+// WithOutputProvider sets the outputProvider property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetOutputProvider(outputProvider)
+	return x
+}
+
+// WithInputHandler sets the inputHandler property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetInputHandler(inputHandler)
+	return x
+}
+
+// WithMIDIOutputBufferSizeHint sets the mIDIOutputBufferSizeHint property and returns the receiver for chaining.
+func (x *AudioUnitV2Bridge) WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnitV2Bridge {
+	x.inner.AUAudioUnit.SetMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint)
+	return x
+}
+
 // AudioUnit calls the underlying AudioUnit.
 func (x *AudioUnitV2Bridge) AudioUnit() *carboncore.ComponentInstanceRecord {
 	return x.inner.AudioUnit()
@@ -46,6 +185,27 @@ func (x *AudioUnitV2Bridge) asAudioUnit() *raw.AUAudioUnit { return &x.inner.AUA
 // AudioUnitV2Bridgeable is the interface implemented by [AudioUnitV2Bridge], for mocking and DI.
 type AudioUnitV2Bridgeable interface {
 	Unwrap() *raw.AUAudioUnitV2Bridge
+	WithRenderResourcesAllocated(renderResourcesAllocated bool) *AudioUnitV2Bridge
+	WithMaximumFramesToRender(maximumFramesToRender uint32) *AudioUnitV2Bridge
+	WithParameterTree(parameterTree *raw.AUParameterTree) *AudioUnitV2Bridge
+	WithMIDIOutputEventBlock(mIDIOutputEventBlock func(int64, uint8, int, unsafe.Pointer) int) *AudioUnitV2Bridge
+	WithMIDIOutputEventListBlock(mIDIOutputEventListBlock func(int64, uint8, unsafe.Pointer) int) *AudioUnitV2Bridge
+	WithHostMIDIProtocol(hostMIDIProtocol objc.ID) *AudioUnitV2Bridge
+	WithFullState(fullState *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge
+	WithFullStateForDocument(fullStateForDocument *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AudioUnitV2Bridge
+	WithCurrentPreset(currentPreset *raw.AUAudioUnitPreset) *AudioUnitV2Bridge
+	WithRenderQuality(renderQuality int) *AudioUnitV2Bridge
+	WithShouldBypassEffect(shouldBypassEffect bool) *AudioUnitV2Bridge
+	WithRenderingOffline(renderingOffline bool) *AudioUnitV2Bridge
+	WithMusicalContextBlock(musicalContextBlock func(*float64, *float64, *int64, *float64, *int64, unsafe.Pointer) bool) *AudioUnitV2Bridge
+	WithTransportStateBlock(transportStateBlock func(*raw.AUHostTransportStateFlags, *float64, *float64, unsafe.Pointer) bool) *AudioUnitV2Bridge
+	WithContextName(contextName string) *AudioUnitV2Bridge
+	WithChannelMap(items ...*foundation.NSNumber) *AudioUnitV2Bridge
+	WithInputEnabled(inputEnabled bool) *AudioUnitV2Bridge
+	WithOutputEnabled(outputEnabled bool) *AudioUnitV2Bridge
+	WithOutputProvider(outputProvider func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, int, unsafe.Pointer) int) *AudioUnitV2Bridge
+	WithInputHandler(inputHandler func(*raw.AudioUnitRenderActionFlags, *coreaudiotypes.AudioTimeStamp, uint32, unsafe.Pointer)) *AudioUnitV2Bridge
+	WithMIDIOutputBufferSizeHint(mIDIOutputBufferSizeHint int) *AudioUnitV2Bridge
 	AudioUnit() *carboncore.ComponentInstanceRecord
 }
 

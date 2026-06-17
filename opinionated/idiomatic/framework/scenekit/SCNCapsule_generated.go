@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Capsule wraps [raw.SCNCapsule] with a fluent Go API.
@@ -62,6 +64,80 @@ func (x *Capsule) WithHeightSegmentCount(heightSegmentCount int) *Capsule {
 // WithCapSegmentCount sets the capSegmentCount property and returns the receiver for chaining.
 func (x *Capsule) WithCapSegmentCount(capSegmentCount int) *Capsule {
 	x.inner.SetCapSegmentCount(capSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Capsule) WithName(name string) *Capsule {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Capsule) WithMaterials(items ...*raw.SCNMaterial) *Capsule {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Capsule) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Capsule {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Capsule) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Capsule) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Capsule {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Capsule) WithSubdivisionLevel(subdivisionLevel uint) *Capsule {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Capsule) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Capsule) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Capsule {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Capsule) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Capsule {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -125,6 +201,15 @@ type Capsuleable interface {
 	WithRadialSegmentCount(radialSegmentCount int) *Capsule
 	WithHeightSegmentCount(heightSegmentCount int) *Capsule
 	WithCapSegmentCount(capSegmentCount int) *Capsule
+	WithName(name string) *Capsule
+	WithMaterials(items ...*raw.SCNMaterial) *Capsule
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Capsule
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Capsule
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Capsule
+	WithSubdivisionLevel(subdivisionLevel uint) *Capsule
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Capsule
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Capsule
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Capsule
 	CapRadius() float64
 	SetCapRadius(capRadius float64)
 	Height() float64

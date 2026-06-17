@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterSimpleStructEchoRequestParams() *MTRTestClusterClus
 	return &MTRTestClusterClusterSimpleStructEchoRequestParams{inner: raw.MTRTestClusterClusterSimpleStructEchoRequestParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterSimpleStructEchoRequestParams {
+	x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams.SetArg1(arg1.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterSimpleStructEchoRequestParams {
+	x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterSimpleStructEchoRequestParams {
+	x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams { return &x.inner.MTRUnitTestingClusterSimpleStructEchoRequestParams }
 
 // MTRTestClusterClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRTestClusterClusterSimpleStructEchoRequestParams], for mocking and DI.
 type MTRTestClusterClusterSimpleStructEchoRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterSimpleStructEchoRequestParams
+	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterSimpleStructEchoRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterSimpleStructEchoRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterSimpleStructEchoRequestParams
 }
 
 var _ MTRTestClusterClusterSimpleStructEchoRequestParamsable = (*MTRTestClusterClusterSimpleStructEchoRequestParams)(nil)

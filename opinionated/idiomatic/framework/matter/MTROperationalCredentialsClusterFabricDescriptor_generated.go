@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,74 @@ func NewMTROperationalCredentialsClusterFabricDescriptor() *MTROperationalCreden
 	return &MTROperationalCredentialsClusterFabricDescriptor{inner: raw.MTROperationalCredentialsClusterFabricDescriptorFromID(_id)}
 }
 
+// WithRootPublicKey sets the rootPublicKey property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithRootPublicKey(rootPublicKey *foundation.NSData) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetRootPublicKey(rootPublicKey)
+	return x
+}
+
+// WithVendorID sets the vendorID property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithVendorID(vendorID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetVendorID(vendorID)
+	return x
+}
+
+// WithVendorId sets the vendorId property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithVendorId(vendorId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetVendorId(vendorId)
+	return x
+}
+
+// WithFabricID sets the fabricID property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithFabricID(fabricID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetFabricID(fabricID)
+	return x
+}
+
+// WithFabricId sets the fabricId property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithFabricId(fabricId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetFabricId(fabricId)
+	return x
+}
+
+// WithNodeID sets the nodeID property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithNodeID(nodeID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetNodeID(nodeID)
+	return x
+}
+
+// WithNodeId sets the nodeId property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithNodeId(nodeId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetNodeId(nodeId)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTROperationalCredentialsClusterFabricDescriptor) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor {
+	x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTROperationalCredentialsClusterFabricDescriptor) asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct { return &x.inner.MTROperationalCredentialsClusterFabricDescriptorStruct }
 
 // MTROperationalCredentialsClusterFabricDescriptorable is the interface implemented by [MTROperationalCredentialsClusterFabricDescriptor], for mocking and DI.
 type MTROperationalCredentialsClusterFabricDescriptorable interface {
 	Unwrap() *raw.MTROperationalCredentialsClusterFabricDescriptor
+	WithRootPublicKey(rootPublicKey *foundation.NSData) *MTROperationalCredentialsClusterFabricDescriptor
+	WithVendorID(vendorID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithVendorId(vendorId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithFabricID(fabricID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithFabricId(fabricId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithNodeID(nodeID *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithNodeId(nodeId *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
+	WithLabel(label string) *MTROperationalCredentialsClusterFabricDescriptor
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterFabricDescriptor
 }
 
 var _ MTROperationalCredentialsClusterFabricDescriptorable = (*MTROperationalCredentialsClusterFabricDescriptor)(nil)

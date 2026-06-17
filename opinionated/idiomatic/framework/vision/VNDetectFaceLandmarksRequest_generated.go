@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,30 @@ func (x *DetectFaceLandmarksRequest) WithConstellation(constellation raw.VNReque
 	return x
 }
 
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectFaceLandmarksRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectFaceLandmarksRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectFaceLandmarksRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectFaceLandmarksRequest) WithRevision(revision uint) *DetectFaceLandmarksRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
+	return x
+}
+
 // Constellation calls the underlying Constellation.
 func (x *DetectFaceLandmarksRequest) Constellation() raw.VNRequestFaceLandmarksConstellation {
 	return x.inner.Constellation()
@@ -59,6 +84,10 @@ func (x *DetectFaceLandmarksRequest) asRequest() *raw.VNRequest { return &x.inne
 type DetectFaceLandmarksRequestable interface {
 	Unwrap() *raw.VNDetectFaceLandmarksRequest
 	WithConstellation(constellation raw.VNRequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest
+	WithRevision(revision uint) *DetectFaceLandmarksRequest
 	Constellation() raw.VNRequestFaceLandmarksConstellation
 	SetConstellation(constellation raw.VNRequestFaceLandmarksConstellation)
 }

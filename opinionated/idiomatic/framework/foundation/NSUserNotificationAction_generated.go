@@ -35,6 +35,12 @@ func NewUserNotificationAction() *UserNotificationAction {
 	return &UserNotificationAction{inner: raw.NSUserNotificationActionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserNotificationAction) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationAction {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Identifier calls the underlying Identifier.
 func (x *UserNotificationAction) Identifier() *String {
 	_r := x.inner.Identifier()
@@ -58,6 +64,7 @@ func (x *UserNotificationAction) asObject() *raw.NSObject { return &x.inner.NSOb
 // UserNotificationActionable is the interface implemented by [UserNotificationAction], for mocking and DI.
 type UserNotificationActionable interface {
 	Unwrap() *raw.NSUserNotificationAction
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserNotificationAction
 	Identifier() *String
 	Title() *String
 }

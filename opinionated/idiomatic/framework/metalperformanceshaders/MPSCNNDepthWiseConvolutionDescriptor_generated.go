@@ -36,6 +36,66 @@ func NewCNNDepthWiseConvolutionDescriptor() *CNNDepthWiseConvolutionDescriptor {
 	return &CNNDepthWiseConvolutionDescriptor{inner: raw.MPSCNNDepthWiseConvolutionDescriptorFromID(_id)}
 }
 
+// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetKernelWidth(kernelWidth)
+	return x
+}
+
+// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetKernelHeight(kernelHeight)
+	return x
+}
+
+// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+	return x
+}
+
+// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+	return x
+}
+
+// WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsX(strideInPixelsX)
+	return x
+}
+
+// WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsY(strideInPixelsY)
+	return x
+}
+
+// WithGroups sets the groups property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetGroups(groups)
+	return x
+}
+
+// WithDilationRateX sets the dilationRateX property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateX(dilationRateX uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateX(dilationRateX)
+	return x
+}
+
+// WithDilationRateY sets the dilationRateY property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateY(dilationRateY)
+	return x
+}
+
+// WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
+func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
+	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+	return x
+}
+
 // ChannelMultiplier calls the underlying ChannelMultiplier.
 func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() uint {
 	return x.inner.ChannelMultiplier()
@@ -46,6 +106,16 @@ func (x *CNNDepthWiseConvolutionDescriptor) asCNNConvolutionDescriptor() *mpsneu
 // CNNDepthWiseConvolutionDescriptorable is the interface implemented by [CNNDepthWiseConvolutionDescriptor], for mocking and DI.
 type CNNDepthWiseConvolutionDescriptorable interface {
 	Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor
+	WithKernelWidth(kernelWidth uint) *CNNDepthWiseConvolutionDescriptor
+	WithKernelHeight(kernelHeight uint) *CNNDepthWiseConvolutionDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor
+	WithStrideInPixelsX(strideInPixelsX uint) *CNNDepthWiseConvolutionDescriptor
+	WithStrideInPixelsY(strideInPixelsY uint) *CNNDepthWiseConvolutionDescriptor
+	WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor
+	WithDilationRateX(dilationRateX uint) *CNNDepthWiseConvolutionDescriptor
+	WithDilationRateY(dilationRateY uint) *CNNDepthWiseConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor
 	ChannelMultiplier() uint
 }
 

@@ -36,6 +36,12 @@ func NewPortNameServer() *PortNameServer {
 	return &PortNameServer{inner: raw.NSPortNameServerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *PortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortNameServer {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PortForName calls the underlying PortForName.
 func (x *PortNameServer) PortForName(name string) *Port {
 	_r := x.inner.PortForName(foundation.NSStringStringWithUTF8String(name))
@@ -71,6 +77,7 @@ func (x *PortNameServer) asObject() *raw.NSObject { return &x.inner.NSObject }
 // PortNameServerable is the interface implemented by [PortNameServer], for mocking and DI.
 type PortNameServerable interface {
 	Unwrap() *raw.NSPortNameServer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortNameServer
 	PortForName(name string) *Port
 	PortForNameHost(name string, host string) *Port
 	RegisterPortName(port *raw.NSPort, name string) bool

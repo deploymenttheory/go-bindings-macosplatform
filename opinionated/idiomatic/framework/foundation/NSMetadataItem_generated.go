@@ -38,6 +38,12 @@ func NewMetadataItemWithURL(url string) *MetadataItem {
 	return &MetadataItem{inner: raw.NSMetadataItemFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *MetadataItem) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataItem {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ValueForAttribute calls the underlying ValueForAttribute.
 func (x *MetadataItem) ValueForAttribute(key string) objc.ID {
 	return x.inner.ValueForAttribute(foundation.NSStringStringWithUTF8String(key))
@@ -64,6 +70,7 @@ func (x *MetadataItem) asObject() *raw.NSObject { return &x.inner.NSObject }
 // MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
 type MetadataItemable interface {
 	Unwrap() *raw.NSMetadataItem
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataItem
 	ValueForAttribute(key string) objc.ID
 	ValuesForAttributes(keys *raw.NSArray[*raw.NSString]) *raw.NSDictionary[*raw.NSString, objc.ID]
 	Attributes() []string

@@ -5,6 +5,7 @@
 package mpsmatrix
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,42 @@ func NewMatrixLogSoftMax() *MatrixLogSoftMax {
 	return &MatrixLogSoftMax{inner: raw.MPSMatrixLogSoftMaxFromID(_id)}
 }
 
+// WithSourceRows sets the sourceRows property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithSourceRows(sourceRows uint) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.SetSourceRows(sourceRows)
+	return x
+}
+
+// WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithSourceColumns(sourceColumns uint) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.SetSourceColumns(sourceColumns)
+	return x
+}
+
+// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+	return x
+}
+
+// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+	return x
+}
+
+// WithBatchStart sets the batchStart property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithBatchStart(batchStart uint) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+	return x
+}
+
+// WithBatchSize sets the batchSize property and returns the receiver for chaining.
+func (x *MatrixLogSoftMax) WithBatchSize(batchSize uint) *MatrixLogSoftMax {
+	x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+	return x
+}
+
 func (x *MatrixLogSoftMax) asMatrixSoftMax() *raw.MPSMatrixSoftMax { return &x.inner.MPSMatrixSoftMax }
 
 func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { return &x.inner.MPSMatrixSoftMax.MPSMatrixUnaryKernel }
@@ -42,6 +79,12 @@ func (x *MatrixLogSoftMax) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel { ret
 // MatrixLogSoftMaxable is the interface implemented by [MatrixLogSoftMax], for mocking and DI.
 type MatrixLogSoftMaxable interface {
 	Unwrap() *raw.MPSMatrixLogSoftMax
+	WithSourceRows(sourceRows uint) *MatrixLogSoftMax
+	WithSourceColumns(sourceColumns uint) *MatrixLogSoftMax
+	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax
+	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMax
+	WithBatchStart(batchStart uint) *MatrixLogSoftMax
+	WithBatchSize(batchSize uint) *MatrixLogSoftMax
 }
 
 var _ MatrixLogSoftMaxable = (*MatrixLogSoftMax)(nil)

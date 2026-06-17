@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -36,6 +37,18 @@ func CNNGroupNormalizationGradientStateFromID(id objc.ID) *CNNGroupNormalization
 func NewCNNGroupNormalizationGradientState() *CNNGroupNormalizationGradientState {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNGroupNormalizationGradientState")), objc.RegisterName("new"))
 	return &CNNGroupNormalizationGradientState{inner: raw.MPSCNNGroupNormalizationGradientStateFromID(_id)}
+}
+
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientState) WithReadCount(readCount uint) *CNNGroupNormalizationGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNGroupNormalizationGradientState) WithLabel(label string) *CNNGroupNormalizationGradientState {
+	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
 }
 
 // GroupNormalization calls the underlying GroupNormalization.
@@ -70,6 +83,8 @@ func (x *CNNGroupNormalizationGradientState) asState() *mpscore.MPSState { retur
 // CNNGroupNormalizationGradientStateable is the interface implemented by [CNNGroupNormalizationGradientState], for mocking and DI.
 type CNNGroupNormalizationGradientStateable interface {
 	Unwrap() *raw.MPSCNNGroupNormalizationGradientState
+	WithReadCount(readCount uint) *CNNGroupNormalizationGradientState
+	WithLabel(label string) *CNNGroupNormalizationGradientState
 	GroupNormalization() *mpsneuralnetwork.MPSCNNGroupNormalization
 	Gamma() metal.MTLBuffer
 	Beta() metal.MTLBuffer

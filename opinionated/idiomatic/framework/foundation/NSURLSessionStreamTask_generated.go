@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -36,6 +37,54 @@ func URLSessionStreamTaskFromID(id objc.ID) *URLSessionStreamTask {
 func NewURLSessionStreamTask() *URLSessionStreamTask {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionStreamTask")), objc.RegisterName("new"))
 	return &URLSessionStreamTask{inner: raw.NSURLSessionStreamTaskFromID(_id)}
+}
+
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetDelegate(delegate)
+	return x
+}
+
+// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	return x
+}
+
+// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	return x
+}
+
+// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	return x
+}
+
+// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithTaskDescription(taskDescription string) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+	return x
+}
+
+// WithPriority sets the priority property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetPriority(priority)
+	return x
+}
+
+// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionStreamTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionStreamTask {
+	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
 }
 
 // ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler calls the underlying ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler.
@@ -93,6 +142,14 @@ func (x *URLSessionStreamTask) asObject() *raw.NSObject { return &x.inner.NSURLS
 // URLSessionStreamTaskable is the interface implemented by [URLSessionStreamTask], for mocking and DI.
 type URLSessionStreamTaskable interface {
 	Unwrap() *raw.NSURLSessionStreamTask
+	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionStreamTask
+	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask
+	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask
+	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask
+	WithTaskDescription(taskDescription string) *URLSessionStreamTask
+	WithPriority(priority float32) *URLSessionStreamTask
+	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionStreamTask
 	ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer))
 	WriteDataTimeout(ctx context.Context, data *raw.NSData, timeout float64) error
 	CaptureStreams()

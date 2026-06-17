@@ -35,6 +35,18 @@ func NewRMSPropOptimizer() *RMSPropOptimizer {
 	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(_id)}
 }
 
+// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
+	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	return x
+}
+
+// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
+	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	return x
+}
+
 // MomentumScale calls the underlying MomentumScale.
 func (x *RMSPropOptimizer) MomentumScale() float32 {
 	return x.inner.MomentumScale()
@@ -60,6 +72,8 @@ func (x *RMSPropOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLC
 // RMSPropOptimizerable is the interface implemented by [RMSPropOptimizer], for mocking and DI.
 type RMSPropOptimizerable interface {
 	Unwrap() *raw.MLCRMSPropOptimizer
+	WithLearningRate(learningRate float32) *RMSPropOptimizer
+	WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer
 	MomentumScale() float32
 	Alpha() float32
 	Epsilon() float32

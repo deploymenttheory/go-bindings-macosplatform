@@ -98,6 +98,30 @@ func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCus
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Application) WithMenu(menu *raw.NSMenu) *Application {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Application) WithUserActivity(userActivity *foundation.NSUserActivity) *Application {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Application) WithTouchBar(touchBar *raw.NSTouchBar) *Application {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // Hide calls the underlying Hide.
 func (x *Application) Hide(sender objc.ID) {
 	x.inner.Hide(sender)
@@ -765,6 +789,10 @@ type Applicationable interface {
 	WithServicesMenu(servicesMenu *raw.NSMenu) *Application
 	WithServicesProvider(servicesProvider objc.ID) *Application
 	WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application
+	WithNextResponder(nextResponder ResponderProvider) *Application
+	WithMenu(menu *raw.NSMenu) *Application
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Application
+	WithTouchBar(touchBar *raw.NSTouchBar) *Application
 	Hide(sender objc.ID)
 	Unhide(sender objc.ID)
 	UnhideWithoutActivation()

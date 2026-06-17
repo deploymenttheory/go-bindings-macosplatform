@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -35,11 +36,326 @@ func NewTextAttachmentCell() *TextAttachmentCell {
 	return &TextAttachmentCell{inner: raw.NSTextAttachmentCellFromID(_id)}
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithControlView(controlView ViewProvider) *TextAttachmentCell {
+	x.inner.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithType(type_ raw.NSCellType) *TextAttachmentCell {
+	x.inner.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithState(state int) *TextAttachmentCell {
+	x.inner.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithTarget(target objc.ID) *TextAttachmentCell {
+	x.inner.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAction(action objc.SEL) *TextAttachmentCell {
+	x.inner.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithTag(tag int) *TextAttachmentCell {
+	x.inner.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithTitle(title string) *TextAttachmentCell {
+	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithEnabled(enabled bool) *TextAttachmentCell {
+	x.inner.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithContinuous(continuous bool) *TextAttachmentCell {
+	x.inner.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithEditable(editable bool) *TextAttachmentCell {
+	x.inner.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithSelectable(selectable bool) *TextAttachmentCell {
+	x.inner.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithBordered(bordered bool) *TextAttachmentCell {
+	x.inner.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithBezeled(bezeled bool) *TextAttachmentCell {
+	x.inner.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithScrollable(scrollable bool) *TextAttachmentCell {
+	x.inner.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithHighlighted(highlighted bool) *TextAttachmentCell {
+	x.inner.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAlignment(alignment raw.NSTextAlignment) *TextAttachmentCell {
+	x.inner.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithWraps(wraps bool) *TextAttachmentCell {
+	x.inner.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithFont(font *raw.NSFont) *TextAttachmentCell {
+	x.inner.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithFormatter(formatter *foundation.NSFormatter) *TextAttachmentCell {
+	x.inner.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithObjectValue(objectValue objc.ID) *TextAttachmentCell {
+	x.inner.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithStringValue(stringValue string) *TextAttachmentCell {
+	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithIntValue(intValue int) *TextAttachmentCell {
+	x.inner.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithFloatValue(floatValue float32) *TextAttachmentCell {
+	x.inner.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithDoubleValue(doubleValue float64) *TextAttachmentCell {
+	x.inner.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithIntegerValue(integerValue int) *TextAttachmentCell {
+	x.inner.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithImage(image *raw.NSImage) *TextAttachmentCell {
+	x.inner.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithControlSize(controlSize raw.NSControlSize) *TextAttachmentCell {
+	x.inner.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithRepresentedObject(representedObject objc.ID) *TextAttachmentCell {
+	x.inner.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithMenu(menu *raw.NSMenu) *TextAttachmentCell {
+	x.inner.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell {
+	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextAttachmentCell {
+	x.inner.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextAttachmentCell {
+	x.inner.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAllowsUndo(allowsUndo bool) *TextAttachmentCell {
+	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextAttachmentCell {
+	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextAttachmentCell {
+	x.inner.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextAttachmentCell {
+	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextAttachmentCell {
+	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithShowsFirstResponder(showsFirstResponder bool) *TextAttachmentCell {
+	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *TextAttachmentCell {
+	x.inner.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextAttachmentCell {
+	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextAttachmentCell {
+	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithImportsGraphics(importsGraphics bool) *TextAttachmentCell {
+	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithAllowsMixedState(allowsMixedState bool) *TextAttachmentCell {
+	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextAttachmentCell {
+	x.inner.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *TextAttachmentCell) WithControlTint(controlTint raw.NSControlTint) *TextAttachmentCell {
+	x.inner.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 func (x *TextAttachmentCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
 // TextAttachmentCellable is the interface implemented by [TextAttachmentCell], for mocking and DI.
 type TextAttachmentCellable interface {
 	Unwrap() *raw.NSTextAttachmentCell
+	WithControlView(controlView ViewProvider) *TextAttachmentCell
+	WithType(type_ raw.NSCellType) *TextAttachmentCell
+	WithState(state int) *TextAttachmentCell
+	WithTarget(target objc.ID) *TextAttachmentCell
+	WithAction(action objc.SEL) *TextAttachmentCell
+	WithTag(tag int) *TextAttachmentCell
+	WithTitle(title string) *TextAttachmentCell
+	WithEnabled(enabled bool) *TextAttachmentCell
+	WithContinuous(continuous bool) *TextAttachmentCell
+	WithEditable(editable bool) *TextAttachmentCell
+	WithSelectable(selectable bool) *TextAttachmentCell
+	WithBordered(bordered bool) *TextAttachmentCell
+	WithBezeled(bezeled bool) *TextAttachmentCell
+	WithScrollable(scrollable bool) *TextAttachmentCell
+	WithHighlighted(highlighted bool) *TextAttachmentCell
+	WithAlignment(alignment raw.NSTextAlignment) *TextAttachmentCell
+	WithWraps(wraps bool) *TextAttachmentCell
+	WithFont(font *raw.NSFont) *TextAttachmentCell
+	WithFormatter(formatter *foundation.NSFormatter) *TextAttachmentCell
+	WithObjectValue(objectValue objc.ID) *TextAttachmentCell
+	WithStringValue(stringValue string) *TextAttachmentCell
+	WithIntValue(intValue int) *TextAttachmentCell
+	WithFloatValue(floatValue float32) *TextAttachmentCell
+	WithDoubleValue(doubleValue float64) *TextAttachmentCell
+	WithIntegerValue(integerValue int) *TextAttachmentCell
+	WithImage(image *raw.NSImage) *TextAttachmentCell
+	WithControlSize(controlSize raw.NSControlSize) *TextAttachmentCell
+	WithRepresentedObject(representedObject objc.ID) *TextAttachmentCell
+	WithMenu(menu *raw.NSMenu) *TextAttachmentCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextAttachmentCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *TextAttachmentCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *TextAttachmentCell
+	WithAllowsUndo(allowsUndo bool) *TextAttachmentCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextAttachmentCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *TextAttachmentCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *TextAttachmentCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *TextAttachmentCell
+	WithShowsFirstResponder(showsFirstResponder bool) *TextAttachmentCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *TextAttachmentCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextAttachmentCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextAttachmentCell
+	WithImportsGraphics(importsGraphics bool) *TextAttachmentCell
+	WithAllowsMixedState(allowsMixedState bool) *TextAttachmentCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *TextAttachmentCell
+	WithControlTint(controlTint raw.NSControlTint) *TextAttachmentCell
 }
 
 var _ TextAttachmentCellable = (*TextAttachmentCell)(nil)

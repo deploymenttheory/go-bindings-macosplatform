@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -49,6 +50,18 @@ func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle mpsneuralnet
 	return x
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNBatchNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalizationNode {
+	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
+	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Flags calls the underlying Flags.
 func (x *CNNBatchNormalizationNode) Flags() mpsneuralnetwork.MPSCNNBatchNormalizationFlags {
 	return x.inner.Flags()
@@ -76,6 +89,8 @@ type CNNBatchNormalizationNodeable interface {
 	Unwrap() *raw.MPSCNNBatchNormalizationNode
 	WithFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags) *CNNBatchNormalizationNode
 	WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBatchNormalizationNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalizationNode
+	WithLabel(label string) *CNNBatchNormalizationNode
 	Flags() mpsneuralnetwork.MPSCNNBatchNormalizationFlags
 	SetFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags)
 	TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle

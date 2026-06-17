@@ -37,6 +37,12 @@ func NewURLResponseWithURLMIMETypeExpectedContentLengthTextEncodingName(uRL stri
 	return &URLResponse{inner: raw.NSURLResponseFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLResponse {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // URL calls the underlying URL.
 func (x *URLResponse) URL() *URL {
 	_r := x.inner.URL()
@@ -85,6 +91,7 @@ func (x *URLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
 // URLResponseable is the interface implemented by [URLResponse], for mocking and DI.
 type URLResponseable interface {
 	Unwrap() *raw.NSURLResponse
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLResponse
 	URL() *URL
 	MIMEType() *String
 	ExpectedContentLength() int64

@@ -35,6 +35,12 @@ func NewClassDescription() *ClassDescription {
 	return &ClassDescription{inner: raw.NSClassDescriptionFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *ClassDescription) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ClassDescription {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *ClassDescription) asClassDescription() *raw.NSClassDescription { return x.inner }
 
 func (x *ClassDescription) asObject() *raw.NSObject { return &x.inner.NSObject }
@@ -42,6 +48,7 @@ func (x *ClassDescription) asObject() *raw.NSObject { return &x.inner.NSObject }
 // ClassDescriptionable is the interface implemented by [ClassDescription], for mocking and DI.
 type ClassDescriptionable interface {
 	Unwrap() *raw.NSClassDescription
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ClassDescription
 }
 
 var _ ClassDescriptionable = (*ClassDescription)(nil)

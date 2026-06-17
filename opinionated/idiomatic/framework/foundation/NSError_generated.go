@@ -37,6 +37,12 @@ func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict *raw.NS
 	return &Error{inner: raw.NSErrorFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Error) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Error {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Domain calls the underlying Domain.
 func (x *Error) Domain() *String {
 	_r := x.inner.Domain()
@@ -118,6 +124,7 @@ func (x *Error) asObject() *raw.NSObject { return &x.inner.NSObject }
 // Errorable is the interface implemented by [Error], for mocking and DI.
 type Errorable interface {
 	Unwrap() *raw.NSError
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Error
 	Domain() *String
 	Code() int
 	UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID]

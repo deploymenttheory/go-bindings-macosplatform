@@ -5,6 +5,7 @@
 package foundation
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,6 +36,54 @@ func NewURLSessionDataTask() *URLSessionDataTask {
 	return &URLSessionDataTask{inner: raw.NSURLSessionDataTaskFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetDelegate(delegate)
+	return x
+}
+
+// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	return x
+}
+
+// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	return x
+}
+
+// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	return x
+}
+
+// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithTaskDescription(taskDescription string) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+	return x
+}
+
+// WithPriority sets the priority property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithPriority(priority float32) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetPriority(priority)
+	return x
+}
+
+// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *URLSessionDataTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDataTask {
+	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *URLSessionDataTask) asURLSessionDataTask() *raw.NSURLSessionDataTask { return x.inner }
 
 func (x *URLSessionDataTask) asURLSessionTask() *raw.NSURLSessionTask { return &x.inner.NSURLSessionTask }
@@ -44,6 +93,14 @@ func (x *URLSessionDataTask) asObject() *raw.NSObject { return &x.inner.NSURLSes
 // URLSessionDataTaskable is the interface implemented by [URLSessionDataTask], for mocking and DI.
 type URLSessionDataTaskable interface {
 	Unwrap() *raw.NSURLSessionDataTask
+	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionDataTask
+	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDataTask
+	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDataTask
+	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDataTask
+	WithTaskDescription(taskDescription string) *URLSessionDataTask
+	WithPriority(priority float32) *URLSessionDataTask
+	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDataTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionDataTask
 }
 
 var _ URLSessionDataTaskable = (*URLSessionDataTask)(nil)

@@ -43,6 +43,24 @@ func (x *DOMAttr) WithValue(value string) *DOMAttr {
 	return x
 }
 
+// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+func (x *DOMAttr) WithNodeValue(nodeValue string) *DOMAttr {
+	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	return x
+}
+
+// WithPrefix sets the prefix property and returns the receiver for chaining.
+func (x *DOMAttr) WithPrefix(prefix string) *DOMAttr {
+	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	return x
+}
+
+// WithTextContent sets the textContent property and returns the receiver for chaining.
+func (x *DOMAttr) WithTextContent(textContent string) *DOMAttr {
+	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	return x
+}
+
 // Name calls the underlying Name.
 func (x *DOMAttr) Name() string {
 	_r := x.inner.Name()
@@ -99,6 +117,9 @@ func (x *DOMAttr) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOM
 type DOMAttrable interface {
 	Unwrap() *raw.DOMAttr
 	WithValue(value string) *DOMAttr
+	WithNodeValue(nodeValue string) *DOMAttr
+	WithPrefix(prefix string) *DOMAttr
+	WithTextContent(textContent string) *DOMAttr
 	Name() string
 	Specified() bool
 	Value() string

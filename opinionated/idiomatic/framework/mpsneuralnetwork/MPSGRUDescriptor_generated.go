@@ -89,6 +89,36 @@ func (x *GRUDescriptor) WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor
 	return x
 }
 
+// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
+func (x *GRUDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+	return x
+}
+
+// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
+func (x *GRUDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+	return x
+}
+
+// WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
+func (x *GRUDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	return x
+}
+
+// WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
+func (x *GRUDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetUseFloat32Weights(useFloat32Weights)
+	return x
+}
+
+// WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
+func (x *GRUDescriptor) WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *GRUDescriptor {
+	x.inner.MPSRNNDescriptor.SetLayerSequenceDirection(layerSequenceDirection)
+	return x
+}
+
 // InputGateInputWeights calls the underlying InputGateInputWeights.
 func (x *GRUDescriptor) InputGateInputWeights() raw.MPSCNNConvolutionDataSource {
 	return x.inner.InputGateInputWeights()
@@ -193,6 +223,11 @@ type GRUDescriptorable interface {
 	WithOutputGateInputGateWeights(outputGateInputGateWeights raw.MPSCNNConvolutionDataSource) *GRUDescriptor
 	WithGatePnormValue(gatePnormValue float32) *GRUDescriptor
 	WithFlipOutputGates(flipOutputGates bool) *GRUDescriptor
+	WithInputFeatureChannels(inputFeatureChannels uint) *GRUDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels uint) *GRUDescriptor
+	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *GRUDescriptor
+	WithUseFloat32Weights(useFloat32Weights bool) *GRUDescriptor
+	WithLayerSequenceDirection(layerSequenceDirection raw.MPSRNNSequenceDirection) *GRUDescriptor
 	InputGateInputWeights() raw.MPSCNNConvolutionDataSource
 	SetInputGateInputWeights(inputGateInputWeights raw.MPSCNNConvolutionDataSource)
 	InputGateRecurrentWeights() raw.MPSCNNConvolutionDataSource

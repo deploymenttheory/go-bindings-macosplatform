@@ -36,6 +36,12 @@ func NewTileOverlayRendererWithTileOverlay(overlay *raw.MKTileOverlay) *TileOver
 	return &TileOverlayRenderer{inner: raw.MKTileOverlayRendererFromID(_id)}
 }
 
+// WithAlpha sets the alpha property and returns the receiver for chaining.
+func (x *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
+	x.inner.MKOverlayRenderer.SetAlpha(alpha)
+	return x
+}
+
 // ReloadData calls the underlying ReloadData.
 func (x *TileOverlayRenderer) ReloadData() {
 	x.inner.ReloadData()
@@ -46,6 +52,7 @@ func (x *TileOverlayRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { retur
 // TileOverlayRendererable is the interface implemented by [TileOverlayRenderer], for mocking and DI.
 type TileOverlayRendererable interface {
 	Unwrap() *raw.MKTileOverlayRenderer
+	WithAlpha(alpha float64) *TileOverlayRenderer
 	ReloadData()
 }
 

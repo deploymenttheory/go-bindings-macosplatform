@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,39 @@ func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftware
 	return &MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID(_id)}
 }
 
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
+// WithBytesDownloaded sets the bytesDownloaded property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetBytesDownloaded(bytesDownloaded)
+	return x
+}
+
+// WithProgressPercent sets the progressPercent property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetProgressPercent(progressPercent)
+	return x
+}
+
+// WithPlatformCode sets the platformCode property and returns the receiver for chaining.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetPlatformCode(platformCode)
+	return x
+}
+
 func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent { return &x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent }
 
 // MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
 	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithBytesDownloaded(bytesDownloaded *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithProgressPercent(progressPercent *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithPlatformCode(platformCode *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)

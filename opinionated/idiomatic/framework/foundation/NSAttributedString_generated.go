@@ -114,6 +114,12 @@ func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAt
 	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AttributedString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AttributesAtIndexEffectiveRange calls the underlying AttributesAtIndexEffectiveRange.
 func (x *AttributedString) AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
 	return x.inner.AttributesAtIndexEffectiveRange(location, range_)
@@ -188,6 +194,7 @@ func (x *AttributedString) asObject() *raw.NSObject { return &x.inner.NSObject }
 // AttributedStringable is the interface implemented by [AttributedString], for mocking and DI.
 type AttributedStringable interface {
 	Unwrap() *raw.NSAttributedString
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString
 	AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
 	String() *String
 	AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID

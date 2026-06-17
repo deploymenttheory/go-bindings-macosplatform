@@ -6,6 +6,7 @@ package automator
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
@@ -34,6 +35,18 @@ func ShellScriptActionFromID(id objc.ID) *ShellScriptAction {
 func NewShellScriptAction() *ShellScriptAction {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMShellScriptAction")), objc.RegisterName("new"))
 	return &ShellScriptAction{inner: raw.AMShellScriptActionFromID(_id)}
+}
+
+// WithParameters sets the parameters property and returns the receiver for chaining.
+func (x *ShellScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *ShellScriptAction {
+	x.inner.AMBundleAction.SetParameters(parameters)
+	return x
+}
+
+// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+func (x *ShellScriptAction) WithProgressValue(progressValue float64) *ShellScriptAction {
+	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)
+	return x
 }
 
 // RemapLineEndings calls the underlying RemapLineEndings.
@@ -66,6 +79,8 @@ func (x *ShellScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleA
 // ShellScriptActionable is the interface implemented by [ShellScriptAction], for mocking and DI.
 type ShellScriptActionable interface {
 	Unwrap() *raw.AMShellScriptAction
+	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *ShellScriptAction
+	WithProgressValue(progressValue float64) *ShellScriptAction
 	RemapLineEndings() bool
 	InputFieldSeparator() string
 	OutputFieldSeparator() string

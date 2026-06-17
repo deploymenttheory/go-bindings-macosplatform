@@ -5,6 +5,7 @@
 package vision
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/ebitengine/purego/objc"
 )
@@ -68,6 +69,30 @@ func (x *DetectRectanglesRequest) WithMinimumConfidence(minimumConfidence float3
 // WithMaximumObservations sets the maximumObservations property and returns the receiver for chaining.
 func (x *DetectRectanglesRequest) WithMaximumObservations(maximumObservations uint) *DetectRectanglesRequest {
 	x.inner.SetMaximumObservations(maximumObservations)
+	return x
+}
+
+// WithRegionOfInterest sets the regionOfInterest property and returns the receiver for chaining.
+func (x *DetectRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest {
+	x.inner.VNImageBasedRequest.SetRegionOfInterest(regionOfInterest)
+	return x
+}
+
+// WithPreferBackgroundProcessing sets the preferBackgroundProcessing property and returns the receiver for chaining.
+func (x *DetectRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetPreferBackgroundProcessing(preferBackgroundProcessing)
+	return x
+}
+
+// WithUsesCPUOnly sets the usesCPUOnly property and returns the receiver for chaining.
+func (x *DetectRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetUsesCPUOnly(usesCPUOnly)
+	return x
+}
+
+// WithRevision sets the revision property and returns the receiver for chaining.
+func (x *DetectRectanglesRequest) WithRevision(revision uint) *DetectRectanglesRequest {
+	x.inner.VNImageBasedRequest.VNRequest.SetRevision(revision)
 	return x
 }
 
@@ -144,6 +169,10 @@ type DetectRectanglesRequestable interface {
 	WithMinimumSize(minimumSize float32) *DetectRectanglesRequest
 	WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest
 	WithMaximumObservations(maximumObservations uint) *DetectRectanglesRequest
+	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest
+	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest
+	WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest
+	WithRevision(revision uint) *DetectRectanglesRequest
 	MinimumAspectRatio() float32
 	SetMinimumAspectRatio(minimumAspectRatio float32)
 	MaximumAspectRatio() float32

@@ -5,6 +5,7 @@
 package passkit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
@@ -34,6 +35,18 @@ func AddShareablePassConfigurationFromID(id objc.ID) *AddShareablePassConfigurat
 func NewAddShareablePassConfiguration() *AddShareablePassConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddShareablePassConfiguration")), objc.RegisterName("new"))
 	return &AddShareablePassConfiguration{inner: raw.PKAddShareablePassConfigurationFromID(_id)}
+}
+
+// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
+func (x *AddShareablePassConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	return x
+}
+
+// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+func (x *AddShareablePassConfiguration) WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration {
+	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	return x
 }
 
 // PrimaryAction calls the underlying PrimaryAction.
@@ -66,6 +79,8 @@ func (x *AddShareablePassConfiguration) asAddSecureElementPassConfiguration() *r
 // AddShareablePassConfigurationable is the interface implemented by [AddShareablePassConfiguration], for mocking and DI.
 type AddShareablePassConfigurationable interface {
 	Unwrap() *raw.PKAddShareablePassConfiguration
+	WithIssuerIdentifier(issuerIdentifier string) *AddShareablePassConfiguration
+	WithLocalizedDescription(localizedDescription string) *AddShareablePassConfiguration
 	PrimaryAction() raw.PKAddShareablePassConfigurationPrimaryAction
 	CredentialsMetadata() []*raw.PKShareablePassMetadata
 	ProvisioningPolicyIdentifier() string

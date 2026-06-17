@@ -42,6 +42,24 @@ func (x *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount 
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *AutomaticReloadPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithAmount sets the amount property and returns the receiver for chaining.
+func (x *AutomaticReloadPaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ raw.PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
+	x.inner.PKPaymentSummaryItem.SetType(type_)
+	return x
+}
+
 // ThresholdAmount calls the underlying ThresholdAmount.
 func (x *AutomaticReloadPaymentSummaryItem) ThresholdAmount() *foundation.NSDecimalNumber {
 	return x.inner.ThresholdAmount()
@@ -58,6 +76,9 @@ func (x *AutomaticReloadPaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymen
 type AutomaticReloadPaymentSummaryItemable interface {
 	Unwrap() *raw.PKAutomaticReloadPaymentSummaryItem
 	WithThresholdAmount(thresholdAmount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem
+	WithLabel(label string) *AutomaticReloadPaymentSummaryItem
+	WithAmount(amount *foundation.NSDecimalNumber) *AutomaticReloadPaymentSummaryItem
+	WithType(type_ raw.PKPaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem
 	ThresholdAmount() *foundation.NSDecimalNumber
 	SetThresholdAmount(thresholdAmount *foundation.NSDecimalNumber)
 }

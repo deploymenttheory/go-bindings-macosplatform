@@ -79,6 +79,12 @@ func (x *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *Popov
 	return x
 }
 
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
+	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
 // ShowPopover calls the underlying ShowPopover.
 func (x *PopoverTouchBarItem) ShowPopover(sender objc.ID) {
 	x.inner.ShowPopover(sender)
@@ -195,6 +201,7 @@ type PopoverTouchBarItemable interface {
 	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem
 	WithPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) *PopoverTouchBarItem
 	WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem
+	WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem
 	ShowPopover(sender objc.ID)
 	DismissPopover(sender objc.ID)
 	MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer

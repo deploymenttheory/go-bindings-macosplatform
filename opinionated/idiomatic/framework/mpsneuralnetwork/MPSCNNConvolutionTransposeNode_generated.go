@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,30 @@ func NewCNNConvolutionTransposeNodeWithSourceConvolutionGradientStateWeights(sou
 	return &CNNConvolutionTransposeNode{inner: raw.MPSCNNConvolutionTransposeNodeFromID(_id)}
 }
 
+// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+	return x
+}
+
+// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+	return x
+}
+
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
+	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *CNNConvolutionTransposeNode) asCNNConvolutionNode() *raw.MPSCNNConvolutionNode { return &x.inner.MPSCNNConvolutionNode }
 
 func (x *CNNConvolutionTransposeNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode }
@@ -43,6 +68,10 @@ func (x *CNNConvolutionTransposeNode) asNNFilterNode() *raw.MPSNNFilterNode { re
 // CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
 type CNNConvolutionTransposeNodeable interface {
 	Unwrap() *raw.MPSCNNConvolutionTransposeNode
+	WithTrainingStyle(trainingStyle raw.MPSNNTrainingStyle) *CNNConvolutionTransposeNode
+	WithAccumulatorPrecision(accumulatorPrecision raw.MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionTransposeNode
+	WithLabel(label string) *CNNConvolutionTransposeNode
 }
 
 var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)

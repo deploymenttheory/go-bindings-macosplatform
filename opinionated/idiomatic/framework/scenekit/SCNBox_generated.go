@@ -5,8 +5,10 @@
 package scenekit
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // Box wraps [raw.SCNBox] with a fluent Go API.
@@ -80,6 +82,80 @@ func (x *Box) WithLengthSegmentCount(lengthSegmentCount int) *Box {
 // WithChamferSegmentCount sets the chamferSegmentCount property and returns the receiver for chaining.
 func (x *Box) WithChamferSegmentCount(chamferSegmentCount int) *Box {
 	x.inner.SetChamferSegmentCount(chamferSegmentCount)
+	return x
+}
+
+// WithName sets the name property and returns the receiver for chaining.
+func (x *Box) WithName(name string) *Box {
+	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	return x
+}
+
+// WithMaterials sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithMaterials(items ...*raw.SCNMaterial) *Box {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetMaterials(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetMaterials(_arr)
+	return x
+}
+
+// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+func (x *Box) WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Box {
+	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial)
+	return x
+}
+
+// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
+func (x *Box) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box {
+	if len(items) == 0 {
+		x.inner.SCNGeometry.SetLevelsOfDetail(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+	return x
+}
+
+// WithTessellator sets the tessellator property and returns the receiver for chaining.
+func (x *Box) WithTessellator(tessellator *raw.SCNGeometryTessellator) *Box {
+	x.inner.SCNGeometry.SetTessellator(tessellator)
+	return x
+}
+
+// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
+func (x *Box) WithSubdivisionLevel(subdivisionLevel uint) *Box {
+	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+	return x
+}
+
+// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+func (x *Box) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box {
+	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	return x
+}
+
+// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+func (x *Box) WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Box {
+	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement)
+	return x
+}
+
+// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+func (x *Box) WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Box {
+	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource)
 	return x
 }
 
@@ -176,6 +252,15 @@ type Boxable interface {
 	WithHeightSegmentCount(heightSegmentCount int) *Box
 	WithLengthSegmentCount(lengthSegmentCount int) *Box
 	WithChamferSegmentCount(chamferSegmentCount int) *Box
+	WithName(name string) *Box
+	WithMaterials(items ...*raw.SCNMaterial) *Box
+	WithFirstMaterial(firstMaterial *raw.SCNMaterial) *Box
+	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Box
+	WithTessellator(tessellator *raw.SCNGeometryTessellator) *Box
+	WithSubdivisionLevel(subdivisionLevel uint) *Box
+	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Box
+	WithEdgeCreasesElement(edgeCreasesElement *raw.SCNGeometryElement) *Box
+	WithEdgeCreasesSource(edgeCreasesSource *raw.SCNGeometrySource) *Box
 	Width() float64
 	SetWidth(width float64)
 	Height() float64

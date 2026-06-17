@@ -47,6 +47,12 @@ func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand 
 	return x
 }
 
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
+	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	return x
+}
+
 // MinimumRating calls the underlying MinimumRating.
 func (x *RatingCommand) MinimumRating() float32 {
 	return x.inner.MinimumRating()
@@ -74,6 +80,7 @@ type RatingCommandable interface {
 	Unwrap() *raw.MPRatingCommand
 	WithMinimumRating(minimumRating float32) *RatingCommand
 	WithMaximumRating(maximumRating float32) *RatingCommand
+	WithEnabled(enabled bool) *RatingCommand
 	MinimumRating() float32
 	SetMinimumRating(minimumRating float32)
 	MaximumRating() float32

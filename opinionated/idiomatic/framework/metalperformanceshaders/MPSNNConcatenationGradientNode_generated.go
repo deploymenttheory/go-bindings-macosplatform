@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewNNConcatenationGradientNodeWithSourceGradientSourceImageGradientState(gr
 	return &NNConcatenationGradientNode{inner: raw.MPSNNConcatenationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNConcatenationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNConcatenationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNConcatenationGradientNode) WithLabel(label string) *NNConcatenationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNConcatenationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *NNConcatenationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -44,6 +57,8 @@ func (x *NNConcatenationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFi
 // NNConcatenationGradientNodeable is the interface implemented by [NNConcatenationGradientNode], for mocking and DI.
 type NNConcatenationGradientNodeable interface {
 	Unwrap() *raw.MPSNNConcatenationGradientNode
+	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNConcatenationGradientNode
+	WithLabel(label string) *NNConcatenationGradientNode
 }
 
 var _ NNConcatenationGradientNodeable = (*NNConcatenationGradientNode)(nil)

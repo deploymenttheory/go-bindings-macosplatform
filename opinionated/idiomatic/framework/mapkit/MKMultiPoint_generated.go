@@ -37,6 +37,18 @@ func NewMultiPoint() *MultiPoint {
 	return &MultiPoint{inner: raw.MKMultiPointFromID(_id)}
 }
 
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *MultiPoint) WithTitle(title string) *MultiPoint {
+	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+func (x *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
+	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	return x
+}
+
 // Points calls the underlying Points.
 func (x *MultiPoint) Points() *raw.MKMapPoint {
 	return x.inner.Points()
@@ -69,6 +81,8 @@ func (x *MultiPoint) asShape() *raw.MKShape { return &x.inner.MKShape }
 // MultiPointable is the interface implemented by [MultiPoint], for mocking and DI.
 type MultiPointable interface {
 	Unwrap() *raw.MKMultiPoint
+	WithTitle(title string) *MultiPoint
+	WithSubtitle(subtitle string) *MultiPoint
 	Points() *raw.MKMapPoint
 	GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange)
 	LocationAtPointIndex(index uint) float64

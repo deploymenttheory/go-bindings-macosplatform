@@ -48,6 +48,12 @@ func (x *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioCh
 	return x
 }
 
+// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+func (x *CaptureAudioDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput {
+	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	return x
+}
+
 // SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
 func (x *CaptureAudioDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
 	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
@@ -95,6 +101,7 @@ type CaptureAudioDataOutputable interface {
 	Unwrap() *raw.AVCaptureAudioDataOutput
 	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioDataOutput
 	WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) *CaptureAudioDataOutput
+	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput
 	SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject)
 	RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
 	SampleBufferDelegate() raw.AVCaptureAudioDataOutputSampleBufferDelegate

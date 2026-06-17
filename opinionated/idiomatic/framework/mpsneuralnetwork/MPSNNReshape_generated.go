@@ -47,6 +47,54 @@ func NewNNReshapeWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLD
 	return &NNReshape{inner: raw.MPSNNReshapeFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *NNReshape) WithOffset(offset mpscore.MPSOffset) *NNReshape {
+	x.inner.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNReshape) WithClipRect(clipRect metal.MTLRegion) *NNReshape {
+	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReshape) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReshape {
+	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNReshape) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReshape {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNReshape) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReshape {
+	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *NNReshape) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReshape {
+	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNReshape) WithPadding(padding raw.MPSNNPadding) *NNReshape {
+	x.inner.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNReshape) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReshape {
+	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels calls the underlying EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels.
 func (x *NNReshape) EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage {
 	return x.inner.EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer, sourceImage, reshapedWidth, reshapedHeight, reshapedFeatureChannels)
@@ -72,6 +120,14 @@ func (x *NNReshape) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNKern
 // NNReshapeable is the interface implemented by [NNReshape], for mocking and DI.
 type NNReshapeable interface {
 	Unwrap() *raw.MPSNNReshape
+	WithOffset(offset mpscore.MPSOffset) *NNReshape
+	WithClipRect(clipRect metal.MTLRegion) *NNReshape
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReshape
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReshape
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReshape
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReshape
+	WithPadding(padding raw.MPSNNPadding) *NNReshape
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReshape
 	EncodeToCommandBufferSourceImageReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage
 	EncodeToCommandBufferSourceImageDestinationStateDestinationStateIsTemporaryReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, outState *mpscore.MPSState, isTemporary bool, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) *mpscore.MPSImage
 	EncodeBatchToCommandBufferSourceImagesReshapedWidthReshapedHeightReshapedFeatureChannels(commandBuffer metal.MTLCommandBuffer, sourceImages unsafe.Pointer, reshapedWidth uint, reshapedHeight uint, reshapedFeatureChannels uint) unsafe.Pointer

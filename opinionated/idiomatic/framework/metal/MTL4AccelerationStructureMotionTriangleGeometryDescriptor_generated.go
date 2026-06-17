@@ -5,6 +5,7 @@
 package metal
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/ebitengine/purego/objc"
 )
@@ -80,6 +81,48 @@ func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithTransfor
 // WithTransformationMatrixLayout sets the transformationMatrixLayout property and returns the receiver for chaining.
 func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
 	x.inner.SetTransformationMatrixLayout(transformationMatrixLayout)
+	return x
+}
+
+// WithIntersectionFunctionTableOffset sets the intersectionFunctionTableOffset property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetIntersectionFunctionTableOffset(intersectionFunctionTableOffset)
+	return x
+}
+
+// WithOpaque sets the opaque property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetOpaque(opaque)
+	return x
+}
+
+// WithAllowDuplicateIntersectionFunctionInvocation sets the allowDuplicateIntersectionFunctionInvocation property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPrimitiveDataBuffer sets the primitiveDataBuffer property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataBuffer(primitiveDataBuffer)
+	return x
+}
+
+// WithPrimitiveDataStride sets the primitiveDataStride property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataStride(primitiveDataStride)
+	return x
+}
+
+// WithPrimitiveDataElementSize sets the primitiveDataElementSize property and returns the receiver for chaining.
+func (x *MTL4AccelerationStructureMotionTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor {
+	x.inner.MTL4AccelerationStructureGeometryDescriptor.SetPrimitiveDataElementSize(primitiveDataElementSize)
 	return x
 }
 
@@ -176,6 +219,13 @@ type MTL4AccelerationStructureMotionTriangleGeometryDescriptorable interface {
 	WithTriangleCount(triangleCount uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
 	WithTransformationMatrixBuffer(transformationMatrixBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
 	WithTransformationMatrixLayout(transformationMatrixLayout raw.MTLMatrixLayout) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithOpaque(opaque bool) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithLabel(label string) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithPrimitiveDataBuffer(primitiveDataBuffer raw.MTL4BufferRange) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithPrimitiveDataStride(primitiveDataStride uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
+	WithPrimitiveDataElementSize(primitiveDataElementSize uint) *MTL4AccelerationStructureMotionTriangleGeometryDescriptor
 	VertexBuffers() raw.MTL4BufferRange
 	SetVertexBuffers(vertexBuffers raw.MTL4BufferRange)
 	VertexFormat() raw.MTLAttributeFormat

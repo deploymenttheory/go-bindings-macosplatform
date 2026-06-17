@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -49,6 +50,144 @@ func (x *NNCompare) WithThreshold(threshold float32) *NNCompare {
 	return x
 }
 
+// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryScale(primaryScale float32) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	return x
+}
+
+// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryScale(secondaryScale float32) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	return x
+}
+
+// WithBias sets the bias property and returns the receiver for chaining.
+func (x *NNCompare) WithBias(bias float32) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetBias(bias)
+	return x
+}
+
+// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+	return x
+}
+
+// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+	return x
+}
+
+// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+func (x *NNCompare) WithMinimumValue(minimumValue float32) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	return x
+}
+
+// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+func (x *NNCompare) WithMaximumValue(maximumValue float32) *NNCompare {
+	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	return x
+}
+
+// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+	return x
+}
+
+// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *NNCompare) WithClipRect(clipRect metal.MTLRegion) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNCompare) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+	return x
+}
+
+// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+	return x
+}
+
+// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
+	return x
+}
+
+// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+	return x
+}
+
+// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNCompare) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+	return x
+}
+
+// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+	return x
+}
+
+// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
+func (x *NNCompare) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *NNCompare) WithPadding(padding raw.MPSNNPadding) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *NNCompare) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCompare {
+	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 // ComparisonType calls the underlying ComparisonType.
 func (x *NNCompare) ComparisonType() raw.MPSNNComparisonType {
 	return x.inner.ComparisonType()
@@ -78,6 +217,29 @@ type NNCompareable interface {
 	Unwrap() *raw.MPSNNCompare
 	WithComparisonType(comparisonType raw.MPSNNComparisonType) *NNCompare
 	WithThreshold(threshold float32) *NNCompare
+	WithPrimaryScale(primaryScale float32) *NNCompare
+	WithSecondaryScale(secondaryScale float32) *NNCompare
+	WithBias(bias float32) *NNCompare
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNCompare
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNCompare
+	WithMinimumValue(minimumValue float32) *NNCompare
+	WithMaximumValue(maximumValue float32) *NNCompare
+	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNCompare
+	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNCompare
+	WithClipRect(clipRect metal.MTLRegion) *NNCompare
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCompare
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNCompare
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNCompare
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNCompare
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNCompare
+	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare
+	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNCompare
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNCompare
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNCompare
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNCompare
+	WithPadding(padding raw.MPSNNPadding) *NNCompare
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCompare
 	ComparisonType() raw.MPSNNComparisonType
 	SetComparisonType(comparisonType raw.MPSNNComparisonType)
 	Threshold() float32

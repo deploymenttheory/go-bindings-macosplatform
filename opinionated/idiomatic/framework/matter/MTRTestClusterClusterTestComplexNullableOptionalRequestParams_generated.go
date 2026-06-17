@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,88 @@ func NewMTRTestClusterClusterTestComplexNullableOptionalRequestParams() *MTRTest
 	return &MTRTestClusterClusterTestComplexNullableOptionalRequestParams{inner: raw.MTRTestClusterClusterTestComplexNullableOptionalRequestParamsFromID(_id)}
 }
 
+// WithNullableInt sets the nullableInt property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableInt(nullableInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableInt(nullableInt)
+	return x
+}
+
+// WithOptionalInt sets the optionalInt property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalInt(optionalInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetOptionalInt(optionalInt)
+	return x
+}
+
+// WithNullableOptionalInt sets the nullableOptionalInt property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableOptionalInt(nullableOptionalInt)
+	return x
+}
+
+// WithNullableString sets the nullableString property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableString(nullableString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableString(foundation.NSStringStringWithUTF8String(nullableString))
+	return x
+}
+
+// WithOptionalString sets the optionalString property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalString(optionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetOptionalString(foundation.NSStringStringWithUTF8String(optionalString))
+	return x
+}
+
+// WithNullableOptionalString sets the nullableOptionalString property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalString(nullableOptionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableOptionalString(foundation.NSStringStringWithUTF8String(nullableOptionalString))
+	return x
+}
+
+// WithNullableStruct sets the nullableStruct property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableStruct(nullableStruct.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
+// WithOptionalStruct sets the optionalStruct property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetOptionalStruct(optionalStruct.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
+// WithNullableOptionalStruct sets the nullableOptionalStruct property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetNullableOptionalStruct(nullableOptionalStruct.asMTRUnitTestingClusterSimpleStruct())
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
+// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams {
+	x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestComplexNullableOptionalRequestParams) asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams { return &x.inner.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams }
 
 // MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable is the interface implemented by [MTRTestClusterClusterTestComplexNullableOptionalRequestParams], for mocking and DI.
 type MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableInt(nullableInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithOptionalInt(optionalInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalInt(nullableOptionalInt *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableString(nullableString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithOptionalString(optionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalString(nullableOptionalString string) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableStruct(nullableStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithOptionalStruct(optionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithNullableOptionalStruct(nullableOptionalStruct MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestComplexNullableOptionalRequestParams
 }
 
 var _ MTRTestClusterClusterTestComplexNullableOptionalRequestParamsable = (*MTRTestClusterClusterTestComplexNullableOptionalRequestParams)(nil)

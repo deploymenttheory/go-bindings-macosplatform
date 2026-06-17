@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRAccessControlClusterExtensionEntry() *MTRAccessControlClusterExtensio
 	return &MTRAccessControlClusterExtensionEntry{inner: raw.MTRAccessControlClusterExtensionEntryFromID(_id)}
 }
 
+// WithData sets the data property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterExtensionEntry) WithData(data *foundation.NSData) *MTRAccessControlClusterExtensionEntry {
+	x.inner.MTRAccessControlClusterAccessControlExtensionStruct.SetData(data)
+	return x
+}
+
+// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
+func (x *MTRAccessControlClusterExtensionEntry) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterExtensionEntry {
+	x.inner.MTRAccessControlClusterAccessControlExtensionStruct.SetFabricIndex(fabricIndex)
+	return x
+}
+
 func (x *MTRAccessControlClusterExtensionEntry) asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct { return &x.inner.MTRAccessControlClusterAccessControlExtensionStruct }
 
 // MTRAccessControlClusterExtensionEntryable is the interface implemented by [MTRAccessControlClusterExtensionEntry], for mocking and DI.
 type MTRAccessControlClusterExtensionEntryable interface {
 	Unwrap() *raw.MTRAccessControlClusterExtensionEntry
+	WithData(data *foundation.NSData) *MTRAccessControlClusterExtensionEntry
+	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRAccessControlClusterExtensionEntry
 }
 
 var _ MTRAccessControlClusterExtensionEntryable = (*MTRAccessControlClusterExtensionEntry)(nil)

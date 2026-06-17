@@ -82,6 +82,402 @@ func (x *PopUpButtonCell) WithArrowPosition(arrowPosition raw.NSPopUpArrowPositi
 	return x
 }
 
+// WithMenuItem sets the menuItem property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithMenuItem(menuItem *raw.NSMenuItem) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.SetMenuItem(menuItem)
+	return x
+}
+
+// WithNeedsSizing sets the needsSizing property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithNeedsSizing(needsSizing bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.SetNeedsSizing(needsSizing)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithNeedsDisplay(needsDisplay bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetBezelStyle(bezelStyle)
+	return x
+}
+
+// WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetHighlightsBy(highlightsBy)
+	return x
+}
+
+// WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetShowsStateBy(showsStateBy)
+	return x
+}
+
+// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetAttributedTitle(attributedTitle)
+	return x
+}
+
+// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAlternateTitle(alternateTitle string) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	return x
+}
+
+// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetAttributedAlternateTitle(attributedAlternateTitle)
+	return x
+}
+
+// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAlternateImage(alternateImage *raw.NSImage) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetAlternateImage(alternateImage)
+	return x
+}
+
+// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetImagePosition(imagePosition)
+	return x
+}
+
+// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetImageScaling(imageScaling)
+	return x
+}
+
+// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithKeyEquivalent(keyEquivalent string) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	return x
+}
+
+// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetKeyEquivalentModifierMask(keyEquivalentModifierMask)
+	return x
+}
+
+// WithTransparent sets the transparent property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithTransparent(transparent bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetTransparent(transparent)
+	return x
+}
+
+// WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+	return x
+}
+
+// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	return x
+}
+
+// WithSound sets the sound property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithSound(sound *raw.NSSound) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetSound(sound)
+	return x
+}
+
+// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBackgroundColor(backgroundColor *raw.NSColor) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithGradientType sets the gradientType property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithGradientType(gradientType raw.NSGradientType) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetGradientType(gradientType)
+	return x
+}
+
+// WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithControlView(controlView ViewProvider) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithType(type_ raw.NSCellType) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithState(state int) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithTarget(target objc.ID) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAction(action objc.SEL) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithTag(tag int) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithTitle(title string) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithEnabled(enabled bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithContinuous(continuous bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithEditable(editable bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithSelectable(selectable bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBordered(bordered bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBezeled(bezeled bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithScrollable(scrollable bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithHighlighted(highlighted bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAlignment(alignment raw.NSTextAlignment) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithWraps(wraps bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithFont(font *raw.NSFont) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithFormatter(formatter *foundation.NSFormatter) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithObjectValue(objectValue objc.ID) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithStringValue(stringValue string) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithIntValue(intValue int) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithFloatValue(floatValue float32) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithDoubleValue(doubleValue float64) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithIntegerValue(integerValue int) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithImage(image *raw.NSImage) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithControlSize(controlSize raw.NSControlSize) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithRepresentedObject(representedObject objc.ID) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithMenu(menu *raw.NSMenu) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAllowsUndo(allowsUndo bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithShowsFirstResponder(showsFirstResponder bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithImportsGraphics(importsGraphics bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithAllowsMixedState(allowsMixedState bool) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *PopUpButtonCell) WithControlTint(controlTint raw.NSControlTint) *PopUpButtonCell {
+	x.inner.NSMenuItemCell.NSButtonCell.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // AddItemWithTitle calls the underlying AddItemWithTitle.
 func (x *PopUpButtonCell) AddItemWithTitle(title string) {
 	x.inner.AddItemWithTitle(foundation.NSStringStringWithUTF8String(title))
@@ -340,6 +736,72 @@ type PopUpButtonCellable interface {
 	WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButtonCell
 	WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButtonCell
 	WithArrowPosition(arrowPosition raw.NSPopUpArrowPosition) *PopUpButtonCell
+	WithMenuItem(menuItem *raw.NSMenuItem) *PopUpButtonCell
+	WithNeedsSizing(needsSizing bool) *PopUpButtonCell
+	WithNeedsDisplay(needsDisplay bool) *PopUpButtonCell
+	WithBezelStyle(bezelStyle raw.NSBezelStyle) *PopUpButtonCell
+	WithHighlightsBy(highlightsBy raw.NSCellStyleMask) *PopUpButtonCell
+	WithShowsStateBy(showsStateBy raw.NSCellStyleMask) *PopUpButtonCell
+	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButtonCell
+	WithAlternateTitle(alternateTitle string) *PopUpButtonCell
+	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButtonCell
+	WithAlternateImage(alternateImage *raw.NSImage) *PopUpButtonCell
+	WithImagePosition(imagePosition raw.NSCellImagePosition) *PopUpButtonCell
+	WithImageScaling(imageScaling raw.NSImageScaling) *PopUpButtonCell
+	WithKeyEquivalent(keyEquivalent string) *PopUpButtonCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask raw.NSEventModifierFlags) *PopUpButtonCell
+	WithTransparent(transparent bool) *PopUpButtonCell
+	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *PopUpButtonCell
+	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButtonCell
+	WithSound(sound *raw.NSSound) *PopUpButtonCell
+	WithBackgroundColor(backgroundColor *raw.NSColor) *PopUpButtonCell
+	WithGradientType(gradientType raw.NSGradientType) *PopUpButtonCell
+	WithKeyEquivalentFont(keyEquivalentFont *raw.NSFont) *PopUpButtonCell
+	WithControlView(controlView ViewProvider) *PopUpButtonCell
+	WithType(type_ raw.NSCellType) *PopUpButtonCell
+	WithState(state int) *PopUpButtonCell
+	WithTarget(target objc.ID) *PopUpButtonCell
+	WithAction(action objc.SEL) *PopUpButtonCell
+	WithTag(tag int) *PopUpButtonCell
+	WithTitle(title string) *PopUpButtonCell
+	WithEnabled(enabled bool) *PopUpButtonCell
+	WithContinuous(continuous bool) *PopUpButtonCell
+	WithEditable(editable bool) *PopUpButtonCell
+	WithSelectable(selectable bool) *PopUpButtonCell
+	WithBordered(bordered bool) *PopUpButtonCell
+	WithBezeled(bezeled bool) *PopUpButtonCell
+	WithScrollable(scrollable bool) *PopUpButtonCell
+	WithHighlighted(highlighted bool) *PopUpButtonCell
+	WithAlignment(alignment raw.NSTextAlignment) *PopUpButtonCell
+	WithWraps(wraps bool) *PopUpButtonCell
+	WithFont(font *raw.NSFont) *PopUpButtonCell
+	WithFormatter(formatter *foundation.NSFormatter) *PopUpButtonCell
+	WithObjectValue(objectValue objc.ID) *PopUpButtonCell
+	WithStringValue(stringValue string) *PopUpButtonCell
+	WithIntValue(intValue int) *PopUpButtonCell
+	WithFloatValue(floatValue float32) *PopUpButtonCell
+	WithDoubleValue(doubleValue float64) *PopUpButtonCell
+	WithIntegerValue(integerValue int) *PopUpButtonCell
+	WithImage(image *raw.NSImage) *PopUpButtonCell
+	WithControlSize(controlSize raw.NSControlSize) *PopUpButtonCell
+	WithRepresentedObject(representedObject objc.ID) *PopUpButtonCell
+	WithMenu(menu *raw.NSMenu) *PopUpButtonCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PopUpButtonCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *PopUpButtonCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *PopUpButtonCell
+	WithAllowsUndo(allowsUndo bool) *PopUpButtonCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PopUpButtonCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *PopUpButtonCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButtonCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButtonCell
+	WithShowsFirstResponder(showsFirstResponder bool) *PopUpButtonCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *PopUpButtonCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButtonCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PopUpButtonCell
+	WithImportsGraphics(importsGraphics bool) *PopUpButtonCell
+	WithAllowsMixedState(allowsMixedState bool) *PopUpButtonCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *PopUpButtonCell
+	WithControlTint(controlTint raw.NSControlTint) *PopUpButtonCell
 	AddItemWithTitle(title string)
 	AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString])
 	InsertItemWithTitleAtIndex(title string, index int)

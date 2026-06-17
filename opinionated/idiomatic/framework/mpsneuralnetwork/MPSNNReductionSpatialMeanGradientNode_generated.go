@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewNNReductionSpatialMeanGradientNodeWithSourceGradientSourceImageGradientS
 	return &NNReductionSpatialMeanGradientNode{inner: raw.MPSNNReductionSpatialMeanGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNReductionSpatialMeanGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionSpatialMeanGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNReductionSpatialMeanGradientNode) WithLabel(label string) *NNReductionSpatialMeanGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *NNReductionSpatialMeanGradientNode) asNNGradientFilterNode() *raw.MPSNNGradientFilterNode { return &x.inner.MPSNNGradientFilterNode }
 
 func (x *NNReductionSpatialMeanGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode }
@@ -43,6 +56,8 @@ func (x *NNReductionSpatialMeanGradientNode) asNNFilterNode() *raw.MPSNNFilterNo
 // NNReductionSpatialMeanGradientNodeable is the interface implemented by [NNReductionSpatialMeanGradientNode], for mocking and DI.
 type NNReductionSpatialMeanGradientNodeable interface {
 	Unwrap() *raw.MPSNNReductionSpatialMeanGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNReductionSpatialMeanGradientNode
+	WithLabel(label string) *NNReductionSpatialMeanGradientNode
 }
 
 var _ NNReductionSpatialMeanGradientNodeable = (*NNReductionSpatialMeanGradientNode)(nil)

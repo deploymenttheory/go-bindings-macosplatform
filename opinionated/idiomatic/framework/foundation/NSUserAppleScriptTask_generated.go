@@ -36,6 +36,12 @@ func NewUserAppleScriptTask() *UserAppleScriptTask {
 	return &UserAppleScriptTask{inner: raw.NSUserAppleScriptTaskFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UserAppleScriptTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAppleScriptTask {
+	x.inner.NSUserScriptTask.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // ExecuteWithAppleEventCompletionHandler calls the underlying ExecuteWithAppleEventCompletionHandler.
 func (x *UserAppleScriptTask) ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer)) {
 	x.inner.ExecuteWithAppleEventCompletionHandler(event, handler)
@@ -48,6 +54,7 @@ func (x *UserAppleScriptTask) asObject() *raw.NSObject { return &x.inner.NSUserS
 // UserAppleScriptTaskable is the interface implemented by [UserAppleScriptTask], for mocking and DI.
 type UserAppleScriptTaskable interface {
 	Unwrap() *raw.NSUserAppleScriptTask
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserAppleScriptTask
 	ExecuteWithAppleEventCompletionHandler(event *raw.NSAppleEventDescriptor, handler func(*raw.NSAppleEventDescriptor, unsafe.Pointer))
 }
 

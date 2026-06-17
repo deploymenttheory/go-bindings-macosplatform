@@ -359,6 +359,30 @@ func (x *View) WithPressureConfiguration(pressureConfiguration *raw.NSPressureCo
 	return x
 }
 
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *View) WithNextResponder(nextResponder ResponderProvider) *View {
+	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *View) WithMenu(menu *raw.NSMenu) *View {
+	x.inner.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *View) WithUserActivity(userActivity *foundation.NSUserActivity) *View {
+	x.inner.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *View) WithTouchBar(touchBar *raw.NSTouchBar) *View {
+	x.inner.NSResponder.SetTouchBar(touchBar)
+	return x
+}
+
 // IsDescendantOf calls the underlying IsDescendantOf.
 func (x *View) IsDescendantOf(view *raw.NSView) bool {
 	return x.inner.IsDescendantOf(view)
@@ -2263,6 +2287,10 @@ type Viewable interface {
 	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *View
 	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *View
 	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *View
+	WithNextResponder(nextResponder ResponderProvider) *View
+	WithMenu(menu *raw.NSMenu) *View
+	WithUserActivity(userActivity *foundation.NSUserActivity) *View
+	WithTouchBar(touchBar *raw.NSTouchBar) *View
 	IsDescendantOf(view *raw.NSView) bool
 	AncestorSharedWithView(view *raw.NSView) *View
 	GetRectsBeingDrawnCount(rects *corefoundation.CGRect, count *int64)

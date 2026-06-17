@@ -6,6 +6,7 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -62,6 +63,276 @@ func (x *StepperCell) WithValueWraps(valueWraps bool) *StepperCell {
 // WithAutorepeat sets the autorepeat property and returns the receiver for chaining.
 func (x *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
 	x.inner.SetAutorepeat(autorepeat)
+	return x
+}
+
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *StepperCell) WithType(type_ raw.NSCellType) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *StepperCell) WithState(state int) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *StepperCell) WithTarget(target objc.ID) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *StepperCell) WithAction(action objc.SEL) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *StepperCell) WithTag(tag int) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *StepperCell) WithTitle(title string) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *StepperCell) WithEnabled(enabled bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *StepperCell) WithContinuous(continuous bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *StepperCell) WithEditable(editable bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *StepperCell) WithSelectable(selectable bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *StepperCell) WithBordered(bordered bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *StepperCell) WithBezeled(bezeled bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *StepperCell) WithScrollable(scrollable bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *StepperCell) WithHighlighted(highlighted bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *StepperCell) WithAlignment(alignment raw.NSTextAlignment) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *StepperCell) WithWraps(wraps bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *StepperCell) WithFont(font *raw.NSFont) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *StepperCell) WithFormatter(formatter *foundation.NSFormatter) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *StepperCell) WithObjectValue(objectValue objc.ID) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *StepperCell) WithStringValue(stringValue string) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *StepperCell) WithIntValue(intValue int) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *StepperCell) WithFloatValue(floatValue float32) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *StepperCell) WithDoubleValue(doubleValue float64) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *StepperCell) WithImage(image *raw.NSImage) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *StepperCell) WithControlSize(controlSize raw.NSControlSize) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *StepperCell) WithRepresentedObject(representedObject objc.ID) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *StepperCell) WithMenu(menu *raw.NSMenu) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *StepperCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *StepperCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *StepperCell) WithAllowsUndo(allowsUndo bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *StepperCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *StepperCell) WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *StepperCell) WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *StepperCell) WithShowsFirstResponder(showsFirstResponder bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *StepperCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *StepperCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *StepperCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *StepperCell) WithImportsGraphics(importsGraphics bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *StepperCell) WithAllowsMixedState(allowsMixedState bool) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *StepperCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *StepperCell) WithControlTint(controlTint raw.NSControlTint) *StepperCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
 	return x
 }
 
@@ -127,6 +398,51 @@ type StepperCellable interface {
 	WithIncrement(increment float64) *StepperCell
 	WithValueWraps(valueWraps bool) *StepperCell
 	WithAutorepeat(autorepeat bool) *StepperCell
+	WithControlView(controlView ViewProvider) *StepperCell
+	WithType(type_ raw.NSCellType) *StepperCell
+	WithState(state int) *StepperCell
+	WithTarget(target objc.ID) *StepperCell
+	WithAction(action objc.SEL) *StepperCell
+	WithTag(tag int) *StepperCell
+	WithTitle(title string) *StepperCell
+	WithEnabled(enabled bool) *StepperCell
+	WithContinuous(continuous bool) *StepperCell
+	WithEditable(editable bool) *StepperCell
+	WithSelectable(selectable bool) *StepperCell
+	WithBordered(bordered bool) *StepperCell
+	WithBezeled(bezeled bool) *StepperCell
+	WithScrollable(scrollable bool) *StepperCell
+	WithHighlighted(highlighted bool) *StepperCell
+	WithAlignment(alignment raw.NSTextAlignment) *StepperCell
+	WithWraps(wraps bool) *StepperCell
+	WithFont(font *raw.NSFont) *StepperCell
+	WithFormatter(formatter *foundation.NSFormatter) *StepperCell
+	WithObjectValue(objectValue objc.ID) *StepperCell
+	WithStringValue(stringValue string) *StepperCell
+	WithIntValue(intValue int) *StepperCell
+	WithFloatValue(floatValue float32) *StepperCell
+	WithDoubleValue(doubleValue float64) *StepperCell
+	WithIntegerValue(integerValue int) *StepperCell
+	WithImage(image *raw.NSImage) *StepperCell
+	WithControlSize(controlSize raw.NSControlSize) *StepperCell
+	WithRepresentedObject(representedObject objc.ID) *StepperCell
+	WithMenu(menu *raw.NSMenu) *StepperCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *StepperCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *StepperCell
+	WithAllowsUndo(allowsUndo bool) *StepperCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *StepperCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell
+	WithShowsFirstResponder(showsFirstResponder bool) *StepperCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *StepperCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StepperCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell
+	WithImportsGraphics(importsGraphics bool) *StepperCell
+	WithAllowsMixedState(allowsMixedState bool) *StepperCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *StepperCell
+	WithControlTint(controlTint raw.NSControlTint) *StepperCell
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64

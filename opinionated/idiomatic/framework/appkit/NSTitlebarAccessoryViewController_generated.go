@@ -6,7 +6,10 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // TitlebarAccessoryViewController wraps [raw.NSTitlebarAccessoryViewController] with a fluent Go API.
@@ -62,6 +65,82 @@ func (x *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automatic
 // WithPreferredScrollEdgeEffectStyle sets the preferredScrollEdgeEffectStyle property and returns the receiver for chaining.
 func (x *TitlebarAccessoryViewController) WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *TitlebarAccessoryViewController {
 	x.inner.SetPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithRepresentedObject(representedObject objc.ID) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithTitle(title string) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithView(view ViewProvider) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetView(view.asView())
+	return x
+}
+
+// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	return x
+}
+
+// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+func (x *TitlebarAccessoryViewController) WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController {
+	if len(items) == 0 {
+		x.inner.NSViewController.SetChildViewControllers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asViewController().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSViewController](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSViewController.SetChildViewControllers(_arr)
+	return x
+}
+
+// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
+	return x
+}
+
+// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithMenu(menu *raw.NSMenu) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithUserActivity(userActivity *foundation.NSUserActivity) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *TitlebarAccessoryViewController) WithTouchBar(touchBar *raw.NSTouchBar) *TitlebarAccessoryViewController {
+	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -131,6 +210,17 @@ type TitlebarAccessoryViewControllerable interface {
 	WithHidden(hidden bool) *TitlebarAccessoryViewController
 	WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController
 	WithPreferredScrollEdgeEffectStyle(preferredScrollEdgeEffectStyle *raw.NSScrollEdgeEffectStyle) *TitlebarAccessoryViewController
+	WithRepresentedObject(representedObject objc.ID) *TitlebarAccessoryViewController
+	WithTitle(title string) *TitlebarAccessoryViewController
+	WithView(view ViewProvider) *TitlebarAccessoryViewController
+	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *TitlebarAccessoryViewController
+	WithChildViewControllers(items ...ViewControllerProvider) *TitlebarAccessoryViewController
+	WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController
+	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *TitlebarAccessoryViewController
+	WithNextResponder(nextResponder ResponderProvider) *TitlebarAccessoryViewController
+	WithMenu(menu *raw.NSMenu) *TitlebarAccessoryViewController
+	WithUserActivity(userActivity *foundation.NSUserActivity) *TitlebarAccessoryViewController
+	WithTouchBar(touchBar *raw.NSTouchBar) *TitlebarAccessoryViewController
 	LayoutAttribute() raw.NSLayoutAttribute
 	SetLayoutAttribute(layoutAttribute raw.NSLayoutAttribute)
 	FullScreenMinHeight() float64

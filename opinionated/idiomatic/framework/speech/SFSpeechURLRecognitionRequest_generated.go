@@ -8,6 +8,7 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // SpeechURLRecognitionRequest wraps [raw.SFSpeechURLRecognitionRequest] with a fluent Go API.
@@ -37,6 +38,58 @@ func NewSpeechURLRecognitionRequestWithURL(uRL string) *SpeechURLRecognitionRequ
 	return &SpeechURLRecognitionRequest{inner: raw.SFSpeechURLRecognitionRequestFromID(_id)}
 }
 
+// WithTaskHint sets the taskHint property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetTaskHint(taskHint)
+	return x
+}
+
+// WithShouldReportPartialResults sets the shouldReportPartialResults property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetShouldReportPartialResults(shouldReportPartialResults)
+	return x
+}
+
+// WithContextualStrings sets the collection, converting the Go slice to an NSArray.
+func (x *SpeechURLRecognitionRequest) WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest {
+	if len(items) == 0 {
+		x.inner.SFSpeechRecognitionRequest.SetContextualStrings(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*foundation.NSString](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.SFSpeechRecognitionRequest.SetContextualStrings(_arr)
+	return x
+}
+
+// WithInteractionIdentifier sets the interactionIdentifier property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetInteractionIdentifier(foundation.NSStringStringWithUTF8String(interactionIdentifier))
+	return x
+}
+
+// WithRequiresOnDeviceRecognition sets the requiresOnDeviceRecognition property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetRequiresOnDeviceRecognition(requiresOnDeviceRecognition)
+	return x
+}
+
+// WithAddsPunctuation sets the addsPunctuation property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetAddsPunctuation(addsPunctuation)
+	return x
+}
+
+// WithCustomizedLanguageModel sets the customizedLanguageModel property and returns the receiver for chaining.
+func (x *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
+	x.inner.SFSpeechRecognitionRequest.SetCustomizedLanguageModel(customizedLanguageModel)
+	return x
+}
+
 // URL calls the underlying URL.
 func (x *SpeechURLRecognitionRequest) URL() *foundation.NSURL {
 	return x.inner.URL()
@@ -47,6 +100,13 @@ func (x *SpeechURLRecognitionRequest) asSpeechRecognitionRequest() *raw.SFSpeech
 // SpeechURLRecognitionRequestable is the interface implemented by [SpeechURLRecognitionRequest], for mocking and DI.
 type SpeechURLRecognitionRequestable interface {
 	Unwrap() *raw.SFSpeechURLRecognitionRequest
+	WithTaskHint(taskHint raw.SFSpeechRecognitionTaskHint) *SpeechURLRecognitionRequest
+	WithShouldReportPartialResults(shouldReportPartialResults bool) *SpeechURLRecognitionRequest
+	WithContextualStrings(items ...*foundation.NSString) *SpeechURLRecognitionRequest
+	WithInteractionIdentifier(interactionIdentifier string) *SpeechURLRecognitionRequest
+	WithRequiresOnDeviceRecognition(requiresOnDeviceRecognition bool) *SpeechURLRecognitionRequest
+	WithAddsPunctuation(addsPunctuation bool) *SpeechURLRecognitionRequest
+	WithCustomizedLanguageModel(customizedLanguageModel *raw.SFSpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest
 	URL() *foundation.NSURL
 }
 

@@ -5,6 +5,8 @@
 package mpsimage
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +43,24 @@ func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
 	return x
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithOffset(offset mpscore.MPSOffset) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *ImageLaplacian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian {
+	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
 // Bias calls the underlying Bias.
 func (x *ImageLaplacian) Bias() float32 {
 	return x.inner.Bias()
@@ -57,6 +77,9 @@ func (x *ImageLaplacian) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return 
 type ImageLaplacianable interface {
 	Unwrap() *raw.MPSImageLaplacian
 	WithBias(bias float32) *ImageLaplacian
+	WithOffset(offset mpscore.MPSOffset) *ImageLaplacian
+	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian
 	Bias() float32
 	SetBias(bias float32)
 }

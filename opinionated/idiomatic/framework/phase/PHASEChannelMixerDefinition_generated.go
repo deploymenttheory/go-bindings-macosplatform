@@ -45,6 +45,18 @@ func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelL
 	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
 }
 
+// WithGain sets the gain property and returns the receiver for chaining.
+func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGain(gain)
+	return x
+}
+
+// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+func (x *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
+	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	return x
+}
+
 // InputChannelLayout calls the underlying InputChannelLayout.
 func (x *ChannelMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
 	return x.inner.InputChannelLayout()
@@ -57,6 +69,8 @@ func (x *ChannelMixerDefinition) asDefinition() *raw.PHASEDefinition { return &x
 // ChannelMixerDefinitionable is the interface implemented by [ChannelMixerDefinition], for mocking and DI.
 type ChannelMixerDefinitionable interface {
 	Unwrap() *raw.PHASEChannelMixerDefinition
+	WithGain(gain float64) *ChannelMixerDefinition
+	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition
 	InputChannelLayout() *avfaudio.AVAudioChannelLayout
 }
 

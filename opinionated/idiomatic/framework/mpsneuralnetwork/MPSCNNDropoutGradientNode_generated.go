@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
@@ -37,6 +38,18 @@ func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProb
 	return &CNNDropoutGradientNode{inner: raw.MPSCNNDropoutGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNDropoutGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDropoutGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KeepProbability calls the underlying KeepProbability.
 func (x *CNNDropoutGradientNode) KeepProbability() float32 {
 	return x.inner.KeepProbability()
@@ -59,6 +72,8 @@ func (x *CNNDropoutGradientNode) asNNFilterNode() *raw.MPSNNFilterNode { return 
 // CNNDropoutGradientNodeable is the interface implemented by [CNNDropoutGradientNode], for mocking and DI.
 type CNNDropoutGradientNodeable interface {
 	Unwrap() *raw.MPSCNNDropoutGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNDropoutGradientNode
+	WithLabel(label string) *CNNDropoutGradientNode
 	KeepProbability() float32
 	Seed() uint
 	MaskStrideInPixels() metal.MTLSize

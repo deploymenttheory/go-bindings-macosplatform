@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/ebitengine/purego/objc"
@@ -36,11 +37,25 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 	return &RNNMatrixTrainingState{inner: raw.MPSRNNMatrixTrainingStateFromID(_id)}
 }
 
+// WithReadCount sets the readCount property and returns the receiver for chaining.
+func (x *RNNMatrixTrainingState) WithReadCount(readCount uint) *RNNMatrixTrainingState {
+	x.inner.MPSState.SetReadCount(readCount)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *RNNMatrixTrainingState) WithLabel(label string) *RNNMatrixTrainingState {
+	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 func (x *RNNMatrixTrainingState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
 type RNNMatrixTrainingStateable interface {
 	Unwrap() *raw.MPSRNNMatrixTrainingState
+	WithReadCount(readCount uint) *RNNMatrixTrainingState
+	WithLabel(label string) *RNNMatrixTrainingState
 }
 
 var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)

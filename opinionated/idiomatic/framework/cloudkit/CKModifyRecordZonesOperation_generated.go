@@ -96,6 +96,60 @@ func (x *ModifyRecordZonesOperation) WithModifyRecordZonesCompletionBlock(modify
 	return x
 }
 
+// WithDatabase sets the database property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithDatabase(database *raw.CKDatabase) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.SetDatabase(database)
+	return x
+}
+
+// WithConfiguration sets the configuration property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration)
+	return x
+}
+
+// WithGroup sets the group property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithGroup(group *raw.CKOperationGroup) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group)
+	return x
+}
+
+// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	return x
+}
+
+// WithContainer sets the container property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithContainer(container *raw.CKContainer) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container)
+	return x
+}
+
+// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	return x
+}
+
+// WithLongLived sets the longLived property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithLongLived(longLived bool) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	return x
+}
+
+// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	return x
+}
+
+// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation {
+	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	return x
+}
+
 // RecordZonesToSave returns the collection as a Go slice.
 func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*raw.CKRecordZone {
 	arr := x.inner.RecordZonesToSave()
@@ -191,6 +245,15 @@ type ModifyRecordZonesOperationable interface {
 	WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation
 	WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation
 	WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation
+	WithDatabase(database *raw.CKDatabase) *ModifyRecordZonesOperation
+	WithConfiguration(configuration *raw.CKOperationConfiguration) *ModifyRecordZonesOperation
+	WithGroup(group *raw.CKOperationGroup) *ModifyRecordZonesOperation
+	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation
+	WithContainer(container *raw.CKContainer) *ModifyRecordZonesOperation
+	WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation
+	WithLongLived(longLived bool) *ModifyRecordZonesOperation
+	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation
+	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation
 	RecordZonesToSave() []*raw.CKRecordZone
 	SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone])
 	RecordZoneIDsToDelete() []*raw.CKRecordZoneID

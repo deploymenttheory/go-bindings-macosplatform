@@ -94,6 +94,276 @@ func (x *FormCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedS
 	return x
 }
 
+// WithControlView sets the controlView property and returns the receiver for chaining.
+func (x *FormCell) WithControlView(controlView ViewProvider) *FormCell {
+	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	return x
+}
+
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *FormCell) WithType(type_ raw.NSCellType) *FormCell {
+	x.inner.NSActionCell.NSCell.SetType(type_)
+	return x
+}
+
+// WithState sets the state property and returns the receiver for chaining.
+func (x *FormCell) WithState(state int) *FormCell {
+	x.inner.NSActionCell.NSCell.SetState(state)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *FormCell) WithTarget(target objc.ID) *FormCell {
+	x.inner.NSActionCell.NSCell.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *FormCell) WithAction(action objc.SEL) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *FormCell) WithTag(tag int) *FormCell {
+	x.inner.NSActionCell.NSCell.SetTag(tag)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *FormCell) WithTitle(title string) *FormCell {
+	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *FormCell) WithEnabled(enabled bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *FormCell) WithContinuous(continuous bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	return x
+}
+
+// WithEditable sets the editable property and returns the receiver for chaining.
+func (x *FormCell) WithEditable(editable bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	return x
+}
+
+// WithSelectable sets the selectable property and returns the receiver for chaining.
+func (x *FormCell) WithSelectable(selectable bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *FormCell) WithBordered(bordered bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	return x
+}
+
+// WithBezeled sets the bezeled property and returns the receiver for chaining.
+func (x *FormCell) WithBezeled(bezeled bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	return x
+}
+
+// WithScrollable sets the scrollable property and returns the receiver for chaining.
+func (x *FormCell) WithScrollable(scrollable bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *FormCell) WithHighlighted(highlighted bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *FormCell) WithAlignment(alignment raw.NSTextAlignment) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAlignment(alignment)
+	return x
+}
+
+// WithWraps sets the wraps property and returns the receiver for chaining.
+func (x *FormCell) WithWraps(wraps bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *FormCell) WithFont(font *raw.NSFont) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFont(font)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *FormCell) WithFormatter(formatter *foundation.NSFormatter) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *FormCell) WithObjectValue(objectValue objc.ID) *FormCell {
+	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *FormCell) WithStringValue(stringValue string) *FormCell {
+	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *FormCell) WithIntValue(intValue int) *FormCell {
+	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *FormCell) WithFloatValue(floatValue float32) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *FormCell) WithDoubleValue(doubleValue float64) *FormCell {
+	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *FormCell) WithIntegerValue(integerValue int) *FormCell {
+	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *FormCell) WithImage(image *raw.NSImage) *FormCell {
+	x.inner.NSActionCell.NSCell.SetImage(image)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *FormCell) WithControlSize(controlSize raw.NSControlSize) *FormCell {
+	x.inner.NSActionCell.NSCell.SetControlSize(controlSize)
+	return x
+}
+
+// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
+func (x *FormCell) WithRepresentedObject(representedObject objc.ID) *FormCell {
+	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *FormCell) WithMenu(menu *raw.NSMenu) *FormCell {
+	x.inner.NSActionCell.NSCell.SetMenu(menu)
+	return x
+}
+
+// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+func (x *FormCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *FormCell) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *FormCell) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *FormCell {
+	x.inner.NSActionCell.NSCell.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+func (x *FormCell) WithAllowsUndo(allowsUndo bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	return x
+}
+
+// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+func (x *FormCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *FormCell {
+	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *FormCell) WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *FormCell) WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+func (x *FormCell) WithShowsFirstResponder(showsFirstResponder bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *FormCell) WithFocusRingType(focusRingType raw.NSFocusRingType) *FormCell {
+	x.inner.NSActionCell.NSCell.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *FormCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+func (x *FormCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	return x
+}
+
+// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+func (x *FormCell) WithImportsGraphics(importsGraphics bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	return x
+}
+
+// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+func (x *FormCell) WithAllowsMixedState(allowsMixedState bool) *FormCell {
+	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	return x
+}
+
+// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
+func (x *FormCell) WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *FormCell {
+	x.inner.NSActionCell.NSCell.SetBackgroundStyle(backgroundStyle)
+	return x
+}
+
+// WithControlTint sets the controlTint property and returns the receiver for chaining.
+func (x *FormCell) WithControlTint(controlTint raw.NSControlTint) *FormCell {
+	x.inner.NSActionCell.NSCell.SetControlTint(controlTint)
+	return x
+}
+
 // TitleWidth calls the underlying TitleWidth.
 func (x *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
 	return x.inner.TitleWidth(size)
@@ -202,6 +472,51 @@ type FormCellable interface {
 	WithTitleBaseWritingDirection(titleBaseWritingDirection raw.NSWritingDirection) *FormCell
 	WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell
 	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell
+	WithControlView(controlView ViewProvider) *FormCell
+	WithType(type_ raw.NSCellType) *FormCell
+	WithState(state int) *FormCell
+	WithTarget(target objc.ID) *FormCell
+	WithAction(action objc.SEL) *FormCell
+	WithTag(tag int) *FormCell
+	WithTitle(title string) *FormCell
+	WithEnabled(enabled bool) *FormCell
+	WithContinuous(continuous bool) *FormCell
+	WithEditable(editable bool) *FormCell
+	WithSelectable(selectable bool) *FormCell
+	WithBordered(bordered bool) *FormCell
+	WithBezeled(bezeled bool) *FormCell
+	WithScrollable(scrollable bool) *FormCell
+	WithHighlighted(highlighted bool) *FormCell
+	WithAlignment(alignment raw.NSTextAlignment) *FormCell
+	WithWraps(wraps bool) *FormCell
+	WithFont(font *raw.NSFont) *FormCell
+	WithFormatter(formatter *foundation.NSFormatter) *FormCell
+	WithObjectValue(objectValue objc.ID) *FormCell
+	WithStringValue(stringValue string) *FormCell
+	WithIntValue(intValue int) *FormCell
+	WithFloatValue(floatValue float32) *FormCell
+	WithDoubleValue(doubleValue float64) *FormCell
+	WithIntegerValue(integerValue int) *FormCell
+	WithImage(image *raw.NSImage) *FormCell
+	WithControlSize(controlSize raw.NSControlSize) *FormCell
+	WithRepresentedObject(representedObject objc.ID) *FormCell
+	WithMenu(menu *raw.NSMenu) *FormCell
+	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *FormCell
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *FormCell
+	WithAllowsUndo(allowsUndo bool) *FormCell
+	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *FormCell
+	WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell
+	WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell
+	WithShowsFirstResponder(showsFirstResponder bool) *FormCell
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *FormCell
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell
+	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell
+	WithImportsGraphics(importsGraphics bool) *FormCell
+	WithAllowsMixedState(allowsMixedState bool) *FormCell
+	WithBackgroundStyle(backgroundStyle raw.NSBackgroundStyle) *FormCell
+	WithControlTint(controlTint raw.NSControlTint) *FormCell
 	TitleWidth(size corefoundation.CGSize) float64
 	TitleWidth2() float64
 	SetTitleWidth(titleWidth float64)

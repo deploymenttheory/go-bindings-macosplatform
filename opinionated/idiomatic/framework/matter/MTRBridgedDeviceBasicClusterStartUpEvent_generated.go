@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,18 @@ func NewMTRBridgedDeviceBasicClusterStartUpEvent() *MTRBridgedDeviceBasicCluster
 	return &MTRBridgedDeviceBasicClusterStartUpEvent{inner: raw.MTRBridgedDeviceBasicClusterStartUpEventFromID(_id)}
 }
 
+// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
+func (x *MTRBridgedDeviceBasicClusterStartUpEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBridgedDeviceBasicClusterStartUpEvent {
+	x.inner.MTRBridgedDeviceBasicInformationClusterStartUpEvent.SetSoftwareVersion(softwareVersion)
+	return x
+}
+
 func (x *MTRBridgedDeviceBasicClusterStartUpEvent) asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent { return &x.inner.MTRBridgedDeviceBasicInformationClusterStartUpEvent }
 
 // MTRBridgedDeviceBasicClusterStartUpEventable is the interface implemented by [MTRBridgedDeviceBasicClusterStartUpEvent], for mocking and DI.
 type MTRBridgedDeviceBasicClusterStartUpEventable interface {
 	Unwrap() *raw.MTRBridgedDeviceBasicClusterStartUpEvent
+	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTRBridgedDeviceBasicClusterStartUpEvent
 }
 
 var _ MTRBridgedDeviceBasicClusterStartUpEventable = (*MTRBridgedDeviceBasicClusterStartUpEvent)(nil)

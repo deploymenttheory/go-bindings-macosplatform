@@ -6,7 +6,12 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // VisualEffectView wraps [raw.NSVisualEffectView] with a fluent Go API.
@@ -62,6 +67,340 @@ func (x *VisualEffectView) WithMaskImage(maskImage *raw.NSImage) *VisualEffectVi
 // WithEmphasized sets the emphasized property and returns the receiver for chaining.
 func (x *VisualEffectView) WithEmphasized(emphasized bool) *VisualEffectView {
 	x.inner.SetEmphasized(emphasized)
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *VisualEffectView) WithSubviews(items ...ViewProvider) *VisualEffectView {
+	if len(items) == 0 {
+		x.inner.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *VisualEffectView) WithHidden(hidden bool) *VisualEffectView {
+	x.inner.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *VisualEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView {
+	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView {
+	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *VisualEffectView {
+	x.inner.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *VisualEffectView) WithFrame(frame corefoundation.CGRect) *VisualEffectView {
+	x.inner.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *VisualEffectView) WithFrameRotation(frameRotation float64) *VisualEffectView {
+	x.inner.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *VisualEffectView) WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView {
+	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *VisualEffectView) WithBoundsRotation(boundsRotation float64) *VisualEffectView {
+	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *VisualEffectView) WithBounds(bounds corefoundation.CGRect) *VisualEffectView {
+	x.inner.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *VisualEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView {
+	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *VisualEffectView) WithNeedsDisplay(needsDisplay bool) *VisualEffectView {
+	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView {
+	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *VisualEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView {
+	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *VisualEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *VisualEffectView {
+	x.inner.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *VisualEffectView) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *VisualEffectView {
+	x.inner.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *VisualEffectView) WithWantsLayer(wantsLayer bool) *VisualEffectView {
+	x.inner.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *VisualEffectView) WithLayer(layer *quartzcore.CALayer) *VisualEffectView {
+	x.inner.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *VisualEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView {
+	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *VisualEffectView) WithNeedsLayout(needsLayout bool) *VisualEffectView {
+	x.inner.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAlphaValue(alphaValue float64) *VisualEffectView {
+	x.inner.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *VisualEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *VisualEffectView {
+	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *VisualEffectView) WithBackgroundFilters(items ...*coreimage.CIFilter) *VisualEffectView {
+	if len(items) == 0 {
+		x.inner.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *VisualEffectView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *VisualEffectView {
+	x.inner.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *VisualEffectView) WithContentFilters(items ...*coreimage.CIFilter) *VisualEffectView {
+	if len(items) == 0 {
+		x.inner.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *VisualEffectView) WithShadow(shadow *raw.NSShadow) *VisualEffectView {
+	x.inner.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *VisualEffectView) WithClipsToBounds(clipsToBounds bool) *VisualEffectView {
+	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *VisualEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView {
+	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *VisualEffectView) WithToolTip(toolTip string) *VisualEffectView {
+	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *VisualEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *VisualEffectView {
+	x.inner.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *VisualEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView {
+	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *VisualEffectView) WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView {
+	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *VisualEffectView) WithFocusRingType(focusRingType raw.NSFocusRingType) *VisualEffectView {
+	x.inner.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *VisualEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView {
+	if len(items) == 0 {
+		x.inner.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *VisualEffectView {
+	x.inner.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *VisualEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView {
+	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *VisualEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView {
+	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *VisualEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *VisualEffectView {
+	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *VisualEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView {
+	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *VisualEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView {
+	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *VisualEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView {
+	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *VisualEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView {
+	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *VisualEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView {
+	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *VisualEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView {
+	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *VisualEffectView) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *VisualEffectView {
+	x.inner.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *VisualEffectView) WithNextResponder(nextResponder ResponderProvider) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *VisualEffectView) WithMenu(menu *raw.NSMenu) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *VisualEffectView) WithUserActivity(userActivity *foundation.NSUserActivity) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *VisualEffectView) WithTouchBar(touchBar *raw.NSTouchBar) *VisualEffectView {
+	x.inner.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -136,6 +475,55 @@ type VisualEffectViewable interface {
 	WithState(state raw.NSVisualEffectState) *VisualEffectView
 	WithMaskImage(maskImage *raw.NSImage) *VisualEffectView
 	WithEmphasized(emphasized bool) *VisualEffectView
+	WithSubviews(items ...ViewProvider) *VisualEffectView
+	WithHidden(hidden bool) *VisualEffectView
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *VisualEffectView
+	WithAutoresizesSubviews(autoresizesSubviews bool) *VisualEffectView
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *VisualEffectView
+	WithFrame(frame corefoundation.CGRect) *VisualEffectView
+	WithFrameRotation(frameRotation float64) *VisualEffectView
+	WithFrameCenterRotation(frameCenterRotation float64) *VisualEffectView
+	WithBoundsRotation(boundsRotation float64) *VisualEffectView
+	WithBounds(bounds corefoundation.CGRect) *VisualEffectView
+	WithCanDrawConcurrently(canDrawConcurrently bool) *VisualEffectView
+	WithNeedsDisplay(needsDisplay bool) *VisualEffectView
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *VisualEffectView
+	WithWantsRestingTouches(wantsRestingTouches bool) *VisualEffectView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *VisualEffectView
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *VisualEffectView
+	WithWantsLayer(wantsLayer bool) *VisualEffectView
+	WithLayer(layer *quartzcore.CALayer) *VisualEffectView
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *VisualEffectView
+	WithNeedsLayout(needsLayout bool) *VisualEffectView
+	WithAlphaValue(alphaValue float64) *VisualEffectView
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *VisualEffectView
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *VisualEffectView
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *VisualEffectView
+	WithContentFilters(items ...*coreimage.CIFilter) *VisualEffectView
+	WithShadow(shadow *raw.NSShadow) *VisualEffectView
+	WithClipsToBounds(clipsToBounds bool) *VisualEffectView
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *VisualEffectView
+	WithToolTip(toolTip string) *VisualEffectView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *VisualEffectView
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *VisualEffectView
+	WithNextKeyView(nextKeyView ViewProvider) *VisualEffectView
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *VisualEffectView
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *VisualEffectView
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *VisualEffectView
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *VisualEffectView
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *VisualEffectView
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *VisualEffectView
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *VisualEffectView
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *VisualEffectView
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *VisualEffectView
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *VisualEffectView
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *VisualEffectView
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *VisualEffectView
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *VisualEffectView
+	WithNextResponder(nextResponder ResponderProvider) *VisualEffectView
+	WithMenu(menu *raw.NSMenu) *VisualEffectView
+	WithUserActivity(userActivity *foundation.NSUserActivity) *VisualEffectView
+	WithTouchBar(touchBar *raw.NSTouchBar) *VisualEffectView
 	Material() raw.NSVisualEffectMaterial
 	SetMaterial(material raw.NSVisualEffectMaterial)
 	InteriorBackgroundStyle() raw.NSBackgroundStyle

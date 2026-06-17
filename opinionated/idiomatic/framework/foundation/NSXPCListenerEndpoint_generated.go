@@ -35,11 +35,18 @@ func NewXPCListenerEndpoint() *XPCListenerEndpoint {
 	return &XPCListenerEndpoint{inner: raw.NSXPCListenerEndpointFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *XPCListenerEndpoint) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListenerEndpoint {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 func (x *XPCListenerEndpoint) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // XPCListenerEndpointable is the interface implemented by [XPCListenerEndpoint], for mocking and DI.
 type XPCListenerEndpointable interface {
 	Unwrap() *raw.NSXPCListenerEndpoint
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListenerEndpoint
 }
 
 var _ XPCListenerEndpointable = (*XPCListenerEndpoint)(nil)

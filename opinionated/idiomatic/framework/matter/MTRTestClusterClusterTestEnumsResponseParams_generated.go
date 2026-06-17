@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,32 @@ func NewMTRTestClusterClusterTestEnumsResponseParams() *MTRTestClusterClusterTes
 	return &MTRTestClusterClusterTestEnumsResponseParams{inner: raw.MTRTestClusterClusterTestEnumsResponseParamsFromID(_id)}
 }
 
+// WithArg1 sets the arg1 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
+	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetArg1(arg1)
+	return x
+}
+
+// WithArg2 sets the arg2 property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
+	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetArg2(arg2)
+	return x
+}
+
+// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
+func (x *MTRTestClusterClusterTestEnumsResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams {
+	x.inner.MTRUnitTestingClusterTestEnumsResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+	return x
+}
+
 func (x *MTRTestClusterClusterTestEnumsResponseParams) asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams { return &x.inner.MTRUnitTestingClusterTestEnumsResponseParams }
 
 // MTRTestClusterClusterTestEnumsResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEnumsResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEnumsResponseParamsable interface {
 	Unwrap() *raw.MTRTestClusterClusterTestEnumsResponseParams
+	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
+	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEnumsResponseParams
 }
 
 var _ MTRTestClusterClusterTestEnumsResponseParamsable = (*MTRTestClusterClusterTestEnumsResponseParams)(nil)

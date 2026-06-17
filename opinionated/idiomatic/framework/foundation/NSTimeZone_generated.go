@@ -44,6 +44,12 @@ func NewTimeZoneWithNameData(tzName string, aData *raw.NSData) *TimeZone {
 	return &TimeZone{inner: raw.NSTimeZoneFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *TimeZone) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TimeZone {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SecondsFromGMTForDate calls the underlying SecondsFromGMTForDate.
 func (x *TimeZone) SecondsFromGMTForDate(aDate *raw.NSDate) int {
 	return x.inner.SecondsFromGMTForDate(aDate)
@@ -147,6 +153,7 @@ func (x *TimeZone) asObject() *raw.NSObject { return &x.inner.NSObject }
 // TimeZoneable is the interface implemented by [TimeZone], for mocking and DI.
 type TimeZoneable interface {
 	Unwrap() *raw.NSTimeZone
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TimeZone
 	SecondsFromGMTForDate(aDate *raw.NSDate) int
 	AbbreviationForDate(aDate *raw.NSDate) *String
 	IsDaylightSavingTimeForDate(aDate *raw.NSDate) bool

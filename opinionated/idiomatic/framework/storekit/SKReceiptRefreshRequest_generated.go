@@ -37,6 +37,12 @@ func NewReceiptRefreshRequestWithReceiptProperties(properties *foundation.NSDict
 	return &ReceiptRefreshRequest{inner: raw.SKReceiptRefreshRequestFromID(_id)}
 }
 
+// WithDelegate sets the delegate property and returns the receiver for chaining.
+func (x *ReceiptRefreshRequest) WithDelegate(delegate raw.SKRequestDelegate) *ReceiptRefreshRequest {
+	x.inner.SKRequest.SetDelegate(delegate)
+	return x
+}
+
 // ReceiptProperties calls the underlying ReceiptProperties.
 func (x *ReceiptRefreshRequest) ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
 	return x.inner.ReceiptProperties()
@@ -47,6 +53,7 @@ func (x *ReceiptRefreshRequest) asRequest() *raw.SKRequest { return &x.inner.SKR
 // ReceiptRefreshRequestable is the interface implemented by [ReceiptRefreshRequest], for mocking and DI.
 type ReceiptRefreshRequestable interface {
 	Unwrap() *raw.SKReceiptRefreshRequest
+	WithDelegate(delegate raw.SKRequestDelegate) *ReceiptRefreshRequest
 	ReceiptProperties() *foundation.NSDictionary[*foundation.NSString, objc.ID]
 }
 

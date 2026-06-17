@@ -37,6 +37,12 @@ func NewAppleEventManager() *AppleEventManager {
 	return &AppleEventManager{inner: raw.NSAppleEventManagerFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *AppleEventManager) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventManager {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // SetEventHandlerAndSelectorForEventClassAndEventID calls the underlying SetEventHandlerAndSelectorForEventClassAndEventID.
 func (x *AppleEventManager) SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint) {
 	x.inner.SetEventHandlerAndSelectorForEventClassAndEventID(handler, handleEventSelector, eventClass, eventID)
@@ -108,6 +114,7 @@ func (x *AppleEventManager) asObject() *raw.NSObject { return &x.inner.NSObject 
 // AppleEventManagerable is the interface implemented by [AppleEventManager], for mocking and DI.
 type AppleEventManagerable interface {
 	Unwrap() *raw.NSAppleEventManager
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventManager
 	SetEventHandlerAndSelectorForEventClassAndEventID(handler objc.ID, handleEventSelector objc.SEL, eventClass uint, eventID uint)
 	RemoveEventHandlerForEventClassAndEventID(eventClass uint, eventID uint)
 	DispatchRawAppleEventWithRawReplyHandlerRefCon(theAppleEvent *ae.AEDesc, theReply *ae.AEDesc, handlerRefCon unsafe.Pointer) int16

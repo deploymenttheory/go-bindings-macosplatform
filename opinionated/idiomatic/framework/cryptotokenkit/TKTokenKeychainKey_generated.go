@@ -93,6 +93,18 @@ func (x *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKey
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
+	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithConstraints sets the constraints property and returns the receiver for chaining.
+func (x *TokenKeychainKey) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainKey {
+	x.inner.TKTokenKeychainItem.SetConstraints(constraints)
+	return x
+}
+
 // KeyType calls the underlying KeyType.
 func (x *TokenKeychainKey) KeyType() string {
 	_r := x.inner.KeyType()
@@ -201,6 +213,8 @@ type TokenKeychainKeyable interface {
 	WithCanSign(canSign bool) *TokenKeychainKey
 	WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey
 	WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey
+	WithLabel(label string) *TokenKeychainKey
+	WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainKey
 	KeyType() string
 	SetKeyType(keyType string)
 	ApplicationTag() *foundation.NSData

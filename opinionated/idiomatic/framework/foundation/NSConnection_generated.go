@@ -68,6 +68,12 @@ func (x *Connection) WithIndependentConversationQueueing(independentConversation
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *Connection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Connection {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // Invalidate calls the underlying Invalidate.
 func (x *Connection) Invalidate() {
 	x.inner.Invalidate()
@@ -241,6 +247,7 @@ type Connectionable interface {
 	WithRootObject(rootObject objc.ID) *Connection
 	WithDelegate(delegate raw.NSConnectionDelegate) *Connection
 	WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Connection
 	Invalidate()
 	AddRequestMode(rmode string)
 	RemoveRequestMode(rmode string)

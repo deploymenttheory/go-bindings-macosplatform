@@ -38,6 +38,12 @@ func NewKeyValueSharedObserversWithObservableClass(observableClass objc.Class) *
 	return &KeyValueSharedObservers{inner: raw.NSKeyValueSharedObserversFromID(_id)}
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObservers {
+	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
 func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
 	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), options, context_)
@@ -57,6 +63,7 @@ func (x *KeyValueSharedObservers) asObject() *raw.NSObject { return &x.inner.NSO
 // KeyValueSharedObserversable is the interface implemented by [KeyValueSharedObservers], for mocking and DI.
 type KeyValueSharedObserversable interface {
 	Unwrap() *raw.NSKeyValueSharedObservers
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObservers
 	AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options raw.NSKeyValueObservingOptions, context_ unsafe.Pointer)
 	Snapshot() *KeyValueSharedObserversSnapshot
 }

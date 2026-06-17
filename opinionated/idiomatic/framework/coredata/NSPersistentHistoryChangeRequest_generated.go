@@ -6,7 +6,9 @@ package coredata
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // PersistentHistoryChangeRequest wraps [raw.NSPersistentHistoryChangeRequest] with a fluent Go API.
@@ -47,6 +49,22 @@ func (x *PersistentHistoryChangeRequest) WithFetchRequest(fetchRequest *raw.NSFe
 	return x
 }
 
+// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+func (x *PersistentHistoryChangeRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest {
+	if len(items) == 0 {
+		x.inner.NSPersistentStoreRequest.SetAffectedStores(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asPersistentStore().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	return x
+}
+
 // ResultType calls the underlying ResultType.
 func (x *PersistentHistoryChangeRequest) ResultType() raw.NSPersistentHistoryResultType {
 	return x.inner.ResultType()
@@ -83,6 +101,7 @@ type PersistentHistoryChangeRequestable interface {
 	Unwrap() *raw.NSPersistentHistoryChangeRequest
 	WithResultType(resultType raw.NSPersistentHistoryResultType) *PersistentHistoryChangeRequest
 	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *PersistentHistoryChangeRequest
+	WithAffectedStores(items ...PersistentStoreProvider) *PersistentHistoryChangeRequest
 	ResultType() raw.NSPersistentHistoryResultType
 	SetResultType(resultType raw.NSPersistentHistoryResultType)
 	Token() *PersistentHistoryToken

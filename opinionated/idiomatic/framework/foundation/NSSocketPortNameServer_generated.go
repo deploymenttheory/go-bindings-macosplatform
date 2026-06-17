@@ -42,6 +42,12 @@ func (x *SocketPortNameServer) WithDefaultNameServerPortNumber(defaultNameServer
 	return x
 }
 
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *SocketPortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPortNameServer {
+	x.inner.NSPortNameServer.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // PortForNameHostNameServerPortNumber calls the underlying PortForNameHostNameServerPortNumber.
 func (x *SocketPortNameServer) PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port {
 	_r := x.inner.PortForNameHostNameServerPortNumber(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host), portNumber)
@@ -74,6 +80,7 @@ func (x *SocketPortNameServer) asObject() *raw.NSObject { return &x.inner.NSPort
 type SocketPortNameServerable interface {
 	Unwrap() *raw.NSSocketPortNameServer
 	WithDefaultNameServerPortNumber(defaultNameServerPortNumber uint16) *SocketPortNameServer
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPortNameServer
 	PortForNameHostNameServerPortNumber(name string, host string, portNumber uint16) *Port
 	RegisterPortNameNameServerPortNumber(port *raw.NSPort, name string, portNumber uint16) bool
 	DefaultNameServerPortNumber() uint16

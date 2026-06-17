@@ -5,6 +5,7 @@
 package mpsndarray
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
 	"github.com/ebitengine/purego/objc"
 )
@@ -41,6 +42,12 @@ func (x *ArrayStridedSlice) WithStrides(strides raw.MPSNDArrayOffsets) *ArrayStr
 	return x
 }
 
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *ArrayStridedSlice) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSlice {
+	x.inner.MPSNDArrayUnaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
 // SetStrides calls the underlying SetStrides.
 func (x *ArrayStridedSlice) SetStrides(strides raw.MPSNDArrayOffsets) {
 	x.inner.SetStrides(strides)
@@ -56,6 +63,7 @@ func (x *ArrayStridedSlice) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase { 
 type ArrayStridedSliceable interface {
 	Unwrap() *raw.MPSNDArrayStridedSlice
 	WithStrides(strides raw.MPSNDArrayOffsets) *ArrayStridedSlice
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSlice
 	SetStrides(strides raw.MPSNDArrayOffsets)
 }
 

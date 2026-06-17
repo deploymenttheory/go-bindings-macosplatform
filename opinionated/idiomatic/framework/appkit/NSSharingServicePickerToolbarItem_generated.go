@@ -6,6 +6,8 @@ package appkit
 
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -41,6 +43,138 @@ func (x *SharingServicePickerToolbarItem) WithDelegate(delegate raw.NSSharingSer
 	return x
 }
 
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithLabel(label string) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
+// WithPaletteLabel sets the paletteLabel property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetPaletteLabel(foundation.NSStringStringWithUTF8String(paletteLabel))
+	return x
+}
+
+// WithPossibleLabels sets the possibleLabels property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetPossibleLabels(possibleLabels)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithToolTip(toolTip string) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithMenuFormRepresentation sets the menuFormRepresentation property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetMenuFormRepresentation(menuFormRepresentation)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithTag(tag int) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetTag(tag)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithTarget(target objc.ID) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithAction(action objc.SEL) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetAction(action)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithEnabled(enabled bool) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetEnabled(enabled)
+	return x
+}
+
+// WithImage sets the image property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithImage(image *raw.NSImage) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetImage(image)
+	return x
+}
+
+// WithTitle sets the title property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithTitle(title string) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	return x
+}
+
+// WithBordered sets the bordered property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithBordered(bordered bool) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetBordered(bordered)
+	return x
+}
+
+// WithBackgroundTintColor sets the backgroundTintColor property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetBackgroundTintColor(backgroundTintColor)
+	return x
+}
+
+// WithStyle sets the style property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithStyle(style raw.NSToolbarItemStyle) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetStyle(style)
+	return x
+}
+
+// WithNavigational sets the navigational property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithNavigational(navigational bool) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetNavigational(navigational)
+	return x
+}
+
+// WithView sets the view property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithView(view ViewProvider) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetView(view.asView())
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithHidden(hidden bool) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetHidden(hidden)
+	return x
+}
+
+// WithMinSize sets the minSize property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetMinSize(minSize)
+	return x
+}
+
+// WithMaxSize sets the maxSize property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetMaxSize(maxSize)
+	return x
+}
+
+// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetVisibilityPriority(visibilityPriority)
+	return x
+}
+
+// WithBadge sets the badge property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithBadge(badge *raw.NSItemBadge) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetBadge(badge)
+	return x
+}
+
+// WithAutovalidates sets the autovalidates property and returns the receiver for chaining.
+func (x *SharingServicePickerToolbarItem) WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem {
+	x.inner.NSToolbarItem.SetAutovalidates(autovalidates)
+	return x
+}
+
 // Delegate calls the underlying Delegate.
 func (x *SharingServicePickerToolbarItem) Delegate() raw.NSSharingServicePickerToolbarItemDelegate {
 	return x.inner.Delegate()
@@ -57,6 +191,28 @@ func (x *SharingServicePickerToolbarItem) asToolbarItem() *raw.NSToolbarItem { r
 type SharingServicePickerToolbarItemable interface {
 	Unwrap() *raw.NSSharingServicePickerToolbarItem
 	WithDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate) *SharingServicePickerToolbarItem
+	WithLabel(label string) *SharingServicePickerToolbarItem
+	WithPaletteLabel(paletteLabel string) *SharingServicePickerToolbarItem
+	WithPossibleLabels(possibleLabels *foundation.NSSet[*foundation.NSString]) *SharingServicePickerToolbarItem
+	WithToolTip(toolTip string) *SharingServicePickerToolbarItem
+	WithMenuFormRepresentation(menuFormRepresentation *raw.NSMenuItem) *SharingServicePickerToolbarItem
+	WithTag(tag int) *SharingServicePickerToolbarItem
+	WithTarget(target objc.ID) *SharingServicePickerToolbarItem
+	WithAction(action objc.SEL) *SharingServicePickerToolbarItem
+	WithEnabled(enabled bool) *SharingServicePickerToolbarItem
+	WithImage(image *raw.NSImage) *SharingServicePickerToolbarItem
+	WithTitle(title string) *SharingServicePickerToolbarItem
+	WithBordered(bordered bool) *SharingServicePickerToolbarItem
+	WithBackgroundTintColor(backgroundTintColor *raw.NSColor) *SharingServicePickerToolbarItem
+	WithStyle(style raw.NSToolbarItemStyle) *SharingServicePickerToolbarItem
+	WithNavigational(navigational bool) *SharingServicePickerToolbarItem
+	WithView(view ViewProvider) *SharingServicePickerToolbarItem
+	WithHidden(hidden bool) *SharingServicePickerToolbarItem
+	WithMinSize(minSize corefoundation.CGSize) *SharingServicePickerToolbarItem
+	WithMaxSize(maxSize corefoundation.CGSize) *SharingServicePickerToolbarItem
+	WithVisibilityPriority(visibilityPriority int) *SharingServicePickerToolbarItem
+	WithBadge(badge *raw.NSItemBadge) *SharingServicePickerToolbarItem
+	WithAutovalidates(autovalidates bool) *SharingServicePickerToolbarItem
 	Delegate() raw.NSSharingServicePickerToolbarItemDelegate
 	SetDelegate(delegate raw.NSSharingServicePickerToolbarItemDelegate)
 }

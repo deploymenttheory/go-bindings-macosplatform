@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -36,6 +37,18 @@ func NewCNNCrossChannelNormalizationGradientNodeWithSourceGradientSourceImageGra
 	return &CNNCrossChannelNormalizationGradientNode{inner: raw.MPSCNNCrossChannelNormalizationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNCrossChannelNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) *CNNCrossChannelNormalizationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // KernelSize calls the underlying KernelSize.
 func (x *CNNCrossChannelNormalizationGradientNode) KernelSize() uint {
 	return x.inner.KernelSize()
@@ -48,6 +61,8 @@ func (x *CNNCrossChannelNormalizationGradientNode) asNNFilterNode() *raw.MPSNNFi
 // CNNCrossChannelNormalizationGradientNodeable is the interface implemented by [CNNCrossChannelNormalizationGradientNode], for mocking and DI.
 type CNNCrossChannelNormalizationGradientNodeable interface {
 	Unwrap() *raw.MPSCNNCrossChannelNormalizationGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNCrossChannelNormalizationGradientNode
+	WithLabel(label string) *CNNCrossChannelNormalizationGradientNode
 	KernelSize() uint
 }
 

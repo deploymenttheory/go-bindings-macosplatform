@@ -50,6 +50,54 @@ func (x *UniqueIDSpecifier) WithUniqueID(uniqueID objc.ID) *UniqueIDSpecifier {
 	return x
 }
 
+// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	return x
+}
+
+// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	return x
+}
+
+// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	return x
+}
+
+// WithKey sets the key property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithKey(key string) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+	return x
+}
+
+// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription)
+	return x
+}
+
+// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	return x
+}
+
+// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
+func (x *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UniqueIDSpecifier {
+	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+	return x
+}
+
 // UniqueID calls the underlying UniqueID.
 func (x *UniqueIDSpecifier) UniqueID() objc.ID {
 	return x.inner.UniqueID()
@@ -68,6 +116,14 @@ func (x *UniqueIDSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptO
 type UniqueIDSpecifierable interface {
 	Unwrap() *raw.NSUniqueIDSpecifier
 	WithUniqueID(uniqueID objc.ID) *UniqueIDSpecifier
+	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier
+	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *UniqueIDSpecifier
+	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *UniqueIDSpecifier
+	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *UniqueIDSpecifier
+	WithKey(key string) *UniqueIDSpecifier
+	WithContainerClassDescription(containerClassDescription *raw.NSScriptClassDescription) *UniqueIDSpecifier
+	WithEvaluationErrorNumber(evaluationErrorNumber int) *UniqueIDSpecifier
+	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UniqueIDSpecifier
 	UniqueID() objc.ID
 	SetUniqueID(uniqueID objc.ID)
 }

@@ -5,6 +5,7 @@
 package mpsneuralnetwork
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -43,6 +44,18 @@ func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradient
 	return &NNGramMatrixCalculationGradientNode{inner: raw.MPSNNGramMatrixCalculationGradientNodeFromID(_id)}
 }
 
+// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradientNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGramMatrixCalculationGradientNode {
+	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
+}
+
 // Alpha calls the underlying Alpha.
 func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
 	return x.inner.Alpha()
@@ -55,6 +68,8 @@ func (x *NNGramMatrixCalculationGradientNode) asNNFilterNode() *raw.MPSNNFilterN
 // NNGramMatrixCalculationGradientNodeable is the interface implemented by [NNGramMatrixCalculationGradientNode], for mocking and DI.
 type NNGramMatrixCalculationGradientNodeable interface {
 	Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode
+	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNGramMatrixCalculationGradientNode
+	WithLabel(label string) *NNGramMatrixCalculationGradientNode
 	Alpha() float32
 }
 

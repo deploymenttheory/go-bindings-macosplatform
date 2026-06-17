@@ -53,6 +53,12 @@ func (x *AudioUnitTimePitch) WithOverlap(overlap float32) *AudioUnitTimePitch {
 	return x
 }
 
+// WithBypass sets the bypass property and returns the receiver for chaining.
+func (x *AudioUnitTimePitch) WithBypass(bypass bool) *AudioUnitTimePitch {
+	x.inner.AVAudioUnitTimeEffect.SetBypass(bypass)
+	return x
+}
+
 // Rate calls the underlying Rate.
 func (x *AudioUnitTimePitch) Rate() float32 {
 	return x.inner.Rate()
@@ -95,6 +101,7 @@ type AudioUnitTimePitchable interface {
 	WithRate(rate float32) *AudioUnitTimePitch
 	WithPitch(pitch float32) *AudioUnitTimePitch
 	WithOverlap(overlap float32) *AudioUnitTimePitch
+	WithBypass(bypass bool) *AudioUnitTimePitch
 	Rate() float32
 	SetRate(rate float32)
 	Pitch() float32

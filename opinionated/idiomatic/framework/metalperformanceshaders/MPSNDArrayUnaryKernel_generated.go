@@ -5,6 +5,7 @@
 package metalperformanceshaders
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
@@ -37,6 +38,24 @@ func NewNDArrayUnaryKernelWithDevice(device metal.MTLDevice) *NDArrayUnaryKernel
 	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayUnaryKernel")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
 	return &NDArrayUnaryKernel{inner: raw.MPSNDArrayUnaryKernelFromID(_id)}
+}
+
+// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
+func (x *NDArrayUnaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	return x
+}
+
+// WithOptions sets the options property and returns the receiver for chaining.
+func (x *NDArrayUnaryKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+	return x
+}
+
+// WithLabel sets the label property and returns the receiver for chaining.
+func (x *NDArrayUnaryKernel) WithLabel(label string) *NDArrayUnaryKernel {
+	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	return x
 }
 
 // EncodeToCommandBufferSourceArray calls the underlying EncodeToCommandBufferSourceArray.
@@ -93,6 +112,9 @@ func (x *NDArrayUnaryKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPS
 // NDArrayUnaryKernelable is the interface implemented by [NDArrayUnaryKernel], for mocking and DI.
 type NDArrayUnaryKernelable interface {
 	Unwrap() *raw.MPSNDArrayUnaryKernel
+	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryKernel
+	WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryKernel
+	WithLabel(label string) *NDArrayUnaryKernel
 	EncodeToCommandBufferSourceArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
 	EncodeToCommandBufferSourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
 	EncodeToCommandBufferSourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray

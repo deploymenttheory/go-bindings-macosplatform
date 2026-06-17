@@ -7,7 +7,9 @@ package appkit
 import (
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
@@ -196,6 +198,484 @@ func (x *Browser) WithAllowsTypeSelect(allowsTypeSelect bool) *Browser {
 // WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
 func (x *Browser) WithBackgroundColor(backgroundColor *raw.NSColor) *Browser {
 	x.inner.SetBackgroundColor(backgroundColor)
+	return x
+}
+
+// WithTarget sets the target property and returns the receiver for chaining.
+func (x *Browser) WithTarget(target objc.ID) *Browser {
+	x.inner.NSControl.SetTarget(target)
+	return x
+}
+
+// WithAction sets the action property and returns the receiver for chaining.
+func (x *Browser) WithAction(action objc.SEL) *Browser {
+	x.inner.NSControl.SetAction(action)
+	return x
+}
+
+// WithTag sets the tag property and returns the receiver for chaining.
+func (x *Browser) WithTag(tag int) *Browser {
+	x.inner.NSControl.SetTag(tag)
+	return x
+}
+
+// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+func (x *Browser) WithIgnoresMultiClick(ignoresMultiClick bool) *Browser {
+	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	return x
+}
+
+// WithContinuous sets the continuous property and returns the receiver for chaining.
+func (x *Browser) WithContinuous(continuous bool) *Browser {
+	x.inner.NSControl.SetContinuous(continuous)
+	return x
+}
+
+// WithEnabled sets the enabled property and returns the receiver for chaining.
+func (x *Browser) WithEnabled(enabled bool) *Browser {
+	x.inner.NSControl.SetEnabled(enabled)
+	return x
+}
+
+// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+func (x *Browser) WithRefusesFirstResponder(refusesFirstResponder bool) *Browser {
+	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	return x
+}
+
+// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+func (x *Browser) WithHighlighted(highlighted bool) *Browser {
+	x.inner.NSControl.SetHighlighted(highlighted)
+	return x
+}
+
+// WithControlSize sets the controlSize property and returns the receiver for chaining.
+func (x *Browser) WithControlSize(controlSize raw.NSControlSize) *Browser {
+	x.inner.NSControl.SetControlSize(controlSize)
+	return x
+}
+
+// WithFormatter sets the formatter property and returns the receiver for chaining.
+func (x *Browser) WithFormatter(formatter *foundation.NSFormatter) *Browser {
+	x.inner.NSControl.SetFormatter(formatter)
+	return x
+}
+
+// WithObjectValue sets the objectValue property and returns the receiver for chaining.
+func (x *Browser) WithObjectValue(objectValue objc.ID) *Browser {
+	x.inner.NSControl.SetObjectValue(objectValue)
+	return x
+}
+
+// WithStringValue sets the stringValue property and returns the receiver for chaining.
+func (x *Browser) WithStringValue(stringValue string) *Browser {
+	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	return x
+}
+
+// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
+func (x *Browser) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Browser {
+	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+	return x
+}
+
+// WithIntValue sets the intValue property and returns the receiver for chaining.
+func (x *Browser) WithIntValue(intValue int) *Browser {
+	x.inner.NSControl.SetIntValue(intValue)
+	return x
+}
+
+// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+func (x *Browser) WithIntegerValue(integerValue int) *Browser {
+	x.inner.NSControl.SetIntegerValue(integerValue)
+	return x
+}
+
+// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+func (x *Browser) WithFloatValue(floatValue float32) *Browser {
+	x.inner.NSControl.SetFloatValue(floatValue)
+	return x
+}
+
+// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+func (x *Browser) WithDoubleValue(doubleValue float64) *Browser {
+	x.inner.NSControl.SetDoubleValue(doubleValue)
+	return x
+}
+
+// WithFont sets the font property and returns the receiver for chaining.
+func (x *Browser) WithFont(font *raw.NSFont) *Browser {
+	x.inner.NSControl.SetFont(font)
+	return x
+}
+
+// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+func (x *Browser) WithUsesSingleLineMode(usesSingleLineMode bool) *Browser {
+	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	return x
+}
+
+// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
+func (x *Browser) WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Browser {
+	x.inner.NSControl.SetLineBreakMode(lineBreakMode)
+	return x
+}
+
+// WithAlignment sets the alignment property and returns the receiver for chaining.
+func (x *Browser) WithAlignment(alignment raw.NSTextAlignment) *Browser {
+	x.inner.NSControl.SetAlignment(alignment)
+	return x
+}
+
+// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
+func (x *Browser) WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Browser {
+	x.inner.NSControl.SetBaseWritingDirection(baseWritingDirection)
+	return x
+}
+
+// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+func (x *Browser) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser {
+	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	return x
+}
+
+// WithCell sets the cell property and returns the receiver for chaining.
+func (x *Browser) WithCell(cell CellProvider) *Browser {
+	x.inner.NSControl.SetCell(cell.asCell())
+	return x
+}
+
+// WithSubviews sets the collection, converting the Go slice to an NSArray.
+func (x *Browser) WithSubviews(items ...ViewProvider) *Browser {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetSubviews(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asView().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSView](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetSubviews(_arr)
+	return x
+}
+
+// WithHidden sets the hidden property and returns the receiver for chaining.
+func (x *Browser) WithHidden(hidden bool) *Browser {
+	x.inner.NSControl.NSView.SetHidden(hidden)
+	return x
+}
+
+// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+func (x *Browser) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser {
+	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	return x
+}
+
+// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+func (x *Browser) WithAutoresizesSubviews(autoresizesSubviews bool) *Browser {
+	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	return x
+}
+
+// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
+func (x *Browser) WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Browser {
+	x.inner.NSControl.NSView.SetAutoresizingMask(autoresizingMask)
+	return x
+}
+
+// WithFrame sets the frame property and returns the receiver for chaining.
+func (x *Browser) WithFrame(frame corefoundation.CGRect) *Browser {
+	x.inner.NSControl.NSView.SetFrame(frame)
+	return x
+}
+
+// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+func (x *Browser) WithFrameRotation(frameRotation float64) *Browser {
+	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	return x
+}
+
+// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+func (x *Browser) WithFrameCenterRotation(frameCenterRotation float64) *Browser {
+	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	return x
+}
+
+// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+func (x *Browser) WithBoundsRotation(boundsRotation float64) *Browser {
+	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	return x
+}
+
+// WithBounds sets the bounds property and returns the receiver for chaining.
+func (x *Browser) WithBounds(bounds corefoundation.CGRect) *Browser {
+	x.inner.NSControl.NSView.SetBounds(bounds)
+	return x
+}
+
+// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+func (x *Browser) WithCanDrawConcurrently(canDrawConcurrently bool) *Browser {
+	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	return x
+}
+
+// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+func (x *Browser) WithNeedsDisplay(needsDisplay bool) *Browser {
+	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	return x
+}
+
+// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+func (x *Browser) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser {
+	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	return x
+}
+
+// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+func (x *Browser) WithWantsRestingTouches(wantsRestingTouches bool) *Browser {
+	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	return x
+}
+
+// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
+func (x *Browser) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Browser {
+	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(layerContentsRedrawPolicy)
+	return x
+}
+
+// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
+func (x *Browser) WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Browser {
+	x.inner.NSControl.NSView.SetLayerContentsPlacement(layerContentsPlacement)
+	return x
+}
+
+// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+func (x *Browser) WithWantsLayer(wantsLayer bool) *Browser {
+	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	return x
+}
+
+// WithLayer sets the layer property and returns the receiver for chaining.
+func (x *Browser) WithLayer(layer *quartzcore.CALayer) *Browser {
+	x.inner.NSControl.NSView.SetLayer(layer)
+	return x
+}
+
+// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+func (x *Browser) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser {
+	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	return x
+}
+
+// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+func (x *Browser) WithNeedsLayout(needsLayout bool) *Browser {
+	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	return x
+}
+
+// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+func (x *Browser) WithAlphaValue(alphaValue float64) *Browser {
+	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	return x
+}
+
+// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+func (x *Browser) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Browser {
+	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	return x
+}
+
+// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Browser) WithBackgroundFilters(items ...*coreimage.CIFilter) *Browser {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetBackgroundFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+	return x
+}
+
+// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
+func (x *Browser) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Browser {
+	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+	return x
+}
+
+// WithContentFilters sets the collection, converting the Go slice to an NSArray.
+func (x *Browser) WithContentFilters(items ...*coreimage.CIFilter) *Browser {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetContentFilters(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.Ptr() }
+	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetContentFilters(_arr)
+	return x
+}
+
+// WithShadow sets the shadow property and returns the receiver for chaining.
+func (x *Browser) WithShadow(shadow *raw.NSShadow) *Browser {
+	x.inner.NSControl.NSView.SetShadow(shadow)
+	return x
+}
+
+// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+func (x *Browser) WithClipsToBounds(clipsToBounds bool) *Browser {
+	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	return x
+}
+
+// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+func (x *Browser) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser {
+	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	return x
+}
+
+// WithToolTip sets the toolTip property and returns the receiver for chaining.
+func (x *Browser) WithToolTip(toolTip string) *Browser {
+	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	return x
+}
+
+// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
+func (x *Browser) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Browser {
+	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(userInterfaceLayoutDirection)
+	return x
+}
+
+// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
+func (x *Browser) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser {
+	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
+	return x
+}
+
+// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+func (x *Browser) WithNextKeyView(nextKeyView ViewProvider) *Browser {
+	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	return x
+}
+
+// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
+func (x *Browser) WithFocusRingType(focusRingType raw.NSFocusRingType) *Browser {
+	x.inner.NSControl.NSView.SetFocusRingType(focusRingType)
+	return x
+}
+
+// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+func (x *Browser) WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser {
+	if len(items) == 0 {
+		x.inner.NSControl.NSView.SetGestureRecognizers(nil)
+		return x
+	}
+	_ptrs := make([]objc.ID, len(items))
+	for _i, _v := range items { _ptrs[_i] = _v.asGestureRecognizer().Ptr() }
+	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
+		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
+			objc.RegisterName("arrayWithObjects:count:"),
+			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	return x
+}
+
+// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
+func (x *Browser) WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Browser {
+	x.inner.NSControl.NSView.SetAllowedTouchTypes(allowedTouchTypes)
+	return x
+}
+
+// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
+func (x *Browser) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser {
+	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+	return x
+}
+
+// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+func (x *Browser) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser {
+	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	return x
+}
+
+// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+func (x *Browser) WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Browser {
+	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator)
+	return x
+}
+
+// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+func (x *Browser) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser {
+	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	return x
+}
+
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+func (x *Browser) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser {
+	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	return x
+}
+
+// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Browser) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser {
+	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	return x
+}
+
+// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+func (x *Browser) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser {
+	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	return x
+}
+
+// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+func (x *Browser) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser {
+	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	return x
+}
+
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+func (x *Browser) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser {
+	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	return x
+}
+
+// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+func (x *Browser) WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Browser {
+	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration)
+	return x
+}
+
+// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+func (x *Browser) WithNextResponder(nextResponder ResponderProvider) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	return x
+}
+
+// WithMenu sets the menu property and returns the receiver for chaining.
+func (x *Browser) WithMenu(menu *raw.NSMenu) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetMenu(menu)
+	return x
+}
+
+// WithUserActivity sets the userActivity property and returns the receiver for chaining.
+func (x *Browser) WithUserActivity(userActivity *foundation.NSUserActivity) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+	return x
+}
+
+// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+func (x *Browser) WithTouchBar(touchBar *raw.NSTouchBar) *Browser {
+	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar)
 	return x
 }
 
@@ -857,6 +1337,79 @@ type Browserable interface {
 	WithColumnsAutosaveName(columnsAutosaveName *foundation.NSString) *Browser
 	WithAllowsTypeSelect(allowsTypeSelect bool) *Browser
 	WithBackgroundColor(backgroundColor *raw.NSColor) *Browser
+	WithTarget(target objc.ID) *Browser
+	WithAction(action objc.SEL) *Browser
+	WithTag(tag int) *Browser
+	WithIgnoresMultiClick(ignoresMultiClick bool) *Browser
+	WithContinuous(continuous bool) *Browser
+	WithEnabled(enabled bool) *Browser
+	WithRefusesFirstResponder(refusesFirstResponder bool) *Browser
+	WithHighlighted(highlighted bool) *Browser
+	WithControlSize(controlSize raw.NSControlSize) *Browser
+	WithFormatter(formatter *foundation.NSFormatter) *Browser
+	WithObjectValue(objectValue objc.ID) *Browser
+	WithStringValue(stringValue string) *Browser
+	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Browser
+	WithIntValue(intValue int) *Browser
+	WithIntegerValue(integerValue int) *Browser
+	WithFloatValue(floatValue float32) *Browser
+	WithDoubleValue(doubleValue float64) *Browser
+	WithFont(font *raw.NSFont) *Browser
+	WithUsesSingleLineMode(usesSingleLineMode bool) *Browser
+	WithLineBreakMode(lineBreakMode raw.NSLineBreakMode) *Browser
+	WithAlignment(alignment raw.NSTextAlignment) *Browser
+	WithBaseWritingDirection(baseWritingDirection raw.NSWritingDirection) *Browser
+	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Browser
+	WithCell(cell CellProvider) *Browser
+	WithSubviews(items ...ViewProvider) *Browser
+	WithHidden(hidden bool) *Browser
+	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Browser
+	WithAutoresizesSubviews(autoresizesSubviews bool) *Browser
+	WithAutoresizingMask(autoresizingMask raw.NSAutoresizingMaskOptions) *Browser
+	WithFrame(frame corefoundation.CGRect) *Browser
+	WithFrameRotation(frameRotation float64) *Browser
+	WithFrameCenterRotation(frameCenterRotation float64) *Browser
+	WithBoundsRotation(boundsRotation float64) *Browser
+	WithBounds(bounds corefoundation.CGRect) *Browser
+	WithCanDrawConcurrently(canDrawConcurrently bool) *Browser
+	WithNeedsDisplay(needsDisplay bool) *Browser
+	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Browser
+	WithWantsRestingTouches(wantsRestingTouches bool) *Browser
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy raw.NSViewLayerContentsRedrawPolicy) *Browser
+	WithLayerContentsPlacement(layerContentsPlacement raw.NSViewLayerContentsPlacement) *Browser
+	WithWantsLayer(wantsLayer bool) *Browser
+	WithLayer(layer *quartzcore.CALayer) *Browser
+	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Browser
+	WithNeedsLayout(needsLayout bool) *Browser
+	WithAlphaValue(alphaValue float64) *Browser
+	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Browser
+	WithBackgroundFilters(items ...*coreimage.CIFilter) *Browser
+	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Browser
+	WithContentFilters(items ...*coreimage.CIFilter) *Browser
+	WithShadow(shadow *raw.NSShadow) *Browser
+	WithClipsToBounds(clipsToBounds bool) *Browser
+	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Browser
+	WithToolTip(toolTip string) *Browser
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection raw.NSUserInterfaceLayoutDirection) *Browser
+	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Browser
+	WithNextKeyView(nextKeyView ViewProvider) *Browser
+	WithFocusRingType(focusRingType raw.NSFocusRingType) *Browser
+	WithGestureRecognizers(items ...GestureRecognizerProvider) *Browser
+	WithAllowedTouchTypes(allowedTouchTypes raw.NSTouchTypeMask) *Browser
+	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Browser
+	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Browser
+	WithWritingToolsCoordinator(writingToolsCoordinator *raw.NSWritingToolsCoordinator) *Browser
+	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Browser
+	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Browser
+	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Browser
+	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Browser
+	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Browser
+	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Browser
+	WithPressureConfiguration(pressureConfiguration *raw.NSPressureConfiguration) *Browser
+	WithNextResponder(nextResponder ResponderProvider) *Browser
+	WithMenu(menu *raw.NSMenu) *Browser
+	WithUserActivity(userActivity *foundation.NSUserActivity) *Browser
+	WithTouchBar(touchBar *raw.NSTouchBar) *Browser
 	LoadColumnZero()
 	ItemAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID
 	ItemAtRowInColumn(row int, column int) objc.ID

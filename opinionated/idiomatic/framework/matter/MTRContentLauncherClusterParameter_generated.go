@@ -5,6 +5,7 @@
 package matter
 
 import (
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/ebitengine/purego/objc"
 )
@@ -35,11 +36,25 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 	return &MTRContentLauncherClusterParameter{inner: raw.MTRContentLauncherClusterParameterFromID(_id)}
 }
 
+// WithType sets the type_ property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterParameter) WithType(type_ *foundation.NSNumber) *MTRContentLauncherClusterParameter {
+	x.inner.MTRContentLauncherClusterParameterStruct.SetType(type_)
+	return x
+}
+
+// WithValue sets the value property and returns the receiver for chaining.
+func (x *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
+	x.inner.MTRContentLauncherClusterParameterStruct.SetValue(foundation.NSStringStringWithUTF8String(value))
+	return x
+}
+
 func (x *MTRContentLauncherClusterParameter) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct { return &x.inner.MTRContentLauncherClusterParameterStruct }
 
 // MTRContentLauncherClusterParameterable is the interface implemented by [MTRContentLauncherClusterParameter], for mocking and DI.
 type MTRContentLauncherClusterParameterable interface {
 	Unwrap() *raw.MTRContentLauncherClusterParameter
+	WithType(type_ *foundation.NSNumber) *MTRContentLauncherClusterParameter
+	WithValue(value string) *MTRContentLauncherClusterParameter
 }
 
 var _ MTRContentLauncherClusterParameterable = (*MTRContentLauncherClusterParameter)(nil)

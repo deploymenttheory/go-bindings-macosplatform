@@ -6,6 +6,7 @@ package mpsneuralnetwork
 
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/ebitengine/purego/objc"
 )
@@ -37,6 +38,54 @@ func NewCNNNeuronPowerWithDeviceABC(device metal.MTLDevice, a float32, b float32
 	return &CNNNeuronPower{inner: raw.MPSCNNNeuronPowerFromID(_id)}
 }
 
+// WithOffset sets the offset property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithOffset(offset mpscore.MPSOffset) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	return x
+}
+
+// WithClipRect sets the clipRect property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+	return x
+}
+
+// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+	return x
+}
+
+// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+	return x
+}
+
+// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
+	return x
+}
+
+// WithPadding sets the padding property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithPadding(padding raw.MPSNNPadding) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
+	return x
+}
+
+// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
+func (x *CNNNeuronPower) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronPower {
+	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
+	return x
+}
+
 func (x *CNNNeuronPower) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
 
 func (x *CNNNeuronPower) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCNNNeuron.MPSCNNKernel }
@@ -44,6 +93,14 @@ func (x *CNNNeuronPower) asCNNKernel() *raw.MPSCNNKernel { return &x.inner.MPSCN
 // CNNNeuronPowerable is the interface implemented by [CNNNeuronPower], for mocking and DI.
 type CNNNeuronPowerable interface {
 	Unwrap() *raw.MPSCNNNeuronPower
+	WithOffset(offset mpscore.MPSOffset) *CNNNeuronPower
+	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronPower
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronPower
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronPower
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronPower
+	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronPower
+	WithPadding(padding raw.MPSNNPadding) *CNNNeuronPower
+	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronPower
 }
 
 var _ CNNNeuronPowerable = (*CNNNeuronPower)(nil)
