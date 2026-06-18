@@ -1,0 +1,12 @@
+{{/*
+    constants.tmpl — idiomatic CoreFoundation-reference constant accessors.
+
+    Each accessor returns the dereferenced CF<Type>Ref value typed as an objc.ID
+    (the reference and an objc.ID are the same pointer), so callers can pass it
+    straight into a dictionary or a C function. CommentBlock carries the raw
+    extern's doc line (already "// …\n") when present.
+*/}}
+{{define "cf_constants"}}{{range .Items}}{{.CommentBlock}}// {{.GoName}} returns the value of the CoreFoundation reference constant {{.ExternName}} as an objc.ID.
+func {{.GoName}}() objc.ID { return purego.CFConstant({{$.RawAlias}}.{{.GoName}}()) }
+
+{{end}}{{end}}

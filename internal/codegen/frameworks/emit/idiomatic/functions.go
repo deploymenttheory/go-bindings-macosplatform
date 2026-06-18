@@ -138,33 +138,24 @@ func emitGenericFunctionWrappers(
 		return nil
 	}
 
+	view := cfunctionsView{RawAlias: rawPkgAlias, Entries: make([]cfuncEntry, 0, len(entries))}
 	for _, entry := range entries {
-		fmt.Fprintf(
-			&body,
-			"// %s calls [%s.%s] (C function %s).\n",
-			entry.goName, rawPkgAlias, entry.rawGoName, cFunctionNameFor(entry.rawGoName, fw),
-		)
 		retSig := ""
 		if entry.retType != "" {
 			retSig = " " + entry.retType
 		}
-		fmt.Fprintf(
-			&body,
-			"func %s(%s)%s {\n",
-			entry.goName, strings.Join(entry.params, ", "), retSig,
-		)
-		call := fmt.Sprintf(
-			"%s.%s(%s)",
-			rawPkgAlias,
-			entry.rawGoName,
-			strings.Join(entry.callArgs, ", "),
-		)
-		if entry.retType != "" {
-			fmt.Fprintf(&body, "\treturn %s\n", call)
-		} else {
-			fmt.Fprintf(&body, "\t%s\n", call)
-		}
-		fmt.Fprint(&body, "}\n\n")
+		view.Entries = append(view.Entries, cfuncEntry{
+			GoName:    entry.goName,
+			RawGoName: entry.rawGoName,
+			CName:     cFunctionNameFor(entry.rawGoName, fw),
+			Params:    strings.Join(entry.params, ", "),
+			CallArgs:  strings.Join(entry.callArgs, ", "),
+			RetType:   entry.retType,
+			RetSig:    retSig,
+		})
+	}
+	if err := executeTemplate(&body, "cfunctions", view); err != nil {
+		return err
 	}
 
 	// Render-then-scan imports: only include packages the body references.
@@ -421,6 +412,7 @@ func emitCFFunctionWrappers(
 ) error {
 	ctx := typemap.Context{Framework: fw.Framework}
 	var body bytes.Buffer
+	view := cffunctionsView{RawAlias: rawPkgAlias}
 
 	for _, fn := range emit.EmittableFunctions(fw, nil) {
 		if !isOSStatusType(fn.Return.ObjCType) {
@@ -485,28 +477,23 @@ func emitCFFunctionWrappers(
 			retSig = "(" + strings.Join(append(append([]string{}, outTypes...), "error"), ", ") + ")"
 		}
 
-		fmt.Fprintf(&body, "// %s wraps [%s.%s], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.\n", goName, rawPkgAlias, goName)
-		fmt.Fprintf(&body, "func %s(%s) %s {\n", goName, strings.Join(sigParams, ", "), retSig)
-		for _, pl := range preLines {
-			fmt.Fprintln(&body, pl)
-		}
-		fmt.Fprintf(&body, "\tif _err := purego.NewOSStatus(%s).Err(); _err != nil {\n", rawCall)
-		if len(outReturns) > 0 {
-			fmt.Fprintf(&body, "\t\treturn %s, _err\n", strings.Join(zeros, ", "))
-		} else {
-			fmt.Fprintf(&body, "\t\treturn _err\n")
-		}
-		fmt.Fprintf(&body, "\t}\n")
-		if len(outReturns) > 0 {
-			fmt.Fprintf(&body, "\treturn %s, nil\n", strings.Join(outReturns, ", "))
-		} else {
-			fmt.Fprintf(&body, "\treturn nil\n")
-		}
-		fmt.Fprintf(&body, "}\n\n")
+		view.Entries = append(view.Entries, cffuncEntry{
+			GoName:     goName,
+			SigParams:  strings.Join(sigParams, ", "),
+			RetSig:     retSig,
+			PreLines:   preLines,
+			RawCall:    rawCall,
+			HasOut:     len(outReturns) > 0,
+			OutReturns: strings.Join(outReturns, ", "),
+			Zeros:      strings.Join(zeros, ", "),
+		})
 	}
 
-	if body.Len() == 0 {
+	if len(view.Entries) == 0 {
 		return nil
+	}
+	if err := executeTemplate(&body, "cffunctions", view); err != nil {
+		return err
 	}
 
 	// Render-then-scan imports, mirroring emitGenericFunctionWrappers so non-CF
@@ -631,4 +618,39 @@ func collectCrossPackageRefs(body, rawPkgAlias string) []string {
 		i = j
 	}
 	return refs
+}
+
+// cfuncEntry / cfunctionsView are the template data for cfunctions.tmpl. The
+// signature/argument strings are pre-joined by emitGenericFunctionWrappers.
+type cfuncEntry struct {
+	GoName    string
+	RawGoName string
+	CName     string
+	Params    string // "name type, …"
+	CallArgs  string // "name, …"
+	RetType   string // "" for a void function
+	RetSig    string // " <retType>" or ""
+}
+
+type cfunctionsView struct {
+	RawAlias string
+	Entries  []cfuncEntry
+}
+
+// cffuncEntry / cffunctionsView are the template data for cffunctions.tmpl (the
+// OSStatus + CoreFoundation-reference bridging wrappers).
+type cffuncEntry struct {
+	GoName     string
+	SigParams  string   // "name type, …"
+	RetSig     string   // "error" or "(objc.ID, …, error)"
+	PreLines   []string // per-out-param "var _outN uintptr" lines
+	RawCall    string   // raw.Foo(args)
+	HasOut     bool     // has CF out-parameters
+	OutReturns string   // "objc.ID(_out0), …"
+	Zeros      string   // "0, …" (zero values for the error path)
+}
+
+type cffunctionsView struct {
+	RawAlias string
+	Entries  []cffuncEntry
 }

@@ -1,0 +1,27 @@
+{{/*
+    constructor.tmpl — a New* constructor for an idiomatic wrapper type.
+    Three shapes: plain +new; alloc+init; alloc+init returning (T, error) for an
+    init that takes an NSError out-parameter. Whitespace is loose; gofmt cleans.
+*/}}
+{{define "constructor"}}// {{.GoName}} creates a new [{{.GoTypeName}}].
+func {{.GoName}}({{.ParamStr}}) {{.RetStr}} {
+{{- if .IsPlainNew}}
+_id := objc.Send[objc.ID](objc.ID(objc.GetClass({{.ClassName | printf "%q"}})), objc.RegisterName("new"))
+return &{{.GoTypeName}}{inner: {{.FromIDFn}}(_id)}
+{{- else}}
+_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass({{.ClassName | printf "%q"}})), objc.RegisterName("alloc"))
+{{- if .HasNSError}}
+var _nsErr uintptr
+_id := objc.Send[objc.ID]({{.SendAllArgs}})
+if _nsErr != 0 {
+return nil, purego.NSErrorToError(objc.ID(_nsErr))
+}
+return &{{.GoTypeName}}{inner: {{.FromIDFn}}(_id)}, nil
+{{- else}}
+_id := objc.Send[objc.ID]({{.SendAllArgs}})
+return &{{.GoTypeName}}{inner: {{.FromIDFn}}(_id)}
+{{- end}}
+{{- end}}
+}
+
+{{end}}

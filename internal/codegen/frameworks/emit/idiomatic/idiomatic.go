@@ -1018,61 +1018,53 @@ func writeConstructor(
 	for _, p := range c.params {
 		paramParts = append(paramParts, p.goName+" "+p.goType)
 	}
-	paramStr := strings.Join(paramParts, ", ")
 
 	retStr := "*" + goTypeName
 	if c.hasNSError {
 		retStr = "(*" + goTypeName + ", error)"
 	}
 
-	fmt.Fprintf(w, "// %s creates a new [%s].\n", c.goName, goTypeName)
-	fmt.Fprintf(w, "func %s(%s) %s {\n", c.goName, paramStr, retStr)
-
-	if c.rawInitGoName == "" {
-		// Plain +new.
-		fmt.Fprintf(
-			w,
-			"\t_id := objc.Send[objc.ID](objc.ID(objc.GetClass(%q)), objc.RegisterName(\"new\"))\n",
-			className,
-		)
-		fmt.Fprintf(w, "\treturn &%s{inner: %s(_id)}\n", goTypeName, fromIDFn)
-	} else {
-		// alloc + send init selector directly via objc.Send[objc.ID], bypassing the raw
-		// init method's return type which may be objc.ID or *T depending on the emitter.
-		fmt.Fprintf(
-			w,
-			"\t_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass(%q)), objc.RegisterName(\"alloc\"))\n",
-			className,
-		)
-
+	view := constructorView{
+		GoName:     c.goName,
+		GoTypeName: goTypeName,
+		ParamStr:   strings.Join(paramParts, ", "),
+		RetStr:     retStr,
+		ClassName:  className,
+		FromIDFn:   fromIDFn,
+		IsPlainNew: c.rawInitGoName == "",
+		HasNSError: c.hasNSError,
+	}
+	if !view.IsPlainNew {
+		// alloc + send the init selector directly via objc.Send[objc.ID],
+		// bypassing the raw init method's return type (objc.ID or *T).
 		sendArgs := make([]string, 0, len(c.params))
 		for _, p := range c.params {
 			sendArgs = append(sendArgs, ctorParamSendExpr(p))
 		}
-
+		allArgs := append(
+			[]string{"_alloc", fmt.Sprintf("objc.RegisterName(%q)", c.rawInitSelector)},
+			sendArgs...,
+		)
 		if c.hasNSError {
-			fmt.Fprintf(w, "\tvar _nsErr uintptr\n")
-			allArgs := append(
-				append(
-					[]string{"_alloc", fmt.Sprintf("objc.RegisterName(%q)", c.rawInitSelector)},
-					sendArgs...),
-				"unsafe.Pointer(&_nsErr)",
-			)
-			fmt.Fprintf(w, "\t_id := objc.Send[objc.ID](%s)\n", strings.Join(allArgs, ", "))
-			fmt.Fprintf(
-				w,
-				"\tif _nsErr != 0 {\n\t\treturn nil, purego.NSErrorToError(objc.ID(_nsErr))\n\t}\n",
-			)
-			fmt.Fprintf(w, "\treturn &%s{inner: %s(_id)}, nil\n", goTypeName, fromIDFn)
-		} else {
-			allArgs := append(
-				[]string{"_alloc", fmt.Sprintf("objc.RegisterName(%q)", c.rawInitSelector)},
-				sendArgs...)
-			fmt.Fprintf(w, "\t_id := objc.Send[objc.ID](%s)\n", strings.Join(allArgs, ", "))
-			fmt.Fprintf(w, "\treturn &%s{inner: %s(_id)}\n", goTypeName, fromIDFn)
+			allArgs = append(allArgs, "unsafe.Pointer(&_nsErr)")
 		}
+		view.SendAllArgs = strings.Join(allArgs, ", ")
 	}
-	fmt.Fprintf(w, "}\n\n")
+
+	renderTemplate(w, "constructor", view)
+}
+
+// constructorView is the template data for constructor.tmpl.
+type constructorView struct {
+	GoName      string
+	GoTypeName  string
+	ParamStr    string
+	RetStr      string
+	ClassName   string
+	FromIDFn    string
+	IsPlainNew  bool
+	HasNSError  bool
+	SendAllArgs string // alloc-init path: `_alloc, objc.RegisterName("sel"), …`
 }
 
 // ctorParamSendExpr returns the expression for passing a constructor parameter to
@@ -1328,55 +1320,49 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 	if inner == "" {
 		inner = "x.inner"
 	}
+	view := withSetterView{
+		TypeName:        typeName,
+		GoName:          we.goName,
+		Inner:           inner,
+		RawSetterGoName: we.rawSetterGoName,
+		IsNSArray:       we.isNSArray,
+	}
 	if we.isNSArray {
-		// Variadic signature.
 		loopExpr := "_v.Ptr()"
 		if we.providerMethodName != "" {
 			loopExpr = "_v." + we.providerMethodName + "().Ptr()"
 		}
-		fmt.Fprintf(
-			w,
-			"// %s sets the collection, converting the Go slice to an %s.\n",
-			we.goName,
-			we.arrayClass,
-		)
-		fmt.Fprintf(
-			w,
-			"func (x *%s) %s(items ...%s) *%s {\n",
-			typeName,
-			we.goName,
-			we.sliceElemType,
-			typeName,
-		)
-		fmt.Fprintf(
-			w,
-			"\tif len(items) == 0 {\n\t\t%s.%s(nil)\n\t\treturn x\n\t}\n",
-			inner,
-			we.rawSetterGoName,
-		)
-		fmt.Fprintf(w, "\t_ptrs := make([]objc.ID, len(items))\n")
-		fmt.Fprintf(w, "\tfor _i, _v := range items { _ptrs[_i] = %s }\n", loopExpr)
-		fmt.Fprintf(w, "\t_arr := %s(\n", we.arrayFromID)
-		fmt.Fprintf(w, "\t\tobjc.Send[objc.ID](objc.ID(objc.GetClass(%q)),\n", we.arrayClass)
-		fmt.Fprintf(w, "\t\t\tobjc.RegisterName(\"arrayWithObjects:count:\"),\n")
-		fmt.Fprintf(w, "\t\t\tunsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))\n")
-		fmt.Fprintf(w, "\t%s.%s(_arr)\n", inner, we.rawSetterGoName)
-		fmt.Fprintf(w, "\treturn x\n}\n\n")
-		return
+		view.SliceElemType = we.sliceElemType
+		view.ArrayClass = we.arrayClass
+		view.ArrayFromID = we.arrayFromID
+		view.LoopExpr = loopExpr
+	} else {
+		view.ParamName = we.param.goName
+		view.ParamType = we.param.goType
+		view.ParamRawExpr = we.param.rawExpr
 	}
 
-	// Scalar / object setter.
-	pn := we.param.goName
-	pt := we.param.goType
-	fmt.Fprintf(
-		w,
-		"// %s sets the %s property and returns the receiver for chaining.\n",
-		we.goName,
-		pn,
-	)
-	fmt.Fprintf(w, "func (x *%s) %s(%s %s) *%s {\n", typeName, we.goName, pn, pt, typeName)
-	fmt.Fprintf(w, "\t%s.%s(%s)\n", inner, we.rawSetterGoName, we.param.rawExpr)
-	fmt.Fprintf(w, "\treturn x\n}\n\n")
+	renderTemplate(w, "with_setter", view)
+}
+
+// withSetterView is the template data for with_setter.tmpl.
+type withSetterView struct {
+	TypeName        string
+	GoName          string
+	Inner           string
+	RawSetterGoName string
+	IsNSArray       bool
+
+	// NSArray collection setter:
+	SliceElemType string
+	ArrayClass    string
+	ArrayFromID   string
+	LoopExpr      string
+
+	// Scalar/object setter:
+	ParamName    string
+	ParamType    string
+	ParamRawExpr string
 }
 
 // ── Method generation (async, slice getters, BoolNSError) ─────────────────────

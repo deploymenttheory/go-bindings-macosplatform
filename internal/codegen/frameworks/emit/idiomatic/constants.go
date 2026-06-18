@@ -43,7 +43,7 @@ func emitConstants(
 
 	seen := make(map[string]bool)
 	seenGoNames := make(map[string]bool)
-	var body bytes.Buffer
+	view := cfConstantsView{RawAlias: rawPkgAlias}
 
 	for _, ext := range fw.Externs {
 		if ext.Availability.IsUnavailable || seen[ext.Name] || funcNames[ext.Name] {
@@ -64,23 +64,24 @@ func emitConstants(
 		}
 		takenNames[goName] = true
 
+		comment := ""
 		if ext.Doc != "" {
-			fmt.Fprintf(&body, "// %s\n", ext.Doc)
+			comment = "// " + ext.Doc + "\n"
 		}
-		fmt.Fprintf(
-			&body,
-			"// %s returns the value of the CoreFoundation reference constant %s as an objc.ID.\n",
-			goName, ext.Name,
-		)
-		fmt.Fprintf(
-			&body,
-			"func %s() objc.ID { return purego.CFConstant(%s.%s()) }\n\n",
-			goName, rawPkgAlias, goName,
-		)
+		view.Items = append(view.Items, constantItem{
+			GoName:       goName,
+			ExternName:   ext.Name,
+			CommentBlock: comment,
+		})
 	}
 
-	if body.Len() == 0 {
+	if len(view.Items) == 0 {
 		return nil
+	}
+
+	var body bytes.Buffer
+	if err := executeTemplate(&body, "cf_constants", view); err != nil {
+		return err
 	}
 
 	imports := map[string]string{
@@ -98,6 +99,18 @@ func emitConstants(
 
 	fname := pkgName + "_constants_generated.go"
 	return emit.WriteGoFile(filepath.Join(outDir, fname), buf.Bytes())
+}
+
+// constantItem / cfConstantsView are the template data for constants.tmpl.
+type constantItem struct {
+	GoName       string
+	ExternName   string
+	CommentBlock string // "// <doc>\n" when the extern has a doc, else ""
+}
+
+type cfConstantsView struct {
+	RawAlias string
+	Items    []constantItem
 }
 
 // isCFRefExtern reports whether an extern's ObjC type is a CoreFoundation

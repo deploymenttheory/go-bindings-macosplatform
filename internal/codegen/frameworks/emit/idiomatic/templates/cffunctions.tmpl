@@ -1,0 +1,16 @@
+{{/*
+    cffunctions.tmpl — idiomatic wrappers for OSStatus C functions that take or
+    return CoreFoundation references: CF…Ref inputs become objc.ID, CFTypeRef*
+    out-parameters become objc.ID returns, and the OSStatus becomes a Go error.
+    Whitespace is intentionally loose; gofmt canonicalises the result.
+*/}}
+{{define "cffunctions"}}{{range .Entries}}// {{.GoName}} wraps [{{$.RawAlias}}.{{.GoName}}], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+func {{.GoName}}({{.SigParams}}) {{.RetSig}} {
+{{range .PreLines}}{{.}}
+{{end}}if _err := purego.NewOSStatus({{.RawCall}}).Err(); _err != nil {
+return {{if .HasOut}}{{.Zeros}}, {{end}}_err
+}
+return {{if .HasOut}}{{.OutReturns}}, {{end}}nil
+}
+
+{{end}}{{end}}
