@@ -8,9 +8,8 @@ package bsm
 import "C"
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/libraries/bsd"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 	"unsafe"
 )
 
@@ -18,745 +17,613 @@ var _ unsafe.Pointer // suppress unused import
 
 // [audit.h:374]
 // ID: objc-sym bsm.audit
-func Audit(ctx context.Context, arg0 unsafe.Pointer, arg1 int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit")
-	defer _end()
+func Audit(arg0 unsafe.Pointer, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit(arg0, C.int32_t(arg1), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:376]
 // ID: objc-sym bsm.auditon
-func Auditon(ctx context.Context, arg0 int32, arg1 unsafe.Pointer, arg2 int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/auditon")
-	defer _end()
+func Auditon(arg0 int32, arg1 unsafe.Pointer, arg2 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_auditon(C.int32_t(arg0), arg1, C.int32_t(arg2), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:378]
 // ID: objc-sym bsm.auditctl
-func Auditctl(ctx context.Context, arg0 string) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/auditctl")
-	defer _end()
+func Auditctl(arg0 string) int32 {
 	_cstr_arg0 := C.CString(arg0)
 	defer C.free(unsafe.Pointer(_cstr_arg0))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_auditctl(_cstr_arg0, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:380]
 // ID: objc-sym bsm.getauid
-func Getauid(ctx context.Context, arg0 *uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauid")
-	defer _end()
+func Getauid(arg0 *uint32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getauid(unsafe.Pointer(arg0), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:381]
 // ID: objc-sym bsm.setauid
-func Setauid(ctx context.Context, arg0 *uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setauid")
-	defer _end()
+func Setauid(arg0 *uint32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_setauid(unsafe.Pointer(arg0), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:382]
 // ID: objc-sym bsm.getaudit_addr
-func Getaudit_addr(ctx context.Context, arg0 *Auditinfo_addr, arg1 int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getaudit_addr")
-	defer _end()
+func Getaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:383]
 // ID: objc-sym bsm.setaudit_addr
-func Setaudit_addr(ctx context.Context, arg0 *Auditinfo_addr, arg1 int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setaudit_addr")
-	defer _end()
+func Setaudit_addr(arg0 *Auditinfo_addr, arg1 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_setaudit_addr(unsafe.Pointer(arg0), C.int32_t(arg1), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:397]
 // ID: objc-sym bsm.getaudit
-func Getaudit(ctx context.Context, arg0 *Auditinfo) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getaudit")
-	defer _end()
+func Getaudit(arg0 *Auditinfo) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getaudit(unsafe.Pointer(arg0), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:400]
 // ID: objc-sym bsm.setaudit
-func Setaudit(ctx context.Context, arg0 *Auditinfo) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setaudit")
-	defer _end()
+func Setaudit(arg0 *Auditinfo) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_setaudit(unsafe.Pointer(arg0), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:424]
 // ID: objc-sym bsm.audit_session_self
-func Audit_session_self(ctx context.Context) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_session_self")
-	defer _end()
+func Audit_session_self() uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_session_self(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:425]
 // ID: objc-sym bsm.audit_session_join
-func Audit_session_join(ctx context.Context, port uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_session_join")
-	defer _end()
+func Audit_session_join(port uint32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_session_join(C.uint32_t(port), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit.h:426]
 // ID: objc-sym bsm.audit_session_port
-func Audit_session_port(ctx context.Context, asid int32, portname *uint32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_session_port")
-	defer _end()
+func Audit_session_port(asid int32, portname *uint32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_session_port(C.int32_t(asid), unsafe.Pointer(portname), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:205]
 // ID: objc-sym bsm.au_open
-func Au_open(ctx context.Context) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_open")
-	defer _end()
+func Au_open() int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_open(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:207]
 // ID: objc-sym bsm.au_write
-func Au_write(ctx context.Context, d int32, m unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_write")
-	defer _end()
+func Au_write(d int32, m unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_write(C.int32_t(d), m, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:209]
 // ID: objc-sym bsm.au_close
-func Au_close(ctx context.Context, d int32, keep int32, event int16) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_close")
-	defer _end()
+func Au_close(d int32, keep int32, event int16) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_close(C.int32_t(d), C.int32_t(keep), C.int16_t(event), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:211]
 // ID: objc-sym bsm.au_close_buffer
-func Au_close_buffer(ctx context.Context, d int32, event int16, buffer *uint8, buflen *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_close_buffer")
-	defer _end()
+func Au_close_buffer(d int32, event int16, buffer *uint8, buflen *uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_close_buffer(C.int32_t(d), C.int16_t(event), unsafe.Pointer(buffer), unsafe.Pointer(buflen), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:213]
 // ID: objc-sym bsm.au_close_token
-func Au_close_token(ctx context.Context, tok unsafe.Pointer, buffer *uint8, buflen *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_close_token")
-	defer _end()
+func Au_close_token(tok unsafe.Pointer, buffer *uint8, buflen *uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_close_token(tok, unsafe.Pointer(buffer), unsafe.Pointer(buflen), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:229]
 // ID: objc-sym bsm.au_to_header
-func Au_to_header(ctx context.Context, rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_header")
-	defer _end()
+func Au_to_header(rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_header(C.int32_t(rec_size), C.uint16_t(e_type), C.uint16_t(e_mod), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:231]
 // ID: objc-sym bsm.au_to_header_ex
-func Au_to_header_ex(ctx context.Context, rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_header_ex")
-	defer _end()
+func Au_to_header_ex(rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_header_ex(C.int32_t(rec_size), C.uint16_t(e_type), C.uint16_t(e_mod), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:233]
 // ID: objc-sym bsm.au_to_header32
-func Au_to_header32(ctx context.Context, rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_header32")
-	defer _end()
+func Au_to_header32(rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_header32(C.int32_t(rec_size), C.uint16_t(e_type), C.uint16_t(e_mod), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:235]
 // ID: objc-sym bsm.au_to_header64
-func Au_to_header64(ctx context.Context, rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_header64")
-	defer _end()
+func Au_to_header64(rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_header64(C.int32_t(rec_size), C.uint16_t(e_type), C.uint16_t(e_mod), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:237]
 // ID: objc-sym bsm.au_to_header32_ex
-func Au_to_header32_ex(ctx context.Context, rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_header32_ex")
-	defer _end()
+func Au_to_header32_ex(rec_size int32, e_type uint16, e_mod uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_header32_ex(C.int32_t(rec_size), C.uint16_t(e_type), C.uint16_t(e_mod), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:241]
 // ID: objc-sym bsm.au_to_me
-func Au_to_me(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_me")
-	defer _end()
+func Au_to_me() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_me(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:243]
 // ID: objc-sym bsm.au_to_arg
-func Au_to_arg(ctx context.Context, n int8, text string, v uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_arg")
-	defer _end()
+func Au_to_arg(n int8, text string, v uint32) unsafe.Pointer {
 	_cstr_text := C.CString(text)
 	defer C.free(unsafe.Pointer(_cstr_text))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_arg(C.int8_t(n), _cstr_text, C.uint32_t(v), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:245]
 // ID: objc-sym bsm.au_to_arg32
-func Au_to_arg32(ctx context.Context, n int8, text string, v uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_arg32")
-	defer _end()
+func Au_to_arg32(n int8, text string, v uint32) unsafe.Pointer {
 	_cstr_text := C.CString(text)
 	defer C.free(unsafe.Pointer(_cstr_text))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_arg32(C.int8_t(n), _cstr_text, C.uint32_t(v), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:247]
 // ID: objc-sym bsm.au_to_arg64
-func Au_to_arg64(ctx context.Context, n int8, text string, v uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_arg64")
-	defer _end()
+func Au_to_arg64(n int8, text string, v uint64) unsafe.Pointer {
 	_cstr_text := C.CString(text)
 	defer C.free(unsafe.Pointer(_cstr_text))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_arg64(C.int8_t(n), _cstr_text, C.uint64_t(v), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:259]
 // ID: objc-sym bsm.au_to_data
-func Au_to_data(ctx context.Context, unit_print int8, unit_type int8, unit_count int8, p string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_data")
-	defer _end()
+func Au_to_data(unit_print int8, unit_type int8, unit_count int8, p string) unsafe.Pointer {
 	_cstr_p := C.CString(p)
 	defer C.free(unsafe.Pointer(_cstr_p))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_data(C.int8_t(unit_print), C.int8_t(unit_type), C.int8_t(unit_count), _cstr_p, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:262]
 // ID: objc-sym bsm.au_to_exit
-func Au_to_exit(ctx context.Context, retval int32, err int32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_exit")
-	defer _end()
+func Au_to_exit(retval int32, err int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_exit(C.int32_t(retval), C.int32_t(err), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:264]
 // ID: objc-sym bsm.au_to_groups
-func Au_to_groups(ctx context.Context, groups *int32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_groups")
-	defer _end()
+func Au_to_groups(groups *int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_groups(unsafe.Pointer(groups), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:266]
 // ID: objc-sym bsm.au_to_newgroups
-func Au_to_newgroups(ctx context.Context, n uint16, groups *uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_newgroups")
-	defer _end()
+func Au_to_newgroups(n uint16, groups *uint32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_newgroups(C.uint16_t(n), unsafe.Pointer(groups), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:268]
 // ID: objc-sym bsm.au_to_in_addr
-func Au_to_in_addr(ctx context.Context, internet_addr *bsd.InAddr) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_in_addr")
-	defer _end()
+func Au_to_in_addr(internet_addr *bsd.InAddr) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_in_addr(unsafe.Pointer(internet_addr), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:270]
 // ID: objc-sym bsm.au_to_in_addr_ex
-func Au_to_in_addr_ex(ctx context.Context, internet_addr *bsd.In6Addr) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_in_addr_ex")
-	defer _end()
+func Au_to_in_addr_ex(internet_addr *bsd.In6Addr) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_in_addr_ex(unsafe.Pointer(internet_addr), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:272]
 // ID: objc-sym bsm.au_to_ip
-func Au_to_ip(ctx context.Context, ip unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_ip")
-	defer _end()
+func Au_to_ip(ip unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_ip(ip, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:274]
 // ID: objc-sym bsm.au_to_ipc
-func Au_to_ipc(ctx context.Context, type_ int8, id_ int32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_ipc")
-	defer _end()
+func Au_to_ipc(type_ int8, id_ int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_ipc(C.int8_t(type_), C.int32_t(id_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:276]
 // ID: objc-sym bsm.au_to_ipc_perm
-func Au_to_ipc_perm(ctx context.Context, perm unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_ipc_perm")
-	defer _end()
+func Au_to_ipc_perm(perm unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_ipc_perm(perm, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:278]
 // ID: objc-sym bsm.au_to_iport
-func Au_to_iport(ctx context.Context, iport uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_iport")
-	defer _end()
+func Au_to_iport(iport uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_iport(C.uint16_t(iport), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:280]
 // ID: objc-sym bsm.au_to_opaque
-func Au_to_opaque(ctx context.Context, data string, bytes uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_opaque")
-	defer _end()
+func Au_to_opaque(data string, bytes uint16) unsafe.Pointer {
 	_cstr_data := C.CString(data)
 	defer C.free(unsafe.Pointer(_cstr_data))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_opaque(_cstr_data, C.uint16_t(bytes), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:282]
 // ID: objc-sym bsm.au_to_path
-func Au_to_path(ctx context.Context, path string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_path")
-	defer _end()
+func Au_to_path(path string) unsafe.Pointer {
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_path(_cstr_path, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:284]
 // ID: objc-sym bsm.au_to_process
-func Au_to_process(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process")
-	defer _end()
+func Au_to_process(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:287]
 // ID: objc-sym bsm.au_to_process32
-func Au_to_process32(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process32")
-	defer _end()
+func Au_to_process32(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process32(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:290]
 // ID: objc-sym bsm.au_to_process64
-func Au_to_process64(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process64")
-	defer _end()
+func Au_to_process64(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process64(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:293]
 // ID: objc-sym bsm.au_to_process_ex
-func Au_to_process_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process_ex")
-	defer _end()
+func Au_to_process_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:296]
 // ID: objc-sym bsm.au_to_process32_ex
-func Au_to_process32_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process32_ex")
-	defer _end()
+func Au_to_process32_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process32_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:300]
 // ID: objc-sym bsm.au_to_process64_ex
-func Au_to_process64_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_process64_ex")
-	defer _end()
+func Au_to_process64_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_process64_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:303]
 // ID: objc-sym bsm.au_to_return
-func Au_to_return(ctx context.Context, status int8, ret uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_return")
-	defer _end()
+func Au_to_return(status int8, ret uint32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_return(C.int8_t(status), C.uint32_t(ret), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:305]
 // ID: objc-sym bsm.au_to_return32
-func Au_to_return32(ctx context.Context, status int8, ret uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_return32")
-	defer _end()
+func Au_to_return32(status int8, ret uint32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_return32(C.int8_t(status), C.uint32_t(ret), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:307]
 // ID: objc-sym bsm.au_to_return64
-func Au_to_return64(ctx context.Context, status int8, ret uint64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_return64")
-	defer _end()
+func Au_to_return64(status int8, ret uint64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_return64(C.int8_t(status), C.uint64_t(ret), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:309]
 // ID: objc-sym bsm.au_to_seq
-func Au_to_seq(ctx context.Context, audit_count int64) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_seq")
-	defer _end()
+func Au_to_seq(audit_count int64) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_seq(C.int64_t(audit_count), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:314]
 // ID: objc-sym bsm.au_to_sock_inet
-func Au_to_sock_inet(ctx context.Context, so unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_sock_inet")
-	defer _end()
+func Au_to_sock_inet(so unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_sock_inet(so, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:316]
 // ID: objc-sym bsm.au_to_sock_inet32
-func Au_to_sock_inet32(ctx context.Context, so unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_sock_inet32")
-	defer _end()
+func Au_to_sock_inet32(so unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_sock_inet32(so, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:318]
 // ID: objc-sym bsm.au_to_sock_inet128
-func Au_to_sock_inet128(ctx context.Context, so unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_sock_inet128")
-	defer _end()
+func Au_to_sock_inet128(so unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_sock_inet128(so, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:320]
 // ID: objc-sym bsm.au_to_sock_unix
-func Au_to_sock_unix(ctx context.Context, so unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_sock_unix")
-	defer _end()
+func Au_to_sock_unix(so unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_sock_unix(so, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:322]
 // ID: objc-sym bsm.au_to_subject
-func Au_to_subject(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject")
-	defer _end()
+func Au_to_subject(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:325]
 // ID: objc-sym bsm.au_to_subject32
-func Au_to_subject32(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject32")
-	defer _end()
+func Au_to_subject32(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject32(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:328]
 // ID: objc-sym bsm.au_to_subject64
-func Au_to_subject64(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject64")
-	defer _end()
+func Au_to_subject64(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject64(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:331]
 // ID: objc-sym bsm.au_to_subject_ex
-func Au_to_subject_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject_ex")
-	defer _end()
+func Au_to_subject_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:334]
 // ID: objc-sym bsm.au_to_subject32_ex
-func Au_to_subject32_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject32_ex")
-	defer _end()
+func Au_to_subject32_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject32_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:337]
 // ID: objc-sym bsm.au_to_subject64_ex
-func Au_to_subject64_ex(ctx context.Context, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_subject64_ex")
-	defer _end()
+func Au_to_subject64_ex(auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_subject64_ex(C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:350]
 // ID: objc-sym bsm.au_to_exec_args
-func Au_to_exec_args(ctx context.Context, argv unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_exec_args")
-	defer _end()
+func Au_to_exec_args(argv unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_exec_args(argv, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:352]
 // ID: objc-sym bsm.au_to_exec_env
-func Au_to_exec_env(ctx context.Context, envp unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_exec_env")
-	defer _end()
+func Au_to_exec_env(envp unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_exec_env(envp, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:354]
 // ID: objc-sym bsm.au_to_certificate_hash
-func Au_to_certificate_hash(ctx context.Context, hash unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_certificate_hash")
-	defer _end()
+func Au_to_certificate_hash(hash unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_certificate_hash(hash, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:356]
 // ID: objc-sym bsm.au_to_krb5_principal
-func Au_to_krb5_principal(ctx context.Context, principal unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_krb5_principal")
-	defer _end()
+func Au_to_krb5_principal(principal unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_krb5_principal(principal, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:359]
 // ID: objc-sym bsm.au_to_text
-func Au_to_text(ctx context.Context, text string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_text")
-	defer _end()
+func Au_to_text(text string) unsafe.Pointer {
 	_cstr_text := C.CString(text)
 	defer C.free(unsafe.Pointer(_cstr_text))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_text(_cstr_text, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:361]
 // ID: objc-sym bsm.au_to_kevent
-func Au_to_kevent(ctx context.Context, kev unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_kevent")
-	defer _end()
+func Au_to_kevent(kev unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_kevent(kev, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:363]
 // ID: objc-sym bsm.au_to_trailer
-func Au_to_trailer(ctx context.Context, rec_size int32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_trailer")
-	defer _end()
+func Au_to_trailer(rec_size int32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_trailer(C.int32_t(rec_size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [audit_record.h:365]
 // ID: objc-sym bsm.au_to_zonename
-func Au_to_zonename(ctx context.Context, zonename string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_to_zonename")
-	defer _end()
+func Au_to_zonename(zonename string) unsafe.Pointer {
 	_cstr_zonename := C.CString(zonename)
 	defer C.free(unsafe.Pointer(_cstr_zonename))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_au_to_zonename(_cstr_zonename, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -765,12 +632,10 @@ func Au_to_zonename(ctx context.Context, zonename string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.setauclass
-func Setauclass(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setauclass")
-	defer _end()
+func Setauclass() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_setauclass(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:816]
@@ -778,12 +643,10 @@ func Setauclass(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.endauclass
-func Endauclass(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/endauclass")
-	defer _end()
+func Endauclass() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_endauclass(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:819]
@@ -791,12 +654,10 @@ func Endauclass(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassent
-func Getauclassent(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassent")
-	defer _end()
+func Getauclassent() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassent(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -805,12 +666,10 @@ func Getauclassent(ctx context.Context) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassent_r
-func Getauclassent_r(ctx context.Context, class_int unsafe.Pointer) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassent_r")
-	defer _end()
+func Getauclassent_r(class_int unsafe.Pointer) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassent_r(class_int, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -819,14 +678,12 @@ func Getauclassent_r(ctx context.Context, class_int unsafe.Pointer) unsafe.Point
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassnam
-func Getauclassnam(ctx context.Context, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassnam")
-	defer _end()
+func Getauclassnam(name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassnam(_cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -835,14 +692,12 @@ func Getauclassnam(ctx context.Context, name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassnam_r
-func Getauclassnam_r(ctx context.Context, class_int unsafe.Pointer, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassnam_r")
-	defer _end()
+func Getauclassnam_r(class_int unsafe.Pointer, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassnam_r(class_int, _cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -851,12 +706,10 @@ func Getauclassnam_r(ctx context.Context, class_int unsafe.Pointer, name string)
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassnum
-func Getauclassnum(ctx context.Context, class_number uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassnum")
-	defer _end()
+func Getauclassnum(class_number uint32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassnum(C.uint32_t(class_number), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -865,12 +718,10 @@ func Getauclassnum(ctx context.Context, class_number uint32) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauclassnum_r
-func Getauclassnum_r(ctx context.Context, class_int unsafe.Pointer, class_number uint32) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauclassnum_r")
-	defer _end()
+func Getauclassnum_r(class_int unsafe.Pointer, class_number uint32) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauclassnum_r(class_int, C.uint32_t(class_number), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -879,12 +730,10 @@ func Getauclassnum_r(ctx context.Context, class_int unsafe.Pointer, class_number
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.setac
-func Setac(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setac")
-	defer _end()
+func Setac() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_setac(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:843]
@@ -892,12 +741,10 @@ func Setac(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.endac
-func Endac(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/endac")
-	defer _end()
+func Endac() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_endac(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:846]
@@ -905,14 +752,12 @@ func Endac(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacdir
-func Getacdir(ctx context.Context, name string, len_ int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacdir")
-	defer _end()
+func Getacdir(name string, len_ int32) int32 {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacdir(_cstr_name, C.int32_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -921,12 +766,10 @@ func Getacdir(ctx context.Context, name string, len_ int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacmin
-func Getacmin(ctx context.Context, min_val *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacmin")
-	defer _end()
+func Getacmin(min_val *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacmin(unsafe.Pointer(min_val), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -935,12 +778,10 @@ func Getacmin(ctx context.Context, min_val *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacfilesz
-func Getacfilesz(ctx context.Context, size_val *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacfilesz")
-	defer _end()
+func Getacfilesz(size_val *uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacfilesz(unsafe.Pointer(size_val), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -949,14 +790,12 @@ func Getacfilesz(ctx context.Context, size_val *uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacflg
-func Getacflg(ctx context.Context, auditstr string, len_ int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacflg")
-	defer _end()
+func Getacflg(auditstr string, len_ int32) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacflg(_cstr_auditstr, C.int32_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -965,14 +804,12 @@ func Getacflg(ctx context.Context, auditstr string, len_ int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacna
-func Getacna(ctx context.Context, auditstr string, len_ int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacna")
-	defer _end()
+func Getacna(auditstr string, len_ int32) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacna(_cstr_auditstr, C.int32_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -981,14 +818,12 @@ func Getacna(ctx context.Context, auditstr string, len_ int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacpol
-func Getacpol(ctx context.Context, auditstr string, len_ uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacpol")
-	defer _end()
+func Getacpol(auditstr string, len_ uint64) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacpol(_cstr_auditstr, C.uint64_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -997,16 +832,14 @@ func Getacpol(ctx context.Context, auditstr string, len_ uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. no longer implemented
 // ID: objc-sym bsm.getacsflagsmask
-func Getacsflagsmask(ctx context.Context, which string, auditstr string, len_ uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacsflagsmask")
-	defer _end()
+func Getacsflagsmask(which string, auditstr string, len_ uint64) int32 {
 	_cstr_which := C.CString(which)
 	defer C.free(unsafe.Pointer(_cstr_which))
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacsflagsmask(_cstr_which, _cstr_auditstr, C.uint64_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1015,14 +848,12 @@ func Getacsflagsmask(ctx context.Context, which string, auditstr string, len_ ui
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getachost
-func Getachost(ctx context.Context, auditstr string, len_ uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getachost")
-	defer _end()
+func Getachost(auditstr string, len_ uint64) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getachost(_cstr_auditstr, C.uint64_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1031,12 +862,10 @@ func Getachost(ctx context.Context, auditstr string, len_ uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getacexpire
-func Getacexpire(ctx context.Context, andflg *int32, age *int64, size *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getacexpire")
-	defer _end()
+func Getacexpire(andflg *int32, age *int64, size *uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getacexpire(unsafe.Pointer(andflg), unsafe.Pointer(age), unsafe.Pointer(size), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1045,14 +874,12 @@ func Getacexpire(ctx context.Context, andflg *int32, age *int64, size *uint64) i
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauditflagsbin
-func Getauditflagsbin(ctx context.Context, auditstr string, masks unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauditflagsbin")
-	defer _end()
+func Getauditflagsbin(auditstr string, masks unsafe.Pointer) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getauditflagsbin(_cstr_auditstr, masks, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1061,14 +888,12 @@ func Getauditflagsbin(ctx context.Context, auditstr string, masks unsafe.Pointer
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauditflagschar
-func Getauditflagschar(ctx context.Context, auditstr string, masks unsafe.Pointer, verbose int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauditflagschar")
-	defer _end()
+func Getauditflagschar(auditstr string, masks unsafe.Pointer, verbose int32) int32 {
 	_cstr_auditstr := C.CString(auditstr)
 	defer C.free(unsafe.Pointer(_cstr_auditstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getauditflagschar(_cstr_auditstr, masks, C.int32_t(verbose), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1077,12 +902,10 @@ func Getauditflagschar(ctx context.Context, auditstr string, masks unsafe.Pointe
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_preselect
-func Au_preselect(ctx context.Context, event uint16, mask_p unsafe.Pointer, sorf int32, flag int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_preselect")
-	defer _end()
+func Au_preselect(event uint16, mask_p unsafe.Pointer, sorf int32, flag int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_preselect(C.uint16_t(event), mask_p, C.int32_t(sorf), C.int32_t(flag), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1091,14 +914,12 @@ func Au_preselect(ctx context.Context, event uint16, mask_p unsafe.Pointer, sorf
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_poltostr
-func Au_poltostr(ctx context.Context, policy int32, maxsize uint64, buf string) int64 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_poltostr")
-	defer _end()
+func Au_poltostr(policy int32, maxsize uint64, buf string) int64 {
 	_cstr_buf := C.CString(buf)
 	defer C.free(unsafe.Pointer(_cstr_buf))
 	var _exc unsafe.Pointer
 	_result := int64(C.bsm_fn_au_poltostr(C.int32_t(policy), C.uint64_t(maxsize), _cstr_buf, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1107,42 +928,36 @@ func Au_poltostr(ctx context.Context, policy int32, maxsize uint64, buf string) 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_strtopol
-func Au_strtopol(ctx context.Context, polstr string, policy *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_strtopol")
-	defer _end()
+func Au_strtopol(polstr string, policy *int32) int32 {
 	_cstr_polstr := C.CString(polstr)
 	defer C.free(unsafe.Pointer(_cstr_polstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_strtopol(_cstr_polstr, unsafe.Pointer(policy), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:891]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.au_sflagstostr
-func Au_sflagstostr(ctx context.Context, flags uint64, maxsize uint64, buf string) int64 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_sflagstostr")
-	defer _end()
+func Au_sflagstostr(flags uint64, maxsize uint64, buf string) int64 {
 	_cstr_buf := C.CString(buf)
 	defer C.free(unsafe.Pointer(_cstr_buf))
 	var _exc unsafe.Pointer
 	_result := int64(C.bsm_fn_au_sflagstostr(C.uint64_t(flags), C.uint64_t(maxsize), _cstr_buf, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:894]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.au_strtosflags
-func Au_strtosflags(ctx context.Context, sflagsstr string, flags *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_strtosflags")
-	defer _end()
+func Au_strtosflags(sflagsstr string, flags *uint64) int32 {
 	_cstr_sflagsstr := C.CString(sflagsstr)
 	defer C.free(unsafe.Pointer(_cstr_sflagsstr))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_strtosflags(_cstr_sflagsstr, unsafe.Pointer(flags), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1151,12 +966,10 @@ func Au_strtosflags(ctx context.Context, sflagsstr string, flags *uint64) int32 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.setauevent
-func Setauevent(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setauevent")
-	defer _end()
+func Setauevent() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_setauevent(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:903]
@@ -1164,12 +977,10 @@ func Setauevent(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.endauevent
-func Endauevent(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/endauevent")
-	defer _end()
+func Endauevent() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_endauevent(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:906]
@@ -1177,12 +988,10 @@ func Endauevent(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevent
-func Getauevent(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevent")
-	defer _end()
+func Getauevent() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevent(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1191,12 +1000,10 @@ func Getauevent(ctx context.Context) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevent_r
-func Getauevent_r(ctx context.Context, e *Au_event_ent) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevent_r")
-	defer _end()
+func Getauevent_r(e *Au_event_ent) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevent_r(unsafe.Pointer(e), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1205,14 +1012,12 @@ func Getauevent_r(ctx context.Context, e *Au_event_ent) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnam
-func Getauevnam(ctx context.Context, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnam")
-	defer _end()
+func Getauevnam(name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnam(_cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1221,14 +1026,12 @@ func Getauevnam(ctx context.Context, name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnam_r
-func Getauevnam_r(ctx context.Context, e *Au_event_ent, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnam_r")
-	defer _end()
+func Getauevnam_r(e *Au_event_ent, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnam_r(unsafe.Pointer(e), _cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1237,12 +1040,10 @@ func Getauevnam_r(ctx context.Context, e *Au_event_ent, name string) unsafe.Poin
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnum
-func Getauevnum(ctx context.Context, event_number uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnum")
-	defer _end()
+func Getauevnum(event_number uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnum(C.uint16_t(event_number), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1251,12 +1052,10 @@ func Getauevnum(ctx context.Context, event_number uint16) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnum_r
-func Getauevnum_r(ctx context.Context, e *Au_event_ent, event_number uint16) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnum_r")
-	defer _end()
+func Getauevnum_r(e *Au_event_ent, event_number uint16) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnum_r(unsafe.Pointer(e), C.uint16_t(event_number), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1265,14 +1064,12 @@ func Getauevnum_r(ctx context.Context, e *Au_event_ent, event_number uint16) uns
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnonam
-func Getauevnonam(ctx context.Context, event_name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnonam")
-	defer _end()
+func Getauevnonam(event_name string) unsafe.Pointer {
 	_cstr_event_name := C.CString(event_name)
 	defer C.free(unsafe.Pointer(_cstr_event_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnonam(_cstr_event_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1281,14 +1078,12 @@ func Getauevnonam(ctx context.Context, event_name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauevnonam_r
-func Getauevnonam_r(ctx context.Context, ev *uint16, event_name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauevnonam_r")
-	defer _end()
+func Getauevnonam_r(ev *uint16, event_name string) unsafe.Pointer {
 	_cstr_event_name := C.CString(event_name)
 	defer C.free(unsafe.Pointer(_cstr_event_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauevnonam_r(unsafe.Pointer(ev), _cstr_event_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1297,12 +1092,10 @@ func Getauevnonam_r(ctx context.Context, ev *uint16, event_name string) unsafe.P
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.setauuser
-func Setauuser(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/setauuser")
-	defer _end()
+func Setauuser() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_setauuser(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:936]
@@ -1310,12 +1103,10 @@ func Setauuser(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.endauuser
-func Endauuser(ctx context.Context) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/endauuser")
-	defer _end()
+func Endauuser() {
 	var _exc unsafe.Pointer
 	C.bsm_fn_endauuser(&_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:939]
@@ -1323,12 +1114,10 @@ func Endauuser(ctx context.Context) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauuserent
-func Getauuserent(ctx context.Context) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauuserent")
-	defer _end()
+func Getauuserent() unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauuserent(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1337,12 +1126,10 @@ func Getauuserent(ctx context.Context) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauuserent_r
-func Getauuserent_r(ctx context.Context, u *Au_user_ent) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauuserent_r")
-	defer _end()
+func Getauuserent_r(u *Au_user_ent) unsafe.Pointer {
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauuserent_r(unsafe.Pointer(u), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1351,14 +1138,12 @@ func Getauuserent_r(ctx context.Context, u *Au_user_ent) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauusernam
-func Getauusernam(ctx context.Context, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauusernam")
-	defer _end()
+func Getauusernam(name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauusernam(_cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1367,14 +1152,12 @@ func Getauusernam(ctx context.Context, name string) unsafe.Pointer {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getauusernam_r
-func Getauusernam_r(ctx context.Context, u *Au_user_ent, name string) unsafe.Pointer {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getauusernam_r")
-	defer _end()
+func Getauusernam_r(u *Au_user_ent, name string) unsafe.Pointer {
 	_cstr_name := C.CString(name)
 	defer C.free(unsafe.Pointer(_cstr_name))
 	var _exc unsafe.Pointer
 	_result := unsafe.Pointer(C.bsm_fn_getauusernam_r(unsafe.Pointer(u), _cstr_name, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1383,14 +1166,12 @@ func Getauusernam_r(ctx context.Context, u *Au_user_ent, name string) unsafe.Poi
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_user_mask
-func Au_user_mask(ctx context.Context, username string, mask_p unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_user_mask")
-	defer _end()
+func Au_user_mask(username string, mask_p unsafe.Pointer) int32 {
 	_cstr_username := C.CString(username)
 	defer C.free(unsafe.Pointer(_cstr_username))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_user_mask(_cstr_username, mask_p, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1399,12 +1180,10 @@ func Au_user_mask(ctx context.Context, username string, mask_p unsafe.Pointer) i
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.getfauditflags
-func Getfauditflags(ctx context.Context, usremask unsafe.Pointer, usrdmask unsafe.Pointer, lastmask unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/getfauditflags")
-	defer _end()
+func Getfauditflags(usremask unsafe.Pointer, usrdmask unsafe.Pointer, lastmask unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_getfauditflags(usremask, usrdmask, lastmask, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1413,12 +1192,10 @@ func Getfauditflags(ctx context.Context, usremask unsafe.Pointer, usrdmask unsaf
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_read_rec
-func Au_read_rec(ctx context.Context, fp unsafe.Pointer, buf unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_read_rec")
-	defer _end()
+func Au_read_rec(fp unsafe.Pointer, buf unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_read_rec(fp, buf, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1427,12 +1204,10 @@ func Au_read_rec(ctx context.Context, fp unsafe.Pointer, buf unsafe.Pointer) int
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_fetch_tok
-func Au_fetch_tok(ctx context.Context, tok unsafe.Pointer, buf *uint8, len_ int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_fetch_tok")
-	defer _end()
+func Au_fetch_tok(tok unsafe.Pointer, buf *uint8, len_ int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_fetch_tok(tok, unsafe.Pointer(buf), C.int32_t(len_), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1441,14 +1216,12 @@ func Au_fetch_tok(ctx context.Context, tok unsafe.Pointer, buf *uint8, len_ int3
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_print_tok
-func Au_print_tok(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Pointer, del string, raw int8, sfrm int8) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_print_tok")
-	defer _end()
+func Au_print_tok(outfp unsafe.Pointer, tok unsafe.Pointer, del string, raw int8, sfrm int8) {
 	_cstr_del := C.CString(del)
 	defer C.free(unsafe.Pointer(_cstr_del))
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_print_tok(outfp, tok, _cstr_del, C.int8_t(raw), C.int8_t(sfrm), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:970]
@@ -1456,14 +1229,12 @@ func Au_print_tok(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Pointer,
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_print_flags_tok
-func Au_print_flags_tok(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Pointer, del string, oflags int32) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_print_flags_tok")
-	defer _end()
+func Au_print_flags_tok(outfp unsafe.Pointer, tok unsafe.Pointer, del string, oflags int32) {
 	_cstr_del := C.CString(del)
 	defer C.free(unsafe.Pointer(_cstr_del))
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_print_flags_tok(outfp, tok, _cstr_del, C.int32_t(oflags), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:973]
@@ -1471,14 +1242,12 @@ func Au_print_flags_tok(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Po
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_print_tok_xml
-func Au_print_tok_xml(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Pointer, del string, raw int8, sfrm int8) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_print_tok_xml")
-	defer _end()
+func Au_print_tok_xml(outfp unsafe.Pointer, tok unsafe.Pointer, del string, raw int8, sfrm int8) {
 	_cstr_del := C.CString(del)
 	defer C.free(unsafe.Pointer(_cstr_del))
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_print_tok_xml(outfp, tok, _cstr_del, C.int8_t(raw), C.int8_t(sfrm), &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:979]
@@ -1486,12 +1255,10 @@ func Au_print_tok_xml(ctx context.Context, outfp unsafe.Pointer, tok unsafe.Poin
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_print_xml_header
-func Au_print_xml_header(ctx context.Context, outfp unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_print_xml_header")
-	defer _end()
+func Au_print_xml_header(outfp unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_print_xml_header(outfp, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:982]
@@ -1499,12 +1266,10 @@ func Au_print_xml_header(ctx context.Context, outfp unsafe.Pointer) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_print_xml_footer
-func Au_print_xml_footer(ctx context.Context, outfp unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_print_xml_footer")
-	defer _end()
+func Au_print_xml_footer(outfp unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_print_xml_footer(outfp, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:1081]
@@ -1512,12 +1277,10 @@ func Au_print_xml_footer(ctx context.Context, outfp unsafe.Pointer) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_free_token
-func Au_free_token(ctx context.Context, tok unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_free_token")
-	defer _end()
+func Au_free_token(tok unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.bsm_fn_au_free_token(tok, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:1098]
@@ -1525,12 +1288,10 @@ func Au_free_token(ctx context.Context, tok unsafe.Pointer) {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_get_state
-func Au_get_state(ctx context.Context) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_get_state")
-	defer _end()
+func Au_get_state() int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_get_state(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1539,12 +1300,10 @@ func Au_get_state(ctx context.Context) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_notify_initialize
-func Au_notify_initialize(ctx context.Context) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_notify_initialize")
-	defer _end()
+func Au_notify_initialize() uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_au_notify_initialize(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1553,12 +1312,10 @@ func Au_notify_initialize(ctx context.Context) uint32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.au_notify_terminate
-func Au_notify_terminate(ctx context.Context) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/au_notify_terminate")
-	defer _end()
+func Au_notify_terminate() int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_au_notify_terminate(&_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1567,36 +1324,30 @@ func Au_notify_terminate(ctx context.Context) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.cannot_audit
-func Cannot_audit(ctx context.Context, arg0 int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/cannot_audit")
-	defer _end()
+func Cannot_audit(arg0 int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_cannot_audit(C.int32_t(arg0), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1145]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_set_terminal_id_ex
-func Audit_set_terminal_id_ex(ctx context.Context, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_terminal_id_ex")
-	defer _end()
+func Audit_set_terminal_id_ex(tid unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_terminal_id_ex(tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1148]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_set_terminal_id
-func Audit_set_terminal_id(ctx context.Context, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_terminal_id")
-	defer _end()
+func Audit_set_terminal_id(tid unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_terminal_id(tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1605,12 +1356,10 @@ func Audit_set_terminal_id(ctx context.Context, tid unsafe.Pointer) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write
-func Audit_write(ctx context.Context, event_code int16, subject unsafe.Pointer, misctok unsafe.Pointer, retval int8, errcode int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write")
-	defer _end()
+func Audit_write(event_code int16, subject unsafe.Pointer, misctok unsafe.Pointer, retval int8, errcode int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write(C.int16_t(event_code), subject, misctok, C.int8_t(retval), C.int32_t(errcode), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1619,12 +1368,10 @@ func Audit_write(ctx context.Context, event_code int16, subject unsafe.Pointer, 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_success_ex
-func Audit_write_success_ex(ctx context.Context, event_code int16, misctok unsafe.Pointer, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_success_ex")
-	defer _end()
+func Audit_write_success_ex(event_code int16, misctok unsafe.Pointer, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_success_ex(C.int16_t(event_code), misctok, C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1633,12 +1380,10 @@ func Audit_write_success_ex(ctx context.Context, event_code int16, misctok unsaf
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_success
-func Audit_write_success(ctx context.Context, event_code int16, misctok unsafe.Pointer, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_success")
-	defer _end()
+func Audit_write_success(event_code int16, misctok unsafe.Pointer, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_success(C.int16_t(event_code), misctok, C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1647,12 +1392,10 @@ func Audit_write_success(ctx context.Context, event_code int16, misctok unsafe.P
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_success_self
-func Audit_write_success_self(ctx context.Context, event_code int16, misctok unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_success_self")
-	defer _end()
+func Audit_write_success_self(event_code int16, misctok unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_success_self(C.int16_t(event_code), misctok, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1661,14 +1404,12 @@ func Audit_write_success_self(ctx context.Context, event_code int16, misctok uns
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_failure_ex
-func Audit_write_failure_ex(ctx context.Context, event_code int16, errmsg string, errret int32, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_failure_ex")
-	defer _end()
+func Audit_write_failure_ex(event_code int16, errmsg string, errret int32, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
 	_cstr_errmsg := C.CString(errmsg)
 	defer C.free(unsafe.Pointer(_cstr_errmsg))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_failure_ex(C.int16_t(event_code), _cstr_errmsg, C.int32_t(errret), C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1677,14 +1418,12 @@ func Audit_write_failure_ex(ctx context.Context, event_code int16, errmsg string
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_failure
-func Audit_write_failure(ctx context.Context, event_code int16, errmsg string, errret int32, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_failure")
-	defer _end()
+func Audit_write_failure(event_code int16, errmsg string, errret int32, auid uint32, euid uint32, egid uint32, ruid uint32, rgid uint32, pid int32, sid int32, tid unsafe.Pointer) int32 {
 	_cstr_errmsg := C.CString(errmsg)
 	defer C.free(unsafe.Pointer(_cstr_errmsg))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_failure(C.int16_t(event_code), _cstr_errmsg, C.int32_t(errret), C.uint32_t(auid), C.uint32_t(euid), C.uint32_t(egid), C.uint32_t(ruid), C.uint32_t(rgid), C.int32_t(pid), C.int32_t(sid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1693,14 +1432,12 @@ func Audit_write_failure(ctx context.Context, event_code int16, errmsg string, e
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_failure_self
-func Audit_write_failure_self(ctx context.Context, event_code int16, errmsg string, errret int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_failure_self")
-	defer _end()
+func Audit_write_failure_self(event_code int16, errmsg string, errret int32) int32 {
 	_cstr_errmsg := C.CString(errmsg)
 	defer C.free(unsafe.Pointer(_cstr_errmsg))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_failure_self(C.int16_t(event_code), _cstr_errmsg, C.int32_t(errret), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1709,14 +1446,12 @@ func Audit_write_failure_self(ctx context.Context, event_code int16, errmsg stri
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_failure_na_ex
-func Audit_write_failure_na_ex(ctx context.Context, event_code int16, errmsg string, errret int32, euid uint32, egid uint32, pid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_failure_na_ex")
-	defer _end()
+func Audit_write_failure_na_ex(event_code int16, errmsg string, errret int32, euid uint32, egid uint32, pid int32, tid unsafe.Pointer) int32 {
 	_cstr_errmsg := C.CString(errmsg)
 	defer C.free(unsafe.Pointer(_cstr_errmsg))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_failure_na_ex(C.int16_t(event_code), _cstr_errmsg, C.int32_t(errret), C.uint32_t(euid), C.uint32_t(egid), C.int32_t(pid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1725,121 +1460,101 @@ func Audit_write_failure_na_ex(ctx context.Context, event_code int16, errmsg str
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_write_failure_na
-func Audit_write_failure_na(ctx context.Context, event_code int16, errmsg string, errret int32, euid uint32, egid uint32, pid int32, tid unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_write_failure_na")
-	defer _end()
+func Audit_write_failure_na(event_code int16, errmsg string, errret int32, euid uint32, egid uint32, pid int32, tid unsafe.Pointer) int32 {
 	_cstr_errmsg := C.CString(errmsg)
 	defer C.free(unsafe.Pointer(_cstr_errmsg))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_write_failure_na(C.int16_t(event_code), _cstr_errmsg, C.int32_t(errret), C.uint32_t(euid), C.uint32_t(egid), C.int32_t(pid), tid, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1455]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_au32
-func Audit_token_to_au32(ctx context.Context, atoken unsafe.Pointer, auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp unsafe.Pointer) {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_au32")
-	defer _end()
+func Audit_token_to_au32(atoken unsafe.Pointer, auidp *uint32, euidp *uint32, egidp *uint32, ruidp *uint32, rgidp *uint32, pidp *int32, asidp *int32, tidp unsafe.Pointer) {
 	var _exc unsafe.Pointer
 	C.bsm_fn_audit_token_to_au32(atoken, unsafe.Pointer(auidp), unsafe.Pointer(euidp), unsafe.Pointer(egidp), unsafe.Pointer(ruidp), unsafe.Pointer(rgidp), unsafe.Pointer(pidp), unsafe.Pointer(asidp), tidp, &_exc)
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 }
 
 // [libbsm.h:1478]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_auid
-func Audit_token_to_auid(ctx context.Context, atoken unsafe.Pointer) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_auid")
-	defer _end()
+func Audit_token_to_auid(atoken unsafe.Pointer) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_token_to_auid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1492]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_euid
-func Audit_token_to_euid(ctx context.Context, atoken unsafe.Pointer) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_euid")
-	defer _end()
+func Audit_token_to_euid(atoken unsafe.Pointer) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_token_to_euid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1506]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_egid
-func Audit_token_to_egid(ctx context.Context, atoken unsafe.Pointer) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_egid")
-	defer _end()
+func Audit_token_to_egid(atoken unsafe.Pointer) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_token_to_egid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1520]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_ruid
-func Audit_token_to_ruid(ctx context.Context, atoken unsafe.Pointer) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_ruid")
-	defer _end()
+func Audit_token_to_ruid(atoken unsafe.Pointer) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_token_to_ruid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1534]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_rgid
-func Audit_token_to_rgid(ctx context.Context, atoken unsafe.Pointer) uint32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_rgid")
-	defer _end()
+func Audit_token_to_rgid(atoken unsafe.Pointer) uint32 {
 	var _exc unsafe.Pointer
 	_result := uint32(C.bsm_fn_audit_token_to_rgid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1548]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_pid
-func Audit_token_to_pid(ctx context.Context, atoken unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_pid")
-	defer _end()
+func Audit_token_to_pid(atoken unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_token_to_pid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1562]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_asid
-func Audit_token_to_asid(ctx context.Context, atoken unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_asid")
-	defer _end()
+func Audit_token_to_asid(atoken unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_token_to_asid(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1576]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_token_to_pidversion
-func Audit_token_to_pidversion(ctx context.Context, atoken unsafe.Pointer) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_token_to_pidversion")
-	defer _end()
+func Audit_token_to_pidversion(atoken unsafe.Pointer) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_token_to_pidversion(atoken, &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1848,14 +1563,12 @@ func Audit_token_to_pidversion(ctx context.Context, atoken unsafe.Pointer) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_car
-func Audit_get_car(ctx context.Context, path string, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_car")
-	defer _end()
+func Audit_get_car(path string, sz uint64) int32 {
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_car(_cstr_path, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1864,12 +1577,10 @@ func Audit_get_car(ctx context.Context, path string, sz uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_class
-func Audit_get_class(ctx context.Context, evc_map unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_class")
-	defer _end()
+func Audit_get_class(evc_map unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_class(evc_map, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1878,12 +1589,10 @@ func Audit_get_class(ctx context.Context, evc_map unsafe.Pointer, sz uint64) int
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_class
-func Audit_set_class(ctx context.Context, evc_map unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_class")
-	defer _end()
+func Audit_set_class(evc_map unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_class(evc_map, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1892,12 +1601,10 @@ func Audit_set_class(ctx context.Context, evc_map unsafe.Pointer, sz uint64) int
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_cond
-func Audit_get_cond(ctx context.Context, cond *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_cond")
-	defer _end()
+func Audit_get_cond(cond *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_cond(unsafe.Pointer(cond), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1906,12 +1613,10 @@ func Audit_get_cond(ctx context.Context, cond *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_cond
-func Audit_set_cond(ctx context.Context, cond *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_cond")
-	defer _end()
+func Audit_set_cond(cond *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_cond(unsafe.Pointer(cond), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1920,14 +1625,12 @@ func Audit_set_cond(ctx context.Context, cond *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_cwd
-func Audit_get_cwd(ctx context.Context, path string, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_cwd")
-	defer _end()
+func Audit_get_cwd(path string, sz uint64) int32 {
 	_cstr_path := C.CString(path)
 	defer C.free(unsafe.Pointer(_cstr_path))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_cwd(_cstr_path, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1936,12 +1639,10 @@ func Audit_get_cwd(ctx context.Context, path string, sz uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_fsize
-func Audit_get_fsize(ctx context.Context, fstat unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_fsize")
-	defer _end()
+func Audit_get_fsize(fstat unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_fsize(fstat, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1950,12 +1651,10 @@ func Audit_get_fsize(ctx context.Context, fstat unsafe.Pointer, sz uint64) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_fsize
-func Audit_set_fsize(ctx context.Context, fstat unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_fsize")
-	defer _end()
+func Audit_set_fsize(fstat unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_fsize(fstat, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1964,12 +1663,10 @@ func Audit_set_fsize(ctx context.Context, fstat unsafe.Pointer, sz uint64) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_kmask
-func Audit_get_kmask(ctx context.Context, kmask unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_kmask")
-	defer _end()
+func Audit_get_kmask(kmask unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_kmask(kmask, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1978,12 +1675,10 @@ func Audit_get_kmask(ctx context.Context, kmask unsafe.Pointer, sz uint64) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_kmask
-func Audit_set_kmask(ctx context.Context, kmask unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_kmask")
-	defer _end()
+func Audit_set_kmask(kmask unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_kmask(kmask, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -1992,12 +1687,10 @@ func Audit_set_kmask(ctx context.Context, kmask unsafe.Pointer, sz uint64) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_kaudit
-func Audit_get_kaudit(ctx context.Context, aia unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_kaudit")
-	defer _end()
+func Audit_get_kaudit(aia unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_kaudit(aia, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2006,12 +1699,10 @@ func Audit_get_kaudit(ctx context.Context, aia unsafe.Pointer, sz uint64) int32 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_kaudit
-func Audit_set_kaudit(ctx context.Context, aia unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_kaudit")
-	defer _end()
+func Audit_set_kaudit(aia unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_kaudit(aia, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2020,12 +1711,10 @@ func Audit_set_kaudit(ctx context.Context, aia unsafe.Pointer, sz uint64) int32 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_pmask
-func Audit_set_pmask(ctx context.Context, api unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_pmask")
-	defer _end()
+func Audit_set_pmask(api unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_pmask(api, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2034,24 +1723,20 @@ func Audit_set_pmask(ctx context.Context, api unsafe.Pointer, sz uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. use audit_get_pinfo_addr Use audit_get_pinfo_addr instead.
 // ID: objc-sym bsm.audit_get_pinfo
-func Audit_get_pinfo(ctx context.Context, api unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_pinfo")
-	defer _end()
+func Audit_get_pinfo(api unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_pinfo(api, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1626]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_get_pinfo_addr
-func Audit_get_pinfo_addr(ctx context.Context, apia unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_pinfo_addr")
-	defer _end()
+func Audit_get_pinfo_addr(apia unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_pinfo_addr(apia, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2060,12 +1745,10 @@ func Audit_get_pinfo_addr(ctx context.Context, apia unsafe.Pointer, sz uint64) i
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_policy
-func Audit_get_policy(ctx context.Context, policy *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_policy")
-	defer _end()
+func Audit_get_policy(policy *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_policy(unsafe.Pointer(policy), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2074,12 +1757,10 @@ func Audit_get_policy(ctx context.Context, policy *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_policy
-func Audit_set_policy(ctx context.Context, policy *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_policy")
-	defer _end()
+func Audit_set_policy(policy *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_policy(unsafe.Pointer(policy), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2088,12 +1769,10 @@ func Audit_set_policy(ctx context.Context, policy *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_qctrl
-func Audit_get_qctrl(ctx context.Context, qctrl unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_qctrl")
-	defer _end()
+func Audit_get_qctrl(qctrl unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_qctrl(qctrl, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2102,36 +1781,30 @@ func Audit_get_qctrl(ctx context.Context, qctrl unsafe.Pointer, sz uint64) int32
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_qctrl
-func Audit_set_qctrl(ctx context.Context, qctrl unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_qctrl")
-	defer _end()
+func Audit_set_qctrl(qctrl unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_qctrl(qctrl, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1641]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_get_sflags
-func Audit_get_sflags(ctx context.Context, flags *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_sflags")
-	defer _end()
+func Audit_get_sflags(flags *uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_sflags(unsafe.Pointer(flags), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1644]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_set_sflags
-func Audit_set_sflags(ctx context.Context, flags uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_sflags")
-	defer _end()
+func Audit_set_sflags(flags uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_sflags(C.uint64_t(flags), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2140,14 +1813,12 @@ func Audit_set_sflags(ctx context.Context, flags uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. no longer implemented
 // ID: objc-sym bsm.audit_get_sflags_mask
-func Audit_get_sflags_mask(ctx context.Context, which string, mask *uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_sflags_mask")
-	defer _end()
+func Audit_get_sflags_mask(which string, mask *uint64) int32 {
 	_cstr_which := C.CString(which)
 	defer C.free(unsafe.Pointer(_cstr_which))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_sflags_mask(_cstr_which, unsafe.Pointer(mask), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2156,26 +1827,22 @@ func Audit_get_sflags_mask(ctx context.Context, which string, mask *uint64) int3
 //
 // Deprecated: Deprecated in macOS 11.0. no longer implemented
 // ID: objc-sym bsm.audit_set_sflags_mask
-func Audit_set_sflags_mask(ctx context.Context, which string, mask uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_sflags_mask")
-	defer _end()
+func Audit_set_sflags_mask(which string, mask uint64) int32 {
 	_cstr_which := C.CString(which)
 	defer C.free(unsafe.Pointer(_cstr_which))
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_sflags_mask(_cstr_which, C.uint64_t(mask), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
 // [libbsm.h:1653]
 // Introduced: macOS 10.8
 // ID: objc-sym bsm.audit_get_sinfo_addr
-func Audit_get_sinfo_addr(ctx context.Context, aia unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_sinfo_addr")
-	defer _end()
+func Audit_get_sinfo_addr(aia unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_sinfo_addr(aia, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2184,12 +1851,10 @@ func Audit_get_sinfo_addr(ctx context.Context, aia unsafe.Pointer, sz uint64) in
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_stat
-func Audit_get_stat(ctx context.Context, stats unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_stat")
-	defer _end()
+func Audit_get_stat(stats unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_stat(stats, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2198,12 +1863,10 @@ func Audit_get_stat(ctx context.Context, stats unsafe.Pointer, sz uint64) int32 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_set_stat
-func Audit_set_stat(ctx context.Context, stats unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_set_stat")
-	defer _end()
+func Audit_set_stat(stats unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_set_stat(stats, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2212,12 +1875,10 @@ func Audit_set_stat(ctx context.Context, stats unsafe.Pointer, sz uint64) int32 
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_send_trigger
-func Audit_send_trigger(ctx context.Context, trigger *int32) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_send_trigger")
-	defer _end()
+func Audit_send_trigger(trigger *int32) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_send_trigger(unsafe.Pointer(trigger), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2226,12 +1887,10 @@ func Audit_send_trigger(ctx context.Context, trigger *int32) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_ctlmode
-func Audit_get_ctlmode(ctx context.Context, mode *uint8, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_ctlmode")
-	defer _end()
+func Audit_get_ctlmode(mode *uint8, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_ctlmode(unsafe.Pointer(mode), C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 
@@ -2240,12 +1899,10 @@ func Audit_get_ctlmode(ctx context.Context, mode *uint8, sz uint64) int32 {
 //
 // Deprecated: Deprecated in macOS 11.0. audit is deprecated
 // ID: objc-sym bsm.audit_get_expire_after
-func Audit_get_expire_after(ctx context.Context, expire unsafe.Pointer, sz uint64) int32 {
-	ctx, _end := tel.Call(ctx, nil, "bsm/audit_get_expire_after")
-	defer _end()
+func Audit_get_expire_after(expire unsafe.Pointer, sz uint64) int32 {
 	var _exc unsafe.Pointer
 	_result := int32(C.bsm_fn_audit_get_expire_after(expire, C.uint64_t(sz), &_exc))
-	tel.RaiseIfException(ctx, _exc)
+	cgo.RaiseIfException(_exc)
 	return _result
 }
 

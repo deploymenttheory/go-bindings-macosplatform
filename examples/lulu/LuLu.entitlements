@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Entitlements for the controlling app (cmd/lulu). The system-extension
+     entitlement lets the app request activation of the embedded extension. -->
+<plist version="1.0">
+<dict>
+    <key>com.apple.developer.system-extension.install</key>
+    <true/>
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <key>com.apple.security.network.client</key>
+    <true/>
+</dict>
+</plist>

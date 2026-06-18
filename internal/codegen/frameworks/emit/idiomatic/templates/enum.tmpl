@@ -1,0 +1,41 @@
+{{/*
+    enum.tmpl — idiomatic re-emission of a named ObjC enum as a concrete Go type.
+
+    A concrete `type X <underlying>` declaration (NOT a `= raw.X` alias): the
+    constant values, the underlying integer width, the String() behaviour, and
+    the doc/deprecation comments are all visible in the idiomatic package, just as
+    they are in the raw bindings. All naming/dedup/comment decisions are made in
+    the Go view-model (buildEnumView); the template is a pure structural shape.
+*/}}
+{{define "named_enum"}}{{.CommentBlock}}{{if .IsBitmask}}// Bitmask — values may be combined with |.
+{{end}}type {{.GoName}} {{.GoType}}
+
+const ({{range .Members}}
+{{.CommentBlock}}	{{.ConstName}} {{$.GoName}} = {{.Value}}{{end}}
+)
+
+func (e {{.GoName}}) String() string {
+{{- if .IsBitmask}}
+	var parts []string
+{{- range .Members}}{{if not .IsZeroVal}}
+	if e&{{.ConstName}} != 0 {
+		parts = append(parts, "{{.ConstName}}")
+	}
+{{- end}}{{end}}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+{{- else}}
+	switch e {
+{{- range .UniqueMembers}}
+	case {{.ConstName}}:
+		return "{{.ConstName}}"
+{{- end}}
+	default:
+		return fmt.Sprintf("{{.DefaultFmt}}", int64(e))
+	}
+{{- end}}
+}
+
+{{end}}

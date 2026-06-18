@@ -129,8 +129,7 @@ func writeOpinionatedHeader(w io.Writer, pkgName, rawImportPath string, extraImp
 	fmt.Fprintf(w, "package %s\n\n", pkgName)
 
 	all := map[string]string{
-		"context": "context",
-		"raw":     rawImportPath,
+		"raw": rawImportPath,
 	}
 	if needsObjc {
 		all["cgo"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"

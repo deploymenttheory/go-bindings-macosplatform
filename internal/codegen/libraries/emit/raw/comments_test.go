@@ -336,12 +336,12 @@ func TestWriteClassDuplicateSelector(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// "func (o *NSMyClass) Count(ctx context.Context)" should appear exactly once.
-	first := strings.Index(out, "func (o *NSMyClass) Count(ctx context.Context)")
+	// "func (o *NSMyClass) Count()" should appear exactly once.
+	first := strings.Index(out, "func (o *NSMyClass) Count()")
 	if first < 0 {
 		t.Fatalf("Count method not emitted; got:\n%s", out)
 	}
-	if strings.Index(out[first+1:], "func (o *NSMyClass) Count(ctx context.Context)") >= 0 {
+	if strings.Index(out[first+1:], "func (o *NSMyClass) Count()") >= 0 {
 		t.Errorf("Count method emitted more than once; got:\n%s", out)
 	}
 }
@@ -363,7 +363,7 @@ func TestWriteClassGoNameDisambiguation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(out, "func (o *NSFile) Open(ctx context.Context)") {
+	if !strings.Contains(out, "func (o *NSFile) Open()") {
 		t.Errorf("zero-arg selector should own the clean name Open; got:\n%s", out)
 	}
 	if !strings.Contains(out, "Open1") {
@@ -496,7 +496,7 @@ func TestWriteMethodBodyPointerToPrimReturn(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(out, "func (o *NSFoo) GetFlag(ctx context.Context)") {
+	if !strings.Contains(out, "func (o *NSFoo) GetFlag()") {
 		t.Errorf("expected GetFlag method; got:\n%s", out)
 	}
 }

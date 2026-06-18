@@ -1,0 +1,10 @@
+{
+  "gopls": {
+    "build.env": {
+      "GOOS": "darwin"
+    }
+  },
+  "go.toolsEnvVars": {
+    "GOOS": "darwin"
+  }
+}

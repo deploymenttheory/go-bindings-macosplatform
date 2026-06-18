@@ -12,14 +12,14 @@ import (
 	"runtime/debug"
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 )
 
 //export goCallBlock_bool_ptr_ptr
 func goCallBlock_bool_ptr_ptr(key C.uint64_t, arg0 unsafe.Pointer, arg1 unsafe.Pointer) (result C.bool) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_bool_ptr_ptr", r, debug.Stack())
 			}
 		}
@@ -40,7 +40,7 @@ func MakeBlock_bool_ptr_ptr(fn func(unsafe.Pointer, unsafe.Pointer) bool) unsafe
 func goCallBlock_bool_ptr_uint64_ptr_uint64(key C.uint64_t, arg0 unsafe.Pointer, arg1 C.uint64_t, arg2 unsafe.Pointer, arg3 C.uint64_t) (result C.bool) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_bool_ptr_uint64_ptr_uint64", r, debug.Stack())
 			}
 		}
@@ -61,7 +61,7 @@ func MakeBlock_bool_ptr_uint64_ptr_uint64(fn func(unsafe.Pointer, uint64, unsafe
 func goCallBlock_bool_uint64_ptr(key C.uint64_t, arg0 C.uint64_t, arg1 unsafe.Pointer) (result C.bool) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_bool_uint64_ptr", r, debug.Stack())
 			}
 		}
@@ -82,7 +82,7 @@ func MakeBlock_bool_uint64_ptr(fn func(uint64, unsafe.Pointer) bool) unsafe.Poin
 func goCallBlock_void(key C.uint64_t) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void", r, debug.Stack())
 			}
 		}
@@ -102,7 +102,7 @@ func MakeBlock_void(fn func()) unsafe.Pointer {
 func goCallBlock_void_bool_ptr_int32(key C.uint64_t, arg0 C.bool, arg1 unsafe.Pointer, arg2 C.int32_t) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_bool_ptr_int32", r, debug.Stack())
 			}
 		}
@@ -122,7 +122,7 @@ func MakeBlock_void_bool_ptr_int32(fn func(bool, unsafe.Pointer, int32)) unsafe.
 func goCallBlock_void_int32(key C.uint64_t, arg0 C.int32_t) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_int32", r, debug.Stack())
 			}
 		}
@@ -142,7 +142,7 @@ func MakeBlock_void_int32(fn func(int32)) unsafe.Pointer {
 func goCallBlock_void_ptr(key C.uint64_t, arg0 unsafe.Pointer) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_ptr", r, debug.Stack())
 			}
 		}
@@ -162,7 +162,7 @@ func MakeBlock_void_ptr(fn func(unsafe.Pointer)) unsafe.Pointer {
 func goCallBlock_void_ptr_int32(key C.uint64_t, arg0 unsafe.Pointer, arg1 C.int32_t) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_ptr_int32", r, debug.Stack())
 			}
 		}
@@ -182,7 +182,7 @@ func MakeBlock_void_ptr_int32(fn func(unsafe.Pointer, int32)) unsafe.Pointer {
 func goCallBlock_void_ptr_ptr(key C.uint64_t, arg0 unsafe.Pointer, arg1 unsafe.Pointer) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_ptr_ptr", r, debug.Stack())
 			}
 		}
@@ -202,7 +202,7 @@ func MakeBlock_void_ptr_ptr(fn func(unsafe.Pointer, unsafe.Pointer)) unsafe.Poin
 func goCallBlock_void_uint64(key C.uint64_t, arg0 C.uint64_t) {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_void_uint64", r, debug.Stack())
 			}
 		}

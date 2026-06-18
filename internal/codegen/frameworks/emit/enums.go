@@ -228,6 +228,18 @@ func unsignedVariant(signed string) string {
 	return signed
 }
 
+// MapEnumGoType maps an ObjC/C integer type string to the Go integer type used
+// as an enum's underlying type. Exported so the idiomatic emitter can derive the
+// exact same underlying type for its re-emitted concrete enums.
+func MapEnumGoType(t string) string { return mapEnumGoType(t) }
+
+// UpgradeEnumTypeIfOverflow upgrades a signed Go integer type to its unsigned
+// variant when a member value would overflow it. Exported for reuse alongside
+// MapEnumGoType.
+func UpgradeEnumTypeIfOverflow(goType string, members []meta.EnumMember) string {
+	return upgradeEnumTypeIfOverflow(goType, members)
+}
+
 // mapEnumGoType maps ObjC/C integer type strings to Go integer types.
 func mapEnumGoType(t string) string {
 	switch strings.TrimSpace(t) {

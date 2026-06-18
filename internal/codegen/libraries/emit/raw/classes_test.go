@@ -209,7 +209,7 @@ func TestWriteClassMethodEmitted(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(out, "func (o *NSMyClass) Count(ctx context.Context)") {
+	if !strings.Contains(out, "func (o *NSMyClass) Count()") {
 		t.Errorf("instance method Count not emitted; got:\n%s", out)
 	}
 }

@@ -31,8 +31,9 @@ var _ unsafe.Pointer // suppress unused import
 {{end -}}
 // {{.BridgeID}}
 func {{.GoName}}({{.Params}}){{if .Ret}} {{.Ret}}{{end}} {
-	ctx, _end := tel.Call(ctx, nil, {{.SpanName | printf "%q"}}{{.TelExtra}})
-	defer _end()
+{{- range .KeepAlives}}
+	defer cgo.KeepAlive({{.}})
+{{- end}}
 {{- range .Preambles}}
 	{{.}}
 {{- end}}

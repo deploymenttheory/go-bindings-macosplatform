@@ -68,8 +68,8 @@ func TestFunctionVoidReturn(t *testing.T) {
 	})
 	out := runFunctions(t, framework)
 
-	if !strings.Contains(out, "func NSDoSomething(ctx context.Context)") {
-		t.Errorf("expected 'func NSDoSomething(ctx context.Context)', got:\n%s", out)
+	if !strings.Contains(out, "func NSDoSomething()") {
+		t.Errorf("expected 'func NSDoSomething()', got:\n%s", out)
 	}
 	// Void function body should not have a return statement.
 	if strings.Contains(out, "return C.") {
@@ -90,8 +90,8 @@ func TestFunctionPrimitiveReturn(t *testing.T) {
 	})
 	out := runFunctions(t, framework)
 
-	if !strings.Contains(out, "func NSGetCount(ctx context.Context) uint64") {
-		t.Errorf("expected 'func NSGetCount(ctx context.Context) uint64', got:\n%s", out)
+	if !strings.Contains(out, "func NSGetCount() uint64") {
+		t.Errorf("expected 'func NSGetCount() uint64', got:\n%s", out)
 	}
 }
 
@@ -112,7 +112,7 @@ func TestFunctionWithArgs(t *testing.T) {
 	})
 	out := runFunctions(t, framework)
 
-	if !strings.Contains(out, "func NSComputeSum(ctx context.Context, a uint64, b uint64) uint64") {
+	if !strings.Contains(out, "func NSComputeSum(a uint64, b uint64) uint64") {
 		t.Errorf("expected correct signature, got:\n%s", out)
 	}
 }
@@ -169,12 +169,12 @@ func TestFunctionDeduplicate(t *testing.T) {
 	})
 	out := runFunctions(t, framework)
 
-	// "func NSOpen(ctx context.Context)" should appear exactly once.
-	first := strings.Index(out, "func NSOpen(ctx context.Context)")
+	// "func NSOpen()" should appear exactly once.
+	first := strings.Index(out, "func NSOpen()")
 	if first < 0 {
 		t.Fatalf("expected at least one NSOpen function:\n%s", out)
 	}
-	second := strings.Index(out[first+1:], "func NSOpen(ctx context.Context)")
+	second := strings.Index(out[first+1:], "func NSOpen()")
 	if second >= 0 {
 		t.Errorf("NSOpen emitted more than once (dedup failed):\n%s", out)
 	}
@@ -220,7 +220,7 @@ func TestFunctionInt32Return(t *testing.T) {
 	})
 	out := runFunctions(t, framework)
 
-	if !strings.Contains(out, "func NSGetValue(ctx context.Context) int32") {
+	if !strings.Contains(out, "func NSGetValue() int32") {
 		t.Errorf("expected int32_t to resolve to int32 return, got:\n%s", out)
 	}
 }

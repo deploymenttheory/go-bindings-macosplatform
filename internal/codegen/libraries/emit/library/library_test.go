@@ -306,8 +306,8 @@ func TestWriteOpinionatedHeader(t *testing.T) {
 	if !strings.Contains(out, "package virtualization") {
 		t.Errorf("expected package declaration; got:\n%s", out)
 	}
-	if !strings.Contains(out, "context") {
-		t.Errorf("expected context import; got:\n%s", out)
+	if !strings.Contains(out, `"github.com/example/fw/virtualization"`) {
+		t.Errorf("expected raw import; got:\n%s", out)
 	}
 	if !strings.Contains(out, "Code generated") {
 		t.Errorf("expected generated header; got:\n%s", out)
@@ -326,7 +326,7 @@ func TestWriteOpinionatedHeaderNeedsObjc(t *testing.T) {
 func TestWriteOpinionatedHeaderWithExtraImport(t *testing.T) {
 	var buf bytes.Buffer
 	extraImports := map[string]string{
-		"foundation": "github.com/example/fw/frameworks/foundation",
+		"foundation": "github.com/example/fw/bindings/frameworks/foundation",
 	}
 	writeOpinionatedHeader(&buf, "mylib", "github.com/example/fw/mylib", extraImports, nil, false)
 	out := buf.String()
@@ -793,7 +793,7 @@ func TestSpecsBoolField(t *testing.T) {
 		t.Fatal(err)
 	}
 	out := buf.String()
-	// Bool field: "if spec.Enabled { c.SetEnabled(ctx, spec.Enabled) }"
+	// Bool field: "if spec.Enabled { c.SetEnabled(spec.Enabled) }"
 	if !strings.Contains(out, "spec.Enabled") {
 		t.Errorf("expected bool field Enabled in spec; got:\n%s", out)
 	}

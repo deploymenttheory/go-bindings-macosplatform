@@ -23,7 +23,7 @@ import (
 	"runtime/debug"
 	"unsafe"
 
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"
 )
 {{end}}
 {{range .Sigs}}{{template "block_trampoline_go_sig" .}}{{end}}{{end}}
@@ -33,7 +33,7 @@ import (
 func goCallBlock_{{.Name}}({{.GoParams}}){{.RetDecl}} {
 	defer func() {
 		if r := recover(); r != nil {
-			if h := tel.OnCallbackPanic; h != nil {
+			if h := cgo.OnCallbackPanic; h != nil {
 				h("goCallBlock_{{.Name}}", r, debug.Stack())
 			}
 		}

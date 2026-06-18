@@ -27,27 +27,22 @@ func buildProtocolsModel(pkgName string, framework *macosplatformmetadata.Framew
 
 	names := sortedStringKeys(framework.Protocols)
 	protocols := make([]protocolModel, 0, len(names))
-	needsContext := false
 
 	for _, name := range names {
 		p := framework.Protocols[name]
 		if p.Availability.IsUnavailable {
 			continue
 		}
-		pm, usesCtx := buildProtocolModel(name, p, framework, m, knownClasses, knownProtocols, allClasses, ctx, usedImports)
-		if usesCtx {
-			needsContext = true
-		}
+		pm := buildProtocolModel(name, p, framework, m, knownClasses, knownProtocols, allClasses, ctx, usedImports)
 		protocols = append(protocols, pm)
 	}
 
-	imports := buildProtocolsImports(usedImports, needsContext)
+	imports := buildProtocolsImports(usedImports)
 	return protocolsFileModel{PkgName: pkgName, Imports: imports, Protocols: protocols}
 }
 
 // buildProtocolModel builds the model for a single ObjC @protocol → Go interface.
-// It also reports whether any method uses context.Context (for import decisions).
-func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class, ctx typemap.Context, usedImports typemap.ImportSet) (protocolModel, bool) {
+func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework *macosplatformmetadata.FrameworkMeta, m *typemap.Mapper, knownClasses map[string]bool, knownProtocols map[string]string, allClasses map[string]macosplatformmetadata.Class, ctx typemap.Context, usedImports typemap.ImportSet) protocolModel {
 	goName := naming.ProtocolGoTypeName(name, m.OwnerIndex)
 
 	// Resolve embedded parent protocols.
@@ -83,7 +78,6 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 	// Build method signatures.
 	seenMethods := make(map[string]bool)
 	methods := make([]protocolMethodModel, 0, len(p.Methods))
-	usesCtx := false
 
 	for _, method := range p.Methods {
 		if shouldSkipBridgeMethod(method) {
@@ -97,9 +91,8 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 			continue
 		}
 		seenMethods[goMethodName] = true
-		usesCtx = true
 
-		args := append([]string{"ctx context.Context"}, buildGoArgs(method.Params, method.IsNSError, ctx, m, usedImports)...)
+		args := buildGoArgs(method.Params, method.IsNSError, ctx, m, usedImports)
 		ret := buildGoReturn(method, ctx, m, "", usedImports)
 		methods = append(methods, protocolMethodModel{
 			GoName: goMethodName,
@@ -115,17 +108,14 @@ func buildProtocolModel(name string, p macosplatformmetadata.Protocol, framework
 		Embeds:        embeds,
 		EmbedComments: embedComments,
 		Methods:       methods,
-	}, usesCtx
+	}
 }
 
 // buildProtocolsImports assembles and sorts the import list for a protocols file.
-func buildProtocolsImports(usedImports typemap.ImportSet, needsContext bool) []string {
+func buildProtocolsImports(usedImports typemap.ImportSet) []string {
 	set := map[string]bool{
 		"unsafe": true,
 		"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo": true,
-	}
-	if needsContext {
-		set["context"] = true
 	}
 	for _, path := range usedImports {
 		set[path] = true

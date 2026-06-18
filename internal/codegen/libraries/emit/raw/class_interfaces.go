@@ -56,13 +56,9 @@ func EmitClassInterfaces(w io.Writer, pkgName string, framework *macosplatformme
 	}
 
 	// Phase 2: compute which imports are needed from the collected models.
-	usesContext := false
 	usesUnsafe := false
 	usesObjc := false
 	for _, iface := range interfaces {
-		if len(iface.Methods) > 0 || iface.HasNSCoding {
-			usesContext = true
-		}
 		if strings.Contains(iface.EmbedLine, "cgo.") {
 			usesObjc = true
 		}
@@ -78,9 +74,6 @@ func EmitClassInterfaces(w io.Writer, pkgName string, framework *macosplatformme
 
 	// Phase 3: assemble the file model and render via template.
 	var allImports []string
-	if usesContext {
-		allImports = append(allImports, "context")
-	}
 	if usesUnsafe {
 		allImports = append(allImports, "unsafe")
 	}
@@ -255,7 +248,7 @@ func buildClassInterfaceModel(name string, cls macosplatformmetadata.Class, fram
 			continue
 		}
 
-		args := append([]string{"ctx context.Context"}, buildGoArgs(method.Params, method.IsNSError, iCtx, m, usedImports)...)
+		args := buildGoArgs(method.Params, method.IsNSError, iCtx, m, usedImports)
 		ret := buildGoReturn(method, iCtx, m, name, usedImports)
 
 		methods = append(methods, interfaceMethodModel{

@@ -25,7 +25,22 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
-	// Build a set of Go type names to detect name collisions with package-level types.
+	functions := make([]functionModel, 0, len(framework.Functions))
+	for _, fn := range EmittableFunctions(framework) {
+		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
+	}
+
+	imports := buildFunctionsImports(functions, usedImports)
+	return functionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
+}
+
+// EmittableFunctions returns the plain C functions that EmitFunctions emits as Go
+// wrappers for framework, in declaration order, after applying the same skip and
+// de-duplication rules (inline/variadic/unavailable/builtin/UPP/va_list/by-value
+// unknown filters, plus collision with package-level type names). The idiomatic
+// library layer uses this so it only ever wraps raw functions that actually exist.
+func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosplatformmetadata.Function {
+	// Names of package-level Go types the function names must not collide with.
 	pkgTypeNames := make(map[string]bool)
 	for n := range framework.Structs {
 		pkgTypeNames[naming.GoTypeName(n)] = true
@@ -40,8 +55,7 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 	}
 
 	seen := make(map[string]bool)
-	functions := make([]functionModel, 0, len(framework.Functions))
-
+	out := make([]macosplatformmetadata.Function, 0, len(framework.Functions))
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
 			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) {
@@ -55,11 +69,9 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 			continue
 		}
 		seen[goName] = true
-		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
+		out = append(out, fn)
 	}
-
-	imports := buildFunctionsImports(functions, usedImports)
-	return functionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
+	return out
 }
 
 // buildFunctionModel builds the model for a single C function → Go wrapper.
@@ -73,9 +85,8 @@ func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, 
 		retType = m.GoReturnType(fn.Return.ObjCType, ctx, imports)
 	}
 
-	// Build parameter list (ctx first, then mapped ObjC args).
-	goArgs := append([]string{"ctx context.Context"}, buildGoArgs(fn.Params, false, ctx, m, imports)...)
-	params := strings.Join(goArgs, ", ")
+	// Build parameter list (mapped ObjC args).
+	params := strings.Join(buildGoArgs(fn.Params, false, ctx, m, imports), ", ")
 
 	// Build CGo call argument list, collecting preambles and keep-alives.
 	var preambles, keepAlives []string
@@ -91,8 +102,7 @@ func buildFunctionModel(fn macosplatformmetadata.Function, framework, _ string, 
 		GoName:       goName,
 		Params:       params,
 		Ret:          retType,
-		SpanName:     fmt.Sprintf("%s/%s", framework, fn.Name),
-		TelExtra:     buildTelCallExtra(keepAlives),
+		KeepAlives:   keepAlives,
 		Preambles:    preambles,
 		CallBody:     callBody,
 	}
@@ -108,22 +118,22 @@ func buildFunctionCallBody(callExpr, retType string, m *typemap.Mapper) string {
 	switch {
 	case retType == "":
 		fmt.Fprintf(&sb, "\t%s\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 
 	case retType == "cgo.Object":
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn cgo.WrapObject(_ptr)\n")
 
 	case isObjectReturn(retType):
 		structType := strings.TrimPrefix(retType, "*")
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn %s\n", objectConstructExpr(structType, "_ptr", nil, m))
 
 	case isValueStructReturn(retType, m):
 		fmt.Fprintf(&sb, "\t_ptr := unsafe.Pointer(%s)\n", callExpr)
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\tif _ptr == nil {\n\t\treturn %s{}\n\t}\n", retType)
 		fmt.Fprintf(&sb, "\t_result := *(*%s)(unsafe.Pointer(_ptr))\n", retType)
 		fmt.Fprintf(&sb, "\tcgo.FreePtr(_ptr)\n")
@@ -131,7 +141,7 @@ func buildFunctionCallBody(callExpr, retType string, m *typemap.Mapper) string {
 
 	default:
 		fmt.Fprintf(&sb, "\t_result := %s\n", cgoReturnConvert(callExpr, retType, m))
-		fmt.Fprintf(&sb, "\ttel.RaiseIfException(ctx, _exc)\n")
+		fmt.Fprintf(&sb, "\tcgo.RaiseIfException(_exc)\n")
 		fmt.Fprintf(&sb, "\treturn _result\n")
 	}
 
@@ -156,13 +166,10 @@ func buildFunctionsImports(functions []functionModel, usedImports typemap.Import
 
 	set := map[string]bool{"unsafe": true}
 	if len(functions) > 0 {
-		set["context"] = true
-		set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"] = true
+		// Every generated wrapper calls cgo.RaiseIfException.
+		set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"] = true
 		if bytes.Contains(body, []byte("blocks.MakeBlock_")) {
 			set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/blocks"] = true
-		}
-		if bytes.Contains(body, []byte("cgo.")) {
-			set["github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"] = true
 		}
 	}
 	for _, path := range usedImports {
@@ -187,7 +194,7 @@ func writeFunction(w io.Writer, fn macosplatformmetadata.Function, framework str
 	return executeTemplate(w, "functions_file", functionsFileModel{
 		PkgName:   strings.ToLower(framework),
 		FwLower:   packageName,
-		Imports:   []string{"context", "unsafe", "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/tel"},
+		Imports:   []string{"unsafe", "github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/cgo"},
 		Functions: []functionModel{model},
 	})
 }

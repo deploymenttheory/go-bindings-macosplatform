@@ -88,10 +88,9 @@ func TestCurated_Vmnet_StartStopInterface(t *testing.T) {
 		t.Skip("vmnet_start_interface not available on this macOS release")
 	}
 
-	ctx := t.Context()
 
 	// Interface description: { vmnet_operation_mode_key: VMNET_SHARED_MODE }.
-	dict := xpc.Xpc_dictionary_create(ctx, nil, nil, 0)
+	dict := xpc.Xpc_dictionary_create(nil, nil, 0)
 	if dict == nil {
 		t.Fatal("xpc_dictionary_create returned nil")
 	}
@@ -99,9 +98,9 @@ func TestCurated_Vmnet_StartStopInterface(t *testing.T) {
 	if modeKey == "" {
 		t.Fatal("could not read vmnet_operation_mode_key")
 	}
-	xpc.Xpc_dictionary_set_uint64(ctx, dict, modeKey, uint64(vmnet.VMNET_SHARED_MODE))
+	xpc.Xpc_dictionary_set_uint64(dict, modeKey, uint64(vmnet.VMNET_SHARED_MODE))
 
-	queuePtr := dispatch.Dispatch_queue_create(ctx, "vmnet.smoke", nil)
+	queuePtr := dispatch.Dispatch_queue_create("vmnet.smoke", nil)
 	if queuePtr == nil {
 		t.Fatal("dispatch_queue_create returned nil")
 	}

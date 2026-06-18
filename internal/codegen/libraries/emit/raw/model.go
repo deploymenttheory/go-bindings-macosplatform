@@ -77,7 +77,7 @@ type structTypedefModel struct {
 // protocolMethodModel is template data for one method in a protocol interface.
 type protocolMethodModel struct {
 	GoName string // Go method name
-	Params string // Full parameter list string (includes "ctx context.Context, ...")
+	Params string // Full parameter list string of mapped ObjC args
 	Ret    string // Return type string, empty for void
 }
 
@@ -106,10 +106,9 @@ type functionModel struct {
 	BridgeID     string // e.g. "Foundation/NSStringFromClass"
 	IsWarnUnused bool
 	GoName       string
-	Params       string   // Full parameter list (includes "ctx context.Context")
+	Params       string   // Full parameter list of mapped ObjC args
 	Ret          string   // Return type string, empty for void
-	SpanName     string   // OTel span name, e.g. "Foundation/NSStringFromClass"
-	TelExtra     string   // Extra keep-alive args appended to tel.Call(...)
+	KeepAlives   []string // ObjC-object arg names to keep alive across the CGo call
 	Preambles    []string // Statements to emit before the CGo call
 	// CallBody is the pre-rendered CGo call + exception check + optional return.
 	// The complex return-path dispatch (void / cgo.Object / value struct / primitive)
@@ -228,7 +227,7 @@ type blockTypeModel struct {
 // interfaceMethodModel is template data for one method in a [ClassName]able interface.
 type interfaceMethodModel struct {
 	GoName string // Go method name
-	Params string // Full parameter list including "ctx context.Context, ..."
+	Params string // Full parameter list of mapped ObjC args
 	Ret    string // Return type string, empty for void
 }
 
@@ -401,7 +400,7 @@ type protocolProxiesFileModel struct {
 // protocolProxyMethodModel is template data for one method on a protocol proxy type.
 type protocolProxyMethodModel struct {
 	GoName       string // Go method name
-	Params       string // full parameter list: "ctx context.Context, ..."
+	Params       string // full parameter list of mapped ObjC args
 	Ret          string // return type string, empty for void
 	AvailComment string // availability comment, empty if none
 	BodyLines    string // pre-rendered method body lines (tab-indented)
