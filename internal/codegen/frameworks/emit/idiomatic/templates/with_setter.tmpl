@@ -1,0 +1,34 @@
+{{/*
+    with_setter.tmpl — a fluent With* setter on an idiomatic wrapper.
+    Two shapes: a variadic slice → NSArray collection setter, and a scalar/object
+    setter. Indentation is loose (gofmt fixes it); the trailing blank line is
+    emitted explicitly because gofmt preserves but does not insert blank lines
+    between declarations.
+*/}}
+{{define "with_setter"}}{{if .IsNSArray -}}
+// {{.GoName}} sets the collection, converting the Go slice to an {{.ArrayClass}}.
+func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
+if len(items) == 0 {
+{{.Inner}}.{{.RawSetterGoName}}(nil)
+return x
+}
+_ptrs := make([]objc.ID, len(items))
+for _i, _v := range items {
+_ptrs[_i] = {{.LoopExpr}}
+}
+_arr := {{.ArrayFromID}}(
+objc.Send[objc.ID](objc.ID(objc.GetClass({{.ArrayClass | printf "%q"}})),
+objc.RegisterName("arrayWithObjects:count:"),
+unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
+{{.Inner}}.{{.RawSetterGoName}}(_arr)
+return x
+}
+
+{{else -}}
+// {{.GoName}} sets the {{.ParamName}} property and returns the receiver for chaining.
+func (x *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
+{{.Inner}}.{{.RawSetterGoName}}({{.ParamRawExpr}})
+return x
+}
+
+{{end}}{{end}}

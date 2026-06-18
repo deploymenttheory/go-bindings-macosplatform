@@ -1,0 +1,11 @@
+{{/*
+    cfunctions.tmpl — idiomatic forwarding wrappers for raw C functions.
+    Signature/arg strings are pre-built in the view-model (params, callArgs);
+    the template only shapes the func. gofmt canonicalises the result.
+*/}}
+{{define "cfunctions"}}{{range .Entries}}// {{.GoName}} calls [{{$.RawAlias}}.{{.RawGoName}}] (C function {{.CName}}).
+func {{.GoName}}({{.Params}}){{.RetSig}} {
+	{{if .RetType}}return {{end}}{{$.RawAlias}}.{{.RawGoName}}({{.CallArgs}})
+}
+
+{{end}}{{end}}
